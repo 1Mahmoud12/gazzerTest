@@ -7,7 +7,7 @@ class GradientTextWzShadow extends StatelessWidget {
     required this.gradient,
     required this.shadow,
     this.style = const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white),
-    required this.textAlign,
+    this.textAlign = TextAlign.center,
   });
   final String text;
   final TextStyle style;

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/adaptive_progress_indicator.dart';
 
-class OptionBtn extends StatelessWidget {
+class OptionBtn extends StatefulWidget {
   OptionBtn({
     super.key,
     this.text,
@@ -44,43 +46,57 @@ class OptionBtn extends StatelessWidget {
   final Function() onPressed;
 
   @override
+  State<OptionBtn> createState() => _OptionBtnState();
+}
+
+class _OptionBtnState extends State<OptionBtn> {
+  final isHovering = ValueNotifier<bool>(false);
+
+  @override
+  void dispose() {
+    isHovering.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (isLoading) {
+    if (widget.isLoading) {
       return AdaptiveProgressIndicator();
     }
     return Padding(
-      padding: margin,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius ?? AppConst.defaultRadius),
-          boxShadow: !showBorder
-              ? null
-              : [
-                  BoxShadow(
-                    color: borderColor ?? Co.burble,
-                    blurRadius: 0,
-                    spreadRadius: 1,
-                    offset: const Offset(0, 1), // changes position of shadow
-                  ),
-                ],
+      padding: widget.margin,
+      child: ValueListenableBuilder(
+        valueListenable: isHovering,
+        builder: (context, value, child) => DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: value ? Grad.hoverGradient : null,
+            borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
+            color: value ? null : widget.bgColor?? Co.bg,
+            border: GradientBoxBorder(gradient: Grad.shadowGrad, width: 2),
+          ),
+          child: child!,
         ),
-        child: MaterialButton(
-          onPressed: !isEnabled ? null : onPressed,
+        child: FilledButton(
+          onPressed: !widget.isEnabled ? null : widget.onPressed,
+          onHover: (value) {
+            isHovering.value = value;
+          },
+          style: FilledButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
+            ),
+            minimumSize: Size(
+              widget.width ?? (widget.padding != null ? 10 : widget.width ?? double.infinity),
+              widget.height ?? 60,
+            ),
+            elevation: 0,
+            padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            backgroundColor: Colors.transparent,
+          ),
 
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? AppConst.defaultRadius)),
-          minWidth: width ?? (padding != null ? 10 : width ?? double.infinity),
-          height: height ?? 50,
-
-          elevation: 0,
-          disabledElevation: 0,
-          focusElevation: 0,
-          hoverElevation: 0,
-          highlightElevation: 0,
-          color: !isEnabled ? disabledColor ?? (Co.greyText) : bgColor ?? Co.bg,
-          padding: padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           child: Padding(
-            padding: padding ?? EdgeInsets.zero,
-            child: child ?? Text(text ?? '', style: textStyle ?? TStyle.mainwSemi(15)),
+            padding: widget.padding ?? EdgeInsets.zero,
+            child: widget.child ?? Text(widget.text ?? '', style: widget.textStyle ?? TStyle.mainwSemi(15)),
           ),
         ),
       ),

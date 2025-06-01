@@ -1,0 +1,146 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/irretable.dart';
+import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
+import 'package:gazzer/core/presentation/pkgs/intl_phone/intl_phone.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/theme/app_gradient.dart';
+import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:intl_phone_number_field/models/country_code_model.dart';
+import 'package:intl_phone_number_field/models/country_config.dart';
+import 'package:intl_phone_number_field/models/dialog_config.dart';
+import 'package:intl_phone_number_field/models/phone_config.dart';
+import 'package:intl_phone_number_field/util/country_list.dart';
+
+class PhoneTextField extends StatefulWidget {
+  // final String? Function(String?)? validator;
+  final Function(IntPhoneNumber)? onChange;
+  final String? Function(String? v, String code)? validator;
+  final TextEditingController? controller;
+  final String? phoneNumb;
+  final String? code;
+  final bool noInitcode;
+  final Color? color;
+  final double? height;
+
+  final Color? borderColor;
+  final EdgeInsets? padding;
+
+  const PhoneTextField({
+    super.key,
+    required this.validator,
+    this.controller,
+    this.onChange,
+    this.padding,
+    this.phoneNumb,
+    this.code,
+    this.noInitcode = false,
+    this.color,
+    this.borderColor,
+    this.height,
+  });
+
+  @override
+  State<PhoneTextField> createState() => _PhoneTextFieldState();
+}
+
+class _PhoneTextFieldState extends State<PhoneTextField> {
+  String? countryCode;
+  CountryCodeModel? country;
+  @override
+  void initState() {
+    if (widget.phoneNumb != null) {
+      widget.controller?.text = widget.phoneNumb!;
+    }
+    final countries = GeneralUtil.loadJson();
+    countryCode = widget.code ?? 'SA';
+    country = countries.firstWhereOrNull((e) => e.code == countryCode);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: InternationalPhoneNumberInput(
+        height: (widget.height ?? 60),
+        controller: widget.controller,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        initCountry: country,
+        betweenPadding: 10,
+        onInputChanged: (phone) {
+          setState(() => countryCode = phone.code);
+          if (widget.onChange == null) return;
+          if (phone.number.trim().isNotEmpty) {
+            widget.onChange!(phone);
+          }
+        },
+        // loadFromJson: loadFromJson,
+        dialogConfig: DialogConfig(
+          backgroundColor: widget.color ?? const Color(0xFFffffff),
+          // searchBoxBackgroundColor: Co.lighterGrey,
+          searchBoxIconColor: const Color(0xFF444448),
+          countryItemHeight: 55,
+          topBarColor: Co.burble,
+          // selectedItemColor: Co.lightPrimary,
+          // selectedIcon:
+          //     Icon(Icons.check_box, color: Co.mainOrange, size: 15.r),
+          textStyle: TStyle.greyRegular(14),
+          searchBoxTextStyle: TStyle.greyRegular(14),
+          titleStyle: TStyle.greyBold(14),
+          searchBoxHintStyle: TStyle.greyRegular(14),
+        ),
+        countryConfig: CountryConfig(
+          flagSize: 30,
+          decoration: BoxDecoration(
+            border: GradientBoxBorder(gradient: Grad.shadowGrad, width: 2),
+            borderRadius: AppConst.defaultBorderRadius,
+          ),
+          textStyle: TStyle.greyRegular(14),
+        ),
+        validator: (v) {
+          if (widget.validator != null) {
+            return widget.validator!(v, countryCode ?? 'SA');
+          }
+          return null;
+        },
+
+        phoneConfig: PhoneConfig(
+          focusedColor: widget.borderColor ?? Colors.black54,
+          enabledColor: widget.borderColor ?? Colors.black54,
+          errorColor: const Color(0xFFFF5494),
+          labelStyle: TStyle.greyRegular(14),
+          labelText: "Phone Number",
+          floatingLabelStyle: TStyle.greyRegular(14),
+          focusNode: null,
+          radius: 16,
+          hintText: countryCode == 'SA' ? '5xxxxxxx' : 'xxxxxx',
+          borderWidth: 2,
+          backgroundColor: Colors.transparent,
+          decoration: null,
+          popUpErrorText: true,
+          autoFocus: false,
+          showCursor: true,
+          textInputAction: TextInputAction.done,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          errorTextMaxLength: 2,
+          errorPadding: const EdgeInsets.only(top: 14),
+          errorStyle: TStyle.errorSemi(13),
+          textStyle: TStyle.greySemi(14),
+          hintStyle: TStyle.greySemi(14),
+        ),
+      ),
+    );
+  }
+}
+
+class GeneralUtil {
+  static List<CountryCodeModel> loadJson() {
+    List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(
+      countries.map((model) => CountryCodeModel.fromJson(model)),
+    );
+
+    return listCountryCodeModel;
+  }
+}

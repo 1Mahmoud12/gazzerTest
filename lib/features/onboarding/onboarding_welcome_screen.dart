@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -10,6 +11,7 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/gradient_text_wz_shadow.dart';
 import 'package:gazzer/core/presentation/widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/features/auth/select_mode_screen.dart';
 
 class OnboardingFirstScreen extends StatelessWidget {
   const OnboardingFirstScreen({super.key});
@@ -35,19 +37,29 @@ class OnboardingFirstScreen extends StatelessWidget {
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    Hero(
-                      tag: Tags.cloud,
-                      child: SizedBox(height: 500, child: Image.asset(Assets.assetsPngCloudWelcome, fit: BoxFit.cover)),
+                    Transform.scale(
+                      scale: 1.15,
+                      child: Hero(
+                        tag: Tags.cloud,
+                        child: Image.asset(
+                          Assets.assetsPngCloudLogo,
+                          fit: BoxFit.fill,
+                          alignment: Alignment.center,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                     Column(
-                      spacing: 20,
+                      spacing: 12,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SvgPicture.asset(Assets.assetsSvgCharacter),
+                        Hero(
+                          tag: Tags.character,
+                          child: SvgPicture.asset(Assets.assetsSvgCharacter)),
                         GradientTextWzShadow(
                           text: "Hi Iam Gazzer\nWelcome",
                           textAlign: TextAlign.center,
-                          style: TStyle.mainwBold(42),
+                          style: TStyle.mainwBold(38),
                           gradient: Grad.radialGradient,
                           shadow: BoxShadow(
                             color: Co.secondary.withAlpha(125),
@@ -57,17 +69,20 @@ class OnboardingFirstScreen extends StatelessWidget {
                           ),
                         ),
                         Text('Nice To meet You', style: TStyle.blackSemi(18)),
-                        const SizedBox(height: 20),
+                        VerticalSpacing(20)
                       ],
                     ),
                   ],
                 ),
+                VerticalSpacing(40),
                 MainBtn(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.myPush(const SelectModeScreen());
+                  },
                   text: "Let's Go",
                   // width: ,
                   icon: Icons.arrow_forward_ios_outlined,
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
                 ),
               ],
             ),

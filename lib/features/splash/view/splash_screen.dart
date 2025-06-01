@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/widgets/spacing.dart';
 import 'package:gazzer/features/onboarding/onboarding_logo_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -32,6 +33,13 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     textController = AnimationController(vsync: this, duration: Durations.short4);
     Future.delayed(Duration(seconds: 2), () => _startAnimate());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    contoller.dispose();
+    textController.dispose();
+    super.dispose();
   }
 
   @override
@@ -72,21 +80,22 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   ),
                 ),
               ),
-              MaterialButton(
+              VerticalSpacing(20),
+              ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(_createRoute());
+                  Navigator.of(context).pushReplacement(_createRoute());
                 },
-                child: Text('Next', style: TStyle.whiteBold(40)),
+                child: Text('Next', style: TStyle.blackBold(18)),
               ),
-              MaterialButton(
-                onPressed: () {
-                  if (textController.isCompleted) {
-                    textController.reset();
-                  }
-                  Future.delayed(Duration(seconds: 1), () => _startAnimate());
-                },
-                child: Text('Repeat', style: TStyle.whiteBold(32)),
-              ),
+              // MaterialButton(
+              //   onPressed: () {
+              //     if (textController.isCompleted) {
+              //       textController.reset();
+              //     }
+              //     Future.delayed(Duration(seconds: 1), () => _startAnimate());
+              //   },
+              //   child: Text('Repeat', style: TStyle.whiteBold(32)),
+              // ),
             ],
           ),
         ),

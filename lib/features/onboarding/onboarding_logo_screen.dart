@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -28,7 +29,7 @@ class OnboardingStartScreen extends StatelessWidget {
                     children: [
                       Hero(
                         tag: Tags.cloud,
-                        child: Image.asset(Assets.assetsPngCloudLogo, fit: BoxFit.fill, alignment: Alignment.center),
+                        child: Image.asset(Assets.assetsPngCloudLogo, fit: BoxFit.fill, alignment: Alignment.center, color: Colors.white,),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 60),
@@ -44,7 +45,8 @@ class OnboardingStartScreen extends StatelessWidget {
               right: -130,
               child: MainBtn(
                 onPressed: () {
-                  Navigator.of(context).push(_createRoute());
+                  // Navigator.of(context).push(_createRoute());
+                  context.myPush(const OnboardingFirstScreen());
                 },
                 text: "Start",
                 textStyle: TStyle.whiteBold(20),
@@ -59,18 +61,18 @@ class OnboardingStartScreen extends StatelessWidget {
     );
   }
 
-  Route _createRoute() {
-    return PageRouteBuilder(
-      transitionDuration: Durations.long4,
-      pageBuilder: (context, animation, secondaryAnimation) => const OnboardingFirstScreen(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0);
-        const end = Offset.zero;
-        const curve = Curves.fastEaseInToSlowEaseOut;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        final offsetAnimation = animation.drive(tween);
-        return SlideTransition(position: offsetAnimation, child: child);
-      },
-    );
-  }
+  // Route _createRoute() {
+  //   return PageRouteBuilder(
+  //     transitionDuration: Durations.long4,
+  //     pageBuilder: (context, animation, secondaryAnimation) => const OnboardingFirstScreen(),
+  //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  //       const begin = Offset(1.0, 0);
+  //       const end = Offset.zero;
+  //       const curve = Curves.fastEaseInToSlowEaseOut;
+  //       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+  //       final offsetAnimation = animation.drive(tween);
+  //       return SlideTransition(position: offsetAnimation, child: child);
+  //     },
+  //   );
+  // }
 }

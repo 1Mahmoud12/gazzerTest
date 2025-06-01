@@ -50,6 +50,14 @@ class MainBtn extends StatefulWidget {
 
 class _MainBtnState extends State<MainBtn> {
   final isHovering = ValueNotifier<bool>(false);
+
+  @override
+  void dispose() {
+    isHovering.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
@@ -61,7 +69,7 @@ class _MainBtnState extends State<MainBtn> {
         valueListenable: isHovering,
         builder: (context, value, child) => DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultRadius),
+            borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
             gradient: value ? Grad.hoverGradient : Grad.radialGradient,
             boxShadow: value
                 ? []
@@ -75,7 +83,7 @@ class _MainBtnState extends State<MainBtn> {
             isHovering.value = v;
           },
           style: FilledButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultRadius)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius)),
             padding: widget.padding ?? const EdgeInsets.all(6),
             elevation: 0,
             // minimumSize: Size(0, 0),
