@@ -16,14 +16,21 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   late final AnimationController contoller;
   late final AnimationController textController;
 
+  _startAnimate() async {
+    if (mounted) contoller.forward();
+    Future.delayed(Duration(seconds: 1), () {
+      if (mounted) contoller.animateBack(0.0);
+    });
+    Future.delayed(Duration(seconds: 2), () {
+      if (mounted) textController.forward();
+    });
+  }
+
   @override
   void initState() {
     contoller = AnimationController(vsync: this, duration: Durations.medium4);
-    textController = AnimationController(vsync: this, duration: Durations.long1);
-    Future.delayed(Duration(seconds: 2), () => contoller.forward());
-    Future.delayed(Duration(seconds: 3), () => contoller.animateBack(0.0));
-    Future.delayed(Duration(seconds: 4), () => textController.forward());
-
+    textController = AnimationController(vsync: this, duration: Durations.short4);
+    Future.delayed(Duration(seconds: 2), () => _startAnimate());
     super.initState();
   }
 
@@ -33,7 +40,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       backgroundColor: Co.dark,
       body: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Colors.transparent, Co.main], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+          gradient: LinearGradient(
+            colors: [Colors.transparent, Co.burble],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
         ),
         child: Center(
           child: Column(
@@ -50,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       SvgPicture.asset(Assets.assetsSvgSplashIcon, height: 90, width: 90),
                       SizeTransition(
                         axis: Axis.horizontal,
-                        axisAlignment: 0,
+                        axisAlignment: 1,
                         sizeFactor: textController,
                         child: FadeTransition(
                           opacity: textController,
@@ -65,18 +76,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 onPressed: () {
                   Navigator.of(context).push(_createRoute());
                 },
-                child: Text('First', style: TextStyle(color: Colors.white, fontSize: 40)),
+                child: Text('Next', style: TStyle.whiteBold(40)),
               ),
-              // MaterialButton(
-              //   onPressed: () {
-              //     if (textController.isCompleted) {
-              //       textController.animateBack(0.0);
-              //     } else {
-              //       textController.forward();
-              //     }
-              //   },
-              //   child: Text('Second'),
-              // ),
+              MaterialButton(
+                onPressed: () {
+                  if (textController.isCompleted) {
+                    textController.reset();
+                  }
+                  Future.delayed(Duration(seconds: 1), () => _startAnimate());
+                },
+                child: Text('Repeat', style: TStyle.whiteBold(32)),
+              ),
             ],
           ),
         ),

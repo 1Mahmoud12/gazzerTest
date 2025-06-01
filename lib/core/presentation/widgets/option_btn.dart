@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/resources/constants.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/adaptive_progress_indicator.dart';
@@ -57,7 +57,7 @@ class OptionBtn extends StatelessWidget {
               ? null
               : [
                   BoxShadow(
-                    color: borderColor ?? Co.main,
+                    color: borderColor ?? Co.burble,
                     blurRadius: 0,
                     spreadRadius: 1,
                     offset: const Offset(0, 1), // changes position of shadow

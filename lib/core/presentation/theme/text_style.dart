@@ -7,6 +7,7 @@ abstract class TStyle {
   static const semi = FontWeight.w500;
 
   static const bold = FontWeight.w700;
+  static const bolder = FontWeight.w900;
 
   //
   static TextStyle mainwRegular(double fontSize, {bool isTitle = false}) => TextStyle(
@@ -82,5 +83,23 @@ abstract class TStyle {
     fontSize: fontSize,
     fontWeight: bold,
     color: Co.white,
+  );
+  static TextStyle blackRegular(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: regular,
+    color: Co.dark,
+  );
+  static TextStyle blackSemi(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: semi,
+    color: Co.dark,
+  );
+  static TextStyle blackBold(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: bold,
+    color: Co.dark,
   );
 }

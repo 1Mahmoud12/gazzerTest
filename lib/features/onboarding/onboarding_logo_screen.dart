@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/main_btn.dart';
-import 'package:gazzer/features/onboarding/onboarding_first_screen.dart';
+import 'package:gazzer/features/onboarding/onboarding_welcome_screen.dart';
 
 class OnboardingStartScreen extends StatelessWidget {
   const OnboardingStartScreen({super.key});
@@ -18,36 +19,37 @@ class OnboardingStartScreen extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(Assets.assetsPngCloud), fit: BoxFit.fill, alignment: Alignment.center),
-                  ),
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 60),
-                      child: Hero(
-                        tag: 'cloud',
+              child: SizedBox(
+                width: 300,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Hero(
+                        tag: Tags.cloud,
+                        child: Image.asset(Assets.assetsPngCloudLogo, fit: BoxFit.fill, alignment: Alignment.center),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 60),
                         child: Image.asset(Assets.assetsPngGazzer, width: 200, fit: BoxFit.fitWidth),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),
             ),
             Positioned(
               bottom: 102,
-              right: -15,
+              right: -130,
               child: MainBtn(
                 onPressed: () {
                   Navigator.of(context).push(_createRoute());
                 },
                 text: "Start",
-                textStyle: TStyle.whiteBold(16),
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                textStyle: TStyle.whiteBold(20),
+                padding: EdgeInsets.all(6),
+                width: 275,
                 icon: Icons.arrow_forward_ios_rounded,
               ),
             ),

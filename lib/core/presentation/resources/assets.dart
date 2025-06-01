@@ -12,11 +12,15 @@ class Assets {
 
   static const String assetsFontsPoppinsRegular = "assets/fonts/Poppins-Regular.ttf";
 
-  static const String assetsPngCloud = "assets/png/cloud.png";
+  static const String assetsPngCloudLogo = "assets/png/cloud_logo.png";
+
+  static const String assetsPngCloudWelcome = "assets/png/cloud_welcome.png";
 
   static const String assetsPngFoodBg = "assets/png/food_bg.jpg";
 
   static const String assetsPngGazzer = "assets/png/gazzer.png";
+
+  static const String assetsPngOnboardBg = "assets/png/onboard_bg.png";
 
   static const String assetsPngShape1 = "assets/png/shape1.jpg";
 
