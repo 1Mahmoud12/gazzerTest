@@ -11,6 +11,7 @@ import 'package:gazzer/core/presentation/widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/widgets/shaped_bg_widget.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
 import 'package:gazzer/features/auth/views/sign_up_screen.dart';
+import 'package:gazzer/features/home/views/home_screen.dart';
 
 class SelectModeScreen extends StatelessWidget {
   const SelectModeScreen({super.key});
@@ -27,10 +28,16 @@ class SelectModeScreen extends StatelessWidget {
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
             GradientText(text: L10n.tr().selectMode, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
-            HorizontalSpacing(double.infinity),
+            const HorizontalSpacing(double.infinity),
             Hero(
               tag: Tags.btn,
-              child: OptionBtn(onPressed: () {}, text: L10n.tr().guestMode, width: 250),
+              child: OptionBtn(
+                onPressed: () {
+                  context.myPushAndRemoveUntil(const HomeScreen());
+                },
+                text: L10n.tr().guestMode,
+                width: 250,
+              ),
             ),
             OptionBtn(onPressed: () {}, text: L10n.tr().signIn, width: 250),
             OptionBtn(

@@ -38,6 +38,14 @@ class Assets {
 
   static const String assetsSvgCharacter = "assets/svg/character.svg";
 
+  static const String assetsSvgDrawerIcon = "assets/svg/drawer_icon.svg";
+
+  static const String assetsSvgFavoriteIcon = "assets/svg/favorite_icon.svg";
+
+  static const String assetsSvgHomeIcon = "assets/svg/home_icon.svg";
+
+  static const String assetsSvgMenyIcon = "assets/svg/meny_icon.svg";
+
   static const String assetsSvgSocialApple = "assets/svg/social_apple.svg";
 
   static const String assetsSvgSocialFacebook = "assets/svg/social_facebook.svg";
