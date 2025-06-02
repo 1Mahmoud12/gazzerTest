@@ -30,11 +30,13 @@ class Assets {
 
   static const String assetsPngShape4 = "assets/png/shape4.png";
 
+  static const String assetsPngShape5 = "assets/png/shape5.png";
+
+  static const String assetsPngShape6 = "assets/png/shape6.png";
+
   static const String assetsPngSplash = "assets/png/splash.png";
 
   static const String assetsSvgCharacter = "assets/svg/character.svg";
-
-  static const String assetsSvgShape4 = "assets/svg/shape4.svg";
 
   static const String assetsSvgSocialApple = "assets/svg/social_apple.svg";
 

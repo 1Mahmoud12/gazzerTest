@@ -14,7 +14,7 @@ class OnboardingStartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(image: AssetImage(Assets.assetsPngSplash), fit: BoxFit.cover),
         ),
         child: Stack(
@@ -51,7 +51,7 @@ class OnboardingStartScreen extends StatelessWidget {
                 },
                 text: L10n.tr().start,
                 textStyle: TStyle.whiteBold(20),
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 width: 275,
                 icon: Icons.arrow_forward_ios_rounded,
               ),

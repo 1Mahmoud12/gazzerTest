@@ -22,7 +22,7 @@ class OnboardingFirstScreen extends StatelessWidget {
     return ColoredBox(
       color: Colors.white,
       child: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(image: AssetImage(Assets.assetsPngOnboardBg), fit: BoxFit.cover),
         ),
         child: BackdropFilter(
@@ -34,7 +34,7 @@ class OnboardingFirstScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                HorizontalSpacing(double.infinity),
+                const HorizontalSpacing(double.infinity),
                 Stack(
                   alignment: Alignment.center,
                   children: [
@@ -64,16 +64,16 @@ class OnboardingFirstScreen extends StatelessWidget {
                             color: Co.secondary.withAlpha(125),
                             spreadRadius: 0,
                             blurRadius: 2,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ),
                         Text(L10n.tr().niceToMeetYou, style: TStyle.blackSemi(18)),
-                        VerticalSpacing(20),
+                        const VerticalSpacing(20),
                       ],
                     ),
                   ],
                 ),
-                VerticalSpacing(40),
+                const VerticalSpacing(40),
                 MainBtn(
                   onPressed: () {
                     context.myPush(const SelectModeScreen());
@@ -81,7 +81,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                   text: L10n.tr().letsGo,
                   // width: ,
                   icon: Icons.arrow_forward_ios_outlined,
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+                  padding: const EdgeInsets.fromLTRB(4,4,12,4),
                 ),
               ],
             ),

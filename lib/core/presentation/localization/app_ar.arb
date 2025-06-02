@@ -38,5 +38,11 @@
     "skip": "تخطي",
     "loading": "جاري التحميل",
     "congratulations": "تهانينا",
-    "youMadeIt": "لقد نجحت"
+    "youMadeIt": "لقد نجحت",
+    "chooseYourMood": "اختر مزاجك",
+    "happy": "سعيد",
+    "sad": "حزين",
+    "angry": "غاضب",
+    "excited": "متحمس",
+    "bored": "ممل"
 }

@@ -34,7 +34,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     _nameController.dispose();
     _phoneController.dispose();
-
     super.dispose();
   }
 

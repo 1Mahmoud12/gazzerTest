@@ -63,9 +63,10 @@ dependencies:
   flutter_svg: ^2.1.0
   animations: ^2.0.11
   smooth_page_indicator: ^1.2.1
-  # pinput: ^5.0.1
   skeletonizer: ^2.0.1
   intl_phone_number_field: ^0.2.1
+  confetti: ^0.8.0
+  # pinput: ^5.0.1
   # gradient_borders: ^1.0.1
   # circle_nav_bar: ^2.0.1+1
   # scrolls_to_top: ^2.1.1

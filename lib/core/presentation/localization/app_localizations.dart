@@ -277,6 +277,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You made it'**
   String get youMadeIt;
+
+  /// No description provided for @chooseYourMood.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your mood'**
+  String get chooseYourMood;
+
+  /// No description provided for @happy.
+  ///
+  /// In en, this message translates to:
+  /// **'Happy'**
+  String get happy;
+
+  /// No description provided for @sad.
+  ///
+  /// In en, this message translates to:
+  /// **'Sad'**
+  String get sad;
+
+  /// No description provided for @angry.
+  ///
+  /// In en, this message translates to:
+  /// **'Angry'**
+  String get angry;
+
+  /// No description provided for @excited.
+  ///
+  /// In en, this message translates to:
+  /// **'Excited'**
+  String get excited;
+
+  /// No description provided for @bored.
+  ///
+  /// In en, this message translates to:
+  /// **'Bored'**
+  String get bored;
 }
 
 class _AppLocalizationsDelegate

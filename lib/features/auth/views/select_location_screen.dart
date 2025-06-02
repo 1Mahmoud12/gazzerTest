@@ -1,10 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/widgets/option_btn.dart';
+import 'package:gazzer/features/plan/views/healthy_plan_screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -114,7 +118,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                   alignment: Alignment.topCenter,
                   child: SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 12),
+                      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -152,15 +156,21 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                 right: 0,
                 left: 0,
                 child: SafeArea(
-                  child: OptionBtn(
-                    text: L10n.tr().setYourLocation,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    bgColor: Colors.transparent,
-                    // isLoading: value,
-                    // enable: value,
-                    width: MediaQuery.sizeOf(context).width / 3,
-                    onPressed: () => Navigator.of(context).pop<LatLng>(initLocation.value!),
+                  child: Hero(
+                    tag: Tags.btn,
+                    child: OptionBtn(
+                      text: L10n.tr().setYourLocation,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      bgColor: Co.burble.withAlpha(20),
+                      // isLoading: value,
+                      // enable: value,
+                      width: MediaQuery.sizeOf(context).width / 3,
+                      onPressed: () {
+                        // Navigator.of(context).pop<LatLng>(initLocation.value!);
+                        context.myPushAndRemoveUntil(HealthyPlanScreen());
+                      },
+                    ),
                   ),
                 ),
               ),

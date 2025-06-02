@@ -101,4 +101,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get youMadeIt => 'لقد نجحت';
+
+  @override
+  String get chooseYourMood => 'اختر مزاجك';
+
+  @override
+  String get happy => 'سعيد';
+
+  @override
+  String get sad => 'حزين';
+
+  @override
+  String get angry => 'غاضب';
+
+  @override
+  String get excited => 'متحمس';
+
+  @override
+  String get bored => 'ممل';
 }

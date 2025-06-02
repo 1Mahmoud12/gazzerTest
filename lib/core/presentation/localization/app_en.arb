@@ -38,5 +38,11 @@
     "skip": "Skip",
     "loading": "LOADING",
     "congratulations": "Congratulations",
-    "youMadeIt": "You made it"
+    "youMadeIt": "You made it",
+    "chooseYourMood": "Choose your mood",
+    "happy": "Happy",
+    "sad": "Sad",
+    "angry": "Angry",
+    "excited": "Excited",
+    "bored": "Bored"
 }

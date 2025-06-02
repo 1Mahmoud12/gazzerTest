@@ -102,4 +102,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get youMadeIt => 'You made it';
+
+  @override
+  String get chooseYourMood => 'Choose your mood';
+
+  @override
+  String get happy => 'Happy';
+
+  @override
+  String get sad => 'Sad';
+
+  @override
+  String get angry => 'Angry';
+
+  @override
+  String get excited => 'Excited';
+
+  @override
+  String get bored => 'Bored';
 }
