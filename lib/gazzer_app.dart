@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/theming.dart';
 import 'package:gazzer/features/splash/view/splash_screen.dart';
@@ -12,7 +13,9 @@ class GazzerApp extends StatelessWidget {
       home: SplashScreen(),
       navigatorKey: AppConst.navKey,
       theme: AppTheme.lightTheme,
-
+      localizationsDelegates: L10n.localizationDelegates,
+      supportedLocales: L10n.supportedLocales,
+      locale: L10n.supportedLocales.first,
       builder: (context, child) {
         return child!;
       },

@@ -85,7 +85,7 @@ dependencies:
   #others
   flutter_bloc: ^9.1.1 #state management
   get_it: ^8.0.3 #dependency injection 
-  intl: ^0.20.0 #Format date
+  intl: ^0.20.2 #Format date
 
 
   #Storage
@@ -106,8 +106,8 @@ dependencies:
   cached_network_image: ^3.4.1
 
   #Location
-  # google_maps_flutter: ^2.12.2
-  # geolocator: ^14.0.0
+  google_maps_flutter: ^2.12.2
+  geolocator: ^14.0.1
   # intl_phone_number_field: ^0.2.1
   # location: ^5.0.0
   # app_settings: ^5.1.1
@@ -134,6 +134,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

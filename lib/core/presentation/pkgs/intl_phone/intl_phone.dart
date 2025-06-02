@@ -103,9 +103,10 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
           child: InkWell(
             onTap: () {
               if (!widget.inactive && countries != null) {
+                SystemSound.play(SystemSoundType.click);
                 showModalBottomSheet(
                   shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-                  barrierColor: Colors.black.withOpacity(0.6),
+                  barrierColor: Colors.black38,
                   isScrollControlled: true,
                   backgroundColor: widget.dialogConfig.backgroundColor,
                   context: context,
@@ -150,7 +151,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
                   mainAxisSize: MainAxisSize.min,
                   spacing: 5,
                   children: [
-                    FlagView(countryCodeModel: selected, isFlat: widget.countryConfig.flatFlag, size: 24,),
+                    FlagView(countryCodeModel: selected, isFlat: widget.countryConfig.flatFlag, size: 24),
                     Text(selected.dial_code, style: widget.phoneConfig.hintStyle),
                   ],
                 ),
@@ -168,7 +169,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             // expands: expands,
             autofocus: widget.phoneConfig.autoFocus,
             showCursor: widget.phoneConfig.showCursor,
-    
+
             textInputAction: widget.phoneConfig.textInputAction,
             focusNode: widget.phoneConfig.focusNode,
             style: widget.phoneConfig.textStyle.copyWith(decoration: TextDecoration.none),
@@ -182,26 +183,41 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             onTapOutside: (event) => FocusScope.of(context).unfocus(),
             inputFormatters: widget.inputFormatters,
             decoration: InputDecoration(
-              border:  GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 2),
+              border: GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 2),
               hintText: widget.phoneConfig.hintText,
               isDense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
               filled: widget.phoneConfig.backgroundColor != null,
               fillColor: widget.phoneConfig.backgroundColor,
               hintStyle: widget.phoneConfig.hintStyle,
-              enabledBorder: GradientOutlineInputBorder(gradient: Grad.shadowGrad, width: 2, borderRadius: AppConst.defaultBorderRadius),
-              focusedBorder:  GradientOutlineInputBorder(gradient: Grad.shadowGrad, width: 2, borderRadius: AppConst.defaultBorderRadius),
+              enabledBorder: GradientOutlineInputBorder(
+                gradient: Grad.shadowGrad,
+                width: 2,
+                borderRadius: AppConst.defaultBorderRadius,
+              ),
+              focusedBorder: GradientOutlineInputBorder(
+                gradient: Grad.shadowGrad,
+                width: 2,
+                borderRadius: AppConst.defaultBorderRadius,
+              ),
               labelText: widget.phoneConfig.labelText,
               labelStyle: widget.phoneConfig.labelStyle,
               errorMaxLines: 1,
-              focusedErrorBorder:  GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
-              errorBorder:  GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
+              focusedErrorBorder: GradientOutlineInputBorder(
+                gradient: Grad.errorGradient,
+                width: 1,
+                borderRadius: AppConst.defaultBorderRadius,
+              ),
+              errorBorder: GradientOutlineInputBorder(
+                gradient: Grad.errorGradient,
+                width: 1,
+                borderRadius: AppConst.defaultBorderRadius,
+              ),
               errorText: widget.phoneConfig.errorText,
               errorStyle: widget.phoneConfig.errorStyle,
               floatingLabelStyle: widget.phoneConfig.floatingLabelStyle,
             ),
           ),
-         
         ),
       ],
     );

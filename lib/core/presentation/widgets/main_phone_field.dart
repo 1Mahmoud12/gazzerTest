@@ -54,7 +54,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
       widget.controller?.text = widget.phoneNumb!;
     }
     final countries = GeneralUtil.loadJson();
-    countryCode = widget.code ?? 'SA';
+    countryCode = widget.code ?? 'EG';
     country = countries.firstWhereOrNull((e) => e.code == countryCode);
     super.initState();
   }
@@ -79,11 +79,11 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         // loadFromJson: loadFromJson,
         dialogConfig: DialogConfig(
           backgroundColor: widget.color ?? const Color(0xFFffffff),
-          // searchBoxBackgroundColor: Co.lighterGrey,
+          searchBoxBackgroundColor: Co.grey.withAlpha(20),
           searchBoxIconColor: const Color(0xFF444448),
           countryItemHeight: 55,
-          topBarColor: Co.burble,
-          // selectedItemColor: Co.lightPrimary,
+          topBarColor: Colors.black45,
+          selectedItemColor: Co.burble.withAlpha(20),
           // selectedIcon:
           //     Icon(Icons.check_box, color: Co.mainOrange, size: 15.r),
           textStyle: TStyle.greyRegular(14),

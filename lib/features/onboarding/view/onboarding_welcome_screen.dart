@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -11,7 +12,7 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/gradient_text_wz_shadow.dart';
 import 'package:gazzer/core/presentation/widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/auth/select_mode_screen.dart';
+import 'package:gazzer/features/auth/views/select_mode_screen.dart';
 
 class OnboardingFirstScreen extends StatelessWidget {
   const OnboardingFirstScreen({super.key});
@@ -53,11 +54,9 @@ class OnboardingFirstScreen extends StatelessWidget {
                       spacing: 12,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Hero(
-                          tag: Tags.character,
-                          child: SvgPicture.asset(Assets.assetsSvgCharacter)),
+                        Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter)),
                         GradientTextWzShadow(
-                          text: "Hi Iam Gazzer\nWelcome",
+                          text: "${L10n.tr().hiIamGazzer}\n${L10n.tr().welcome}",
                           textAlign: TextAlign.center,
                           style: TStyle.mainwBold(38),
                           gradient: Grad.radialGradient,
@@ -68,8 +67,8 @@ class OnboardingFirstScreen extends StatelessWidget {
                             offset: Offset(0, 3),
                           ),
                         ),
-                        Text('Nice To meet You', style: TStyle.blackSemi(18)),
-                        VerticalSpacing(20)
+                        Text(L10n.tr().niceToMeetYou, style: TStyle.blackSemi(18)),
+                        VerticalSpacing(20),
                       ],
                     ),
                   ],
@@ -79,7 +78,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                   onPressed: () {
                     context.myPush(const SelectModeScreen());
                   },
-                  text: "Let's Go",
+                  text: L10n.tr().letsGo,
                   // width: ,
                   icon: Icons.arrow_forward_ios_outlined,
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),

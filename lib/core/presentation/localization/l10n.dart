@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gazzer/core/presentation/localization/app_localizations.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 
+
 class L10n {
   L10n._();
   static final List<Locale> supportedLocales = [

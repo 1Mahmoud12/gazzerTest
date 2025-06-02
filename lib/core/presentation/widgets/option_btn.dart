@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
 
 class OptionBtn extends StatefulWidget {
   OptionBtn({
@@ -71,13 +72,18 @@ class _OptionBtnState extends State<OptionBtn> {
           decoration: BoxDecoration(
             gradient: value ? Grad.hoverGradient : null,
             borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
-            color: value ? null : widget.bgColor?? Co.bg,
+            color: value ? null : widget.bgColor ?? Co.bg,
             border: GradientBoxBorder(gradient: Grad.shadowGrad, width: 2),
           ),
           child: child!,
         ),
         child: FilledButton(
-          onPressed: !widget.isEnabled ? null : widget.onPressed,
+          onPressed: !widget.isEnabled
+              ? null
+              : () {
+                  SystemSound.play(SystemSoundType.click);
+                  widget.onPressed();
+                },
           onHover: (value) {
             isHovering.value = value;
           },

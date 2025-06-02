@@ -28,11 +28,19 @@ class Assets {
 
   static const String assetsPngShape3 = "assets/png/shape3.png";
 
+  static const String assetsPngShape4 = "assets/png/shape4.png";
+
   static const String assetsPngSplash = "assets/png/splash.png";
 
   static const String assetsSvgCharacter = "assets/svg/character.svg";
 
   static const String assetsSvgShape4 = "assets/svg/shape4.svg";
+
+  static const String assetsSvgSocialApple = "assets/svg/social_apple.svg";
+
+  static const String assetsSvgSocialFacebook = "assets/svg/social_facebook.svg";
+
+  static const String assetsSvgSocialGoogle = "assets/svg/social_google.svg";
 
   static const String assetsSvgSplashIcon = "assets/svg/splash_icon.svg";
 }

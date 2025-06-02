@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
@@ -8,7 +9,7 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/auth/sign_up_screen.dart';
+import 'package:gazzer/features/auth/views/sign_up_screen.dart';
 
 class SelectModeScreen extends StatelessWidget {
   const SelectModeScreen({super.key});
@@ -36,15 +37,18 @@ class SelectModeScreen extends StatelessWidget {
               spacing: 12,
               children: [
                 Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-                GradientText(text: "Select Mode", style: TStyle.blackBold(24), gradient: Grad.radialGradient),
+                GradientText(text: L10n.tr().selectMode, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
                 HorizontalSpacing(double.infinity),
-                OptionBtn(onPressed: () {}, text: "Guest Mode", width: 250),
-                OptionBtn(onPressed: () {}, text: "Login", width: 250),
+                Hero(
+                  tag: Tags.btn,
+                  child: OptionBtn(onPressed: () {}, text: L10n.tr().guestMode, width: 250),
+                ),
+                OptionBtn(onPressed: () {}, text: L10n.tr().signIn, width: 250),
                 OptionBtn(
                   onPressed: () {
                     context.myPush(SignUpScreen());
                   },
-                  text: "Sign Up",
+                  text: L10n.tr().signUp,
                   width: 250,
                 ),
               ],

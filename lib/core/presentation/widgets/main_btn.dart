@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
 
 class MainBtn extends StatefulWidget {
   const MainBtn({
@@ -57,7 +58,6 @@ class _MainBtnState extends State<MainBtn> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
@@ -78,12 +78,19 @@ class _MainBtnState extends State<MainBtn> {
           child: child!,
         ),
         child: FilledButton(
-          onPressed: !widget.isEnabled ? null : widget.onPressed,
+          onPressed: !widget.isEnabled
+              ? null
+              : () {
+                  SystemSound.play(SystemSoundType.click);
+                  widget.onPressed();
+                },
           onHover: (v) {
             isHovering.value = v;
           },
           style: FilledButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
+            ),
             padding: widget.padding ?? const EdgeInsets.all(6),
             elevation: 0,
             // minimumSize: Size(0, 0),
@@ -106,7 +113,12 @@ class _MainBtnState extends State<MainBtn> {
                         gradient: Grad.radialGradient,
                         shape: BoxShape.circle,
                         boxShadow: [
-                          BoxShadow(color: Co.shadowColor.withAlpha(80), blurRadius: 4, spreadRadius: 1, offset: const Offset(0, 0)),
+                          BoxShadow(
+                            color: Co.shadowColor.withAlpha(80),
+                            blurRadius: 4,
+                            spreadRadius: 1,
+                            offset: const Offset(0, 0),
+                          ),
                         ],
                       ),
                       child: Padding(

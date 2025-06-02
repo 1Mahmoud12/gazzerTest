@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/onboarding/onboarding_logo_screen.dart';
+import 'package:gazzer/features/onboarding/view/onboarding_logo_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -85,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 onPressed: () {
                   Navigator.of(context).pushReplacement(_createRoute());
                 },
-                child: Text('Next', style: TStyle.blackBold(18)),
+                child: Text(L10n.tr().next, style: TStyle.blackBold(18)),
               ),
               // MaterialButton(
               //   onPressed: () {

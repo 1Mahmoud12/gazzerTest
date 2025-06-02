@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/main_btn.dart';
-import 'package:gazzer/features/onboarding/onboarding_welcome_screen.dart';
+import 'package:gazzer/features/onboarding/view/onboarding_welcome_screen.dart';
 
 class OnboardingStartScreen extends StatelessWidget {
   const OnboardingStartScreen({super.key});
@@ -48,7 +49,7 @@ class OnboardingStartScreen extends StatelessWidget {
                   // Navigator.of(context).push(_createRoute());
                   context.myPush(const OnboardingFirstScreen());
                 },
-                text: "Start",
+                text: L10n.tr().start,
                 textStyle: TStyle.whiteBold(20),
                 padding: EdgeInsets.all(6),
                 width: 275,
