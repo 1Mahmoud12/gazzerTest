@@ -28,7 +28,7 @@ class MainTextField extends StatefulWidget {
     this.suffix,
     this.suffixWidget,
     this.prefix,
-    this.hieght,
+    this.height,
     this.width,
     this.isPassword = false,
     this.borderRadius,
@@ -58,7 +58,7 @@ class MainTextField extends StatefulWidget {
   final Widget? suffix;
   final Widget? suffixWidget;
   final Widget? prefix;
-  final double? hieght;
+  final double? height;
   final double? width;
   final double? borderRadius;
   final Color? foucusedColor;
@@ -90,13 +90,13 @@ class _MainTextFieldState extends State<MainTextField> {
     if (widget.isOutLinedBorder) {
       focusedBorder = GradientOutlineInputBorder(
         borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-        gradient: Grad.shadowGrad,
+        gradient: Grad.shadowGrad(),
         width: 2,
       );
     } else {
       focusedBorder = GradientUnderlineInputBorder(
         borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-        gradient: Grad.shadowGrad,
+        gradient: Grad.shadowGrad(),
         width: 2,
       );
     }
@@ -118,7 +118,7 @@ class _MainTextFieldState extends State<MainTextField> {
       builder: (context, value, child) {
         return TextFormField(
           maxLines: widget.maxLines ?? 1,
-          cursorColor: Co.burble,
+          cursorColor: Co.primary,
           controller: widget.controller,
           enabled: widget.enabled,
           style: widget.style ?? TStyle.greySemi(14),

@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 class Co {
   static const bg = Color(0xFFF2EFEF);
 
-  static const burble = Color(0xFF52229E);
+  static const burble = Color(0xFF933EFF);
+  static const primary = Color(0xFF52229E);
   static const secondary = Color(0xFFFF9900);
   static const second3 = Color(0xFFB35000);
 

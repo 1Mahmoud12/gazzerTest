@@ -11,7 +11,7 @@ import 'package:gazzer/core/presentation/widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/widgets/shaped_bg_widget.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
 import 'package:gazzer/features/auth/views/sign_up_screen.dart';
-import 'package:gazzer/features/home/views/home_screen.dart';
+import 'package:gazzer/features/main_layout/views/main_layout.dart';
 
 class SelectModeScreen extends StatelessWidget {
   const SelectModeScreen({super.key});
@@ -33,7 +33,7 @@ class SelectModeScreen extends StatelessWidget {
               tag: Tags.btn,
               child: OptionBtn(
                 onPressed: () {
-                  context.myPushAndRemoveUntil(const HomeScreen());
+                  context.myPushAndRemoveUntil(const MainLayout());
                 },
                 text: L10n.tr().guestMode,
                 width: 250,

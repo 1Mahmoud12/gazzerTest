@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/routing/app_transitions.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
@@ -20,11 +20,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   _startAnimate() async {
     if (mounted) contoller.forward();
-    Future.delayed(Duration(seconds: 1), () {
+    await Future.delayed(const Duration(seconds: 1), () {
       if (mounted) contoller.animateBack(0.0);
     });
-    Future.delayed(Duration(seconds: 2), () {
+    await Future.delayed(const Duration(seconds: 1), () {
       if (mounted) textController.forward();
+    });
+    await Future.delayed(const Duration(milliseconds: 1500), () {
+      if (mounted) Navigator.of(context).pushReplacement(AppTransitions().slideTransition(const OnboardingStartScreen()));
     });
   }
 
@@ -32,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void initState() {
     contoller = AnimationController(vsync: this, duration: Durations.medium4);
     textController = AnimationController(vsync: this, duration: Durations.short4);
-    Future.delayed(Duration(seconds: 2), () => _startAnimate());
+    Future.delayed(const Duration(seconds: 2), () => _startAnimate());
     super.initState();
   }
 
@@ -48,9 +51,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return Scaffold(
       backgroundColor: Co.dark,
       body: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.transparent, Co.burble],
+            colors: [Colors.transparent, Co.primary],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -81,13 +84,13 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   ),
                 ),
               ),
-              VerticalSpacing(20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(_createRoute());
-                },
-                child: Text(L10n.tr().next, style: TStyle.blackBold(18)),
-              ),
+              const VerticalSpacing(20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.of(context).pushReplacement(_createRoute());
+              //   },
+              //   child: Text(L10n.tr().next, style: TStyle.blackBold(18)),
+              // ),
               // MaterialButton(
               //   onPressed: () {
               //     if (textController.isCompleted) {
@@ -101,21 +104,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
           ),
         ),
       ),
-    );
-  }
-
-  Route _createRoute() {
-    return PageRouteBuilder(
-      transitionDuration: Durations.long4,
-      pageBuilder: (context, animation, secondaryAnimation) => const OnboardingStartScreen(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0);
-        const end = Offset.zero;
-        const curve = Curves.fastEaseInToSlowEaseOut;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        final offsetAnimation = animation.drive(tween);
-        return SlideTransition(position: offsetAnimation, child: child);
-      },
     );
   }
 }

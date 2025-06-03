@@ -1,4 +1,5 @@
 {
+    "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
     "thisFieldIsRequired": "هذا الحقل مطلوب.",
     "passwordLengthError": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
     "invalidEmail": "يرجى إدخال عنوان بريد إلكتروني صالح.",

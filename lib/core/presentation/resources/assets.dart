@@ -12,9 +12,13 @@ class Assets {
 
   static const String assetsFontsPoppinsRegular = "assets/fonts/Poppins-Regular.ttf";
 
+  static const String assetsLottieDeliveryBoy = "assets/lottie/delivery_boy.json";
+
   static const String assetsPngCloudLogo = "assets/png/cloud_logo.png";
 
   static const String assetsPngCloudWelcome = "assets/png/cloud_welcome.png";
+
+  static const String assetsPngFastFood = "assets/png/fast-food.jpg";
 
   static const String assetsPngFoodBg = "assets/png/food_bg.jpg";
 
@@ -36,7 +40,13 @@ class Assets {
 
   static const String assetsPngSplash = "assets/png/splash.png";
 
+  static const String assetsSvgAddContainer = "assets/svg/add_container.svg";
+
+  static const String assetsSvgCart = "assets/svg/cart.svg";
+
   static const String assetsSvgCharacter = "assets/svg/character.svg";
+
+  static const String assetsSvgDiscount = "assets/svg/discount.svg";
 
   static const String assetsSvgDrawerIcon = "assets/svg/drawer_icon.svg";
 
@@ -44,7 +54,15 @@ class Assets {
 
   static const String assetsSvgHomeIcon = "assets/svg/home_icon.svg";
 
+  static const String assetsSvgLanguage = "assets/svg/language.svg";
+
+  static const String assetsSvgLocation = "assets/svg/location.svg";
+
   static const String assetsSvgMenyIcon = "assets/svg/meny_icon.svg";
+
+  static const String assetsSvgNotification = "assets/svg/notification.svg";
+
+  static const String assetsSvgProdCard = "assets/svg/prod_card.svg";
 
   static const String assetsSvgSocialApple = "assets/svg/social_apple.svg";
 

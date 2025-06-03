@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -47,31 +48,42 @@ class _MainBnbState extends State<MainBnb> {
         ),
         gradient: Grad.radialGradient,
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-        child: SafeArea(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(icons.length, (index) {
-              return ElevatedButton(
-                onPressed: () {
-                  setState(() => selectedIndex = index);
-                  widget.onItemSelected(index);
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder(),
-                  padding: const EdgeInsets.all(8),
-                  backgroundColor: Colors.transparent,
-                  minimumSize: const Size(0, 0),
-                ),
-                child: CircleAvatar(
-                  radius: 28,
-                  backgroundColor: index == selectedIndex ? const Color(0xFFFFE6E6) : Colors.transparent,
-                  child: SvgPicture.asset(icons[index], height: 24, width: 24),
-                ),
-              );
-            }),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(AppConst.defaultInnerRadius),
+            topRight: Radius.circular(AppConst.defaultInnerRadius),
+          ),
+          gradient: Grad.linearGradient,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: SafeArea(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(icons.length, (index) {
+                return ElevatedButton(
+                  onPressed: () {
+                    SystemSound.play(SystemSoundType.click);
+                    setState(() => selectedIndex = index);
+                    widget.onItemSelected(index);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(8),
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    minimumSize: Size.zero,
+                  ),
+                  child: CircleAvatar(
+                    radius: 28,
+                    backgroundColor: index == selectedIndex ? const Color(0xFFFFE6E6) : Colors.transparent,
+                    child: SvgPicture.asset(icons[index], height: 24, width: 24),
+                  ),
+                );
+              }),
+            ),
           ),
         ),
       ),

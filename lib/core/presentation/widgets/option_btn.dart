@@ -73,7 +73,7 @@ class _OptionBtnState extends State<OptionBtn> {
             gradient: value ? Grad.hoverGradient : null,
             borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
             color: value ? null : widget.bgColor ?? Co.bg,
-            border: GradientBoxBorder(gradient: Grad.shadowGrad, width: 2),
+            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
           ),
           child: child!,
         ),

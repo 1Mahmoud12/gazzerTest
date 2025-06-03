@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @clickBackAgainToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'اضغط مرة أخرى للخروج'**
+  String get clickBackAgainToExit;
+
   /// No description provided for @thisFieldIsRequired.
   ///
   /// In en, this message translates to:

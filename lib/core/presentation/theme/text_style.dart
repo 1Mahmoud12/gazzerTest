@@ -10,6 +10,42 @@ abstract class TStyle {
   static const bolder = FontWeight.w900;
 
   //
+  static TextStyle primaryRegular(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: regular,
+    color: Co.primary,
+  );
+  static TextStyle primarySemi(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: semi,
+    color: Co.primary,
+  );
+  static TextStyle primaryBold(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: bold,
+    color: Co.primary,
+  );
+  static TextStyle burbleRegular(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: regular,
+    color: Co.burble,
+  );
+  static TextStyle burbleSemi(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: semi,
+    color: Co.burble,
+  );
+  static TextStyle burbleBold(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: bold,
+    color: Co.burble,
+  );
   static TextStyle mainwRegular(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,

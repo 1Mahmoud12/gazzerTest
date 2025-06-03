@@ -40,7 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
             const HorizontalSpacing(double.infinity),
             GradientText(text: L10n.tr().loading, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
             StaggeredDotsWave(
-              colors: [Co.second3, Co.burble, Co.greyText, Co.secondary, Co.secondary],
+              colors: [Co.second3, Co.primary, Co.greyText, Co.secondary, Co.secondary],
               size: 100,
               dotsNumber: 5,
             ),

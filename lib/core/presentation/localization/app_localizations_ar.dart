@@ -9,6 +9,9 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get clickBackAgainToExit => 'اضغط مرة أخرى للخروج';
+
+  @override
   String get thisFieldIsRequired => 'هذا الحقل مطلوب.';
 
   @override

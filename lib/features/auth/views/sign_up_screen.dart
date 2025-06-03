@@ -44,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Co.burble.withAlpha(50), Colors.transparent],
+            colors: [Co.primary.withAlpha(50), Colors.transparent],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
           ),

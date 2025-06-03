@@ -3,35 +3,53 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class Grad {
   Grad._();
-  static final linearGradient = LinearGradient(
-    colors: [const Color(0xFF402788), const Color(0x99230064), const Color(0x00230064)],
+  static final linearGradient = const LinearGradient(
+    colors: [Color(0xFF933EFF), Color(0xAA230064), Color(0x00230064)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     stops: [0.07, 0.79, 1.0],
   );
-  static final shadowGrad = LinearGradient(
-    colors: [Colors.transparent, Co.burble],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    stops: const [0.0, 0.5],
+  static RadialGradient get radialGradient =>
+      const RadialGradient(colors: [Color(0xFF250266), Color(0xFF010014)], center: Alignment.center, radius: 0.7);
+
+  ///
+  static shadowGrad([bool isVertical = true]) => LinearGradient(
+    colors: [Colors.transparent, Co.primary],
+    begin: isVertical ? Alignment.topCenter : Alignment.centerRight,
+    end: isVertical ? Alignment.bottomCenter : Alignment.centerLeft,
+    stops: [0.0, 0.5],
   );
-  static final errorGradient = LinearGradient(
+  static final errorGradient = const LinearGradient(
     colors: [Colors.transparent, Co.red],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    stops: const [0.0, 0.5],
+    stops: [0.0, 0.5],
   );
-  static final bgLinear = LinearGradient(
-    colors: [const Color(0xFF402788), Colors.transparent],
+  static final bgLinear = const LinearGradient(
+    colors: [Color(0xFF402788), Colors.transparent],
     begin: Alignment.bottomCenter,
     end: Alignment.topCenter,
-    stops: const [0.2, 0.8],
+    stops: [0.2, 0.8],
   );
-  static final hoverGradient = LinearGradient(
-    colors: [const Color(0x00402788), const Color(0xFF402788)],
+  static final hoverGradient = const LinearGradient(
+    colors: [Color(0x00402788), Color(0xFF402788)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
-  static RadialGradient get radialGradient =>
-      RadialGradient(colors: [const Color(0xFF250266), const Color(0xFF010014)], center: Alignment.center, radius: 1);
+}
+
+extension LinearGradientExt on LinearGradient {
+  LinearGradient copyWith({
+    List<Color>? colors,
+    AlignmentGeometry? begin,
+    AlignmentGeometry? end,
+    List<double>? stops,
+  }) {
+    return LinearGradient(
+      colors: colors ?? this.colors,
+      begin: begin ?? this.begin,
+      end: end ?? this.end,
+      stops: stops ?? this.stops,
+    );
+  }
 }

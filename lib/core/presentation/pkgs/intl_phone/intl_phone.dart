@@ -191,12 +191,12 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
               fillColor: widget.phoneConfig.backgroundColor,
               hintStyle: widget.phoneConfig.hintStyle,
               enabledBorder: GradientOutlineInputBorder(
-                gradient: Grad.shadowGrad,
+                gradient: Grad.shadowGrad(),
                 width: 2,
                 borderRadius: AppConst.defaultBorderRadius,
               ),
               focusedBorder: GradientOutlineInputBorder(
-                gradient: Grad.shadowGrad,
+                gradient: Grad.shadowGrad(),
                 width: 2,
                 borderRadius: AppConst.defaultBorderRadius,
               ),

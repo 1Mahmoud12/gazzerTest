@@ -83,7 +83,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
           searchBoxIconColor: const Color(0xFF444448),
           countryItemHeight: 55,
           topBarColor: Colors.black45,
-          selectedItemColor: Co.burble.withAlpha(20),
+          selectedItemColor: Co.primary.withAlpha(20),
           // selectedIcon:
           //     Icon(Icons.check_box, color: Co.mainOrange, size: 15.r),
           textStyle: TStyle.greyRegular(14),
@@ -94,7 +94,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         countryConfig: CountryConfig(
           flagSize: 30,
           decoration: BoxDecoration(
-            border: GradientBoxBorder(gradient: Grad.shadowGrad, width: 2),
+            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
             borderRadius: AppConst.defaultBorderRadius,
           ),
           textStyle: TStyle.greyRegular(14),

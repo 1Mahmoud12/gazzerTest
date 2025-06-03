@@ -1,4 +1,5 @@
 {
+    "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
     "thisFieldIsRequired": "This field is required.",
     "passwordLengthError": "Password must be at least 6 characters long.",
     "invalidEmail": "Please enter a valid email address.",

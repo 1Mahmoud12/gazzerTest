@@ -9,6 +9,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get clickBackAgainToExit => 'اضغط مرة أخرى للخروج';
+
+  @override
   String get thisFieldIsRequired => 'This field is required.';
 
   @override
