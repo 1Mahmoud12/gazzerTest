@@ -1,0 +1,35 @@
+import 'package:flutter/material.dart';
+import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/features/product/presentation/widgets/product_app_bar.dart';
+import 'package:gazzer/features/product/presentation/widgets/product_extras_widget.dart';
+import 'package:gazzer/features/product/presentation/widgets/product_image_widget.dart';
+import 'package:gazzer/features/product/presentation/widgets/product_price_summary.dart';
+import 'package:gazzer/features/product/presentation/widgets/product_summary_widget.dart';
+import 'package:gazzer/features/product/presentation/widgets/product_types_widget.dart';
+
+class AddProdctToCartScreen extends StatelessWidget {
+  const AddProdctToCartScreen({super.key, required this.product});
+  final ProductModel product;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const ProductAppBar(),
+      extendBodyBehindAppBar: true,
+      body: ListView(
+        padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+        children: [
+          const VerticalSpacing(16),
+          const ProductImageWidget(),
+          ProductSummaryWidget(product: product),
+          const VerticalSpacing(24),
+          ProductTypesWidget(product: product),
+          const VerticalSpacing(24),
+          ProductExtrasWidget(product: product),
+          const VerticalSpacing(24),
+          ProductPriceSummary(),
+        ],
+      ),
+    );
+  }
+}

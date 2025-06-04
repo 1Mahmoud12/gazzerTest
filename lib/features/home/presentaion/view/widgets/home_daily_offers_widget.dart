@@ -29,7 +29,7 @@ class DailyOffersWidget extends StatelessWidget {
           ),
           itemCount: 4,
           itemBuilder: (context, index) {
-            return VerticalProductCard(product: Fakers.fakeProds[index]);
+            return VerticalProductCard(product: Fakers.fakeProds[index], canAdd: false);
           },
         ),
       ],

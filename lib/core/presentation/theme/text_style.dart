@@ -32,19 +32,19 @@ abstract class TStyle {
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: regular,
-    color: Co.second2,
+    color: Co.secondary,
   );
   static TextStyle secondarySemi(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: semi,
-    color: Co.second2,
+    color: Co.secondary,
   );
   static TextStyle secondaryBold(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: bold,
-    color: Co.second2,
+    color: Co.secondary,
   );
   static TextStyle tertiaryRegular(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,

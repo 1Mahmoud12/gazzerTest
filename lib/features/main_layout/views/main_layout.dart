@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/utils/snackbars.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
@@ -58,21 +59,20 @@ class _MainLayoutState extends State<MainLayout> {
       child: Scaffold(
         body: ValueListenableBuilder(
           valueListenable: indexNotifier,
-          builder: (context, value, child) => _getScreen(value),
-          // PageTransitionSwitcher(
-          //   duration: Durations.long4,
-          //   reverse: _prevIdenx > value,
-          //   transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-          //     return SharedAxisTransition(
-          //       fillColor: Colors.transparent,
-          //       animation: primaryAnimation,
-          //       secondaryAnimation: secondaryAnimation,
-          //       transitionType: SharedAxisTransitionType.horizontal,
-          //       child: child,
-          //     );
-          //   },
-          //   child: _getScreen(value),
-          // ),
+          builder: (context, value, child) => PageTransitionSwitcher(
+            duration: Durations.long4,
+            reverse: _prevIdenx > value,
+            transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+              return SharedAxisTransition(
+                fillColor: Colors.transparent,
+                animation: primaryAnimation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: SharedAxisTransitionType.horizontal,
+                child: child,
+              );
+            },
+            child: _getScreen(value),
+          ),
         ),
         bottomNavigationBar: Directionality(
           textDirection: TextDirection.ltr,

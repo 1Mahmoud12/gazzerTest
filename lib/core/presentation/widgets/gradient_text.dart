@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class GradientText extends StatelessWidget {
   const GradientText({
     super.key,
     required this.text,
     required this.style,
-    required this.gradient,
+    this.gradient = const RadialGradient(colors: [Co.mauve, Co.darkMauve], center: Alignment.center, radius: 0.7),
     this.textAlign = TextAlign.center,
   });
   final String text;

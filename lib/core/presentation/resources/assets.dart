@@ -42,6 +42,8 @@ class Assets {
 
   static const String assetsPngSandwitch = "assets/png/sandwitch.png";
 
+  static const String assetsPngSandwitch2 = "assets/png/sandwitch2.png";
+
   static const String assetsPngShape1 = "assets/png/shape1.jpg";
 
   static const String assetsPngShape2 = "assets/png/shape2.png";

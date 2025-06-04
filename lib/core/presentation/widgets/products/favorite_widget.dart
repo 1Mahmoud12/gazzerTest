@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class FavoriteWidget extends StatefulWidget {
@@ -54,7 +55,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
-        print('object');
+        SystemSound.play(SystemSoundType.click);
         _toggleFav();
       },
       style: IconButton.styleFrom(

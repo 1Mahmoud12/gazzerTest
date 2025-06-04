@@ -9,11 +9,14 @@ class Grad {
     end: Alignment.bottomRight,
     stops: [0.07, 0.79, 1.0],
   );
-  static RadialGradient get radialGradient =>
-      const RadialGradient(colors: [Co.mauve, Co.darkMauve], center: Alignment.center, radius: 0.7);
+  static final radialGradient = const RadialGradient(
+    colors: [Co.mauve, Co.darkMauve],
+    center: Alignment.center,
+    radius: 0.7,
+  );
 
   ///
-  static shadowGrad([bool isVertical = true]) => LinearGradient(
+  static LinearGradient shadowGrad([bool isVertical = true]) => LinearGradient(
     colors: [Colors.black.withAlpha(0), Co.buttonGradient],
     begin: isVertical ? Alignment.topCenter : Alignment.centerRight,
     end: isVertical ? Alignment.bottomCenter : Alignment.centerLeft,

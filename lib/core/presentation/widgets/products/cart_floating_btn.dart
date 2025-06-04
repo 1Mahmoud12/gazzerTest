@@ -5,8 +5,9 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
 
 class CartFloatingBtn extends StatelessWidget {
-  const CartFloatingBtn({super.key});
-
+  const CartFloatingBtn({super.key, this.size = 25, this.padding = 15});
+  final double size;
+  final double padding;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -18,8 +19,8 @@ class CartFloatingBtn extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad.linearGradient),
           child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: SvgPicture.asset(Assets.assetsSvgCart, height: 25, width: 25),
+            padding: EdgeInsets.all(padding),
+            child: SvgPicture.asset(Assets.assetsSvgCart, height: size, width: size),
           ),
         ),
       ),
