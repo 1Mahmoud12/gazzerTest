@@ -10,16 +10,14 @@ class CircleGradientBorderedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
+      position: DecorationPosition.foreground,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: !showBorder ? null : GradientBoxBorder(gradient: Grad.shadowGrad()),
         boxShadow: shadow == null ? null : [shadow!],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(1.5),
-        child: ClipOval(
-          child: AspectRatio(aspectRatio: 1.0, child: Image.asset(image, fit: BoxFit.cover)),
-        ),
+      child: ClipOval(
+        child: AspectRatio(aspectRatio: 1.0, child: Image.asset(image, fit: BoxFit.cover)),
       ),
     );
   }

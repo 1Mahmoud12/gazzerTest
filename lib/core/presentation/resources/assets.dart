@@ -89,5 +89,7 @@ class Assets {
   static const String assetsSvgSocialGoogle = "assets/svg/social_google.svg";
 
   static const String assetsSvgSplashIcon = "assets/svg/splash_icon.svg";
+
+  static const String assetsSvgSuccess = "assets/svg/success.svg";
 }
 

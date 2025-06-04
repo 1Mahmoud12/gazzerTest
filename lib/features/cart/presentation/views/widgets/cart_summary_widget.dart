@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -6,6 +7,7 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/widgets/dashed_border.dart';
 import 'package:gazzer/core/presentation/widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 
 class CartSummaryWidget extends StatelessWidget {
   const CartSummaryWidget({super.key});
@@ -45,7 +47,7 @@ class CartSummaryWidget extends StatelessWidget {
                               borderRadius: AppConst.defaultInnerBorderRadius,
                               border: GradientBoxBorder(
                                 gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
-                                width: 2,
+                                width: 1,
                               ),
                             ),
                             child: Padding(
@@ -79,14 +81,16 @@ class CartSummaryWidget extends StatelessWidget {
                               borderRadius: AppConst.defaultInnerBorderRadius,
                               border: GradientBoxBorder(
                                 gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
-                                width: 2,
+                                width: 1,
                               ),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(2),
                               child: MainBtn(
-                                onPressed: () {},
-                                text: "Add to Cart",
+                                onPressed: () {
+                                  context.myPush(const ConfirmOrder());
+                                },
+                                text: "Checkout",
                                 textStyle: TStyle.secondaryBold(14),
                                 bgColor: Co.purple,
                               ),

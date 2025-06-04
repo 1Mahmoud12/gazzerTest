@@ -27,19 +27,17 @@ class CartItemCard extends StatelessWidget {
           child: Row(
             children: [
               DecoratedBox(
+                position: DecorationPosition.foreground,
                 decoration: BoxDecoration(
                   border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
                   borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(2),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(12),
-                      bottomLeft: Radius.circular(12),
-                    ),
-                    child: Image.asset(item.image, fit: BoxFit.cover, height: 125, width: 85),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(12),
+                    bottomLeft: Radius.circular(12),
                   ),
+                  child: Image.asset(item.image, fit: BoxFit.cover, height: 125, width: 85),
                 ),
               ),
               const HorizontalSpacing(12),
