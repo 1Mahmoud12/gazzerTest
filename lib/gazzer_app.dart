@@ -16,9 +16,9 @@ class GazzerApp extends StatelessWidget {
       localizationsDelegates: L10n.localizationDelegates,
       supportedLocales: L10n.supportedLocales,
       locale: L10n.supportedLocales.first,
-      builder: (context, child) {
-        return child!;
-      },
+      // builder: (context, child) {
+      //   return child!;
+      // },
     );
   }
 }
