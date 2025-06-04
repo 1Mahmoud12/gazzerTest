@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:gazzer/core/domain/cart/cart_item_model.dart';
+import 'package:gazzer/core/domain/cart/vendor_products_model.dart';
 import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
@@ -45,5 +47,20 @@ class Fakers {
   static final fakeCuisines = List.generate(
     8,
     (index) => CuisineModel(id: index, name: "Cuisine $index", image: _catsImages[_random.nextInt(_catsImages.length)]),
+  );
+  static final fakecartItems = List.generate(
+    5,
+    (index) => CartItemModel.fromProduct(fakeProds[_random.nextInt(fakeProds.length)]),
+  );
+  static final fakeVendors = List.generate(
+    3,
+    (index) => VendorProductsModel(
+      id: index,  
+      vendorName: "Vendor ${index + 1}",
+      vendorImage: _catsImages[_random.nextInt(_catsImages.length)],
+      cartItems: List.generate(5, (index) {
+        return fakecartItems[index];
+      }),
+    ),
   );
 }

@@ -68,3 +68,20 @@ extension RadialGradientExtension on RadialGradient {
     );
   }
 }
+
+extension GradientExtension on Gradient {
+  Gradient copyWith({
+    List<Color>? colors,
+    AlignmentGeometry? begin,
+    AlignmentGeometry? end,
+    List<double>? stops,
+    double? radius,
+  }) {
+    if (this is LinearGradient) {
+      return (this as LinearGradient).copyWith(colors: colors, begin: begin, end: end, stops: stops);
+    } else if (this is RadialGradient) {
+      return (this as RadialGradient).copyWith(colors: colors, center: begin, radius: radius, stops: stops);
+    }
+    return this;
+  }
+}

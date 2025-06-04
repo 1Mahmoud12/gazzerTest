@@ -1,0 +1,97 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+
+class IncrementWidgetWhite extends StatefulWidget {
+  const IncrementWidgetWhite({super.key, this.initVal = 1});
+  final int initVal;
+  @override
+  State<IncrementWidgetWhite> createState() => _IncrementWidgetWhiteState();
+}
+
+class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
+  late int val;
+
+  @override
+  void initState() {
+    val = widget.initVal;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(
+            border: GradientBoxBorder(
+              gradient: Grad.shadowGrad().copyWith(
+                colors: [Colors.black26, Colors.black.withAlpha(0), Colors.black26],
+                stops: [0.0, 0.5, 1.0],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              width: 2,
+            ),
+            borderRadius: AppConst.defaultBorderRadius,
+          ),
+          child: IconButton(
+            onPressed: () {
+              SystemSound.play(SystemSoundType.click);
+              setState(() {
+                val++;
+              });
+            },
+            style: IconButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+              elevation: 0,
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+            ),
+            icon: const Icon(Icons.add, color: Co.secondary, size: 24),
+          ),
+        ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: 40),
+          child: Text("$val", style: TStyle.secondaryBold(18), textAlign: TextAlign.center),
+        ),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            border: GradientBoxBorder(
+              gradient: Grad.shadowGrad().copyWith(
+                colors: [Colors.black26, Colors.black.withAlpha(0), Colors.black26],
+                stops: [0.0, 0.5, 1.0],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              width: 2,
+            ),
+            borderRadius: AppConst.defaultBorderRadius,
+          ),
+          child: IconButton(
+            onPressed: () {
+              SystemSound.play(SystemSoundType.click);
+              setState(() {
+                if (val > 1) {
+                  val--;
+                }
+              });
+            },
+            style: IconButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+              elevation: 0,
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+            ),
+            icon: const Icon(Icons.remove, color: Co.secondary, size: 24),
+          ),
+        ),
+      ],
+    );
+  }
+}
