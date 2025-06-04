@@ -77,7 +77,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                   position: DecorationPosition.foreground,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Co.primary.withAlpha(120), Colors.transparent],
+                      colors: [Co.purple.withAlpha(120), Colors.transparent],
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       stops: [0.0, 0.2],
@@ -105,12 +105,12 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                     onTap: (latlng) {},
                   ),
                 ),
-                SafeArea(
-                  child: const Align(
+                const SafeArea(
+                  child: Align(
                     alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 60),
-                      child: Icon(Icons.location_pin, size: 60, color: Co.primary),
+                      child: Icon(Icons.location_pin, size: 60, color: Co.purple),
                     ),
                   ),
                 ),
@@ -122,7 +122,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          BackButton(),
+                          const BackButton(),
                           InkWell(
                             onTap: () async {
                               isgetttingCurrent.value = true;
@@ -162,13 +162,13 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                       text: L10n.tr().setYourLocation,
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       margin: const EdgeInsets.symmetric(horizontal: 20),
-                      bgColor: Co.primary.withAlpha(20),
+                      bgColor: Co.purple.withAlpha(20),
                       // isLoading: value,
                       // enable: value,
                       width: MediaQuery.sizeOf(context).width / 3,
                       onPressed: () {
                         // Navigator.of(context).pop<LatLng>(initLocation.value!);
-                        context.myPushAndRemoveUntil(HealthyPlanScreen());
+                        context.myPushAndRemoveUntil(const HealthyPlanScreen());
                       },
                     ),
                   ),

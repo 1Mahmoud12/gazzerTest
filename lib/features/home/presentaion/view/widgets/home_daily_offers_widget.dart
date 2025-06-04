@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/vertical_product_card.dart';
+import 'package:gazzer/core/presentation/widgets/products/vertical_product_card.dart';
 
 class DailyOffersWidget extends StatelessWidget {
   const DailyOffersWidget({super.key});
@@ -28,7 +29,7 @@ class DailyOffersWidget extends StatelessWidget {
           ),
           itemCount: 4,
           itemBuilder: (context, index) {
-            return const VerticalProductCard();
+            return VerticalProductCard(product: Fakers.fakeProds[index]);
           },
         ),
       ],

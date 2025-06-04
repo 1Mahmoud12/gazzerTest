@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
+import 'package:gazzer/core/presentation/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/core/presentation/widgets/products/mini_product_card.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
 import 'package:gazzer/features/home/presentaion/utils/custom_floating_btn_position.dart';
 import 'package:gazzer/features/home/presentaion/utils/home_utils.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/cart_floating_btn.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/categories_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/daily_offers_widget.dart';
 import 'package:gazzer/features/home/presentaion/view/widgets/home_add_widget.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/home_best_popular.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/home_button_offer_widget.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/home_categories_widget.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/home_contact_us_widget.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/home_cuisines_widget.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/home_daily_offers_widget.dart';
 import 'package:gazzer/features/home/presentaion/view/widgets/home_header.dart';
 import 'package:gazzer/features/home/presentaion/view/widgets/home_search_widget.dart';
 import 'package:gazzer/features/home/presentaion/view/widgets/home_suggested_products_widget.dart';
@@ -46,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 HomeAddWidget(
                   color: const Color(0xAAB8ABEA),
                   image: Assets.assetsLottieDeliveryBoy,
-                  text: Column(
+                  rtChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GradientText(text: "Free Delivery", style: TStyle.blackBold(32), gradient: Grad.radialGradient),
@@ -67,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 HomeAddWidget(
                   color: const Color(0x66FFC4C4),
                   image: Assets.assetsSvgDiscount,
-                  text: Column(
+                  rtChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GradientText(
@@ -80,7 +86,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                HomeSuggestedProductsWidget(),
+                const HomeSuggestedProductsWidget(),
+                HomeDoubleAddWidget(
+                  bgColor: const Color(0x88B8ABEA),
+                  fgColor: const Color(0x88FFC4C4),
+                  ltChild: Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GradientText(text: "Top Rated", style: TStyle.blackBold(20), gradient: Grad.radialGradient),
+                        Text("Explore", style: TStyle.blackBold(14)),
+                      ],
+                    ),
+                  ),
+                  rtChild: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    itemCount: 5,
+                    separatorBuilder: (context, index) => const HorizontalSpacing(12),
+                    itemBuilder: (context, index) {
+                      return MiniProductCard(product: Fakers.fakeProds[index]);
+                    },
+                  ),
+                ),
+                const HomeCuisinesWidget(),
+                const HomeContactUsWidget(),
+                const HomeBestPopular(),
+                const HomeButtonOfferWidget(),
+                const VerticalSpacing(8),
               ],
             ),
           ),

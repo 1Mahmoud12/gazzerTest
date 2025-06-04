@@ -8,7 +8,7 @@ import 'package:gazzer/core/presentation/widgets/adaptive_progress_indicator.dar
 import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
 
 class OptionBtn extends StatefulWidget {
-  OptionBtn({
+  const OptionBtn({
     super.key,
     this.text,
     this.child,
@@ -26,9 +26,8 @@ class OptionBtn extends StatefulWidget {
     this.margin = EdgeInsets.zero,
     this.height,
     this.width,
-  }) {
-    assert(text != null || child != null, 'Either text or child must be provided');
-  }
+  }) : assert(text != null || child != null, 'Either text or child must be provided');
+
   final String? text;
   final Widget? child;
   final TextStyle? textStyle;
@@ -62,7 +61,7 @@ class _OptionBtnState extends State<OptionBtn> {
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
-      return AdaptiveProgressIndicator();
+      return const AdaptiveProgressIndicator();
     }
     return Padding(
       padding: widget.margin,

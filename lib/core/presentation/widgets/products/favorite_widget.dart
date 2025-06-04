@@ -57,7 +57,14 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
         print('object');
         _toggleFav();
       },
-      style: IconButton.styleFrom(padding: EdgeInsets.all(6), shape: const CircleBorder(), minimumSize: Size.zero),
+      style: IconButton.styleFrom(
+        padding: const EdgeInsets.all(8),
+        shape: const CircleBorder(),
+        minimumSize: Size.zero,
+        iconSize: widget.size,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        alignment: Alignment.center,
+      ),
       icon: ScaleTransition(
         scale: animation,
         child: Icon(isFav ? Icons.favorite : Icons.favorite_border_rounded, color: Co.secondary, size: widget.size),

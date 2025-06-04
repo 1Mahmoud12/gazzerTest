@@ -10,7 +10,7 @@ class GazzerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainLayout(),
+      home: const MainLayout(),
       navigatorKey: AppConst.navKey,
       theme: AppTheme.lightTheme,
       localizationsDelegates: L10n.localizationDelegates,

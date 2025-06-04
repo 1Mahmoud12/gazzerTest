@@ -14,17 +14,33 @@ class Assets {
 
   static const String assetsLottieDeliveryBoy = "assets/lottie/delivery_boy.json";
 
+  static const String assetsPngBakery = "assets/png/bakery.jpg";
+
   static const String assetsPngCloudLogo = "assets/png/cloud_logo.png";
 
   static const String assetsPngCloudWelcome = "assets/png/cloud_welcome.png";
 
   static const String assetsPngFastFood = "assets/png/fast-food.jpg";
 
+  static const String assetsPngFood2 = "assets/png/food2.webp";
+
+  static const String assetsPngFood3 = "assets/png/food3.jpg";
+
+  static const String assetsPngFood4 = "assets/png/food4.avif";
+
+  static const String assetsPngFood5 = "assets/png/food5.jpg";
+
   static const String assetsPngFoodBg = "assets/png/food_bg.jpg";
 
   static const String assetsPngGazzer = "assets/png/gazzer.png";
 
+  static const String assetsPngGrocery = "assets/png/grocery.jpg";
+
+  static const String assetsPngMedic = "assets/png/medic.jpg";
+
   static const String assetsPngOnboardBg = "assets/png/onboard_bg.png";
+
+  static const String assetsPngSandwitch = "assets/png/sandwitch.png";
 
   static const String assetsPngShape1 = "assets/png/shape1.jpg";
 

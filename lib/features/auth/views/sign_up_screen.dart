@@ -44,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Co.primary.withAlpha(50), Colors.transparent],
+            colors: [Co.purple.withAlpha(50), Colors.transparent],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
           ),
@@ -60,20 +60,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   GradientText(text: L10n.tr().signUp, style: TStyle.mainwBold(32), gradient: Grad.radialGradient),
                 ],
               ),
-              VerticalSpacing(8),
+              const VerticalSpacing(8),
               Text(L10n.tr().singUpToExploreWideVarietyOfProducts, maxLines: 2, style: TStyle.greySemi(16)),
-              VerticalSpacing(24),
+              const VerticalSpacing(24),
               Text(L10n.tr().fullName, style: TStyle.blackBold(20)),
-              VerticalSpacing(8),
+              const VerticalSpacing(8),
               MainTextField(
                 controller: _nameController,
                 hintText: L10n.tr().yourFullName,
                 bgColor: Colors.transparent,
                 validator: Validators.notEmpty,
               ),
-              VerticalSpacing(24),
+              const VerticalSpacing(24),
               Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
-              VerticalSpacing(8),
+              const VerticalSpacing(8),
               PhoneTextField(
                 controller: _phoneController,
                 validator: (v, code) {
@@ -83,13 +83,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return Validators.moreThanSix(v);
                 },
               ),
-              VerticalSpacing(24),
+              const VerticalSpacing(24),
               Hero(
                 tag: Tags.btn,
                 child: OptionBtn(
                   onPressed: () {
                     if (_formKey.currentState?.validate() == true) {
-                      context.myPush(SelectLocationScreen());
+                      context.myPush(const SelectLocationScreen());
                     }
                   },
                   text: L10n.tr().continu,
@@ -97,9 +97,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   bgColor: Colors.transparent,
                 ),
               ),
-              VerticalSpacing(24),
+              const VerticalSpacing(24),
               Center(child: Text(L10n.tr().or, style: TStyle.greySemi(16))),
-              VerticalSpacing(10),
+              const VerticalSpacing(10),
               Row(
                 spacing: 16,
                 children: List.generate(social.length, (index) {

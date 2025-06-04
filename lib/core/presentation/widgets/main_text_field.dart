@@ -118,7 +118,7 @@ class _MainTextFieldState extends State<MainTextField> {
       builder: (context, value, child) {
         return TextFormField(
           maxLines: widget.maxLines ?? 1,
-          cursorColor: Co.primary,
+          cursorColor: Co.purple,
           controller: widget.controller,
           enabled: widget.enabled,
           style: widget.style ?? TStyle.greySemi(14),

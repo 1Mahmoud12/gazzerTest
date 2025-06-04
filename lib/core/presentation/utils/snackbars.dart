@@ -15,7 +15,7 @@ class AppSnackbar {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 2),
-        backgroundColor: forError ? Co.red : Co.primary,
+        backgroundColor: forError ? Co.red : Co.purple,
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.all(16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -45,7 +45,7 @@ class AppSnackbar {
   static info(BuildContext context, String content) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
-        getSnackBar(bgColor: Co.white, content: content, icon: CupertinoIcons.exclamationmark, iconColor: Co.primary));
+        getSnackBar(bgColor: Co.white, content: content, icon: CupertinoIcons.exclamationmark, iconColor: Co.purple));
   }
 
   static exitSnack(BuildContext context) {

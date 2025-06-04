@@ -3,15 +3,30 @@ import 'package:flutter/cupertino.dart';
 class Co {
   static const bg = Color(0xFFF2EFEF);
 
-  static const burble = Color(0xFF933EFF);
-  static const primary = Color(0xFF52229E);
+  // Assets Colors
+  static const purple = Color(0xFF52229E);
   static const secondary = Color(0xFFFF9900);
-  static const second3 = Color(0xFFB35000);
+  static const second2 = Color(0xFFF86E00);
+  static const tertiary = Color(0xFFB35000);
 
+  // text colors
   static const mainText = Color(0xFF000000);
   static const secText = Color(0xFFD7D7D7);
   static const greyText = Color(0xFF525252);
 
+  // button gradient
+  static const buttonGradient = Color(0xFF402788);
+
+  // Main color ** BG **
+  /// Linear gradient
+  static const lightPurple = Color(0xFF933EFF);
+  static const darkPurple = Color(0xFF230064);
+
+  /// Radial gradient
+  static const mauve = Color(0xFF250266);
+  static const darkMauve = Color(0xFF010014);
+
+  // others
   static const grey = Color(0xFF777777);
   static const white = Color(0xFFFFFFFF);
   static const dark = Color(0xFF000000);
@@ -19,8 +34,6 @@ class Co {
   // for decorations
   static const shadowColor = Color(0xFFFAF5FF);
 
-  static const tertText = Color(0xFFB35000);
   static const red = Color(0xFFFF0000);
-
   static const darkMain = Color(0xFF010014);
 }

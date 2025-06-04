@@ -61,7 +61,7 @@ class _MainBtnState extends State<MainBtn> {
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
-      return AdaptiveProgressIndicator();
+      return const AdaptiveProgressIndicator();
     }
     return Padding(
       padding: widget.margin,
@@ -69,11 +69,16 @@ class _MainBtnState extends State<MainBtn> {
         valueListenable: isHovering,
         builder: (context, value, child) => DecoratedBox(
           decoration: BoxDecoration(
+            color: widget.bgColor,
             borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
-            gradient: value ? Grad.hoverGradient : Grad.radialGradient,
+            gradient: widget.bgColor != null
+                ? null
+                : value
+                ? Grad.hoverGradient
+                : Grad.radialGradient,
             boxShadow: value
                 ? []
-                : [BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: const Offset(0, 0))],
+                : [const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0))],
           ),
           child: child!,
         ),
@@ -104,7 +109,7 @@ class _MainBtnState extends State<MainBtn> {
               width: widget.width == null ? null : widget.width! - ((widget.padding?.horizontal ?? 0) * 2),
               child: Row(
                 spacing: 20,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: widget.icon == null ? MainAxisAlignment.center : MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (widget.icon is IconData || (widget.icon is String && widget.icon.endsWith('svg') == true))
@@ -122,7 +127,7 @@ class _MainBtnState extends State<MainBtn> {
                         ],
                       ),
                       child: Padding(
-                        padding: EdgeInsetsGeometry.all(10),
+                        padding: const EdgeInsetsGeometry.all(10),
                         child: widget.icon is IconData
                             ? Icon(widget.icon!, size: (widget.height ?? 50) * 0.6, color: Co.white)
                             : SvgPicture.asset(widget.icon!, height: widget.height ?? 40),

@@ -34,12 +34,12 @@ class HealthyPlanScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            HorizontalSpacing(double.infinity),
+            const HorizontalSpacing(double.infinity),
             Hero(
               tag: Tags.btn,
               child: OptionBtn(
                 onPressed: () {
-                  context.myPush(ChooseYourMode());
+                  context.myPush(const ChooseYourMode());
                 },
                 text: L10n.tr().setHealthPlan,
                 width: 250,

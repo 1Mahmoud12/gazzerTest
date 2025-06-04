@@ -42,7 +42,7 @@ class SelectModeScreen extends StatelessWidget {
             OptionBtn(onPressed: () {}, text: L10n.tr().signIn, width: 250),
             OptionBtn(
               onPressed: () {
-                context.myPush(SignUpScreen());
+                context.myPush(const SignUpScreen());
               },
               text: L10n.tr().signUp,
               width: 250,

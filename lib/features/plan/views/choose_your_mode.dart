@@ -29,7 +29,7 @@ class ChooseYourMode extends StatelessWidget {
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             GradientText(text: L10n.tr().chooseYourMood, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
-            VerticalSpacing(24),
+            const VerticalSpacing(24),
             Column(
               spacing: 16,
               children: [
@@ -37,16 +37,16 @@ class ChooseYourMode extends StatelessWidget {
                   tag: Tags.btn,
                   child: OptionBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(LoadingScreen());
+                      context.myPushAndRemoveUntil(const LoadingScreen());
                     },
                     width: 250,
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     child: SizedBox(
                       width: 120,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(emojis.first, style: TextStyle(fontSize: 24)),
+                          Text(emojis.first, style: const TextStyle(fontSize: 24)),
                           Text(moods[0], style: TStyle.blackSemi(18)),
                         ],
                       ),
@@ -57,16 +57,16 @@ class ChooseYourMode extends StatelessWidget {
                   moods.length - 1,
                   (index) => OptionBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(LoadingScreen());
+                      context.myPushAndRemoveUntil(const LoadingScreen());
                     },
                     width: 250,
-                    padding: EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
                     child: SizedBox(
                       width: 120,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(emojis[index + 1], style: TextStyle(fontSize: 24)),
+                          Text(emojis[index + 1], style: const TextStyle(fontSize: 24)),
                           Text(moods[index + 1], style: TStyle.blackSemi(18)),
                         ],
                       ),

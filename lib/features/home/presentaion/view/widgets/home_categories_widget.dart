@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/home/presentaion/view/widgets/category_item.dart';
 
@@ -14,11 +15,11 @@ class CategoriesWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("Categories", style: TStyle.primaryBold(20)),
-            TextButton(onPressed: () {}, child: Text("View All")),
+            TextButton(onPressed: () {}, child: const Text("View All")),
           ],
         ),
         GridView.builder(
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -27,9 +28,9 @@ class CategoriesWidget extends StatelessWidget {
             crossAxisSpacing: 18,
             childAspectRatio: 0.58,
           ),
-          itemCount: 12,
+          itemCount: Fakers.fakeCats.length,
           itemBuilder: (context, index) {
-            return const CategoryItem();
+            return CategoryItem(category: Fakers.fakeCats[index]);
           },
         ),
       ],

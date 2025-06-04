@@ -14,37 +14,73 @@ abstract class TStyle {
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: regular,
-    color: Co.primary,
+    color: Co.purple,
   );
   static TextStyle primarySemi(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: semi,
-    color: Co.primary,
+    color: Co.purple,
   );
   static TextStyle primaryBold(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: bold,
-    color: Co.primary,
+    color: Co.purple,
+  );
+  static TextStyle secondaryRegular(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: regular,
+    color: Co.second2,
+  );
+  static TextStyle secondarySemi(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: semi,
+    color: Co.second2,
+  );
+  static TextStyle secondaryBold(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: bold,
+    color: Co.second2,
+  );
+  static TextStyle tertiaryRegular(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: regular,
+    color: Co.tertiary,
+  );
+  static TextStyle tertiarySemi(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: semi,
+    color: Co.tertiary,
+  );
+  static TextStyle tertiaryBold(double fontSize, {bool isTitle = false}) => TextStyle(
+    // fontFamily: isTitle ? 'Lemon' : null,
+    fontSize: fontSize,
+    fontWeight: bold,
+    color: Co.tertiary,
   );
   static TextStyle burbleRegular(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: regular,
-    color: Co.burble,
+    color: Co.lightPurple,
   );
   static TextStyle burbleSemi(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: semi,
-    color: Co.burble,
+    color: Co.lightPurple,
   );
   static TextStyle burbleBold(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,
     fontSize: fontSize,
     fontWeight: bold,
-    color: Co.burble,
+    color: Co.lightPurple,
   );
   static TextStyle mainwRegular(double fontSize, {bool isTitle = false}) => TextStyle(
     // fontFamily: isTitle ? 'Lemon' : null,

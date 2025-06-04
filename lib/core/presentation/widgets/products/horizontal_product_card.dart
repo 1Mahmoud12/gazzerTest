@@ -1,22 +1,21 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/favorite_widget.dart';
 import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/rating_widget.dart';
+import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
+import 'package:gazzer/core/presentation/widgets/products/rating_widget.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
 
 class HorizontalProductCard extends StatelessWidget {
-  const HorizontalProductCard({super.key});
-
+  const HorizontalProductCard({super.key, required this.product});
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
-    final rndm = Random();
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 600, maxHeight: 140),
       child: Stack(
@@ -30,7 +29,7 @@ class HorizontalProductCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: GradientBoxBorder(
                       gradient: LinearGradient(
-                        colors: [Co.primary.withAlpha(25), Co.primary],
+                        colors: [Co.purple.withAlpha(25), Co.purple],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         stops: [0.0, 0.5],
@@ -54,17 +53,17 @@ class HorizontalProductCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               GradientText(
-                                text: "Beef Burger",
+                                text: product.name,
                                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                 gradient: Grad.radialGradient,
                               ),
                               Text(
-                                "Butta Drop Shimmering Whipped Oil Body Cream",
+                                product.description,
                                 style: TStyle.blackSemi(14),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
-                              RatingWidget(rndm.nextInt(6).toString(), ignoreGesture: true, itemSize: 16),
+                              RatingWidget(product.rate.toStringAsFixed(1), ignoreGesture: true, itemSize: 16),
                             ],
                           ),
                         ),
@@ -90,7 +89,7 @@ class HorizontalProductCard extends StatelessWidget {
                                   Assets.assetsSvgCart,
                                   height: 24,
                                   width: 24,
-                                  colorFilter: const ColorFilter.mode(Co.primary, BlendMode.srcIn),
+                                  colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                                 ),
                               ),
                             ),
@@ -117,7 +116,14 @@ class HorizontalProductCard extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.centerLeft,
-            child: ClipOval(child: Image.asset(Assets.assetsPngFastFood, height: 110, width: 110, fit: BoxFit.cover)),
+            child: SizedBox(
+              height: 110,
+              child: CircleGradientBorderedImage(
+                image: product.image,
+                showBorder: false,
+                shadow: const BoxShadow(color: Colors.black38, offset: Offset(0, 2), blurRadius: 2),
+              ),
+            ),
           ),
         ],
       ),

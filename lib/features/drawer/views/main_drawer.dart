@@ -5,7 +5,7 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Main Drawer',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),

@@ -48,7 +48,7 @@ class HomeHeader extends StatelessWidget {
                     decoration: const BoxDecoration(color: Co.bg),
                     foregroundDecoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Co.primary.withAlpha(50), Colors.transparent],
+                        colors: [Co.purple.withAlpha(50), Colors.transparent],
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                       ),

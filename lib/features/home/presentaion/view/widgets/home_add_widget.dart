@@ -1,49 +1,120 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/features/home/presentaion/utils/add_shape_painter.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeAddWidget extends StatelessWidget {
-  const HomeAddWidget({super.key, required this.color, required this.image, required this.text});
+  const HomeAddWidget({super.key, required this.color, required this.image, required this.rtChild, this.ltChild})
+    : assert(image != null, 'Image must not be null');
   final Color color;
-  final String image;
-  final Widget text;
+  final String? image;
+  final Widget rtChild;
+  final Widget? ltChild;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         print(constraints.maxWidth);
-        return SizedBox(
-          height: 170,
-          width: constraints.maxWidth,
-          child: Stack(
-            children: [
-              FractionallySizedBox(
-                widthFactor: 1.1,
-                child: SvgPicture.asset(
-                  Assets.assetsSvgAddContainer,
-                  width: constraints.maxWidth,
-                  fit: BoxFit.fitWidth,
-                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                ),
-              ),
-              Row(
+        return FractionallySizedBox(
+          widthFactor: 1.1,
+          child: CustomPaint(
+            painter: AddShapePainter(color: color),
+            child: SizedBox(
+              height: 170,
+              width: constraints.maxWidth,
+              child: Row(
                 children: [
-                    Expanded(
-                      flex: 2,
-                      child: Center(
-                        child: image.endsWith('svg')
-                            ? SvgPicture.asset(image, height: 150, fit: BoxFit.contain)
-                            : image.endsWith('json')
-                            ? Lottie.asset(image, fit: BoxFit.contain, alignment: Alignment.bottomCenter)
-                            : Image.asset(image, height: 150, fit: BoxFit.contain),
+                  ltChild ??
+                      Expanded(
+                        flex: 2,
+                        child: Center(
+                          child: image!.endsWith('svg')
+                              ? SvgPicture.asset(image!, height: 150, fit: BoxFit.contain)
+                              : image!.endsWith('json')
+                              ? Lottie.asset(image!, fit: BoxFit.contain, alignment: Alignment.bottomCenter)
+                              : Image.asset(image!, height: 150, fit: BoxFit.contain),
+                        ),
                       ),
-                    ),
 
-                  Expanded(flex: 3, child: text),
+                  Expanded(flex: 3, child: rtChild),
                 ],
               ),
-            ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class HomeDoubleAddWidget extends StatelessWidget {
+  const HomeDoubleAddWidget({
+    super.key,
+    required this.fgColor,
+    required this.bgColor,
+    this.image,
+    required this.rtChild,
+    this.ltChild,
+    this.rtFlex,
+  }) : assert(image != null || ltChild != null, 'Either image or lfChild must be provided');
+
+  final Color fgColor;
+  final Color bgColor;
+  final String? image;
+  final Widget rtChild;
+  final Widget? ltChild;
+  final int? rtFlex;
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        print(constraints.maxWidth);
+        return FractionallySizedBox(
+          widthFactor: 1.1,
+          child: SizedBox(
+            height: 170,
+            width: constraints.maxWidth,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: CustomPaint(
+                    painter: AddShapePainter(color: bgColor),
+                    child: SizedBox(height: 150, width: constraints.maxWidth),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: CustomPaint(
+                    painter: AddShapePainter(color: fgColor),
+                    child: SizedBox(height: 150, width: constraints.maxWidth),
+                  ),
+                ),
+                SizedBox(
+                  height: 150,
+                  width: constraints.maxWidth,
+                  child: Row(
+                    children: [
+                      ltChild ??
+                          Expanded(
+                            flex: 2,
+                            child: Center(
+                              child: image!.endsWith('svg')
+                                  ? SvgPicture.asset(image!, height: 150, fit: BoxFit.contain)
+                                  : image!.endsWith('json')
+                                  ? Lottie.asset(image!, fit: BoxFit.contain, alignment: Alignment.bottomCenter)
+                                  : Image.asset(image!, height: 150, fit: BoxFit.contain),
+                            ),
+                          ),
+
+                      Expanded(flex: rtFlex ?? 3, child: rtChild),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

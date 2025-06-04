@@ -3,18 +3,18 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class Grad {
   Grad._();
-  static final linearGradient = const LinearGradient(
-    colors: [Color(0xFF933EFF), Color(0xAA230064), Color(0x00230064)],
+  static final linearGradient = LinearGradient(
+    colors: [Co.lightPurple, Co.darkPurple.withAlpha(201), Co.darkPurple.withAlpha(0)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     stops: [0.07, 0.79, 1.0],
   );
   static RadialGradient get radialGradient =>
-      const RadialGradient(colors: [Color(0xFF250266), Color(0xFF010014)], center: Alignment.center, radius: 0.7);
+      const RadialGradient(colors: [Co.mauve, Co.darkMauve], center: Alignment.center, radius: 0.7);
 
   ///
   static shadowGrad([bool isVertical = true]) => LinearGradient(
-    colors: [Colors.transparent, Co.primary],
+    colors: [Colors.black.withAlpha(0), Co.buttonGradient],
     begin: isVertical ? Alignment.topCenter : Alignment.centerRight,
     end: isVertical ? Alignment.bottomCenter : Alignment.centerLeft,
     stops: [0.0, 0.5],
@@ -31,6 +31,7 @@ class Grad {
     end: Alignment.topCenter,
     stops: [0.2, 0.8],
   );
+
   static final hoverGradient = const LinearGradient(
     colors: [Color(0x00402788), Color(0xFF402788)],
     begin: Alignment.topCenter,
@@ -49,6 +50,17 @@ extension LinearGradientExt on LinearGradient {
       colors: colors ?? this.colors,
       begin: begin ?? this.begin,
       end: end ?? this.end,
+      stops: stops ?? this.stops,
+    );
+  }
+}
+
+extension RadialGradientExtension on RadialGradient {
+  RadialGradient copyWith({List<Color>? colors, AlignmentGeometry? center, double? radius, List<double>? stops}) {
+    return RadialGradient(
+      colors: colors ?? this.colors,
+      center: center ?? this.center,
+      radius: radius ?? this.radius,
       stops: stops ?? this.stops,
     );
   }

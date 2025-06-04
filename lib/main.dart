@@ -5,7 +5,7 @@ import 'package:gazzer/gazzer_app.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarColor: Colors.black,
       statusBarBrightness: Brightness.light,
       systemStatusBarContrastEnforced: true,
