@@ -6,7 +6,13 @@ class GradientText extends StatelessWidget {
     super.key,
     required this.text,
     required this.style,
-    this.gradient = const RadialGradient(colors: [Co.purple, Co.darkMauve], center: Alignment.center, radius: 1),
+    // this.gradient = const RadialGradient(colors: [Co.purple, Co.darkMauve], center: Alignment.center, radius: 1),
+    this.gradient = const LinearGradient(
+      colors: [Co.purple, Co.mauve],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      stops: [0.0, 0.8],
+    ),
     this.textAlign = TextAlign.center,
   });
   final String text;

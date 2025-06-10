@@ -56,7 +56,7 @@ class HomeBestPopular extends StatelessWidget {
                                       Expanded(
                                         child: Text(
                                           prod.name,
-                                          style: TStyle.primaryBold(13),
+                                          style: TStyle.primaryBold(12),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -75,7 +75,7 @@ class HomeBestPopular extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Text("In all grills", style: TStyle.blackSemi(14)),
+                                  Text("On all grills", style: TStyle.blackSemi(12)),
                                 ],
                               ),
                             ),
@@ -88,7 +88,7 @@ class HomeBestPopular extends StatelessWidget {
                           angle: -0.25,
                           child: ClipRRect(
                             borderRadius: AppConst.defaultBorderRadius,
-                            child: Image.asset(prod.image, fit: BoxFit.cover, width: 100, height: 60),
+                            child: Image.asset(prod.image, fit: BoxFit.cover, width: 95, height: 50),
                           ),
                         ),
                       ),

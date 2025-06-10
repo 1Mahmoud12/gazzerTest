@@ -17,13 +17,13 @@ class ConfirmOrder extends StatelessWidget {
     final btnText = ["Add Promo Code", "Add Delivery Instructions", "Add Tip"];
     return Scaffold(
       appBar: AppBar(
-        title: GradientText(text: "Confirm Order", style: TStyle.blackBold(24)),
+        title: GradientText(text: "Confirm Order", style: TStyle.blackBold(18)),
       ),
       body: ListView(
         padding: AppConst.defaultPadding,
         children: [
-          Text("Order Summary", style: TStyle.blackBold(18)),
-          VerticalSpacing(24),
+          Text("Order Summary", style: TStyle.blackBold(16)),
+          const VerticalSpacing(24),
           SizedBox(
             height: 250,
             child: ListView.separated(
@@ -45,7 +45,10 @@ class ConfirmOrder extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(flex: 5, child: Image.asset(cartProd.image, fit: BoxFit.cover)),
+                          Expanded(
+                            flex: 5,
+                            child: Image.asset(cartProd.image, fit: BoxFit.cover, width: double.infinity),
+                          ),
                           Expanded(
                             flex: 3,
                             child: Padding(
@@ -53,15 +56,15 @@ class ConfirmOrder extends StatelessWidget {
                               child: Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(text: cartProd.name, style: TStyle.blackBold(16)),
+                                    TextSpan(text: cartProd.name, style: TStyle.blackBold(14)),
                                     const TextSpan(text: "\n"),
                                     const TextSpan(text: "Qty:"),
-                                    TextSpan(text: "${cartProd.quantity}", style: TStyle.blackBold(14)),
+                                    TextSpan(text: "${cartProd.quantity}", style: TStyle.blackBold(13)),
                                     const TextSpan(text: "\n"),
                                     const TextSpan(text: "Price: "),
-                                    TextSpan(text: Helpers.getProperPrice(cartProd.price), style: TStyle.blackSemi(14)),
+                                    TextSpan(text: Helpers.getProperPrice(cartProd.price), style: TStyle.blackSemi(13)),
                                   ],
-                                  style: TStyle.blackSemi(14),
+                                  style: TStyle.blackSemi(13),
                                 ),
                               ),
                             ),
@@ -74,21 +77,30 @@ class ConfirmOrder extends StatelessWidget {
               },
             ),
           ),
-          VerticalSpacing(24),
+          const VerticalSpacing(24),
 
           ...List.generate(btnText.length, (index) {
             return Padding(
-              padding: EdgeInsetsGeometry.symmetric(vertical: 12),
-              child: OptionBtn(onPressed: () {}, radius: 16, text: btnText[index], textStyle: TStyle.primaryBold(16)),
+              padding: const EdgeInsetsGeometry.symmetric(vertical: 12),
+              child: OptionBtn(
+                onPressed: () {},
+                radius: 16,
+                text: btnText[index],
+                textStyle: TStyle.primaryBold(14),
+                height: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+              ),
             );
           }),
-          VerticalSpacing(32),
+          const VerticalSpacing(32),
           OptionBtn(
             onPressed: () {
               context.myPush(const PostCheckoutScreen());
             },
+            height: 0,
+            padding: const EdgeInsets.symmetric(vertical: 8),
             text: "Confirm Order",
-            textStyle: TStyle.primaryBold(16),
+            textStyle: TStyle.primaryBold(14),
           ),
         ],
       ),

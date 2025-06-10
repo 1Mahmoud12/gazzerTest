@@ -80,27 +80,27 @@ class HomeHeader extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             spacing: 12,
                             children: [
-                              SvgPicture.asset(Assets.assetsSvgLocation, height: 40, width: 40),
+                              SvgPicture.asset(Assets.assetsSvgLocation, height: 32, width: 32),
                               Expanded(
                                 child: Text.rich(
                                   TextSpan(
                                     children: [
                                       TextSpan(
                                         text: "Deliver To",
-                                        style: TStyle.mainwSemi(18).copyWith(color: Co.white.withAlpha(120)),
+                                        style: TStyle.mainwSemi(15).copyWith(color: Co.white.withAlpha(120)),
                                       ),
                                       const TextSpan(text: '\n'),
                                       const TextSpan(text: '4140 Parker Rd. Allentwon, St.Mark'),
                                     ],
                                   ),
-                                  maxLines: 3,
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TStyle.whiteSemi(15),
+                                  style: TStyle.whiteSemi(14),
                                 ),
                               ),
                               IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.notifications_none, color: Co.secondary, size: 32),
+                                icon: const Icon(Icons.notifications_none, color: Co.secondary, size: 24),
                               ),
                             ],
                           ),

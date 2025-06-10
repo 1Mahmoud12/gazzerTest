@@ -137,10 +137,10 @@ class _MainTextFieldState extends State<MainTextField> {
               : null,
           decoration: InputDecoration(
             errorStyle: TStyle.errorSemi(13),
-            contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+            contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
             isDense: true,
             hintText: widget.hintText,
-            hintStyle: widget.style ?? TStyle.blackRegular(12),
+            hintStyle: widget.style ?? TStyle.greyRegular(12),
             labelStyle: TStyle.greySemi(15),
             labelText: widget.label,
             prefixIcon: widget.prefix == null

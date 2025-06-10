@@ -36,7 +36,7 @@ class HomeCuisinesWidget extends StatelessWidget {
                   spacing: 6,
                   children: [
                     CircleGradientBorderedImage(image: cuisne.image),
-                    Text("${cuisne.name} Cousine", style: TStyle.blackBold(14), textAlign: TextAlign.center),
+                    Text("${cuisne.name} Cousine", style: TStyle.blackBold(12), textAlign: TextAlign.center),
                     const HorizontalSpacing(8),
                   ],
                 ),
@@ -46,7 +46,7 @@ class HomeCuisinesWidget extends StatelessWidget {
         ),
         const SizedBox.shrink(),
         SizedBox(
-          height: 110,
+          height: 95,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: Fakers.fakeCuisines.length,
@@ -59,7 +59,7 @@ class HomeCuisinesWidget extends StatelessWidget {
                   spacing: 8,
                   children: [
                     Expanded(child: CircleGradientBorderedImage(image: cuisne.image)),
-                    Text(cuisne.name, style: TStyle.blackBold(14), overflow: TextOverflow.ellipsis, maxLines: 1,),
+                    Text(cuisne.name, style: TStyle.blackBold(12), overflow: TextOverflow.ellipsis, maxLines: 1,),
                   ],
                 ),
               );

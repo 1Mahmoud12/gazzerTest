@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class FavoriteWidget extends StatefulWidget {
-  const FavoriteWidget({super.key, this.size = 32});
+  const FavoriteWidget({super.key, this.size = 32, this.padding = 8});
   final double size;
+  final double padding;
+
   @override
   State<FavoriteWidget> createState() => _FavoriteWidgetState();
 }
@@ -59,7 +61,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
         _toggleFav();
       },
       style: IconButton.styleFrom(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(widget.padding),
         shape: const CircleBorder(),
         minimumSize: Size.zero,
         iconSize: widget.size,

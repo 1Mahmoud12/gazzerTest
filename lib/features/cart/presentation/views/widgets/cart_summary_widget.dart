@@ -55,7 +55,10 @@ class CartSummaryWidget extends StatelessWidget {
                               child: MainBtn(
                                 onPressed: () {},
                                 text: "Add Items",
-                                textStyle: TStyle.secondaryBold(14),
+                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                width: double.infinity,
+                                height: 0,
+                                textStyle: TStyle.secondaryBold(12),
                                 bgColor: Co.purple,
                               ),
                             ),
@@ -63,9 +66,9 @@ class CartSummaryWidget extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Delivery Fee", style: TStyle.secondarySemi(13)),
+                              Text("Delivery Fee", style: TStyle.secondarySemi(12)),
                               const HorizontalSpacing(6),
-                              Text(Helpers.getProperPrice(45), style: TStyle.secondarySemi(13)),
+                              Text(Helpers.getProperPrice(45), style: TStyle.secondarySemi(12)),
                             ],
                           ),
                         ],
@@ -91,7 +94,9 @@ class CartSummaryWidget extends StatelessWidget {
                                   context.myPush(const ConfirmOrder());
                                 },
                                 text: "Checkout",
-                                textStyle: TStyle.secondaryBold(14),
+                                textStyle: TStyle.secondaryBold(12),
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(vertical: 6),
                                 bgColor: Co.purple,
                               ),
                             ),
@@ -99,9 +104,9 @@ class CartSummaryWidget extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Total Amount", style: TStyle.secondarySemi(13)),
+                              Text("Total Amount", style: TStyle.secondarySemi(12)),
                               const HorizontalSpacing(12),
-                              Text(Helpers.getProperPrice(20.0), style: TStyle.secondarySemi(13)),
+                              Text(Helpers.getProperPrice(20.0), style: TStyle.secondarySemi(12)),
                             ],
                           ),
                         ],
@@ -109,9 +114,9 @@ class CartSummaryWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const VerticalSpacing(16),
-                const DashedBorder(width: 12, gap: 12, color: Co.secondary),
-                const VerticalSpacing(16),
+                const VerticalSpacing(12),
+                const DashedBorder(width: 6, gap: 6, color: Co.secondary),
+                const VerticalSpacing(12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

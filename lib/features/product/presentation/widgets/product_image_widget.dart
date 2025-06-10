@@ -39,7 +39,7 @@ class ProductImageWidget extends StatelessWidget {
                         gradient: Grad.linearGradient,
                         borderRadius: AppConst.defaultBorderRadius,
                       ),
-                      child: const FavoriteWidget(),
+                      child: const FavoriteWidget(size: 24),
                     ),
                   ),
                 ),

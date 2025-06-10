@@ -24,9 +24,10 @@ class _CartScreenState extends State<CartScreen> {
         children: [
           GradientText(
             text: "Shipping Cart",
-            style: TStyle.blackBold(32),
+            style: TStyle.blackBold(24),
             gradient: Grad.radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
           ),
+          const VerticalSpacing(24),
           Expanded(
             child: ListView.separated(
               padding: AppConst.defaultHrPadding,

@@ -18,8 +18,9 @@ class HorizontalProductCard extends StatelessWidget {
   final ProductModel product;
   @override
   Widget build(BuildContext context) {
+    final height = 115.0;
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 600, maxHeight: 140),
+      constraints: BoxConstraints(maxWidth: 600, maxHeight: height),
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
         onTap: () => context.myPush(AddProdctToCartScreen(product: product)),
@@ -59,12 +60,12 @@ class HorizontalProductCard extends StatelessWidget {
                               children: [
                                 GradientText(
                                   text: product.name,
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                   gradient: Grad.radialGradient,
                                 ),
                                 Text(
                                   product.description,
-                                  style: TStyle.blackSemi(14),
+                                  style: TStyle.blackSemi(12),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                 ),
@@ -89,11 +90,11 @@ class HorizontalProductCard extends StatelessWidget {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(8),
                                   child: SvgPicture.asset(
                                     Assets.assetsSvgCart,
-                                    height: 24,
-                                    width: 24,
+                                    height: 20,
+                                    width: 20,
                                     colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                                   ),
                                 ),
@@ -108,7 +109,7 @@ class HorizontalProductCard extends StatelessWidget {
                                   colors: [const Color(0x55402788), Colors.transparent],
                                 ),
                               ),
-                              child: const FavoriteWidget(size: 24),
+                              child: const FavoriteWidget(size: 20),
                             ),
                           ],
                         ),
@@ -122,7 +123,7 @@ class HorizontalProductCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: SizedBox(
-                height: 110,
+                height: height * 0.75,
                 child: CircleGradientBorderedImage(
                   image: product.image,
                   showBorder: false,

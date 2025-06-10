@@ -31,7 +31,7 @@ class _ProductTypesWidgetState extends State<ProductTypesWidget> {
           spacing: 6,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Select Type", style: TStyle.blackBold(18).copyWith(shadows: AppDec.blackTextShadow)),
+            Text("Select Type", style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
             const VerticalSpacing(12),
             ...List.generate(
               items.length,
@@ -47,9 +47,9 @@ class _ProductTypesWidgetState extends State<ProductTypesWidget> {
                     children: [
                       GradientRadioBtn(isSelected: i == _selectedIndex, size: 8),
                       const HorizontalSpacing(24),
-                      Text(items[i], style: TStyle.blackBold(18)),
+                      Text(items[i], style: TStyle.blackBold(14)),
                       const Spacer(),
-                      Text(Helpers.getProperPrice((i + 1) * 7.5), style: TStyle.blackBold(18)),
+                      Text(Helpers.getProperPrice((i + 1) * 7.5), style: TStyle.blackBold(14)),
                     ],
                   ),
                 ),

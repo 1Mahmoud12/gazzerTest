@@ -23,7 +23,7 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
             controller: controller,
             height: 80,
             borderRadius: 64,
-            prefix: const Icon(Icons.search, color: Co.purple, size: 32),
+            prefix: const Icon(Icons.search, color: Co.purple, size: 24),
           ),
         ),
         const HorizontalSpacing(64),

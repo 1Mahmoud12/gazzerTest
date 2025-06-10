@@ -17,15 +17,15 @@ class ProductExtrasWidget extends StatelessWidget {
         GradientText(text: "Also Order With", style: TStyle.blackBold(18)),
 
         SizedBox(
-          height: 185,
+          height: 170,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: 4,
             separatorBuilder: (context, index) => const HorizontalSpacing(12),
             itemBuilder: (context, index) {
               return SizedBox(
-                width: 165,
-                child: VerticalProductCard(product: Fakers.fakeProds[index], canAdd: true, fontFactor: 0.85),
+                width: 150,
+                child: VerticalProductCard(product: Fakers.fakeProds[index], canAdd: true, fontFactor: 0.9),
               );
             },
           ),

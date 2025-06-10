@@ -24,7 +24,7 @@ class TitleWithMore extends StatelessWidget {
           ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(backgroundColor: Co.secondary.withAlpha(25), elevation: 0),
-            child: Text("View All", style: TStyle.primarySemi(16)),
+            child: Text("View All", style: TStyle.primarySemi(14)),
           ),
       ],
     );

@@ -101,6 +101,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
         Expanded(
           flex: 6,
           child: InkWell(
+            borderRadius: AppConst.defaultBorderRadius,
             onTap: () {
               if (!widget.inactive && countries != null) {
                 SystemSound.play(SystemSoundType.click);
@@ -145,7 +146,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             child: DecoratedBox(
               decoration: widget.countryConfig.decoration,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -186,7 +187,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
               border: GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 2),
               hintText: widget.phoneConfig.hintText,
               isDense: true,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
               filled: widget.phoneConfig.backgroundColor != null,
               fillColor: widget.phoneConfig.backgroundColor,
               hintStyle: widget.phoneConfig.hintStyle,

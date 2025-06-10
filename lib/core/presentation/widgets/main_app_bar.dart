@@ -6,19 +6,20 @@ import 'package:gazzer/core/presentation/widgets/products/cart_floating_btn.dart
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({super.key});
-
+  const MainAppBar({super.key, this.showCart = true});
+  final bool showCart;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       actions: [
-        const Badge(
-          label: Text("0"),
-          textColor: Co.mainText,
-          backgroundColor: Co.second2,
-          child: CartFloatingBtn(size: 20, padding: 8),
-        ),
+        if (showCart)
+          const Badge(
+            label: Text("0"),
+            textColor: Co.mainText,
+            backgroundColor: Co.second2,
+            child: CartFloatingBtn(size: 20, padding: 8),
+          ),
         const HorizontalSpacing(12),
         SvgPicture.asset(
           Assets.assetsSvgNotification,

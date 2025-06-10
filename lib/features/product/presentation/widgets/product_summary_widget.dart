@@ -13,22 +13,22 @@ class ProductSummaryWidget extends StatelessWidget {
         Row(
           spacing: 12,
           children: [
-            GradientText(text: product.name.toUpperCase(), style: TStyle.blackBold(26), gradient: Grad.radialGradient),
+            GradientText(text: product.name.toUpperCase(), style: TStyle.blackBold(20), gradient: Grad.textGradient),
             const Spacer(),
-            Text("EG", style: TStyle.blackBold(18).copyWith(shadows: AppDec.blackTextShadow)),
+            Text("EG", style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
             Text(
               product.price.toStringAsFixed(2),
-              style: TStyle.blackBold(18).copyWith(shadows: AppDec.blackTextShadow),
+              style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow),
             ),
           ],
         ),
         Row(
           spacing: 8,
           children: [
-            Text("Valid until May 15, 2025", style: TStyle.blackRegular(15)),
-            Spacer(),
-            Icon(Icons.star, color: Co.secondary, size: 24),
-            Text(product.rate.toStringAsFixed(1), style: TStyle.secondaryBold(15)),
+            Text("Valid until May 15, 2025", style: TStyle.blackRegular(14)),
+            const Spacer(),
+            const Icon(Icons.star, color: Co.secondary, size: 20),
+            Text(product.rate.toStringAsFixed(1), style: TStyle.secondaryBold(13)),
           ],
         ),
       ],

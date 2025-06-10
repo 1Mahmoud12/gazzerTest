@@ -29,6 +29,7 @@ class HomeButtonOfferWidget extends StatelessWidget {
 
             Expanded(
               child: Column(
+                spacing: 4,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GradientText(text: "30%", style: TStyle.blackBold(42), gradient: Grad.radialGradient),
@@ -45,11 +46,12 @@ class HomeButtonOfferWidget extends StatelessWidget {
                   ),
                   MainBtn(
                     onPressed: () {},
-                    width: 170,
+                    width: 115,
+                    height: 35,
 
                     text: "Order Now",
                     bgColor: Co.second2,
-                    textStyle: TStyle.primaryBold(20),
+                    textStyle: TStyle.primaryBold(14),
                   ),
                 ],
               ),

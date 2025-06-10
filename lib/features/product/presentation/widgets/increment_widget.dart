@@ -46,12 +46,12 @@ class _IncrementWidgetState extends State<IncrementWidget> {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
             ),
-            icon: const Icon(Icons.add, color: Co.secondary, size: 28),
+            icon: const Icon(Icons.add, color: Co.secondary, size: 22),
           ),
         ),
         ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 40),
-          child: Text("$val", style: TStyle.secondaryBold(18), textAlign: TextAlign.center),
+          child: Text("$val", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
         ),
         DoubledDecoratedWidget(
           innerDecoration: BoxDecoration(
@@ -75,7 +75,7 @@ class _IncrementWidgetState extends State<IncrementWidget> {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
             ),
-            icon: const Icon(Icons.remove, color: Co.secondary, size: 26),
+            icon: const Icon(Icons.remove, color: Co.secondary, size: 20),
           ),
         ),
       ],

@@ -46,7 +46,7 @@ class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
               });
             },
             style: IconButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               elevation: 0,
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -57,7 +57,7 @@ class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
         ),
         ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 40),
-          child: Text("$val", style: TStyle.secondaryBold(18), textAlign: TextAlign.center),
+          child: Text("$val", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
         ),
         DecoratedBox(
           decoration: BoxDecoration(
@@ -82,13 +82,13 @@ class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
               });
             },
             style: IconButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               elevation: 0,
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
             ),
-            icon: const Icon(Icons.remove, color: Co.secondary, size: 24),
+            icon: const Icon(Icons.remove, color: Co.secondary, size: 22),
           ),
         ),
       ],

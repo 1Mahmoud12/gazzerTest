@@ -17,7 +17,7 @@ class AddProdctToCartScreen extends StatelessWidget {
       appBar: const MainAppBar(),
       extendBodyBehindAppBar: true,
       body: ListView(
-        padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         children: [
           const VerticalSpacing(16),
           const ProductImageWidget(),
@@ -27,7 +27,7 @@ class AddProdctToCartScreen extends StatelessWidget {
           const VerticalSpacing(24),
           ProductExtrasWidget(product: product),
           const VerticalSpacing(24),
-          ProductPriceSummary(),
+          const ProductPriceSummary(),
         ],
       ),
     );

@@ -11,12 +11,12 @@ class VendorCartProductsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 24,
+      spacing: 12,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GradientText(
           text: vendor.vendorName,
-          style: TStyle.blackBold(24),
+          style: TStyle.blackBold(18),
           gradient: Grad.radialGradient.copyWith(radius: 2, center: Alignment.centerRight),
         ),
         ListView.separated(

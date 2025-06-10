@@ -6,12 +6,19 @@ import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/features/resturants_category/data/category_add_model.dart';
+import 'package:gazzer/features/resturants_category/data/subcategory_model.dart';
+import 'package:gazzer/features/resturants_category/data/vendor_model.dart';
 
 class Fakers {
   Fakers._();
 
   static final _prodImages = [
     Assets.assetsPngFastFood,
+    Assets.assetsPngFood2,
+    Assets.assetsPngFood3,
+    Assets.assetsPngFood4,
+    Assets.assetsPngFood5,
     Assets.assetsPngFood2,
     Assets.assetsPngFood3,
     Assets.assetsPngFood4,
@@ -55,12 +62,44 @@ class Fakers {
   static final fakeVendors = List.generate(
     3,
     (index) => VendorProductsModel(
-      id: index,  
+      id: index,
       vendorName: "Vendor ${index + 1}",
       vendorImage: _catsImages[_random.nextInt(_catsImages.length)],
       cartItems: List.generate(5, (index) {
         return fakecartItems[index];
       }),
+    ),
+  );
+  static final adds = List.generate(
+    4,
+    (index) => CategoryAddModel(
+      id: index,
+      title: "Off From Checken Burder",
+      image: Assets.assetsPngSandwitch,
+      discountPercentage: _random.nextDouble() * 100,
+      dataId: _random.nextInt(4),
+      type: "food",
+    ),
+  );
+  static final fakeSubCats = List.generate(
+    6,
+    (index) => SubcategoryModel(
+      id: index,
+      name: "Subcategory ${index + 1}",
+      imageUrl: _catsImages[_random.nextInt(_catsImages.length)],
+    ),
+  );
+
+  static final vendors = List.generate(
+    6,
+    (index) => VendorModel(
+      id: index,
+      name: "Vendor ${index + 1}",
+      imageUrl: _catsImages[_random.nextInt(_catsImages.length)],
+      rate: _random.nextDouble() * 5,
+      reviewCount: _random.nextInt(100),
+      deliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} min",
+      items: List.generate(_random.nextInt(_prodImages.length - 1) + 1, (index) => _prodImages[index]),
     ),
   );
 }

@@ -15,7 +15,6 @@ class HomeAddWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        print(constraints.maxWidth);
         return FractionallySizedBox(
           widthFactor: 1.1,
           child: CustomPaint(
@@ -69,7 +68,6 @@ class HomeDoubleAddWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        print(constraints.maxWidth);
         return FractionallySizedBox(
           widthFactor: 1.1,
           child: SizedBox(

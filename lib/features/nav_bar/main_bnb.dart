@@ -31,9 +31,7 @@ class _MainBnbState extends State<MainBnb> {
   @override
   void didUpdateWidget(covariant MainBnb oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print(" ** MainBnb didUpdateWidget ** ");
     if (oldWidget.initialIndex != widget.initialIndex) {
-      print(" ** MainBnb didUpdateWidget - updating index ** ");
       setState(() => selectedIndex = widget.initialIndex);
     }
   }
@@ -57,7 +55,7 @@ class _MainBnbState extends State<MainBnb> {
           gradient: Grad.linearGradient,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          padding: const EdgeInsets.fromLTRB(6, 6, 6, 2),
           child: SafeArea(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,15 +69,18 @@ class _MainBnbState extends State<MainBnb> {
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(6),
                     backgroundColor: Colors.transparent,
                     elevation: 0,
+                    iconSize: 21,
+                    maximumSize: const Size(50, 50),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     minimumSize: Size.zero,
                   ),
                   child: CircleAvatar(
-                    radius: 28,
+                    radius: 20,
                     backgroundColor: index == selectedIndex ? const Color(0xFFFFE6E6) : Colors.transparent,
-                    child: SvgPicture.asset(icons[index], height: 24, width: 24),
+                    child: SvgPicture.asset(icons[index], height: 21, width: 21),
                   ),
                 );
               }),

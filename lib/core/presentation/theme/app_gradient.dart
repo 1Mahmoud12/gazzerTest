@@ -14,6 +14,12 @@ class Grad {
     center: Alignment.center,
     radius: 0.7,
   );
+  static final textGradient = const LinearGradient(
+    colors: [Co.purple, Co.mauve],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    stops: [0.0, 0.8],
+  );
 
   ///
   static LinearGradient shadowGrad([bool isVertical = true]) => LinearGradient(

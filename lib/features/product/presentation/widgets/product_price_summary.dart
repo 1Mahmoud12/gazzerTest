@@ -27,7 +27,7 @@ class ProductPriceSummary extends StatelessWidget {
           right: false,
           left: false,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Column(
               spacing: 12,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,9 +51,10 @@ class ProductPriceSummary extends StatelessWidget {
                           child: MainBtn(
                             onPressed: () {},
                             text: "Add to Cart",
-                            textStyle: TStyle.secondaryBold(14),
+                            textStyle: TStyle.secondaryBold(12),
                             bgColor: Co.purple,
-                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            height: 0,
+                            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                           ),
                         ),
                       ),
@@ -66,7 +67,7 @@ class ProductPriceSummary extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: Text("Selected Type", style: TStyle.secondarySemi(16)),
+                        child: Text("Selected Type", style: TStyle.secondaryBold(13)),
                       ),
                     ),
                     const HorizontalSpacing(12),
@@ -76,9 +77,9 @@ class ProductPriceSummary extends StatelessWidget {
 
                         child: Row(
                           children: [
-                            Text("TOTAL:", style: TStyle.secondarySemi(16)),
+                            Text("TOTAL:", style: TStyle.secondaryBold(13)),
                             const HorizontalSpacing(12),
-                            Text(Helpers.getProperPrice(20.0), style: TStyle.secondarySemi(16)),
+                            Text(Helpers.getProperPrice(20.0), style: TStyle.secondaryBold(13)),
                           ],
                         ),
                       ),

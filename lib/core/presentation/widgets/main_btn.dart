@@ -99,7 +99,11 @@ class _MainBtnState extends State<MainBtn> {
             padding: widget.padding ?? const EdgeInsets.all(6),
             elevation: 0,
             // minimumSize: Size(0, 0),
-            minimumSize: Size(widget.width ?? (widget.padding == null ? double.infinity : 0), widget.height ?? 50),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            minimumSize: Size(
+              widget.width ?? (widget.padding == null ? double.infinity : 0),
+              widget.padding != null ? 0 : widget.height ?? 50,
+            ),
             backgroundColor: Colors.transparent,
           ),
 
@@ -127,13 +131,13 @@ class _MainBtnState extends State<MainBtn> {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsGeometry.all(10),
+                        padding: const EdgeInsetsGeometry.all(4),
                         child: widget.icon is IconData
-                            ? Icon(widget.icon!, size: (widget.height ?? 50) * 0.6, color: Co.white)
-                            : SvgPicture.asset(widget.icon!, height: widget.height ?? 40),
+                            ? Icon(widget.icon!, size: (widget.height ?? 32) * 0.6, color: Co.white)
+                            : SvgPicture.asset(widget.icon!, height: widget.height ?? 32),
                       ),
                     ),
-                  Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(15)),
+                  Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(14)),
                 ],
               ),
             ),

@@ -87,15 +87,16 @@ class _OptionBtnState extends State<OptionBtn> {
             isHovering.value = value;
           },
           style: FilledButton.styleFrom(
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
             ),
             minimumSize: Size(
               widget.width ?? (widget.padding != null ? 10 : widget.width ?? double.infinity),
-              widget.height ?? 60,
+              widget.height ?? 54,
             ),
             elevation: 0,
-            padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             backgroundColor: Colors.transparent,
           ),
 

@@ -3650,9 +3650,9 @@ class AddShapePainter extends CustomPainter {
     path_0.lineTo(size.width * -0.07989103, size.height * 0.3925019);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = color;
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = color;
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override

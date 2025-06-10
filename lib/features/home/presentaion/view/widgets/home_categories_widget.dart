@@ -14,8 +14,11 @@ class CategoriesWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Categories", style: TStyle.primaryBold(20)),
-            TextButton(onPressed: () {}, child: const Text("View All")),
+            Text("Categories", style: TStyle.primaryBold(16)),
+            TextButton(
+              onPressed: () {},
+              child: const Text("View All", style: TextStyle(fontSize: 14)),
+            ),
           ],
         ),
         GridView.builder(

@@ -7,7 +7,7 @@ import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 
 class CartFloatingBtn extends StatelessWidget {
-  const CartFloatingBtn({super.key, this.size = 25, this.padding = 15});
+  const CartFloatingBtn({super.key, this.size = 25, this.padding = 12});
   final double size;
   final double padding;
   @override

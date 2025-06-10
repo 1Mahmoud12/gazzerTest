@@ -24,7 +24,7 @@ class MiniProductCard extends StatelessWidget {
           width: constraints.maxHeight * 0.71,
           child: InkWell(
             onTap: () => context.myPush(AddProdctToCartScreen(product: product)),
-            borderRadius: AppConst.defaultBorderRadius, 
+            borderRadius: AppConst.defaultBorderRadius,
             child: Stack(
               children: [
                 Padding(
@@ -33,17 +33,20 @@ class MiniProductCard extends StatelessWidget {
                     children: [
                       CircleGradientBorderedImage(image: product.image),
                       Expanded(
-                        child: Text(
-                          product.name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
+                        child: Center(
+                          child: Text(
+                            product.name,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 12),
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Align(alignment: Alignment.topRight, child: const FavoriteWidget()),
+                const Align(alignment: Alignment.topRight, child: FavoriteWidget(size: 24)),
               ],
             ),
           ),

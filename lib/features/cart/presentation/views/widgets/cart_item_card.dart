@@ -33,10 +33,7 @@ class CartItemCard extends StatelessWidget {
                   borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
                 ),
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(12),
-                    bottomLeft: Radius.circular(12),
-                  ),
+                  borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
                   child: Image.asset(item.image, fit: BoxFit.cover, height: 125, width: 85),
                 ),
               ),
@@ -50,9 +47,9 @@ class CartItemCard extends StatelessWidget {
                         Expanded(
                           child: GradientText(text: item.name, style: TStyle.blackBold(16), textAlign: TextAlign.start),
                         ),
-                        const Icon(Icons.star, color: Co.second2, size: 32),
+                        const Icon(Icons.star, color: Co.second2, size: 24),
                         const HorizontalSpacing(6),
-                        Text(item.rate.toStringAsFixed(1), style: TStyle.blackSemi(14)),
+                        Text(item.rate.toStringAsFixed(1), style: TStyle.blackSemi(13)),
                       ],
                     ),
                     const VerticalSpacing(4),

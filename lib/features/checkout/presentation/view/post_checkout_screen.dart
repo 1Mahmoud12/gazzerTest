@@ -39,7 +39,7 @@ class PostCheckoutScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.location_pin, size: 32, color: Co.purple),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     SvgPicture.asset(Assets.assetsSvgCharacter, height: 80),
                   ],
                 ),
@@ -51,7 +51,7 @@ class PostCheckoutScreen extends StatelessWidget {
                     children: [
                       SvgPicture.asset(Assets.assetsSvgSuccess),
                       GradientText(text:  "Order Placed Successfully!", style: TStyle.blackBold(22)),
-                      VerticalSpacing(64),
+                      const VerticalSpacing(64),
                     ],
                   ),
                 ),

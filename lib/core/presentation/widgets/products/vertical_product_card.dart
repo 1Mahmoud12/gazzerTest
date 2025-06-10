@@ -59,13 +59,13 @@ class VerticalProductCard extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Expanded(child: Text(product.name, style: TStyle.primaryBold(18 * fontFactor))),
+                                Expanded(child: Text(product.name, style: TStyle.primaryBold(15 * fontFactor))),
                                 Row(
                                   children: [
                                     const Icon(Icons.star, color: Co.secondary, size: 16),
                                     Text(
                                       product.rate.toStringAsFixed(1),
-                                      style: TStyle.mainwSemi(14 * fontFactor).copyWith(color: Co.secondary),
+                                      style: TStyle.mainwSemi(12 * fontFactor).copyWith(color: Co.secondary),
                                     ),
                                   ],
                                 ),
@@ -74,14 +74,14 @@ class VerticalProductCard extends StatelessWidget {
                             if (canAdd)
                               Text(
                                 Helpers.getProperPrice(product.price),
-                                style: TStyle.blackSemi(14 * fontFactor).copyWith(shadows: AppDec.blackTextShadow),
+                                style: TStyle.blackSemi(12 * fontFactor).copyWith(shadows: AppDec.blackTextShadow),
                               )
                             else
                               SizedBox(
                                 width: constraints.maxWidth * 0.55,
                                 child: Text(
                                   "Valid until May 15, 2025",
-                                  style: TStyle.mainwSemi(14 * fontFactor),
+                                  style: TStyle.mainwSemi(12 * fontFactor),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.start,
@@ -107,16 +107,16 @@ class VerticalProductCard extends StatelessWidget {
                               onTap: () {
                                 SystemSound.play(SystemSoundType.click);
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Icon(Icons.add, color: Co.second2, size: 32),
+                              child:  Padding(
+                                padding: const EdgeInsets.all(6),
+                                child: Icon(Icons.add, color: Co.second2, size: 24 * fontFactor),
                               ),
                             )
                           : Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: Text(
                                 "40%\nOFF",
-                                style: TStyle.mainwBold(13 * fontFactor).copyWith(color: Co.secondary),
+                                style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary),
                               ),
                             ),
                     ),
