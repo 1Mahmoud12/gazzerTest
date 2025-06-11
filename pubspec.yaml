@@ -184,7 +184,9 @@ flutter:
           style: italic
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
-  #
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter.ttf
 flutter_assets:
   assets_path:
     - assets/

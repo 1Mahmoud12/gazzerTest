@@ -4,11 +4,10 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/resturants_category/data/vendor_model.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/widgets/stacked_item_widget.dart';
+import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/stacked_item_widget.dart';
 
 class HorizontalVendorCard extends StatelessWidget {
   const HorizontalVendorCard({
@@ -17,11 +16,13 @@ class HorizontalVendorCard extends StatelessWidget {
     required this.vendor,
     this.height,
     this.corner = Corner.bottomRight,
+    this.imgToTextRatio = 0.66,
   });
   final double? width;
   final double? height;
   final VendorModel vendor;
   final Corner corner;
+  final double imgToTextRatio; 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,9 +46,10 @@ class HorizontalVendorCard extends StatelessWidget {
             padding: const EdgeInsetsGeometry.all(8),
           ),
           child: Row(
+            spacing: 12,
             children: [
               Expanded(
-                flex: 2,
+                flex: (imgToTextRatio * 10).toInt(),
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -74,11 +76,10 @@ class HorizontalVendorCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const HorizontalSpacing(14),
+
               Expanded(
-                flex: 3,
+                flex: 10,
                 child: Column(
-                  spacing: 2,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -20,6 +20,7 @@ import 'package:gazzer/features/home/presentaion/view/widgets/home_daily_offers_
 import 'package:gazzer/features/home/presentaion/view/widgets/home_header.dart';
 import 'package:gazzer/features/home/presentaion/view/widgets/home_search_widget.dart';
 import 'package:gazzer/features/home/presentaion/view/widgets/home_suggested_products_widget.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/summer_sale_add_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -86,22 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const DailyOffersWidget(),
-                    HomeAddWidget(
-                      color: const Color(0x66FFC4C4),
-                      image: Assets.assetsSvgDiscount,
-                      rtChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GradientText(
-                            text: "Mega Summer\nSale",
-                            style: TStyle.blackBold(32),
-                            gradient: Grad.radialGradient,
-                          ),
-
-                          Text("deals starts 27 may", style: TStyle.blackBold(16)),
-                        ],
-                      ),
-                    ),
+                    const SummerSaleAddWidget(),
+                    //
                     const HomeSuggestedProductsWidget(),
                     HomeDoubleAddWidget(
                       bgColor: const Color(0x88B8ABEA),

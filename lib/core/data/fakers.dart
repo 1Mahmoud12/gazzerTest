@@ -6,9 +6,9 @@ import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/features/resturants_category/data/category_add_model.dart';
-import 'package:gazzer/features/resturants_category/data/subcategory_model.dart';
-import 'package:gazzer/features/resturants_category/data/vendor_model.dart';
+import 'package:gazzer/features/resturants/resturants_category/data/category_add_model.dart';
+import 'package:gazzer/features/resturants/resturants_category/data/subcategory_model.dart';
+import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
 
 class Fakers {
   Fakers._();
@@ -70,7 +70,7 @@ class Fakers {
       }),
     ),
   );
-  static final adds = List.generate(
+  static final restCatAdds = List.generate(
     4,
     (index) => CategoryAddModel(
       id: index,
@@ -91,7 +91,7 @@ class Fakers {
   );
 
   static final vendors = List.generate(
-    6,
+    4,
     (index) => VendorModel(
       id: index,
       name: "Vendor ${index + 1}",

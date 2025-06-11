@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -17,9 +19,23 @@ class RestCatCarousal extends StatefulWidget {
 
 class _RestCatCarousalState extends State<RestCatCarousal> {
   final PageController controller = PageController(viewportFraction: 1);
+  late final Timer timer;
+
+  @override
+  void initState() {
+    timer = Timer.periodic(const Duration(seconds: 3), (_) {
+      if ((controller.page ?? 0) >= Fakers.restCatAdds.length - 1) {
+        controller.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+      } else {
+        controller.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeInOut);
+      }
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
+    timer.cancel();
     controller.dispose();
     super.dispose();
   }
@@ -40,12 +56,12 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
             Expanded(
               child: PageView.builder(
                 controller: controller,
-                itemCount: Fakers.adds.length,
+                itemCount: Fakers.restCatAdds.length,
                 scrollDirection: Axis.horizontal,
                 padEnds: true,
                 onPageChanged: (value) {},
                 itemBuilder: (context, index) {
-                  final add = Fakers.adds[index];
+                  final add = Fakers.restCatAdds[index];
                   return Padding(
                     padding: AppConst.defaultHrPadding,
                     child: Row(
@@ -87,7 +103,7 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
                                   children: [
                                     GradientText(
                                       text: "${add.discountPercentage.toInt()}% ",
-                                      style: TStyle.primaryBold(48).copyWith(color: Co.white),
+                                      style: TStyle.primaryBold(48, isInter: true).copyWith(color: Co.white),
                                     ),
                                     Expanded(
                                       child: Column(
@@ -117,7 +133,7 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
                         LayoutBuilder(
                           builder: (context, constraints) {
                             return Image.asset(
-                              Fakers.adds[index].image,
+                              Fakers.restCatAdds[index].image,
                               fit: BoxFit.cover,
                               height: constraints.maxHeight * 0.8,
                             );
@@ -131,7 +147,7 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
             ),
             SmoothPageIndicator(
               controller: controller, // PageController
-              count: Fakers.adds.length,
+              count: Fakers.restCatAdds.length,
               effect:
                   // SwapEffect(
                   //   dotWidth: 10,

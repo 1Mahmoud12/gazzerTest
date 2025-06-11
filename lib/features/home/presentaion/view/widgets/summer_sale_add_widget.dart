@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/widgets/animations/animated_discount_percentage_widget.dart';
+import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
+import 'package:gazzer/features/home/presentaion/view/widgets/home_add_widget.dart';
+
+class SummerSaleAddWidget extends StatefulWidget {
+  const SummerSaleAddWidget({super.key});
+
+  @override
+  State<SummerSaleAddWidget> createState() => _SummerSaleAddWidgetState();
+}
+
+class _SummerSaleAddWidgetState extends State<SummerSaleAddWidget> with SingleTickerProviderStateMixin {
+  @override
+  Widget build(BuildContext context) {
+    return HomeAddWidget(
+      color: const Color(0x66FFC4C4),
+      ltChild: const Expanded(flex: 2, child: AnimatedDiscountPercentageWidget()),
+      rtChild: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GradientText(text: "Mega Summer\nSale", style: TStyle.blackBold(24), gradient: Grad.radialGradient),
+
+          Text("deals starts 27 may", style: TStyle.blackBold(14)),
+        ],
+      ),
+    );
+  }
+}

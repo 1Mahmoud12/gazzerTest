@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/restaurants_cat_screen.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/restaurants_cat_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.category});

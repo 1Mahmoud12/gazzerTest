@@ -16,6 +16,8 @@ class RestCatHeaderWidget extends StatefulWidget {
 class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
   final controller = TextEditingController();
 
+
+
   @override
   void dispose() {
     controller.dispose();
@@ -24,7 +26,8 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final height = 200 + kToolbarHeight;
+
+    final height = MediaQuery.paddingOf(context).top + kToolbarHeight + 50;
     return Column(
       children: [
         LayoutBuilder(
@@ -68,8 +71,8 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
             ),
           ),
         ),
-        GradientText(text: "Best MENU OF Restairents", style: TStyle.primaryBold(32)),
-        Text("Choose Your Favorite", style: TStyle.greyBold(22)),
+        GradientText(text: "Best MENU OF Restaurants", style: TStyle.primaryBold(24)),
+        Text("Choose Your Favorite", style: TStyle.greyBold(14)),
       ],
     );
   }

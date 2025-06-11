@@ -4,10 +4,10 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/resturants_category/data/vendor_model.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/widgets/stacked_item_widget.dart';
+import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/stacked_item_widget.dart';
 
 class VerticalVendorCard extends StatelessWidget {
   const VerticalVendorCard({
@@ -16,11 +16,14 @@ class VerticalVendorCard extends StatelessWidget {
     required this.vendor,
     this.height,
     this.corner = Corner.bottomRight,
+    this.imgToTextRatio = 0.66,
   });
   final double width;
   final double? height;
   final VendorModel vendor;
   final Corner corner;
+  final double imgToTextRatio; 
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class VerticalVendorCard extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                flex: 2,
+                flex: (imgToTextRatio * 10).toInt(),
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -75,20 +78,20 @@ class VerticalVendorCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 10,
                 child: Column(
                   spacing: 4,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(vendor.name, style: TStyle.primaryBold(16)),
+                    Text(vendor.name, style: TStyle.primaryBold(14)),
                     Row(
                       spacing: 4,
                       children: [
                         const Icon(Icons.star, color: Co.tertiary, size: 24),
                         const Spacer(),
-                        Text(vendor.rate.toStringAsFixed(2), style: TStyle.blackBold(16).copyWith(color: Co.tertiary)),
-                        Text("(${vendor.reviewCount})", style: TStyle.blackSemi(16)),
+                        Text(vendor.rate.toStringAsFixed(2), style: TStyle.blackBold(13).copyWith(color: Co.tertiary)),
+                        Text("(${vendor.reviewCount})", style: TStyle.blackBold(12)),
                       ],
                     ),
                     StackedItemWidget(items: vendor.items),
@@ -96,7 +99,7 @@ class VerticalVendorCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(Icons.access_time_outlined, color: Co.purple, size: 24),
-                        Text(vendor.deliveryTime, style: TStyle.greyBold(14)),
+                        Text(vendor.deliveryTime, style: TStyle.greySemi(13)),
                       ],
                     ),
                   ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/features/resturants_category/presentation/view/widgets/horizontal_vendor_card.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/horizontal_vendor_card.dart';
 
 class HorizontalVendorGridComponent extends StatelessWidget {
   const HorizontalVendorGridComponent({super.key});

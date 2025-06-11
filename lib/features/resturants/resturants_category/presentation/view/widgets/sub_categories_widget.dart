@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/resturants_category/data/subcategory_model.dart';
+import 'package:gazzer/features/resturants/resturants_category/data/subcategory_model.dart';
 
 class SubCategoriesWidget extends StatefulWidget {
   const SubCategoriesWidget({super.key});
@@ -19,7 +19,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
+      height: 40,
       child: ListView.separated(
         padding: AppConst.defaultHrPadding,
         scrollDirection: Axis.horizontal,
@@ -57,6 +57,8 @@ class SubCategoryItem extends StatelessWidget {
         onPressed: () => ontap(subcategory.id),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: AppConst.defaultInnerBorderRadius),
           padding: EdgeInsets.zero,
@@ -67,7 +69,7 @@ class SubCategoryItem extends StatelessWidget {
 
             Padding(
               padding: AppConst.defaultHrPadding,
-              child: Text(subcategory.name, style: TStyle.blackBold(14)),
+              child: Text(subcategory.name, style: TStyle.blackSemi(13)),
             ),
           ],
         ),
