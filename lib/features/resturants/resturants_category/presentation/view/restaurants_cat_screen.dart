@@ -16,14 +16,9 @@ import 'package:gazzer/features/resturants/resturants_category/presentation/view
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/rest_cat_last_chance_add_widget.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/sub_categories_widget.dart';
 
-class RestaurantsCatScreen extends StatefulWidget {
+class RestaurantsCatScreen extends StatelessWidget {
   const RestaurantsCatScreen({super.key, required this.id});
   final int id;
-  @override
-  State<RestaurantsCatScreen> createState() => _RestaurantsCatScreenState();
-}
-
-class _RestaurantsCatScreenState extends State<RestaurantsCatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
