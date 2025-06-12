@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/widgets/products/cart_floating_btn.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({super.key, this.showCart = true});
@@ -20,19 +19,25 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor: Co.second2,
             child: CartFloatingBtn(size: 20, padding: 8),
           ),
-        const HorizontalSpacing(12),
-        SvgPicture.asset(
-          Assets.assetsSvgNotification,
-          height: 21,
-          width: 21,
-          colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+        IconButton(
+          onPressed: () {},
+          style: IconButton.styleFrom(backgroundColor: Colors.black12),
+          icon: SvgPicture.asset(
+            Assets.assetsSvgNotification,
+            height: 21,
+            width: 21,
+            colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+          ),
         ),
-        const HorizontalSpacing(12),
-        SvgPicture.asset(
-          Assets.assetsSvgLanguage,
-          height: 21,
-          width: 21,
-          colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+        IconButton(
+          onPressed: () {},
+          style: IconButton.styleFrom(backgroundColor: Colors.black12),
+          icon: SvgPicture.asset(
+            Assets.assetsSvgLanguage,
+            height: 21,
+            width: 21,
+            colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+          ),
         ),
       ],
     );

@@ -24,6 +24,11 @@ class _AnimatedDiscountPercentageWidgetState extends State<AnimatedDiscountPerce
     super.initState();
   }
 
+@override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(

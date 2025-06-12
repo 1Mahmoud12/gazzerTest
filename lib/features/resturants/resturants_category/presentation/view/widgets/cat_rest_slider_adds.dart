@@ -10,7 +10,12 @@ class CatRestSliderAdds extends StatelessWidget {
     return OverlapingCardsSlider(
       itemCount: images.length,
       builder: (context, index) {
-        return Image.asset(images[index], width: double.infinity, fit: BoxFit.cover);
+        return SizedBox(
+          height: 180,
+          child: Image.asset(images[index], width: double.infinity,
+          height: 180,
+           fit: BoxFit.cover),
+        );
       },
     );
   }

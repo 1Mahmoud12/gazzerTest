@@ -82,7 +82,7 @@ class Fakers {
     ),
   );
   static final fakeSubCats = List.generate(
-    6,
+    20,
     (index) => SubcategoryModel(
       id: index,
       name: "Subcategory ${index + 1}",
