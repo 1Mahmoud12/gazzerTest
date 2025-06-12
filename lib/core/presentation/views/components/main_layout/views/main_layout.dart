@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/utils/snackbars.dart';
+import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/views/favorites_screen.dart';
 import 'package:gazzer/features/home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/menu/views/menu_screen.dart';
-import 'package:gazzer/features/nav_bar/main_bnb.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key, this.idnex});

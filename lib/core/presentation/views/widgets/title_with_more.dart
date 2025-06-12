@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/gradient_text.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 
 class TitleWithMore extends StatelessWidget {
   const TitleWithMore({super.key, required this.title, this.titleStyle, this.showMore = true, this.onPressed});

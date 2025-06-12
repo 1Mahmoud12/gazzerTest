@@ -4,8 +4,8 @@ import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/spacing.dart';
+import  'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/resturants/resturants_category/data/subcategory_model.dart';
 
 class SubCategoriesWidget extends StatefulWidget {

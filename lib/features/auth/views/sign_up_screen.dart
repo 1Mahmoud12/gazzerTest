@@ -9,9 +9,9 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
-import 'package:gazzer/core/presentation/widgets/form_related_widgets.dart/form_related_widgets.dart'
+import  'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart'
     show MainTextField, PhoneTextField;
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/auth/views/select_location_screen.dart';
 
 class SignUpScreen extends StatefulWidget {

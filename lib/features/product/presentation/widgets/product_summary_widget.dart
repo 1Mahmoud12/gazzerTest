@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/gradient_text.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 
 class ProductSummaryWidget extends StatelessWidget {
   const ProductSummaryWidget({super.key, required this.product});

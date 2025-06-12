@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/core/presentation/widgets/title_with_more.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import  'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/vertical_vendor_card.dart';
 
 class HorzScrollVertCardVendorsListComponent extends StatelessWidget {

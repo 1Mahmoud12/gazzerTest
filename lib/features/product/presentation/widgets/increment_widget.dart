@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 
 class IncrementWidget extends StatefulWidget {
   const IncrementWidget({super.key, this.initVal = 1});

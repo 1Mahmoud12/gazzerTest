@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/animations/animated_discount_percentage_widget.dart';
-import 'package:gazzer/core/presentation/widgets/decoration_widgets/spiky_shape_widget.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/gradient_text.dart';
+import  'package:gazzer/core/presentation/views/widgets/animations/animated_discount_percentage_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 
 class SummerSaleAddWidget extends StatefulWidget {
   const SummerSaleAddWidget({super.key});

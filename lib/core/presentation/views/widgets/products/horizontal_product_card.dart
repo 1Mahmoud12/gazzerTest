@@ -6,11 +6,11 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing;
-import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
-import 'package:gazzer/core/presentation/widgets/products/rating_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/features/product/presentation/add_prodct_to_cart_screen.dart';
 
 class HorizontalProductCard extends StatelessWidget {

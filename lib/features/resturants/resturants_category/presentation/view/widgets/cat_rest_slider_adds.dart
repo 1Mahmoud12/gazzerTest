@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/widgets/animations/overlaping_cards_slider.dart';
+import  'package:gazzer/core/presentation/views/widgets/animations/overlaping_cards_slider.dart';
 
 class CatRestSliderAdds extends StatelessWidget {
   const CatRestSliderAdds({super.key});

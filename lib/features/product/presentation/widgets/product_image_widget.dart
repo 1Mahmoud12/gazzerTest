@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 
 class ProductImageWidget extends StatelessWidget {
   const ProductImageWidget({super.key});

@@ -6,10 +6,10 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
+import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/auth/views/sign_up_screen.dart';
-import 'package:gazzer/features/main_layout/views/main_layout.dart';
 
 class SelectModeScreen extends StatelessWidget {
   const SelectModeScreen({super.key});

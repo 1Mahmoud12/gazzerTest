@@ -7,8 +7,8 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing;
 import 'package:gazzer/features/plan/views/congrats_screen.dart';
 

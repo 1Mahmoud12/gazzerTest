@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart' show GradientText, MainBtn;
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, MainBtn;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class RestCatCarousal extends StatefulWidget {

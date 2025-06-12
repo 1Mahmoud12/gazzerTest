@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
 
 class ProductTypesWidget extends StatefulWidget {

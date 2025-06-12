@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/theming.dart';
-import 'package:gazzer/features/main_layout/views/main_layout.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 
 class GazzerApp extends StatelessWidget {
   const GazzerApp({super.key});

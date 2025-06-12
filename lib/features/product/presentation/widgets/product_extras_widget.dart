@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing;
-import 'package:gazzer/core/presentation/widgets/products/vertical_product_card.dart';
+import  'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 
 class ProductExtrasWidget extends StatelessWidget {
   const ProductExtrasWidget({super.key, required this.product});

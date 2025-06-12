@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/cart/vendor_products_model.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart' show GradientText, VerticalSpacing;
+import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, VerticalSpacing;
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_item_card.dart';
 
 class VendorCartProductsItem extends StatelessWidget {
