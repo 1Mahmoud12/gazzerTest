@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/routing/app_transitions.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/onboarding/view/onboarding_logo_screen.dart';
 
 class SplashScreen extends StatefulWidget {

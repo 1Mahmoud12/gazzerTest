@@ -4,9 +4,8 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/option_btn.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, OptionBtn, VerticalSpacing, HorizontalSpacing;
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 
 class ConfirmOrder extends StatelessWidget {

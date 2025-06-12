@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/main_btn.dart';
+part of '../home_screen.dart';
 
-class HomeButtonOfferWidget extends StatelessWidget {
-  const HomeButtonOfferWidget({super.key});
+class _HomeButtonOfferWidget extends StatelessWidget {
+  const _HomeButtonOfferWidget();
 
   @override
   Widget build(BuildContext context) {

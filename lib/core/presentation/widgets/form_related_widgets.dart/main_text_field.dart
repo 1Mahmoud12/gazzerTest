@@ -8,7 +8,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
 export 'package:flutter/services.dart';
 

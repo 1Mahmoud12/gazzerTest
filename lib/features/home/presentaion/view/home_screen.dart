@@ -1,26 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/domain/category/category_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
+import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/widgets/decoration_widgets/spiky_shape_widget.dart';
+import 'package:gazzer/core/presentation/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, HorizontalSpacing, VerticalSpacing, MainBtn;
 import 'package:gazzer/core/presentation/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
+import 'package:gazzer/core/presentation/widgets/products/horizontal_product_card.dart';
 import 'package:gazzer/core/presentation/widgets/products/mini_product_card.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/products/vertical_product_card.dart';
+import 'package:gazzer/core/presentation/widgets/summer_sale_add_widget.dart';
+import 'package:gazzer/core/presentation/widgets/title_with_more.dart';
+import 'package:gazzer/features/home/presentaion/utils/add_shape_clipper.dart';
 import 'package:gazzer/features/home/presentaion/utils/home_utils.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_add_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_best_popular.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_button_offer_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_categories_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_contact_us_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_cuisines_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_daily_offers_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_header.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_search_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/home_suggested_products_widget.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/summer_sale_add_widget.dart';
+import 'package:gazzer/features/home/presentaion/utils/product_shape_painter.dart';
+import 'package:gazzer/features/product/presentation/add_prodct_to_cart_screen.dart';
+import 'package:gazzer/features/resturants/resturants_category/presentation/view/restaurants_cat_screen.dart';
+
+///
+///
+part 'widgets/home_best_popular.dart';
+part 'widgets/home_button_offer_widget.dart';
+part 'widgets/home_categories_widget.dart';
+part 'widgets/home_contact_us_widget.dart';
+part 'widgets/home_cuisines_widget.dart';
+part 'widgets/home_daily_offers_widget.dart';
+part 'widgets/home_header.dart';
+part 'widgets/home_search_widget.dart';
+part 'widgets/home_suggested_products_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -53,16 +70,16 @@ class _HomeScreenState extends State<HomeScreen> {
           mainScreenWidget: ListView(
             padding: EdgeInsets.zero,
             children: [
-              const HomeHeader(),
+              const _HomeHeader(),
               const VerticalSpacing(12),
               Padding(
                 padding: AppConst.defaultHrPadding,
                 child: Column(
                   spacing: 24,
                   children: [
-                    const HomeSearchWidget(),
-                    const CategoriesWidget(),
-                    HomeAddWidget(
+                    const _HomeSearchWidget(),
+                    const _HomeCategoriesWidget(),
+                    SpikyShapeWidget(
                       color: const Color(0xAAB8ABEA),
                       image: Assets.assetsLottieDeliveryBoy,
                       rtChild: Column(
@@ -86,10 +103,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    const DailyOffersWidget(),
+                    const _DailyOffersWidget(),
                     const SummerSaleAddWidget(),
                     //
-                    const HomeSuggestedProductsWidget(),
+                    const _HomeSuggestedProductsWidget(),
                     HomeDoubleAddWidget(
                       bgColor: const Color(0x88B8ABEA),
                       fgColor: const Color(0x88FFC4C4),
@@ -113,10 +130,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                     ),
-                    const HomeCuisinesWidget(),
-                    const HomeContactUsWidget(),
-                    const HomeBestPopular(),
-                    const HomeButtonOfferWidget(),
+                    const _HomeCuisinesWidget(),
+                    const _HomeContactUsWidget(),
+                    const _HomeBestPopular(),
+                    const _HomeButtonOfferWidget(),
                     const VerticalSpacing(8),
                   ],
                 ),

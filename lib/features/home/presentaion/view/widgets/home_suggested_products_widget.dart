@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/widgets/products/horizontal_product_card.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/title_with_more.dart';
+part of "../home_screen.dart";
 
-class HomeSuggestedProductsWidget extends StatelessWidget {
-  const HomeSuggestedProductsWidget({super.key});
+class _HomeSuggestedProductsWidget extends StatelessWidget {
+  const _HomeSuggestedProductsWidget();
 
   @override
   Widget build(BuildContext context) {

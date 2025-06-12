@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
+import 'package:gazzer/core/presentation/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/home/presentaion/utils/product_shape_painter.dart';

@@ -1,18 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/home/presentaion/utils/product_shape_painter.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/title_with_more.dart';
-import 'package:gazzer/features/product/presentation/add_prodct_to_cart_screen.dart';
+part of '../home_screen.dart';
 
-class HomeBestPopular extends StatelessWidget {
-  const HomeBestPopular({super.key});
+class _HomeBestPopular extends StatelessWidget {
+  const _HomeBestPopular();
 
   @override
   Widget build(BuildContext context) {

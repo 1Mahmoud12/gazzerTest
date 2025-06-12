@@ -6,10 +6,8 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/option_btn.dart';
-import 'package:gazzer/core/presentation/widgets/shaped_bg_widget.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/auth/views/sign_up_screen.dart';
 import 'package:gazzer/features/main_layout/views/main_layout.dart';
 
@@ -18,8 +16,8 @@ class SelectModeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShapedBgWidget(
-      shape: Assets.assetsPngShape2,
+    return ImageBackgroundWidget(
+      image: Assets.assetsPngShape2,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(),

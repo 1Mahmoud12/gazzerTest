@@ -9,9 +9,8 @@ import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text_wz_shadow.dart';
-import 'package:gazzer/core/presentation/widgets/main_btn.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show GradientTextWzShadow, HorizontalSpacing, MainBtn, VerticalSpacing;
 import 'package:gazzer/features/auth/views/select_mode_screen.dart';
 
 class OnboardingFirstScreen extends StatelessWidget {
@@ -81,7 +80,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                   text: L10n.tr().letsGo,
                   // width: ,
                   icon: Icons.arrow_forward_ios_outlined,
-                  padding: const EdgeInsets.fromLTRB(4,4,12,4),
+                  padding: const EdgeInsets.fromLTRB(4, 4, 12, 4),
                 ),
               ],
             ),

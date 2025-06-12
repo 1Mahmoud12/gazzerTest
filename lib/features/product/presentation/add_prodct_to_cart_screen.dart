@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
-import 'package:gazzer/core/presentation/widgets/main_app_bar.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
 import 'package:gazzer/features/product/presentation/widgets/product_extras_widget.dart';
 import 'package:gazzer/features/product/presentation/widgets/product_image_widget.dart';
 import 'package:gazzer/features/product/presentation/widgets/product_price_summary.dart';

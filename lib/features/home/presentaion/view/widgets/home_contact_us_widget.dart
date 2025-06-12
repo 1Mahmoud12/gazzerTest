@@ -1,13 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/features/home/presentaion/utils/add_shape_clipper.dart';
+part of '../home_screen.dart';
 
-class HomeContactUsWidget extends StatelessWidget {
-  const HomeContactUsWidget({super.key});
+class _HomeContactUsWidget extends StatelessWidget {
+  const _HomeContactUsWidget();
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/products/vertical_product_card.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/title_with_more.dart';
+part of '../home_screen.dart';
 
-class DailyOffersWidget extends StatelessWidget {
-  const DailyOffersWidget({super.key});
+class _DailyOffersWidget extends StatelessWidget {
+  const _DailyOffersWidget();
 
   @override
   Widget build(BuildContext context) {

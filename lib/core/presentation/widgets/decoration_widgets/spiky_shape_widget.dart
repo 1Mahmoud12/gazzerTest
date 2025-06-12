@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/features/home/presentaion/utils/add_shape_painter.dart';
 import 'package:lottie/lottie.dart';
 
-class HomeAddWidget extends StatelessWidget {
-  const HomeAddWidget({super.key, required this.color, this.image, required this.rtChild, this.ltChild})
+class SpikyShapeWidget extends StatelessWidget {
+  const SpikyShapeWidget({super.key, required this.color, this.image, required this.rtChild, this.ltChild})
     : assert(image != null || ltChild != null, 'Image or ltChild must not be null');
   final Color color;
   final String? image;

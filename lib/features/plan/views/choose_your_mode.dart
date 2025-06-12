@@ -6,10 +6,9 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/option_btn.dart';
-import 'package:gazzer/core/presentation/widgets/shaped_bg_widget.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, VerticalSpacing, OptionBtn;
 import 'package:gazzer/features/plan/views/loading_screen.dart';
 
 class ChooseYourMode extends StatelessWidget {
@@ -19,8 +18,8 @@ class ChooseYourMode extends StatelessWidget {
   Widget build(BuildContext context) {
     final moods = [L10n.tr().happy, L10n.tr().sad, L10n.tr().excited, L10n.tr().bored, L10n.tr().angry];
     final emojis = ["\u{1F60A}", "\u{1F622}", "\u{1F603}", "\u{1F610}", "\u{1F620}"];
-    return ShapedBgWidget(
-      shape: Assets.assetsPngShape4,
+    return ImageBackgroundWidget(
+      image: Assets.assetsPngShape4,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(),

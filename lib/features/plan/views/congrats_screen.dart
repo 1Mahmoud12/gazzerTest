@@ -4,10 +4,9 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/option_btn.dart';
-import 'package:gazzer/core/presentation/widgets/shaped_bg_widget.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, HorizontalSpacing, OptionBtn;
 import 'package:gazzer/features/main_layout/views/main_layout.dart';
 
 class CongratsScreen extends StatefulWidget {
@@ -35,8 +34,8 @@ class _CongratsScreenState extends State<CongratsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ShapedBgWidget(
-      shape: Assets.assetsPngShape6,
+    return ImageBackgroundWidget(
+      image: Assets.assetsPngShape6,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
@@ -55,9 +54,13 @@ class _CongratsScreenState extends State<CongratsScreen> {
                     gradient: Grad.radialGradient,
                   ),
                   Text(L10n.tr().youMadeIt, style: TStyle.mainwBold(16)),
-                  OptionBtn(onPressed: () {
-                    context.myPushAndRemoveUntil(const MainLayout());
-                  }, text: L10n.tr().start, width: 250),
+                  OptionBtn(
+                    onPressed: () {
+                      context.myPushAndRemoveUntil(const MainLayout());
+                    },
+                    text: L10n.tr().start,
+                    width: 250,
+                  ),
                 ],
               ),
             ),

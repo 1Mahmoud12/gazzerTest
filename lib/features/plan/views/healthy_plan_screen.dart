@@ -5,10 +5,9 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/option_btn.dart';
-import 'package:gazzer/core/presentation/widgets/shaped_bg_widget.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, HorizontalSpacing, OptionBtn;
 import 'package:gazzer/features/plan/views/choose_your_mode.dart';
 
 class HealthyPlanScreen extends StatelessWidget {
@@ -16,8 +15,8 @@ class HealthyPlanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShapedBgWidget(
-      shape: Assets.assetsPngShape3,
+    return ImageBackgroundWidget(
+      image: Assets.assetsPngShape3,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(),

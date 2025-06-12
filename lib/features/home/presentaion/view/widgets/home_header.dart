@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/features/home/presentaion/utils/home_utils.dart';
+part of '../home_screen.dart';
 
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+class _HomeHeader extends StatelessWidget {
+  const _HomeHeader();
   @override
   Widget build(BuildContext context) {
     final width = HomeUtils.headerWidth(context);

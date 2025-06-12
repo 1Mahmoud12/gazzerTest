@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
+import 'package:gazzer/core/presentation/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 
 class CartFloatingBtn extends StatelessWidget {

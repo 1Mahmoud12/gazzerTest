@@ -7,9 +7,9 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/shaped_bg_widget.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, HorizontalSpacing;
 import 'package:gazzer/features/plan/views/congrats_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -27,8 +27,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
         context.myPushAndRemoveUntil(const CongratsScreen());
       }
     });
-    return ShapedBgWidget(
-      shape: Assets.assetsPngShape5,
+    return ImageBackgroundWidget(
+      image: Assets.assetsPngShape5,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(

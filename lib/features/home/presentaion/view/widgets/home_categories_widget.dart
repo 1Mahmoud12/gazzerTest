@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/category_item.dart';
+part of '../home_screen.dart';
 
-class CategoriesWidget extends StatelessWidget {
-  const CategoriesWidget({super.key});
+class _HomeCategoriesWidget extends StatelessWidget {
+  const _HomeCategoriesWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +34,56 @@ class CategoriesWidget extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({super.key, required this.category});
+  final CategoryModel category;
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) => Container(
+        // clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          border: GradientBoxBorder(gradient: Grad.shadowGrad(false), width: 1.5),
+          borderRadius: BorderRadius.circular(constraints.maxWidth),
+          // color: Co.bg,
+          boxShadow: [const BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
+        ),
+        height: constraints.minHeight,
+        width: constraints.maxWidth,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Co.bg,
+            padding: EdgeInsets.zero,
+            shadowColor: Colors.transparent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(constraints.maxWidth)),
+          ),
+          onPressed: () {
+            context.myPush(RestaurantsCatScreen(id: category.id));
+          },
+          child: Column(
+            spacing: 4,
+            children: [
+              CircleGradientBorderedImage(image: category.image),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: Text(
+                    category.name,
+                    style: TStyle.blackSemi(12),
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.fade,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

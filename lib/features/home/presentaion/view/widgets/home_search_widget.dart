@@ -1,16 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
 
-class HomeSearchWidget extends StatefulWidget {
-  const HomeSearchWidget({super.key});
+
+part of "../home_screen.dart";
+
+class _HomeSearchWidget extends StatefulWidget {
+  const _HomeSearchWidget();
 
   @override
-  State<HomeSearchWidget> createState() => _HomeSearchWidgetState();
+  State<_HomeSearchWidget> createState() => _HomeSearchWidgetState();
 }
 
-class _HomeSearchWidgetState extends State<HomeSearchWidget> {
+class _HomeSearchWidgetState extends State<_HomeSearchWidget> {
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {

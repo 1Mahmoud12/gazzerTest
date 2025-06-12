@@ -1,14 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
-import 'package:gazzer/features/home/presentaion/view/widgets/title_with_more.dart';
+part of '../home_screen.dart';
 
-class HomeCuisinesWidget extends StatelessWidget {
-  const HomeCuisinesWidget({super.key});
+class _HomeCuisinesWidget extends StatelessWidget {
+  const _HomeCuisinesWidget();
   @override
   Widget build(BuildContext context) {
     return Column(

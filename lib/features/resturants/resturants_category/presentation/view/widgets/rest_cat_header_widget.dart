@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/main_text_field.dart';
+import 'package:gazzer/core/presentation/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/features/home/presentaion/utils/add_shape_clipper.dart';
 
 class RestCatHeaderWidget extends StatefulWidget {
@@ -16,8 +16,6 @@ class RestCatHeaderWidget extends StatefulWidget {
 class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
   final controller = TextEditingController();
 
-
-
   @override
   void dispose() {
     controller.dispose();
@@ -26,7 +24,6 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     final height = MediaQuery.paddingOf(context).top + kToolbarHeight + 50;
     return Column(
       children: [

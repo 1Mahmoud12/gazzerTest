@@ -4,9 +4,8 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/widgets/dashed_border.dart';
-import 'package:gazzer/core/presentation/widgets/main_btn.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart'
+    show DashedBorder, HorizontalSpacing, MainBtn, VerticalSpacing;
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 
 class CartSummaryWidget extends StatelessWidget {

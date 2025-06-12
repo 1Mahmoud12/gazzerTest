@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/widgets/main_app_bar.dart';
-import 'package:gazzer/core/presentation/widgets/spacing.dart';
+import 'package:gazzer/core/presentation/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_summary_widget.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/vendor_cart_products_item.dart';
 

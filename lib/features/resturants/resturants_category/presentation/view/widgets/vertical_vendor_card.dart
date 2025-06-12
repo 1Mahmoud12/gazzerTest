@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/widgets/doubled_decorated_widget.dart';
+import 'package:gazzer/core/presentation/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/stacked_item_widget.dart';
+import 'package:gazzer/features/resturants/type_related_resturants/presentation/view/type_related_restaurants_screen.dart';
 
 class VerticalVendorCard extends StatelessWidget {
   const VerticalVendorCard({
@@ -22,8 +24,7 @@ class VerticalVendorCard extends StatelessWidget {
   final double? height;
   final VendorModel vendor;
   final Corner corner;
-  final double imgToTextRatio; 
-
+  final double imgToTextRatio;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,9 @@ class VerticalVendorCard extends StatelessWidget {
           borderRadius: AppConst.defaultBorderRadius,
         ),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            context.myPush(TypeRelatedRestaurantsScreen(id: vendor.id));
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
