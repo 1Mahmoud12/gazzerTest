@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
-import 'package:gazzer/features/product/add_to_cart/presentation/widgets/increment_widget.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/increment_widget.dart';
 
 class ProductPriceSummary extends StatelessWidget {
   const ProductPriceSummary({super.key});

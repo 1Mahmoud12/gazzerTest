@@ -24,7 +24,7 @@ import  'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/home/presentaion/utils/add_shape_clipper.dart';
 import 'package:gazzer/features/home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/presentaion/utils/product_shape_painter.dart';
-import 'package:gazzer/features/product/add_to_cart/presentation/add_prodct_to_cart_screen.dart';
+import 'package:gazzer/features/product/food_details/presentation/view/food_details_screen.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/restaurants_cat_screen.dart';
 
 ///

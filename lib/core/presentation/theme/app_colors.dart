@@ -27,6 +27,7 @@ class Co {
   static const darkMauve = Color(0xFF010014);
 
   // others
+  static const lightGrey = Color(0xFFD9D9D9);
   static const grey = Color(0xFF777777);
   static const white = Color(0xFFFFFFFF);
   static const dark = Color(0xFF000000);

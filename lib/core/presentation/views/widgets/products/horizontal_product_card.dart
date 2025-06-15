@@ -6,12 +6,12 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing;
-import  'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
-import 'package:gazzer/features/product/add_to_cart/presentation/add_prodct_to_cart_screen.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
+import 'package:gazzer/features/product/food_details/presentation/view/food_details_screen.dart';
 
 class HorizontalProductCard extends StatelessWidget {
   const HorizontalProductCard({super.key, required this.product});
@@ -23,7 +23,7 @@ class HorizontalProductCard extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: 600, maxHeight: height),
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => context.myPush(AddProdctToCartScreen(product: product)),
+        onTap: () => context.myPush(FoodDetailsScreen(product: product)),
         child: Stack(
           children: [
             Align(
@@ -100,17 +100,7 @@ class HorizontalProductCard extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            DecoratedBox(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: GradientBoxBorder(gradient: Grad.shadowGrad()),
-                                gradient: Grad.bgLinear.copyWith(
-                                  stops: const [0.0, 1],
-                                  colors: [const Color(0x55402788), Colors.transparent],
-                                ),
-                              ),
-                              child: const FavoriteWidget(size: 20),
-                            ),
+                            const DecoratedFavoriteWidget(size: 20, isDarkContainer: false),
                           ],
                         ),
                         const HorizontalSpacing(12),

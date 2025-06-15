@@ -21,7 +21,7 @@ class _HomeBestPopular extends StatelessWidget {
                 width: 125,
                 child: InkWell(
                   borderRadius: AppConst.defaultBorderRadius,
-                  onTap: () => context.myPush(AddProdctToCartScreen(product: prod)),
+                  onTap: () => context.myPush(FoodDetailsScreen(product: prod)),
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [

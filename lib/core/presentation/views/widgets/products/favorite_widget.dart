@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 
 class FavoriteWidget extends StatefulWidget {
-  const FavoriteWidget({super.key, this.size = 32, this.padding = 8, this.hasContainer = false});
+  const FavoriteWidget({super.key, this.size = 32, this.padding = 8});
   final double size;
   final double padding;
-  final bool hasContainer;
 
   @override
   State<FavoriteWidget> createState() => _FavoriteWidgetState();
@@ -75,10 +76,33 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
         child: Icon(isFav ? Icons.favorite : Icons.favorite_border_rounded, color: Co.secondary, size: widget.size),
       ),
     );
-    if (!widget.hasContainer) return child;
-    return DoubledDecoratedWidget(
-      innerDecoration: BoxDecoration(borderRadius: BorderRadiusGeometry.circular(6)),
-      child: child,
+    return child;
+  }
+}
+
+///
+///
+///
+class DecoratedFavoriteWidget extends StatelessWidget {
+  const DecoratedFavoriteWidget({super.key, this.size = 32, this.padding = 8, this.isDarkContainer = true});
+  final double size;
+  final double padding;
+  final bool isDarkContainer;
+  @override
+  Widget build(BuildContext context) {
+    if (isDarkContainer) {
+      return DoubledDecoratedWidget(
+        innerDecoration: BoxDecoration(borderRadius: BorderRadiusGeometry.circular(6)),
+        child: FavoriteWidget(size: size, padding: padding),
+      );
+    }
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+        gradient: Grad.bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
+      ),
+      child: FavoriteWidget(size: size, padding: padding),
     );
   }
 }

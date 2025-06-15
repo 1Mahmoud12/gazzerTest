@@ -24,20 +24,25 @@ class _PickToYou extends StatelessWidget {
 
               return SizedBox(
                 width: 105,
-                child: Column(
-                  spacing: 12,
-                  children: [
-                    Expanded(
-                      child: AspectRatio(aspectRatio: 1, child: Image.asset(prod.image, fit: BoxFit.fill)),
-                    ),
-                    Text(
-                      '${prod.name}\n',
-                      style: TStyle.blackSemi(14),
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                child: InkWell(
+                  onTap: () {
+                    context.myPush(FoodDetailsScreen(product: prod));
+                  },
+                  child: Column(
+                    spacing: 12,
+                    children: [
+                      Expanded(
+                        child: AspectRatio(aspectRatio: 1, child: Image.asset(prod.image, fit: BoxFit.cover)),
+                      ),
+                      Text(
+                        '${prod.name}\n',
+                        style: TStyle.blackSemi(14),
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
