@@ -11,7 +11,7 @@ import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wi
 import  'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import  'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
-import 'package:gazzer/features/product/presentation/add_prodct_to_cart_screen.dart';
+import 'package:gazzer/features/product/add_to_cart/presentation/add_prodct_to_cart_screen.dart';
 
 class HorizontalProductCard extends StatelessWidget {
   const HorizontalProductCard({super.key, required this.product});

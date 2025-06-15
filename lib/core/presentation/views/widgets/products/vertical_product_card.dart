@@ -8,7 +8,7 @@ import  'package:gazzer/core/presentation/views/widgets/form_related_widgets.dar
 import  'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/home/presentaion/utils/product_shape_painter.dart';
-import 'package:gazzer/features/product/presentation/add_prodct_to_cart_screen.dart';
+import 'package:gazzer/features/product/add_to_cart/presentation/add_prodct_to_cart_screen.dart';
 
 class VerticalProductCard extends StatelessWidget {
   const VerticalProductCard({super.key, required this.product, required this.canAdd, this.fontFactor = 1.0});

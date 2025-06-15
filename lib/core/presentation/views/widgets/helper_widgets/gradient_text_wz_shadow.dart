@@ -4,14 +4,14 @@ class GradientTextWzShadow extends StatelessWidget {
   const GradientTextWzShadow({
     super.key,
     required this.text,
-    required this.gradient,
+    this.gradient,
     required this.shadow,
     this.style = const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white),
     this.textAlign = TextAlign.center,
   });
   final String text;
   final TextStyle style;
-  final Gradient gradient;
+  final Gradient? gradient;
   final BoxShadow shadow;
   final TextAlign textAlign;
   @override
@@ -37,13 +37,14 @@ class GradientTextWzShadow extends StatelessWidget {
               ),
 
               // Foreground gradient text
-              ShaderMask(
-                shaderCallback: (bounds) {
-                  return gradient.createShader(bounds);
-                },
-                blendMode: BlendMode.srcIn,
-                child: Text(text, textAlign: textAlign, style: style),
-              ),
+              if (gradient != null)
+                ShaderMask(
+                  shaderCallback: (bounds) {
+                    return gradient!.createShader(bounds);
+                  },
+                  blendMode: BlendMode.srcIn,
+                  child: Text(text, textAlign: textAlign, style: style),
+                ),
             ],
           ),
         );

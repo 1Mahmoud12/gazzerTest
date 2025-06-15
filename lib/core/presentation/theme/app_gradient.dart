@@ -40,6 +40,10 @@ class Grad {
     end: Alignment.topCenter,
     stops: [0.2, 0.8],
   );
+  static final bglightLinear = bgLinear.copyWith(
+    colors: [Co.buttonGradient.withAlpha(80), Co.bg.withAlpha(0)],
+    stops: const [0.0, 1],
+  );
 
   static final hoverGradient = const LinearGradient(
     colors: [Color(0x00402788), Color(0xFF402788)],

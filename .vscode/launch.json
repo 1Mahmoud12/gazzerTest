@@ -11,6 +11,17 @@
             "type": "dart"
         },
         {
+            "name": "Web-gazzer_user",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-experimental-hot-reload"
+                // "--wasm"
+            ]
+        },
+        {
             "name": "gazzer_user (profile mode)",
             "request": "launch",
             "type": "dart",

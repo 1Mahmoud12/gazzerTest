@@ -76,6 +76,8 @@ class Assets {
 
   static const String assetsPngShape6 = "assets/png/shape6.png";
 
+  static const String assetsPngSpicyChickeAdd = "assets/png/spicy_chicke_add.png";
+
   static const String assetsPngSplash = "assets/png/splash.png";
 
   static const String assetsSvgAddContainer = "assets/svg/add_container.svg";

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
-import 'package:gazzer/features/product/presentation/widgets/product_extras_widget.dart';
-import 'package:gazzer/features/product/presentation/widgets/product_image_widget.dart';
-import 'package:gazzer/features/product/presentation/widgets/product_price_summary.dart';
-import 'package:gazzer/features/product/presentation/widgets/product_summary_widget.dart';
-import 'package:gazzer/features/product/presentation/widgets/product_types_widget.dart';
+import 'package:gazzer/features/product/add_to_cart/presentation/widgets/product_extras_widget.dart';
+import 'package:gazzer/features/product/add_to_cart/presentation/widgets/product_image_widget.dart';
+import 'package:gazzer/features/product/add_to_cart/presentation/widgets/product_price_summary.dart';
+import 'package:gazzer/features/product/add_to_cart/presentation/widgets/product_summary_widget.dart';
+import 'package:gazzer/features/product/add_to_cart/presentation/widgets/product_types_widget.dart';
 
 class AddProdctToCartScreen extends StatelessWidget {
   const AddProdctToCartScreen({super.key, required this.product});
