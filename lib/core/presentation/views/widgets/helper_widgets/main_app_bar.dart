@@ -5,16 +5,14 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({super.key, this.showCart = true});
+  const MainAppBar({super.key, this.showCart = true, this.iconsColor = Co.purple});
   final bool showCart;
+  final Color iconsColor;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
-      leading: IconButton(
-        onPressed: () => Navigator.maybePop(context),
-        icon: const Icon(Icons.arrow_back_ios),
-      ),
+      leading: IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.arrow_back_ios)),
       leadingWidth: 65,
       actions: [
         if (showCart)
@@ -31,7 +29,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             Assets.assetsSvgNotification,
             height: 21,
             width: 21,
-            colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
           ),
         ),
         IconButton(
@@ -41,7 +39,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             Assets.assetsSvgLanguage,
             height: 21,
             width: 21,
-            colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
           ),
         ),
       ],

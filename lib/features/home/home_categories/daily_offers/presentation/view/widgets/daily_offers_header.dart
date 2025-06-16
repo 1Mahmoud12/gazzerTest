@@ -1,0 +1,74 @@
+part of "../daily_offers_screen.dart";
+
+class DailyOffersHeader extends StatefulWidget {
+  const DailyOffersHeader({super.key});
+
+  @override
+  State<DailyOffersHeader> createState() => _DailyOffersHeaderState();
+}
+
+class _DailyOffersHeaderState extends State<DailyOffersHeader> {
+  final controller = TextEditingController();
+  final width = 550.0;
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      height: HomeUtils.headerHeight(context),
+      child: Stack(
+        alignment: Alignment.center,
+        fit: StackFit.loose,
+        children: [
+          Positioned(
+            bottom: 20,
+            child: Transform.rotate(
+              angle: -0.25,
+              child: ClipOval(
+                child: Container(
+                  width: width * 1.2,
+                  height: width,
+                  decoration: BoxDecoration(
+                    gradient: Grad.bglightLinear.copyWith(
+                      begin: Alignment.centerRight,
+                      colors: [Co.buttonGradient, Colors.black.withAlpha(0)],
+                    ),
+                  ),
+                  // foregroundDecoration: BoxDecoration(gradient: Grad.linearGradient),
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: const Alignment(0, -1),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, MediaQuery.paddingOf(context).top, 16, 0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 12,
+                children: [
+                  Expanded(
+                    child: MainTextField(
+                      controller: controller,
+                      height: 80,
+                      hintText: "Search for storesm items, or categories",
+                      borderRadius: 64,
+                      bgColor: Colors.transparent,
+                      prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+                    ),
+                  ),
+                  const CartFloatingBtn(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

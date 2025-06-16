@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/features/home/presentaion/utils/add_shape_painter.dart';
+import 'package:gazzer/core/presentation/utils/add_shape_painter.dart';
 import 'package:lottie/lottie.dart';
 
 class SpikyShapeWidget extends StatelessWidget {
