@@ -12,7 +12,7 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientTextWzShadow, HorizontalSpacing, MainBtn, VerticalSpacing;
-import 'package:gazzer/features/auth/views/select_mode_screen.dart';
+import 'package:gazzer/features/auth/presentation/views/select_language_screen.dart';
 
 class OnboardingFirstScreen extends StatelessWidget {
   const OnboardingFirstScreen({super.key});
@@ -85,7 +85,8 @@ class OnboardingFirstScreen extends StatelessWidget {
                               Positioned(
                                 top: -35,
                                 right: -10,
-                                child: Image.asset(Assets.assetsPngWave, height: 40, width: 40)),
+                                child: Image.asset(Assets.assetsPngWave, height: 40, width: 40),
+                              ),
                             ],
                           ),
                           Text(L10n.tr().niceToMeetYou, style: TStyle.blackSemi(14)),
@@ -97,7 +98,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                   const VerticalSpacing(120),
                   MainBtn(
                     onPressed: () {
-                      context.myPush(const SelectModeScreen());
+                      context.myPush(const SelectLanguageScreen());
                     },
                     text: L10n.tr().letsGo,
                     textStyle: TStyle.blackSemi(16).copyWith(color: Co.bg),

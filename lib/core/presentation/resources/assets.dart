@@ -28,11 +28,17 @@ class Assets {
 
   static const String assetsPngBakery = "assets/png/bakery.jpg";
 
+  static const String assetsPngChooseMoodShape = "assets/png/choose_mood_shape.png";
+
   static const String assetsPngCloudLogo = "assets/png/cloud_logo.png";
 
   static const String assetsPngCloudWelcome = "assets/png/cloud_welcome.png";
 
   static const String assetsPngFastFood = "assets/png/fast-food.jpg";
+
+  static const String assetsPngFlagEg = "assets/png/flag_eg.png";
+
+  static const String assetsPngFlagEn = "assets/png/flag_en.png";
 
   static const String assetsPngFood2 = "assets/png/food2.webp";
 
@@ -48,7 +54,13 @@ class Assets {
 
   static const String assetsPngGrocery = "assets/png/grocery.jpg";
 
+  static const String assetsPngLanguageShape = "assets/png/language_shape.png";
+
+  static const String assetsPngLoadingShape = "assets/png/loading_shape.png";
+
   static const String assetsPngMedic = "assets/png/medic.jpg";
+
+  static const String assetsPngMoodShape = "assets/png/mood_shape.png";
 
   static const String assetsPngOnboardBg = "assets/png/onboard_bg.png";
 
@@ -64,15 +76,9 @@ class Assets {
 
   static const String assetsPngSandwtichLayer2 = "assets/png/sandwtich_layer_2.png";
 
+  static const String assetsPngSetPlanShape = "assets/png/set_plan_shape.png";
+
   static const String assetsPngShape1 = "assets/png/shape1.jpg";
-
-  static const String assetsPngShape2 = "assets/png/shape2.png";
-
-  static const String assetsPngShape3 = "assets/png/shape3.png";
-
-  static const String assetsPngShape4 = "assets/png/shape4.png";
-
-  static const String assetsPngShape5 = "assets/png/shape5.png";
 
   static const String assetsPngShape6 = "assets/png/shape6.png";
 

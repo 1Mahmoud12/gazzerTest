@@ -10,6 +10,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing, OptionBtn;
 import 'package:gazzer/features/plan/views/choose_your_mode.dart';
+import 'package:gazzer/features/plan/views/congrats_screen.dart';
+import 'package:gazzer/features/plan/views/loading_screen.dart';
 
 class HealthyPlanScreen extends StatelessWidget {
   const HealthyPlanScreen({super.key});
@@ -17,7 +19,7 @@ class HealthyPlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(
-      image: Assets.assetsPngShape3,
+      image: Assets.assetsPngSetPlanShape,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const ClassicAppBar(),
@@ -46,7 +48,9 @@ class HealthyPlanScreen extends StatelessWidget {
               ),
             ),
             OptionBtn(
-              onPressed: () {},
+              onPressed: () {
+                context.myPush(const LoadingScreen(navigateTo: CongratsScreen()));
+              },
               text: L10n.tr().skip,
               width: 209,
               child: GradientText(text: L10n.tr().skip, style: TStyle.blackSemi(16)),

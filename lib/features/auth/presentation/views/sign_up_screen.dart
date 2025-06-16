@@ -13,7 +13,7 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
     show MainTextField, PhoneTextField;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/views/select_location_screen.dart';
+import 'package:gazzer/features/auth/presentation/views/select_location_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

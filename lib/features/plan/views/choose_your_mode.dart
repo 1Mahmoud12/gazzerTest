@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, OptionBtn, VerticalSpacing;
+import 'package:gazzer/features/plan/views/congrats_screen.dart';
 import 'package:gazzer/features/plan/views/loading_screen.dart';
 
 class ChooseYourMode extends StatelessWidget {
@@ -20,7 +21,7 @@ class ChooseYourMode extends StatelessWidget {
     final moods = [L10n.tr().happy, L10n.tr().sad, L10n.tr().excited, L10n.tr().bored, L10n.tr().angry];
     final emojis = ["\u{1F60A}", "\u{1F622}", "\u{1F603}", "\u{1F62B}", "\u{1F621}"];
     return ImageBackgroundWidget(
-      image: Assets.assetsPngShape4,
+      image: Assets.assetsPngChooseMoodShape,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const ClassicAppBar(),
@@ -37,7 +38,7 @@ class ChooseYourMode extends StatelessWidget {
                   tag: Tags.btn,
                   child: OptionBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(const LoadingScreen());
+                      context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: CongratsScreen()));
                     },
                     width: 209,
                     height: 60,
@@ -57,7 +58,7 @@ class ChooseYourMode extends StatelessWidget {
                   moods.length - 1,
                   (index) => OptionBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(const LoadingScreen());
+                      context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: CongratsScreen()));
                     },
                     width: 209,
                     height: 60,

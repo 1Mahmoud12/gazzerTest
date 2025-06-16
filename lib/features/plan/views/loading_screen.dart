@@ -7,28 +7,23 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing;
-import 'package:gazzer/features/plan/views/congrats_screen.dart';
 
-class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({super.key});
+class LoadingScreen extends StatelessWidget {
+  const LoadingScreen({super.key, required this.navigateTo});
+  final Widget navigateTo;
 
-  @override
-  State<LoadingScreen> createState() => _LoadingScreenState();
-}
-
-class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
       if (context.mounted) {
-        context.myPushAndRemoveUntil(const CongratsScreen());
+        context.myPushAndRemoveUntil(navigateTo);
       }
     });
     return ImageBackgroundWidget(
-      image: Assets.assetsPngShape5,
+      image: Assets.assetsPngLoadingShape,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(

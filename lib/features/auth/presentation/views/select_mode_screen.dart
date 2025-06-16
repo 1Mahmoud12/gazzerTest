@@ -10,7 +10,7 @@ import 'package:gazzer/core/presentation/views/components/main_layout/views/main
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/views/sign_up_screen.dart';
+import 'package:gazzer/features/auth/presentation/views/sign_up_screen.dart';
 
 class SelectModeScreen extends StatelessWidget {
   const SelectModeScreen({super.key});
@@ -18,7 +18,7 @@ class SelectModeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(
-      image: Assets.assetsPngShape2,
+      image: Assets.assetsPngMoodShape,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const ClassicAppBar(),
@@ -27,7 +27,7 @@ class SelectModeScreen extends StatelessWidget {
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
             GradientText(text: L10n.tr().selectMode, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
-            const SizedBox(height: 54, width: double.infinity),
+            const SizedBox(height: 40, width: double.infinity),
             Hero(
               tag: Tags.btn,
               child: OptionBtn(
@@ -38,6 +38,8 @@ class SelectModeScreen extends StatelessWidget {
                 width: 209,
               ),
             ),
+            const SizedBox.shrink(),
+
             OptionBtn(
               onPressed: () {
                 context.myPush(const SignUpScreen());
