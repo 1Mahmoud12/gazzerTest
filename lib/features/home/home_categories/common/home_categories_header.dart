@@ -1,13 +1,17 @@
-part of "../daily_offers_screen.dart";
+import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 
-class DailyOffersHeader extends StatefulWidget {
-  const DailyOffersHeader({super.key});
+class HomeCategoriesHeader extends StatefulWidget {
+  const HomeCategoriesHeader({super.key});
 
   @override
-  State<DailyOffersHeader> createState() => _DailyOffersHeaderState();
+  State<HomeCategoriesHeader> createState() => _HomeCategoriesHeaderState();
 }
 
-class _DailyOffersHeaderState extends State<DailyOffersHeader> {
+class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
   final controller = TextEditingController();
   final width = 550.0;
   @override

@@ -9,21 +9,21 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
-import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/mini_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/summer_sale_add_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/features/home/home_categories/daily_offers/presentation/view/daily_offers_screen.dart';
+import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
+import 'package:gazzer/features/home/home_categories/suggested_screen/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
-import 'package:gazzer/features/product/food_details/presentation/view/food_details_screen.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/restaurants_cat_screen.dart';
 
 ///

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/resources/resources.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
 
-
-class DailyOffersScreen extends StatelessWidget {
-  const DailyOffersScreen({super.key});
+class PopularScreen extends StatelessWidget {
+  const PopularScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +21,35 @@ class DailyOffersScreen extends StatelessWidget {
           const HomeCategoriesHeader(),
           Padding(
             padding: AppConst.defaultHrPadding,
-            child: GradientText(text: "Daily Offers For You", style: TStyle.blackBold(16)),
+            child: GradientText(text: "Suggested For You", style: TStyle.blackBold(16)),
           ),
           const VerticalSpacing(12),
+          SizedBox(
+            height: 180,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: AppConst.defaultHrPadding,
+              itemCount: 5,
+              separatorBuilder: (context, index) => const HorizontalSpacing(12),
+              itemBuilder: (context, index) {
+                final prod = Fakers.fakeProds[index];
+                return VerticalRotatedImgCard(prod: prod);
+              },
+            ),
+          ),
+          const VerticalSpacing(16),
           Expanded(
             child: GridView.builder(
               padding: AppConst.defaultPadding,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.88,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
               ),
               itemCount: Fakers.fakeProds.length,
               itemBuilder: (context, index) {
-                return VerticalProductCard(product: Fakers.fakeProds[index], canAdd: false);
+                final prod = Fakers.fakeProds[index];
+                return VerticalRotatedImgCard(prod: prod);
               },
             ),
           ),

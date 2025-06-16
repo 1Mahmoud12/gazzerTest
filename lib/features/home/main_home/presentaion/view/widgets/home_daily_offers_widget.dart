@@ -8,7 +8,13 @@ class _DailyOffersWidget extends StatelessWidget {
     return Column(
       spacing: 24,
       children: [
-        TitleWithMore(title: "Daily Offers For You", titleStyle: TStyle.primaryBold(16), onPressed: () {}),
+        TitleWithMore(
+          title: "Daily Offers For You",
+          titleStyle: TStyle.primaryBold(16),
+          onPressed: () {
+            context.myPush(const DailyOffersScreen());
+          },
+        ),
         GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.zero,

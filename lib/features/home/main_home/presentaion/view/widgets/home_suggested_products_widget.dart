@@ -8,7 +8,12 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
     return Column(
       spacing: 12,
       children: [
-        TitleWithMore(title: "Suggested For You", onPressed: () {}),
+        TitleWithMore(
+          title: "Suggested For You",
+          onPressed: () {
+            context.myPush(const SuggestedScreen());
+          },
+        ),
         ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.zero,
