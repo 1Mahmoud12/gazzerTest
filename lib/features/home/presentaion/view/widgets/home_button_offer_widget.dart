@@ -46,7 +46,7 @@ class _HomeButtonOfferWidget extends StatelessWidget {
                     height: 35,
 
                     text: "Order Now",
-                    bgColor: Co.second2,
+                    bgColor: Co.secondary,
                     textStyle: TStyle.primaryBold(14),
                   ),
                 ],

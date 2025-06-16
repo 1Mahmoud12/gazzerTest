@@ -6,9 +6,10 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, VerticalSpacing, OptionBtn;
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, OptionBtn, VerticalSpacing;
 import 'package:gazzer/features/plan/views/loading_screen.dart';
 
 class ChooseYourMode extends StatelessWidget {
@@ -17,12 +18,12 @@ class ChooseYourMode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final moods = [L10n.tr().happy, L10n.tr().sad, L10n.tr().excited, L10n.tr().bored, L10n.tr().angry];
-    final emojis = ["\u{1F60A}", "\u{1F622}", "\u{1F603}", "\u{1F610}", "\u{1F620}"];
+    final emojis = ["\u{1F60A}", "\u{1F622}", "\u{1F603}", "\u{1F62B}", "\u{1F621}"];
     return ImageBackgroundWidget(
       image: Assets.assetsPngShape4,
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(),
+        appBar: const ClassicAppBar(),
         body: ListView(
           padding: AppConst.defaultHrPadding,
           children: [
@@ -38,15 +39,15 @@ class ChooseYourMode extends StatelessWidget {
                     onPressed: () {
                       context.myPushAndRemoveUntil(const LoadingScreen());
                     },
-                    width: 250,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    width: 209,
+                    height: 60,
                     child: SizedBox(
                       width: 120,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(emojis.first, style: const TextStyle(fontSize: 24)),
-                          Text(moods[0], style: TStyle.blackSemi(18)),
+                          Text(emojis.first, style: const TextStyle(fontSize: 28)),
+                          GradientText(text: moods[0], style: TStyle.blackSemi(16)),
                         ],
                       ),
                     ),
@@ -58,15 +59,15 @@ class ChooseYourMode extends StatelessWidget {
                     onPressed: () {
                       context.myPushAndRemoveUntil(const LoadingScreen());
                     },
-                    width: 250,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    width: 209,
+                    height: 60,
                     child: SizedBox(
                       width: 120,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(emojis[index + 1], style: const TextStyle(fontSize: 24)),
-                          Text(moods[index + 1], style: TStyle.blackSemi(18)),
+                          Text(emojis[index + 1], style: const TextStyle(fontSize: 28)),
+                          GradientText(text: moods[index + 1], style: TStyle.blackSemi(16)),
                         ],
                       ),
                     ),

@@ -55,19 +55,24 @@ class HorizontalProductCard extends StatelessWidget {
                           child: Padding(
                             padding: AppConst.defaultPadding,
                             child: Column(
-                              spacing: 6,
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                GradientText(
-                                  text: product.name,
-                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                  gradient: Grad.radialGradient,
-                                ),
-                                Text(
-                                  product.description,
-                                  style: TStyle.blackSemi(12),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
+                                Column(
+                                  spacing: 4,
+                                  children: [
+                                    GradientText(
+                                      text: product.name,
+                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                      gradient: Grad.radialGradient,
+                                    ),
+                                    Text(
+                                      product.description,
+                                      style: TStyle.blackRegular(12),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    ),
+                                  ],
                                 ),
                                 RatingWidget(product.rate.toStringAsFixed(1), ignoreGesture: true, itemSize: 16),
                               ],

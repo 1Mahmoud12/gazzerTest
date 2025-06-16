@@ -33,7 +33,7 @@ class OnboardingStartScreen extends StatelessWidget {
                         child: Image.asset(Assets.assetsPngCloudLogo, fit: BoxFit.fill, alignment: Alignment.center, color: Colors.white,),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 60),
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
                         child: Image.asset(Assets.assetsPngGazzer, width: 200, fit: BoxFit.fitWidth),
                       ),
                     ],

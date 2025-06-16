@@ -3,8 +3,8 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
@@ -34,7 +34,7 @@ class VerticalVendorCard extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Co.purple.withAlpha(50), Co.purple.withAlpha(0)],
+            colors: [Co.buttonGradient.withAlpha(30), Colors.black.withAlpha(0)],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
           ),

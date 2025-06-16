@@ -7,8 +7,9 @@ import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/auth/views/sign_up_screen.dart';
 
 class SelectModeScreen extends StatelessWidget {
@@ -20,13 +21,13 @@ class SelectModeScreen extends StatelessWidget {
       image: Assets.assetsPngShape2,
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(),
+        appBar: const ClassicAppBar(),
         body: Column(
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
             GradientText(text: L10n.tr().selectMode, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
-            const HorizontalSpacing(double.infinity),
+            const SizedBox(height: 54, width: double.infinity),
             Hero(
               tag: Tags.btn,
               child: OptionBtn(
@@ -34,16 +35,15 @@ class SelectModeScreen extends StatelessWidget {
                   context.myPushAndRemoveUntil(const MainLayout());
                 },
                 text: L10n.tr().guestMode,
-                width: 250,
+                width: 209,
               ),
             ),
-            OptionBtn(onPressed: () {}, text: L10n.tr().signIn, width: 250),
             OptionBtn(
               onPressed: () {
                 context.myPush(const SignUpScreen());
               },
               text: L10n.tr().signUp,
-              width: 250,
+              width: 209,
             ),
           ],
         ),

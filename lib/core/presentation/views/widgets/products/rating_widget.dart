@@ -19,11 +19,11 @@ class RatingWidget extends StatelessWidget {
       itemCount: 5,
       itemSize: itemSize,
       ignoreGestures: ignoreGesture,
-      itemBuilder: (context, _) => const Icon(
-        Icons.star,
-        color: Co.secondary,
-      ),
-      unratedColor: Co.grey,
+      itemBuilder: (context, index) {
+        final isRated = index < (double.tryParse(initialRating) ?? 0.0);
+        return Icon(isRated ? Icons.star : Icons.star_border, color: Co.secondary);
+      },
+      unratedColor: Co.secondary,
       onRatingUpdate: (rating) {
         if (onRate != null) onRate!(rating);
       },

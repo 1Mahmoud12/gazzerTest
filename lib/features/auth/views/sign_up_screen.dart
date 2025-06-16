@@ -9,9 +9,10 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
-import  'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart'
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart'
     show MainTextField, PhoneTextField;
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/auth/views/select_location_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
 
-  final social = [Assets.assetsSvgSocialFacebook, Assets.assetsSvgSocialGoogle, Assets.assetsSvgSocialApple];
+  final social = [Assets.assetsSvgFacebook, Assets.assetsSvgGoogle, Assets.assetsSvgApple];
 
   @override
   void dispose() {
@@ -38,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const ClassicAppBar(),
       body: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -90,13 +91,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       context.myPush(const SelectLocationScreen());
                     }
                   },
-                  text: L10n.tr().continu,
                   textStyle: TStyle.mainwSemi(15),
                   bgColor: Colors.transparent,
+                  child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
                 ),
               ),
               const VerticalSpacing(24),
-              Center(child: Text(L10n.tr().or, style: TStyle.greySemi(16))),
+              Center(child: Text( "or", // L10n.tr().or,
+               style: TStyle.greyRegular(16))),
               const VerticalSpacing(10),
               Row(
                 spacing: 16,

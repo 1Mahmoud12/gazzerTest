@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({super.key, this.showCart = true});
@@ -11,6 +11,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+      leading: IconButton(
+        onPressed: () => Navigator.maybePop(context),
+        icon: const Icon(Icons.arrow_back_ios),
+      ),
+      leadingWidth: 65,
       actions: [
         if (showCart)
           const Badge(
@@ -21,7 +26,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         IconButton(
           onPressed: () {},
-          style: IconButton.styleFrom(backgroundColor: Colors.black12),
+          // style: IconButton.styleFrom(backgroundColor: Colors.black12),
           icon: SvgPicture.asset(
             Assets.assetsSvgNotification,
             height: 21,
@@ -31,7 +36,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         IconButton(
           onPressed: () {},
-          style: IconButton.styleFrom(backgroundColor: Colors.black12),
+          // style: IconButton.styleFrom(backgroundColor: Colors.black12),
           icon: SvgPicture.asset(
             Assets.assetsSvgLanguage,
             height: 21,

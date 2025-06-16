@@ -20,7 +20,7 @@ class _SummerSaleAddWidgetState extends State<SummerSaleAddWidget> with SingleTi
       rtChild: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          GradientText(text: "Mega Summer\nSale", style: TStyle.blackBold(24), gradient: Grad.radialGradient),
+          GradientText(text: "Mega Summer\nSale", style: TStyle.blackBold(20), gradient: Grad.radialGradient),
 
           Text("deals starts 27 may", style: TStyle.blackBold(14)),
         ],

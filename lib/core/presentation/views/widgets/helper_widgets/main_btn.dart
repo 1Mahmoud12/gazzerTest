@@ -4,8 +4,8 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import  'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
 class MainBtn extends StatefulWidget {
   const MainBtn({
@@ -76,11 +76,17 @@ class _MainBtnState extends State<MainBtn> {
                 : value
                 ? Grad.hoverGradient
                 : Grad.radialGradient,
-            boxShadow: value
-                ? []
-                : [const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0))],
+            boxShadow: [
+              if (value) const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0)),
+            ],
           ),
-          child: child!,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
+              gradient: widget.bgColor != null || value ? null : Grad.linearGradient,
+            ),
+            child: child!,
+          ),
         ),
         child: FilledButton(
           onPressed: !widget.isEnabled
@@ -123,18 +129,21 @@ class _MainBtnState extends State<MainBtn> {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Co.shadowColor.withAlpha(80),
-                            blurRadius: 4,
+                            color: Co.shadowColor.withAlpha(63),
+                            blurRadius: 4.1,
                             spreadRadius: 1,
                             offset: const Offset(0, 0),
                           ),
                         ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsetsGeometry.all(4),
-                        child: widget.icon is IconData
-                            ? Icon(widget.icon!, size: (widget.height ?? 32) * 0.6, color: Co.white)
-                            : SvgPicture.asset(widget.icon!, height: widget.height ?? 32),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad.linearGradient),
+                        child: Padding(
+                          padding: const EdgeInsetsGeometry.all(12),
+                          child: widget.icon is IconData
+                              ? Icon(widget.icon!, size: (widget.height ?? 24) * 0.6, color: Co.white)
+                              : SvgPicture.asset(widget.icon!, height: widget.height ?? 24),
+                        ),
                       ),
                     ),
                   Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(14)),

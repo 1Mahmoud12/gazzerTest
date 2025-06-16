@@ -4,8 +4,8 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/food_details/presentation/view/food_details_screen.dart';
 
 class MiniProductCard extends StatelessWidget {
@@ -46,7 +46,21 @@ class MiniProductCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Align(alignment: Alignment.topRight, child: FavoriteWidget(size: 24)),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: Grad.bgLinear.copyWith(
+                        colors: [Color(0xAA402788), Colors.transparent],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                      shape: BoxShape.circle,
+                      border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+                    ),
+                    child: FavoriteWidget(size: 24),
+                  ),
+                ),
               ],
             ),
           ),

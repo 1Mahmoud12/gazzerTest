@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         sizeFactor: textController,
                         child: FadeTransition(
                           opacity: textController,
-                          child: Text('HELLO', style: TStyle.whiteBold(60)),
+                          child: Text('HELLO', style: TStyle.whiteBold(92).copyWith(color: Co.bg)),
                         ),
                       ),
                     ],

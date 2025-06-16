@@ -5,8 +5,9 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing, OptionBtn;
 import 'package:gazzer/features/plan/views/choose_your_mode.dart';
 
@@ -19,12 +20,12 @@ class HealthyPlanScreen extends StatelessWidget {
       image: Assets.assetsPngShape3,
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(),
+        appBar: const ClassicAppBar(),
         body: Column(
           spacing: 12,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
+            GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(24)),
             SizedBox(
               width: 250,
               child: Text(
@@ -40,11 +41,16 @@ class HealthyPlanScreen extends StatelessWidget {
                 onPressed: () {
                   context.myPush(const ChooseYourMode());
                 },
-                text: L10n.tr().setHealthPlan,
-                width: 250,
+                width: 209,
+                child: GradientText(text: L10n.tr().setHealthPlan, style: TStyle.blackSemi(16)),
               ),
             ),
-            OptionBtn(onPressed: () {}, text: L10n.tr().skip, width: 250),
+            OptionBtn(
+              onPressed: () {},
+              text: L10n.tr().skip,
+              width: 209,
+              child: GradientText(text: L10n.tr().skip, style: TStyle.blackSemi(16)),
+            ),
           ],
         ),
       ),

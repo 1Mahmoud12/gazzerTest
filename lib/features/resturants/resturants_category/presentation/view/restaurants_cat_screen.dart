@@ -29,7 +29,7 @@ class _RestaurantsCatScreenState extends State<RestaurantsCatScreen> {
   final anchorController = AnchorScrollController();
 
   final nonVendorIndeces = {0, 1, 2, 3, 6, 10, 16, 19};
-
+  final selectedIndex = ValueNotifier(0);
   final items = {
     0: const RestCatHeaderWidget(),
     1: const RestCatCarousal(),
@@ -96,6 +96,7 @@ class _RestaurantsCatScreenState extends State<RestaurantsCatScreen> {
 
   @override
   void dispose() {
+    selectedIndex.dispose();
     anchorController.dispose();
     super.dispose();
   }
@@ -108,6 +109,7 @@ class _RestaurantsCatScreenState extends State<RestaurantsCatScreen> {
       extendBody: true,
       body: ListView.separated(
         controller: anchorController,
+
         padding: EdgeInsets.zero,
         itemCount: items.length,
         separatorBuilder: (context, index) => const VerticalSpacing(12),
@@ -116,7 +118,17 @@ class _RestaurantsCatScreenState extends State<RestaurantsCatScreen> {
             return AnchorItemWrapper(
               index: index,
               controller: anchorController,
-              child: SubCategoriesWidget(anchorController: anchorController, addsIndeces: nonVendorIndeces),
+              child: ValueListenableBuilder(
+                valueListenable: selectedIndex,
+                builder: (context, value, child) => SubCategoriesWidget(
+                  onSubCategorySelected: (i) {
+                    anchorController.scrollToIndex(index: i);
+                    selectedIndex.value = i;
+                  },
+                  selectedId: value,
+                  addsIndeces: nonVendorIndeces,
+                ),
+              ),
             );
           }
           return AnchorItemWrapper(index: index, controller: anchorController, child: items[index]!);

@@ -6,27 +6,19 @@ class _HomeCategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 12,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Categories", style: TStyle.primaryBold(16)),
-            TextButton(
-              onPressed: () {},
-              child: const Text("View All", style: TextStyle(fontSize: 14)),
-            ),
-          ],
-        ),
+        Text("Categories", style: TStyle.primaryBold(16)),
         GridView.builder(
           padding: const EdgeInsets.all(0),
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 90,
+            maxCrossAxisExtent: 77,
             mainAxisSpacing: 18,
             crossAxisSpacing: 18,
-            childAspectRatio: 0.58,
+            mainAxisExtent: 117,
           ),
           itemCount: Fakers.fakeCats.length,
           itemBuilder: (context, index) {
@@ -49,14 +41,19 @@ class CategoryItem extends StatelessWidget {
         decoration: BoxDecoration(
           border: GradientBoxBorder(gradient: Grad.shadowGrad(false), width: 1.5),
           borderRadius: BorderRadius.circular(constraints.maxWidth),
-          // color: Co.bg,
+          // shadows will enforce that the gradient has no opacity
+          gradient: Grad.bglightLinear.copyWith(
+            colors: [const Color(0xFFD0CADA), Co.bg],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
           boxShadow: [const BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
         ),
         height: constraints.minHeight,
         width: constraints.maxWidth,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Co.bg,
+            backgroundColor: Colors.transparent,
             padding: EdgeInsets.zero,
             shadowColor: Colors.transparent,
             elevation: 0,

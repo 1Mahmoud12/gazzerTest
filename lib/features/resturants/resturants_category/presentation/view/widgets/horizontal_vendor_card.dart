@@ -3,8 +3,8 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
@@ -33,7 +33,7 @@ class HorizontalVendorCard extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Co.purple.withAlpha(50), Co.purple.withAlpha(0)],
+            colors: [Co.buttonGradient.withAlpha(30), Colors.black.withAlpha(0)],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
           ),
@@ -73,7 +73,7 @@ class HorizontalVendorCard extends StatelessWidget {
                     Align(
                       alignment: corner.alignment,
                       child: DoubledDecoratedWidget(
-                        innerDecoration: BoxDecoration(borderRadius: BorderRadiusGeometry.circular(6)),
+                        borderRadius: BorderRadiusGeometry.circular(6),
                         child: const Padding(padding: EdgeInsets.all(4), child: FavoriteWidget(size: 24, padding: 0)),
                       ),
                     ),
@@ -87,14 +87,14 @@ class HorizontalVendorCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(vendor.name, style: TStyle.primaryBold(14)),
+                    Text(vendor.name, style: TStyle.primaryBold(12)),
                     Row(
                       spacing: 4,
                       children: [
                         const Icon(Icons.star, color: Co.tertiary, size: 24),
                         const Spacer(),
-                        Text(vendor.rate.toStringAsFixed(2), style: TStyle.blackBold(14).copyWith(color: Co.tertiary)),
-                        Text("(${vendor.reviewCount})", style: TStyle.blackSemi(14)),
+                        Text(vendor.rate.toStringAsFixed(2), style: TStyle.blackBold(12).copyWith(color: Co.tertiary)),
+                        Text("(${vendor.reviewCount})", style: TStyle.blackSemi(12)),
                       ],
                     ),
                     StackedItemWidget(items: vendor.items),
@@ -102,7 +102,7 @@ class HorizontalVendorCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(Icons.access_time_outlined, color: Co.purple, size: 24),
-                        Text(vendor.deliveryTime, style: TStyle.greyBold(14)),
+                        Text(vendor.deliveryTime, style: TStyle.greyBold(12)),
                       ],
                     ),
                   ],

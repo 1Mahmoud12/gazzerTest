@@ -26,7 +26,7 @@ class _HomeContactUsWidget extends StatelessWidget {
                     spacing: 6,
                     children: [
                       Text("Order Whenever You Are", style: TStyle.whiteBold(16)),
-                      Text("Contact Us", style: TStyle.whiteBold(14).copyWith(color: Co.second2)),
+                      Text("Contact Us", style: TStyle.whiteBold(14).copyWith(color: Co.secondary)),
                     ],
                   ),
                 ),

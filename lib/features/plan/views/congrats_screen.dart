@@ -5,9 +5,9 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, HorizontalSpacing, OptionBtn;
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
 
 class CongratsScreen extends StatefulWidget {
   const CongratsScreen({super.key});
@@ -49,17 +49,18 @@ class _CongratsScreenState extends State<CongratsScreen> {
                 children: [
                   const HorizontalSpacing(double.infinity),
                   GradientText(
-                    text: L10n.tr().congratulations,
-                    style: TStyle.blackBold(24),
+                    text: "${L10n.tr().congratulations}!",
+                    style: TStyle.blackBold(32),
                     gradient: Grad.radialGradient,
                   ),
-                  Text(L10n.tr().youMadeIt, style: TStyle.mainwBold(16)),
+                  GradientText(text: "You Made It", style: TStyle.mainwBold(16), gradient: Grad.radialGradient),
+                  const VerticalSpacing(23),
                   OptionBtn(
                     onPressed: () {
                       context.myPushAndRemoveUntil(const MainLayout());
                     },
-                    text: L10n.tr().start,
-                    width: 250,
+                    width: 209,
+                    child: GradientText(text: L10n.tr().start, style: TStyle.blackSemi(13)),
                   ),
                 ],
               ),

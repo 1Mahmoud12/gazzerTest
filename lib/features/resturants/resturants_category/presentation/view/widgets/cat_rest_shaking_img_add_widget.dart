@@ -59,19 +59,19 @@ class _CatRestShakingImgAddWidgetState extends State<CatRestShakingImgAddWidget>
             child: DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Co.purple.withAlpha(50), Co.purple.withAlpha(0)],
+                  colors: [Co.buttonGradient.withAlpha(30), Colors.black.withAlpha(0)],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 12),
+                padding: const EdgeInsets.symmetric(vertical: 40),
                 child: Column(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.symmetric(horizontal: 36 ),
                       child: Badge(
                         backgroundColor: Colors.transparent,
                         label: SvgPicture.asset(Assets.assetsSvgTripleStarts, width: 32, height: 32),
@@ -91,8 +91,8 @@ class _CatRestShakingImgAddWidgetState extends State<CatRestShakingImgAddWidget>
                         children: [
                           ...List.generate(
                             3,
-                            (_) => TextSpan(
-                              text: "Buy More & Save More",
+                            (i) => TextSpan(
+                              text: "${i == 0 ? "" : "Buy More "}& Save More",
                               style: TStyle.blackBold(14),
                               children: [
                                 const WidgetSpan(
@@ -116,7 +116,9 @@ class _CatRestShakingImgAddWidgetState extends State<CatRestShakingImgAddWidget>
             bottom: 0,
             child: RotationTransition(
               alignment: Alignment.topRight,
-              turns: _controller, child: Image.asset(Assets.assetsPngPizza, height: 200)),
+              turns: _controller,
+              child: Image.asset(Assets.assetsPngPizza, height: 200),
+            ),
           ),
         ],
       ),

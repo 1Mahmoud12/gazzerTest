@@ -24,7 +24,7 @@ class StackedItemWidget extends StatelessWidget {
             }),
           ),
         ),
-        if (items.length > 4) Text("+${items.length - 4} items", style: TStyle.blackBold(13)),
+        if (items.length > 4) Text("+${items.length - 4} items", style: TStyle.blackBold(12)),
       ],
     );
   }

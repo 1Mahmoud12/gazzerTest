@@ -74,9 +74,10 @@ class _HomeHeader extends StatelessWidget {
                         children: [
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 12,
+                            // spacing: 12,
                             children: [
                               SvgPicture.asset(Assets.assetsSvgLocation, height: 32, width: 32),
+                              const HorizontalSpacing(8),
                               Expanded(
                                 child: Text.rich(
                                   TextSpan(
@@ -94,9 +95,19 @@ class _HomeHeader extends StatelessWidget {
                                   style: TStyle.whiteSemi(14),
                                 ),
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.notifications_none, color: Co.secondary, size: 24),
+                              InkWell(
+                                onTap: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6),
+                                  child: SvgPicture.asset(Assets.assetsSvgNotification),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6),
+                                  child: SvgPicture.asset(Assets.assetsSvgLanguage),
+                                ),
                               ),
                             ],
                           ),

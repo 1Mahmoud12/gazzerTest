@@ -80,7 +80,11 @@ class Assets {
 
   static const String assetsPngSplash = "assets/png/splash.png";
 
+  static const String assetsPngWave = "assets/png/wave.png";
+
   static const String assetsSvgAddContainer = "assets/svg/add_container.svg";
+
+  static const String assetsSvgApple = "assets/svg/apple.svg";
 
   static const String assetsSvgCart = "assets/svg/cart.svg";
 
@@ -88,7 +92,11 @@ class Assets {
 
   static const String assetsSvgDrawerIcon = "assets/svg/drawer_icon.svg";
 
+  static const String assetsSvgFacebook = "assets/svg/facebook.svg";
+
   static const String assetsSvgFavoriteIcon = "assets/svg/favorite_icon.svg";
+
+  static const String assetsSvgGoogle = "assets/svg/google.svg";
 
   static const String assetsSvgHomeIcon = "assets/svg/home_icon.svg";
 
@@ -107,12 +115,6 @@ class Assets {
   static const String assetsSvgPercentageBg = "assets/svg/percentage_bg.svg";
 
   static const String assetsSvgProdCard = "assets/svg/prod_card.svg";
-
-  static const String assetsSvgSocialApple = "assets/svg/social_apple.svg";
-
-  static const String assetsSvgSocialFacebook = "assets/svg/social_facebook.svg";
-
-  static const String assetsSvgSocialGoogle = "assets/svg/social_google.svg";
 
   static const String assetsSvgSplashIcon = "assets/svg/splash_icon.svg";
 

@@ -5,8 +5,8 @@ class Grad {
   Grad._();
   static final linearGradient = LinearGradient(
     colors: [Co.lightPurple, Co.darkPurple.withAlpha(201), Co.darkPurple.withAlpha(0)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
     stops: [0.07, 0.79, 1.0],
   );
   static final radialGradient = const RadialGradient(
