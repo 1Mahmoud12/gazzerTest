@@ -8,16 +8,18 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/plan/presentation/views/nuttration_support_screen.dart';
+import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
+import 'package:gazzer/features/intro/presentation/loading_screen.dart';
+import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 
-class SupplementsScreen extends StatelessWidget {
-  const SupplementsScreen({super.key});
+class FrequancyCombosScreen extends StatelessWidget {
+  const FrequancyCombosScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final focusData = ["Yes, Daily", "Occasionally", "No"];
+    final focusData = ["Every 3 days", "weely", "I'll Choose Manually"];
     return ImageBackgroundWidget(
-      image: Assets.assetsPngSupplementationShape,
+      image: Assets.assetsPngFrequencyShape,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const ClassicAppBar(),
@@ -28,7 +30,7 @@ class SupplementsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GradientText(
-                text: "Do you take medications or health supplements regularly?",
+                text: "How often would you like to receive your healthy combos?",
                 style: TStyle.blackBold(20),
                 gradient: Grad.radialGradient,
               ),
@@ -41,7 +43,11 @@ class SupplementsScreen extends StatelessWidget {
                   focusData.length,
                   (index) => OptionBtn(
                     onPressed: () {
-                      context.myPush(const NuttrationSupportScreen());
+                      context.myPushReplacment(
+                        const LoadingScreen(
+                          navigateTo: CongratsScreen(navigateTo: IntroVideoTutorialScreen(videoLink: '')),
+                        ),
+                      );
                     },
                     width: 209,
                     height: 60,

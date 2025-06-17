@@ -5,19 +5,17 @@ import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/plan/presentation/views/supplements_screen.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/diatery_lifestyle_screen.dart';
 
-class DiateryLifestyleScreen extends StatelessWidget {
-  const DiateryLifestyleScreen({super.key});
+class HealthFocusScreen extends StatelessWidget {
+  const HealthFocusScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final focusData = ["Vegetarian", "Vegan", "Low-Carb/Keto", "No Specific Diet"];
+    final focusData = ["Lose Weight", "Build Muscle", "Eat Healthier", "Manage A Condition"];
     return ImageBackgroundWidget(
-      image: Assets.assetsPngDiateryShape,
+      image: Assets.assetsPngHealthFocusShape,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const ClassicAppBar(),
@@ -26,9 +24,9 @@ class DiateryLifestyleScreen extends StatelessWidget {
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: GradientText(
-                text: "Do You Follow Any Specific Dietary Lifestyle?",
+                text: "What Is Your Primary Health Focus",
                 style: TStyle.blackBold(20),
                 gradient: Grad.radialGradient,
               ),
@@ -41,7 +39,7 @@ class DiateryLifestyleScreen extends StatelessWidget {
                   focusData.length,
                   (index) => OptionBtn(
                     onPressed: () {
-                      context.myPush(const SupplementsScreen());
+                      context.myPush(const DiateryLifestyleScreen());
                     },
                     width: 209,
                     height: 60,

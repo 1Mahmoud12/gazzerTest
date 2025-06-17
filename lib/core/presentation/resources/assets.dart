@@ -96,6 +96,10 @@ class Assets {
 
   static const String assetsPngSupplementationShape = "assets/png/supplementation_shape.png";
 
+  static const String assetsPngVideoTutorialPlaceholder2 = "assets/png/video_tutorial_placeholder_2.png";
+
+  static const String assetsPngVideotutorialVideoPlaceholder = "assets/png/videotutorial_video_placeholder.png";
+
   static const String assetsPngWave = "assets/png/wave.png";
 
   static const String assetsSvgAddContainer = "assets/svg/add_container.svg";

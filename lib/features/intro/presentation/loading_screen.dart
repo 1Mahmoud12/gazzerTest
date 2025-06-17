@@ -12,16 +12,26 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
     show GradientText, HorizontalSpacing;
 
 class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({super.key, required this.navigateTo});
+  const LoadingScreen({super.key, required this.navigateTo, this.toLoad});
   final Widget navigateTo;
+  final Future Function()? toLoad;
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
-      if (context.mounted) {
-        context.myPushAndRemoveUntil(navigateTo);
+    Future _loadAndNav() async {
+      if (toLoad != null) {
+        await toLoad!();
+        if (context.mounted) context.myPushAndRemoveUntil(navigateTo);
+      } else {
+        Future.delayed(const Duration(seconds: 3), () {
+          if (context.mounted) {
+            context.myPushAndRemoveUntil(navigateTo);
+          }
+        });
       }
-    });
+    }
+
+    _loadAndNav();
     return ImageBackgroundWidget(
       image: Assets.assetsPngLoadingShape,
       child: Scaffold(

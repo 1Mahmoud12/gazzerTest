@@ -10,7 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, OptionBtn, VerticalSpacing;
-import 'package:gazzer/features/plan/presentation/views/health_focus_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 
 class ChooseYourMode extends StatelessWidget {
   const ChooseYourMode({super.key});

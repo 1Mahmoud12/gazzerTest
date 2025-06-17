@@ -8,17 +8,16 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/plan/presentation/views/congrats_screen.dart';
-import 'package:gazzer/features/plan/presentation/views/loading_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support_screen.dart';
 
-class FrequancyCombosScreen extends StatelessWidget {
-  const FrequancyCombosScreen({super.key});
+class SupplementsScreen extends StatelessWidget {
+  const SupplementsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final focusData = ["Every 3 days", "weely", "I'll Choose Manually"];
+    final focusData = ["Yes, Daily", "Occasionally", "No"];
     return ImageBackgroundWidget(
-      image: Assets.assetsPngFrequencyShape,
+      image: Assets.assetsPngSupplementationShape,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const ClassicAppBar(),
@@ -29,7 +28,7 @@ class FrequancyCombosScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GradientText(
-                text: "How often would you like to receive your healthy combos?",
+                text: "Do you take medications or health supplements regularly?",
                 style: TStyle.blackBold(20),
                 gradient: Grad.radialGradient,
               ),
@@ -42,7 +41,7 @@ class FrequancyCombosScreen extends StatelessWidget {
                   focusData.length,
                   (index) => OptionBtn(
                     onPressed: () {
-                      context.myPushReplacment(const LoadingScreen(navigateTo: CongratsScreen()));
+                      context.myPush(const NuttrationSupportScreen());
                     },
                     width: 209,
                     height: 60,

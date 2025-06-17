@@ -8,7 +8,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/plan/presentation/views/frequancy_combos_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/frequancy_combos_screen.dart';
 
 class NuttrationSupportScreen extends StatelessWidget {
   const NuttrationSupportScreen({super.key});

@@ -5,13 +5,14 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing, OptionBtn;
-import 'package:gazzer/features/plan/presentation/views/choose_your_mode.dart';
-import 'package:gazzer/features/plan/presentation/views/congrats_screen.dart';
-import 'package:gazzer/features/plan/presentation/views/loading_screen.dart';
+import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
+import 'package:gazzer/features/intro/presentation/loading_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/choose_your_mode.dart';
 
 class HealthyPlanScreen extends StatelessWidget {
   const HealthyPlanScreen({super.key});
@@ -49,7 +50,7 @@ class HealthyPlanScreen extends StatelessWidget {
             ),
             OptionBtn(
               onPressed: () {
-                context.myPush(const LoadingScreen(navigateTo: CongratsScreen()));
+                context.myPush(const LoadingScreen(navigateTo: CongratsScreen(navigateTo: MainLayout())));
               },
               text: L10n.tr().skip,
               width: 209,
