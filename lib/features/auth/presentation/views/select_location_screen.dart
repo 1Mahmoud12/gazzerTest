@@ -6,8 +6,8 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/plan/views/healthy_plan_screen.dart';
-import 'package:gazzer/features/plan/views/loading_screen.dart';
+import 'package:gazzer/features/plan/presentation/views/healthy_plan_screen.dart';
+import 'package:gazzer/features/plan/presentation/views/loading_screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 

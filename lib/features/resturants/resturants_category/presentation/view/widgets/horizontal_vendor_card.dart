@@ -3,11 +3,11 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
+import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
-import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/conrer_indented_clipper.dart';
-import 'package:gazzer/features/resturants/resturants_category/presentation/view/utils/corner_indendet_shape.dart';
 import 'package:gazzer/features/resturants/resturants_category/presentation/view/widgets/stacked_item_widget.dart';
 import 'package:gazzer/features/resturants/type_related_resturants/presentation/view/type_related_restaurants_screen.dart';
 

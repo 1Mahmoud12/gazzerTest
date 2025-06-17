@@ -3,8 +3,8 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import  'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
 class OptionBtn extends StatefulWidget {
   const OptionBtn({
@@ -24,6 +24,7 @@ class OptionBtn extends StatefulWidget {
     this.padding,
     this.margin = EdgeInsets.zero,
     this.height,
+    this.textAlign = TextAlign.start,
     this.width,
   }) : assert(text != null || child != null, 'Either text or child must be provided');
 
@@ -42,6 +43,7 @@ class OptionBtn extends StatefulWidget {
   final EdgeInsets margin;
   final double? height;
   final double? width;
+  final TextAlign textAlign;
   final Function() onPressed;
 
   @override
@@ -101,7 +103,9 @@ class _OptionBtnState extends State<OptionBtn> {
 
           child: Padding(
             padding: widget.padding ?? EdgeInsets.zero,
-            child: widget.child ?? Text(widget.text ?? '', style: widget.textStyle ?? TStyle.mainwSemi(15)),
+            child:
+                widget.child ??
+                Text(widget.text ?? '', style: widget.textStyle ?? TStyle.mainwSemi(15), textAlign: widget.textAlign),
           ),
         ),
       ),

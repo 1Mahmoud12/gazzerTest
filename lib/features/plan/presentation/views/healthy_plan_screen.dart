@@ -9,9 +9,9 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing, OptionBtn;
-import 'package:gazzer/features/plan/views/choose_your_mode.dart';
-import 'package:gazzer/features/plan/views/congrats_screen.dart';
-import 'package:gazzer/features/plan/views/loading_screen.dart';
+import 'package:gazzer/features/plan/presentation/views/choose_your_mode.dart';
+import 'package:gazzer/features/plan/presentation/views/congrats_screen.dart';
+import 'package:gazzer/features/plan/presentation/views/loading_screen.dart';
 
 class HealthyPlanScreen extends StatelessWidget {
   const HealthyPlanScreen({super.key});
@@ -27,7 +27,7 @@ class HealthyPlanScreen extends StatelessWidget {
           spacing: 12,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(24)),
+            GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(20)),
             SizedBox(
               width: 250,
               child: Text(

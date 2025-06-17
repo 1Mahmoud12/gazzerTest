@@ -10,8 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, OptionBtn, VerticalSpacing;
-import 'package:gazzer/features/plan/views/congrats_screen.dart';
-import 'package:gazzer/features/plan/views/loading_screen.dart';
+import 'package:gazzer/features/plan/presentation/views/health_focus_screen.dart';
 
 class ChooseYourMode extends StatelessWidget {
   const ChooseYourMode({super.key});
@@ -29,7 +28,7 @@ class ChooseYourMode extends StatelessWidget {
           padding: AppConst.defaultHrPadding,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().chooseYourMood, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
+            GradientText(text: L10n.tr().chooseYourMood, style: TStyle.blackBold(20), gradient: Grad.radialGradient),
             const VerticalSpacing(24),
             Column(
               spacing: 16,
@@ -38,7 +37,7 @@ class ChooseYourMode extends StatelessWidget {
                   tag: Tags.btn,
                   child: OptionBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: CongratsScreen()));
+                      context.myPushAndRemoveUntil(const HealthFocusScreen());
                     },
                     width: 209,
                     height: 60,
@@ -58,7 +57,7 @@ class ChooseYourMode extends StatelessWidget {
                   moods.length - 1,
                   (index) => OptionBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: CongratsScreen()));
+                      context.myPushAndRemoveUntil(const HealthFocusScreen());
                     },
                     width: 209,
                     height: 60,
