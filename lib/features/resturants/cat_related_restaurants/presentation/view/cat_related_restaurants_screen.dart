@@ -12,8 +12,8 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
-import 'package:gazzer/features/resturants/single_restaurant/presentation/view/single_restaurant_details.dart';
+import 'package:gazzer/features/resturants/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
+import 'package:gazzer/features/resturants/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 // components
 part 'components/explore_best.dart';
@@ -24,8 +24,8 @@ part 'widgets/add_widget.dart';
 part 'widgets/infinet_carousal.dart';
 part 'widgets/type_related_restaurants_header.dart';
 
-class UniCatRestaurants extends StatelessWidget {
-  const UniCatRestaurants({super.key, required this.id});
+class CatRelatedRestaurantsScreen extends StatelessWidget {
+  const CatRelatedRestaurantsScreen({super.key, required this.id});
   final int id;
   @override
   Widget build(BuildContext context) {

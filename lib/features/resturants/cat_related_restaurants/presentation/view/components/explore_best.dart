@@ -1,4 +1,4 @@
-part of '../uni_cat_restaurants.dart';
+part of '../cat_related_restaurants_screen.dart';
 
 class _ExploreBest extends StatelessWidget {
   const _ExploreBest();
@@ -20,14 +20,18 @@ class _ExploreBest extends StatelessWidget {
           padding: AppConst.defaultHrPadding,
           separatorBuilder: (context, index) => const VerticalSpacing(16),
           itemBuilder: (context, index) {
-            final prod = Fakers.fakeProds[index];
+            final vendor = Fakers.vendors[index];
             return SizedBox(
               height: 140,
               child: LayoutBuilder(
                 builder: (context, constraints) => InkWell(
                   borderRadius: AppConst.defaultBorderRadius,
                   onTap: () {
-                    context.myPush(AddProdctToCartScreen(product: prod));
+                    if (index.isEven) {
+                      context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+                    } else {
+                      context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
+                    }
                   },
                   child: Stack(
                     children: [
@@ -53,16 +57,16 @@ class _ExploreBest extends StatelessWidget {
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            GradientText(text: prod.name, style: TStyle.blackBold(20)),
+                                            GradientText(text: vendor.name, style: TStyle.blackBold(20)),
                                             const DecoratedFavoriteWidget(size: 20, isDarkContainer: false),
                                           ],
                                         ),
                                         GradientTextWzShadow(
-                                          text: Helpers.getProperPrice(prod.price),
+                                          text: Helpers.getProperPrice(50.0),
                                           style: TStyle.blackSemi(16),
                                           shadow: AppDec.blackTextShadow.first,
                                         ),
-                                        RatingWidget(prod.rate.toStringAsFixed(1), itemSize: 14),
+                                        RatingWidget(vendor.rate.toStringAsFixed(1), itemSize: 14),
                                       ],
                                     ),
                                   ),
@@ -102,7 +106,7 @@ class _ExploreBest extends StatelessWidget {
                                       border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
                                     ),
                                     child: Image.asset(
-                                      prod.image,
+                                      vendor.image,
                                       fit: BoxFit.cover,
                                       height: constraints.maxHeight * 0.8,
                                       width: constraints.maxHeight * 0.8,

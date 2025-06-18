@@ -1,4 +1,4 @@
-part of "../uni_cat_restaurants.dart";
+part of "../cat_related_restaurants_screen.dart";
 
 // import 'package:flutter/material.dart';
 // import 'package:gazzer/core/presentation/theme/app_colors.dart';

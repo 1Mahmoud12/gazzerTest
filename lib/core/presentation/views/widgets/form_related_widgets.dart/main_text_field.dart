@@ -8,7 +8,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
 export 'package:flutter/services.dart';
 
@@ -44,6 +44,7 @@ class MainTextField extends StatefulWidget {
     this.isOutLinedBorder = true,
     this.prefixOnTap,
     this.prefixColor,
+    this.autofillHints,
   });
   final TextEditingController controller;
   final String? hintText;
@@ -74,7 +75,7 @@ class MainTextField extends StatefulWidget {
   final bool isOutLinedBorder;
   final VoidCallback? prefixOnTap;
   final Color? prefixColor;
-
+  final List<String>? autofillHints;
   @override
   State<MainTextField> createState() => _MainTextFieldState();
 }
@@ -124,6 +125,7 @@ class _MainTextFieldState extends State<MainTextField> {
           style: widget.style ?? TStyle.greySemi(14),
           validator: widget.validator,
           onChanged: widget.onChange,
+          autofillHints: widget.autofillHints,
           onSaved: widget.onSaved,
           onFieldSubmitted: widget.onSubmitting,
           obscureText: value,

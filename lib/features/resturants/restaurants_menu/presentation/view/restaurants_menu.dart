@@ -17,15 +17,15 @@ import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/wi
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/rest_cat_last_chance_add_widget.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
 
-class RestaurantsCatScreen extends StatefulWidget {
-  const RestaurantsCatScreen({super.key, required this.id});
+class RestaurantsMenu extends StatefulWidget {
+  const RestaurantsMenu({super.key, required this.id});
   final int id;
 
   @override
-  State<RestaurantsCatScreen> createState() => _RestaurantsCatScreenState();
+  State<RestaurantsMenu> createState() => _RestaurantsMenuState();
 }
 
-class _RestaurantsCatScreenState extends State<RestaurantsCatScreen> {
+class _RestaurantsMenuState extends State<RestaurantsMenu> {
   final anchorController = AnchorScrollController();
 
   final nonVendorIndeces = {0, 1, 2, 3, 6, 10, 16, 19};

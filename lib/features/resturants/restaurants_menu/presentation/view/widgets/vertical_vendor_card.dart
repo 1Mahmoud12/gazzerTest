@@ -8,7 +8,8 @@ import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/stacked_item_widget.dart';
-import 'package:gazzer/features/resturants/uni_cat_restaurants/presentation/view/uni_cat_restaurants.dart';
+import 'package:gazzer/features/resturants/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
+import 'package:gazzer/features/resturants/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 class VerticalVendorCard extends StatelessWidget {
   const VerticalVendorCard({
@@ -41,7 +42,11 @@ class VerticalVendorCard extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            context.myPush(UniCatRestaurants(id: vendor.id));
+            if (vendor.id.isEven) {
+              context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+            } else {
+              context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
@@ -62,7 +67,7 @@ class VerticalVendorCard extends StatelessWidget {
                       child: ClipPath(
                         clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
                         child: Image.asset(
-                          vendor.imageUrl,
+                          vendor.image,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,

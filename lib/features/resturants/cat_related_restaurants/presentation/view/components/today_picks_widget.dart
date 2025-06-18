@@ -1,4 +1,4 @@
-part of "../uni_cat_restaurants.dart";
+part of "../cat_related_restaurants_screen.dart";
 
 class _TodayPicksWidget extends StatelessWidget {
   const _TodayPicksWidget();
@@ -17,11 +17,11 @@ class _TodayPicksWidget extends StatelessWidget {
           height: 260,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: Fakers.fakeProds.length,
+            itemCount: Fakers.vendors.length,
             padding: AppConst.defaultHrPadding,
             separatorBuilder: (context, index) => const HorizontalSpacing(16),
             itemBuilder: (context, index) {
-              final prod = Fakers.fakeProds[index];
+              final vendor = Fakers.vendors[index];
               return SizedBox(
                 width: 200,
                 child: ClipRRect(
@@ -30,13 +30,17 @@ class _TodayPicksWidget extends StatelessWidget {
                     decoration: BoxDecoration(gradient: Grad.bglightLinear),
                     child: InkWell(
                       onTap: () {
-                        context.myPush(AddProdctToCartScreen(product: prod));
+                        if (index.isEven) {
+                          context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+                        } else {
+                          context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
+                        }
                       },
                       child: Column(
                         spacing: 4,
                         children: [
                           Expanded(
-                            child: SizedBox.expand(child: Image.asset(prod.image, fit: BoxFit.cover)),
+                            child: SizedBox.expand(child: Image.asset(vendor.image, fit: BoxFit.cover)),
                           ),
                           Expanded(
                             child: Padding(
@@ -59,7 +63,7 @@ class _TodayPicksWidget extends StatelessWidget {
                                               spacing: 8,
                                               children: [
                                                 const Icon(Icons.star, size: 16, color: Co.second2),
-                                                Text(prod.rate.toStringAsFixed(1), style: TStyle.secondarySemi(13)),
+                                                Text(vendor.rate.toStringAsFixed(1), style: TStyle.secondarySemi(13)),
                                               ],
                                             ),
                                           ),
@@ -77,9 +81,9 @@ class _TodayPicksWidget extends StatelessWidget {
                                   Text.rich(
                                     TextSpan(
                                       children: [
-                                        TextSpan(text: prod.name, style: TStyle.blackBold(15)),
+                                        TextSpan(text: vendor.name, style: TStyle.blackBold(15)),
                                         const TextSpan(text: '\n'),
-                                        TextSpan(text: prod.description, style: TStyle.secondarySemi(14)),
+                                        TextSpan(text: vendor.deliveryTime, style: TStyle.secondarySemi(14)),
                                       ],
                                     ),
                                     maxLines: 3,
@@ -89,7 +93,7 @@ class _TodayPicksWidget extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       GradientTextWzShadow(
-                                        text: Helpers.getProperPrice(prod.price),
+                                        text: Helpers.getProperPrice(50.0),
                                         shadow: AppDec.blackTextShadow.first,
                                         style: TStyle.blackBold(14),
                                       ),

@@ -24,7 +24,7 @@ import 'package:gazzer/features/home/home_categories/daily_offers/presentation/v
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/home_categories/suggested_screen/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/restaurants_cat_screen.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/restaurants_menu.dart';
 
 ///
 ///

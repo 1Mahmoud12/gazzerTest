@@ -19,15 +19,15 @@ part 'widgets/food_details_widget.dart';
 part 'widgets/food_images_gallery.dart';
 part 'widgets/vendor_card.dart';
 
-class SingleRestaurantDetailsScreen extends StatelessWidget {
-  const SingleRestaurantDetailsScreen({super.key, required this.product});
-  final ProductModel product;
+class SingleCatRestaurantScreen extends StatelessWidget {
+  const SingleCatRestaurantScreen({super.key, required this.vendorId});
+  final int vendorId;
   @override
   Widget build(BuildContext context) {
     final listItems = [
       _VendorCard(Fakers.vendors.first),
       const _FoodImagesGallery(),
-      _FoodDetailsWidget(product: product),
+      _FoodDetailsWidget(product: Fakers.fakeProds.first),
     ];
     return Scaffold(
       appBar: const MainAppBar(),

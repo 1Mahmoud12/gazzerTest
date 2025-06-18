@@ -60,7 +60,7 @@ class CategoryItem extends StatelessWidget {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(constraints.maxWidth)),
           ),
           onPressed: () {
-            context.myPush(RestaurantsCatScreen(id: category.id));
+            context.myPush(RestaurantsMenu(id: category.id));
           },
           child: Column(
             spacing: 4,

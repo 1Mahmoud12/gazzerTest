@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -63,31 +64,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Text(L10n.tr().singUpToExploreWideVarietyOfProducts, maxLines: 2, style: TStyle.greySemi(16)),
               const VerticalSpacing(24),
               Text(L10n.tr().fullName, style: TStyle.blackBold(20)),
-              const VerticalSpacing(8),
-              MainTextField(
-                controller: _nameController,
-                hintText: L10n.tr().yourFullName,
-                bgColor: Colors.transparent,
-                validator: Validators.notEmpty,
+              AutofillGroup(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const VerticalSpacing(8),
+                    MainTextField(
+                      controller: _nameController,
+                      hintText: L10n.tr().yourFullName,
+                      bgColor: Colors.transparent,
+                      validator: Validators.notEmpty,
+                      autofillHints: [AutofillHints.username, AutofillHints.name],
+                    ),
+                    const VerticalSpacing(24),
+                    Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
+                    const VerticalSpacing(8),
+                    PhoneTextField(
+                      controller: _phoneController,
+                      validator: (v, code) {
+                        if (code == 'EG') {
+                          return Validators.mobileEGValidator(v);
+                        }
+                        return Validators.moreThanSix(v);
+                      },
+                    ),
+                  ],
+                ),
               ),
               const VerticalSpacing(24),
-              Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
-              const VerticalSpacing(8),
-              PhoneTextField(
-                controller: _phoneController,
-                validator: (v, code) {
-                  if (code == 'EG') {
-                    return Validators.mobileEGValidator(v);
-                  }
-                  return Validators.moreThanSix(v);
-                },
-              ),
               const VerticalSpacing(24),
               Hero(
                 tag: Tags.btn,
                 child: OptionBtn(
                   onPressed: () {
                     if (_formKey.currentState?.validate() == true) {
+                      TextInput.finishAutofillContext();
                       context.myPush(const SelectLocationScreen());
                     }
                   },
@@ -97,8 +108,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               const VerticalSpacing(24),
-              Center(child: Text( "or", // L10n.tr().or,
-               style: TStyle.greyRegular(16))),
+              Center(
+                child: Text(
+                  "or", // L10n.tr().or,
+                  style: TStyle.greyRegular(16),
+                ),
+              ),
               const VerticalSpacing(10),
               Row(
                 spacing: 16,

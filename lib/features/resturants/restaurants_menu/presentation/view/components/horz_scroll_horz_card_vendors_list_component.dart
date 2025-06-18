@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import  'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/features/resturants/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/horizontal_vendor_card.dart';
 
 class HorzScrollHorzCardVendorsListComponent extends StatelessWidget {
@@ -13,7 +15,7 @@ class HorzScrollHorzCardVendorsListComponent extends StatelessWidget {
     return Column(
       spacing: 4,
       children: [
-        const TitleWithMore(title: ''),
+        TitleWithMore(title: '', onPressed: () => context.myPush(const CatRelatedRestaurantsScreen(id: 0))),
 
         SizedBox(
           height: 120,

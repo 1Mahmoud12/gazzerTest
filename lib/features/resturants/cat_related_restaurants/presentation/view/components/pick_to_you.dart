@@ -1,4 +1,4 @@
-part of '../uni_cat_restaurants.dart';
+part of '../cat_related_restaurants_screen.dart';
 
 class _PickToYou extends StatelessWidget {
   const _PickToYou();
@@ -17,25 +17,29 @@ class _PickToYou extends StatelessWidget {
           height: 130,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: Fakers.fakeProds.length,
+            itemCount: Fakers.vendors.length,
             separatorBuilder: (context, index) => const HorizontalSpacing(12),
             itemBuilder: (context, index) {
-              final prod = Fakers.fakeProds[index];
+              final vendor = Fakers.vendors[index];
 
               return SizedBox(
                 width: 105,
                 child: InkWell(
                   onTap: () {
-                    context.myPush(AddProdctToCartScreen(product: prod));
+                    if (index.isEven) {
+                      context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+                    } else {
+                      context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
+                    }
                   },
                   child: Column(
                     spacing: 12,
                     children: [
                       Expanded(
-                        child: AspectRatio(aspectRatio: 1, child: Image.asset(prod.image, fit: BoxFit.cover)),
+                        child: AspectRatio(aspectRatio: 1, child: Image.asset(vendor.image, fit: BoxFit.cover)),
                       ),
                       Text(
-                        '${prod.name}\n',
+                        '${vendor.name}\n',
                         style: TStyle.blackSemi(14),
                         maxLines: 2,
                         textAlign: TextAlign.center,

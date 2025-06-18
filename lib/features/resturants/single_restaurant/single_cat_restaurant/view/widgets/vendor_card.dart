@@ -77,7 +77,7 @@ class _VendorCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ClipOval(
-                      child: Image.asset(vendor.imageUrl, height: imageSize, width: imageSize, fit: BoxFit.cover),
+                      child: Image.asset(vendor.image, height: imageSize, width: imageSize, fit: BoxFit.cover),
                     ),
                     GradientText(text: vendor.name, style: TStyle.blackBold(16)),
                     const DecoratedFavoriteWidget(isDarkContainer: false, size: 20),

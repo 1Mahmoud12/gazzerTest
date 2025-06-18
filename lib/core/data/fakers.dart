@@ -95,7 +95,7 @@ class Fakers {
     (index) => VendorModel(
       id: index,
       name: "Vendor ${index + 1}",
-      imageUrl: _catsImages[_random.nextInt(_catsImages.length)],
+      image: _catsImages[_random.nextInt(_catsImages.length)],
       rate: _random.nextDouble() * 5,
       reviewCount: _random.nextInt(100),
       deliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} min",

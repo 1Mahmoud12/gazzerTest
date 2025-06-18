@@ -80,6 +80,12 @@ class Assets {
 
   static const String assetsPngPlanView = "assets/png/plan_view.png";
 
+  static const String assetsPngRestAdd1 = "assets/png/rest_add_1.png";
+
+  static const String assetsPngRestAdd2 = "assets/png/rest_add_2.png";
+
+  static const String assetsPngRestAdd3 = "assets/png/rest_add_3.png";
+
   static const String assetsPngSandwitch = "assets/png/sandwitch.png";
 
   static const String assetsPngSandwitch2 = "assets/png/sandwitch2.png";

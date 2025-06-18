@@ -1,4 +1,4 @@
-part of "../uni_cat_restaurants.dart";
+part of "../cat_related_restaurants_screen.dart";
 
 class _InfinetAnimatingCarousal extends StatefulWidget {
   const _InfinetAnimatingCarousal();
