@@ -30,7 +30,7 @@ class SupplementsScreen extends StatelessWidget {
               child: GradientText(
                 text: "Do you take medications or health supplements regularly?",
                 style: TStyle.blackBold(20),
-                gradient: Grad.radialGradient,
+                gradient: Grad.textGradient,
               ),
             ),
             const VerticalSpacing(24),

@@ -6,9 +6,9 @@ import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/features/resturants/resturants_category/data/category_add_model.dart';
-import 'package:gazzer/features/resturants/resturants_category/data/subcategory_model.dart';
-import 'package:gazzer/features/resturants/resturants_category/data/vendor_model.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/data/category_add_model.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/data/subcategory_model.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
 
 class Fakers {
   Fakers._();

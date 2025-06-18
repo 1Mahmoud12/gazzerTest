@@ -28,7 +28,7 @@ class ChooseYourMode extends StatelessWidget {
           padding: AppConst.defaultHrPadding,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().chooseYourMood, style: TStyle.blackBold(20), gradient: Grad.radialGradient),
+            GradientText(text: L10n.tr().chooseYourMood, style: TStyle.blackBold(20), gradient: Grad.textGradient),
             const VerticalSpacing(24),
             Column(
               spacing: 16,
@@ -47,7 +47,7 @@ class ChooseYourMode extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(emojis.first, style: const TextStyle(fontSize: 28)),
-                          GradientText(text: moods[0], style: TStyle.blackSemi(16)),
+                          Text( moods[0], style: TStyle.primarySemi(16)),
                         ],
                       ),
                     ),
@@ -67,7 +67,7 @@ class ChooseYourMode extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(emojis[index + 1], style: const TextStyle(fontSize: 28)),
-                          GradientText(text: moods[index + 1], style: TStyle.blackSemi(16)),
+                          Text( moods[index + 1], style: TStyle.primarySemi(16)),
                         ],
                       ),
                     ),

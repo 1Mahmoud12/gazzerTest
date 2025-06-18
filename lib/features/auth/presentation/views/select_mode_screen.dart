@@ -11,6 +11,7 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/auth/presentation/views/sign_up_screen.dart';
+import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 
 class SelectModeScreen extends StatelessWidget {
   const SelectModeScreen({super.key});
@@ -26,13 +27,13 @@ class SelectModeScreen extends StatelessWidget {
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-            GradientText(text: L10n.tr().selectMode, style: TStyle.blackBold(24), gradient: Grad.radialGradient),
+            GradientText(text: "How To Login", style: TStyle.blackBold(24), gradient: Grad.textGradient),
             const SizedBox(height: 40, width: double.infinity),
             Hero(
               tag: Tags.btn,
               child: OptionBtn(
                 onPressed: () {
-                  context.myPushAndRemoveUntil(const MainLayout());
+                  context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
                 },
                 text: L10n.tr().guestMode,
                 width: 209,

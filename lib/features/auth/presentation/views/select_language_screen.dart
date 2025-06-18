@@ -24,7 +24,7 @@ class SelectLanguageScreen extends StatelessWidget {
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-            GradientText(text: "Select Language", style: TStyle.blackBold(24), gradient: Grad.radialGradient),
+            GradientText(text: "Select Language", style: TStyle.blackBold(24), gradient: Grad.textGradient),
             const SizedBox(height: 40, width: double.infinity),
             Hero(
               tag: Tags.btn,
@@ -41,7 +41,7 @@ class SelectLanguageScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset(Assets.assetsPngFlagEn, height: 24, width: 24),
-                      GradientText(text: "English", style: TStyle.blackSemi(16)),
+                      Text("English", style: TStyle.primarySemi(16)),
                     ],
                   ),
                 ),
@@ -61,7 +61,7 @@ class SelectLanguageScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(Assets.assetsPngFlagEg, height: 24, width: 24),
-                    GradientText(text: "Arabic", style: TStyle.blackSemi(16)),
+                    Text("Arabic", style: TStyle.primarySemi(16)),
                   ],
                 ),
               ),

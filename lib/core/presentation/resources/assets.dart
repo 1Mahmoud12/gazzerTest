@@ -2,6 +2,8 @@
 class Assets {
   Assets._();
   
+  static const String assetsDeliveryLogo = "assets/delivery_logo.png";
+
   static const String assetsFontsInter = "assets/fonts/Inter.ttf";
 
   static const String assetsFontsPoppinsBold = "assets/fonts/Poppins-Bold.ttf";
@@ -19,6 +21,8 @@ class Assets {
   static const String assetsIosLauncher = "assets/ios_launcher.png";
 
   static const String assetsLottieDeliveryBoy = "assets/lottie/delivery_boy.json";
+
+  static const String assetsNewLogo = "assets/new_logo.png";
 
   static const String assetsPng30perc = "assets/png/30perc.png";
 
@@ -73,6 +77,8 @@ class Assets {
   static const String assetsPngOnboardBg = "assets/png/onboard_bg.png";
 
   static const String assetsPngPizza = "assets/png/pizza.png";
+
+  static const String assetsPngPlanView = "assets/png/plan_view.png";
 
   static const String assetsPngSandwitch = "assets/png/sandwitch.png";
 
@@ -143,5 +149,7 @@ class Assets {
   static const String assetsSvgTripleStarts = "assets/svg/triple_starts.svg";
 
   static const String assetsSvgYellowPatches = "assets/svg/yellow_patches.svg";
+
+  static const String assetsVendorLogo = "assets/vendor_logo.png";
 }
 

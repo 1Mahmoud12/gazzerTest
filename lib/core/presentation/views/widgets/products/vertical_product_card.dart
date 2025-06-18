@@ -5,10 +5,11 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
-import  'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/product/food_details/presentation/view/food_details_screen.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
+
 
 class VerticalProductCard extends StatelessWidget {
   const VerticalProductCard({super.key, required this.product, required this.canAdd, this.fontFactor = 1.0});
@@ -28,7 +29,7 @@ class VerticalProductCard extends StatelessWidget {
                 ? null
                 : () {
                     SystemSound.play(SystemSoundType.click);
-                    context.myPush(FoodDetailsScreen(product: product));
+                    context.myPush(AddProdctToCartScreen(product: product));
                   },
 
             child: CustomPaint(
@@ -102,23 +103,32 @@ class VerticalProductCard extends StatelessWidget {
                           bottomRight: Radius.circular(12),
                         ),
                       ),
-                      child: canAdd
-                          ? InkWell(
-                              onTap: () {
-                                SystemSound.play(SystemSoundType.click);
-                              },
-                              child:  Padding(
-                                padding: const EdgeInsets.all(6),
-                                child: Icon(Icons.add, color: Co.second2, size: 24 * fontFactor),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: Grad.linearGradient,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          ),
+                        ),
+                        child: canAdd
+                            ? InkWell(
+                                onTap: () {
+                                  SystemSound.play(SystemSoundType.click);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6),
+                                  child: Icon(Icons.add, color: Co.second2, size: 24 * fontFactor),
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Text(
+                                  "40%\nOFF",
+                                  style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary),
+                                ),
                               ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                "40%\nOFF",
-                                style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary),
-                              ),
-                            ),
+                      ),
                     ),
                   ),
                 ],

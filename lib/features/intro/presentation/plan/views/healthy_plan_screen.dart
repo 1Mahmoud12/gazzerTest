@@ -11,7 +11,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing, OptionBtn;
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
-import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/choose_your_mode.dart';
 
 class HealthyPlanScreen extends StatelessWidget {
@@ -28,7 +27,7 @@ class HealthyPlanScreen extends StatelessWidget {
           spacing: 12,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(20)),
+            GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(20), gradient: Grad.textGradient),
             SizedBox(
               width: 250,
               child: Text(
@@ -45,16 +44,15 @@ class HealthyPlanScreen extends StatelessWidget {
                   context.myPush(const ChooseYourMode());
                 },
                 width: 209,
-                child: GradientText(text: L10n.tr().setHealthPlan, style: TStyle.blackSemi(16)),
+                text: L10n.tr().setHealthPlan,
               ),
             ),
             OptionBtn(
               onPressed: () {
-                context.myPush(const LoadingScreen(navigateTo: CongratsScreen(navigateTo: MainLayout())));
+                context.myPush(const CongratsScreen(navigateTo: MainLayout()));
               },
               text: L10n.tr().skip,
               width: 209,
-              child: GradientText(text: L10n.tr().skip, style: TStyle.blackSemi(16)),
             ),
           ],
         ),

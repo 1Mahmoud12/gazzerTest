@@ -74,7 +74,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                                 text: "${L10n.tr().hiIamGazzer}\n${L10n.tr().welcome}",
                                 textAlign: TextAlign.center,
                                 style: TStyle.mainwBold(32),
-                                gradient: Grad.radialGradient,
+                                gradient: Grad.textGradient,
                                 shadow: BoxShadow(
                                   color: Co.secondary.withAlpha(125),
                                   spreadRadius: 0,

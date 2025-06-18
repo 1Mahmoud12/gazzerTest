@@ -28,7 +28,7 @@ class HealthFocusScreen extends StatelessWidget {
               child: GradientText(
                 text: "What Is Your Primary Health Focus",
                 style: TStyle.blackBold(20),
-                gradient: Grad.radialGradient,
+                gradient: Grad.textGradient,
               ),
             ),
             const VerticalSpacing(24),

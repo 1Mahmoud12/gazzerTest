@@ -3,13 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gazzer/core/presentation/localization/app_localizations.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 
-
 class L10n {
   L10n._();
-  static final List<Locale> supportedLocales = [
-    const Locale("en", ""),
-    const Locale("ar", ""),
-  ];
+  static final List<Locale> supportedLocales = [const Locale("en", ""), const Locale("ar", "")];
 
   static const List<LocalizationsDelegate> localizationDelegates = [
     AppLocalizations.delegate,
@@ -27,7 +23,7 @@ class L10n {
     return null;
   }
 
-  static AppLocalizations tr() => AppLocalizations.of(AppConst.navKey.currentContext!)!;
+  static AppLocalizations tr([BuildContext? ctx]) => AppLocalizations.of(ctx ?? AppConst.navKey.currentContext!)!;
 
   static bool isAr(BuildContext context) => Localizations.localeOf(context).languageCode == 'ar';
 }

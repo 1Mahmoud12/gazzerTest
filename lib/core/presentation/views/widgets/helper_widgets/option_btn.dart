@@ -105,7 +105,7 @@ class _OptionBtnState extends State<OptionBtn> {
             padding: widget.padding ?? EdgeInsets.zero,
             child:
                 widget.child ??
-                Text(widget.text ?? '', style: widget.textStyle ?? TStyle.mainwSemi(15), textAlign: widget.textAlign),
+                Text(widget.text ?? '', style: widget.textStyle ?? TStyle.primarySemi(16), textAlign: widget.textAlign),
           ),
         ),
       ),

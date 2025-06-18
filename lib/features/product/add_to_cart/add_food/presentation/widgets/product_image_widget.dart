@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import  'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 
 class ProductImageWidget extends StatelessWidget {
   const ProductImageWidget({super.key});
@@ -29,19 +27,7 @@ class ProductImageWidget extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 40),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: Grad.radialGradient,
-                      borderRadius: AppConst.defaultBorderRadius,
-                    ),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: Grad.linearGradient,
-                        borderRadius: AppConst.defaultBorderRadius,
-                      ),
-                      child: const FavoriteWidget(size: 24),
-                    ),
-                  ),
+                  child: DecoratedFavoriteWidget(size: 24, borderRadius: AppConst.defaultBorderRadius),
                 ),
               ),
             ],

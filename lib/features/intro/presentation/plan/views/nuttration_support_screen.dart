@@ -35,7 +35,7 @@ class NuttrationSupportScreen extends StatelessWidget {
               child: GradientText(
                 text: "What types of nutrition support would you like?",
                 style: TStyle.blackBold(20),
-                gradient: Grad.radialGradient,
+                gradient: Grad.textGradient,
               ),
             ),
             const VerticalSpacing(24),
@@ -50,6 +50,7 @@ class NuttrationSupportScreen extends StatelessWidget {
                     },
                     width: 209,
                     height: 60,
+                    textStyle: TStyle.primarySemi(15),
                     text: focusData[index],
                   ),
                 ),

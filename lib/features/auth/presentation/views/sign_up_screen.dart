@@ -56,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
               Row(
                 children: [
-                  GradientText(text: L10n.tr().signUp, style: TStyle.mainwBold(32), gradient: Grad.radialGradient),
+                  GradientText(text: L10n.tr().signUp, style: TStyle.mainwBold(32), gradient: Grad.textGradient),
                 ],
               ),
               const VerticalSpacing(8),

@@ -7,7 +7,7 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/product/food_details/presentation/view/food_details_screen.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 
 import 'circle_gradient_image.dart';
 
@@ -20,7 +20,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
       width: 125,
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => context.myPush(FoodDetailsScreen(product: prod)),
+        onTap: () => context.myPush(AddProdctToCartScreen(product: prod)),
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -77,17 +77,10 @@ class VerticalRotatedImgCard extends StatelessWidget {
               ),
             ),
 
-            const Positioned(
+            Positioned(
               top: 60,
               right: 0,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Co.mauve,
-                  boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2))],
-                ),
-                child: FavoriteWidget(size: 20),
-              ),
+              child: DecoratedFavoriteWidget(size: 20, borderRadius: AppConst.defaultInnerBorderRadius),
             ),
           ],
         ),

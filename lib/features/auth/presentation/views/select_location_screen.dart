@@ -6,7 +6,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/healthy_plan_screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -160,14 +159,16 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                     child: OptionBtn(
                       margin: const EdgeInsets.symmetric(horizontal: 16),
                       bgColor: Co.purple.withAlpha(20),
-                      // isLoading: value,
-                      // enable: value,
                       height: 60,
                       width: MediaQuery.sizeOf(context).width / 3,
                       onPressed: () {
-                        context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: HealthyPlanScreen()));
+                        context.myPush(const HealthyPlanScreen());
                       },
-                      child: GradientText(text: L10n.tr().setYourLocation, style: TStyle.blackSemi(16)),
+                      child: GradientText(
+                        text: L10n.tr().setYourLocation,
+                        style: TStyle.blackSemi(16),
+                        gradient: Grad.textGradient,
+                      ),
                     ),
                   ),
                 ),

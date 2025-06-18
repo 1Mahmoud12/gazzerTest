@@ -43,7 +43,7 @@ class OnboardingStartScreen extends StatelessWidget {
             ),
             Positioned(
               bottom: 102,
-              right: -130,
+              right: -15,
               child: MainBtn(
                 onPressed: () {
                   // Navigator.of(context).push(_createRoute());
@@ -52,7 +52,7 @@ class OnboardingStartScreen extends StatelessWidget {
                 text: L10n.tr().start,
                 textStyle: TStyle.whiteBold(20),
                 padding: const EdgeInsets.all(6),
-                width: 275,
+                width: 150,
                 icon: Icons.arrow_forward_ios_rounded,
               ),
             ),

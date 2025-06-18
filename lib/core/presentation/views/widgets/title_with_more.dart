@@ -21,7 +21,7 @@ class TitleWithMore extends StatelessWidget {
         GradientText(
           text: title,
           style: titleStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          gradient: Grad.radialGradient,
+          gradient: Grad.textGradient,
         ),
         if (showMore)
           ValueListenableBuilder(

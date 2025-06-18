@@ -5,6 +5,7 @@ class Co {
 
   // Assets Colors
   static const purple = Color(0xFF52229E);
+  static const altPurple = Color(0xFF5E24AA);
   static const secondary = Color(0xFFFF9900);
   static const second2 = Color(0xFFF86E00);
   static const tertiary = Color(0xFFB35000);
@@ -19,7 +20,7 @@ class Co {
 
   // Main color ** BG **
   /// Linear gradient
-  static const lightPurple = Color(0xFF933EFF);
+  static const lightPurple = Color(0xFF5E24AA);
   static const darkPurple = Color(0xFF230064);
 
   /// Radial gradient

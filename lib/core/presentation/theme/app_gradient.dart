@@ -9,16 +9,13 @@ class Grad {
     end: Alignment.centerRight,
     stops: [0.07, 0.79, 1.0],
   );
-  static final radialGradient = const RadialGradient(
-    colors: [Co.mauve, Co.darkMauve],
-    center: Alignment.center,
-    radius: 0.7,
-  );
-  static final textGradient = const LinearGradient(
-    colors: [Co.purple, Co.mauve],
-    begin: Alignment.topLeft,
+  static RadialGradient get radialGradient =>
+      const RadialGradient(colors: [Co.mauve, Co.darkMauve], center: Alignment.center, radius: 1);
+  static LinearGradient get textGradient => const LinearGradient(
+    colors: [Color(0xFF6F2BCB), Co.mauve, Color(0xFF0D0130)],
     end: Alignment.bottomRight,
-    stops: [0.0, 0.8],
+    begin: Alignment.topLeft,
+    stops: [0.0, 0.6, 1.0],
   );
 
   ///

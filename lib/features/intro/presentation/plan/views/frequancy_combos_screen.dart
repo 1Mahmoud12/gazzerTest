@@ -8,9 +8,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
-import 'package:gazzer/features/intro/presentation/loading_screen.dart';
-import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/plans_view_screen.dart';
 
 class FrequancyCombosScreen extends StatelessWidget {
   const FrequancyCombosScreen({super.key});
@@ -32,7 +30,7 @@ class FrequancyCombosScreen extends StatelessWidget {
               child: GradientText(
                 text: "How often would you like to receive your healthy combos?",
                 style: TStyle.blackBold(20),
-                gradient: Grad.radialGradient,
+                gradient: Grad.textGradient,
               ),
             ),
             const VerticalSpacing(24),
@@ -43,11 +41,7 @@ class FrequancyCombosScreen extends StatelessWidget {
                   focusData.length,
                   (index) => OptionBtn(
                     onPressed: () {
-                      context.myPushReplacment(
-                        const LoadingScreen(
-                          navigateTo: CongratsScreen(navigateTo: IntroVideoTutorialScreen(videoLink: '')),
-                        ),
-                      );
+                      context.myPush(const PlansViewScreen());
                     },
                     width: 209,
                     height: 60,

@@ -55,7 +55,7 @@ class _TutorialHeaderState extends State<TutorialHeader> {
                 text: "Gazzer Video Tutorial",
                 shadow: BoxShadow(color: Co.secondary.withAlpha(100), blurRadius: 8, offset: const Offset(0, 2)),
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                gradient: Grad.radialGradient,
+                gradient: Grad.textGradient,
               ),
             ),
           ),
