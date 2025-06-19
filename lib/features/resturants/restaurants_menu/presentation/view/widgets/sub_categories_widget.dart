@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -13,19 +12,25 @@ class SubCategoriesWidget extends StatelessWidget {
     required this.addsIndeces,
     this.selectedId = 0,
     required this.onSubCategorySelected,
+    required this.subCategories,
   });
   final Set<int> addsIndeces;
   final int selectedId;
   final Function(int) onSubCategorySelected;
-
+  final List<SubcategoryModel> subCategories;
   @override
   Widget build(BuildContext context) {
+    final subcats = List.of(subCategories);
+    for (final index in addsIndeces) {
+      subcats.insert(index, SubcategoryModel(id: -1, name: '', imageUrl: ''));
+    }
+
     return SizedBox(
       height: 48,
       child: ListView.separated(
         padding: AppConst.defaultHrPadding,
         scrollDirection: Axis.horizontal,
-        itemCount: Fakers.fakeSubCats.length,
+        itemCount: subcats.length,
         separatorBuilder: (context, index) =>
             addsIndeces.contains(index) ? const SizedBox.shrink() : const HorizontalSpacing(12),
         itemBuilder: (context, index) {
@@ -33,8 +38,8 @@ class SubCategoriesWidget extends StatelessWidget {
             return const SizedBox.shrink();
           }
           return SubCategoryItem(
-            subcategory: Fakers.fakeSubCats[index],
-            isSelected: Fakers.fakeSubCats[index].id == selectedId,
+            subcategory: subcats[index],
+            isSelected: subcats[index].id == selectedId,
             ontap: onSubCategorySelected,
           );
         },

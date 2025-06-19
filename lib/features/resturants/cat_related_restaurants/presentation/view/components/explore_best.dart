@@ -76,48 +76,7 @@ class _ExploreBest extends StatelessWidget {
                           ),
                         ),
                       ),
-                      ClipOval(
-                        clipBehavior: Clip.hardEdge,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            gradient: Grad.bglightLinear.copyWith(colors: [const Color(0xffCFC8DA), Co.bg]),
-                            border: GradientBoxBorder(
-                              gradient: LinearGradient(
-                                colors: [Colors.black.withAlpha(0), Co.buttonGradient],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                stops: [0.5, 1],
-                              ),
-                              width: 2,
-                            ),
-                          ),
-                          child: SizedBox(
-                            height: constraints.maxHeight,
-                            width: constraints.maxHeight,
-                            child: Column(
-                              children: [
-                                ClipOval(
-                                  clipBehavior: Clip.hardEdge,
-                                  child: DecoratedBox(
-                                    position: DecorationPosition.foreground,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
-                                    ),
-                                    child: Image.asset(
-                                      vendor.image,
-                                      fit: BoxFit.cover,
-                                      height: constraints.maxHeight * 0.8,
-                                      width: constraints.maxHeight * 0.8,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      ImageInNestedCircles(imageRatio: 4, image: vendor.image),
                     ],
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -121,6 +122,7 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
               child: ValueListenableBuilder(
                 valueListenable: selectedIndex,
                 builder: (context, value, child) => SubCategoriesWidget(
+                  subCategories: Fakers.fakeSubCats,
                   onSubCategorySelected: (i) {
                     anchorController.scrollToIndex(index: i);
                     selectedIndex.value = i;

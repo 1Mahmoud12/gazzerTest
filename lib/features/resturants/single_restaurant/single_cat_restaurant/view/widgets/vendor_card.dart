@@ -1,7 +1,14 @@
-part of '../single_restaurant_details.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
 
-class _VendorCard extends StatelessWidget {
-  const _VendorCard(this.vendor);
+class VendorCard extends StatelessWidget {
+  const VendorCard(this.vendor);
   final VendorModel vendor;
   @override
   Widget build(BuildContext context) {

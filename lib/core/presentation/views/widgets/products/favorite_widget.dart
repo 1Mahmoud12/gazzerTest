@@ -108,9 +108,8 @@ class DecoratedFavoriteWidget extends StatelessWidget {
     }
     return DecoratedBox(
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
         border: GradientBoxBorder(gradient: Grad.shadowGrad()),
-        borderRadius: borderRadius,
+        borderRadius: borderRadius?? BorderRadiusGeometry.circular(6),
         gradient: Grad.bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
       ),
       child: FavoriteWidget(size: size, padding: padding),

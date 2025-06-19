@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
@@ -13,11 +12,10 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
+import 'package:gazzer/features/resturants/single_restaurant/single_cat_restaurant/view/widgets/vendor_card.dart';
 
 part 'widgets/food_details_widget.dart';
 part 'widgets/food_images_gallery.dart';
-part 'widgets/vendor_card.dart';
 
 class SingleCatRestaurantScreen extends StatelessWidget {
   const SingleCatRestaurantScreen({super.key, required this.vendorId});
@@ -25,7 +23,7 @@ class SingleCatRestaurantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final listItems = [
-      _VendorCard(Fakers.vendors.first),
+      VendorCard(Fakers.vendors.first),
       const _FoodImagesGallery(),
       _FoodDetailsWidget(product: Fakers.fakeProds.first),
     ];

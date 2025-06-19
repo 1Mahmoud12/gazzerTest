@@ -21,14 +21,10 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
   int index = 0;
 
   _animate() {
-    print("Current page: ${controller.page}");
-    print("adds.length: ${adds.length - 1}");
     if (index < (adds.length - 1)) {
-      print("Animating to next page");
       controller.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeInOut);
       setState(() => index++);
     } else {
-      print("Resetting to first page");
       controller.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.easeInOut);
       setState(() => index = 0);
     }

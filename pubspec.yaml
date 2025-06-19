@@ -71,6 +71,7 @@ dependencies:
   dotted_border: ^3.0.1
   scrollable_list_tab_scroller: ^3.1.1
   anchor_scroll_controller: ^0.4.4
+  curve_slider: ^0.0.4
 
   # pinput: ^5.0.1
   # gradient_borders: ^1.0.1
@@ -121,6 +122,10 @@ dependencies:
   go_router: ^15.1.2
   event_bus: ^2.0.1
   flutter_multi_formatter: ^2.13.7
+  curved_carousel: ^0.0.8
+  carousel_slider: ^5.1.1
+  wearos_curved_scrollbar: ^0.0.2
+  circular_motion: ^0.0.6
   # flutter_multi_formatter: ^2.13.7
   # share_plus: ^11.0.0
 
