@@ -17,11 +17,8 @@ class _FoodDetailsWidget extends StatelessWidget {
               GradientText(text: product.name, style: TStyle.blackBold(18)),
               const Spacer(),
               const DecoratedFavoriteWidget(size: 16),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: Grad.radialGradient,
-                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
-                ),
+              DoubledDecoratedWidget(
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
                 child: InkWell(
                   onTap: () {
                     SystemSound.play(SystemSoundType.click);

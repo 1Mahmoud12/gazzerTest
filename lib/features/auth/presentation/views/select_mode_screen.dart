@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/views/components/main_layout/views/main
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/features/auth/presentation/views/login_screen.dart';
 import 'package:gazzer/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 
@@ -41,6 +42,14 @@ class SelectModeScreen extends StatelessWidget {
             ),
             const SizedBox.shrink(),
 
+            OptionBtn(
+              onPressed: () {
+                context.myPush(const LoginScreen());
+              },
+              text: "Log in",
+              width: 209,
+            ),
+            const SizedBox.shrink(),
             OptionBtn(
               onPressed: () {
                 context.myPush(const SignUpScreen());

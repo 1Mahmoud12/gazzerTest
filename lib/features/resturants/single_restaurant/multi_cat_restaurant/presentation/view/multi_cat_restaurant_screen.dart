@@ -1,7 +1,9 @@
 import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -9,6 +11,7 @@ import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/circular_carousal_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/overlaping_cards_slider.dart';
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/image_in_nested_circles.dart';
@@ -20,6 +23,7 @@ part 'component/top_rated_coponent.dart';
 // part 'component/top_rated_component.dart';
 part 'widgets/header_widget.dart';
 part 'widgets/hor_product_card.dart';
+part 'widgets/mini_bordered_product_card.dart';
 part 'widgets/mini_product_card.dart';
 part 'widgets/sliding_adds_widget.dart';
 part 'widgets/top_rated_card.dart';
@@ -73,6 +77,30 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
           separatorBuilder: (context, index) => const HorizontalSpacing(24),
           itemBuilder: (context, index) {
             return _VertProductCard(prod: Fakers.fakeProds[index]);
+          },
+        ),
+      ),
+      SizedBox(
+        height: 138,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: AppConst.defaultHrPadding,
+          itemCount: Fakers.fakeProds.length,
+          separatorBuilder: (context, index) => const HorizontalSpacing(16),
+          itemBuilder: (context, index) {
+            return _MiniProductCard(prod: Fakers.fakeProds[index]);
+          },
+        ),
+      ),
+      SizedBox(
+        height: 138,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: AppConst.defaultHrPadding,
+          itemCount: Fakers.fakeProds.length,
+          separatorBuilder: (context, index) => const HorizontalSpacing(16),
+          itemBuilder: (context, index) {
+            return _MiniBorderedProductCard(prod: Fakers.fakeProds[index]);
           },
         ),
       ),
