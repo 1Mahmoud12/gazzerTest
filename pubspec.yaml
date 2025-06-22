@@ -73,7 +73,7 @@ dependencies:
   anchor_scroll_controller: ^0.4.4
   curve_slider: ^0.0.4
 
-  # pinput: ^5.0.1
+  pinput: ^5.0.1
   # gradient_borders: ^1.0.1
   # circle_nav_bar: ^2.0.1+1
   # scrolls_to_top: ^2.1.1

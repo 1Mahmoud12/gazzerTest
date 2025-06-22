@@ -22,7 +22,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String valueMustBeNum(int num, String val) {
-    return 'قيمة $val يجب أن تكون أكثر من $num';
+    return 'قيمة $val يجب أن تكون  $num ارقام';
   }
 
   @override

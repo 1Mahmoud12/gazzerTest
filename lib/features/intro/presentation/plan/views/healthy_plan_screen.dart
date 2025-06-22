@@ -8,8 +8,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, HorizontalSpacing, OptionBtn;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing, OptionBtn;
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/choose_your_mode.dart';
 
@@ -30,13 +29,8 @@ class HealthyPlanScreen extends StatelessWidget {
             GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(20), gradient: Grad.textGradient),
             SizedBox(
               width: 250,
-              child: Text(
-                L10n.tr().thisPartHelpYouToBeMoreHealthy,
-                style: TStyle.blackSemi(18),
-                textAlign: TextAlign.center,
-              ),
+              child: Text(L10n.tr().thisPartHelpYouToBeMoreHealthy, style: TStyle.blackSemi(18), textAlign: TextAlign.center),
             ),
-            const HorizontalSpacing(double.infinity),
             Hero(
               tag: Tags.btn,
               child: OptionBtn(
@@ -54,6 +48,7 @@ class HealthyPlanScreen extends StatelessWidget {
               text: L10n.tr().skip,
               width: 209,
             ),
+            const HorizontalSpacing(double.infinity),
           ],
         ),
       ),

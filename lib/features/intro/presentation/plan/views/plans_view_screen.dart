@@ -27,11 +27,7 @@ class PlansViewScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(
-                text: "Your Plan To Optimize Calories",
-                style: TStyle.blackBold(20),
-                gradient: Grad.textGradient,
-              ),
+              child: GradientText(text: "Your Plan To Optimize Calories", style: TStyle.blackBold(20), gradient: Grad.textGradient),
             ),
             Expanded(
               child: GridView.builder(
@@ -49,28 +45,18 @@ class PlansViewScreen extends StatelessWidget {
                     decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Weight Loss Plan", style: TStyle.primaryBold(16)),
-                          const VerticalSpacing(8),
-                          Text(
-                            "Daily Calorie Range: 1200–1500 kcal (adjusted based on user data)\nFeatures:",
-                            style: TStyle.blackRegular(12),
-                          ),
-                          // const TextSpan(text: "\n"),
-                          ...List.generate(
-                            4,
-                            (index) => Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const HorizontalSpacing(4),
-                                Text("• ", style: TStyle.blackRegular(12)),
-                                Expanded(child: Text("Low-carb, high-protein meals", style: TStyle.blackRegular(12))),
-                              ],
-                            ),
-                          ),
-                        ],
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(text: "Weight Loss Plan", style: TStyle.primaryBold(16)),
+                            const TextSpan(text: '\n'),
+                            TextSpan(text: "Daily Calorie Range: 1200–1500 kcal (adjusted based on user data)\nFeatures:", style: TStyle.blackRegular(12)),
+                            const TextSpan(text: '\n'),
+
+                            ...List.generate(4, (i) => TextSpan(text: "\n•  Low-carb, high-protein meals", style: TStyle.blackRegular(12))),
+                          ],
+                        ),
+                        overflow: TextOverflow.fade,
                       ),
                     ),
                   );

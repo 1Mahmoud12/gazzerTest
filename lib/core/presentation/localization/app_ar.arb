@@ -1,49 +1,49 @@
 {
-    "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
-    "thisFieldIsRequired": "هذا الحقل مطلوب.",
-    "passwordLengthError": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
-    "invalidEmail": "يرجى إدخال عنوان بريد إلكتروني صالح.",
-    "valueMustBeNum": "قيمة {val} يجب أن تكون أكثر من {num}",
-    "@valueMustBeNum": {
-        "placeholders": {
-            "num": {
-                "type": "int"
-            },
-            "val": {
-                "type": "String"
-            }
-        }
-    },
-    "invalidPhoneNumber": "يرجى إدخال رقم هاتف صالح.",
-    "next": "التالي",
-    "start": "ابدأ",
-    "hiIamGazzer": "مرحباً، أنا جازر",
-    "welcome": "مرحباً",
-    "niceToMeetYou": "تشرفنا بلقائك",
-    "letsGo": "هيا بنا",
-    "selectMode": "اختر الوضع",
-    "guestMode": "وضع الضيف",
-    "signIn": "تسجيل الدخول",
-    "signUp": "إنشاء حساب",
-    "or": "أو",
-    "singUpToExploreWideVarietyOfProducts": "سجل لاستكشاف مجموعة واسعة من المنتجات",
-    "fullName": "الاسم الكامل",
-    "yourFullName": "اسمك الكامل",
-    "mobileNumber": "رقم الهاتف المحمول",
-    "yourMobileNumber": "رقم هاتفك المحمول",
-    "continu": "متابعة",
-    "setYourLocation": "حدد موقعك",
-    "healthyPlan": "خطة صحية",
-    "thisPartHelpYouToBeMoreHealthy": "هذا الجزء يساعدك لتكون أكثر صحة",
-    "setHealthPlan": "تحديد الخطة الصحية",
-    "skip": "تخطي",
-    "loading": "جاري التحميل",
-    "congratulations": "تهانينا",
-    "youMadeIt": "لقد نجحت",
-    "chooseYourMood": "اختر مزاجك",
-    "happy": "سعيد",
-    "sad": "حزين",
-    "angry": "غاضب",
-    "excited": "متحمس",
-    "bored": "ممل"
+  "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
+  "thisFieldIsRequired": "هذا الحقل مطلوب.",
+  "passwordLengthError": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+  "invalidEmail": "يرجى إدخال عنوان بريد إلكتروني صالح.",
+  "valueMustBeNum": "قيمة {val} يجب أن تكون  {num} ارقام",
+  "@valueMustBeNum": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      },
+      "val": {
+        "type": "String"
+      }
+    }
+  },
+  "invalidPhoneNumber": "يرجى إدخال رقم هاتف صالح.",
+  "next": "التالي",
+  "start": "ابدأ",
+  "hiIamGazzer": "مرحباً، أنا جازر",
+  "welcome": "مرحباً",
+  "niceToMeetYou": "تشرفنا بلقائك",
+  "letsGo": "هيا بنا",
+  "selectMode": "اختر الوضع",
+  "guestMode": "وضع الضيف",
+  "signIn": "تسجيل الدخول",
+  "signUp": "إنشاء حساب",
+  "or": "أو",
+  "singUpToExploreWideVarietyOfProducts": "سجل لاستكشاف مجموعة واسعة من المنتجات",
+  "fullName": "الاسم الكامل",
+  "yourFullName": "اسمك الكامل",
+  "mobileNumber": "رقم الهاتف المحمول",
+  "yourMobileNumber": "رقم هاتفك المحمول",
+  "continu": "متابعة",
+  "setYourLocation": "حدد موقعك",
+  "healthyPlan": "خطة صحية",
+  "thisPartHelpYouToBeMoreHealthy": "هذا الجزء يساعدك لتكون أكثر صحة",
+  "setHealthPlan": "تحديد الخطة الصحية",
+  "skip": "تخطي",
+  "loading": "جاري التحميل",
+  "congratulations": "تهانينا",
+  "youMadeIt": "لقد نجحت",
+  "chooseYourMood": "اختر مزاجك",
+  "happy": "سعيد",
+  "sad": "حزين",
+  "angry": "غاضب",
+  "excited": "متحمس",
+  "bored": "ممل"
 }

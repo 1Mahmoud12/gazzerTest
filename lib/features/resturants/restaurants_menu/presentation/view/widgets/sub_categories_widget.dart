@@ -7,40 +7,29 @@ import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_
 import 'package:gazzer/features/resturants/restaurants_menu/data/subcategory_model.dart';
 
 class SubCategoriesWidget extends StatelessWidget {
-  const SubCategoriesWidget({
-    super.key,
-    required this.addsIndeces,
-    this.selectedId = 0,
-    required this.onSubCategorySelected,
-    required this.subCategories,
-  });
+  const SubCategoriesWidget({super.key, required this.addsIndeces, this.selectedId = 0, required this.onSubCategorySelected, required this.subCategories});
   final Set<int> addsIndeces;
   final int selectedId;
   final Function(int) onSubCategorySelected;
   final List<SubcategoryModel> subCategories;
   @override
   Widget build(BuildContext context) {
-    final subcats = List.of(subCategories);
-    for (final index in addsIndeces) {
-      subcats.insert(index, SubcategoryModel(id: -1, name: '', imageUrl: ''));
-    }
-
     return SizedBox(
       height: 48,
       child: ListView.separated(
         padding: AppConst.defaultHrPadding,
         scrollDirection: Axis.horizontal,
-        itemCount: subcats.length,
-        separatorBuilder: (context, index) =>
-            addsIndeces.contains(index) ? const SizedBox.shrink() : const HorizontalSpacing(12),
+        itemCount: subCategories.length,
+        separatorBuilder: (context, index) => addsIndeces.contains(index) ? const SizedBox.shrink() : const HorizontalSpacing(12),
         itemBuilder: (context, index) {
           if (addsIndeces.contains(index)) {
+            print("SubCategoriesWidget: Skipping index $index as it is an add index");
             return const SizedBox.shrink();
           }
           return SubCategoryItem(
-            subcategory: subcats[index],
-            isSelected: subcats[index].id == selectedId,
-            ontap: onSubCategorySelected,
+            subcategory: subCategories[index],
+            isSelected: subCategories[index].id == selectedId,
+            ontap: () => onSubCategorySelected(index),
           );
         },
       ),
@@ -52,18 +41,18 @@ class SubCategoryItem extends StatelessWidget {
   const SubCategoryItem({super.key, required this.subcategory, required this.isSelected, required this.ontap});
   final SubcategoryModel subcategory;
   final bool isSelected;
-  final Function(int) ontap;
+  final Function() ontap;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: AppConst.defaultInnerBorderRadius,
-        border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
+        border: GradientBoxBorder(gradient: Grad.bgLinear, width: 2),
         // color: isSelected ? null : Co.bg,
-        gradient: isSelected ? Grad.hoverGradient : null,
+        gradient: isSelected ? Grad.bglightLinear : null,
       ),
       child: ElevatedButton(
-        onPressed: () => ontap(subcategory.id),
+        onPressed: ontap,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           minimumSize: Size.zero,

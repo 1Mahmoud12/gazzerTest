@@ -23,16 +23,13 @@ class SingleCatRestaurantScreen extends StatelessWidget {
   final int vendorId;
   @override
   Widget build(BuildContext context) {
-    final listItems = [
-      VendorCard(Fakers.vendors.first),
-      const _FoodImagesGallery(),
-      _FoodDetailsWidget(product: Fakers.fakeProds.first),
-    ];
+    final listItems = [VendorCard(Fakers.vendors.first), const _FoodImagesGallery(), _FoodDetailsWidget(product: Fakers.fakeProds.first)];
     return Scaffold(
       appBar: const MainAppBar(),
-      body: ListView.builder(
+      body: ListView.separated(
         itemCount: listItems.length,
         padding: EdgeInsets.only(bottom: MediaQuery.viewPaddingOf(context).bottom + 16),
+        separatorBuilder: (context, index) => const VerticalSpacing(24),
         itemBuilder: (context, index) {
           return listItems[index];
         },

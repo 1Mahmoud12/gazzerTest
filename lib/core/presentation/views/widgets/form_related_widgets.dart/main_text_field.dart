@@ -32,7 +32,6 @@ class MainTextField extends StatefulWidget {
     this.width,
     this.isPassword = false,
     this.borderRadius,
-    this.foucusedColor,
     this.bgColor,
     this.isFilled = true,
     this.inputFormatters,
@@ -62,7 +61,6 @@ class MainTextField extends StatefulWidget {
   final double? height;
   final double? width;
   final double? borderRadius;
-  final Color? foucusedColor;
   final bool isPassword;
   final bool isFilled;
   final Color? bgColor;
@@ -81,39 +79,37 @@ class MainTextField extends StatefulWidget {
 }
 
 class _MainTextFieldState extends State<MainTextField> {
-  late final ValueNotifier<bool> isObscure;
-  late final InputBorder focusedBorder;
-  late final InputBorder errorBorder;
+  late ValueNotifier<bool> isObscure;
+  late InputBorder focusedBorder;
+  late InputBorder errorBorder;
+
+  formBorders() {
+    if (widget.isOutLinedBorder) {
+      focusedBorder = GradientOutlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad.shadowGrad(), width: 2);
+    } else {
+      focusedBorder = GradientUnderlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad.shadowGrad(), width: 2);
+    }
+    errorBorder = GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 1, borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)));
+  }
 
   @override
   void initState() {
     isObscure = ValueNotifier<bool>(widget.isPassword);
-    if (widget.isOutLinedBorder) {
-      focusedBorder = GradientOutlineInputBorder(
-        borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-        gradient: Grad.shadowGrad(),
-        width: 2,
-      );
-    } else {
-      focusedBorder = GradientUnderlineInputBorder(
-        borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-        gradient: Grad.shadowGrad(),
-        width: 2,
-      );
-    }
-    errorBorder = GradientOutlineInputBorder(
-      gradient: Grad.errorGradient,
-      width: 1,
-      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-    );
-
+    formBorders();
     super.initState();
   }
 
   @override
+  void didUpdateWidget(covariant MainTextField oldWidget) {
+    if (widget.isOutLinedBorder != oldWidget.isOutLinedBorder || widget.borderRadius != oldWidget.borderRadius) {
+      setState(formBorders);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final iconContraints =
-        widget.iconsConstraints ?? const BoxConstraints(minHeight: 25, maxHeight: 40, maxWidth: 40, minWidth: 25);
+    final iconContraints = widget.iconsConstraints ?? const BoxConstraints(minHeight: 25, maxHeight: 40, maxWidth: 40, minWidth: 25);
     return ValueListenableBuilder(
       valueListenable: isObscure,
       builder: (context, value, child) {
@@ -134,9 +130,7 @@ class _MainTextFieldState extends State<MainTextField> {
           },
           textInputAction: TextInputAction.next,
           inputFormatters: widget.inputFormatters != null ? [widget.inputFormatters!] : null,
-          keyboardType: widget.inputFormatters == FilteringTextInputFormatter.digitsOnly
-              ? const TextInputType.numberWithOptions(signed: true)
-              : null,
+          keyboardType: widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null,
           decoration: InputDecoration(
             errorStyle: TStyle.errorSemi(13),
             contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),

@@ -15,6 +15,7 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/double
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/image_in_nested_circles.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/data/subcategory_model.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
 import 'package:gazzer/features/resturants/single_restaurant/single_cat_restaurant/view/widgets/vendor_card.dart';

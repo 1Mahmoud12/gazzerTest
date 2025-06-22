@@ -16,11 +16,7 @@ class _FoodImagesGallery extends StatelessWidget {
             bottom: 0,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                gradient: RadialGradient(
-                  colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)],
-                  radius: 0.5,
-                  stops: const [0.5, 1.0],
-                ),
+                gradient: RadialGradient(colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)], radius: 0.5, stops: const [0.5, 1.0]),
               ),
               child: AspectRatio(aspectRatio: 1, child: Image.asset(Assets.assetsPngSandwitch2, fit: BoxFit.cover)),
             ),
@@ -30,7 +26,7 @@ class _FoodImagesGallery extends StatelessWidget {
             child: SizedBox(
               width: smallImagesWidth,
               child: Padding(
-                padding: EdgeInsets.only(top: smallImagesWidth * 0.5),
+                padding: EdgeInsets.only(top: smallImagesWidth * 0.5, bottom: smallImagesWidth * 0.5),
                 child: ListView.separated(
                   padding: EdgeInsets.zero,
                   itemCount: 5,

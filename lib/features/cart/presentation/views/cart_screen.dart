@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_summary_widget.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/vendor_cart_products_item.dart';
 
@@ -28,7 +27,7 @@ class _CartScreenState extends State<CartScreen> {
           const VerticalSpacing(24),
           Expanded(
             child: ListView.separated(
-              padding: AppConst.defaultHrPadding,
+              padding: EdgeInsets.zero,
               itemCount: Fakers.fakeVendors.length + 1,
               separatorBuilder: (context, index) => const VerticalSpacing(24),
               // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),

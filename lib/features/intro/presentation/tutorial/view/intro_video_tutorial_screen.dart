@@ -24,6 +24,8 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
           SizedBox.expand(

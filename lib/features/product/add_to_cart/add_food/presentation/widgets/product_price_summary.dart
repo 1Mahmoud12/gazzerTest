@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/increment_widget.dart';
 
 class ProductPriceSummary extends StatelessWidget {
@@ -26,7 +26,7 @@ class ProductPriceSummary extends StatelessWidget {
           right: false,
           left: false,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
             child: Column(
               spacing: 12,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,10 +40,7 @@ class ProductPriceSummary extends StatelessWidget {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: AppConst.defaultInnerBorderRadius,
-                          border: GradientBoxBorder(
-                            gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
-                            width: 2,
-                          ),
+                          border: GradientBoxBorder(gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]), width: 2),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(2),

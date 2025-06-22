@@ -40,10 +40,7 @@ class _ExploreBest extends StatelessWidget {
                         child: SizedBox(
                           width: constraints.maxWidth - (constraints.maxHeight / 2),
                           child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              gradient: Grad.bglightLinear,
-                              borderRadius: AppConst.defaultBorderRadius,
-                            ),
+                            decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
                             child: Row(
                               children: [
                                 const HorizontalSpacing(70),
@@ -58,7 +55,7 @@ class _ExploreBest extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             GradientText(text: vendor.name, style: TStyle.blackBold(20)),
-                                            const DecoratedFavoriteWidget(size: 20, isDarkContainer: false),
+                                            DecoratedFavoriteWidget(size: 20, isDarkContainer: false, borderRadius: AppConst.defaultInnerBorderRadius),
                                           ],
                                         ),
                                         GradientTextWzShadow(

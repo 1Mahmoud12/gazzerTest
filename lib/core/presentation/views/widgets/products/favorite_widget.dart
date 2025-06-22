@@ -84,13 +84,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
 ///
 ///
 class DecoratedFavoriteWidget extends StatelessWidget {
-  const DecoratedFavoriteWidget({
-    super.key,
-    this.size = 32,
-    this.padding = 8,
-    this.isDarkContainer = true,
-    this.borderRadius,
-  });
+  const DecoratedFavoriteWidget({super.key, this.size = 32, this.padding = 8, this.isDarkContainer = true, this.borderRadius});
   final double size;
   final double padding;
   final bool isDarkContainer;
@@ -99,17 +93,14 @@ class DecoratedFavoriteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isDarkContainer) {
       return DoubledDecoratedWidget(
-        innerDecoration: BoxDecoration(
-          borderRadius: borderRadius ?? BorderRadiusGeometry.circular(6),
-          gradient: Grad.linearGradient,
-        ),
+        innerDecoration: BoxDecoration(borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12), gradient: Grad.linearGradient),
         child: FavoriteWidget(size: size, padding: padding),
       );
     }
     return DecoratedBox(
       decoration: BoxDecoration(
         border: GradientBoxBorder(gradient: Grad.shadowGrad()),
-        borderRadius: borderRadius?? BorderRadiusGeometry.circular(6),
+        borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12),
         gradient: Grad.bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
       ),
       child: FavoriteWidget(size: size, padding: padding),

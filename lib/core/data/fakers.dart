@@ -25,12 +25,7 @@ class Fakers {
     Assets.assetsPngFood5,
   ];
 
-  static final _catsImages = [
-    Assets.assetsPngFastFood,
-    Assets.assetsPngGrocery,
-    Assets.assetsPngBakery,
-    Assets.assetsPngMedic,
-  ];
+  static final _catsImages = [Assets.assetsPngFastFood, Assets.assetsPngGrocery, Assets.assetsPngBakery, Assets.assetsPngMedic];
 
   static final _random = Random();
   static final fakeProds = List.generate(
@@ -47,18 +42,14 @@ class Fakers {
 
   static final fakeCats = List.generate(
     12,
-    (index) =>
-        CategoryModel(id: index, name: "Category $index", image: _catsImages[_random.nextInt(_catsImages.length)]),
+    (index) => CategoryModel(id: index, name: "Category $index", image: _catsImages[_random.nextInt(_catsImages.length)]),
   );
 
   static final fakeCuisines = List.generate(
     8,
     (index) => CuisineModel(id: index, name: "Cuisine $index", image: _catsImages[_random.nextInt(_catsImages.length)]),
   );
-  static final fakecartItems = List.generate(
-    5,
-    (index) => CartItemModel.fromProduct(fakeProds[_random.nextInt(fakeProds.length)]),
-  );
+  static final fakecartItems = List.generate(5, (index) => CartItemModel.fromProduct(fakeProds[_random.nextInt(fakeProds.length)]));
   static final fakeVendors = List.generate(
     3,
     (index) => VendorProductsModel(
@@ -82,12 +73,8 @@ class Fakers {
     ),
   );
   static final fakeSubCats = List.generate(
-    20,
-    (index) => SubcategoryModel(
-      id: index,
-      name: "Subcategory ${index + 1}",
-      imageUrl: _catsImages[_random.nextInt(_catsImages.length)],
-    ),
+    10,
+    (index) => SubcategoryModel(id: index, name: "Subcategory ${index + 1}", imageUrl: _catsImages[_random.nextInt(_catsImages.length)]),
   );
 
   static final vendors = List.generate(

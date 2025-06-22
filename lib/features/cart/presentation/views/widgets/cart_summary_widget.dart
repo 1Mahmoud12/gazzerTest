@@ -4,8 +4,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show DashedBorder, HorizontalSpacing, MainBtn, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show DashedBorder, HorizontalSpacing, MainBtn, VerticalSpacing;
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 
 class CartSummaryWidget extends StatelessWidget {
@@ -28,7 +27,7 @@ class CartSummaryWidget extends StatelessWidget {
           right: false,
           left: false,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Column(
               children: [
                 Row(
@@ -44,10 +43,7 @@ class CartSummaryWidget extends StatelessWidget {
                           DecoratedBox(
                             decoration: BoxDecoration(
                               borderRadius: AppConst.defaultInnerBorderRadius,
-                              border: GradientBoxBorder(
-                                gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
-                                width: 1,
-                              ),
+                              border: GradientBoxBorder(gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]), width: 1),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(2),
@@ -81,10 +77,7 @@ class CartSummaryWidget extends StatelessWidget {
                           DecoratedBox(
                             decoration: BoxDecoration(
                               borderRadius: AppConst.defaultInnerBorderRadius,
-                              border: GradientBoxBorder(
-                                gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
-                                width: 1,
-                              ),
+                              border: GradientBoxBorder(gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]), width: 1),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(2),

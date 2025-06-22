@@ -8,11 +8,11 @@ import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.
 import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
 
 class VendorCard extends StatelessWidget {
-  const VendorCard(this.vendor);
+  const VendorCard(this.vendor, {super.key});
   final VendorModel vendor;
   @override
   Widget build(BuildContext context) {
-    final imageSize = 60.0;
+    final imageSize = 70.0;
     return Padding(
       padding: EdgeInsetsGeometry.fromLTRB(16, imageSize * 0.5, 16, 0),
       child: SizedBox(
@@ -45,11 +45,7 @@ class VendorCard extends StatelessWidget {
                                 colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                               ),
                               Flexible(
-                                child: Text(
-                                  "4140 Parker Road near by ${vendor.name}",
-                                  style: TStyle.blackRegular(13),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                child: Text("4140 Parker Road near by ${vendor.name}", style: TStyle.blackRegular(13), overflow: TextOverflow.ellipsis),
                               ),
                             ],
                           ),
@@ -81,13 +77,13 @@ class VendorCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ClipOval(
                       child: Image.asset(vendor.image, height: imageSize, width: imageSize, fit: BoxFit.cover),
                     ),
                     GradientText(text: vendor.name, style: TStyle.blackBold(16)),
-                    const DecoratedFavoriteWidget(isDarkContainer: false, size: 20),
+                    DecoratedFavoriteWidget(isDarkContainer: false, size: 20, borderRadius: AppConst.defaultInnerBorderRadius),
                   ],
                 ),
               ),

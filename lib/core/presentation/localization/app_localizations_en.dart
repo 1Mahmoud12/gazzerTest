@@ -23,7 +23,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String valueMustBeNum(int num, String val) {
-    return '$val must be more than $num';
+    return '$val must be equal to $num characters';
   }
 
   @override

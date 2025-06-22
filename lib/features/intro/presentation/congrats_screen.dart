@@ -5,8 +5,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
 
 class CongratsScreen extends StatefulWidget {
   const CongratsScreen({super.key, required this.navigateTo});
@@ -40,20 +39,17 @@ class _CongratsScreenState extends State<CongratsScreen> {
         body: Stack(
           children: [
             Align(
-              alignment: Alignment.center,
+              alignment: const Alignment(0, -0.1),
+
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 spacing: 12,
                 children: [
                   const HorizontalSpacing(double.infinity),
-                  GradientText(
-                    text: "${L10n.tr().congratulations}!",
-                    style: TStyle.blackBold(32),
-                    gradient: Grad.radialGradient,
-                  ),
+                  GradientText(text: "${L10n.tr().congratulations}!", style: TStyle.blackBold(32), gradient: Grad.radialGradient),
                   GradientText(text: "You Made It", style: TStyle.mainwBold(16), gradient: Grad.radialGradient),
-                  const VerticalSpacing(23),
+                  const VerticalSpacing(12),
                   OptionBtn(
                     onPressed: () {
                       context.myPushAndRemoveUntil(widget.navigateTo);
@@ -61,22 +57,17 @@ class _CongratsScreenState extends State<CongratsScreen> {
                     width: 209,
                     child: GradientText(text: L10n.tr().start, style: TStyle.blackSemi(13)),
                   ),
+                  const VerticalSpacing(24),
                 ],
               ),
             ),
             Align(
-              alignment: Alignment.center,
+              alignment: const Alignment(0, -0.1),
               child: ConfettiWidget(
                 confettiController: controller,
                 blastDirectionality: BlastDirectionality.explosive, // don't specify a direction, blast randomly
                 shouldLoop: true, // start again as soon as the animation is finished
-                colors: const [
-                  Colors.green,
-                  Colors.blue,
-                  Colors.pink,
-                  Colors.yellow,
-                  Colors.purple,
-                ], // manually specify the colors to be used
+                colors: const [Colors.green, Colors.blue, Colors.pink, Colors.yellow, Colors.purple], // manually specify the colors to be used
                 numberOfParticles: 12,
                 gravity: 0.08,
                 maxBlastForce: 10,

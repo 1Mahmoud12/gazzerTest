@@ -1,16 +1,12 @@
 import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show MainAppBar, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/summer_sale_add_widget.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/components/horz_scroll_horz_card_vendors_list_component.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/components/horz_scroll_vert_card_vendors_list_component.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/components/vert_scroll_cert_card_vendor_grid_component.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/components/vert_scroll_horz_card_vendors_list_component.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/data/subcategory_model.dart';
+import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/utils/sub_categories.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/cat_rest_shaking_img_add_widget.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/cat_rest_slider_adds.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/rest_cat_carousal.dart';
@@ -29,71 +25,32 @@ class RestaurantsMenu extends StatefulWidget {
 class _RestaurantsMenuState extends State<RestaurantsMenu> {
   final anchorController = AnchorScrollController();
 
-  final nonVendorIndeces = {0, 1, 2, 3, 6, 10, 16, 19};
+  final nonVendorIndeces = [0, 1, 2, 3, 6, 9, 12, 15];
   final selectedIndex = ValueNotifier(0);
-  final items = {
-    0: const RestCatHeaderWidget(),
-    1: const RestCatCarousal(),
 
-    2: Padding(
+  final items = [
+    const RestCatHeaderWidget(),
+    const RestCatCarousal(),
+    Padding(
       padding: AppConst.defaultHrPadding,
       child: Text("Choose your favorite vendor", style: TStyle.blackBold(16)),
     ),
-    3: const SizedBox(), // replacing SubCategoriesWidget
-    ///
-    4: const HorzScrollHorzCardVendorsListComponent(),
+    const SizedBox(), // replacing SubCategoriesWidget
+    const CatRestShakingImgAddWidget(),
+    const CatRestSliderAdds(),
+    const SummerSaleAddWidget(),
+    const RestCatLastChanceAddWidget(),
+  ];
 
-    ///
-    5: const HorzScrollVertCardVendorsListComponent(),
+  final subCats = List.of(Fakers.fakeSubCats);
 
-    // ///
-    6: const CatRestShakingImgAddWidget(),
-
-    // ///
-    7: const HorzScrollHorzCardVendorsListComponent(),
-
-    // ///
-    8: const HorzScrollHorzCardVendorsListComponent(),
-
-    // ///
-    9: const VertScrollHorzCardVendorsListComponent(),
-
-    // ///
-    10: const CatRestSliderAdds(),
-
-    // ///
-    11: const HorzScrollHorzCardVendorsListComponent(corner: Corner.bottomLeft),
-
-    // ///
-    12: const HorzScrollHorzCardVendorsListComponent(),
-
-    // ///
-    13: const VerticalVendorGridComponent(),
-
-    // ///
-    14: const HorzScrollHorzCardVendorsListComponent(),
-
-    // ///
-    15: const HorzScrollHorzCardVendorsListComponent(),
-
-    // ///
-    16: const SummerSaleAddWidget(),
-
-    // ///
-    17: const HorzScrollHorzCardVendorsListComponent(),
-
-    // ///
-    18: const HorzScrollHorzCardVendorsListComponent(corner: Corner.bottomLeft),
-
-    // ///
-    19: const RestCatLastChanceAddWidget(),
-
-    // ///
-    // // const HorizontalVendorGridComponent(),
-
-    // ///
-    20: const HorzScrollVertCardVendorsListComponent(),
-  };
+  @override
+  void initState() {
+    for (final i in nonVendorIndeces) {
+      subCats.insert(i, SubcategoryModel(id: -1, name: '', imageUrl: ''));
+    }
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -111,8 +68,8 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
       body: ListView.separated(
         controller: anchorController,
 
-        padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom+ 16),
-        itemCount: items.length,
+        padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom + 16),
+        itemCount: subCats.length,
         separatorBuilder: (context, index) => const VerticalSpacing(12),
         itemBuilder: (context, index) {
           if (index == 3) {
@@ -122,18 +79,27 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
               child: ValueListenableBuilder(
                 valueListenable: selectedIndex,
                 builder: (context, value, child) => SubCategoriesWidget(
-                  subCategories: Fakers.fakeSubCats,
+                  subCategories: subCats,
                   onSubCategorySelected: (i) {
                     anchorController.scrollToIndex(index: i);
                     selectedIndex.value = i;
                   },
                   selectedId: value,
-                  addsIndeces: nonVendorIndeces,
+                  addsIndeces: nonVendorIndeces.toSet(),
                 ),
               ),
             );
           }
-          return AnchorItemWrapper(index: index, controller: anchorController, child: items[index]!);
+          return AnchorItemWrapper(
+            index: index,
+            controller: anchorController,
+            child: Builder(
+              builder: (context) {
+                if (nonVendorIndeces.contains(index)) return items[nonVendorIndeces.indexOf(index)];
+                return SubCategories().getCatWidget(subCats[index]);
+              },
+            ),
+          );
         },
       ),
     );

@@ -12,14 +12,7 @@ import 'package:gazzer/features/resturants/single_restaurant/multi_cat_restauran
 import 'package:gazzer/features/resturants/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 class VerticalVendorCard extends StatelessWidget {
-  const VerticalVendorCard({
-    super.key,
-    required this.width,
-    required this.vendor,
-    this.height,
-    this.corner = Corner.bottomRight,
-    this.imgToTextRatio = 0.66,
-  });
+  const VerticalVendorCard({super.key, required this.width, required this.vendor, this.height, this.corner = Corner.bottomRight, this.imgToTextRatio = 0.66});
   final double width;
   final double? height;
   final VendorModel vendor;
@@ -66,12 +59,7 @@ class VerticalVendorCard extends StatelessWidget {
                       foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
                       child: ClipPath(
                         clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
-                        child: Image.asset(
-                          vendor.image,
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
+                        child: Image.asset(vendor.image, width: double.infinity, height: double.infinity, fit: BoxFit.cover),
                       ),
                     ),
                     Align(alignment: corner.alignment, child: const DecoratedFavoriteWidget(size: 24, padding: 4)),

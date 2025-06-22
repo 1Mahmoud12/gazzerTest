@@ -29,7 +29,7 @@ class Validators {
   }
 
   static String? valueMustBeNum(String? value, int num, String name) {
-    if (value == null || value.trim().length < num) {
+    if (value == null || value.trim().length != num) {
       return L10n.tr().valueMustBeNum(num, name);
     }
     return null;
@@ -53,9 +53,7 @@ class Validators {
     if (input == null || input.isEmpty) {
       return L10n.tr().thisFieldIsRequired;
     }
-    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input)
-        ? L10n.tr().invalidEmail
-        : null;
+    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input) ? L10n.tr().invalidEmail : null;
   }
 
   static String? countryPhoneValidator(String? input, String code) {

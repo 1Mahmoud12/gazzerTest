@@ -1,49 +1,49 @@
 {
-    "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
-    "thisFieldIsRequired": "This field is required.",
-    "passwordLengthError": "Password must be at least 6 characters long.",
-    "invalidEmail": "Please enter a valid email address.",
-    "valueMustBeNum": "{val} must be more than {num}",
-    "@valueMustBeNum": {
-        "placeholders": {
-            "num": {
-                "type": "int"
-            },
-            "val": {
-                "type": "String"
-            }
-        }
-    },
-    "invalidPhoneNumber": "Please enter a valid phone number.",
-    "next": "Next",
-    "start": "Start",
-    "hiIamGazzer": "Hi, I am Gazzer",
-    "welcome": "Welcome",
-    "niceToMeetYou": "Nice to meet you",
-    "letsGo": "Let's go",
-    "selectMode": "Select Mode",
-    "guestMode": "Guest Mode",
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
-    "or": "Or",
-    "singUpToExploreWideVarietyOfProducts": "Sign up to explore a wide variety of products",
-    "fullName": "Full Name",
-    "yourFullName": "Your Full Name",
-    "mobileNumber": "Mobile Number",
-    "yourMobileNumber": "Your Mobile No.",
-    "continu": "Continue",
-    "setYourLocation": "Set your location",
-    "healthyPlan": "Healthy Plan",
-    "thisPartHelpYouToBeMoreHealthy": "This part helps you to be more healthy",
-    "setHealthPlan": "Set Health Plan",
-    "skip": "Skip",
-    "loading": "LOADING",
-    "congratulations": "Congratulations",
-    "youMadeIt": "You made it",
-    "chooseYourMood": "Choose your mood",
-    "happy": "Happy",
-    "sad": "Sad",
-    "angry": "Angry",
-    "excited": "Excited",
-    "bored": "Bored"
+  "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
+  "thisFieldIsRequired": "This field is required.",
+  "passwordLengthError": "Password must be at least 6 characters long.",
+  "invalidEmail": "Please enter a valid email address.",
+  "valueMustBeNum": "{val} must be equal to {num} characters",
+  "@valueMustBeNum": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      },
+      "val": {
+        "type": "String"
+      }
+    }
+  },
+  "invalidPhoneNumber": "Please enter a valid phone number.",
+  "next": "Next",
+  "start": "Start",
+  "hiIamGazzer": "Hi, I am Gazzer",
+  "welcome": "Welcome",
+  "niceToMeetYou": "Nice to meet you",
+  "letsGo": "Let's go",
+  "selectMode": "Select Mode",
+  "guestMode": "Guest Mode",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "or": "Or",
+  "singUpToExploreWideVarietyOfProducts": "Sign up to explore a wide variety of products",
+  "fullName": "Full Name",
+  "yourFullName": "Your Full Name",
+  "mobileNumber": "Mobile Number",
+  "yourMobileNumber": "Your Mobile No.",
+  "continu": "Continue",
+  "setYourLocation": "Set your location",
+  "healthyPlan": "Healthy Plan",
+  "thisPartHelpYouToBeMoreHealthy": "This part helps you to be more healthy",
+  "setHealthPlan": "Set Health Plan",
+  "skip": "Skip",
+  "loading": "LOADING",
+  "congratulations": "Congratulations",
+  "youMadeIt": "You made it",
+  "chooseYourMood": "Choose your mood",
+  "happy": "Happy",
+  "sad": "Sad",
+  "angry": "Angry",
+  "excited": "Excited",
+  "bored": "Bored"
 }

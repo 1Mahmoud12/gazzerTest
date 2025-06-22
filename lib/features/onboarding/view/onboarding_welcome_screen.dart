@@ -12,7 +12,7 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientTextWzShadow, HorizontalSpacing, MainBtn, VerticalSpacing;
-import 'package:gazzer/features/auth/presentation/views/select_language_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/select_language_screen.dart';
 
 class OnboardingFirstScreen extends StatelessWidget {
   const OnboardingFirstScreen({super.key});
@@ -45,12 +45,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                         scale: 1.65,
                         child: Hero(
                           tag: Tags.cloud,
-                          child: Image.asset(
-                            Assets.assetsPngCloudLogo,
-                            fit: BoxFit.fill,
-                            alignment: Alignment.center,
-                            color: Colors.white,
-                          ),
+                          child: Image.asset(Assets.assetsPngCloudLogo, fit: BoxFit.fill, alignment: Alignment.center, color: Colors.white),
                         ),
                       ),
                       Column(
@@ -59,12 +54,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                         children: [
                           Hero(
                             tag: Tags.character,
-                            child: SvgPicture.asset(
-                              Assets.assetsSvgCharacter,
-                              height: 195,
-                              width: 219,
-                              fit: BoxFit.cover,
-                            ),
+                            child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 195, width: 219, fit: BoxFit.cover),
                           ),
                           Stack(
                             clipBehavior: Clip.none,
@@ -75,18 +65,9 @@ class OnboardingFirstScreen extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TStyle.mainwBold(32),
                                 gradient: Grad.textGradient,
-                                shadow: BoxShadow(
-                                  color: Co.secondary.withAlpha(125),
-                                  spreadRadius: 0,
-                                  blurRadius: 2,
-                                  offset: const Offset(0, 3),
-                                ),
+                                shadow: BoxShadow(color: Co.secondary.withAlpha(125), spreadRadius: 0, blurRadius: 2, offset: const Offset(0, 3)),
                               ),
-                              Positioned(
-                                top: -35,
-                                right: -10,
-                                child: Image.asset(Assets.assetsPngWave, height: 40, width: 40),
-                              ),
+                              Positioned(top: -35, right: -10, child: Image.asset(Assets.assetsPngWave, height: 40, width: 40)),
                             ],
                           ),
                           Text(L10n.tr().niceToMeetYou, style: TStyle.blackSemi(14)),

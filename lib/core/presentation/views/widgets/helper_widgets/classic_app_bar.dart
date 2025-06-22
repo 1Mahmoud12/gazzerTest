@@ -6,7 +6,7 @@ class ClassicAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.arrow_back_ios)),
+      leading: Navigator.canPop(context) ? IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.arrow_back_ios)) : null,
       leadingWidth: 65,
     );
   }
