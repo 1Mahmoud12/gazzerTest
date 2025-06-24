@@ -12,7 +12,7 @@ class _DailyOffersWidget extends StatelessWidget {
           title: "Daily Offers For You",
           titleStyle: TStyle.primaryBold(16),
           onPressed: () {
-            context.myPush(const DailyOffersScreen());
+            Navigator.of(context).push(AppTransitions().slideTransition(const DailyOffersScreen()));
           },
         ),
         GridView.builder(

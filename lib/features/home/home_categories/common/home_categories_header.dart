@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
@@ -57,13 +58,16 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                 spacing: 12,
                 children: [
                   Expanded(
-                    child: MainTextField(
-                      controller: controller,
-                      height: 80,
-                      hintText: "Search for storesm items, or categories",
-                      borderRadius: 64,
-                      bgColor: Colors.transparent,
-                      prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+                    child: Hero(
+                      tag: Tags.searchBar,
+                      child: MainTextField(
+                        controller: controller,
+                        height: 80,
+                        hintText: "Search for storesm items, or categories",
+                        borderRadius: 64,
+                        bgColor: Colors.transparent,
+                        prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+                      ),
                     ),
                   ),
                   const CartFloatingBtn(),

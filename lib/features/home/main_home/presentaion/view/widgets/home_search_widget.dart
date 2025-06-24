@@ -16,13 +16,16 @@ class _HomeSearchWidgetState extends State<_HomeSearchWidget> {
       spacing: 12,
       children: [
         Expanded(
-          child: MainTextField(
-            controller: controller,
-            height: 80,
-            borderRadius: 64,
-            hintText: "Search for restaurants, items, or categories",
-            bgColor: Colors.transparent,
-            prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+          child: Hero(
+            tag: Tags.searchBar,
+            child: MainTextField(
+              controller: controller,
+              height: 80,
+              borderRadius: 64,
+              hintText: "Search for restaurants, items, or categories",
+              bgColor: Colors.transparent,
+              prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+            ),
           ),
         ),
         const HorizontalSpacing(64),

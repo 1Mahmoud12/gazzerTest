@@ -10,7 +10,7 @@ class _HomeBestPopular extends StatelessWidget {
         TitleWithMore(
           title: "Best Popular",
           onPressed: () {
-            context.myPush(const PopularScreen());
+            Navigator.of(context).push(AppTransitions().slideTransition(const PopularScreen()));
           },
         ),
 

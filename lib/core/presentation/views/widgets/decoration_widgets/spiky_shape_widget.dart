@@ -4,12 +4,19 @@ import 'package:gazzer/core/presentation/utils/add_shape_painter.dart';
 import 'package:lottie/lottie.dart';
 
 class SpikyShapeWidget extends StatelessWidget {
-  const SpikyShapeWidget({super.key, required this.color, this.image, required this.rtChild, this.ltChild})
-    : assert(image != null || ltChild != null, 'Image or ltChild must not be null');
+  const SpikyShapeWidget({
+    super.key,
+    required this.color,
+    this.image,
+    required this.rtChild,
+    this.ltChild,
+    this.heroTag,
+  }) : assert(image != null || ltChild != null, 'Image or ltChild must not be null');
   final Color color;
   final String? image;
   final Widget rtChild;
   final Widget? ltChild;
+  final String? heroTag;
 
   @override
   Widget build(BuildContext context) {
@@ -18,31 +25,34 @@ class SpikyShapeWidget extends StatelessWidget {
       builder: (context, constraints) {
         return FractionallySizedBox(
           widthFactor: fraction,
-          child: CustomPaint(
-            painter: AddShapePainter(color: color),
-            child: SizedBox(
-              height: 170,
-              width: constraints.maxWidth,
-              child: FractionallySizedBox(
-                widthFactor: 1 / fraction,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Row(
-                    children: [
-                      ltChild ??
-                          Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: image!.endsWith('svg')
-                                  ? SvgPicture.asset(image!, height: 150, fit: BoxFit.contain)
-                                  : image!.endsWith('json')
-                                  ? Lottie.asset(image!, fit: BoxFit.contain, alignment: Alignment.bottomCenter)
-                                  : Image.asset(image!, height: 150, fit: BoxFit.contain),
+          child: Hero(
+            tag: heroTag ?? 'spiky_shape_widget',
+            child: CustomPaint(
+              painter: AddShapePainter(color: color),
+              child: SizedBox(
+                height: 170,
+                width: constraints.maxWidth,
+                child: FractionallySizedBox(
+                  widthFactor: 1 / fraction,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Row(
+                      children: [
+                        ltChild ??
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: image!.endsWith('svg')
+                                    ? SvgPicture.asset(image!, height: 150, fit: BoxFit.contain)
+                                    : image!.endsWith('json')
+                                    ? Lottie.asset(image!, fit: BoxFit.contain, alignment: Alignment.bottomCenter)
+                                    : Image.asset(image!, height: 150, fit: BoxFit.contain),
+                              ),
                             ),
-                          ),
 
-                      Expanded(flex: 3, child: rtChild),
-                    ],
+                        Expanded(flex: 3, child: rtChild),
+                      ],
+                    ),
                   ),
                 ),
               ),

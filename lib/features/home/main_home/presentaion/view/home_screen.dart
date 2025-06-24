@@ -6,8 +6,8 @@ import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/resources/resources.dart';
+import 'package:gazzer/core/presentation/routing/app_transitions.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
@@ -92,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const _HomeSearchWidget(),
                     const _HomeCategoriesWidget(),
                     SpikyShapeWidget(
+                      heroTag: Tags.spickyShape,
                       color: const Color(0xAAB8ABEA),
                       image: Assets.assetsLottieDeliveryBoy,
                       rtChild: Column(
