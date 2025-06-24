@@ -28,7 +28,7 @@ class _ExploreBest extends StatelessWidget {
                   borderRadius: AppConst.defaultBorderRadius,
                   onTap: () {
                     if (index.isEven) {
-                      context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+                      AppNavigator().push(SingleCatRestaurantScreen(vendorId: vendor.id));
                     } else {
                       context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
                     }
@@ -40,7 +40,10 @@ class _ExploreBest extends StatelessWidget {
                         child: SizedBox(
                           width: constraints.maxWidth - (constraints.maxHeight / 2),
                           child: DecoratedBox(
-                            decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
+                            decoration: BoxDecoration(
+                              gradient: Grad.bglightLinear,
+                              borderRadius: AppConst.defaultBorderRadius,
+                            ),
                             child: Row(
                               children: [
                                 const HorizontalSpacing(70),
@@ -55,7 +58,11 @@ class _ExploreBest extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             GradientText(text: vendor.name, style: TStyle.blackBold(20)),
-                                            DecoratedFavoriteWidget(size: 20, isDarkContainer: false, borderRadius: AppConst.defaultInnerBorderRadius),
+                                            DecoratedFavoriteWidget(
+                                              size: 20,
+                                              isDarkContainer: false,
+                                              borderRadius: AppConst.defaultInnerBorderRadius,
+                                            ),
                                           ],
                                         ),
                                         GradientTextWzShadow(

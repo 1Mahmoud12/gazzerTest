@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/session.dart';
 import 'package:gazzer/core/domain/category/category_model.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
+import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
@@ -25,7 +27,7 @@ import 'package:gazzer/features/home/home_categories/popular/presentation/view/p
 import 'package:gazzer/features/home/home_categories/suggested_screen/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/restaurants_menu.dart';
-import 'package:hotspot/hotspot.dart';
+import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
 ///
 ///
@@ -50,7 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      HotspotProvider.of(context).startFlow();
+      if (Session().showTour) {
+        HotspotProvider.of(context).startFlow();
+      }
     });
     super.initState();
   }

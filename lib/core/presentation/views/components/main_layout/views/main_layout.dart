@@ -2,14 +2,16 @@ import 'dart:io';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/session.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/snackbars.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/home_navigation.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
-import 'package:gazzer/features/menu/views/menu_screen.dart';
-import 'package:hotspot/hotspot.dart';
+import 'package:gazzer/features/orders/views/orders_screen.dart';
+import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key, this.idnex});
@@ -26,11 +28,11 @@ class _MainLayoutState extends State<MainLayout> {
   _getScreen(int index) {
     switch (index) {
       case 0:
-        return const HomeScreen(key: ValueKey(0));
+        return const HomeNavigation(key: ValueKey(0));
       case 1:
         return const FavoritesScreen(key: ValueKey(1));
       case 2:
-        return const MenuScreen(key: ValueKey(2));
+        return const OrdersScreen(key: ValueKey(2));
       case 3:
         return const MainDrawer(key: ValueKey(3));
       default:
@@ -47,7 +49,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
+    final child = PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (!canPop.value) {
@@ -58,11 +60,42 @@ class _MainLayoutState extends State<MainLayout> {
           exit(0);
         }
       },
-      child: HotspotProvider(
+      child: Scaffold(
+        body: ValueListenableBuilder(
+          valueListenable: indexNotifier,
+          builder: (context, value, child) => PageTransitionSwitcher(
+            duration: Durations.long4,
+            reverse: _prevIdenx > value,
+            transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+              return SharedAxisTransition(
+                fillColor: Colors.transparent,
+                animation: primaryAnimation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: SharedAxisTransitionType.horizontal,
+                child: child,
+              );
+            },
+            child: _getScreen(value),
+          ),
+        ),
+        bottomNavigationBar: Directionality(
+          textDirection: TextDirection.ltr,
+          child: MainBnb(
+            initialIndex: indexNotifier.value,
+            onItemSelected: (index) {
+              if (index == indexNotifier.value) return;
+              _prevIdenx = indexNotifier.value;
+              indexNotifier.value = index;
+            },
+          ),
+        ),
+      ),
+    );
+    if (Session().showTour) {
+      return HotspotProvider(
         skrimColor: Colors.black54,
         dismissibleSkrim: true,
         bodyWidth: 220,
-
         foregroundColor: Colors.green,
         duration: Durations.extralong4,
         backgroundColor: Co.purple,
@@ -86,37 +119,9 @@ class _MainLayoutState extends State<MainLayout> {
             ),
           ],
         ),
-        child: Scaffold(
-          body: ValueListenableBuilder(
-            valueListenable: indexNotifier,
-            builder: (context, value, child) => PageTransitionSwitcher(
-              duration: Durations.long4,
-              reverse: _prevIdenx > value,
-              transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-                return SharedAxisTransition(
-                  fillColor: Colors.transparent,
-                  animation: primaryAnimation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                );
-              },
-              child: _getScreen(value),
-            ),
-          ),
-          bottomNavigationBar: Directionality(
-            textDirection: TextDirection.ltr,
-            child: MainBnb(
-              initialIndex: indexNotifier.value,
-              onItemSelected: (index) {
-                if (index == indexNotifier.value) return;
-                _prevIdenx = indexNotifier.value;
-                indexNotifier.value = index;
-              },
-            ),
-          ),
-        ),
-      ),
-    );
+        child: child,
+      );
+    }
+    return child;
   }
 }

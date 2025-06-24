@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
-import 'package:hotspot/hotspot.dart';
+import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
+
 
 class MainBnb extends StatefulWidget {
   const MainBnb({super.key, this.initialIndex = 0, required this.onItemSelected});

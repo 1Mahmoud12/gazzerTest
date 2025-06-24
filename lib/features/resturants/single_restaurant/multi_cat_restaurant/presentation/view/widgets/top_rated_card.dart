@@ -16,7 +16,7 @@ class _TopRatedCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          context.myPush(AddFoodToCartScreen(product: product));
+                                  AppNavigator().push(AddFoodToCartScreen(product: product));
         },
         child: Column(
           children: [

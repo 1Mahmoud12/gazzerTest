@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
@@ -28,7 +28,7 @@ class VerticalProductCard extends StatelessWidget {
                 ? null
                 : () {
                     SystemSound.play(SystemSoundType.click);
-                    context.myPush(AddFoodToCartScreen(product: product));
+                    AppNavigator().push(AddFoodToCartScreen(product: product));
                   },
 
             child: CustomPaint(
@@ -63,13 +63,19 @@ class VerticalProductCard extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Icon(Icons.star, color: Co.secondary, size: 16),
-                                    Text(product.rate.toStringAsFixed(1), style: TStyle.mainwSemi(12 * fontFactor).copyWith(color: Co.secondary)),
+                                    Text(
+                                      product.rate.toStringAsFixed(1),
+                                      style: TStyle.mainwSemi(12 * fontFactor).copyWith(color: Co.secondary),
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
                             if (canAdd)
-                              Text(Helpers.getProperPrice(product.price), style: TStyle.blackSemi(12 * fontFactor).copyWith(shadows: AppDec.blackTextShadow))
+                              Text(
+                                Helpers.getProperPrice(product.price),
+                                style: TStyle.blackSemi(12 * fontFactor).copyWith(shadows: AppDec.blackTextShadow),
+                              )
                             else
                               SizedBox(
                                 width: constraints.maxWidth * 0.55,
@@ -91,12 +97,18 @@ class VerticalProductCard extends StatelessWidget {
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         gradient: Grad.radialGradient,
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
                       ),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           gradient: Grad.linearGradient,
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          ),
                         ),
                         child: canAdd
                             ? InkWell(
@@ -110,7 +122,10 @@ class VerticalProductCard extends StatelessWidget {
                               )
                             : Padding(
                                 padding: const EdgeInsets.all(6.0),
-                                child: Text("40%\nOFF", style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary)),
+                                child: Text(
+                                  "40%\nOFF",
+                                  style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary),
+                                ),
                               ),
                       ),
                     ),

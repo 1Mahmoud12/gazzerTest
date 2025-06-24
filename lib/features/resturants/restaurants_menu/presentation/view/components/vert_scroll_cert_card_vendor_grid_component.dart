@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/resturants/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';

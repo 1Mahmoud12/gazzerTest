@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
@@ -20,7 +20,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
       width: 125,
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => context.myPush(AddFoodToCartScreen(product: prod)),
+        onTap: () => AppNavigator().push(AddFoodToCartScreen(product: prod)),
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -77,7 +77,11 @@ class VerticalRotatedImgCard extends StatelessWidget {
               ),
             ),
 
-            Positioned(top: 60, right: 0, child: DecoratedFavoriteWidget(size: 20, borderRadius: AppConst.defaultInnerBorderRadius)),
+            Positioned(
+              top: 60,
+              right: 0,
+              child: DecoratedFavoriteWidget(size: 20, borderRadius: AppConst.defaultInnerBorderRadius),
+            ),
           ],
         ),
       ),

@@ -27,7 +27,7 @@ class _PickToYou extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     if (index.isEven) {
-                      context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+                      AppNavigator().push(SingleCatRestaurantScreen(vendorId: vendor.id));
                     } else {
                       context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
                     }

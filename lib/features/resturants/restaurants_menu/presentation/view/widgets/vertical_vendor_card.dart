@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
@@ -12,7 +13,14 @@ import 'package:gazzer/features/resturants/single_restaurant/multi_cat_restauran
 import 'package:gazzer/features/resturants/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 class VerticalVendorCard extends StatelessWidget {
-  const VerticalVendorCard({super.key, required this.width, required this.vendor, this.height, this.corner = Corner.bottomRight, this.imgToTextRatio = 0.66});
+  const VerticalVendorCard({
+    super.key,
+    required this.width,
+    required this.vendor,
+    this.height,
+    this.corner = Corner.bottomRight,
+    this.imgToTextRatio = 0.66,
+  });
   final double width;
   final double? height;
   final VendorModel vendor;
@@ -36,7 +44,7 @@ class VerticalVendorCard extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             if (vendor.id.isEven) {
-              context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+              AppNavigator().push(SingleCatRestaurantScreen(vendorId: vendor.id));
             } else {
               context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
             }
@@ -59,7 +67,12 @@ class VerticalVendorCard extends StatelessWidget {
                       foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
                       child: ClipPath(
                         clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
-                        child: Image.asset(vendor.image, width: double.infinity, height: double.infinity, fit: BoxFit.cover),
+                        child: Image.asset(
+                          vendor.image,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Align(alignment: corner.alignment, child: const DecoratedFavoriteWidget(size: 24, padding: 4)),

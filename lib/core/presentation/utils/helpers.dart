@@ -5,8 +5,9 @@ abstract class Helpers {
   static Future customTryCatch(Future Function() func) async {
     try {
       await func();
-    } catch (e) {
+    } catch (e, stack) {
       if (kDebugMode) print(e.toString());
+      // TODO: send to crashlytics
     }
   }
 

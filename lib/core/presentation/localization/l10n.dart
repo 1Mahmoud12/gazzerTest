@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gazzer/core/presentation/localization/app_localizations.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 
 class L10n {
   L10n._();
@@ -23,7 +23,8 @@ class L10n {
     return null;
   }
 
-  static AppLocalizations tr([BuildContext? ctx]) => AppLocalizations.of(ctx ?? AppConst.navKey.currentContext!)!;
+  static AppLocalizations tr([BuildContext? ctx]) =>
+      AppLocalizations.of(ctx ?? AppNavigator().mainKey.currentContext!)!;
 
   static bool isAr(BuildContext context) => Localizations.localeOf(context).languageCode == 'ar';
 }

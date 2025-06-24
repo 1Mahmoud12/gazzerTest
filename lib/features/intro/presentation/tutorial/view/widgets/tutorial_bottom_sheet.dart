@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';

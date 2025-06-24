@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/infinite_scrolling.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, HorizontalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
@@ -22,7 +23,7 @@ class HorizontalProductCard extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: 600, maxHeight: height),
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => context.myPush(AddFoodToCartScreen(product: product)),
+        onTap: () => AppNavigator().push(AddFoodToCartScreen(product: product)),
         child: Stack(
           children: [
             Align(
@@ -65,7 +66,12 @@ class HorizontalProductCard extends StatelessWidget {
                                       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                       gradient: Grad.radialGradient,
                                     ),
-                                    Text(product.description, style: TStyle.blackRegular(12), overflow: TextOverflow.ellipsis, maxLines: 2),
+                                    Text(
+                                      product.description,
+                                      style: TStyle.blackRegular(12),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    ),
                                   ],
                                 ),
                                 RatingWidget(product.rate.toStringAsFixed(1), ignoreGesture: true, itemSize: 16),
@@ -83,7 +89,10 @@ class HorizontalProductCard extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: GradientBoxBorder(gradient: Grad.shadowGrad()),
-                                  gradient: Grad.bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
+                                  gradient: Grad.bgLinear.copyWith(
+                                    stops: const [0.0, 1],
+                                    colors: [const Color(0x55402788), Colors.transparent],
+                                  ),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8),

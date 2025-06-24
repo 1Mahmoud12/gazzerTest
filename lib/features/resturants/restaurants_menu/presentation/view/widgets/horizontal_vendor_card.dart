@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
@@ -42,7 +43,7 @@ class HorizontalVendorCard extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             if (vendor.id.isEven) {
-              context.myPush(SingleCatRestaurantScreen(vendorId: vendor.id));
+              AppNavigator().push(SingleCatRestaurantScreen(vendorId: vendor.id));
             } else {
               context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
             }

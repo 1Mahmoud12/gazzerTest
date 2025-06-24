@@ -9,7 +9,7 @@ class _HorProductCard extends StatelessWidget {
       width: 215,
       child: InkWell(
         onTap: () {
-          context.myPush(AddFoodToCartScreen(product: prod));
+          AppNavigator().push(AddFoodToCartScreen(product: prod));
         },
         child: Stack(
           children: [
