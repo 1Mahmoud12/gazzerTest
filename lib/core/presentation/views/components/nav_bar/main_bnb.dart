@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import 'package:hotspot/hotspot.dart';
 
 class MainBnb extends StatefulWidget {
   const MainBnb({super.key, this.initialIndex = 0, required this.onItemSelected});
@@ -68,15 +69,23 @@ class _MainBnbState extends State<MainBnb> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CircleAvatar(
-                          radius: 20,
-                          backgroundColor: index == selectedIndex ? const Color(0xFFFFE6E6) : Colors.transparent,
-                          child: SvgPicture.asset(
-                            items.values.elementAt(index),
-                            height: 21,
-                            width: 21,
-                            colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                          ),
+                        Builder(
+                          builder: (context) {
+                            final child = CircleAvatar(
+                              radius: 20,
+                              backgroundColor: index == selectedIndex ? const Color(0xFFFFE6E6) : Colors.transparent,
+                              child: SvgPicture.asset(
+                                items.values.elementAt(index),
+                                height: 21,
+                                width: 21,
+                                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                              ),
+                            );
+                            if (index == items.length - 1) {
+                              return child.withHotspot(order: 5, title: "", text: "Side Menu Setting");
+                            }
+                            return child;
+                          },
                         ),
                         Text(items.keys.elementAt(index), style: TStyle.secondaryBold(12).copyWith(color: color)),
                       ],

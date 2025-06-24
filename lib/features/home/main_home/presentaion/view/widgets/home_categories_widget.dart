@@ -9,7 +9,10 @@ class _HomeCategoriesWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 12,
       children: [
-        Text("Categories", style: TStyle.primaryBold(16)),
+        Text(
+          "Categories",
+          style: TStyle.primaryBold(16),
+        ).withHotspot(order: 2, title: "", text: "Choose Your Categories"),
         GridView.builder(
           padding: const EdgeInsets.all(0),
           physics: const NeverScrollableScrollPhysics(),

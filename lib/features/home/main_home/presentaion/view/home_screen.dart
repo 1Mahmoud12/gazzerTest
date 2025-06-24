@@ -25,6 +25,7 @@ import 'package:gazzer/features/home/home_categories/popular/presentation/view/p
 import 'package:gazzer/features/home/home_categories/suggested_screen/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/restaurants_menu.dart';
+import 'package:hotspot/hotspot.dart';
 
 ///
 ///
@@ -47,6 +48,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      HotspotProvider.of(context).startFlow();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Scaffold(
@@ -57,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // floatingActionButton: const CartFloatingBtn(),
         body: FloatingDraggableWidget(
           dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
-          floatingWidget: const CartFloatingBtn(),
+          floatingWidget: const CartFloatingBtn().withHotspot(order: 3, title: "", text: "Check Your Cart"),
           floatingWidgetHeight: 50,
           floatingWidgetWidth: 50,
           autoAlign: false,

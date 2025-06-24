@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/snackbars.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/menu/views/menu_screen.dart';
+import 'package:hotspot/hotspot.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key, this.idnex});
@@ -56,33 +58,62 @@ class _MainLayoutState extends State<MainLayout> {
           exit(0);
         }
       },
-      child: Scaffold(
-        body: ValueListenableBuilder(
-          valueListenable: indexNotifier,
-          builder: (context, value, child) => PageTransitionSwitcher(
-            duration: Durations.long4,
-            reverse: _prevIdenx > value,
-            transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-              return SharedAxisTransition(
-                fillColor: Colors.transparent,
-                animation: primaryAnimation,
-                secondaryAnimation: secondaryAnimation,
-                transitionType: SharedAxisTransitionType.horizontal,
-                child: child,
-              );
-            },
-            child: _getScreen(value),
-          ),
+      child: HotspotProvider(
+        skrimColor: Colors.black54,
+        dismissibleSkrim: true,
+        bodyWidth: 220,
+
+        foregroundColor: Colors.green,
+        duration: Durations.extralong4,
+        backgroundColor: Co.purple,
+        padding: const EdgeInsets.all(8),
+        curve: Curves.fastOutSlowIn,
+        hotspotShapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        tailSize: const Size(35, 42),
+        actionBuilder: (context, controller) => Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () {
+                controller.next();
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: Co.purple,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+              ),
+              child: Text("Got it", style: TStyle.whiteBold(16)),
+            ),
+          ],
         ),
-        bottomNavigationBar: Directionality(
-          textDirection: TextDirection.ltr,
-          child: MainBnb(
-            initialIndex: indexNotifier.value,
-            onItemSelected: (index) {
-              if (index == indexNotifier.value) return;
-              _prevIdenx = indexNotifier.value;
-              indexNotifier.value = index;
-            },
+        child: Scaffold(
+          body: ValueListenableBuilder(
+            valueListenable: indexNotifier,
+            builder: (context, value, child) => PageTransitionSwitcher(
+              duration: Durations.long4,
+              reverse: _prevIdenx > value,
+              transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+                return SharedAxisTransition(
+                  fillColor: Colors.transparent,
+                  animation: primaryAnimation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
+              child: _getScreen(value),
+            ),
+          ),
+          bottomNavigationBar: Directionality(
+            textDirection: TextDirection.ltr,
+            child: MainBnb(
+              initialIndex: indexNotifier.value,
+              onItemSelected: (index) {
+                if (index == indexNotifier.value) return;
+                _prevIdenx = indexNotifier.value;
+                indexNotifier.value = index;
+              },
+            ),
           ),
         ),
       ),

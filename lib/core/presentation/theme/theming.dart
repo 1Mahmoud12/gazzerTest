@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/theme/text_style.dart';
 
 class AppTheme {
   AppTheme._();
@@ -11,6 +12,10 @@ class AppTheme {
         TargetPlatform.android: CustomPageTransitionBuilder(),
         TargetPlatform.iOS: CustomPageTransitionBuilder(),
       },
+    ),
+    textTheme: TextTheme(
+      titleMedium: TStyle.whiteSemi(14),
+      bodyMedium: TStyle.whiteSemi(13),
     ),
     fontFamily: 'poppins',
     scaffoldBackgroundColor: Co.bg,

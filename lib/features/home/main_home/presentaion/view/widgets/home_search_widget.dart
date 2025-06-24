@@ -1,5 +1,3 @@
-
-
 part of "../home_screen.dart";
 
 class _HomeSearchWidget extends StatefulWidget {
@@ -22,6 +20,7 @@ class _HomeSearchWidgetState extends State<_HomeSearchWidget> {
             controller: controller,
             height: 80,
             borderRadius: 64,
+            hintText: "Search for restaurants, items, or categories",
             bgColor: Colors.transparent,
             prefix: const Icon(Icons.search, color: Co.purple, size: 24),
           ),

@@ -64,6 +64,12 @@ class _HomeHeader extends StatelessWidget {
                     width: width * 0.18,
                     fit: BoxFit.contain,
                     height: width * 0.18,
+                  ).withHotspot(
+                    // hotspotSize: Size.zero,
+                    hotspotOffset: Offset.zero,
+                    order: 1,
+                    title: "",
+                    text: "Gazzer Video Tour Guide",
                   ),
                   SizedBox(
                     height: width * 0.195,
@@ -76,7 +82,11 @@ class _HomeHeader extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // spacing: 12,
                             children: [
-                              SvgPicture.asset(Assets.assetsSvgLocation, height: 32, width: 32),
+                              SvgPicture.asset(
+                                Assets.assetsSvgLocation,
+                                height: 32,
+                                width: 32,
+                              ).withHotspot(order: 4, title: "", text: "Set Your Location"),
                               const HorizontalSpacing(8),
                               Expanded(
                                 child: Text.rich(
