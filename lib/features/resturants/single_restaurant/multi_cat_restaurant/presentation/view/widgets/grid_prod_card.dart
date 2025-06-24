@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 
 class SingleGridProduct extends StatelessWidget {
   const SingleGridProduct({super.key, required this.prod, required this.isTop});
@@ -23,69 +25,79 @@ class SingleGridProduct extends StatelessWidget {
           children: [
             SizedBox(
               height: constraints.maxHeight * 0.8,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  // border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
-                  borderRadius: BorderRadiusDirectional.vertical(
-                    top: Radius.circular(constraints.maxHeight * 0.2),
-                    bottom: Radius.circular(AppConst.defaultRadius),
+              child: InkWell(
+                onTap: () {
+                  context.myPush(AddFoodToCartScreen(product: prod));
+                },
+                borderRadius: AppConst.defaultInnerBorderRadius,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    // border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
+                    borderRadius: BorderRadiusDirectional.vertical(
+                      top: Radius.circular(constraints.maxHeight * 0.2),
+                      bottom: Radius.circular(AppConst.defaultRadius),
+                    ),
+                    gradient: Grad.bglightLinear,
                   ),
-                  gradient: Grad.bglightLinear,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: 65,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
-                          borderRadius: BorderRadius.circular(100),
-                          // color: Co.bg,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 60,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
+                            borderRadius: BorderRadius.circular(100),
+                            // color: Co.bg,
+                          ),
+                          child: Row(
+                            children: [
+                              CircleGradientBorderedImage(image: prod.image, showBorder: true),
+                              Expanded(
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(text: prod.name, style: TStyle.blackSemi(13)),
+                                      const TextSpan(text: '\n'),
+                                      TextSpan(text: "Test Test", style: TStyle.greyRegular(12)),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            CircleGradientBorderedImage(image: prod.image, showBorder: true),
-                            Expanded(
-                              child: Text.rich(
-                                TextSpan(
+                            Column(
+                              spacing: 8,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   children: [
-                                    TextSpan(text: prod.name, style: TStyle.blackSemi(13)),
-                                    TextSpan(text: '\n'),
-                                    TextSpan(text: "Test Test", style: TStyle.greyRegular(12)),
+                                    const Icon(Icons.star, color: Co.secondary, size: 18),
+                                    Text(prod.rate.toStringAsFixed(1), style: TStyle.secondaryBold(12)),
                                   ],
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
+                                Text(Helpers.getProperPrice(prod.price), style: TStyle.blackBold(12)),
+                              ],
+                            ),
+                            DecoratedFavoriteWidget(
+                              isDarkContainer: false,
+                              size: 18,
+                              borderRadius: AppConst.defaultInnerBorderRadius,
                             ),
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            spacing: 8,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.star, color: Co.secondary, size: 18),
-                                  Text(prod.rate.toStringAsFixed(1), style: TStyle.secondaryBold(12)),
-                                ],
-                              ),
-                              Text(Helpers.getProperPrice(prod.price), style: TStyle.blackBold(12)),
-                            ],
-                          ),
-                          DecoratedFavoriteWidget(isDarkContainer: false, size: 18, borderRadius: AppConst.defaultInnerBorderRadius),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

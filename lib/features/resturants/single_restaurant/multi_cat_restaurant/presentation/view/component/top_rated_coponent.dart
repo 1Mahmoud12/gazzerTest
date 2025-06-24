@@ -1,15 +1,9 @@
 part of '../multi_cat_restaurant_screen.dart';
 
-class _TopRatedCoponent extends StatefulWidget {
-  const _TopRatedCoponent({required this.anchorController, required this.nonCatIndices, required this.subCats});
-  final AnchorScrollController anchorController;
-  final Set<int> nonCatIndices;
+class _TopRatedCoponent extends StatelessWidget {
+  const _TopRatedCoponent({required this.subCats, required this.vendor});
   final List<SubcategoryModel> subCats;
-  @override
-  State<_TopRatedCoponent> createState() => _TopRatedCoponentState();
-}
-
-class _TopRatedCoponentState extends State<_TopRatedCoponent> {
+  final VendorModel vendor;
   @override
   Widget build(BuildContext context) {
     int currentindex = 0;
@@ -49,16 +43,19 @@ class _TopRatedCoponentState extends State<_TopRatedCoponent> {
                       child: StatefulBuilder(
                         builder: (context, setState) {
                           return SubCategoriesWidget(
-                            subCategories: widget.subCats,
-                            onSubCategorySelected: (i) {
-                              print("I is $i");
-                              widget.anchorController.scrollToIndex(index: i);
-                              setState(() {
-                                currentindex = i;
-                              });
+                            subCategories: subCats,
+                            onSubCategorySelected: (index) {
+                              Navigator.of(context).push(
+                                AppTransitions().slideTransition(
+                                  RestaurantCategoryScreen(subCat: subCats[index], vendor: vendor),
+                                  start: const Offset(0, 1),
+                                  duration: const Duration(milliseconds: 750),
+                                  curve: Curves.linear,
+                                ),
+                              );
                             },
                             selectedId: currentindex,
-                            addsIndeces: widget.nonCatIndices,
+                            addsIndeces: {},
                           );
                         },
                       ),

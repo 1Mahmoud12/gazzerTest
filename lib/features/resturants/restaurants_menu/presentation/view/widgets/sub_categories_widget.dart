@@ -10,7 +10,7 @@ class SubCategoriesWidget extends StatelessWidget {
   const SubCategoriesWidget({super.key, required this.addsIndeces, this.selectedId = 0, required this.onSubCategorySelected, required this.subCategories});
   final Set<int> addsIndeces;
   final int selectedId;
-  final Function(int) onSubCategorySelected;
+  final Function(int index) onSubCategorySelected;
   final List<SubcategoryModel> subCategories;
   @override
   Widget build(BuildContext context) {

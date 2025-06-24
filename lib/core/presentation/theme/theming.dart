@@ -12,7 +12,7 @@ class AppTheme {
         TargetPlatform.iOS: CustomPageTransitionBuilder(),
       },
     ),
-    fontFamily: 'Poppins',
+    fontFamily: 'poppins',
     scaffoldBackgroundColor: Co.bg,
     appBarTheme: const AppBarTheme(
       // systemOverlayStyle: SystemUiOverlayStyle(

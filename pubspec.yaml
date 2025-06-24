@@ -162,6 +162,7 @@ flutter:
     - assets/png/
     - assets/fonts/
     - assets/svg/
+    - assets/gif/
     - assets/lottie/
     - shorebird.yaml
 
@@ -177,7 +178,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Poppins
+    - family: poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
           weight: 200
@@ -188,9 +189,12 @@ flutter:
           style: italic
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
-    - family: Inter
+    - family: inter
       fonts:
         - asset: assets/fonts/Inter.ttf
+    - family: playfair
+      fonts:
+        - asset: assets/fonts/Playfair.ttf
 flutter_assets:
   assets_path:
     - assets/

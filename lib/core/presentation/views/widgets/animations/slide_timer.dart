@@ -34,7 +34,7 @@ class _SlideTimerState extends State<SlideTimer> {
 
   @override
   void initState() {
-    style = widget.textStyle ?? TStyle.blackBold(18);
+    style = widget.textStyle ?? TStyle.blackBold(18, font: FFamily.playfair);
     _calculate();
     timer = Timer.periodic(widget.duration, (timer) {
       setState(() => _calculate());
@@ -51,50 +51,96 @@ class _SlideTimerState extends State<SlideTimer> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          transitionBuilder: (child, animation) {
-            final inAnimation = Tween<Offset>(begin: const Offset(0, -1), end: const Offset(0, 0)).animate(animation);
-            final outAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(animation);
-            return FadeTransition(
-              opacity: animation,
-              child: SlideTransition(position: child.key == ValueKey(hours) ? inAnimation : outAnimation, child: child),
-            );
-          },
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              transitionBuilder: (child, animation) {
+                final inAnimation = Tween<Offset>(
+                  begin: const Offset(0, -1),
+                  end: const Offset(0, 0),
+                ).animate(animation);
+                final outAnimation = Tween<Offset>(
+                  begin: const Offset(0, 1),
+                  end: const Offset(0, 0),
+                ).animate(animation);
+                return FadeTransition(
+                  opacity: animation,
+                  child: SlideTransition(
+                    position: child.key == ValueKey(hours) ? inAnimation : outAnimation,
+                    child: child,
+                  ),
+                );
+              },
 
-          child: Text(key: ValueKey(hours), hours.toString().padLeft(2, '0'), style: style),
+              child: Text(key: ValueKey(hours), hours.toString().padLeft(2, '0'), style: style),
+            ),
+            Text("Hours", style: style.copyWith(fontSize: 8)),
+          ],
         ),
         Text(" : ", style: style),
 
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          transitionBuilder: (child, animation) {
-            final inAnimation = Tween<Offset>(begin: const Offset(0, -1), end: const Offset(0, 0)).animate(animation);
-            final outAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(animation);
-            return FadeTransition(
-              opacity: animation,
-              child: SlideTransition(position: child.key == ValueKey(minutes) ? inAnimation : outAnimation, child: child),
-            );
-          },
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              transitionBuilder: (child, animation) {
+                final inAnimation = Tween<Offset>(
+                  begin: const Offset(0, -1),
+                  end: const Offset(0, 0),
+                ).animate(animation);
+                final outAnimation = Tween<Offset>(
+                  begin: const Offset(0, 1),
+                  end: const Offset(0, 0),
+                ).animate(animation);
+                return FadeTransition(
+                  opacity: animation,
+                  child: SlideTransition(
+                    position: child.key == ValueKey(minutes) ? inAnimation : outAnimation,
+                    child: child,
+                  ),
+                );
+              },
 
-          child: Text(key: ValueKey(minutes), minutes.toString().padLeft(2, '0'), style: style),
+              child: Text(key: ValueKey(minutes), minutes.toString().padLeft(2, '0'), style: style),
+            ),
+            Text("Mins", style: style.copyWith(fontSize: 8)),
+          ],
         ),
         Text(" : ", style: style),
 
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          transitionBuilder: (child, animation) {
-            final inAnimation = Tween<Offset>(begin: const Offset(0, -1), end: const Offset(0, 0)).animate(animation);
-            final outAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(animation);
-            return FadeTransition(
-              opacity: animation,
-              child: SlideTransition(position: child.key == ValueKey(seconds) ? inAnimation : outAnimation, child: child),
-            );
-          },
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              transitionBuilder: (child, animation) {
+                final inAnimation = Tween<Offset>(
+                  begin: const Offset(0, -1),
+                  end: const Offset(0, 0),
+                ).animate(animation);
+                final outAnimation = Tween<Offset>(
+                  begin: const Offset(0, 1),
+                  end: const Offset(0, 0),
+                ).animate(animation);
+                return FadeTransition(
+                  opacity: animation,
+                  child: SlideTransition(
+                    position: child.key == ValueKey(seconds) ? inAnimation : outAnimation,
+                    child: child,
+                  ),
+                );
+              },
 
-          child: Text(key: ValueKey(seconds), seconds.toString().padLeft(2, '0'), style: style),
+              child: Text(key: ValueKey(seconds), seconds.toString().padLeft(2, '0'), style: style),
+            ),
+            Text("Secs", style: style.copyWith(fontSize: 8)),
+          ],
         ),
       ],
     );

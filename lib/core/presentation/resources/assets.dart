@@ -6,6 +6,8 @@ class Assets {
 
   static const String assetsFontsInter = "assets/fonts/Inter.ttf";
 
+  static const String assetsFontsPlayfair = "assets/fonts/Playfair.ttf";
+
   static const String assetsFontsPoppinsBold = "assets/fonts/Poppins-Bold.ttf";
 
   static const String assetsFontsPoppinsBoldItalic = "assets/fonts/Poppins-BoldItalic.ttf";
@@ -66,6 +68,8 @@ class Assets {
 
   static const String assetsPngHealthFocusShape = "assets/png/health_focus_Shape.png";
 
+  static const String assetsPngImpAnnounceAdd = "assets/png/imp_announce_add.png";
+
   static const String assetsPngLanguageShape = "assets/png/language_shape.png";
 
   static const String assetsPngLoadingShape = "assets/png/loading_shape.png";
@@ -87,6 +91,8 @@ class Assets {
   static const String assetsPngRestAdd2 = "assets/png/rest_add_2.png";
 
   static const String assetsPngRestAdd3 = "assets/png/rest_add_3.png";
+
+  static const String assetsPngRestCatAdd = "assets/png/rest_cat_add.png";
 
   static const String assetsPngSandwitch = "assets/png/sandwitch.png";
 

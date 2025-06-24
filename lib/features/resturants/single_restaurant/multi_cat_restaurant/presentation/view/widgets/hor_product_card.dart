@@ -19,14 +19,22 @@ class _HorProductCard extends StatelessWidget {
                   const HorizontalSpacing(80),
                   Expanded(
                     child: DecoratedBox(
-                      decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
+                      decoration: BoxDecoration(
+                        gradient: Grad.bglightLinear,
+                        borderRadius: AppConst.defaultBorderRadius,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              DecoratedFavoriteWidget(isDarkContainer: false, size: 22, padding: 4, borderRadius: BorderRadius.circular(100)),
+                              DecoratedFavoriteWidget(
+                                isDarkContainer: false,
+                                size: 22,
+                                padding: 4,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 spacing: 6,

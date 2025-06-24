@@ -37,6 +37,7 @@ class _MiniBorderedProductCard extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             SystemSound.play(SystemSoundType.click);
+                            context.myPush(AddFoodToCartScreen(product: prod));
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(4),

@@ -52,18 +52,6 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          SizedBox(
-            height: 1,
-            width: 1,
-            child: PageView.builder(
-              controller: controller,
-              itemCount: adds.length,
-              scrollDirection: Axis.horizontal,
-              padEnds: true,
-              onPageChanged: (value) {},
-              itemBuilder: (context, index) => SizedBox(height: 1, width: 1, child: Text(index.toString())),
-            ),
-          ),
           PageTransitionSwitcher(
             duration: Durations.long4,
             transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
@@ -74,6 +62,18 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
+            ),
+          ),
+          SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: PageView.builder(
+              controller: controller,
+              itemCount: adds.length,
+              scrollDirection: Axis.horizontal,
+              padEnds: true,
+              onPageChanged: (value) => setState(() => index = value),
+              itemBuilder: (context, index) => const ColoredBox(color: Colors.transparent),
             ),
           ),
 

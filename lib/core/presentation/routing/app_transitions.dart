@@ -7,15 +7,16 @@ class AppTransitions {
     return _instance;
   }
 
-  Route slideTransition(Widget nextPage) {
+  Route slideTransition(Widget nextPage, {Offset? start, Duration? duration, Curve? curve}) {
     return PageRouteBuilder(
-      transitionDuration: Durations.long4,
+      transitionDuration: duration ?? Durations.long4,
       pageBuilder: (context, animation, secondaryAnimation) => nextPage,
+      reverseTransitionDuration: duration ?? Durations.long4,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0);
-        const end = Offset.zero;
-        const curve = Curves.fastEaseInToSlowEaseOut;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(
+          begin: start ?? const Offset(1.0, 0),
+          end: Offset.zero,
+        ).chain(CurveTween(curve: curve ?? Curves.fastEaseInToSlowEaseOut));
         final offsetAnimation = animation.drive(tween);
         return SlideTransition(position: offsetAnimation, child: child);
       },
