@@ -10,7 +10,6 @@ import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 
-
 class VerticalProductCard extends StatelessWidget {
   const VerticalProductCard({super.key, required this.product, required this.canAdd, this.fontFactor = 1.0});
   final ProductModel product;
@@ -29,7 +28,7 @@ class VerticalProductCard extends StatelessWidget {
                 ? null
                 : () {
                     SystemSound.play(SystemSoundType.click);
-                    context.myPush(AddProdctToCartScreen(product: product));
+                    context.myPush(AddFoodToCartScreen(product: product));
                   },
 
             child: CustomPaint(
@@ -64,19 +63,13 @@ class VerticalProductCard extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Icon(Icons.star, color: Co.secondary, size: 16),
-                                    Text(
-                                      product.rate.toStringAsFixed(1),
-                                      style: TStyle.mainwSemi(12 * fontFactor).copyWith(color: Co.secondary),
-                                    ),
+                                    Text(product.rate.toStringAsFixed(1), style: TStyle.mainwSemi(12 * fontFactor).copyWith(color: Co.secondary)),
                                   ],
                                 ),
                               ],
                             ),
                             if (canAdd)
-                              Text(
-                                Helpers.getProperPrice(product.price),
-                                style: TStyle.blackSemi(12 * fontFactor).copyWith(shadows: AppDec.blackTextShadow),
-                              )
+                              Text(Helpers.getProperPrice(product.price), style: TStyle.blackSemi(12 * fontFactor).copyWith(shadows: AppDec.blackTextShadow))
                             else
                               SizedBox(
                                 width: constraints.maxWidth * 0.55,
@@ -98,18 +91,12 @@ class VerticalProductCard extends StatelessWidget {
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         gradient: Grad.radialGradient,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          bottomRight: Radius.circular(12),
-                        ),
+                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
                       ),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           gradient: Grad.linearGradient,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            bottomRight: Radius.circular(12),
-                          ),
+                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
                         ),
                         child: canAdd
                             ? InkWell(
@@ -123,10 +110,7 @@ class VerticalProductCard extends StatelessWidget {
                               )
                             : Padding(
                                 padding: const EdgeInsets.all(6.0),
-                                child: Text(
-                                  "40%\nOFF",
-                                  style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary),
-                                ),
+                                child: Text("40%\nOFF", style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary)),
                               ),
                       ),
                     ),

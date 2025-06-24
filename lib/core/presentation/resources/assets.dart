@@ -38,6 +38,8 @@ class Assets {
 
   static const String assetsPngCloudWelcome = "assets/png/cloud_welcome.png";
 
+  static const String assetsPngDailyDealsAdd = "assets/png/daily_deals_add.png";
+
   static const String assetsPngDiateryShape = "assets/png/diatery_shape.png";
 
   static const String assetsPngFastFood = "assets/png/fast-food.jpg";
@@ -101,6 +103,8 @@ class Assets {
   static const String assetsPngShape1 = "assets/png/shape1.jpg";
 
   static const String assetsPngShape6 = "assets/png/shape6.png";
+
+  static const String assetsPngShawerma = "assets/png/shawerma.png";
 
   static const String assetsPngSpicyChickeAdd = "assets/png/spicy_chicke_add.png";
 

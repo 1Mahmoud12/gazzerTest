@@ -7,8 +7,8 @@ import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widget
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_summary_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_types_widget.dart';
 
-class AddProdctToCartScreen extends StatelessWidget {
-  const AddProdctToCartScreen({super.key, required this.product});
+class AddFoodToCartScreen extends StatelessWidget {
+  const AddFoodToCartScreen({super.key, required this.product});
   final ProductModel product;
   @override
   Widget build(BuildContext context) {

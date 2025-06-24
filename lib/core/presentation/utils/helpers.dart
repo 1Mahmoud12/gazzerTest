@@ -15,8 +15,18 @@ abstract class Helpers {
     try {
       final parsed = DateTime.parse(date);
       final formateddate = DateFormat('MMM dd, yyyy').format(parsed);
-      final formatedTime = DateFormat('jm').format(parsed);
+      final formatedTime = DateFormat('jms').format(parsed);
       return showDate ? formateddate + (showTime ? ' $formatedTime' : '') : formatedTime;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static String? countDownTime(int seconds) {
+    try {
+      final parsed = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+      final formatedTime = DateFormat('hh:mm:ss').format(parsed);
+      return formatedTime;
     } catch (e) {
       return null;
     }
@@ -58,7 +68,6 @@ abstract class Helpers {
   //     ),
   //   ]));
   // }
-
 
   // static bool requestLogin(BuildContext context) {
   //   if (SessionData.inst.user == null) {

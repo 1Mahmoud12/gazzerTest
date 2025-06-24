@@ -1,25 +1,15 @@
 part of '../multi_cat_restaurant_screen.dart';
 
 class _TopRatedCoponent extends StatefulWidget {
-  const _TopRatedCoponent({required this.anchorController, required this.addsIndeces});
+  const _TopRatedCoponent({required this.anchorController, required this.nonCatIndices, required this.subCats});
   final AnchorScrollController anchorController;
-  final Set<int> addsIndeces;
-
+  final Set<int> nonCatIndices;
+  final List<SubcategoryModel> subCats;
   @override
   State<_TopRatedCoponent> createState() => _TopRatedCoponentState();
 }
 
 class _TopRatedCoponentState extends State<_TopRatedCoponent> {
-  final subCats = List.of(Fakers.fakeSubCats);
-
-  @override
-  void initState() {
-    for (final i in widget.addsIndeces) {
-      subCats.insert(i, SubcategoryModel(id: -1, name: '', imageUrl: ''));
-    }
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     int currentindex = 0;
@@ -59,7 +49,7 @@ class _TopRatedCoponentState extends State<_TopRatedCoponent> {
                       child: StatefulBuilder(
                         builder: (context, setState) {
                           return SubCategoriesWidget(
-                            subCategories: subCats,
+                            subCategories: widget.subCats,
                             onSubCategorySelected: (i) {
                               print("I is $i");
                               widget.anchorController.scrollToIndex(index: i);
@@ -68,7 +58,7 @@ class _TopRatedCoponentState extends State<_TopRatedCoponent> {
                               });
                             },
                             selectedId: currentindex,
-                            addsIndeces: widget.addsIndeces,
+                            addsIndeces: widget.nonCatIndices,
                           );
                         },
                       ),

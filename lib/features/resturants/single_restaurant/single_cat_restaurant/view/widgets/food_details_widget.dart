@@ -22,7 +22,7 @@ class _FoodDetailsWidget extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     SystemSound.play(SystemSoundType.click);
-                    context.myPush(AddProdctToCartScreen(product: product));
+                    context.myPush(AddFoodToCartScreen(product: product));
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(6),
@@ -34,11 +34,7 @@ class _FoodDetailsWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              GradientTextWzShadow(
-                text: Helpers.getProperPrice(product.price),
-                shadow: AppDec.blackTextShadow.first,
-                style: TStyle.blackSemi(14),
-              ),
+              GradientTextWzShadow(text: Helpers.getProperPrice(product.price), shadow: AppDec.blackTextShadow.first, style: TStyle.blackSemi(14)),
               const HorizontalSpacing(32),
               const Icon(Icons.star, color: Co.secondary, size: 20),
               Text(product.rate.toStringAsFixed(1), style: TStyle.secondaryBold(14)),

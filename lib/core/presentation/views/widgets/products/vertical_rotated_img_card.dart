@@ -20,7 +20,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
       width: 125,
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => context.myPush(AddProdctToCartScreen(product: prod)),
+        onTap: () => context.myPush(AddFoodToCartScreen(product: prod)),
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -77,11 +77,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
               ),
             ),
 
-            Positioned(
-              top: 60,
-              right: 0,
-              child: DecoratedFavoriteWidget(size: 20, borderRadius: AppConst.defaultInnerBorderRadius),
-            ),
+            Positioned(top: 60, right: 0, child: DecoratedFavoriteWidget(size: 20, borderRadius: AppConst.defaultInnerBorderRadius)),
           ],
         ),
       ),

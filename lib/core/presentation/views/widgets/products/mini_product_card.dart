@@ -8,8 +8,6 @@ import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 
-
-
 class MiniProductCard extends StatelessWidget {
   const MiniProductCard({super.key, required this.product});
   final ProductModel product;
@@ -25,7 +23,7 @@ class MiniProductCard extends StatelessWidget {
           height: constraints.maxHeight,
           width: constraints.maxHeight * 0.71,
           child: InkWell(
-            onTap: () => context.myPush(AddProdctToCartScreen(product: product)),
+            onTap: () => context.myPush(AddFoodToCartScreen(product: product)),
             borderRadius: AppConst.defaultBorderRadius,
             child: Stack(
               children: [
