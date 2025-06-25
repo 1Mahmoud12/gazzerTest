@@ -28,7 +28,11 @@ class _ExploreBest extends StatelessWidget {
                   borderRadius: AppConst.defaultBorderRadius,
                   onTap: () {
                     if (index.isEven) {
-                      AppNavigator().push(SingleCatRestaurantScreen(vendorId: vendor.id));
+                      final widget = AppTransitions().slideTransition(
+                        SingleCatRestaurantScreen(vendorId: vendor.id),
+                        start: const Offset(1, 0),
+                      );
+                      AppNavigator().push(widget);
                     } else {
                       context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
                     }

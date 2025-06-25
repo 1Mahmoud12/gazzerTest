@@ -18,7 +18,7 @@ class TutorialBottomSheet extends StatelessWidget {
           Expanded(
             child: OptionBtn(
               onPressed: () {
-                context.myPushReplacment(const MainLayout());
+                context.myPushReplacement(const MainLayout());
               },
               text: "Skip",
             ),
@@ -26,7 +26,7 @@ class TutorialBottomSheet extends StatelessWidget {
           Expanded(
             child: OptionBtn(
               onPressed: () {
-                context.myPushReplacment(const VideoTutorialScreen());
+                context.myPushReplacement(const VideoTutorialScreen());
               },
               text: "Learn More",
             ),

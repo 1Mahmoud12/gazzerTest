@@ -32,7 +32,7 @@ extension NavigationHelper on BuildContext {
     );
   }
 
-  Future<T?> myPushReplacment<T>(Widget widget) async {
+  Future<T?> myPushReplacement<T>(Widget widget) async {
     final result = await Navigator.of(this).pushReplacement<T, dynamic>(MaterialPageRoute(builder: (context) => widget));
     return result;
   }

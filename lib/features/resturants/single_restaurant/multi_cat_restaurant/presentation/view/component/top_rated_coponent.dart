@@ -1,7 +1,7 @@
 part of '../multi_cat_restaurant_screen.dart';
 
-class _TopRatedCoponent extends StatelessWidget {
-  const _TopRatedCoponent({required this.subCats, required this.vendor});
+class _TopRatedComponent extends StatelessWidget {
+  const _TopRatedComponent({required this.subCats, required this.vendor});
   final List<SubcategoryModel> subCats;
   final VendorModel vendor;
   @override

@@ -5,26 +5,45 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({super.key, this.showCart = true, this.iconsColor = Co.purple});
+  const MainAppBar({super.key, this.showCart = true, this.iconsColor = Co.purple, this.isCartScreen = false});
   final bool showCart;
   final Color iconsColor;
+  final bool isCartScreen;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
-      leading: Navigator.canPop(context) ? IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.arrow_back_ios)) : null,
+      leading: Navigator.canPop(context)
+          ? IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.arrow_back_ios))
+          : null,
       leadingWidth: 65,
       actions: [
-        if (showCart) const Badge(label: Text("0"), textColor: Co.mainText, backgroundColor: Co.second2, child: CartFloatingBtn(size: 20, padding: 8)),
+        if (showCart)
+          Badge(
+            label: const Text("0"),
+            textColor: Co.mainText,
+            backgroundColor: Co.second2,
+            child: CartFloatingBtn(size: 20, padding: 8, navigate: !isCartScreen),
+          ),
         IconButton(
           onPressed: () {},
           // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-          icon: SvgPicture.asset(Assets.assetsSvgNotification, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
+          icon: SvgPicture.asset(
+            Assets.assetsSvgNotification,
+            height: 21,
+            width: 21,
+            colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+          ),
         ),
         IconButton(
           onPressed: () {},
           // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-          icon: SvgPicture.asset(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
+          icon: SvgPicture.asset(
+            Assets.assetsSvgLanguage,
+            height: 21,
+            width: 21,
+            colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+          ),
         ),
       ],
     );

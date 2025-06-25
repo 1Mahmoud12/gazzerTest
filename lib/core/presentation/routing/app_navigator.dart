@@ -60,10 +60,13 @@ class AppNavigator {
     return context;
   }
 
-  Future<T?> push<T>(Widget widget, {Parent parent = Parent.main, bool useLast = false}) async {
+  Future<T?> push<T>(dynamic widget, {Parent parent = Parent.main, bool useLast = false}) async {
     try {
       final context = _getContext(parent, useLast);
-      final result = await context.myPush<T>(widget);
+      final result = switch (widget) {
+        Route r => await Navigator.of(context).push(r),
+        _ => await context.myPush<T>(widget),
+      };
       return result;
     } catch (e) {
       if (kDebugMode) rethrow;
@@ -113,10 +116,13 @@ class AppNavigator {
     }
   }
 
-  Future<T?> pushReplacement<T>(Widget widget, {Parent parent = Parent.main, bool useLast = false}) async {
+  Future<T?> pushReplacement<T>(dynamic widget, {Parent parent = Parent.main, bool useLast = false}) async {
     try {
       final context = _getContext(parent, useLast);
-      final result = await context.myPushReplacment<T>(widget);
+      final result = switch (widget) {
+        Route r => await Navigator.of(context).pushReplacement(r),
+        _ => await context.myPushReplacement<T>(widget),
+      };
       return result;
     } catch (e) {
       if (kDebugMode) rethrow;
@@ -127,7 +133,10 @@ class AppNavigator {
   Future<T?> pushAndRemoveUntil<T>(Widget widget, {Parent parent = Parent.main, bool useLast = false}) async {
     try {
       final context = _getContext(parent, useLast);
-      final result = await context.myPushAndRemoveUntil<T>(widget);
+      final result = switch (widget) {
+        Route r => await Navigator.of(context).pushAndRemoveUntil(r, (route) => false),
+        _ => await context.myPushAndRemoveUntil<T>(widget),
+      };
       return result;
     } catch (e) {
       if (kDebugMode) rethrow;

@@ -26,8 +26,13 @@ class _PickToYou extends StatelessWidget {
                 width: 105,
                 child: InkWell(
                   onTap: () {
+                    print("Tapped on vendor: ${vendor.name}");
                     if (index.isEven) {
-                      AppNavigator().push(SingleCatRestaurantScreen(vendorId: vendor.id));
+                      final widget = AppTransitions().slideTransition(
+                        SingleCatRestaurantScreen(vendorId: vendor.id),
+                        start: const Offset(1, 0),
+                      );
+                      AppNavigator().push(widget);
                     } else {
                       context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
                     }

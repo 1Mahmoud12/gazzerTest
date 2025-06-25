@@ -46,7 +46,7 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
     final subCats = List.of(Fakers.fakeSubCats);
     final nonCat = [
       MultiCatRestHeader(vendor: vendor),
-      _TopRatedCoponent(subCats: subCats, vendor: vendor),
+      _TopRatedComponent(subCats: subCats, vendor: vendor),
       const _SlidingAddsWidget(),
       SizedBox(
         height: 130,

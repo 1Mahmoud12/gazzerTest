@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SpikyShapeWidget(
                       heroTag: Tags.spickyShape,
                       color: const Color(0xAAB8ABEA),
-                      image: Assets.assetsLottieDeliveryBoy,
+                      image: Assets.assetsGifDelivery,
                       rtChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -140,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Align(alignment: Alignment.topLeft, child: Image.asset(Assets.assetsGifWow, width: 65)),
                             GradientText(text: "Top Rated", style: TStyle.blackBold(20), gradient: Grad.radialGradient),
                             Text("Explore", style: TStyle.blackBold(14)),
                           ],

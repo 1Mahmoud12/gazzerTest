@@ -23,7 +23,7 @@ class VideoTutorialCard extends StatelessWidget {
         borderRadius: AppConst.defaultBorderRadius,
         child: InkWell(
           onTap: () {
-            context.myPushReplacment(const IntroVideoTutorialScreen(videoLink: ''));
+            context.myPushReplacement(const IntroVideoTutorialScreen(videoLink: ''));
           },
           child: Row(
             children: [

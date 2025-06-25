@@ -20,6 +20,10 @@ class Assets {
 
   static const String assetsGazzerLogo = "assets/gazzer_logo.png";
 
+  static const String assetsGifDelivery = "assets/gif/delivery.gif";
+
+  static const String assetsGifWow = "assets/gif/wow.gif";
+
   static const String assetsIosLauncher = "assets/ios_launcher.png";
 
   static const String assetsLottieDeliveryBoy = "assets/lottie/delivery_boy.json";

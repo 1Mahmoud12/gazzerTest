@@ -65,7 +65,7 @@ class PlansViewScreen extends StatelessWidget {
             ),
             OptionBtn(
               onPressed: () {
-                context.myPushReplacment(
+                context.myPushReplacement(
                   const LoadingScreen(
                     navigateTo: CongratsScreen(navigateTo: IntroVideoTutorialScreen(videoLink: '')),
                   ),

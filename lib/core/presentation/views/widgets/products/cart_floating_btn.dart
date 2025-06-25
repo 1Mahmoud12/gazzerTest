@@ -8,17 +8,19 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 
 class CartFloatingBtn extends StatelessWidget {
-  const CartFloatingBtn({super.key, this.size = 25, this.padding = 12});
+  const CartFloatingBtn({super.key, this.size = 25, this.padding = 12, this.navigate = true});
   final double size;
   final double padding;
+  final bool navigate;
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: Tags.cart,
       child: GestureDetector(
         onTap: () {
+          if (!navigate) return;
           SystemSound.play(SystemSoundType.click);
-          AppNavigator().push(const CartScreen());
+          if (navigate) AppNavigator().push(const CartScreen());
         },
         child: DecoratedBox(
           decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad.radialGradient),

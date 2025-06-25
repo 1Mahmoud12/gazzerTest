@@ -16,7 +16,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(),
+      appBar: const MainAppBar(isCartScreen: true),
       body: Column(
         children: [
           GradientText(
