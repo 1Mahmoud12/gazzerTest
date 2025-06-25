@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -10,6 +17,7 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
+  final controller = TextEditingController();
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -18,10 +26,67 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     super.initState();
   }
 
+  final favs = ["Recent Restaurants", "Recent Groceries", "Recent Pharmacies"];
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Favorites Screen', style: TStyle.blackBold(24))),
+      appBar: const MainAppBar(showCart: false),
+      body: Column(
+        spacing: 12,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: MainTextField(
+              controller: controller,
+              height: 80,
+              borderRadius: 64,
+              hintText: "Search for restaurants, items, or categories",
+              bgColor: Colors.transparent,
+              prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+            ),
+          ),
+          Expanded(
+            child: ListView.separated(
+              itemCount: favs.length,
+              padding: AppConst.defaultPadding,
+              separatorBuilder: (context, index) => const VerticalSpacing(24),
+              itemBuilder: (context, index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 8,
+                  children: [
+                    Text(favs[index], style: TStyle.primaryBold(20)),
+                    SizedBox(
+                      height: 180,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 5,
+                        separatorBuilder: (context, index) => const HorizontalSpacing(16),
+                        itemBuilder: (context, index) {
+                          final prod = Fakers.fakeProds[index];
+                          return VerticalRotatedImgCard(
+                            prod: prod,
+                            onTap: () {
+                              AppNavigator().push(AddFoodToCartScreen(product: prod));
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -73,6 +73,7 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
                         isAnimating.value = true;
                       });
                     },
+                    textStyle: TStyle.primarySemi(15),
                     isAnimating: isAnimating,
                     animDuration: animDuration,
                     text: focusData[index],

@@ -59,9 +59,8 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
             Column(
               spacing: 16,
               children: [
-                ...List.generate(
-                  focusData.length,
-                  (index) => PlanAnimatedBtn(
+                ...List.generate(focusData.length, (index) {
+                  final child = PlanAnimatedBtn(
                     onPressed: () {
                       isAnimating.value = false;
                       context.myPush(const PlansViewScreen()).then((v) {
@@ -71,8 +70,12 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
                     isAnimating: isAnimating,
                     animDuration: animDuration,
                     text: focusData[index],
-                  ),
-                ),
+                  );
+                  if (index == 0) {
+                    return Hero(tag: Tags.btn, child: child);
+                  }
+                  return child;
+                }),
               ],
             ),
           ],

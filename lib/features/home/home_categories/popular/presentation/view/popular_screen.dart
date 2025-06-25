@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/fakers.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 
 class PopularScreen extends StatelessWidget {
   const PopularScreen({super.key});
@@ -33,7 +35,12 @@ class PopularScreen extends StatelessWidget {
               separatorBuilder: (context, index) => const HorizontalSpacing(12),
               itemBuilder: (context, index) {
                 final prod = Fakers.fakeProds[index];
-                return VerticalRotatedImgCard(prod: prod);
+                return VerticalRotatedImgCard(
+                  prod: prod,
+                  onTap: () {
+                    AppNavigator().push(AddFoodToCartScreen(product: prod));
+                  },
+                );
               },
             ),
           ),
@@ -49,7 +56,12 @@ class PopularScreen extends StatelessWidget {
               itemCount: Fakers.fakeProds.length,
               itemBuilder: (context, index) {
                 final prod = Fakers.fakeProds[index];
-                return VerticalRotatedImgCard(prod: prod);
+                return VerticalRotatedImgCard(
+                  prod: prod,
+                  onTap: () {
+                    AppNavigator().push(AddFoodToCartScreen(product: prod));
+                  },
+                );
               },
             ),
           ),

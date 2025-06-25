@@ -22,7 +22,12 @@ class _HomeBestPopular extends StatelessWidget {
             separatorBuilder: (context, index) => const HorizontalSpacing(12),
             itemBuilder: (context, index) {
               final prod = Fakers.fakeProds[index];
-              return VerticalRotatedImgCard(prod: prod);
+              return VerticalRotatedImgCard(
+                prod: prod,
+                onTap: () {
+                  AppNavigator().push(AddFoodToCartScreen(product: prod));
+                },
+              );
             },
           ),
         ),

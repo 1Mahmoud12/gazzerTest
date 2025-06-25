@@ -15,13 +15,14 @@ class PlanAnimatedBtn extends StatefulWidget {
     required this.isAnimating,
     required this.animDuration,
     this.child,
+    this.textStyle,
   }) : assert(text != null || child != null, 'Either text or child must be provided');
   final bool isLoading;
   final ValueNotifier<bool> isAnimating;
   final Duration animDuration;
   final String? text;
   final Widget? child;
-
+  final TextStyle? textStyle;
   final Function() onPressed;
 
   @override
@@ -87,7 +88,13 @@ class _PlanAnimatedBtnState extends State<PlanAnimatedBtn> {
             ),
             child: Padding(
               padding: EdgeInsets.zero,
-              child: widget.child ?? Text(widget.text ?? '', style: TStyle.primarySemi(16), textAlign: TextAlign.start),
+              child:
+                  widget.child ??
+                  Text(
+                    widget.text ?? '',
+                    style: widget.textStyle ?? TStyle.primarySemi(16),
+                    textAlign: TextAlign.start,
+                  ),
             ),
           ),
         ),

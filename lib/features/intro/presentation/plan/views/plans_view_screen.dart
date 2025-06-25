@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/resources/hero_tags.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
@@ -63,16 +64,19 @@ class PlansViewScreen extends StatelessWidget {
                 },
               ),
             ),
-            OptionBtn(
-              onPressed: () {
-                context.myPushReplacement(
-                  const LoadingScreen(
-                    navigateTo: CongratsScreen(navigateTo: IntroVideoTutorialScreen(videoLink: '')),
-                  ),
-                );
-              },
-              width: 209,
-              text: "Continue",
+            Hero(
+              tag: Tags.btn,
+              child: OptionBtn(
+                onPressed: () {
+                  context.myPushReplacement(
+                    const LoadingScreen(
+                      navigateTo: CongratsScreen(navigateTo: IntroVideoTutorialScreen(videoLink: '')),
+                    ),
+                  );
+                },
+                width: 209,
+                text: "Continue",
+              ),
             ),
             const VerticalSpacing(60),
           ],

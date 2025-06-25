@@ -67,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const VerticalSpacing(8),
                     PhoneTextField(
                       hasLabel: false,
+                      hasHint: true,
                       controller: _phoneController,
                       validator: (v, code) {
                         if (code == 'EG') {

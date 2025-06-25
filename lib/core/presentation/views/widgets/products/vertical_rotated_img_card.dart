@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 
 import 'circle_gradient_image.dart';
 
 class VerticalRotatedImgCard extends StatelessWidget {
-  const VerticalRotatedImgCard({super.key, required this.prod});
+  const VerticalRotatedImgCard({super.key, required this.prod, required this.onTap});
   final ProductModel prod;
+  final Function() onTap;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 125,
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => AppNavigator().push(AddFoodToCartScreen(product: prod)),
+        onTap: onTap,
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
