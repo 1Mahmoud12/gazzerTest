@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, OptionBtn, VerticalSpacing;
+    show GradientText, VerticalSpacing;
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
 
-class ChooseYourMode extends StatelessWidget {
+class ChooseYourMode extends StatefulWidget {
   const ChooseYourMode({super.key});
+
+  @override
+  State<ChooseYourMode> createState() => _ChooseYourModeState();
+}
+
+class _ChooseYourModeState extends State<ChooseYourMode> {
+  final isAnimating = ValueNotifier<bool>(false);
+  final animDuration = const Duration(milliseconds: 500);
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      isAnimating.value = true;
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    isAnimating.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +51,29 @@ class ChooseYourMode extends StatelessWidget {
           padding: AppConst.defaultHrPadding,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().chooseYourMood, style: TStyle.blackBold(20), gradient: Grad.textGradient),
+            GradientText(text: L10n.tr().chooseYourMood + "\n", style: TStyle.blackBold(20), gradient: Grad.textGradient),
             const VerticalSpacing(24),
             Column(
               spacing: 16,
               children: [
                 Hero(
                   tag: Tags.btn,
-                  child: OptionBtn(
+                  child: PlanAnimatedBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(const HealthFocusScreen());
+                      isAnimating.value = false;
+                      context.myPush(const HealthFocusScreen()).then((v) {
+                        isAnimating.value = true;
+                      });
                     },
-                    width: 209,
-                    height: 60,
+                    isAnimating: isAnimating,
+                    animDuration: animDuration,
                     child: SizedBox(
                       width: 120,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(emojis.first, style: const TextStyle(fontSize: 28)),
-                          Text( moods[0], style: TStyle.primarySemi(16)),
+                          Text(moods[0], style: TStyle.primarySemi(16)),
                         ],
                       ),
                     ),
@@ -55,19 +81,22 @@ class ChooseYourMode extends StatelessWidget {
                 ),
                 ...List.generate(
                   moods.length - 1,
-                  (index) => OptionBtn(
+                  (index) => PlanAnimatedBtn(
                     onPressed: () {
-                      context.myPushAndRemoveUntil(const HealthFocusScreen());
+                      isAnimating.value = false;
+                      context.myPush(const HealthFocusScreen()).then((v) {
+                        isAnimating.value = true;
+                      });
                     },
-                    width: 209,
-                    height: 60,
+                    isAnimating: isAnimating,
+                    animDuration: animDuration,
                     child: SizedBox(
                       width: 120,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(emojis[index + 1], style: const TextStyle(fontSize: 28)),
-                          Text( moods[index + 1], style: TStyle.primarySemi(16)),
+                          Text(moods[index + 1], style: TStyle.primarySemi(16)),
                         ],
                       ),
                     ),

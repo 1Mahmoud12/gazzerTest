@@ -1,21 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
 
-class DiateryLifestyleScreen extends StatelessWidget {
+class DiateryLifestyleScreen extends StatefulWidget {
   const DiateryLifestyleScreen({super.key});
 
   @override
+  State<DiateryLifestyleScreen> createState() => _DiateryLifestyleScreenState();
+}
+
+class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
+  final isAnimating = ValueNotifier<bool>(false);
+  final animDuration = const Duration(milliseconds: 500);
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      isAnimating.value = true;
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    isAnimating.dispose();
+    super.dispose();
+  }
+
+  final focusData = ["Vegetarian", "Vegan", "Low-Carb/Keto", "No Specific Diet"];
+  @override
   Widget build(BuildContext context) {
-    final focusData = ["Vegetarian", "Vegan", "Low-Carb/Keto", "No Specific Diet"];
     return ImageBackgroundWidget(
       image: Assets.assetsPngDiateryShape,
       child: Scaffold(
@@ -39,12 +61,15 @@ class DiateryLifestyleScreen extends StatelessWidget {
               children: [
                 ...List.generate(
                   focusData.length,
-                  (index) => OptionBtn(
+                  (index) => PlanAnimatedBtn(
+                    isAnimating: isAnimating,
+                    animDuration: animDuration,
                     onPressed: () {
-                      context.myPush(const SupplementsScreen());
+                      isAnimating.value = false;
+                      context.myPush(const SupplementsScreen()).then((v) {
+                        isAnimating.value = true;
+                      });
                     },
-                    width: 209,
-                    height: 60,
                     text: focusData[index],
                   ),
                 ),

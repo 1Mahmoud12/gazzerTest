@@ -92,7 +92,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         onPressed: finished ? () => setTimer() : null,
                         child: Text(
                           finished ? "Resend code" : "Resend in ${value}s",
-                          style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.dark),
+                          style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
                         ),
                       );
                     },
