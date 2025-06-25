@@ -23,6 +23,8 @@ class PhoneTextField extends StatefulWidget {
   final bool noInitcode;
   final Color? color;
   final double? height;
+  final bool hasLabel;
+  final bool hasHint;
 
   final Color? borderColor;
   final EdgeInsets? padding;
@@ -39,6 +41,8 @@ class PhoneTextField extends StatefulWidget {
     this.color,
     this.borderColor,
     this.height,
+    this.hasLabel = true,
+    this.hasHint = false,
   });
 
   @override
@@ -111,11 +115,15 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
           enabledColor: widget.borderColor ?? Colors.black54,
           errorColor: const Color(0xFFFF5494),
           labelStyle: TStyle.greyRegular(14),
-          labelText: "Phone Number",
+          labelText: widget.hasLabel ? "Phone Number" : null,
           floatingLabelStyle: TStyle.greyRegular(14),
           focusNode: null,
           radius: 16,
-          hintText: countryCode == 'SA' ? '5xxxxxxx' : 'xxxxxx',
+          hintText: !widget.hasHint
+              ? null
+              : countryCode == 'EG'
+              ? '1xxxxxxxxx'
+              : 'xxxxxx',
           borderWidth: 2,
           backgroundColor: Colors.transparent,
           decoration: null,

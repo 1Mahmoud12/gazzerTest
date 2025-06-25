@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 
 class ClassicAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ClassicAppBar({super.key, this.showCart = true});
@@ -6,7 +7,15 @@ class ClassicAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Navigator.canPop(context) ? IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.arrow_back_ios)) : null,
+      leading: Navigator.canPop(context)
+          ? IconButton(
+              onPressed: () {
+                SystemSound.play(SystemSoundType.click);
+                Navigator.maybePop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios),
+            )
+          : null,
       leadingWidth: 65,
     );
   }

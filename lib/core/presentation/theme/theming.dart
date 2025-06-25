@@ -13,12 +13,21 @@ class AppTheme {
         TargetPlatform.iOS: CustomPageTransitionBuilder(),
       },
     ),
-    textTheme: TextTheme(
-      titleMedium: TStyle.whiteSemi(14),
-      bodyMedium: TStyle.whiteSemi(13),
-    ),
+    textTheme: TextTheme(titleMedium: TStyle.whiteSemi(14), bodyMedium: TStyle.whiteSemi(13)),
     fontFamily: 'poppins',
     scaffoldBackgroundColor: Co.bg,
+    switchTheme: SwitchThemeData(
+      thumbColor: const WidgetStateColor.fromMap({WidgetState.selected: Co.white, WidgetState.any: Co.tertiary}),
+      trackColor: const WidgetStateColor.fromMap({WidgetState.selected: Co.second2, WidgetState.any: Co.lightGrey}),
+      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+      trackOutlineColor: WidgetStatePropertyAll(Colors.grey.shade400),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      padding: EdgeInsets.zero,
+    ),
+
+    ///
+    ///
+    ///
     appBarTheme: const AppBarTheme(
       // systemOverlayStyle: SystemUiOverlayStyle(
       //   statusBarColor: Colors.black,

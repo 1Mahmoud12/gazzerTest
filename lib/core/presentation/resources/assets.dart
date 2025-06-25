@@ -132,13 +132,23 @@ class Assets {
 
   static const String assetsSvgCharacter = "assets/svg/character.svg";
 
+  static const String assetsSvgChat = "assets/svg/chat.svg";
+
+  static const String assetsSvgCommunity = "assets/svg/community.svg";
+
   static const String assetsSvgDrawerIcon = "assets/svg/drawer_icon.svg";
 
   static const String assetsSvgFacebook = "assets/svg/facebook.svg";
 
   static const String assetsSvgFavoriteIcon = "assets/svg/favorite_icon.svg";
 
+  static const String assetsSvgFavoritesOutlined = "assets/svg/favorites_outlined.svg";
+
+  static const String assetsSvgFoodPlan = "assets/svg/food_plan.svg";
+
   static const String assetsSvgGoogle = "assets/svg/google.svg";
+
+  static const String assetsSvgHistory = "assets/svg/history.svg";
 
   static const String assetsSvgHomeIcon = "assets/svg/home_icon.svg";
 
@@ -152,17 +162,25 @@ class Assets {
 
   static const String assetsSvgNotification = "assets/svg/notification.svg";
 
+  static const String assetsSvgPaymentSettings = "assets/svg/payment_settings.svg";
+
   static const String assetsSvgPercentage = "assets/svg/percentage.svg";
 
   static const String assetsSvgPercentageBg = "assets/svg/percentage_bg.svg";
 
   static const String assetsSvgProdCard = "assets/svg/prod_card.svg";
 
+  static const String assetsSvgRewards = "assets/svg/rewards.svg";
+
   static const String assetsSvgSplashIcon = "assets/svg/splash_icon.svg";
 
   static const String assetsSvgSuccess = "assets/svg/success.svg";
 
+  static const String assetsSvgTerms = "assets/svg/terms.svg";
+
   static const String assetsSvgTripleStarts = "assets/svg/triple_starts.svg";
+
+  static const String assetsSvgVideo = "assets/svg/video.svg";
 
   static const String assetsSvgYellowPatches = "assets/svg/yellow_patches.svg";
 

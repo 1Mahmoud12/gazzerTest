@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/session.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/snackbars.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/fav_navigator.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/home_navigation.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/inherited_layout.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/orders_navigator.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
-import 'package:gazzer/features/favorites/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
-import 'package:gazzer/features/orders/views/orders_screen.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
 class MainLayout extends StatefulWidget {
@@ -25,16 +26,22 @@ class _MainLayoutState extends State<MainLayout> {
   final canPop = ValueNotifier(false);
   int _prevIdenx = 0;
 
+  changeIndex(int index) {
+    if (index == indexNotifier.value) return false;
+    _prevIdenx = indexNotifier.value;
+    indexNotifier.value = index;
+  }
+
   _getScreen(int index) {
     switch (index) {
       case 0:
         return const HomeNavigation(key: ValueKey(0));
       case 1:
-        return const FavoritesScreen(key: ValueKey(1));
+        return const FavNavigator(key: ValueKey(1));
       case 2:
-        return const OrdersScreen(key: ValueKey(2));
+        return const OrdersNavigator(key: ValueKey(2));
       case 3:
-        return const MainDrawer(key: ValueKey(3));
+        break;
       default:
         return const HomeScreen(key: ValueKey(4));
     }
@@ -60,33 +67,48 @@ class _MainLayoutState extends State<MainLayout> {
           exit(0);
         }
       },
-      child: Scaffold(
-        body: ValueListenableBuilder(
+      child: LayoutInherited(
+        changeIndex: changeIndex,
+        child: ValueListenableBuilder(
           valueListenable: indexNotifier,
-          builder: (context, value, child) => PageTransitionSwitcher(
-            duration: Durations.long4,
-            reverse: _prevIdenx > value,
-            transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-              return SharedAxisTransition(
-                fillColor: Colors.transparent,
-                animation: primaryAnimation,
-                secondaryAnimation: secondaryAnimation,
-                transitionType: SharedAxisTransitionType.horizontal,
-                child: child,
-              );
-            },
-            child: _getScreen(value),
-          ),
-        ),
-        bottomNavigationBar: Directionality(
-          textDirection: TextDirection.ltr,
-          child: MainBnb(
-            initialIndex: indexNotifier.value,
-            onItemSelected: (index) {
-              if (index == indexNotifier.value) return;
-              _prevIdenx = indexNotifier.value;
-              indexNotifier.value = index;
-            },
+          builder: (context, value, child) => Scaffold(
+            body: PageTransitionSwitcher(
+              duration: Durations.long4,
+              reverse: _prevIdenx > value,
+              transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+                return SharedAxisTransition(
+                  fillColor: Colors.transparent,
+                  animation: primaryAnimation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
+              child: _getScreen(value),
+            ),
+
+            bottomNavigationBar: Builder(
+              builder: (context) {
+                return Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: MainBnb(
+                    initialIndex: indexNotifier.value,
+                    onItemSelected: (index) {
+                      if (index == 3) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Scaffold.of(context).openEndDrawer();
+                        });
+                        return;
+                      }
+                      if (index == indexNotifier.value) return;
+                      _prevIdenx = indexNotifier.value;
+                      indexNotifier.value = index;
+                    },
+                  ),
+                );
+              },
+            ),
+            endDrawer: const MainDrawer(),
           ),
         ),
       ),

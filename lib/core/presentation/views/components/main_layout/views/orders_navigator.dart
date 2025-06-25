@@ -9,6 +9,10 @@ class OrdersNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator(
       key: AppNavigator().ordersKey,
+      onGenerateInitialRoutes: (navigator, initialRoute) {
+        AppNavigator().initContext = context;
+        return Navigator.defaultGenerateInitialRoutes(navigator, initialRoute);
+      },
       onDidRemovePage: (page) {},
       pages: [const MaterialPage(child: OrdersScreen())],
     );

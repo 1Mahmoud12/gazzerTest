@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 
@@ -12,7 +13,7 @@ import 'package:gazzer/core/presentation/routing/context.dart';
 ///
 /// This class is our way to push a page in a specific navigator key (not the nearest one).
 
-enum Parent { main, home, fav, orders, menu }
+enum Parent { main, home, fav, orders }
 
 class AppNavigator {
   static final AppNavigator _instance = AppNavigator._();
@@ -23,98 +24,177 @@ class AppNavigator {
   final _homeKey = GlobalKey<NavigatorState>();
   final _favKey = GlobalKey<NavigatorState>();
   final _ordersKey = GlobalKey<NavigatorState>();
-  final _drawerKey = GlobalKey<NavigatorState>();
+  // final _drawerKey = GlobalKey<NavigatorState>();
 
   GlobalKey<NavigatorState> get mainKey => _mainKey;
   GlobalKey<NavigatorState> get homeKey => _homeKey;
   GlobalKey<NavigatorState> get favKey => _favKey;
   GlobalKey<NavigatorState> get ordersKey => _ordersKey;
-  GlobalKey<NavigatorState> get drawerKey => _drawerKey;
+  // GlobalKey<NavigatorState> get drawerKey => _drawerKey;
 
   late BuildContext _lastUsed;
   BuildContext get context => _lastUsed;
   set initContext(BuildContext value) {
+    print("init last context");
     _lastUsed = value;
   }
 
-  BuildContext _getContext(Parent par) {
-    BuildContext? context = switch (par) {
-      Parent.main => _mainKey.currentContext,
-      Parent.home => _homeKey.currentContext,
-      Parent.fav => _favKey.currentContext,
-      Parent.orders => _ordersKey.currentContext,
-      Parent.menu => _drawerKey.currentContext,
-    };
+  BuildContext _getContext(Parent par, bool useLast) {
+    BuildContext? context;
+    if (useLast) {
+      context = _lastUsed;
+    } else {
+      context = switch (par) {
+        Parent.main => _mainKey.currentContext,
+        Parent.home => _homeKey.currentContext,
+        Parent.fav => _favKey.currentContext,
+        Parent.orders => _ordersKey.currentContext,
+        // Parent.menu => _drawerKey.currentContext,
+      };
+    }
 
-    if (context == null) throw Exception('Navigator context for $par is null');
+    if (context == null) {
+      throw Exception('Navigator context for $par is null');
+    }
     _lastUsed = context;
     return context;
   }
 
-  Future<T?> push<T>(Widget widget, {Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    final result = await context.myPush<T>(widget);
-    return result;
+  Future<T?> push<T>(Widget widget, {Parent parent = Parent.main, bool useLast = false}) async {
+    try {
+      final context = _getContext(parent, useLast);
+      final result = await context.myPush<T>(widget);
+      return result;
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  Future<T?> pushNamed<T>(String name, {Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    final result = await context.myPushNamed<T>(name);
-    return result;
+  Future<T?> pushNamed<T>(String name, {Parent parent = Parent.main, bool useLast = false}) async {
+    try {
+      final context = _getContext(parent, useLast);
+      final result = await context.myPushNamed<T>(name);
+      return result;
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  Future<T?> showDialog<T>(Widget widget, {bool dissmisable = true, Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    final result = await context.myShowDialog<T>(widget, dissmisable: dissmisable);
-    return result;
+  Future<T?> showDialog<T>(
+    Widget widget, {
+    bool dissmisable = true,
+    Parent parent = Parent.main,
+    bool useLast = false,
+  }) async {
+    try {
+      final context = _getContext(parent, useLast);
+      final result = await context.myShowDialog<T>(widget, dissmisable: dissmisable);
+      return result;
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  Future<T?> showBottomSheet<T>({required Widget child, bool isDismissible = false, Parent parent = Parent.main}) {
-    final context = _getContext(parent);
-    return context.showMBottomSheet<T>(child: child, isDismissible: isDismissible);
+  Future<T?> showBottomSheet<T>({
+    required Widget child,
+    bool isDismissible = false,
+    Parent parent = Parent.main,
+    bool useLast = false,
+  }) async {
+    try {
+      final context = _getContext(parent, useLast);
+      return await context.showMBottomSheet<T>(child: child, isDismissible: isDismissible);
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  Future<T?> pushReplacement<T>(Widget widget, {Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    final result = await context.myPushReplacment<T>(widget);
-    return result;
+  Future<T?> pushReplacement<T>(Widget widget, {Parent parent = Parent.main, bool useLast = false}) async {
+    try {
+      final context = _getContext(parent, useLast);
+      final result = await context.myPushReplacment<T>(widget);
+      return result;
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  Future<T?> pushAndRemoveUntil<T>(Widget widget, {Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    final result = await context.myPushAndRemoveUntil<T>(widget);
-    return result;
+  Future<T?> pushAndRemoveUntil<T>(Widget widget, {Parent parent = Parent.main, bool useLast = false}) async {
+    try {
+      final context = _getContext(parent, useLast);
+      final result = await context.myPushAndRemoveUntil<T>(widget);
+      return result;
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  Future<T?> pushAndRemoveUntilNamed<T>(Widget widget, String routeName, {Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    final result = await context.myPushAndRemoveUntilNamed<T>(widget, routeName);
-    return result;
+  Future<T?> pushAndRemoveUntilNamed<T>(
+    Widget widget,
+    String routeName, {
+    Parent parent = Parent.main,
+    bool useLast = false,
+  }) async {
+    try {
+      final context = _getContext(parent, useLast);
+      final result = await context.myPushAndRemoveUntilNamed<T>(widget, routeName);
+      return result;
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  Future<T?> popAndPushNamed<T>(String name, {Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    final result = await context.myPopAndPushNamed<T>(name);
-    return result;
+  Future<T?> popAndPushNamed<T>(String name, {Parent parent = Parent.main, bool useLast = false}) async {
+    try {
+      final context = _getContext(parent, useLast);
+      final result = await context.myPopAndPushNamed<T>(name);
+      return result;
+    } catch (e) {
+      if (kDebugMode) rethrow;
+      return null;
+    }
   }
 
-  void popUntil(String name, {Parent parent = Parent.main}) {
-    final context = _getContext(parent);
-    context.myPopUntil(name);
+  void popUntil(String name, {Parent parent = Parent.main, bool useLast = false}) {
+    try {
+      final context = _getContext(parent, useLast);
+      context.myPopUntil(name);
+    } catch (e) {
+      if (kDebugMode) rethrow;
+    }
   }
 
-  Future<void> pop({dynamic result, Parent parent = Parent.main}) async {
-    final context = _getContext(parent);
-    await context.myPop(result: result);
+  Future<void> pop({dynamic result, Parent parent = Parent.main, bool useLast = false}) async {
+    try {
+      final context = _getContext(parent, useLast);
+      await context.myPop(result: result);
+    } catch (e) {
+      if (kDebugMode) rethrow;
+    }
   }
 
-  void popUntilFirstScreen({Parent parent = Parent.main}) {
-    final context = _getContext(parent);
-    context.myPopUntilFirstScreen();
+  void popUntilFirstScreen({Parent parent = Parent.main, bool useLast = false}) {
+    try {
+      final context = _getContext(parent, useLast);
+      context.myPopUntilFirstScreen();
+    } catch (e) {
+      if (kDebugMode) rethrow;
+    }
   }
 
-  void popAll({Parent parent = Parent.main}) {
-    final context = _getContext(parent);
-    context.myPopAll();
+  void popAll({Parent parent = Parent.main, bool useLast = false}) {
+    try {
+      final context = _getContext(parent, useLast);
+      context.myPopAll();
+    } catch (e) {
+      if (kDebugMode) rethrow;
+    }
   }
 }

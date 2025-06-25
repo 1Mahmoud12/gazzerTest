@@ -10,7 +10,8 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
-import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show MainTextField, PhoneTextField;
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart'
+    show MainTextField, PhoneTextField;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/auth/presentation/views/otp_screen.dart';
@@ -42,7 +43,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: const ClassicAppBar(),
       body: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Co.purple.withAlpha(50), Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          gradient: LinearGradient(
+            colors: [Co.purple.withAlpha(50), Colors.transparent],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
         ),
         child: Form(
           key: _formKey,
@@ -51,7 +56,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
               Row(
-                children: [GradientText(text: L10n.tr().signUp, style: TStyle.mainwBold(32), gradient: Grad.textGradient)],
+                children: [
+                  GradientText(text: L10n.tr().signUp, style: TStyle.mainwBold(32), gradient: Grad.textGradient),
+                ],
               ),
               const VerticalSpacing(8),
               Text(L10n.tr().singUpToExploreWideVarietyOfProducts, maxLines: 2, style: TStyle.greySemi(16)),
@@ -74,6 +81,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const VerticalSpacing(8),
                     PhoneTextField(
                       controller: _phoneController,
+                      hasLabel: false,
+                      hasHint: true,
                       validator: (v, code) {
                         if (code == 'EG') {
                           return Validators.mobileEGValidator(v);
@@ -114,7 +123,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return Expanded(
                     child: InkWell(
                       onTap: () {},
-                      child: Padding(padding: const EdgeInsets.symmetric(vertical: 12), child: SvgPicture.asset(social[index], height: 24)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: SvgPicture.asset(social[index], height: 24),
+                      ),
                     ),
                   );
                 }),
