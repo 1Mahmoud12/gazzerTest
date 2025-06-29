@@ -1,4 +1,4 @@
-package com.example.gazzer
+package com.az.gazzer
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';

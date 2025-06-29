@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';

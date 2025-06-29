@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
@@ -6,8 +7,11 @@ abstract class Helpers {
     try {
       await func();
     } catch (e, stack) {
-      if (kDebugMode) print(e.toString());
-      // TODO: send to crashlytics
+      if (kDebugMode) {
+        print(e.toString());
+      } else {
+        FirebaseCrashlytics.instance.recordError(e, stack, fatal: true);
+      }
     }
   }
 

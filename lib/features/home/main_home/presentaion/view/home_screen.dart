@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
-import 'package:gazzer/core/data/session.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';

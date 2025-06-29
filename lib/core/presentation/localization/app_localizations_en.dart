@@ -9,7 +9,22 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get clickBackAgainToExit => 'اضغط مرة أخرى للخروج';
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get requestTimeOut => 'Request timed out';
+
+  @override
+  String get weakOrNoInternetConnection => 'Weak or no internet connection';
+
+  @override
+  String get requestToServerWasCancelled => 'Request to server was cancelled';
+
+  @override
+  String get unknownErorOccurred => 'Unknown error occurred';
+
+  @override
+  String get clickBackAgainToExit => 'Click back again to exit';
 
   @override
   String get thisFieldIsRequired => 'This field is required.';

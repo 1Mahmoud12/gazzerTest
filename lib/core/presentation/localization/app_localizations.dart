@@ -98,10 +98,40 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get somethingWentWrong;
+
+  /// No description provided for @requestTimeOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Request timed out'**
+  String get requestTimeOut;
+
+  /// No description provided for @weakOrNoInternetConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak or no internet connection'**
+  String get weakOrNoInternetConnection;
+
+  /// No description provided for @requestToServerWasCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Request to server was cancelled'**
+  String get requestToServerWasCancelled;
+
+  /// No description provided for @unknownErorOccurred.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error occurred'**
+  String get unknownErorOccurred;
+
   /// No description provided for @clickBackAgainToExit.
   ///
   /// In en, this message translates to:
-  /// **'اضغط مرة أخرى للخروج'**
+  /// **'Click back again to exit'**
   String get clickBackAgainToExit;
 
   /// No description provided for @thisFieldIsRequired.

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, OptionBtn, VerticalSpacing, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, OptionBtn, VerticalSpacing, HorizontalSpacing;
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 
 class ConfirmOrder extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_summary_widget.dart';

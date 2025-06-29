@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -105,12 +105,7 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 4,
               padding: EdgeInsets.zero,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1,
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 8,
-              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1, crossAxisCount: 2, crossAxisSpacing: 20, mainAxisSpacing: 8),
 
               itemBuilder: (_, index) {
                 return SingleGridProduct(isTop: index.isEven, prod: Fakers.fakeProds[index]);

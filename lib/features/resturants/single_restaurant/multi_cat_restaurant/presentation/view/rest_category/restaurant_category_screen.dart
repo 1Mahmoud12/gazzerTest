@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -28,12 +28,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
         aspectRatio: 1,
         child: GridView.builder(
           scrollDirection: Axis.horizontal,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            mainAxisExtent: 85,
-          ),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, mainAxisExtent: 85),
           padding: AppConst.defaultHrPadding,
           itemCount: Fakers.fakeProds.length,
           itemBuilder: (_, index) => RestCatMiniProductCard(prod: Fakers.fakeProds[index]),
@@ -53,12 +48,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 4,
               padding: EdgeInsets.zero,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1,
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 8,
-              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1, crossAxisCount: 2, crossAxisSpacing: 20, mainAxisSpacing: 8),
 
               itemBuilder: (_, index) {
                 return SingleGridProduct(isTop: index.isEven, prod: Fakers.fakeProds[index]);

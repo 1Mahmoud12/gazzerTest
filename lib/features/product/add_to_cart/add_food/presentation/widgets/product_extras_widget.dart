@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, HorizontalSpacing;
-import  'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 
 class ProductExtrasWidget extends StatelessWidget {
   const ProductExtrasWidget({super.key, required this.product});
@@ -23,10 +22,7 @@ class ProductExtrasWidget extends StatelessWidget {
             itemCount: 4,
             separatorBuilder: (context, index) => const HorizontalSpacing(12),
             itemBuilder: (context, index) {
-              return SizedBox(
-                width: 150,
-                child: VerticalProductCard(product: Fakers.fakeProds[index], canAdd: true, fontFactor: 0.9),
-              );
+              return SizedBox(width: 150, child: VerticalProductCard(product: Fakers.fakeProds[index], canAdd: true, fontFactor: 0.9));
             },
           ),
         ),

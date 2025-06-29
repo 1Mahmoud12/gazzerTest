@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -24,11 +24,7 @@ class SingleCatRestaurantScreen extends StatelessWidget {
   final int vendorId;
   @override
   Widget build(BuildContext context) {
-    final listItems = [
-      VendorCard(Fakers.vendors.first),
-      const _FoodImagesGallery(),
-      _FoodDetailsWidget(product: Fakers.fakeProds.first),
-    ];
+    final listItems = [VendorCard(Fakers.vendors.first), const _FoodImagesGallery(), _FoodDetailsWidget(product: Fakers.fakeProds.first)];
     return Scaffold(
       appBar: const MainAppBar(),
       body: ListView.separated(

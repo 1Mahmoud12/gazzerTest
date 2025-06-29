@@ -1,5 +1,10 @@
 {
-  "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
+  "somethingWentWrong": "Something went wrong",
+  "requestTimeOut": "Request timed out",
+  "weakOrNoInternetConnection": "Weak or no internet connection",
+  "requestToServerWasCancelled": "Request to server was cancelled",
+  "unknownErorOccurred": "Unknown error occurred",
+  "clickBackAgainToExit": "Click back again to exit",
   "thisFieldIsRequired": "This field is required.",
   "passwordLengthError": "Password must be at least 6 characters long.",
   "invalidEmail": "Please enter a valid email address.",

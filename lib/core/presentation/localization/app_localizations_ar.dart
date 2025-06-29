@@ -9,6 +9,22 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get somethingWentWrong => 'حدث خطأ ما';
+
+  @override
+  String get requestTimeOut => 'انتهت مهلة الطلب';
+
+  @override
+  String get weakOrNoInternetConnection =>
+      'اتصال ضعيف أو لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get requestToServerWasCancelled => 'تم إلغاء الطلب إلى الخادم';
+
+  @override
+  String get unknownErorOccurred => 'حدث خطأ غير معروف';
+
+  @override
   String get clickBackAgainToExit => 'اضغط مرة أخرى للخروج';
 
   @override

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "426479468960",
+    "project_id": "azgazzer",
+    "storage_bucket": "azgazzer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426479468960:android:aa9ab90f82111e3a31a4c5",
+        "android_client_info": {
+          "package_name": "com.az.gazzer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426479468960-n2tths5d4nqoo6pvhjn89htskb8mc1h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlzNdub1O9O4YhJxDXHczxp4B_KkiLAuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426479468960-n2tths5d4nqoo6pvhjn89htskb8mc1h9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "426479468960-o81gqb39gcnl6u9sapr0fudk6u3rsbun.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.az.gazzer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

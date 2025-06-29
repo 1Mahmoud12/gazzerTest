@@ -1,11 +1,10 @@
 import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show MainAppBar, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/summer_sale_add_widget.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/data/subcategory_model.dart';

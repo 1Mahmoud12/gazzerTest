@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
-
 
 class DailyOffersScreen extends StatelessWidget {
   const DailyOffersScreen({super.key});

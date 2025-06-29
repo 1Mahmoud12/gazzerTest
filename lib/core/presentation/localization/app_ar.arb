@@ -1,4 +1,9 @@
 {
+  "somethingWentWrong": "حدث خطأ ما",
+  "requestTimeOut": "انتهت مهلة الطلب",
+  "weakOrNoInternetConnection": "اتصال ضعيف أو لا يوجد اتصال بالإنترنت",
+  "requestToServerWasCancelled": "تم إلغاء الطلب إلى الخادم",
+  "unknownErorOccurred": "حدث خطأ غير معروف",
   "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
   "thisFieldIsRequired": "هذا الحقل مطلوب.",
   "passwordLengthError": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",

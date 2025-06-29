@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/session.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/snackbars.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/fav_navigator.dart';
