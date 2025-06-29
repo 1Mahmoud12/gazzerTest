@@ -70,6 +70,8 @@ class Assets {
 
   static const String assetsPngGrocery = "assets/png/grocery.jpg";
 
+  static const String assetsPngGroceryAdd = "assets/png/grocery_add.png";
+
   static const String assetsPngHealthFocusShape = "assets/png/health_focus_Shape.png";
 
   static const String assetsPngImpAnnounceAdd = "assets/png/imp_announce_add.png";
