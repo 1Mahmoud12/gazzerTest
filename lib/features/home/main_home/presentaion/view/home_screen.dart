@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/fakers.dart';
+import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/data/session.dart';
 import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
@@ -23,6 +24,7 @@ import 'package:gazzer/core/presentation/views/widgets/products/vertical_product
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/summer_sale_add_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/home/home_categories/daily_offers/presentation/view/daily_offers_screen.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/home_categories/suggested_screen/presentation/view/suggested_screen.dart';
@@ -31,6 +33,7 @@ import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_fo
 import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/restaurants_menu.dart';
 import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
+import 'package:shared_preferences/shared_preferences.dart';
 
 ///
 ///
@@ -58,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       AppNavigator().initContext = context;
       if (Session().showTour) {
         HotspotProvider.of(context).startFlow();
+        di<SharedPreferences>().setBool(StorageKeys.haveSeenTour, true);
       }
     });
     super.initState();
@@ -102,11 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       rtChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GradientText(
-                            text: "Free Delivery",
-                            style: TStyle.blackBold(22),
-                            gradient: Grad.radialGradient,
-                          ),
+                          GradientText(text: "Free Delivery", style: TStyle.blackBold(22), gradient: Grad.radialGradient),
                           Text.rich(
                             TextSpan(
                               children: [
@@ -122,11 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           //   style: TStyle.blackBold(16),
                           //   gradient: Grad.radialGradient,
                           // ),
-                          GradientText(
-                            text: "FREE",
-                            style: TStyle.blackBold(18).copyWith(letterSpacing: 12),
-                            gradient: Grad.radialGradient,
-                          ),
+                          GradientText(text: "FREE", style: TStyle.blackBold(18).copyWith(letterSpacing: 12), gradient: Grad.radialGradient),
                         ],
                       ),
                     ),

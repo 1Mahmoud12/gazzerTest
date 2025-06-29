@@ -1,16 +1,11 @@
-import 'package:gazzer/core/data/services/local_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:gazzer/core/data/services/local_storage.dart';
+// import 'package:gazzer/di.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
-sealed class AppUi {
-  AppUi._() {
-    SharedPreferences.getInstance().then((prefs) {
-      _showTour = prefs.getBool(StorageKeys.haveSeenTour) != true;
-    });
-  }
-  late final bool _showTour;
-  bool get howTour => !_showTour;
-}
+// sealed class AppUi {
+//   bool get showTour => (di<SharedPreferences>().getBool(StorageKeys.haveSeenTour) != true);
+// }
 
-class AppUiImpl extends AppUi {
-  AppUiImpl() : super._();
-}
+// class AppUiImpl extends AppUi {
+//   AppUiImpl();
+// }
