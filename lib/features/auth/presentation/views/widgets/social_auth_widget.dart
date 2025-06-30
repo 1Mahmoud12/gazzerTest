@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/utils/comand.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
@@ -23,7 +25,7 @@ class _SocialAuthWidgetState extends State<SocialAuthWidget> {
 
   @override
   void initState() {
-    social = [(facebook, Assets.assetsSvgFacebook), (google, Assets.assetsSvgGoogle), (apple, Assets.assetsSvgApple)];
+    social = [(facebook, Assets.assetsSvgFacebook), (google, Assets.assetsSvgGoogle), if (Platform.isIOS) (apple, Assets.assetsSvgApple)];
     super.initState();
   }
 
@@ -47,6 +49,7 @@ class _SocialAuthWidgetState extends State<SocialAuthWidget> {
               return child!;
             },
             child: InkWell(
+              borderRadius: AppConst.defaultBorderRadius,
               onTap: item.$1.running
                   ? null
                   : () {

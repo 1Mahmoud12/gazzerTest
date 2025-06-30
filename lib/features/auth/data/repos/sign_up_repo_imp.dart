@@ -1,3 +1,4 @@
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
@@ -5,6 +6,7 @@ import 'package:gazzer/features/auth/domain/entities/social_login_data.dart';
 import 'package:gazzer/features/auth/domain/entities/user_entity.dart';
 import 'package:gazzer/features/auth/domain/repos/sing_up_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SignUpRepoImp extends SignUpRepo {
   final ApiClient apiClient;
@@ -39,26 +41,64 @@ class SignUpRepoImp extends SignUpRepo {
       );
       return Result.ok(data);
     } catch (e) {
+      print("SOCIAL ::::: Error signing in with Google: $e");
       return Result.error(ApiError(message: "Failed to sign in with Google: ${e.toString()}"));
     }
   }
 
   Future<Result<SocialLoginData>> _signInWithFacebook() async {
-    // Implement Facebook sign-in logic here
-    await Future.delayed(Duration(seconds: 2));
-    return Result.ok(SocialLoginData(id: "facebook_id", email: "facebook_email", photoUrl: "facebook_photo_url", name: "facebook_name"));
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+      // or FacebookAuth.i.login()
+      if (result.status == LoginStatus.success) {
+        final userData = await FacebookAuth.instance.getUserData();
+        return Result.ok(
+          SocialLoginData(
+            id: result.accessToken?.tokenString ?? "**blank**",
+            email: userData.entries.firstWhere((e) => e.key == 'email', orElse: () => const MapEntry('email', '**blank**')).value,
+            name: userData.entries.firstWhere((e) => e.key == 'name', orElse: () => const MapEntry('name', '**blank**')).value,
+            photoUrl: userData.entries
+                .firstWhere(
+                  (e) => e.key == 'picture',
+                  orElse: () {
+                    return const MapEntry('picture', {
+                      'data': {'url': '**blank**'},
+                    });
+                  },
+                )
+                .value['data']['url'],
+          ),
+        );
+      } else {
+        return Result.error(ApiError(message: "Failed to sign in with Facebook: ${result.message ?? 'Unknown error'}"));
+      }
+    } catch (e) {
+      print("SOCIAL ::::: Error signing in with Facebook: $e");
+      return Result.error(ApiError(message: "Failed to sign in with Facebook: ${e.toString()}"));
+    }
   }
 
   Future<Result<SocialLoginData>> _signInWithApple() async {
-    // Implement Apple sign-in logic here
-    await Future.delayed(Duration(seconds: 2));
-    return Result.ok(SocialLoginData(id: "apple_id", email: "apple_email", photoUrl: "apple_photo_url", name: "apple_name"));
+    try {
+      final credential = await SignInWithApple.getAppleIDCredential(scopes: [AppleIDAuthorizationScopes.email, AppleIDAuthorizationScopes.fullName]);
+      return Result.ok(
+        SocialLoginData(
+          id: credential.userIdentifier ?? '**blank**',
+          email: credential.email,
+          name: "${credential.givenName ?? ''} ${credential.familyName ?? ''}",
+          idToken: credential.identityToken,
+        ),
+      );
+    } catch (e) {
+      print("SOCIAL ::::: Error signing in with APple: $e");
+      return Result.error(ApiError(message: "Failed to sign in with Apple: ${e.toString()}"));
+    }
   }
 
   @override
   Future<Result<UserEntity>> sendSocialToBackend(SocialLoginData data) async {
     print("sendin to back ....");
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     return Result.ok(UserEntity());
   }
 
