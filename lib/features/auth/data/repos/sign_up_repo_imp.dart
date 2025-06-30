@@ -11,7 +11,18 @@ class SignUpRepoImp extends SignUpRepo {
   SignUpRepoImp(this.apiClient);
 
   @override
-  Future<Result<SocialLoginData>> googleSingIn() async {
+  Future<Result<SocialLoginData>> socialLogin(Social type) async {
+    switch (type) {
+      case Social.google:
+        return await _signInWithGoogle();
+      case Social.facebook:
+        return await _signInWithFacebook();
+      case Social.apple:
+        return await _signInWithApple();
+    }
+  }
+
+  Future<Result<SocialLoginData>> _signInWithGoogle() async {
     final GoogleSignIn signIn = GoogleSignIn.instance;
     await signIn.initialize();
     if (!signIn.supportsAuthenticate()) {
@@ -19,28 +30,29 @@ class SignUpRepoImp extends SignUpRepo {
     }
     try {
       final result = await signIn.authenticate();
-      print(result.displayName);
-      print(result.email);
-      print(result.id);
-      print(result.photoUrl);
-      print(result.authentication.idToken);
-      final data = SocialLoginData(id: result.id, email: result.email, photoUrl: result.photoUrl, name: result.displayName);
+      final data = SocialLoginData(
+        id: result.id,
+        email: result.email,
+        photoUrl: result.photoUrl,
+        name: result.displayName,
+        idToken: result.authentication.idToken,
+      );
       return Result.ok(data);
     } catch (e) {
       return Result.error(ApiError(message: "Failed to sign in with Google: ${e.toString()}"));
     }
   }
 
-  @override
-  Future<Result<SocialLoginData>> appleSingIn() {
-    // TODO: implement appleSingIn
-    throw UnimplementedError();
+  Future<Result<SocialLoginData>> _signInWithFacebook() async {
+    // Implement Facebook sign-in logic here
+    await Future.delayed(Duration(seconds: 2));
+    return Result.ok(SocialLoginData(id: "facebook_id", email: "facebook_email", photoUrl: "facebook_photo_url", name: "facebook_name"));
   }
 
-  @override
-  Future<Result<SocialLoginData>> facebookSingIn() {
-    // TODO: implement facebookSingIn
-    throw UnimplementedError();
+  Future<Result<SocialLoginData>> _signInWithApple() async {
+    // Implement Apple sign-in logic here
+    await Future.delayed(Duration(seconds: 2));
+    return Result.ok(SocialLoginData(id: "apple_id", email: "apple_email", photoUrl: "apple_photo_url", name: "apple_name"));
   }
 
   @override

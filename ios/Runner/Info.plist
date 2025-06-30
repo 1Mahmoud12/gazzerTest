@@ -30,6 +30,26 @@
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
+
+		<!-- Added Configurations -->
+		<!-- Google Sign-in Section -->
+		<key>GIDClientID</key>
+		<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
+		<string>426479468960-o81gqb39gcnl6u9sapr0fudk6u3rsbun.apps.googleusercontent.com</string>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+					<string>com.googleusercontent.apps.426479468960-o81gqb39gcnl6u9sapr0fudk6u3rsbun</string>
+				</array>
+			</dict>
+		</array>
+		<!-- End of the Google Sign-in Section -->
+
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>

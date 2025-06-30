@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/utils/comand.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/domain/repos/sing_up_repo.dart';
 import 'package:gazzer/features/auth/domain/usecases/google_sign_in.dart';
@@ -14,9 +15,9 @@ class SocialAuthWidget extends StatefulWidget {
 }
 
 class _SocialAuthWidgetState extends State<SocialAuthWidget> {
-  final google = Command(GoogleSignInCase(di<SignUpRepo>()).excute);
-  final facebook = Command(() async => Future.delayed(Duration(seconds: 3)));
-  final apple = Command(() async => Future.delayed(Duration(seconds: 3)));
+  final google = Command(() async => SocialLogin(di<SignUpRepo>()).excute(Social.google));
+  final facebook = Command(() async => SocialLogin(di<SignUpRepo>()).excute(Social.facebook));
+  final apple = Command(() async => SocialLogin(di<SignUpRepo>()).excute(Social.apple));
 
   late final List<(Command, String)> social;
 
@@ -40,7 +41,7 @@ class _SocialAuthWidgetState extends State<SocialAuthWidget> {
                 print(item.$1.error);
               }
               if (item.$1.running) {
-                return Center(child: CircularProgressIndicator());
+                return const AdaptiveProgressIndicator();
               }
 
               return child!;

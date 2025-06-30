@@ -4,13 +4,13 @@ import 'package:gazzer/features/auth/domain/entities/social_login_data.dart';
 import 'package:gazzer/features/auth/domain/entities/user_entity.dart';
 import 'package:gazzer/features/auth/domain/repos/sing_up_repo.dart';
 
-class GoogleSignInCase {
+class SocialLogin {
   SignUpRepo repo;
-  GoogleSignInCase(this.repo);
+  SocialLogin(this.repo);
 
-  Future<Result<UserEntity>> excute() async {
+  Future<Result<UserEntity>> excute(Social type) async {
     try {
-      final result = await repo.googleSingIn();
+      final result = await repo.socialLogin(type);
       switch (result) {
         case Ok<SocialLoginData> ok:
           return await repo.sendSocialToBackend(ok.value);
