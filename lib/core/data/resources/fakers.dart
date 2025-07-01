@@ -86,7 +86,7 @@ class Fakers {
       rate: _random.nextDouble() * 5,
       reviewCount: _random.nextInt(100),
       deliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} min",
-      items: List.generate(_random.nextInt(_prodImages.length - 1) + 1, (index) => _prodImages[index]),
+      items: List.generate(_random.nextInt(_prodImages.length - 1) + 1, (i) => _prodImages[i]),
     ),
   );
 }

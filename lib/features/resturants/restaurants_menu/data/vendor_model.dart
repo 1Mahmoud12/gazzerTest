@@ -6,6 +6,8 @@ class VendorModel {
   final int reviewCount;
   final String deliveryTime;
   final List<String> items;
+  final String description =
+      "Vendor description data goes here. It can be a brief overview of the vendor's offerings, specialties, or any other relevant information that helps customers understand what to expect from this vendor.";
 
   VendorModel({
     required this.id,

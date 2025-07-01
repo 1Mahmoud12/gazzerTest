@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
@@ -13,6 +13,7 @@ import 'package:gazzer/core/presentation/routing/app_transitions.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
+import 'package:gazzer/core/presentation/views/widgets/adds/image_with_aligned_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -38,7 +39,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 ///
 part 'widgets/home_best_popular.dart';
-part 'widgets/home_button_offer_widget.dart';
 part 'widgets/home_categories_widget.dart';
 part 'widgets/home_contact_us_widget.dart';
 part 'widgets/home_cuisines_widget.dart';
@@ -157,11 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const _HomeCuisinesWidget(),
                     const _HomeContactUsWidget(),
                     const _HomeBestPopular(),
-                    const _HomeButtonOfferWidget(),
                     const VerticalSpacing(8),
                   ],
                 ),
               ),
+              const ImageWithAlignedBtn(image: Assets.assetsPngHomeAdd, align: Alignment(0, 1), btnText: "Order Now"),
             ],
           ),
         ),

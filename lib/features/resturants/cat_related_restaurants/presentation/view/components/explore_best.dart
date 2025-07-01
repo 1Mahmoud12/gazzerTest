@@ -28,10 +28,7 @@ class _ExploreBest extends StatelessWidget {
                   borderRadius: AppConst.defaultBorderRadius,
                   onTap: () {
                     if (index.isEven) {
-                      final widget = AppTransitions().slideTransition(
-                        SingleCatRestaurantScreen(vendorId: vendor.id),
-                        start: const Offset(1, 0),
-                      );
+                      final widget = AppTransitions().slideTransition(SingleCatRestaurantScreen(vendorId: vendor.id), start: const Offset(1, 0));
                       AppNavigator().push(widget);
                     } else {
                       context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
@@ -44,10 +41,7 @@ class _ExploreBest extends StatelessWidget {
                         child: SizedBox(
                           width: constraints.maxWidth - (constraints.maxHeight / 2),
                           child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              gradient: Grad.bglightLinear,
-                              borderRadius: AppConst.defaultBorderRadius,
-                            ),
+                            decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
                             child: Row(
                               children: [
                                 const HorizontalSpacing(70),
@@ -62,11 +56,7 @@ class _ExploreBest extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             GradientText(text: vendor.name, style: TStyle.blackBold(20)),
-                                            DecoratedFavoriteWidget(
-                                              size: 20,
-                                              isDarkContainer: false,
-                                              borderRadius: AppConst.defaultInnerBorderRadius,
-                                            ),
+                                            DecoratedFavoriteWidget(size: 20, isDarkContainer: false, borderRadius: AppConst.defaultInnerBorderRadius),
                                           ],
                                         ),
                                         GradientTextWzShadow(
@@ -74,7 +64,7 @@ class _ExploreBest extends StatelessWidget {
                                           style: TStyle.blackSemi(16),
                                           shadow: AppDec.blackTextShadow.first,
                                         ),
-                                        RatingWidget(vendor.rate.toStringAsFixed(1), itemSize: 14),
+                                        AppRatingWidget(vendor.rate.toStringAsFixed(1), itemSize: 14),
                                       ],
                                     ),
                                   ),
