@@ -12,14 +12,25 @@ class Validators {
     return null;
   }
 
-  // static String? under100(String? value, {String? msg}) {
-  //   if (value == null || value.isEmpty) return null;
-
-  //   if ((int.tryParse(value) ?? 0) > 100) {
-  //     return msg ??L10n.tr().allowedValuesAreOneToOneHundreds
-  //   }
-  //   return null;
-  // }
+  static String? passwordValidation(String? value) {
+    if (value?.isNotEmpty != true) {
+      return L10n.tr().thisFieldIsRequired;
+    }
+    final hasMinimumLength = value!.trim().length >= 8;
+    final hasUpperCase = RegExp(r'[A-Z]').hasMatch(value);
+    final hasLowerCase = RegExp(r'[a-z]').hasMatch(value);
+    final hasDigits = RegExp(r'[0-9]').hasMatch(value);
+    final hasSpecialCharacters = RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
+    if (!(hasMinimumLength || hasUpperCase || hasLowerCase || hasDigits || hasSpecialCharacters)) return null;
+    String msg = "Password must contain";
+    if (!hasMinimumLength) msg += " at least 8 characters, ";
+    if (!hasUpperCase) msg += " one uppercase letter, ";
+    if (!hasLowerCase) msg += " one lowercase letter, ";
+    if (!hasDigits) msg += " one digit, ";
+    if (!hasSpecialCharacters) msg += " one special character, ";
+    msg = '${msg.substring(0, msg.length - 2)}.'; // replace last comma with a period
+    return msg;
+  }
 
   static String? moreThanSix(String? value) {
     if (value == null || value.trim().length < 6) {
@@ -31,6 +42,13 @@ class Validators {
   static String? valueMustBeNum(String? value, int num, String name) {
     if (value == null || value.trim().length != num) {
       return L10n.tr().valueMustBeNum(num, name);
+    }
+    return null;
+  }
+
+  static String? valueMoreThanNum(String? value, int num, String name) {
+    if (value == null || value.trim().length < num) {
+      return L10n.tr().valueMoreThanNum(num, name);
     }
     return null;
   }

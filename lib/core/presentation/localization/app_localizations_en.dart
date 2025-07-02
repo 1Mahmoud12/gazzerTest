@@ -42,6 +42,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String valueMoreThanNum(int num, String val) {
+    return 'Value $val must be $num characters or more';
+  }
+
+  @override
   String get invalidPhoneNumber => 'Please enter a valid phone number.';
 
   @override

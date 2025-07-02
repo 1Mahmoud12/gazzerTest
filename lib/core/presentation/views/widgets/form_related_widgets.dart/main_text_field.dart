@@ -133,6 +133,7 @@ class _MainTextFieldState extends State<MainTextField> {
           keyboardType: widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null,
           decoration: InputDecoration(
             errorStyle: TStyle.errorSemi(13),
+            errorMaxLines: widget.isPassword ? 4 : 1,
             contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
             isDense: true,
             hintText: widget.hintText,

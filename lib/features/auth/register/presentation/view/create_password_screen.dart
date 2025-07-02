@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -11,16 +11,18 @@ import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/presentation/views/select_location_screen.dart';
+import 'package:gazzer/features/auth/register/data/register_request.dart';
+import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:gazzer/features/auth/register/presentation/cubit/register_states.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
-
+class CreatePasswordScreen extends StatefulWidget {
+  const CreatePasswordScreen({super.key, required this.req});
+  final RegisterRequest req;
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
@@ -47,12 +49,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             children: [
               Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
               Row(
-                children: [GradientText(text: "Reset Password", style: TStyle.mainwBold(32), gradient: Grad.textGradient)],
+                children: [GradientText(text: "Create Password", style: TStyle.mainwBold(32), gradient: Grad.textGradient)],
               ),
               const VerticalSpacing(8),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Text("Sign in to start exploring our wide variety of Groceries.", maxLines: 2, style: TStyle.greySemi(16), textAlign: TextAlign.center),
+                child: Text("create password to veritfy.", maxLines: 2, style: TStyle.greySemi(16), textAlign: TextAlign.center),
               ),
               const VerticalSpacing(32),
               AutofillGroup(
@@ -90,18 +92,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               ),
 
               const VerticalSpacing(70),
-              Hero(
-                tag: Tags.btn,
-                child: OptionBtn(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() == true) {
-                      TextInput.finishAutofillContext();
-                      context.myPush(const SelectLocationScreen());
-                    }
-                  },
-                  textStyle: TStyle.mainwSemi(15),
-                  bgColor: Colors.transparent,
-                  child: GradientText(text: "Continue", style: TStyle.blackSemi(16)),
+              BlocConsumer<RegisterCubit, RegisterStates>(
+                listener: (context, state) {},
+                builder: (context, state) => Hero(
+                  tag: Tags.btn,
+                  child: OptionBtn(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() == true) {
+                        TextInput.finishAutofillContext();
+                        final req = widget.req.copyWith(password: password.text, passwordConfirmation: confirmPassword.text);
+                        context.read<RegisterCubit>().register(req);
+                      }
+                    },
+                    isLoading: state is RegisterLoading,
+                    textStyle: TStyle.mainwSemi(15),
+                    bgColor: Colors.transparent,
+                    child: GradientText(text: "Continue", style: TStyle.blackSemi(16)),
+                  ),
                 ),
               ),
             ],

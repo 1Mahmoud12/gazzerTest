@@ -19,6 +19,17 @@
       }
     }
   },
+  "valueMoreThanNum": "يجب أن تكون قيمة {val} {num} أرقام على الأقل",
+  "@valueMoreThanNum": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      },
+      "val": {
+        "type": "String"
+      }
+    }
+  },
   "invalidPhoneNumber": "يرجى إدخال رقم هاتف صالح.",
   "next": "التالي",
   "start": "ابدأ",

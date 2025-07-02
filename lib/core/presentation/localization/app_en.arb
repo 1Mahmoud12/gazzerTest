@@ -19,6 +19,17 @@
       }
     }
   },
+  "valueMoreThanNum": "Value {val} must be {num} characters or more",
+  "@valueMoreThanNum": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      },
+      "val": {
+        "type": "String"
+      }
+    }
+  },
   "invalidPhoneNumber": "Please enter a valid phone number.",
   "next": "Next",
   "start": "Start",

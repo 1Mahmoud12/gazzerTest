@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -10,8 +11,10 @@ import 'package:gazzer/core/presentation/views/components/main_layout/views/main
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/presentation/views/login_screen.dart';
-import 'package:gazzer/features/auth/presentation/views/sign_up_screen.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
+import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
 
@@ -82,7 +85,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             PlanAnimatedBtn(
               onPressed: () {
                 isAnimating.value = false;
-                context.myPush(const SignUpScreen()).then((v) {
+                context.myPush(BlocProvider(create: (context) => di<RegisterCubit>(), child: const SignUpScreen())).then((v) {
                   isAnimating.value = true;
                 });
               },

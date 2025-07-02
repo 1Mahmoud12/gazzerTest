@@ -158,6 +158,12 @@ abstract class AppLocalizations {
   /// **'{val} must be equal to {num} characters'**
   String valueMustBeNum(int num, String val);
 
+  /// No description provided for @valueMoreThanNum.
+  ///
+  /// In en, this message translates to:
+  /// **'Value {val} must be {num} characters or more'**
+  String valueMoreThanNum(int num, String val);
+
   /// No description provided for @invalidPhoneNumber.
   ///
   /// In en, this message translates to:

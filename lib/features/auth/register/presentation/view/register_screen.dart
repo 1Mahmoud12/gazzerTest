@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -13,8 +14,11 @@ import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show MainTextField, PhoneTextField;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/presentation/views/otp_screen.dart';
-import 'package:gazzer/features/auth/presentation/views/widgets/social_auth_widget.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/auth/common/widgets/social_auth_widget.dart';
+import 'package:gazzer/features/auth/register/data/register_request.dart';
+import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -27,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
-
+  String countryCode = "EG";
   @override
   void dispose() {
     _nameController.dispose();
@@ -75,7 +79,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _phoneController,
                       hasLabel: false,
                       hasHint: true,
+                      code: countryCode,
                       validator: (v, code) {
+                        countryCode = code;
                         if (code == 'EG') {
                           return Validators.mobileEGValidator(v);
                         }
@@ -93,7 +99,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() == true) {
                       TextInput.finishAutofillContext();
-                      context.myPush(const OtpScreen());
+                      context.myPush(
+                        BlocProvider(
+                          create: (context) => di<RegisterCubit>(),
+                          child: CreatePasswordScreen(
+                            req: RegisterRequest(
+                              name: _nameController.text,
+                              countryIso: countryCode,
+                              phone: _phoneController.text,
+                              password: '',
+                              passwordConfirmation: '',
+                            ),
+                          ),
+                        ),
+                      );
                     }
                   },
                   textStyle: TStyle.mainwSemi(15),

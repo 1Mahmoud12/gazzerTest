@@ -42,6 +42,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String valueMoreThanNum(int num, String val) {
+    return 'يجب أن تكون قيمة $val $num أرقام على الأقل';
+  }
+
+  @override
   String get invalidPhoneNumber => 'يرجى إدخال رقم هاتف صالح.';
 
   @override

@@ -1,17 +1,13 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/auth/domain/entities/social_login_data.dart';
-import 'package:gazzer/features/auth/domain/entities/user_entity.dart';
-import 'package:gazzer/features/auth/domain/repos/sing_up_repo.dart';
+import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/auth/common/social/domain/social_login_data.dart';
+import 'package:gazzer/features/auth/common/social/domain/social_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class SignUpRepoImp extends SignUpRepo {
-  final ApiClient apiClient;
-  SignUpRepoImp(this.apiClient);
-
+class SocialRepoImp extends SocialRepo {
   @override
   Future<Result<SocialLoginData>> socialLogin(Social type) async {
     switch (type) {
@@ -96,15 +92,9 @@ class SignUpRepoImp extends SignUpRepo {
   }
 
   @override
-  Future<Result<UserEntity>> sendSocialToBackend(SocialLoginData data) async {
+  Future<Result<ClientEntity>> sendSocialToBackend(SocialLoginData data) async {
     print("sendin to back ....");
     await Future.delayed(const Duration(seconds: 2));
-    return Result.ok(UserEntity());
-  }
-
-  @override
-  Future<Result<UserEntity>> singUp() {
-    // TODO: implement singUp
-    throw UnimplementedError();
+    return Result.ok(ClientEntity());
   }
 }

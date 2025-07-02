@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/utils/comand.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/domain/repos/sing_up_repo.dart';
-import 'package:gazzer/features/auth/domain/usecases/google_sign_in.dart';
+import 'package:gazzer/features/auth/common/domain/usecases/google_sign_in.dart';
+import 'package:gazzer/features/auth/common/social/domain/social_repo.dart';
 
 class SocialAuthWidget extends StatefulWidget {
   const SocialAuthWidget({super.key});
@@ -17,15 +15,15 @@ class SocialAuthWidget extends StatefulWidget {
 }
 
 class _SocialAuthWidgetState extends State<SocialAuthWidget> {
-  final google = Command(() async => SocialLogin(di<SignUpRepo>()).excute(Social.google));
-  final facebook = Command(() async => SocialLogin(di<SignUpRepo>()).excute(Social.facebook));
-  final apple = Command(() async => SocialLogin(di<SignUpRepo>()).excute(Social.apple));
+  final google = Command(() async => SocialLogin(di<SocialRepo>()).excute(Social.google));
+  final facebook = Command(() async => SocialLogin(di<SocialRepo>()).excute(Social.facebook));
+  final apple = Command(() async => SocialLogin(di<SocialRepo>()).excute(Social.apple));
 
   late final List<(Command, String)> social;
 
   @override
   void initState() {
-    social = [(facebook, Assets.assetsSvgFacebook), (google, Assets.assetsSvgGoogle), if (Platform.isIOS) (apple, Assets.assetsSvgApple)];
+    social = [(google, Assets.assetsSvgLogoGoogle), (facebook, Assets.assetsSvgLogoFacebook), (apple, Assets.assetsSvgLogoApple)];
     super.initState();
   }
 
@@ -43,19 +41,25 @@ class _SocialAuthWidgetState extends State<SocialAuthWidget> {
                 print(item.$1.error);
               }
               if (item.$1.running) {
-                return const AdaptiveProgressIndicator();
+                return const Center(child: AdaptiveProgressIndicator());
               }
 
               return child!;
             },
-            child: InkWell(
-              borderRadius: AppConst.defaultBorderRadius,
-              onTap: item.$1.running
+            child: ElevatedButton(
+              onPressed: item.$1.running
                   ? null
                   : () {
                       item.$1.execute();
                     },
-              child: Padding(padding: const EdgeInsets.symmetric(vertical: 12), child: SvgPicture.asset(item.$2, height: 24)),
+              style: ElevatedButton.styleFrom(
+                shape: CircleBorder(),
+                elevation: 8,
+                padding: EdgeInsetsDirectional.all(8),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: SvgPicture.asset(item.$2, height: 24),
             ),
           ),
         );

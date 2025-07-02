@@ -5,30 +5,35 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/presentation/views/reset_password_screen.dart';
-import 'package:gazzer/features/auth/presentation/views/widgets/otp_widget.dart';
+import 'package:gazzer/features/auth/verify/domain/verify_mixin.dart';
+import 'package:gazzer/features/auth/verify/presentation/widgets/otp_widget.dart';
 
-class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
-
+class VerifyScreen extends StatefulWidget {
+  const VerifyScreen({super.key, required this.repo, required this.onSuccess});
+  final VerifyMixin repo;
+  final VoidCallback onSuccess;
   @override
-  State<OtpScreen> createState() => _OtpScreenState();
+  State<VerifyScreen> createState() => _VerifyScreenState();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
+class _VerifyScreenState extends State<VerifyScreen> {
   final _formKey = GlobalKey<FormState>();
   final otp = TextEditingController();
-
+  final isLoading = ValueNotifier<bool>(false);
   late Timer timer;
   late final ValueNotifier<int> seconds;
 
-  setTimer() {
+  resend() async {
+    await widget.repo.resend();
+    _setTimer();
+  }
+
+  _setTimer() {
     seconds.value = 60;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds.value <= 0) {
@@ -43,7 +48,7 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     seconds = ValueNotifier<int>(60);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      setTimer();
+      _setTimer();
     });
     super.initState();
   }
@@ -85,17 +90,26 @@ class _OtpScreenState extends State<OtpScreen> {
                 children: [
                   Text("Didn't receive the code? ", style: TStyle.greySemi(16)),
                   ValueListenableBuilder(
-                    valueListenable: seconds,
+                    valueListenable: isLoading,
                     builder: (context, value, child) {
-                      final finished = value <= 0;
-                      return TextButton(
-                        onPressed: finished ? () => setTimer() : null,
-                        child: Text(
-                          finished ? "Resend code" : "Resend in ${value}s",
-                          style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
-                        ),
-                      );
+                      if (value) {
+                        return const AdaptiveProgressIndicator();
+                      }
+                      return child!;
                     },
+                    child: ValueListenableBuilder(
+                      valueListenable: seconds,
+                      builder: (context, value, child) {
+                        final finished = value <= 0;
+                        return TextButton(
+                          onPressed: finished ? () => resend() : null,
+                          child: Text(
+                            finished ? "Resend code" : "Resend in ${value}s",
+                            style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -105,7 +119,8 @@ class _OtpScreenState extends State<OtpScreen> {
                 child: OptionBtn(
                   onPressed: () {
                     if (_formKey.currentState?.validate() == true) {
-                      context.myPush(const ResetPasswordScreen());
+                      widget.repo.verify(otp.text);
+                      // context.myPush(const CreatePasswordScreen());
                     }
                   },
                   textStyle: TStyle.mainwSemi(15),

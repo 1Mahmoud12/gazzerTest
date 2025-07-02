@@ -1,14 +1,14 @@
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/auth/domain/entities/social_login_data.dart';
-import 'package:gazzer/features/auth/domain/entities/user_entity.dart';
-import 'package:gazzer/features/auth/domain/repos/sing_up_repo.dart';
+import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/auth/common/social/domain/social_login_data.dart';
+import 'package:gazzer/features/auth/common/social/domain/social_repo.dart';
 
 class SocialLogin {
-  SignUpRepo repo;
+  SocialRepo repo;
   SocialLogin(this.repo);
 
-  Future<Result<UserEntity>> excute(Social type) async {
+  Future<Result<ClientEntity>> excute(Social type) async {
     try {
       final result = await repo.socialLogin(type);
       switch (result) {

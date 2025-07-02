@@ -76,13 +76,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
 
   void controllerOnChange() {
     if (widget.onInputChanged != null) {
-      widget.onInputChanged!(
-        IntPhoneNumber(
-          code: selected.code,
-          dialCode: selected.dial_code,
-          number: widget.controller.text.trimLeft().trimRight(),
-        ),
-      );
+      widget.onInputChanged!(IntPhoneNumber(code: selected.code, dialCode: selected.dial_code, number: widget.controller.text.trimLeft().trimRight()));
     }
   }
 
@@ -122,11 +116,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
                           });
                           if (widget.onInputChanged != null) {
                             widget.onInputChanged!(
-                              IntPhoneNumber(
-                                code: selected.code,
-                                dialCode: selected.dial_code,
-                                number: widget.controller.text.trimLeft().trimRight(),
-                              ),
+                              IntPhoneNumber(code: selected.code, dialCode: selected.dial_code, number: widget.controller.text.trimLeft().trimRight()),
                             );
                           }
                         },
@@ -191,29 +181,13 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
               filled: widget.phoneConfig.backgroundColor != null,
               fillColor: widget.phoneConfig.backgroundColor,
               hintStyle: widget.phoneConfig.hintStyle,
-              enabledBorder: GradientOutlineInputBorder(
-                gradient: Grad.shadowGrad(),
-                width: 2,
-                borderRadius: AppConst.defaultBorderRadius,
-              ),
-              focusedBorder: GradientOutlineInputBorder(
-                gradient: Grad.shadowGrad(),
-                width: 2,
-                borderRadius: AppConst.defaultBorderRadius,
-              ),
+              enabledBorder: GradientOutlineInputBorder(gradient: Grad.shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
+              focusedBorder: GradientOutlineInputBorder(gradient: Grad.shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
               labelText: widget.phoneConfig.labelText,
               labelStyle: widget.phoneConfig.labelStyle,
               errorMaxLines: 1,
-              focusedErrorBorder: GradientOutlineInputBorder(
-                gradient: Grad.errorGradient,
-                width: 1,
-                borderRadius: AppConst.defaultBorderRadius,
-              ),
-              errorBorder: GradientOutlineInputBorder(
-                gradient: Grad.errorGradient,
-                width: 1,
-                borderRadius: AppConst.defaultBorderRadius,
-              ),
+              focusedErrorBorder: GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
+              errorBorder: GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
               errorText: widget.phoneConfig.errorText,
               errorStyle: widget.phoneConfig.errorStyle,
               floatingLabelStyle: widget.phoneConfig.floatingLabelStyle,

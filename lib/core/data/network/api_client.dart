@@ -16,7 +16,7 @@ class ApiClient {
   factory ApiClient() => _instance;
   final Dio _dio = Dio();
   static final mainDomain = "https://www.gazzer.com/";
-  final String _baseURL = "${mainDomain}api/";
+  final String _baseURL = "$mainDomain/api/clients/";
   final String _acceptLanguage = "Accept-Language";
   final String _authorization = "authorization";
   final timeOut = const Duration(seconds: 30);

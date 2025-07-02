@@ -99,7 +99,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
           flagSize: 30,
           decoration: BoxDecoration(
             border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
-            borderRadius: AppConst.defaultBorderRadius,
+            borderRadius: AppConst.defaultInnerBorderRadius,
           ),
           textStyle: TStyle.greyRegular(14),
         ),
@@ -145,9 +145,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
 
 class GeneralUtil {
   static List<CountryCodeModel> loadJson() {
-    List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(
-      countries.map((model) => CountryCodeModel.fromJson(model)),
-    );
+    List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(countries.map((model) => CountryCodeModel.fromJson(model)));
 
     return listCountryCodeModel;
   }

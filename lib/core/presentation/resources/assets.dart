@@ -96,6 +96,8 @@ class Assets {
 
   static const String assetsPngLoadingShape = "assets/png/loading_shape.png";
 
+  static const String assetsPngLoginShape = "assets/png/login_shape.png";
+
   static const String assetsPngMedic = "assets/png/medic.jpg";
 
   static const String assetsPngMoodShape = "assets/png/mood_shape.png";
@@ -180,7 +182,15 @@ class Assets {
 
   static const String assetsSvgLocation = "assets/svg/location.svg";
 
+  static const String assetsSvgLogoApple = "assets/svg/LogoApple.svg";
+
+  static const String assetsSvgLogoFacebook = "assets/svg/LogoFacebook.svg";
+
+  static const String assetsSvgLogoGoogle = "assets/svg/LogoGoogle.svg";
+
   static const String assetsSvgMenyIcon = "assets/svg/meny_icon.svg";
+
+  static const String assetsSvgMessage = "assets/svg/Message.svg";
 
   static const String assetsSvgNotification = "assets/svg/notification.svg";
 
@@ -197,6 +207,8 @@ class Assets {
   static const String assetsSvgSplashIcon = "assets/svg/splash_icon.svg";
 
   static const String assetsSvgSuccess = "assets/svg/success.svg";
+
+  static const String assetsSvgSupport = "assets/svg/support.svg";
 
   static const String assetsSvgTerms = "assets/svg/terms.svg";
 

@@ -1,3 +1,5 @@
+import 'package:gazzer/core/data/network/error_models.dart';
+
 /// Utility class that simplifies handling errors.
 ///
 /// Return a [Result] from a function to indicate success or failure.
@@ -14,7 +16,7 @@ sealed class Result<T> {
   factory Result.ok(T value) => Ok(value);
 
   /// Create an instance of Result containing an error
-  factory Result.error(BaseError error) => Error(error);
+  factory Result.error(ApiError error) => Error(error);
 }
 
 /// Subclass of Result for values
@@ -30,9 +32,10 @@ final class Error<T> extends Result<T> {
   const Error(this.error);
 
   /// Returned error in result
-  final BaseError error;
+  final ApiError error;
 }
 
+/// Base class for all error types in the application.
 abstract class BaseError {
   String? message;
   BaseError({this.message});
