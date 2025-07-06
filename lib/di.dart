@@ -1,4 +1,6 @@
 import 'package:gazzer/core/data/network/api_client.dart';
+import 'package:gazzer/features/auth/forget_password/data/forgot_password_imp.dart';
+import 'package:gazzer/features/auth/forget_password/domain/forgot_password_repo.dart';
 import 'package:gazzer/features/auth/login/data/login_repo_imp.dart';
 import 'package:gazzer/features/auth/login/domain/login_repo.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
@@ -34,6 +36,7 @@ Future _registerAsync() async {
 void _registerRepos(ApiClient apiClient) {
   di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(apiClient));
   di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(apiClient));
+  di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(apiClient));
 }
 
 void _registerCubits() {

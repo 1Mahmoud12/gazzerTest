@@ -9,10 +9,28 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get onBoarding_________________Start => '__________________';
+
+  @override
+  String get learnMore => 'Learcn More';
+
+  @override
+  String get onBoarding_________________end => '__________________';
+
+  @override
   String get auth___________________Start => '_______________________';
 
   @override
+  String get enterYourMobileNumber => 'Enter Your Mobile Number';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
   String get login => 'Login';
+
+  @override
+  String get editYourNumber => 'Edit Your Number';
 
   @override
   String get guestMode => 'Guest Mode';

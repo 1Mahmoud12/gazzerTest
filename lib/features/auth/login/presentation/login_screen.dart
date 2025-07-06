@@ -18,6 +18,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/auth/forget_password/presentation/forget_password_btn.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_states.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
@@ -96,17 +97,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: Validators.passwordValidation,
                         autofillHints: [AutofillHints.newPassword],
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              // context.myPush(const CreatePasswordScreen());
-                            },
-                            style: TextButton.styleFrom(minimumSize: Size.zero),
-                            child: Text(L10n.tr().forgotPassword, style: TStyle.primaryBold(12)),
-                          ),
-                        ],
+                        children: [ForgetPasswordBtn()],
                       ),
                     ],
                   ),
@@ -149,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         textStyle: TStyle.mainwSemi(15),
                         bgColor: Colors.transparent,
-                        child: Text(L10n.tr().guestMode, style: TStyle.primarySemi(16)),
+                        child: Text(L10n.tr().skip, style: TStyle.primarySemi(16)),
                       ),
                     ),
                     Expanded(

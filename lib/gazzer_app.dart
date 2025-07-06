@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/theming.dart';
-import 'package:gazzer/features/intro/presentation/select_mode_screen.dart';
+import 'package:gazzer/features/splash/view/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GazzerApp extends StatelessWidget {
@@ -14,7 +14,7 @@ class GazzerApp extends StatelessWidget {
       v.clear();
     });
     return MaterialApp(
-      home: const SelectModeScreen(),
+      home: const SplashScreen(),
       navigatorKey: AppNavigator().mainKey,
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,

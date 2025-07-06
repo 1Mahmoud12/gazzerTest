@@ -53,9 +53,10 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
                   setState(() => isNextPPressed = !isNextPPressed);
                   showModalBottomSheet(
                     context: context,
-                    constraints: BoxConstraints(maxHeight: 210 + MediaQuery.paddingOf(context).bottom, minHeight: 210),
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
                     barrierColor: Co.bg.withAlpha(125),
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
+                    // shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
                     builder: (context) {
                       return const TutorialBottomSheet();
                     },

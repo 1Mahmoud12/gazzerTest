@@ -9,10 +9,28 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get onBoarding_________________Start => '__________________';
+
+  @override
+  String get learnMore => 'المزيد';
+
+  @override
+  String get onBoarding_________________end => '__________________';
+
+  @override
   String get auth___________________Start => '_______________________';
 
   @override
+  String get enterYourMobileNumber => 'أدخل رقم هاتفك المحمول';
+
+  @override
+  String get resetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
   String get login => 'تسجيل الدخول';
+
+  @override
+  String get editYourNumber => 'تعديل رقمك';
 
   @override
   String get guestMode => 'وضع الضيف';

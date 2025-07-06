@@ -98,17 +98,53 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @onBoarding_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get onBoarding_________________Start;
+
+  /// No description provided for @learnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learcn More'**
+  String get learnMore;
+
+  /// No description provided for @onBoarding_________________end.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get onBoarding_________________end;
+
   /// No description provided for @auth___________________Start.
   ///
   /// In en, this message translates to:
   /// **'_______________________'**
   String get auth___________________Start;
 
+  /// No description provided for @enterYourMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Mobile Number'**
+  String get enterYourMobileNumber;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
   /// **'Login'**
   String get login;
+
+  /// No description provided for @editYourNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Your Number'**
+  String get editYourNumber;
 
   /// No description provided for @guestMode.
   ///

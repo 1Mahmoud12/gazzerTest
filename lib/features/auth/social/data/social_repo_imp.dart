@@ -2,8 +2,8 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
-import 'package:gazzer/features/auth/common/social/domain/social_login_data.dart';
-import 'package:gazzer/features/auth/common/social/domain/social_repo.dart';
+import 'package:gazzer/features/auth/social/domain/social_login_data.dart';
+import 'package:gazzer/features/auth/social/domain/social_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 

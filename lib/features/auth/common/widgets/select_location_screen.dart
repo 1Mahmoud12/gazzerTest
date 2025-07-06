@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/intro/presentation/plan/views/healthy_plan_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -137,9 +137,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                               builder: (context, value, child) => CircleAvatar(
                                 backgroundColor: Colors.blueGrey,
                                 radius: 25,
-                                child: value == true
-                                    ? const AdaptiveProgressIndicator()
-                                    : const Icon(Icons.my_location_rounded, color: Colors.white, size: 35),
+                                child: value == true ? const AdaptiveProgressIndicator() : const Icon(Icons.my_location_rounded, color: Colors.white, size: 35),
                               ),
                             ),
                           ),
@@ -162,7 +160,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                       height: 60,
                       width: MediaQuery.sizeOf(context).width / 3,
                       onPressed: () {
-                        context.myPush(const HealthyPlanScreen());
+                        context.myPush(const HealthFocusScreen());
                       },
                       child: GradientText(
                         text: L10n.tr().setYourLocation,

@@ -13,7 +13,7 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/register/presentation/view/widget/change_phone_number_sheet.dart';
+import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
 import 'package:gazzer/features/auth/verify/domain/verify_repo.dart';
 import 'package:gazzer/features/auth/verify/presentation/widgets/otp_widget.dart';
 
@@ -28,7 +28,7 @@ class VerifyOTPScreen extends StatefulWidget {
 
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final _formKey = GlobalKey<FormState>();
-  final otp = TextEditingController();
+  final otpCont = TextEditingController();
   final isResendingOtp = ValueNotifier<bool>(false);
   final isSubmitting = ValueNotifier<bool>(false);
   late Timer timer;
@@ -72,7 +72,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
 
   @override
   void dispose() {
-    otp.dispose();
+    otpCont.dispose();
     super.dispose();
   }
 
@@ -132,7 +132,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 ],
               ),
               const VerticalSpacing(24),
-              OtpWidget(controller: otp, count: 6, width: 60, height: 50, spacing: 8),
+              OtpWidget(controller: otpCont, count: 6, width: 60, height: 50, spacing: 8),
               const VerticalSpacing(24),
               Row(
                 children: [
@@ -202,7 +202,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                         return Alerts.showToast(L10n.tr().valueMustBeNum(6, L10n.tr().code));
                       }
                       isSubmitting.value = true;
-                      final res = await widget.repo.verify(otp.text);
+                      final res = await widget.repo.verify(otpCont.text);
                       isSubmitting.value = false;
                       switch (res) {
                         case Ok<String> ok:
@@ -210,6 +210,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           if (context.mounted) widget.onSuccess(context);
                           break;
                         case Error err:
+                          otpCont.clear();
                           Alerts.showToast(err.error.message ?? '');
                           break;
                       }

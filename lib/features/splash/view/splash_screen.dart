@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/routing/app_transitions.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/onboarding/view/onboarding_logo_screen.dart';
+import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,7 +28,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     });
     await Future.delayed(const Duration(milliseconds: 1500), () {
       if (mounted) {
-        Navigator.of(context).pushReplacement(AppTransitions().slideTransition(const OnboardingStartScreen()));
+        Navigator.of(context).pushReplacement(
+          AppTransitions().slideTransition(
+            const IntroVideoTutorialScreen(videoLink: ''),
+          ),
+        );
       }
     });
   }

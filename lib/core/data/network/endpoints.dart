@@ -12,5 +12,5 @@ class Endpoints {
   /// Forget password
   static const forgetPassword = "auth/forgot-password";
   static const resetPassword = "auth/reset-password";
-  static const verifyOyp = "auth/forgot-password/verify-otp";
+  static const forgetPasswordVerifyOTP = "auth/forgot-password/verify-otp";
 }

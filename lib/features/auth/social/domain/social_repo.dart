@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
-import 'package:gazzer/features/auth/common/social/domain/social_login_data.dart';
+import 'package:gazzer/features/auth/social/domain/social_login_data.dart';
 
 enum Social { google, facebook, apple }
 

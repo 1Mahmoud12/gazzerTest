@@ -3,12 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
+import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
-import 'package:gazzer/features/intro/presentation/plan/views/plans_view_screen.dart';
 
 class FrequancyCombosScreen extends StatefulWidget {
   const FrequancyCombosScreen({super.key});
@@ -63,9 +65,13 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
                   final child = PlanAnimatedBtn(
                     onPressed: () {
                       isAnimating.value = false;
-                      context.myPush(const PlansViewScreen()).then((v) {
-                        isAnimating.value = true;
-                      });
+                      context
+                          .myPush(
+                            const LoadingScreen(navigateTo: CongratsScreen(navigateTo: MainLayout())),
+                          )
+                          .then((v) {
+                            isAnimating.value = true;
+                          });
                     },
                     isAnimating: isAnimating,
                     animDuration: animDuration,

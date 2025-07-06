@@ -1,6 +1,12 @@
 {
+  "onBoarding_________________Start": "__________________",
+  "learnMore": "Learcn More",
+  "onBoarding_________________end": "__________________",
   "auth___________________Start": "_______________________",
+  "enterYourMobileNumber": "Enter Your Mobile Number",
+  "resetPassword": "Reset Password",
   "login": "Login",
+  "editYourNumber": "Edit Your Number",
   "guestMode": "Guest Mode",
   "signIn": "Sign In",
   "signUp": "Sign Up",

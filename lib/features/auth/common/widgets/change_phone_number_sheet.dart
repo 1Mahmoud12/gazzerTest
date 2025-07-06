@@ -7,9 +7,10 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
 class ChangePhoneNumberSheet extends StatefulWidget {
-  const ChangePhoneNumberSheet({super.key, required this.onConfirm, this.initialPhone});
+  const ChangePhoneNumberSheet({super.key, required this.onConfirm, this.initialPhone, this.title});
   final Future<bool> Function(String phone) onConfirm;
   final String? initialPhone;
+  final String? title;
   @override
   State<ChangePhoneNumberSheet> createState() => _ChangePhoneNumberSheetState();
 }
@@ -46,6 +47,9 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
             ),
           ),
           Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Padding(
               padding: const EdgeInsetsGeometry.symmetric(vertical: 48, horizontal: 24),
               child: SafeArea(
@@ -56,7 +60,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                   children: [
                     const SizedBox.shrink(),
                     Text(
-                      "L10n.tr().editYourNumber",
+                      widget.title ?? L10n.tr().editYourNumber,
                       style: TStyle.primaryBold(16),
                     ),
                     const SizedBox.shrink(),
@@ -93,7 +97,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                           final phone = _phoneController.text.trim();
                           final res = await widget.onConfirm(phone);
                           if (context.mounted) {
-                            isLoading.value = true;
+                            isLoading.value = false;
                             if (res) context.myPop();
                           }
                         },

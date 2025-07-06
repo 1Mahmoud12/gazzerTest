@@ -15,12 +15,12 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
 import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_states.dart';
-import 'package:gazzer/features/auth/register/presentation/view/widget/change_phone_number_sheet.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
 
 class CreatePasswordScreen extends StatefulWidget {

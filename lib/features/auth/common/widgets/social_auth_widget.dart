@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/utils/comand.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/common/domain/usecases/google_sign_in.dart';
-import 'package:gazzer/features/auth/common/social/domain/social_repo.dart';
+import 'package:gazzer/features/auth/social/domain/social_repo.dart';
 
 class SocialAuthWidget extends StatefulWidget {
   const SocialAuthWidget({super.key});

@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 // import 'package:panara_dialogs/panara_dialogs.dart';
 
 class Alerts {
-  static exitSnack(BuildContext context, {String? msg}) {
+  static void exitSnack(BuildContext context, {String? msg}) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -23,7 +23,7 @@ class Alerts {
     );
   }
 
-  static exitBanner(BuildContext context, {String? msg}) {
+  static void exitBanner(BuildContext context, {String? msg}) {
     ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
@@ -50,14 +50,14 @@ class Alerts {
 
   static void showToast(
     String message, {
-    Toast length = Toast.LENGTH_SHORT,
+    Toast? length,
     ToastGravity toastGravity = ToastGravity.BOTTOM,
     bool error = true,
     bool isInfo = false,
   }) {
     Fluttertoast.showToast(
       msg: message,
-      toastLength: length,
+      toastLength: length ?? (message.length > 35 ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT),
       gravity: toastGravity,
       timeInSecForIosWeb: 3,
       fontSize: 16,
