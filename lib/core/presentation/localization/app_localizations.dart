@@ -98,6 +98,312 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @auth___________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'_______________________'**
+  String get auth___________________Start;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @guestMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest Mode'**
+  String get guestMode;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password'**
+  String get forgotPassword;
+
+  /// No description provided for @howToLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'How to Login?'**
+  String get howToLogin;
+
+  /// No description provided for @enterYourPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Password'**
+  String get enterYourPassword;
+
+  /// No description provided for @otpVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP Verification'**
+  String get otpVerification;
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend Code'**
+  String get resendCode;
+
+  /// No description provided for @anOTPhasBeenSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'An OTP has been sent to'**
+  String get anOTPhasBeenSentTo;
+
+  /// No description provided for @support.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get support;
+
+  /// No description provided for @enterNumDigitCodeNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter {num}-Digit code number'**
+  String enterNumDigitCodeNumber(int num);
+
+  /// No description provided for @wrongNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong Number?'**
+  String get wrongNumber;
+
+  /// No description provided for @code.
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get code;
+
+  /// No description provided for @createPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Password'**
+  String get createPassword;
+
+  /// No description provided for @createPasswordToVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Password to Verify'**
+  String get createPasswordToVerify;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @yourNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Your New Password'**
+  String get yourNewPassword;
+
+  /// No description provided for @confirmNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm New Password'**
+  String get confirmNewPassword;
+
+  /// No description provided for @nameAcceptsOnlyDashedAndCharacters.
+  ///
+  /// In en, this message translates to:
+  /// **'Name accepts only characters and dashes'**
+  String get nameAcceptsOnlyDashedAndCharacters;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match.'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @pleaseReEnterYourNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please re-enter your new password.'**
+  String get pleaseReEnterYourNewPassword;
+
+  /// No description provided for @clickBackAgainToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Click back again to exit'**
+  String get clickBackAgainToExit;
+
+  /// No description provided for @thisFieldIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required.'**
+  String get thisFieldIsRequired;
+
+  /// No description provided for @valueShouldBeNumAtelase.
+  ///
+  /// In en, this message translates to:
+  /// **'Value {val} should be at least {num} characters'**
+  String valueShouldBeNumAtelase(int num, String val);
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address.'**
+  String get invalidEmail;
+
+  /// No description provided for @valueMustBeNum.
+  ///
+  /// In en, this message translates to:
+  /// **'{val} must be equal to {num} characters'**
+  String valueMustBeNum(int num, String val);
+
+  /// No description provided for @valueMoreThanNum.
+  ///
+  /// In en, this message translates to:
+  /// **'Value {val} must be {num} characters or more'**
+  String valueMoreThanNum(int num, String val);
+
+  /// No description provided for @invalidPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get invalidPhoneNumber;
+
+  /// No description provided for @passwordMustConain.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain'**
+  String get passwordMustConain;
+
+  /// No description provided for @atLEastEightCharacters.
+  ///
+  /// In en, this message translates to:
+  /// **'at least 8 characters'**
+  String get atLEastEightCharacters;
+
+  /// No description provided for @oneUppercaseLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'one uppercase letter'**
+  String get oneUppercaseLetter;
+
+  /// No description provided for @oneLowercaseLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'one lowercase letter'**
+  String get oneLowercaseLetter;
+
+  /// No description provided for @oneSpecialCharacter.
+  ///
+  /// In en, this message translates to:
+  /// **'one special character'**
+  String get oneSpecialCharacter;
+
+  /// No description provided for @oneDigit.
+  ///
+  /// In en, this message translates to:
+  /// **'one digit'**
+  String get oneDigit;
+
+  /// No description provided for @auth___________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'_______________________'**
+  String get auth___________________End;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @alert.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert'**
+  String get alert;
+
+  /// No description provided for @areYouSureYouWantToDeleteThisItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this item?'**
+  String get areYouSureYouWantToDeleteThisItem;
+
+  /// No description provided for @areYouSureYouWantToClearAllItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear all items?'**
+  String get areYouSureYouWantToClearAllItems;
+
+  /// No description provided for @areYouSureYouWantToLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get areYouSureYouWantToLogout;
+
+  /// No description provided for @areYouSureYouWantToDeleteThisAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this account?'**
+  String get areYouSureYouWantToDeleteThisAccount;
+
+  /// No description provided for @pressDoubleBackToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Press double back to exit'**
+  String get pressDoubleBackToExit;
+
   /// No description provided for @somethingWentWrong.
   ///
   /// In en, this message translates to:
@@ -127,48 +433,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown error occurred'**
   String get unknownErorOccurred;
-
-  /// No description provided for @clickBackAgainToExit.
-  ///
-  /// In en, this message translates to:
-  /// **'Click back again to exit'**
-  String get clickBackAgainToExit;
-
-  /// No description provided for @thisFieldIsRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'This field is required.'**
-  String get thisFieldIsRequired;
-
-  /// No description provided for @passwordLengthError.
-  ///
-  /// In en, this message translates to:
-  /// **'Password must be at least 6 characters long.'**
-  String get passwordLengthError;
-
-  /// No description provided for @invalidEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter a valid email address.'**
-  String get invalidEmail;
-
-  /// No description provided for @valueMustBeNum.
-  ///
-  /// In en, this message translates to:
-  /// **'{val} must be equal to {num} characters'**
-  String valueMustBeNum(int num, String val);
-
-  /// No description provided for @valueMoreThanNum.
-  ///
-  /// In en, this message translates to:
-  /// **'Value {val} must be {num} characters or more'**
-  String valueMoreThanNum(int num, String val);
-
-  /// No description provided for @invalidPhoneNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter a valid phone number.'**
-  String get invalidPhoneNumber;
 
   /// No description provided for @next.
   ///
@@ -211,30 +475,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select Mode'**
   String get selectMode;
-
-  /// No description provided for @guestMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Guest Mode'**
-  String get guestMode;
-
-  /// No description provided for @signIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign In'**
-  String get signIn;
-
-  /// No description provided for @signUp.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign Up'**
-  String get signUp;
-
-  /// No description provided for @or.
-  ///
-  /// In en, this message translates to:
-  /// **'Or'**
-  String get or;
 
   /// No description provided for @singUpToExploreWideVarietyOfProducts.
   ///

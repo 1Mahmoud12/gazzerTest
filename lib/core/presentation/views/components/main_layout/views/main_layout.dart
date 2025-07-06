@@ -4,12 +4,12 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/utils/snackbars.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/fav_navigator.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/home_navigation.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/inherited_layout.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/orders_navigator.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
@@ -60,7 +60,7 @@ class _MainLayoutState extends State<MainLayout> {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (!canPop.value) {
-          AppSnackbar.exitSnack(context);
+          Alerts.exitSnack(context);
           canPop.value = true;
           Future.delayed(const Duration(seconds: 2), () => canPop.value = false);
         } else {

@@ -1,12 +1,48 @@
 {
-  "somethingWentWrong": "حدث خطأ ما",
-  "requestTimeOut": "انتهت مهلة الطلب",
-  "weakOrNoInternetConnection": "اتصال ضعيف أو لا يوجد اتصال بالإنترنت",
-  "requestToServerWasCancelled": "تم إلغاء الطلب إلى الخادم",
-  "unknownErorOccurred": "حدث خطأ غير معروف",
-  "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
+  "auth___________________Start": "_______________________",
+  "login": "تسجيل الدخول",
+  "guestMode": "وضع الضيف",
+  "signIn": "تسجيل الدخول",
+  "signUp": "إنشاء حساب",
+  "register": "إنشاء حساب",
+  "forgotPassword": "نسيت كلمة المرور",
+  "howToLogin": "كيف تريد تسجيل الدخول؟",
+  "enterYourPassword": "أدخل كلمة المرور الخاصة بك",
+  "resendCode": "إعادة إرسال الرمز",
+  "otpVerification": "التحقق من رمز OTP",
+  "anOTPhasBeenSentTo": "تم إرسال رمز OTP إلى",
+  "enterNumDigitCodeNumber": "أدخل الرمز المكون من {num} أرقام",
+  "@enterNumDigitCodeNumber": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      }
+    }
+  },
+  "support": "الدعم",
+  "wrongNumber": "رقم خاطئ؟",
+  "code": "رمز",
+  "createPassword": "إنشاء كلمة مرور",
+  "createPasswordToVerify": ".إنشاء كلمة مرور للتحقق.",
+  "password": "كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "yourNewPassword": "كلمة المرور الجديدة الخاصة بك",
+  "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+  "nameAcceptsOnlyDashedAndCharacters": "الاسم يقبل فقط الأحرف والأحرف المتقطعة.",
+  "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين.",
+  "pleaseReEnterYourNewPassword": "يرجى إعادة إدخال كلمة المرور الجديدة الخاصة بك.",
   "thisFieldIsRequired": "هذا الحقل مطلوب.",
-  "passwordLengthError": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+  "valueShouldBeNumAtelase": "يجب أن تكون طول قيمة {val} على الأقل {num} احرف",
+  "@valueShouldBeNumAtelase": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      },
+      "val": {
+        "type": "String"
+      }
+    }
+  },
   "invalidEmail": "يرجى إدخال عنوان بريد إلكتروني صالح.",
   "valueMustBeNum": "قيمة {val} يجب أن تكون  {num} ارقام",
   "@valueMustBeNum": {
@@ -31,6 +67,30 @@
     }
   },
   "invalidPhoneNumber": "يرجى إدخال رقم هاتف صالح.",
+  "passwordMustConain": "يجب أن تحتوي كلمة المرور على",
+  "atLEastEightCharacters": "ثمانية أحرف على الأقل",
+  "oneUppercaseLetter": "حرف كبير واحد على الأقل",
+  "oneLowercaseLetter": "حرف صغير واحد على الأقل",
+  "oneSpecialCharacter": "رمز خاص واحد على الأقل",
+  "oneDigit": "رقم واحد على الأقل",
+  "auth___________________End": "_______________________",
+  "cancel": "إلغاء",
+  "confirm": "تأكيد",
+  "send": "إرسال",
+  "submit": "إرسال",
+  "warning": "تحذير",
+  "alert": "تنبيه",
+  "areYouSureYouWantToDeleteThisItem": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+  "areYouSureYouWantToClearAllItems": "هل أنت متأكد أنك تريد مسح جميع العناصر؟",
+  "areYouSureYouWantToLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "areYouSureYouWantToDeleteThisAccount": "هل أنت متأكد أنك تريد حذف هذا الحساب؟",
+  "pressDoubleBackToExit": "اضغط مرتين للخروج",
+  "somethingWentWrong": "حدث خطأ ما",
+  "requestTimeOut": "انتهت مهلة الطلب",
+  "weakOrNoInternetConnection": "اتصال ضعيف أو لا يوجد اتصال بالإنترنت",
+  "requestToServerWasCancelled": "تم إلغاء الطلب إلى الخادم",
+  "unknownErorOccurred": "حدث خطأ غير معروف",
+  "clickBackAgainToExit": "اضغط مرة أخرى للخروج",
   "next": "التالي",
   "start": "ابدأ",
   "hiIamGazzer": "مرحباً، أنا جازر",
@@ -38,9 +98,6 @@
   "niceToMeetYou": "تشرفنا بلقائك",
   "letsGo": "هيا بنا",
   "selectMode": "اختر الوضع",
-  "guestMode": "وضع الضيف",
-  "signIn": "تسجيل الدخول",
-  "signUp": "إنشاء حساب",
   "or": "أو",
   "singUpToExploreWideVarietyOfProducts": "سجل لاستكشاف مجموعة واسعة من المنتجات",
   "fullName": "الاسم الكامل",

@@ -10,10 +10,11 @@ class ClientResponse {
 
   ClientResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      accessToken = json['access_token'];
-      // tokenType = json['token_type'];
-      expiresIn = int.tryParse(json['expires_in'].toString());
-      client = ClientEntity.fromJson(json['client']);
+      final data = json['data'];
+      accessToken = data['access_token'];
+      // tokenType = data['token_type'];
+      expiresIn = int.tryParse(data['expires_in'].toString());
+      client = ClientEntity.fromJson(data['client']);
     }
     message = json['message'];
   }

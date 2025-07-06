@@ -1,4 +1,7 @@
 import 'package:gazzer/core/data/network/api_client.dart';
+import 'package:gazzer/features/auth/login/data/login_repo_imp.dart';
+import 'package:gazzer/features/auth/login/domain/login_repo.dart';
+import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/register/data/register_repo_imp.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
@@ -30,8 +33,10 @@ Future _registerAsync() async {
 
 void _registerRepos(ApiClient apiClient) {
   di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(apiClient));
+  di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(apiClient));
 }
 
 void _registerCubits() {
   di.registerFactory(() => RegisterCubit(di.get()));
+  di.registerFactory(() => LoginCubit(di.get()));
 }

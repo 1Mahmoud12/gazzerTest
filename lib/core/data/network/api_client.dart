@@ -15,7 +15,7 @@ class ApiClient {
   static final ApiClient _instance = ApiClient._();
   factory ApiClient() => _instance;
   final Dio _dio = Dio();
-  static final mainDomain = "https://www.gazzer.com/";
+  static final mainDomain = "https://gazzer-dev-do.mostafa.cloud";
   final String _baseURL = "$mainDomain/api/clients/";
   final String _acceptLanguage = "Accept-Language";
   final String _authorization = "authorization";

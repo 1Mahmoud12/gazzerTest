@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
@@ -13,11 +14,12 @@ import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show PhoneTextField, MainTextField;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
-import 'package:gazzer/features/auth/common/widgets/social_auth_widget.dart';
+import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:gazzer/features/auth/login/presentation/cubit/login_states.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
@@ -61,14 +63,14 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
                 Row(
-                  children: [GradientText(text: "Log-in", style: TStyle.mainwBold(32), gradient: Grad.textGradient)],
+                  children: [GradientText(text: L10n.tr().login, style: TStyle.mainwBold(32), gradient: Grad.textGradient)],
                 ),
                 const VerticalSpacing(16),
                 AutofillGroup(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Mobile Number", maxLines: 1, style: TStyle.greySemi(16)),
+                      Text(L10n.tr().mobileNumber, maxLines: 1, style: TStyle.greySemi(16)),
                       const VerticalSpacing(8),
                       PhoneTextField(
                         hasLabel: false,
@@ -78,19 +80,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (code == 'EG') {
                             return Validators.mobileEGValidator(v);
                           }
-                          return Validators.moreThanSix(v);
+                          return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
                         },
                       ),
                       const VerticalSpacing(16),
-                      Text("Password", maxLines: 1, style: TStyle.greySemi(16)),
+                      Text(L10n.tr().password, maxLines: 1, style: TStyle.greySemi(16)),
                       const VerticalSpacing(8),
                       MainTextField(
                         controller: _pasword,
-                        hintText: "Enter Your Password",
+                        hintText: L10n.tr().enterYourPassword,
                         bgColor: Colors.transparent,
                         isPassword: true,
                         borderRadius: 32,
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
                         validator: Validators.passwordValidation,
                         autofillHints: [AutofillHints.newPassword],
                       ),
@@ -102,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               // context.myPush(const CreatePasswordScreen());
                             },
                             style: TextButton.styleFrom(minimumSize: Size.zero),
-                            child: Text("Forgot Password?", style: TStyle.primaryBold(12)),
+                            child: Text(L10n.tr().forgotPassword, style: TStyle.primaryBold(12)),
                           ),
                         ],
                       ),
@@ -111,18 +113,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 // const VerticalSpacing(8),
-                Hero(
-                  tag: Tags.btn,
-                  child: OptionBtn(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() == true) {
-                        TextInput.finishAutofillContext();
-                        context.myPush(const SelectLocationScreen());
-                      }
-                    },
-                    textStyle: TStyle.mainwSemi(15),
-                    bgColor: Colors.transparent,
-                    child: GradientText(text: "Log in", style: TStyle.blackSemi(16)),
+                BlocConsumer<LoginCubit, LoginStates>(
+                  listener: (context, state) {
+                    if (state is LoginSuccessState) {
+                      Alerts.showToast(state.message, error: false);
+                      context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
+                    } else if (state is LoginErrorState) {
+                      Alerts.showToast(state.error);
+                    }
+                  },
+                  builder: (context, state) => Hero(
+                    tag: Tags.btn,
+                    child: OptionBtn(
+                      isLoading: state is LoginLoadingState,
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() == true) {
+                          TextInput.finishAutofillContext();
+                          context.read<LoginCubit>().login(_phoneController.text.trim(), _pasword.text.trim());
+                        }
+                      },
+                      textStyle: TStyle.mainwSemi(15),
+                      bgColor: Colors.transparent,
+                      child: GradientText(text: L10n.tr().login, style: TStyle.blackSemi(16)),
+                    ),
                   ),
                 ),
                 const VerticalSpacing(16),
@@ -136,30 +149,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         textStyle: TStyle.mainwSemi(15),
                         bgColor: Colors.transparent,
-                        child: Text("Guest Mode", style: TStyle.primarySemi(16)),
+                        child: Text(L10n.tr().guestMode, style: TStyle.primarySemi(16)),
                       ),
                     ),
                     Expanded(
                       child: OptionBtn(
                         onPressed: () {
-                          context.myPush(BlocProvider(create: (context) => di<RegisterCubit>(), child: const SignUpScreen()));
+                          context.myPush(BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen()));
                         },
                         textStyle: TStyle.mainwSemi(15),
                         bgColor: Colors.transparent,
-                        child: Text("Sign up", style: TStyle.primarySemi(16)),
+                        child: Text(L10n.tr().signUp, style: TStyle.primarySemi(16)),
                       ),
                     ),
                   ],
                 ),
-                const VerticalSpacing(8),
-                Center(
-                  child: Text(
-                    "or", // L10n.tr().or,
-                    style: TStyle.greyRegular(16),
-                  ),
-                ),
-                const VerticalSpacing(8),
-                const SocialAuthWidget(),
+                // const VerticalSpacing(8),
+                // Center(child: Text(L10n.tr().or, style: TStyle.greyRegular(16))),
+                // const VerticalSpacing(8),
+                // const SocialAuthWidget(),
               ],
             ),
           ),

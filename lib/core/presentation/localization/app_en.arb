@@ -1,12 +1,50 @@
 {
-  "somethingWentWrong": "Something went wrong",
-  "requestTimeOut": "Request timed out",
-  "weakOrNoInternetConnection": "Weak or no internet connection",
-  "requestToServerWasCancelled": "Request to server was cancelled",
-  "unknownErorOccurred": "Unknown error occurred",
+  "auth___________________Start": "_______________________",
+  "login": "Login",
+  "guestMode": "Guest Mode",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "register": "Register",
+  "or": "Or",
+  "forgotPassword": "Forgot Password",
+  "howToLogin": "How to Login?",
+  "enterYourPassword": "Enter Your Password",
+  "otpVerification": "OTP Verification",
+  "resendCode": "Resend Code",
+  "anOTPhasBeenSentTo": "An OTP has been sent to",
+  "support": "Support",
+  "enterNumDigitCodeNumber": "Enter {num}-Digit code number",
+  "@enterNumDigitCodeNumber": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      }
+    }
+  },
+  "wrongNumber": "Wrong Number?",
+  "code": "Code",
+  "createPassword": "Create Password",
+  "createPasswordToVerify": "Create Password to Verify",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "yourNewPassword": "Your New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "nameAcceptsOnlyDashedAndCharacters": "Name accepts only characters and dashes",
+  "passwordsDoNotMatch": "Passwords do not match.",
+  "pleaseReEnterYourNewPassword": "Please re-enter your new password.",
   "clickBackAgainToExit": "Click back again to exit",
   "thisFieldIsRequired": "This field is required.",
-  "passwordLengthError": "Password must be at least 6 characters long.",
+  "valueShouldBeNumAtelase": "Value {val} should be at least {num} characters",
+  "@valueShouldBeNumAtelase": {
+    "placeholders": {
+      "num": {
+        "type": "int"
+      },
+      "val": {
+        "type": "String"
+      }
+    }
+  },
   "invalidEmail": "Please enter a valid email address.",
   "valueMustBeNum": "{val} must be equal to {num} characters",
   "@valueMustBeNum": {
@@ -31,6 +69,29 @@
     }
   },
   "invalidPhoneNumber": "Please enter a valid phone number.",
+  "passwordMustConain": "Password must contain",
+  "atLEastEightCharacters": "at least 8 characters",
+  "oneUppercaseLetter": "one uppercase letter",
+  "oneLowercaseLetter": "one lowercase letter",
+  "oneSpecialCharacter": "one special character",
+  "oneDigit": "one digit",
+  "auth___________________End": "_______________________",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "send": "Send",
+  "submit": "Submit",
+  "warning": "Warning",
+  "alert": "Alert",
+  "areYouSureYouWantToDeleteThisItem": "Are you sure you want to delete this item?",
+  "areYouSureYouWantToClearAllItems": "Are you sure you want to clear all items?",
+  "areYouSureYouWantToLogout": "Are you sure you want to logout?",
+  "areYouSureYouWantToDeleteThisAccount": "Are you sure you want to delete this account?",
+  "pressDoubleBackToExit": "Press double back to exit",
+  "somethingWentWrong": "Something went wrong",
+  "requestTimeOut": "Request timed out",
+  "weakOrNoInternetConnection": "Weak or no internet connection",
+  "requestToServerWasCancelled": "Request to server was cancelled",
+  "unknownErorOccurred": "Unknown error occurred",
   "next": "Next",
   "start": "Start",
   "hiIamGazzer": "Hi, I am Gazzer",
@@ -38,10 +99,6 @@
   "niceToMeetYou": "Nice to meet you",
   "letsGo": "Let's go",
   "selectMode": "Select Mode",
-  "guestMode": "Guest Mode",
-  "signIn": "Sign In",
-  "signUp": "Sign Up",
-  "or": "Or",
   "singUpToExploreWideVarietyOfProducts": "Sign up to explore a wide variety of products",
   "fullName": "Full Name",
   "yourFullName": "Your Full Name",

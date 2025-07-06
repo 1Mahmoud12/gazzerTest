@@ -62,7 +62,7 @@ class _OptionBtnState extends State<OptionBtn> {
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
-      return const AdaptiveProgressIndicator();
+      return const Center(child: AdaptiveProgressIndicator());
     }
     return Padding(
       padding: widget.margin,
@@ -103,9 +103,7 @@ class _OptionBtnState extends State<OptionBtn> {
 
           child: Padding(
             padding: widget.padding ?? EdgeInsets.zero,
-            child:
-                widget.child ??
-                Text(widget.text ?? '', style: widget.textStyle ?? TStyle.primarySemi(16), textAlign: widget.textAlign),
+            child: widget.child ?? Text(widget.text ?? '', style: widget.textStyle ?? TStyle.primarySemi(16), textAlign: widget.textAlign),
           ),
         ),
       ),

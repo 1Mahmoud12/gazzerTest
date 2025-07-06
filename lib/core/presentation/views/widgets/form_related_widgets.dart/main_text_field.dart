@@ -44,6 +44,7 @@ class MainTextField extends StatefulWidget {
     this.prefixOnTap,
     this.prefixColor,
     this.autofillHints,
+    this.max = 50,
   });
   final TextEditingController controller;
   final String? hintText;
@@ -74,6 +75,7 @@ class MainTextField extends StatefulWidget {
   final VoidCallback? prefixOnTap;
   final Color? prefixColor;
   final List<String>? autofillHints;
+  final int max;
   @override
   State<MainTextField> createState() => _MainTextFieldState();
 }
@@ -83,7 +85,7 @@ class _MainTextFieldState extends State<MainTextField> {
   late InputBorder focusedBorder;
   late InputBorder errorBorder;
 
-  formBorders() {
+  void formBorders() {
     if (widget.isOutLinedBorder) {
       focusedBorder = GradientOutlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad.shadowGrad(), width: 2);
     } else {
@@ -125,6 +127,8 @@ class _MainTextFieldState extends State<MainTextField> {
           onSaved: widget.onSaved,
           onFieldSubmitted: widget.onSubmitting,
           obscureText: value,
+          maxLength: widget.max,
+
           onTapOutside: (event) {
             FocusScope.of(context).unfocus();
           },
@@ -136,6 +140,7 @@ class _MainTextFieldState extends State<MainTextField> {
             errorMaxLines: widget.isPassword ? 4 : 1,
             contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
             isDense: true,
+            counterText: '',
             hintText: widget.hintText,
             hintStyle: widget.style ?? TStyle.greyRegular(12),
             labelStyle: TStyle.greySemi(15),

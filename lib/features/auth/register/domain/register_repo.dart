@@ -3,9 +3,9 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/auth/common/data/auth_response.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
-import 'package:gazzer/features/auth/verify/domain/verify_mixin.dart';
+import 'package:gazzer/features/auth/verify/domain/verify_repo.dart';
 
-abstract class RegisterRepo extends BaseApiRepo with VerifyMixin {
+abstract class RegisterRepo extends BaseApiRepo implements VerifyRepo {
   // register
   Future<Result<AuthResponse>> register(RegisterRequest req);
   Future<Result<String>> verifyOTP(String sessionId, String code);

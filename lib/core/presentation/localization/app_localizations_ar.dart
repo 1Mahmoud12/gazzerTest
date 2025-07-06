@@ -9,20 +9,86 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get somethingWentWrong => 'حدث خطأ ما';
+  String get auth___________________Start => '_______________________';
 
   @override
-  String get requestTimeOut => 'انتهت مهلة الطلب';
+  String get login => 'تسجيل الدخول';
 
   @override
-  String get weakOrNoInternetConnection =>
-      'اتصال ضعيف أو لا يوجد اتصال بالإنترنت';
+  String get guestMode => 'وضع الضيف';
 
   @override
-  String get requestToServerWasCancelled => 'تم إلغاء الطلب إلى الخادم';
+  String get signIn => 'تسجيل الدخول';
 
   @override
-  String get unknownErorOccurred => 'حدث خطأ غير معروف';
+  String get signUp => 'إنشاء حساب';
+
+  @override
+  String get register => 'إنشاء حساب';
+
+  @override
+  String get or => 'أو';
+
+  @override
+  String get forgotPassword => 'نسيت كلمة المرور';
+
+  @override
+  String get howToLogin => 'كيف تريد تسجيل الدخول؟';
+
+  @override
+  String get enterYourPassword => 'أدخل كلمة المرور الخاصة بك';
+
+  @override
+  String get otpVerification => 'التحقق من رمز OTP';
+
+  @override
+  String get resendCode => 'إعادة إرسال الرمز';
+
+  @override
+  String get anOTPhasBeenSentTo => 'تم إرسال رمز OTP إلى';
+
+  @override
+  String get support => 'الدعم';
+
+  @override
+  String enterNumDigitCodeNumber(int num) {
+    return 'أدخل الرمز المكون من $num أرقام';
+  }
+
+  @override
+  String get wrongNumber => 'رقم خاطئ؟';
+
+  @override
+  String get code => 'رمز';
+
+  @override
+  String get createPassword => 'إنشاء كلمة مرور';
+
+  @override
+  String get createPasswordToVerify => '.إنشاء كلمة مرور للتحقق.';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get yourNewPassword => 'كلمة المرور الجديدة الخاصة بك';
+
+  @override
+  String get confirmNewPassword => 'تأكيد كلمة المرور الجديدة';
+
+  @override
+  String get nameAcceptsOnlyDashedAndCharacters =>
+      'الاسم يقبل فقط الأحرف والأحرف المتقطعة.';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين.';
+
+  @override
+  String get pleaseReEnterYourNewPassword =>
+      'يرجى إعادة إدخال كلمة المرور الجديدة الخاصة بك.';
 
   @override
   String get clickBackAgainToExit => 'اضغط مرة أخرى للخروج';
@@ -31,7 +97,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thisFieldIsRequired => 'هذا الحقل مطلوب.';
 
   @override
-  String get passwordLengthError => 'يجب أن تكون كلمة المرور 6 أحرف على الأقل.';
+  String valueShouldBeNumAtelase(int num, String val) {
+    return 'يجب أن تكون طول قيمة $val على الأقل $num احرف';
+  }
 
   @override
   String get invalidEmail => 'يرجى إدخال عنوان بريد إلكتروني صالح.';
@@ -48,6 +116,79 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invalidPhoneNumber => 'يرجى إدخال رقم هاتف صالح.';
+
+  @override
+  String get passwordMustConain => 'يجب أن تحتوي كلمة المرور على';
+
+  @override
+  String get atLEastEightCharacters => 'ثمانية أحرف على الأقل';
+
+  @override
+  String get oneUppercaseLetter => 'حرف كبير واحد على الأقل';
+
+  @override
+  String get oneLowercaseLetter => 'حرف صغير واحد على الأقل';
+
+  @override
+  String get oneSpecialCharacter => 'رمز خاص واحد على الأقل';
+
+  @override
+  String get oneDigit => 'رقم واحد على الأقل';
+
+  @override
+  String get auth___________________End => '_______________________';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get send => 'إرسال';
+
+  @override
+  String get submit => 'إرسال';
+
+  @override
+  String get warning => 'تحذير';
+
+  @override
+  String get alert => 'تنبيه';
+
+  @override
+  String get areYouSureYouWantToDeleteThisItem =>
+      'هل أنت متأكد أنك تريد حذف هذا العنصر؟';
+
+  @override
+  String get areYouSureYouWantToClearAllItems =>
+      'هل أنت متأكد أنك تريد مسح جميع العناصر؟';
+
+  @override
+  String get areYouSureYouWantToLogout => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get areYouSureYouWantToDeleteThisAccount =>
+      'هل أنت متأكد أنك تريد حذف هذا الحساب؟';
+
+  @override
+  String get pressDoubleBackToExit => 'اضغط مرتين للخروج';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما';
+
+  @override
+  String get requestTimeOut => 'انتهت مهلة الطلب';
+
+  @override
+  String get weakOrNoInternetConnection =>
+      'اتصال ضعيف أو لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get requestToServerWasCancelled => 'تم إلغاء الطلب إلى الخادم';
+
+  @override
+  String get unknownErorOccurred => 'حدث خطأ غير معروف';
 
   @override
   String get next => 'التالي';
@@ -69,18 +210,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get selectMode => 'اختر الوضع';
-
-  @override
-  String get guestMode => 'وضع الضيف';
-
-  @override
-  String get signIn => 'تسجيل الدخول';
-
-  @override
-  String get signUp => 'إنشاء حساب';
-
-  @override
-  String get or => 'أو';
 
   @override
   String get singUpToExploreWideVarietyOfProducts =>

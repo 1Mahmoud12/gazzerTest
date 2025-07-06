@@ -13,12 +13,12 @@ class RegisterRepoImp extends RegisterRepo {
   final ApiClient _apiClient;
   RegisterRepoImp(this._apiClient);
 
-  late final String _sessionId;
+  late String _sessionId;
 
   @override
   Future<Result<String>> editPhoneNumber(String sessionId, String code) {
     return call<String>(
-      apiCall: () => _apiClient.post(endpoint: Endpoints.editPhoneNum(sessionId), requestBody: {'otp_code': code}),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.editPhoneNum(sessionId), requestBody: {'phone': code}),
       parser: (result) {
         return result.data['message']?.toString() ?? 'Success';
       },
@@ -31,7 +31,7 @@ class RegisterRepoImp extends RegisterRepo {
       apiCall: () => _apiClient.post(endpoint: Endpoints.register, requestBody: req.toJson()),
       parser: (result) {
         final resp = AuthResponse.fromJson(result.data);
-        _sessionId = resp.sessionId;
+        _sessionId = resp.sessionId ?? '';
         return resp;
       },
     );
@@ -75,4 +75,12 @@ class RegisterRepoImp extends RegisterRepo {
     TokenService.setToken(token);
     Session().setClient = client;
   }
+
+  @override
+  Future<Result<String>> onChangePhone(String newPhone) async {
+    return editPhoneNumber(_sessionId, newPhone);
+  }
+
+  @override
+  bool canChangePhone = true;
 }

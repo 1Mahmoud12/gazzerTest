@@ -12,7 +12,6 @@ import 'package:intl_phone_number_field/models/country_config.dart';
 import 'package:intl_phone_number_field/models/dialog_config.dart';
 import 'package:intl_phone_number_field/models/phone_config.dart';
 import 'package:intl_phone_number_field/util/general_util.dart';
-import 'package:intl_phone_number_field/view/country_code_bottom_sheet.dart';
 import 'package:intl_phone_number_field/view/flag_view.dart';
 
 class InternationalPhoneNumberInput extends StatefulWidget {
@@ -96,37 +95,37 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
           flex: 6,
           child: InkWell(
             borderRadius: AppConst.defaultBorderRadius,
-            onTap: () {
-              if (!widget.inactive && countries != null) {
-                SystemSound.play(SystemSoundType.click);
-                showModalBottomSheet(
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-                  barrierColor: Colors.black38,
-                  isScrollControlled: true,
-                  backgroundColor: widget.dialogConfig.backgroundColor,
-                  context: context,
-                  builder: (context) {
-                    return SingleChildScrollView(
-                      child: CountryCodeBottomSheet(
-                        countries: countries!,
-                        selected: selected,
-                        onSelected: (countryCodeModel) {
-                          setState(() {
-                            selected = countryCodeModel;
-                          });
-                          if (widget.onInputChanged != null) {
-                            widget.onInputChanged!(
-                              IntPhoneNumber(code: selected.code, dialCode: selected.dial_code, number: widget.controller.text.trimLeft().trimRight()),
-                            );
-                          }
-                        },
-                        dialogConfig: widget.dialogConfig,
-                      ),
-                    );
-                  },
-                );
-              }
-            },
+            // onTap: () {
+            //   if (!widget.inactive && countries != null) {
+            //     SystemSound.play(SystemSoundType.click);
+            //     showModalBottomSheet(
+            //       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+            //       barrierColor: Colors.black38,
+            //       isScrollControlled: true,
+            //       backgroundColor: widget.dialogConfig.backgroundColor,
+            //       context: context,
+            //       builder: (context) {
+            //         return SingleChildScrollView(
+            //           child: CountryCodeBottomSheet(
+            //             countries: countries!,
+            //             selected: selected,
+            //             onSelected: (countryCodeModel) {
+            //               setState(() {
+            //                 selected = countryCodeModel;
+            //               });
+            //               if (widget.onInputChanged != null) {
+            //                 widget.onInputChanged!(
+            //                   IntPhoneNumber(code: selected.code, dialCode: selected.dial_code, number: widget.controller.text.trimLeft().trimRight()),
+            //                 );
+            //               }
+            //             },
+            //             dialogConfig: widget.dialogConfig,
+            //           ),
+            //         );
+            //       },
+            //     );
+            //   }
+            // },
             // style: TextButton.styleFrom(
             //   minimumSize: Size.zero,
             //   padding: EdgeInsets.zero,

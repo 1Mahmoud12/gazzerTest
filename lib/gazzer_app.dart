@@ -17,6 +17,7 @@ class GazzerApp extends StatelessWidget {
       home: const SelectModeScreen(),
       navigatorKey: AppNavigator().mainKey,
       theme: AppTheme.lightTheme,
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: L10n.localizationDelegates,
       supportedLocales: L10n.supportedLocales,
       locale: L10n.supportedLocales.first,

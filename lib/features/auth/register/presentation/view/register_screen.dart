@@ -15,19 +15,18 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/common/widgets/social_auth_widget.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -69,7 +68,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _nameController,
                       hintText: L10n.tr().yourFullName,
                       bgColor: Colors.transparent,
-                      validator: Validators.notEmpty,
+                      validator: (v) {
+                        return Validators.dashedCharactersOnly(v) ?? Validators.valueMoreThanNum(v, 3, L10n.tr().fullName);
+                      },
                       autofillHints: [AutofillHints.username, AutofillHints.name],
                     ),
                     const VerticalSpacing(24),
@@ -85,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (code == 'EG') {
                           return Validators.mobileEGValidator(v);
                         }
-                        return Validators.moreThanSix(v);
+                        return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
                       },
                     ),
                   ],
@@ -120,15 +121,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
                 ),
               ),
-              const VerticalSpacing(24),
-              Center(
-                child: Text(
-                  "or", // L10n.tr().or,
-                  style: TStyle.greyRegular(16),
-                ),
-              ),
-              const VerticalSpacing(10),
-              const SocialAuthWidget(),
+              // const VerticalSpacing(24),
+              // Center(child: Text(L10n.tr().or, style: TStyle.greyRegular(16))),
+              // const VerticalSpacing(10),
+              // const SocialAuthWidget(),
             ],
           ),
         ),

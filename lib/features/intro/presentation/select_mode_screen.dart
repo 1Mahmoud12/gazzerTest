@@ -12,6 +12,7 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
@@ -54,7 +55,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-            GradientText(text: "How To Login", style: TStyle.blackBold(24), gradient: Grad.textGradient),
+            GradientText(text: L10n.tr().howToLogin, style: TStyle.blackBold(24), gradient: Grad.textGradient),
             const SizedBox(height: 40, width: double.infinity),
             Hero(
               tag: Tags.btn,
@@ -73,11 +74,9 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             PlanAnimatedBtn(
               onPressed: () {
                 isAnimating.value = false;
-                context.myPush(const LoginScreen()).then((v) {
-                  isAnimating.value = true;
-                });
+                context.myPush(BlocProvider(create: (context) => di<LoginCubit>(), child: const LoginScreen())).then((v) => isAnimating.value = true);
               },
-              text: "Log in",
+              text: L10n.tr().login,
               isAnimating: isAnimating,
               animDuration: animDuration,
             ),
@@ -85,7 +84,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             PlanAnimatedBtn(
               onPressed: () {
                 isAnimating.value = false;
-                context.myPush(BlocProvider(create: (context) => di<RegisterCubit>(), child: const SignUpScreen())).then((v) {
+                context.myPush(BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen())).then((v) {
                   isAnimating.value = true;
                 });
               },
