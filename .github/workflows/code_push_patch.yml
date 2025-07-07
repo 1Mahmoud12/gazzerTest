@@ -1,0 +1,70 @@
+name: Build test apk
+
+on:
+  push:
+    branches:
+      - dev_codepatch
+  pull_request:
+    branches:
+      - dev_codepatch
+
+env:
+  SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
+jobs:
+  build_test_apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # create key store files from secrets
+      - name: Retrieve the secret key store and decode it to a file
+        env:
+          BASE_64_SIGNING_KEY: ${{ secrets.BASE_64_SIGNING_KEY }}
+        run: |
+          cd ./android/app
+          ls -l 
+          echo $BASE_64_SIGNING_KEY | base64 --decode > ./upload-keystore.jks
+          echo "key store file created"
+          ls -l
+
+      # create key properties files from secrets
+      - name: Retrieve key properties and decode it to a file
+        env:
+          Base_64_KEY_PROPERTIES: ${{ secrets.Base_64_KEY_PROPERTIES }}
+        run: |
+          cd ./android/
+          ls -l
+          echo $Base_64_KEY_PROPERTIES | base64 --decode > key.properties
+          echo "key properties file created"
+          ls -l
+
+      - name: Set up JDK 23.0.1+11
+        uses: actions/setup-java@v2
+        with:
+          java-version: "23.0.1+11"
+          distribution: "temurin"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # - name: Build APK
+      #   run: flutter build apk
+
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true # Optionally cache your Shorebird installation
+
+      - name: 🚀 Shorebird Patch
+        uses: shorebirdtech/shorebird-patch@v0
+        with:
+          platform: android # or 'ios'
+
