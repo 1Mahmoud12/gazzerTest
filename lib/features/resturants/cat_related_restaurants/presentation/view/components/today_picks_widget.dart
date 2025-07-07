@@ -11,7 +11,7 @@ class _TodayPicksWidget extends StatelessWidget {
       children: [
         Padding(
           padding: AppConst.defaultHrPadding,
-          child: GradientText(text: "Today's Picks", style: TStyle.blackBold(24)),
+          child: GradientText(text: L10n.tr().todayPicks, style: TStyle.blackBold(24)),
         ),
         SizedBox(
           height: 260,

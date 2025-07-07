@@ -36,7 +36,7 @@ class __GroceryHeaderState extends State<_GroceryHeader> {
                 controller: controller,
                 height: 80,
                 borderRadius: 64,
-                hintText: "Search for restaurants, items, or categories",
+                hintText: L10n.tr().searchForStoresItemsAndCAtegories,
                 bgColor: Colors.transparent,
                 prefix: const Icon(Icons.search, color: Co.purple, size: 24),
               ),

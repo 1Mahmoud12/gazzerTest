@@ -27,32 +27,32 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   void initState() {
     drawerBtns = [
-      ("My Cart", Assets.assetsSvgCart, (BuildContext ctx) => AppNavigator().push(const CartScreen())),
+      (L10n.tr().myCart, Assets.assetsSvgCart, (BuildContext ctx) => AppNavigator().push(const CartScreen())),
       (
-        "Theme Mood",
+        L10n.tr().themeMode,
         Switch(value: true, onChanged: (v) {}).withScale(scale: 0.8, alignment: Alignment.centerRight),
         (BuildContext ctx) {},
       ),
-      ("Food Plan", Assets.assetsSvgFoodPlan, (BuildContext ctx) => AppNavigator().push(const HealthFocusScreen())),
+      (L10n.tr().foodPlan, Assets.assetsSvgFoodPlan, (BuildContext ctx) => AppNavigator().push(const HealthFocusScreen())),
       (
-        "Video Tutorial",
+        L10n.tr().videoTutorials,
         Assets.assetsSvgVideo,
         (BuildContext ctx) => AppNavigator().push(const VideoTutorialScreen(), useLast: true),
       ),
-      ("Rewards", Assets.assetsSvgRewards, (BuildContext ctx) {}),
+      (L10n.tr().rewards, Assets.assetsSvgRewards, (BuildContext ctx) {}),
       (
-        "Favorites",
+        L10n.tr().favorites,
         Assets.assetsSvgFavoritesOutlined,
         (BuildContext ctx) {
           LayoutInherited.of(context).changeIndex(1);
         },
       ),
-      ("My Orders", Assets.assetsSvgHistory, (BuildContext ctx) {}),
-      ("Language", Assets.assetsSvgLanguage, (BuildContext ctx) {}),
-      ("Gazzer Chat", Assets.assetsSvgChat, (BuildContext ctx) {}),
-      ("Community App", Assets.assetsSvgCommunity, (BuildContext ctx) {}),
-      ("Payment Setting", Assets.assetsSvgPaymentSettings, (BuildContext ctx) {}),
-      ("Terms & Conditions", Assets.assetsSvgTerms, (BuildContext ctx) {}),
+      (L10n.tr().myOrders, Assets.assetsSvgHistory, (BuildContext ctx) {}),
+      (L10n.tr().language, Assets.assetsSvgLanguage, (BuildContext ctx) {}),
+      (L10n.tr().gazzerChat, Assets.assetsSvgChat, (BuildContext ctx) {}),
+      (L10n.tr().communityApp, Assets.assetsSvgCommunity, (BuildContext ctx) {}),
+      (L10n.tr().paymentSetting, Assets.assetsSvgPaymentSettings, (BuildContext ctx) {}),
+      (L10n.tr().termsAndConditions, Assets.assetsSvgTerms, (BuildContext ctx) {}),
     ];
     super.initState();
   }

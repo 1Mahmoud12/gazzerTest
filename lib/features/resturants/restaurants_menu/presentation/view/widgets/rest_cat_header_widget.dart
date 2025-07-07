@@ -74,7 +74,7 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
                           height: 80,
                           borderRadius: 64,
                           bgColor: Colors.transparent,
-                          hintText: "Search for stores, items, or categories",
+                          hintText: L10n.tr().searchForStoresItemsAndCAtegories,
                           prefix: const Icon(Icons.search, color: Co.purple, size: 32),
                         ),
                       ),

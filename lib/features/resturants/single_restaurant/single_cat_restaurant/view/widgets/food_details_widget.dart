@@ -59,9 +59,10 @@ class _FoodDetailsWidget extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "Details\n",
+                      text: L10n.tr().details,
                       style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow),
                     ),
+                    const TextSpan(text: "\n"),
                     const WidgetSpan(child: VerticalSpacing(24)),
                     TextSpan(
                       text:

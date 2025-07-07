@@ -37,7 +37,7 @@ class _ExploreBest extends StatelessWidget {
                   child: Stack(
                     children: [
                       Align(
-                        alignment: Alignment.centerRight,
+                        alignment: AlignmentLocale.centerEnd(context),
                         child: SizedBox(
                           width: constraints.maxWidth - (constraints.maxHeight / 2),
                           child: DecoratedBox(

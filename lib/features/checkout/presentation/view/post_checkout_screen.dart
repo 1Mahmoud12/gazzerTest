@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
-import  'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 
 class PostCheckoutScreen extends StatelessWidget {
   const PostCheckoutScreen({super.key});
@@ -35,8 +36,7 @@ class PostCheckoutScreen extends StatelessWidget {
                       icon: const Icon(Icons.home_outlined, size: 32, color: Co.purple),
                     ),
                     IconButton(
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       icon: const Icon(Icons.location_pin, size: 32, color: Co.purple),
                     ),
                     const Spacer(),
@@ -50,7 +50,7 @@ class PostCheckoutScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SvgPicture.asset(Assets.assetsSvgSuccess),
-                      GradientText(text:  "Order Placed Successfully!", style: TStyle.blackBold(22)),
+                      GradientText(text: L10n.tr().orderPlacedSuccessfully, style: TStyle.blackBold(22)),
                       const VerticalSpacing(64),
                     ],
                   ),

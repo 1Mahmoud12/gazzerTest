@@ -24,12 +24,15 @@ class _TopRatedComponent extends StatelessWidget {
             fit: StackFit.expand,
             alignment: Alignment.topCenter,
             children: [
-              CircularCarousalWidget(
-                itemsCount: Fakers.fakeProds.length,
-                maxItemWidth: 128,
-                itemBuilder: (BuildContext context, int index) {
-                  return _TopRatedCard(Fakers.fakeProds[index]);
-                },
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: CircularCarousalWidget(
+                  itemsCount: Fakers.fakeProds.length,
+                  maxItemWidth: 128,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _TopRatedCard(Fakers.fakeProds[index]);
+                  },
+                ),
               ),
               Align(
                 alignment: const Alignment(0, 0.7),

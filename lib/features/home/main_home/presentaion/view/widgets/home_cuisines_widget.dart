@@ -7,7 +7,7 @@ class _HomeCuisinesWidget extends StatelessWidget {
     return Column(
       spacing: 12,
       children: [
-        TitleWithMore(title: "Explore Cuisines", onPressed: () {}),
+        TitleWithMore(title: L10n.tr().exploreCuisines, onPressed: () {}),
         SizedBox(
           height: 70,
           child: ListView.separated(
@@ -29,7 +29,7 @@ class _HomeCuisinesWidget extends StatelessWidget {
                   spacing: 6,
                   children: [
                     CircleGradientBorderedImage(image: cuisne.image),
-                    Text("${cuisne.name} Cousine", style: TStyle.blackBold(12), textAlign: TextAlign.center),
+                    Text("${cuisne.name} ${cuisne.name}", style: TStyle.blackBold(12), textAlign: TextAlign.center),
                     const HorizontalSpacing(8),
                   ],
                 ),
@@ -52,7 +52,12 @@ class _HomeCuisinesWidget extends StatelessWidget {
                   spacing: 8,
                   children: [
                     Expanded(child: CircleGradientBorderedImage(image: cuisne.image)),
-                    Text(cuisne.name, style: TStyle.blackBold(12), overflow: TextOverflow.ellipsis, maxLines: 1,),
+                    Text(
+                      cuisne.name,
+                      style: TStyle.blackBold(12),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ],
                 ),
               );

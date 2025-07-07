@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
@@ -63,7 +64,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                       child: MainTextField(
                         controller: controller,
                         height: 80,
-                        hintText: "Search for storesm items, or categories",
+                        hintText: L10n.tr().searchForStoresItemsAndCAtegories,
                         borderRadius: 64,
                         bgColor: Colors.transparent,
                         prefix: const Icon(Icons.search, color: Co.purple, size: 24),

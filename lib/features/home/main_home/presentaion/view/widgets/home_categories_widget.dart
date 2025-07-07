@@ -10,7 +10,7 @@ class _HomeCategoriesWidget extends StatelessWidget {
       spacing: 12,
       children: [
         Text(
-          "Categories",
+          L10n.tr().categories,
           style: TStyle.primaryBold(16),
         ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
         GridView.builder(

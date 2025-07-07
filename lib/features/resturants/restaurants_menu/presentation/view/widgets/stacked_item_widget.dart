@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 
 class StackedItemWidget extends StatelessWidget {
@@ -14,7 +15,7 @@ class StackedItemWidget extends StatelessWidget {
       children: [
         SizedBox(
           width: (radius * 2) + (radius * min(items.length.toDouble(), 3)),
-          height: (radius*2),
+          height: (radius * 2),
           child: Stack(
             children: List.generate(min(items.length, 4), (i) {
               return Positioned(
@@ -24,7 +25,7 @@ class StackedItemWidget extends StatelessWidget {
             }),
           ),
         ),
-        if (items.length > 4) Text("+${items.length - 4} items", style: TStyle.blackBold(12)),
+        if (items.length > 4) Text("+${items.length - 4} ${L10n.tr().items}", style: TStyle.blackBold(12)),
       ],
     );
   }

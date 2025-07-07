@@ -18,10 +18,10 @@ class MainBnb extends StatefulWidget {
 class _MainBnbState extends State<MainBnb> {
   late int selectedIndex;
   final items = {
-    "Home": Assets.assetsSvgHomeIcon,
-    "Favorite": Assets.assetsSvgFavoriteIcon,
-    "Orders": Assets.assetsSvgMenyIcon,
-    "Menu": Assets.assetsSvgDrawerIcon,
+    L10n.tr().home: Assets.assetsSvgHomeIcon,
+    L10n.tr().favorites: Assets.assetsSvgFavoriteIcon,
+    L10n.tr().orders: Assets.assetsSvgMenyIcon,
+    L10n.tr().menu: Assets.assetsSvgDrawerIcon,
   };
 
   @override

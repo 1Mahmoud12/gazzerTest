@@ -38,7 +38,7 @@ class _RecentOrders extends StatelessWidget {
                             ),
                             border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1.5),
                           ),
-                        
+
                           child: ClipRRect(
                             borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(32),
@@ -69,7 +69,7 @@ class _RecentOrders extends StatelessWidget {
                                   runAlignment: WrapAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Order #00${index + 1}",
+                                      "#00${index + 1}",
                                       style: TStyle.blackSemi(12),
                                     ),
                                     Text(
@@ -80,7 +80,7 @@ class _RecentOrders extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Text("Delivered on 01/01/2025", style: TStyle.greySemi(12)),
+                              Text("${L10n.tr().deliveredOn} 01/01/2025", style: TStyle.greySemi(12)),
                               Text(prod.name, style: TStyle.greySemi(12)),
                             ],
                           ),

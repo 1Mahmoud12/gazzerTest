@@ -16,6 +16,8 @@ import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
 class MainLayout extends StatefulWidget {
+  /// Main layout that provide smooth transitions etween the main screens, it contains the bottom navigation bar and the main screens.
+  /// [idnex] is the initial index of the bottom navigation bar, if not provided, it defaults to 0
   const MainLayout({super.key, this.idnex});
   final int? idnex;
   @override
@@ -27,13 +29,14 @@ class _MainLayoutState extends State<MainLayout> {
   final canPop = ValueNotifier(false);
   int _prevIdenx = 0;
 
-  changeIndex(int index) {
+  bool changeIndex(int index) {
     if (index == indexNotifier.value) return false;
     _prevIdenx = indexNotifier.value;
     indexNotifier.value = index;
+    return true;
   }
 
-  _getScreen(int index) {
+  Widget _getScreen(int index) {
     switch (index) {
       case 0:
         return const HomeNavigation(key: ValueKey(0));
@@ -42,7 +45,7 @@ class _MainLayoutState extends State<MainLayout> {
       case 2:
         return const OrdersNavigator(key: ValueKey(2));
       case 3:
-        break;
+        return const SizedBox.shrink();
       default:
         return const HomeScreen(key: ValueKey(4));
     }
@@ -57,42 +60,42 @@ class _MainLayoutState extends State<MainLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final child = PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!canPop.value) {
-          Alerts.exitSnack(context);
-          canPop.value = true;
-          Future.delayed(const Duration(seconds: 2), () => canPop.value = false);
-        } else {
-          exit(0);
-        }
-      },
-      child: LayoutInherited(
-        changeIndex: changeIndex,
-        child: ValueListenableBuilder(
-          valueListenable: indexNotifier,
-          builder: (context, value, child) => Scaffold(
-            body: PageTransitionSwitcher(
-              duration: Durations.long4,
-              reverse: _prevIdenx > value,
-              transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-                return SharedAxisTransition(
-                  fillColor: Colors.transparent,
-                  animation: primaryAnimation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                );
-              },
-              child: _getScreen(value),
-            ),
+    return GuideProvider(
+      shouldProvide: () => Session().showTour,
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!canPop.value) {
+            Alerts.exitSnack(context);
+            canPop.value = true;
+            Future.delayed(const Duration(seconds: 2), () => canPop.value = false);
+          } else {
+            exit(0);
+          }
+        },
+        child: LayoutInherited(
+          changeIndex: changeIndex,
+          child: ValueListenableBuilder(
+            valueListenable: indexNotifier,
+            builder: (context, value, child) => Scaffold(
+              body: PageTransitionSwitcher(
+                duration: Durations.long4,
+                reverse: _prevIdenx > value,
+                transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
+                  return SharedAxisTransition(
+                    fillColor: Colors.transparent,
+                    animation: primaryAnimation,
+                    secondaryAnimation: secondaryAnimation,
+                    transitionType: SharedAxisTransitionType.horizontal,
+                    child: child,
+                  );
+                },
+                child: _getScreen(value),
+              ),
 
-            bottomNavigationBar: Builder(
-              builder: (context) {
-                return Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: MainBnb(
+              bottomNavigationBar: Builder(
+                builder: (context) {
+                  return MainBnb(
                     initialIndex: indexNotifier.value,
                     onItemSelected: (index) {
                       if (index == 3) {
@@ -105,16 +108,27 @@ class _MainLayoutState extends State<MainLayout> {
                       _prevIdenx = indexNotifier.value;
                       indexNotifier.value = index;
                     },
-                  ),
-                );
-              },
+                  );
+                },
+              ),
+              endDrawer: const MainDrawer(),
             ),
-            endDrawer: const MainDrawer(),
           ),
         ),
       ),
     );
-    if (Session().showTour) {
+  }
+}
+
+class GuideProvider extends StatelessWidget {
+  /// This widgets provide [HotspotProvider] widget as parent to the
+  /// given child if the condition is fulfilled
+  const GuideProvider({super.key, required this.child, required this.shouldProvide});
+  final Widget child;
+  final bool Function() shouldProvide;
+  @override
+  Widget build(BuildContext context) {
+    if (shouldProvide()) {
       return HotspotProvider(
         skrimColor: Colors.black54,
         dismissibleSkrim: true,

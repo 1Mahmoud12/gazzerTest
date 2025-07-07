@@ -9,7 +9,7 @@ class _DailyOffersWidget extends StatelessWidget {
       spacing: 24,
       children: [
         TitleWithMore(
-          title: "Daily Offers For You",
+          title: L10n.tr().dailyOffersForYou,
           titleStyle: TStyle.primaryBold(16),
           onPressed: () {
             Navigator.of(context).push(AppTransitions().slideTransition(const DailyOffersScreen()));

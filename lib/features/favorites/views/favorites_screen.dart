@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -26,8 +27,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     super.initState();
   }
 
-  final favs = ["Recent Restaurants", "Recent Groceries", "Recent Pharmacies"];
-
   @override
   void dispose() {
     controller.dispose();
@@ -36,6 +35,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final favs = [L10n.tr().recentRestaurants, L10n.tr().recentGroceries, L10n.tr().recentPharmacies];
     return Scaffold(
       appBar: const MainAppBar(showCart: false),
       body: Column(
@@ -47,7 +47,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               controller: controller,
               height: 80,
               borderRadius: 64,
-              hintText: "Search for restaurants, items, or categories",
+              hintText: L10n.tr().searchForStoresItemsAndCAtegories,
               bgColor: Colors.transparent,
               prefix: const Icon(Icons.search, color: Co.purple, size: 24),
             ),

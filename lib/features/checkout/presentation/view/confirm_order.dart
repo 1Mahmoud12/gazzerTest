@@ -13,7 +13,7 @@ class ConfirmOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final btnText = ["Add Promo Code", "Add Delivery Instructions", "Add Tip"];
+    final btnText = [L10n.tr().addPRomoCode, L10n.tr().addDeliveryInstruction, L10n.tr().addTip];
     return Scaffold(
       appBar: AppBar(
         title: GradientText(text: L10n.tr().confirmOrder, style: TStyle.blackBold(18)),

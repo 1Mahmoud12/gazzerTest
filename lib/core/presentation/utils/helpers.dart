@@ -1,5 +1,6 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:intl/intl.dart';
 
 abstract class Helpers {
@@ -37,53 +38,9 @@ abstract class Helpers {
     }
   }
 
-  // static Widget concatinateTheCurrency({required num? amount, TextStyle? style, Color? color}) {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     children: [
-  //       Row(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text('EG', style: TStyle.primarySemi(10).copyWith(color: color)),
-  //           Text(amount.toString().split('.').first, style: TStyle.primaryBold(18).copyWith(color: color)),
-  //           Text(" ${amount?.toStringAsFixed(2).split('.').last}",
-  //               style: TStyle.primarySemi(10).copyWith(color: color)),
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
-
   static String getProperPrice(num price, {bool showCurrency = true}) {
     final isInt = price % 1 == 0;
-    return (showCurrency ? ('EGP ') : '') + (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2));
+
+    return (showCurrency ? ('${L10n.tr().egp} ') : '') + (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2));
   }
-
-  // static Widget getProperPriceWidget(num price, {TextStyle? egStyle, TextStyle? style}) {
-  //   final isInt = price % 1 == 0;
-  //   // ('EG ') + (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2));
-  //   return Text.rich(TextSpan(children: [
-  //     TextSpan(
-  //       text: 'EG ',
-  //       style: egStyle ?? TStyle.greySemi(13),
-  //     ),
-  //     TextSpan(
-  //       text: (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2)),
-  //       style: style ?? TStyle.blackBold(13),
-  //     ),
-  //   ]));
-  // }
-
-  // static bool requestLogin(BuildContext context) {
-  //   if (SessionData.inst.user == null) {
-  //     showDialog<bool?>(
-  //       context: context,
-  //       builder: (context) => Dialogs.confirmDialog(title: L10n.tr().pleaseLoginFirst),
-  //     ).then((c) {
-  //       if (c == true && context.mounted) context.push(LoginScreen.routeName(false));
-  //     });
-  //     return true;
-  //   }
-  //   return false;
-  // }
 }

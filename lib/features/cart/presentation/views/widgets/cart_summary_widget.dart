@@ -113,7 +113,7 @@ class CartSummaryWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("TOTAL: ", style: TStyle.secondaryBold(13)),
+                    Text(L10n.tr().total, style: TStyle.secondaryBold(13)),
                     const HorizontalSpacing(12),
                     Text(Helpers.getProperPrice(65), style: TStyle.secondaryBold(13)),
                   ],

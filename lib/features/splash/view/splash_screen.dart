@@ -54,59 +54,62 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Co.dark,
-      body: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.transparent, Co.purple],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        backgroundColor: Co.dark,
+        body: DecoratedBox(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.transparent, Co.purple],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ScaleTransition(
-                scale: Tween<double>(begin: 0.4, end: 1.0).animate(contoller),
-                child: RotationTransition(
-                  turns: Tween<double>(begin: 0.0, end: 0.37).animate(contoller),
-                  child: Row(
-                    spacing: 12,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(Assets.assetsSvgSplashIcon, height: 90, width: 90),
-                      SizeTransition(
-                        axis: Axis.horizontal,
-                        axisAlignment: 1,
-                        sizeFactor: textController,
-                        child: FadeTransition(
-                          opacity: textController,
-                          child: Text('HELLO', style: TStyle.whiteBold(92).copyWith(color: Co.bg)),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ScaleTransition(
+                  scale: Tween<double>(begin: 0.4, end: 1.0).animate(contoller),
+                  child: RotationTransition(
+                    turns: Tween<double>(begin: 0.0, end: 0.37).animate(contoller),
+                    child: Row(
+                      spacing: 12,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(Assets.assetsSvgSplashIcon, height: 90, width: 90),
+                        SizeTransition(
+                          axis: Axis.horizontal,
+                          axisAlignment: 1,
+                          sizeFactor: textController,
+                          child: FadeTransition(
+                            opacity: textController,
+                            child: Text('HELLO', style: TStyle.whiteBold(92).copyWith(color: Co.bg)),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const VerticalSpacing(20),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.of(context).pushReplacement(_createRoute());
-              //   },
-              //   child: Text(L10n.tr().next, style: TStyle.blackBold(18)),
-              // ),
-              // MaterialButton(
-              //   onPressed: () {
-              //     if (textController.isCompleted) {
-              //       textController.reset();
-              //     }
-              //     Future.delayed(Duration(seconds: 1), () => _startAnimate());
-              //   },
-              //   child: Text('Repeat', style: TStyle.whiteBold(32)),
-              // ),
-            ],
+                const VerticalSpacing(20),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     Navigator.of(context).pushReplacement(_createRoute());
+                //   },
+                //   child: Text(L10n.tr().next, style: TStyle.blackBold(18)),
+                // ),
+                // MaterialButton(
+                //   onPressed: () {
+                //     if (textController.isCompleted) {
+                //       textController.reset();
+                //     }
+                //     Future.delayed(Duration(seconds: 1), () => _startAnimate());
+                //   },
+                //   child: Text('Repeat', style: TStyle.whiteBold(32)),
+                // ),
+              ],
+            ),
           ),
         ),
       ),

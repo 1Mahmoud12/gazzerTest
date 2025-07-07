@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
           autoAlignType: AlignmentType.both,
           speed: 1,
           dy: HomeUtils.headerHeight(context) + 12,
-          dx: constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
+          dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
           disableBounceAnimation: true,
           mainScreenWidget: ListView(
             padding: EdgeInsets.zero,
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       rtChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GradientText(text: "L10n.tr().freeDelivery", style: TStyle.blackBold(22), gradient: Grad.radialGradient),
+                          GradientText(text: L10n.tr().freeDelivery, style: TStyle.blackBold(22), gradient: Grad.radialGradient),
                           Text.rich(
                             TextSpan(
                               children: [

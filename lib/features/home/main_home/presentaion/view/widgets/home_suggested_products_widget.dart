@@ -9,7 +9,7 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
       spacing: 12,
       children: [
         TitleWithMore(
-          title: "Suggested For You",
+          title: L10n.tr().suggestedForYou,
           onPressed: () {
             Navigator.of(context).push(AppTransitions().slideTransition(const SuggestedScreen()));
           },

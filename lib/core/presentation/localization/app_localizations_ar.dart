@@ -12,13 +12,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get groceries_________________Start => '__________________';
 
   @override
-  String get bestOffer => 'best_Offer';
+  String get bestOffer => 'أفضل عرض';
 
   @override
-  String get shopNow => 'shop_Now';
+  String get shopNow => 'تسوق الآن';
 
   @override
-  String get groceryStores => 'grocery_Stores';
+  String get groceryStores => 'متاجر البقالة';
 
   @override
   String get groceries_________________End => '__________________';
@@ -27,10 +27,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ordersHistory_________________Start => '__________________';
 
   @override
-  String get historyOrders => 'history_Orders';
+  String get historyOrders => 'تاريخ الطلبات';
 
   @override
-  String get recentOrders => 'recent_Orders';
+  String get recentOrders => 'الطلبات الأخيرة';
 
   @override
   String get ordersHistory_________________End => '__________________';
@@ -39,34 +39,40 @@ class AppLocalizationsAr extends AppLocalizations {
   String get restaurants_________________Start => '__________________';
 
   @override
-  String get exploreBest => 'explore_Best';
+  String get details => 'التفاصيل';
 
   @override
-  String get pickToYou => 'pick_To_You';
+  String get todayPicks => 'اختيارات اليوم';
 
   @override
-  String get eartYourFirstOrderForFree => 'eart_Your_First_Order_For_Free';
+  String get exploreBest => 'استكشف الأفضل';
 
   @override
-  String get burgerRestaurants => 'burger_Restaurants';
+  String get pickToYou => 'اختر لك';
 
   @override
-  String get chooseYourFavorite => 'choose_Your_Favorite';
+  String get eartYourFirstOrderForFree => 'احصل على طلبك الأول مجاناً';
 
   @override
-  String get bestMenuOfRestaurants => 'best_Menu_Of_Restaurants';
+  String get burgerRestaurants => 'مطاعم البرغر';
 
   @override
-  String get chooseYourFavoriteVendor => 'choose_Your_Favorite_Vendor';
+  String get chooseYourFavorite => 'اختر المفضل لديك';
 
   @override
-  String get exploreTheBestMeals => 'explore_The_Best_Meals';
+  String get bestMenuOfRestaurants => 'أفضل قائمة من المطاعم';
 
   @override
-  String get earnYourFirst5OrdersForFree => 'earn_Your_First5_Orders_For_Free';
+  String get chooseYourFavoriteVendor => 'اختر البائع المفضل لديك';
 
   @override
-  String get testTest => 'test_Test';
+  String get exploreTheBestMeals => 'استكشف أفضل الوجبات';
+
+  @override
+  String get earnYourFirst5OrdersForFree => 'احصل على أول 5 طلبات مجاناً';
+
+  @override
+  String get testTest => 'اختبار';
 
   @override
   String get restaurants_________________End => '__________________';
@@ -75,19 +81,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get product_________________Start => '__________________';
 
   @override
-  String get selectedType => 'selected_Type';
+  String get selectedType => 'النوع المحدد';
 
   @override
-  String get addToCart => 'add_To_Cart';
+  String get addToCart => 'إضافة إلى السلة';
 
   @override
-  String get eg => 'eg';
+  String get eg => 'مثال';
 
   @override
-  String get selectType => 'select_Type';
+  String get selectType => 'اختر النوع';
 
   @override
-  String get alsoOrderWith => 'also_Order_With';
+  String get alsoOrderWith => 'اطلب أيضاً مع';
 
   @override
   String get product_________________End => '__________________';
@@ -96,29 +102,28 @@ class AppLocalizationsAr extends AppLocalizations {
   String get plans_________________Start => '__________________';
 
   @override
-  String get whatIsYourPrimaryHealthFocus =>
-      'what_Is_Your_Primary_Health_Focus';
+  String get whatIsYourPrimaryHealthFocus => 'ما هو تركيزك الصحي الأساسي';
 
   @override
-  String get yourPlanToOptimizeCalories => 'your_Plan_To_Optimize_Calories';
+  String get yourPlanToOptimizeCalories => 'خطتك لتحسين السعرات الحرارية';
 
   @override
-  String get weightLossPlan => 'weight_Loss_Plan';
+  String get weightLossPlan => 'خطة فقدان الوزن';
 
   @override
-  String get english => 'english';
+  String get english => 'English';
 
   @override
-  String get arabic => 'arabic';
+  String get arabic => 'عربي';
 
   @override
   String get selectLanguage => 'اختر اللغة';
 
   @override
-  String get gazzerVideoTutorialGuide => 'gazzer_Video_Tutorial_Guide';
+  String get gazzerVideoTutorialGuide => 'دليل الفيديو التعليمي لجازر';
 
   @override
-  String get gazzerVideoTutorial => 'gazzer_Video_Tutorial';
+  String get gazzerVideoTutorial => 'الفيديو التعليمي لجازر';
 
   @override
   String get youMadeIt => 'لقد نجحت';
@@ -130,40 +135,68 @@ class AppLocalizationsAr extends AppLocalizations {
   String get home_________________Start => '__________________';
 
   @override
-  String get explore => 'explore';
+  String get home => 'الرئيسية';
 
   @override
-  String get checkYourCart => 'check_Your_Cart';
+  String get menu => 'القائمة';
 
   @override
-  String get earnYourFirst => 'earn_Your_First';
+  String get favorites => 'المفضلة';
 
   @override
-  String get orders => 'orders';
+  String get cuisine => 'المأكولات';
 
   @override
-  String get earnYourFirst5Orders => 'earn_Your_First5_Orders';
+  String get exploreCuisines => 'استكشف المأكولات';
 
   @override
-  String get free => 'free';
+  String get megaSummerSale => 'تخفيضات الصيف\nالكبرى';
 
   @override
-  String get topRated => 'top_Rated';
+  String get freeDelivery => 'توصيل مجاني';
 
   @override
-  String get orderWheneverYouAre => 'order_Whenever_You_Are';
+  String get searchForStoresItemsAndCAtegories =>
+      'ابحث عن المتاجر والعناصر والفئات';
 
   @override
-  String get contactUs => 'contact_Us';
+  String get categories => 'الفئات';
 
   @override
-  String get chooseYourCategories => 'choose_Your_Categories';
+  String get explore => 'استكشف';
 
   @override
-  String get gazzerVideoTourGuide => 'gazzer_Video_Tour_Guide';
+  String get checkYourCart => 'تحقق من سلتك';
 
   @override
-  String get deliverTo => 'deliver_To';
+  String get earnYourFirst => 'احصل على أول';
+
+  @override
+  String get orders => 'طلبات';
+
+  @override
+  String get earnYourFirst5Orders => 'احصل على أول 5 طلبات';
+
+  @override
+  String get free => 'مجاني';
+
+  @override
+  String get topRated => 'الأعلى تقييماً';
+
+  @override
+  String get orderWheneverYouAre => 'اطلب أينما كنت';
+
+  @override
+  String get contactUs => 'تواصل معنا';
+
+  @override
+  String get chooseYourCategories => 'اختر فئاتك';
+
+  @override
+  String get gazzerVideoTourGuide => 'دليل جولة الفيديو لجازر';
+
+  @override
+  String get deliverTo => 'توصيل إلى';
 
   @override
   String get home_________________End => '__________________';
@@ -172,52 +205,79 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cart_________________Start => '__________________';
 
   @override
-  String get deliveryFee => 'delivery_Fee';
+  String get total => 'الإجمالي';
 
   @override
-  String get totalAmount => 'total_Amount';
+  String get deliveryFee => 'رسوم التوصيل';
 
   @override
-  String get addItems => 'add_Items';
+  String get totalAmount => 'إجمالي المبلغ';
 
   @override
-  String get checkout => 'checkout';
+  String get addItems => 'إضافة عناصر';
 
   @override
-  String get shippingCart => 'shipping_Cart';
+  String get checkout => 'الدفع';
 
   @override
-  String get orderSummary => 'order_Summary';
+  String get shippingCart => 'سلة التسوق';
 
   @override
-  String get confirmOrder => 'confirm_Order';
+  String get orderSummary => 'ملخص الطلب';
+
+  @override
+  String get confirmOrder => 'تأكيد الطلب';
 
   @override
   String get cart_________________End => '__________________';
 
   @override
+  String get checkout_________________Start => '__________________';
+
+  @override
+  String get addPRomoCode => 'إضافة كود خصم';
+
+  @override
+  String get addDeliveryInstruction => 'اضافة تعليمات للتوصيل';
+
+  @override
+  String get addTip => 'اضف بقشيش';
+
+  @override
+  String get orderPlacedSuccessfully => 'تم تقديم الطلب بنجاح';
+
+  @override
+  String get checkout_________________End => '__________________';
+
+  @override
   String get core_________________Start => '__________________';
 
   @override
-  String get hours => 'hours';
+  String get items => 'عناصر';
 
   @override
-  String get mins => 'mins';
+  String get egp => 'جم';
 
   @override
-  String get secs => 'secs';
+  String get hours => 'ساعات';
 
   @override
-  String get onAllGrills => 'on_All_Grills';
+  String get mins => 'دقائق';
 
   @override
-  String get dealsStarts27May => 'deals_Starts27_May';
+  String get secs => 'ثوان';
 
   @override
-  String get orderNow => 'order_Now';
+  String get onAllGrills => 'على جميع الشوايات';
 
   @override
-  String get viewAll => 'view_All';
+  String get dealsStarts27May => 'العروض تبدأ في 27 مايو';
+
+  @override
+  String get orderNow => 'اطلب الآن';
+
+  @override
+  String get viewAll => 'عرض الكل';
 
   @override
   String get core_________________End => '__________________';
@@ -226,31 +286,82 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mainScreens_________________Start => '__________________';
 
   @override
-  String get recentSearches => 'recent_Searches';
+  String get deliveredOn => 'تم التوصيل في';
 
   @override
-  String get clear => 'clear';
+  String get recentRestaurants => 'المطاعم الأخيرة';
 
   @override
-  String get gazzerApp => 'gazzer_App';
+  String get recentGroceries => 'البقالة الأخيرة';
 
   @override
-  String get freshFruits => 'fresh_Fruits';
+  String get recentPharmacies => 'الصيدليات الأخيرة';
 
   @override
-  String get dailyOffersForYou => 'daily_Offers_For_You';
+  String get recentSearches => 'عمليات البحث الأخيرة';
 
   @override
-  String get suggestedForYou => 'suggested_For_You';
+  String get clear => 'مسح';
 
   @override
-  String get gotIt => 'got_It';
+  String get gazzerApp => 'تطبيق جازر';
 
   @override
-  String get sideMenuSetting => 'side_Menu_Setting';
+  String get freshFruits => 'فواكه طازجة';
+
+  @override
+  String get dailyOffersForYou => 'عروض يومية لك';
+
+  @override
+  String get suggestedForYou => 'مقترح لك';
+
+  @override
+  String get gotIt => 'فهمت';
+
+  @override
+  String get sideMenuSetting => 'إعدادات القائمة الجانبية';
 
   @override
   String get mainScreens_________________End => '__________________';
+
+  @override
+  String get drawer_________________Start => '__________________';
+
+  @override
+  String get myCart => 'سلتي';
+
+  @override
+  String get themeMode => 'وضع السمة';
+
+  @override
+  String get foodPlan => 'خطة الطعام';
+
+  @override
+  String get videoTutorials => 'دروس الفيديو';
+
+  @override
+  String get rewards => 'المكافآت';
+
+  @override
+  String get myOrders => 'طلباتي';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get gazzerChat => 'دردشة جزر';
+
+  @override
+  String get communityApp => 'تطبيق المجتمع';
+
+  @override
+  String get paymentSetting => 'إعدادات الدفع';
+
+  @override
+  String get termsAndConditions => 'الشروط والأحكام';
+
+  @override
+  String get drawer_________________End => '__________________';
 
   @override
   String get onBoarding_________________Start => '__________________';
