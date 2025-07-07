@@ -83,7 +83,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       validator: Validators.passwordValidation,
                       autofillHints: [AutofillHints.newPassword],
                     ),
-                    const VerticalSpacing(32),
+                    const VerticalSpacing(16),
                     Text(L10n.tr().confirmPassword, style: TStyle.blackBold(20)),
                     const VerticalSpacing(8),
                     MainTextField(
@@ -103,7 +103,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
               ),
 
-              const VerticalSpacing(70),
+              const VerticalSpacing(40),
               Hero(
                 tag: Tags.btn,
                 child: ValueListenableBuilder(

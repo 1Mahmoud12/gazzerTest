@@ -115,6 +115,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                                     Alerts.showToast(ok.value, error: false);
                                     if (context.mounted) {
                                       setState(() => phoneNumber = val);
+                                      timer.cancel();
                                       _setTimer();
                                     }
                                     return true;

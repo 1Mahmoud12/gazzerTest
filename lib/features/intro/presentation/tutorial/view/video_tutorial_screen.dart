@@ -5,8 +5,8 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
-import 'package:gazzer/features/intro/presentation/tutorial/view/tutorial_header.dart';
-import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_card.dart';
+import 'package:gazzer/features/intro/presentation/tutorial/view/widgets/tutorial_header.dart';
+import 'package:gazzer/features/intro/presentation/tutorial/view/widgets/video_tutorial_card.dart';
 
 class VideoTutorialScreen extends StatelessWidget {
   const VideoTutorialScreen({super.key});

@@ -12,7 +12,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onBoarding_________________Start => '__________________';
 
   @override
-  String get learnMore => 'Learcn More';
+  String get learnMore => 'Learn More';
+
+  @override
+  String get selectLanguage => 'Select Language';
 
   @override
   String get onBoarding_________________end => '__________________';

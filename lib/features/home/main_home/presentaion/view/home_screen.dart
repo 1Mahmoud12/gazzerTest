@@ -9,8 +9,8 @@ import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
-import 'package:gazzer/core/presentation/routing/app_transitions.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
+import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/views/widgets/adds/image_with_aligned_btn.dart';
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       rtChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GradientText(text: "Free Delivery", style: TStyle.blackBold(22), gradient: Grad.radialGradient),
+                          GradientText(text: "L10n.tr().freeDelivery", style: TStyle.blackBold(22), gradient: Grad.radialGradient),
                           Text.rich(
                             TextSpan(
                               children: [

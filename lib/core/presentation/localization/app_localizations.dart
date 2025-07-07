@@ -107,8 +107,14 @@ abstract class AppLocalizations {
   /// No description provided for @learnMore.
   ///
   /// In en, this message translates to:
-  /// **'Learcn More'**
+  /// **'Learn More'**
   String get learnMore;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
 
   /// No description provided for @onBoarding_________________end.
   ///

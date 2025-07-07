@@ -48,30 +48,33 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
                   return DoubledDecoratedWidget(borderRadius: BorderRadius.circular(100), child: child!);
                 }
               },
-              child: InkWell(
-                onTap: () {
-                  setState(() => isNextPPressed = !isNextPPressed);
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    barrierColor: Co.bg.withAlpha(125),
-                    // shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
-                    builder: (context) {
-                      return const TutorialBottomSheet();
-                    },
-                  ).then((_) {
-                    if (mounted) {
-                      setState(() => isNextPPressed = !isNextPPressed);
-                    }
-                  });
-                },
-                onHover: (value) {
-                  isHovering.value = value;
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.arrow_forward_ios, color: Co.bg, size: 32),
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: InkWell(
+                  onTap: () {
+                    setState(() => isNextPPressed = !isNextPPressed);
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      barrierColor: Co.bg.withAlpha(125),
+                      // shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
+                      builder: (context) {
+                        return const TutorialBottomSheet();
+                      },
+                    ).then((_) {
+                      if (mounted) {
+                        setState(() => isNextPPressed = !isNextPPressed);
+                      }
+                    });
+                  },
+                  onHover: (value) {
+                    isHovering.value = value;
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.arrow_forward_ios, color: Co.bg, size: 32),
+                  ),
                 ),
               ),
             ),

@@ -18,8 +18,8 @@ Future init() async {
   await _registerAsync();
 
   ///
-  final apiClient = ApiClient();
-  _registerRepos(apiClient);
+  di.registerSingleton<ApiClient>(ApiClient());
+  _registerRepos(di.get<ApiClient>());
 
   ///
   _registerCubits();

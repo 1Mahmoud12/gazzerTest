@@ -38,19 +38,22 @@ class _OtpWidgetState extends State<OtpWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Pinput(
-      controller: widget.controller,
-      length: widget.count,
-      closeKeyboardWhenCompleted: true,
-      defaultPinTheme: defaultPinTheme,
-      focusedPinTheme: defaultPinTheme,
-      submittedPinTheme: defaultPinTheme,
-      validator: (v) => Validators.valueMustBeNum(v, widget.count, "Code"),
-      pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Pinput(
+        controller: widget.controller,
+        length: widget.count,
+        closeKeyboardWhenCompleted: true,
+        defaultPinTheme: defaultPinTheme,
+        focusedPinTheme: defaultPinTheme,
+        submittedPinTheme: defaultPinTheme,
+        validator: (v) => Validators.valueMustBeNum(v, widget.count, "Code"),
+        pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
 
-      // onSubmitted: (value) {},
-      showCursor: true,
-      // onCompleted: (pin) => print(pin),
+        // onSubmitted: (value) {},
+        showCursor: true,
+        // onCompleted: (pin) => print(pin),
+      ),
     );
   }
 }

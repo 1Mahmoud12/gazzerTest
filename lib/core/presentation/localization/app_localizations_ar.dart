@@ -15,6 +15,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get learnMore => 'المزيد';
 
   @override
+  String get selectLanguage => 'اختر اللغة';
+
+  @override
   String get onBoarding_________________end => '__________________';
 
   @override
