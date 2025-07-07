@@ -12,7 +12,7 @@ class _HomeCategoriesWidget extends StatelessWidget {
         Text(
           "Categories",
           style: TStyle.primaryBold(16),
-        ).withHotspot(order: 2, title: "", text: "Choose Your Categories"),
+        ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
         GridView.builder(
           padding: const EdgeInsets.all(0),
           physics: const NeverScrollableScrollPhysics(),

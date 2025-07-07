@@ -98,7 +98,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(Assets.assetsPngFlagEn, height: 24, width: 24),
-                            Text("English", style: TStyle.primarySemi(16)),
+                            Text(L10n.tr().english, style: TStyle.primarySemi(16)),
                           ],
                         ),
                       ),

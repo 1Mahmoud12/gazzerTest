@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -26,7 +27,7 @@ class _RecentSearchesWidgetState extends State<RecentSearchesWidget> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Recent Searches", style: TStyle.primaryBold(16)),
+                Text(L10n.tr().recentSearches, style: TStyle.primaryBold(16)),
                 const Spacer(),
                 TextButton(
                   onPressed: () {
@@ -34,7 +35,7 @@ class _RecentSearchesWidgetState extends State<RecentSearchesWidget> {
                       searchWords.clear();
                     });
                   },
-                  child: Text("Clear", style: TStyle.tertiaryBold(14).copyWith(color: Co.second2)),
+                  child: Text(L10n.tr().clear, style: TStyle.tertiaryBold(14).copyWith(color: Co.second2)),
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -46,7 +47,7 @@ class ProductPriceSummary extends StatelessWidget {
                           padding: const EdgeInsets.all(2),
                           child: MainBtn(
                             onPressed: () {},
-                            text: "Add to Cart",
+                            text: L10n.tr().addToCart,
                             textStyle: TStyle.secondaryBold(12),
                             bgColor: Co.purple,
                             height: 0,
@@ -63,7 +64,7 @@ class ProductPriceSummary extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: Text("Selected Type", style: TStyle.secondaryBold(13)),
+                        child: Text(L10n.tr().selectedType, style: TStyle.secondaryBold(13)),
                       ),
                     ),
                     const HorizontalSpacing(12),

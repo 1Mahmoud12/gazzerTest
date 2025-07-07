@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -74,7 +75,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GradientText(text: "Gazzer App", style: TStyle.primaryBold(24)),
+                  GradientText(text: L10n.tr().gazzerApp, style: TStyle.primaryBold(24)),
                   SvgPicture.asset(
                     Assets.assetsSvgDrawerIcon,
                     width: 20,

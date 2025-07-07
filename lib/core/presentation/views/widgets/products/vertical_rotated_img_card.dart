@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -58,7 +59,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Text("On all grills", style: TStyle.blackSemi(12)),
+                        Text(L10n.tr().onAllGrills, style: TStyle.blackSemi(12)),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
@@ -19,7 +20,7 @@ class ImageWithAlignedBtn extends StatelessWidget {
           Image.asset(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
           Align(
             alignment: align,
-            child: MainBtn(onPressed: () {}, width: 115, height: 35, text: "Order Now", bgColor: Co.secondary, textStyle: TStyle.primaryBold(14)),
+            child: MainBtn(onPressed: () {}, width: 115, height: 35, text: L10n.tr().orderNow, bgColor: Co.secondary, textStyle: TStyle.primaryBold(14)),
           ),
         ],
       ),

@@ -8,7 +8,7 @@ class _HistoryOrdersWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("History Orders", style: TStyle.primaryBold(20)),
+        Text(L10n.tr().historyOrders, style: TStyle.primaryBold(20)),
         Expanded(
           child: ListView.separated(
             itemCount: 5,

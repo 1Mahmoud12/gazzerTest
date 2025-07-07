@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
@@ -47,7 +48,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-            GradientText(text: "Select Language", style: TStyle.blackBold(24), gradient: Grad.textGradient),
+            GradientText(text: L10n.tr().selectLanguage, style: TStyle.blackBold(24), gradient: Grad.textGradient),
             const SizedBox(height: 40, width: double.infinity),
             PlanAnimatedBtn(
               onPressed: () {
@@ -57,7 +58,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                   isAnimating.value = true;
                 });
               },
-            
+
               isAnimating: isAnimating,
               animDuration: animDuration,
               child: SizedBox(
@@ -66,7 +67,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(Assets.assetsPngFlagEn, height: 24, width: 24),
-                    Text("English", style: TStyle.primarySemi(16)),
+                    Text(L10n.tr().english, style: TStyle.primarySemi(16)),
                   ],
                 ),
               ),
@@ -89,7 +90,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(Assets.assetsPngFlagEg, height: 24, width: 24),
-                    Text("Arabic", style: TStyle.primarySemi(16)),
+                    Text(L10n.tr().arabic, style: TStyle.primarySemi(16)),
                   ],
                 ),
               ),

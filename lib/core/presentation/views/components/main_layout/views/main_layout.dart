@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/fav_navigator.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/home_navigation.dart';
@@ -137,7 +138,7 @@ class _MainLayoutState extends State<MainLayout> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
               ),
-              child: Text("Got it", style: TStyle.whiteBold(16)),
+              child: Text(L10n.tr().gotIt, style: TStyle.whiteBold(16)),
             ),
           ],
         ),

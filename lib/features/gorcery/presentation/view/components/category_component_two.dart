@@ -76,7 +76,7 @@ class _VendorCardTwo extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 8),
-                          child: Text("Best Offer", style: TStyle.primaryBold(12)),
+                          child: Text(L10n.tr().bestOffer, style: TStyle.primaryBold(12)),
                         ),
                       ),
                     ),

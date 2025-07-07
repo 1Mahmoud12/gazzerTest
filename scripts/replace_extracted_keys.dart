@@ -38,7 +38,7 @@ void main() async {
         final camelCaseKey = toCamelCase(originalText);
         hasChanges = true;
         replaced++;
-        return 'Text(L10n.tr().$camelCaseKey"';
+        return 'Text(L10n.tr().$camelCaseKey';
       });
 
       // Replace text: "..." patterns

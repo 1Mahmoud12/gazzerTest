@@ -11,7 +11,7 @@ class _ExploreBest extends StatelessWidget {
       children: [
         Padding(
           padding: AppConst.defaultHrPadding,
-          child: GradientText(text: "Explore Best", style: TStyle.blackBold(24)),
+          child: GradientText(text: L10n.tr().exploreBest, style: TStyle.blackBold(24)),
         ),
         ListView.separated(
           physics: const NeverScrollableScrollPhysics(),

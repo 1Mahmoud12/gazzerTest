@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_summary_widget.dart';
@@ -20,7 +21,7 @@ class _CartScreenState extends State<CartScreen> {
       body: Column(
         children: [
           GradientText(
-            text: "Shipping Cart",
+            text: L10n.tr().shippingCart,
             style: TStyle.blackBold(24),
             gradient: Grad.radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
           ),

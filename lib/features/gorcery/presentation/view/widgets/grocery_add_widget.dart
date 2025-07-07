@@ -53,7 +53,7 @@ class _GroceryAddWidgetState extends State<_GroceryAddWidget> {
             child: MainBtn(
               onPressed: () {},
               bgColor: Co.secondary,
-              text: "Shop now",
+              text: L10n.tr().shopNow,
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
               textStyle: TStyle.primaryBold(14),
             ),

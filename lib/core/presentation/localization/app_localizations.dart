@@ -98,6 +98,492 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @groceries_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get groceries_________________Start;
+
+  /// No description provided for @bestOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'best_Offer'**
+  String get bestOffer;
+
+  /// No description provided for @shopNow.
+  ///
+  /// In en, this message translates to:
+  /// **'shop_Now'**
+  String get shopNow;
+
+  /// No description provided for @groceryStores.
+  ///
+  /// In en, this message translates to:
+  /// **'grocery_Stores'**
+  String get groceryStores;
+
+  /// No description provided for @groceries_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get groceries_________________End;
+
+  /// No description provided for @ordersHistory_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get ordersHistory_________________Start;
+
+  /// No description provided for @historyOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'history_Orders'**
+  String get historyOrders;
+
+  /// No description provided for @recentOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'recent_Orders'**
+  String get recentOrders;
+
+  /// No description provided for @ordersHistory_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get ordersHistory_________________End;
+
+  /// No description provided for @restaurants_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get restaurants_________________Start;
+
+  /// No description provided for @exploreBest.
+  ///
+  /// In en, this message translates to:
+  /// **'explore_Best'**
+  String get exploreBest;
+
+  /// No description provided for @pickToYou.
+  ///
+  /// In en, this message translates to:
+  /// **'pick_To_You'**
+  String get pickToYou;
+
+  /// No description provided for @eartYourFirstOrderForFree.
+  ///
+  /// In en, this message translates to:
+  /// **'eart_Your_First_Order_For_Free'**
+  String get eartYourFirstOrderForFree;
+
+  /// No description provided for @burgerRestaurants.
+  ///
+  /// In en, this message translates to:
+  /// **'burger_Restaurants'**
+  String get burgerRestaurants;
+
+  /// No description provided for @chooseYourFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'choose_Your_Favorite'**
+  String get chooseYourFavorite;
+
+  /// No description provided for @bestMenuOfRestaurants.
+  ///
+  /// In en, this message translates to:
+  /// **'best_Menu_Of_Restaurants'**
+  String get bestMenuOfRestaurants;
+
+  /// No description provided for @chooseYourFavoriteVendor.
+  ///
+  /// In en, this message translates to:
+  /// **'choose_Your_Favorite_Vendor'**
+  String get chooseYourFavoriteVendor;
+
+  /// No description provided for @exploreTheBestMeals.
+  ///
+  /// In en, this message translates to:
+  /// **'explore_The_Best_Meals'**
+  String get exploreTheBestMeals;
+
+  /// No description provided for @earnYourFirst5OrdersForFree.
+  ///
+  /// In en, this message translates to:
+  /// **'earn_Your_First5_Orders_For_Free'**
+  String get earnYourFirst5OrdersForFree;
+
+  /// No description provided for @testTest.
+  ///
+  /// In en, this message translates to:
+  /// **'test_Test'**
+  String get testTest;
+
+  /// No description provided for @restaurants_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get restaurants_________________End;
+
+  /// No description provided for @product_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get product_________________Start;
+
+  /// No description provided for @selectedType.
+  ///
+  /// In en, this message translates to:
+  /// **'selected_Type'**
+  String get selectedType;
+
+  /// No description provided for @addToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'add_To_Cart'**
+  String get addToCart;
+
+  /// No description provided for @eg.
+  ///
+  /// In en, this message translates to:
+  /// **'eg'**
+  String get eg;
+
+  /// No description provided for @selectType.
+  ///
+  /// In en, this message translates to:
+  /// **'select_Type'**
+  String get selectType;
+
+  /// No description provided for @alsoOrderWith.
+  ///
+  /// In en, this message translates to:
+  /// **'also_Order_With'**
+  String get alsoOrderWith;
+
+  /// No description provided for @product_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get product_________________End;
+
+  /// No description provided for @plans_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get plans_________________Start;
+
+  /// No description provided for @whatIsYourPrimaryHealthFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'what_Is_Your_Primary_Health_Focus'**
+  String get whatIsYourPrimaryHealthFocus;
+
+  /// No description provided for @yourPlanToOptimizeCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'your_Plan_To_Optimize_Calories'**
+  String get yourPlanToOptimizeCalories;
+
+  /// No description provided for @weightLossPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'weight_Loss_Plan'**
+  String get weightLossPlan;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'english'**
+  String get english;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'arabic'**
+  String get arabic;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @gazzerVideoTutorialGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'gazzer_Video_Tutorial_Guide'**
+  String get gazzerVideoTutorialGuide;
+
+  /// No description provided for @gazzerVideoTutorial.
+  ///
+  /// In en, this message translates to:
+  /// **'gazzer_Video_Tutorial'**
+  String get gazzerVideoTutorial;
+
+  /// No description provided for @youMadeIt.
+  ///
+  /// In en, this message translates to:
+  /// **'You made it'**
+  String get youMadeIt;
+
+  /// No description provided for @plans_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get plans_________________End;
+
+  /// No description provided for @home_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get home_________________Start;
+
+  /// No description provided for @explore.
+  ///
+  /// In en, this message translates to:
+  /// **'explore'**
+  String get explore;
+
+  /// No description provided for @checkYourCart.
+  ///
+  /// In en, this message translates to:
+  /// **'check_Your_Cart'**
+  String get checkYourCart;
+
+  /// No description provided for @earnYourFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'earn_Your_First'**
+  String get earnYourFirst;
+
+  /// No description provided for @orders.
+  ///
+  /// In en, this message translates to:
+  /// **'orders'**
+  String get orders;
+
+  /// No description provided for @earnYourFirst5Orders.
+  ///
+  /// In en, this message translates to:
+  /// **'earn_Your_First5_Orders'**
+  String get earnYourFirst5Orders;
+
+  /// No description provided for @free.
+  ///
+  /// In en, this message translates to:
+  /// **'free'**
+  String get free;
+
+  /// No description provided for @topRated.
+  ///
+  /// In en, this message translates to:
+  /// **'top_Rated'**
+  String get topRated;
+
+  /// No description provided for @orderWheneverYouAre.
+  ///
+  /// In en, this message translates to:
+  /// **'order_Whenever_You_Are'**
+  String get orderWheneverYouAre;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'contact_Us'**
+  String get contactUs;
+
+  /// No description provided for @chooseYourCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'choose_Your_Categories'**
+  String get chooseYourCategories;
+
+  /// No description provided for @gazzerVideoTourGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'gazzer_Video_Tour_Guide'**
+  String get gazzerVideoTourGuide;
+
+  /// No description provided for @deliverTo.
+  ///
+  /// In en, this message translates to:
+  /// **'deliver_To'**
+  String get deliverTo;
+
+  /// No description provided for @home_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get home_________________End;
+
+  /// No description provided for @cart_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get cart_________________Start;
+
+  /// No description provided for @deliveryFee.
+  ///
+  /// In en, this message translates to:
+  /// **'delivery_Fee'**
+  String get deliveryFee;
+
+  /// No description provided for @totalAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'total_Amount'**
+  String get totalAmount;
+
+  /// No description provided for @addItems.
+  ///
+  /// In en, this message translates to:
+  /// **'add_Items'**
+  String get addItems;
+
+  /// No description provided for @checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'checkout'**
+  String get checkout;
+
+  /// No description provided for @shippingCart.
+  ///
+  /// In en, this message translates to:
+  /// **'shipping_Cart'**
+  String get shippingCart;
+
+  /// No description provided for @orderSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'order_Summary'**
+  String get orderSummary;
+
+  /// No description provided for @confirmOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'confirm_Order'**
+  String get confirmOrder;
+
+  /// No description provided for @cart_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get cart_________________End;
+
+  /// No description provided for @core_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get core_________________Start;
+
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'hours'**
+  String get hours;
+
+  /// No description provided for @mins.
+  ///
+  /// In en, this message translates to:
+  /// **'mins'**
+  String get mins;
+
+  /// No description provided for @secs.
+  ///
+  /// In en, this message translates to:
+  /// **'secs'**
+  String get secs;
+
+  /// No description provided for @onAllGrills.
+  ///
+  /// In en, this message translates to:
+  /// **'on_All_Grills'**
+  String get onAllGrills;
+
+  /// No description provided for @dealsStarts27May.
+  ///
+  /// In en, this message translates to:
+  /// **'deals_Starts27_May'**
+  String get dealsStarts27May;
+
+  /// No description provided for @orderNow.
+  ///
+  /// In en, this message translates to:
+  /// **'order_Now'**
+  String get orderNow;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'view_All'**
+  String get viewAll;
+
+  /// No description provided for @core_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get core_________________End;
+
+  /// No description provided for @mainScreens_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get mainScreens_________________Start;
+
+  /// No description provided for @recentSearches.
+  ///
+  /// In en, this message translates to:
+  /// **'recent_Searches'**
+  String get recentSearches;
+
+  /// No description provided for @clear.
+  ///
+  /// In en, this message translates to:
+  /// **'clear'**
+  String get clear;
+
+  /// No description provided for @gazzerApp.
+  ///
+  /// In en, this message translates to:
+  /// **'gazzer_App'**
+  String get gazzerApp;
+
+  /// No description provided for @freshFruits.
+  ///
+  /// In en, this message translates to:
+  /// **'fresh_Fruits'**
+  String get freshFruits;
+
+  /// No description provided for @dailyOffersForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'daily_Offers_For_You'**
+  String get dailyOffersForYou;
+
+  /// No description provided for @suggestedForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'suggested_For_You'**
+  String get suggestedForYou;
+
+  /// No description provided for @gotIt.
+  ///
+  /// In en, this message translates to:
+  /// **'got_It'**
+  String get gotIt;
+
+  /// No description provided for @sideMenuSetting.
+  ///
+  /// In en, this message translates to:
+  /// **'side_Menu_Setting'**
+  String get sideMenuSetting;
+
+  /// No description provided for @mainScreens_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get mainScreens_________________End;
+
   /// No description provided for @onBoarding_________________Start.
   ///
   /// In en, this message translates to:
@@ -109,12 +595,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Learn More'**
   String get learnMore;
-
-  /// No description provided for @selectLanguage.
-  ///
-  /// In en, this message translates to:
-  /// **'Select Language'**
-  String get selectLanguage;
 
   /// No description provided for @onBoarding_________________end.
   ///
@@ -595,12 +1075,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Congratulations'**
   String get congratulations;
-
-  /// No description provided for @youMadeIt.
-  ///
-  /// In en, this message translates to:
-  /// **'You made it'**
-  String get youMadeIt;
 
   /// No description provided for @chooseYourMood.
   ///

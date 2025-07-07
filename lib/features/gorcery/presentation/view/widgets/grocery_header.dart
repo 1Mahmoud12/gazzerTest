@@ -40,7 +40,7 @@ class __GroceryHeaderState extends State<_GroceryHeader> {
                 bgColor: Colors.transparent,
                 prefix: const Icon(Icons.search, color: Co.purple, size: 24),
               ),
-              GradientText(text: "Grocery Stores", style: TStyle.blackBold(24)),
+              GradientText(text: L10n.tr().groceryStores, style: TStyle.blackBold(24)),
             ],
           ),
         ),

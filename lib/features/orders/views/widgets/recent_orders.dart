@@ -9,7 +9,7 @@ class _RecentOrders extends StatelessWidget {
       spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Recent Orders", style: TStyle.primaryBold(20)),
+        Text(L10n.tr().recentOrders, style: TStyle.primaryBold(20)),
 
         SizedBox(
           height: 220,

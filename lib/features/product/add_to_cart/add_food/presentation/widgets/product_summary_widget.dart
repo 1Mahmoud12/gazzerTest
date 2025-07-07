@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 
 class ProductSummaryWidget extends StatelessWidget {
   const ProductSummaryWidget({super.key, required this.product});
@@ -15,7 +16,7 @@ class ProductSummaryWidget extends StatelessWidget {
           children: [
             GradientText(text: product.name.toUpperCase(), style: TStyle.blackBold(20), gradient: Grad.textGradient),
             const Spacer(),
-            Text("EG", style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
+            Text(L10n.tr().eg, style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
             Text(
               product.price.toStringAsFixed(2),
               style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow),

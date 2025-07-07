@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, OptionBtn, VerticalSpacing, HorizontalSpacing;
@@ -15,12 +16,12 @@ class ConfirmOrder extends StatelessWidget {
     final btnText = ["Add Promo Code", "Add Delivery Instructions", "Add Tip"];
     return Scaffold(
       appBar: AppBar(
-        title: GradientText(text: "Confirm Order", style: TStyle.blackBold(18)),
+        title: GradientText(text: L10n.tr().confirmOrder, style: TStyle.blackBold(18)),
       ),
       body: ListView(
         padding: AppConst.defaultPadding,
         children: [
-          Text("Order Summary", style: TStyle.blackBold(16)),
+          Text(L10n.tr().orderSummary, style: TStyle.blackBold(16)),
           const VerticalSpacing(24),
           SizedBox(
             height: 250,
@@ -97,7 +98,7 @@ class ConfirmOrder extends StatelessWidget {
             },
             height: 0,
             padding: const EdgeInsets.symmetric(vertical: 8),
-            text: "Confirm Order",
+            text: L10n.tr().confirmOrder,
             textStyle: TStyle.primaryBold(14),
           ),
         ],

@@ -12,11 +12,11 @@ class _TopRatedComponent extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: GradientText(text: "Top Rated", style: TStyle.blackBold(24)),
+          child: GradientText(text: L10n.tr().topRated, style: TStyle.blackBold(24)),
         ),
         Padding(
           padding: const EdgeInsetsGeometry.symmetric(horizontal: 8),
-          child: Text("Explore The Best Meals", style: TStyle.blackBold(14)),
+          child: Text(L10n.tr().exploreTheBestMeals, style: TStyle.blackBold(14)),
         ),
         SizedBox(
           height: 420,
@@ -37,7 +37,7 @@ class _TopRatedComponent extends StatelessWidget {
                   spacing: 8,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Earn Your First 5 Orders For Free", style: TStyle.blackBold(16)),
+                    Text(L10n.tr().earnYourFirst5OrdersForFree, style: TStyle.blackBold(16)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: StatefulBuilder(

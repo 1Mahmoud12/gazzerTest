@@ -2,6 +2,7 @@ import 'package:anchor_scroll_controller/anchor_scroll_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
@@ -40,7 +41,7 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
     const RestCatCarousal(),
     Padding(
       padding: AppConst.defaultHrPadding,
-      child: Text("Choose your favorite vendor", style: TStyle.blackBold(16)),
+      child: Text(L10n.tr().chooseYourFavoriteVendor, style: TStyle.blackBold(16)),
     ),
     const SizedBox(), // replacing SubCategoriesWidget
     const CatRestShakingImgAddWidget(),

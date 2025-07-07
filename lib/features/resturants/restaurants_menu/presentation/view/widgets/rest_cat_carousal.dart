@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
@@ -54,8 +55,7 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
         children: [
           PageTransitionSwitcher(
             duration: Durations.long4,
-            transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
-                FadeTransition(opacity: primaryAnimation, child: child),
+            transitionBuilder: (child, primaryAnimation, secondaryAnimation) => FadeTransition(opacity: primaryAnimation, child: child),
             child: Image.asset(
               key: ValueKey(index),
               adds[index],
@@ -80,7 +80,7 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
           Align(
             alignment: const Alignment(-0.9, 0.88),
             child: MainBtn(
-              text: "Order now",
+              text: L10n.tr().orderNow,
               height: 32,
               width: 110,
               bgColor: Co.secondary,

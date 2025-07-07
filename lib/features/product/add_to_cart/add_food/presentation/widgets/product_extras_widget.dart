@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
@@ -13,7 +14,7 @@ class ProductExtrasWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        GradientText(text: "Also Order With", style: TStyle.blackBold(18)),
+        GradientText(text: L10n.tr().alsoOrderWith, style: TStyle.blackBold(18)),
 
         SizedBox(
           height: 170,

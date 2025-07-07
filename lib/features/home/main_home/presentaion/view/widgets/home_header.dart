@@ -69,7 +69,7 @@ class _HomeHeader extends StatelessWidget {
                     hotspotOffset: Offset.zero,
                     order: 1,
                     title: "",
-                    text: "Gazzer Video Tour Guide",
+                    text: L10n.tr().gazzerVideoTourGuide,
                   ),
                   SizedBox(
                     height: width * 0.195,
@@ -86,14 +86,14 @@ class _HomeHeader extends StatelessWidget {
                                 Assets.assetsSvgLocation,
                                 height: 32,
                                 width: 32,
-                              ).withHotspot(order: 4, title: "", text: "Set Your Location"),
+                              ).withHotspot(order: 4, title: "", text: L10n.tr().setYourLocation),
                               const HorizontalSpacing(8),
                               Expanded(
                                 child: Text.rich(
                                   TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: "Deliver To",
+                                        text: L10n.tr().deliverTo,
                                         style: TStyle.mainwSemi(15).copyWith(color: Co.white.withAlpha(120)),
                                       ),
                                       const TextSpan(text: '\n'),

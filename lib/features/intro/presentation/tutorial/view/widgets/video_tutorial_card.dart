@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
@@ -62,7 +63,7 @@ class VideoTutorialCard extends StatelessWidget {
               const HorizontalSpacing(8),
               Expanded(
                 flex: 3,
-                child: Text("Gazzer Video Tutorial Guide", style: TStyle.blackSemi(13), textAlign: TextAlign.center),
+                child: Text(L10n.tr().gazzerVideoTutorialGuide, style: TStyle.blackSemi(13), textAlign: TextAlign.center),
               ),
               const HorizontalSpacing(6),
             ],

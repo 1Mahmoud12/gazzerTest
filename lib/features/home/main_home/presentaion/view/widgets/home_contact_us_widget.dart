@@ -25,8 +25,8 @@ class _HomeContactUsWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     spacing: 6,
                     children: [
-                      Text("Order Whenever You Are", style: TStyle.whiteBold(16)),
-                      Text("Contact Us", style: TStyle.whiteBold(14).copyWith(color: Co.secondary)),
+                      Text(L10n.tr().orderWheneverYouAre, style: TStyle.whiteBold(16)),
+                      Text(L10n.tr().contactUs, style: TStyle.whiteBold(14).copyWith(color: Co.secondary)),
                     ],
                   ),
                 ),

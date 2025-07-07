@@ -11,7 +11,7 @@ class _PickToYou extends StatelessWidget {
       children: [
         Padding(
           padding: AppConst.defaultHrPadding,
-          child: GradientText(text: "Pick To You", style: TStyle.blackBold(24)),
+          child: GradientText(text: L10n.tr().pickToYou, style: TStyle.blackBold(24)),
         ),
         SizedBox(
           height: 130,

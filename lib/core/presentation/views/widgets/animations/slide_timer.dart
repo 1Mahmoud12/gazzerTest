@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 class SlideTimer extends StatefulWidget {
@@ -79,7 +80,7 @@ class _SlideTimerState extends State<SlideTimer> {
 
               child: Text(key: ValueKey(hours), hours.toString().padLeft(2, '0'), style: style),
             ),
-            Text("Hours", style: style.copyWith(fontSize: 8)),
+            Text(L10n.tr().hours, style: style.copyWith(fontSize: 8)),
           ],
         ),
         Text(" : ", style: style),
@@ -109,7 +110,7 @@ class _SlideTimerState extends State<SlideTimer> {
 
               child: Text(key: ValueKey(minutes), minutes.toString().padLeft(2, '0'), style: style),
             ),
-            Text("Mins", style: style.copyWith(fontSize: 8)),
+            Text(L10n.tr().mins, style: style.copyWith(fontSize: 8)),
           ],
         ),
         Text(" : ", style: style),
@@ -139,7 +140,7 @@ class _SlideTimerState extends State<SlideTimer> {
 
               child: Text(key: ValueKey(seconds), seconds.toString().padLeft(2, '0'), style: style),
             ),
-            Text("Secs", style: style.copyWith(fontSize: 8)),
+            Text(L10n.tr().secs, style: style.copyWith(fontSize: 8)),
           ],
         ),
       ],

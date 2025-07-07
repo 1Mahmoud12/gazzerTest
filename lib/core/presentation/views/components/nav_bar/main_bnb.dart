@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
@@ -81,7 +82,7 @@ class _MainBnbState extends State<MainBnb> {
                               ),
                             );
                             if (index == items.length - 1) {
-                              return child.withHotspot(order: 5, title: "", text: "Side Menu Setting");
+                              return child.withHotspot(order: 5, title: "", text: L10n.tr().sideMenuSetting);
                             }
                             return child;
                           },

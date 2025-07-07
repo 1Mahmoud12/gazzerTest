@@ -64,7 +64,7 @@ class _CongratsScreenState extends State<CongratsScreen> {
                       style: TStyle.blackBold(32),
                       gradient: Grad.radialGradient,
                     ),
-                    GradientText(text: "You Made It", style: TStyle.mainwBold(16), gradient: Grad.radialGradient),
+                    GradientText(text: L10n.tr().youMadeIt, style: TStyle.mainwBold(16), gradient: Grad.radialGradient),
                     const VerticalSpacing(12),
                     OptionBtn(
                       onPressed: () {

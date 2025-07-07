@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
@@ -59,7 +60,7 @@ class SingleGridProduct extends StatelessWidget {
                                     children: [
                                       TextSpan(text: prod.name, style: TStyle.blackSemi(13)),
                                       const TextSpan(text: '\n'),
-                                      TextSpan(text: "Test Test", style: TStyle.greyRegular(12)),
+                                      TextSpan(text: L10n.tr().testTest, style: TStyle.greyRegular(12)),
                                     ],
                                   ),
                                   textAlign: TextAlign.center,

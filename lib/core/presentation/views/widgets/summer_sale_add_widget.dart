@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/animations/animated_discount_percentage_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
+import 'package:gazzer/core/presentation/views/widgets/animations/animated_discount_percentage_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 
 class SummerSaleAddWidget extends StatefulWidget {
   const SummerSaleAddWidget({super.key});
@@ -22,7 +23,7 @@ class _SummerSaleAddWidgetState extends State<SummerSaleAddWidget> with SingleTi
         children: [
           GradientText(text: "Mega Summer\nSale", style: TStyle.blackBold(20), gradient: Grad.radialGradient),
 
-          Text("deals starts 27 may", style: TStyle.blackBold(14)),
+          Text(L10n.tr().dealsStarts27May, style: TStyle.blackBold(14)),
         ],
       ),
     );

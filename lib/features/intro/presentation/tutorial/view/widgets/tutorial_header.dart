@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
@@ -52,7 +53,7 @@ class _TutorialHeaderState extends State<TutorialHeader> {
             child: Padding(
               padding: EdgeInsets.fromLTRB(16, MediaQuery.paddingOf(context).top, 16, 0),
               child: GradientTextWzShadow(
-                text: "Gazzer Video Tutorial",
+                text: L10n.tr().gazzerVideoTutorial,
                 shadow: BoxShadow(color: Co.secondary.withAlpha(100), blurRadius: 8, offset: const Offset(0, 2)),
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 gradient: Grad.textGradient,

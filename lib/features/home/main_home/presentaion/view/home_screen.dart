@@ -5,6 +5,7 @@ import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/domain/category/category_model.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // floatingActionButton: const CartFloatingBtn(),
         body: FloatingDraggableWidget(
           dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
-          floatingWidget: const CartFloatingBtn().withHotspot(order: 3, title: "", text: "Check Your Cart"),
+          floatingWidget: const CartFloatingBtn().withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
           floatingWidgetHeight: 50,
           floatingWidgetWidth: 50,
           autoAlign: false,
@@ -110,19 +111,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text.rich(
                             TextSpan(
                               children: [
-                                const TextSpan(text: "Earn Your First"),
+                                TextSpan(text: L10n.tr().earnYourFirst),
                                 TextSpan(text: " 5 ", style: TStyle.blackBold(17)),
-                                const TextSpan(text: "Orders"),
+                                TextSpan(text: L10n.tr().orders),
                               ],
                             ),
                             style: TStyle.blackBold(15),
                           ),
                           // GradientText(
-                          //   text: "Earn Your First 5 Orders",
+                          //   text: L10n.tr().earnYourFirst5Orders,
                           //   style: TStyle.blackBold(16),
                           //   gradient: Grad.radialGradient,
                           // ),
-                          GradientText(text: "FREE", style: TStyle.blackBold(18).copyWith(letterSpacing: 12), gradient: Grad.radialGradient),
+                          GradientText(text: L10n.tr().free, style: TStyle.blackBold(18).copyWith(letterSpacing: 12), gradient: Grad.radialGradient),
                         ],
                       ),
                     ),
@@ -139,8 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Align(alignment: Alignment.topLeft, child: Image.asset(Assets.assetsGifWow, width: 65)),
-                            GradientText(text: "Top Rated", style: TStyle.blackBold(20), gradient: Grad.radialGradient),
-                            Text("Explore", style: TStyle.blackBold(14)),
+                            GradientText(text: L10n.tr().topRated, style: TStyle.blackBold(20), gradient: Grad.radialGradient),
+                            Text(L10n.tr().explore, style: TStyle.blackBold(14)),
                           ],
                         ),
                       ),

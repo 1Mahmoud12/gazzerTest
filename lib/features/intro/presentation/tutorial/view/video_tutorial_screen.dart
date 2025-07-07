@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
@@ -23,7 +24,7 @@ class VideoTutorialScreen extends StatelessWidget {
           const TutorialHeader(),
           Padding(
             padding: AppConst.defaultHrPadding,
-            child: GradientText(text: "Daily Offers For You", style: TStyle.blackBold(16), gradient: Grad.textGradient),
+            child: GradientText(text: L10n.tr().dailyOffersForYou, style: TStyle.blackBold(16), gradient: Grad.textGradient),
           ),
           Expanded(
             child: GridView.builder(
@@ -43,7 +44,7 @@ class VideoTutorialScreen extends StatelessWidget {
           ),
           Padding(
             padding: AppConst.defaultHrPadding,
-            child: GradientText(text: "Daily Offers For You", style: TStyle.blackBold(16), gradient: Grad.textGradient),
+            child: GradientText(text: L10n.tr().dailyOffersForYou, style: TStyle.blackBold(16), gradient: Grad.textGradient),
           ),
           Expanded(
             child: GridView.builder(

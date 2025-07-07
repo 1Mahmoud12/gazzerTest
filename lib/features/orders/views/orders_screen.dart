@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';

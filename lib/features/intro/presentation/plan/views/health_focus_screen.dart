@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -49,7 +50,7 @@ class _HealthFocusScreenState extends State<HealthFocusScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: GradientText(
-                text: "What Is Your Primary Health Focus",
+                text: L10n.tr().whatIsYourPrimaryHealthFocus,
                 style: TStyle.blackBold(20),
                 gradient: Grad.textGradient,
               ),

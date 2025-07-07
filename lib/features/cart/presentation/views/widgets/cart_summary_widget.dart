@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show DashedBorder, HorizontalSpacing, MainBtn, VerticalSpacing;
@@ -49,7 +50,7 @@ class CartSummaryWidget extends StatelessWidget {
                               padding: const EdgeInsets.all(2),
                               child: MainBtn(
                                 onPressed: () {},
-                                text: "Add Items",
+                                text: L10n.tr().addItems,
                                 padding: const EdgeInsets.symmetric(vertical: 6),
                                 width: double.infinity,
                                 height: 0,
@@ -61,7 +62,7 @@ class CartSummaryWidget extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Delivery Fee", style: TStyle.secondarySemi(12)),
+                              Text(L10n.tr().deliveryFee, style: TStyle.secondarySemi(12)),
                               const HorizontalSpacing(6),
                               Text(Helpers.getProperPrice(45), style: TStyle.secondarySemi(12)),
                             ],
@@ -85,7 +86,7 @@ class CartSummaryWidget extends StatelessWidget {
                                 onPressed: () {
                                   context.myPush(const ConfirmOrder());
                                 },
-                                text: "Checkout",
+                                text: L10n.tr().checkout,
                                 textStyle: TStyle.secondaryBold(12),
                                 width: double.infinity,
                                 padding: const EdgeInsets.symmetric(vertical: 6),
@@ -96,7 +97,7 @@ class CartSummaryWidget extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Total Amount", style: TStyle.secondarySemi(12)),
+                              Text(L10n.tr().totalAmount, style: TStyle.secondarySemi(12)),
                               const HorizontalSpacing(12),
                               Text(Helpers.getProperPrice(20.0), style: TStyle.secondarySemi(12)),
                             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -24,7 +25,7 @@ class SuggestedScreen extends StatelessWidget {
           const HomeCategoriesHeader(),
           Padding(
             padding: AppConst.defaultHrPadding,
-            child: GradientText(text: "Suggested For You", style: TStyle.blackBold(16)),
+            child: GradientText(text: L10n.tr().suggestedForYou, style: TStyle.blackBold(16)),
           ),
           const VerticalSpacing(12),
           Expanded(

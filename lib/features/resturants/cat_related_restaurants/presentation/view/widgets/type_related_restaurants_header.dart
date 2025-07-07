@@ -35,7 +35,7 @@ class _TypeRelatedRestaurantsHeader extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: height * 0.25),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [GradientText(text: "Burger Restaurants", style: TStyle.blackBold(24))],
+                      children: [GradientText(text: L10n.tr().burgerRestaurants, style: TStyle.blackBold(24))],
                     ),
                   ),
                 ),
@@ -52,7 +52,7 @@ class _TypeRelatedRestaurantsHeader extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsetsGeometry.only(top: 16, bottom: 16),
-            child: Center(child: Text("Eart Your First Order For Free", style: TStyle.blackBold(15))),
+            child: Center(child: Text(L10n.tr().eartYourFirstOrderForFree, style: TStyle.blackBold(15))),
           ),
         ),
       ],

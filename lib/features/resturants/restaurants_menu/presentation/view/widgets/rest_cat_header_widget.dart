@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
@@ -53,9 +54,9 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
                           ),
                           child: Padding(
                             padding: EdgeInsets.only(bottom: height * 0.25),
-                            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                                
-                              ],
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [],
                             ),
                           ),
                         ),
@@ -84,8 +85,8 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
             ),
           ),
         ),
-        GradientText(text: "Best MENU OF Restaurants", style: TStyle.primaryBold(24)),
-        Text("Choose Your Favorite", style: TStyle.greyBold(14).copyWith(letterSpacing: 2)),
+        GradientText(text: L10n.tr().bestMenuOfRestaurants, style: TStyle.primaryBold(24)),
+        Text(L10n.tr().chooseYourFavorite, style: TStyle.greyBold(14).copyWith(letterSpacing: 2)),
       ],
     );
   }
