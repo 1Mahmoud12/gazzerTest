@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "426479468960-r5siorok0phk6r7falibkvi21vgdg18c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.az.gazzer",
+            "certificate_hash": "ba2b05bc8b9a052b85ea7cad3711bbeaf6cbcf53"
+          }
+        },
+        {
           "client_id": "426479468960-n2tths5d4nqoo6pvhjn89htskb8mc1h9.apps.googleusercontent.com",
           "client_type": 3
         }

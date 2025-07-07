@@ -70,6 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '426479468960',
     projectId: 'azgazzer',
     storageBucket: 'azgazzer.firebasestorage.app',
+    androidClientId: '426479468960-r5siorok0phk6r7falibkvi21vgdg18c.apps.googleusercontent.com',
     iosClientId: '426479468960-o81gqb39gcnl6u9sapr0fudk6u3rsbun.apps.googleusercontent.com',
     iosBundleId: 'com.az.gazzer',
   );
