@@ -6,8 +6,8 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
-import 'package:gazzer/features/auth/forget_password/domain/forgot_password_repo.dart';
-import 'package:gazzer/features/auth/forget_password/presentation/reset_password_screen.dart';
+import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo.dart';
+import 'package:gazzer/features/auth/forgot_password/presentation/reset_password_screen.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
 
 class ForgetPasswordBtn extends StatelessWidget {

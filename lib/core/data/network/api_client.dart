@@ -29,7 +29,10 @@ class ApiClient {
       receiveTimeout: timeOut,
       sendTimeout: timeOut,
       validateStatus: (status) => (status ?? 500) < 400,
-      headers: {'Accept': 'application/json', _acceptLanguage: di<SharedPreferences>().getString(StorageKeys.locale) ?? Platform.localeName.substring(0, 2)},
+      headers: {
+        'Accept': 'application/json',
+        _acceptLanguage: di<SharedPreferences>().getString(StorageKeys.locale) ?? Platform.localeName.substring(0, 2),
+      },
     );
     if (kDebugMode) {
       _dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
@@ -37,7 +40,11 @@ class ApiClient {
   }
 
   bool isDisconected = false;
-  Future<Response> get({required String endpoint, Map<String, dynamic>? queryParameters, Map<String, dynamic>? headers}) async {
+  Future<Response> get({
+    required String endpoint,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) async {
     try {
       final String? token = TokenService.getToken();
       final custHeaders = <String, dynamic>{};
@@ -48,10 +55,11 @@ class ApiClient {
         queryParameters: queryParameters,
         options: Options(headers: custHeaders),
       );
-      _unAuthenticated(response.data['message']);
       return response;
     } on DioException catch (e) {
       _noInternetConnection(e.type);
+      // final message = e.response?.data is Map ? (e.response?.data?['message'] ?? '') : '';
+      // _unAuthenticated(message);
       rethrow;
     }
   }
@@ -73,13 +81,17 @@ class ApiClient {
         queryParameters: queryParameters,
         data: requestBody,
         onSendProgress: onSendProgress,
-        options: Options(receiveTimeout: customRequestDuration, sendTimeout: customRequestDuration, headers: custHeaders),
+        options: Options(
+          receiveTimeout: customRequestDuration,
+          sendTimeout: customRequestDuration,
+          headers: custHeaders,
+        ),
       );
-      final message = response.data is Map ? (response.data?['message'] ?? '') : '';
-      _unAuthenticated(message);
       return response;
     } on DioException catch (e) {
       _noInternetConnection(e.type);
+      // final message = e.response?.data is Map ? (e.response?.data?['message'] ?? '') : '';
+      // _unAuthenticated(message);
       rethrow;
     }
   }
@@ -98,7 +110,7 @@ class ApiClient {
     }
   }
 
-  void _unAuthenticated(String? msg) {
+  void _unAuthenticated(msg) {
     if (['Unauthenticated.'].contains(msg?.toString())) {
       // Helpers.deleteUserLocally();
     }

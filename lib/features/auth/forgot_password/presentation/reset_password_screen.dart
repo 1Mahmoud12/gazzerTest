@@ -11,7 +11,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/forget_password/domain/forgot_password_repo.dart';
+import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});

@@ -13,12 +13,13 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show PhoneTextField, MainTextField;
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart'
+    show PhoneTextField, MainTextField;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/forget_password/presentation/forget_password_btn.dart';
+import 'package:gazzer/features/auth/forgot_password/presentation/forgot_password_btn.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_states.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
@@ -55,7 +56,11 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: const ClassicAppBar(),
         body: DecoratedBox(
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [Co.purple.withAlpha(50), Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+            gradient: LinearGradient(
+              colors: [Co.purple.withAlpha(50), Colors.transparent],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            ),
           ),
           child: Form(
             key: _formKey,
@@ -64,7 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
                 Row(
-                  children: [GradientText(text: L10n.tr().login, style: TStyle.mainwBold(32), gradient: Grad.textGradient)],
+                  children: [
+                    GradientText(text: L10n.tr().login, style: TStyle.mainwBold(32), gradient: Grad.textGradient),
+                  ],
                 ),
                 const VerticalSpacing(16),
                 AutofillGroup(
@@ -148,7 +155,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     Expanded(
                       child: OptionBtn(
                         onPressed: () {
-                          context.myPush(BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen()));
+                          context.myPush(
+                            BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen()),
+                          );
                         },
                         textStyle: TStyle.mainwSemi(15),
                         bgColor: Colors.transparent,
