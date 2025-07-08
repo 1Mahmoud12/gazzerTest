@@ -24,7 +24,7 @@ class RegisterData {
     "status": "success",
   };
 
-  final registerErrorJson = {
+  final registerPhoneExistsErrorJson = {
     "message": "This mobile number is already registered.",
     "errors": {
       "phone": ["This mobile number is already registered."],

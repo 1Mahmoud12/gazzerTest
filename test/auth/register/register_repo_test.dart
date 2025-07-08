@@ -20,7 +20,11 @@ void main() async {
     late RegisterRepoImp registerRepo;
     final registerData = RegisterData();
     final Response successResponse = Response(statusCode: 200, requestOptions: RequestOptions());
-    final Response errorResponse = Response(statusCode: 422, requestOptions: RequestOptions());
+    final DioException errorResponse = DioException(
+      requestOptions: RequestOptions(),
+      type: DioExceptionType.badResponse,
+      response: Response(requestOptions: RequestOptions(), statusCode: 422),
+    );
 
     setUp(() {
       apiClient = MockApiClient();
@@ -51,12 +55,16 @@ void main() async {
         () async {
           when(
             apiClient.post(endpoint: Endpoints.register, requestBody: registerData.registerReq.toJson()),
-          ).thenAnswer((_) async => errorResponse..data = registerData.registerErrorJson);
+          ).thenThrow(() {
+            errorResponse.response!.data = registerData.registerPhoneExistsErrorJson;
+            return errorResponse;
+          }());
 
           final result = await registerRepo.register(registerData.registerReq);
 
           expect(result, isInstanceOf<Error<AuthResponse>>());
           expect((result as Error<AuthResponse>).error.message, isNotNull);
+          expect(result.error.message, contains('mobile'));
         },
       );
     });
@@ -104,14 +112,16 @@ void main() async {
               endpoint: Endpoints.editPhoneNum(registerData.notExistSessionId),
               requestBody: {'phone': registerData.newPhone},
             ),
-          ).thenAnswer(
-            (_) async => errorResponse..data = registerData.editPhoneNumberSessionNotExistsErrorJson,
-          );
+          ).thenThrow(() {
+            errorResponse.response!.data = registerData.editPhoneNumberSessionNotExistsErrorJson;
+            return errorResponse;
+          }());
 
-          final result = await registerRepo.editPhoneNumber(registerData.sessionId, registerData.newPhone);
+          final result = await registerRepo.editPhoneNumber(registerData.notExistSessionId, registerData.newPhone);
 
           expect(result, isInstanceOf<Error<String>>());
           expect((result as Error<String>).error.message, isNotNull);
+          expect(result.error.message, contains('Session'));
         },
       );
       test(
@@ -122,14 +132,16 @@ void main() async {
               endpoint: Endpoints.editPhoneNum(registerData.sessionId),
               requestBody: {'phone': registerData.existPhoneNum},
             ),
-          ).thenAnswer(
-            (_) async => errorResponse..data = registerData.editPhoneNumberTakenErrorJson,
-          );
+          ).thenThrow(() {
+            errorResponse.response!.data = registerData.editPhoneNumberTakenErrorJson;
+            return errorResponse;
+          }());
 
           final result = await registerRepo.editPhoneNumber(registerData.sessionId, registerData.newPhone);
 
           expect(result, isInstanceOf<Error<String>>());
           expect((result as Error<String>).error.message, isNotNull);
+          expect(result.error.message, contains('phone'));
         },
       );
     });
@@ -160,12 +172,16 @@ void main() async {
               endpoint: Endpoints.verifyOTP,
               requestBody: {'session_id': registerData.sessionId, 'otp_code': registerData.code},
             ),
-          ).thenAnswer((_) async => errorResponse..data = registerData.verifyOtpErrorJson);
+          ).thenThrow(() {
+            errorResponse.response!.data = registerData.verifyOtpErrorJson;
+            return errorResponse;
+          }());
 
           final result = await registerRepo.verifyOTP(registerData.sessionId, registerData.code);
 
           expect(result, isInstanceOf<Error<String>>());
           expect((result as Error<String>).error.message, isNotNull);
+          expect(result.error.message, contains('Invalid'));
         },
       );
     });

@@ -26,7 +26,7 @@ abstract class BaseApiRepo {
 
   ApiError _handle(Object error, StackTrace? stack) {
     try {
-      var apiError = ApiError(message: L10n.tr().somethingWentWrong);
+      ApiError apiError = ApiError(message: error.toString());
       if (error is! DioException) {
         _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing data');
         return apiError;
@@ -52,6 +52,8 @@ abstract class BaseApiRepo {
           apiError.message = L10n.tr().unknownErorOccurred;
           break;
         default:
+          apiError.message = L10n.tr().somethingWentWrong;
+          break;
       }
       return apiError;
     } catch (e, stack) {

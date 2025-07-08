@@ -20,7 +20,11 @@ void main() async {
     late LoginRepo registerRepo;
     final loginData = LoginData();
     final Response successResponse = Response(statusCode: 200, requestOptions: RequestOptions());
-    final Response errorResponse = Response(statusCode: 422, requestOptions: RequestOptions());
+    final DioException errorResponse = DioException(
+      requestOptions: RequestOptions(),
+      type: DioExceptionType.badResponse,
+      response: Response(requestOptions: RequestOptions(), statusCode: 422, data: loginData.loginErrorJson),
+    );
 
     setUp(() {
       registerRepo = LoginRepoImp(apiClient);
@@ -48,13 +52,17 @@ void main() async {
         'should return Error with message when login fails',
         () async {
           when(
-            apiClient.post(endpoint: Endpoints.login, requestBody: loginData.invalidBody),
-          ).thenAnswer((_) async => errorResponse..data = loginData.loginErrorJson);
+            apiClient.post(
+              endpoint: Endpoints.login,
+              requestBody: {'phone': loginData.invalidPhone, 'password': loginData.invalidPassword},
+            ),
+          ).thenThrow(errorResponse);
 
           final result = await registerRepo.login(loginData.invalidPhone, loginData.invalidPassword);
 
           expect(result, isInstanceOf<Error<String>>());
           expect((result as Error<String>).error.message, isNotNull);
+          expect(result.error.message, contains('match'));
         },
       );
     });
