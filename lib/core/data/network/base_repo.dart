@@ -1,11 +1,21 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/domain/crashlytics_repo.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/di.dart';
 
 abstract class BaseApiRepo {
-  Future<Result<T>> call<T>({required Future<Response> Function() apiCall, required T Function(Response response) parser}) async {
+  late final CrashlyticsRepo _crashlyticsRepo;
+
+  BaseApiRepo() {
+    _crashlyticsRepo = di.get<CrashlyticsRepo>();
+  }
+
+  Future<Result<T>> call<T>({
+    required Future<Response> Function() apiCall,
+    required T Function(Response response) parser,
+  }) async {
     try {
       final result = await apiCall();
       return Result.ok(parser(result));
@@ -18,7 +28,7 @@ abstract class BaseApiRepo {
     try {
       var apiError = ApiError(message: L10n.tr().somethingWentWrong);
       if (error is! DioException) {
-        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true, reason: 'Parsing data');
+        _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing data');
         return apiError;
       }
       apiError.e = error.type;
@@ -46,7 +56,7 @@ abstract class BaseApiRepo {
       return apiError;
     } catch (e, stack) {
       // sent to crashlytics
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true, reason: 'Parsing errors');
+      _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing errors');
       return ApiError(message: "Something went wrong");
     }
   }

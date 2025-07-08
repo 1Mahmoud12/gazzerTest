@@ -5,6 +5,7 @@ import 'package:gazzer/features/auth/forget_password/domain/forgot_password_repo
 
 class ForgotPasswordImp extends ForgotPasswordRepo {
   final ApiClient _apiClient;
+  
   ForgotPasswordImp(this._apiClient);
   late String phoneNum;
   late String resetPasswordToken;

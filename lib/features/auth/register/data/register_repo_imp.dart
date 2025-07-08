@@ -16,16 +16,6 @@ class RegisterRepoImp extends RegisterRepo {
   late String _sessionId;
 
   @override
-  Future<Result<String>> editPhoneNumber(String sessionId, String code) {
-    return call<String>(
-      apiCall: () => _apiClient.post(endpoint: Endpoints.editPhoneNum(sessionId), requestBody: {'phone': code}),
-      parser: (result) {
-        return result.data['message']?.toString() ?? 'Success';
-      },
-    );
-  }
-
-  @override
   Future<Result<AuthResponse>> register(RegisterRequest req) {
     return call<AuthResponse>(
       apiCall: () => _apiClient.post(endpoint: Endpoints.register, requestBody: req.toJson()),
@@ -35,11 +25,6 @@ class RegisterRepoImp extends RegisterRepo {
         return resp;
       },
     );
-  }
-
-  @override
-  Future<Result<String>> resend() {
-    return resendOtp(_sessionId);
   }
 
   @override
@@ -53,9 +38,20 @@ class RegisterRepoImp extends RegisterRepo {
   }
 
   @override
-  Future<Result<String>> verify(String otpCode) {
-    return verifyOTP(_sessionId, otpCode);
+  Future<Result<String>> resend() => resendOtp(_sessionId);
+
+  @override
+  Future<Result<String>> editPhoneNumber(String sessionId, String code) {
+    return call<String>(
+      apiCall: () => _apiClient.post(endpoint: Endpoints.editPhoneNum(sessionId), requestBody: {'phone': code}),
+      parser: (result) {
+        return result.data['message']?.toString() ?? 'Success';
+      },
+    );
   }
+
+  @override
+  Future<Result<String>> onChangePhone(String newPhone) => editPhoneNumber(_sessionId, newPhone);
 
   @override
   Future<Result<String>> verifyOTP(String sessionId, String code) {
@@ -70,15 +66,14 @@ class RegisterRepoImp extends RegisterRepo {
     );
   }
 
+  /// for verify repo
+  @override
+  Future<Result<String>> verify(String otpCode) => verifyOTP(_sessionId, otpCode);
+
   @override
   void setAuthUser(ClientEntity client, String token) {
     TokenService.setToken(token);
     Session().setClient = client;
-  }
-
-  @override
-  Future<Result<String>> onChangePhone(String newPhone) async {
-    return editPhoneNumber(_sessionId, newPhone);
   }
 
   @override

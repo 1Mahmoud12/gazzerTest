@@ -16,14 +16,14 @@ class ApiClient {
   factory ApiClient() => _instance;
   final Dio _dio = Dio();
   static final mainDomain = "https://gazzer-dev-do.mostafa.cloud";
-  final String _baseURL = "$mainDomain/api/clients/";
+  final String baseURL = "$mainDomain/api/clients/";
   final String _acceptLanguage = "Accept-Language";
   final String _authorization = "authorization";
   final timeOut = const Duration(seconds: 30);
   var cancelToken = CancelToken();
   ApiClient._() {
     _dio.options = BaseOptions(
-      baseUrl: _baseURL,
+      baseUrl: baseURL,
       receiveDataWhenStatusError: true,
       connectTimeout: timeOut,
       receiveTimeout: timeOut,

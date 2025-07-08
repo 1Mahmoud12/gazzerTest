@@ -1,4 +1,6 @@
 import 'package:gazzer/core/data/network/api_client.dart';
+import 'package:gazzer/core/data/network/crashlytics_repo_imp.dart';
+import 'package:gazzer/core/domain/crashlytics_repo.dart';
 import 'package:gazzer/features/auth/forget_password/data/forgot_password_imp.dart';
 import 'package:gazzer/features/auth/forget_password/domain/forgot_password_repo.dart';
 import 'package:gazzer/features/auth/login/data/login_repo_imp.dart';
@@ -19,6 +21,7 @@ Future init() async {
 
   ///
   di.registerSingleton<ApiClient>(ApiClient());
+  di.registerSingleton<CrashlyticsRepo>(CrashlyticsRepoImp());
   _registerRepos(di.get<ApiClient>());
 
   ///
