@@ -12,6 +12,23 @@ class Validators {
     return null;
   }
 
+  static String? emailValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return L10n.tr().thisFieldIsRequired;
+    }
+    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input) ||
+            input.length > 50
+        ? L10n.tr().invalidEmail
+        : null;
+  }
+
+  static String? mobileEGValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return L10n.tr().thisFieldIsRequired;
+    }
+    return !RegExp(r"^1(0|1|2|5)[0-9]{8}$").hasMatch(input) ? L10n.tr().invalidPhoneNumber : null;
+  }
+
   static String? passwordValidation(String? value) {
     if (value?.isNotEmpty != true) {
       return L10n.tr().thisFieldIsRequired;
@@ -21,9 +38,6 @@ class Validators {
     final hasLowerCase = RegExp(r'[a-z]').hasMatch(value);
     final hasDigits = RegExp(r'[0-9]').hasMatch(value);
     final hasSpecialCharacters = RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
-    print(
-      "hasMinimumLength: $hasMinimumLength, hasUpperCase: $hasUpperCase, hasLowerCase: $hasLowerCase, hasDigits: $hasDigits, hasSpecialCharacters: $hasSpecialCharacters",
-    );
     if (![hasMinimumLength, hasUpperCase, hasLowerCase, hasDigits, hasSpecialCharacters].contains(false)) return null;
     final msg = StringBuffer(L10n.tr().passwordMustConain);
 
@@ -49,6 +63,7 @@ class Validators {
   }
 
   static String? valueAtLeastNum(String? value, String name, int num) {
+    if (num < 1) return null;
     if (value == null || value.trim().length < num) {
       return L10n.tr().valueMoreThanNum(num, name);
     }
@@ -62,37 +77,16 @@ class Validators {
     return null;
   }
 
-  static String? valueMoreThanNum(String? value, int num, String name) {
-    if (value == null || value.trim().length < num) {
-      return L10n.tr().valueMoreThanNum(num, name);
-    }
-    return null;
-  }
+  // static String? countryPhoneValidator(String? input, String code) {
+  //   if (code == 'SA') return Validators.mobileSAValidator(input);
+  //   if (code == 'EG') return Validators.mobileEGValidator(input);
+  //   return Validators.valueMustBeNum(input, 5, L10n.tr().mobileNumber);
+  // }
 
-  static String? emailValidator(String? input) {
-    if (input == null || input.isEmpty) {
-      return L10n.tr().thisFieldIsRequired;
-    }
-    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input) ? L10n.tr().invalidEmail : null;
-  }
-
-  static String? countryPhoneValidator(String? input, String code) {
-    if (code == 'SA') return Validators.mobileSAValidator(input);
-    if (code == 'EG') return Validators.mobileEGValidator(input);
-    return Validators.valueMustBeNum(input, 5, L10n.tr().mobileNumber);
-  }
-
-  static String? mobileSAValidator(String? input) {
-    if (input == null || input.isEmpty) {
-      return L10n.tr().thisFieldIsRequired;
-    }
-    return !RegExp(r"^5[0-9]{7}$").hasMatch(input) ? L10n.tr().invalidPhoneNumber : null;
-  }
-
-  static String? mobileEGValidator(String? input) {
-    if (input == null || input.isEmpty) {
-      return L10n.tr().thisFieldIsRequired;
-    }
-    return !RegExp(r"^1(0|1|2|5)[0-9]{8}$").hasMatch(input) ? L10n.tr().invalidPhoneNumber : null;
-  }
+  // static String? mobileSAValidator(String? input) {
+  //   if (input == null || input.isEmpty) {
+  //     return L10n.tr().thisFieldIsRequired;
+  //   }
+  //   return !RegExp(r"^5[0-9]{7}$").hasMatch(input) ? L10n.tr().invalidPhoneNumber : null;
+  // }
 }

@@ -1,27 +1,29 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/auth/common/data/auth_response.dart';
 import 'package:gazzer/features/auth/register/data/register_repo_imp.dart';
+import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_states.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'register_cubit_test.mocks.dart';
+import '../../test_di.dart';
 import 'register_data.dart';
 
 @GenerateMocks([RegisterRepoImp])
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await initTest();
+  WidgetsFlutterBinding.ensureInitialized();
+  await initTest();
+
   group('test HomeCubit logic', () {
-    late MockRegisterRepoImp repo;
-    late RegisterCubit cubit;
     final registerData = RegisterData();
+    final repo = diTest.get<RegisterRepo>();
+    late RegisterCubit cubit;
     setUp(() {
-      repo = MockRegisterRepoImp();
       cubit = RegisterCubit(repo);
     });
     tearDown(() => cubit.close());
