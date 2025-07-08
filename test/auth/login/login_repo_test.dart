@@ -17,7 +17,7 @@ void main() async {
 
   group('RegisterRepo Tests', () {
     final apiClient = diTest.get<ApiClient>();
-    late LoginRepo registerRepo;
+    late LoginRepo loginRepo;
     final loginData = LoginData();
     final Response successResponse = Response(statusCode: 200, requestOptions: RequestOptions());
     final DioException errorResponse = DioException(
@@ -27,7 +27,7 @@ void main() async {
     );
 
     setUp(() {
-      registerRepo = LoginRepoImp(apiClient);
+      loginRepo = LoginRepoImp(apiClient);
     });
 
     tearDown(() {
@@ -41,7 +41,7 @@ void main() async {
             apiClient.post(endpoint: Endpoints.login, requestBody: loginData.validBody),
           ).thenAnswer((_) async => successResponse..data = loginData.loginSuccessJson);
 
-          final result = await registerRepo.login(loginData.validPhone, loginData.validPassword);
+          final result = await loginRepo.login(loginData.validPhone, loginData.validPassword);
 
           expect(result, isInstanceOf<Ok<String>>());
           expect((result as Ok<String>).value, isNotNull);
@@ -58,7 +58,7 @@ void main() async {
             ),
           ).thenThrow(errorResponse);
 
-          final result = await registerRepo.login(loginData.invalidPhone, loginData.invalidPassword);
+          final result = await loginRepo.login(loginData.invalidPhone, loginData.invalidPassword);
 
           expect(result, isInstanceOf<Error<String>>());
           expect((result as Error<String>).error.message, isNotNull);

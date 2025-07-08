@@ -83,6 +83,23 @@ void main() async {
           expect((result as Ok<String>).value, isNotNull);
         },
       );
+      test(
+        'should return error message when resend OTP fails',
+        () async {
+          when(
+            apiClient.post(endpoint: Endpoints.resendOtp(registerData.sessionId), requestBody: {}),
+          ).thenThrow(() {
+            errorResponse.response!.data = registerData.resendOtpErrorJson;
+            return errorResponse;
+          }());
+
+          final result = await registerRepo.resendOtp(registerData.sessionId);
+
+          expect(result, isInstanceOf<Error<String>>());
+          expect((result as Error<String>).error.message, isNotNull);
+          expect(result.error.message, contains('Resend OTP failed'));
+        },
+      );
     });
 
     group('EditPhoneNumber Function Tests', () {
@@ -184,6 +201,141 @@ void main() async {
           expect(result.error.message, contains('Invalid'));
         },
       );
+    });
+
+    group('Verify Repo Function Tests', () {
+      group('Verify Function Tests', () {
+        test(
+          'should return success message when OTP verification succeeds',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.verifyOTP,
+                requestBody: {'session_id': registerData.sessionId, 'otp_code': registerData.code},
+              ),
+            ).thenAnswer((_) async => successResponse..data = registerData.verifyOtpSuccessJson);
+
+            final result = await registerRepo.verify(registerData.code, registerData.sessionId);
+
+            expect(result, isInstanceOf<Ok<String>>());
+            expect((result as Ok<String>).value, isNotNull);
+          },
+        );
+
+        test(
+          'should return Error when OTP verification fails',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.verifyOTP,
+                requestBody: {'session_id': registerData.sessionId, 'otp_code': registerData.invalidCode},
+              ),
+            ).thenThrow(() {
+              errorResponse.response!.data = registerData.verifyOtpErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await registerRepo.verify(registerData.invalidCode, registerData.sessionId);
+
+            expect(result, isInstanceOf<Error<String>>());
+            expect((result as Error<String>).error.message, isNotNull);
+            expect(result.error.message, contains('Invalid'));
+          },
+        );
+      });
+      group('Resend Function Tests', () {
+        test(
+          'should return success message when resend OTP succeeds',
+          () async {
+            when(
+              apiClient.post(endpoint: Endpoints.resendOtp(registerData.sessionId), requestBody: {}),
+            ).thenAnswer((_) async => successResponse..data = registerData.resendOtpSuccessJson);
+
+            final result = await registerRepo.resend(registerData.sessionId);
+
+            expect(result, isInstanceOf<Ok<String>>());
+            expect((result as Ok<String>).value, isNotNull);
+          },
+        );
+
+        test(
+          'should return error message when resend OTP fails',
+          () async {
+            when(
+              apiClient.post(endpoint: Endpoints.resendOtp(registerData.sessionId), requestBody: {}),
+            ).thenThrow(() {
+              errorResponse.response!.data = registerData.resendOtpErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await registerRepo.resend(registerData.sessionId);
+
+            expect(result, isInstanceOf<Error<String>>());
+            expect((result as Error<String>).error.message, isNotNull);
+            expect(result.error.message, contains('Resend OTP failed'));
+          },
+        );
+      });
+      group('ChangePhone Function Tests', () {
+        test(
+          'should return success message when phone number edit succeeds',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.editPhoneNum(registerData.sessionId),
+                requestBody: {'phone': registerData.newPhone},
+              ),
+            ).thenAnswer(
+              (_) async => successResponse..data = registerData.editPhoneNumberSuccessJson,
+            );
+
+            final result = await registerRepo.onChangePhone(registerData.newPhone, registerData.sessionId);
+
+            expect(result, isInstanceOf<Ok<String>>());
+            expect((result as Ok<String>).value, isNotNull);
+          },
+        );
+        test(
+          'should return Error when phone number edit fails due to session not existing',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.editPhoneNum(registerData.notExistSessionId),
+                requestBody: {'phone': registerData.newPhone},
+              ),
+            ).thenThrow(() {
+              errorResponse.response!.data = registerData.editPhoneNumberSessionNotExistsErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await registerRepo.onChangePhone(registerData.newPhone, registerData.notExistSessionId);
+
+            expect(result, isInstanceOf<Error<String>>());
+            expect((result as Error<String>).error.message, isNotNull);
+            expect(result.error.message, contains('Session'));
+          },
+        );
+        test(
+          'should return Error when phone number edit fails due to phone already taken',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.editPhoneNum(registerData.sessionId),
+                requestBody: {'phone': registerData.existPhoneNum},
+              ),
+            ).thenThrow(() {
+              errorResponse.response!.data = registerData.editPhoneNumberTakenErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await registerRepo.onChangePhone(registerData.newPhone, registerData.sessionId);
+
+            expect(result, isInstanceOf<Error<String>>());
+            expect((result as Error<String>).error.message, isNotNull);
+            expect(result.error.message, contains('phone'));
+          },
+        );
+      });
     });
   });
 }

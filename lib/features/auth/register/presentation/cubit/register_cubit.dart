@@ -14,7 +14,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     final resp = await _repo.register(req);
     switch (resp) {
       case Ok<AuthResponse> res:
-        emit(RegisterSuccess(res.value.msg));
+        emit(RegisterSuccess(res.value));
         break;
       case Error err:
         emit(RegisterError(err.error));

@@ -80,13 +80,13 @@ class MockRegisterRepoImp extends _i1.Mock implements _i2.RegisterRepoImp {
           as _i3.Future<_i4.Result<String>>);
 
   @override
-  _i3.Future<_i4.Result<String>> resend() =>
+  _i3.Future<_i4.Result<String>> resend([String? data]) =>
       (super.noSuchMethod(
-            Invocation.method(#resend, []),
+            Invocation.method(#resend, [data]),
             returnValue: _i3.Future<_i4.Result<String>>.value(
               _i7.dummyValue<_i4.Result<String>>(
                 this,
-                Invocation.method(#resend, []),
+                Invocation.method(#resend, [data]),
               ),
             ),
           )
@@ -109,13 +109,16 @@ class MockRegisterRepoImp extends _i1.Mock implements _i2.RegisterRepoImp {
           as _i3.Future<_i4.Result<String>>);
 
   @override
-  _i3.Future<_i4.Result<String>> onChangePhone(String? newPhone) =>
+  _i3.Future<_i4.Result<String>> onChangePhone(
+    String? newPhone, [
+    String? data,
+  ]) =>
       (super.noSuchMethod(
-            Invocation.method(#onChangePhone, [newPhone]),
+            Invocation.method(#onChangePhone, [newPhone, data]),
             returnValue: _i3.Future<_i4.Result<String>>.value(
               _i7.dummyValue<_i4.Result<String>>(
                 this,
-                Invocation.method(#onChangePhone, [newPhone]),
+                Invocation.method(#onChangePhone, [newPhone, data]),
               ),
             ),
           )
@@ -135,13 +138,13 @@ class MockRegisterRepoImp extends _i1.Mock implements _i2.RegisterRepoImp {
           as _i3.Future<_i4.Result<String>>);
 
   @override
-  _i3.Future<_i4.Result<String>> verify(String? otpCode) =>
+  _i3.Future<_i4.Result<String>> verify(String? otpCode, [String? data]) =>
       (super.noSuchMethod(
-            Invocation.method(#verify, [otpCode]),
+            Invocation.method(#verify, [otpCode, data]),
             returnValue: _i3.Future<_i4.Result<String>>.value(
               _i7.dummyValue<_i4.Result<String>>(
                 this,
-                Invocation.method(#verify, [otpCode]),
+                Invocation.method(#verify, [otpCode, data]),
               ),
             ),
           )

@@ -13,16 +13,14 @@ class RegisterRepoImp extends RegisterRepo {
   final ApiClient _apiClient;
   RegisterRepoImp(this._apiClient);
 
-  late String _sessionId;
+  // late String _sessionId;
 
   @override
   Future<Result<AuthResponse>> register(RegisterRequest req) {
     return call<AuthResponse>(
       apiCall: () => _apiClient.post(endpoint: Endpoints.register, requestBody: req.toJson()),
       parser: (result) {
-        final resp = AuthResponse.fromJson(result.data);
-        _sessionId = resp.sessionId ?? '';
-        return resp;
+        return AuthResponse.fromJson(result.data);
       },
     );
   }
@@ -38,7 +36,7 @@ class RegisterRepoImp extends RegisterRepo {
   }
 
   @override
-  Future<Result<String>> resend() => resendOtp(_sessionId);
+  Future<Result<String>> resend(String data) => resendOtp(data!);
 
   @override
   Future<Result<String>> editPhoneNumber(String sessionId, String code) {
@@ -51,7 +49,7 @@ class RegisterRepoImp extends RegisterRepo {
   }
 
   @override
-  Future<Result<String>> onChangePhone(String newPhone) => editPhoneNumber(_sessionId, newPhone);
+  Future<Result<String>> onChangePhone(String newPhone, String data) => editPhoneNumber(data, newPhone);
 
   @override
   Future<Result<String>> verifyOTP(String sessionId, String code) {
@@ -68,7 +66,7 @@ class RegisterRepoImp extends RegisterRepo {
 
   /// for verify repo
   @override
-  Future<Result<String>> verify(String otpCode) => verifyOTP(_sessionId, otpCode);
+  Future<Result<String>> verify(String otpCode, String data) => verifyOTP(data, otpCode);
 
   @override
   void setAuthUser(ClientEntity client, String token) {

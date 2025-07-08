@@ -53,6 +53,7 @@ class ForgetPasswordBtn extends StatelessWidget {
             VerifyOTPScreen(
               repo: di<ForgotPasswordRepo>(),
               initPhone: phone,
+              data: phone,
               onSuccess: (ctx) => ctx.myPushReplacement(const ResetPasswordScreen()),
             ),
           );

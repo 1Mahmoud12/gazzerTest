@@ -7,7 +7,7 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
   final ApiClient _apiClient;
 
   ForgotPasswordImp(this._apiClient);
-  late String phoneNum;
+  // late String phoneNum;
   late String resetPasswordToken;
   @override
   bool canChangePhone = false;
@@ -17,7 +17,7 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
     return super.call(
       apiCall: () => _apiClient.post(endpoint: Endpoints.forgetPassword, requestBody: {"phone": phoneNumber}),
       parser: (response) {
-        phoneNum = phoneNumber;
+        // phoneNum = phoneNumber;
         resetPasswordToken = '';
         return response.data['message'].toString();
       },
@@ -57,13 +57,13 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
 
   ///
   @override
-  Future<Result<String>> verify(String otpCode) => verifyOtp(phoneNum, otpCode);
+  Future<Result<String>> verify(String otpCode, String? phone) => verifyOtp(phone!, otpCode);
 
   @override
-  Future<Result<String>> resend() => forgotPassword(phoneNum);
+  Future<Result<String>> resend(String phone) => forgotPassword(phone);
 
   @override
-  Future<Result<String>> onChangePhone(String newPhone) {
+  Future<Result<String>> onChangePhone(String newPhone, String data) {
     throw UnimplementedError();
   }
 }

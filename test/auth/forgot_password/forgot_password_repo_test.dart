@@ -229,5 +229,144 @@ void main() async {
         },
       );
     });
+
+    ///
+    ///
+    ///
+
+    group('Verify Repo Function Tests', () {
+      group('Verify Function Tests', () {
+        test(
+          'should return success message with reset token when OTP verification succeeds',
+          () async {
+            // First set the reset token
+            forgotPasswordRepo.resetPasswordToken = forgetPasswordData.resetToken;
+            when(
+              apiClient.post(
+                endpoint: Endpoints.forgetPasswordVerifyOTP,
+                requestBody: {"phone": forgetPasswordData.phone, "otp_code": forgetPasswordData.validOtp},
+              ),
+            ).thenAnswer((_) async => successResponse..data = forgetPasswordData.verifyOtpSuccessJson);
+
+            final result = await forgotPasswordRepo.verify(forgetPasswordData.validOtp, forgetPasswordData.phone);
+
+            expect(result, isInstanceOf<Ok<String>>());
+            expect((result as Ok<String>).value, isNotNull);
+            expect(result.value, contains('verified'));
+            // Check that reset token is stored internally
+            expect(forgotPasswordRepo.resetPasswordToken, equals(forgetPasswordData.resetToken));
+          },
+        );
+
+        test(
+          'should return Error when OTP verification fails with invalid OTP',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.forgetPasswordVerifyOTP,
+                requestBody: {"phone": forgetPasswordData.phone, "otp_code": forgetPasswordData.invalidOtp},
+              ),
+            ).thenThrow(() {
+              errorResponse.response!.data = forgetPasswordData.verifyOtpErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await forgotPasswordRepo.verify(forgetPasswordData.invalidOtp, forgetPasswordData.phone);
+
+            expect(result, isInstanceOf<Error<String>>());
+            final errorResult = result as Error<String>;
+            expect(errorResult.error.message, isNotNull);
+            expect(errorResult.error.message, isNotEmpty);
+          },
+        );
+
+        test(
+          'should return Error when OTP verification fails due to expired OTP',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.forgetPasswordVerifyOTP,
+                requestBody: {"phone": forgetPasswordData.phone, "otp_code": forgetPasswordData.expiredOtp},
+              ),
+            ).thenThrow(() {
+              errorResponse.response!.data = forgetPasswordData.expiredOtpErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await forgotPasswordRepo.verify(forgetPasswordData.phone, forgetPasswordData.expiredOtp);
+
+            expect(result, isInstanceOf<Error<String>>());
+            expect((result as Error<String>).error.message, isNotNull);
+          },
+        );
+        test(
+          'should return Error when OTP verification fails due to max attempts reached',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.forgetPasswordVerifyOTP,
+                requestBody: {"phone": forgetPasswordData.phone, "otp_code": forgetPasswordData.maxAttempteddOtp},
+              ),
+            ).thenThrow(() {
+              errorResponse.response!.data = forgetPasswordData.maxAttemptsReachedErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await forgotPasswordRepo.verify(
+              forgetPasswordData.maxAttempteddOtp,
+              forgetPasswordData.phone,
+            );
+
+            expect(result, isInstanceOf<Error<String>>());
+            expect((result as Error<String>).error.message, isNotNull);
+          },
+        );
+      });
+      group('Resend Function Tests', () {
+        test(
+          'should return success message when forgot password request succeeds',
+          () async {
+            when(
+              apiClient.post(endpoint: Endpoints.forgetPassword, requestBody: {"phone": forgetPasswordData.phone}),
+            ).thenAnswer((_) async => successResponse..data = forgetPasswordData.forgotPasswordSuccessJson);
+
+            final result = await forgotPasswordRepo.resend(forgetPasswordData.phone);
+
+            expect(result, isInstanceOf<Ok<String>>());
+            expect((result as Ok<String>).value, isNotNull);
+          },
+        );
+
+        test(
+          'should return Error with message when phone number is not registered',
+          () async {
+            when(
+              apiClient.post(
+                endpoint: Endpoints.forgetPassword,
+                requestBody: {"phone": forgetPasswordData.invalidPhone},
+              ),
+            ).thenThrow(() {
+              errorResponse.response!.data = forgetPasswordData.forgetPasswordErrorJson;
+              return errorResponse;
+            }());
+
+            final result = await forgotPasswordRepo.resend(forgetPasswordData.invalidPhone);
+            expect(result, isInstanceOf<Error<String>>());
+            expect((result as Error<String>).error.message, isNotNull);
+          },
+        );
+      });
+      group('ChangePhone Function Tests', () {
+        test(
+          'should throw UnimplementedError when trying to change phone',
+          () async {
+            expect(
+              () => forgotPasswordRepo.onChangePhone(forgetPasswordData.newPhone, ''),
+              throwsA(isA<UnimplementedError>()),
+            );
+          },
+        );
+      });
+    });
   });
 }

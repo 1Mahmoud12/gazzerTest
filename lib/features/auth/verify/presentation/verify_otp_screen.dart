@@ -18,9 +18,16 @@ import 'package:gazzer/features/auth/verify/domain/verify_repo.dart';
 import 'package:gazzer/features/auth/verify/presentation/widgets/otp_widget.dart';
 
 class VerifyOTPScreen extends StatefulWidget {
-  const VerifyOTPScreen({super.key, required this.repo, required this.onSuccess, required this.initPhone});
+  const VerifyOTPScreen({
+    super.key,
+    required this.repo,
+    required this.onSuccess,
+    required this.initPhone,
+    required this.data,
+  });
   final VerifyRepo repo;
   final String initPhone;
+  final String data;
   final Function(BuildContext ctx) onSuccess;
   @override
   State<VerifyOTPScreen> createState() => _VerifyOTPScreenState();
@@ -37,7 +44,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
 
   Future<void> resend() async {
     isResendingOtp.value = true;
-    final res = await widget.repo.resend();
+    final res = await widget.repo.resend(widget.data);
     switch (res) {
       case Ok<String> ok:
         Alerts.showToast(ok.value, error: false);
@@ -82,7 +89,11 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
       appBar: const ClassicAppBar(),
       body: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Co.purple.withAlpha(50), Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          gradient: LinearGradient(
+            colors: [Co.purple.withAlpha(50), Colors.transparent],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
         ),
         child: Form(
           key: _formKey,
@@ -91,13 +102,24 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
             children: [
               Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
               Row(
-                children: [GradientText(text: L10n.tr().otpVerification, style: TStyle.mainwBold(32), gradient: Grad.textGradient)],
+                children: [
+                  GradientText(
+                    text: L10n.tr().otpVerification,
+                    style: TStyle.mainwBold(32),
+                    gradient: Grad.textGradient,
+                  ),
+                ],
               ),
               const VerticalSpacing(8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(L10n.tr().anOTPhasBeenSentTo + "\n( +20$phoneNumber", maxLines: 2, style: TStyle.greySemi(16), textAlign: TextAlign.start),
+                  Text(
+                    L10n.tr().anOTPhasBeenSentTo + "\n( +20$phoneNumber",
+                    maxLines: 2,
+                    style: TStyle.greySemi(16),
+                    textAlign: TextAlign.start,
+                  ),
                   if (widget.repo.canChangePhone)
                     TextButton(
                       onPressed: () async {
@@ -109,7 +131,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                             return ChangePhoneNumberSheet(
                               initialPhone: phoneNumber,
                               onConfirm: (val) async {
-                                final res = await widget.repo.onChangePhone(val);
+                                final res = await widget.repo.onChangePhone(val, widget.data);
                                 switch (res) {
                                   case Ok<String> ok:
                                     Alerts.showToast(ok.value, error: false);
@@ -162,7 +184,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                             onPressed: finished ? () => resend() : null,
 
                             child: Text(
-                              finished ? L10n.tr().resendCode : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
+                              finished
+                                  ? L10n.tr().resendCode
+                                  : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
                               textAlign: TextAlign.end,
                               style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
                             ),
@@ -203,7 +227,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                         return Alerts.showToast(L10n.tr().valueMustBeNum(6, L10n.tr().code));
                       }
                       isSubmitting.value = true;
-                      final res = await widget.repo.verify(otpCont.text);
+                      final res = await widget.repo.verify(otpCont.text, widget.data);
                       isSubmitting.value = false;
                       switch (res) {
                         case Ok<String> ok:

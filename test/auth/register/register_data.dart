@@ -10,6 +10,7 @@ class RegisterData {
     passwordConfirmation: "!Ss123456",
   );
   final String code = "123456";
+  final String invalidCode = "123456";
   final String sessionId = "01JZ0JT3RKPBRHC1ZE1BKS74V6";
   final String notExistSessionId = "01JZ0JT3RKPBRHC1ZE1BKS74V9";
   final String newPhone = "0987654321";

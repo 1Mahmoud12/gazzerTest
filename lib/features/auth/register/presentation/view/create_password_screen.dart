@@ -55,7 +55,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       appBar: const ClassicAppBar(),
       body: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Co.purple.withAlpha(50), Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          gradient: LinearGradient(
+            colors: [Co.purple.withAlpha(50), Colors.transparent],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
         ),
         child: Form(
           key: _formKey,
@@ -65,7 +69,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
               Row(
                 children: [
-                  GradientText(text: L10n.tr().createPassword, style: TStyle.mainwBold(32), gradient: Grad.textGradient),
+                  GradientText(
+                    text: L10n.tr().createPassword,
+                    style: TStyle.mainwBold(32),
+                    gradient: Grad.textGradient,
+                  ),
                 ],
               ),
               const VerticalSpacing(8),
@@ -142,11 +150,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               BlocConsumer<RegisterCubit, RegisterStates>(
                 listener: (context, state) {
                   if (state is RegisterSuccess) {
-                    Alerts.showToast(state.message, error: false);
+                    Alerts.showToast(state.resp.msg, error: false);
                     context.myPush(
                       VerifyOTPScreen(
                         initPhone: req.phone,
                         repo: di<RegisterRepo>(),
+                        data: state.resp.sessionId ?? '',
                         onSuccess: (ctx) => ctx.myPushAndRemoveUntil(const SelectLocationScreen()),
                       ),
                     );
