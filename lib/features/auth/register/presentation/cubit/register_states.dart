@@ -14,7 +14,7 @@ class RegisterSuccess extends RegisterStates {
 }
 
 class RegisterError extends RegisterStates {
-  final ApiError error;
+  final BaseError error;
 
   RegisterError(this.error);
 }

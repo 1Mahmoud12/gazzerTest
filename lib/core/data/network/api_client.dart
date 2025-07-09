@@ -7,20 +7,23 @@ import 'package:gazzer/di.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-extension ResposnseSuccess on Response {
-  bool get isSuccess => (statusCode ?? 500) < 400;
-}
-
 class ApiClient {
+  /// Singleton instance of [ApiClient].
   static final ApiClient _instance = ApiClient._();
   factory ApiClient() => _instance;
+
   final Dio _dio = Dio();
+
+  /// Static for handling deep linking
   static final mainDomain = "https://gazzer-dev-do.mostafa.cloud";
   final String baseURL = "$mainDomain/api/clients/";
+
+  /// Headers
   final String _acceptLanguage = "Accept-Language";
   final String _authorization = "authorization";
   final timeOut = const Duration(seconds: 30);
   var cancelToken = CancelToken();
+
   ApiClient._() {
     _dio.options = BaseOptions(
       baseUrl: baseURL,
@@ -34,26 +37,34 @@ class ApiClient {
         _acceptLanguage: di<SharedPreferences>().getString(StorageKeys.locale) ?? Platform.localeName.substring(0, 2),
       },
     );
-    if (kDebugMode) {
-      _dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
-    }
+
+    /// Adding interceptors for logging only in debug mode
+    if (kDebugMode) _dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
   }
 
-  bool isDisconected = false;
+  void changeLocale(String languageCode) => _dio.options.headers[_acceptLanguage] = languageCode;
+
+  Map<String, dynamic> _getHeaders(Map<String, dynamic>? headers) {
+    final custHeaders = <String, dynamic>{};
+    final String? token = TokenService.getToken();
+    if (token != null) custHeaders.addAll({_authorization: "Bearer $token"});
+    if (headers != null) custHeaders.addAll(headers);
+    return custHeaders;
+  }
+
+  /// [queryParameters] can be used to add query parameters to the request
+  ///
+  /// [headers] can be used to add custom headers to the request not including the authorization header
   Future<Response> get({
     required String endpoint,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     try {
-      final String? token = TokenService.getToken();
-      final custHeaders = <String, dynamic>{};
-      if (token != null) custHeaders.addAll({_authorization: "Bearer $token"});
-      if (headers != null) custHeaders.addAll(headers);
       final response = await _dio.get(
         endpoint,
         queryParameters: queryParameters,
-        options: Options(headers: custHeaders),
+        options: Options(headers: _getHeaders(headers)),
       );
       return response;
     } on DioException catch (e) {
@@ -64,6 +75,15 @@ class ApiClient {
     }
   }
 
+  /// set [customRequestDuration] override the default request duration which [timeOut] value
+  ///
+  /// use [onSendProgress] to track the upload progress
+  ///
+  /// [requestBody] Must be a [Map] or [Null] [FormData] for file uploads
+  ///
+  /// [queryParameters] can be used to add query parameters to the request
+  ///
+  /// [headers] can be used to add custom headers to the request not including the authorization header
   Future<Response> post({
     required String endpoint,
     required var requestBody,
@@ -72,10 +92,8 @@ class ApiClient {
     Duration? customRequestDuration,
     void Function(int, int)? onSendProgress,
   }) async {
+    assert(requestBody is Map? || requestBody is FormData, 'requestBody must be a Map or FormData for file uploads');
     try {
-      final String? token = TokenService.getToken();
-      final custHeaders = <String, dynamic>{_authorization: token != null ? "Bearer $token" : ''};
-      if (headers != null) custHeaders.addAll(headers);
       final response = await _dio.post(
         endpoint,
         queryParameters: queryParameters,
@@ -84,7 +102,7 @@ class ApiClient {
         options: Options(
           receiveTimeout: customRequestDuration,
           sendTimeout: customRequestDuration,
-          headers: custHeaders,
+          headers: _getHeaders(headers),
         ),
       );
       return response;
@@ -96,8 +114,9 @@ class ApiClient {
     }
   }
 
-  void changeLocale(String languageCode) => _dio.options.headers[_acceptLanguage] = languageCode;
+  bool isDisconected = false;
 
+  /// Handles no internet connection scenarios.
   void _noInternetConnection(DioExceptionType e) {
     if (e == DioExceptionType.connectionError ||
         e == DioExceptionType.connectionTimeout ||
@@ -105,14 +124,14 @@ class ApiClient {
         // e == DioExceptionType.cancel ||
         e == DioExceptionType.sendTimeout) {
       isDisconected = true;
-      // TODO show offline widget
+      // TODO: trigger Connection bus event to show offline widget
       // ConnectionBus.inst.emitNoConnectionState();
     }
   }
 
   void _unAuthenticated(msg) {
     if (['Unauthenticated.'].contains(msg?.toString())) {
-      // Helpers.deleteUserLocally();
+      /// TODO: remove token and user cached data, request a refresh token
     }
   }
 }

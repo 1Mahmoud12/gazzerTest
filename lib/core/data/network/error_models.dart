@@ -1,6 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+
+/// Base class for all error types in the application.
+abstract class BaseError {
+  String? message;
+  BaseError({this.message});
+}
 
 class ApiError extends BaseError {
   late bool isSingle;

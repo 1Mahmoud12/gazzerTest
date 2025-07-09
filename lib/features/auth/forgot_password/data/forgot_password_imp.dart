@@ -55,10 +55,11 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
     );
   }
 
-  ///
+  /// data is phone number
   @override
   Future<Result<String>> verify(String otpCode, String? phone) => verifyOtp(phone!, otpCode);
 
+  /// data is phone number
   @override
   Future<Result<String>> resend(String phone) => forgotPassword(phone);
 

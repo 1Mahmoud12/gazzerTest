@@ -35,8 +35,9 @@ class RegisterRepoImp extends RegisterRepo {
     );
   }
 
+  /// data is sessionId
   @override
-  Future<Result<String>> resend(String data) => resendOtp(data!);
+  Future<Result<String>> resend(String data) => resendOtp(data);
 
   @override
   Future<Result<String>> editPhoneNumber(String sessionId, String code) {
@@ -64,7 +65,7 @@ class RegisterRepoImp extends RegisterRepo {
     );
   }
 
-  /// for verify repo
+  /// data is sessionId
   @override
   Future<Result<String>> verify(String otpCode, String data) => verifyOTP(data, otpCode);
 

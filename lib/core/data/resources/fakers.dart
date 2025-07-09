@@ -10,6 +10,7 @@ import 'package:gazzer/features/resturants/restaurants_menu/data/category_add_mo
 import 'package:gazzer/features/resturants/restaurants_menu/data/subcategory_model.dart';
 import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
 
+/// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
   Fakers._();
 
@@ -25,7 +26,12 @@ class Fakers {
     Assets.assetsPngFood5,
   ];
 
-  static final _catsImages = [Assets.assetsPngFastFood, Assets.assetsPngGrocery, Assets.assetsPngBakery, Assets.assetsPngMedic];
+  static final _catsImages = [
+    Assets.assetsPngFastFood,
+    Assets.assetsPngGrocery,
+    Assets.assetsPngBakery,
+    Assets.assetsPngMedic,
+  ];
 
   static final _random = Random();
   static final fakeProds = List.generate(
@@ -49,7 +55,10 @@ class Fakers {
     8,
     (index) => CuisineModel(id: index, name: "مطبخ $index", image: _catsImages[_random.nextInt(_catsImages.length)]),
   );
-  static final fakecartItems = List.generate(5, (index) => CartItemModel.fromProduct(fakeProds[_random.nextInt(fakeProds.length)]));
+  static final fakecartItems = List.generate(
+    5,
+    (index) => CartItemModel.fromProduct(fakeProds[_random.nextInt(fakeProds.length)]),
+  );
   static final fakeVendors = List.generate(
     3,
     (index) => VendorProductsModel(
@@ -74,7 +83,11 @@ class Fakers {
   );
   static final fakeSubCats = List.generate(
     10,
-    (index) => SubcategoryModel(id: index, name: "فئة فرعية ${index + 1}", imageUrl: _catsImages[_random.nextInt(_catsImages.length)]),
+    (index) => SubcategoryModel(
+      id: index,
+      name: "فئة فرعية ${index + 1}",
+      imageUrl: _catsImages[_random.nextInt(_catsImages.length)],
+    ),
   );
 
   static final vendors = List.generate(
