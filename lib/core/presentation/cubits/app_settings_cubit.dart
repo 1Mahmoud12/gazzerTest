@@ -14,4 +14,10 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
     di<ApiClient>().changeLocale(lang);
     emit(AppSettingsState(lang: lang));
   }
+
+  @override
+  void emit(AppSettingsState state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

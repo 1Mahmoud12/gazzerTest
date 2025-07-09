@@ -19,4 +19,10 @@ class LoginCubit extends Cubit<LoginStates> {
         break;
     }
   }
+
+  // @override
+  // void emit(LoginStates state) {
+  //   if (isClosed) return;
+  //   super.emit(state);
+  // }
 }

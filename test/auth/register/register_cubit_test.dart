@@ -19,10 +19,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initTest();
 
+  final registerData = RegisterData();
+  final repo = diTest.get<RegisterRepo>();
+  late RegisterCubit cubit;
   group('test HomeCubit logic', () {
-    final registerData = RegisterData();
-    final repo = diTest.get<RegisterRepo>();
-    late RegisterCubit cubit;
     setUp(() {
       cubit = RegisterCubit(repo);
     });
@@ -60,4 +60,21 @@ void main() async {
       );
     });
   });
+  blocTest<RegisterCubit, RegisterStates>(
+    'Test Cubit emit guard - should not throw exception when emitting state after close',
+    setUp: () {
+      cubit = RegisterCubit(repo);
+      cubit.close();
+    },
+    build: () => cubit,
+    act: (bloc) {
+      // This should not throw an exception even though the cubit is closed
+      expect(() => bloc.emit(RegisterLoading()), returnsNormally);
+    },
+    expect: () => [],
+    verify: (bloc) {
+      // Verify that the cubit is indeed closed
+      expect(bloc.isClosed, isTrue);
+    },
+  );
 }

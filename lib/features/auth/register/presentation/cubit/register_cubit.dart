@@ -21,4 +21,10 @@ class RegisterCubit extends Cubit<RegisterStates> {
         break;
     }
   }
+
+  @override
+  void emit(RegisterStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }
