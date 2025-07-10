@@ -3,8 +3,8 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 
 /// Base class for all error types in the application.
 abstract class BaseError {
-  String? message;
-  BaseError({this.message});
+  late String message;
+  BaseError({this.message = ''});
 }
 
 class ApiError extends BaseError {

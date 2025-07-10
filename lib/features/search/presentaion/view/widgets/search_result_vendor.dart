@@ -7,9 +7,9 @@ import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
-import 'package:gazzer/features/resturants/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
-import 'package:gazzer/features/resturants/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/data/vendor_model.dart';
+import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
+import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 class SearchResultVendor extends StatelessWidget {
   const SearchResultVendor({super.key, required this.vendor});

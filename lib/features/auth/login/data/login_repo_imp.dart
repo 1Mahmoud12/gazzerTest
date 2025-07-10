@@ -20,7 +20,7 @@ class LoginRepoImp extends LoginRepo {
       parser: (result) {
         final response = ClientResponse.fromJson(result.data);
         TokenService.setToken(response.accessToken);
-        Session().setClient = response.client;
+        Session().setClient = response.toClientEntity();
         return response.message ?? '';
       },
     );

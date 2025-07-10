@@ -5,7 +5,7 @@ import 'package:gazzer/core/data/network/error_models.dart';
 /// Return a [Result] from a function to indicate success or failure.
 ///
 /// A [Result] is either an [Ok] with a value of type [T]
-/// or an [Error] with an [ApiError].
+/// or an [Err] with an [ApiError].
 ///
 /// Use [Result.ok] to create a successful result with a value of type [T].
 /// Use [Result.error] to create an error result with an [ApiError].
@@ -16,7 +16,7 @@ sealed class Result<T> {
   factory Result.ok(T value) => Ok(value);
 
   /// Create an instance of Result containing an error
-  factory Result.error(BaseError error) => Error(error);
+  factory Result.error(BaseError error) => Err(error);
 }
 
 /// Subclass of Result for values
@@ -28,8 +28,8 @@ final class Ok<T> extends Result<T> {
 }
 
 /// Subclass of Result for errors
-final class Error<T> extends Result<T> {
-  const Error(this.error);
+final class Err<T> extends Result<T> {
+  const Err(this.error);
 
   /// Returned error in result
   final BaseError error;

@@ -33,7 +33,7 @@ abstract class BaseApiRepo {
       return Result.ok(parser(result));
     } catch (e, stack) {
       /// Either the api call failed or the parser function threw an exception.
-      return Error(_handle(e, stack));
+      return Err(_handle(e, stack));
     }
   }
 
@@ -53,7 +53,7 @@ abstract class BaseApiRepo {
       switch (error.type) {
         case DioExceptionType.badResponse:
           apiError = ApiError.fromJson(error.response?.data, e: error.type);
-          apiError.message ??= L10n.tr().somethingWentWrong;
+          apiError.message;
           return apiError;
         case DioExceptionType.receiveTimeout:
         case DioExceptionType.connectionTimeout:

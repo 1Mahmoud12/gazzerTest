@@ -50,8 +50,8 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
         Alerts.showToast(ok.value, error: false);
         _setTimer();
         break;
-      case Error err:
-        Alerts.showToast(err.error.message ?? '');
+      case Err err:
+        Alerts.showToast(err.error.message);
     }
     isResendingOtp.value = false;
   }
@@ -141,8 +141,8 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                                       _setTimer();
                                     }
                                     return true;
-                                  case Error err:
-                                    Alerts.showToast(err.error.message ?? '');
+                                  case Err err:
+                                    Alerts.showToast(err.error.message);
                                     return false;
                                 }
                               },
@@ -184,9 +184,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                             onPressed: finished ? () => resend() : null,
 
                             child: Text(
-                              finished
-                                  ? L10n.tr().resendCode
-                                  : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
+                              finished ? L10n.tr().resendCode : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
                               textAlign: TextAlign.end,
                               style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
                             ),
@@ -234,9 +232,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           Alerts.showToast(ok.value, error: false);
                           if (context.mounted) widget.onSuccess(context);
                           break;
-                        case Error err:
+                        case Err err:
                           otpCont.clear();
-                          Alerts.showToast(err.error.message ?? '');
+                          Alerts.showToast(err.error.message);
                           break;
                       }
                     },

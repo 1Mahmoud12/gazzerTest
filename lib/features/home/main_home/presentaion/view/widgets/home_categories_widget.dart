@@ -1,41 +1,52 @@
 part of '../home_screen.dart';
 
-class _HomeCategoriesWidget extends StatelessWidget {
-  const _HomeCategoriesWidget();
+class _HomeCategoriesComponent extends StatelessWidget {
+  const _HomeCategoriesComponent();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 12,
-      children: [
-        Text(
-          L10n.tr().categories,
-          style: TStyle.primaryBold(16),
-        ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
-        GridView.builder(
-          padding: const EdgeInsets.all(0),
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 77,
-            mainAxisSpacing: 18,
-            crossAxisSpacing: 18,
-            mainAxisExtent: 117,
+    return BlocBuilder<HomeCubit, HomeStates>(
+      buildWhen: (previous, current) => current is CategoryStates,
+      builder: (context, state) {
+        if (state is CategoryErrorState) return const SizedBox.shrink();
+
+        final cats = state is CategoryStates ? state.categories : <CategoryEntity>[];
+        return Skeletonizer(
+          enabled: state is CategoryLoadingState,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 12,
+            children: [
+              Text(
+                L10n.tr().categories,
+                style: TStyle.primaryBold(16),
+              ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
+              GridView.builder(
+                padding: const EdgeInsets.all(0),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 77,
+                  mainAxisSpacing: 18,
+                  crossAxisSpacing: 18,
+                  mainAxisExtent: 117,
+                ),
+                itemCount: cats.length,
+                itemBuilder: (context, index) {
+                  return CategoryCard(category: cats[index]);
+                },
+              ),
+            ],
           ),
-          itemCount: Fakers.fakeCats.length,
-          itemBuilder: (context, index) {
-            return CategoryItem(category: Fakers.fakeCats[index]);
-          },
-        ),
-      ],
+        );
+      },
     );
   }
 }
 
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.category});
-  final CategoryModel category;
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({super.key, required this.category});
+  final CategoryEntity category;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -62,8 +73,14 @@ class CategoryItem extends StatelessWidget {
             elevation: 0,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(constraints.maxWidth)),
           ),
+          clipBehavior: Clip.hardEdge,
           onPressed: () {
-            context.myPush(RestaurantsMenu(id: category.id));
+            context.myPush(
+              BlocProvider(
+                create: (context) => di<RestaurantsMenuCubit>(),
+                child: RestaurantsMenu(id: category.id),
+              ),
+            );
           },
           child: Column(
             spacing: 4,

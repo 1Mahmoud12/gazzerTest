@@ -16,7 +16,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
       case Ok<AuthResponse> res:
         emit(RegisterSuccess(res.value));
         break;
-      case Error err:
+      case Err err:
         emit(RegisterError(err.error));
         break;
     }

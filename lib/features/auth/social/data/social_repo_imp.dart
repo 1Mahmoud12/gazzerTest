@@ -93,8 +93,9 @@ class SocialRepoImp extends SocialRepo {
 
   @override
   Future<Result<ClientEntity>> sendSocialToBackend(SocialLoginData data) async {
-    print("sendin to back ....");
-    await Future.delayed(const Duration(seconds: 2));
-    return Result.ok(ClientEntity());
+    // print("sendin to back ....");
+    // await Future.delayed(const Duration(seconds: 2));
+    // return Result.ok(ClientEntity());
+    throw UnimplementedError("sendSocialToBackend is not implemented yet");
   }
 }

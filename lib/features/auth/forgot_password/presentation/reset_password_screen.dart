@@ -36,8 +36,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         Alerts.showToast(ok.value, error: false);
         if (mounted) context.myPop();
         break;
-      case Error err:
-        return Alerts.showToast(err.error.message ?? '');
+      case Err err:
+        return Alerts.showToast(err.error.message);
     }
   }
 

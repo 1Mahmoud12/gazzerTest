@@ -1,16 +1,25 @@
 class Endpoints {
   /// ** Auth
   /// Register
-  static const register = "auth/register";
-  static const verifyOTP = "auth/register/verify-otp";
-  static String editPhoneNum(String sessionId) => "auth/register/edit-phone/$sessionId";
-  static String resendOtp(String sessionId) => "auth/register/resend-otp/$sessionId";
+  static const register = "clients/auth/register";
+  static const verifyOTP = "clients/auth/register/verify-otp";
+  static String editPhoneNum(String sessionId) => "clients/auth/register/edit-phone/$sessionId";
+  static String resendOtp(String sessionId) => "clients/auth/register/resend-otp/$sessionId";
 
   /// Login
-  static const login = "auth/login";
+  static const login = "clients/auth/login";
 
   /// Forget password
-  static const forgetPassword = "auth/forgot-password";
-  static const resetPassword = "auth/reset-password";
-  static const forgetPasswordVerifyOTP = "auth/forgot-password/verify-otp";
+  static const forgetPassword = "clients/auth/forgot-password";
+  static const resetPassword = "clients/auth/reset-password";
+  static const forgetPasswordVerifyOTP = "clients/auth/forgot-password/verify-otp";
+
+  /// stores categories
+  static const storesCategories = "stores/categories";
+  static String subcategory(int catId) => "stores/sub-categories/$catId";
+
+  // restaurants
+  static String retaurantsByCat(int catId) => "restaurants/category/$catId";
+  static String retaurantsBySubCat(int subcatIt) => "restaurants/sub-category/$subcatIt";
+  static String retaurantsByCatAnSubCat(int catId, int subCatId) => "restaurants/category/$catId/sub-category/$subCatId";
 }

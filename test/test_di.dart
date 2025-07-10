@@ -7,9 +7,9 @@ import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'auth/login/login_cubit_test.mocks.dart';
-import 'auth/register/register_cubit_test.mocks.dart';
 import 'core/core_generator.mocks.dart';
+import 'features/auth/login/login_cubit_test.mocks.dart';
+import 'features/auth/register/register_cubit_test.mocks.dart';
 
 final diTest = GetIt.instance;
 

@@ -16,9 +16,9 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/data/subcategory_model.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/data/vendor_model.dart';
-import 'package:gazzer/features/resturants/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
+import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/data/vendor_model.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
 
 part 'components/category_componenet_five.dart';
 part 'components/category_componenet_four.dart';

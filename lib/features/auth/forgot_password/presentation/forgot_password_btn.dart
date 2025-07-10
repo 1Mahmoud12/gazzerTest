@@ -38,7 +38,7 @@ class ForgetPasswordBtn extends StatelessWidget {
                     phone = val;
                     Alerts.showToast(ok.value, error: false);
                     return true;
-                  case Error err:
+                  case Err err:
                     Alerts.showToast(err.error.message ?? ' ');
                     return false;
                 }

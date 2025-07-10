@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/core/presentation/extensions/alignment.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -26,7 +27,7 @@ class HorizontalProductCard extends StatelessWidget {
         child: Stack(
           children: [
             Align(
-              alignment: Alignment.centerRight,
+              alignment: AlignmentLocale.centerEnd(context),
               child: LayoutBuilder(
                 builder: (context, constraints) => SizedBox(
                   width: constraints.maxWidth - 55,
@@ -107,7 +108,7 @@ class HorizontalProductCard extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentLocale.centerStart(context),
               child: SizedBox(
                 height: height * 0.75,
                 child: CircleGradientBorderedImage(

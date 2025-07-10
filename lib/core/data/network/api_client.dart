@@ -16,7 +16,7 @@ class ApiClient {
 
   /// Static for handling deep linking
   static final mainDomain = "https://gazzer-dev-do.mostafa.cloud";
-  final String baseURL = "$mainDomain/api/clients/";
+  final String baseURL = "$mainDomain/api/";
 
   /// Headers
   final String _acceptLanguage = "Accept-Language";
@@ -129,6 +129,7 @@ class ApiClient {
     }
   }
 
+  // ignore: unused_element
   void _unAuthenticated(msg) {
     if (['Unauthenticated.'].contains(msg?.toString())) {
       /// TODO: remove token and user cached data, request a refresh token

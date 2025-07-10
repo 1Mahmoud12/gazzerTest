@@ -14,8 +14,8 @@ class LoginCubit extends Cubit<LoginStates> {
       case Ok<String> ok:
         emit(LoginSuccessState(ok.value));
         break;
-      case Error err:
-        emit(LoginErrorState(err.error.message ?? ''));
+      case Err err:
+        emit(LoginErrorState(err.error.message));
         break;
     }
   }

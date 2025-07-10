@@ -1,19 +1,19 @@
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/features/auth/common/data/auth_response.dart';
 
-abstract class RegisterStates {}
+sealed class RegisterStates {}
 
-class RegisterInitial extends RegisterStates {}
+final class RegisterInitial extends RegisterStates {}
 
-class RegisterLoading extends RegisterStates {}
+final class RegisterLoading extends RegisterStates {}
 
-class RegisterSuccess extends RegisterStates {
+final class RegisterSuccess extends RegisterStates {
   final AuthResponse resp;
 
   RegisterSuccess(this.resp);
 }
 
-class RegisterError extends RegisterStates {
+final class RegisterError extends RegisterStates {
   final BaseError error;
 
   RegisterError(this.error);

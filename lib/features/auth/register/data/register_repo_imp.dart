@@ -59,7 +59,7 @@ class RegisterRepoImp extends RegisterRepo {
       apiCall: () => _apiClient.post(endpoint: Endpoints.verifyOTP, requestBody: body),
       parser: (result) {
         final response = ClientResponse.fromJson(result.data);
-        setAuthUser(response.client, response.accessToken);
+        setAuthUser(response.toClientEntity(), response.accessToken);
         return response.message ?? 'Success';
       },
     );

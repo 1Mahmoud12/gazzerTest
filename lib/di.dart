@@ -9,6 +9,12 @@ import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/register/data/register_repo_imp.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
+import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
+import 'package:gazzer/features/stores/resturants/data/restaurant_repo_imp.dart';
+import 'package:gazzer/features/stores/resturants/domain/restaurant_repo.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +28,7 @@ Future init() async {
   ///
   di.registerSingleton<ApiClient>(ApiClient());
   di.registerSingleton<CrashlyticsRepo>(CrashlyticsRepoImp());
-  _registerRepos(di.get<ApiClient>());
+  _registerRepos();
 
   ///
   _registerCubits();
@@ -36,13 +42,17 @@ Future _registerAsync() async {
   await Future.wait([di.getAsync<SharedPreferences>(), di.getAsync<PackageInfo>()]);
 }
 
-void _registerRepos(ApiClient apiClient) {
-  di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(apiClient));
-  di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(apiClient));
-  di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(apiClient));
+void _registerRepos() {
+  di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(di.get()));
+  di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get()));
+  di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get()));
+  di.registerLazySingleton<HomeRepo>(() => HomeRepoImp(di.get()));
+  di.registerLazySingleton<RestaurantRepo>(() => RestaurantRepoImp(di.get()));
 }
 
 void _registerCubits() {
   di.registerFactory(() => RegisterCubit(di.get()));
   di.registerFactory(() => LoginCubit(di.get()));
+  di.registerFactory(() => HomeCubit(di.get()));
+  di.registerFactory(() => RestaurantsMenuCubit(di.get()));
 }

@@ -2,7 +2,7 @@ part of '../grocery_screen.dart';
 
 class _TopRatedComponent extends StatelessWidget {
   const _TopRatedComponent({required this.subcat, required this.vendors});
-  final SubcategoryModel subcat;
+  final CategoryOfPlateEntity subcat;
   final List<VendorModel> vendors;
   @override
   Widget build(BuildContext context) {
