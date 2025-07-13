@@ -3,7 +3,7 @@ part of '../grocery_screen.dart';
 class CategoryComponentThree extends StatelessWidget {
   const CategoryComponentThree({super.key, required this.subcat, required this.vendors});
   final CategoryOfPlateEntity subcat;
-  final List<VendorModel> vendors;
+  final List<RestaurantEntity> vendors;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,7 +42,7 @@ class CategoryComponentThree extends StatelessWidget {
 
 class _VendorCardThree extends StatelessWidget {
   const _VendorCardThree({required this.vendor});
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -96,7 +96,7 @@ class _VendorCardThree extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(Icons.access_time_rounded, size: 22, color: Co.purple),
-                        Text(vendor.deliveryTime, style: TStyle.greyRegular(13)),
+                        Text(vendor.estimateDeliveryTime, style: TStyle.greyRegular(13)),
                       ],
                     ),
                   ),

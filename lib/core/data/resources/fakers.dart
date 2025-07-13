@@ -6,14 +6,13 @@ import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
-import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
 import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/data/vendor_model.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
-  Fakers._();
-
   static final _prodImages = [
     Assets.assetsPngFastFood,
     Assets.assetsPngFood2,
@@ -27,10 +26,11 @@ class Fakers {
   ];
 
   static final _catsImages = [
-    Assets.assetsPngFastFood,
-    Assets.assetsPngGrocery,
-    Assets.assetsPngBakery,
-    Assets.assetsPngMedic,
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
   ];
 
   static final _random = Random();
@@ -58,7 +58,7 @@ class Fakers {
 
   static final fakeCuisines = List.generate(
     8,
-    (index) => CuisineModel(id: index, name: "مطبخ $index", image: _catsImages[_random.nextInt(_catsImages.length)]),
+    (index) => CuisineModel(id: index, name: "مطبخ $index", image: _prodImages[_random.nextInt(_prodImages.length)]),
   );
   static final fakecartItems = List.generate(
     5,
@@ -69,7 +69,7 @@ class Fakers {
     (index) => VendorProductsModel(
       id: index,
       vendorName: "بائع ${index + 1}",
-      vendorImage: _catsImages[_random.nextInt(_catsImages.length)],
+      vendorImage: _prodImages[_random.nextInt(_prodImages.length)],
       cartItems: List.generate(5, (index) {
         return fakecartItems[index];
       }),
@@ -92,19 +92,50 @@ class Fakers {
       index,
       "فئة فرعية ${index + 1}",
       _catsImages[_random.nextInt(_catsImages.length)],
+      CategoryStyle.values[_random.nextInt(CategoryStyle.values.length)],
     ),
   );
 
   static final vendors = List.generate(
     4,
-    (index) => VendorModel(
+    (index) => RestaurantEntity(
       id: index,
       name: "بائع ${index + 1}",
-      image: _catsImages[_random.nextInt(_catsImages.length)],
+      image: _prodImages[_random.nextInt(_prodImages.length)],
       rate: _random.nextDouble() * 5,
       reviewCount: _random.nextInt(100),
-      deliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
-      items: List.generate(_random.nextInt(_prodImages.length - 1) + 1, (i) => _prodImages[i]),
+      estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
+      categoryOfPlate: fakeSubCats,
+    ),
+  );
+
+  final List<PlateEntity> plates = List.generate(
+    8,
+    (index) => PlateEntity(
+      id: index,
+      name: "طبق ${index + 1}",
+      description: "وصف الطبق ${index + 1}",
+      price: _random.nextDouble() * 100,
+      rate: _random.nextDouble() * 5,
+      image: _prodImages[_random.nextInt(_prodImages.length)],
+      categoryPlateId: 0,
+      options: [],
+      priceBeforeDiscount: _random.nextDouble() * 110,
+    ),
+  );
+  final List<RestaurantEntity> restaurants = List.generate(
+    8,
+    (index) => RestaurantEntity(
+      id: index,
+      name: "طبق ${index + 1}",
+      rate: _random.nextDouble() * 5,
+      image: _prodImages[_random.nextInt(_prodImages.length)],
+      reviewCount: _random.nextInt(100),
+      estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
+      categoryOfPlate: fakeSubCats,
+      address: 'asd asd ad',
+      deliveryFees: 123,
+      isRestaurant: true,
     ),
   );
 }

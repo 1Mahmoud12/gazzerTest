@@ -3,7 +3,7 @@ part of '../grocery_screen.dart';
 class _TopRatedComponent extends StatelessWidget {
   const _TopRatedComponent({required this.subcat, required this.vendors});
   final CategoryOfPlateEntity subcat;
-  final List<VendorModel> vendors;
+  final List<RestaurantEntity> vendors;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +31,7 @@ class _TopRatedComponent extends StatelessWidget {
 
 class VendorListTile extends StatelessWidget {
   const VendorListTile({super.key, required this.vendor});
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -63,13 +63,13 @@ class VendorListTile extends StatelessWidget {
                       ],
                     ),
                     Expanded(
-                      child: Text(vendor.description, style: TStyle.greyRegular(12), overflow: TextOverflow.ellipsis, maxLines: 3),
+                      child: Text(vendor.address ?? '', style: TStyle.greyRegular(12), overflow: TextOverflow.ellipsis, maxLines: 3),
                     ),
                     AppRatingWidget(vendor.rate.toString(), itemSize: 18),
                     Row(
                       children: [
                         const Icon(Icons.access_time_rounded, color: Co.purple, size: 18),
-                        Text(vendor.deliveryTime, style: TStyle.blackSemi(12)),
+                        Text(vendor.estimateDeliveryTime, style: TStyle.blackSemi(12)),
                       ],
                     ),
                   ],

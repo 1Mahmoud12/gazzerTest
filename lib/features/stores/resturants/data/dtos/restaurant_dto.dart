@@ -1,5 +1,5 @@
-import 'package:gazzer/features/stores/resturants/data/category_of_plate_dto.dart';
-import 'package:gazzer/features/stores/resturants/domain/restaurant_entity.dart';
+import 'package:gazzer/features/stores/resturants/data/dtos/category_of_plate_dto.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 class RestaurantDTO {
   int? id;
@@ -65,20 +65,22 @@ class RestaurantDTO {
     }
   }
 
-  RestaurantEntity toStorEntity() {
+  RestaurantEntity toRestEntity() {
     return RestaurantEntity(
       id: id!,
       name: storeName!,
-      logo: "logo",
-      rate: null,
-      estimateDeliveryTime: null,
+      image:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+      rate: 0,
+      estimateDeliveryTime: '',
       deliveryFees: null,
       promotionalMessage: null,
       location: location,
       address: address,
-      isRestaurant: isRestaurant,
+      isRestaurant: isRestaurant == 1,
       storeCategoryId: storeCategoryId,
-      subcategories: subcategories?.map((e) => e.toSubCategoryEntity()).toList(),
+      reviewCount: 0,
+      categoryOfPlate: subcategories?.map((e) => e.toCategoryOfPlateEntity()).toList(),
     );
   }
 }

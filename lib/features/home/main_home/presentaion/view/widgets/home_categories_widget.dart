@@ -78,7 +78,7 @@ class CategoryCard extends StatelessWidget {
             context.myPush(
               BlocProvider(
                 create: (context) => di<RestaurantsMenuCubit>(),
-                child: RestaurantsMenu(id: category.id),
+                child: const RestaurantsMenu(),
               ),
             );
           },

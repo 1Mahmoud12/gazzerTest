@@ -22,7 +22,10 @@ class CircleGradientBorderedImage extends StatelessWidget {
             aspectRatio: 1.0,
             child: Image.network(
               image,
-              errorBuilder: (context, error, stackTrace) => Image.asset(image),
+              errorBuilder: (context, error, stackTrace) => Image.asset(
+                image,
+                errorBuilder: (context, error, stackTrace) => const Icon(Icons.image, size: 24),
+              ),
               fit: BoxFit.cover,
             ),
           ),

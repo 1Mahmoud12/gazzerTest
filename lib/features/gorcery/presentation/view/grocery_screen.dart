@@ -16,9 +16,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/data/vendor_model.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 part 'components/category_componenet_five.dart';
 part 'components/category_componenet_four.dart';
@@ -49,7 +48,7 @@ class _GroceryScreenState extends State<GroceryScreen> {
         children: [
           const _GroceryHeader(),
           const VerticalSpacing(24),
-          SubCategoriesWidget(addsIndeces: {}, onSubCategorySelected: (index) {}, subCategories: Fakers.fakeSubCats),
+          // SubCategoriesWidget(addsIndeces: {}, onSubCategorySelected: (index) {}, subCategories: Fakers.fakeSubCats),
           const VerticalSpacing(24),
           const _GroceryAddWidget(),
           const VerticalSpacing(24),

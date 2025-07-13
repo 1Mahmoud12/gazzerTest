@@ -8,7 +8,8 @@ import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/summer_sale_add_widget.dart';
-import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/components/horz_scroll_horz_card_vendors_list_component.dart';
@@ -22,11 +23,8 @@ import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_last_chance_add_widget.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
 
-part './utils/sub_cat_utils.dart';
-
 class RestaurantsMenu extends StatefulWidget {
-  const RestaurantsMenu({super.key, required this.id});
-  final int id;
+  const RestaurantsMenu({super.key});
 
   @override
   State<RestaurantsMenu> createState() => _RestaurantsMenuState();
@@ -56,7 +54,8 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
   void initState() {
     cubit = context.read<RestaurantsMenuCubit>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      cubit.loadCategoriesOfPlates(widget.id);
+      cubit.loadCategoriesOfPlates();
+      cubit.loadPlates();
     });
 
     super.initState();
@@ -69,6 +68,21 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
     super.dispose();
   }
 
+  Widget getCatComponent(CategoryOfPlateEntity cat, List<RestaurantEntity> rest) {
+    switch (cat.style) {
+      case CategoryStyle.horizontalScrollHorzCard:
+        return HorzScrollHorzCardVendorsListComponent(catName: cat.name, catId: cat.id, rests: rest);
+      case CategoryStyle.horizontalScrollVertCard:
+        return HorzScrollVertCardVendorsListComponent(catName: cat.name, catId: cat.id, rests: rest);
+      case CategoryStyle.verticalGrid:
+        return VerticalVendorGridComponent(catName: cat.name, catId: cat.id, rests: rest);
+      case CategoryStyle.horizontalScrollHorzCardCorner:
+        return HorzScrollHorzCardVendorsListComponent(corner: Corner.bottomRight, catName: cat.name, catId: cat.id, rests: rest);
+      case CategoryStyle.verticalScrollHorzCard:
+        return VertScrollHorzCardVendorsListComponent(catName: cat.name, catId: cat.id, rests: rest);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,18 +91,12 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
       extendBody: true,
       floatingActionButton: const CartFloatingBtn(),
       body: BlocBuilder<RestaurantsMenuCubit, RestaurantsMenuStates>(
-        buildWhen: (previous, current) => current is RestaurantsCategoriesStates,
         builder: (context, state) {
-          final categoriesOfPlates = state is RestaurantsCategoriesStates ? state.categories : <CategoryOfPlateEntity>[];
-          if (state is RestaurantsCategoriesLoaded) {
-            for (final i in nonVendorIndeces) {
-              categoriesOfPlates.insert(i, CategoryOfPlateEntity(-1, '', ''));
-            }
-          }
+          final cats = cubit.cats;
           return ListView.separated(
             controller: anchorController,
             padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom + 16),
-            itemCount: categoriesOfPlates.length,
+            itemCount: cats.length,
             separatorBuilder: (context, index) => const VerticalSpacing(12),
             itemBuilder: (context, index) {
               if (index == 3) {
@@ -98,13 +106,16 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
                   child: ValueListenableBuilder(
                     valueListenable: selectedIndex,
                     builder: (context, value, child) => SubCategoriesWidget(
-                      subCategories: categoriesOfPlates,
+                      subCategories: cats
+                          .map(
+                            (e) => (name: e.$1.name, image: e.$1.image, id: e.$1.id, isAdd: e.$2),
+                          )
+                          .toList(),
                       onSubCategorySelected: (i) {
                         anchorController.scrollToIndex(index: i);
                         selectedIndex.value = i;
                       },
                       selectedId: value,
-                      addsIndeces: nonVendorIndeces.toSet(),
                     ),
                   ),
                 );
@@ -115,7 +126,7 @@ class _RestaurantsMenuState extends State<RestaurantsMenu> {
                 child: Builder(
                   builder: (context) {
                     if (nonVendorIndeces.contains(index)) return noCatWidgets[nonVendorIndeces.indexOf(index)];
-                    return SubCatUtils().getCatWidget(categoriesOfPlates[index]);
+                    return getCatComponent(cats[index].$1, cubit.plates);
                   },
                 ),
               );

@@ -12,8 +12,12 @@ import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
-import 'package:gazzer/features/stores/resturants/data/restaurant_repo_imp.dart';
-import 'package:gazzer/features/stores/resturants/domain/restaurant_repo.dart';
+import 'package:gazzer/features/stores/resturants/data/repo_imp/categories_of_plates_repo_imp.dart';
+import 'package:gazzer/features/stores/resturants/data/repo_imp/plates_repo_imp.dart';
+import 'package:gazzer/features/stores/resturants/data/repo_imp/restaurants_repo_imp.dart';
+import 'package:gazzer/features/stores/resturants/domain/repos/categories_of_plates_repo.dart';
+import 'package:gazzer/features/stores/resturants/domain/repos/plates_repo.dart';
+import 'package:gazzer/features/stores/resturants/domain/repos/restaurants_repo.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -47,12 +51,14 @@ void _registerRepos() {
   di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get()));
   di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get()));
   di.registerLazySingleton<HomeRepo>(() => HomeRepoImp(di.get()));
-  di.registerLazySingleton<RestaurantRepo>(() => RestaurantRepoImp(di.get()));
+  di.registerLazySingleton<CategoriesOfPlatesRepo>(() => CategoriesOfPlatesRepoImp(di.get()));
+  di.registerLazySingleton<RestaurantsRepo>(() => RestaurantsRepoImp(di.get()));
+  di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get()));
 }
 
 void _registerCubits() {
   di.registerFactory(() => RegisterCubit(di.get()));
   di.registerFactory(() => LoginCubit(di.get()));
   di.registerFactory(() => HomeCubit(di.get()));
-  di.registerFactory(() => RestaurantsMenuCubit(di.get()));
+  di.registerFactory(() => RestaurantsMenuCubit(di.get(), di.get()));
 }

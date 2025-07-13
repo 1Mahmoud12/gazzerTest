@@ -4,14 +4,22 @@ import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/horizontal_vendor_card.dart';
 
 class HorzScrollHorzCardVendorsListComponent extends StatelessWidget {
-  const HorzScrollHorzCardVendorsListComponent({super.key, this.corner = Corner.bottomRight, required this.subcat});
+  const HorzScrollHorzCardVendorsListComponent({
+    super.key,
+    this.corner = Corner.bottomRight,
+    required this.catName,
+    required this.catId,
+    required this.rests,
+  });
   final Corner corner;
-  final CategoryOfPlateEntity subcat;
+  final String catName;
+  final int catId;
+  final List<RestaurantEntity> rests;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,7 +28,10 @@ class HorzScrollHorzCardVendorsListComponent extends StatelessWidget {
       child: Column(
         spacing: 4,
         children: [
-          TitleWithMore(title: subcat.name, onPressed: () => context.myPush(const CatRelatedRestaurantsScreen(id: 0))),
+          TitleWithMore(
+            title: catName,
+            onPressed: () => context.myPush(CatRelatedRestaurantsScreen(id: catId)),
+          ),
 
           SizedBox(
             height: 120,
@@ -30,7 +41,7 @@ class HorzScrollHorzCardVendorsListComponent extends StatelessWidget {
               itemCount: Fakers.vendors.length,
               separatorBuilder: (context, index) => const HorizontalSpacing(12),
               itemBuilder: (context, index) {
-                return HorizontalVendorCard(corner: corner, imgToTextRatio: 0.8, width: 260, vendor: Fakers.vendors[index]);
+                return HorizontalVendorCard(corner: corner, imgToTextRatio: 0.8, width: 260, vendor: rests[index]);
               },
             ),
           ),

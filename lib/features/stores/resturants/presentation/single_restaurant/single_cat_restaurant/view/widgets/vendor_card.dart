@@ -5,11 +5,11 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/data/vendor_model.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 class VendorCard extends StatelessWidget {
   const VendorCard(this.vendor, {super.key});
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
     final imageSize = 70.0;
@@ -54,7 +54,7 @@ class VendorCard extends StatelessWidget {
                           spacing: 2,
                           children: [
                             const Icon(Icons.access_time_rounded, color: Co.purple, size: 20),
-                            Text(vendor.deliveryTime, style: TStyle.blackRegular(13)),
+                            Text(vendor.estimateDeliveryTime, style: TStyle.blackRegular(13)),
                           ],
                         ),
                         Row(

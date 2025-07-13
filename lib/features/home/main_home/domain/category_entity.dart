@@ -1,7 +1,7 @@
 enum CategoryType {
-  restaurant('restaurant'),
-  grocery('grocery'),
-  pharmacy('pharmacy');
+  restaurant('Restaurant'),
+  grocery('Grocery'),
+  pharmacy('Pharmacy');
 
   final String value;
 

@@ -3,7 +3,7 @@ part of '../multi_cat_restaurant_screen.dart';
 class _TopRatedComponent extends StatelessWidget {
   const _TopRatedComponent({required this.subCats, required this.vendor});
   final List<CategoryOfPlateEntity> subCats;
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
     int currentindex = 0;
@@ -46,7 +46,7 @@ class _TopRatedComponent extends StatelessWidget {
                       child: StatefulBuilder(
                         builder: (context, setState) {
                           return SubCategoriesWidget(
-                            subCategories: subCats,
+                            subCategories: subCats.map((e) => (name: e.name, image: e.image, id: e.id, isAdd: false)).toList(),
                             onSubCategorySelected: (index) {
                               Navigator.of(context).push(
                                 AppTransitions().slideTransition(
@@ -58,7 +58,6 @@ class _TopRatedComponent extends StatelessWidget {
                               );
                             },
                             selectedId: currentindex,
-                            addsIndeces: {},
                           );
                         },
                       ),

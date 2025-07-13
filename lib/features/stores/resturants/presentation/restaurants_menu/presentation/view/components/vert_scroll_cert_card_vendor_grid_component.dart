@@ -3,13 +3,15 @@ import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/vertical_vendor_card.dart';
 
 class VerticalVendorGridComponent extends StatelessWidget {
-  const VerticalVendorGridComponent({super.key, required this.subCat});
-  final CategoryOfPlateEntity subCat;
+  const VerticalVendorGridComponent({super.key, required this.catName, required this.catId, required this.rests});
+  final String catName;
+  final int catId;
+  final List<RestaurantEntity> rests;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +19,10 @@ class VerticalVendorGridComponent extends StatelessWidget {
 
       child: Column(
         children: [
-          TitleWithMore(title: subCat.name, onPressed: () => context.myPush(const CatRelatedRestaurantsScreen(id: 0))),
+          TitleWithMore(
+            title: catName,
+            onPressed: () => context.myPush(CatRelatedRestaurantsScreen(id: catId)),
+          ),
 
           GridView.builder(
             shrinkWrap: true,
@@ -27,7 +32,7 @@ class VerticalVendorGridComponent extends StatelessWidget {
             itemCount: Fakers.vendors.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisExtent: 220, crossAxisSpacing: 12, mainAxisSpacing: 12),
             itemBuilder: (context, index) {
-              return VerticalVendorCard(width: 350, height: 150, vendor: Fakers.vendors[index], corner: Corner.bottomLeft);
+              return VerticalVendorCard(width: 350, height: 150, vendor: rests[index], corner: Corner.bottomLeft);
             },
           ),
         ],

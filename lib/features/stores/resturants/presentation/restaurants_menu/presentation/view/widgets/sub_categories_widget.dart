@@ -4,14 +4,12 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
 
 class SubCategoriesWidget extends StatelessWidget {
-  const SubCategoriesWidget({super.key, required this.addsIndeces, this.selectedId = 0, required this.onSubCategorySelected, required this.subCategories});
-  final Set<int> addsIndeces;
+  const SubCategoriesWidget({super.key, required this.selectedId, required this.onSubCategorySelected, required this.subCategories});
   final int selectedId;
   final Function(int index) onSubCategorySelected;
-  final List<CategoryOfPlateEntity> subCategories;
+  final List<({String name, String image, int id, bool isAdd})> subCategories;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,14 +18,15 @@ class SubCategoriesWidget extends StatelessWidget {
         padding: AppConst.defaultHrPadding,
         scrollDirection: Axis.horizontal,
         itemCount: subCategories.length,
-        separatorBuilder: (context, index) => addsIndeces.contains(index) ? const SizedBox.shrink() : const HorizontalSpacing(12),
+        separatorBuilder: (context, index) => subCategories[index].isAdd ? const SizedBox.shrink() : const HorizontalSpacing(12),
         itemBuilder: (context, index) {
-          if (addsIndeces.contains(index)) {
+          if (subCategories[index].isAdd) {
             print("SubCategoriesWidget: Skipping index $index as it is an add index");
             return const SizedBox.shrink();
           }
           return SubCategoryItem(
-            subcategory: subCategories[index],
+            name: subCategories[index].name,
+            image: subCategories[index].image,
             isSelected: subCategories[index].id == selectedId,
             ontap: () => onSubCategorySelected(index),
           );
@@ -38,8 +37,9 @@ class SubCategoriesWidget extends StatelessWidget {
 }
 
 class SubCategoryItem extends StatelessWidget {
-  const SubCategoryItem({super.key, required this.subcategory, required this.isSelected, required this.ontap});
-  final CategoryOfPlateEntity subcategory;
+  const SubCategoryItem({super.key, required this.name, required this.isSelected, required this.ontap, required this.image});
+  final String name;
+  final String image;
   final bool isSelected;
   final Function() ontap;
   @override
@@ -64,11 +64,11 @@ class SubCategoryItem extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleGradientBorderedImage(image: subcategory.image),
+            CircleGradientBorderedImage(image: image),
 
             Padding(
               padding: AppConst.defaultHrPadding,
-              child: Text(subcategory.name, style: TStyle.blackSemi(13)),
+              child: Text(name, style: TStyle.blackSemi(13)),
             ),
           ],
         ),

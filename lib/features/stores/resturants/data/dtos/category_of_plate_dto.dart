@@ -1,4 +1,4 @@
-import 'package:gazzer/features/stores/resturants/domain/category_of_plate_entity.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
 
 class CategoryOfPlateDTO {
   int? id;
@@ -19,5 +19,10 @@ class CategoryOfPlateDTO {
     updatedAt = json['updated_at'];
   }
 
-  CategoryOfPlateEntity toSubCategoryEntity() => CategoryOfPlateEntity(id!, name!, image ?? '');
+  CategoryOfPlateEntity toCategoryOfPlateEntity() => CategoryOfPlateEntity(
+    id!,
+    name!,
+    image ?? '',
+    CategoryStyle.values[id! % CategoryStyle.values.length],
+  );
 }

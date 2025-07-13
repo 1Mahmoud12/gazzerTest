@@ -3,7 +3,7 @@ part of '../grocery_screen.dart';
 class CategoryComponentOne extends StatelessWidget {
   const CategoryComponentOne({super.key, required this.subcat, required this.vendors});
   final CategoryOfPlateEntity subcat;
-  final List<VendorModel> vendors;
+  final List<RestaurantEntity> vendors;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +37,7 @@ class CategoryComponentOne extends StatelessWidget {
 
 class _VendorCardOne extends StatelessWidget {
   const _VendorCardOne({required this.vendor});
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -66,7 +66,7 @@ class _VendorCardOne extends StatelessWidget {
                   children: [
                     Text(vendor.name, style: TStyle.blackBold(14)),
                     Expanded(
-                      child: Text(vendor.description, style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis, maxLines: 3),
+                      child: Text(vendor.address ?? '', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis, maxLines: 3),
                     ),
                     Row(
                       spacing: 18,
@@ -89,7 +89,7 @@ class _VendorCardOne extends StatelessWidget {
                       children: [
                         const Icon(Icons.access_time_rounded, size: 22, color: Co.purple),
 
-                        Text(vendor.deliveryTime, style: TStyle.greyRegular(13)),
+                        Text(vendor.estimateDeliveryTime, style: TStyle.greyRegular(13)),
                       ],
                     ),
                   ],

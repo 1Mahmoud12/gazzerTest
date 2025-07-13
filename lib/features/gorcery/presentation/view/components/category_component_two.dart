@@ -3,7 +3,7 @@ part of '../grocery_screen.dart';
 class CategoryComponentTwo extends StatelessWidget {
   const CategoryComponentTwo({super.key, required this.subcat, required this.vendors});
   final CategoryOfPlateEntity subcat;
-  final List<VendorModel> vendors;
+  final List<RestaurantEntity> vendors;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +37,7 @@ class CategoryComponentTwo extends StatelessWidget {
 
 class _VendorCardTwo extends StatelessWidget {
   const _VendorCardTwo({required this.vendor});
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
     final corner = Corner.values[vendor.id % 4];

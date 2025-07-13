@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/data/vendor_model.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/widgets/vendor_card.dart';
 
 class MultiCatRestHeader extends StatelessWidget {
   const MultiCatRestHeader({super.key, required this.vendor});
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.paddingOf(context).top + kToolbarHeight + 185.0;

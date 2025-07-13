@@ -87,7 +87,7 @@ class _TodayPicksWidget extends StatelessWidget {
                                       children: [
                                         TextSpan(text: vendor.name, style: TStyle.blackBold(15)),
                                         const TextSpan(text: '\n'),
-                                        TextSpan(text: vendor.deliveryTime, style: TStyle.secondarySemi(14)),
+                                        TextSpan(text: vendor.estimateDeliveryTime, style: TStyle.secondarySemi(14)),
                                       ],
                                     ),
                                     maxLines: 3,

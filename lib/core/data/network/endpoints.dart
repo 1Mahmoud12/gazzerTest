@@ -14,12 +14,18 @@ class Endpoints {
   static const resetPassword = "clients/auth/reset-password";
   static const forgetPasswordVerifyOTP = "clients/auth/forgot-password/verify-otp";
 
-  /// stores categories
+  /// ** stores categories
   static const storesCategories = "stores/categories";
-  static String subcategory(int catId) => "stores/sub-categories/$catId";
 
-  // restaurants
-  static String retaurantsByCat(int catId) => "restaurants/category/$catId";
-  static String retaurantsBySubCat(int subcatIt) => "restaurants/sub-category/$subcatIt";
-  static String retaurantsByCatAnSubCat(int catId, int subCatId) => "restaurants/category/$catId/sub-category/$subCatId";
+  /// ** restaurants
+  static String allRestaurants(int page, int limit) => "restaurants?is_paginated=1&page=$page&limit=$limit";
+  static String retaurantsByCatOfPlate(int catId) => "restaurants/category/$catId?is_paginated=0";
+
+  /// ** categoryOfPlates
+  static const categoriesOfPlates = 'restaurants/plates/sub-categories?is_paginated=0';
+  static String categoryOfPlatesByRest(int restId) => "restaurants/$restId/plates/categories?is_paginated=0";
+
+  /// ** paltes
+  static String platesByRest(int restId) => "restaurants/$restId/plates";
+  static String platesByRestAnCatOfPlate(int restId, int catId) => "restaurants/$restId/plates/$catId";
 }

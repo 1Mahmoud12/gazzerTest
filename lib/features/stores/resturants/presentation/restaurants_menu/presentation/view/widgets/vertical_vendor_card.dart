@@ -7,7 +7,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/data/vendor_model.dart';
+import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/stacked_item_widget.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
@@ -23,7 +23,7 @@ class VerticalVendorCard extends StatelessWidget {
   });
   final double width;
   final double? height;
-  final VendorModel vendor;
+  final RestaurantEntity vendor;
   final Corner corner;
   final double imgToTextRatio;
 
@@ -67,11 +67,12 @@ class VerticalVendorCard extends StatelessWidget {
                       foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
                       child: ClipPath(
                         clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
-                        child: Image.asset(
+                        child: Image.network(
                           vendor.image,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.info, color: Co.red),
                         ),
                       ),
                     ),
@@ -96,12 +97,12 @@ class VerticalVendorCard extends StatelessWidget {
                         Text("(${vendor.reviewCount})", style: TStyle.blackBold(12)),
                       ],
                     ),
-                    StackedItemWidget(items: vendor.items),
+                    StackedImagesWidget(images: vendor.categoryOfPlate?.map((e) => e.image).toList() ?? []),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(Icons.access_time_outlined, color: Co.purple, size: 24),
-                        Text(vendor.deliveryTime, style: TStyle.greySemi(13)),
+                        Text(vendor.estimateDeliveryTime, style: TStyle.greySemi(13)),
                       ],
                     ),
                   ],
