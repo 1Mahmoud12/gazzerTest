@@ -159,6 +159,8 @@ class Fakers {
       apartmentNum: _random.nextInt(100),
       description: "وصف العنوان ${index + 1}",
       landmark: "معلم ${index + 1}",
+      zoneName: "منطقة ${index + 1}",
+      provinceName: "محافظة ${index + 1}",
     ),
   );
 }

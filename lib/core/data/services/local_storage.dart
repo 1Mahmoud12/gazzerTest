@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageKeys {
   static String locale = "locale";
-  // static String lightTheme = "lightTheme";
+  static String isDark = "isDark";
   static String token = "token";
   // static String user = "user";
   static String haveSeenTour = "haveSeenTour";

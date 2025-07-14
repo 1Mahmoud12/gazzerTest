@@ -75,6 +75,36 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeAddress => 'المنزل';
 
   @override
+  String get floor => 'الطابق';
+
+  @override
+  String get apartmentNumber => 'رقم الشقة';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get landmark => 'معلم';
+
+  @override
+  String get province => 'المحافظة';
+
+  @override
+  String get zone => 'المنطقة';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get addressLabel => 'وصف العنوان';
+
+  @override
+  String get addressLabelHint => 'مثال: المنزل، العمل، إلخ.';
+
+  @override
+  String get darkMode => 'الوضع الداكن';
+
+  @override
   String get profile_________________End => '__________________';
 
   @override

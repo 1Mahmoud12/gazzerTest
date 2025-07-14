@@ -5,7 +5,6 @@ class _ProfileAddressesComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final client = Session().client;
     return Column(
       spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -16,14 +15,17 @@ class _ProfileAddressesComponent extends StatelessWidget {
         ),
         const Divider(height: 15, thickness: 1, color: Colors.white38),
         ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: 400),
-          child: ListView.separated(
-            shrinkWrap: true,
-            itemCount: Fakers().addresses.length,
-            separatorBuilder: (context, index) => const VerticalSpacing(16),
-            itemBuilder: (context, index) {
-              return AddressCard(address: AddressModel.fromEntity(Fakers().addresses[index]));
-            },
+          constraints: const BoxConstraints(maxHeight: 300),
+          child: Scrollbar(
+            child: ListView.separated(
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              itemCount: Fakers().addresses.length,
+              separatorBuilder: (context, index) => const VerticalSpacing(16),
+              itemBuilder: (context, index) {
+                return AddressCard(address: AddressModel.fromEntity(Fakers().addresses[index]));
+              },
+            ),
           ),
         ),
         MainBtn(

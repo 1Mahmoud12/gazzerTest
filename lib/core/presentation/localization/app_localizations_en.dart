@@ -75,6 +75,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeAddress => 'Home';
 
   @override
+  String get floor => 'Floor';
+
+  @override
+  String get apartmentNumber => 'Apartment Number';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get landmark => 'Landmark';
+
+  @override
+  String get province => 'Province';
+
+  @override
+  String get zone => 'Zone';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get addressLabel => 'Address Description';
+
+  @override
+  String get addressLabelHint => 'Example: Home, Work, etc.';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
   String get profile_________________End => '__________________';
 
   @override

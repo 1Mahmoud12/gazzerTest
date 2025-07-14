@@ -1,7 +1,7 @@
 part of '../profile_screen.dart';
 
-class ProfileHeaderWidget extends StatelessWidget {
-  const ProfileHeaderWidget({super.key});
+class _ProfileHeaderWidget extends StatelessWidget {
+  const _ProfileHeaderWidget();
 
   @override
   Widget build(BuildContext context) {

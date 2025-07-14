@@ -54,6 +54,8 @@ class AddressModel extends AddressEntity {
         apartmentNum: entity.apartmentNum,
         description: entity.description,
         landmark: entity.landmark,
+        provinceName: entity.provinceName,
+        zoneName: entity.zoneName,
       ) {
     labelSvg = labelType.label == null
         ? Assets.assetsSvgLocation
