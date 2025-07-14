@@ -9,7 +9,7 @@ import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/domain/address_entity.dart';
 import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/plate_entity.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.

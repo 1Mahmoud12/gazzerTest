@@ -1,40 +1,36 @@
-import 'package:gazzer/features/stores/resturants/domain/enities/plate_entity.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
-class PlateDTO {
+sealed class StoreItemDTO {
+  StoreItemDTO();
+  StoreItemDTO.fromJson(Map<String, dynamic> json);
+  ProductItemEntity toProductItem();
+}
+
+class PlateDTO extends StoreItemDTO {
   int? id;
   int? storeId;
   String? plateName;
   int? plateCategoryId;
-  int? toBeDisplayedOnApp;
-  int? toBeDisplayedOnStore;
-  int? parentRestaurantPlateId;
   String? plateDescription;
   String? otherVariant;
   String? addons;
   String? size;
   String? price;
-  int? priceUnitId;
+  String? rate;
   String? appPrice;
-  String? createdAt;
-  String? updatedAt;
 
   PlateDTO({
     this.id,
     this.storeId,
     this.plateName,
     this.plateCategoryId,
-    this.toBeDisplayedOnApp,
-    this.toBeDisplayedOnStore,
-    this.parentRestaurantPlateId,
     this.plateDescription,
     this.otherVariant,
     this.addons,
     this.size,
     this.price,
-    this.priceUnitId,
+    this.rate,
     this.appPrice,
-    this.createdAt,
-    this.updatedAt,
   });
 
   PlateDTO.fromJson(Map<String, dynamic> json) {
@@ -42,21 +38,17 @@ class PlateDTO {
     storeId = json['store_id'];
     plateName = json['plate_name'];
     plateCategoryId = json['plate_category_id'];
-    toBeDisplayedOnApp = json['to_be_displayed_on_app'];
-    toBeDisplayedOnStore = json['to_be_displayed_on_store'];
-    parentRestaurantPlateId = json['parent_restaurant_plate_id'];
     plateDescription = json['plate_description'];
     otherVariant = json['OtherVariant'];
     addons = json['addons'];
     size = json['size'];
     price = json['price'];
-    priceUnitId = json['price_unit_id'];
+    rate = json['rate'];
     appPrice = json['app_price'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
   }
 
-  PlateEntity toPlateEntity() {
+  @override
+  ProductItemEntity toProductItem() {
     return PlateEntity(
       id: id!,
       categoryPlateId: plateCategoryId ?? 0,
@@ -68,6 +60,59 @@ class PlateDTO {
       rate: 0.0,
       priceBeforeDiscount: 0,
       options: [],
+    );
+  }
+}
+
+class ProductDTO extends StoreItemDTO {
+  int? id;
+  int? storeId;
+  String? plateName;
+  int? plateCategoryId;
+  String? plateDescription;
+  String? otherVariant;
+  String? addons;
+  String? size;
+  String? price;
+  String? rate;
+  String? appPrice;
+
+  ProductDTO({
+    this.id,
+    this.storeId,
+    this.plateName,
+    this.plateCategoryId,
+    this.plateDescription,
+    this.otherVariant,
+    this.addons,
+    this.size,
+    this.price,
+    this.rate,
+    this.appPrice,
+  });
+
+  ProductDTO.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    storeId = json['store_id'];
+    plateName = json['plate_name'];
+    plateCategoryId = json['plate_category_id'];
+    plateDescription = json['plate_description'];
+    otherVariant = json['OtherVariant'];
+    addons = json['addons'];
+    size = json['size'];
+    price = json['price'];
+    rate = json['rate'];
+    appPrice = json['app_price'];
+  }
+
+  @override
+  ProductItemEntity toProductItem() {
+    return ProductEntity(
+      id: id!,
+      name: plateName ?? '',
+      description: plateDescription ?? '',
+      price: double.tryParse(price.toString()) ?? 0,
+      storeId: storeId,
     );
   }
 }

@@ -1,6 +1,6 @@
-import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
+part of 'section_item_dto.dart';
 
-class CategoryDTO {
+class CategoryDTO extends SectionItem {
   final int? id;
   final String? name;
   final String? image;

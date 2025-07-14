@@ -299,6 +299,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deliverTo => 'deliver To';
 
   @override
+  String get retry => 'Retry';
+
+  @override
   String get home_________________End => '__________________';
 
   @override

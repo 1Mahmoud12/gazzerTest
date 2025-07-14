@@ -1,4 +1,6 @@
-class PlateEntity {
+part of 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+
+class PlateEntity extends ProductItemEntity {
   final int id;
   final int categoryPlateId;
   final String name;

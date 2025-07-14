@@ -1,4 +1,5 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/features/home/main_home/data/home_reponse.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 
 sealed class HomeStates {}
@@ -22,4 +23,23 @@ final class CategorySuccessState extends CategoryStates {
 final class CategoryErrorState extends CategoryStates {
   final String msg;
   CategoryErrorState(this.msg);
+}
+
+/// Home states
+sealed class HomeDataStates extends HomeStates {
+  final HomeReponse? homeResponse;
+  HomeDataStates({this.homeResponse});
+}
+
+final class HomeDataLoadingState extends HomeDataStates {
+  HomeDataLoadingState({super.homeResponse});
+}
+
+final class HomeDataSuccessState extends HomeDataStates {
+  HomeDataSuccessState({required super.homeResponse});
+}
+
+final class HomeDataErrorState extends HomeDataStates {
+  final String msg;
+  HomeDataErrorState(this.msg, {super.homeResponse});
 }

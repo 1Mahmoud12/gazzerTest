@@ -674,6 +674,12 @@ abstract class AppLocalizations {
   /// **'deliver To'**
   String get deliverTo;
 
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
   /// No description provided for @home_________________End.
   ///
   /// In en, this message translates to:

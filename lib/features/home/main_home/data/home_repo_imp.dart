@@ -1,7 +1,8 @@
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/main_home/data/category_dto.dart';
+import 'package:gazzer/features/home/main_home/data/home_reponse.dart';
+import 'package:gazzer/features/home/main_home/data/section_item_dto.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 
@@ -19,6 +20,16 @@ class HomeRepoImp extends HomeRepo {
           cats.add(CategoryDTO.fromJson(item).toCategoryEntity());
         }
         return cats;
+      },
+    );
+  }
+
+  @override
+  Future<Result<HomeReponse>> getHome() {
+    return super.call<HomeReponse>(
+      apiCall: () => _apiClient.get(endpoint: Endpoints.homePage),
+      parser: (response) {
+        return HomeReponse.fromJson(response.data);
       },
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
@@ -7,7 +5,7 @@ import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/theming.dart';
-import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 
 class GazzerApp extends StatelessWidget {
   const GazzerApp({super.key});
@@ -20,13 +18,13 @@ class GazzerApp extends StatelessWidget {
         builder: (context) {
           return BlocBuilder<AppSettingsCubit, AppSettingsState>(
             builder: (context, state) => MaterialApp(
-              home: const ProfileScreen(),
+              home: const MainLayout(),
               navigatorKey: AppNavigator().mainKey,
               theme: AppTheme.lightTheme,
               debugShowCheckedModeBanner: false,
               localizationsDelegates: L10n.localizationDelegates,
               supportedLocales: L10n.supportedLocales,
-              locale: Locale(state.lang ?? Platform.localeName),
+              locale: Locale(state.lang),
             ),
           );
         },

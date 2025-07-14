@@ -298,6 +298,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deliverTo => 'توصيل إلى';
 
   @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
   String get home_________________End => '__________________';
 
   @override

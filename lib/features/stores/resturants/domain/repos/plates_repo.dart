@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/plate_entity.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 abstract class PlatesRepo extends BaseApiRepo {
   Future<Result<List<PlateEntity>>> getAllPlatesPaginated(int page, [int perPage = 10]);

@@ -1,18 +1,21 @@
 class Endpoints {
   /// ** Auth
-  /// Register
+  // Register
   static const register = "clients/auth/register";
   static const verifyOTP = "clients/auth/register/verify-otp";
   static String editPhoneNum(String sessionId) => "clients/auth/register/edit-phone/$sessionId";
   static String resendOtp(String sessionId) => "clients/auth/register/resend-otp/$sessionId";
 
-  /// Login
+  // Login
   static const login = "clients/auth/login";
 
-  /// Forget password
+  // Forget password
   static const forgetPassword = "clients/auth/forgot-password";
   static const resetPassword = "clients/auth/reset-password";
   static const forgetPasswordVerifyOTP = "clients/auth/forgot-password/verify-otp";
+
+  /// ** pages
+  static const homePage = "homepage";
 
   /// ** stores categories
   static const storesCategories = "stores/categories";
