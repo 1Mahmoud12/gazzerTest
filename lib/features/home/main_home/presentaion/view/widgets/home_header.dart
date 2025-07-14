@@ -17,8 +17,8 @@ class _HomeHeader extends StatelessWidget {
             child: Container(
               width: width,
               height: width,
-              decoration: BoxDecoration(gradient: Grad.radialGradient, shape: BoxShape.circle),
-              foregroundDecoration: BoxDecoration(gradient: Grad.linearGradient, shape: BoxShape.circle),
+              decoration: BoxDecoration(gradient: Grad().radialGradient, shape: BoxShape.circle),
+              foregroundDecoration: BoxDecoration(gradient: Grad().linearGradient, shape: BoxShape.circle),
             ),
           ),
           Positioned(

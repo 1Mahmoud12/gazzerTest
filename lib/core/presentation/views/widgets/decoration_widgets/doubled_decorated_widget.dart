@@ -12,13 +12,13 @@ class DoubledDecoratedWidget extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: borderRadius ?? innerDecoration?.borderRadius ?? AppConst.defaultBorderRadius,
-        gradient: Grad.radialGradient,
+        gradient: Grad().radialGradient,
         shape: innerDecoration?.shape ?? BoxShape.rectangle,
       ),
       child: DecoratedBox(
         decoration:
             innerDecoration?.copyWith(borderRadius: borderRadius) ??
-            BoxDecoration(borderRadius: borderRadius ?? AppConst.defaultBorderRadius, gradient: Grad.linearGradient),
+            BoxDecoration(borderRadius: borderRadius ?? AppConst.defaultBorderRadius, gradient: Grad().linearGradient),
         child: child,
       ),
     );

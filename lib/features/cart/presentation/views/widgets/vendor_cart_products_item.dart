@@ -19,7 +19,7 @@ class VendorCartProductsItem extends StatelessWidget {
           GradientText(
             text: vendor.vendorName,
             style: TStyle.blackBold(18),
-            gradient: Grad.radialGradient.copyWith(radius: 2, center: Alignment.centerRight),
+            gradient: Grad().radialGradient.copyWith(radius: 2, center: Alignment.centerRight),
           ),
           ListView.separated(
             physics: const NeverScrollableScrollPhysics(),

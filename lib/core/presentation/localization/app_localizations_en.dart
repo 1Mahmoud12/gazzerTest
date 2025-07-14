@@ -9,6 +9,75 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get profile_________________Start => '__________________';
+
+  @override
+  String get userProfile => 'User Profile';
+
+  @override
+  String get goldenAccountUser => 'Golden Account User';
+
+  @override
+  String get memberSince => 'Member Since';
+
+  @override
+  String get accountInformation => 'Account Information';
+
+  @override
+  String get editAccountInformation => 'Edit Account Information';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get addresses => 'Addresses';
+
+  @override
+  String get defaultt => 'Default';
+
+  @override
+  String get setAsDefault => 'Set As Default';
+
+  @override
+  String get addNewAddress => 'Add New Address';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get privacy => 'Privacy';
+
+  @override
+  String get security => 'Security';
+
+  @override
+  String get privacySettings => 'Privacy Settings';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get signOut => 'Sign Out';
+
+  @override
+  String get emailAddress => 'Email Address';
+
+  @override
+  String get work => 'Work';
+
+  @override
+  String get homeAddress => 'Home';
+
+  @override
+  String get profile_________________End => '__________________';
+
+  @override
   String get groceries_________________Start => '__________________';
 
   @override

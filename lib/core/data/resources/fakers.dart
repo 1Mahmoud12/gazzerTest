@@ -6,6 +6,7 @@ import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
+import 'package:gazzer/features/profile/domain/address_entity.dart';
 import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/plate_entity.dart';
@@ -136,6 +137,28 @@ class Fakers {
       address: 'asd asd ad',
       deliveryFees: 123,
       isRestaurant: true,
+    ),
+  );
+
+  final addresses = List.generate(
+    3,
+    (index) => AddressEntity(
+      id: index,
+      street: "شارع ${index + 1}",
+      provinceId: _random.nextInt(10),
+      zoneId: _random.nextInt(10),
+      label: index == 0
+          ? 'home'
+          : index == 1
+          ? 'work'
+          : 'other',
+      lat: 0.0,
+      lng: 0.0,
+      isDefault: index == 0, // First address is default
+      floor: _random.nextInt(5),
+      apartmentNum: _random.nextInt(100),
+      description: "وصف العنوان ${index + 1}",
+      landmark: "معلم ${index + 1}",
     ),
   );
 }

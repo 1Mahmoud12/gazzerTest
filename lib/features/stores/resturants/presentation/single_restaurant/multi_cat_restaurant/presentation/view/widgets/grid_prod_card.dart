@@ -33,12 +33,12 @@ class SingleGridProduct extends StatelessWidget {
                 borderRadius: AppConst.defaultInnerBorderRadius,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    // border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
+                    // border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1),
                     borderRadius: BorderRadiusDirectional.vertical(
                       top: Radius.circular(constraints.maxHeight * 0.2),
                       bottom: Radius.circular(AppConst.defaultRadius),
                     ),
-                    gradient: Grad.bglightLinear,
+                    gradient: Grad().bglightLinear,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +47,7 @@ class SingleGridProduct extends StatelessWidget {
                         height: 60,
                         child: DecoratedBox(
                           decoration: BoxDecoration(
-                            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
+                            border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1),
                             borderRadius: BorderRadius.circular(100),
                             // color: Co.bg,
                           ),

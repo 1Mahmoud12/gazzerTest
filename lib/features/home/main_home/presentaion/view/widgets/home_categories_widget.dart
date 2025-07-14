@@ -53,10 +53,10 @@ class CategoryCard extends StatelessWidget {
       builder: (context, constraints) => Container(
         // clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          border: GradientBoxBorder(gradient: Grad.shadowGrad(false), width: 1.5),
+          border: GradientBoxBorder(gradient: Grad().shadowGrad(false), width: 1.5),
           borderRadius: BorderRadius.circular(constraints.maxWidth),
           // shadows will enforce that the gradient has no opacity
-          gradient: Grad.bglightLinear.copyWith(
+          gradient: Grad().bglightLinear.copyWith(
             colors: [const Color(0xFFD0CADA), Co.bg],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,

@@ -18,7 +18,6 @@ class MainBtn extends StatefulWidget {
     this.isLoading = false,
     this.isEnabled = true,
     this.borderThickness = 1.0,
-    this.showBorder = true,
     required this.onPressed,
     this.disabledColor,
     this.padding,
@@ -26,12 +25,12 @@ class MainBtn extends StatefulWidget {
     this.height,
     this.width,
     this.icon,
+    this.child,
   });
   final String? text;
   final TextStyle? textStyle;
   final double? radius;
   final Color? bgColor;
-  final bool showBorder;
   final Color? borderColor;
   final Color? disabledColor;
   final bool isLoading;
@@ -42,7 +41,7 @@ class MainBtn extends StatefulWidget {
   final double? height;
   final double? width;
   final dynamic icon;
-
+  final Widget? child;
   final Function() onPressed;
 
   @override
@@ -69,13 +68,19 @@ class _MainBtnState extends State<MainBtn> {
         valueListenable: isHovering,
         builder: (context, value, child) => DecoratedBox(
           decoration: BoxDecoration(
+            border: widget.borderColor == null
+                ? null
+                : Border.all(
+                    color: widget.borderColor!,
+                    width: widget.borderThickness,
+                  ),
             color: widget.bgColor,
             borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
             gradient: widget.bgColor != null
                 ? null
                 : value
-                ? Grad.hoverGradient
-                : Grad.radialGradient,
+                ? Grad().hoverGradient
+                : Grad().radialGradient,
             boxShadow: [
               if (value) const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0)),
             ],
@@ -83,7 +88,7 @@ class _MainBtnState extends State<MainBtn> {
           child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
-              gradient: widget.bgColor != null || value ? null : Grad.linearGradient,
+              gradient: widget.bgColor != null || value ? null : Grad().linearGradient,
             ),
             child: child!,
           ),
@@ -117,38 +122,40 @@ class _MainBtnState extends State<MainBtn> {
             padding: widget.padding ?? EdgeInsets.zero,
             child: SizedBox(
               width: widget.width == null ? null : widget.width! - ((widget.padding?.horizontal ?? 0) * 2),
-              child: Row(
-                spacing: 20,
-                mainAxisAlignment: widget.icon == null ? MainAxisAlignment.center : MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (widget.icon is IconData || (widget.icon is String && widget.icon.endsWith('svg') == true))
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: Grad.radialGradient,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Co.shadowColor.withAlpha(63),
-                            blurRadius: 4.1,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 0),
+              child:
+                  widget.child ??
+                  Row(
+                    spacing: 20,
+                    mainAxisAlignment: widget.icon == null ? MainAxisAlignment.center : MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (widget.icon is IconData || (widget.icon is String && widget.icon.endsWith('svg') == true))
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: Grad().radialGradient,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Co.shadowColor.withAlpha(63),
+                                blurRadius: 4.1,
+                                spreadRadius: 1,
+                                offset: const Offset(0, 0),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad.linearGradient),
-                        child: Padding(
-                          padding: const EdgeInsetsGeometry.all(12),
-                          child: widget.icon is IconData
-                              ? Icon(widget.icon!, size: (widget.height ?? 24) * 0.6, color: Co.white)
-                              : SvgPicture.asset(widget.icon!, height: widget.height ?? 24),
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().linearGradient),
+                            child: Padding(
+                              padding: const EdgeInsetsGeometry.all(12),
+                              child: widget.icon is IconData
+                                  ? Icon(widget.icon!, size: (widget.height ?? 24) * 0.6, color: Co.white)
+                                  : SvgPicture.asset(widget.icon!, height: widget.height ?? 24),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(14)),
-                ],
-              ),
+                      Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(14)),
+                    ],
+                  ),
             ),
           ),
         ),

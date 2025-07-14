@@ -29,7 +29,7 @@ class PlansViewScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(text: L10n.tr().yourPlanToOptimizeCalories, style: TStyle.blackBold(20), gradient: Grad.textGradient),
+              child: GradientText(text: L10n.tr().yourPlanToOptimizeCalories, style: TStyle.blackBold(20), gradient: Grad().textGradient),
             ),
             Expanded(
               child: GridView.builder(
@@ -44,7 +44,7 @@ class PlansViewScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   return DecoratedBox(
-                    decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
+                    decoration: BoxDecoration(gradient: Grad().bglightLinear, borderRadius: AppConst.defaultBorderRadius),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
                       child: Text.rich(

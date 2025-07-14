@@ -36,7 +36,7 @@ class _SupplementsScreenState extends State<SupplementsScreen> {
   }
 
   final focusData = ["Yes, Daily", "Occasionally", "No"];
-  
+
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(
@@ -53,7 +53,7 @@ class _SupplementsScreenState extends State<SupplementsScreen> {
               child: GradientText(
                 text: "Do you take medications or health supplements regularly?",
                 style: TStyle.blackBold(20),
-                gradient: Grad.textGradient,
+                gradient: Grad().textGradient,
               ),
             ),
             const VerticalSpacing(24),

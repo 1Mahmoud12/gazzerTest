@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         rtChild: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            GradientText(text: L10n.tr().freeDelivery, style: TStyle.blackBold(22), gradient: Grad.radialGradient),
+                            GradientText(text: L10n.tr().freeDelivery, style: TStyle.blackBold(22), gradient: Grad().radialGradient),
                             Text.rich(
                               TextSpan(
                                 children: [
@@ -132,9 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             // GradientText(
                             //   text: L10n.tr().earnYourFirst5Orders,
                             //   style: TStyle.blackBold(16),
-                            //   gradient: Grad.radialGradient,
+                            //   gradient: Grad().radialGradient,
                             // ),
-                            GradientText(text: L10n.tr().free, style: TStyle.blackBold(18).copyWith(letterSpacing: 12), gradient: Grad.radialGradient),
+                            GradientText(text: L10n.tr().free, style: TStyle.blackBold(18).copyWith(letterSpacing: 12), gradient: Grad().radialGradient),
                           ],
                         ),
                       ),
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Align(alignment: Alignment.topLeft, child: Image.asset(Assets.assetsGifWow, width: 65)),
-                              GradientText(text: L10n.tr().topRated, style: TStyle.blackBold(20), gradient: Grad.radialGradient),
+                              GradientText(text: L10n.tr().topRated, style: TStyle.blackBold(20), gradient: Grad().radialGradient),
                               Text(L10n.tr().explore, style: TStyle.blackBold(14)),
                             ],
                           ),

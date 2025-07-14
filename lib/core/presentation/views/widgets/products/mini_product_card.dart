@@ -16,7 +16,7 @@ class MiniProductCard extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) => DecoratedBox(
         decoration: BoxDecoration(
-          border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+          border: GradientBoxBorder(gradient: Grad().shadowGrad()),
           borderRadius: AppConst.defaultBorderRadius,
         ),
         child: SizedBox(
@@ -50,13 +50,13 @@ class MiniProductCard extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      gradient: Grad.bgLinear.copyWith(
+                      gradient: Grad().bgLinear.copyWith(
                         colors: [const Color(0xAA402788), Colors.transparent],
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                       ),
                       shape: BoxShape.circle,
-                      border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+                      border: GradientBoxBorder(gradient: Grad().shadowGrad()),
                     ),
                     child: const FavoriteWidget(size: 24),
                   ),

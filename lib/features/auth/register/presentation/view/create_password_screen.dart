@@ -72,7 +72,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   GradientText(
                     text: L10n.tr().createPassword,
                     style: TStyle.mainwBold(32),
-                    gradient: Grad.textGradient,
+                    gradient: Grad().textGradient,
                   ),
                 ],
               ),

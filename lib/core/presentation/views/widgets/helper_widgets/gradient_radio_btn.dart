@@ -12,7 +12,7 @@ class GradientRadioBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
+        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
         shape: BoxShape.circle,
       ),
       child: AnimatedOpacity(

@@ -64,7 +64,7 @@ class HorizontalProductCard extends StatelessWidget {
                                     GradientText(
                                       text: product.name,
                                       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                      gradient: Grad.radialGradient,
+                                      gradient: Grad().radialGradient,
                                     ),
                                     Text(product.description, style: TStyle.blackRegular(12), overflow: TextOverflow.ellipsis, maxLines: 2),
                                   ],
@@ -83,8 +83,8 @@ class HorizontalProductCard extends StatelessWidget {
                               icon: DecoratedBox(
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: GradientBoxBorder(gradient: Grad.shadowGrad()),
-                                  gradient: Grad.bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
+                                  border: GradientBoxBorder(gradient: Grad().shadowGrad()),
+                                  gradient: Grad().bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8),

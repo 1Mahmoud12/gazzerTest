@@ -5,16 +5,21 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({super.key, this.showCart = true, this.iconsColor = Co.purple, this.isCartScreen = false});
+  const MainAppBar({super.key, this.showCart = true, this.iconsColor = Co.purple, this.isCartScreen = false, this.showLanguage = true, this.bacButtonColor});
   final bool showCart;
+  final bool showLanguage;
   final Color iconsColor;
+  final Color? bacButtonColor;
   final bool isCartScreen;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       leading: Navigator.canPop(context)
-          ? IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.arrow_back_ios))
+          ? IconButton(
+              onPressed: () => Navigator.maybePop(context),
+              icon: Icon(Icons.arrow_back_ios, color: bacButtonColor),
+            )
           : null,
       leadingWidth: 65,
       actions: [
@@ -35,16 +40,17 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
           ),
         ),
-        IconButton(
-          onPressed: () {},
-          // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-          icon: SvgPicture.asset(
-            Assets.assetsSvgLanguage,
-            height: 21,
-            width: 21,
-            colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+        if (showLanguage)
+          IconButton(
+            onPressed: () {},
+            // style: IconButton.styleFrom(backgroundColor: Colors.black12),
+            icon: SvgPicture.asset(
+              Assets.assetsSvgLanguage,
+              height: 21,
+              width: 21,
+              colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+            ),
           ),
-        ),
       ],
     );
   }

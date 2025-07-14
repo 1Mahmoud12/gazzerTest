@@ -9,7 +9,7 @@ class _VertProductCard extends StatelessWidget {
       width: 138,
       child: InkWell(
         onTap: () {
-                                  AppNavigator().push(AddFoodToCartScreen(product: prod));
+          AppNavigator().push(AddFoodToCartScreen(product: prod));
         },
         child: Stack(
           alignment: Alignment.topCenter,
@@ -20,7 +20,7 @@ class _VertProductCard extends StatelessWidget {
                 children: [
                   const Spacer(),
                   DecoratedBox(
-                    decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
+                    decoration: BoxDecoration(gradient: Grad().bglightLinear, borderRadius: AppConst.defaultBorderRadius),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(

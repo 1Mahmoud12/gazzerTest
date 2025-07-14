@@ -29,7 +29,7 @@ class _OtpWidgetState extends State<OtpWidget> {
       margin: EdgeInsets.symmetric(horizontal: (widget.spacing ?? 32) * 0.5),
       textStyle: const TextStyle(fontSize: 20, color: Co.greyText, fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
+        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1),
         borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
       ),
     );

@@ -70,10 +70,10 @@ class _OptionBtnState extends State<OptionBtn> {
         valueListenable: isHovering,
         builder: (context, value, child) => DecoratedBox(
           decoration: BoxDecoration(
-            gradient: value ? Grad.hoverGradient : null,
+            gradient: value ? Grad().hoverGradient : null,
             borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
             color: value ? null : widget.bgColor ?? Colors.transparent,
-            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
+            border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
           ),
           child: child!,
         ),

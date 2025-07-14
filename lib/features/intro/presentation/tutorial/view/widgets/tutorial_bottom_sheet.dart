@@ -85,7 +85,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                   spacing: 12,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    GradientText(text: L10n.tr().selectLanguage, style: TStyle.blackBold(24), gradient: Grad.textGradient),
+                    GradientText(text: L10n.tr().selectLanguage, style: TStyle.blackBold(24), gradient: Grad().textGradient),
                     const SizedBox(height: 40, width: double.infinity),
                     PlanAnimatedBtn(
                       onPressed: () => changeLanguage('en'),

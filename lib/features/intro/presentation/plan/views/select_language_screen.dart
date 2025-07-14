@@ -48,7 +48,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-            GradientText(text: L10n.tr().selectLanguage, style: TStyle.blackBold(24), gradient: Grad.textGradient),
+            GradientText(text: L10n.tr().selectLanguage, style: TStyle.blackBold(24), gradient: Grad().textGradient),
             const SizedBox(height: 40, width: double.infinity),
             PlanAnimatedBtn(
               onPressed: () {

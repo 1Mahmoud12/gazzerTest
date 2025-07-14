@@ -52,7 +52,7 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
               child: GradientText(
                 text: "Do You Follow Any Specific Dietary Lifestyle?",
                 style: TStyle.blackBold(20),
-                gradient: Grad.textGradient,
+                gradient: Grad().textGradient,
               ),
             ),
             const VerticalSpacing(24),

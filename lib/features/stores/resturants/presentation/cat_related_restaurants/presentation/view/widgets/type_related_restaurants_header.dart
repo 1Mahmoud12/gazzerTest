@@ -26,7 +26,7 @@ class _TypeRelatedRestaurantsHeader extends StatelessWidget {
                 clipper: AddShapeClipper(),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    gradient: Grad.bgLinear.copyWith(
+                    gradient: Grad().bgLinear.copyWith(
                       colors: [Co.buttonGradient.withAlpha(200), Co.bg.withAlpha(0)],
                       stops: const [0.0, 1],
                     ),
@@ -45,7 +45,7 @@ class _TypeRelatedRestaurantsHeader extends StatelessWidget {
         ),
         DecoratedBox(
           decoration: BoxDecoration(
-            gradient: Grad.bgLinear.copyWith(
+            gradient: Grad().bgLinear.copyWith(
               colors: [Co.buttonGradient.withAlpha(80), Co.bg.withAlpha(0)],
               stops: const [0.0, 1],
             ),

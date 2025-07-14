@@ -20,7 +20,7 @@ class PostCheckoutScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
           child: DecoratedBox(
             decoration: BoxDecoration(
-              gradient: Grad.bgLinear.copyWith(colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)]),
+              gradient: Grad().bgLinear.copyWith(colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)]),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(

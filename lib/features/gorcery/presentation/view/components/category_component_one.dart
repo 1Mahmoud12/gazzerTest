@@ -49,7 +49,7 @@ class _VendorCardOne extends StatelessWidget {
               position: DecorationPosition.foreground,
               decoration: BoxDecoration(
                 borderRadius: AppConst.defaultBorderRadius,
-                border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+                border: GradientBoxBorder(gradient: Grad().shadowGrad()),
               ),
               child: ClipRRect(
                 borderRadius: AppConst.defaultBorderRadius,
@@ -59,7 +59,7 @@ class _VendorCardOne extends StatelessWidget {
           ),
           Expanded(
             child: DecoratedBox(
-              decoration: BoxDecoration(gradient: Grad.bglightLinear),
+              decoration: BoxDecoration(gradient: Grad().bglightLinear),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

@@ -16,7 +16,7 @@ class VideoTutorialCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+        border: GradientBoxBorder(gradient: Grad().shadowGrad()),
 
         borderRadius: AppConst.defaultBorderRadius,
       ),

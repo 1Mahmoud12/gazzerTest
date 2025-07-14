@@ -96,7 +96,7 @@ class VerticalProductCard extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        gradient: Grad.radialGradient,
+                        gradient: Grad().radialGradient,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(12),
                           bottomRight: Radius.circular(12),
@@ -104,7 +104,7 @@ class VerticalProductCard extends StatelessWidget {
                       ),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          gradient: Grad.linearGradient,
+                          gradient: Grad().linearGradient,
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(12),
                             bottomRight: Radius.circular(12),

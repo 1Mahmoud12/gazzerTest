@@ -39,7 +39,7 @@ class VendorListTile extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(60)),
-          gradient: Grad.bglightLinear.copyWith(colors: [Co.buttonGradient.withAlpha(60), Co.bg.withAlpha(0)]),
+          gradient: Grad().bglightLinear.copyWith(colors: [Co.buttonGradient.withAlpha(60), Co.bg.withAlpha(0)]),
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 12, 16, 12),

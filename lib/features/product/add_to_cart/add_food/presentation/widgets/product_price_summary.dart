@@ -15,12 +15,12 @@ class ProductPriceSummary extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(36), topRight: Radius.circular(36)),
-        gradient: Grad.radialGradient,
+        gradient: Grad().radialGradient,
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(36), topRight: Radius.circular(36)),
-          gradient: Grad.linearGradient,
+          gradient: Grad().linearGradient,
         ),
         child: SafeArea(
           top: false,
@@ -41,7 +41,7 @@ class ProductPriceSummary extends StatelessWidget {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: AppConst.defaultInnerBorderRadius,
-                          border: GradientBoxBorder(gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]), width: 2),
+                          border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]), width: 2),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(2),

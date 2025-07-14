@@ -15,7 +15,7 @@ class CircleGradientBorderedImage extends StatelessWidget {
         position: DecorationPosition.foreground,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: !showBorder ? null : GradientBoxBorder(gradient: Grad.shadowGrad()),
+          border: !showBorder ? null : GradientBoxBorder(gradient: Grad().shadowGrad()),
         ),
         child: ClipOval(
           child: AspectRatio(

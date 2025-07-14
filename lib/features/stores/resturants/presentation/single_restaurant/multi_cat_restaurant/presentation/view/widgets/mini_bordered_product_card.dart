@@ -11,7 +11,7 @@ class _MiniBorderedProductCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         color: Co.bg,
-        border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1.5),
+        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1.5),
       ),
       child: Column(
         children: [
@@ -37,7 +37,7 @@ class _MiniBorderedProductCard extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             SystemSound.play(SystemSoundType.click);
-                                                    AppNavigator().push(AddFoodToCartScreen(product: prod));
+                            AppNavigator().push(AddFoodToCartScreen(product: prod));
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(4),

@@ -65,7 +65,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
               Row(
                 children: [
-                  GradientText(text: L10n.tr().resetPassword, style: TStyle.mainwBold(32), gradient: Grad.textGradient),
+                  GradientText(text: L10n.tr().resetPassword, style: TStyle.mainwBold(32), gradient: Grad().textGradient),
                 ],
               ),
               const VerticalSpacing(32),

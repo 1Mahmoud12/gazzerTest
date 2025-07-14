@@ -55,7 +55,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-            GradientText(text: L10n.tr().howToLogin, style: TStyle.blackBold(24), gradient: Grad.textGradient),
+            GradientText(text: L10n.tr().howToLogin, style: TStyle.blackBold(24), gradient: Grad().textGradient),
             const SizedBox(height: 40, width: double.infinity),
             Hero(
               tag: Tags.btn,

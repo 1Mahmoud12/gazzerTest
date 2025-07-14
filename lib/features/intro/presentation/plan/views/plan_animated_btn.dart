@@ -49,10 +49,10 @@ class _PlanAnimatedBtnState extends State<PlanAnimatedBtn> {
         valueListenable: isHovering,
         builder: (context, value, child) => DecoratedBox(
           decoration: BoxDecoration(
-            gradient: value ? Grad.hoverGradient : null,
+            gradient: value ? Grad().hoverGradient : null,
             borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius),
             color: value ? null : Colors.transparent,
-            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
+            border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
           ),
           child: child!,
         ),

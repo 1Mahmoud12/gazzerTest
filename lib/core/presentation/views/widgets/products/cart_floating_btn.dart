@@ -23,9 +23,9 @@ class CartFloatingBtn extends StatelessWidget {
           if (navigate) AppNavigator().push(const CartScreen());
         },
         child: DecoratedBox(
-          decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad.radialGradient),
+          decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().radialGradient),
           child: DecoratedBox(
-            decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad.linearGradient),
+            decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().linearGradient),
             child: Padding(
               padding: EdgeInsets.all(padding),
               child: SvgPicture.asset(Assets.assetsSvgCart, height: size, width: size),

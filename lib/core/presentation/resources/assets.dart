@@ -150,6 +150,8 @@ class Assets {
 
   static const String assetsSvgAddContainer = "assets/svg/add_container.svg";
 
+  static const String assetsSvgAppearance = "assets/svg/appearance.svg";
+
   static const String assetsSvgApple = "assets/svg/apple.svg";
 
   static const String assetsSvgCart = "assets/svg/cart.svg";
@@ -160,7 +162,13 @@ class Assets {
 
   static const String assetsSvgCommunity = "assets/svg/community.svg";
 
+  static const String assetsSvgCup = "assets/svg/cup.svg";
+
   static const String assetsSvgDrawerIcon = "assets/svg/drawer_icon.svg";
+
+  static const String assetsSvgEdit = "assets/svg/edit.svg";
+
+  static const String assetsSvgEditSquare = "assets/svg/edit_square.svg";
 
   static const String assetsSvgFacebook = "assets/svg/facebook.svg";
 
@@ -175,6 +183,8 @@ class Assets {
   static const String assetsSvgHistory = "assets/svg/history.svg";
 
   static const String assetsSvgHomeIcon = "assets/svg/home_icon.svg";
+
+  static const String assetsSvgHomeOutlined = "assets/svg/home_outlined.svg";
 
   static const String assetsSvgLanguage = "assets/svg/language.svg";
 
@@ -200,6 +210,10 @@ class Assets {
 
   static const String assetsSvgPercentageBg = "assets/svg/percentage_bg.svg";
 
+  static const String assetsSvgPhone = "assets/svg/phone.svg";
+
+  static const String assetsSvgPrivacy = "assets/svg/privacy.svg";
+
   static const String assetsSvgProdCard = "assets/svg/prod_card.svg";
 
   static const String assetsSvgRewards = "assets/svg/rewards.svg";
@@ -214,7 +228,11 @@ class Assets {
 
   static const String assetsSvgTripleStarts = "assets/svg/triple_starts.svg";
 
+  static const String assetsSvgUser = "assets/svg/user.svg";
+
   static const String assetsSvgVideo = "assets/svg/video.svg";
+
+  static const String assetsSvgWork = "assets/svg/work.svg";
 
   static const String assetsSvgYellowPatches = "assets/svg/yellow_patches.svg";
 

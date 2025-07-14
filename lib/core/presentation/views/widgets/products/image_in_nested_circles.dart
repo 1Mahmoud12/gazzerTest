@@ -15,7 +15,7 @@ class ImageInNestedCircles extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: Grad.bglightLinear.copyWith(colors: [const Color(0xffCFC8DA), Co.bg]),
+          gradient: Grad().bglightLinear.copyWith(colors: [const Color(0xffCFC8DA), Co.bg]),
           border: GradientBoxBorder(
             gradient: LinearGradient(
               colors: [Colors.black.withAlpha(0), Co.buttonGradient],
@@ -38,7 +38,7 @@ class ImageInNestedCircles extends StatelessWidget {
                     position: DecorationPosition.foreground,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1),
+                      border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1),
                     ),
                     child: AspectRatio(
                       aspectRatio: 1,

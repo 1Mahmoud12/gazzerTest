@@ -87,11 +87,11 @@ class _MainTextFieldState extends State<MainTextField> {
 
   void formBorders() {
     if (widget.isOutLinedBorder) {
-      focusedBorder = GradientOutlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad.shadowGrad(), width: 2);
+      focusedBorder = GradientOutlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad().shadowGrad(), width: 2);
     } else {
-      focusedBorder = GradientUnderlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad.shadowGrad(), width: 2);
+      focusedBorder = GradientUnderlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad().shadowGrad(), width: 2);
     }
-    errorBorder = GradientOutlineInputBorder(gradient: Grad.errorGradient, width: 1, borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)));
+    errorBorder = GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)));
   }
 
   @override

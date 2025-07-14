@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class Grad {
-  Grad._();
-  static final linearGradient = LinearGradient(
+  final linearGradient = LinearGradient(
     colors: [Co.lightPurple, Co.darkPurple.withAlpha(201), Co.darkPurple.withAlpha(0)],
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
+    begin: Alignment.topLeft,
+    end: Alignment.bottomCenter,
     stops: [0.07, 0.79, 1.0],
   );
-  static RadialGradient get radialGradient =>
-      const RadialGradient(colors: [Co.mauve, Co.darkMauve], center: Alignment.center, radius: 1);
-  static LinearGradient get textGradient => const LinearGradient(
+  RadialGradient get radialGradient => const RadialGradient(
+    colors: [Co.mauve, Co.darkMauve],
+    center: Alignment.center,
+    radius: 1,
+  );
+  LinearGradient get textGradient => const LinearGradient(
     colors: [Color(0xFF6F2BCB), Co.mauve, Color(0xFF0D0130)],
     end: Alignment.bottomRight,
     begin: Alignment.topLeft,
@@ -19,30 +21,30 @@ class Grad {
   );
 
   ///
-  static LinearGradient shadowGrad([bool isVertical = true]) => LinearGradient(
+  LinearGradient shadowGrad([bool isVertical = true]) => LinearGradient(
     colors: [Colors.black.withAlpha(0), Co.buttonGradient],
     begin: isVertical ? Alignment.topCenter : Alignment.centerRight,
     end: isVertical ? Alignment.bottomCenter : Alignment.centerLeft,
     stops: [0.0, 0.5],
   );
-  static final errorGradient = const LinearGradient(
+  final errorGradient = const LinearGradient(
     colors: [Colors.transparent, Co.red],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     stops: [0.0, 0.5],
   );
-  static final bgLinear = const LinearGradient(
+  final bgLinear = const LinearGradient(
     colors: [Color(0xFF402788), Colors.transparent],
     begin: Alignment.bottomCenter,
     end: Alignment.topCenter,
     stops: [0.2, 0.8],
   );
-  static final bglightLinear = bgLinear.copyWith(
+  LinearGradient get bglightLinear => bgLinear.copyWith(
     colors: [Co.buttonGradient.withAlpha(80), Co.bg.withAlpha(0)],
     stops: const [0.0, 1],
   );
 
-  static final hoverGradient = const LinearGradient(
+  final hoverGradient = const LinearGradient(
     colors: [Color(0x00402788), Color(0xFF402788)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

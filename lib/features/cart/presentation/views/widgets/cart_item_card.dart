@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import  'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/increment_widget_white.dart';
 
 class CartItemCard extends StatelessWidget {
@@ -16,7 +16,7 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
+        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
@@ -28,7 +28,7 @@ class CartItemCard extends StatelessWidget {
               DecoratedBox(
                 position: DecorationPosition.foreground,
                 decoration: BoxDecoration(
-                  border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
+                  border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
                   borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
                 ),
                 child: ClipRRect(

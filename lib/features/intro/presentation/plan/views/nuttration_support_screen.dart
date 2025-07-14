@@ -57,7 +57,7 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
               child: GradientText(
                 text: "What types of nutrition support would you like?",
                 style: TStyle.blackBold(20),
-                gradient: Grad.textGradient,
+                gradient: Grad().textGradient,
               ),
             ),
             const VerticalSpacing(24),

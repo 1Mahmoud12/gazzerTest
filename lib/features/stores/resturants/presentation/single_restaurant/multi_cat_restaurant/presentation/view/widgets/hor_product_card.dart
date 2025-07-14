@@ -20,7 +20,7 @@ class _HorProductCard extends StatelessWidget {
                   Expanded(
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        gradient: Grad.bglightLinear,
+                        gradient: Grad().bglightLinear,
                         borderRadius: AppConst.defaultBorderRadius,
                       ),
                       child: Row(

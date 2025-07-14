@@ -18,7 +18,7 @@ class _HomeContactUsWidget extends StatelessWidget {
             ),
             child: Center(
               child: DecoratedBox(
-                decoration: BoxDecoration(gradient: Grad.hoverGradient, borderRadius: AppConst.defaultBorderRadius),
+                decoration: BoxDecoration(gradient: Grad().hoverGradient, borderRadius: AppConst.defaultBorderRadius),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   child: Column(

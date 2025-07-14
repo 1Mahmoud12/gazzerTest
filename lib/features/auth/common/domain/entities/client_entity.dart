@@ -2,6 +2,9 @@ class ClientEntity {
   final int? id;
   final String phoneNumber;
   final String? clientName;
+  final String? image;
+  final String? email;
+  final String? createdAt;
 
   /// TODO: to be replaced by clientstatus name
   final int? clientStatusId;
@@ -16,5 +19,8 @@ class ClientEntity {
     required this.clientStatusId,
     required this.driver,
     required this.socialId,
+    this.image,
+    this.email,
+    this.createdAt,
   });
 }

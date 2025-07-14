@@ -21,7 +21,7 @@ class SearchResultVendor extends StatelessWidget {
       child: DecoratedBox(
         position: DecorationPosition.foreground,
         decoration: BoxDecoration(
-          border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+          border: GradientBoxBorder(gradient: Grad().shadowGrad()),
           borderRadius: AppConst.defaultBorderRadius,
         ),
         child: ClipRRect(

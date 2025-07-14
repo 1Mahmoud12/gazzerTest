@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import  'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 
 class IncrementWidget extends StatefulWidget {
   const IncrementWidget({super.key, this.initVal = 1});
@@ -29,8 +29,8 @@ class _IncrementWidgetState extends State<IncrementWidget> {
         DoubledDecoratedWidget(
           innerDecoration: BoxDecoration(
             borderRadius: AppConst.defaultBorderRadius,
-            gradient: Grad.linearGradient,
-            border: GradientBoxBorder(gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
+            gradient: Grad().linearGradient,
+            border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
           ),
           child: IconButton(
             onPressed: () {
@@ -56,8 +56,8 @@ class _IncrementWidgetState extends State<IncrementWidget> {
         DoubledDecoratedWidget(
           innerDecoration: BoxDecoration(
             borderRadius: AppConst.defaultBorderRadius,
-            gradient: Grad.linearGradient,
-            border: GradientBoxBorder(gradient: Grad.shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
+            gradient: Grad().linearGradient,
+            border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
           ),
           child: IconButton(
             onPressed: () {

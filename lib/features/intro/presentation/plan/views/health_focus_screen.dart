@@ -52,7 +52,7 @@ class _HealthFocusScreenState extends State<HealthFocusScreen> {
               child: GradientText(
                 text: L10n.tr().whatIsYourPrimaryHealthFocus,
                 style: TStyle.blackBold(20),
-                gradient: Grad.textGradient,
+                gradient: Grad().textGradient,
               ),
             ),
             const VerticalSpacing(24),

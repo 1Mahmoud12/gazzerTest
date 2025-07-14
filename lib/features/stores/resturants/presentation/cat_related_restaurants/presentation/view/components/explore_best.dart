@@ -41,7 +41,7 @@ class _ExploreBest extends StatelessWidget {
                         child: SizedBox(
                           width: constraints.maxWidth - (constraints.maxHeight / 2),
                           child: DecoratedBox(
-                            decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
+                            decoration: BoxDecoration(gradient: Grad().bglightLinear, borderRadius: AppConst.defaultBorderRadius),
                             child: Row(
                               children: [
                                 const HorizontalSpacing(70),

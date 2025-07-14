@@ -36,7 +36,7 @@ class _RecentOrders extends StatelessWidget {
                               topRight: Radius.circular(32),
                               bottomLeft: Radius.circular(32),
                             ),
-                            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 1.5),
+                            border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1.5),
                           ),
 
                           child: ClipRRect(

@@ -98,7 +98,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         countryConfig: CountryConfig(
           flagSize: 30,
           decoration: BoxDecoration(
-            border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2),
+            border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
             borderRadius: AppConst.defaultInnerBorderRadius,
           ),
           textStyle: TStyle.greyRegular(14),

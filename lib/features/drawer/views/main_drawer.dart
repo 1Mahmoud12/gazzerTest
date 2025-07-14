@@ -64,7 +64,7 @@ class _MainDrawerState extends State<MainDrawer> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(44)),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: Grad.bglightLinear.copyWith(colors: [Co.buttonGradient.withAlpha(180), Colors.black.withAlpha(0)]),
+          gradient: Grad().bglightLinear.copyWith(colors: [Co.buttonGradient.withAlpha(180), Colors.black.withAlpha(0)]),
         ),
         child: Column(
           children: [

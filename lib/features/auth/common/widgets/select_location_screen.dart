@@ -165,7 +165,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                       child: GradientText(
                         text: L10n.tr().setYourLocation,
                         style: TStyle.blackSemi(16),
-                        gradient: Grad.textGradient,
+                        gradient: Grad().textGradient,
                       ),
                     ),
                   ),

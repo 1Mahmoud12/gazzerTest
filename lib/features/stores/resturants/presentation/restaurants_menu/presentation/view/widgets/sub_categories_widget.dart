@@ -47,9 +47,9 @@ class SubCategoryItem extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: AppConst.defaultInnerBorderRadius,
-        border: GradientBoxBorder(gradient: Grad.bgLinear, width: 2),
+        border: GradientBoxBorder(gradient: Grad().bgLinear, width: 2),
         // color: isSelected ? null : Co.bg,
-        gradient: isSelected ? Grad.bglightLinear : null,
+        gradient: isSelected ? Grad().bglightLinear : null,
       ),
       child: ElevatedButton(
         onPressed: ontap,

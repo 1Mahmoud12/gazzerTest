@@ -23,7 +23,7 @@ class _CartScreenState extends State<CartScreen> {
           GradientText(
             text: L10n.tr().shippingCart,
             style: TStyle.blackBold(24),
-            gradient: Grad.radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
+            gradient: Grad().radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
           ),
           const VerticalSpacing(24),
           Expanded(

@@ -9,6 +9,75 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get profile_________________Start => '__________________';
+
+  @override
+  String get userProfile => 'الملف الشخصي';
+
+  @override
+  String get goldenAccountUser => 'مستخدم حساب جولدن';
+
+  @override
+  String get memberSince => 'عضو منذ';
+
+  @override
+  String get accountInformation => 'معلومات الحساب';
+
+  @override
+  String get editAccountInformation => 'تعديل معلومات الحساب';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get addresses => 'العناوين';
+
+  @override
+  String get defaultt => 'افتراضي';
+
+  @override
+  String get setAsDefault => 'تعيين كافتراضي';
+
+  @override
+  String get addNewAddress => 'إضافة عنوان جديد';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get preferences => 'التفضيلات';
+
+  @override
+  String get appearance => 'المظهر';
+
+  @override
+  String get privacy => 'الخصوصية';
+
+  @override
+  String get security => 'الأمان';
+
+  @override
+  String get privacySettings => 'إعدادات الخصوصية';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get signOut => 'تسجيل الخروج';
+
+  @override
+  String get emailAddress => 'البريد الإلكتروني';
+
+  @override
+  String get work => 'العمل';
+
+  @override
+  String get homeAddress => 'المنزل';
+
+  @override
+  String get profile_________________End => '__________________';
+
+  @override
   String get groceries_________________Start => '__________________';
 
   @override

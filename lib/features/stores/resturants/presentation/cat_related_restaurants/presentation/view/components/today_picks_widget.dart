@@ -27,7 +27,7 @@ class _TodayPicksWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: AppConst.defaultBorderRadius,
                   child: DecoratedBox(
-                    decoration: BoxDecoration(gradient: Grad.bglightLinear),
+                    decoration: BoxDecoration(gradient: Grad().bglightLinear),
                     child: InkWell(
                       onTap: () {
                         if (index.isEven) {

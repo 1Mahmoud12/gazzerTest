@@ -38,12 +38,12 @@ class _TutorialHeaderState extends State<TutorialHeader> {
                   width: width * 1.2,
                   height: width,
                   decoration: BoxDecoration(
-                    gradient: Grad.bglightLinear.copyWith(
+                    gradient: Grad().bglightLinear.copyWith(
                       begin: Alignment.centerRight,
                       colors: [Co.buttonGradient, Colors.black.withAlpha(0)],
                     ),
                   ),
-                  // foregroundDecoration: BoxDecoration(gradient: Grad.linearGradient),
+                  // foregroundDecoration: BoxDecoration(gradient: Grad().linearGradient),
                 ),
               ),
             ),
@@ -56,7 +56,7 @@ class _TutorialHeaderState extends State<TutorialHeader> {
                 text: L10n.tr().gazzerVideoTutorial,
                 shadow: BoxShadow(color: Co.secondary.withAlpha(100), blurRadius: 8, offset: const Offset(0, 2)),
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                gradient: Grad.textGradient,
+                gradient: Grad().textGradient,
               ),
             ),
           ),

@@ -50,7 +50,7 @@ class _RecentSearchesWidgetState extends State<RecentSearchesWidget> {
                 children: List.generate(searchWords.length, (index) {
                   return DecoratedBox(
                     decoration: BoxDecoration(
-                      border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+                      border: GradientBoxBorder(gradient: Grad().shadowGrad()),
                       borderRadius: AppConst.defaultBorderRadius,
                     ),
                     child: Padding(

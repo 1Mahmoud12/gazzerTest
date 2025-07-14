@@ -18,9 +18,9 @@ class _HomeCuisinesWidget extends StatelessWidget {
               final cuisne = Fakers.fakeCuisines[index];
               return DecoratedBox(
                 decoration: BoxDecoration(
-                  border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+                  border: GradientBoxBorder(gradient: Grad().shadowGrad()),
                   borderRadius: BorderRadius.circular(66),
-                  gradient: Grad.bgLinear.copyWith(
+                  gradient: Grad().bgLinear.copyWith(
                     stops: const [0.0, 1],
                     colors: [const Color(0x55402788), Colors.transparent],
                   ),

@@ -22,7 +22,7 @@ class TitleWithMore extends StatelessWidget {
         GradientText(
           text: title,
           style: titleStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          gradient: Grad.textGradient,
+          gradient: Grad().textGradient,
         ),
         if (showMore)
           ValueListenableBuilder(
@@ -31,7 +31,7 @@ class TitleWithMore extends StatelessWidget {
               decoration: BoxDecoration(
                 color: value ? null : Co.secondary.withAlpha(50),
                 borderRadius: AppConst.defaultBorderRadius,
-                gradient: value ? Grad.hoverGradient : null,
+                gradient: value ? Grad().hoverGradient : null,
                 // boxShadow: value
                 //     ? []
                 //     : [const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0))],

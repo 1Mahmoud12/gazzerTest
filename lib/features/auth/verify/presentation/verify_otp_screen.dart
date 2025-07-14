@@ -106,7 +106,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   GradientText(
                     text: L10n.tr().otpVerification,
                     style: TStyle.mainwBold(32),
-                    gradient: Grad.textGradient,
+                    gradient: Grad().textGradient,
                   ),
                 ],
               ),

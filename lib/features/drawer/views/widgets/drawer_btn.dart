@@ -14,7 +14,7 @@ class DrawerBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(gradient: Grad.bglightLinear, borderRadius: AppConst.defaultBorderRadius),
+      decoration: BoxDecoration(gradient: Grad().bglightLinear, borderRadius: AppConst.defaultBorderRadius),
       child: InkWell(
         onTap: () {
           Scaffold.of(context).closeEndDrawer();

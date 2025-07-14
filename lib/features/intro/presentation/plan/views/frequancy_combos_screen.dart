@@ -54,7 +54,7 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
               child: GradientText(
                 text: "How often would you like to receive your healthy combos?",
                 style: TStyle.blackBold(20),
-                gradient: Grad.textGradient,
+                gradient: Grad().textGradient,
               ),
             ),
             const VerticalSpacing(24),

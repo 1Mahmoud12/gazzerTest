@@ -28,7 +28,7 @@ class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
         DecoratedBox(
           decoration: BoxDecoration(
             border: GradientBoxBorder(
-              gradient: Grad.shadowGrad().copyWith(
+              gradient: Grad().shadowGrad().copyWith(
                 colors: [Colors.black26, Colors.black.withAlpha(0), Colors.black26],
                 stops: [0.0, 0.5, 1.0],
                 begin: Alignment.centerLeft,
@@ -62,7 +62,7 @@ class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
         DecoratedBox(
           decoration: BoxDecoration(
             border: GradientBoxBorder(
-              gradient: Grad.shadowGrad().copyWith(
+              gradient: Grad().shadowGrad().copyWith(
                 colors: [Colors.black26, Colors.black.withAlpha(0), Colors.black26],
                 stops: [0.0, 0.5, 1.0],
                 begin: Alignment.centerLeft,

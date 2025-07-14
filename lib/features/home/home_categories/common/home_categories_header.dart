@@ -40,12 +40,12 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                   width: width * 1.2,
                   height: width,
                   decoration: BoxDecoration(
-                    gradient: Grad.bglightLinear.copyWith(
+                    gradient: Grad().bglightLinear.copyWith(
                       begin: Alignment.centerRight,
                       colors: [Co.buttonGradient, Colors.black.withAlpha(0)],
                     ),
                   ),
-                  // foregroundDecoration: BoxDecoration(gradient: Grad.linearGradient),
+                  // foregroundDecoration: BoxDecoration(gradient: Grad().linearGradient),
                 ),
               ),
             ),

@@ -52,7 +52,7 @@ class _FoodDetailsWidget extends StatelessWidget {
             ],
           ),
           DecoratedBox(
-            decoration: BoxDecoration(border: GradientBoxBorder(gradient: Grad.shadowGrad(), width: 2)),
+            decoration: BoxDecoration(border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2)),
             child: Padding(
               padding: AppConst.defaultPadding,
               child: Text.rich(

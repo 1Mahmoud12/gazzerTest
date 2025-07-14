@@ -11,12 +11,12 @@ class _TopRatedCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 12),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        gradient: Grad.bglightLinear,
+        gradient: Grad().bglightLinear,
         borderRadius: const BorderRadius.only(topRight: Radius.circular(24), bottomLeft: Radius.circular(24)),
       ),
       child: InkWell(
         onTap: () {
-                                  AppNavigator().push(AddFoodToCartScreen(product: product));
+          AppNavigator().push(AddFoodToCartScreen(product: product));
         },
         child: Column(
           children: [

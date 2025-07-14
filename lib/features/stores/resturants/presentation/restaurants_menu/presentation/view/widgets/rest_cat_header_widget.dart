@@ -47,7 +47,7 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
                         clipper: AddShapeClipper(),
                         child: DecoratedBox(
                           decoration: BoxDecoration(
-                            gradient: Grad.bgLinear.copyWith(
+                            gradient: Grad().bgLinear.copyWith(
                               colors: [Co.buttonGradient.withAlpha(200), Co.bg.withAlpha(0)],
                               stops: const [0.0, 1],
                             ),

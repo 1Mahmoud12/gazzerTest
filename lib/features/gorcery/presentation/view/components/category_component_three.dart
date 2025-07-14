@@ -48,7 +48,7 @@ class _VendorCardThree extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         // color: Co.red,
-        border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+        border: GradientBoxBorder(gradient: Grad().shadowGrad()),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(AppConst.defaultRadius),
           bottomRight: Radius.circular(AppConst.defaultRadius),

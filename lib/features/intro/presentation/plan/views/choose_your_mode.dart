@@ -8,8 +8,7 @@ import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, VerticalSpacing;
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
 
@@ -51,7 +50,7 @@ class _ChooseYourModeState extends State<ChooseYourMode> {
           padding: AppConst.defaultHrPadding,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().chooseYourMood + "\n", style: TStyle.blackBold(20), gradient: Grad.textGradient),
+            GradientText(text: L10n.tr().chooseYourMood + "\n", style: TStyle.blackBold(20), gradient: Grad().textGradient),
             const VerticalSpacing(24),
             Column(
               spacing: 16,

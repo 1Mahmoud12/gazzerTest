@@ -5,8 +5,7 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
 
 class CongratsScreen extends StatefulWidget {
   const CongratsScreen({super.key, required this.navigateTo});
@@ -62,9 +61,9 @@ class _CongratsScreenState extends State<CongratsScreen> {
                     GradientText(
                       text: "${L10n.tr().congratulations}!",
                       style: TStyle.blackBold(32),
-                      gradient: Grad.radialGradient,
+                      gradient: Grad().radialGradient,
                     ),
-                    GradientText(text: L10n.tr().youMadeIt, style: TStyle.mainwBold(16), gradient: Grad.radialGradient),
+                    GradientText(text: L10n.tr().youMadeIt, style: TStyle.mainwBold(16), gradient: Grad().radialGradient),
                     const VerticalSpacing(12),
                     OptionBtn(
                       onPressed: () {

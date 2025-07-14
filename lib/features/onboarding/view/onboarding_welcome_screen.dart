@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -64,7 +64,7 @@ class OnboardingFirstScreen extends StatelessWidget {
                                 text: "${L10n.tr().hiIamGazzer}\n${L10n.tr().welcome}",
                                 textAlign: TextAlign.center,
                                 style: TStyle.mainwBold(32),
-                                gradient: Grad.textGradient,
+                                gradient: Grad().textGradient,
                                 shadow: BoxShadow(color: Co.secondary.withAlpha(125), spreadRadius: 0, blurRadius: 2, offset: const Offset(0, 3)),
                               ),
                               Positioned(top: -35, right: -10, child: Image.asset(Assets.assetsPngWave, height: 40, width: 40)),

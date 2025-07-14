@@ -48,7 +48,7 @@ class _VendorCardFour extends StatelessWidget {
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
-                border: GradientBoxBorder(gradient: Grad.shadowGrad()),
+                border: GradientBoxBorder(gradient: Grad().shadowGrad()),
               ),
               child: Image.asset(vendor.image, height: double.infinity, width: double.infinity, fit: BoxFit.cover),
             ),

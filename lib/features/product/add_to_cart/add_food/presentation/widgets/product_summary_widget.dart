@@ -14,7 +14,7 @@ class ProductSummaryWidget extends StatelessWidget {
         Row(
           spacing: 12,
           children: [
-            GradientText(text: product.name.toUpperCase(), style: TStyle.blackBold(20), gradient: Grad.textGradient),
+            GradientText(text: product.name.toUpperCase(), style: TStyle.blackBold(20), gradient: Grad().textGradient),
             const Spacer(),
             Text(L10n.tr().eg, style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
             Text(
