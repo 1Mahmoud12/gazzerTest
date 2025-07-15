@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/main_home/data/home_reponse.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
+import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
@@ -25,7 +25,7 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeDataLoadingState());
     final result = await _repo.getHome();
     switch (result) {
-      case Ok<HomeReponse> success:
+      case Ok<HomeDataModel> success:
         emit(HomeDataSuccessState(homeResponse: success.value));
         break;
       case Err error:

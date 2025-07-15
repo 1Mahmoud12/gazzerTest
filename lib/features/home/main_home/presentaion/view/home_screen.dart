@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
+import 'package:gazzer/core/domain/banner_entity.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
@@ -14,6 +15,7 @@ import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
+import 'package:gazzer/core/presentation/views/components/banners/main_bunner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/adds/image_with_aligned_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
@@ -122,35 +124,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           spacing: 24,
                           children: [
                             const _HomeSearchWidget(),
-                            _HomeCategoriesComponent(state.homeResponse!.categories!.$1),
-
-                            SpikyShapeWidget(
-                              heroTag: Tags.spickyShape,
-                              color: const Color(0xAAB8ABEA),
-                              image: Assets.assetsGifDelivery,
-                              rtChild: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  GradientText(text: L10n.tr().freeDelivery, style: TStyle.blackBold(22), gradient: Grad().radialGradient),
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(text: L10n.tr().earnYourFirst),
-                                        TextSpan(text: " 5 ", style: TStyle.blackBold(17)),
-                                        TextSpan(text: L10n.tr().orders),
-                                      ],
-                                    ),
-                                    style: TStyle.blackBold(15),
-                                  ),
-                                  // GradientText(
-                                  //   text: L10n.tr().earnYourFirst5Orders,
-                                  //   style: TStyle.blackBold(16),
-                                  //   gradient: Grad().radialGradient,
-                                  // ),
-                                  GradientText(text: L10n.tr().free, style: TStyle.blackBold(18).copyWith(letterSpacing: 12), gradient: Grad().radialGradient),
-                                ],
-                              ),
+                            _HomeCategoriesComponent(
+                              data: state.homeResponse?.categories?.$1 ?? [],
+                              banner: state.homeResponse?.categories?.$2,
                             ),
+
                             const _DailyOffersWidget(),
                             const SummerSaleAddWidget(),
                             //

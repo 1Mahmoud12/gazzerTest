@@ -36,12 +36,15 @@ class SectionDTO {
     isActive = json['is_active'];
     banner = json['banner'] != null ? BannerDTO.fromJson(json['banner']) : null;
     data = [];
-    if (json['type'] == 'categories') {
+    if (type == SectionType.categories) {
       for (var item in json['data']) {
         data!.add(CategoryDTO.fromJson(item));
       }
+    } else if (type == SectionType.topVendors) {
+      for (var item in json['data']) {
+        data!.add(VendorDTO.fromJson(item));
+      }
     } else {
-      data = [];
       for (var item in json['data']) {
         data!.add(SectionItemDTO.fromJson(item));
       }

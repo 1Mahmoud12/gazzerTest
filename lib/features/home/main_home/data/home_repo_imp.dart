@@ -1,10 +1,11 @@
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/main_home/data/home_reponse.dart';
+import 'package:gazzer/features/home/main_home/data/home_response.dart';
 import 'package:gazzer/features/home/main_home/data/section_item_dto.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
+import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
 
 class HomeRepoImp extends HomeRepo {
   final ApiClient _apiClient;
@@ -25,11 +26,11 @@ class HomeRepoImp extends HomeRepo {
   }
 
   @override
-  Future<Result<HomeReponse>> getHome() {
-    return super.call<HomeReponse>(
+  Future<Result<HomeDataModel>> getHome() {
+    return super.call<HomeDataModel>(
       apiCall: () => _apiClient.get(endpoint: Endpoints.homePage),
       parser: (response) {
-        return HomeReponse.fromJson(response.data);
+        return HomeResponseDTO.fromJson(response.data).toModel();
       },
     );
   }

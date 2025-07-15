@@ -1,3 +1,5 @@
+import 'package:gazzer/core/domain/banner_entity.dart';
+
 class BannerDTO {
   int? id;
   String? type;
@@ -10,6 +12,7 @@ class BannerDTO {
   String? targetableType;
   String? backgroundColor;
   num? discountPercent;
+  List<String>? images;
   // String? createdAt;
   // List<Null>? timeRemain;
   // int? bannerableId;
@@ -31,12 +34,15 @@ class BannerDTO {
     this.targetableType,
     this.backgroundColor,
     this.discountPercent,
+    this.images,
   });
 
   BannerDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
-    image = json['image'];
+    image = json['image'].toString().contains('"https://gazzer-dev-do.mostafa.cloud/defaults/')
+        ? json['image']
+        : "https://gazzer-dev-do.mostafa.cloud/defaults/${json['image']}";
     title = json['title'];
     subtitle = json['subtitle'];
     isAnimated = json['is_animated'];
@@ -45,6 +51,7 @@ class BannerDTO {
     backgroundColor = json['background_color'];
     discountPercent = json['discount_percent'];
     expiredAt = json['expired_at'];
+    images = json['images'] != null ? List<String>.from(json['images']) : null;
     // createdAt = json['created_at'];
     // bannerableId = json['bannerable_id'];
     // bannerableType = json['bannerable_type'];
@@ -54,5 +61,22 @@ class BannerDTO {
     //     timeRemain!.add(new Null.fromJson(v));
     //   });
     // }
+  }
+
+  BannerEntity toEntity() {
+    return BannerEntity(
+      id: id ?? 0,
+      type: BannerType.fromString(type ?? ''),
+      image: image,
+      title: title,
+      subtitle: subtitle,
+      expiredAt: expiredAt,
+      isAnimated: isAnimated,
+      targetableId: targetableId,
+      targetableType: targetableType,
+      backgroundColor: backgroundColor,
+      discountPercent: discountPercent,
+      images: images,
+    );
   }
 }

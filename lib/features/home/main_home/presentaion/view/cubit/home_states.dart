@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/features/home/main_home/data/home_reponse.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
+import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
 
 sealed class HomeStates {}
 
@@ -27,7 +27,7 @@ final class CategoryErrorState extends CategoryStates {
 
 /// Home states
 sealed class HomeDataStates extends HomeStates {
-  final HomeReponse? homeResponse;
+  final HomeDataModel? homeResponse;
   HomeDataStates({this.homeResponse});
 }
 

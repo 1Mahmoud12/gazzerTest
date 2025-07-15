@@ -1,8 +1,9 @@
 part of '../home_screen.dart';
 
 class _HomeCategoriesComponent extends StatelessWidget {
-  const _HomeCategoriesComponent(this.categories);
-  final List<CategoryEntity> categories;
+  const _HomeCategoriesComponent({required this.data, required this.banner});
+  final List<CategoryEntity> data;
+  final BannerEntity? banner;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,11 +24,12 @@ class _HomeCategoriesComponent extends StatelessWidget {
             crossAxisSpacing: 18,
             mainAxisExtent: 117,
           ),
-          itemCount: categories.length,
+          itemCount: data.length,
           itemBuilder: (context, index) {
-            return CategoryCard(category: categories[index]);
+            return CategoryCard(category: data[index]);
           },
         ),
+        if (banner != null) MainBannerWidget(banner: banner!),
       ],
     );
   }

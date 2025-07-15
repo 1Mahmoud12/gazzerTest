@@ -15,9 +15,9 @@ class PlateDTO extends StoreItemDTO {
   String? otherVariant;
   String? addons;
   String? size;
-  String? price;
-  String? rate;
-  String? appPrice;
+  double? price;
+  double? rate;
+  double? appPrice;
 
   PlateDTO({
     this.id,
@@ -42,9 +42,9 @@ class PlateDTO extends StoreItemDTO {
     otherVariant = json['OtherVariant'];
     addons = json['addons'];
     size = json['size'];
-    price = json['price'];
-    rate = json['rate'];
-    appPrice = json['app_price'];
+    price = double.tryParse(json['price'].toString());
+    rate = double.tryParse(json['rate'].toString());
+    appPrice = double.tryParse(json['app_price'].toString());
   }
 
   @override
