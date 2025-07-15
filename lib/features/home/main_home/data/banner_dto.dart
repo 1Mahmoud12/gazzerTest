@@ -40,9 +40,7 @@ class BannerDTO {
   BannerDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
-    image = json['image'].toString().contains('"https://gazzer-dev-do.mostafa.cloud/defaults/')
-        ? json['image']
-        : "https://gazzer-dev-do.mostafa.cloud/defaults/${json['image']}";
+    image = json['image'].toString().contains('http') ? json['image'] : "https://gazzer-dev-do.mostafa.cloud/defaults/${json['image']}";
     title = json['title'];
     subtitle = json['subtitle'];
     isAnimated = json['is_animated'];

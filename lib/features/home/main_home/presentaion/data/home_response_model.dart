@@ -4,12 +4,22 @@ import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 class HomeDataModel {
-  late final (List<CategoryEntity>, BannerEntity?)? categories;
-  late final (List<ProductItemEntity?>, BannerEntity?)? dailyOffers;
-  late final (List<ProductItemEntity?>, BannerEntity?)? suggested;
-  late final (List<ProductItemEntity?>, BannerEntity?)? topItems;
-  late final (List<VendorEntity?>, BannerEntity?)? topVendors;
-  late final (List<ProductItemEntity?>, BannerEntity?)? bestPopular;
+  late final List<CategoryEntity>? categories;
+  late final BannerEntity? categoriesBanner;
+  late final List<ProductItemEntity?>? dailyOffers;
+  late final BannerEntity? dailyOffersBanner;
+
+  late final List<ProductItemEntity?>? suggested;
+  late final BannerEntity? suggestedBanner;
+
+  late final List<ProductItemEntity?>? topItems;
+  late final BannerEntity? topItemsBanner;
+
+  late final List<VendorEntity?>? topVendors;
+  late final BannerEntity? topVendorsBanner;
+
+  late final List<ProductItemEntity?>? bestPopular;
+  late final BannerEntity? bestPopularBanner;
 
   HomeDataModel({
     required this.categories,
@@ -18,5 +28,11 @@ class HomeDataModel {
     required this.topItems,
     required this.topVendors,
     required this.bestPopular,
+    this.categoriesBanner,
+    this.dailyOffersBanner,
+    this.suggestedBanner,
+    this.topItemsBanner,
+    this.topVendorsBanner,
+    this.bestPopularBanner,
   });
 }

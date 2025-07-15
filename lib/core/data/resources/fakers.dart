@@ -3,13 +3,12 @@ import 'dart:math';
 import 'package:gazzer/core/domain/cart/cart_item_model.dart';
 import 'package:gazzer/core/domain/cart/vendor_products_model.dart';
 import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
-import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/domain/address_entity.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
@@ -26,6 +25,11 @@ class Fakers {
     Assets.assetsPngFood5,
   ];
 
+  final netWorkImage =
+      "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
+  final netWorkPRoductImage =
+      "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
+
   static final _catsImages = [
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
@@ -37,13 +41,16 @@ class Fakers {
   static final _random = Random();
   static final fakeProds = List.generate(
     10,
-    (index) => ProductModel(
+    (index) => PlateEntity(
       id: index,
       name: "منتج $index",
       description: "وصف $index",
       price: _random.nextDouble() * 100,
       rate: _random.nextDouble() * 5,
       image: _prodImages[_random.nextInt(_prodImages.length)],
+      categoryPlateId: _random.nextInt(5),
+      options: [],
+      priceBeforeDiscount: _random.nextDouble() * 110,
     ),
   );
 

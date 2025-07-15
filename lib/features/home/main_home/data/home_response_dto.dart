@@ -1,6 +1,6 @@
 import 'package:gazzer/features/home/main_home/data/banner_dto.dart';
+import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
 import 'package:gazzer/features/home/main_home/data/section_dto.dart';
-import 'package:gazzer/features/home/main_home/data/section_item_dto.dart';
 import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
 
 class HomeResponseDTO {
@@ -54,12 +54,18 @@ class HomeResponseDTO {
 
   HomeDataModel toModel() {
     return HomeDataModel(
-      categories: categories == null ? null : (categories!.$1.map((e) => e.toCategoryEntity()).toList(), categories!.$2?.toEntity()),
-      dailyOffers: dailyOffers == null ? null : (dailyOffers!.$1.map((e) => e?.toEntity()).toList(), dailyOffers!.$2?.toEntity()),
-      suggested: suggested == null ? null : (suggested!.$1.map((e) => e?.toEntity()).toList(), suggested!.$2?.toEntity()),
-      topItems: topItems == null ? null : (topItems!.$1.map((e) => e?.toEntity()).toList(), topItems!.$2?.toEntity()),
-      topVendors: topVendors == null ? null : (topVendors!.$1.map((e) => e?.toEntity()).toList(), topVendors!.$2?.toEntity()),
-      bestPopular: bestPopular == null ? null : (bestPopular!.$1.map((e) => e?.toEntity()).toList(), bestPopular!.$2?.toEntity()),
+      categories: categories!.$1.map((e) => e.toCategoryEntity()).toList(),
+      categoriesBanner: categories!.$2?.toEntity(),
+      dailyOffers: dailyOffers!.$1.map((e) => e?.toEntity()).toList(),
+      dailyOffersBanner: dailyOffers!.$2?.toEntity(),
+      suggested: suggested!.$1.map((e) => e?.toEntity()).toList(),
+      suggestedBanner: suggested!.$2?.toEntity(),
+      topItems: topItems!.$1.map((e) => e?.toEntity()).toList(),
+      topItemsBanner: topItems!.$2?.toEntity(),
+      topVendors: topVendors!.$1.map((e) => e?.toEntity()).toList(),
+      topVendorsBanner: topVendors!.$2?.toEntity(),
+      bestPopular: bestPopular!.$1.map((e) => e?.toEntity()).toList(),
+      bestPopularBanner: bestPopular!.$2?.toEntity(),
     );
   }
 }

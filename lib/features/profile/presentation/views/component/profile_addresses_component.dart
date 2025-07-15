@@ -11,9 +11,9 @@ class _ProfileAddressesComponent extends StatelessWidget {
       children: [
         Text(
           L10n.tr().addresses,
-          style: TStyle.whiteBold(16),
+          style: TStyle.primaryBold(16),
         ),
-        const Divider(height: 15, thickness: 1, color: Colors.white38),
+        Divider(height: 15, thickness: 1, color: Co.purple.withAlpha(90)),
         ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 300),
           child: Scrollbar(

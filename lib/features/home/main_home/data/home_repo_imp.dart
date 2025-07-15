@@ -1,8 +1,8 @@
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/main_home/data/home_response.dart';
-import 'package:gazzer/features/home/main_home/data/section_item_dto.dart';
+import 'package:gazzer/features/home/main_home/data/home_response_dto.dart';
+import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';

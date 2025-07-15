@@ -13,6 +13,7 @@ import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/drawer/views/widgets/drawer_btn.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({super.key});
@@ -50,7 +51,13 @@ class _MainDrawerState extends State<MainDrawer> {
       (L10n.tr().myOrders, Assets.assetsSvgHistory, (BuildContext ctx) {}),
       (L10n.tr().language, Assets.assetsSvgLanguage, (BuildContext ctx) {}),
       (L10n.tr().gazzerChat, Assets.assetsSvgChat, (BuildContext ctx) {}),
-      (L10n.tr().communityApp, Assets.assetsSvgCommunity, (BuildContext ctx) {}),
+      (
+        L10n.tr().myProfile,
+        Assets.assetsSvgCommunity,
+        (BuildContext ctx) {
+          AppNavigator().push(const ProfileScreen(), useLast: true);
+        },
+      ),
       (L10n.tr().paymentSetting, Assets.assetsSvgPaymentSettings, (BuildContext ctx) {}),
       (L10n.tr().termsAndConditions, Assets.assetsSvgTerms, (BuildContext ctx) {}),
     ];

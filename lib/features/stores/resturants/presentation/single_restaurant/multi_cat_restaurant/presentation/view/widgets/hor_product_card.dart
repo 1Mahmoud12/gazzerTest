@@ -2,7 +2,7 @@ part of '../multi_cat_restaurant_screen.dart';
 
 class _HorProductCard extends StatelessWidget {
   const _HorProductCard({required this.prod});
-  final ProductModel prod;
+  final ProductItemEntity prod;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

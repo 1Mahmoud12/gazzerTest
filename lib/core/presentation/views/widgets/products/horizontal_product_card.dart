@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/extensions/alignment.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show HorizontalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 class HorizontalProductCard extends StatelessWidget {
   const HorizontalProductCard({super.key, required this.product});
-  final ProductModel product;
+  final ProductItemEntity product;
   @override
   Widget build(BuildContext context) {
-    final height = 115.0;
+    final height = 135.0;
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 600, maxHeight: height),
       child: InkWell(
@@ -56,18 +56,26 @@ class HorizontalProductCard extends StatelessWidget {
                             padding: AppConst.defaultPadding,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Column(
-                                  spacing: 4,
-                                  children: [
-                                    GradientText(
-                                      text: product.name,
-                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                      gradient: Grad().radialGradient,
+                                Flexible(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: product.name,
+                                        ),
+                                        const TextSpan(text: '\n'),
+                                        TextSpan(
+                                          text: product.description,
+                                          style: TStyle.blackRegular(12),
+                                        ),
+                                      ],
+                                      style: TStyle.primaryBold(16),
                                     ),
-                                    Text(product.description, style: TStyle.blackRegular(12), overflow: TextOverflow.ellipsis, maxLines: 2),
-                                  ],
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                                 AppRatingWidget(product.rate.toStringAsFixed(1), ignoreGesture: true, itemSize: 16),
                               ],

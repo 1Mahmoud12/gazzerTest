@@ -171,9 +171,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get earnYourFirst5OrdersForFree => 'Earn Your First 5 Orders For Free';
 
   @override
-  String get testTest => 'Test Test';
-
-  @override
   String get restaurants_________________End => '__________________';
 
   @override
@@ -235,6 +232,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home_________________Start => '__________________';
 
   @override
+  String get bestPopular => 'Best Popular';
+
+  @override
   String get home => 'Home';
 
   @override
@@ -244,59 +244,56 @@ class AppLocalizationsEn extends AppLocalizations {
   String get favorites => 'Favorites';
 
   @override
-  String get cuisine => 'Cuisone';
-
-  @override
-  String get exploreCuisines => 'explore Cuisines';
+  String get topVendors => 'Top Vendors';
 
   @override
   String get megaSummerSale => 'Mega Summer\nSale';
 
   @override
-  String get freeDelivery => 'free Delivery';
+  String get freeDelivery => 'Free Delivery';
 
   @override
   String get searchForStoresItemsAndCAtegories =>
-      'search For Stores Items And Categories';
+      'Search For Stores Items And Categories';
 
   @override
   String get categories => 'Categories';
 
   @override
-  String get explore => 'explore';
+  String get explore => 'Explore';
 
   @override
-  String get checkYourCart => 'check Your Cart';
+  String get checkYourCart => 'Check Your Cart';
 
   @override
-  String get earnYourFirst => 'earn Your First';
+  String get earnYourFirst => 'Earn Your First';
 
   @override
-  String get orders => 'orders';
+  String get orders => 'Orders';
 
   @override
-  String get earnYourFirst5Orders => 'earn Your First 5 Orders';
+  String get earnYourFirst5Orders => 'Earn Your First 5 Orders';
 
   @override
-  String get free => 'free';
+  String get free => 'Free';
 
   @override
-  String get topRated => 'top Rated';
+  String get topRated => 'Top Rated';
 
   @override
-  String get orderWheneverYouAre => 'order Whenever You Are';
+  String get orderWheneverYouAre => 'Order Whenever You Are';
 
   @override
-  String get contactUs => 'contact Us';
+  String get contactUs => 'Contact Us';
 
   @override
-  String get chooseYourCategories => 'choose Your Categories';
+  String get chooseYourCategories => 'Choose Your Categories';
 
   @override
-  String get gazzerVideoTourGuide => 'gazzer Video Tour Guide';
+  String get gazzerVideoTourGuide => 'Gazzer Video Tour Guide';
 
   @override
-  String get deliverTo => 'deliver To';
+  String get deliverTo => 'Deliver To';
 
   @override
   String get retry => 'Retry';
@@ -311,25 +308,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get total => 'TOTAL';
 
   @override
-  String get deliveryFee => 'delivery_Fee';
+  String get deliveryFee => 'Delivery Fee';
 
   @override
-  String get totalAmount => 'total Amount';
+  String get totalAmount => 'Total Amount';
 
   @override
-  String get addItems => 'add Items';
+  String get addItems => 'Add Items';
 
   @override
-  String get checkout => 'checkout';
+  String get checkout => 'Checkout';
 
   @override
-  String get shippingCart => 'shipping Cart';
+  String get shippingCart => 'Shipping Cart';
 
   @override
-  String get orderSummary => 'order Summary';
+  String get orderSummary => 'Order Summary';
 
   @override
-  String get confirmOrder => 'confirm Order';
+  String get confirmOrder => 'Confirm Order';
 
   @override
   String get cart_________________End => '__________________';
@@ -371,16 +368,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get secs => 'secs';
 
   @override
-  String get onAllGrills => 'on All Grills';
+  String get onAllGrills => 'On All Grills';
 
   @override
-  String get dealsStarts27May => 'deals Starts 27 May';
+  String get dealsStarts27May => 'Deals Starts 27 May';
 
   @override
-  String get orderNow => 'order Now';
+  String get orderNow => 'Order Now';
 
   @override
-  String get viewAll => 'view All';
+  String get viewAll => 'View All';
 
   @override
   String get core_________________End => '__________________';
@@ -389,40 +386,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mainScreens_________________Start => '__________________';
 
   @override
-  String get deliveredOn => 'delivered On';
+  String get deliveredOn => 'Delivered On';
 
   @override
-  String get recentRestaurants => 'recent Restaurants';
+  String get recentRestaurants => 'Recent Restaurants';
 
   @override
-  String get recentGroceries => 'recent Groceries';
+  String get recentGroceries => 'Recent Groceries';
 
   @override
-  String get recentPharmacies => 'recent Pharmacies';
+  String get recentPharmacies => 'Recent Pharmacies';
 
   @override
-  String get recentSearches => 'recent Searches';
+  String get recentSearches => 'Recent Searches';
 
   @override
-  String get clear => 'clear';
+  String get clear => 'Clear';
 
   @override
-  String get gazzerApp => 'gazzer App';
+  String get gazzerApp => 'Gazzer App';
 
   @override
-  String get freshFruits => 'fresh Fruits';
+  String get freshFruits => 'Fresh Fruits';
 
   @override
-  String get dailyOffersForYou => 'daily Offers For You';
+  String get dailyOffersForYou => 'Daily Offers For You';
 
   @override
-  String get suggestedForYou => 'suggested For You';
+  String get suggestedForYou => 'Suggested For You';
 
   @override
-  String get gotIt => 'got It';
+  String get gotIt => 'Got It';
 
   @override
-  String get sideMenuSetting => 'side Menu Setting';
+  String get sideMenuSetting => 'Side Menu Setting';
 
   @override
   String get mainScreens_________________End => '__________________';
@@ -455,7 +452,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gazzerChat => 'Gazzer Chat';
 
   @override
-  String get communityApp => 'Community App';
+  String get myProfile => 'My Profile';
 
   @override
   String get paymentSetting => 'Payment Setting';

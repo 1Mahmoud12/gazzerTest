@@ -2,7 +2,7 @@ part of '../multi_cat_restaurant_screen.dart';
 
 class _TopRatedCard extends StatelessWidget {
   const _TopRatedCard(this.product);
-  final ProductModel product;
+  final ProductItemEntity product;
 
   @override
   Widget build(BuildContext context) {

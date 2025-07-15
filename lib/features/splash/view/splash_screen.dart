@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +16,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   late final AnimationController contoller;
   late final AnimationController textController;
 
-  _startAnimate() async {
+  bool isAuth = false;
+  Future<void> _startAnimate() async {
+    await Future.delayed(Durations.extralong4);
     if (mounted) contoller.forward();
     await Future.delayed(const Duration(seconds: 1), () {
       if (mounted) contoller.animateBack(0.0);
@@ -26,22 +26,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     await Future.delayed(const Duration(seconds: 1), () {
       if (mounted) textController.forward();
     });
-    await Future.delayed(const Duration(milliseconds: 1500), () {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          AppTransitions().slideTransition(
-            const IntroVideoTutorialScreen(videoLink: ''),
-          ),
-        );
-      }
-    });
+    await Future.delayed(const Duration(milliseconds: 1500), () {});
   }
 
   @override
   void initState() {
     contoller = AnimationController(vsync: this, duration: Durations.medium4);
     textController = AnimationController(vsync: this, duration: Durations.short4);
-    Future.delayed(const Duration(seconds: 2), () => _startAnimate());
+    _startAnimate();
     super.initState();
   }
 

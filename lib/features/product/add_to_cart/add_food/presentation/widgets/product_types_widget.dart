@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -8,11 +7,12 @@ import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 class ProductTypesWidget extends StatefulWidget {
   const ProductTypesWidget({super.key, required this.product});
 
-  final ProductModel product;
+  final ProductItemEntity product;
 
   @override
   State<ProductTypesWidget> createState() => _ProductTypesWidgetState();

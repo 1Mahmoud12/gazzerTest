@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
 
 /// Base class for all error types in the application.
 abstract class BaseError {
@@ -35,7 +34,11 @@ class ApiError extends BaseError {
       message = _errors!.join(", ");
     } else {
       isSingle = true;
-      message = json['message'] ?? L10n.tr().somethingWentWrong;
+      message = (json['message'].toString().length < 60) ? json['message'] : '${json['message'].toString().substring(0, 60)}...';
     }
   }
+}
+
+class ExpireTokeError extends BaseError {
+  ExpireTokeError({super.message = 'Token has expired, please login again.'});
 }

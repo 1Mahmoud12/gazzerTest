@@ -1,13 +1,19 @@
-part of '../multi_cat_restaurant_screen.dart';
+import 'dart:async';
 
-class DailyDealsAdd extends StatefulWidget {
-  const DailyDealsAdd({super.key});
+import 'package:flutter/material.dart';
+import 'package:gazzer/core/domain/banner_entity.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/views/widgets/animations/slide_timer.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
+class CountDownBanner extends StatefulWidget {
+  const CountDownBanner({super.key, required this.banner});
+  final BannerEntity banner;
   @override
-  State<DailyDealsAdd> createState() => _DailyDealsAddState();
+  State<CountDownBanner> createState() => _CountDownBannerState();
 }
 
-class _DailyDealsAddState extends State<DailyDealsAdd> with SingleTickerProviderStateMixin {
+class _CountDownBannerState extends State<CountDownBanner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late final Timer _timer;
   final animationduration = const Duration(milliseconds: 500);
@@ -49,7 +55,7 @@ class _DailyDealsAddState extends State<DailyDealsAdd> with SingleTickerProvider
             child: RotationTransition(
               alignment: Alignment.topCenter,
               turns: Tween<double>(begin: 0, end: -0.015).animate(_controller),
-              child: Image.asset(Assets.assetsPngShawerma, fit: BoxFit.cover, height: 120),
+              child: CustomNetworkImage(widget.banner.image ?? '', fit: BoxFit.cover, height: 120),
             ),
           ),
           Align(

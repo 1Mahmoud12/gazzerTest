@@ -1,17 +1,17 @@
 part of 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 class ProductEntity extends ProductItemEntity {
-  final int id;
+  ///
   final int? storeId;
-  final String name;
-  final String? description;
-  final double price;
 
   ProductEntity({
-    required this.id,
-    required this.storeId,
-    required this.name,
-    this.description,
-    required this.price,
+    required super.id,
+    required super.name,
+    required super.description,
+    required super.price,
+    required super.image,
+    super.priceBeforeDiscount,
+    this.storeId,
+    required super.rate,
   });
 }

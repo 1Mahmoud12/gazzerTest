@@ -18,7 +18,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Navigator.canPop(context)
           ? IconButton(
               onPressed: () => Navigator.maybePop(context),
-              icon: Icon(Icons.arrow_back_ios, color: bacButtonColor),
+              icon: Icon(Icons.arrow_back_ios, color: bacButtonColor ?? Co.purple),
             )
           : null,
       leadingWidth: 65,

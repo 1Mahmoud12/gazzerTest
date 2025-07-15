@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -14,12 +11,12 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/circular_carousal_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/overlaping_cards_slider.dart';
-import 'package:gazzer/core/presentation/views/widgets/animations/slide_timer.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/image_in_nested_circles.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
@@ -27,7 +24,6 @@ import 'package:gazzer/features/stores/resturants/presentation/single_restaurant
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/grid_prod_card.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
 
-part 'component/daily_deals_add.dart';
 part 'component/top_rated_coponent.dart';
 // part 'component/top_rated_component.dart';
 part 'widgets/hor_product_card.dart';
@@ -69,8 +65,8 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
           itemBuilder: (_, index) => _VertProductCard(prod: Fakers.fakeProds[index]),
         ),
       ),
-      const DailyDealsAdd(),
 
+      // const CountDownBanner(),
       SizedBox(
         height: 140,
         child: ListView.separated(

@@ -11,9 +11,9 @@ import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_switcher.dart';
+import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/profile/presentation/model/address_model.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/language_drop_list.dart';
@@ -32,26 +32,40 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late final ClientEntity? client;
+
+  @override
+  void initState() {
+    client = Session().client;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DoubledDecoratedWidget(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: const MainAppBar(showLanguage: false, showCart: false, iconsColor: Co.secondary, bacButtonColor: Co.secondary),
-        body: BlocBuilder<AppSettingsCubit, AppSettingsState>(
+    return Scaffold(
+      appBar: const MainAppBar(
+        showLanguage: false,
+        showCart: false,
+      ),
+      body: SafeArea(
+        child: BlocBuilder<AppSettingsCubit, AppSettingsState>(
           buildWhen: (previous, current) => previous.lang != current.lang || previous.isDarkMode != current.isDarkMode,
-          builder: (context, state) => ListView(
-            padding: AppConst.defaultPadding,
-            children: [
-              _ProfileHeaderWidget(),
-              const VerticalSpacing(32),
-              _AccountInformationComponent(),
-              const VerticalSpacing(32),
-              _ProfileAddressesComponent(),
-              const VerticalSpacing(32),
-              _SettingsPreferenceComponent(),
-            ],
-          ),
+          builder: (context, state) {
+            return ListView(
+              padding: AppConst.defaultPadding,
+              children: [
+                if (client != null) ...[
+                  _ProfileHeaderWidget(),
+                  const VerticalSpacing(32),
+                  _AccountInformationComponent(),
+                  const VerticalSpacing(32),
+                  _ProfileAddressesComponent(),
+                  const VerticalSpacing(32),
+                ],
+                _SettingsPreferenceComponent(client),
+              ],
+            );
+          },
         ),
       ),
     );

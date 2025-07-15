@@ -1,36 +1,38 @@
 part of '../home_screen.dart';
 
 class _HomeCategoriesComponent extends StatelessWidget {
-  const _HomeCategoriesComponent({required this.data, required this.banner});
-  final List<CategoryEntity> data;
-  final BannerEntity? banner;
+  const _HomeCategoriesComponent({required this.items});
+  final List<CategoryEntity> items;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 12,
-      children: [
-        Text(
-          L10n.tr().categories,
-          style: TStyle.primaryBold(16),
-        ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
-        GridView.builder(
-          padding: const EdgeInsets.all(0),
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 77,
-            mainAxisSpacing: 18,
-            crossAxisSpacing: 18,
-            mainAxisExtent: 117,
+    if (items.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: AppConst.defaultHrPadding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 12,
+        children: [
+          Text(
+            L10n.tr().categories,
+            style: TStyle.primaryBold(16),
+          ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
+          GridView.builder(
+            padding: AppConst.defaultHrPadding,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 77,
+              mainAxisSpacing: 18,
+              crossAxisSpacing: 18,
+              mainAxisExtent: 117,
+            ),
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return CategoryCard(category: items[index]);
+            },
           ),
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            return CategoryCard(category: data[index]);
-          },
-        ),
-        if (banner != null) MainBannerWidget(banner: banner!),
-      ],
+        ],
+      ),
     );
   }
 }

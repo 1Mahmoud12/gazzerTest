@@ -1,30 +1,37 @@
 part of "../home_screen.dart";
 
 class _HomeSuggestedProductsWidget extends StatelessWidget {
-  const _HomeSuggestedProductsWidget();
-
+  const _HomeSuggestedProductsWidget({required this.items});
+  final List<ProductItemEntity?> items;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 12,
-      children: [
-        TitleWithMore(
-          title: L10n.tr().suggestedForYou,
-          onPressed: () {
-            Navigator.of(context).push(AppTransitions().slideTransition(const SuggestedScreen()));
-          },
-        ),
-        ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          itemCount: 4,
-          separatorBuilder: (context, index) => const VerticalSpacing(12),
-          itemBuilder: (context, index) {
-            return HorizontalProductCard(product: Fakers.fakeProds[index]);
-          },
-        ),
-      ],
+    if (items.isEmpty) return const SizedBox.shrink();
+
+    return Padding(
+      padding: AppConst.defaultHrPadding,
+      child: Column(
+        spacing: 12,
+        children: [
+          TitleWithMore(
+            title: L10n.tr().suggestedForYou,
+            onPressed: () {
+              Navigator.of(context).push(AppTransitions().slideTransition(const SuggestedScreen()));
+            },
+          ),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemCount: items.length > 4 ? 4 : items.length,
+            separatorBuilder: (context, index) => const VerticalSpacing(12),
+            itemBuilder: (context, index) {
+              if (items[index] == null) return const SizedBox.shrink();
+
+              return HorizontalProductCard(product: items[index]!);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

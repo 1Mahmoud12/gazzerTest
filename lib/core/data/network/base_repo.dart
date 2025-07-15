@@ -33,7 +33,7 @@ abstract class BaseApiRepo {
       return Result.ok(parser(result));
     } catch (e, stack) {
       /// Either the api call failed or the parser function threw an exception.
-      return Err(_handle(e, stack));
+      return Err(isTokenExpired(e) ?? _handle(e, stack));
     }
   }
 
@@ -41,7 +41,7 @@ abstract class BaseApiRepo {
   ///
   /// Error is resulted from either the [apiCall]  which is going to be a [DioException]
   /// or the [parser] function which is going to be an [Exception].
-  ApiError _handle(Object error, StackTrace? stack) {
+  BaseError _handle(Object error, StackTrace? stack) {
     ApiError apiError = ApiError(message: error.toString());
     try {
       if (error is! DioException) {
@@ -91,11 +91,12 @@ abstract class BaseApiRepo {
     }
   }
 
-  // Result<T> parse<T>(T Function() parser) {
-  //   try {
-  //     return Result.ok(parser());
-  //   } catch (e) {
-  //     return Error(_handle(e));
-  //   }
-  // }
+  /// Checks if the error is a DioException with status code 498, which indicates an expired token.
+  //  TODO: implenet logic te refresh token in this case
+  ExpireTokeError? isTokenExpired(Object error) {
+    if (error is DioException && error.response?.statusCode == 498) {
+      return ExpireTokeError();
+    }
+    return null;
+  }
 }

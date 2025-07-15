@@ -171,9 +171,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get earnYourFirst5OrdersForFree => 'احصل على أول 5 طلبات مجاناً';
 
   @override
-  String get testTest => 'اختبار';
-
-  @override
   String get restaurants_________________End => '__________________';
 
   @override
@@ -234,6 +231,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get home_________________Start => '__________________';
 
   @override
+  String get bestPopular => 'الأفضل والأكثر شعبية';
+
+  @override
   String get home => 'الرئيسية';
 
   @override
@@ -243,10 +243,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get favorites => 'المفضلة';
 
   @override
-  String get cuisine => 'المأكولات';
-
-  @override
-  String get exploreCuisines => 'استكشف المأكولات';
+  String get topVendors => 'أفضل البائعين';
 
   @override
   String get megaSummerSale => 'تخفيضات الصيف\nالكبرى';
@@ -454,7 +451,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get gazzerChat => 'دردشة جزر';
 
   @override
-  String get communityApp => 'تطبيق المجتمع';
+  String get myProfile => 'الملف الشخصي';
 
   @override
   String get paymentSetting => 'إعدادات الدفع';

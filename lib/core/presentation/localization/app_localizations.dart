@@ -422,12 +422,6 @@ abstract class AppLocalizations {
   /// **'Earn Your First 5 Orders For Free'**
   String get earnYourFirst5OrdersForFree;
 
-  /// No description provided for @testTest.
-  ///
-  /// In en, this message translates to:
-  /// **'Test Test'**
-  String get testTest;
-
   /// No description provided for @restaurants_________________End.
   ///
   /// In en, this message translates to:
@@ -548,6 +542,12 @@ abstract class AppLocalizations {
   /// **'__________________'**
   String get home_________________Start;
 
+  /// No description provided for @bestPopular.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Popular'**
+  String get bestPopular;
+
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
@@ -566,17 +566,11 @@ abstract class AppLocalizations {
   /// **'Favorites'**
   String get favorites;
 
-  /// No description provided for @cuisine.
+  /// No description provided for @topVendors.
   ///
   /// In en, this message translates to:
-  /// **'Cuisone'**
-  String get cuisine;
-
-  /// No description provided for @exploreCuisines.
-  ///
-  /// In en, this message translates to:
-  /// **'explore Cuisines'**
-  String get exploreCuisines;
+  /// **'Top Vendors'**
+  String get topVendors;
 
   /// No description provided for @megaSummerSale.
   ///
@@ -587,13 +581,13 @@ abstract class AppLocalizations {
   /// No description provided for @freeDelivery.
   ///
   /// In en, this message translates to:
-  /// **'free Delivery'**
+  /// **'Free Delivery'**
   String get freeDelivery;
 
   /// No description provided for @searchForStoresItemsAndCAtegories.
   ///
   /// In en, this message translates to:
-  /// **'search For Stores Items And Categories'**
+  /// **'Search For Stores Items And Categories'**
   String get searchForStoresItemsAndCAtegories;
 
   /// No description provided for @categories.
@@ -605,73 +599,73 @@ abstract class AppLocalizations {
   /// No description provided for @explore.
   ///
   /// In en, this message translates to:
-  /// **'explore'**
+  /// **'Explore'**
   String get explore;
 
   /// No description provided for @checkYourCart.
   ///
   /// In en, this message translates to:
-  /// **'check Your Cart'**
+  /// **'Check Your Cart'**
   String get checkYourCart;
 
   /// No description provided for @earnYourFirst.
   ///
   /// In en, this message translates to:
-  /// **'earn Your First'**
+  /// **'Earn Your First'**
   String get earnYourFirst;
 
   /// No description provided for @orders.
   ///
   /// In en, this message translates to:
-  /// **'orders'**
+  /// **'Orders'**
   String get orders;
 
   /// No description provided for @earnYourFirst5Orders.
   ///
   /// In en, this message translates to:
-  /// **'earn Your First 5 Orders'**
+  /// **'Earn Your First 5 Orders'**
   String get earnYourFirst5Orders;
 
   /// No description provided for @free.
   ///
   /// In en, this message translates to:
-  /// **'free'**
+  /// **'Free'**
   String get free;
 
   /// No description provided for @topRated.
   ///
   /// In en, this message translates to:
-  /// **'top Rated'**
+  /// **'Top Rated'**
   String get topRated;
 
   /// No description provided for @orderWheneverYouAre.
   ///
   /// In en, this message translates to:
-  /// **'order Whenever You Are'**
+  /// **'Order Whenever You Are'**
   String get orderWheneverYouAre;
 
   /// No description provided for @contactUs.
   ///
   /// In en, this message translates to:
-  /// **'contact Us'**
+  /// **'Contact Us'**
   String get contactUs;
 
   /// No description provided for @chooseYourCategories.
   ///
   /// In en, this message translates to:
-  /// **'choose Your Categories'**
+  /// **'Choose Your Categories'**
   String get chooseYourCategories;
 
   /// No description provided for @gazzerVideoTourGuide.
   ///
   /// In en, this message translates to:
-  /// **'gazzer Video Tour Guide'**
+  /// **'Gazzer Video Tour Guide'**
   String get gazzerVideoTourGuide;
 
   /// No description provided for @deliverTo.
   ///
   /// In en, this message translates to:
-  /// **'deliver To'**
+  /// **'Deliver To'**
   String get deliverTo;
 
   /// No description provided for @retry.
@@ -701,43 +695,43 @@ abstract class AppLocalizations {
   /// No description provided for @deliveryFee.
   ///
   /// In en, this message translates to:
-  /// **'delivery_Fee'**
+  /// **'Delivery Fee'**
   String get deliveryFee;
 
   /// No description provided for @totalAmount.
   ///
   /// In en, this message translates to:
-  /// **'total Amount'**
+  /// **'Total Amount'**
   String get totalAmount;
 
   /// No description provided for @addItems.
   ///
   /// In en, this message translates to:
-  /// **'add Items'**
+  /// **'Add Items'**
   String get addItems;
 
   /// No description provided for @checkout.
   ///
   /// In en, this message translates to:
-  /// **'checkout'**
+  /// **'Checkout'**
   String get checkout;
 
   /// No description provided for @shippingCart.
   ///
   /// In en, this message translates to:
-  /// **'shipping Cart'**
+  /// **'Shipping Cart'**
   String get shippingCart;
 
   /// No description provided for @orderSummary.
   ///
   /// In en, this message translates to:
-  /// **'order Summary'**
+  /// **'Order Summary'**
   String get orderSummary;
 
   /// No description provided for @confirmOrder.
   ///
   /// In en, this message translates to:
-  /// **'confirm Order'**
+  /// **'Confirm Order'**
   String get confirmOrder;
 
   /// No description provided for @cart_________________End.
@@ -821,25 +815,25 @@ abstract class AppLocalizations {
   /// No description provided for @onAllGrills.
   ///
   /// In en, this message translates to:
-  /// **'on All Grills'**
+  /// **'On All Grills'**
   String get onAllGrills;
 
   /// No description provided for @dealsStarts27May.
   ///
   /// In en, this message translates to:
-  /// **'deals Starts 27 May'**
+  /// **'Deals Starts 27 May'**
   String get dealsStarts27May;
 
   /// No description provided for @orderNow.
   ///
   /// In en, this message translates to:
-  /// **'order Now'**
+  /// **'Order Now'**
   String get orderNow;
 
   /// No description provided for @viewAll.
   ///
   /// In en, this message translates to:
-  /// **'view All'**
+  /// **'View All'**
   String get viewAll;
 
   /// No description provided for @core_________________End.
@@ -857,73 +851,73 @@ abstract class AppLocalizations {
   /// No description provided for @deliveredOn.
   ///
   /// In en, this message translates to:
-  /// **'delivered On'**
+  /// **'Delivered On'**
   String get deliveredOn;
 
   /// No description provided for @recentRestaurants.
   ///
   /// In en, this message translates to:
-  /// **'recent Restaurants'**
+  /// **'Recent Restaurants'**
   String get recentRestaurants;
 
   /// No description provided for @recentGroceries.
   ///
   /// In en, this message translates to:
-  /// **'recent Groceries'**
+  /// **'Recent Groceries'**
   String get recentGroceries;
 
   /// No description provided for @recentPharmacies.
   ///
   /// In en, this message translates to:
-  /// **'recent Pharmacies'**
+  /// **'Recent Pharmacies'**
   String get recentPharmacies;
 
   /// No description provided for @recentSearches.
   ///
   /// In en, this message translates to:
-  /// **'recent Searches'**
+  /// **'Recent Searches'**
   String get recentSearches;
 
   /// No description provided for @clear.
   ///
   /// In en, this message translates to:
-  /// **'clear'**
+  /// **'Clear'**
   String get clear;
 
   /// No description provided for @gazzerApp.
   ///
   /// In en, this message translates to:
-  /// **'gazzer App'**
+  /// **'Gazzer App'**
   String get gazzerApp;
 
   /// No description provided for @freshFruits.
   ///
   /// In en, this message translates to:
-  /// **'fresh Fruits'**
+  /// **'Fresh Fruits'**
   String get freshFruits;
 
   /// No description provided for @dailyOffersForYou.
   ///
   /// In en, this message translates to:
-  /// **'daily Offers For You'**
+  /// **'Daily Offers For You'**
   String get dailyOffersForYou;
 
   /// No description provided for @suggestedForYou.
   ///
   /// In en, this message translates to:
-  /// **'suggested For You'**
+  /// **'Suggested For You'**
   String get suggestedForYou;
 
   /// No description provided for @gotIt.
   ///
   /// In en, this message translates to:
-  /// **'got It'**
+  /// **'Got It'**
   String get gotIt;
 
   /// No description provided for @sideMenuSetting.
   ///
   /// In en, this message translates to:
-  /// **'side Menu Setting'**
+  /// **'Side Menu Setting'**
   String get sideMenuSetting;
 
   /// No description provided for @mainScreens_________________End.
@@ -986,11 +980,11 @@ abstract class AppLocalizations {
   /// **'Gazzer Chat'**
   String get gazzerChat;
 
-  /// No description provided for @communityApp.
+  /// No description provided for @myProfile.
   ///
   /// In en, this message translates to:
-  /// **'Community App'**
-  String get communityApp;
+  /// **'My Profile'**
+  String get myProfile;
 
   /// No description provided for @paymentSetting.
   ///

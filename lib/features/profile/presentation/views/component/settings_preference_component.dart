@@ -1,8 +1,8 @@
 part of 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 
 class _SettingsPreferenceComponent extends StatelessWidget {
-  const _SettingsPreferenceComponent();
-
+  const _SettingsPreferenceComponent(this.client);
+  final ClientEntity? client;
   @override
   Widget build(BuildContext context) {
     final startPadding = 32.0;
@@ -12,9 +12,9 @@ class _SettingsPreferenceComponent extends StatelessWidget {
       children: [
         Text(
           "${L10n.tr().settings} & ${L10n.tr().preferences}",
-          style: TStyle.whiteBold(16),
+          style: TStyle.primaryBold(16),
         ),
-        const Divider(height: 33, thickness: 1, color: Colors.white38),
+        Divider(height: 33, thickness: 1, color: Co.purple.withAlpha(90)),
 
         ///
         _ItitleWithSvg(
@@ -51,21 +51,22 @@ class _SettingsPreferenceComponent extends StatelessWidget {
                   ),
                   child: Text(
                     L10n.tr().privacySettings,
-                    style: TStyle.secondaryRegular(14),
+                    style: TStyle.blackRegular(14),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    minimumSize: Size.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                if (client != null)
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      L10n.tr().changePassword,
+                      style: TStyle.blackRegular(14),
+                    ),
                   ),
-                  child: Text(
-                    L10n.tr().changePassword,
-                    style: TStyle.secondaryRegular(14),
-                  ),
-                ),
               ],
             ),
           ],
@@ -76,14 +77,15 @@ class _SettingsPreferenceComponent extends StatelessWidget {
         MainBtn(
           onPressed: () {},
           bgColor: Co.secondary,
+          radius: 16,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
           child: Row(
             spacing: 16,
             children: [
-              const Icon(Icons.logout_outlined, size: 20, color: Co.purple),
+              Icon(client == null ? Icons.login_outlined : Icons.logout_outlined, size: 20, color: Co.purple),
               Expanded(
                 child: Text(
-                  L10n.tr().signOut,
+                  client == null ? L10n.tr().login : L10n.tr().signOut,
                   style: TStyle.primaryBold(14, font: FFamily.inter),
                   textAlign: TextAlign.center,
                 ),
@@ -112,7 +114,7 @@ class _ItitleWithSvg extends StatelessWidget {
         ),
         Text(
           title,
-          style: TStyle.whiteSemi(16),
+          style: TStyle.primarySemi(16),
         ),
       ],
     );

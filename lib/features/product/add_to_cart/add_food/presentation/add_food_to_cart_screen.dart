@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_extras_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_image_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_price_summary.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_summary_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_types_widget.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 class AddFoodToCartScreen extends StatelessWidget {
   const AddFoodToCartScreen({super.key, required this.product});
-  final ProductModel product;
+  final ProductItemEntity product;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,7 @@ class AddFoodToCartScreen extends StatelessWidget {
                 const VerticalSpacing(24),
                 ProductTypesWidget(product: product),
                 const VerticalSpacing(24),
-                ProductExtrasWidget(product: product),
+                // ProductExtrasWidget(product: product),
                 const VerticalSpacing(24),
               ],
             ),

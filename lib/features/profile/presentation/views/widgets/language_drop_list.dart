@@ -20,22 +20,22 @@ class LanguageDropList extends StatelessWidget {
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderRadius: AppConst.defaultBorderRadius,
-                borderSide: const BorderSide(color: Co.secondary, width: 1),
+                borderSide: const BorderSide(color: Co.purple, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: AppConst.defaultBorderRadius,
-                borderSide: const BorderSide(color: Co.secondary, width: 1),
+                borderSide: const BorderSide(color: Co.purple, width: 1),
               ),
               border: OutlineInputBorder(
                 borderRadius: AppConst.defaultBorderRadius,
-                borderSide: const BorderSide(color: Co.secondary, width: 1),
+                borderSide: const BorderSide(color: Co.purple, width: 1),
               ),
             ),
-            focusColor: Co.secondary,
-            style: TStyle.secondarySemi(14),
+            focusColor: Co.purple,
+            style: TStyle.primarySemi(14),
             borderRadius: AppConst.defaultBorderRadius,
             isExpanded: true,
-            iconEnabledColor: Co.secondary,
+            iconEnabledColor: Co.purple,
             value: cubit.state.lang,
 
             items: [

@@ -1,6 +1,6 @@
-part of 'section_item_dto.dart';
+part of 'product_item_dto.dart';
 
-class CategoryDTO extends SectionItem {
+class CategoryDTO extends ProductItemDTO {
   final int? id;
   final String? name;
   final String? image;
@@ -13,7 +13,7 @@ class CategoryDTO extends SectionItem {
   CategoryEntity toCategoryEntity() => CategoryEntity(id!, name!, image ?? '', CategoryType.fromString(type ?? ''));
 }
 
-class VendorDTO extends SectionItem {
+class VendorDTO extends ProductItemDTO {
   int? id;
   String? vendorName;
   String? contactPerson;
@@ -31,9 +31,10 @@ class VendorDTO extends SectionItem {
   VendorEntity toEntity() {
     return VendorEntity(
       id: id ?? 0,
-      vendorName: vendorName ?? '',
+      name: vendorName ?? '',
       contactPerson: contactPerson,
       secondContactPerson: secondContactPerson,
+      image: Fakers().netWorkImage,
     );
   }
 }

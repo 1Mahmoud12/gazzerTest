@@ -1,3 +1,4 @@
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 sealed class StoreItemDTO {
@@ -54,8 +55,7 @@ class PlateDTO extends StoreItemDTO {
       categoryPlateId: plateCategoryId ?? 0,
       name: plateName ?? '',
       description: plateDescription ?? '',
-      image:
-          'https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=',
+      image: Fakers().netWorkPRoductImage,
       price: double.tryParse(price.toString()) ?? 0,
       rate: 0.0,
       priceBeforeDiscount: 0,
@@ -113,6 +113,9 @@ class ProductDTO extends StoreItemDTO {
       description: plateDescription ?? '',
       price: double.tryParse(price.toString()) ?? 0,
       storeId: storeId,
+      image: 'image_url_placeholder',
+      rate: double.tryParse(rate.toString()) ?? 0,
+      priceBeforeDiscount: double.tryParse(appPrice.toString()) ?? 0,
     );
   }
 }

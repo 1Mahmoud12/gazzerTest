@@ -8,14 +8,29 @@ class _ProfileHeaderWidget extends StatelessWidget {
     final client = Session().client;
     return Column(
       children: [
-        Center(child: Text(L10n.tr().userProfile, style: TStyle.whiteBold(20))),
+        Center(
+          child: GradientTextWzShadow(
+            text: L10n.tr().userProfile,
+            style: TStyle.primaryBold(20),
+            shadow: const BoxShadow(color: Colors.black26, blurRadius: 4, spreadRadius: 2, offset: Offset(0, 2)),
+          ),
+        ),
         const VerticalSpacing(8),
         Row(
           spacing: 32,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(L10n.tr().goldenAccountUser, style: TStyle.secondaryBold(13, font: FFamily.inter)),
-            SvgPicture.asset(Assets.assetsSvgCup, height: 24, width: 24),
+            Text(L10n.tr().goldenAccountUser, style: TStyle.primaryBold(13, font: FFamily.inter)),
+            CircleAvatar(
+              radius: 18,
+              backgroundColor: Co.secondary,
+              child: SvgPicture.asset(
+                Assets.assetsSvgCup,
+                height: 22,
+                width: 22,
+                colorFilter: ColorFilter.mode(Co.dark, BlendMode.srcIn),
+              ),
+            ),
           ],
         ),
         const VerticalSpacing(24),
@@ -51,8 +66,7 @@ class _ProfileHeaderWidget extends StatelessWidget {
                       child: AspectRatio(
                         aspectRatio: 1,
                         child: Image.network(
-                          client?.image ??
-                              "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp",
+                          client?.image ?? Fakers().netWorkImage,
                         ),
                       ),
                     ),
@@ -64,15 +78,15 @@ class _ProfileHeaderWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(client?.clientName ?? 'Client Name', style: TStyle.whiteSemi(16)),
+                    Text(client?.clientName ?? 'Client Name', style: TStyle.primarySemi(16)),
                     Text(
                       client?.email ?? 'client@email.com',
-                      style: TStyle.whiteRegular(12, font: FFamily.inter).copyWith(
-                        color: Colors.white70,
+                      style: TStyle.primaryRegular(12, font: FFamily.inter).copyWith(
+                        color: Colors.black87,
                       ),
                     ),
                     const Spacer(),
-                    Text("${L10n.tr().memberSince} ${client?.createdAt ?? 'Jan 2025'}", style: TStyle.whiteRegular(12, font: FFamily.inter)),
+                    Text("${L10n.tr().memberSince} ${client?.createdAt ?? 'Jan 2025'}", style: TStyle.blackRegular(12, font: FFamily.inter)),
                   ],
                 ),
               ),

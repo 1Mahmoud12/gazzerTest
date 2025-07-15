@@ -16,16 +16,8 @@ class ClientResponse {
     }
     message = json['message'];
   }
-
   ClientEntity toClientEntity() {
-    return ClientEntity(
-      id: client.id!,
-      phoneNumber: client.phoneNumber!,
-      clientName: client.clientName,
-      clientStatusId: client.clientStatusId,
-      driver: client.driver,
-      socialId: client.socialId,
-    );
+    return client.toClientEntity();
   }
 }
 
@@ -62,5 +54,16 @@ class ClientDTO {
     updatedAt = json['updated_at'];
     driver = json['driver'];
     socialId = json['social_id'];
+  }
+
+  ClientEntity toClientEntity() {
+    return ClientEntity(
+      id: id!,
+      phoneNumber: phoneNumber!,
+      clientName: clientName,
+      clientStatusId: clientStatusId,
+      driver: driver,
+      socialId: socialId,
+    );
   }
 }

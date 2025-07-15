@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/product/product_model.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
@@ -9,10 +7,11 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 class SingleGridProduct extends StatelessWidget {
   const SingleGridProduct({super.key, required this.prod, required this.isTop});
-  final ProductModel prod;
+  final ProductItemEntity prod;
   final bool isTop;
   @override
   Widget build(BuildContext context) {
@@ -60,7 +59,7 @@ class SingleGridProduct extends StatelessWidget {
                                     children: [
                                       TextSpan(text: prod.name, style: TStyle.blackSemi(13)),
                                       const TextSpan(text: '\n'),
-                                      TextSpan(text: L10n.tr().testTest, style: TStyle.greyRegular(12)),
+                                      TextSpan(text: "TEST ", style: TStyle.greyRegular(12)),
                                     ],
                                   ),
                                   textAlign: TextAlign.center,

@@ -16,8 +16,7 @@ class AddressCard extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: AppConst.defaultBorderRadius,
-        border: address.isDefault ? null : Border.all(color: Co.secondary),
-        color: address.isDefault ? Colors.white24 : null,
+        border: address.isDefault ? null : Border.all(color: Co.purple),
       ),
       child: Padding(
         padding: AppConst.defaultPadding,
@@ -29,12 +28,12 @@ class AddressCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 23,
-                  backgroundColor: Co.white,
+                  backgroundColor: Co.secondary,
                   child: SvgPicture.asset(
                     address.labelSvg,
                     width: 20,
                     height: 20,
-                    colorFilter: ColorFilter.mode(address.isDefault ? Co.purple : Co.secondary, BlendMode.srcIn),
+                    colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                   ),
                 ),
                 const HorizontalSpacing(20),
@@ -44,7 +43,7 @@ class AddressCard extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: address.labelType.label ?? address.label,
-                          style: TStyle.secondarySemi(16).copyWith(color: address.isDefault ? Co.white : null),
+                          style: TStyle.primarySemi(16),
                         ),
                         const TextSpan(text: '\n'),
                         TextSpan(text: "${address.provinceName}, "),
@@ -55,7 +54,7 @@ class AddressCard extends StatelessWidget {
                         if (address.description != null) TextSpan(text: " ${address.description}."),
                         if (address.landmark != null) TextSpan(text: " ${L10n.tr().landmark} ${address.landmark}."),
                       ],
-                      style: TStyle.whiteRegular(12).copyWith(color: Colors.white70, height: 1.7),
+                      style: TStyle.greyRegular(12).copyWith(height: 1.7),
                     ),
                   ),
                 ),
@@ -69,7 +68,7 @@ class AddressCard extends StatelessWidget {
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      icon: const Icon(Icons.edit, color: Co.secondary),
+                      icon: const Icon(Icons.edit, color: Co.purple),
                     ),
                     IconButton(
                       onPressed: () {},
@@ -78,7 +77,7 @@ class AddressCard extends StatelessWidget {
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      icon: const Icon(CupertinoIcons.delete, color: Co.secondary),
+                      icon: const Icon(CupertinoIcons.delete, color: Co.purple),
                     ),
                   ],
                 ),

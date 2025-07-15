@@ -1,25 +1,33 @@
-import 'package:gazzer/core/domain/product/product_model.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
-class CartItemModel extends ProductModel {
+class CartItemModel {
   final int quantity;
+  final int id;
+  final String name;
+  final String image;
+  final String description;
+  final double price;
+  final double? priceBeforeDiscount;
+  final double rate;
   double get totalPrice => price * quantity;
   CartItemModel({
-    required super.id,
-    required super.name,
-    required super.description,
-    required super.price,
-    required super.rate,
-    required super.image,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.rate,
+    required this.image,
+    this.priceBeforeDiscount,
+
     this.quantity = 1,
   });
 
-  CartItemModel.fromProduct(ProductModel product, {this.quantity = 1})
-    : super(
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        rate: product.rate,
-        image: product.image,
-      );
+  CartItemModel.fromProduct(ProductItemEntity product, {this.quantity = 1})
+    : id = product.id,
+      name = product.name,
+      description = product.description,
+      price = product.price,
+      rate = product.rate,
+      image = product.image,
+      priceBeforeDiscount = product.priceBeforeDiscount;
 }

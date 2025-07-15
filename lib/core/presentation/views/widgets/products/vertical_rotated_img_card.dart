@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/product/product_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
@@ -7,12 +6,13 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 
 import 'circle_gradient_image.dart';
 
 class VerticalRotatedImgCard extends StatelessWidget {
   const VerticalRotatedImgCard({super.key, required this.prod, required this.onTap});
-  final ProductModel prod;
+  final ProductItemEntity prod;
   final Function() onTap;
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                 angle: -0.25,
                 child: ClipRRect(
                   borderRadius: AppConst.defaultBorderRadius,
-                  child: Image.asset(prod.image, fit: BoxFit.cover, width: 95, height: 50),
+                  child: Image.network(prod.image, fit: BoxFit.cover, width: 95, height: 50),
                 ),
               ),
             ),

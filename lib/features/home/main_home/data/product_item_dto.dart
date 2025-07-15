@@ -1,3 +1,4 @@
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
@@ -5,25 +6,25 @@ import 'package:gazzer/features/stores/resturants/data/dtos/plate_dto.dart';
 
 part 'category_dto.dart';
 
-sealed class SectionItem {
-  SectionItem();
-  SectionItem.fromJson(Map<String, dynamic> json);
+sealed class ProductItemDTO {
+  ProductItemDTO();
+  ProductItemDTO.fromJson(Map<String, dynamic> json);
 }
 
 enum ItemType {
   plate('plate'),
   product('product'),
-  unknown('Unknown');
+  unknown('unknown');
 
   final String value;
   const ItemType(this.value);
 
   static ItemType fromString(String type) {
-    return ItemType.values.firstWhere((e) => e.value.toLowerCase() == type, orElse: () => ItemType.unknown);
+    return ItemType.values.firstWhere((e) => e.value == type.toLowerCase(), orElse: () => ItemType.unknown);
   }
 }
 
-class SectionItemDTO extends SectionItem {
+class SectionItemDTO extends ProductItemDTO {
   int? id;
   String? expiredAt;
   int? discount;
@@ -38,7 +39,8 @@ class SectionItemDTO extends SectionItem {
         return item?.toProductItem() as ProductEntity;
       default:
         // throw Exception('Unsupported item? type: $item?Type');
-        return item?.toProductItem();
+        // return item?.toProductItem();
+        return null;
     }
   }
 
@@ -50,7 +52,7 @@ class SectionItemDTO extends SectionItem {
     if (itemType == ItemType.plate) {
       item = PlateDTO.fromJson(json['item']);
     } else if (itemType == ItemType.product) {
-      // item = ProductItemDTO.fromJson(json['item']);
+      item = ProductDTO.fromJson(json['item']);
     } else {
       // item = ProductItemDTO.fromJson(json['item']);
     }

@@ -1,4 +1,4 @@
-import 'package:gazzer/core/data/local_storage/storage_service.dart';
+import 'package:gazzer/core/data/local_storage/local_storage.dart';
 
 class LoginData {
   final validPhone = '1234567890';

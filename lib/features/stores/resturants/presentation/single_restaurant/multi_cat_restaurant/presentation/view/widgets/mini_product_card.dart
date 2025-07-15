@@ -2,7 +2,7 @@ part of '../multi_cat_restaurant_screen.dart';
 
 class _MiniProductCard extends StatelessWidget {
   const _MiniProductCard({required this.prod});
-  final ProductModel prod;
+  final ProductItemEntity prod;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +34,7 @@ class _MiniProductCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(prod.name, style: TStyle.blackBold(12)),
-              
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -53,8 +53,11 @@ class _MiniProductCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      DecoratedFavoriteWidget(isDarkContainer: false, size: 16, padding: 6,
-                      borderRadius: AppConst.defaultInnerBorderRadius,
+                      DecoratedFavoriteWidget(
+                        isDarkContainer: false,
+                        size: 16,
+                        padding: 6,
+                        borderRadius: AppConst.defaultInnerBorderRadius,
                       ),
                     ],
                   ),

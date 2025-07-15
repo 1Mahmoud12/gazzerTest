@@ -1,70 +1,79 @@
 part of '../home_screen.dart';
 
-class _HomeCuisinesWidget extends StatelessWidget {
-  const _HomeCuisinesWidget();
+class _HomeTopVendorsWidget extends StatelessWidget {
+  const _HomeTopVendorsWidget({required this.vendors});
+  final List<VendorEntity?> vendors;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 12,
-      children: [
-        TitleWithMore(title: L10n.tr().exploreCuisines, onPressed: () {}),
-        SizedBox(
-          height: 70,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: 4,
-            separatorBuilder: (context, index) => const HorizontalSpacing(12),
-            itemBuilder: (context, index) {
-              final cuisne = Fakers.fakeCuisines[index];
-              return DecoratedBox(
-                decoration: BoxDecoration(
-                  border: GradientBoxBorder(gradient: Grad().shadowGrad()),
-                  borderRadius: BorderRadius.circular(66),
-                  gradient: Grad().bgLinear.copyWith(
-                    stops: const [0.0, 1],
-                    colors: [const Color(0x55402788), Colors.transparent],
-                  ),
-                ),
-                child: Row(
-                  spacing: 6,
-                  children: [
-                    CircleGradientBorderedImage(image: cuisne.image),
-                    Text("${cuisne.name} ${cuisne.name}", style: TStyle.blackBold(12), textAlign: TextAlign.center),
-                    const HorizontalSpacing(8),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox.shrink(),
-        SizedBox(
-          height: 95,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: Fakers.fakeCuisines.length,
-            separatorBuilder: (context, index) => const HorizontalSpacing(12),
-            itemBuilder: (context, index) {
-              final cuisne = Fakers.fakeCuisines[index];
-              return ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 110),
-                child: Column(
-                  spacing: 8,
-                  children: [
-                    Expanded(child: CircleGradientBorderedImage(image: cuisne.image)),
-                    Text(
-                      cuisne.name,
-                      style: TStyle.blackBold(12),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+    return Padding(
+      padding: AppConst.defaultHrPadding,
+      child: Column(
+        spacing: 12,
+        children: [
+          TitleWithMore(title: L10n.tr().topVendors, onPressed: () {}),
+          SizedBox(
+            height: 70,
+            child: ListView.separated(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.horizontal,
+              itemCount: vendors.length > 6 ? 4 : vendors.length,
+              separatorBuilder: (context, index) => const HorizontalSpacing(12),
+              itemBuilder: (context, index) {
+                if (vendors[index] == null) return const SizedBox.shrink();
+                final vendor = vendors[index];
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: GradientBoxBorder(gradient: Grad().shadowGrad()),
+                    borderRadius: BorderRadius.circular(66),
+                    gradient: Grad().bgLinear.copyWith(
+                      stops: const [0.0, 1],
+                      colors: [const Color(0x55402788), Colors.transparent],
                     ),
-                  ],
-                ),
-              );
-            },
+                  ),
+                  child: Row(
+                    spacing: 6,
+                    children: [
+                      CircleGradientBorderedImage(image: vendor!.image),
+                      Text("${vendor.name} ${vendor.name}", style: TStyle.blackBold(12), textAlign: TextAlign.center),
+                      const HorizontalSpacing(8),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ],
+          if (vendors.length > 6) ...[
+            const SizedBox.shrink(),
+            SizedBox(
+              height: 95,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: (vendors.length - 4) > 6 ? 6 : (vendors.length - 4),
+                separatorBuilder: (context, index) => const HorizontalSpacing(12),
+                itemBuilder: (context, index) {
+                  if (vendors[index + 4] == null) return const SizedBox.shrink();
+                  final cuisne = vendors[index + 4];
+                  return ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 110),
+                    child: Column(
+                      spacing: 8,
+                      children: [
+                        Expanded(child: CircleGradientBorderedImage(image: cuisne!.image)),
+                        Text(
+                          cuisne.name,
+                          style: TStyle.blackBold(12),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

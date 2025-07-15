@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/widgets/tutorial_bottom_sheet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroVideoTutorialScreen extends StatefulWidget {
   const IntroVideoTutorialScreen({super.key, required this.videoLink});
@@ -14,6 +17,12 @@ class IntroVideoTutorialScreen extends StatefulWidget {
 class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
   final isHovering = ValueNotifier<bool>(false);
   bool isNextPPressed = false;
+
+  @override
+  void initState() {
+    di<SharedPreferences>().setBool(StorageKeys.haveSeenTour, true);
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -31,9 +40,8 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
           SizedBox.expand(
             child: AnimatedCrossFade(
               duration: Durations.extralong1,
-
-              secondChild: Image.asset(Assets.assetsPngVideoTutorialPlaceholder2, fit: BoxFit.cover),
-              firstChild: Image.asset(Assets.assetsPngVideotutorialVideoPlaceholder, fit: BoxFit.cover),
+              secondChild: Image.asset(Assets.assetsPngVideoTutorialPlaceholder2, fit: BoxFit.fill),
+              firstChild: Image.asset(Assets.assetsPngVideotutorialVideoPlaceholder, fit: BoxFit.fill),
               crossFadeState: isNextPPressed ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             ),
           ),

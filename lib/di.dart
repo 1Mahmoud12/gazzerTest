@@ -12,6 +12,8 @@ import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
+import 'package:gazzer/features/profile/data/profile_repo_imp.dart';
+import 'package:gazzer/features/profile/domain/profile_repo.dart';
 import 'package:gazzer/features/stores/resturants/data/repo_imp/categories_of_plates_repo_imp.dart';
 import 'package:gazzer/features/stores/resturants/data/repo_imp/plates_repo_imp.dart';
 import 'package:gazzer/features/stores/resturants/data/repo_imp/restaurants_repo_imp.dart';
@@ -54,6 +56,7 @@ void _registerRepos() {
   di.registerLazySingleton<CategoriesOfPlatesRepo>(() => CategoriesOfPlatesRepoImp(di.get()));
   di.registerLazySingleton<RestaurantsRepo>(() => RestaurantsRepoImp(di.get()));
   di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get()));
+  di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get()));
 }
 
 void _registerCubits() {

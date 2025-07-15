@@ -12,9 +12,9 @@ class _AccountInformationComponent extends StatelessWidget {
       children: [
         Text(
           L10n.tr().accountInformation,
-          style: TStyle.whiteBold(16),
+          style: TStyle.primaryBold(16),
         ),
-        const Divider(height: 15, thickness: 1, color: Colors.white38),
+        Divider(height: 15, thickness: 1, color: Co.purple.withAlpha(90)),
         ProfileInformationRow(
           icon: Assets.assetsSvgUser,
           title: L10n.tr().fullName,
@@ -33,6 +33,7 @@ class _AccountInformationComponent extends StatelessWidget {
         MainBtn(
           onPressed: () {},
           bgColor: Co.secondary,
+          radius: 16,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
           child: Row(
             spacing: 16,
@@ -57,16 +58,17 @@ class _AccountInformationComponent extends StatelessWidget {
         MainBtn(
           onPressed: () {},
           bgColor: Colors.transparent,
-          borderColor: Co.secondary,
+          borderColor: Co.purple,
+          radius: 16,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
           child: Row(
             spacing: 16,
             children: [
-              const Icon(CupertinoIcons.delete, size: 20, color: Co.secondary),
+              const Icon(CupertinoIcons.delete, size: 20, color: Co.purple),
               Expanded(
                 child: Text(
                   L10n.tr().deleteAccount,
-                  style: TStyle.secondaryBold(14, font: FFamily.inter),
+                  style: TStyle.primaryBold(14, font: FFamily.inter),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -108,11 +110,11 @@ class ProfileInformationRow extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TStyle.secondaryRegular(14, font: FFamily.inter),
+              style: TStyle.blackRegular(14, font: FFamily.inter),
             ),
             Text(
               value,
-              style: TStyle.whiteSemi(16, font: FFamily.inter),
+              style: TStyle.primaryBold(14, font: FFamily.inter),
             ),
           ],
         ),
