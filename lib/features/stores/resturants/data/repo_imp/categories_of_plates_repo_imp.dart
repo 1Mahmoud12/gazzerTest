@@ -7,7 +7,7 @@ import 'package:gazzer/features/stores/resturants/domain/repos/categories_of_pla
 
 class CategoriesOfPlatesRepoImp extends CategoriesOfPlatesRepo {
   final ApiClient _apiClient;
-  CategoriesOfPlatesRepoImp(this._apiClient);
+  CategoriesOfPlatesRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
   Future<Result<List<CategoryOfPlateEntity>>> getAllCategoriesOfPlates() {

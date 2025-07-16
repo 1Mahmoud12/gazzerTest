@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/domain/crashlytics_repo.dart';
 import 'package:gazzer/features/auth/common/data/auth_response.dart';
 import 'package:gazzer/features/auth/register/data/register_repo_imp.dart';
 import 'package:mockito/mockito.dart';
@@ -28,7 +29,7 @@ void main() async {
 
     setUp(() {
       apiClient = MockApiClient();
-      registerRepo = RegisterRepoImp(apiClient);
+      registerRepo = RegisterRepoImp(apiClient, diTest<CrashlyticsRepo>());
     });
 
     tearDown(() {

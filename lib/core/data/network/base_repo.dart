@@ -3,25 +3,22 @@ import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/domain/crashlytics_repo.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/di.dart';
 
 /// any repo in the app that makes api calls should extend this class
 /// it provides a [call] method that takes an api call and a parser function
 /// and returns a [Result] of <[T]> type which generated from [parser] method
-///  or an [ApiError] if the api call fails.
+///  or an [BadResponse] if the api call fails.
 ///
 abstract class BaseApiRepo {
   late final CrashlyticsRepo _crashlyticsRepo;
-
-  BaseApiRepo() {
-    _crashlyticsRepo = di.get<CrashlyticsRepo>();
-  }
+  // TODO: dependency injection for CrashlyticsRepo should be done in the constructor
+  BaseApiRepo(this._crashlyticsRepo);
 
   /// Calls the API and parses the response.
   ///
-  /// Returns a [Result<T>] which is either an [Ok] of <[T]> generated from [parser] or an [ApiError].
+  /// Returns a [Result<T>] which is either an [Ok] of <[T]> generated from [parser] or an [BadResponse].
   ///
-  /// [ApiError] can be generated from either the [apiCall] or the [parser] function.
+  /// [BadResponse] can be generated from either the [apiCall] or the [parser] function.
   ///
   /// The error is also sent to crashlytics for further analysis.
   Future<Result<T>> call<T>({
@@ -37,66 +34,67 @@ abstract class BaseApiRepo {
     }
   }
 
-  /// Handles the error, send it to crashlytics and returns an [ApiError].
+  /// Handles the error, send it to crashlytics and returns an [BaseError].
   ///
   /// Error is resulted from either the [apiCall]  which is going to be a [DioException]
   /// or the [parser] function which is going to be an [Exception].
   BaseError _handle(Object error, StackTrace? stack) {
-    ApiError apiError = ApiError(message: error.toString());
     try {
       if (error is! DioException) {
-        /// if the error is not a DioException, it means it is an Exception
-        _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing data');
-        return apiError;
+        return _formParsingError(error, stack);
       }
-      apiError.e = error.type;
       switch (error.type) {
         case DioExceptionType.badResponse:
-          apiError = ApiError.fromJson(error.response?.data, e: error.type);
-          apiError.message;
-          return apiError;
+          return BadResponse.fromJson(error.response?.data, e: ErrorType.badResponse);
         case DioExceptionType.receiveTimeout:
         case DioExceptionType.connectionTimeout:
-          apiError.message = L10n.tr().requestTimeOut;
-          break;
+          return BaseError(message: L10n.tr().requestTimeOut, e: ErrorType.noInternetConnection);
         case DioExceptionType.connectionError:
         case DioExceptionType.sendTimeout:
-          apiError.message = L10n.tr().weakOrNoInternetConnection;
-          break;
+          return BaseError(message: L10n.tr().weakOrNoInternetConnection, e: ErrorType.noInternetConnection);
+
         case DioExceptionType.cancel:
-          apiError.message = L10n.tr().requestToServerWasCancelled;
-          break;
+          return BaseError(message: L10n.tr().requestToServerWasCancelled, e: ErrorType.noInternetConnection);
+
         case DioExceptionType.unknown:
-          apiError.message = L10n.tr().unknownErorOccurred;
-          break;
+          return BaseError(message: L10n.tr().unknownErorOccurred, e: ErrorType.unknownError);
+
         default:
-          apiError.message = L10n.tr().somethingWentWrong;
-          break;
+          return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
       }
-      return apiError;
     } catch (e, stack) {
       // exception here can occurs from many reasons, like:
-      // - sending [Exception] to crashlytics
-      // - parsing the error response from the server with [ApiError.fromJson]
+      // - sending [Exception] to crashlytics during [_formParsingError]
+      // - parsing the error response from the server with [BadResponse.fromJson]
       // - giving a translated message according to locale of context (which may not be available)
-      // and throws an exception
+      //   and throws an exception
       try {
         // if the exception is due to parsin, it will succeed here
         _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing errors');
-        return ApiError(message: L10n.tr().somethingWentWrong);
+        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
       } catch (e) {
         // if the exception is due to sending to crashlytics, or translation, it will fail here
-        return ApiError(message: L10n.tr().somethingWentWrong);
+        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
       }
     }
   }
 
   /// Checks if the error is a DioException with status code 498, which indicates an expired token.
-  //  TODO: implenet logic te refresh token in this case
-  ExpireTokeError? isTokenExpired(Object error) {
+  //  TODO: should implenet logic te refresh token in this case??
+  BaseError? isTokenExpired(Object error) {
     if (error is DioException && error.response?.statusCode == 498) {
-      return ExpireTokeError();
+      return BaseError(message: "Token has been expired", e: ErrorType.expireTokenError);
     }
     return null;
+  }
+
+  BaseError _formParsingError(Object error, StackTrace? stack) {
+    /// if the error is not a DioException, it means it is an Exception due to parsing the response
+    _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing data');
+    try {
+      return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.parseError);
+    } catch (e) {
+      return BaseError(message: "Something went wrong", e: ErrorType.parseError);
+    }
   }
 }

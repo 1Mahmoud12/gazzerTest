@@ -48,9 +48,9 @@ void main() async {
       blocTest<RegisterCubit, RegisterStates>(
         'test register method with register request that completes with error',
         setUp: () {
-          provideDummy<Result<AuthResponse>>(Err(ApiError.fromJson(registerData.registerPhoneExistsErrorJson)));
+          provideDummy<Result<AuthResponse>>(Err(BadResponse.fromJson(registerData.registerPhoneExistsErrorJson)));
           when(repo.register(registerData.registerReq)).thenAnswer((_) async {
-            return Err<AuthResponse>(ApiError.fromJson(registerData.registerPhoneExistsErrorJson));
+            return Err<AuthResponse>(BadResponse.fromJson(registerData.registerPhoneExistsErrorJson));
           });
         },
         build: () => cubit,

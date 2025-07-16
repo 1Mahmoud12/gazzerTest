@@ -16,10 +16,7 @@ class Validators {
     if (input == null || input.trim().isEmpty) {
       return L10n.tr().thisFieldIsRequired;
     }
-    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input) ||
-            input.length > 50
-        ? L10n.tr().invalidEmail
-        : null;
+    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input) || input.length > 50 ? L10n.tr().invalidEmail : null;
   }
 
   static String? mobileEGValidator(String? input) {
@@ -55,6 +52,13 @@ class Validators {
     if (value == null || value.trim().isEmpty) {
       return L10n.tr().thisFieldIsRequired;
     }
+    // if (isAr) {
+    //   final hasOnlyDashes = RegExp(r'^[\u0621-\u064A -]+$').hasMatch(value);
+    //   if (!hasOnlyDashes) return msg ?? L10n.tr().nameAcceptsOnlyDashedAndCharacters;
+    // } else {
+    //   final hasOnlyDashes = RegExp(r'^[\u0621-\u064A a-zA-Z-]+$').hasMatch(value);
+    //   if (!hasOnlyDashes) return msg ?? L10n.tr().nameAcceptsOnlyDashedAndCharacters;
+    // }
     final hasOnlyDashes = RegExp(r'^[\u0621-\u064A a-zA-Z-]+$').hasMatch(value);
     if (!hasOnlyDashes) {
       return msg ?? L10n.tr().nameAcceptsOnlyDashedAndCharacters;

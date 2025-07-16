@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/data/services/local_storage.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
+import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
+import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
+import 'package:gazzer/features/splash/cubit/splash_states.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,9 +25,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
   late final AnimationController contoller;
   late final AnimationController textController;
-
-  bool isAuth = false;
-  Future<void> _startAnimate() async {
+  late final SplashCubit cubit;
+  int trialCount = 0;
+  Future<void> _startAnimate(VoidCallback action) async {
     await Future.delayed(Durations.extralong4);
     if (mounted) contoller.forward();
     await Future.delayed(const Duration(seconds: 1), () {
@@ -26,14 +36,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     await Future.delayed(const Duration(seconds: 1), () {
       if (mounted) textController.forward();
     });
-    await Future.delayed(const Duration(milliseconds: 1500), () {});
+    await Future.delayed(Durations.extralong4, action);
   }
 
   @override
   void initState() {
+    cubit = context.read<SplashCubit>();
     contoller = AnimationController(vsync: this, duration: Durations.medium4);
     textController = AnimationController(vsync: this, duration: Durations.short4);
-    _startAnimate();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _startAnimate(cubit.checkAuth);
+    });
     super.initState();
   }
 
@@ -58,50 +71,108 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               end: Alignment.bottomCenter,
             ),
           ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ScaleTransition(
-                  scale: Tween<double>(begin: 0.4, end: 1.0).animate(contoller),
-                  child: RotationTransition(
-                    turns: Tween<double>(begin: 0.0, end: 0.37).animate(contoller),
-                    child: Row(
-                      spacing: 12,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(Assets.assetsSvgSplashIcon, height: 90, width: 90),
-                        SizeTransition(
-                          axis: Axis.horizontal,
-                          axisAlignment: 1,
-                          sizeFactor: textController,
-                          child: FadeTransition(
-                            opacity: textController,
-                            child: Text('HELLO', style: TStyle.whiteBold(92).copyWith(color: Co.bg)),
-                          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const Spacer(flex: 3),
+              ScaleTransition(
+                scale: Tween<double>(begin: 0.4, end: 1.0).animate(contoller),
+                child: RotationTransition(
+                  turns: Tween<double>(begin: 0.0, end: 0.37).animate(contoller),
+                  child: Row(
+                    spacing: 12,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(Assets.assetsSvgSplashIcon, height: 90, width: 90),
+                      SizeTransition(
+                        axis: Axis.horizontal,
+                        axisAlignment: 1,
+                        sizeFactor: textController,
+                        child: FadeTransition(
+                          opacity: textController,
+                          child: Text('HELLO', style: TStyle.whiteBold(92).copyWith(color: Co.bg)),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                const VerticalSpacing(20),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     Navigator.of(context).pushReplacement(_createRoute());
-                //   },
-                //   child: Text(L10n.tr().next, style: TStyle.blackBold(18)),
-                // ),
-                // MaterialButton(
-                //   onPressed: () {
-                //     if (textController.isCompleted) {
-                //       textController.reset();
-                //     }
-                //     Future.delayed(Duration(seconds: 1), () => _startAnimate());
-                //   },
-                //   child: Text('Repeat', style: TStyle.whiteBold(32)),
-                // ),
-              ],
-            ),
+              ),
+              BlocConsumer<SplashCubit, SplashStates>(
+                listener: (context, state) {
+                  if (state is UnAuth) {
+                    if (state.haveSeenTour) {
+                      Navigator.of(context).pushReplacement(
+                        AppTransitions().slideTransition(
+                          BlocProvider(create: (context) => di<LoginCubit>(), child: const LoginScreen()),
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pushReplacement(
+                        AppTransitions().slideTransition(const IntroVideoTutorialScreen(videoLink: '')),
+                      );
+                    }
+                  } else if (state is RefreshTokenSuccess) {
+                    cubit.getClient();
+                  } else if (state is GetClientSuccess) {
+                    Navigator.of(context).pushReplacement(
+                      AppTransitions().slideTransition(const MainLayout()),
+                    );
+                  } else if (state is RefreshTokenError || state is GetClientError) {
+                    trialCount++;
+                  }
+                },
+                builder: (context, state) {
+                  return AnimatedOpacity(
+                    duration: Durations.short3,
+                    opacity: state is RefreshTokenError || state is GetClientError ? 1 : 0,
+                    child: IgnorePointer(
+                      ignoring: state is! RefreshTokenError && state is! GetClientError,
+                      child: SizedBox(
+                        height: 170,
+                        child: Column(
+                          spacing: 8,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              L10n.tr().errorFetchingUserData,
+                              style: TStyle.errorSemi(16),
+                            ),
+                            const SizedBox.shrink(),
+                            if (trialCount < 3)
+                              OutlinedButton(
+                                onPressed: state is RefreshTokenError ? cubit.refreshToken : cubit.getClient,
+                                child: Row(
+                                  spacing: 6,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(L10n.tr().retry, style: TStyle.whiteSemi(14)),
+                                    const Icon(Icons.refresh, color: Co.white, size: 24),
+                                  ],
+                                ),
+                              ),
+                            ElevatedButton(
+                              onPressed: () {
+                                TokenService.deleteToken();
+                                Navigator.of(context).pushReplacement(
+                                  AppTransitions().slideTransition(
+                                    BlocProvider(create: (context) => di<LoginCubit>(), child: const LoginScreen()),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                L10n.tr().skip,
+                                style: TStyle.blackSemi(14),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              const Spacer(flex: 2),
+            ],
           ),
         ),
       ),

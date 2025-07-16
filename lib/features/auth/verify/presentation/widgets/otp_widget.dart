@@ -3,6 +3,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpWidget extends StatefulWidget {
@@ -46,6 +47,7 @@ class _OtpWidgetState extends State<OtpWidget> {
         closeKeyboardWhenCompleted: true,
         defaultPinTheme: defaultPinTheme,
         focusedPinTheme: defaultPinTheme,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         submittedPinTheme: defaultPinTheme,
         validator: (v) => Validators.valueMustBeNum(v, widget.count, "Code"),
         pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,

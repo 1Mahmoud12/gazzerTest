@@ -4,28 +4,33 @@ sealed class SplashStates {}
 
 class SplashInitial extends SplashStates {}
 
-sealed class SplashRefreshTokenStates extends SplashStates {}
+sealed class RefreshTokenStates extends SplashStates {}
 
-class SplashRefreshTokenLoading extends SplashRefreshTokenStates {}
+class RefreshTokenLoading extends RefreshTokenStates {}
 
-class SplashRefreshTokenSuccess extends SplashRefreshTokenStates {}
+class RefreshTokenSuccess extends RefreshTokenStates {}
 
-class SplashRefreshTokenError extends SplashRefreshTokenStates {
+class RefreshTokenError extends RefreshTokenStates {
   final String message;
 
-  SplashRefreshTokenError(this.message);
+  RefreshTokenError(this.message);
 }
 
-sealed class SplashGetClientStates extends SplashStates {}
+sealed class GetClientStates extends SplashStates {}
 
-class SplashGetClientLoading extends SplashGetClientStates {}
+class GetClientLoading extends GetClientStates {}
 
-class SplashGetClientSuccess extends SplashGetClientStates {
+class GetClientSuccess extends GetClientStates {
   final ClientEntity client;
-  SplashGetClientSuccess(this.client);
+  GetClientSuccess(this.client);
 }
 
-class SplashGetClientError extends SplashGetClientStates {
+class GetClientError extends GetClientStates {
   final String message;
-  SplashGetClientError(this.message);
+  GetClientError(this.message);
+}
+
+class UnAuth extends SplashStates {
+  final bool haveSeenTour;
+  UnAuth(this.haveSeenTour);
 }

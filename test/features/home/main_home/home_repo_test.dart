@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/domain/crashlytics_repo.dart';
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
@@ -28,7 +29,7 @@ void main() async {
 
   setUp(() {
     apiClient = MockApiClient();
-    homeRepo = HomeRepoImp(apiClient);
+    homeRepo = HomeRepoImp(apiClient, diTest<CrashlyticsRepo>());
   });
 
   tearDown(() {

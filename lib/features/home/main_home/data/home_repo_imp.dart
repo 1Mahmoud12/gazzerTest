@@ -9,7 +9,7 @@ import 'package:gazzer/features/home/main_home/presentaion/data/home_response_mo
 
 class HomeRepoImp extends HomeRepo {
   final ApiClient _apiClient;
-  HomeRepoImp(this._apiClient);
+  HomeRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
   Future<Result<List<CategoryEntity>>> getCategories() {

@@ -24,7 +24,7 @@ class SocialRepoImp extends SocialRepo {
     final GoogleSignIn signIn = GoogleSignIn.instance;
     await signIn.initialize();
     if (!signIn.supportsAuthenticate()) {
-      return Result.error(ApiError(message: "asdad"));
+      return Result.error(BaseError(message: "asdad", e: ErrorType.unknownError));
     }
     try {
       final result = await signIn.authenticate();
@@ -38,7 +38,7 @@ class SocialRepoImp extends SocialRepo {
       return Result.ok(data);
     } catch (e) {
       print("SOCIAL ::::: Error signing in with Google: $e");
-      return Result.error(ApiError(message: "Failed to sign in with Google: ${e.toString()}"));
+      return Result.error(BaseError(message: "Failed to sign in with Google: ${e.toString()}", e: ErrorType.unknownError));
     }
   }
 
@@ -66,11 +66,11 @@ class SocialRepoImp extends SocialRepo {
           ),
         );
       } else {
-        return Result.error(ApiError(message: "Failed to sign in with Facebook: ${result.message ?? 'Unknown error'}"));
+        return Result.error(BaseError(message: "Failed to sign in with Facebook: ${result.message ?? 'Unknown error'}", e: ErrorType.unknownError));
       }
     } catch (e) {
       print("SOCIAL ::::: Error signing in with Facebook: $e");
-      return Result.error(ApiError(message: "Failed to sign in with Facebook: ${e.toString()}"));
+      return Result.error(BaseError(message: "Failed to sign in with Facebook: ${e.toString()}", e: ErrorType.unknownError));
     }
   }
 
@@ -87,7 +87,7 @@ class SocialRepoImp extends SocialRepo {
       );
     } catch (e) {
       print("SOCIAL ::::: Error signing in with APple: $e");
-      return Result.error(ApiError(message: "Failed to sign in with Apple: ${e.toString()}"));
+      return Result.error(BaseError(message: "Failed to sign in with Apple: ${e.toString()}", e: ErrorType.unknownError));
     }
   }
 

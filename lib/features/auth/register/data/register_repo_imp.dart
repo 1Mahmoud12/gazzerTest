@@ -11,7 +11,7 @@ import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 
 class RegisterRepoImp extends RegisterRepo {
   final ApiClient _apiClient;
-  RegisterRepoImp(this._apiClient);
+  RegisterRepoImp(this._apiClient, super.crashlyticsRepo);
 
   // late String _sessionId;
 
@@ -37,7 +37,7 @@ class RegisterRepoImp extends RegisterRepo {
 
   /// data is sessionId
   @override
-  Future<Result<String>> resend(String data) => resendOtp(data);
+  Future<Result<String>> resend(dynamic data) => resendOtp(data);
 
   @override
   Future<Result<String>> editPhoneNumber(String sessionId, String code) {
@@ -58,7 +58,7 @@ class RegisterRepoImp extends RegisterRepo {
     return call<String>(
       apiCall: () => _apiClient.post(endpoint: Endpoints.verifyOTP, requestBody: body),
       parser: (result) {
-        final response = ClientResponse.fromJson(result.data);
+        final response = ClientResponse.fromWholeResponse(result.data);
         setAuthUser(response.toClientEntity(), response.accessToken);
         return response.message ?? 'Success';
       },
@@ -67,7 +67,7 @@ class RegisterRepoImp extends RegisterRepo {
 
   /// data is sessionId
   @override
-  Future<Result<String>> verify(String otpCode, String data) => verifyOTP(data, otpCode);
+  Future<Result<String>> verify(String otpCode, dynamic data) => verifyOTP(data, otpCode);
 
   @override
   void setAuthUser(ClientEntity client, String token) {

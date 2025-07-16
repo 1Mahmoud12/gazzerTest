@@ -8,12 +8,9 @@ import 'dart:async' as _i3;
 import 'package:dio/dio.dart' as _i9;
 import 'package:gazzer/core/data/network/result_model.dart' as _i4;
 import 'package:gazzer/features/auth/common/data/auth_response.dart' as _i5;
-import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart'
-    as _i8;
-import 'package:gazzer/features/auth/register/data/register_repo_imp.dart'
-    as _i2;
-import 'package:gazzer/features/auth/register/data/register_request.dart'
-    as _i6;
+import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart' as _i8;
+import 'package:gazzer/features/auth/register/data/register_repo_imp.dart' as _i2;
+import 'package:gazzer/features/auth/register/data/register_request.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 
@@ -80,7 +77,7 @@ class MockRegisterRepoImp extends _i1.Mock implements _i2.RegisterRepoImp {
           as _i3.Future<_i4.Result<String>>);
 
   @override
-  _i3.Future<_i4.Result<String>> resend([String? data]) =>
+  _i3.Future<_i4.Result<String>> resend(data) =>
       (super.noSuchMethod(
             Invocation.method(#resend, [data]),
             returnValue: _i3.Future<_i4.Result<String>>.value(
@@ -138,7 +135,7 @@ class MockRegisterRepoImp extends _i1.Mock implements _i2.RegisterRepoImp {
           as _i3.Future<_i4.Result<String>>);
 
   @override
-  _i3.Future<_i4.Result<String>> verify(String? otpCode, [String? data]) =>
+  _i3.Future<_i4.Result<String>> verify(String? otpCode, data) =>
       (super.noSuchMethod(
             Invocation.method(#verify, [otpCode, data]),
             returnValue: _i3.Future<_i4.Result<String>>.value(
@@ -151,11 +148,10 @@ class MockRegisterRepoImp extends _i1.Mock implements _i2.RegisterRepoImp {
           as _i3.Future<_i4.Result<String>>);
 
   @override
-  void setAuthUser(_i8.ClientEntity? client, String? token) =>
-      super.noSuchMethod(
-        Invocation.method(#setAuthUser, [client, token]),
-        returnValueForMissingStub: null,
-      );
+  void setAuthUser(_i8.ClientEntity? client, String? token) => super.noSuchMethod(
+    Invocation.method(#setAuthUser, [client, token]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   _i3.Future<_i4.Result<T>> call<T>({

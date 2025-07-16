@@ -14,6 +14,8 @@ import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/profile/data/profile_repo_imp.dart';
 import 'package:gazzer/features/profile/domain/profile_repo.dart';
+import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/stores/resturants/data/repo_imp/categories_of_plates_repo_imp.dart';
 import 'package:gazzer/features/stores/resturants/data/repo_imp/plates_repo_imp.dart';
 import 'package:gazzer/features/stores/resturants/data/repo_imp/restaurants_repo_imp.dart';
@@ -49,14 +51,14 @@ Future _registerAsync() async {
 }
 
 void _registerRepos() {
-  di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(di.get()));
-  di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get()));
-  di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get()));
-  di.registerLazySingleton<HomeRepo>(() => HomeRepoImp(di.get()));
-  di.registerLazySingleton<CategoriesOfPlatesRepo>(() => CategoriesOfPlatesRepoImp(di.get()));
-  di.registerLazySingleton<RestaurantsRepo>(() => RestaurantsRepoImp(di.get()));
-  di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get()));
-  di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get()));
+  di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get(), di.get()));
+  di.registerLazySingleton<HomeRepo>(() => HomeRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<CategoriesOfPlatesRepo>(() => CategoriesOfPlatesRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<RestaurantsRepo>(() => RestaurantsRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get(), di.get()));
 }
 
 void _registerCubits() {
@@ -64,4 +66,6 @@ void _registerCubits() {
   di.registerFactory(() => LoginCubit(di.get()));
   di.registerFactory(() => HomeCubit(di.get()));
   di.registerFactory(() => RestaurantsMenuCubit(di.get(), di.get()));
+  di.registerFactory(() => SplashCubit(di.get(), di.get()));
+  di.registerFactory(() => ProfileCubit(di.get()));
 }

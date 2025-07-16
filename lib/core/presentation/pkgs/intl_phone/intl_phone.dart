@@ -28,6 +28,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   final List<TextInputFormatter> inputFormatters;
   final Future<String?> Function()? loadFromJson;
   final String? Function(String? number)? validator;
+  final bool showBorder;
   InternationalPhoneNumberInput({
     super.key,
     TextEditingController? controller,
@@ -43,6 +44,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     DialogConfig? dialogConfig,
     CountryConfig? countryConfig,
     PhoneConfig? phoneConfig,
+    required this.showBorder,
   }) : dialogConfig = dialogConfig ?? DialogConfig(),
        controller = controller ?? TextEditingController(),
        countryConfig = countryConfig ?? CountryConfig(),
@@ -134,16 +136,19 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             // ),
             child: DecoratedBox(
               decoration: widget.countryConfig.decoration,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 5,
-                  children: [
-                    FlagView(countryCodeModel: selected, isFlat: widget.countryConfig.flatFlag, size: 24),
-                    Text(selected.dial_code, style: widget.phoneConfig.hintStyle),
-                  ],
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 100),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 5,
+                    children: [
+                      FlagView(countryCodeModel: selected, isFlat: widget.countryConfig.flatFlag, size: 24),
+                      Text(selected.dial_code, style: widget.phoneConfig.hintStyle),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -173,20 +178,29 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             onTapOutside: (event) => FocusScope.of(context).unfocus(),
             inputFormatters: widget.inputFormatters,
             decoration: InputDecoration(
-              border: GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 2),
-              hintText: widget.phoneConfig.hintText,
               isDense: true,
               contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
               filled: widget.phoneConfig.backgroundColor != null,
               fillColor: widget.phoneConfig.backgroundColor,
               hintStyle: widget.phoneConfig.hintStyle,
-              enabledBorder: GradientOutlineInputBorder(gradient: Grad().shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
-              focusedBorder: GradientOutlineInputBorder(gradient: Grad().shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
+              hintText: widget.phoneConfig.hintText,
+              border: !widget.showBorder ? null : GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 2),
+              enabledBorder: !widget.showBorder
+                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  : GradientOutlineInputBorder(gradient: Grad().shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
+              focusedBorder: !widget.showBorder
+                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  : GradientOutlineInputBorder(gradient: Grad().shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
+
+              focusedErrorBorder: !widget.showBorder
+                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  : GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
+              errorBorder: !widget.showBorder
+                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  : GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
               labelText: widget.phoneConfig.labelText,
               labelStyle: widget.phoneConfig.labelStyle,
               errorMaxLines: 1,
-              focusedErrorBorder: GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
-              errorBorder: GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
               errorText: widget.phoneConfig.errorText,
               errorStyle: widget.phoneConfig.errorStyle,
               floatingLabelStyle: widget.phoneConfig.floatingLabelStyle,

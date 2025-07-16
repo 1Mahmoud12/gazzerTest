@@ -9,7 +9,46 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get splash_________________Start => '__________________';
+
+  @override
+  String get errorFetchingUserData => 'خطأ في جلب بيانات المستخدم';
+
+  @override
+  String get splash_________________End => '__________________';
+
+  @override
   String get profile_________________Start => '__________________';
+
+  @override
+  String get confirmToDelete => 'تأكيد الحذف';
+
+  @override
+  String get reason => 'السبب';
+
+  @override
+  String get other => 'أخرى';
+
+  @override
+  String get enterReson => 'أدخل السبب';
+
+  @override
+  String get currentPassword => 'كلمة المرور الحالية';
+
+  @override
+  String get newPassword => 'كلمة المرور الجديدة';
+
+  @override
+  String get profileUpdatedSuccessfully => 'تم تحديث بيانات الحساب بنجاح';
+
+  @override
+  String get youHaveNoAddressesYet => 'ليس لديك عناوين حتى الآن';
+
+  @override
+  String get saveEdit => 'حفظ التعديلات';
+
+  @override
+  String get notSetYet => 'لم يتم تعيينه';
 
   @override
   String get userProfile => 'الملف الشخصي';

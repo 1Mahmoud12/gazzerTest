@@ -40,6 +40,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final isSubmitting = ValueNotifier<bool>(false);
   late Timer timer;
   late final ValueNotifier<int> seconds;
+  final counter = 60;
   late String phoneNumber;
 
   Future<void> resend() async {
@@ -57,7 +58,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   }
 
   void _setTimer() {
-    seconds.value = 60;
+    seconds.value = counter;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds.value <= 0) {
         timer.cancel();
@@ -70,7 +71,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   @override
   void initState() {
     phoneNumber = widget.initPhone;
-    seconds = ValueNotifier<int>(60);
+    seconds = ValueNotifier<int>(counter);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _setTimer();
     });
@@ -112,13 +113,16 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
               ),
               const VerticalSpacing(8),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    L10n.tr().anOTPhasBeenSentTo + "\n( +20$phoneNumber",
-                    maxLines: 2,
-                    style: TStyle.greySemi(16),
-                    textAlign: TextAlign.start,
+                  Flexible(
+                    child: Text(
+                      "${L10n.tr().anOTPhasBeenSentTo}\n( +20$phoneNumber",
+                      maxLines: 3,
+                      style: TStyle.greySemi(16),
+                      textAlign: TextAlign.start,
+                    ),
                   ),
                   if (widget.repo.canChangePhone)
                     TextButton(

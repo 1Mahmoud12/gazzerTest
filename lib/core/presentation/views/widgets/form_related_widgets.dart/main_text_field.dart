@@ -38,13 +38,14 @@ class MainTextField extends StatefulWidget {
     this.padding,
     this.iconsConstraints,
     this.isValid,
-    this.showShadow = true,
+    this.showBorder = true,
     this.maxLines,
     this.isOutLinedBorder = true,
     this.prefixOnTap,
     this.prefixColor,
     this.autofillHints,
     this.max = 50,
+    this.disabledColor,
   });
   final TextEditingController controller;
   final String? hintText;
@@ -65,11 +66,12 @@ class MainTextField extends StatefulWidget {
   final bool isPassword;
   final bool isFilled;
   final Color? bgColor;
+  final Color? disabledColor;
   final TextInputFormatter? inputFormatters;
   final EdgeInsets? padding;
   final BoxConstraints? iconsConstraints;
   final bool? isValid;
-  final bool showShadow;
+  final bool showBorder;
   final int? maxLines;
   final bool isOutLinedBorder;
   final VoidCallback? prefixOnTap;
@@ -163,11 +165,38 @@ class _MainTextFieldState extends State<MainTextField> {
             suffix: widget.suffixWidget,
             filled: widget.isFilled || widget.bgColor != null,
             fillColor: widget.bgColor ?? Co.white,
-            focusedBorder: focusedBorder,
-            errorBorder: errorBorder,
-            focusedErrorBorder: errorBorder,
-            enabledBorder: focusedBorder,
-            disabledBorder: focusedBorder,
+            enabled: widget.enabled,
+
+            focusedBorder: widget.showBorder
+                ? focusedBorder
+                : OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                  ),
+            errorBorder: widget.showBorder
+                ? errorBorder
+                : OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                  ),
+            focusedErrorBorder: widget.showBorder
+                ? errorBorder
+                : OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                  ),
+            enabledBorder: widget.showBorder
+                ? focusedBorder
+                : OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                  ),
+            disabledBorder: widget.showBorder
+                ? focusedBorder
+                : OutlineInputBorder(
+                    borderSide: widget.disabledColor == null ? BorderSide.none : BorderSide(color: widget.disabledColor!),
+                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                  ),
           ),
         );
       },

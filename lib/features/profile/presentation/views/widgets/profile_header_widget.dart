@@ -1,11 +1,10 @@
 part of '../profile_screen.dart';
 
 class _ProfileHeaderWidget extends StatelessWidget {
-  const _ProfileHeaderWidget();
-
+  const _ProfileHeaderWidget(this.client);
+  final ClientEntity client;
   @override
   Widget build(BuildContext context) {
-    final client = Session().client;
     return Column(
       children: [
         Center(
@@ -77,16 +76,18 @@ class _ProfileHeaderWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(client?.clientName ?? 'Client Name', style: TStyle.primarySemi(16)),
-                    Text(
-                      client?.email ?? 'client@email.com',
-                      style: TStyle.primaryRegular(12, font: FFamily.inter).copyWith(
-                        color: Colors.black87,
+                    Text(client?.clientName ?? L10n.tr().notSetYet, style: TStyle.primarySemi(16)),
+                    if (client?.email != null)
+                      Text(
+                        client?.email ?? L10n.tr().notSetYet,
+                        style: TStyle.primaryRegular(12, font: FFamily.inter).copyWith(
+                          color: Colors.black87,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    Text("${L10n.tr().memberSince} ${client?.createdAt ?? 'Jan 2025'}", style: TStyle.blackRegular(12, font: FFamily.inter)),
+                    SizedBox.shrink(),
+                    Text("${L10n.tr().memberSince} ${client?.formatedCreatedAt}", style: TStyle.blackRegular(12, font: FFamily.inter)),
                   ],
                 ),
               ),

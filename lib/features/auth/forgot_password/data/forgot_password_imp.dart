@@ -6,7 +6,7 @@ import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo
 class ForgotPasswordImp extends ForgotPasswordRepo {
   final ApiClient _apiClient;
 
-  ForgotPasswordImp(this._apiClient);
+  ForgotPasswordImp(this._apiClient, super.crashlyticsRepo);
   // late String phoneNum;
   late String resetPasswordToken;
   @override
@@ -57,11 +57,11 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
 
   /// data is phone number
   @override
-  Future<Result<String>> verify(String otpCode, String? phone) => verifyOtp(phone!, otpCode);
+  Future<Result<String>> verify(String otpCode, dynamic phone) => verifyOtp(phone!, otpCode);
 
   /// data is phone number
   @override
-  Future<Result<String>> resend(String phone) => forgotPassword(phone);
+  Future<Result<String>> resend(dynamic phone) => forgotPassword(phone);
 
   @override
   Future<Result<String>> onChangePhone(String newPhone, String data) {

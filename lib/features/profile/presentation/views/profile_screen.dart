@@ -5,16 +5,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
+import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/components/loading_full_screen.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_switcher.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
+import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
+import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
+import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
 import 'package:gazzer/features/profile/presentation/model/address_model.dart';
+import 'package:gazzer/features/profile/presentation/views/component/delete_account_confirm_sheet.dart';
+import 'package:gazzer/features/profile/presentation/views/component/profile_verify_otp_sheet.dart';
+import 'package:gazzer/features/profile/presentation/views/component/udpate_account_sheet.dart';
+import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/language_drop_list.dart';
 
@@ -24,49 +38,70 @@ part 'component/settings_preference_component.dart';
 part 'widgets/profile_header_widget.dart';
 part 'widgets/theme_button.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  late final ClientEntity? client;
-
-  @override
-  void initState() {
-    client = Session().client;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const MainAppBar(
-        showLanguage: false,
-        showCart: false,
-      ),
-      body: SafeArea(
-        child: BlocBuilder<AppSettingsCubit, AppSettingsState>(
-          buildWhen: (previous, current) => previous.lang != current.lang || previous.isDarkMode != current.isDarkMode,
-          builder: (context, state) {
-            return ListView(
-              padding: AppConst.defaultPadding,
-              children: [
-                if (client != null) ...[
-                  _ProfileHeaderWidget(),
-                  const VerticalSpacing(32),
-                  _AccountInformationComponent(),
-                  const VerticalSpacing(32),
-                  _ProfileAddressesComponent(),
-                  const VerticalSpacing(32),
-                ],
-                _SettingsPreferenceComponent(client),
-              ],
-            );
-          },
-        ),
+    return BlocProvider(
+      create: (context) => di<ProfileCubit>(),
+      child: Builder(
+        builder: (context) {
+          final cubit = context.read<ProfileCubit>();
+          return BlocConsumer<ProfileCubit, ProfileStates>(
+            listener: (context, state) async {
+              if (state is ProfileErrorStates) {
+                Alerts.showToast(state.message);
+              } else if (state is UpdateSuccessWithClient) {
+                Alerts.showToast(state.message, error: false);
+              } else if (state is UpdateSuccessWithSession) {
+                if (ModalRoute.of(context)?.isCurrent == true) {
+                  await showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    useSafeArea: true,
+                    builder: (context) => BlocProvider.value(
+                      value: cubit,
+                      child: ProfileVerifyOtpScreen(sessionId: state.sessionId, req: state.req),
+                    ),
+                  );
+                }
+              }
+            },
+
+            builder: (context, state) => LoadingFullScreen(
+              isLoading: state is ProfileLoadingStates,
+              child: Scaffold(
+                appBar: const MainAppBar(
+                  showLanguage: false,
+                  showCart: false,
+                ),
+                body: SafeArea(
+                  child: BlocBuilder<AppSettingsCubit, AppSettingsState>(
+                    buildWhen: (previous, current) => previous.lang != current.lang || previous.isDarkMode != current.isDarkMode,
+                    builder: (context, state) {
+                      return ListView(
+                        padding: AppConst.defaultPadding,
+                        children: [
+                          if (cubit.client != null) ...[
+                            _ProfileHeaderWidget(cubit.client!),
+                            const VerticalSpacing(32),
+                            _AccountInformationComponent(cubit.client!),
+                            const VerticalSpacing(32),
+                            _ProfileAddressesComponent(),
+                            const VerticalSpacing(32),
+                          ],
+                          _SettingsPreferenceComponent(cubit.client),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

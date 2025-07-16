@@ -8,7 +8,7 @@ import 'package:gazzer/features/auth/login/domain/login_repo.dart';
 
 class LoginRepoImp extends LoginRepo {
   final ApiClient _apiClient;
-  LoginRepoImp(this._apiClient);
+  LoginRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
   Future<Result<String>> login(String phone, String password) async {
@@ -18,7 +18,7 @@ class LoginRepoImp extends LoginRepo {
         requestBody: {"phone": phone, "password": password},
       ),
       parser: (result) {
-        final response = ClientResponse.fromJson(result.data);
+        final response = ClientResponse.fromWholeResponse(result.data);
         TokenService.setToken(response.accessToken);
         Session().setClient = response.toClientEntity();
         return response.message ?? '';

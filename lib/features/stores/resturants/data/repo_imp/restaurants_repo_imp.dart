@@ -7,7 +7,7 @@ import 'package:gazzer/features/stores/resturants/domain/repos/restaurants_repo.
 
 class RestaurantsRepoImp extends RestaurantsRepo {
   final ApiClient _apiClient;
-  RestaurantsRepoImp(this._apiClient);
+  RestaurantsRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
   Future<Result<List<RestaurantEntity>>> getAllRestaurants(int page, int limit) {

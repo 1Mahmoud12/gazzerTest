@@ -6,6 +6,8 @@ import 'package:gazzer/features/auth/register/data/register_request.dart';
 import 'package:gazzer/features/auth/verify/domain/verify_repo.dart';
 
 abstract class RegisterRepo extends BaseApiRepo implements VerifyRepo {
+  RegisterRepo(super.crashlyticsRepo);
+
   // register
   Future<Result<AuthResponse>> register(RegisterRequest req);
   Future<Result<String>> verifyOTP(String sessionId, String code);

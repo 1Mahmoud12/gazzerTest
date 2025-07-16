@@ -7,7 +7,7 @@ class ClientResponse {
   late final String accessToken;
   int? expiresIn;
 
-  ClientResponse.fromJson(Map<String, dynamic> json) {
+  ClientResponse.fromWholeResponse(Map<String, dynamic> json) {
     if (json['data'] != null) {
       final data = json['data'];
       accessToken = data['access_token'];
@@ -25,6 +25,7 @@ class ClientDTO {
   int? id;
   String? phoneNumber;
   String? clientName;
+  String? email;
   String? countryPrefix;
   int? clientStatusId;
   String? createdAt;
@@ -36,6 +37,7 @@ class ClientDTO {
     this.id,
     this.phoneNumber,
     this.clientName,
+    this.email,
     this.countryPrefix,
     this.clientStatusId,
     this.createdAt,
@@ -54,16 +56,19 @@ class ClientDTO {
     updatedAt = json['updated_at'];
     driver = json['driver'];
     socialId = json['social_id'];
+    email = json['email'];
   }
 
   ClientEntity toClientEntity() {
     return ClientEntity(
       id: id!,
       phoneNumber: phoneNumber!,
-      clientName: clientName,
+      clientName: clientName!,
       clientStatusId: clientStatusId,
       driver: driver,
       socialId: socialId,
+      createdAt: createdAt,
+      email: email,
     );
   }
 }

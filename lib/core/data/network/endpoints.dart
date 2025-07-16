@@ -10,11 +10,17 @@ class Endpoints {
   static const login = "clients/auth/login";
 
   // profile
+  static const logout = "clients/auth/logout";
+  static const refreshToken = "clients/auth/refresh-token";
   static const profile = "clients/auth/me";
   static const updateProfile = "clients/edit-profile";
   static const verifyProfileUpdate = "clients/edit-profile/verify-otp";
   static const changePassword = "clients/change-password";
-  static const refreshToken = "clients/auth/refresh-token";
+
+  // delete account
+  static const requestDeleteAccount = "clients/request-delete-account";
+  static const confirmDeleteAccount = "clients/confirm-delete-account";
+  static const deleteAccountReasons = "core/reasons/delete_client_account";
 
   // Forget password
   static const forgetPassword = "clients/auth/forgot-password";

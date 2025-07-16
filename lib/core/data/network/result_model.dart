@@ -5,10 +5,10 @@ import 'package:gazzer/core/data/network/error_models.dart';
 /// Return a [Result] from a function to indicate success or failure.
 ///
 /// A [Result] is either an [Ok] with a value of type [T]
-/// or an [Err] with an [ApiError].
+/// or an [Err] with an [BaseError].
 ///
 /// Use [Result.ok] to create a successful result with a value of type [T].
-/// Use [Result.error] to create an error result with an [ApiError].
+/// Use [Result.error] to create an error result with an [BaseError].
 sealed class Result<T> {
   const Result();
 

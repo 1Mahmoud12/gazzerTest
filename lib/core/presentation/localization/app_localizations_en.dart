@@ -9,7 +9,46 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get splash_________________Start => '__________________';
+
+  @override
+  String get errorFetchingUserData => 'Error fetching user data';
+
+  @override
+  String get splash_________________End => '__________________';
+
+  @override
   String get profile_________________Start => '__________________';
+
+  @override
+  String get confirmToDelete => 'Confirm to delete';
+
+  @override
+  String get reason => 'Reason';
+
+  @override
+  String get other => 'Other';
+
+  @override
+  String get enterReson => 'Enter Reason';
+
+  @override
+  String get currentPassword => 'Current Password';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated Successfully';
+
+  @override
+  String get youHaveNoAddressesYet => 'You have no addresses yet';
+
+  @override
+  String get saveEdit => 'Save edit';
+
+  @override
+  String get notSetYet => 'Not set yet';
 
   @override
   String get userProfile => 'User Profile';

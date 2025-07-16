@@ -98,11 +98,89 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @splash_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get splash_________________Start;
+
+  /// No description provided for @errorFetchingUserData.
+  ///
+  /// In en, this message translates to:
+  /// **'Error fetching user data'**
+  String get errorFetchingUserData;
+
+  /// No description provided for @splash_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get splash_________________End;
+
   /// No description provided for @profile_________________Start.
   ///
   /// In en, this message translates to:
   /// **'__________________'**
   String get profile_________________Start;
+
+  /// No description provided for @confirmToDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm to delete'**
+  String get confirmToDelete;
+
+  /// No description provided for @reason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get reason;
+
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
+  /// No description provided for @enterReson.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Reason'**
+  String get enterReson;
+
+  /// No description provided for @currentPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get currentPassword;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPassword;
+
+  /// No description provided for @profileUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated Successfully'**
+  String get profileUpdatedSuccessfully;
+
+  /// No description provided for @youHaveNoAddressesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no addresses yet'**
+  String get youHaveNoAddressesYet;
+
+  /// No description provided for @saveEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save edit'**
+  String get saveEdit;
+
+  /// No description provided for @notSetYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set yet'**
+  String get notSetYet;
 
   /// No description provided for @userProfile.
   ///

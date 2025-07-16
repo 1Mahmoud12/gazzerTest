@@ -47,9 +47,9 @@ void main() async {
       blocTest<LoginCubit, LoginStates>(
         'test login method with login request that completes with error',
         setUp: () {
-          provideDummy<Result<String>>(Err(ApiError.fromJson(loginData.loginErrorJson)));
+          provideDummy<Result<String>>(Err(BadResponse.fromJson(loginData.loginErrorJson)));
           when(repo.login(loginData.validPhone, loginData.validPassword)).thenAnswer((_) async {
-            return Err(ApiError.fromJson(loginData.loginErrorJson));
+            return Err(BadResponse.fromJson(loginData.loginErrorJson));
           });
         },
         build: () => cubit,

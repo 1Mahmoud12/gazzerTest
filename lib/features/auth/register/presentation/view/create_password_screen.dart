@@ -160,7 +160,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       ),
                     );
                   } else if (state is RegisterError) {
-                    if (state.error.message != null) Alerts.showToast(state.error.message!);
+                    Alerts.showToast(state.error.message);
                   }
                 },
                 builder: (context, state) => Hero(

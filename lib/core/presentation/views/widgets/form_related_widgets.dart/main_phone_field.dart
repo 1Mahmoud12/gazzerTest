@@ -21,11 +21,11 @@ class PhoneTextField extends StatefulWidget {
   final String? phoneNumb;
   final String? code;
   final bool noInitcode;
-  final Color? color;
+  final Color? bgColor;
   final double? height;
   final bool hasLabel;
   final bool hasHint;
-
+  final bool showBorder;
   final Color? borderColor;
   final EdgeInsets? padding;
 
@@ -38,9 +38,10 @@ class PhoneTextField extends StatefulWidget {
     this.phoneNumb,
     this.code,
     this.noInitcode = false,
-    this.color,
+    this.bgColor,
     this.borderColor,
     this.height,
+    this.showBorder = true,
     this.hasLabel = true,
     this.hasHint = false,
   });
@@ -73,6 +74,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         initCountry: country,
         betweenPadding: 10,
+        showBorder: widget.showBorder,
         onInputChanged: (phone) {
           setState(() => countryCode = phone.code);
           if (widget.onChange == null) return;
@@ -82,7 +84,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         },
         // loadFromJson: loadFromJson,
         dialogConfig: DialogConfig(
-          backgroundColor: widget.color ?? const Color(0xFFffffff),
+          backgroundColor: widget.bgColor ?? const Color(0xFFffffff),
           searchBoxBackgroundColor: Co.grey.withAlpha(20),
           searchBoxIconColor: const Color(0xFF444448),
           countryItemHeight: 55,
@@ -98,8 +100,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         countryConfig: CountryConfig(
           flagSize: 30,
           decoration: BoxDecoration(
-            border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
-            borderRadius: AppConst.defaultInnerBorderRadius,
+            color: widget.bgColor,
+            border: !widget.showBorder ? null : GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
+            borderRadius: AppConst.defaultBorderRadius,
           ),
           textStyle: TStyle.greyRegular(14),
         ),
@@ -125,7 +128,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
               ? '1xxxxxxxxx'
               : 'xxxxxx',
           borderWidth: 2,
-          backgroundColor: Colors.transparent,
+          backgroundColor: widget.bgColor,
           decoration: null,
           popUpErrorText: true,
           autoFocus: false,

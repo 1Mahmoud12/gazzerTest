@@ -14,13 +14,13 @@ class SocialLogin {
       switch (result) {
         case Ok<SocialLoginData> ok:
           return await repo.sendSocialToBackend(ok.value);
-        case Err<ApiError> e:
+        case Err<BaseError> e:
           return Result.error(e.error);
         default:
-          return Result.error(ApiError(message: "Unknown error occurred"));
+          return Result.error(BaseError(message: "Unknown error occurred", e: ErrorType.unknownError));
       }
     } catch (e) {
-      return Result.error(ApiError(message: "Unknown error occurred"));
+      return Result.error(BaseError(message: "Unknown error occurred", e: ErrorType.unknownError));
     }
   }
 }

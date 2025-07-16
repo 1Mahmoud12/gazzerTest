@@ -16,17 +16,27 @@ class _ProfileAddressesComponent extends StatelessWidget {
         Divider(height: 15, thickness: 1, color: Co.purple.withAlpha(90)),
         ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 300),
-          child: Scrollbar(
-            child: ListView.separated(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              itemCount: Fakers().addresses.length,
-              separatorBuilder: (context, index) => const VerticalSpacing(16),
-              itemBuilder: (context, index) {
-                return AddressCard(address: AddressModel.fromEntity(Fakers().addresses[index]));
-              },
-            ),
-          ),
+          child: Fakers().addresses.isEmpty
+              ? SizedBox(
+                  height: 200,
+                  child: Center(
+                    child: Text(
+                      L10n.tr().youHaveNoAddressesYet,
+                      style: TStyle.primaryRegular(14),
+                    ),
+                  ),
+                )
+              : Scrollbar(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    itemCount: Fakers().addresses.length,
+                    separatorBuilder: (context, index) => const VerticalSpacing(16),
+                    itemBuilder: (context, index) {
+                      return AddressCard(address: AddressModel.fromEntity(Fakers().addresses[index]));
+                    },
+                  ),
+                ),
         ),
         MainBtn(
           onPressed: () {},

@@ -1,11 +1,11 @@
 part of '../profile_screen.dart';
 
 class _AccountInformationComponent extends StatelessWidget {
-  const _AccountInformationComponent();
-
+  const _AccountInformationComponent(this.client);
+  final ClientEntity client;
   @override
   Widget build(BuildContext context) {
-    final client = Session().client;
+    final cubit = context.read<ProfileCubit>();
     return Column(
       spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,20 +18,30 @@ class _AccountInformationComponent extends StatelessWidget {
         ProfileInformationRow(
           icon: Assets.assetsSvgUser,
           title: L10n.tr().fullName,
-          value: client?.clientName ?? "Client Name",
+          value: client.clientName,
         ),
         ProfileInformationRow(
           icon: Icons.email_outlined,
           title: L10n.tr().emailAddress,
-          value: client?.email ?? "Client Email",
+          value: client.email ?? L10n.tr().notSetYet,
         ),
         ProfileInformationRow(
           icon: Icons.phone_outlined,
           title: L10n.tr().mobileNumber,
-          value: client?.phoneNumber ?? "Client Mobile",
+          value: client.phoneNumber,
         ),
         MainBtn(
-          onPressed: () {},
+          onPressed: () async {
+            final res = await showModalBottomSheet<UpdateProfileReq>(
+              context: context,
+              backgroundColor: Co.secText,
+              isScrollControlled: true,
+              builder: (context) {
+                return const UdpateAccountSheet();
+              },
+            );
+            if (res != null && context.mounted) context.read<ProfileCubit>().updateProfile(res);
+          },
           bgColor: Co.secondary,
           radius: 16,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
@@ -55,24 +65,47 @@ class _AccountInformationComponent extends StatelessWidget {
           ),
         ),
 
-        MainBtn(
-          onPressed: () {},
-          bgColor: Colors.transparent,
-          borderColor: Co.purple,
-          radius: 16,
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-          child: Row(
-            spacing: 16,
-            children: [
-              const Icon(CupertinoIcons.delete, size: 20, color: Co.purple),
-              Expanded(
-                child: Text(
-                  L10n.tr().deleteAccount,
-                  style: TStyle.primaryBold(14, font: FFamily.inter),
-                  textAlign: TextAlign.center,
+        BlocListener<ProfileCubit, ProfileStates>(
+          listener: (context, state) {
+            if (state is RequestDeleteAccountSuccess && ModalRoute.of(context)?.isCurrent == true) {
+              context.myPush(
+                BlocProvider.value(
+                  value: cubit,
+                  child: DeleteAccountScreen(sessionId: state.sessionId),
                 ),
-              ),
-            ],
+              );
+            } else if (state is RequestDeleteAccountError) {
+              Alerts.showToast(state.message);
+            }
+          },
+          child: MainBtn(
+            onPressed: () async {
+              final res = await showModalBottomSheet<bool>(
+                context: context,
+                backgroundColor: Co.secText,
+                constraints: const BoxConstraints(minHeight: 260),
+                useSafeArea: true,
+                builder: (context) => const DeleteAccountConfirmSheet(),
+              );
+              if (res == true) cubit.requestDeleteAccount();
+            },
+            bgColor: Colors.transparent,
+            borderColor: Co.purple,
+            radius: 16,
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+            child: Row(
+              spacing: 16,
+              children: [
+                const Icon(CupertinoIcons.delete, size: 20, color: Co.purple),
+                Expanded(
+                  child: Text(
+                    L10n.tr().deleteAccount,
+                    style: TStyle.primaryBold(14, font: FFamily.inter),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],

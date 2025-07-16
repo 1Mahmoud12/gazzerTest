@@ -7,7 +7,7 @@ import 'package:gazzer/features/stores/resturants/domain/repos/plates_repo.dart'
 
 class PlatesRepoImp extends PlatesRepo {
   final ApiClient _apiClient;
-  PlatesRepoImp(this._apiClient);
+  PlatesRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
   Future<Result<List<PlateEntity>>> getAllPlatesPaginated(int page, [int perPage = 10]) {
