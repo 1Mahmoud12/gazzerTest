@@ -25,7 +25,7 @@ import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/
 
 class RestaurantsMenu extends StatefulWidget {
   const RestaurantsMenu({super.key});
-
+  static const route = '/restaurants-menu';
   @override
   State<RestaurantsMenu> createState() => _RestaurantsMenuState();
 }

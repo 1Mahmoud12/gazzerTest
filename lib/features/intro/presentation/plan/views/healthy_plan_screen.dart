@@ -3,19 +3,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/choose_your_mode.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
+import 'package:go_router/go_router.dart';
 
 class HealthyPlanScreen extends StatefulWidget {
   const HealthyPlanScreen({super.key});
-
+  static const route = '/healthy-plan';
   @override
   State<HealthyPlanScreen> createState() => _HealthyPlanScreenState();
 }
@@ -61,9 +61,7 @@ class _HealthyPlanScreenState extends State<HealthyPlanScreen> {
             PlanAnimatedBtn(
               onPressed: () {
                 isAnimating.value = false;
-                context.myPush(const ChooseYourMode()).then((v) {
-                  isAnimating.value = true;
-                });
+                context.push(ChooseYourMode.route).then((v) => isAnimating.value = true);
               },
               text: L10n.tr().setHealthPlan,
               isAnimating: isAnimating,
@@ -73,7 +71,7 @@ class _HealthyPlanScreenState extends State<HealthyPlanScreen> {
               tag: Tags.btn,
               child: PlanAnimatedBtn(
                 onPressed: () {
-                  context.myPushAndRemoveUntil(const CongratsScreen(navigateTo: MainLayout()));
+                  const CongratsScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                 },
                 text: L10n.tr().skip,
                 isAnimating: isAnimating,

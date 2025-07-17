@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
@@ -11,6 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
+import 'package:go_router/go_router.dart';
 
 class UdpateAccountSheet extends StatefulWidget {
   const UdpateAccountSheet({super.key});
@@ -171,7 +171,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 email: _emailController.text.trim(),
                 phone: _phoneController.text.trim(),
               );
-              context.myPop(result: req);
+              context.pop(req);
             },
             bgColor: Co.secondary,
             radius: 16,

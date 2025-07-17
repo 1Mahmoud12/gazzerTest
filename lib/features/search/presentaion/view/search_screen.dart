@@ -11,7 +11,7 @@ import 'package:gazzer/features/search/presentaion/view/widgets/search_result_ve
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
-
+  static const route = '/search';
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }

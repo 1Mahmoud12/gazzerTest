@@ -5,10 +5,25 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/widgets/tutorial_bottom_sheet.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+part 'intro_video_tutorial_screen.g.dart';
+
+@TypedGoRoute<IntroVideoTutorialRoute>(path: IntroVideoTutorialScreen.routeUriLink)
+@immutable
+class IntroVideoTutorialRoute extends GoRouteData with _$IntroVideoTutorialRoute {
+  const IntroVideoTutorialRoute({required this.videoLink});
+  final String videoLink;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return IntroVideoTutorialScreen(videoLink: videoLink);
+  }
+}
 
 class IntroVideoTutorialScreen extends StatefulWidget {
   const IntroVideoTutorialScreen({super.key, required this.videoLink});
+  static const routeUriLink = '/video-player';
   final String videoLink;
   @override
   State<IntroVideoTutorialScreen> createState() => _IntroVideoTutorialScreenState();

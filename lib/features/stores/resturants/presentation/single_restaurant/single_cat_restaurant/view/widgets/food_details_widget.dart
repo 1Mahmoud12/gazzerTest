@@ -22,14 +22,7 @@ class _FoodDetailsWidget extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     SystemSound.play(SystemSoundType.click);
-                    ;
-                    AppNavigator().push(
-                      AppTransitions().slideTransition(
-                        AddFoodToCartScreen(product: product),
-                        start: const Offset(0, 1),
-                      ),
-                      parent: Parent.main,
-                    );
+                    AddFoodToCartRoute($extra: product).push(context);
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(6),

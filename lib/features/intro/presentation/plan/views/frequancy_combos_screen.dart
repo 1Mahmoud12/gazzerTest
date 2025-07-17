@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
 
 class FrequancyCombosScreen extends StatefulWidget {
   const FrequancyCombosScreen({super.key});
-
+  static const route = '/frequancy-combo';
   @override
   State<FrequancyCombosScreen> createState() => _FrequancyCombosScreenState();
 }
@@ -63,15 +62,11 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
               children: [
                 ...List.generate(focusData.length, (index) {
                   final child = PlanAnimatedBtn(
-                    onPressed: () {
+                    onPressed: () async {
                       isAnimating.value = false;
-                      context
-                          .myPush(
-                            const LoadingScreen(navigateTo: CongratsScreen(navigateTo: MainLayout())),
-                          )
-                          .then((v) {
-                            isAnimating.value = true;
-                          });
+                      const LoadingScreenRoute(navigateToRoute: '').go(context);
+                      await Future.delayed(const Duration(seconds: 3));
+                      const CongratsScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                     },
                     isAnimating: isAnimating,
                     animDuration: animDuration,

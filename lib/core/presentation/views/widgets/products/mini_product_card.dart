@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
@@ -23,7 +22,7 @@ class MiniProductCard extends StatelessWidget {
           height: constraints.maxHeight,
           width: constraints.maxHeight * 0.71,
           child: InkWell(
-            onTap: () => AppNavigator().push(AddFoodToCartScreen(product: product)),
+            onTap: () => AddFoodToCartRoute($extra: product).push(context),
             borderRadius: AppConst.defaultBorderRadius,
             child: Stack(
               children: [

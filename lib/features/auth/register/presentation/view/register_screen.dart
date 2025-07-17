@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -14,14 +13,13 @@ import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show MainTextField, PhoneTextField;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
-import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
-
+  static const route = '/register';
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -106,18 +104,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() == true) {
                       TextInput.finishAutofillContext();
-                      context.myPush(
-                        BlocProvider(
-                          create: (context) => di<RegisterCubit>(),
-                          child: CreatePasswordScreen(
-                            req: RegisterRequest(
-                              name: _nameController.text,
-                              countryIso: countryCode,
-                              phone: _phoneController.text,
-                              password: '',
-                              passwordConfirmation: '',
-                            ),
-                          ),
+                      context.push(
+                        CreatePasswordScreen.routeWithExtra,
+                        extra: RegisterRequest(
+                          name: _nameController.text,
+                          countryIso: countryCode,
+                          phone: _phoneController.text,
+                          password: '',
+                          passwordConfirmation: '',
                         ),
                       );
                     }

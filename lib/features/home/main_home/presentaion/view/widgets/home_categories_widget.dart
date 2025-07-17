@@ -68,12 +68,7 @@ class CategoryCard extends StatelessWidget {
           ),
           clipBehavior: Clip.hardEdge,
           onPressed: () {
-            context.myPush(
-              BlocProvider(
-                create: (context) => di<RestaurantsMenuCubit>(),
-                child: const RestaurantsMenu(),
-              ),
-            );
+            context.push(RestaurantsMenu.route);
           },
           child: Column(
             spacing: 4,

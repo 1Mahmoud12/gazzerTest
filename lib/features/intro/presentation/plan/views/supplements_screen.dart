@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
@@ -9,10 +8,11 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_t
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
+import 'package:go_router/go_router.dart';
 
 class SupplementsScreen extends StatefulWidget {
   const SupplementsScreen({super.key});
-
+  static const route = '/supplements';
   @override
   State<SupplementsScreen> createState() => _SupplementsScreenState();
 }
@@ -67,9 +67,7 @@ class _SupplementsScreenState extends State<SupplementsScreen> {
                     animDuration: animDuration,
                     onPressed: () {
                       isAnimating.value = false;
-                      context.myPush(const NuttrationSupportScreen()).then((v) {
-                        isAnimating.value = true;
-                      });
+                      context.push(NuttrationSupportScreen.route).then((v) => isAnimating.value = true);
                     },
                     text: focusData[index],
                   ),

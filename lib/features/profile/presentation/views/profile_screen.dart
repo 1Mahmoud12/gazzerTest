@@ -10,7 +10,6 @@ import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/loading_full_screen.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
@@ -18,7 +17,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/main_switcher.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
-import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
@@ -30,6 +28,7 @@ import 'package:gazzer/features/profile/presentation/views/delete_account_screen
 import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/language_drop_list.dart';
+import 'package:go_router/go_router.dart';
 
 part 'component/account_information_component.dart';
 part 'component/profile_addresses_component.dart';
@@ -39,7 +38,7 @@ part 'widgets/theme_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
+  static const route = '/profile';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

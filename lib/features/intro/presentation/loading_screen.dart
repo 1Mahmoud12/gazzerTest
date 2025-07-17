@@ -3,16 +3,30 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/staggered_dots_wave.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
+import 'package:go_router/go_router.dart';
+
+part 'loading_screen.g.dart';
+
+@TypedGoRoute<LoadingScreenRoute>(path: LoadingScreen.routeUriRoute)
+@immutable
+class LoadingScreenRoute extends GoRouteData with _$LoadingScreenRoute {
+  const LoadingScreenRoute({required this.navigateToRoute});
+  final String navigateToRoute;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return LoadingScreen(navigateToRoute: navigateToRoute);
+  }
+}
 
 class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({super.key, required this.navigateTo, this.toLoad});
-  final Widget navigateTo;
+  static const routeUriRoute = '/loading';
+  const LoadingScreen({super.key, required this.navigateToRoute, this.toLoad});
+  final String navigateToRoute;
   final Future Function()? toLoad;
 
   @override
@@ -20,11 +34,13 @@ class LoadingScreen extends StatelessWidget {
     Future _loadAndNav() async {
       if (toLoad != null) {
         await toLoad!();
-        if (context.mounted) context.myPushAndRemoveUntil(navigateTo);
+        if (context.mounted) {
+          context.go(navigateToRoute);
+        }
       } else {
         Future.delayed(const Duration(seconds: 3), () {
           if (context.mounted) {
-            context.myPushAndRemoveUntil(navigateTo);
+            context.go(navigateToRoute);
           }
         });
       }

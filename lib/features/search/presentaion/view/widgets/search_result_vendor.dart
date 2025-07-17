@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
-import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
@@ -29,13 +26,13 @@ class SearchResultVendor extends StatelessWidget {
           child: InkWell(
             onTap: () {
               if (vendor.id.isEven) {
-                final widget = AppTransitions().slideTransition(
-                  SingleCatRestaurantScreen(vendorId: vendor.id),
-                  start: const Offset(1, 0),
-                );
-                AppNavigator().push(widget);
+                SingleCatRestaurantRoute(id: vendor.id).push(context);
+                // final widget = AppTransitions().slideTransition(
+                //   SingleCatRestaurantScreen(vendorId: vendor.id),
+                //   start: const Offset(1, 0),
+                // );
               } else {
-                context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
+                MultiCatRestaurantsRoute(id: vendor.id).push(context);
               }
             },
             child: Row(

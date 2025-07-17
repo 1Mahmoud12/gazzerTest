@@ -67,13 +67,7 @@ class _AccountInformationComponent extends StatelessWidget {
 
         MainBtn(
           onPressed: () async {
-            AppNavigator().push(
-              BlocProvider.value(
-                value: cubit,
-                child: const DeleteAccountScreen(),
-              ),
-              parent: Parent.main,
-            );
+            DeleteAccountRoute($extra: cubit).push(context);
           },
           bgColor: Colors.transparent,
           borderColor: Co.purple,

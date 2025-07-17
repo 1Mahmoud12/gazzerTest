@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/di.dart';
@@ -9,6 +8,7 @@ import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.da
 import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo.dart';
 import 'package:gazzer/features/auth/forgot_password/presentation/reset_password_screen.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgetPasswordBtn extends StatelessWidget {
   const ForgetPasswordBtn({super.key});
@@ -49,13 +49,12 @@ class ForgetPasswordBtn extends StatelessWidget {
 
         ///
         if (isSentOtp && context.mounted) {
-          context.myPush(
-            VerifyOTPScreen(
-              repo: di<ForgotPasswordRepo>(),
+          (
+            VerifyOTPScreenRoute(
               initPhone: phone,
               data: phone,
-              onSuccess: (ctx) => ctx.myPushReplacement(const ResetPasswordScreen()),
-            ),
+              $extra: (di<ForgotPasswordRepo>(), (ctx) => ctx.pushReplacement(ResetPasswordScreen.route)),
+            ).push(context),
           );
         }
       },

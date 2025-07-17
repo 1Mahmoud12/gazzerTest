@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
@@ -12,10 +11,11 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo.dart';
+import 'package:go_router/go_router.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
-
+  static const route = '/reset-password';
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
@@ -34,7 +34,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     switch (resp) {
       case Ok<String> ok:
         Alerts.showToast(ok.value, error: false);
-        if (mounted) context.myPop();
+        if (mounted) context.pop();
         break;
       case Err err:
         return Alerts.showToast(err.error.message);

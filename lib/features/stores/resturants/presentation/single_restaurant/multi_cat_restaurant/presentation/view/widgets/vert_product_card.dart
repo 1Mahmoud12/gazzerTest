@@ -9,7 +9,7 @@ class _VertProductCard extends StatelessWidget {
       width: 138,
       child: InkWell(
         onTap: () {
-          AppNavigator().push(AddFoodToCartScreen(product: prod));
+          AddFoodToCartRoute($extra: prod).push(context);
         },
         child: Stack(
           alignment: Alignment.topCenter,

@@ -2,14 +2,28 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
+import 'package:go_router/go_router.dart';
+
+part 'congrats_screen.g.dart';
+
+@TypedGoRoute<CongratsScreenRoute>(path: CongratsScreen.routeUriRoute)
+@immutable
+class CongratsScreenRoute extends GoRouteData with _$CongratsScreenRoute {
+  const CongratsScreenRoute({required this.navigateToRoute});
+  final String navigateToRoute;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return CongratsScreen(navigateTo: navigateToRoute);
+  }
+}
 
 class CongratsScreen extends StatefulWidget {
   const CongratsScreen({super.key, required this.navigateTo});
-  final Widget navigateTo;
+  static const routeUriRoute = '/congrats';
+  final String navigateTo;
   @override
   State<CongratsScreen> createState() => _CongratsScreenState();
 }
@@ -67,7 +81,7 @@ class _CongratsScreenState extends State<CongratsScreen> {
                     const VerticalSpacing(12),
                     OptionBtn(
                       onPressed: () {
-                        context.myPushAndRemoveUntil(widget.navigateTo);
+                        context.go(widget.navigateTo);
                       },
                       width: 209,
                       child: GradientText(text: L10n.tr().start, style: TStyle.blackSemi(13)),

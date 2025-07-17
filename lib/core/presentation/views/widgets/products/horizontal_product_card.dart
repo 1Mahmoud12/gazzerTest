@@ -4,7 +4,6 @@ import 'package:gazzer/core/presentation/extensions/alignment.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show HorizontalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
@@ -23,7 +22,7 @@ class HorizontalProductCard extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: 600, maxHeight: height),
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => AppNavigator().push(AddFoodToCartScreen(product: product)),
+        onTap: () => AddFoodToCartRoute($extra: product).push(context),
         child: Stack(
           children: [
             Align(

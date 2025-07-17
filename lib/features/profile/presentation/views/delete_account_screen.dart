@@ -18,12 +18,25 @@ import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
 import 'package:gazzer/features/profile/presentation/views/component/delete_account_confirm_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/component/delete_account_otp_sheet.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+part 'delete_account_screen.g.dart';
+
+@TypedGoRoute<DeleteAccountRoute>(path: DeleteAccountScreen.routeWzCubit)
+@immutable
+class DeleteAccountRoute extends GoRouteData with _$DeleteAccountRoute {
+  const DeleteAccountRoute({required this.$extra});
+  final ProfileCubit $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider.value(value: $extra, child: const DeleteAccountScreen());
+  }
+}
+
 class DeleteAccountScreen extends StatefulWidget {
-  const DeleteAccountScreen({
-    super.key,
-  });
+  const DeleteAccountScreen({super.key});
+  static const routeWzCubit = '/delete-account';
   @override
   State<DeleteAccountScreen> createState() => _DeleteAccountScreenState();
 }

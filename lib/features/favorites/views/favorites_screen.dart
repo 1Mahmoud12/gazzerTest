@@ -12,6 +12,7 @@ import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_fo
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
+  static const route = '/favorites';
 
   @override
   State<FavoritesScreen> createState() => _FavoritesScreenState();
@@ -74,7 +75,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           return VerticalRotatedImgCard(
                             prod: prod,
                             onTap: () {
-                              AppNavigator().push(AddFoodToCartScreen(product: prod));
+                              AddFoodToCartRoute($extra: prod).push(context);
                             },
                           );
                         },

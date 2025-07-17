@@ -3,11 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
+import 'package:gazzer/core/presentation/routing/app_router.dart';
 import 'package:gazzer/core/presentation/theme/theming.dart';
-import 'package:gazzer/di.dart';
-import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
-import 'package:gazzer/features/splash/view/splash_screen.dart';
 
 class GazzerApp extends StatelessWidget {
   const GazzerApp({super.key});
@@ -19,9 +16,8 @@ class GazzerApp extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return BlocBuilder<AppSettingsCubit, AppSettingsState>(
-            builder: (context, state) => MaterialApp(
-              home: BlocProvider(create: (context) => di<SplashCubit>(), child: const SplashScreen()),
-              navigatorKey: AppNavigator().mainKey,
+            builder: (context, state) => MaterialApp.router(
+              routerConfig: router,
               theme: AppTheme.lightTheme,
               debugShowCheckedModeBanner: false,
               localizationsDelegates: L10n.localizationDelegates,

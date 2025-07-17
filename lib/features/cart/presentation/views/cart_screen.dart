@@ -8,7 +8,7 @@ import 'package:gazzer/features/cart/presentation/views/widgets/vendor_cart_prod
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
-
+  static const route = '/cart';
   @override
   State<CartScreen> createState() => _CartScreenState();
 }

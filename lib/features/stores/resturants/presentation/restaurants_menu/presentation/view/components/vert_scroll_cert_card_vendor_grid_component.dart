@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';
@@ -21,7 +20,7 @@ class VerticalVendorGridComponent extends StatelessWidget {
         children: [
           TitleWithMore(
             title: catName,
-            onPressed: () => context.myPush(CatRelatedRestaurantsScreen(id: catId)),
+            onPressed: () => CatRelatedRestaurantsRoute(id: catId).push(context),
           ),
 
           GridView.builder(

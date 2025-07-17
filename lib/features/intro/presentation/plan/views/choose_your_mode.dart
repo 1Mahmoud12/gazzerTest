@@ -4,16 +4,17 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, VerticalSpacing;
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
+import 'package:go_router/go_router.dart';
 
 class ChooseYourMode extends StatefulWidget {
   const ChooseYourMode({super.key});
+  static const route = '/choose-mode';
 
   @override
   State<ChooseYourMode> createState() => _ChooseYourModeState();
@@ -60,9 +61,7 @@ class _ChooseYourModeState extends State<ChooseYourMode> {
                   child: PlanAnimatedBtn(
                     onPressed: () {
                       isAnimating.value = false;
-                      context.myPush(const HealthFocusScreen()).then((v) {
-                        isAnimating.value = true;
-                      });
+                      context.push(HealthFocusScreen.route).then((v) => isAnimating.value = true);
                     },
                     isAnimating: isAnimating,
                     animDuration: animDuration,
@@ -83,9 +82,7 @@ class _ChooseYourModeState extends State<ChooseYourMode> {
                   (index) => PlanAnimatedBtn(
                     onPressed: () {
                       isAnimating.value = false;
-                      context.myPush(const HealthFocusScreen()).then((v) {
-                        isAnimating.value = true;
-                      });
+                      context.push(HealthFocusScreen.route).then((v) => isAnimating.value = true);
                     },
                     isAnimating: isAnimating,
                     animDuration: animDuration,

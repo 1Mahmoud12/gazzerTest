@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -14,6 +13,7 @@ import 'package:gazzer/features/drawer/views/widgets/drawer_btn.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({super.key});
@@ -28,17 +28,17 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   void initState() {
     drawerBtns = [
-      (L10n.tr().myCart, Assets.assetsSvgCart, (BuildContext ctx) => AppNavigator().push(const CartScreen())),
+      (L10n.tr().myCart, Assets.assetsSvgCart, (BuildContext ctx) => ctx.push(CartScreen.route)),
       (
         L10n.tr().themeMode,
         Switch(value: true, onChanged: (v) {}).withScale(scale: 0.8, alignment: Alignment.centerRight),
         (BuildContext ctx) {},
       ),
-      (L10n.tr().foodPlan, Assets.assetsSvgFoodPlan, (BuildContext ctx) => AppNavigator().push(const HealthFocusScreen())),
+      (L10n.tr().foodPlan, Assets.assetsSvgFoodPlan, (BuildContext ctx) => ctx.push(HealthFocusScreen.route)),
       (
         L10n.tr().videoTutorials,
         Assets.assetsSvgVideo,
-        (BuildContext ctx) => AppNavigator().push(const VideoTutorialScreen(), useLast: true),
+        (BuildContext ctx) => ctx.push(VideoTutorialScreen.route),
       ),
       (L10n.tr().rewards, Assets.assetsSvgRewards, (BuildContext ctx) {}),
       (
@@ -55,7 +55,7 @@ class _MainDrawerState extends State<MainDrawer> {
         L10n.tr().myProfile,
         Assets.assetsSvgCommunity,
         (BuildContext ctx) {
-          AppNavigator().push(const ProfileScreen(), useLast: true);
+          ctx.push(ProfileScreen.route);
         },
       ),
       (L10n.tr().paymentSetting, Assets.assetsSvgPaymentSettings, (BuildContext ctx) {}),

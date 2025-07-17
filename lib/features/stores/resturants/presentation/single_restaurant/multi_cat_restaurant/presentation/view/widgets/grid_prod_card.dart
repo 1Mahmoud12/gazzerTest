@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
@@ -27,7 +26,7 @@ class SingleGridProduct extends StatelessWidget {
               height: constraints.maxHeight * 0.8,
               child: InkWell(
                 onTap: () {
-                  AppNavigator().push(AddFoodToCartScreen(product: prod));
+                  AddFoodToCartRoute($extra: prod).push(context);
                 },
                 borderRadius: AppConst.defaultInnerBorderRadius,
                 child: DecoratedBox(

@@ -11,6 +11,7 @@ import 'package:gazzer/features/intro/presentation/tutorial/view/widgets/video_t
 
 class VideoTutorialScreen extends StatelessWidget {
   const VideoTutorialScreen({super.key});
+  static const route = '/vidoe-tutorial';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

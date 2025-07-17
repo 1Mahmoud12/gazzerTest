@@ -18,7 +18,7 @@ class _HomeSearchWidgetState extends State<_HomeSearchWidget> {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              context.myPush(const SearchScreen());
+              context.push(SearchScreen.route);
             },
             child: AbsorbPointer(
               absorbing: true,

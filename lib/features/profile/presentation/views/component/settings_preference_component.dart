@@ -67,12 +67,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
                   if (client != null)
                     TextButton(
                       onPressed: () {
-                        context.myPush(
-                          BlocProvider.value(
-                            value: context.read<ProfileCubit>(),
-                            child: const UpodatePasswordScreen(),
-                          ),
-                        );
+                        UpodatePasswordRoute($extra: context.read<ProfileCubit>()).push(context);
                       },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -120,10 +115,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
           else
             MainBtn(
               onPressed: () {
-                AppNavigator().push(
-                  const LoginScreen(),
-                  parent: Parent.main,
-                );
+                context.push(LoginScreen.route);
               },
               bgColor: Co.secondary,
               radius: 16,

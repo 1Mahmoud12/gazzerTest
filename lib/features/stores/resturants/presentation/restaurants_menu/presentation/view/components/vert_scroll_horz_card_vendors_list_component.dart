@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
@@ -22,7 +21,7 @@ class VertScrollHorzCardVendorsListComponent extends StatelessWidget {
         children: [
           TitleWithMore(
             title: catName,
-            onPressed: () => context.myPush(CatRelatedRestaurantsScreen(id: catId)),
+            onPressed: () => CatRelatedRestaurantsRoute(id: catId).push(context),
           ),
 
           ListView.separated(

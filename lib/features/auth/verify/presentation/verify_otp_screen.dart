@@ -16,19 +16,34 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
 import 'package:gazzer/features/auth/verify/domain/verify_repo.dart';
 import 'package:gazzer/features/auth/verify/presentation/widgets/otp_widget.dart';
+import 'package:go_router/go_router.dart';
+
+part 'verify_otp_screen.g.dart';
+
+@TypedGoRoute<VerifyOTPScreenRoute>(path: VerifyOTPScreen.route)
+@immutable
+class VerifyOTPScreenRoute extends GoRouteData with _$VerifyOTPScreenRoute {
+  const VerifyOTPScreenRoute({required this.$extra, required this.initPhone, required this.data});
+  final (VerifyRepo repo, Function(BuildContext ctx) onSuccess) $extra;
+  final String initPhone;
+  final String data;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return VerifyOTPScreen(extra: $extra, initPhone: initPhone, data: data);
+  }
+}
 
 class VerifyOTPScreen extends StatefulWidget {
+  static const route = '/verify-otp';
   const VerifyOTPScreen({
     super.key,
-    required this.repo,
-    required this.onSuccess,
+    required this.extra,
     required this.initPhone,
     required this.data,
   });
-  final VerifyRepo repo;
   final String initPhone;
   final String data;
-  final Function(BuildContext ctx) onSuccess;
+  final (VerifyRepo repo, Function(BuildContext ctx) onSuccess) extra;
   @override
   State<VerifyOTPScreen> createState() => _VerifyOTPScreenState();
 }
@@ -43,10 +58,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final counter = 60;
   late String phoneNumber;
   final showSupport = ValueNotifier<bool>(false);
+  late final VerifyRepo repo;
+  late final Function(BuildContext ctx) onSuccess;
 
   Future<void> resend() async {
     isResendingOtp.value = true;
-    final res = await widget.repo.resend(widget.data);
+    final res = await repo.resend(widget.data);
     switch (res) {
       case Ok<String> ok:
         Alerts.showToast(ok.value, error: false);
@@ -72,6 +89,8 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
 
   @override
   void initState() {
+    repo = widget.extra.$1;
+    onSuccess = widget.extra.$2;
     phoneNumber = widget.initPhone;
     seconds = ValueNotifier<int>(counter);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -126,7 +145,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  if (widget.repo.canChangePhone)
+                  if (repo.canChangePhone)
                     TextButton(
                       onPressed: () async {
                         showModalBottomSheet(
@@ -137,7 +156,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                             return ChangePhoneNumberSheet(
                               initialPhone: phoneNumber,
                               onConfirm: (val) async {
-                                final res = await widget.repo.onChangePhone(val, widget.data);
+                                final res = await repo.onChangePhone(val, widget.data);
                                 switch (res) {
                                   case Ok<String> ok:
                                     Alerts.showToast(ok.value, error: false);
@@ -239,12 +258,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                         return Alerts.showToast(L10n.tr().valueMustBeNum(6, L10n.tr().code));
                       }
                       isSubmitting.value = true;
-                      final res = await widget.repo.verify(otpCont.text, widget.data);
+                      final res = await repo.verify(otpCont.text, widget.data);
                       isSubmitting.value = false;
                       switch (res) {
                         case Ok<String> ok:
                           Alerts.showToast(ok.value, error: false);
-                          if (context.mounted) widget.onSuccess(context);
+                          if (context.mounted) onSuccess(context);
                           break;
                         case Err err:
                           otpCont.clear();

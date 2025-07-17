@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/no_paste_formatter.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
-import 'package:gazzer/core/presentation/routing/no_paste_formatter.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';

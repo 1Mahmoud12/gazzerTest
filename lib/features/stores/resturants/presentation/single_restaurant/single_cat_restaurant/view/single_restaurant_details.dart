@@ -16,13 +16,27 @@ import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/widgets/vendor_card.dart';
+import 'package:go_router/go_router.dart';
 
+part 'single_restaurant_details.g.dart';
 part 'widgets/food_details_widget.dart';
 part 'widgets/food_images_gallery.dart';
+
+@TypedGoRoute<SingleCatRestaurantRoute>(path: SingleCatRestaurantScreen.routeUriId)
+@immutable
+class SingleCatRestaurantRoute extends GoRouteData with _$SingleCatRestaurantRoute {
+  const SingleCatRestaurantRoute({required this.id});
+  final int id;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SingleCatRestaurantScreen(vendorId: id);
+  }
+}
 
 class SingleCatRestaurantScreen extends StatelessWidget {
   const SingleCatRestaurantScreen({super.key, required this.vendorId});
   final int vendorId;
+  static const routeUriId = '/single-cat-restaurant';
   @override
   Widget build(BuildContext context) {
     final listItems = [VendorCard(Fakers.vendors.first), const _FoodImagesGallery(), _FoodDetailsWidget(product: Fakers.fakeProds.first)];

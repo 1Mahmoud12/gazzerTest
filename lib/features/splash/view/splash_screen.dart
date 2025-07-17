@@ -15,7 +15,7 @@ import 'package:gazzer/features/splash/cubit/splash_states.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
+  static const route = '/splash';
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }

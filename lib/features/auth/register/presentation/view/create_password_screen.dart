@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -22,9 +21,24 @@ import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_states.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
+import 'package:go_router/go_router.dart';
+
+part 'create_password_screen.g.dart';
+
+@TypedGoRoute<CreatePasswordRoute>(path: CreatePasswordScreen.routeWithExtra)
+@immutable
+class CreatePasswordRoute extends GoRouteData with _$CreatePasswordRoute {
+  const CreatePasswordRoute({required this.$extra});
+  final RegisterRequest $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return CreatePasswordScreen(req: $extra);
+  }
+}
 
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({super.key, required this.req});
+  static const routeWithExtra = '/create-password';
   final RegisterRequest req;
   @override
   State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
@@ -51,142 +65,147 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const ClassicAppBar(),
-      body: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Co.purple.withAlpha(50), Colors.transparent],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          ),
-        ),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            padding: AppConst.defaultHrPadding,
-            children: [
-              Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-              Row(
-                children: [
-                  GradientText(
-                    text: L10n.tr().createPassword,
-                    style: TStyle.mainwBold(32),
-                    gradient: Grad().textGradient,
-                  ),
-                ],
+    return BlocProvider(
+      create: (context) => di<RegisterCubit>(),
+
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: const ClassicAppBar(),
+            body: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Co.purple.withAlpha(50), Colors.transparent],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
               ),
-              const VerticalSpacing(8),
-              Row(
-                children: [
-                  Text(
-                    L10n.tr().createPasswordToVerify,
-                    maxLines: 2,
-                    style: TStyle.greySemi(16),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('(+20${widget.req.phone}', style: TStyle.greySemi(14)),
-                  TextButton(
-                    onPressed: () async {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) {
-                          return ChangePhoneNumberSheet(
-                            initialPhone: widget.req.phone,
-                            onConfirm: (val) async {
-                              req = req.copyWith(phone: val);
-                              return true;
-                            },
-                          );
-                        },
-                      );
-                    },
-                    child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
-                  ),
-                ],
-              ),
-              const VerticalSpacing(32),
-              AutofillGroup(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  padding: AppConst.defaultHrPadding,
                   children: [
-                    Text(L10n.tr().password, style: TStyle.blackBold(20)),
+                    Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+                    Row(
+                      children: [
+                        GradientText(
+                          text: L10n.tr().createPassword,
+                          style: TStyle.mainwBold(32),
+                          gradient: Grad().textGradient,
+                        ),
+                      ],
+                    ),
                     const VerticalSpacing(8),
-                    MainTextField(
-                      controller: password,
-                      hintText: L10n.tr().yourNewPassword,
-                      bgColor: Colors.transparent,
-                      isPassword: true,
-                      validator: Validators.passwordValidation,
-                      autofillHints: [AutofillHints.newPassword],
+                    Row(
+                      children: [
+                        Text(
+                          L10n.tr().createPasswordToVerify,
+                          maxLines: 2,
+                          style: TStyle.greySemi(16),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('(+20${widget.req.phone}', style: TStyle.greySemi(14)),
+                        TextButton(
+                          onPressed: () async {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) {
+                                return ChangePhoneNumberSheet(
+                                  initialPhone: widget.req.phone,
+                                  onConfirm: (val) async {
+                                    req = req.copyWith(phone: val);
+                                    return true;
+                                  },
+                                );
+                              },
+                            );
+                          },
+                          child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
+                        ),
+                      ],
                     ),
                     const VerticalSpacing(32),
-                    Text(L10n.tr().confirmPassword, style: TStyle.blackBold(20)),
-                    const VerticalSpacing(8),
-                    MainTextField(
-                      controller: confirmPassword,
-                      hintText: L10n.tr().confirmNewPassword,
-                      bgColor: Colors.transparent,
-                      isPassword: true,
-                      validator: (value) {
-                        if (value != password.text) {
-                          return L10n.tr().passwordsDoNotMatch;
+                    AutofillGroup(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(L10n.tr().password, style: TStyle.blackBold(20)),
+                          const VerticalSpacing(8),
+                          MainTextField(
+                            controller: password,
+                            hintText: L10n.tr().yourNewPassword,
+                            bgColor: Colors.transparent,
+                            isPassword: true,
+                            validator: Validators.passwordValidation,
+                            autofillHints: [AutofillHints.newPassword],
+                          ),
+                          const VerticalSpacing(32),
+                          Text(L10n.tr().confirmPassword, style: TStyle.blackBold(20)),
+                          const VerticalSpacing(8),
+                          MainTextField(
+                            controller: confirmPassword,
+                            hintText: L10n.tr().confirmNewPassword,
+                            bgColor: Colors.transparent,
+                            isPassword: true,
+                            validator: (value) {
+                              if (value != password.text) {
+                                return L10n.tr().passwordsDoNotMatch;
+                              }
+                              return null;
+                            },
+                            autofillHints: [AutofillHints.newPassword],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const VerticalSpacing(70),
+                    BlocConsumer<RegisterCubit, RegisterStates>(
+                      listener: (context, state) {
+                        if (state is RegisterSuccess) {
+                          Alerts.showToast(state.resp.msg, error: false);
+                          VerifyOTPScreenRoute(
+                            initPhone: req.phone,
+                            data: state.resp.sessionId ?? '',
+                            $extra: (di<RegisterRepo>(), (ctx) => ctx.go(SelectLocationScreen.route)),
+                          ).push(context);
+                        } else if (state is RegisterError) {
+                          Alerts.showToast(state.error.message);
                         }
-                        return null;
                       },
-                      autofillHints: [AutofillHints.newPassword],
+                      builder: (context, state) => Hero(
+                        tag: Tags.btn,
+                        child: OptionBtn(
+                          onPressed: () {
+                            if (_formKey.currentState?.validate() == true) {
+                              TextInput.finishAutofillContext();
+                              req = req.copyWith(
+                                password: password.text,
+                                passwordConfirmation: confirmPassword.text,
+                              );
+                              context.read<RegisterCubit>().register(req);
+                            }
+                          },
+                          isLoading: state is RegisterLoading,
+                          textStyle: TStyle.mainwSemi(15),
+                          bgColor: Colors.transparent,
+                          child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-
-              const VerticalSpacing(70),
-              BlocConsumer<RegisterCubit, RegisterStates>(
-                listener: (context, state) {
-                  if (state is RegisterSuccess) {
-                    Alerts.showToast(state.resp.msg, error: false);
-                    context.myPush(
-                      VerifyOTPScreen(
-                        initPhone: req.phone,
-                        repo: di<RegisterRepo>(),
-                        data: state.resp.sessionId ?? '',
-                        onSuccess: (ctx) => ctx.myPushAndRemoveUntil(const SelectLocationScreen()),
-                      ),
-                    );
-                  } else if (state is RegisterError) {
-                    Alerts.showToast(state.error.message);
-                  }
-                },
-                builder: (context, state) => Hero(
-                  tag: Tags.btn,
-                  child: OptionBtn(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() == true) {
-                        TextInput.finishAutofillContext();
-                        req = req.copyWith(
-                          password: password.text,
-                          passwordConfirmation: confirmPassword.text,
-                        );
-                        context.read<RegisterCubit>().register(req);
-                      }
-                    },
-                    isLoading: state is RegisterLoading,
-                    textStyle: TStyle.mainwSemi(15),
-                    bgColor: Colors.transparent,
-                    child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

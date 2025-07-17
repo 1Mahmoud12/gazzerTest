@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
@@ -12,10 +11,24 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/profile/data/models/change_password_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
+import 'package:go_router/go_router.dart';
+
+part 'update_password_screen.g.dart';
+
+@TypedGoRoute<UpodatePasswordRoute>(path: UpodatePasswordScreen.routeWzValue)
+@immutable
+class UpodatePasswordRoute extends GoRouteData with _$UpodatePasswordRoute {
+  const UpodatePasswordRoute({required this.$extra});
+  final ProfileCubit $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider.value(value: $extra, child: const UpodatePasswordScreen());
+  }
+}
 
 class UpodatePasswordScreen extends StatefulWidget {
   const UpodatePasswordScreen({super.key});
-
+  static const routeWzValue = '/update-password';
   @override
   State<UpodatePasswordScreen> createState() => _UpodatePasswordScreenState();
 }
@@ -103,7 +116,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                 listener: (context, state) {
                   if (state is ChangePasswordSuccess) {
                     Alerts.showToast(state.message, error: false);
-                    context.myPop();
+                    context.pop();
                   }
                 },
                 builder: (context, state) => MainBtn(

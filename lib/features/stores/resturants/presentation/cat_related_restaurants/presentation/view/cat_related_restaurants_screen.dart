@@ -7,7 +7,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/infinite_scrolling.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
@@ -18,7 +17,9 @@ import 'package:gazzer/core/presentation/views/widgets/products/image_in_nested_
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
+import 'package:go_router/go_router.dart';
 
+part 'cat_related_restaurants_screen.g.dart';
 // components
 part 'components/explore_best.dart';
 part 'components/pick_to_you.dart';
@@ -29,9 +30,21 @@ part 'widgets/add_widget.dart';
 part 'widgets/infinet_carousal.dart';
 part 'widgets/type_related_restaurants_header.dart';
 
+@TypedGoRoute<CatRelatedRestaurantsRoute>(path: CatRelatedRestaurantsScreen.routeUriId)
+@immutable
+class CatRelatedRestaurantsRoute extends GoRouteData with _$CatRelatedRestaurantsRoute {
+  const CatRelatedRestaurantsRoute({required this.id});
+  final int id;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return CatRelatedRestaurantsScreen(id: id);
+  }
+}
+
 class CatRelatedRestaurantsScreen extends StatelessWidget {
   const CatRelatedRestaurantsScreen({super.key, required this.id});
   final int id;
+  static const routeUriId = '/cat-related-restaurant';
   @override
   Widget build(BuildContext context) {
     final items = [

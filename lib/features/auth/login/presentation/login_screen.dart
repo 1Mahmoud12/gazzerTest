@@ -6,7 +6,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -21,13 +20,13 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/forgot_password/presentation/forgot_password_btn.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_states.dart';
-import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
+  static const route = '/login';
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -120,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         listener: (context, state) {
                           if (state is LoginSuccessState) {
                             Alerts.showToast(state.message, error: false);
-                            context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
+                            context.go(Uri(path: LoadingScreen.routeUriRoute, queryParameters: {'route': MainLayout.route}).toString());
                           } else if (state is LoginErrorState) {
                             Alerts.showToast(state.error);
                           }
@@ -148,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(
                             child: OptionBtn(
                               onPressed: () {
-                                context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
+                                context.go(Uri(path: LoadingScreen.routeUriRoute, queryParameters: {'route': MainLayout.route}).toString());
                               },
                               textStyle: TStyle.mainwSemi(15),
                               bgColor: Colors.transparent,
@@ -158,9 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(
                             child: OptionBtn(
                               onPressed: () {
-                                context.myPush(
-                                  BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen()),
-                                );
+                                context.push(RegisterScreen.route);
                               },
                               textStyle: TStyle.mainwSemi(15),
                               bgColor: Colors.transparent,

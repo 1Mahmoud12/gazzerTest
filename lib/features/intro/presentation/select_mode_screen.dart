@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
-import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
-import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
+import 'package:go_router/go_router.dart';
 
 class SelectModeScreen extends StatefulWidget {
   const SelectModeScreen({super.key});
-
+  static const route = '/select-mode';
   @override
   State<SelectModeScreen> createState() => _SelectModeScreenState();
 }
@@ -61,7 +57,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
               child: PlanAnimatedBtn(
                 onPressed: () {
                   isAnimating.value = false;
-                  context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
+                  const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                 },
                 text: L10n.tr().guestMode,
                 isAnimating: isAnimating,
@@ -73,7 +69,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             PlanAnimatedBtn(
               onPressed: () {
                 isAnimating.value = false;
-                context.myPush(const LoginScreen()).then((v) => isAnimating.value = true);
+                context.push(LoginScreen.route).then((v) => isAnimating.value = true);
               },
               text: L10n.tr().login,
               isAnimating: isAnimating,
@@ -83,9 +79,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             PlanAnimatedBtn(
               onPressed: () {
                 isAnimating.value = false;
-                context.myPush(BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen())).then((v) {
-                  isAnimating.value = true;
-                });
+                context.push(LoginScreen.route).then((v) => isAnimating.value = true);
               },
               text: L10n.tr().signUp,
               isAnimating: isAnimating,

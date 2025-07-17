@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
@@ -17,6 +16,7 @@ import 'package:gazzer/features/auth/verify/presentation/widgets/otp_widget.dart
 import 'package:gazzer/features/profile/data/models/delete_account_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
+import 'package:go_router/go_router.dart';
 
 class DeleteAccountSheet extends StatefulWidget {
   const DeleteAccountSheet({super.key, required this.req});
@@ -69,7 +69,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
           if (state is DeleteAccountSuccess) {
             Alerts.showToast(state.message, error: false);
             Session().clear();
-            context.myPushAndRemoveUntil(const LoginScreen());
+            context.go(LoginScreen.route);
           } else if (state is DeleteAccountError) {
             Alerts.showToast(state.message);
           }

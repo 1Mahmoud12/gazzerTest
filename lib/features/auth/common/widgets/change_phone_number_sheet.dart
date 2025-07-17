@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class ChangePhoneNumberSheet extends StatefulWidget {
   const ChangePhoneNumberSheet({super.key, required this.onConfirm, this.initialPhone, this.title});
@@ -43,7 +43,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () => context.myPop(),
+              onTap: () => context.pop(),
             ),
           ),
           Card(
@@ -89,7 +89,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                       builder: (context, value, child) => OptionBtn(
                         onPressed: () async {
                           if (widget.initialPhone == _phoneController.text.trim()) {
-                            context.myPop();
+                            context.pop();
                             return;
                           }
                           if (_formKey.currentState?.validate() != true) return;
@@ -98,7 +98,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                           final res = await widget.onConfirm(phone);
                           if (context.mounted) {
                             isLoading.value = false;
-                            if (res) context.myPop();
+                            if (res) context.pop();
                           }
                         },
                         isLoading: value,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
+import 'package:go_router/go_router.dart';
 
 class DeleteAccountConfirmSheet extends StatelessWidget {
   const DeleteAccountConfirmSheet({super.key});
@@ -24,7 +24,7 @@ class DeleteAccountConfirmSheet extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              context.myPop(result: true);
+              context.pop(true);
             },
             style: OutlinedButton.styleFrom(
               fixedSize: const Size(250, 60),

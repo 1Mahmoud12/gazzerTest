@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
@@ -9,10 +8,11 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_t
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class DiateryLifestyleScreen extends StatefulWidget {
   const DiateryLifestyleScreen({super.key});
-
+  static const route = '/diatery-life';
   @override
   State<DiateryLifestyleScreen> createState() => _DiateryLifestyleScreenState();
 }
@@ -66,9 +66,7 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
                     animDuration: animDuration,
                     onPressed: () {
                       isAnimating.value = false;
-                      context.myPush(const SupplementsScreen()).then((v) {
-                        isAnimating.value = true;
-                      });
+                      context.push(SupplementsScreen.route).then((v) => isAnimating.value = true);
                     },
                     text: focusData[index],
                   ),

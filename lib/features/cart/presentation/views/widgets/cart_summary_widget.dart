@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show DashedBorder, HorizontalSpacing, MainBtn, VerticalSpacing;
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
+import 'package:go_router/go_router.dart';
 
 class CartSummaryWidget extends StatelessWidget {
   const CartSummaryWidget({super.key});
@@ -84,7 +84,7 @@ class CartSummaryWidget extends StatelessWidget {
                               padding: const EdgeInsets.all(2),
                               child: MainBtn(
                                 onPressed: () {
-                                  context.myPush(const ConfirmOrder());
+                                  context.push(ConfirmOrderScreen.route);
                                 },
                                 text: L10n.tr().checkout,
                                 textStyle: TStyle.secondaryBold(12),

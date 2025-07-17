@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, OptionBtn, VerticalSpacing, HorizontalSpacing;
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
+import 'package:go_router/go_router.dart';
 
-class ConfirmOrder extends StatelessWidget {
-  const ConfirmOrder({super.key});
-
+class ConfirmOrderScreen extends StatelessWidget {
+  const ConfirmOrderScreen({super.key});
+  static const route = '/order-confirm';
   @override
   Widget build(BuildContext context) {
     final btnText = [L10n.tr().addPRomoCode, L10n.tr().addDeliveryInstruction, L10n.tr().addTip];
@@ -94,7 +94,7 @@ class ConfirmOrder extends StatelessWidget {
           const VerticalSpacing(32),
           OptionBtn(
             onPressed: () {
-              context.myPush(const PostCheckoutScreen());
+              context.push(PostCheckoutScreen.route);
             },
             height: 0,
             padding: const EdgeInsets.symmetric(vertical: 8),

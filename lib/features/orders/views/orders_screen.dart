@@ -14,7 +14,7 @@ part 'widgets/recent_orders.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
-
+  static const route = '/orders';
   @override
   State<OrdersScreen> createState() => _OrdersScreenState();
 }

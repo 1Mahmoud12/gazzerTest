@@ -3,7 +3,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
@@ -17,7 +16,7 @@ import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tut
 
 class PlansViewScreen extends StatelessWidget {
   const PlansViewScreen({super.key});
-
+  static const route = '/plans';
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(
@@ -68,12 +67,10 @@ class PlansViewScreen extends StatelessWidget {
             Hero(
               tag: Tags.btn,
               child: OptionBtn(
-                onPressed: () {
-                  context.myPushReplacement(
-                    const LoadingScreen(
-                      navigateTo: CongratsScreen(navigateTo: IntroVideoTutorialScreen(videoLink: '')),
-                    ),
-                  );
+                onPressed: () async {
+                  const LoadingScreenRoute(navigateToRoute: '').go(context);
+                  await Future.delayed(const Duration(seconds: 3));
+                  const CongratsScreenRoute(navigateToRoute: IntroVideoTutorialScreen.routeUriLink).go(context);
                 },
                 width: 209,
                 text: L10n.tr().continu,

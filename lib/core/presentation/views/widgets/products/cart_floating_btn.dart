@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class CartFloatingBtn extends StatelessWidget {
   const CartFloatingBtn({super.key, this.size = 25, this.padding = 12, this.navigate = true});
@@ -20,7 +20,7 @@ class CartFloatingBtn extends StatelessWidget {
         onTap: () {
           if (!navigate) return;
           SystemSound.play(SystemSoundType.click);
-          if (navigate) AppNavigator().push(const CartScreen());
+          if (navigate) context.push(CartScreen.route);
         },
         child: DecoratedBox(
           decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().radialGradient),

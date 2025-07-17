@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
@@ -56,7 +55,7 @@ class RestCatMiniProductCard extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             SystemSound.play(SystemSoundType.click);
-                            AppNavigator().push(AddFoodToCartScreen(product: prod));
+                            AddFoodToCartRoute($extra: prod).push(context);
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(4),

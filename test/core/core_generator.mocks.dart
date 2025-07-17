@@ -125,6 +125,12 @@ class MockApiClient extends _i1.Mock implements _i5.ApiClient {
   );
 
   @override
+  void changeLocale(String? languageCode) => super.noSuchMethod(
+    Invocation.method(#changeLocale, [languageCode]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
   _i4.Future<_i2.Response<dynamic>> get({
     required String? endpoint,
     Map<String, dynamic>? queryParameters,
@@ -184,10 +190,29 @@ class MockApiClient extends _i1.Mock implements _i5.ApiClient {
           as _i4.Future<_i2.Response<dynamic>>);
 
   @override
-  void changeLocale(String? languageCode) => super.noSuchMethod(
-    Invocation.method(#changeLocale, [languageCode]),
-    returnValueForMissingStub: null,
-  );
+  _i4.Future<_i2.Response<dynamic>> delete({
+    required String? endpoint,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#delete, [], {
+              #endpoint: endpoint,
+              #queryParameters: queryParameters,
+              #headers: headers,
+            }),
+            returnValue: _i4.Future<_i2.Response<dynamic>>.value(
+              _FakeResponse_2<dynamic>(
+                this,
+                Invocation.method(#delete, [], {
+                  #endpoint: endpoint,
+                  #queryParameters: queryParameters,
+                  #headers: headers,
+                }),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.Response<dynamic>>);
 }
 
 /// A class which mocks [SharedPreferences].

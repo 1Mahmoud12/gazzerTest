@@ -23,8 +23,10 @@ import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant_category_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/grid_prod_card.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
+import 'package:go_router/go_router.dart';
 
 part 'component/top_rated_coponent.dart';
+part 'multi_cat_restaurant_screen.g.dart';
 // part 'component/top_rated_component.dart';
 part 'widgets/hor_product_card.dart';
 part 'widgets/mini_bordered_product_card.dart';
@@ -33,10 +35,21 @@ part 'widgets/sliding_adds_widget.dart';
 part 'widgets/top_rated_card.dart';
 part 'widgets/vert_product_card.dart';
 
+@TypedGoRoute<MultiCatRestaurantsRoute>(path: MultiCatRestaurantsScreen.routeUriId)
+@immutable
+class MultiCatRestaurantsRoute extends GoRouteData with _$MultiCatRestaurantsRoute {
+  const MultiCatRestaurantsRoute({required this.id});
+  final int id;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return MultiCatRestaurantsScreen(vendorId: id);
+  }
+}
+
 class MultiCatRestaurantsScreen extends StatelessWidget {
   const MultiCatRestaurantsScreen({super.key, required this.vendorId});
   final int vendorId;
-
+  static const routeUriId = '/multi-cat-restaurant';
   @override
   Widget build(BuildContext context) {
     final vendor = Fakers.vendors.first;

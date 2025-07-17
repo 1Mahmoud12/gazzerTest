@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
@@ -9,10 +8,11 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_t
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/frequancy_combos_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
+import 'package:go_router/go_router.dart';
 
 class NuttrationSupportScreen extends StatefulWidget {
   const NuttrationSupportScreen({super.key});
-
+  static const route = '/nutrition-support';
   @override
   State<NuttrationSupportScreen> createState() => _NuttrationSupportScreenState();
 }
@@ -69,9 +69,7 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
                   (index) => PlanAnimatedBtn(
                     onPressed: () {
                       isAnimating.value = false;
-                      context.myPush(const FrequancyCombosScreen()).then((v) {
-                        isAnimating.value = true;
-                      });
+                      context.push(FrequancyCombosScreen.route).then((v) => isAnimating.value = true);
                     },
                     textStyle: TStyle.primarySemi(15),
                     isAnimating: isAnimating,

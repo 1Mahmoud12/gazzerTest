@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
@@ -16,6 +15,7 @@ import 'package:gazzer/features/profile/data/models/profile_verify_otp_req.dart'
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileVerifyOtpScreen extends StatefulWidget {
   const ProfileVerifyOtpScreen({super.key, required this.sessionId, required this.req});
@@ -142,7 +142,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                       listener: (context, state) {
                         if (state is VerifyOTPSuccess) {
                           Alerts.showToast(state.message, error: false);
-                          context.myPop();
+                          context.pop();
                         } else if (state is VerifyOTPError) {
                           Alerts.showToast(state.message);
                         }

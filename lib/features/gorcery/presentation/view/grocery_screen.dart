@@ -31,7 +31,7 @@ part 'widgets/grocery_header.dart';
 
 class GroceryScreen extends StatefulWidget {
   const GroceryScreen({super.key});
-
+  static const route = '/grocery';
   @override
   State<GroceryScreen> createState() => _GroceryScreenState();
 }

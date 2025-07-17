@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SelectLocationScreen extends StatefulWidget {
   const SelectLocationScreen({super.key});
-
+  static const route = '/select-location';
   @override
   State<SelectLocationScreen> createState() => _SelectLocationScreenState();
 }
@@ -160,7 +160,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                       height: 60,
                       width: MediaQuery.sizeOf(context).width / 3,
                       onPressed: () {
-                        context.myPush(const HealthFocusScreen());
+                        context.push(HealthFocusScreen.route);
                       },
                       child: GradientText(
                         text: L10n.tr().setYourLocation,

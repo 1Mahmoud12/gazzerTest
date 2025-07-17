@@ -10,7 +10,6 @@ import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
@@ -34,8 +33,8 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_state
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,7 +50,7 @@ part 'widgets/home_suggested_products_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
+  static const route = '/home';
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
@@ -39,7 +38,7 @@ class PopularScreen extends StatelessWidget {
                 return VerticalRotatedImgCard(
                   prod: prod,
                   onTap: () {
-                    AppNavigator().push(AddFoodToCartScreen(product: prod));
+                    AddFoodToCartRoute($extra: prod).push(context);
                   },
                 );
               },
@@ -56,7 +55,7 @@ class PopularScreen extends StatelessWidget {
                 return VerticalRotatedImgCard(
                   prod: prod,
                   onTap: () {
-                    AppNavigator().push(AddFoodToCartScreen(product: prod));
+                    AddFoodToCartRoute($extra: prod).push(context);
                   },
                 );
               },

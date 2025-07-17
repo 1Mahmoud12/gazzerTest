@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class PostCheckoutScreen extends StatelessWidget {
   const PostCheckoutScreen({super.key});
-
+  static const route = '/post-checkout';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,7 @@ class PostCheckoutScreen extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         SystemSound.play(SystemSoundType.click);
-                        context.myPushAndRemoveUntil(const MainLayout());
+                        context.go(HomeScreen.route);
                       },
                       icon: const Icon(Icons.home_outlined, size: 32, color: Co.purple),
                     ),

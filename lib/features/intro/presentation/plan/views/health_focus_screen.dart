@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/diatery_lifestyle_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
+import 'package:go_router/go_router.dart';
 
 class HealthFocusScreen extends StatefulWidget {
   const HealthFocusScreen({super.key});
-
+  static const route = '/health-focus';
   @override
   State<HealthFocusScreen> createState() => _HealthFocusScreenState();
 }
@@ -66,9 +66,7 @@ class _HealthFocusScreenState extends State<HealthFocusScreen> {
                     animDuration: animDuration,
                     onPressed: () {
                       isAnimating.value = false;
-                      context.myPush(const DiateryLifestyleScreen()).then((v) {
-                        isAnimating.value = true;
-                      });
+                      context.push(DiateryLifestyleScreen.route).then((v) => isAnimating.value = true);
                     },
                     text: focusData[index],
                   ),

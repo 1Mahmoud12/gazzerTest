@@ -16,6 +16,8 @@ import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
 class MainLayout extends StatefulWidget {
+  static const route = '/main';
+
   /// Main layout that provide smooth transitions etween the main screens, it contains the bottom navigation bar and the main screens.
   /// [idnex] is the initial index of the bottom navigation bar, if not provided, it defaults to 0
   const MainLayout({super.key, this.idnex});

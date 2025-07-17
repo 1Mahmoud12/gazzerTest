@@ -30,14 +30,10 @@ class _TodayPicksWidget extends StatelessWidget {
                     decoration: BoxDecoration(gradient: Grad().bglightLinear),
                     child: InkWell(
                       onTap: () {
-                        if (index.isEven) {
-                          final widget = AppTransitions().slideTransition(
-                            SingleCatRestaurantScreen(vendorId: vendor.id),
-                            start: const Offset(1, 0),
-                          );
-                          AppNavigator().push(widget);
+                        if (vendor.id.isEven) {
+                          SingleCatRestaurantRoute(id: vendor.id).push(context);
                         } else {
-                          context.myPush(MultiCatRestaurantsScreen(vendorId: vendor.id));
+                          MultiCatRestaurantsRoute(id: vendor.id).push(context);
                         }
                       },
                       child: Column(
