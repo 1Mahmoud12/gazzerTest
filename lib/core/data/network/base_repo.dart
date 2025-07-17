@@ -43,6 +43,9 @@ abstract class BaseApiRepo {
       if (error is! DioException) {
         return _formParsingError(error, stack);
       }
+      if ((error.response?.statusCode ?? 400) > 499) {
+        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
+      }
       switch (error.type) {
         case DioExceptionType.badResponse:
           return BadResponse.fromJson(error.response?.data, e: ErrorType.badResponse);

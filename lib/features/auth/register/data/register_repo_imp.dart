@@ -28,7 +28,10 @@ class RegisterRepoImp extends RegisterRepo {
   @override
   Future<Result<String>> resendOtp(String sessionId) {
     return call<String>(
-      apiCall: () => _apiClient.post(endpoint: Endpoints.resendOtp(sessionId), requestBody: {}),
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.resendOtp,
+        requestBody: {'session_id': sessionId},
+      ),
       parser: (result) {
         return result.data['message']?.toString() ?? 'Success';
       },
@@ -42,7 +45,10 @@ class RegisterRepoImp extends RegisterRepo {
   @override
   Future<Result<String>> editPhoneNumber(String sessionId, String code) {
     return call<String>(
-      apiCall: () => _apiClient.post(endpoint: Endpoints.editPhoneNum(sessionId), requestBody: {'phone': code}),
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.editPhoneNum,
+        requestBody: {'phone': code, 'session_id': sessionId},
+      ),
       parser: (result) {
         return result.data['message']?.toString() ?? 'Success';
       },

@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         isPassword: true,
                         borderRadius: 32,
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                        validator: Validators.passwordValidation,
+                        validator: Validators.notEmpty,
                         autofillHints: [AutofillHints.newPassword],
                       ),
                       const Row(

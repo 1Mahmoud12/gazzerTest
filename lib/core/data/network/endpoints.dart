@@ -3,8 +3,8 @@ class Endpoints {
   // Register
   static const register = "clients/auth/register";
   static const verifyOTP = "clients/auth/register/verify-otp";
-  static String editPhoneNum(String sessionId) => "clients/auth/register/edit-phone/$sessionId";
-  static String resendOtp(String sessionId) => "clients/auth/register/resend-otp/$sessionId";
+  static String editPhoneNum = "clients/auth/register/edit-phone";
+  static const resendOtp = "clients/auth/register/resend-otp";
 
   // Login
   static const login = "clients/auth/login";

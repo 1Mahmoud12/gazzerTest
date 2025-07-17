@@ -42,6 +42,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   late final ValueNotifier<int> seconds;
   final counter = 60;
   late String phoneNumber;
+  final showSupport = ValueNotifier<bool>(false);
 
   Future<void> resend() async {
     isResendingOtp.value = true;
@@ -52,6 +53,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
         _setTimer();
         break;
       case Err err:
+        showSupport.value = true;
         Alerts.showToast(err.error.message);
     }
     isResendingOtp.value = false;
@@ -200,22 +202,30 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   const SizedBox.shrink(),
                 ],
               ),
-              const Divider(),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                    child: Row(
-                      spacing: 12,
-                      mainAxisSize: MainAxisSize.min,
+              ValueListenableBuilder(
+                valueListenable: showSupport,
+                builder: (context, value, child) => AnimatedScale(scale: value ? 1 : 0, duration: Durations.short4, child: child),
+                child: Column(
+                  children: [
+                    const Divider(),
+                    Row(
                       children: [
-                        const Icon(Icons.wifi_calling_3, size: 32, color: Co.purple),
-                        Text(L10n.tr().support),
+                        TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                          child: Row(
+                            spacing: 12,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.wifi_calling_3, size: 32, color: Co.purple),
+                              Text(L10n.tr().support),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const VerticalSpacing(80),
               Hero(

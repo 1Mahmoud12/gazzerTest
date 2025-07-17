@@ -75,7 +75,10 @@ void main() async {
         'should return success message when resend OTP succeeds',
         () async {
           when(
-            apiClient.post(endpoint: Endpoints.resendOtp(registerData.sessionId), requestBody: {}),
+            apiClient.post(
+              endpoint: Endpoints.resendOtp,
+              requestBody: {'session_id': registerData.sessionId},
+            ),
           ).thenAnswer((_) async => successResponse..data = registerData.resendOtpSuccessJson);
 
           final result = await registerRepo.resendOtp(registerData.sessionId);
@@ -88,7 +91,7 @@ void main() async {
         'should return error message when resend OTP fails',
         () async {
           when(
-            apiClient.post(endpoint: Endpoints.resendOtp(registerData.sessionId), requestBody: {}),
+            apiClient.post(endpoint: Endpoints.resendOtp, requestBody: {'session_id': registerData.sessionId}),
           ).thenThrow(() {
             errorResponse.response!.data = registerData.resendOtpErrorJson;
             return errorResponse;
@@ -109,8 +112,8 @@ void main() async {
         () async {
           when(
             apiClient.post(
-              endpoint: Endpoints.editPhoneNum(registerData.sessionId),
-              requestBody: {'phone': registerData.newPhone},
+              endpoint: Endpoints.editPhoneNum,
+              requestBody: {'phone': registerData.newPhone, 'session_id': registerData.sessionId},
             ),
           ).thenAnswer(
             (_) async => successResponse..data = registerData.editPhoneNumberSuccessJson,
@@ -127,8 +130,8 @@ void main() async {
         () async {
           when(
             apiClient.post(
-              endpoint: Endpoints.editPhoneNum(registerData.notExistSessionId),
-              requestBody: {'phone': registerData.newPhone},
+              endpoint: Endpoints.editPhoneNum,
+              requestBody: {'phone': registerData.newPhone, 'session_id': registerData.notExistSessionId},
             ),
           ).thenThrow(() {
             errorResponse.response!.data = registerData.editPhoneNumberSessionNotExistsErrorJson;
@@ -147,8 +150,8 @@ void main() async {
         () async {
           when(
             apiClient.post(
-              endpoint: Endpoints.editPhoneNum(registerData.sessionId),
-              requestBody: {'phone': registerData.existPhoneNum},
+              endpoint: Endpoints.editPhoneNum,
+              requestBody: {'phone': registerData.existPhoneNum, 'session_id': registerData.sessionId},
             ),
           ).thenThrow(() {
             errorResponse.response!.data = registerData.editPhoneNumberTakenErrorJson;
@@ -249,7 +252,12 @@ void main() async {
           'should return success message when resend OTP succeeds',
           () async {
             when(
-              apiClient.post(endpoint: Endpoints.resendOtp(registerData.sessionId), requestBody: {}),
+              apiClient.post(
+                endpoint: Endpoints.resendOtp,
+                requestBody: {
+                  'session_id': registerData.sessionId,
+                },
+              ),
             ).thenAnswer((_) async => successResponse..data = registerData.resendOtpSuccessJson);
 
             final result = await registerRepo.resend(registerData.sessionId);
@@ -263,7 +271,12 @@ void main() async {
           'should return error message when resend OTP fails',
           () async {
             when(
-              apiClient.post(endpoint: Endpoints.resendOtp(registerData.sessionId), requestBody: {}),
+              apiClient.post(
+                endpoint: Endpoints.resendOtp,
+                requestBody: {
+                  'session_id': registerData.sessionId,
+                },
+              ),
             ).thenThrow(() {
               errorResponse.response!.data = registerData.resendOtpErrorJson;
               return errorResponse;
@@ -283,8 +296,11 @@ void main() async {
           () async {
             when(
               apiClient.post(
-                endpoint: Endpoints.editPhoneNum(registerData.sessionId),
-                requestBody: {'phone': registerData.newPhone},
+                endpoint: Endpoints.editPhoneNum,
+                requestBody: {
+                  'phone': registerData.newPhone,
+                  'session_id': registerData.sessionId,
+                },
               ),
             ).thenAnswer(
               (_) async => successResponse..data = registerData.editPhoneNumberSuccessJson,
@@ -301,8 +317,8 @@ void main() async {
           () async {
             when(
               apiClient.post(
-                endpoint: Endpoints.editPhoneNum(registerData.notExistSessionId),
-                requestBody: {'phone': registerData.newPhone},
+                endpoint: Endpoints.editPhoneNum,
+                requestBody: {'phone': registerData.newPhone, 'session_id': registerData.notExistSessionId},
               ),
             ).thenThrow(() {
               errorResponse.response!.data = registerData.editPhoneNumberSessionNotExistsErrorJson;
@@ -321,8 +337,8 @@ void main() async {
           () async {
             when(
               apiClient.post(
-                endpoint: Endpoints.editPhoneNum(registerData.sessionId),
-                requestBody: {'phone': registerData.existPhoneNum},
+                endpoint: Endpoints.editPhoneNum,
+                requestBody: {'phone': registerData.existPhoneNum, 'session_id': registerData.sessionId},
               ),
             ).thenThrow(() {
               errorResponse.response!.data = registerData.editPhoneNumberTakenErrorJson;

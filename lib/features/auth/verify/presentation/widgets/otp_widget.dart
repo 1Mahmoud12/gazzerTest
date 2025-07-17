@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
+import 'package:gazzer/core/presentation/routing/no_paste_formatter.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
@@ -41,20 +42,32 @@ class _OtpWidgetState extends State<OtpWidget> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: Pinput(
-        controller: widget.controller,
-        length: widget.count,
-        closeKeyboardWhenCompleted: true,
-        defaultPinTheme: defaultPinTheme,
-        focusedPinTheme: defaultPinTheme,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        submittedPinTheme: defaultPinTheme,
-        validator: (v) => Validators.valueMustBeNum(v, widget.count, "Code"),
-        pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+      child: Form(
+        child: Pinput(
+          contextMenuBuilder: (context, editableTextState) {
+            return AdaptiveTextSelectionToolbar(
+              anchors: editableTextState.contextMenuAnchors,
+              //  empty list or exclude paste action
+              children: [],
+            );
+          },
+          controller: widget.controller,
+          length: widget.count,
+          closeKeyboardWhenCompleted: true,
+          defaultPinTheme: defaultPinTheme,
+          focusedPinTheme: defaultPinTheme,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            NoPasteFormatter(),
+          ],
+          submittedPinTheme: defaultPinTheme,
+          validator: (v) => Validators.valueMustBeNum(v, widget.count, "Code"),
+          pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
 
-        // onSubmitted: (value) {},
-        showCursor: true,
-        // onCompleted: (pin) => print(pin),
+          // onSubmitted: (value) {},
+          showCursor: true,
+          // onCompleted: (pin) => print(pin),
+        ),
       ),
     );
   }

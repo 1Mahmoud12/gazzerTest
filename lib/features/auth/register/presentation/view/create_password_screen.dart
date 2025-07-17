@@ -88,8 +88,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text('(+20${widget.req.phone}', style: TStyle.greySemi(14)),
                   TextButton(
                     onPressed: () async {
                       showModalBottomSheet(
