@@ -48,131 +48,138 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ImageBackgroundWidget(
-      image: Assets.assetsPngLoginShape,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: const ClassicAppBar(),
-        body: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Co.purple.withAlpha(50), Colors.transparent],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-          ),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              padding: AppConst.defaultHrPadding,
-              children: [
-                Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-                Row(
-                  children: [
-                    GradientText(text: L10n.tr().login, style: TStyle.mainwBold(32), gradient: Grad().textGradient),
-                  ],
+    return BlocProvider(
+      create: (context) => di<LoginCubit>(),
+      child: Builder(
+        builder: (context) {
+          return ImageBackgroundWidget(
+            image: Assets.assetsPngLoginShape,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: const ClassicAppBar(),
+              body: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Co.purple.withAlpha(50), Colors.transparent],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
                 ),
-                const VerticalSpacing(16),
-                AutofillGroup(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    padding: AppConst.defaultHrPadding,
                     children: [
-                      Text(L10n.tr().mobileNumber, maxLines: 1, style: TStyle.greySemi(16)),
-                      const VerticalSpacing(8),
-                      PhoneTextField(
-                        hasLabel: false,
-                        hasHint: true,
-                        controller: _phoneController,
-                        validator: (v, code) {
-                          if (code == 'EG') {
-                            return Validators.mobileEGValidator(v);
-                          }
-                          return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
-                        },
+                      Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+                      Row(
+                        children: [
+                          GradientText(text: L10n.tr().login, style: TStyle.mainwBold(32), gradient: Grad().textGradient),
+                        ],
                       ),
                       const VerticalSpacing(16),
-                      Text(L10n.tr().password, maxLines: 1, style: TStyle.greySemi(16)),
-                      const VerticalSpacing(8),
-                      MainTextField(
-                        controller: _pasword,
-                        hintText: L10n.tr().enterYourPassword,
-                        bgColor: Colors.transparent,
-                        isPassword: true,
-                        borderRadius: 32,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                        validator: Validators.notEmpty,
-                        autofillHints: [AutofillHints.newPassword],
+                      AutofillGroup(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(L10n.tr().mobileNumber, maxLines: 1, style: TStyle.greySemi(16)),
+                            const VerticalSpacing(8),
+                            PhoneTextField(
+                              hasLabel: false,
+                              hasHint: true,
+                              controller: _phoneController,
+                              validator: (v, code) {
+                                if (code == 'EG') {
+                                  return Validators.mobileEGValidator(v);
+                                }
+                                return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
+                              },
+                            ),
+                            const VerticalSpacing(16),
+                            Text(L10n.tr().password, maxLines: 1, style: TStyle.greySemi(16)),
+                            const VerticalSpacing(8),
+                            MainTextField(
+                              controller: _pasword,
+                              hintText: L10n.tr().enterYourPassword,
+                              bgColor: Colors.transparent,
+                              isPassword: true,
+                              borderRadius: 32,
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+                              validator: Validators.notEmpty,
+                              autofillHints: [AutofillHints.newPassword],
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [ForgetPasswordBtn()],
+                            ),
+                          ],
+                        ),
                       ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [ForgetPasswordBtn()],
+
+                      // const VerticalSpacing(8),
+                      BlocConsumer<LoginCubit, LoginStates>(
+                        listener: (context, state) {
+                          if (state is LoginSuccessState) {
+                            Alerts.showToast(state.message, error: false);
+                            context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
+                          } else if (state is LoginErrorState) {
+                            Alerts.showToast(state.error);
+                          }
+                        },
+                        builder: (context, state) => Hero(
+                          tag: Tags.btn,
+                          child: OptionBtn(
+                            isLoading: state is LoginLoadingState,
+                            onPressed: () {
+                              if (_formKey.currentState?.validate() == true) {
+                                TextInput.finishAutofillContext();
+                                context.read<LoginCubit>().login(_phoneController.text.trim(), _pasword.text.trim());
+                              }
+                            },
+                            textStyle: TStyle.mainwSemi(15),
+                            bgColor: Colors.transparent,
+                            child: GradientText(text: L10n.tr().login, style: TStyle.blackSemi(16)),
+                          ),
+                        ),
                       ),
+                      const VerticalSpacing(16),
+                      Row(
+                        spacing: 16,
+                        children: [
+                          Expanded(
+                            child: OptionBtn(
+                              onPressed: () {
+                                context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
+                              },
+                              textStyle: TStyle.mainwSemi(15),
+                              bgColor: Colors.transparent,
+                              child: Text(L10n.tr().skip, style: TStyle.primarySemi(16)),
+                            ),
+                          ),
+                          Expanded(
+                            child: OptionBtn(
+                              onPressed: () {
+                                context.myPush(
+                                  BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen()),
+                                );
+                              },
+                              textStyle: TStyle.mainwSemi(15),
+                              bgColor: Colors.transparent,
+                              child: Text(L10n.tr().signUp, style: TStyle.primarySemi(16)),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // const VerticalSpacing(8),
+                      // Center(child: Text(L10n.tr().or, style: TStyle.greyRegular(16))),
+                      // const VerticalSpacing(8),
+                      // const SocialAuthWidget(),
                     ],
                   ),
                 ),
-
-                // const VerticalSpacing(8),
-                BlocConsumer<LoginCubit, LoginStates>(
-                  listener: (context, state) {
-                    if (state is LoginSuccessState) {
-                      Alerts.showToast(state.message, error: false);
-                      context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
-                    } else if (state is LoginErrorState) {
-                      Alerts.showToast(state.error);
-                    }
-                  },
-                  builder: (context, state) => Hero(
-                    tag: Tags.btn,
-                    child: OptionBtn(
-                      isLoading: state is LoginLoadingState,
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() == true) {
-                          TextInput.finishAutofillContext();
-                          context.read<LoginCubit>().login(_phoneController.text.trim(), _pasword.text.trim());
-                        }
-                      },
-                      textStyle: TStyle.mainwSemi(15),
-                      bgColor: Colors.transparent,
-                      child: GradientText(text: L10n.tr().login, style: TStyle.blackSemi(16)),
-                    ),
-                  ),
-                ),
-                const VerticalSpacing(16),
-                Row(
-                  spacing: 16,
-                  children: [
-                    Expanded(
-                      child: OptionBtn(
-                        onPressed: () {
-                          context.myPushAndRemoveUntil(const LoadingScreen(navigateTo: MainLayout()));
-                        },
-                        textStyle: TStyle.mainwSemi(15),
-                        bgColor: Colors.transparent,
-                        child: Text(L10n.tr().skip, style: TStyle.primarySemi(16)),
-                      ),
-                    ),
-                    Expanded(
-                      child: OptionBtn(
-                        onPressed: () {
-                          context.myPush(
-                            BlocProvider(create: (context) => di<RegisterCubit>(), child: const RegisterScreen()),
-                          );
-                        },
-                        textStyle: TStyle.mainwSemi(15),
-                        bgColor: Colors.transparent,
-                        child: Text(L10n.tr().signUp, style: TStyle.primarySemi(16)),
-                      ),
-                    ),
-                  ],
-                ),
-                // const VerticalSpacing(8),
-                // Center(child: Text(L10n.tr().or, style: TStyle.greyRegular(16))),
-                // const VerticalSpacing(8),
-                // const SocialAuthWidget(),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

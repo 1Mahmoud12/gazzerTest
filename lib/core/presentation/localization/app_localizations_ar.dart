@@ -9,6 +9,9 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get otpSentSuccessfully => 'تم إرسال رمز التحقق بنجاح';
+
+  @override
   String get splash_________________Start => '__________________';
 
   @override
@@ -19,6 +22,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profile_________________Start => '__________________';
+
+  @override
+  String get pleaseSelectReason => 'يرجى اختيار السبب';
+
+  @override
+  String get accountSuccessfullyDeleted => 'تم حذف الحساب بنجاح';
+
+  @override
+  String get whyAreYouDeletingYourAccount => 'لماذا تريد حذف حسابك؟';
+
+  @override
+  String get thisFeedbackHelpsUsImproveOurServices =>
+      'هذا التعليق يساعدنا على تحسين خدماتنا.';
+
+  @override
+  String get otherReason => 'سبب آخر';
 
   @override
   String get confirmToDelete => 'تأكيد الحذف';

@@ -120,7 +120,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 children: [
                   Flexible(
                     child: Text(
-                      "${L10n.tr().anOTPhasBeenSentTo}\n( +20$phoneNumber",
+                      "${L10n.tr().anOTPhasBeenSentTo} (+20$phoneNumber",
                       maxLines: 3,
                       style: TStyle.greySemi(16),
                       textAlign: TextAlign.start,
@@ -156,7 +156,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           },
                         );
                       },
-                      child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(16)),
+                      child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
                     ),
                 ],
               ),

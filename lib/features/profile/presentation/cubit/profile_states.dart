@@ -1,4 +1,4 @@
-import 'package:gazzer/features/profile/data/models/delete_account_reason.dart';
+import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 
 sealed class ProfileStates {}
@@ -73,7 +73,7 @@ class RequestDeleteAccountError extends ProfileErrorStates {
 class FetchDeleteAccountReasonsLoading extends ProfileLoadingStates {}
 
 class FetchDeleteAccountReasonsSuccess extends ProfileStates {
-  final List<DeleteAccountReason> reasons;
+  final List<DeleteAccountReasonDTO> reasons;
   FetchDeleteAccountReasonsSuccess(this.reasons);
 }
 

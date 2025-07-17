@@ -8,8 +8,6 @@ import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
-import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
@@ -102,9 +100,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   if (state is UnAuth) {
                     if (state.haveSeenTour) {
                       Navigator.of(context).pushReplacement(
-                        AppTransitions().slideTransition(
-                          BlocProvider(create: (context) => di<LoginCubit>(), child: const LoginScreen()),
-                        ),
+                        AppTransitions().slideTransition(const LoginScreen()),
                       );
                     } else {
                       Navigator.of(context).pushReplacement(
@@ -154,9 +150,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                               onPressed: () {
                                 TokenService.deleteToken();
                                 Navigator.of(context).pushReplacement(
-                                  AppTransitions().slideTransition(
-                                    BlocProvider(create: (context) => di<LoginCubit>(), child: const LoginScreen()),
-                                  ),
+                                  AppTransitions().slideTransition(const LoginScreen()),
                                 );
                               },
                               child: Text(

@@ -5,6 +5,7 @@ import 'package:gazzer/core/domain/cart/vendor_products_model.dart';
 import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
+import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/profile/domain/address_entity.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
@@ -168,6 +169,16 @@ class Fakers {
       landmark: "معلم ${index + 1}",
       zoneName: "منطقة ${index + 1}",
       provinceName: "محافظة ${index + 1}",
+    ),
+  );
+
+  final reasons = List.generate(
+    5,
+    (index) => DeleteAccountReasonDTO(
+      title: 'asd  asd sad a dads',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+
+      id: index,
     ),
   );
 }

@@ -108,7 +108,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         },
                       );
                     },
-                    child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(16)),
+                    child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
                   ),
                 ],
               ),

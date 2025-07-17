@@ -11,8 +11,6 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
-import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/plan_animated_btn.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';
@@ -31,10 +29,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
   Future navigateToLoginScreen() async {
     return Navigator.of(context).pushReplacement(
       AppTransitions().slideTransition(
-        BlocProvider(
-          create: (context) => di<LoginCubit>(),
-          child: const LoginScreen(),
-        ),
+        const LoginScreen(),
       ),
     );
   }

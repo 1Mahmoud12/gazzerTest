@@ -46,6 +46,7 @@ class MainTextField extends StatefulWidget {
     this.autofillHints,
     this.max = 50,
     this.disabledColor,
+    this.action = TextInputAction.next,
   });
   final TextEditingController controller;
   final String? hintText;
@@ -78,6 +79,7 @@ class MainTextField extends StatefulWidget {
   final Color? prefixColor;
   final List<String>? autofillHints;
   final int max;
+  final TextInputAction action;
   @override
   State<MainTextField> createState() => _MainTextFieldState();
 }
@@ -134,7 +136,7 @@ class _MainTextFieldState extends State<MainTextField> {
           onTapOutside: (event) {
             FocusScope.of(context).unfocus();
           },
-          textInputAction: TextInputAction.next,
+          textInputAction: widget.action,
           inputFormatters: widget.inputFormatters != null ? [widget.inputFormatters!] : null,
           keyboardType: widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null,
           decoration: InputDecoration(

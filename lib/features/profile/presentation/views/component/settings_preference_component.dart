@@ -121,10 +121,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
             MainBtn(
               onPressed: () {
                 AppNavigator().push(
-                  BlocProvider(
-                    create: (context) => di<LoginCubit>(),
-                    child: const LoginScreen(),
-                  ),
+                  const LoginScreen(),
                   parent: Parent.main,
                 );
               },

@@ -15,8 +15,24 @@ class DeleteAccountReq {
     return {
       'otp_code': otpCode,
       'session_id': sessionId,
-      'reason_id': reasonId,
-      'reason_text': reasonText,
+
+      /// If reasonId is -1, it is "Other Reason" option, we send reasonText instead
+      'reason_id': reasonId != -1 ? reasonId : null,
+      'reason_text': reasonId == -1 ? reasonText : null,
     };
+  }
+
+  copyWith({
+    String? otpCode,
+    String? sessionId,
+    int? reasonId,
+    String? reasonText,
+  }) {
+    return DeleteAccountReq(
+      otpCode: otpCode ?? this.otpCode,
+      sessionId: sessionId ?? this.sessionId,
+      reasonId: reasonId ?? this.reasonId,
+      reasonText: reasonText ?? this.reasonText,
+    );
   }
 }

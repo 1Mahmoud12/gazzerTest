@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/features/auth/common/data/client_response.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/profile/data/models/change_password_req.dart';
-import 'package:gazzer/features/profile/data/models/delete_account_reason.dart';
+import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_req.dart';
 import 'package:gazzer/features/profile/data/models/profile_verify_otp_req.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
@@ -83,7 +83,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(FetchDeleteAccountReasonsLoading());
     final req = await _repo.getDeleteAccountReasons();
     switch (req) {
-      case Ok<List<DeleteAccountReason>> ok:
+      case Ok<List<DeleteAccountReasonDTO>> ok:
         emit(FetchDeleteAccountReasonsSuccess(ok.value));
         break;
       case Err err:
@@ -96,7 +96,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
     final res = await _repo.confirmDeleteAccount(req);
     switch (res) {
       case Ok<String> ok:
-        Session().client = null;
+        Session().setClient = null;
         TokenService.deleteToken();
         emit(DeleteAccountSuccess(ok.value));
         break;
@@ -111,7 +111,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
     switch (res) {
       case Ok<String> ok:
         client = null;
-        Session().client = null;
+        Session().setClient = null;
         TokenService.deleteToken();
         emit(LogoutSuccess(ok.value));
         break;

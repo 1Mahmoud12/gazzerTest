@@ -24,7 +24,6 @@ import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
 import 'package:gazzer/features/profile/presentation/model/address_model.dart';
-import 'package:gazzer/features/profile/presentation/views/component/delete_account_confirm_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/component/profile_verify_otp_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/component/udpate_account_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';

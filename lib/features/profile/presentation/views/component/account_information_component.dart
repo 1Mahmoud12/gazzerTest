@@ -65,47 +65,32 @@ class _AccountInformationComponent extends StatelessWidget {
           ),
         ),
 
-        BlocListener<ProfileCubit, ProfileStates>(
-          listener: (context, state) {
-            if (state is RequestDeleteAccountSuccess && ModalRoute.of(context)?.isCurrent == true) {
-              context.myPush(
-                BlocProvider.value(
-                  value: cubit,
-                  child: DeleteAccountScreen(sessionId: state.sessionId),
-                ),
-              );
-            } else if (state is RequestDeleteAccountError) {
-              Alerts.showToast(state.message);
-            }
+        MainBtn(
+          onPressed: () async {
+            AppNavigator().push(
+              BlocProvider.value(
+                value: cubit,
+                child: const DeleteAccountScreen(),
+              ),
+              parent: Parent.main,
+            );
           },
-          child: MainBtn(
-            onPressed: () async {
-              final res = await showModalBottomSheet<bool>(
-                context: context,
-                backgroundColor: Co.secText,
-                constraints: const BoxConstraints(minHeight: 260),
-                useSafeArea: true,
-                builder: (context) => const DeleteAccountConfirmSheet(),
-              );
-              if (res == true) cubit.requestDeleteAccount();
-            },
-            bgColor: Colors.transparent,
-            borderColor: Co.purple,
-            radius: 16,
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-            child: Row(
-              spacing: 16,
-              children: [
-                const Icon(CupertinoIcons.delete, size: 20, color: Co.purple),
-                Expanded(
-                  child: Text(
-                    L10n.tr().deleteAccount,
-                    style: TStyle.primaryBold(14, font: FFamily.inter),
-                    textAlign: TextAlign.center,
-                  ),
+          bgColor: Colors.transparent,
+          borderColor: Co.purple,
+          radius: 16,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+          child: Row(
+            spacing: 16,
+            children: [
+              const Icon(CupertinoIcons.delete, size: 20, color: Co.purple),
+              Expanded(
+                child: Text(
+                  L10n.tr().deleteAccount,
+                  style: TStyle.primaryBold(14, font: FFamily.inter),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],

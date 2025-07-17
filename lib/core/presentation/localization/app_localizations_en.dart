@@ -9,6 +9,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get otpSentSuccessfully => 'OTP sent successfully';
+
+  @override
   String get splash_________________Start => '__________________';
 
   @override
@@ -19,6 +22,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_________________Start => '__________________';
+
+  @override
+  String get pleaseSelectReason => 'Please select a reason';
+
+  @override
+  String get accountSuccessfullyDeleted => 'Account successfully deleted';
+
+  @override
+  String get whyAreYouDeletingYourAccount =>
+      'Why are you deleting your account?';
+
+  @override
+  String get thisFeedbackHelpsUsImproveOurServices =>
+      'This feedback helps us improve our services.';
+
+  @override
+  String get otherReason => 'Other Reason';
 
   @override
   String get confirmToDelete => 'Confirm to delete';

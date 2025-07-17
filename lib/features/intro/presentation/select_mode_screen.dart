@@ -12,7 +12,6 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
@@ -74,7 +73,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             PlanAnimatedBtn(
               onPressed: () {
                 isAnimating.value = false;
-                context.myPush(BlocProvider(create: (context) => di<LoginCubit>(), child: const LoginScreen())).then((v) => isAnimating.value = true);
+                context.myPush(const LoginScreen()).then((v) => isAnimating.value = true);
               },
               text: L10n.tr().login,
               isAnimating: isAnimating,

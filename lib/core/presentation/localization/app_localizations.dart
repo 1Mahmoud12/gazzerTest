@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @otpSentSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP sent successfully'**
+  String get otpSentSuccessfully;
+
   /// No description provided for @splash_________________Start.
   ///
   /// In en, this message translates to:
@@ -121,6 +127,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'__________________'**
   String get profile_________________Start;
+
+  /// No description provided for @pleaseSelectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a reason'**
+  String get pleaseSelectReason;
+
+  /// No description provided for @accountSuccessfullyDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Account successfully deleted'**
+  String get accountSuccessfullyDeleted;
+
+  /// No description provided for @whyAreYouDeletingYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are you deleting your account?'**
+  String get whyAreYouDeletingYourAccount;
+
+  /// No description provided for @thisFeedbackHelpsUsImproveOurServices.
+  ///
+  /// In en, this message translates to:
+  /// **'This feedback helps us improve our services.'**
+  String get thisFeedbackHelpsUsImproveOurServices;
+
+  /// No description provided for @otherReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Other Reason'**
+  String get otherReason;
 
   /// No description provided for @confirmToDelete.
   ///

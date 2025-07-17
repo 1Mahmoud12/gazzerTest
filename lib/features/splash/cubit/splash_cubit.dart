@@ -43,7 +43,7 @@ class SplashCubit extends Cubit<SplashStates> {
     final res = await _repo.getClient();
     switch (res) {
       case Ok<ClientEntity> ok:
-        Session().client = ok.value;
+        Session().setClient = ok.value;
         emit(GetClientSuccess(ok.value));
         break;
       case Err<ClientEntity> err:

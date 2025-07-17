@@ -4,7 +4,7 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/auth/common/data/client_response.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/profile/data/models/change_password_req.dart';
-import 'package:gazzer/features/profile/data/models/delete_account_reason.dart';
+import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_req.dart';
 import 'package:gazzer/features/profile/data/models/profile_verify_otp_req.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
@@ -93,11 +93,11 @@ class ProfileRepoImp extends ProfileRepo {
   }
 
   @override
-  Future<Result<List<DeleteAccountReason>>> getDeleteAccountReasons() {
+  Future<Result<List<DeleteAccountReasonDTO>>> getDeleteAccountReasons() {
     return super.call(
       apiCall: () => _apiClient.get(endpoint: Endpoints.deleteAccountReasons),
       parser: (response) {
-        return (response.data['data'] as List).map((e) => DeleteAccountReason.fromJson(e)).toList();
+        return (response.data['data'] as List).map((e) => DeleteAccountReasonDTO.fromJson(e)).toList();
       },
     );
   }
