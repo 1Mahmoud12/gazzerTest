@@ -1,6 +1,6 @@
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/features/profile/domain/address_entity.dart';
+import 'package:gazzer/features/addresses/domain/address_entity.dart';
 
 enum AddressLabel {
   home,
@@ -51,7 +51,8 @@ class AddressModel extends AddressEntity {
         lng: entity.lng,
         isDefault: entity.isDefault,
         floor: entity.floor,
-        apartmentNum: entity.apartmentNum,
+        apartment: entity.apartment,
+        building: entity.building,
         description: entity.description,
         landmark: entity.landmark,
         provinceName: entity.provinceName,

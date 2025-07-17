@@ -27,6 +27,13 @@ class Endpoints {
   static const resetPassword = "clients/auth/reset-password";
   static const forgetPasswordVerifyOTP = "clients/auth/forgot-password/verify-otp";
 
+  /// ** Addresses
+  static const addresses = "clients/addresses";
+  static const addAddress = "clients/addresses";
+  static String editAddress(int id) => "clients/addresses/update/$id";
+  static String deleteAddress(int id) => "clients/addresses/$id";
+  static const setDefaultAddress = "clients/addresses/set-default";
+
   /// ** pages
   static const homePage = "homepage";
 

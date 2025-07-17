@@ -10,7 +10,8 @@ class AddressEntity {
   final bool isDefault;
   final String street;
   final int floor;
-  final int apartmentNum;
+  final int apartment;
+  final String building;
   final String? description;
   final String? landmark;
 
@@ -26,7 +27,8 @@ class AddressEntity {
     required this.lng,
     required this.isDefault,
     required this.floor,
-    required this.apartmentNum,
+    required this.apartment,
+    required this.building,
     this.description,
     this.landmark,
   });

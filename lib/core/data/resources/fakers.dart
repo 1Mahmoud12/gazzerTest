@@ -4,8 +4,8 @@ import 'package:gazzer/core/domain/cart/cart_item_model.dart';
 import 'package:gazzer/core/domain/cart/vendor_products_model.dart';
 import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
-import 'package:gazzer/features/profile/domain/address_entity.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
@@ -163,7 +163,8 @@ class Fakers {
       lng: 0.0,
       isDefault: index == 0, // First address is default
       floor: _random.nextInt(5),
-      apartmentNum: _random.nextInt(100),
+      apartment: _random.nextInt(100),
+      building: "مبنى ${index + 1}",
       description: "وصف العنوان ${index + 1}",
       landmark: "معلم ${index + 1}",
       zoneName: "منطقة ${index + 1}",
