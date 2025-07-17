@@ -114,6 +114,29 @@ class ApiClient {
     }
   }
 
+  /// [queryParameters] can be used to add query parameters to the request
+  ///
+  /// [headers] can be used to add custom headers to the request not including the authorization header
+  Future<Response> delete({
+    required String endpoint,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) async {
+    try {
+      final response = await _dio.delete(
+        endpoint,
+        queryParameters: queryParameters,
+        options: Options(headers: _getHeaders(headers)),
+      );
+      return response;
+    } on DioException catch (e) {
+      _noInternetConnection(e.type);
+      // final message = e.response?.data is Map ? (e.response?.data?['message'] ?? '') : '';
+      // _unAuthenticated(message);
+      rethrow;
+    }
+  }
+
   bool isDisconected = false;
 
   /// Handles no internet connection scenarios.

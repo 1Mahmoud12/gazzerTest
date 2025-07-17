@@ -50,7 +50,7 @@ class AddressCard extends StatelessWidget {
                         TextSpan(text: "${address.zoneName}, "),
                         TextSpan(text: address.street),
                         TextSpan(text: ", ${L10n.tr().floor} ${address.floor}"),
-                        TextSpan(text: ", ${L10n.tr().apartmentNumber} ${address.apartmentNum}."),
+                        TextSpan(text: ", ${L10n.tr().apartmentNumber} ${address.apartment}."),
                         if (address.description != null) TextSpan(text: " ${address.description}."),
                         if (address.landmark != null) TextSpan(text: " ${L10n.tr().landmark} ${address.landmark}."),
                       ],
