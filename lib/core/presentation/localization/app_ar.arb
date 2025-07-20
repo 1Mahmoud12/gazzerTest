@@ -198,16 +198,17 @@
   "wrongNumber": "رقم خاطئ؟",
   "code": "رمز",
   "createPassword": "إنشاء كلمة مرور",
-  "createPasswordToVerify": ".إنشاء كلمة مرور للتحقق.",
+  "createPasswordToVerify": "إنشاء كلمة مرور للتحقق.",
   "password": "كلمة المرور",
   "confirmPassword": "تأكيد كلمة المرور",
   "yourNewPassword": "كلمة المرور الجديدة الخاصة بك",
   "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
-  "nameAcceptsOnlyDashedAndCharacters": "الاسم يقبل فقط الأحرف والأحرف المتقطعة.",
+  "nameAcceptsOnlyDashedAndCharacters": "الاسم الكامل يجب ان يحتوي فقط على الاحرف والمسافة والشرطة (-).",
   "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين.",
   "pleaseReEnterYourNewPassword": "يرجى إعادة إدخال كلمة المرور الجديدة الخاصة بك.",
   "thisFieldIsRequired": "هذا الحقل مطلوب.",
-  "valueShouldBeNumAtelase": "يجب أن تكون طول قيمة {val} على الأقل {num} احرف",
+  "fullNameShouldBeThreeLettersOrMore" : "الاسم الكامل يجب أن يكون ثلاثة أحرف او اكثر.",
+  "valueShouldBeNumAtelase": "طول {val} يجب ان يكون {num} او اكثر",
   "@valueShouldBeNumAtelase": {
     "placeholders": {
       "num": {
@@ -230,7 +231,7 @@
       }
     }
   },
-  "valueMoreThanNum": "يجب أن تكون قيمة {val} {num} أرقام على الأقل",
+  "valueMoreThanNum": "طول {val} يجب ان يكون {num} او اكثر",
   "@valueMoreThanNum": {
     "placeholders": {
       "num": {

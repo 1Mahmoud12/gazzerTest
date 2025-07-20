@@ -613,7 +613,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nameAcceptsOnlyDashedAndCharacters =>
-      'Name accepts only characters and dashes';
+      'Name accepts only characters, dashes and white spaces';
 
   @override
   String get passwordsDoNotMatch => 'Passwords do not match.';
@@ -627,6 +627,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thisFieldIsRequired => 'This field is required.';
+
+  @override
+  String get fullNameShouldBeThreeLettersOrMore =>
+      'Full name Should be tree letters or more';
 
   @override
   String valueShouldBeNumAtelase(int num, String val) {

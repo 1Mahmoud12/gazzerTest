@@ -595,7 +595,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get createPassword => 'إنشاء كلمة مرور';
 
   @override
-  String get createPasswordToVerify => '.إنشاء كلمة مرور للتحقق.';
+  String get createPasswordToVerify => 'إنشاء كلمة مرور للتحقق.';
 
   @override
   String get password => 'كلمة المرور';
@@ -611,7 +611,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get nameAcceptsOnlyDashedAndCharacters =>
-      'الاسم يقبل فقط الأحرف والأحرف المتقطعة.';
+      'الاسم الكامل يجب ان يحتوي فقط على الاحرف والمسافة والشرطة (-).';
 
   @override
   String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين.';
@@ -627,8 +627,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thisFieldIsRequired => 'هذا الحقل مطلوب.';
 
   @override
+  String get fullNameShouldBeThreeLettersOrMore =>
+      'الاسم الكامل يجب أن يكون ثلاثة أحرف او اكثر.';
+
+  @override
   String valueShouldBeNumAtelase(int num, String val) {
-    return 'يجب أن تكون طول قيمة $val على الأقل $num احرف';
+    return 'طول $val يجب ان يكون $num او اكثر';
   }
 
   @override
@@ -641,7 +645,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String valueMoreThanNum(int num, String val) {
-    return 'يجب أن تكون قيمة $val $num أرقام على الأقل';
+    return 'طول $val يجب ان يكون $num او اكثر';
   }
 
   @override

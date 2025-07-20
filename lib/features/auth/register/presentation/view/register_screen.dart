@@ -74,8 +74,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: _nameController,
                       hintText: L10n.tr().yourFullName,
                       bgColor: Colors.transparent,
+                      max: 255,
                       validator: (v) {
-                        return Validators.dashedCharactersOnly(v) ?? Validators.valueAtLeastNum(v, L10n.tr().fullName, 3);
+                        return Validators.dashedCharactersOnly(v) ??
+                            Validators.valueAtLeastNum(
+                              v,
+                              L10n.tr().fullName,
+                              3,
+                              msg: L10n.tr().fullNameShouldBeThreeLettersOrMore,
+                            );
                       },
                       autofillHints: [AutofillHints.username, AutofillHints.name],
                     ),

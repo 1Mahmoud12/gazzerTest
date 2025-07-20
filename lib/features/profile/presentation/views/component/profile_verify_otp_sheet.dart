@@ -84,7 +84,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "${L10n.tr().anOTPhasBeenSentTo} (+20$phoneNumber",
+                      "${L10n.tr().anOTPhasBeenSentTo} (+20)-$phoneNumber",
                       maxLines: 2,
                       style: TStyle.greySemi(16),
                       textAlign: TextAlign.start,

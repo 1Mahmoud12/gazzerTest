@@ -90,10 +90,13 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('(+20${widget.req.phone}', style: TStyle.greySemi(14)),
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Text('(+20)-${req.phone}', style: TStyle.greySemi(14)),
+                  ),
                   TextButton(
                     onPressed: () async {
-                      showModalBottomSheet(
+                      await showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
@@ -107,6 +110,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           );
                         },
                       );
+                      setState(() {});
                     },
                     child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
                   ),
