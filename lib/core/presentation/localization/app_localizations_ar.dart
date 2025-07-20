@@ -524,7 +524,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onBoarding_________________Start => '__________________';
 
   @override
-  String get learnMore => 'المزيد';
+  String get learnMore => 'Learn More';
 
   @override
   String get onBoarding_________________end => '__________________';

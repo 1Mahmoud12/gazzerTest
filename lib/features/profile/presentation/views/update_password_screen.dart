@@ -11,11 +11,12 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/profile/data/models/change_password_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
+import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'update_password_screen.g.dart';
 
-@TypedGoRoute<UpodatePasswordRoute>(path: UpodatePasswordScreen.routeWzValue)
+@TypedGoRoute<UpodatePasswordRoute>(path: UpodatePasswordScreen.fullRoute)
 @immutable
 class UpodatePasswordRoute extends GoRouteData with _$UpodatePasswordRoute {
   const UpodatePasswordRoute({required this.$extra});
@@ -28,7 +29,9 @@ class UpodatePasswordRoute extends GoRouteData with _$UpodatePasswordRoute {
 
 class UpodatePasswordScreen extends StatefulWidget {
   const UpodatePasswordScreen({super.key});
-  static const routeWzValue = '/update-password';
+  static const endpoint = 'update-password';
+  static const fullRoute = '${ProfileScreen.route}/$endpoint';
+
   @override
   State<UpodatePasswordScreen> createState() => _UpodatePasswordScreenState();
 }

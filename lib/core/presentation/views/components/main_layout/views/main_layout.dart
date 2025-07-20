@@ -1,18 +1,16 @@
 import 'dart:io';
 
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/fav_navigator.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/home_navigation.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/inherited_layout.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/orders_navigator.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
+import 'package:gazzer/features/favorites/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:gazzer/features/orders/views/orders_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
 class MainLayout extends StatefulWidget {
@@ -20,44 +18,48 @@ class MainLayout extends StatefulWidget {
 
   /// Main layout that provide smooth transitions etween the main screens, it contains the bottom navigation bar and the main screens.
   /// [idnex] is the initial index of the bottom navigation bar, if not provided, it defaults to 0
-  const MainLayout({super.key, this.idnex});
-  final int? idnex;
+  const MainLayout({super.key, required this.child, required this.state});
+  final Widget child;
+  final GoRouterState state;
   @override
   State<MainLayout> createState() => _MainLayoutState();
 }
 
 class _MainLayoutState extends State<MainLayout> {
-  late final ValueNotifier<int> indexNotifier;
   final canPop = ValueNotifier(false);
-  int _prevIdenx = 0;
 
-  bool changeIndex(int index) {
-    if (index == indexNotifier.value) return false;
-    _prevIdenx = indexNotifier.value;
-    indexNotifier.value = index;
-    return true;
+  late final ValueNotifier<int> route;
+  late int currentRoute;
+
+  final routes = {0: HomeScreen.route, 1: FavoritesScreen.route, 2: OrdersScreen.route};
+
+  String _getBaseRoute() {
+    final baseRoute = widget.state.fullPath?.split('/')[1];
+    print("FULL PATH IS  :::::::::::::: ${widget.state.fullPath}");
+    print("BASE ROUTE IS :::::::::::::: $baseRoute");
+    return "/$baseRoute";
   }
 
-  Widget _getScreen(int index) {
-    switch (index) {
-      case 0:
-        return const HomeNavigation(key: ValueKey(0));
-      case 1:
-        return const FavNavigator(key: ValueKey(1));
-      case 2:
-        return const OrdersNavigator(key: ValueKey(2));
-      case 3:
-        return const SizedBox.shrink();
-      default:
-        return const HomeScreen(key: ValueKey(4));
-    }
+  int _updateBNV(bool isInit) {
+    final initRoute = _getBaseRoute();
+    return routes.entries.firstWhere((k) => k.value == initRoute, orElse: () => routes.entries.first).key;
   }
 
   @override
   void initState() {
-    indexNotifier = ValueNotifier(widget.idnex ?? 0);
-    _prevIdenx = widget.idnex ?? 0;
+    currentRoute = _updateBNV(true);
+    route = ValueNotifier(currentRoute);
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant MainLayout oldWidget) {
+    if (oldWidget.state.fullPath != widget.state.fullPath) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _updateBNV(false);
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -75,46 +77,30 @@ class _MainLayoutState extends State<MainLayout> {
             exit(0);
           }
         },
-        child: LayoutInherited(
-          changeIndex: changeIndex,
-          child: ValueListenableBuilder(
-            valueListenable: indexNotifier,
-            builder: (context, value, child) => Scaffold(
-              body: PageTransitionSwitcher(
-                duration: Durations.long4,
-                reverse: _prevIdenx > value,
-                transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-                  return SharedAxisTransition(
-                    fillColor: Colors.transparent,
-                    animation: primaryAnimation,
-                    secondaryAnimation: secondaryAnimation,
-                    transitionType: SharedAxisTransitionType.horizontal,
-                    child: child,
-                  );
-                },
-                child: _getScreen(value),
-              ),
+        child: ValueListenableBuilder(
+          valueListenable: route,
+          builder: (context, value, child) => Scaffold(
+            body: widget.child,
+            bottomNavigationBar: Builder(
+              builder: (context) {
+                return MainBnb(
+                  initialIndex: value,
+                  onItemSelected: (index) {
+                    if (index == 3) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Scaffold.of(context).openEndDrawer();
+                      });
+                      return;
+                    }
+                    if (index == value) return;
 
-              bottomNavigationBar: Builder(
-                builder: (context) {
-                  return MainBnb(
-                    initialIndex: indexNotifier.value,
-                    onItemSelected: (index) {
-                      if (index == 3) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          Scaffold.of(context).openEndDrawer();
-                        });
-                        return;
-                      }
-                      if (index == indexNotifier.value) return;
-                      _prevIdenx = indexNotifier.value;
-                      indexNotifier.value = index;
-                    },
-                  );
-                },
-              ),
-              endDrawer: const MainDrawer(),
+                    route.value = index;
+                    context.pushReplacement(routes[index]!);
+                  },
+                );
+              },
             ),
+            endDrawer: const MainDrawer(),
           ),
         ),
       ),

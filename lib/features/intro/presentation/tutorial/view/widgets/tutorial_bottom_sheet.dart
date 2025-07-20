@@ -4,7 +4,6 @@ import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -27,11 +26,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
   final animDuration = const Duration(milliseconds: 500);
 
   Future navigateToLoginScreen() async {
-    return Navigator.of(context).pushReplacement(
-      AppTransitions().slideTransition(
-        const LoginScreen(),
-      ),
-    );
+    context.push(LoginScreen.route);
   }
 
   Future<void> changeLanguage(String lang) async {

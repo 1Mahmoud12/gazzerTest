@@ -97,7 +97,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
         isLoading: state is RequestDeleteAccountLoading,
         child: Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: const ClassicAppBar(),
+          appBar: const ClassicAppBar(color: Colors.white),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

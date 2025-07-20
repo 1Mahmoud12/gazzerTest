@@ -67,7 +67,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
                   if (client != null)
                     TextButton(
                       onPressed: () {
-                        UpodatePasswordRoute($extra: context.read<ProfileCubit>()).push(context);
+                        UpodatePasswordRoute($extra: context.read<ProfileCubit>()).go(context);
                       },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

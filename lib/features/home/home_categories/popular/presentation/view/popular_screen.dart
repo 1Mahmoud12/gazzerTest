@@ -10,7 +10,7 @@ import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_fo
 
 class PopularScreen extends StatelessWidget {
   const PopularScreen({super.key});
-
+  static const route = '/popular-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/routing/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';

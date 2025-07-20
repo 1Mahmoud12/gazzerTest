@@ -5,16 +5,18 @@ import 'package:gazzer/core/presentation/routing/routers/auth_routes.dart';
 import 'package:gazzer/core/presentation/routing/routers/checkout_routes.dart';
 import 'package:gazzer/core/presentation/routing/routers/nested_routes.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
+import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
+import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
+import 'package:gazzer/features/intro/presentation/loading_screen.dart';
+import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/view/splash_screen.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
 import 'package:go_router/go_router.dart';
 
-GoRouter router = GoRouter(
+GoRouter get router => GoRouter(
   navigatorKey: AppNavigator().mainKey,
   initialLocation: SplashScreen.route,
   observers: [MyRouteObserver()],
@@ -23,20 +25,27 @@ GoRouter router = GoRouter(
       path: SplashScreen.route,
       builder: (context, state) => BlocProvider(create: (context) => di<SplashCubit>(), child: const SplashScreen()),
     ),
+
+    ///
     nestedRoutes,
     ...authRoutes,
     ...checkoutRoutes,
+    $addFoodToCartRoute,
+
+    /// plan & intro
+    $congratsScreenRoute,
+    $loadingScreenRoute,
+    $introVideoTutorialRoute,
 
     /// scattered;
-    GoRoute(path: DeleteAccountScreen.routeWzCubit, builder: (context, state) => const DeleteAccountScreen()),
+    $deleteAccountRoute,
+    $addEditAddressRoute,
     GoRoute(
-      path: AddEditAddressScreen.routeWzExtra,
-      builder: (context, state) => AddEditAddressScreen(address: state.extra as AddressEntity?),
+      path: SelectLocationScreen.route,
+      builder: (context, state) => const SelectLocationScreen(),
     ),
-    GoRoute(
-      path: AddFoodToCartScreen.routeWzExtra,
-      builder: (context, state) => AddFoodToCartScreen(product: state.extra as ProductItemEntity),
-    ),
+
+    ///
   ],
   // errorBuilder: (context, state) => const RouteNotFoundScreen(),
   redirect: (context, state) {

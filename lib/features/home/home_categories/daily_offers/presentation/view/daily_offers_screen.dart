@@ -9,7 +9,7 @@ import 'package:gazzer/features/home/home_categories/common/home_categories_head
 
 class DailyOffersScreen extends StatelessWidget {
   const DailyOffersScreen({super.key});
-
+  static const route = '/daily-offers';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

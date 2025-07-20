@@ -81,8 +81,10 @@
   "selectType": "اختر النوع",
   "alsoOrderWith": "اطلب أيضاً مع",
   "product_________________End": "__________________",
+  "onBoarding_________________Start": "__________________",
+  "learnMore": "Learn More",
+  "onBoarding_________________end": "__________________",
   "plans_________________Start": "__________________",
-  "learnMore": "المزيد",
   "whatIsYourPrimaryHealthFocus": "ما هو تركيزك الصحي الأساسي",
   "yourPlanToOptimizeCalories": "خطتك لتحسين السعرات الحرارية",
   "weightLossPlan": "خطة فقدان الوزن",
@@ -207,7 +209,7 @@
   "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين.",
   "pleaseReEnterYourNewPassword": "يرجى إعادة إدخال كلمة المرور الجديدة الخاصة بك.",
   "thisFieldIsRequired": "هذا الحقل مطلوب.",
-  "fullNameShouldBeThreeLettersOrMore" : "الاسم الكامل يجب أن يكون ثلاثة أحرف او اكثر.",
+  "fullNameShouldBeThreeLettersOrMore": "الاسم الكامل يجب أن يكون ثلاثة أحرف او اكثر.",
   "valueShouldBeNumAtelase": "طول {val} يجب ان يكون {num} او اكثر",
   "@valueShouldBeNumAtelase": {
     "placeholders": {

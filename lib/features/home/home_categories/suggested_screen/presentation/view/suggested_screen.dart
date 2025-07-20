@@ -12,7 +12,7 @@ import 'package:gazzer/features/home/home_categories/common/home_categories_head
 
 class SuggestedScreen extends StatelessWidget {
   const SuggestedScreen({super.key});
-
+  static const route = '/suggested-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

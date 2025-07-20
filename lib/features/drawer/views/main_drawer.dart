@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/inherited_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_switcher.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
@@ -45,7 +44,7 @@ class _MainDrawerState extends State<MainDrawer> {
         L10n.tr().favorites,
         Assets.assetsSvgFavoritesOutlined,
         (BuildContext ctx) {
-          LayoutInherited.of(context).changeIndex(1);
+          // LayoutInherited.of(context).changeIndex(1);
         },
       ),
       (L10n.tr().myOrders, Assets.assetsSvgHistory, (BuildContext ctx) {}),

@@ -3,7 +3,6 @@ import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
@@ -25,7 +24,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AppNavigator().initContext = context;
+      // AppNavigator().initContext = context;
     });
     super.initState();
   }

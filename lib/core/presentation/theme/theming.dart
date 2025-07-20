@@ -8,7 +8,10 @@ class AppTheme {
   AppTheme._();
   static final lightTheme = ThemeData(
     pageTransitionsTheme: PageTransitionsTheme(
-      builders: {TargetPlatform.android: CustomPageTransitionBuilder(), TargetPlatform.iOS: CustomPageTransitionBuilder()},
+      builders: {
+        TargetPlatform.android: CustomPageTransitionBuilder(),
+        TargetPlatform.iOS: CustomPageTransitionBuilder(),
+      },
     ),
     textTheme: TextTheme(titleMedium: TStyle.whiteSemi(14), bodyMedium: TStyle.whiteSemi(13)),
     fontFamily: 'poppins',

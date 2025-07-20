@@ -4,14 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/cubit/splash_states.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -99,20 +99,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 listener: (context, state) {
                   if (state is UnAuth) {
                     if (state.haveSeenTour) {
-                      Navigator.of(context).pushReplacement(
-                        AppTransitions().slideTransition(const LoginScreen()),
-                      );
+                      context.go(LoginScreen.route);
                     } else {
-                      Navigator.of(context).pushReplacement(
-                        AppTransitions().slideTransition(const IntroVideoTutorialScreen(videoLink: '')),
-                      );
+                      const IntroVideoTutorialRoute(videoLink: '').go(context);
                     }
                   } else if (state is RefreshTokenSuccess) {
                     cubit.getClient();
                   } else if (state is GetClientSuccess) {
-                    Navigator.of(context).pushReplacement(
-                      AppTransitions().slideTransition(const MainLayout()),
-                    );
+                    context.go(HomeScreen.route);
                   } else if (state is RefreshTokenError || state is GetClientError) {
                     trialCount++;
                   }
@@ -149,9 +143,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                             ElevatedButton(
                               onPressed: () {
                                 TokenService.deleteToken();
-                                Navigator.of(context).pushReplacement(
-                                  AppTransitions().slideTransition(const LoginScreen()),
-                                );
+                                context.go(LoginScreen.route);
                               },
                               child: Text(
                                 L10n.tr().skip,

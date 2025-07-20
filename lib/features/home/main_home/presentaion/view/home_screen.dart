@@ -9,8 +9,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
-import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
@@ -60,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<HomeCubit>().getHomeData();
-      AppNavigator().initContext = context;
+      // AppNavigator().initContext = context;
       if (Session().showTour) {
         HotspotProvider.of(context).startFlow();
         di<SharedPreferences>().setBool(StorageKeys.haveSeenTour, true);

@@ -5,24 +5,44 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/widgets/rest_cat_mini_product_card.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/grid_prod_card.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
+import 'package:go_router/go_router.dart';
+
+part 'restaurant_category_screen.g.dart';
+
+@TypedGoRoute<RestaurantCategoryRoute>(path: RestaurantCategoryScreen.route)
+@immutable
+class RestaurantCategoryRoute extends GoRouteData with _$RestaurantCategoryRoute {
+  const RestaurantCategoryRoute({required this.subCatId, required this.subcatName, required this.$extra});
+  final RestaurantEntity $extra;
+  final int subCatId;
+  final String subcatName;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return RestaurantCategoryScreen(
+      vendor: $extra,
+      subCatId: subCatId,
+      subcatName: subcatName,
+    );
+  }
+}
 
 class RestaurantCategoryScreen extends StatelessWidget {
-  const RestaurantCategoryScreen({super.key, required this.vendor, required this.subCat});
+  const RestaurantCategoryScreen({super.key, required this.vendor, required this.subCatId, required this.subcatName});
   final RestaurantEntity vendor;
-  final CategoryOfPlateEntity subCat;
-
+  final int subCatId;
+  final String subcatName;
+  static const route = '/restaurant-category';
   @override
   Widget build(BuildContext context) {
     final nonCat = [
       MultiCatRestHeader(vendor: vendor),
       Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-        child: Text(subCat.name, style: TStyle.primaryBold(16)),
+        child: Text(subcatName, style: TStyle.primaryBold(16)),
       ),
       AspectRatio(
         aspectRatio: 1,

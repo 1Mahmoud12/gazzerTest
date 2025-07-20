@@ -30,33 +30,33 @@ class AppNavigator {
   GlobalKey<NavigatorState> get ordersKey => _ordersKey;
   // GlobalKey<NavigatorState> get drawerKey => _drawerKey;
 
-  late BuildContext _lastUsed;
-  BuildContext get context => _lastUsed;
-  set initContext(BuildContext value) {
-    print("init last context");
-    _lastUsed = value;
-  }
+  // late BuildContext _lastUsed;
+  // BuildContext get context => _lastUsed;
+  // set initContext(BuildContext value) {
+  //   print("init last context");
+  //   _lastUsed = value;
+  // }
 
-  BuildContext _getContext(Parent par, bool useLast) {
-    BuildContext? context;
-    if (useLast) {
-      context = _lastUsed;
-    } else {
-      context = switch (par) {
-        Parent.main => _mainKey.currentContext,
-        Parent.home => _homeKey.currentContext,
-        Parent.fav => _favKey.currentContext,
-        Parent.orders => _ordersKey.currentContext,
-        // Parent.menu => _drawerKey.currentContext,
-      };
-    }
+  // BuildContext _getContext(Parent par, bool useLast) {
+  //   BuildContext? context;
+  //   if (useLast) {
+  //     context = _lastUsed;
+  //   } else {
+  //     context = switch (par) {
+  //       Parent.main => _mainKey.currentContext,
+  //       Parent.home => _homeKey.currentContext,
+  //       Parent.fav => _favKey.currentContext,
+  //       Parent.orders => _ordersKey.currentContext,
+  //       // Parent.menu => _drawerKey.currentContext,
+  //     };
+  //   }
 
-    if (context == null) {
-      throw Exception('Navigator context for $par is null');
-    }
-    _lastUsed = context;
-    return context;
-  }
+  //   if (context == null) {
+  //     throw Exception('Navigator context for $par is null');
+  //   }
+  //   _lastUsed = context;
+  //   return context;
+  // }
 
   // Future<T?> push<T>(dynamic widget, {Parent parent = Parent.main, bool useLast = false}) async {
   //   try {

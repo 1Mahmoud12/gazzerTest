@@ -9,7 +9,7 @@ part of 'update_password_screen.dart';
 List<RouteBase> get $appRoutes => [$upodatePasswordRoute];
 
 RouteBase get $upodatePasswordRoute => GoRouteData.$route(
-  path: '/update-password',
+  path: '/profile/update-password',
 
   factory: _$UpodatePasswordRoute._fromState,
 );
@@ -21,7 +21,7 @@ mixin _$UpodatePasswordRoute on GoRouteData {
   UpodatePasswordRoute get _self => this as UpodatePasswordRoute;
 
   @override
-  String get location => GoRouteData.$location('/update-password');
+  String get location => GoRouteData.$location('/profile/update-password');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

@@ -15,7 +15,7 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
           TitleWithMore(
             title: L10n.tr().suggestedForYou,
             onPressed: () {
-              Navigator.of(context).push(AppTransitions().slideTransition(const SuggestedScreen()));
+              context.push(SuggestedScreen.route);
             },
           ),
           ListView.separated(

@@ -48,14 +48,7 @@ class _TopRatedComponent extends StatelessWidget {
                           return SubCategoriesWidget(
                             subCategories: subCats.map((e) => (name: e.name, image: e.image, id: e.id, isAdd: false)).toList(),
                             onSubCategorySelected: (index) {
-                              Navigator.of(context).push(
-                                AppTransitions().slideTransition(
-                                  RestaurantCategoryScreen(subCat: subCats[index], vendor: vendor),
-                                  start: const Offset(0, 1),
-                                  duration: const Duration(milliseconds: 750),
-                                  curve: Curves.linear,
-                                ),
-                              );
+                              RestaurantCategoryRoute(subcatName: subCats[index].name, subCatId: subCats[index].id, $extra: vendor).push(context);
                             },
                             selectedId: currentindex,
                           );
