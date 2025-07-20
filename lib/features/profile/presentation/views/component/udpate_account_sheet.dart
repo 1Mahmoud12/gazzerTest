@@ -88,7 +88,13 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             bgColor: Colors.white,
                             showBorder: false,
                             validator: (v) {
-                              return Validators.dashedCharactersOnly(v) ?? Validators.valueAtLeastNum(v, L10n.tr().fullName, 3);
+                              return Validators.dashedCharactersOnly(v) ??
+                                  Validators.valueAtLeastNum(
+                                    v,
+                                    L10n.tr().fullName,
+                                    3,
+                                    msg: L10n.tr().fullNameShouldBeThreeLettersOrMore,
+                                  );
                             },
                             autofillHints: [AutofillHints.username, AutofillHints.name],
                           ),

@@ -139,7 +139,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 children: [
                   Flexible(
                     child: Text(
-                      "${L10n.tr().anOTPhasBeenSentTo} (+20$phoneNumber",
+                      "${L10n.tr().anOTPhasBeenSentTo} (+20)-$phoneNumber",
                       maxLines: 3,
                       style: TStyle.greySemi(16),
                       textAlign: TextAlign.start,

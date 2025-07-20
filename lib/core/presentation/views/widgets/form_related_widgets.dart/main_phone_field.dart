@@ -66,81 +66,78 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: InternationalPhoneNumberInput(
-        height: (widget.height ?? 60),
-        controller: widget.controller,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        initCountry: country,
-        betweenPadding: 10,
-        showBorder: widget.showBorder,
-        onInputChanged: (phone) {
-          setState(() => countryCode = phone.code);
-          if (widget.onChange == null) return;
-          if (phone.number.trim().isNotEmpty) {
-            widget.onChange!(phone);
-          }
-        },
-        // loadFromJson: loadFromJson,
-        dialogConfig: DialogConfig(
-          backgroundColor: widget.bgColor ?? const Color(0xFFffffff),
-          searchBoxBackgroundColor: Co.grey.withAlpha(20),
-          searchBoxIconColor: const Color(0xFF444448),
-          countryItemHeight: 55,
-          topBarColor: Colors.black45,
-          selectedItemColor: Co.purple.withAlpha(20),
-          // selectedIcon:
-          //     Icon(Icons.check_box, color: Co.mainOrange, size: 15.r),
-          textStyle: TStyle.greyRegular(14),
-          searchBoxTextStyle: TStyle.greyRegular(14),
-          titleStyle: TStyle.greyBold(14),
-          searchBoxHintStyle: TStyle.greyRegular(14),
+    return InternationalPhoneNumberInput(
+      height: (widget.height ?? 60),
+      controller: widget.controller,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      initCountry: country,
+      betweenPadding: 10,
+      showBorder: widget.showBorder,
+      onInputChanged: (phone) {
+        setState(() => countryCode = phone.code);
+        if (widget.onChange == null) return;
+        if (phone.number.trim().isNotEmpty) {
+          widget.onChange!(phone);
+        }
+      },
+      // loadFromJson: loadFromJson,
+      dialogConfig: DialogConfig(
+        backgroundColor: widget.bgColor ?? const Color(0xFFffffff),
+        searchBoxBackgroundColor: Co.grey.withAlpha(20),
+        searchBoxIconColor: const Color(0xFF444448),
+        countryItemHeight: 55,
+        topBarColor: Colors.black45,
+        selectedItemColor: Co.purple.withAlpha(20),
+        // selectedIcon:
+        //     Icon(Icons.check_box, color: Co.mainOrange, size: 15.r),
+        textStyle: TStyle.greyRegular(14),
+        searchBoxTextStyle: TStyle.greyRegular(14),
+        titleStyle: TStyle.greyBold(14),
+        searchBoxHintStyle: TStyle.greyRegular(14),
+      ),
+      countryConfig: CountryConfig(
+        flagSize: 30,
+        decoration: BoxDecoration(
+          color: widget.bgColor,
+          border: !widget.showBorder ? null : GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
+          borderRadius: AppConst.defaultBorderRadius,
         ),
-        countryConfig: CountryConfig(
-          flagSize: 30,
-          decoration: BoxDecoration(
-            color: widget.bgColor,
-            border: !widget.showBorder ? null : GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
-            borderRadius: AppConst.defaultBorderRadius,
-          ),
-          textStyle: TStyle.greyRegular(14),
-        ),
-        validator: (v) {
-          if (widget.validator != null) {
-            return widget.validator!(v, countryCode ?? 'SA');
-          }
-          return null;
-        },
+        textStyle: TStyle.greyRegular(14),
+      ),
+      validator: (v) {
+        if (widget.validator != null) {
+          return widget.validator!(v, countryCode ?? 'SA');
+        }
+        return null;
+      },
 
-        phoneConfig: PhoneConfig(
-          focusedColor: widget.borderColor ?? Colors.black54,
-          enabledColor: widget.borderColor ?? Colors.black54,
-          errorColor: const Color(0xFFFF5494),
-          labelStyle: TStyle.greyRegular(14),
-          labelText: widget.hasLabel ? "Phone Number" : null,
-          floatingLabelStyle: TStyle.greyRegular(14),
-          focusNode: null,
-          radius: 16,
-          hintText: !widget.hasHint
-              ? null
-              : countryCode == 'EG'
-              ? '1xxxxxxxxx'
-              : 'xxxxxx',
-          borderWidth: 2,
-          backgroundColor: widget.bgColor,
-          decoration: null,
-          popUpErrorText: true,
-          autoFocus: false,
-          showCursor: true,
-          textInputAction: TextInputAction.done,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          errorTextMaxLength: 2,
-          errorPadding: const EdgeInsets.only(top: 14),
-          errorStyle: TStyle.errorSemi(13),
-          textStyle: TStyle.greySemi(14),
-          hintStyle: TStyle.greySemi(14),
-        ),
+      phoneConfig: PhoneConfig(
+        focusedColor: widget.borderColor ?? Colors.black54,
+        enabledColor: widget.borderColor ?? Colors.black54,
+        errorColor: const Color(0xFFFF5494),
+        labelStyle: TStyle.greyRegular(14),
+        labelText: widget.hasLabel ? "Phone Number" : null,
+        floatingLabelStyle: TStyle.greyRegular(14),
+        focusNode: null,
+        radius: 16,
+        hintText: !widget.hasHint
+            ? null
+            : countryCode == 'EG'
+            ? '1xxxxxxxxx'
+            : 'xxxxxx',
+        borderWidth: 2,
+        backgroundColor: widget.bgColor,
+        decoration: null,
+        popUpErrorText: true,
+        autoFocus: false,
+        showCursor: true,
+        textInputAction: TextInputAction.done,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        errorTextMaxLength: 2,
+        errorPadding: const EdgeInsets.only(top: 14),
+        errorStyle: TStyle.errorSemi(13),
+        textStyle: TStyle.greySemi(14),
+        hintStyle: TStyle.greySemi(14),
       ),
     );
   }

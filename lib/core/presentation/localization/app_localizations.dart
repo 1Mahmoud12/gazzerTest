@@ -1295,7 +1295,7 @@ abstract class AppLocalizations {
   /// No description provided for @nameAcceptsOnlyDashedAndCharacters.
   ///
   /// In en, this message translates to:
-  /// **'Name accepts only characters and dashes'**
+  /// **'Name accepts only characters, dashes and white spaces'**
   String get nameAcceptsOnlyDashedAndCharacters;
 
   /// No description provided for @passwordsDoNotMatch.
@@ -1321,6 +1321,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This field is required.'**
   String get thisFieldIsRequired;
+
+  /// No description provided for @fullNameShouldBeThreeLettersOrMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name Should be tree letters or more'**
+  String get fullNameShouldBeThreeLettersOrMore;
 
   /// No description provided for @valueShouldBeNumAtelase.
   ///

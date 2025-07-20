@@ -200,7 +200,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
                   : GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
               labelText: widget.phoneConfig.labelText,
               labelStyle: widget.phoneConfig.labelStyle,
-              errorMaxLines: 1,
+              errorMaxLines: 4,
               errorText: widget.phoneConfig.errorText,
               errorStyle: widget.phoneConfig.errorStyle,
               floatingLabelStyle: widget.phoneConfig.floatingLabelStyle,

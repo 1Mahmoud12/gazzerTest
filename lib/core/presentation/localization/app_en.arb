@@ -205,11 +205,12 @@
   "confirmPassword": "Confirm Password",
   "yourNewPassword": "Your New Password",
   "confirmNewPassword": "Confirm New Password",
-  "nameAcceptsOnlyDashedAndCharacters": "Name accepts only characters and dashes",
+  "nameAcceptsOnlyDashedAndCharacters": "Name accepts only characters, dashes and white spaces",
   "passwordsDoNotMatch": "Passwords do not match.",
   "pleaseReEnterYourNewPassword": "Please re-enter your new password.",
   "clickBackAgainToExit": "Click back again to exit",
   "thisFieldIsRequired": "This field is required.",
+  "fullNameShouldBeThreeLettersOrMore" : "Full name Should be tree letters or more",
   "valueShouldBeNumAtelase": "Value {val} should be at least {num} characters",
   "@valueShouldBeNumAtelase": {
     "placeholders": {

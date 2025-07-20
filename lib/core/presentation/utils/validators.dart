@@ -30,7 +30,7 @@ class Validators {
     if (value?.isNotEmpty != true) {
       return L10n.tr().thisFieldIsRequired;
     }
-    final hasMinimumLength = value!.trim().length >= 8;
+    final hasMinimumLength = value!.length >= 8;
     final hasUpperCase = RegExp(r'[A-Z]').hasMatch(value);
     final hasLowerCase = RegExp(r'[a-z]').hasMatch(value);
     final hasDigits = RegExp(r'[0-9]').hasMatch(value);
@@ -66,17 +66,17 @@ class Validators {
     return null;
   }
 
-  static String? valueAtLeastNum(String? value, String name, int num) {
+  static String? valueAtLeastNum(String? value, String name, int num, {String? msg}) {
     if (num < 1) return null;
     if (value == null || value.trim().length < num) {
-      return L10n.tr().valueMoreThanNum(num, name);
+      return msg ?? L10n.tr().valueMoreThanNum(num, name);
     }
     return null;
   }
 
-  static String? valueMustBeNum(String? value, int num, String name) {
+  static String? valueMustBeNum(String? value, int num, String name, {String? msg}) {
     if (value == null || value.trim().length != num) {
-      return L10n.tr().valueMustBeNum(num, name);
+      return msg ?? L10n.tr().valueMustBeNum(num, name);
     }
     return null;
   }
