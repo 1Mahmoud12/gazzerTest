@@ -20,7 +20,7 @@ class HorizontalVendorGridComponent extends StatelessWidget {
         children: [
           TitleWithMore(
             title: catName,
-            onPressed: () => context.myPush(CatRelatedRestaurantsScreen(id: catId)),
+            onPressed: () => CatRelatedRestaurantsRoute(id: catId).push(context),
           ),
           SizedBox(
             height: 300,
