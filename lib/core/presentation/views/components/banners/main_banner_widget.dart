@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/banner_entity.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/views/components/banners/count_doun_banner.dart';
 import 'package:gazzer/core/presentation/views/components/banners/detailed_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/overlaping_cards_slider.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/cat_rest_shaking_img_add_widget.dart';
 
 class MainBannerWidget extends StatelessWidget {
   const MainBannerWidget({super.key, required this.banner});
@@ -33,11 +35,20 @@ class MainBannerWidget extends StatelessWidget {
                       builder: (context, index) {
                         return AspectRatio(
                           aspectRatio: bannerAspectRation,
-                          child: Image.network(banner.images![index], width: double.infinity, height: double.infinity, fit: BoxFit.fill),
+                          child: Image.network(
+                            banner.images![index],
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.fill,
+                          ),
                         );
                       },
                     ),
             BannerType.countdown => CountDownBanner(banner: banner),
+            BannerType.shaking => const ShakingBanner(
+              backGround: Assets.assetsPngShakingAddBg,
+              foreGround: Assets.assetsPngPizza,
+            ),
 
             _ => const SizedBox.shrink(),
           },

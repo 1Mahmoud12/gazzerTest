@@ -85,7 +85,7 @@ class HorizontalVendorCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(vendor.name, style: TStyle.primaryBold(12)),
+                    Text(vendor.name, style: TStyle.primaryBold(12), maxLines: 1),
                     Row(
                       spacing: 4,
                       children: [

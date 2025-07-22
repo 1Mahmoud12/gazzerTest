@@ -3,6 +3,7 @@ enum BannerType {
   detailed('Detailed'),
   slider('Slider'),
   countdown('Countdown'),
+  shaking('Shaking'),
   unknown('Unknown');
 
   final String value;

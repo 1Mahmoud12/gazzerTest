@@ -8,15 +8,23 @@ class Assets {
 
   static const String assetsFontsPlayfair = "assets/fonts/Playfair.ttf";
 
-  static const String assetsFontsPoppinsBold = "assets/fonts/Poppins-Bold.ttf";
+  static const String assetsFontsPoppinsPoppinsBlack = "assets/fonts/poppins/Poppins-Black.ttf";
 
-  static const String assetsFontsPoppinsBoldItalic = "assets/fonts/Poppins-BoldItalic.ttf";
+  static const String assetsFontsPoppinsPoppinsBlackItalic = "assets/fonts/poppins/Poppins-BlackItalic.ttf";
 
-  static const String assetsFontsPoppinsMedium = "assets/fonts/Poppins-Medium.ttf";
+  static const String assetsFontsPoppinsPoppinsBold = "assets/fonts/poppins/Poppins-Bold.ttf";
 
-  static const String assetsFontsPoppinsMediumItalic = "assets/fonts/Poppins-MediumItalic.ttf";
+  static const String assetsFontsPoppinsPoppinsBoldItalic = "assets/fonts/poppins/Poppins-BoldItalic.ttf";
 
-  static const String assetsFontsPoppinsRegular = "assets/fonts/Poppins-Regular.ttf";
+  static const String assetsFontsPoppinsPoppinsMedium = "assets/fonts/poppins/Poppins-Medium.ttf";
+
+  static const String assetsFontsPoppinsPoppinsMediumItalic = "assets/fonts/poppins/Poppins-MediumItalic.ttf";
+
+  static const String assetsFontsPoppinsPoppinsRegular = "assets/fonts/poppins/Poppins-Regular.ttf";
+
+  static const String assetsFontsPoppinsPoppinsSemiBold = "assets/fonts/poppins/Poppins-SemiBold.ttf";
+
+  static const String assetsFontsPoppinsPoppinsSemiBoldItalic = "assets/fonts/poppins/Poppins-SemiBoldItalic.ttf";
 
   static const String assetsGazzerLogo = "assets/gazzer_logo.png";
 
@@ -129,6 +137,8 @@ class Assets {
   static const String assetsPngSandwtichLayer2 = "assets/png/sandwtich_layer_2.png";
 
   static const String assetsPngSetPlanShape = "assets/png/set_plan_shape.png";
+
+  static const String assetsPngShakingAddBg = "assets/png/shaking_add_bg.png";
 
   static const String assetsPngShape1 = "assets/png/shape1.jpg";
 

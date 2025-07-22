@@ -10,9 +10,9 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
-import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show PhoneTextField, MainTextField;
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart'
+    show PhoneTextField, MainTextField;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -21,6 +21,7 @@ import 'package:gazzer/features/auth/forgot_password/presentation/forgot_passwor
 import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_states.dart';
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -72,7 +73,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
                       Row(
                         children: [
-                          GradientText(text: L10n.tr().login, style: TStyle.mainwBold(32), gradient: Grad().textGradient),
+                          GradientText(
+                            text: L10n.tr().login,
+                            style: TStyle.mainwBold(32),
+                            gradient: Grad().textGradient,
+                          ),
                         ],
                       ),
                       const VerticalSpacing(16),
@@ -119,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         listener: (context, state) {
                           if (state is LoginSuccessState) {
                             Alerts.showToast(state.message, error: false);
-                            context.go(Uri(path: LoadingScreen.routeUriRoute, queryParameters: {'route': MainLayout.route}).toString());
+                            const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                           } else if (state is LoginErrorState) {
                             Alerts.showToast(state.error);
                           }
@@ -147,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(
                             child: OptionBtn(
                               onPressed: () {
-                                context.go(Uri(path: LoadingScreen.routeUriRoute, queryParameters: {'route': MainLayout.route}).toString());
+                                const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                               },
                               textStyle: TStyle.mainwSemi(15),
                               bgColor: Colors.transparent,

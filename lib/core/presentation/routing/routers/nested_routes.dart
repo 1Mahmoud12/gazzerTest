@@ -9,7 +9,7 @@ import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart
 import 'package:gazzer/features/orders/views/orders_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant_category_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
@@ -27,10 +27,10 @@ get nestedRoutes => ShellRoute(
 
     /// home screen nested
     GoRoute(
-      path: RestaurantsMenu.route,
+      path: RestaurantsMenuScreen.route,
       builder: (context, state) => BlocProvider(
         create: (context) => di<RestaurantsMenuCubit>(),
-        child: const RestaurantsMenu(),
+        child: const RestaurantsMenuScreen(),
       ),
     ),
     GoRoute(path: GroceryScreen.route, builder: (context, state) => const GroceryScreen()),

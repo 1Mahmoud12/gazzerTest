@@ -6,13 +6,15 @@ sealed class RestaurantsMenuStates {}
 
 final class RestaurantsMenuInit extends RestaurantsMenuStates {}
 
+
+
 sealed class RestaurantsCategoriesStates extends RestaurantsMenuStates {
-  final List<(CategoryOfPlateEntity, bool)> categories;
+  final List<CategoryOfPlateEntity> categories;
   RestaurantsCategoriesStates({this.categories = const []});
 }
 
 final class RestaurantsCategoriesLoading extends RestaurantsCategoriesStates {
-  RestaurantsCategoriesLoading() : super(categories: Fakers.fakeSubCats.map((e) => (e, false)).toList());
+  RestaurantsCategoriesLoading() : super(categories: Fakers.fakeSubCats);
 }
 
 final class RestaurantsCategoriesLoaded extends RestaurantsCategoriesStates {

@@ -5,8 +5,8 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
-import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
+import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 
 class RestCatHeaderWidget extends StatefulWidget {
   const RestCatHeaderWidget({super.key});
@@ -16,13 +16,6 @@ class RestCatHeaderWidget extends StatefulWidget {
 }
 
 class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
-  final controller = TextEditingController();
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +62,10 @@ class _RestCatHeaderWidgetState extends State<RestCatHeaderWidget> {
                       width: constraints.maxWidth * 0.9,
                       child: Hero(
                         tag: Tags.searchBar,
-                        child: MainTextField(
-                          controller: controller,
+                        child: MainSearchWidget(
                           height: 80,
                           borderRadius: 64,
-                          bgColor: Colors.transparent,
                           hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                          prefix: const Icon(Icons.search, color: Co.purple, size: 32),
                         ),
                       ),
                     ),

@@ -41,7 +41,7 @@ class SubCategoryItem extends StatelessWidget {
   final String name;
   final String image;
   final bool isSelected;
-  final Function() ontap;
+  final Function()? ontap;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(

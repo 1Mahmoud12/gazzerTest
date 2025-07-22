@@ -3,9 +3,9 @@ import 'package:gazzer/core/domain/banner_entity.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/color_utils.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
-import 'package:gazzer/core/utils/color_utils.dart';
 
 class DetailedBannerWidget extends StatelessWidget {
   const DetailedBannerWidget({super.key, required this.banner});

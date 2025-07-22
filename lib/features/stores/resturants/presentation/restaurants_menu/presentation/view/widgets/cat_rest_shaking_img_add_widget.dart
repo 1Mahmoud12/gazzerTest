@@ -1,19 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
-class CatRestShakingImgAddWidget extends StatefulWidget {
-  const CatRestShakingImgAddWidget({super.key});
-
+class ShakingBanner extends StatefulWidget {
+  const ShakingBanner({super.key, required this.foreGround, required this.backGround});
+  final String foreGround;
+  final String backGround;
   @override
-  State<CatRestShakingImgAddWidget> createState() => _CatRestShakingImgAddWidgetState();
+  State<ShakingBanner> createState() => _ShakingBannerState();
 }
 
-class _CatRestShakingImgAddWidgetState extends State<CatRestShakingImgAddWidget> with SingleTickerProviderStateMixin {
+class _ShakingBannerState extends State<ShakingBanner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late final Timer _timer;
 
@@ -50,79 +47,33 @@ class _CatRestShakingImgAddWidgetState extends State<CatRestShakingImgAddWidget>
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: const Color.fromRGBO(0, 0, 0, 0),
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 40),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Co.buttonGradient.withAlpha(30), Colors.black.withAlpha(0)],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
-                  child: Column(
-                    spacing: 12,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 36),
-                        child: Badge(
-                          backgroundColor: Colors.transparent,
-                          label: SvgPicture.asset(Assets.assetsSvgTripleStarts, width: 32, height: 32),
-                          alignment: const Alignment(0.65, -1),
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(color: Co.bg, borderRadius: AppConst.defaultBorderRadius),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 6, 24, 6),
-                              child: Text("Buy 3\nGet 4 Free", style: TStyle.primaryBold(20)),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      Text.rich(
-                        TextSpan(
-                          children: [
-                            ...List.generate(
-                              3,
-                              (i) => TextSpan(
-                                text: "${i == 0 ? "" : "Buy More "}& Save More",
-                                style: TStyle.blackBold(14),
-                                children: [
-                                  const WidgetSpan(
-                                    child: Icon(Icons.battery_charging_full_rounded, color: Co.secondary, size: 24),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.clip,
-                      ),
-                    ],
-                  ),
+    return AspectRatio(
+      aspectRatio: 1.83,
+      child: ColoredBox(
+        color: const Color.fromRGBO(0, 0, 0, 0),
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Stack(
+            children: [
+              AspectRatio(
+                aspectRatio: 2.15,
+                child: Image.asset(
+                  widget.backGround,
+                  fit: BoxFit.fill,
+                  errorBuilder: (context, error, stackTrace) => const Icon(Icons.info_outline, size: 32),
                 ),
               ),
-            ),
-            Positioned(
-              right: -20,
-              bottom: 0,
-              child: RotationTransition(
-                alignment: Alignment.topRight,
-                turns: _controller,
-                child: Image.asset(Assets.assetsPngPizza, height: 200),
+              Positioned(
+                right: -20,
+                bottom: 0,
+                child: RotationTransition(
+                  alignment: Alignment.topRight,
+                  turns: _controller,
+                  child: Image.asset(widget.foreGround, height: 200),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,21 +1,12 @@
-import 'dart:async';
-
-import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-class RestCatCarousal extends StatefulWidget {
-  const RestCatCarousal({super.key});
+part of '../restaurants_menu_screen.dart';
+class _RestCatCarousal extends StatefulWidget {
+  const _RestCatCarousal({super.key});
 
   @override
-  State<RestCatCarousal> createState() => _RestCatCarousalState();
+  State<_RestCatCarousal> createState() => _RestCatCarousalState();
 }
 
-class _RestCatCarousalState extends State<RestCatCarousal> {
+class _RestCatCarousalState extends State<_RestCatCarousal> {
   final PageController controller = PageController(viewportFraction: 1);
   final adds = [Assets.assetsPngRestAdd1, Assets.assetsPngRestAdd2, Assets.assetsPngRestAdd3];
   late final Timer timer;

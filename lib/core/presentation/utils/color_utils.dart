@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/domain/crashlytics_repo.dart';
+import 'package:gazzer/di.dart';
 
 class ColorUtils {
   /// Converts a hex string to a Color object
   /// Supports formats: #RRGGBB, #AARRGGBB, RRGGBB, AARRGGBB
   /// Examples: "#FF5733", "#80FF5733", "FF5733", "80FF5733"
-  static Color hexToColor(String hexString) {
+  static Color _hexToColor(String hexString) {
     // Remove # if present
     hexString = hexString.replaceAll('#', '');
 
@@ -21,25 +23,27 @@ class ColorUtils {
     }
   }
 
-  /// Alternative method with default opacity
-  static Color hexToColorWithOpacity(String hexString, {double opacity = 1.0}) {
-    hexString = hexString.replaceAll('#', '');
+  // /// Alternative method with default opacity
+  // static Color hexToColorWithOpacity(String hexString, {double opacity = 1.0}) {
+  //   hexString = hexString.replaceAll('#', '');
 
-    if (hexString.length == 6) {
-      final color = Color(int.parse('0xFF$hexString'));
-      return color.withOpacity(opacity);
-    } else if (hexString.length == 8) {
-      return Color(int.parse('0x$hexString'));
-    } else {
-      throw ArgumentError('Invalid hex color format: $hexString');
-    }
-  }
+  //   if (hexString.length == 6) {
+  //     final color = Color(int.parse('0xFF$hexString'));
+  //     return color.withOpacity(opacity);
+  //   } else if (hexString.length == 8) {
+  //     return Color(int.parse('0x$hexString'));
+  //   } else {
+  //     throw ArgumentError('Invalid hex color format: $hexString');
+  //   }
+  // }
 
   /// Safe conversion that returns a default color if parsing fails
-  static Color safeHexToColor(String hexString, {Color defaultColor = Colors.grey}) {
+  static Color safeHexToColor(String? hexString, {Color defaultColor = Colors.grey}) {
+    if (hexString == null || hexString.isEmpty) return defaultColor;
     try {
-      return hexToColor(hexString);
-    } catch (e) {
+      return _hexToColor(hexString);
+    } catch (e, stack) {
+      di<CrashlyticsRepo>().sendToCrashlytics(e, stack);
       return defaultColor;
     }
   }

@@ -70,8 +70,14 @@ dependencies:
   lottie: ^3.3.1
   flutter_rating_bar: ^4.0.1
   dotted_border: ^3.0.1
+  # 
   scrollable_list_tab_scroller: ^3.1.1
   anchor_scroll_controller: ^0.4.4
+  flutter_sticky_header: ^0.8.0
+  scrollable_positioned_list: ^0.3.8
+  easy_sticky_header: ^1.1.1
+
+
   curve_slider: ^0.0.4
   timer_count_down: ^2.2.2
   odometer: ^3.0.0
@@ -183,15 +189,25 @@ flutter:
   fonts:
     - family: poppins
       fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-          weight: 200
-        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Poppins-MediumItalic.ttf
-          weight: 500
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/Poppins-SemiBoldItalic.ttf
+          weight: 600
           style: italic
-        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
           weight: 700
+        - asset: assets/fonts/poppins/Poppins-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/poppins/Poppins-Black.ttf
+          weight: 900
+        - asset: assets/fonts/poppins/Poppins-BlackItalic.ttf
+          weight: 900
+          style: italic
     - family: inter
       fonts:
         - asset: assets/fonts/Inter.ttf

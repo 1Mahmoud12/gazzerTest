@@ -18,11 +18,16 @@ class TitleWithMore extends StatelessWidget {
     final isHovering = ValueNotifier<bool>(false);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        GradientText(
-          text: title,
-          style: titleStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          gradient: Grad().textGradient,
+        Expanded(
+          child: GradientText(
+            text: title,
+            style: titleStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            gradient: Grad().textGradient,
+            textAlign: TextAlign.start,
+            // maxLines: 1,
+          ),
         ),
         if (showMore)
           ValueListenableBuilder(

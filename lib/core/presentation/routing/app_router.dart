@@ -7,6 +7,7 @@ import 'package:gazzer/core/presentation/routing/routers/nested_routes.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
@@ -16,9 +17,9 @@ import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/view/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
-GoRouter get router => GoRouter(
+final GoRouter router = GoRouter(
   navigatorKey: AppNavigator().mainKey,
-  initialLocation: SplashScreen.route,
+  initialLocation: HomeScreen.route,
   observers: [MyRouteObserver()],
   routes: [
     GoRoute(

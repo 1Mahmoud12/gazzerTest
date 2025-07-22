@@ -9,23 +9,20 @@ import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/
 class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
   final CategoriesOfPlatesRepo _catRepor;
   final RestaurantsRepo _platesReo;
-  final _nonVendorIndeces = [0, 1, 2, 3, 6, 9, 12, 15];
 
   RestaurantsMenuCubit(this._catRepor, this._platesReo) : super(RestaurantsMenuInit());
-  final cats = <(CategoryOfPlateEntity, bool)>[];
+
+  final List<CategoryOfPlateEntity> cats = [];
 
   Future<void> loadCategoriesOfPlates() async {
     emit(RestaurantsCategoriesLoading());
-    cats.clear();
+
     final result = await _catRepor.getAllCategoriesOfPlates();
     switch (result) {
       case Ok<List<CategoryOfPlateEntity>> data:
-        final defaultCat = CategoryOfPlateEntity(0, "", "", CategoryStyle.horizontalScrollHorzCard);
-        for (var i = 0; i < data.value.length; i++) {
-          if (_nonVendorIndeces.contains(i)) cats.add((defaultCat, true));
-          cats.add((data.value[i], false));
-        }
-        emit(RestaurantsCategoriesLoaded(categories: cats));
+        cats.clear();
+        cats.addAll(data.value);
+        emit(RestaurantsCategoriesLoaded(categories: data.value));
         break;
       case Err<List<CategoryOfPlateEntity>> error:
         emit(RestaurantsCategoriesError(error.error.message));

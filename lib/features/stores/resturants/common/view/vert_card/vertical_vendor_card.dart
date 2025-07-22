@@ -85,7 +85,7 @@ class VerticalVendorCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(vendor.name, style: TStyle.primaryBold(14)),
+                    Text(vendor.name, style: TStyle.primaryBold(14),  maxLines: 1, overflow: TextOverflow.ellipsis,),
                     Row(
                       spacing: 4,
                       children: [

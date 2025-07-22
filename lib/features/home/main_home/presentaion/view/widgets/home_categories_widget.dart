@@ -68,7 +68,7 @@ class CategoryCard extends StatelessWidget {
           ),
           clipBehavior: Clip.hardEdge,
           onPressed: () {
-            context.push(RestaurantsMenu.route);
+            context.push(RestaurantsMenuScreen.route);
           },
           child: Column(
             spacing: 4,

@@ -9,6 +9,7 @@ class StackedImagesWidget extends StatelessWidget {
   final List<String> images;
   @override
   Widget build(BuildContext context) {
+    if (images.isEmpty) return const SizedBox.shrink();
     final double radius = 10.0; // Radius for the CircleAvatar
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,7 +21,11 @@ class StackedImagesWidget extends StatelessWidget {
             children: List.generate(min(images.length, 4), (i) {
               return Positioned(
                 left: i * radius,
-                child: CircleAvatar(radius: radius, backgroundImage: AssetImage(images[i])),
+                child: CircleAvatar(
+                  radius: radius,
+                  backgroundImage: NetworkImage(images[i]),
+                  onBackgroundImageError: (exception, stackTrace) => const Icon(Icons.image, size: 24),
+                ),
               );
             }),
           ),
