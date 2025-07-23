@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/alignment.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/infinite_scrolling.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/routing/app_navigator.dart';
-import 'package:gazzer/core/presentation/routing/custom_page_transition_builder.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -15,6 +12,10 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/image_in_nested_circles.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
+import 'package:gazzer/features/stores/resturants/common/view/app_bar_row_widget.dart';
+import 'package:gazzer/features/stores/resturants/common/view/horz_card/vert_scroll_horz_card_vendors_list_component.dart';
+import 'package:gazzer/features/stores/resturants/common/view/vert_card/horz_scroll_vert_card_vendors_list_component.dart';
+import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/widgets/infinet_carousal.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +28,6 @@ part 'components/today_picks_widget.dart';
 
 /// screen widgets
 part 'widgets/add_widget.dart';
-part 'widgets/infinet_carousal.dart';
 part 'widgets/type_related_restaurants_header.dart';
 
 @TypedGoRoute<CatRelatedRestaurantsRoute>(path: CatRelatedRestaurantsScreen.routeUriId)
@@ -48,17 +48,31 @@ class CatRelatedRestaurantsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      const _TypeRelatedRestaurantsHeader(),
-      const _InfinetAnimatingCarousal(),
-      const _TodayPicksWidget(),
-      const _ExploreBest(),
+      _TypeRelatedRestaurantsHeader(title: L10n.tr().burgerRestaurants),
+
+      const LongitudinalCarousal([
+        Assets.assetsPngSandwitchLayers,
+        Assets.assetsPngSandwtichLayer2,
+        Assets.assetsPngSandwitchLayers,
+        Assets.assetsPngSandwtichLayer2,
+        Assets.assetsPngSandwitchLayers,
+        Assets.assetsPngSandwtichLayer2,
+      ]),
+      HorzScrollVertCardVendorsListComponent(
+        title: L10n.tr().todayPicks,
+        items: Fakers().restaurants,
+        onViewAllPressed: null,
+      ),
+      VertScrollHorzCardVendorsListComponent(
+        items: Fakers().restaurants,
+
+        onViewAllPressed: null,
+        title: L10n.tr().exploreBest,
+      ),
       const _AddWidget(),
       const _PickToYou(),
     ];
     return Scaffold(
-      appBar: const MainAppBar(showCart: false),
-      extendBodyBehindAppBar: true,
-      extendBody: true,
       body: ListView.separated(
         itemCount: items.length,
         separatorBuilder: (context, index) => index < 1 ? const SizedBox.shrink() : const VerticalSpacing(24),

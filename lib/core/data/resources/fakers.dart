@@ -48,7 +48,8 @@ class Fakers {
       description: "وصف $index",
       price: _random.nextDouble() * 100,
       rate: _random.nextDouble() * 5,
-      image: _prodImages[_random.nextInt(_prodImages.length)],
+      image:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       categoryPlateId: _random.nextInt(5),
       options: [],
       priceBeforeDiscount: _random.nextDouble() * 110,
@@ -67,7 +68,12 @@ class Fakers {
 
   static final fakeCuisines = List.generate(
     8,
-    (index) => CuisineModel(id: index, name: "مطبخ $index", image: _prodImages[_random.nextInt(_prodImages.length)]),
+    (index) => CuisineModel(
+      id: index,
+      name: "مطبخ $index",
+      image:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+    ),
   );
   static final fakecartItems = List.generate(
     5,
@@ -78,7 +84,8 @@ class Fakers {
     (index) => VendorProductsModel(
       id: index,
       vendorName: "بائع ${index + 1}",
-      vendorImage: _prodImages[_random.nextInt(_prodImages.length)],
+      vendorImage:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       cartItems: List.generate(5, (index) {
         return fakecartItems[index];
       }),
@@ -110,7 +117,8 @@ class Fakers {
     (index) => RestaurantEntity(
       id: index,
       name: "بائع ${index + 1}",
-      image: _prodImages[_random.nextInt(_prodImages.length)],
+      image:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       rate: _random.nextDouble() * 5,
       reviewCount: _random.nextInt(100),
       estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
@@ -126,7 +134,8 @@ class Fakers {
       description: "وصف الطبق ${index + 1}",
       price: _random.nextDouble() * 100,
       rate: _random.nextDouble() * 5,
-      image: _prodImages[_random.nextInt(_prodImages.length)],
+      image:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       categoryPlateId: 0,
       options: [],
       priceBeforeDiscount: _random.nextDouble() * 110,
@@ -138,7 +147,8 @@ class Fakers {
       id: index,
       name: "طبق ${index + 1}",
       rate: _random.nextDouble() * 5,
-      image: _prodImages[_random.nextInt(_prodImages.length)],
+      image:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       reviewCount: _random.nextInt(100),
       estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
       categoryOfPlate: fakeSubCats,

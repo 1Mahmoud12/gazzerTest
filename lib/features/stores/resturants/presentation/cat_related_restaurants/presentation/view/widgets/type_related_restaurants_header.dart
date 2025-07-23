@@ -7,8 +7,8 @@ part of "../cat_related_restaurants_screen.dart";
 // import 'package:gazzer/features/home/presentaion/utils/add_shape_clipper.dart';
 
 class _TypeRelatedRestaurantsHeader extends StatelessWidget {
-  const _TypeRelatedRestaurantsHeader();
-
+  const _TypeRelatedRestaurantsHeader({required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.paddingOf(context).top + kToolbarHeight + 50;
@@ -35,7 +35,10 @@ class _TypeRelatedRestaurantsHeader extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: height * 0.25),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [GradientText(text: L10n.tr().burgerRestaurants, style: TStyle.blackBold(24))],
+                      children: [
+                        SizedBox(width: constraints.maxWidth * 0.9, child: const AppBarRowWidget()),
+                        GradientText(text: title, style: TStyle.blackBold(24)),
+                      ],
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
@@ -9,8 +10,12 @@ class HorzScrollVertCardVendorsListComponent<T> extends StatelessWidget {
   const HorzScrollVertCardVendorsListComponent({
     super.key,
     required this.title,
-    this.onViewAllPressed,
+    required this.onViewAllPressed,
     required this.items,
+    this.cardWidth,
+    this.cardHeight,
+    this.cardImageToTextRatio,
+    this.corner,
   }) : assert(
          items is List<RestaurantEntity> || items is List<PlateEntity>,
          'HorzScrollVertCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
@@ -18,6 +23,11 @@ class HorzScrollVertCardVendorsListComponent<T> extends StatelessWidget {
   final String? title;
   final Function()? onViewAllPressed;
   final List<T> items;
+  final double? cardWidth;
+  final double? cardHeight;
+  final double? cardImageToTextRatio;
+  final Corner? corner;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +40,7 @@ class HorzScrollVertCardVendorsListComponent<T> extends StatelessWidget {
             onPressed: onViewAllPressed,
           ),
           SizedBox(
-            height: 220,
+            height: cardHeight ?? 220,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.zero,
@@ -39,7 +49,12 @@ class HorzScrollVertCardVendorsListComponent<T> extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = items[index];
                 if (item is RestaurantEntity) {
-                  return VerticalVendorCard(imgToTextRatio: 0.9, width: 140, vendor: item);
+                  return VerticalVendorCard(
+                    imgToTextRatio: cardImageToTextRatio ?? 0.9,
+                    width: cardWidth ?? 140,
+                    vendor: item,
+                    corner: corner ?? Corner.bottomRight,
+                  );
                 }
                 if (item is PlateEntity) return const SizedBox();
                 return const SizedBox();

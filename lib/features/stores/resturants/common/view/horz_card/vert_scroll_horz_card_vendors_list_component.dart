@@ -7,14 +7,24 @@ import 'package:gazzer/features/stores/resturants/common/view/horz_card/horizont
 import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 class VertScrollHorzCardVendorsListComponent<T> extends StatelessWidget {
-  const VertScrollHorzCardVendorsListComponent({super.key, this.title, this.onViewAllPressed, required this.items})
-    : assert(
-        items is List<RestaurantEntity> || items is List<PlateEntity>,
-        'HorzScrollHorzCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
-      );
+  const VertScrollHorzCardVendorsListComponent({
+    super.key,
+    this.title,
+    this.onViewAllPressed,
+    required this.items,
+    this.cardHeight,
+    this.cardImageToTextRatio,
+    this.corner,
+  }) : assert(
+         items is List<RestaurantEntity> || items is List<PlateEntity>,
+         'HorzScrollHorzCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
+       );
   final String? title;
   final Function()? onViewAllPressed;
   final List<T> items;
+  final double? cardHeight;
+  final double? cardImageToTextRatio;
+  final Corner? corner;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,9 +48,9 @@ class VertScrollHorzCardVendorsListComponent<T> extends StatelessWidget {
               final item = items[index];
               if (item is RestaurantEntity) {
                 return HorizontalVendorCard(
-                  imgToTextRatio: 1.4,
+                  imgToTextRatio: cardImageToTextRatio ?? 1.4,
                   // width: 350,
-                  height: 115,
+                  height: cardHeight ?? 115,
                   vendor: item as RestaurantEntity,
                   corner: Corner.topLeft,
                 );

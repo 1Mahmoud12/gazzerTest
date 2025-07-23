@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:nested_scroll_view_plus/nested_scroll_view_plus.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:scrolls_to_top/scrolls_to_top.dart';
 
@@ -267,7 +267,9 @@ class ScrollableListTabScrollerState extends State<ScrollableListTabScroller> {
 
   Widget buildCustomBodyContainerOrDefault({required BuildContext context, required Widget child}) {
     return widget.bodyContainerBuilder?.call(context, child) ??
-        child;
+        Expanded(
+          child: child,
+        );
   }
 
   Future<void> _onScrollsToTop(ScrollsToTopEvent event) async {
@@ -276,57 +278,75 @@ class ScrollableListTabScrollerState extends State<ScrollableListTabScroller> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverStickyHeader(
-      header: buildCustomHeaderContainerOrDefault(
-        context: context,
-        child: DefaultHeaderWidget(
-          key: Key(widget.itemCount.toString()),
-          itemCount: widget.itemCount,
-          onTapTab: (i) => _triggerScrollInPositionedListIfNeeded(i),
-          //TODO: implement callback to handle tab click ,
-          selectedTabIndex: _selectedTabIndex,
-          tabBuilder: widget.tabBuilder,
-          tabBarProps: widget.tabBarProps,
+    NestedScrollViewPlus(
+      headerSliverBuilder: (context, innerScrolled) => <Widget>[
+        SliverToBoxAdapter(
+          child: buildCustomHeaderContainerOrDefault(
+            context: context,
+            child: DefaultHeaderWidget(
+              key: Key(widget.itemCount.toString()),
+              itemCount: widget.itemCount,
+              onTapTab: (i) => _triggerScrollInPositionedListIfNeeded(i),
+              //TODO: implement callback to handle tab click ,
+              selectedTabIndex: _selectedTabIndex,
+              tabBuilder: widget.tabBuilder,
+              tabBarProps: widget.tabBarProps,
+            ),
+          ),
         ),
-      ),
-      sliver: buildCustomBodyContainerOrDefault(
-        context: context,
-        child: Builder(
-          builder: (context) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              final size = context.size;
-              if (size != null) {
-                _currentPositionedListSize = size;
-              }
-            });
-            return ScrollsToTop(
-              onScrollsToTop: _onScrollsToTop,
-              child: ScrollablePositionedList.builder(
-                itemBuilder: (a, b) {
-                  return widget.itemBuilder(a, b);
+      ],
+      body: CustomScrollView(
+        // Step 2: [🚨IMPORTANT] Set the physics of `CustomScrollView` to `AlwaysScrollableScrollPhysics`
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: buildCustomBodyContainerOrDefault(
+              context: context,
+              child: Builder(
+                builder: (context) {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                    final size = context.size;
+                    if (size != null) {
+                      _currentPositionedListSize = size;
+                    }
+                  });
+                  return ScrollsToTop(
+                    onScrollsToTop: _onScrollsToTop,
+                    child: ScrollablePositionedList.builder(
+                      itemBuilder: (a, b) {
+                        return widget.itemBuilder(a, b);
+                      },
+                      itemCount: widget.itemCount,
+                      itemScrollController: itemScrollController,
+                      itemPositionsListener: itemPositionsListener,
+                      shrinkWrap: widget.shrinkWrap,
+                      initialScrollIndex: widget.initialScrollIndex,
+                      initialAlignment: widget.initialAlignment,
+                      scrollDirection: widget.scrollDirection,
+                      reverse: widget.reverse,
+                      physics: widget.physics,
+                      semanticChildCount: widget.semanticChildCount,
+                      padding: widget.padding,
+                      addSemanticIndexes: widget.addSemanticIndexes,
+                      addAutomaticKeepAlives: widget.addAutomaticKeepAlives,
+                      addRepaintBoundaries: widget.addRepaintBoundaries,
+                      minCacheExtent: widget.minCacheExtent,
+                      scrollOffsetController: widget.scrollOffsetController,
+                      scrollOffsetListener: widget.scrollOffsetListener,
+                    ),
+                  );
                 },
-                itemCount: widget.itemCount,
-                itemScrollController: itemScrollController,
-                itemPositionsListener: itemPositionsListener,
-                shrinkWrap: widget.shrinkWrap,
-                initialScrollIndex: widget.initialScrollIndex,
-                initialAlignment: widget.initialAlignment,
-                scrollDirection: widget.scrollDirection,
-                reverse: widget.reverse,
-                physics: widget.physics,
-                semanticChildCount: widget.semanticChildCount,
-                padding: widget.padding,
-                addSemanticIndexes: widget.addSemanticIndexes,
-                addAutomaticKeepAlives: widget.addAutomaticKeepAlives,
-                addRepaintBoundaries: widget.addRepaintBoundaries,
-                minCacheExtent: widget.minCacheExtent,
-                scrollOffsetController: widget.scrollOffsetController,
-                scrollOffsetListener: widget.scrollOffsetListener,
               ),
-            );
-          },
-        ),
+            ),
+          ),
+          // ... insert your body sliver widgets here
+        ],
       ),
+    );
+    return Column(
+      children: [],
     );
   }
 
@@ -354,9 +374,7 @@ class DefaultHeaderWidget extends StatefulWidget {
     @Deprecated("Use 'tabBarProps' instead. Deprecated since >3.0.1") TabAlignment? tabAlignment,
     TabBarProps? tabBarProps,
   }) : assert(tabAlignment == null || tabBarProps == null, "Must use only 'tabBarProps'"),
-       tabBarProps = tabAlignment != null
-           ? TabBarProps(tabAlignment: tabAlignment)
-           : tabBarProps ?? const TabBarProps(),
+       tabBarProps = tabAlignment != null ? TabBarProps(tabAlignment: tabAlignment) : tabBarProps ?? const TabBarProps(),
        super(key: key);
 
   @override
@@ -426,9 +444,7 @@ class _DefaultHeaderWidgetState extends State<DefaultHeaderWidget> with SingleTi
         indicatorSize: widget.tabBarProps.indicatorSize,
         dividerColor: widget.tabBarProps.dividerColor,
         dividerHeight: widget.tabBarProps.dividerHeight,
-        labelColor: widget.tabBarProps.labelColor is _DefaultTextStyleColor
-            ? defaultTextStyle.style.color
-            : widget.tabBarProps.labelColor,
+        labelColor: widget.tabBarProps.labelColor is _DefaultTextStyleColor ? defaultTextStyle.style.color : widget.tabBarProps.labelColor,
         labelStyle: widget.tabBarProps.labelStyle,
         labelPadding: widget.tabBarProps.labelPadding,
         unselectedLabelColor: widget.tabBarProps.unselectedLabelColor,

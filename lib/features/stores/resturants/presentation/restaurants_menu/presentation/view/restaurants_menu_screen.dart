@@ -1,25 +1,23 @@
-import 'dart:async';
-
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/resources.dart';
+import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/features/stores/resturants/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/stores/resturants/common/view/vert_card/horz_scroll_vert_card_vendors_list_component.dart';
+import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/scrollable_tabed_list.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_carousal.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-part 'widgets/rest_cat_carousal.dart';
+// part 'widgets/rest_cat_carousal.dart';
 
 class RestaurantsMenuScreen extends StatefulWidget {
   const RestaurantsMenuScreen({super.key});
@@ -45,48 +43,57 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
   @override
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.paddingOf(context).top;
+
     return Scaffold(
-      // appBar: const MainAppBar(showCart: false),
-      // extendBodyBehindAppBar: true,
-      // extendBody: true,
-      floatingActionButton: const CartFloatingBtn(),
-      body: LayoutBuilder(
-        builder: (context, constraints) => BlocBuilder<RestaurantsMenuCubit, RestaurantsMenuStates>(
+      body: FloatingDraggableWidget(
+        floatingWidget: const CartFloatingBtn(),
+        floatingWidgetHeight: 50,
+        floatingWidgetWidth: 50,
+        mainScreenWidget: BlocBuilder<RestaurantsMenuCubit, RestaurantsMenuStates>(
           builder: (context, state) {
             if (state is! RestaurantsCategoriesLoaded) {
               return const Center(child: CircularProgressIndicator());
             }
-            final tabs = (state).categories.map((e) => (e.image, e.name)).toList();
+            final tabs = (state).categories.map((e) => (e.image, e.name, e.id)).toList();
             return Skeletonizer(
               enabled: false,
               child: ScrollableTabedList(
                 preHerader: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const MainAppBar(showCart: false),
-                    const RestCatHeaderWidget(),
+                    RestCatHeaderWidget(
+                      title: L10n.tr().bestMenuOfRestaurants,
+                    ),
                     VerticalSpacing(topPadding + 16),
-                    const _RestCatCarousal(),
-                    const VerticalSpacing(kToolbarHeight),
+                    const RestCatCarousal(),
+                    const VerticalSpacing(24),
                     Padding(
-                      padding: const EdgeInsetsGeometry.symmetric(vertical: 16),
+                      padding: AppConst.defaultHrPadding,
                       child: Text(L10n.tr().chooseYourFavoriteVendor, style: TStyle.blackBold(16)),
                     ),
                   ],
                 ),
-                tabs: tabs,
+                itemsCount: tabs.length,
+                tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
+                tabBuilder: (p0, index) => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleGradientBorderedImage(image: tabs[index].$1),
+                    Padding(
+                      padding: AppConst.defaultHrPadding,
+                      child: Text(tabs[index].$2, style: TStyle.blackSemi(13)),
+                    ),
+                  ],
+                ),
                 listItemBuilder: (context, index) {
                   final rest = Fakers.vendors;
                   final child = HorzScrollVertCardVendorsListComponent(
                     items: rest,
-                    title: "Section ${index + 1}",
-                    onViewAllPressed: null,
+                    title: tabs[index].$2,
+                    onViewAllPressed: () => CatRelatedRestaurantsRoute(id: tabs[index].$3).push(context),
                   );
-                  if (index == tabs.length - 1) {
-                    return ConstrainedBox(
-                      constraints: BoxConstraints(minHeight: constraints.maxHeight - 40),
-                      child: child,
-                    );
-                  }
+
                   return child;
                 },
               ),

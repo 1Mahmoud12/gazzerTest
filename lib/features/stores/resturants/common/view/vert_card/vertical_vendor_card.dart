@@ -9,6 +9,7 @@ import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_enti
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/stacked_item_widget.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
+import 'package:ribbon_widget/ribbon_widget.dart';
 
 class VerticalVendorCard extends StatelessWidget {
   const VerticalVendorCard({
@@ -27,6 +28,7 @@ class VerticalVendorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(vendor.image);
     return SizedBox(
       width: width,
       height: height,
@@ -57,25 +59,32 @@ class VerticalVendorCard extends StatelessWidget {
             children: [
               Expanded(
                 flex: (imgToTextRatio * 10).toInt(),
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    CustomPaint(
-                      isComplex: true,
-                      foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
-                      child: ClipPath(
-                        clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
-                        child: Image.network(
-                          vendor.image,
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => const Icon(Icons.info, color: Co.red),
+                child: Ribbon(
+                  nearLength: 0,
+                  farLength: 1,
+                  title: 'sadadasd',
+                  color: Colors.red,
+                  location: RibbonLocation.topEnd,
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      CustomPaint(
+                        isComplex: true,
+                        foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
+                        child: ClipPath(
+                          clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
+                          child: Image.network(
+                            vendor.image,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.fill,
+                            errorBuilder: (context, error, stackTrace) => const Icon(Icons.info, color: Co.red),
+                          ),
                         ),
                       ),
-                    ),
-                    Align(alignment: corner.alignment, child: const DecoratedFavoriteWidget(size: 24, padding: 4)),
-                  ],
+                      Align(alignment: corner.alignment, child: const DecoratedFavoriteWidget(size: 24, padding: 4)),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -85,7 +94,12 @@ class VerticalVendorCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(vendor.name, style: TStyle.primaryBold(14),  maxLines: 1, overflow: TextOverflow.ellipsis,),
+                    Text(
+                      vendor.name,
+                      style: TStyle.primaryBold(14),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     Row(
                       spacing: 4,
                       children: [

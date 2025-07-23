@@ -24,38 +24,39 @@ class _ListWithTabsComponentState extends State<ListWithTabsComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollableListTabScroller(
-      
-      itemScrollController: controller,
-      animationDuration: Durations.medium3,
-      itemCount: widget.tabs.length,
-      
-      headerContainerBuilder: (context, child) => SizedBox(
-        height: 40,
-        child: child,
-      ),
-      tabBuilder: (context, index, active) {
-        final tab = widget.tabs[index];
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: SubCategoryItem(
-            image: tab.$1,
-            name: tab.$2,
-            isSelected: active,
-            ontap: () => controller.scrollTo(index: index, duration: Durations.short1),
-          ),
-        );
-      },
-      bodyContainerBuilder: (context, child) => child,
-      itemBuilder: (context, index) {
-        if (index == widget.itemCount - 1) {
-          return ConstrainedBox(
-            constraints: BoxConstraints(minHeight: widget.maxHeight - 40),
-            child: widget.listItemBuilder(context, index),
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: widget.maxHeight),
+      child: ScrollableListTabScroller(
+        itemScrollController: controller,
+        animationDuration: Durations.medium3,
+        itemCount: widget.tabs.length,
+        shrinkWrap: true,
+        headerContainerBuilder: (context, child) => SizedBox(
+          height: 40,
+          child: child,
+        ),
+        tabBuilder: (context, index, active) {
+          final tab = widget.tabs[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: SubCategoryItem(
+              image: tab.$1,
+              name: tab.$2,
+              isSelected: active,
+              ontap: () => controller.scrollTo(index: index, duration: Durations.short1),
+            ),
           );
-        }
-        return widget.listItemBuilder(context, index);
-      },
+        },
+        itemBuilder: (context, index) {
+          if (index == widget.itemCount - 1) {
+            return ConstrainedBox(
+              constraints: BoxConstraints(minHeight: widget.maxHeight - 40),
+              child: widget.listItemBuilder(context, index),
+            );
+          }
+          return widget.listItemBuilder(context, index);
+        },
+      ),
     );
   }
 }
