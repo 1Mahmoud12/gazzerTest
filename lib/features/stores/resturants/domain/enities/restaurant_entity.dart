@@ -1,10 +1,6 @@
-import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
+part of 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 
-class RestaurantEntity {
-  final int id;
-  final String name;
-  final String image;
-  final double rate;
+class RestaurantEntity extends GenericVendorEntity {
   final int reviewCount;
   final String estimateDeliveryTime;
   final double? deliveryFees;
@@ -18,10 +14,6 @@ class RestaurantEntity {
   final List<CategoryOfPlateEntity>? categoryOfPlate;
 
   RestaurantEntity({
-    required this.id,
-    required this.name,
-    required this.image,
-    this.rate = 0.0,
     this.reviewCount = 0,
     this.estimateDeliveryTime = '',
     this.deliveryFees,
@@ -31,5 +23,10 @@ class RestaurantEntity {
     this.isRestaurant,
     this.storeCategoryId,
     this.categoryOfPlate,
+    required super.id,
+    required super.name,
+    required super.image,
+    required super.description,
+    required super.rate,
   });
 }

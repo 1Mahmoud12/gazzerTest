@@ -2,7 +2,7 @@ part of '../single_restaurant_details.dart';
 
 class _FoodDetailsWidget extends StatelessWidget {
   const _FoodDetailsWidget({required this.product});
-  final ProductItemEntity product;
+  final GenericItemEntity product;
   @override
   Widget build(BuildContext context) {
     return Padding(

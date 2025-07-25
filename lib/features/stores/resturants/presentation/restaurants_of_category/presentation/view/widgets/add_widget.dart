@@ -1,4 +1,4 @@
-part of '../cat_related_restaurants_screen.dart';
+part of '../restaurants_of_category_screen.dart';
 
 class _AddWidget extends StatelessWidget {
   const _AddWidget();

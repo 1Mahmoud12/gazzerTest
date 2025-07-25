@@ -1,7 +1,7 @@
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/stores/resturants/domain/repos/plates_repo.dart';
 

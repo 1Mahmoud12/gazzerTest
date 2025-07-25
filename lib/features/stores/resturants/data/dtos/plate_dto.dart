@@ -1,10 +1,10 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 sealed class StoreItemDTO {
   StoreItemDTO();
   StoreItemDTO.fromJson(Map<String, dynamic> json);
-  ProductItemEntity toProductItem();
+  GenericItemEntity toProductItem();
 }
 
 class PlateDTO extends StoreItemDTO {
@@ -49,7 +49,7 @@ class PlateDTO extends StoreItemDTO {
   }
 
   @override
-  ProductItemEntity toProductItem() {
+  GenericItemEntity toProductItem() {
     return PlateEntity(
       id: id!,
       categoryPlateId: plateCategoryId ?? 0,
@@ -106,7 +106,7 @@ class ProductDTO extends StoreItemDTO {
   }
 
   @override
-  ProductItemEntity toProductItem() {
+  GenericItemEntity toProductItem() {
     return ProductEntity(
       id: id!,
       name: plateName ?? '',

@@ -1,5 +1,5 @@
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/stores/resturants/data/dtos/category_of_plate_dto.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 class RestaurantDTO {
   int? id;
@@ -81,6 +81,7 @@ class RestaurantDTO {
       storeCategoryId: storeCategoryId,
       reviewCount: 0,
       categoryOfPlate: subcategories?.map((e) => e.toCategoryOfPlateEntity()).toList(),
+      description: '',
     );
   }
 }

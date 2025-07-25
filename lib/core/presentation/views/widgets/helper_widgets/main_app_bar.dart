@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({super.key, this.showCart = true, this.iconsColor = Co.purple, this.isCartScreen = false, this.showLanguage = true, this.bacButtonColor});
+  const MainAppBar({super.key, this.showCart = false, this.iconsColor = Co.purple, this.isCartScreen = false, this.showLanguage = false, this.bacButtonColor});
   final bool showCart;
   final bool showLanguage;
   final Color iconsColor;

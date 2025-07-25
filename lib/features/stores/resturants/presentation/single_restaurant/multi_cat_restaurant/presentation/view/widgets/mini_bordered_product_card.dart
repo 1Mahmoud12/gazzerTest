@@ -2,7 +2,7 @@ part of '../multi_cat_restaurant_screen.dart';
 
 class _MiniBorderedProductCard extends StatelessWidget {
   const _MiniBorderedProductCard({required this.prod});
-  final ProductItemEntity prod;
+  final GenericItemEntity prod;
   @override
   Widget build(BuildContext context) {
     return Container(

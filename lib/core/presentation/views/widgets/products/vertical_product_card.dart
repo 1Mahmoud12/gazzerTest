@@ -6,11 +6,11 @@ import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 class VerticalProductCard extends StatelessWidget {
   const VerticalProductCard({super.key, required this.product, required this.canAdd, this.fontFactor = 1.0});
-  final ProductItemEntity product;
+  final GenericItemEntity product;
   final bool canAdd;
   final double fontFactor;
   @override

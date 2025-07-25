@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/stacked_item_widget.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';

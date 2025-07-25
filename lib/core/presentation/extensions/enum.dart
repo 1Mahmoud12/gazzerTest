@@ -18,3 +18,18 @@ extension AlignmentCorner on Corner {
     }
   }
 }
+
+enum CardType {
+  typeOne('One'),
+  typeTwo('Two'),
+  typeThree('Three'),
+  typeFour('Four');
+
+  final String type;
+
+  const CardType(this.type);
+
+  factory CardType.fromString(String type) {
+    return CardType.values.firstWhere((e) => e.type == type, orElse: () => typeOne);
+  }
+}

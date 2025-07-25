@@ -28,6 +28,9 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
   late final StickyHeaderController _controller;
   late final TabController _tabController;
   final padding = ValueNotifier(0.0);
+  final headerHeight = 40.0;
+  double topPadding = 0;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +39,25 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
       length: widget.itemsCount,
       vsync: this,
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      topPadding = MediaQuery.paddingOf(context).top;
+      _controller.addListener(_setHeaderPAdding);
+    });
+  }
+
+  void _setHeaderPAdding() {
+    final parentOffset = _controller.getStickyHeaderInfo(2)?.offset.dy;
+    if (parentOffset != null) {
+      final realoffset = parentOffset - headerHeight;
+      if (realoffset < topPadding) {
+        final paddingValue = topPadding - max(realoffset, 0);
+        padding.value = paddingValue;
+      } else {
+        padding.value = 0;
+      }
+    } else {
+      padding.value = 0;
+    }
   }
 
   @override
@@ -47,7 +69,6 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
 
   @override
   Widget build(BuildContext context) {
-    final topPadding = MediaQuery.paddingOf(context).top;
     return LayoutBuilder(
       builder: (context, constraints) => StickyHeader(
         controller: _controller,
@@ -56,7 +77,7 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
           padding: EdgeInsets.zero,
           reverse: false,
           physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics(),
+            parent: ClampingScrollPhysics(),
           ),
           itemCount: widget.itemsCount + 2,
           itemBuilder: (context, index) {
@@ -69,11 +90,11 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
               return ParentStickyContainerBuilder(
                 index: index,
                 onUpdate: (childStickyHeaderInfo) {
-                  if ((childStickyHeaderInfo?.index ?? 0) < 2) {
-                    padding.value = 0.0;
-                  } else {
-                    if (padding.value < topPadding) padding.value = topPadding;
-                  }
+                  // if ((childStickyHeaderInfo?.index ?? 0) < 1) {
+                  //   padding.value = 0.0;
+                  // } else {
+                  //   if (padding.value < topPadding) padding.value = topPadding;
+                  // }
                   if (childStickyHeaderInfo == null) {
                     _tabController.animateTo(0);
                   } else if (childStickyHeaderInfo.index != _tabController.index + 2) {
@@ -86,12 +107,12 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
                     ValueListenableBuilder(
                       valueListenable: padding,
                       builder: (context, value, child) => Padding(
-                        padding: EdgeInsets.only(top: max(value, 24)),
+                        padding: EdgeInsets.only(top: max(value, 0)),
                         child: child,
                       ),
                       child: SizedBox(
                         width: double.infinity,
-                        height: 40,
+                        height: headerHeight,
                         child: TabBar(
                           dividerColor: Co.purple.withAlpha(50),
                           controller: _tabController,

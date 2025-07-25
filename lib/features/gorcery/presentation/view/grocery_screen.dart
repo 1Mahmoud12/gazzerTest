@@ -17,7 +17,7 @@ import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 
 part 'components/category_componenet_five.dart';
 part 'components/category_componenet_four.dart';

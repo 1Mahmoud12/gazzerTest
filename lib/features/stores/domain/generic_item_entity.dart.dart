@@ -1,8 +1,10 @@
-part '../resturants/domain/enities/plate_entity.dart';
-part '../stores/data/product_entity.dart';
+export 'package:gazzer/core/presentation/extensions/enum.dart';
+
+part 'package:gazzer/features/stores/resturants/domain/enities/plate_entity.dart';
+part 'package:gazzer/features/stores/stores/domain/product_entity.dart';
 
 /// generic class for both [PlateEntity] for restaurants and [ProductEntity] for stores
-sealed class ProductItemEntity {
+sealed class GenericItemEntity {
   final int id;
   final String name;
   final String image;
@@ -11,7 +13,7 @@ sealed class ProductItemEntity {
   final double? priceBeforeDiscount;
   final double rate;
 
-  ProductItemEntity({
+  GenericItemEntity({
     required this.id,
     required this.name,
     required this.image,

@@ -6,11 +6,11 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 class SingleGridProduct extends StatelessWidget {
   const SingleGridProduct({super.key, required this.prod, required this.isTop});
-  final ProductItemEntity prod;
+  final GenericItemEntity prod;
   final bool isTop;
   @override
   Widget build(BuildContext context) {

@@ -7,10 +7,10 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
@@ -24,19 +24,6 @@ class Fakers {
     Assets.assetsPngFood3,
     Assets.assetsPngFood4,
     Assets.assetsPngFood5,
-  ];
-
-  final netWorkImage =
-      "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
-  final netWorkPRoductImage =
-      "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
-
-  static final _catsImages = [
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
   ];
 
   static final _random = Random();
@@ -123,9 +110,43 @@ class Fakers {
       reviewCount: _random.nextInt(100),
       estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
       categoryOfPlate: fakeSubCats,
+      description: 'asd',
     ),
   );
 
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+
+  final netWorkImage =
+      "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
+  final netWorkPRoductImage =
+      "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
+
+  static final _catsImages = [
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+  ];
+
+  ///
   final List<PlateEntity> plates = List.generate(
     8,
     (index) => PlateEntity(
@@ -141,6 +162,8 @@ class Fakers {
       priceBeforeDiscount: _random.nextDouble() * 110,
     ),
   );
+
+  ///
   final List<RestaurantEntity> restaurants = List.generate(
     8,
     (index) => RestaurantEntity(
@@ -155,9 +178,29 @@ class Fakers {
       address: 'asd asd ad',
       deliveryFees: 123,
       isRestaurant: true,
+      description: 'asdads',
     ),
   );
 
+  ///
+  final List<StoreEntity> stores = List.generate(
+    8,
+    (index) => StoreEntity(
+      id: index,
+      name: "طبق ${index + 1}",
+      rate: _random.nextDouble() * 5,
+      image:
+          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+      reviewCount: _random.nextInt(100),
+      estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
+      address: 'asd asd ad',
+      deliveryFees: 123,
+      isRestaurant: true,
+      description: 'asdads',
+    ),
+  );
+
+  ///
   final addresses = List.generate(
     3,
     (index) => AddressEntity(
@@ -187,7 +230,8 @@ class Fakers {
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',
-      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+      description:
+          'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
 
       id: index,
     ),

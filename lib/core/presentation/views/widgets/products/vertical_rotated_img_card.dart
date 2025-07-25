@@ -6,13 +6,13 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 import 'circle_gradient_image.dart';
 
 class VerticalRotatedImgCard extends StatelessWidget {
   const VerticalRotatedImgCard({super.key, required this.prod, required this.onTap});
-  final ProductItemEntity prod;
+  final GenericItemEntity prod;
   final Function() onTap;
   @override
   Widget build(BuildContext context) {

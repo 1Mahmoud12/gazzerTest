@@ -36,7 +36,7 @@ class _HomeSearchWidgetState extends State<_HomeSearchWidget> {
             ),
           ),
         ),
-        const HorizontalSpacing(64),
+        HorizontalSpacing(AppConst.floatingCartWidth),
       ],
     );
   }

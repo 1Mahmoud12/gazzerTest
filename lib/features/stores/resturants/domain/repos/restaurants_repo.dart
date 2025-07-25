@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 
 abstract class RestaurantsRepo extends BaseApiRepo {
   RestaurantsRepo(super.crashlyticsRepo);

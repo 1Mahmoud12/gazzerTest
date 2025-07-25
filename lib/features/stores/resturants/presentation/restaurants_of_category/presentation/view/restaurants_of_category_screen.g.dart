@@ -1,25 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cat_related_restaurants_screen.dart';
+part of 'restaurants_of_category_screen.dart';
 
 // **************************************************************************
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$catRelatedRestaurantsRoute];
+List<RouteBase> get $appRoutes => [$restaurantsOfCategoryRoute];
 
-RouteBase get $catRelatedRestaurantsRoute => GoRouteData.$route(
+RouteBase get $restaurantsOfCategoryRoute => GoRouteData.$route(
   path: '/cat-related-restaurant',
 
-  factory: _$CatRelatedRestaurantsRoute._fromState,
+  factory: _$RestaurantsOfCategoryRoute._fromState,
 );
 
-mixin _$CatRelatedRestaurantsRoute on GoRouteData {
-  static CatRelatedRestaurantsRoute _fromState(GoRouterState state) => CatRelatedRestaurantsRoute(
-    id: int.parse(state.uri.queryParameters['id']!)!,
-  );
+mixin _$RestaurantsOfCategoryRoute on GoRouteData {
+  static RestaurantsOfCategoryRoute _fromState(GoRouterState state) =>
+      RestaurantsOfCategoryRoute(
+        id: int.parse(state.uri.queryParameters['id']!)!,
+      );
 
-  CatRelatedRestaurantsRoute get _self => this as CatRelatedRestaurantsRoute;
+  RestaurantsOfCategoryRoute get _self => this as RestaurantsOfCategoryRoute;
 
   @override
   String get location => GoRouteData.$location(
@@ -34,7 +35,8 @@ mixin _$CatRelatedRestaurantsRoute on GoRouteData {
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   @override
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   @override
   void replace(BuildContext context) => context.replace(location);

@@ -2,7 +2,7 @@ import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/stores/resturants/data/dtos/restaurant_dto.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/stores/resturants/domain/repos/restaurants_repo.dart';
 
 class RestaurantsRepoImp extends RestaurantsRepo {

@@ -1,24 +1,24 @@
 import 'package:gazzer/core/domain/banner_entity.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 class HomeDataModel {
   late final List<CategoryEntity>? categories;
   late final BannerEntity? categoriesBanner;
-  late final List<ProductItemEntity?>? dailyOffers;
+  late final List<GenericItemEntity?>? dailyOffers;
   late final BannerEntity? dailyOffersBanner;
 
-  late final List<ProductItemEntity?>? suggested;
+  late final List<GenericItemEntity?>? suggested;
   late final BannerEntity? suggestedBanner;
 
-  late final List<ProductItemEntity?>? topItems;
+  late final List<GenericItemEntity?>? topItems;
   late final BannerEntity? topItemsBanner;
 
   late final List<VendorEntity?>? topVendors;
   late final BannerEntity? topVendorsBanner;
 
-  late final List<ProductItemEntity?>? bestPopular;
+  late final List<GenericItemEntity?>? bestPopular;
   late final BannerEntity? bestPopularBanner;
 
   HomeDataModel({

@@ -30,7 +30,7 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
@@ -123,14 +123,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         const VerticalSpacing(24),
 
                         ///
-                        _DailyOffersWidget(items: state.homeResponse?.dailyOffers ?? <ProductItemEntity>[]),
+                        _DailyOffersWidget(items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[]),
                         const VerticalSpacing(24),
                         if (state.homeResponse?.dailyOffersBanner != null) MainBannerWidget(banner: state.homeResponse!.dailyOffersBanner!),
                         const VerticalSpacing(24),
 
                         /// const SummerSaleAddWidget(),
                         ///
-                        _HomeSuggestedProductsWidget(items: state.homeResponse?.suggested ?? <ProductItemEntity>[]),
+                        _HomeSuggestedProductsWidget(items: state.homeResponse?.suggested ?? <GenericItemEntity>[]),
                         const VerticalSpacing(24),
                         if (state.homeResponse?.suggestedBanner != null) MainBannerWidget(banner: state.homeResponse!.suggestedBanner!),
                         const VerticalSpacing(24),
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const VerticalSpacing(24),
 
                         ///
-                        _HomeBestPopular(items: state.homeResponse?.bestPopular ?? <ProductItemEntity>[]),
+                        _HomeBestPopular(items: state.homeResponse?.bestPopular ?? <GenericItemEntity>[]),
                         const VerticalSpacing(24),
                         if (state.homeResponse?.bestPopularBanner != null) MainBannerWidget(banner: state.homeResponse!.bestPopularBanner!),
                         const VerticalSpacing(24),

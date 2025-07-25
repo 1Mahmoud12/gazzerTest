@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/alignment.dart';
@@ -15,34 +13,33 @@ import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.da
 import 'package:gazzer/features/stores/resturants/common/view/app_bar_row_widget.dart';
 import 'package:gazzer/features/stores/resturants/common/view/horz_card/vert_scroll_horz_card_vendors_list_component.dart';
 import 'package:gazzer/features/stores/resturants/common/view/vert_card/horz_scroll_vert_card_vendors_list_component.dart';
-import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/widgets/infinet_carousal.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_of_category/presentation/view/widgets/infinet_carousal.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 import 'package:go_router/go_router.dart';
 
-part 'cat_related_restaurants_screen.g.dart';
 // components
 part 'components/explore_best.dart';
 part 'components/pick_to_you.dart';
 part 'components/today_picks_widget.dart';
-
+part 'restaurants_of_category_screen.g.dart';
 /// screen widgets
 part 'widgets/add_widget.dart';
 part 'widgets/type_related_restaurants_header.dart';
 
-@TypedGoRoute<CatRelatedRestaurantsRoute>(path: CatRelatedRestaurantsScreen.routeUriId)
+@TypedGoRoute<RestaurantsOfCategoryRoute>(path: RestaurantsOfCategoryScreen.routeUriId)
 @immutable
-class CatRelatedRestaurantsRoute extends GoRouteData with _$CatRelatedRestaurantsRoute {
-  const CatRelatedRestaurantsRoute({required this.id});
+class RestaurantsOfCategoryRoute extends GoRouteData with _$RestaurantsOfCategoryRoute {
+  const RestaurantsOfCategoryRoute({required this.id});
   final int id;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return CatRelatedRestaurantsScreen(id: id);
+    return RestaurantsOfCategoryScreen(id: id);
   }
 }
 
-class CatRelatedRestaurantsScreen extends StatelessWidget {
-  const CatRelatedRestaurantsScreen({super.key, required this.id});
+class RestaurantsOfCategoryScreen extends StatelessWidget {
+  const RestaurantsOfCategoryScreen({super.key, required this.id});
   final int id;
   static const routeUriId = '/cat-related-restaurant';
   @override

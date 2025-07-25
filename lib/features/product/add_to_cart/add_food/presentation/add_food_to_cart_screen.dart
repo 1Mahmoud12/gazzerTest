@@ -4,7 +4,7 @@ import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widget
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_price_summary.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_summary_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_types_widget.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 import 'package:go_router/go_router.dart';
 
 part 'add_food_to_cart_screen.g.dart';
@@ -13,7 +13,7 @@ part 'add_food_to_cart_screen.g.dart';
 @immutable
 class AddFoodToCartRoute extends GoRouteData with _$AddFoodToCartRoute {
   const AddFoodToCartRoute({required this.$extra});
-  final ProductItemEntity $extra;
+  final GenericItemEntity $extra;
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return AddFoodToCartScreen(product: $extra);
@@ -22,7 +22,7 @@ class AddFoodToCartRoute extends GoRouteData with _$AddFoodToCartRoute {
 
 class AddFoodToCartScreen extends StatelessWidget {
   const AddFoodToCartScreen({super.key, required this.product});
-  final ProductItemEntity product;
+  final GenericItemEntity product;
   static const routeWzExtra = '/add-to-cart';
 
   @override

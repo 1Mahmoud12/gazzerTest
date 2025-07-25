@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class Grad {
+  /// pharmacy gradient
+  final pharmacyLinearGrad = const LinearGradient(
+    colors: [Co.greenish, Co.blueish],
+    begin: Alignment(-0.5, 1),
+    end: Alignment(0.7, -1),
+    stops: [0.1, 1],
+  );
+
+  /// restaurant gradients
   final linearGradient = LinearGradient(
     colors: [Co.lightPurple, Co.darkPurple.withAlpha(201), Co.darkPurple.withAlpha(0)],
     begin: Alignment.topLeft,

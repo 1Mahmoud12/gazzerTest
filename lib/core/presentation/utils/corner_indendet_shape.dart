@@ -3,22 +3,21 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
-
 
 //Copy this CustomPainter code to the Bottom of the File
 class CornerIndendetShape extends CustomPainter {
-  final Color begin;
-  final Color end;
   final Size indent;
   final Corner corner;
   final double strokeWidth;
 
+  final (Color? shadowColor, double? shadowBlurRadius)? shadow;
+  final (Color begin, Color end)? border;
+
   CornerIndendetShape({
     this.indent = const Size(40, 40),
     this.corner = Corner.bottomRight,
-    this.begin = const Color(0x12000000),
-    this.end = Co.buttonGradient,
+    this.shadow,
+    this.border = const (Colors.transparent, Colors.transparent),
     this.strokeWidth = 1.0,
   });
 
@@ -199,16 +198,31 @@ class CornerIndendetShape extends CustomPainter {
     ///
 
     path_0.close();
+
     Paint paint0Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
-    paint0Stroke.shader = ui.Gradient.linear(
-      Offset(size.width, 0),
-      Offset(size.width, size.height),
-      [begin, end],
-      [0.1, 1],
-    );
+    // Draw shadow
+    if (shadow == null) {
+      if (border != null) {
+        paint0Stroke.shader = ui.Gradient.linear(
+          Offset(size.width, 0),
+          Offset(size.width, size.height),
+          [border!.$1, border!.$2],
+          [0.1, 1],
+        );
+      }
+    }
+
     canvas.drawPath(path_0, paint0Stroke);
+    if (shadow != null) {
+      canvas.drawShadow(
+        path_0,
+        shadow?.$1 ?? Colors.black26,
+        shadow?.$2 ?? 2,
+        false,
+      );
+    }
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
     paint0Fill.color = Colors.transparent;

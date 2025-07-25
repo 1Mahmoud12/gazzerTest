@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/stores/resturants/domain/repos/categories_of_plates_repo.dart';
 import 'package:gazzer/features/stores/resturants/domain/repos/restaurants_repo.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';

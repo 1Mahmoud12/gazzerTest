@@ -10,11 +10,11 @@ import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_bt
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/features/stores/resturants/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/stores/resturants/common/view/vert_card/horz_scroll_vert_card_vendors_list_component.dart';
-import 'package:gazzer/features/stores/resturants/presentation/cat_related_restaurants/presentation/view/cat_related_restaurants_screen.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_carousal.dart';
 import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
+import 'package:gazzer/features/stores/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 // part 'widgets/rest_cat_carousal.dart';
@@ -91,7 +91,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   final child = HorzScrollVertCardVendorsListComponent(
                     items: rest,
                     title: tabs[index].$2,
-                    onViewAllPressed: () => CatRelatedRestaurantsRoute(id: tabs[index].$3).push(context),
+                    onViewAllPressed: () => RestaurantsOfCategoryRoute(id: tabs[index].$3).push(context),
                   );
 
                   return child;

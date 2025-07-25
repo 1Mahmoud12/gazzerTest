@@ -2,7 +2,7 @@ part of '../home_screen.dart';
 
 class _HomeBestPopular extends StatelessWidget {
   const _HomeBestPopular({required this.items});
-  final List<ProductItemEntity?> items;
+  final List<GenericItemEntity?> items;
 
   @override
   Widget build(BuildContext context) {

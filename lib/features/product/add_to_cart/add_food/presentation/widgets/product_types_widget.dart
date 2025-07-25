@@ -7,12 +7,12 @@ import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 class ProductTypesWidget extends StatefulWidget {
   const ProductTypesWidget({super.key, required this.product});
 
-  final ProductItemEntity product;
+  final GenericItemEntity product;
 
   @override
   State<ProductTypesWidget> createState() => _ProductTypesWidgetState();

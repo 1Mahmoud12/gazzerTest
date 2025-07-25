@@ -1,6 +1,6 @@
-part of 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+part of 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
-class ProductEntity extends ProductItemEntity {
+class ProductEntity extends GenericItemEntity {
   ///
   final int? storeId;
 

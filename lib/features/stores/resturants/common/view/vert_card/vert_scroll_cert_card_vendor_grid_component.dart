@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/stores/resturants/common/view/vert_card/vertical_vendor_card.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 
 class VerticalVendorGridComponent<T> extends StatelessWidget {
   const VerticalVendorGridComponent({super.key, required this.title, this.onViewAllPressed, required this.items})
     : assert(
-        items is List<RestaurantEntity> || items is List<PlateEntity>,
+        items is List<GenericVendorEntity>  || items is List<PlateEntity>,
         'HorzScrollVertCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
       );
   final String? title;

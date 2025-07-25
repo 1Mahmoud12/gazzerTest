@@ -164,6 +164,8 @@ class Assets {
 
   static const String assetsSvgApple = "assets/svg/apple.svg";
 
+  static const String assetsSvgBadge = "assets/svg/badge.svg";
+
   static const String assetsSvgCart = "assets/svg/cart.svg";
 
   static const String assetsSvgCharacter = "assets/svg/character.svg";

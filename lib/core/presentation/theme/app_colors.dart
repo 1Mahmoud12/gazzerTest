@@ -38,4 +38,9 @@ class Co {
 
   static const red = Color(0xFFFF0000);
   static const darkMain = Color(0xFF010014);
+
+  /// pharmacy colors
+  static const greenish = Color(0xFF6FB490);
+  static const blueish = Color(0xFF42497D);
+
 }

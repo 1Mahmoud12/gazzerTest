@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/restaurant_entity.dart';
+import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
 
 sealed class RestaurantsMenuStates {}
 

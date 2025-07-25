@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 abstract class PlatesRepo extends BaseApiRepo {
   PlatesRepo(super.crashlyticsRepo);

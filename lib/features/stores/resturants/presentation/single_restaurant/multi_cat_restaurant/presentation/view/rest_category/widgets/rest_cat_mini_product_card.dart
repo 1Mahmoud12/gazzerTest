@@ -6,11 +6,11 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 class RestCatMiniProductCard extends StatelessWidget {
   const RestCatMiniProductCard({super.key, required this.prod});
-  final ProductItemEntity prod;
+  final GenericItemEntity prod;
   @override
   Widget build(BuildContext context) {
     return Container(

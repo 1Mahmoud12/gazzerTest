@@ -1,4 +1,4 @@
-import 'package:gazzer/features/stores/domain/store_item_entity.dart.dart';
+import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
 
 class CartItemModel {
   final int quantity;
@@ -22,7 +22,7 @@ class CartItemModel {
     this.quantity = 1,
   });
 
-  CartItemModel.fromProduct(ProductItemEntity product, {this.quantity = 1})
+  CartItemModel.fromProduct(GenericItemEntity product, {this.quantity = 1})
     : id = product.id,
       name = product.name,
       description = product.description,

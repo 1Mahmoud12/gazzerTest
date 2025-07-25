@@ -2,7 +2,7 @@ part of '../home_screen.dart';
 
 class _DailyOffersWidget extends StatelessWidget {
   const _DailyOffersWidget({required this.items});
-  final List<ProductItemEntity?> items;
+  final List<GenericItemEntity?> items;
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SizedBox.shrink();

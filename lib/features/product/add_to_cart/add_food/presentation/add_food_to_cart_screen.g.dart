@@ -16,7 +16,7 @@ RouteBase get $addFoodToCartRoute => GoRouteData.$route(
 
 mixin _$AddFoodToCartRoute on GoRouteData {
   static AddFoodToCartRoute _fromState(GoRouterState state) =>
-      AddFoodToCartRoute($extra: state.extra as ProductItemEntity);
+      AddFoodToCartRoute($extra: state.extra as GenericItemEntity);
 
   AddFoodToCartRoute get _self => this as AddFoodToCartRoute;
 
