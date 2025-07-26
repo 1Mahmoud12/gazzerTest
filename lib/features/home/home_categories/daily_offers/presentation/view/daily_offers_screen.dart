@@ -34,9 +34,9 @@ class DailyOffersScreen extends StatelessWidget {
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
               ),
-              itemCount: Fakers.fakeProds.length,
+              itemCount: Fakers().fakeProds.length,
               itemBuilder: (context, index) {
-                return VerticalProductCard(product: Fakers.fakeProds[index], canAdd: false);
+                return VerticalProductCard(product: Fakers().fakeProds[index], canAdd: false);
               },
             ),
           ),

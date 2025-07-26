@@ -1,33 +1,19 @@
 import 'dart:math';
 
-import 'package:gazzer/core/domain/cart/cart_item_model.dart';
-import 'package:gazzer/core/domain/cart/vendor_products_model.dart';
-import 'package:gazzer/core/domain/cusine/cuisine_model.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/stores/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/stores/resturants/data/category_add_model.dart';
-import 'package:gazzer/features/stores/resturants/domain/enities/category_of_plate_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/resturants/data/category_add_model.dart';
+import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
-  static final _prodImages = [
-    Assets.assetsPngFastFood,
-    Assets.assetsPngFood2,
-    Assets.assetsPngFood3,
-    Assets.assetsPngFood4,
-    Assets.assetsPngFood5,
-    Assets.assetsPngFood2,
-    Assets.assetsPngFood3,
-    Assets.assetsPngFood4,
-    Assets.assetsPngFood5,
-  ];
-
+  Fakers();
   static final _random = Random();
-  static final fakeProds = List.generate(
+  final fakeProds = List.generate(
     10,
     (index) => PlateEntity(
       id: index,
@@ -40,10 +26,13 @@ class Fakers {
       categoryPlateId: _random.nextInt(5),
       options: [],
       priceBeforeDiscount: _random.nextDouble() * 110,
+      outOfStock: _random.nextBool(),
+      badge: _random.nextBool() ? '30%' : null,
+      reviewCount: _random.nextDouble() * 100,
     ),
   );
 
-  static final fakeCats = List.generate(
+  final fakeCats = List.generate(
     12,
     (index) => CategoryEntity(
       index,
@@ -53,31 +42,6 @@ class Fakers {
     ),
   );
 
-  static final fakeCuisines = List.generate(
-    8,
-    (index) => CuisineModel(
-      id: index,
-      name: "مطبخ $index",
-      image:
-          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-    ),
-  );
-  static final fakecartItems = List.generate(
-    5,
-    (index) => CartItemModel.fromProduct(fakeProds[_random.nextInt(fakeProds.length)]),
-  );
-  static final fakeVendors = List.generate(
-    3,
-    (index) => VendorProductsModel(
-      id: index,
-      vendorName: "بائع ${index + 1}",
-      vendorImage:
-          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-      cartItems: List.generate(5, (index) {
-        return fakecartItems[index];
-      }),
-    ),
-  );
   static final restCatAdds = List.generate(
     4,
     (index) => CategoryAddModel(
@@ -92,25 +56,12 @@ class Fakers {
   static final fakeSubCats = List.generate(
     10,
     (index) => CategoryOfPlateEntity(
-      index,
-      "فئة فرعية ${index + 1}",
-      _catsImages[_random.nextInt(_catsImages.length)],
-      CategoryStyle.values[_random.nextInt(CategoryStyle.values.length)],
-    ),
-  );
-
-  static final vendors = List.generate(
-    4,
-    (index) => RestaurantEntity(
       id: index,
-      name: "بائع ${index + 1}",
-      image:
-          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-      rate: _random.nextDouble() * 5,
-      reviewCount: _random.nextInt(100),
-      estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
-      categoryOfPlate: fakeSubCats,
-      description: 'asd',
+      name: "فئة $index",
+      image: _catsImages[_random.nextInt(_catsImages.length)],
+      parentId: 0,
+      style: CardStyle.typeOne,
+      layout: LayoutType.grid,
     ),
   );
 
@@ -160,6 +111,9 @@ class Fakers {
       categoryPlateId: 0,
       options: [],
       priceBeforeDiscount: _random.nextDouble() * 110,
+      outOfStock: _random.nextBool(),
+      badge: _random.nextBool() ? '30%' : null,
+      reviewCount: _random.nextDouble() * 100,
     ),
   );
 
@@ -175,10 +129,24 @@ class Fakers {
       reviewCount: _random.nextInt(100),
       estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
       categoryOfPlate: fakeSubCats,
-      address: 'asd asd ad',
+      address: 'ZAMALEK',
       deliveryFees: 123,
-      isRestaurant: true,
       description: 'asdads',
+      isClosed: index.isEven, // Just for testing
+      badge: '30%',
+      priceRange: '\$10 - \$20',
+      tag: 'Free delivery',
+      location: 'ZAMALEK',
+      subCategories: const [
+        GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
+        GenericSubCategoryEntity(id: 2, name: 'Pizza', image: ''),
+      ],
+      startTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
+      endTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
+      parentId: index % 3 == 0 ? null : index - 1, // Random parent ID for testing
+      deliveryTime: '30-45 min',
+      deliveryFee: 30.0,
+      rateCount: 13,
     ),
   );
 
@@ -193,10 +161,25 @@ class Fakers {
           "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       reviewCount: _random.nextInt(100),
       estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
-      address: 'asd asd ad',
+      address: 'ZAMALEK',
       deliveryFees: 123,
       isRestaurant: true,
       description: 'asdads',
+      isClosed: index.isEven, // Just for testing
+      badge: '30%',
+      priceRange: '\$10 - \$20',
+      tag: 'Free delivery',
+      location: 'ZAMALEK',
+      subCategories: const [
+        GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
+        GenericSubCategoryEntity(id: 2, name: 'Pizza', image: ''),
+      ],
+      startTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
+      endTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
+      parentId: index % 3 == 0 ? null : index - 1, // Random parent ID for testing
+      deliveryTime: '30-45 min',
+      deliveryFee: 30.0,
+      rateCount: 13,
     ),
   );
 

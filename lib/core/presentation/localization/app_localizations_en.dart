@@ -9,6 +9,41 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get vendorCommon_________________Start => '__________________';
+
+  @override
+  String get outOFStock => 'Out of Stock';
+
+  @override
+  String get closed => 'Closed';
+
+  @override
+  String get from => 'From';
+
+  @override
+  String get to => 'To';
+
+  @override
+  String get hurryUp => 'Hurry Up!';
+
+  @override
+  String vendorClosesInMinutes(int minutes, String vendor) {
+    return '$vendor closes in $minutes minutes';
+  }
+
+  @override
+  String get theRestaurant => 'The Restaurant';
+
+  @override
+  String get theStore => 'The Store';
+
+  @override
+  String get thePharmacy => 'The Pharmacy';
+
+  @override
+  String get vendorCommon_________________End => '__________________';
+
+  @override
   String get otpSentSuccessfully => 'OTP sent successfully';
 
   @override

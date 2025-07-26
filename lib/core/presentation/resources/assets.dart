@@ -214,6 +214,8 @@ class Assets {
 
   static const String assetsSvgMessage = "assets/svg/Message.svg";
 
+  static const String assetsSvgMoney = "assets/svg/money.svg";
+
   static const String assetsSvgNotification = "assets/svg/notification.svg";
 
   static const String assetsSvgPaymentSettings = "assets/svg/payment_settings.svg";
@@ -239,6 +241,8 @@ class Assets {
   static const String assetsSvgTerms = "assets/svg/terms.svg";
 
   static const String assetsSvgTripleStarts = "assets/svg/triple_starts.svg";
+
+  static const String assetsSvgTruck = "assets/svg/truck.svg";
 
   static const String assetsSvgUser = "assets/svg/user.svg";
 

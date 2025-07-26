@@ -4,7 +4,7 @@ import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widget
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_price_summary.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_summary_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_types_widget.dart';
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:go_router/go_router.dart';
 
 part 'add_food_to_cart_screen.g.dart';

@@ -1,4 +1,4 @@
-import 'package:gazzer/features/home/main_home/data/banner_dto.dart';
+import 'package:gazzer/core/data/dto/banner_dto.dart';
 import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
 
 enum SectionType {

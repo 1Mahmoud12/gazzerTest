@@ -14,12 +14,12 @@ import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_fo
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/view/splash_screen.dart';
-import 'package:gazzer/features/stores/pharmacy/presentation/pharmacy_menu/view/pharmacy_menu_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: AppNavigator().mainKey,
-  initialLocation: PharmacyMenuScreen.route,
+  initialLocation: RestaurantsMenuScreen.route,
   observers: [MyRouteObserver()],
   routes: [
     GoRoute(

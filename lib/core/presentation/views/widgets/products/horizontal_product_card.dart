@@ -10,7 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class HorizontalProductCard extends StatelessWidget {
   const HorizontalProductCard({super.key, required this.product});

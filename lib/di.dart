@@ -1,6 +1,8 @@
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/crashlytics_repo_imp.dart';
-import 'package:gazzer/core/domain/crashlytics_repo.dart';
+import 'package:gazzer/core/data/repo/banner_repo_imp.dart';
+import 'package:gazzer/core/domain/repos/banner_repo.dart';
+import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 import 'package:gazzer/features/auth/forgot_password/data/forgot_password_imp.dart';
 import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo.dart';
 import 'package:gazzer/features/auth/login/data/login_repo_imp.dart';
@@ -16,13 +18,11 @@ import 'package:gazzer/features/profile/data/profile_repo_imp.dart';
 import 'package:gazzer/features/profile/domain/profile_repo.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
-import 'package:gazzer/features/stores/resturants/data/repo_imp/categories_of_plates_repo_imp.dart';
-import 'package:gazzer/features/stores/resturants/data/repo_imp/plates_repo_imp.dart';
-import 'package:gazzer/features/stores/resturants/data/repo_imp/restaurants_repo_imp.dart';
-import 'package:gazzer/features/stores/resturants/domain/repos/categories_of_plates_repo.dart';
-import 'package:gazzer/features/stores/resturants/domain/repos/plates_repo.dart';
-import 'package:gazzer/features/stores/resturants/domain/repos/restaurants_repo.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
+import 'package:gazzer/features/vendors/resturants/data/repo_imp/plates_repo_imp.dart';
+import 'package:gazzer/features/vendors/resturants/data/repo_imp/restaurants_repo_imp.dart';
+import 'package:gazzer/features/vendors/resturants/domain/repos/plates_repo.dart';
+import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,10 +55,10 @@ void _registerRepos() {
   di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get(), di.get()));
   di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get(), di.get()));
   di.registerLazySingleton<HomeRepo>(() => HomeRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<CategoriesOfPlatesRepo>(() => CategoriesOfPlatesRepoImp(di.get(), di.get()));
   di.registerLazySingleton<RestaurantsRepo>(() => RestaurantsRepoImp(di.get(), di.get()));
   di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get(), di.get()));
   di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<BannerRepo>(() => BannerRepoImp(di.get(), di.get()));
 }
 
 void _registerCubits() {

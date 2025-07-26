@@ -1,7 +1,7 @@
-import 'package:gazzer/core/domain/banner_entity.dart';
+import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class HomeDataModel {
   late final List<CategoryEntity>? categories;

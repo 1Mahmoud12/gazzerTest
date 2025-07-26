@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/banner_entity.dart';
+import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/views/components/banners/count_doun_banner.dart';
 import 'package:gazzer/core/presentation/views/components/banners/detailed_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/overlaping_cards_slider.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/widgets/cat_rest_shaking_img_add_widget.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/cat_rest_shaking_img_add_widget.dart';
 
 class MainBannerWidget extends StatelessWidget {
   const MainBannerWidget({super.key, required this.banner});

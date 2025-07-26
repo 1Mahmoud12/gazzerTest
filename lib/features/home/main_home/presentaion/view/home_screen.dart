@@ -30,8 +30,8 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/stores/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 import 'package:shared_preferences/shared_preferences.dart';

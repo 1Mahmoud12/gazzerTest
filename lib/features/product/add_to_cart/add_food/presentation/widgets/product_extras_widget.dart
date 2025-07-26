@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class ProductExtrasWidget extends StatelessWidget {
   const ProductExtrasWidget({super.key, required this.product});

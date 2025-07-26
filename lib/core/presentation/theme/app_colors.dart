@@ -37,6 +37,7 @@ class Co {
   static const shadowColor = Color(0xFFFAF5FF);
 
   static const red = Color(0xFFFF0000);
+  static const darkRed = Color(0xFFA90000);
   static const darkMain = Color(0xFF010014);
 
   /// pharmacy colors

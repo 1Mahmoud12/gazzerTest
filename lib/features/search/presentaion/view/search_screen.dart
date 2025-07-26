@@ -48,10 +48,10 @@ class _SearchScreenState extends State<SearchScreen> {
             const RecentSearchesWidget(),
             Expanded(
               child: ListView.separated(
-                itemCount: Fakers.vendors.length,
+                itemCount: Fakers().restaurants.length,
                 separatorBuilder: (context, index) => const VerticalSpacing(16),
                 itemBuilder: (context, index) {
-                  return SearchResultVendor(vendor: Fakers.vendors[index]);
+                  return SearchResultVendor(vendor: Fakers().restaurants[index]);
                 },
               ),
             ),

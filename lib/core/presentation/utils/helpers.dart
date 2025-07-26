@@ -41,6 +41,6 @@ abstract class Helpers {
   static String getProperPrice(num price, {bool showCurrency = true}) {
     final isInt = price % 1 == 0;
 
-    return (showCurrency ? ('${L10n.tr().egp} ') : '') + (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2));
+    return (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2)) + (showCurrency ? (' ${L10n.tr().egp}') : '');
   }
 }

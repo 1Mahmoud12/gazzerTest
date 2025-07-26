@@ -1,4 +1,25 @@
 {
+  "vendorCommon_________________Start": "__________________",
+  "outOFStock": "Out of Stock",
+  "closed": "Closed",
+  "from": "From",
+  "to": "To",
+  "hurryUp": "Hurry Up!",
+  "vendorClosesInMinutes": "{vendor} closes in {minutes} minutes",
+  "@vendorClosesInMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "vendor": {
+        "type": "String"
+      }
+    }
+  },
+  "theRestaurant": "The Restaurant",
+  "theStore": "The Store",
+  "thePharmacy": "The Pharmacy",
+  "vendorCommon_________________End": "__________________",
   "otpSentSuccessfully": "OTP sent successfully",
   "splash_________________Start": "__________________",
   "errorFetchingUserData": "Error fetching user data",
@@ -210,7 +231,7 @@
   "pleaseReEnterYourNewPassword": "Please re-enter your new password.",
   "clickBackAgainToExit": "Click back again to exit",
   "thisFieldIsRequired": "This field is required.",
-  "fullNameShouldBeThreeLettersOrMore" : "Full name Should be tree letters or more",
+  "fullNameShouldBeThreeLettersOrMore": "Full name Should be tree letters or more",
   "valueShouldBeNumAtelase": "Value {val} should be at least {num} characters",
   "@valueShouldBeNumAtelase": {
     "placeholders": {

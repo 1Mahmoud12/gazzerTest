@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/crashlytics_repo.dart';
+import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 import 'package:gazzer/di.dart';
 
 class ColorUtils {

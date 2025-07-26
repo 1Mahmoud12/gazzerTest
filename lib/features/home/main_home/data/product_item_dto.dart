@@ -1,8 +1,8 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/stores/resturants/data/dtos/plate_dto.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 
 part 'category_dto.dart';
 

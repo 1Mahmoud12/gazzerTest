@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/banner_entity.dart';
+import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/slide_timer.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';

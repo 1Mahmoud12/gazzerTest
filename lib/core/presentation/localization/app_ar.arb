@@ -1,4 +1,25 @@
 {
+  "vendorCommon_________________Start": "__________________",
+  "outOFStock": "غير متوفر",
+  "closed": "مغلق",
+  "from": "من",
+  "to": "إلى",
+  "hurryUp": "أسرع!",
+  "vendorClosesInMinutes": "{vendor} يغلق خلال {minutes} دقيقة",
+  "@vendorClosesInMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "vendor": {
+        "type": "String"
+      }
+    }
+  },
+  "theRestaurant": "المطعم",
+  "theStore": "المتجر",
+  "thePharmacy": "الصيدلية",
+  "vendorCommon_________________End": "__________________",
   "otpSentSuccessfully": "تم إرسال رمز التحقق بنجاح",
   "splash_________________Start": "__________________",
   "errorFetchingUserData": "خطأ في جلب بيانات المستخدم",

@@ -1,5 +1,5 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:gazzer/core/domain/crashlytics_repo.dart';
+import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 
 class CrashlyticsRepoImp implements CrashlyticsRepo {
   @override

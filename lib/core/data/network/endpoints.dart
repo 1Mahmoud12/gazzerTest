@@ -42,13 +42,17 @@ class Endpoints {
 
   /// ** restaurants
   static String allRestaurants(int page, int limit) => "restaurants?is_paginated=1&page=$page&limit=$limit";
-  static String retaurantsByCatOfPlate(int catId) => "restaurants/category/$catId?is_paginated=0";
+  static String retaurantsByCatOfPlate(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId";
 
   /// ** categoryOfPlates
-  static const categoriesOfPlates = 'restaurants/plates/sub-categories?is_paginated=0';
+  static const platesCategories = 'restaurants/plates/categories';
   static String categoryOfPlatesByRest(int restId) => "restaurants/$restId/plates/categories?is_paginated=0";
 
   /// ** paltes
   static String platesByRest(int restId) => "restaurants/$restId/plates";
   static String platesByRestAnCatOfPlate(int restId, int catId) => "restaurants/$restId/plates/$catId";
+
+  // ** banners
+  static const restaurantsMenuBanners = "banners/restaurants-page";
+  static String storeCategoryBanners(int id) => "banners/bannerable/store-category/id/$id";
 }

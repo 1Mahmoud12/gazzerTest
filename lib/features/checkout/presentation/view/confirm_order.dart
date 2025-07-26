@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/domain/cart/cart_item_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, OptionBtn, VerticalSpacing, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, OptionBtn, VerticalSpacing, HorizontalSpacing;
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,6 +16,10 @@ class ConfirmOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final btnText = [L10n.tr().addPRomoCode, L10n.tr().addDeliveryInstruction, L10n.tr().addTip];
+    final cartITems = List.generate(
+      5,
+      (index) => CartItemModel.fromProduct(Fakers().fakeProds[index % Fakers().fakeProds.length]),
+    );
     return Scaffold(
       appBar: AppBar(
         title: GradientText(text: L10n.tr().confirmOrder, style: TStyle.blackBold(18)),
@@ -30,7 +36,7 @@ class ConfirmOrderScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               separatorBuilder: (context, index) => const HorizontalSpacing(12),
               itemBuilder: (context, index) {
-                final cartProd = Fakers.fakecartItems[index];
+                final cartProd = cartITems[index];
                 return SizedBox(
                   width: 180,
                   child: DecoratedBox(

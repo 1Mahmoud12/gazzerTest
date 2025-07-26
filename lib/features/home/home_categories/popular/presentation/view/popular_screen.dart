@@ -34,7 +34,7 @@ class PopularScreen extends StatelessWidget {
               itemCount: 5,
               separatorBuilder: (context, index) => const HorizontalSpacing(12),
               itemBuilder: (context, index) {
-                final prod = Fakers.fakeProds[index];
+                final prod = Fakers().fakeProds[index];
                 return VerticalRotatedImgCard(
                   prod: prod,
                   onTap: () {
@@ -49,9 +49,9 @@ class PopularScreen extends StatelessWidget {
             child: GridView.builder(
               padding: AppConst.defaultPadding,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12),
-              itemCount: Fakers.fakeProds.length,
+              itemCount: Fakers().fakeProds.length,
               itemBuilder: (context, index) {
-                final prod = Fakers.fakeProds[index];
+                final prod = Fakers().fakeProds[index];
                 return VerticalRotatedImgCard(
                   prod: prod,
                   onTap: () {

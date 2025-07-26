@@ -19,7 +19,7 @@ extension AlignmentCorner on Corner {
   }
 }
 
-enum CardType {
+enum CardStyle {
   typeOne('One'),
   typeTwo('Two'),
   typeThree('Three'),
@@ -27,9 +27,23 @@ enum CardType {
 
   final String type;
 
-  const CardType(this.type);
+  const CardStyle(this.type);
 
-  factory CardType.fromString(String type) {
-    return CardType.values.firstWhere((e) => e.type == type, orElse: () => typeOne);
+  factory CardStyle.fromString(String type) {
+    return CardStyle.values.firstWhere((e) => e.type == type, orElse: () => typeOne);
+  }
+}
+
+enum LayoutType {
+  horizontal('Horizontal'),
+  vertical('Vertical'),
+  grid('Grid');
+
+  final String type;
+
+  const LayoutType(this.type);
+
+  factory LayoutType.fromString(String type) {
+    return LayoutType.values.firstWhere((e) => e.type == type, orElse: () => horizontal);
   }
 }

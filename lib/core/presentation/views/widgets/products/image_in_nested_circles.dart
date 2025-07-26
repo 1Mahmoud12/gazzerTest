@@ -42,7 +42,7 @@ class ImageInNestedCircles extends StatelessWidget {
                     ),
                     child: AspectRatio(
                       aspectRatio: 1,
-                      child: Image.asset(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+                      child: Image.network(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
                     ),
                   ),
                 ),

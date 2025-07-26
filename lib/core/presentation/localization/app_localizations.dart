@@ -98,6 +98,72 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @vendorCommon_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get vendorCommon_________________Start;
+
+  /// No description provided for @outOFStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Out of Stock'**
+  String get outOFStock;
+
+  /// No description provided for @closed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get closed;
+
+  /// No description provided for @from.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get from;
+
+  /// No description provided for @to.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get to;
+
+  /// No description provided for @hurryUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Hurry Up!'**
+  String get hurryUp;
+
+  /// No description provided for @vendorClosesInMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{vendor} closes in {minutes} minutes'**
+  String vendorClosesInMinutes(int minutes, String vendor);
+
+  /// No description provided for @theRestaurant.
+  ///
+  /// In en, this message translates to:
+  /// **'The Restaurant'**
+  String get theRestaurant;
+
+  /// No description provided for @theStore.
+  ///
+  /// In en, this message translates to:
+  /// **'The Store'**
+  String get theStore;
+
+  /// No description provided for @thePharmacy.
+  ///
+  /// In en, this message translates to:
+  /// **'The Pharmacy'**
+  String get thePharmacy;
+
+  /// No description provided for @vendorCommon_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get vendorCommon_________________End;
+
   /// No description provided for @otpSentSuccessfully.
   ///
   /// In en, this message translates to:

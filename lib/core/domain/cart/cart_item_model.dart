@@ -1,4 +1,4 @@
-import 'package:gazzer/features/stores/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class CartItemModel {
   final int quantity;

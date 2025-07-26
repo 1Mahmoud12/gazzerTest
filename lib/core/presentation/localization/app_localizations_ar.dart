@@ -9,6 +9,41 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get vendorCommon_________________Start => '__________________';
+
+  @override
+  String get outOFStock => 'غير متوفر';
+
+  @override
+  String get closed => 'مغلق';
+
+  @override
+  String get from => 'من';
+
+  @override
+  String get to => 'إلى';
+
+  @override
+  String get hurryUp => 'أسرع!';
+
+  @override
+  String vendorClosesInMinutes(int minutes, String vendor) {
+    return '$vendor يغلق خلال $minutes دقيقة';
+  }
+
+  @override
+  String get theRestaurant => 'المطعم';
+
+  @override
+  String get theStore => 'المتجر';
+
+  @override
+  String get thePharmacy => 'الصيدلية';
+
+  @override
+  String get vendorCommon_________________End => '__________________';
+
+  @override
   String get otpSentSuccessfully => 'تم إرسال رمز التحقق بنجاح';
 
   @override

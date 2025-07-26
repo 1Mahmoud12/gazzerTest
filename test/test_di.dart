@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/local_storage/local_storage.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
-import 'package:gazzer/core/domain/crashlytics_repo.dart';
+import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 import 'package:gazzer/features/auth/login/domain/login_repo.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:get_it/get_it.dart';

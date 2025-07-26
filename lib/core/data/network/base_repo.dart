@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/core/domain/crashlytics_repo.dart';
+import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 
 /// any repo in the app that makes api calls should extend this class

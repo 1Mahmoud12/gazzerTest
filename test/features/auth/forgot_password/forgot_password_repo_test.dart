@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/core/domain/crashlytics_repo.dart';
+import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 import 'package:gazzer/features/auth/forgot_password/data/forgot_password_imp.dart';
 import 'package:mockito/mockito.dart';
 
