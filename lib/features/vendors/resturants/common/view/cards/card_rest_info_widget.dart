@@ -19,7 +19,7 @@ class CardRestInfoWidget extends StatelessWidget {
         ),
         if (vendor.tag != null)
           Text(
-            vendor.tag!,
+             vendor.tag!.join(', '),
             style: TStyle.secondarySemi(12),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -33,22 +33,22 @@ class CardRestInfoWidget extends StatelessWidget {
             Text("(${vendor.reviewCount})", style: TStyle.blackBold(12)),
           ],
         ),
-        if (vendor.location != null)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Icon(Icons.location_on, color: Co.purple, size: 18),
-
-              Text(vendor.location!, style: TStyle.primaryRegular(12)),
-            ],
-          ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Icon(Icons.access_time_outlined, color: Co.purple, size: 18),
-            Text(vendor.estimateDeliveryTime, style: TStyle.greySemi(13)),
+            const Icon(Icons.location_on, color: Co.purple, size: 18),
+
+            Text(vendor.location, style: TStyle.primaryRegular(12)),
           ],
         ),
+        if (vendor.deliveryTime != null)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Icon(Icons.access_time_outlined, color: Co.purple, size: 18),
+              Text(vendor.deliveryTime!, style: TStyle.greySemi(13)),
+            ],
+          ),
       ],
     );
   }

@@ -11,10 +11,10 @@ List<RouteBase> get $appRoutes => [$storeOfCategoryRoute];
 RouteBase get $storeOfCategoryRoute => GoRouteData.$route(
   path: '/stores-of-category',
 
-  factory: _$StoreOfCategoryRoute._fromState,
+  factory: _$StoresOfCategoryRoute._fromState,
 );
 
-mixin _$StoreOfCategoryRoute on GoRouteData {
+mixin _$StoresOfCategoryRoute on GoRouteData {
   static StoresOfCategoryRoute _fromState(GoRouterState state) =>
       StoresOfCategoryRoute(
         vendorId: int.parse(state.uri.queryParameters['vendor-id']!)!,

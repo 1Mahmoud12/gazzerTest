@@ -66,7 +66,12 @@ class _VendorCardOne extends StatelessWidget {
                   children: [
                     Text(vendor.name, style: TStyle.blackBold(14)),
                     Expanded(
-                      child: Text(vendor.address ?? '', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis, maxLines: 3),
+                      child: Text(
+                        vendor.address ?? '',
+                        style: TStyle.greyRegular(13),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                      ),
                     ),
                     Row(
                       spacing: 18,
@@ -89,7 +94,7 @@ class _VendorCardOne extends StatelessWidget {
                       children: [
                         const Icon(Icons.access_time_rounded, size: 22, color: Co.purple),
 
-                        Text(vendor.estimateDeliveryTime, style: TStyle.greyRegular(13)),
+                        Text(vendor.deliveryTime ?? '', style: TStyle.greyRegular(13)),
                       ],
                     ),
                   ],

@@ -65,7 +65,7 @@ class _ProfileHeaderWidget extends StatelessWidget {
                       child: AspectRatio(
                         aspectRatio: 1,
                         child: Image.network(
-                          client?.image ?? Fakers().netWorkImage,
+                          client?.image ?? Fakers.netWorkImage,
                         ),
                       ),
                     ),

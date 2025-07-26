@@ -55,7 +55,7 @@ class PlateDTO extends StoreItemDTO {
       categoryPlateId: plateCategoryId ?? 0,
       name: plateName ?? '',
       description: plateDescription ?? '',
-      image: Fakers().netWorkPRoductImage,
+      image: Fakers.netWorkPRoductImage,
       price: double.tryParse(price.toString()) ?? 0,
       rate: 0.0,
       priceBeforeDiscount: 0,

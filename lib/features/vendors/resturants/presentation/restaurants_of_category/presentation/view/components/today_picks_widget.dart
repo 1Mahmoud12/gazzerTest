@@ -15,7 +15,7 @@ class _TodayPicksWidget extends StatelessWidget {
         ),
         RestHorzScrollVertCardListComponent(
           title: L10n.tr().todayPicks,
-          items: Fakers().restaurants,
+          items: Fakers.restaurants,
           onViewAllPressed: null,
         ),
       ],

@@ -4,64 +4,58 @@ import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_d
 class RestaurantDTO {
   int? id;
   String? storeName;
-  int? vendorId;
-  String? location;
-  String? weightDeviationPercent;
-  // int? trackingOnPackingAndPickup;
-  String? address;
-  // String? contactPerson;
-  // int? staringCashNeedsSupervisorApproval;
-  int? isRestaurant;
-  // int? autoHideItemOnThreshold;
-  int? isActive;
-  String? timeForEditingOrder;
-  // int? autoApproveUpdatesOnOrderDivision;
-  int? countryZoneId;
+  String? image;
   int? storeCategoryId;
-  List<CategoryOfPlateDTO>? subcategories;
+  int? vendorId;
+  String? address;
+  int? estimatedDeliveryTime;
+  String? rate;
+  int? isFavorite;
+  int? isOpen;
+  String? workFrom;
+  String? workTo;
+  int? is24Hours;
+  List<String>? tags;
+  String? provinceZone;
 
-  RestaurantDTO({
-    this.id,
-    this.storeName,
-    this.vendorId,
-    this.location,
-    this.weightDeviationPercent,
-    // this.trackingOnPackingAndPickup,
-    this.address,
-    // this.contactPerson,
-    // this.staringCashNeedsSupervisorApproval,
-    this.isRestaurant,
-    // this.autoHideItemOnThreshold,
-    this.isActive,
-    this.timeForEditingOrder,
-    // this.autoApproveUpdatesOnOrderDivision,
-    this.countryZoneId,
-    this.storeCategoryId,
-    this.subcategories,
-  });
+  // TODO: need to be loaded from api
+  List<CategoryOfPlateDTO>? subcategories;
+  double? deliveryFees;
+  int? rateCount;
+  String? badge;
 
   RestaurantDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     storeName = json['store_name'];
-    vendorId = json['vendor_id'];
-    location = json['location'];
-    weightDeviationPercent = json['weight_deviation_percent'];
-    // trackingOnPackingAndPickup = json['tracking_on_packing_and_pickup'];
-    address = json['address'];
-    // contactPerson = json['contact_person'];
-    // staringCashNeedsSupervisorApproval = json['staring_cash_needs_supervisor_approval'];
-    isRestaurant = json['is_restaurant'];
-    // autoHideItemOnThreshold = json['auto_hide_item_on_threshold'];
-    isActive = json['is_active'];
-    timeForEditingOrder = json['time_for_editing_order'];
-    // autoApproveUpdatesOnOrderDivision = json['auto_approve_updates_on_order_division'];
-    countryZoneId = json['country_zone_id'];
+    image = json['image'];
     storeCategoryId = json['store_category_id'];
-    if (json['subcategories'] != null) {
-      subcategories = <CategoryOfPlateDTO>[];
-      json['subcategories'].forEach((v) {
-        subcategories!.add(CategoryOfPlateDTO.fromJson(v));
-      });
+    vendorId = json['vendor_id'];
+    address = json['address'];
+    estimatedDeliveryTime = json['estimated_delivery_time'];
+    rate = json['rate'];
+    isFavorite = json['is_favorite'];
+    isOpen = json['is_open'];
+    workFrom = json['work_from'];
+    workTo = json['work_to'];
+    is24Hours = json['is_24_hours'];
+    if (json['tags'] != null) {
+      tags = [];
+      for (var tag in json['tags']) {
+        tags!.add(tag['name'] as String);
+      }
+    }
+    if (json['province_zone'] is Map) {
+      provinceZone = json['province_zone']['zone_name'];
+    }
+  }
+
+  DateTime? _formDateTimeFromString(String time) {
+    try {
+      final now = DateTime.now();
+      final parts = time.split(' ').first.split(':');
+      return DateTime(now.year, now.month, now.day, int.parse(parts[0]), int.parse(parts[1]));
+    } catch (e) {
+      return null;
     }
   }
 
@@ -69,29 +63,25 @@ class RestaurantDTO {
     return RestaurantEntity(
       id: id!,
       name: storeName!,
-      image:
-          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-      rate: 0,
-      estimateDeliveryTime: '',
-      deliveryFees: null,
-      promotionalMessage: null,
-      location: location ?? 'ZAMALEK',
+      image: image ?? '',
+      rate: double.tryParse(rate ?? '0') ?? 0.0,
+      deliveryFees: deliveryFees ?? 0.0,
+      location: provinceZone ?? '',
       address: address,
       parentId: storeCategoryId,
-
       reviewCount: 0,
       categoryOfPlate: subcategories?.map((e) => e.toCategoryOfPlateEntity()).toList(),
-      description: '',
-      isClosed: id?.isEven ?? false,
-      badge: '30%',
+      badge: badge ,
       priceRange: '\$10 - \$20',
-      tag: null,
-      startTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
-      endTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
+      tag: tags,
+      startTime: _formDateTimeFromString(workFrom ?? ''),
+      endTime: _formDateTimeFromString(workTo ?? ''),
       subCategories: subcategories
           ?.map((e) => GenericSubCategoryEntity(id: e.id!, name: e.name ?? '', image: e.image))
           .toList(),
-      deliveryTime: '30-45 min',
+      deliveryTime: estimatedDeliveryTime != null
+          ? '${(estimatedDeliveryTime! * 0.7).floor()} - ${(estimatedDeliveryTime! * 1.3).ceil()} '
+          : null,
       deliveryFee: 30.0,
       rateCount: 13,
     );

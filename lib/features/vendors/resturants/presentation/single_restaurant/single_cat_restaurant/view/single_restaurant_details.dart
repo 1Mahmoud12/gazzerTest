@@ -37,7 +37,7 @@ class SingleCatRestaurantScreen extends StatelessWidget {
   static const routeUriId = '/single-cat-restaurant';
   @override
   Widget build(BuildContext context) {
-    final listItems = [VendorInfoCard(Fakers().restaurants.first), const _FoodImagesGallery(), _FoodDetailsWidget(product: Fakers().fakeProds.first)];
+    final listItems = [VendorInfoCard(Fakers.restaurants.first), const _FoodImagesGallery(), _FoodDetailsWidget(product: Fakers.fakeProds.first)];
     return Scaffold(
       appBar: const MainAppBar(),
       body: ListView.separated(

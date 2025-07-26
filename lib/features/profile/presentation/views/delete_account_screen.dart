@@ -151,7 +151,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                         onRetry: () => cubit.getDeleteAccountReasons(),
                       );
                     } else {
-                      final items = state is FetchDeleteAccountReasonsSuccess ? state.reasons : Fakers().reasons;
+                      final items = state is FetchDeleteAccountReasonsSuccess ? state.reasons : Fakers.reasons;
                       return Skeletonizer(
                         effect: const PulseEffect(),
                         containersColor: Co.secText,

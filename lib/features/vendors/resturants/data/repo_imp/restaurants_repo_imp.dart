@@ -26,7 +26,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
   }
 
   @override
-  Future<Result<List<RestaurantEntity>>> getRestaurantsByCatOfPlate(int catOfPlateId, {int pag = 0, int limit = 10}) {
+  Future<Result<List<RestaurantEntity>>> getRestaurantsOfCategory(int catOfPlateId, {int pag = 0, int limit = 10}) {
     return super.call(
       apiCall: () => _apiClient.get(
         endpoint: Endpoints.retaurantsByCatOfPlate(catOfPlateId, pag: pag, limit: limit),
@@ -63,6 +63,54 @@ class RestaurantsRepoImp extends RestaurantsRepo {
         final data = <CategoryOfPlateEntity>[];
         for (var item in response.data['data']) {
           data.add(CategoryOfPlateDTO.fromJson(item).toCategoryOfPlateEntity());
+        }
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<RestaurantEntity>>> getOffersRestaurants(int id, {int pag = 0, int limit = 10}) {
+    return super.call(
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.offersRestaurants(id, pag: pag, limit: limit),
+      ),
+      parser: (response) {
+        final data = <RestaurantEntity>[];
+        for (var item in response.data['data']) {
+          data.add(RestaurantDTO.fromJson(item).toRestEntity());
+        }
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<RestaurantEntity>>> getTodaysSickRestaurants(int id, {int pag = 0, int limit = 10}) {
+    return super.call(
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.todaysPicRestaurants(id, pag: pag, limit: limit),
+      ),
+      parser: (response) {
+        final data = <RestaurantEntity>[];
+        for (var item in response.data['data']) {
+          data.add(RestaurantDTO.fromJson(item).toRestEntity());
+        }
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<RestaurantEntity>>> getTopRatedRestaurants(int id, {int pag = 0, int limit = 10}) {
+    return super.call(
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.topRatedRestaurants(id, pag: pag, limit: limit),
+      ),
+      parser: (response) {
+        final data = <RestaurantEntity>[];
+        for (var item in response.data['data']) {
+          data.add(RestaurantDTO.fromJson(item).toRestEntity());
         }
         return data;
       },

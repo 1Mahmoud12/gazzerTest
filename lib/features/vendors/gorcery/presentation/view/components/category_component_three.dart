@@ -96,7 +96,7 @@ class _VendorCardThree extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(Icons.access_time_rounded, size: 22, color: Co.purple),
-                        Text(vendor.estimateDeliveryTime, style: TStyle.greyRegular(13)),
+                        Text(vendor.deliveryTime ?? '', style: TStyle.greyRegular(13)),
                       ],
                     ),
                   ),

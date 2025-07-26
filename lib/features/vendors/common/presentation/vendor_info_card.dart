@@ -8,7 +8,7 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/common/presentation/venodr_closing_timer.dart';
+import 'package:gazzer/features/vendors/common/presentation/vendor_closing_timer.dart';
 import 'package:intl/intl.dart';
 
 class VendorInfoCard extends StatelessWidget {
@@ -16,7 +16,6 @@ class VendorInfoCard extends StatelessWidget {
   final GenericVendorEntity vendor;
   @override
   Widget build(BuildContext context) {
-    print(vendor.endTime.compareTo(DateTime.now()));
     final imageSize = 70.0;
     return Padding(
       padding: EdgeInsetsGeometry.fromLTRB(16, imageSize * 0.5, 16, 0),
@@ -53,29 +52,31 @@ class VendorInfoCard extends StatelessWidget {
                                 children: [
                                   const Icon(Icons.access_time, color: Co.purple, size: 20),
                                   const Spacer(),
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(12)),
-                                        TextSpan(
-                                          text: DateFormat.jm().format(vendor.startTime),
-                                          style: TStyle.greyRegular(12),
-                                        ),
-                                      ],
+                                  if (vendor.startTime != null)
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(12)),
+                                          TextSpan(
+                                            text: DateFormat.jm().format(vendor.startTime!),
+                                            style: TStyle.greyRegular(12),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
                                   const Spacer(flex: 4),
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(12)),
-                                        TextSpan(
-                                          text: DateFormat.jm().format(vendor.endTime),
-                                          style: TStyle.greyRegular(12),
-                                        ),
-                                      ],
+                                  if (vendor.endTime != null)
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(12)),
+                                          TextSpan(
+                                            text: DateFormat.jm().format(vendor.endTime!),
+                                            style: TStyle.greyRegular(12),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
                                   const Spacer(),
                                 ],
                               ),
@@ -106,8 +107,8 @@ class VendorInfoCard extends StatelessWidget {
                   ],
                 ),
               ),
-              if (vendor.endTime.difference(DateTime.now()) < const Duration(minutes: 45))
-                VenodrClosingTimer(endTime: vendor.endTime, name: vendor.name)
+              if (vendor.endTime != null && vendor.endTime!.difference(DateTime.now()) < const Duration(minutes: 45))
+                VendorClosingTimer(endTime: vendor.endTime!, name: vendor.name)
               else
                 Padding(
                   padding: const EdgeInsets.all(10),

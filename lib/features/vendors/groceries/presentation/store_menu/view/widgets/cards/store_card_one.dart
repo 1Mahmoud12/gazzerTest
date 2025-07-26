@@ -90,10 +90,11 @@ class StoreCardOne extends StatelessWidget {
                                 style: TStyle.primaryBold(14),
                               ),
                               const TextSpan(text: '\n'),
-                              TextSpan(
-                                text: vendor.description,
-                                style: TStyle.greyRegular(12),
-                              ),
+                              if (vendor.tag?.isNotEmpty == true)
+                                TextSpan(
+                                  text: vendor.tag!.join(', '),
+                                  style: TStyle.greyRegular(12),
+                                ),
                             ],
                           ),
                           maxLines: 2,

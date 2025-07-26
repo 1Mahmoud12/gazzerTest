@@ -50,7 +50,7 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
   static const routeUriId = '/multi-cat-restaurant';
   @override
   Widget build(BuildContext context) {
-    final vendor = Fakers().restaurants.first;
+    final vendor = Fakers.restaurants.first;
     final subCats = List.of(Fakers.fakeSubCats);
     final nonCat = [
       MultiCatRestHeader(vendor: vendor),
@@ -62,8 +62,8 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: AppConst.defaultHrPadding,
           separatorBuilder: (context, index) => const HorizontalSpacing(24),
-          itemCount: Fakers().fakeProds.length,
-          itemBuilder: (_, index) => _HorProductCard(prod: Fakers().fakeProds[index]),
+          itemCount: Fakers.fakeProds.length,
+          itemBuilder: (_, index) => _HorProductCard(prod: Fakers.fakeProds[index]),
         ),
       ),
       SizedBox(
@@ -72,8 +72,8 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: AppConst.defaultHrPadding,
           separatorBuilder: (context, index) => const HorizontalSpacing(24),
-          itemCount: Fakers().fakeProds.length,
-          itemBuilder: (_, index) => _VertProductCard(prod: Fakers().fakeProds[index]),
+          itemCount: Fakers.fakeProds.length,
+          itemBuilder: (_, index) => _VertProductCard(prod: Fakers.fakeProds[index]),
         ),
       ),
 
@@ -84,8 +84,8 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: AppConst.defaultHrPadding,
           separatorBuilder: (context, index) => const HorizontalSpacing(16),
-          itemCount: Fakers().fakeProds.length,
-          itemBuilder: (_, index) => _MiniProductCard(prod: Fakers().fakeProds[index]),
+          itemCount: Fakers.fakeProds.length,
+          itemBuilder: (_, index) => _MiniProductCard(prod: Fakers.fakeProds[index]),
         ),
       ),
       SizedBox(
@@ -93,9 +93,9 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           padding: AppConst.defaultHrPadding,
-          itemCount: Fakers().fakeProds.length,
+          itemCount: Fakers.fakeProds.length,
           separatorBuilder: (context, index) => const HorizontalSpacing(16),
-          itemBuilder: (_, index) => _MiniBorderedProductCard(prod: Fakers().fakeProds[index]),
+          itemBuilder: (_, index) => _MiniBorderedProductCard(prod: Fakers.fakeProds[index]),
         ),
       ),
       SizedBox(
@@ -116,7 +116,7 @@ class MultiCatRestaurantsScreen extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1, crossAxisCount: 2, crossAxisSpacing: 20, mainAxisSpacing: 8),
 
               itemBuilder: (_, index) {
-                return SingleGridProduct(isTop: index.isEven, prod: Fakers().fakeProds[index]);
+                return SingleGridProduct(isTop: index.isEven, prod: Fakers.fakeProds[index]);
               },
             ),
           ],

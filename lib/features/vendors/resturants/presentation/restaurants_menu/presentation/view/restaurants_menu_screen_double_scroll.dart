@@ -67,7 +67,7 @@
 //                     maxHeight: constraints.maxHeight - topPadding - kToolbarHeight,
 //                     tabs: tabs,
 //                     listItemBuilder: (context, index) {
-//                       final rest = Fakers().restaurants;
+//                       final rest = Fakers.restaurants;
 //                       final child = HorzScrollVertCardVendorsListComponent(
 //                         items: rest,
 //                         title: "Section ${index + 1}",
@@ -101,7 +101,7 @@
 //               //   ),
 //               //   tabs: tabs,
 //               //   listItemBuilder: (context, index) {
-//               //     final rest = Fakers().restaurants;
+//               //     final rest = Fakers.restaurants;
 //               //     final child = HorzScrollVertCardVendorsListComponent(
 //               //       items: rest,
 //               //       title: "Section ${index + 1}",

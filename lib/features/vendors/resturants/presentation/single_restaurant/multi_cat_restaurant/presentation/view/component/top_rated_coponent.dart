@@ -27,10 +27,10 @@ class _TopRatedComponent extends StatelessWidget {
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: CircularCarousalWidget(
-                  itemsCount: Fakers().fakeProds.length,
+                  itemsCount: Fakers.fakeProds.length,
                   maxItemWidth: 128,
                   itemBuilder: (BuildContext context, int index) {
-                    return _TopRatedCard(Fakers().fakeProds[index]);
+                    return _TopRatedCard(Fakers.fakeProds[index]);
                   },
                 ),
               ),

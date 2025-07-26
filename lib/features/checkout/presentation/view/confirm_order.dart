@@ -18,7 +18,7 @@ class ConfirmOrderScreen extends StatelessWidget {
     final btnText = [L10n.tr().addPRomoCode, L10n.tr().addDeliveryInstruction, L10n.tr().addTip];
     final cartITems = List.generate(
       5,
-      (index) => CartItemModel.fromProduct(Fakers().fakeProds[index % Fakers().fakeProds.length]),
+      (index) => CartItemModel.fromProduct(Fakers.fakeProds[index % Fakers.fakeProds.length]),
     );
     return Scaffold(
       appBar: AppBar(

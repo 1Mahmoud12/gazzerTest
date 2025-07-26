@@ -23,7 +23,6 @@ class StoreMenuScreen extends StatelessWidget {
   static const route = '/store-menu';
   @override
   Widget build(BuildContext context) {
-    final fakers = Fakers();
     return FloatingDraggableWidget(
       // dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
       floatingWidget: const CartFloatingBtn(),
@@ -55,25 +54,25 @@ class StoreMenuScreen extends StatelessWidget {
                 ),
               ),
               MainBannerWidget(
-                banner: BannerEntity(id: 1, type: BannerType.image, image: fakers.netWorkPRoductImage),
+                banner: BannerEntity(id: 1, type: BannerType.image, image: Fakers.netWorkPRoductImage),
               ),
               const VerticalSpacing(8),
             ],
           ),
-          itemsCount: fakers.restaurants.length,
+          itemsCount: Fakers.restaurants.length,
           tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
           tabBuilder: (p0, index) => Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleGradientBorderedImage(image: fakers.netWorkPRoductImage),
+              CircleGradientBorderedImage(image: Fakers.netWorkPRoductImage),
               Padding(
                 padding: AppConst.defaultHrPadding,
-                child: Text(fakers.restaurants[index].name, style: TStyle.blackSemi(13)),
+                child: Text(Fakers.restaurants[index].name, style: TStyle.blackSemi(13)),
               ),
             ],
           ),
           listItemBuilder: (context, index) {
-            final rest = fakers.stores;
+            final rest = Fakers.stores;
             final child = StoreHorzScrollCardOneList(
               items: rest,
               title: 'Category ${index + 1}',

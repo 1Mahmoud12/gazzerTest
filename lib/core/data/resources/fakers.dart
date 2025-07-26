@@ -11,9 +11,9 @@ import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_pl
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
-  Fakers();
+  Fakers._();
   static final _random = Random();
-  final fakeProds = List.generate(
+  static final fakeProds = List.generate(
     10,
     (index) => PlateEntity(
       id: index,
@@ -32,7 +32,7 @@ class Fakers {
     ),
   );
 
-  final fakeCats = List.generate(
+  static final fakeCats = List.generate(
     12,
     (index) => CategoryEntity(
       index,
@@ -84,9 +84,9 @@ class Fakers {
   ///
   ///
 
-  final netWorkImage =
+  static final netWorkImage =
       "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
-  final netWorkPRoductImage =
+  static final netWorkPRoductImage =
       "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
 
   static final _catsImages = [
@@ -98,7 +98,7 @@ class Fakers {
   ];
 
   ///
-  final List<PlateEntity> plates = List.generate(
+  static final List<PlateEntity> plates = List.generate(
     8,
     (index) => PlateEntity(
       id: index,
@@ -118,7 +118,8 @@ class Fakers {
   );
 
   ///
-  final List<RestaurantEntity> restaurants = List.generate(
+
+  static final List<RestaurantEntity> restaurants = List.generate(
     8,
     (index) => RestaurantEntity(
       id: index,
@@ -127,15 +128,12 @@ class Fakers {
       image:
           "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       reviewCount: _random.nextInt(100),
-      estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
       categoryOfPlate: fakeSubCats,
       address: 'ZAMALEK',
       deliveryFees: 123,
-      description: 'asdads',
-      isClosed: index.isEven, // Just for testing
       badge: '30%',
       priceRange: '\$10 - \$20',
-      tag: 'Free delivery',
+      tag: ['Free delivery'],
       location: 'ZAMALEK',
       subCategories: const [
         GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
@@ -151,7 +149,7 @@ class Fakers {
   );
 
   ///
-  final List<StoreEntity> stores = List.generate(
+  static final List<StoreEntity> stores = List.generate(
     8,
     (index) => StoreEntity(
       id: index,
@@ -164,11 +162,9 @@ class Fakers {
       address: 'ZAMALEK',
       deliveryFees: 123,
       isRestaurant: true,
-      description: 'asdads',
-      isClosed: index.isEven, // Just for testing
       badge: '30%',
       priceRange: '\$10 - \$20',
-      tag: 'Free delivery',
+      tag: ['Free delivery'],
       location: 'ZAMALEK',
       subCategories: const [
         GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
@@ -184,7 +180,7 @@ class Fakers {
   );
 
   ///
-  final addresses = List.generate(
+  static final addresses = List.generate(
     3,
     (index) => AddressEntity(
       id: index,
@@ -209,7 +205,7 @@ class Fakers {
     ),
   );
 
-  final reasons = List.generate(
+  static final reasons = List.generate(
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',

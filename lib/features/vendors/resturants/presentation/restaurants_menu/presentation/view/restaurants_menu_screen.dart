@@ -105,26 +105,26 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                                 title: cat.$1.name,
                                 items: cat.$2,
                                 imgToTextRatio: 0.8,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute(id: cat.$1.id).push(context),
+                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
                               );
                             case CardStyle.typeTwo:
                               return RestHorzScrollVertCardListComponent(
                                 title: cat.$1.name,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute(id: cat.$1.id).push(context),
+                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
                                 items: cat.$2,
                               );
                             case CardStyle.typeThree:
                               return RestVertScrollHorzCardListComponent(
                                 items: cat.$2,
                                 title: cat.$1.name,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute(id: cat.$1.id).push(context),
+                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
                                 corner: Corner.topLeft,
                               );
                             case CardStyle.typeFour:
                               return RestVertScrollVertCardGridComponent(
                                 items: cat.$2,
                                 title: cat.$1.name,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute(id: cat.$1.id).push(context),
+                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
                               );
                           }
                         },

@@ -23,13 +23,9 @@ class LongitudinalCarousal extends StatelessWidget {
           autoPlayInterval: Duration(seconds: 3),
           autoPlayAnimationDuration: Duration(milliseconds: 800),
           autoPlayCurve: Curves.fastOutSlowIn,
-          onPageChanged: (a, s) {
-            print('asdads');
-          },
+          onPageChanged: (a, s) {},
           scrollDirection: Axis.horizontal,
-          onScrolled: (value) {
-            print('asdad');
-          },
+          onScrolled: (value) {},
         ),
         itemCount: images.length,
         itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {

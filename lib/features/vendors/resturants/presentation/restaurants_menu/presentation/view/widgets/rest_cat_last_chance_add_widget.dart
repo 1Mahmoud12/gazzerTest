@@ -19,7 +19,7 @@
 //   updateIndex() {
 //     setState(() {
 //       index++;
-//       if (index >= Fakers().fakeProds.length) {
+//       if (index >= Fakers.fakeProds.length) {
 //         index = 0;
 //       }
 //     });
@@ -55,7 +55,7 @@
 //                 transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
 //                   return FadeTransition(opacity: primaryAnimation, child: child);
 //                 },
-//                 child: Image.asset(key: ValueKey(Fakers().fakeProds[index].image), Fakers().fakeProds[index].image, height: 110, width: 110, fit: BoxFit.cover),
+//                 child: Image.asset(key: ValueKey(Fakers.fakeProds[index].image), Fakers.fakeProds[index].image, height: 110, width: 110, fit: BoxFit.cover),
 //               ),
 //             ),
 //           ),
@@ -67,7 +67,7 @@
 //                 transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
 //                   return FadeTransition(opacity: primaryAnimation, child: child);
 //                 },
-//                 child: Image.asset(key: ValueKey(Fakers().fakeProds[index].image), Fakers().fakeProds[index].image, height: 60, width: 60, fit: BoxFit.cover),
+//                 child: Image.asset(key: ValueKey(Fakers.fakeProds[index].image), Fakers.fakeProds[index].image, height: 60, width: 60, fit: BoxFit.cover),
 //               ),
 //             ),
 //           ),

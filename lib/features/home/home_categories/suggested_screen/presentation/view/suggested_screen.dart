@@ -35,7 +35,7 @@ class SuggestedScreen extends StatelessWidget {
               itemCount: 4,
               separatorBuilder: (context, index) => const VerticalSpacing(12),
               itemBuilder: (context, index) {
-                return HorizontalProductCard(product: Fakers().fakeProds[index]);
+                return HorizontalProductCard(product: Fakers.fakeProds[index]);
               },
             ),
           ),

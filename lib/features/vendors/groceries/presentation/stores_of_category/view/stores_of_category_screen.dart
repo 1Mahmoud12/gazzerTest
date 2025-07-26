@@ -18,7 +18,7 @@ part 'store_of_category_screen.g.dart';
 
 @TypedGoRoute<StoresOfCategoryRoute>(path: StoresOfCategoryScreen.routeUriId)
 @immutable
-class StoresOfCategoryRoute extends GoRouteData with _$StoreOfCategoryRoute {
+class StoresOfCategoryRoute extends GoRouteData with _$StoresOfCategoryRoute {
   const StoresOfCategoryRoute({required this.vendorId});
   final int vendorId;
   @override
@@ -80,7 +80,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
             ),
             const VerticalSpacing(24),
             StoresTopRatedComponent(
-              items: Fakers().plates,
+              items: Fakers.plates,
             ),
             const VerticalSpacing(120),
 
@@ -88,7 +88,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
               4,
               (index) {
                 return StoreHorzScrollCardOneList(
-                  items: Fakers().stores,
+                  items: Fakers.stores,
                   title: 'Section ${index + 1}',
                   onViewAllPressed: () {},
                   onSinglceCardPressed: (tiem) {},

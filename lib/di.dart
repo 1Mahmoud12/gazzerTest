@@ -23,6 +23,7 @@ import 'package:gazzer/features/vendors/resturants/data/repo_imp/restaurants_rep
 import 'package:gazzer/features/vendors/resturants/domain/repos/plates_repo.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -68,4 +69,5 @@ void _registerCubits() {
   di.registerFactory(() => RestaurantsMenuCubit(di.get(), di.get()));
   di.registerFactory(() => SplashCubit(di.get(), di.get()));
   di.registerFactory(() => ProfileCubit(di.get()));
+  di.registerCachedFactoryParam<RestaurantsOfCategoryCubit, int, Null>((id, _) => RestaurantsOfCategoryCubit(di.get(), id));
 }

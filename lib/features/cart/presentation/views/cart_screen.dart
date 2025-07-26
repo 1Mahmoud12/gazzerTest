@@ -30,16 +30,16 @@ class _CartScreenState extends State<CartScreen> {
           Expanded(
             child: ListView.separated(
               padding: EdgeInsets.zero,
-              itemCount: Fakers().restaurants.length + 1,
+              itemCount: Fakers.restaurants.length + 1,
               separatorBuilder: (context, index) => const VerticalSpacing(24),
               // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
               itemBuilder: (context, index) {
-                if (index == Fakers().restaurants.length) {
+                if (index == Fakers.restaurants.length) {
                   return const CartSummaryWidget();
                 }
                 return VendorCartProductsItem(
-                  vendorName: Fakers().restaurants[index].name,
-                  cartItems: Fakers().plates.map((e) => CartItemModel.fromProduct(e)).toList(),
+                  vendorName: Fakers.restaurants[index].name,
+                  cartItems: Fakers.plates.map((e) => CartItemModel.fromProduct(e)).toList(),
                 );
               },
             ),

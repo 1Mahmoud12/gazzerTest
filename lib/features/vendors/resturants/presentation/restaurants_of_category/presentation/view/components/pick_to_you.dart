@@ -17,10 +17,10 @@ class _PickToYou extends StatelessWidget {
           height: 130,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: Fakers().restaurants.length,
+            itemCount: Fakers.restaurants.length,
             separatorBuilder: (context, index) => const HorizontalSpacing(12),
             itemBuilder: (context, index) {
-              final vendor = Fakers().restaurants[index];
+              final vendor = Fakers.restaurants[index];
 
               return SizedBox(
                 width: 105,

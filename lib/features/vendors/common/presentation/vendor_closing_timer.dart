@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
-class VenodrClosingTimer extends StatefulWidget {
-  const VenodrClosingTimer({super.key, required this.endTime, required this.name});
+class VendorClosingTimer extends StatefulWidget {
+  const VendorClosingTimer({super.key, required this.endTime, required this.name});
   final DateTime endTime;
   final String name;
   @override
-  State<VenodrClosingTimer> createState() => _VenodrClosingTimerState();
+  State<VendorClosingTimer> createState() => _VendorClosingTimerState();
 }
 
-class _VenodrClosingTimerState extends State<VenodrClosingTimer> {
+class _VendorClosingTimerState extends State<VendorClosingTimer> {
   Timer? timer;
   late bool isClosed;
   final difference = ValueNotifier(0);

@@ -15,7 +15,7 @@ class _HistoryOrdersWidget extends StatelessWidget {
             padding: AppConst.defaultPadding,
             separatorBuilder: (context, index) => Divider(color: Co.secondary, height: 25),
             itemBuilder: (context, index) {
-              final prod = Fakers().fakeProds[index];
+              final prod = Fakers.fakeProds[index];
               return Row(
                 spacing: 12,
                 children: [

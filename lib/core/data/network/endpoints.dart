@@ -43,6 +43,9 @@ class Endpoints {
   /// ** restaurants
   static String allRestaurants(int page, int limit) => "restaurants?is_paginated=1&page=$page&limit=$limit";
   static String retaurantsByCatOfPlate(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId";
+  static String topRatedRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/top-rated";
+  static String offersRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/has-offers";
+  static String todaysPicRestaurants(int catId, {int pag = 0, int limit = 10}) => "lists/todays-picks-restaurants";
 
   /// ** categoryOfPlates
   static const platesCategories = 'restaurants/plates/categories';

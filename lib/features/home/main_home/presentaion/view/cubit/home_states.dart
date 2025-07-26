@@ -13,7 +13,7 @@ sealed class CategoryStates extends HomeStates {
 }
 
 final class CategoryLoadingState extends CategoryStates {
-  CategoryLoadingState() : super(categories: Fakers().fakeCats);
+  CategoryLoadingState() : super(categories: Fakers.fakeCats);
 }
 
 final class CategorySuccessState extends CategoryStates {

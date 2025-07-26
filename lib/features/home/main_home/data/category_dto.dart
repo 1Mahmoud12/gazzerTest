@@ -34,7 +34,7 @@ class VendorDTO extends ProductItemDTO {
       name: vendorName ?? '',
       contactPerson: contactPerson,
       secondContactPerson: secondContactPerson,
-      image: Fakers().netWorkImage,
+      image: Fakers.netWorkImage,
     );
   }
 }

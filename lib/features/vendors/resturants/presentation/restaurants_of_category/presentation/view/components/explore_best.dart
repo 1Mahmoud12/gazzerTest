@@ -20,7 +20,7 @@ class _ExploreBest extends StatelessWidget {
           padding: AppConst.defaultHrPadding,
           separatorBuilder: (context, index) => const VerticalSpacing(16),
           itemBuilder: (context, index) {
-            final vendor = Fakers().restaurants[index];
+            final vendor = Fakers.restaurants[index];
             return SizedBox(
               height: 140,
               child: LayoutBuilder(

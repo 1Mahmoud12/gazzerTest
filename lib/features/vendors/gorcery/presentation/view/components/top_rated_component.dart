@@ -59,17 +59,26 @@ class VendorListTile extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(child: Text(vendor.name, style: TStyle.primaryBold(12))),
-                        DecoratedFavoriteWidget(isDarkContainer: false, size: 16, borderRadius: AppConst.defaultInnerBorderRadius),
+                        DecoratedFavoriteWidget(
+                          isDarkContainer: false,
+                          size: 16,
+                          borderRadius: AppConst.defaultInnerBorderRadius,
+                        ),
                       ],
                     ),
                     Expanded(
-                      child: Text(vendor.address ?? '', style: TStyle.greyRegular(12), overflow: TextOverflow.ellipsis, maxLines: 3),
+                      child: Text(
+                        vendor.address ?? '',
+                        style: TStyle.greyRegular(12),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                      ),
                     ),
                     AppRatingWidget(vendor.rate.toString(), itemSize: 18),
                     Row(
                       children: [
                         const Icon(Icons.access_time_rounded, color: Co.purple, size: 18),
-                        Text(vendor.estimateDeliveryTime, style: TStyle.blackSemi(12)),
+                        Text(vendor.deliveryTime ?? '', style: TStyle.blackSemi(12)),
                       ],
                     ),
                   ],

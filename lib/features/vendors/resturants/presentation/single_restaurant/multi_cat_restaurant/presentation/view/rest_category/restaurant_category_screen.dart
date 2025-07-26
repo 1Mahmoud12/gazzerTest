@@ -50,8 +50,8 @@ class RestaurantCategoryScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, mainAxisExtent: 85),
           padding: AppConst.defaultHrPadding,
-          itemCount: Fakers().fakeProds.length,
-          itemBuilder: (_, index) => RestCatMiniProductCard(prod: Fakers().fakeProds[index]),
+          itemCount: Fakers.fakeProds.length,
+          itemBuilder: (_, index) => RestCatMiniProductCard(prod: Fakers.fakeProds[index]),
         ),
       ),
       AspectRatio(
@@ -71,7 +71,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 1, crossAxisCount: 2, crossAxisSpacing: 20, mainAxisSpacing: 8),
 
               itemBuilder: (_, index) {
-                return SingleGridProduct(isTop: index.isEven, prod: Fakers().fakeProds[index]);
+                return SingleGridProduct(isTop: index.isEven, prod: Fakers.fakeProds[index]);
               },
             ),
           ],

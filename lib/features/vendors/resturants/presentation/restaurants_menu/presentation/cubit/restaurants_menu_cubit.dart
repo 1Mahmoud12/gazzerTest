@@ -46,7 +46,7 @@ class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
   }
 
   Future<void> _loadVendors(int id) async {
-    final result = await _restRepo.getRestaurantsByCatOfPlate(1);
+    final result = await _restRepo.getRestaurantsOfCategory(1);
     switch (result) {
       case Ok<List<RestaurantEntity>> data:
         cats.firstWhere((cat) => cat.$1.id == id).$2.addAll(data.value);

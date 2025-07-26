@@ -13,7 +13,6 @@ sealed class GenericVendorEntity {
 
   final String name;
   final String image;
-  final String description;
   final String location; // zone
   final List<GenericSubCategoryEntity>? subCategories;
 
@@ -22,23 +21,22 @@ sealed class GenericVendorEntity {
   final String? deliveryTime;
   final double? deliveryFee;
   final String? badge;
-  final String? tag;
+  final List<String>? tag;
 
-  final bool isClosed;
-  final DateTime startTime;
-  final DateTime endTime;
+  final DateTime? startTime;
+  final DateTime? endTime;
   final double rate;
   final int? rateCount;
+
+  bool get isClosed => startTime?.isBefore(DateTime.now()) == true && endTime?.isAfter(DateTime.now()) == true;
 
   const GenericVendorEntity({
     required this.id,
     required this.parentId,
     required this.name,
     required this.image,
-    required this.description,
     this.priceRange,
     required this.rate,
-    required this.isClosed,
     this.badge,
     this.tag,
     required this.startTime,

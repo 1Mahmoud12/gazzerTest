@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_painter.dart';
 import 'package:lottie/lottie.dart';
 
@@ -26,34 +25,31 @@ class SpikyShapeWidget extends StatelessWidget {
       builder: (context, constraints) {
         return FractionallySizedBox(
           widthFactor: fraction,
-          child: Hero(
-            tag: heroTag ?? Tags.spickyShape,
-            child: CustomPaint(
-              painter: AddShapePainter(color: color),
-              child: SizedBox(
-                height: 170,
-                width: constraints.maxWidth,
-                child: FractionallySizedBox(
-                  widthFactor: 1 / fraction,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Row(
-                      children: [
-                        ltChild ??
-                            Expanded(
-                              flex: 2,
-                              child: Center(
-                                child: image!.endsWith('svg')
-                                    ? SvgPicture.network(image!, height: 150, fit: BoxFit.fitHeight)
-                                    : image!.endsWith('json')
-                                    ? Lottie.network(image!, fit: BoxFit.fitHeight)
-                                    : Image.network(image!, height: 150, fit: BoxFit.fitHeight),
-                              ),
+          child: CustomPaint(
+            painter: AddShapePainter(color: color),
+            child: SizedBox(
+              height: 170,
+              width: constraints.maxWidth,
+              child: FractionallySizedBox(
+                widthFactor: 1 / fraction,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Row(
+                    children: [
+                      ltChild ??
+                          Expanded(
+                            flex: 2,
+                            child: Center(
+                              child: image!.endsWith('svg')
+                                  ? SvgPicture.network(image!, height: 150, fit: BoxFit.fitHeight)
+                                  : image!.endsWith('json')
+                                  ? Lottie.network(image!, fit: BoxFit.fitHeight)
+                                  : Image.network(image!, height: 150, fit: BoxFit.fitHeight),
                             ),
-
-                        Expanded(flex: 3, child: rtChild),
-                      ],
-                    ),
+                          ),
+          
+                      Expanded(flex: 3, child: rtChild),
+                    ],
                   ),
                 ),
               ),
