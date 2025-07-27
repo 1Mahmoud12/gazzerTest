@@ -16,6 +16,7 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
     this.cardHeight,
     this.cardImageToTextRatio,
     this.corner,
+    required this.onSingleCardPressed,
   }) : assert(
          items is List<GenericVendorEntity> || items is List<GenericItemEntity>,
          'HorzScrollVertCardListComponent can only be used with RestaurantEntity or PlateEntity',
@@ -27,6 +28,7 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
   final double? cardHeight;
   final double? cardImageToTextRatio;
   final Corner? corner;
+  final void Function<T>(T item) onSingleCardPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
         spacing: 4,
         children: [
           TitleWithMore(
-            title: title ?? '',
+            title: title,
             onPressed: onViewAllPressed,
           ),
           SizedBox(
@@ -54,8 +56,9 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
                   return VerticalRestaurantCard(
                     imgToTextRatio: cardImageToTextRatio ?? 0.9,
                     width: cardWidth ?? 140,
-                    vendor: item,
+                    item: item,
                     corner: corner,
+                    onTap: (item) => onSingleCardPressed(item),
                   );
                 }
                 if (item is PlateEntity) {
@@ -64,6 +67,7 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
                     width: cardWidth ?? 140,
                     item: item,
                     corner: corner,
+                    onTap: (item) => onSingleCardPressed(item),
                   );
                 }
                 return const SizedBox();

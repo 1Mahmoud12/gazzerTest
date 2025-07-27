@@ -2,18 +2,22 @@ import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 
-sealed class RestaurantsMenuStates {}
+sealed class RestaurantsMenuStates {
+  final List<(CategoryOfPlateEntity, List<RestaurantEntity>)> categories;
+  final List<BannerEntity> banners;
+  RestaurantsMenuStates({this.categories = const [], this.banners = const []});
+}
 
 final class RestaurantsMenuInit extends RestaurantsMenuStates {}
 
+///
+///
 sealed class RestaurantsCategoriesStates extends RestaurantsMenuStates {
-  final List<(CategoryOfPlateEntity, List<RestaurantEntity>)> categories;
-  final List<BannerEntity> banners;
-  RestaurantsCategoriesStates({this.categories = const [], this.banners = const []});
+  RestaurantsCategoriesStates({required super.categories, required super.banners});
 }
 
 final class RestaurantsCategoriesLoading extends RestaurantsCategoriesStates {
-  RestaurantsCategoriesLoading();
+  RestaurantsCategoriesLoading({super.categories = const [], super.banners = const []});
 }
 
 final class RestaurantsCategoriesLoaded extends RestaurantsCategoriesStates {
@@ -22,24 +26,24 @@ final class RestaurantsCategoriesLoaded extends RestaurantsCategoriesStates {
 
 final class RestaurantsCategoriesError extends RestaurantsCategoriesStates {
   final String error;
-  RestaurantsCategoriesError(this.error);
+  RestaurantsCategoriesError({super.categories = const [], super.banners = const [], required this.error});
 }
 
-// sealed class VendorsState extends RestaurantsMenuStates {
-//   final int categoryId;
-//   final List<GenericVendorEntity> vendors;
-//   VendorsState({required this.categoryId, this.vendors = const []});
-// }
+///
+///
+sealed class VendorsState extends RestaurantsMenuStates {
+  VendorsState({required super.categories, required super.banners});
+}
 
-// final class VendorsLoading extends VendorsState {
-//   VendorsLoading({required super.categoryId});
-// }
+final class VendorsLoading extends VendorsState {
+  VendorsLoading({super.categories = const [], super.banners = const []});
+}
 
-// final class VendorsLoaded extends VendorsState {
-//   VendorsLoaded({required super.categoryId, required super.vendors});
-// }
+final class VendorsLoaded extends VendorsState {
+  VendorsLoaded({required super.categories, required super.banners});
+}
 
-// final class VendorsError extends VendorsState {
-//   final String error;
-//   VendorsError({required super.categoryId, required this.error});
-// }
+final class VendorsError extends VendorsState {
+  final String error;
+  VendorsError({super.categories = const [], super.banners = const [], required this.error});
+}

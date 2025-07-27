@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
@@ -53,43 +54,48 @@ class Fakers {
       type: "طعام",
     ),
   );
-  static final fakeSubCats = List.generate(
-    10,
-    (index) => CategoryOfPlateEntity(
-      id: index,
-      name: "فئة $index",
-      image: _catsImages[_random.nextInt(_catsImages.length)],
+  static const fakeSubCats = [
+    CategoryOfPlateEntity(
+      id: 0,
+      name: "فئة 0",
+      image: "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
       parentId: 0,
       style: CardStyle.typeOne,
       layout: LayoutType.grid,
     ),
-  );
+    CategoryOfPlateEntity(
+      id: 1,
+      name: "فئة 1",
+      image: "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+      parentId: 0,
+      style: CardStyle.typeOne,
+      layout: LayoutType.grid,
+    ),
+    CategoryOfPlateEntity(
+      id: 2,
+      name: "فئة 2",
+      image: "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+      parentId: 0,
+      style: CardStyle.typeOne,
+      layout: LayoutType.grid,
+    ),
+  ];
 
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
-  ///
+  static const banners = [
+    BannerEntity(
+      id: 1,
+      image: "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+      title: "خصم 20% على جميع الطلبات",
+      type: BannerType.image,
+    ),
+  ];
 
   static final netWorkImage =
       "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
   static final netWorkPRoductImage =
       "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
 
-  static final _catsImages = [
+  static final _catsImages = const [
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
@@ -209,8 +215,7 @@ class Fakers {
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',
-      description:
-          'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
 
       id: index,
     ),

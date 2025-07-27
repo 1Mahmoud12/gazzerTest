@@ -9,8 +9,6 @@ import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/cards/card_plate_info_widget.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 class VerticalPlateCard extends StatelessWidget {
   const VerticalPlateCard({
@@ -20,13 +18,16 @@ class VerticalPlateCard extends StatelessWidget {
     this.height,
     Corner? corner,
     this.imgToTextRatio = 0.66,
+    required this.onTap,
   }) : corner = corner ?? Corner.bottomLeft;
   final double width;
   final double? height;
-  final GenericItemEntity item;
+  final PlateEntity item;
   final Corner corner;
   final double imgToTextRatio;
   final double iconsWidth = 72;
+  final Function(PlateEntity)? onTap;
+
   @override
   Widget build(BuildContext context) {
     print(item.image);
@@ -45,13 +46,9 @@ class VerticalPlateCard extends StatelessWidget {
         child: ElevatedButton(
           onPressed: item.outOfStock
               ? null
-              : () {
-                  if (item.id.isEven) {
-                    SingleCatRestaurantRoute(id: item.id).push(context);
-                  } else {
-                    MultiCatRestaurantsRoute(id: item.id).push(context);
-                  }
-                },
+              : onTap == null
+              ? null
+              : () => onTap!(item),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
@@ -74,9 +71,7 @@ class VerticalPlateCard extends StatelessWidget {
                         child: Stack(
                           children: [
                             Container(
-                              foregroundDecoration: !item.outOfStock
-                                  ? null
-                                  : BoxDecoration(color: Co.secText.withAlpha(200)),
+                              foregroundDecoration: !item.outOfStock ? null : BoxDecoration(color: Co.secText.withAlpha(200)),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(item.image),
@@ -95,9 +90,7 @@ class VerticalPlateCard extends StatelessWidget {
                             else if (item.badge != null)
                               CardBadge(
                                 text: item.badge!,
-                                alignment: corner == Corner.topRight
-                                    ? AlignmentDirectional.topStart
-                                    : AlignmentDirectional.topEnd,
+                                alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
                               ),
                           ],
                         ),

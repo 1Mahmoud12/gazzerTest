@@ -12,6 +12,7 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
     this.onViewAllPressed,
     required this.items,
     this.corner = Corner.bottomLeft,
+    required this.onSingleCardPressed,
   }) : assert(
          items is List<GenericVendorEntity> || items is List<GenericItemEntity>,
          'HorzScrollVertCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
@@ -19,7 +20,9 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
   final String? title;
   final Function()? onViewAllPressed;
   final List<T> items;
-  final Corner corner;
+  final Corner? corner;
+  final void Function<T>(T item) onSingleCardPressed;
+
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SizedBox.shrink();
@@ -49,7 +52,13 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = items[index];
               if (item is RestaurantEntity) {
-                return VerticalRestaurantCard(width: 350, height: 150, vendor: item, corner: corner);
+                return VerticalRestaurantCard(
+                  width: 350,
+                  height: 150,
+                  item: item,
+                  corner: corner,
+                  onTap: (item) => onSingleCardPressed(item),
+                );
               }
               if (item is PlateEntity) {
                 return VerticalPlateCard(
@@ -57,6 +66,7 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
                   imgToTextRatio: 0.6,
                   width: double.infinity,
                   corner: corner,
+                  onTap: (item) => onSingleCardPressed(item),
                 );
               }
               return const SizedBox();

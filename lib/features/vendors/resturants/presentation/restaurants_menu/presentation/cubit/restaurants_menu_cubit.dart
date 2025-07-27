@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/domain/repos/banner_repo.dart';
@@ -12,59 +11,56 @@ class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
   final RestaurantsRepo _restRepo;
   final BannerRepo _bannerRepo;
 
-  RestaurantsMenuCubit(this._restRepo, this._bannerRepo) : super(RestaurantsMenuInit());
+  RestaurantsMenuCubit(this._restRepo, this._bannerRepo) : super(RestaurantsMenuInit()) {
+    gettBanners();
+    getCategoriesOfPlates();
+  }
 
   final List<(CategoryOfPlateEntity, List<RestaurantEntity>)> cats = [];
   final List<BannerEntity> banners = [];
 
-  Future<void> loadScreenData() async {
+  Future<void> gettBanners() async {
     emit(RestaurantsCategoriesLoading());
-    await Future.wait([
-      _loadCategoriesOfPlates(),
-      _getBanners(),
-    ]);
-    await Future.wait(
-      List.generate(cats.length, (index) => _loadVendors(cats[index].$1.id)),
-    );
-    try {
-      emit(RestaurantsCategoriesLoaded(categories: cats.where((e) => e.$2.isNotEmpty).toList(), banners: banners));
-    } on BaseError catch (e) {
-      emit(RestaurantsCategoriesError(e.message));
-    }
-  }
 
-  Future<void> _loadCategoriesOfPlates() async {
-    final result = await _restRepo.getAllPlatesCategories();
-    switch (result) {
-      case Ok<List<CategoryOfPlateEntity>> data:
-        cats.clear();
-        cats.addAll(data.value.map((cat) => (cat, [])));
-        break;
-      case Err<List<CategoryOfPlateEntity>> error:
-        throw error.error;
-    }
-  }
-
-  Future<void> _loadVendors(int id) async {
-    final result = await _restRepo.getRestaurantsOfCategory(1);
-    switch (result) {
-      case Ok<List<RestaurantEntity>> data:
-        cats.firstWhere((cat) => cat.$1.id == id).$2.addAll(data.value);
-        break;
-      case Err error:
-        throw error.error;
-    }
-  }
-
-  Future<void> _getBanners() async {
     final result = await _bannerRepo.getRestaurantPageBanners();
     switch (result) {
       case Ok<List<BannerEntity>> data:
         banners.clear();
         banners.addAll(data.value);
+        emit(RestaurantsCategoriesLoaded(categories: cats, banners: banners));
+
         break;
       case Err error:
-        throw error.error;
+        return emit(RestaurantsCategoriesError(error: error.error.message));
+    }
+  }
+
+  Future<void> getCategoriesOfPlates() async {
+    emit(RestaurantsCategoriesLoading());
+
+    final result = await _restRepo.getAllPlatesCategories();
+    switch (result) {
+      case Ok<List<CategoryOfPlateEntity>> data:
+        cats.clear();
+        cats.addAll(data.value.map((cat) => (cat, [])));
+        emit(RestaurantsCategoriesLoaded(categories: cats, banners: banners));
+        break;
+      case Err<List<CategoryOfPlateEntity>> error:
+        return emit(RestaurantsCategoriesError(error: error.error.message));
+    }
+  }
+
+  Future<void> getVendors(int id) async {
+    emit(VendorsLoading());
+    final result = await _restRepo.getRestaurantsOfCategory(id);
+    switch (result) {
+      case Ok<List<RestaurantEntity>> data:
+        cats.firstWhere((cat) => cat.$1.id == id).$2.addAll(data.value);
+        emit(VendorsLoaded(categories: cats, banners: banners));
+        break;
+      case Err error:
+        emit(VendorsError(error: error.error.message));
+        break;
     }
   }
 

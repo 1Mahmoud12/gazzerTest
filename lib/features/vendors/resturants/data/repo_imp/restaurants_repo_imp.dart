@@ -4,6 +4,7 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_reponse.dart';
 import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
 
@@ -86,7 +87,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
   }
 
   @override
-  Future<Result<List<RestaurantEntity>>> getTodaysSickRestaurants(int id, {int pag = 0, int limit = 10}) {
+  Future<Result<List<RestaurantEntity>>> getTodaysPickRestaurants(int id, {int pag = 0, int limit = 10}) {
     return super.call(
       apiCall: () => _apiClient.get(
         endpoint: Endpoints.todaysPicRestaurants(id, pag: pag, limit: limit),
@@ -113,6 +114,16 @@ class RestaurantsRepoImp extends RestaurantsRepo {
           data.add(RestaurantDTO.fromJson(item).toRestEntity());
         }
         return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<RestaurantsMenuReponse>> getRestaurantsMenuPage() {
+    return super.call(
+      apiCall: () => _apiClient.get(endpoint: Endpoints.restaurantsMenu),
+      parser: (response) {
+        return RestaurantsMenuReponse.fromJson(response.data);
       },
     );
   }

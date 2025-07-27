@@ -10,23 +10,23 @@ import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/cards/card_plate_info_widget.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 class HorizontalPlateCard extends StatelessWidget {
   const HorizontalPlateCard({
     super.key,
     this.width,
-    required this.plate,
+    required this.item,
     this.height,
     this.corner = Corner.bottomRight,
     this.imgToTextRatio = 0.66,
+    required this.onTap,
   });
   final double? width;
   final double? height;
-  final PlateEntity plate;
+  final PlateEntity item;
   final Corner corner;
   final double imgToTextRatio;
+  final Function(PlateEntity)? onTap;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -42,15 +42,11 @@ class HorizontalPlateCard extends StatelessWidget {
         width: width,
         height: height,
         child: ElevatedButton(
-          onPressed: plate.outOfStock
+          onPressed: item.outOfStock
               ? null
-              : () {
-                  if (plate.id.isEven) {
-                    SingleCatRestaurantRoute(id: plate.id).push(context);
-                  } else {
-                    MultiCatRestaurantsRoute(id: plate.id).push(context);
-                  }
-                },
+              : onTap == null
+              ? null
+              : () => onTap!(item),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             disabledBackgroundColor: Colors.transparent,
@@ -80,29 +76,25 @@ class HorizontalPlateCard extends StatelessWidget {
                                 child: Stack(
                                   children: [
                                     Container(
-                                      foregroundDecoration: !plate.outOfStock
-                                          ? null
-                                          : BoxDecoration(color: Co.secText.withAlpha(200)),
+                                      foregroundDecoration: !item.outOfStock ? null : BoxDecoration(color: Co.secText.withAlpha(200)),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: NetworkImage(plate.image),
+                                          image: NetworkImage(item.image),
                                           fit: BoxFit.cover,
                                           onError: (error, stackTrace) => print(' Error loading image: $error'),
                                         ),
                                       ),
                                     ),
-                                    if (plate.outOfStock)
-                                       CardBadge(
+                                    if (item.outOfStock)
+                                      CardBadge(
                                         text: L10n.tr().outOFStock,
                                         alignment: AlignmentDirectional.topStart,
                                         fullWidth: true,
                                       )
-                                    else if (plate.badge != null)
+                                    else if (item.badge != null)
                                       CardBadge(
-                                        text: plate.badge!,
-                                        alignment: corner == Corner.topRight
-                                            ? AlignmentDirectional.topStart
-                                            : AlignmentDirectional.topEnd,
+                                        text: item.badge!,
+                                        alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
                                       ),
                                   ],
                                 ),
@@ -124,7 +116,7 @@ class HorizontalPlateCard extends StatelessWidget {
                 ),
               ),
               const HorizontalSpacing(10),
-              Expanded(flex: 10, child: CardPlateInfoWidget(plate: plate)),
+              Expanded(flex: 10, child: CardPlateInfoWidget(plate: item)),
             ],
           ),
         ),

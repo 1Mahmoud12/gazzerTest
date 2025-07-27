@@ -8,27 +8,27 @@ import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/cards/card_rest_info_widget.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
 
 class VerticalRestaurantCard extends StatelessWidget {
   const VerticalRestaurantCard({
     super.key,
     required this.width,
-    required this.vendor,
+    required this.item,
     this.height,
     Corner? corner,
     this.imgToTextRatio = 0.66,
+    required this.onTap,
   }) : corner = corner ?? Corner.bottomRight;
   final double width;
   final double? height;
-  final RestaurantEntity vendor;
+  final RestaurantEntity item;
   final Corner corner;
   final double imgToTextRatio;
+  final Function(RestaurantEntity)? onTap;
 
   @override
   Widget build(BuildContext context) {
-    print(vendor.image);
+    print(item.image);
     return SizedBox(
       width: width,
       height: height,
@@ -42,15 +42,11 @@ class VerticalRestaurantCard extends StatelessWidget {
           borderRadius: AppConst.defaultBorderRadius,
         ),
         child: ElevatedButton(
-          onPressed: vendor.isClosed
+          onPressed: item.isClosed
               ? null
-              : () {
-                  if (vendor.id.isEven) {
-                    SingleCatRestaurantRoute(id: vendor.id).push(context);
-                  } else {
-                    MultiCatRestaurantsRoute(id: vendor.id).push(context);
-                  }
-                },
+              : onTap == null
+              ? null
+              : () => onTap!(item),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
@@ -73,30 +69,26 @@ class VerticalRestaurantCard extends StatelessWidget {
                         child: Stack(
                           children: [
                             Container(
-                              foregroundDecoration: !vendor.isClosed
-                                  ? null
-                                  : BoxDecoration(color: Colors.red.withAlpha(75)),
+                              foregroundDecoration: !item.isClosed ? null : BoxDecoration(color: Colors.red.withAlpha(75)),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(vendor.image),
+                                  image: NetworkImage(item.image),
                                   fit: BoxFit.cover,
-                                  opacity: vendor.isClosed ? 0.4 : 1,
+                                  opacity: item.isClosed ? 0.4 : 1,
                                   onError: (error, stackTrace) => print(' Error loading image: $error'),
                                 ),
                               ),
                             ),
-                            if (vendor.isClosed)
+                            if (item.isClosed)
                               CardBadge(
                                 text: L10n.tr().closed,
                                 alignment: AlignmentDirectional.topStart,
                                 fullWidth: true,
                               )
-                            else if (vendor.badge != null)
+                            else if (item.badge != null)
                               CardBadge(
-                                text: vendor.badge!,
-                                alignment: corner == Corner.topRight
-                                    ? AlignmentDirectional.topStart
-                                    : AlignmentDirectional.topEnd,
+                                text: item.badge!,
+                                alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
                               ),
                           ],
                         ),
@@ -106,7 +98,7 @@ class VerticalRestaurantCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(flex: 10, child: CardRestInfoWidget(vendor: vendor)),
+              Expanded(flex: 10, child: CardRestInfoWidget(vendor: item)),
             ],
           ),
         ),

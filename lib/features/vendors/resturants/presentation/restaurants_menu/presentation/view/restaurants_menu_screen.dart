@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -11,14 +12,13 @@ import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_bt
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_horz_scroll_horz_card_list_component.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_horz_scroll_vert_card_list_component.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_vert_scroll_horz_card_list_component.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_vert_scroll_vert_card_grid_component.dart';
+import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 // part 'widgets/rest_cat_carousal.dart';
 
@@ -35,10 +35,10 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
   @override
   void initState() {
     cubit = context.read<RestaurantsMenuCubit>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      cubit.loadScreenData();
-      // cubit.loadPlates();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   cubit.loadScreenData();
+    //   // cubit.loadPlates();
+    // });
 
     super.initState();
   }
@@ -52,7 +52,15 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
         floatingWidget: const CartFloatingBtn(),
         floatingWidgetHeight: 50,
         floatingWidgetWidth: 50,
-        mainScreenWidget: BlocBuilder<RestaurantsMenuCubit, RestaurantsMenuStates>(
+        mainScreenWidget: BlocConsumer<RestaurantsMenuCubit, RestaurantsMenuStates>(
+          listener: (previous, current) {
+            if (current is RestaurantsCategoriesLoaded) {
+              for (final item in current.categories) {
+                cubit.getVendors(item.$1.id);
+              }
+            }
+          },
+          buildWhen: (previous, current) => current is RestaurantsCategoriesStates,
           builder: (context, state) {
             if (state is! RestaurantsCategoriesStates) return const SizedBox.shrink();
             if (state is RestaurantsCategoriesLoading) {
@@ -61,7 +69,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
             final tabs = state.categories.map((e) => (e.$1.image, e.$1.name, e.$1.id)).toList();
             return RefreshIndicator(
               onRefresh: () async {
-                await cubit.loadScreenData();
+                await Future.wait([cubit.getCategoriesOfPlates(), cubit.gettBanners()]);
               },
               child: ScrollableTabedList(
                 preHerader: Column(
@@ -95,43 +103,38 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                 ),
                 listItemBuilder: (context, index) {
                   final cat = state.categories[index];
-                  return Column(
-                    children: [
-                      Builder(
-                        builder: (context) {
-                          switch (cat.$1.style) {
-                            case CardStyle.typeOne:
-                              return RestHorzScrollHorzCardListComponent(
-                                title: cat.$1.name,
-                                items: cat.$2,
-                                imgToTextRatio: 0.8,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
-                              );
-                            case CardStyle.typeTwo:
-                              return RestHorzScrollVertCardListComponent(
-                                title: cat.$1.name,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
-                                items: cat.$2,
-                              );
-                            case CardStyle.typeThree:
-                              return RestVertScrollHorzCardListComponent(
-                                items: cat.$2,
-                                title: cat.$1.name,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
-                                corner: Corner.topLeft,
-                              );
-                            case CardStyle.typeFour:
-                              return RestVertScrollVertCardGridComponent(
-                                items: cat.$2,
-                                title: cat.$1.name,
-                                onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
-                              );
-                          }
-                        },
-                      ),
-                      if (index.isOdd && (index / 2).floor() < (state.banners.length - 1)) // skip first banner
-                        MainBannerWidget(banner: state.banners[(index / 2).floor() + 1]),
-                    ],
+                  return BlocBuilder<RestaurantsMenuCubit, RestaurantsMenuStates>(
+                    builder: (context, state) {
+                      return Column(
+                        children: [
+                          Skeletonizer(
+                            ignoreContainers: true,
+                            enabled: cat.$2.isEmpty,
+                            child: AbsorbPointer(
+                              absorbing: cat.$2.isEmpty,
+                              child: Builder(
+                                builder: (context) {
+                                  return RestListSwitche(
+                                    title: cat.$1.name,
+                                    items: cat.$2.isNotEmpty ? cat.$2 : Fakers.restaurants,
+                                    onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
+                                    cardImageToTextRatios: {CardStyle.typeOne: 0.8},
+                                    corners: {CardStyle.typeThree: Corner.topLeft},
+                                    onSingleCardPressed: <RestaurantEntity>(item) {
+                                      RestaurantsOfCategoryRoute($extra: cat.$1).push(context);
+                                    },
+                                    // TODO: Ask Product Owner about this
+                                    style: index == state.categories.length - 1 ? CardStyle.typeThree : cat.$1.style,
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          if (index.isOdd && (index / 2).floor() < (state.banners.length - 1)) // skip first banner
+                            MainBannerWidget(banner: state.banners[(index / 2).floor() + 1]),
+                        ],
+                      );
+                    },
                   );
                 },
               ),

@@ -20,9 +20,16 @@ extension AlignmentCorner on Corner {
 }
 
 enum CardStyle {
+  /// RestHorzScrollHorzCardListComponent
   typeOne('One'),
+
+  /// RestHorzScrollVertCardListComponent
   typeTwo('Two'),
+
+  /// RestVertScrollHorzCardListComponent
   typeThree('Three'),
+
+  /// RestVertScrollVertCardGridComponent
   typeFour('Four');
 
   final String type;

@@ -15,6 +15,8 @@ class RestaurantsOfCategoryInitial extends RestaurantsOfCategoryStates {
   RestaurantsOfCategoryInitial() : super(restaurants: []);
 }
 
+///
+/// All restaurants of category section
 sealed class AllRestaurantsOfCategoryStates extends RestaurantsOfCategoryStates {
   AllRestaurantsOfCategoryStates({required super.restaurants});
 }

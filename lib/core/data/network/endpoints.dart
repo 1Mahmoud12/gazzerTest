@@ -36,6 +36,7 @@ class Endpoints {
 
   /// ** pages
   static const homePage = "homepage";
+  static const restaurantsMenu = "restaurants-page";
 
   /// ** stores categories
   static const storesCategories = "stores/categories";

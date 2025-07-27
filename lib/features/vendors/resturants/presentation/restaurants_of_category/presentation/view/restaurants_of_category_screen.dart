@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/alignment.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -14,8 +15,7 @@ import 'package:gazzer/core/presentation/views/widgets/products/image_in_nested_
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/app_bar_row_widget.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_horz_scroll_vert_card_list_component.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_vert_scroll_horz_card_list_component.dart';
+import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_states.dart';
@@ -28,8 +28,8 @@ import 'package:skeletonizer/skeletonizer.dart';
 // components
 part 'components/explore_best.dart';
 part 'components/pick_to_you.dart';
-part 'components/today_picks_widget.dart';
 part 'restaurants_of_category_screen.g.dart';
+
 /// screen widgets
 part 'widgets/add_widget.dart';
 part 'widgets/type_related_restaurants_header.dart';
@@ -48,99 +48,145 @@ class RestaurantsOfCategoryRoute extends GoRouteData with _$RestaurantsOfCategor
   }
 }
 
-class RestaurantsOfCategoryScreen extends StatefulWidget {
+class RestaurantsOfCategoryScreen extends StatelessWidget {
   const RestaurantsOfCategoryScreen({super.key, required this.cat});
   final CategoryOfPlateEntity cat;
   static const routeUriId = '/cat-related-restaurant';
 
   @override
-  State<RestaurantsOfCategoryScreen> createState() => _RestaurantsOfCategoryScreenState();
-}
-
-class _RestaurantsOfCategoryScreenState extends State<RestaurantsOfCategoryScreen> {
-  @override
   Widget build(BuildContext context) {
+    final cubit = context.read<RestaurantsOfCategoryCubit>();
     return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.only(bottom: MediaQuery.viewPaddingOf(context).bottom + 16),
-        children: [
-          _TypeRelatedRestaurantsHeader(title: widget.cat.name),
+      body: RefreshIndicator(
+        onRefresh: () {
+          return cubit.loadPageData();
+        },
+        child: ListView(
+          padding: EdgeInsets.only(bottom: MediaQuery.viewPaddingOf(context).bottom + 16),
+          children: [
+            _TypeRelatedRestaurantsHeader(title: cat.name),
 
-          const LongitudinalCarousal([
-            Assets.assetsPngSandwitchLayers,
-            Assets.assetsPngSandwtichLayer2,
-            Assets.assetsPngSandwitchLayers,
-            Assets.assetsPngSandwtichLayer2,
-            Assets.assetsPngSandwitchLayers,
-            Assets.assetsPngSandwtichLayer2,
-          ]),
+            const LongitudinalCarousal([
+              Assets.assetsPngSandwitchLayers,
+              Assets.assetsPngSandwtichLayer2,
+              Assets.assetsPngSandwitchLayers,
+              Assets.assetsPngSandwtichLayer2,
+              Assets.assetsPngSandwitchLayers,
+              Assets.assetsPngSandwtichLayer2,
+            ]),
 
-          BlocBuilder<RestaurantsOfCategoryCubit, RestaurantsOfCategoryStates>(
-            buildWhen: (previous, current) => current is TopRatedStates,
-            builder: (context, state) {
-              if (state is TopRatedError) {
-                return FailureWidget(
-                  message: state.error,
-                  onRetry: () => context.read<RestaurantsOfCategoryCubit>().getTopRatedSection(),
+            BlocBuilder<RestaurantsOfCategoryCubit, RestaurantsOfCategoryStates>(
+              buildWhen: (previous, current) => current is TopRatedStates,
+              builder: (context, state) {
+                if (state is TopRatedError) {
+                  return FailureWidget(
+                    message: state.error,
+                    onRetry: () => cubit.getTopRatedSection(),
+                  );
+                }
+                if (state is! TopRatedStates) return const SizedBox.shrink();
+                final rest = state.restaurants;
+                return Skeletonizer(
+                  enabled: state is TopRatedLoading,
+                  child: RestListSwitche(
+                    style: CardStyle.typeTwo,
+                    cardImageToTextRatios: {},
+                    corners: {},
+                    items: rest,
+                    onViewAllPressed: null,
+                    title: L10n.tr().topRated,
+                    onSingleCardPressed: <RestaurantEntity>(item) {
+                      print('asd asd a');
+                    },
+                  ),
                 );
-              }
-              if (state is! TopRatedStates) return const SizedBox.shrink();
-              final rest = state.restaurants;
-              return Skeletonizer(
-                enabled: state is TopRatedLoading,
-                child: RestVertScrollHorzCardListComponent(
-                  items: rest,
-                  onViewAllPressed: null,
-                  title: L10n.tr().exploreBest,
-                ),
-              );
-            },
-          ),
-          BlocBuilder<RestaurantsOfCategoryCubit, RestaurantsOfCategoryStates>(
-            buildWhen: (previous, current) => current is OffersSectionStates,
-            builder: (context, state) {
-              if (state is OffersSectionError) {
-                return FailureWidget(
-                  message: state.error,
-                  onRetry: () => context.read<RestaurantsOfCategoryCubit>().getOffersSection(),
+              },
+            ),
+            BlocBuilder<RestaurantsOfCategoryCubit, RestaurantsOfCategoryStates>(
+              buildWhen: (previous, current) => current is OffersSectionStates,
+              builder: (context, state) {
+                if (state is OffersSectionError) {
+                  return FailureWidget(
+                    message: state.error,
+                    onRetry: () => cubit.getOffersSection(),
+                  );
+                }
+                if (state is! OffersSectionStates) return const SizedBox.shrink();
+                final rest = state.restaurants;
+                return Skeletonizer(
+                  enabled: state is OffersSectionLoading,
+                  child: RestListSwitche(
+                    style: CardStyle.typeTwo,
+                    cardImageToTextRatios: {},
+                    corners: {},
+                    items: rest,
+                    onViewAllPressed: null,
+                    title: L10n.tr().exploreBest,
+                    onSingleCardPressed: <RestaurantEntity>(item) {
+                      print('asd asd a');
+                    },
+                  ),
                 );
-              }
-              if (state is! OffersSectionStates) return const SizedBox.shrink();
-              final rest = state.restaurants;
-              return Skeletonizer(
-                enabled: state is OffersSectionLoading,
-                child: RestVertScrollHorzCardListComponent(
-                  items: rest,
-                  onViewAllPressed: null,
-                  title: L10n.tr().exploreBest,
-                ),
-              );
-            },
-          ),
-          BlocBuilder<RestaurantsOfCategoryCubit, RestaurantsOfCategoryStates>(
-            buildWhen: (previous, current) => current is TodaysSickSectionStates,
-            builder: (context, state) {
-              if (state is TodaysSickSectionError) {
-                return FailureWidget(
-                  message: state.error,
-                  onRetry: () => context.read<RestaurantsOfCategoryCubit>().getTodaysSickSection(),
+              },
+            ),
+            BlocBuilder<RestaurantsOfCategoryCubit, RestaurantsOfCategoryStates>(
+              buildWhen: (previous, current) => current is TodaysSickSectionStates,
+              builder: (context, state) {
+                if (state is TodaysSickSectionError) {
+                  return FailureWidget(
+                    message: state.error,
+                    onRetry: () => cubit.getTodaysSickSection(),
+                  );
+                }
+                if (state is! TodaysSickSectionStates) return const SizedBox.shrink();
+                final rest = state.restaurants;
+                return Skeletonizer(
+                  enabled: state is TodaysSickSectionLoading,
+                  child: RestListSwitche(
+                    cardImageToTextRatios: {},
+                    corners: {},
+                    style: CardStyle.typeTwo,
+                    title: L10n.tr().todayPicks,
+                    items: rest,
+                    onViewAllPressed: null,
+                    onSingleCardPressed: <RestaurantEntity>(item) {
+                      print('asd asd a');
+                    },
+                  ),
                 );
-              }
-              if (state is! TodaysSickSectionStates) return const SizedBox.shrink();
-              final rest = state.restaurants;
-              return Skeletonizer(
-                enabled: state is TodaysSickSectionLoading,
-                child: RestHorzScrollVertCardListComponent(
-                  title: L10n.tr().todayPicks,
-                  items: rest,
-                  onViewAllPressed: null,
-                ),
-              );
-            },
-          ),
-          const _AddWidget(),
-          const _PickToYou(),
-        ],
+              },
+            ),
+            BlocBuilder<RestaurantsOfCategoryCubit, RestaurantsOfCategoryStates>(
+              buildWhen: (previous, current) => current is AllRestaurantsOfCategoryStates,
+              builder: (context, state) {
+                if (state is AllRestaurantsOfCategoryError) {
+                  return FailureWidget(
+                    message: state.error,
+                    onRetry: () => cubit.getCategoryRelatedSection(),
+                  );
+                }
+                if (state is! AllRestaurantsOfCategoryStates) return const SizedBox.shrink();
+                final rest = state.restaurants;
+                return Skeletonizer(
+                  enabled: state is AllRestaurantsOfCategoryLoading,
+                  child: RestListSwitche(
+                    cardImageToTextRatios: {},
+                    corners: {},
+                    style: CardStyle.typeThree,
+                    title: null,
+                    items: rest,
+                    onViewAllPressed: null,
+                    onSingleCardPressed: <RestaurantEntity>(item) {
+                      print('asd asd a');
+                    },
+                  ),
+                );
+              },
+            ),
+            // const _AddWidget(),
+            // const _PickToYou(),
+          ],
+        ),
       ),
     );
   }

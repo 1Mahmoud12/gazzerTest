@@ -14,6 +14,15 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
     getTodaysSickSection();
     getCategoryRelatedSection();
   }
+  Future<void> loadPageData() async {
+    await Future.wait([
+      getPageBanners(),
+      getTopRatedSection(),
+      getOffersSection(),
+      getTodaysSickSection(),
+      getCategoryRelatedSection(),
+    ]);
+  }
 
   Future<void> getTopRatedSection() async {
     emit(TopRatedLoading());
@@ -43,7 +52,7 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
 
   Future<void> getTodaysSickSection() async {
     emit(TodaysSickSectionLoading());
-    final result = await _repo.getTodaysSickRestaurants(id);
+    final result = await _repo.getTodaysPickRestaurants(id);
     switch (result) {
       case Ok<List<RestaurantEntity>> ok:
         emit(TodaysSickSectionLoaded(restaurants: ok.value));

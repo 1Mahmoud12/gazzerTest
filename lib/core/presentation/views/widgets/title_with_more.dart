@@ -5,12 +5,12 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class TitleWithMore extends StatelessWidget {
-  const TitleWithMore({super.key, required this.title, this.titleStyle, this.showMore = true, this.onPressed});
-  final String title;
+  const TitleWithMore({super.key, required this.title, this.titleStyle, this.onPressed});
+  final String? title;
   final TextStyle? titleStyle;
-  final bool showMore;
   final Function()? onPressed;
 
   @override
@@ -20,16 +20,19 @@ class TitleWithMore extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          child: GradientText(
-            text: title,
-            style: titleStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            gradient: Grad().textGradient,
-            textAlign: TextAlign.start,
-            // maxLines: 1,
+        if (title != null && title!.isNotEmpty)
+          Expanded(
+            child: Skeleton.shade(
+              child: GradientText(
+                text: title!,
+                style: titleStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                gradient: Grad().textGradient,
+                textAlign: TextAlign.start,
+                // maxLines: 1,
+              ),
+            ),
           ),
-        ),
-        if (showMore)
+        if (onPressed != null)
           ValueListenableBuilder(
             valueListenable: isHovering,
             builder: (context, value, child) => DecoratedBox(

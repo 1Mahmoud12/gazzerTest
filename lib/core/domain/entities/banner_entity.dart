@@ -29,7 +29,7 @@ class BannerEntity {
   final num? discountPercent;
   final List<String>? images;
 
-  BannerEntity({
+  const BannerEntity({
     required this.id,
     required this.type,
     this.image,
