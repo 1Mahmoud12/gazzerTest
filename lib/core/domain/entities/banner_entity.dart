@@ -5,6 +5,14 @@ enum BannerType {
   countdown('Countdown'),
   shaking('Shaking'),
   unknown('Unknown');
+  /*
+'Image';
+'Detailed';
+'SliderVertical';
+'SliderHorizontal';
+'Countdown';
+'Shaking';
+*/
 
   final String value;
 

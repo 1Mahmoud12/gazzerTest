@@ -36,7 +36,8 @@ class Endpoints {
 
   /// ** pages
   static const homePage = "homepage";
-  static const restaurantsMenu = "restaurants-page";
+  static const restaurantsMenuPage = "pages/restaurants-page";
+  static String restaurantsOfCategoryPage(int id) => "pages/restaurants-page/category/$id";
 
   /// ** stores categories
   static const storesCategories = "stores/categories";

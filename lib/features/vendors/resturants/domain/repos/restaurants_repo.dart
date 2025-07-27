@@ -2,6 +2,7 @@ import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_reponse.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_of_categoryy_response.dart';
 import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 
 abstract class RestaurantsRepo extends BaseApiRepo {
@@ -20,5 +21,7 @@ abstract class RestaurantsRepo extends BaseApiRepo {
 
   Future<Result<List<CategoryOfPlateEntity>>> getCategoriesOfPlatesByRestaurant(int restaurantId);
 
-  Future<Result<RestaurantsMenuReponse>> getRestaurantsMenuPage();
+  Future<Result<RestaurantsMenuReponse>> loadRestaurantsMenuPage();
+
+  Future<Result<RestaurantsOfCategoryyResponse>> loadRestaurantsOfCategoryPage(int id);
 }

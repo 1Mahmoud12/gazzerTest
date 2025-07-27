@@ -11,6 +11,25 @@ sealed class RestaurantsMenuStates {
 final class RestaurantsMenuInit extends RestaurantsMenuStates {}
 
 ///
+/// screen data states
+sealed class ScreenDataStates extends RestaurantsMenuStates {
+  ScreenDataStates({required super.categories, required super.banners});
+}
+
+final class ScreenDataLoading extends ScreenDataStates {
+  ScreenDataLoading({super.categories = const [], super.banners = const []});
+}
+
+final class ScreenDataLoaded extends ScreenDataStates {
+  ScreenDataLoaded({required super.categories, required super.banners});
+}
+
+final class ScreenDataError extends ScreenDataStates {
+  final String error;
+  ScreenDataError({super.categories = const [], super.banners = const [], required this.error});
+}
+
+///
 ///
 sealed class RestaurantsCategoriesStates extends RestaurantsMenuStates {
   RestaurantsCategoriesStates({required super.categories, required super.banners});
