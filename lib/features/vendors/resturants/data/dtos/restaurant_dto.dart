@@ -17,6 +17,7 @@ class RestaurantDTO {
   int? is24Hours;
   List<String>? tags;
   String? provinceZone;
+  
 
   // TODO: need to be loaded from api
   List<CategoryOfPlateDTO>? subcategories;
@@ -84,6 +85,11 @@ class RestaurantDTO {
           : null,
       deliveryFee: 30.0,
       rateCount: 13,
+      isFavorite: isFavorite == 1,
+      isOpen: isOpen == 1,
+      alwaysOpen: is24Hours == 1,
+      alwaysClosed: false, // TODO: Determine if this is needed
+      
     );
   }
 }

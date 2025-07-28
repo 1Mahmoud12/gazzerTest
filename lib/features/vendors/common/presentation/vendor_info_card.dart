@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -10,21 +11,22 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_closing_timer.dart';
-import 'package:intl/intl.dart';
 
 class VendorInfoCard extends StatelessWidget {
-  const VendorInfoCard(this.vendor, {super.key});
+  const VendorInfoCard(this.vendor, {super.key, this.padding});
   final GenericVendorEntity vendor;
+  final EdgeInsets? padding;
   @override
   Widget build(BuildContext context) {
-    final imageSize = 70.0;
+    final imageSize = 60.0;
     return Padding(
-      padding: EdgeInsetsGeometry.fromLTRB(16, imageSize * 0.5, 16, 0),
+      padding: padding ?? const EdgeInsetsGeometry.fromLTRB(16, 0, 16, 0),
       child: ClipRRect(
         borderRadius: AppConst.defaultBorderRadius,
         child: ColoredBox(
-          color: Co.secText.withAlpha(95),
+          color: Co.secText.withAlpha(100),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.all(6),
@@ -32,10 +34,15 @@ class VendorInfoCard extends StatelessWidget {
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 6,
+                      spacing: 4,
                       children: [
                         ClipOval(
-                          child: CustomNetworkImage(vendor.image, height: imageSize, width: imageSize, fit: BoxFit.cover),
+                          child: CustomNetworkImage(
+                            vendor.image,
+                            height: imageSize,
+                            width: imageSize,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         Expanded(
                           child: Column(
@@ -49,38 +56,64 @@ class VendorInfoCard extends StatelessWidget {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                              Row(
-                                children: [
-                                  const Icon(Icons.access_time, color: Co.purple, size: 20),
-                                  const Spacer(),
-                                  if (vendor.startTime != null)
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(12)),
-                                          TextSpan(
-                                            text: DateFormat.jm().format(vendor.startTime!),
-                                            style: TStyle.greyRegular(12),
-                                          ),
-                                        ],
+                              if (vendor.alwaysOpen)
+                                Text(
+                                  L10n.tr().alwayeysOpen,
+                                  style: TStyle.blackSemi(13),
+                                  textAlign: TextAlign.center,
+                                )
+                              else if (vendor.alwaysClosed)
+                                Text(
+                                  L10n.tr().thisRestaurantIsCurrentlyUnavailable,
+                                  style: TStyle.blackRegular(11).copyWith(color: Co.darkRed),
+                                  textAlign: TextAlign.center,
+                                )
+                              else
+                                Row(
+                                  children: [
+                                    const Icon(Icons.access_time, color: Co.purple, size: 18),
+                                    Expanded(
+                                      child: Text.rich(
+                                        TextSpan(
+                                          children: [
+                                            TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(12)),
+                                            if (vendor.startTime != null)
+                                              TextSpan(
+                                                text: vendor.startTime!.defaultTimeFormat,
+                                                style: TStyle.greyRegular(12),
+                                              )
+                                            else
+                                              TextSpan(
+                                                text: L10n.tr().availabilityUnknown,
+                                                style: TStyle.greyRegular(12),
+                                              ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                  const Spacer(flex: 4),
-                                  if (vendor.endTime != null)
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(12)),
-                                          TextSpan(
-                                            text: DateFormat.jm().format(vendor.endTime!),
-                                            style: TStyle.greyRegular(12),
-                                          ),
-                                        ],
+                                    Expanded(
+                                      child: Text.rich(
+                                        TextSpan(
+                                          children: [
+                                            TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(12)),
+                                            if (vendor.endTime != null)
+                                              TextSpan(
+                                                text: vendor.endTime!.defaultTimeFormat,
+                                                style: TStyle.greyRegular(12),
+                                              )
+                                            else
+                                              TextSpan(
+                                                text: L10n.tr().availabilityUnknown,
+                                                style: TStyle.greyRegular(12),
+                                              ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                  const Spacer(),
-                                ],
-                              ),
+                                  ],
+                                ),
                             ],
                           ),
                         ),
@@ -109,7 +142,11 @@ class VendorInfoCard extends StatelessWidget {
                 ),
               ),
               if (vendor.endTime != null && vendor.endTime!.difference(DateTime.now()) < const Duration(minutes: 45))
-                VendorClosingTimer(endTime: vendor.endTime!, name: vendor.name)
+                VendorClosingTimer(
+                  endTime: vendor.endTime!,
+                  name: vendor.name,
+                  startTime: vendor.startTime,
+                )
               else
                 Padding(
                   padding: const EdgeInsets.all(10),

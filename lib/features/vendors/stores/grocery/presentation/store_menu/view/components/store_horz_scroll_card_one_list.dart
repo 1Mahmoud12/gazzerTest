@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.da
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/store_menu/view/widgets/cards/store_card_three.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/store_menu/view/widgets/cards/store_card_three.dart';
 
 class StoreHorzScrollCardOneList<T> extends StatelessWidget {
   const StoreHorzScrollCardOneList({

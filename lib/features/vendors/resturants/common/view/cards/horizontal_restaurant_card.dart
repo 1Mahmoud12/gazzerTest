@@ -69,7 +69,9 @@ class HorizontalRestaurantCard extends StatelessWidget {
                         child: Stack(
                           children: [
                             Container(
-                              foregroundDecoration: !item.isClosed ? null : BoxDecoration(color: Colors.red.withAlpha(75)),
+                              foregroundDecoration: !item.isClosed
+                                  ? null
+                                  : BoxDecoration(color: Colors.red.withAlpha(75)),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(item.image),
@@ -88,7 +90,9 @@ class HorizontalRestaurantCard extends StatelessWidget {
                             else if (item.badge != null)
                               CardBadge(
                                 text: item.badge!,
-                                alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
+                                alignment: corner == Corner.topRight
+                                    ? AlignmentDirectional.topStart
+                                    : AlignmentDirectional.topEnd,
                               ),
                           ],
                         ),

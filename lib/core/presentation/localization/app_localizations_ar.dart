@@ -9,7 +9,41 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get typeHere => 'اكتب هنا';
+
+  @override
+  String get addSpecialNote => 'إضافة ملاحظة خاصة';
+
+  @override
   String get vendorCommon_________________Start => '__________________';
+
+  @override
+  String get soon => 'قريباً';
+
+  @override
+  String nameisCurrentlyyClosedWeWillOpenAt(String name, String time) {
+    return '$name مغلق حالياً، وسيفتح في $time';
+  }
+
+  @override
+  String get thisRestaurantIsCurrentlyUnavailable =>
+      'هذا المطعم غير متوفر حالياً';
+
+  @override
+  String get alwayeysOpen => 'دائماً مفتوح';
+
+  @override
+  String get availabilityUnknown => 'توافر غير معروف';
+
+  @override
+  String get deviceTimeIsInvalid => 'وقت الجهاز غير صالح';
+
+  @override
+  String get notAvailable => 'غير متوفر';
+
+  @override
+  String get couldnotLoadDataPleaseTryyAgain =>
+      'تعذر تحميل البيانات، يرجى المحاولة مرة أخرى';
 
   @override
   String get outOFStock => 'غير متوفر';

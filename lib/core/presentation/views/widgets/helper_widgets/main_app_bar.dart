@@ -5,12 +5,23 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({super.key, this.showCart = false, this.iconsColor = Co.purple, this.isCartScreen = false, this.showLanguage = false, this.bacButtonColor});
+  const MainAppBar({
+    super.key,
+    this.showCart = false,
+    this.iconsColor = Co.purple,
+    this.isCartScreen = false,
+    this.showLanguage = false,
+    this.bacButtonColor,
+    this.onShare,
+    this.showNotification = true,
+  });
   final bool showCart;
   final bool showLanguage;
+  final bool showNotification;
   final Color iconsColor;
   final Color? bacButtonColor;
   final bool isCartScreen;
+  final Function()? onShare;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -30,16 +41,17 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor: Co.second2,
             child: CartFloatingBtn(size: 20, padding: 8, navigate: !isCartScreen),
           ),
-        IconButton(
-          onPressed: () {},
-          // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-          icon: SvgPicture.asset(
-            Assets.assetsSvgNotification,
-            height: 21,
-            width: 21,
-            colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+        if (showNotification)
+          IconButton(
+            onPressed: () {},
+            // style: IconButton.styleFrom(backgroundColor: Colors.black12),
+            icon: SvgPicture.asset(
+              Assets.assetsSvgNotification,
+              height: 21,
+              width: 21,
+              colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+            ),
           ),
-        ),
         if (showLanguage)
           IconButton(
             onPressed: () {},
@@ -50,6 +62,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 21,
               colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
             ),
+          ),
+        if (onShare != null)
+          IconButton(
+            onPressed: onShare,
+            // style: IconButton.styleFrom(backgroundColor: Colors.black12),
+            icon: const Icon(Icons.share, color: Co.purple, size: 24),
           ),
       ],
     );

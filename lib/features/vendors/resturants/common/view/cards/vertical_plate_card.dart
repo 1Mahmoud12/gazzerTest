@@ -71,7 +71,9 @@ class VerticalPlateCard extends StatelessWidget {
                         child: Stack(
                           children: [
                             Container(
-                              foregroundDecoration: !item.outOfStock ? null : BoxDecoration(color: Co.secText.withAlpha(200)),
+                              foregroundDecoration: !item.outOfStock
+                                  ? null
+                                  : BoxDecoration(color: Co.secText.withAlpha(200)),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(item.image),
@@ -83,14 +85,16 @@ class VerticalPlateCard extends StatelessWidget {
                             ),
                             if (item.outOfStock)
                               CardBadge(
-                                text: L10n.tr().outOFStock,
+                                text: L10n.tr().notAvailable,
                                 alignment: AlignmentDirectional.topStart,
                                 fullWidth: true,
                               )
                             else if (item.badge != null)
                               CardBadge(
                                 text: item.badge!,
-                                alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
+                                alignment: corner == Corner.topRight
+                                    ? AlignmentDirectional.topStart
+                                    : AlignmentDirectional.topEnd,
                               ),
                           ],
                         ),
@@ -105,7 +109,10 @@ class VerticalPlateCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const DecoratedFavoriteWidget(size: 24, padding: 4),
-                            AddIcon(onTap: () {}),
+                            AbsorbPointer(
+                              absorbing: item.outOfStock,
+                              child: AddIcon(onTap: () {}),
+                            ),
                           ],
                         ),
                       ),

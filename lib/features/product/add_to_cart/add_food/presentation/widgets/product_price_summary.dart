@@ -4,7 +4,8 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+    show MainBtn, HorizontalSpacing;
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/increment_widget.dart';
 
 class ProductPriceSummary extends StatelessWidget {
@@ -29,6 +30,7 @@ class ProductPriceSummary extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               spacing: 12,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,7 +43,10 @@ class ProductPriceSummary extends StatelessWidget {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: AppConst.defaultInnerBorderRadius,
-                          border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]), width: 2),
+                          border: GradientBoxBorder(
+                            gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
+                            width: 2,
+                          ),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(2),
@@ -49,7 +54,7 @@ class ProductPriceSummary extends StatelessWidget {
                             onPressed: () {},
                             text: L10n.tr().addToCart,
                             textStyle: TStyle.secondaryBold(12),
-                            bgColor: Co.purple,
+                            bgColor: Colors.transparent,
                             height: 0,
                             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                           ),
@@ -74,7 +79,7 @@ class ProductPriceSummary extends StatelessWidget {
 
                         child: Row(
                           children: [
-                            Text("TOTAL:", style: TStyle.secondaryBold(13)),
+                            Text("${L10n.tr().total}:", style: TStyle.secondaryBold(13)),
                             const HorizontalSpacing(12),
                             Text(Helpers.getProperPrice(20.0), style: TStyle.secondaryBold(13)),
                           ],

@@ -1,5 +1,25 @@
 {
+  "typeHere": "Type here",
+  "addSpecialNote": "Add Special Note",
   "vendorCommon_________________Start": "__________________",
+  "soon": "Soon",
+  "nameisCurrentlyyClosedWeWillOpenAt": "{name} is currently closed. We will open at {time}",
+  "@nameisCurrentlyyClosedWeWillOpenAt": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "thisRestaurantIsCurrentlyUnavailable": "This restaurant is currently unavailable",
+  "alwayeysOpen": "Always Open",
+  "availabilityUnknown": "Availability Unknown",
+  "deviceTimeIsInvalid": "Device time is invalid",
+  "notAvailable": "Not Available",
+  "couldnotLoadDataPleaseTryyAgain": "Could not load data. Please try again",
   "outOFStock": "Out of Stock",
   "closed": "Closed",
   "from": "From",

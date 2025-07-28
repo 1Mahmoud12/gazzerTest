@@ -62,6 +62,7 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
 
   @override
   void dispose() {
+    _controller.removeListener(_setHeaderPAdding);
     _controller.dispose();
     _tabController.dispose();
     super.dispose();

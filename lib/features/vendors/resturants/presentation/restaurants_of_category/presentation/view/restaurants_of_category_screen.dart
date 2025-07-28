@@ -21,7 +21,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 // part 'components/explore_best.dart';
 // part 'components/pick_to_you.dart';
 part 'restaurants_of_category_screen.g.dart';
-
 /// screen widgets
 // part 'widgets/add_widget.dart';
 part 'widgets/type_related_restaurants_header.dart';
@@ -63,7 +62,10 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                     title: '',
                   ),
                   Expanded(
-                    child: FailureWidget(message: state.error, onRetry: () => cubit.loadPageData()),
+                    child: FailureWidget(
+                      message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+                      onRetry: () => cubit.loadPageData(),
+                    ),
                   ),
                 ],
               );

@@ -2,8 +2,8 @@ import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_pl
 
 export 'package:gazzer/core/presentation/extensions/enum.dart';
 
-part 'package:gazzer/features/vendors/groceries/domain/store_entity.dart';
 part 'package:gazzer/features/vendors/resturants/domain/enities/restaurant_entity.dart';
+part 'package:gazzer/features/vendors/stores/grocery/domain/store_entity.dart';
 
 /// generic class for both [RestaurantEntity] for restaurants and [StoreEntity] for stores
 
@@ -27,8 +27,13 @@ sealed class GenericVendorEntity {
   final DateTime? endTime;
   final double rate;
   final int? rateCount;
+  final bool alwaysOpen; // is_24_hours
+  final bool alwaysClosed;
+  final bool isFavorite;
+  final bool isOpen;
 
-  bool get isClosed => startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
+  bool get isClosed =>
+      alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
 
   const GenericVendorEntity({
     required this.id,
@@ -46,6 +51,10 @@ sealed class GenericVendorEntity {
     this.deliveryFee,
     required this.location,
     this.rateCount,
+    required this.alwaysOpen,
+    required this.alwaysClosed,
+    required this.isFavorite,
+    required this.isOpen,
   });
 }
 

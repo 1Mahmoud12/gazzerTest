@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/features/vendors/pharmacy/presentation/utils/header_shape.dart';
+import 'package:gazzer/features/vendors/stores/pharmacy/presentation/utils/header_shape.dart';
 
 class PharmacyMenuScreen extends StatelessWidget {
   const PharmacyMenuScreen({super.key});

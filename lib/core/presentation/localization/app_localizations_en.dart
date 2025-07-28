@@ -9,7 +9,41 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get typeHere => 'Type here';
+
+  @override
+  String get addSpecialNote => 'Add Special Note';
+
+  @override
   String get vendorCommon_________________Start => '__________________';
+
+  @override
+  String get soon => 'Soon';
+
+  @override
+  String nameisCurrentlyyClosedWeWillOpenAt(String name, String time) {
+    return '$name is currently closed. We will open at $time';
+  }
+
+  @override
+  String get thisRestaurantIsCurrentlyUnavailable =>
+      'This restaurant is currently unavailable';
+
+  @override
+  String get alwayeysOpen => 'Always Open';
+
+  @override
+  String get availabilityUnknown => 'Availability Unknown';
+
+  @override
+  String get deviceTimeIsInvalid => 'Device time is invalid';
+
+  @override
+  String get notAvailable => 'Not Available';
+
+  @override
+  String get couldnotLoadDataPleaseTryyAgain =>
+      'Could not load data. Please try again';
 
   @override
   String get outOFStock => 'Out of Stock';

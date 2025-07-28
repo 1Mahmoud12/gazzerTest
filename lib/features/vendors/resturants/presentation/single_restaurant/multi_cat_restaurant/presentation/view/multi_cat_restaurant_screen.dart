@@ -16,30 +16,63 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 import 'package:gazzer/features/vendors/resturants/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant__sub_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
+import 'package:go_router/go_router.dart';
 
 part 'component/top_rated_coponent.dart';
-// part 'component/top_rated_component.dart';
+part 'multi_cat_restaurant_screen.g.dart';
 part 'widgets/top_rated_card.dart';
 
-class MultiCatRestaurantsScreen extends StatelessWidget {
-  const MultiCatRestaurantsScreen({super.key, required this.toprated, required this.categoriesWithPlates, required this.banners, required this.restaurant});
-  final RestaurantEntity restaurant;
-  final List<PlateEntity> toprated;
-  final List<(CategoryOfPlateEntity, List<GenericItemEntity>)> categoriesWithPlates;
-  final List<BannerEntity> banners;
+@TypedGoRoute<MultiCatRestaurantsRoute>(path: MultiCatRestaurantsScreen.route)
+@immutable
+class MultiCatRestaurantsRoute extends GoRouteData with _$MultiCatRestaurantsRoute {
+  const MultiCatRestaurantsRoute({required this.$extra});
+  final SingleRestaurantLoaded $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return MultiCatRestaurantsScreen(state: $extra);
+  }
+}
+
+class MultiCatRestaurantsScreen extends StatefulWidget {
+  static const route = '/multi-cat-restaurant';
+  const MultiCatRestaurantsScreen({
+    super.key,
+    required this.state,
+  });
+  final SingleRestaurantLoaded state;
+  @override
+  State<MultiCatRestaurantsScreen> createState() => _MultiCatRestaurantsScreenState();
+}
+
+class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
+  late final RestaurantEntity restaurant;
+  late final List<PlateEntity> toprated;
+  late final List<(CategoryOfPlateEntity, List<GenericItemEntity>)> categoriesWithPlates;
+  late final List<BannerEntity> banners;
+
+  @override
+  void initState() {
+    restaurant = widget.state.restaurant;
+    toprated = widget.state.toprated;
+    categoriesWithPlates = widget.state.categoriesWithPlates;
+    banners = widget.state.banners;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(showCart: false),
+      appBar: MainAppBar(showNotification: false, onShare: () {}),
       extendBody: true,
       extendBodyBehindAppBar: true,
       body: ScrollableTabedList(
         preHerader: Column(
           children: [
             MultiCatRestHeader(vendor: restaurant),
-            _TopRatedComponent(toprated: toprated),
+            _TopRatedComponent(toprated: toprated.take(5).toList()),
           ],
         ),
         itemsCount: categoriesWithPlates.length,

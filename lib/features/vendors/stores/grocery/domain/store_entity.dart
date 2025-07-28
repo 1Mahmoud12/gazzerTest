@@ -35,7 +35,11 @@ class StoreEntity extends GenericVendorEntity {
     required super.location,
     super.rateCount,
     required super.parentId,
-    
+    required super.alwaysOpen,
+    required super.alwaysClosed,
+    required super.isFavorite,
+    required super.isOpen,
+
     // this.categoryOfPlate,
   });
 }

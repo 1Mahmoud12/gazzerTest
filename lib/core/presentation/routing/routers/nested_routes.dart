@@ -1,23 +1,24 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/routing/routers/drawer_routes.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
-import 'package:gazzer/features/vendors/gorcery/presentation/view/grocery_screen.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/store_menu/view/store_screen.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/stores_of_category/view/stores_of_category_screen.dart';
-import 'package:gazzer/features/vendors/pharmacy/presentation/pharmacy_menu/view/pharmacy_menu_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant__sub_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/store_menu/view/store_screen.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/stores_of_category/view/stores_of_category_screen.dart';
+import 'package:gazzer/features/vendors/stores/pharmacy/presentation/pharmacy_menu/view/pharmacy_menu_screen.dart';
 import 'package:go_router/go_router.dart';
 
-get nestedRoutes => ShellRoute(
+ShellRoute get nestedRoutes => ShellRoute(
   builder: (context, state, child) {
     return MainLayout(state: state, child: child);
   },
@@ -35,10 +36,10 @@ get nestedRoutes => ShellRoute(
         child: const RestaurantsMenuScreen(),
       ),
     ),
-    GoRoute(path: GroceryScreen.route, builder: (context, state) => const GroceryScreen()),
     $restaurantsOfCategoryRoute,
     $restaurantCategoryRoute,
     $restaurantDetilsRoute,
+    $multiCatRestaurantsRoute,
 
     ///
     GoRoute(
@@ -81,5 +82,15 @@ final pharmacyRoutes = [
   GoRoute(
     path: PharmacyMenuScreen.route,
     builder: (context, state) => const PharmacyMenuScreen(),
+  ),
+];
+
+List<GoRoute> get drowerRoutes => [
+  GoRoute(
+    path: ProfileScreen.route,
+    builder: (context, state) => const ProfileScreen(),
+    routes: [
+      $upodatePasswordRoute,
+    ],
   ),
 ];

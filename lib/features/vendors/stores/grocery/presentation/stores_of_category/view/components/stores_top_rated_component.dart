@@ -4,8 +4,8 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/stores_of_category/view/widgets/rotating_items_widget.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/stores_of_category/view/widgets/top_rated_item_details.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/stores_of_category/view/widgets/rotating_items_widget.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/stores_of_category/view/widgets/top_rated_item_details.dart';
 
 class StoresTopRatedComponent extends StatefulWidget {
   const StoresTopRatedComponent({super.key, required this.items});

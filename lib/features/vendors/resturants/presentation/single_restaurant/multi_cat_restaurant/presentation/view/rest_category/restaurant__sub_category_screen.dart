@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
@@ -48,16 +49,13 @@ class RestaurantCategoryScreen extends StatelessWidget {
       body: Column(
         children: [
           MultiCatRestHeader(vendor: vendor),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: Text(subcatName, style: TStyle.primaryBold(16)),
-          ),
+          Text(subcatName, style: TStyle.primaryBold(16)),
           FutureBuilder(
             future: di<RestaurantsRepo>().getPlatesOfSpecificRestaurantCategory(vendor.id, subCatId),
             builder: (context, snapshot) {
               if (snapshot.hasError || snapshot.data is Err) {
                 return FailureWidget(
-                  message: snapshot.error.toString(),
+                  message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
                 );
               }
               final isLoading = snapshot.connectionState == ConnectionState.waiting;

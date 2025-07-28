@@ -12,11 +12,11 @@ import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart'
     show CircleGradientBorderedImage;
-import 'package:gazzer/features/vendors/groceries/presentation/store_menu/view/components/store_horz_scroll_card_one_list.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/store_menu/view/widgets/store_header_container.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/stores_of_category/view/stores_of_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/app_bar_row_widget.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/store_menu/view/components/store_horz_scroll_card_one_list.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/store_menu/view/widgets/store_header_container.dart';
+import 'package:gazzer/features/vendors/stores/grocery/presentation/stores_of_category/view/stores_of_category_screen.dart';
 
 class StoreMenuScreen extends StatelessWidget {
   const StoreMenuScreen({super.key});

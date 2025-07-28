@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/di.dart';
@@ -33,30 +34,40 @@ class RestaurantDetilsScreen extends StatelessWidget {
   final int id;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SingleRestaurantCubit, SingleRestaurantStates>(
+    return BlocConsumer<SingleRestaurantCubit, SingleRestaurantStates>(
+      listener: (context, state) {
+        if (state is SingleRestaurantLoaded) {
+          if (state.isSingle &&
+              state.categoriesWithPlates.isNotEmpty &&
+              state.categoriesWithPlates.first.$2.isNotEmpty) {
+            SingleCatRestaurantRoute($extra: state).pushReplacement(context);
+          } else {
+            MultiCatRestaurantsRoute($extra: state).pushReplacement(context);
+          }
+        }
+      },
       builder: (context, state) {
-        if (state is SingleRestaurantError) {
+        if (state is SingleRestaurantError ||
+            (state is SingleRestaurantLoaded &&
+                (state.categoriesWithPlates.isEmpty || state.categoriesWithPlates.first.$2.isEmpty))) {
           return Scaffold(
             appBar: const ClassicAppBar(),
             body: FailureWidget(
-              message: state.error,
+              message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
               onRetry: () => context.read<SingleRestaurantCubit>().loadSingleRestaurantData(),
             ),
           );
         } else {
-          if (state is SingleRestaurantLoading) {
-            return const Skeletonizer(child: SingleCatRestaurantScreen(restaurant: Fakers.restaurant));
-          }
-          if (state.isSingle) {
-            return const Skeletonizer(child: SingleCatRestaurantScreen(restaurant: Fakers.restaurant));
-          } else {
-            return MultiCatRestaurantsScreen(
-              toprated: state.toprated,
-              categoriesWithPlates: state.categoriesWithPlates,
-              banners: state.banners,
-              restaurant: state.restaurant,
-            );
-          }
+          return Skeletonizer(
+            child: SingleCatRestaurantScreen(
+              state: SingleRestaurantLoaded(
+                banners: [],
+                restaurant: Fakers.restaurant,
+                toprated: [],
+                categoriesWithPlates: [(Fakers.categoryOfPlate, Fakers.plates)],
+              ),
+            ),
+          );
         }
       },
     );

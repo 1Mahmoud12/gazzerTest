@@ -9,21 +9,21 @@ class MultiCatRestHeader extends StatelessWidget {
   final RestaurantEntity vendor;
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.paddingOf(context).top + kToolbarHeight + 120.0;
+    final height =
+        MediaQuery.paddingOf(context).top + kToolbarHeight + 105.0; // 105 is the expected height of vendor info card
 
     return SizedBox(
       height: height,
-      child: OverflowBox(
+      child: Stack(
         alignment: Alignment.bottomCenter,
-        maxWidth: 1306,
-        minWidth: 1306,
-        maxHeight: 394,
-        minHeight: 394,
-
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            ClipPath(
+        children: [
+          OverflowBox(
+            alignment: const Alignment(0, 0.63),
+            maxWidth: 1306,
+            minWidth: 1306,
+            maxHeight: 394,
+            minHeight: 394,
+            child: ClipPath(
               clipper: AddShapeClipper(),
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -34,9 +34,9 @@ class MultiCatRestHeader extends StatelessWidget {
                 ),
               ),
             ),
-            VendorInfoCard(vendor),
-          ],
-        ),
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 40), child: VendorInfoCard(vendor)),
+        ],
       ),
     );
   }

@@ -76,7 +76,9 @@ class HorizontalPlateCard extends StatelessWidget {
                                 child: Stack(
                                   children: [
                                     Container(
-                                      foregroundDecoration: !item.outOfStock ? null : BoxDecoration(color: Co.secText.withAlpha(200)),
+                                      foregroundDecoration: !item.outOfStock
+                                          ? null
+                                          : BoxDecoration(color: Co.secText.withAlpha(200)),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: NetworkImage(item.image),
@@ -87,14 +89,16 @@ class HorizontalPlateCard extends StatelessWidget {
                                     ),
                                     if (item.outOfStock)
                                       CardBadge(
-                                        text: L10n.tr().outOFStock,
+                                        text: L10n.tr().notAvailable,
                                         alignment: AlignmentDirectional.topStart,
                                         fullWidth: true,
                                       )
                                     else if (item.badge != null)
                                       CardBadge(
                                         text: item.badge!,
-                                        alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
+                                        alignment: corner == Corner.topRight
+                                            ? AlignmentDirectional.topStart
+                                            : AlignmentDirectional.topEnd,
                                       ),
                                   ],
                                 ),
@@ -110,7 +114,10 @@ class HorizontalPlateCard extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2),
-                      child: AddIcon(onTap: () {}),
+                      child: AbsorbPointer(
+                        absorbing: item.outOfStock,
+                        child: AddIcon(onTap: () {}),
+                      ),
                     ),
                   ],
                 ),

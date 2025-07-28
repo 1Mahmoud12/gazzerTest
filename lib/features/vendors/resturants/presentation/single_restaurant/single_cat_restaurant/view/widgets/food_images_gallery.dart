@@ -1,7 +1,23 @@
 part of '../single_restaurant_details.dart';
 
-class _FoodImagesGallery extends StatelessWidget {
-  const _FoodImagesGallery();
+class _FoodImagesGallery extends StatefulWidget {
+  const _FoodImagesGallery({required this.plates, required this.onSelect, required this.selected});
+  final List<PlateEntity> plates;
+  final Function(PlateEntity) onSelect;
+  final PlateEntity selected;
+
+  @override
+  State<_FoodImagesGallery> createState() => _FoodImagesGalleryState();
+}
+
+class _FoodImagesGalleryState extends State<_FoodImagesGallery> {
+  late PlateEntity selected;
+
+  @override
+  void initState() {
+    selected = widget.selected;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,32 +25,46 @@ class _FoodImagesGallery extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1,
       child: Stack(
+        alignment: Alignment.center,
         children: [
-          Positioned(
-            right: -smallImagesWidth,
-            top: 0,
-            bottom: 0,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: RadialGradient(colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)], radius: 0.5, stops: const [0.5, 1.0]),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: RadialGradient(
+                colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)],
+                radius: 0.5,
+                stops: const [0.5, 1.0],
               ),
-              child: AspectRatio(aspectRatio: 1, child: Image.asset(Assets.assetsPngSandwitch2, fit: BoxFit.cover)),
+            ),
+            child: AspectRatio(
+              aspectRatio: 1.1,
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 1200),
+                layoutBuilder: (currentChild, previousChildren) => SizedBox.expand(child: currentChild),
+                transitionBuilder: (child, animation) => FadeTransition(
+                  opacity: animation,
+                  child: child,
+                ),
+                child: Image.network(key: ValueKey(selected.id), selected.image, fit: BoxFit.cover),
+              ),
             ),
           ),
           Align(
             alignment: const Alignment(-0.85, -0.9),
             child: SizedBox(
               width: smallImagesWidth,
-              child: Padding(
-                padding: EdgeInsets.only(top: smallImagesWidth * 0.5, bottom: smallImagesWidth * 0.5),
-                child: ListView.separated(
-                  padding: EdgeInsets.zero,
-                  itemCount: 5,
-                  separatorBuilder: (context, index) => const VerticalSpacing(12),
-                  itemBuilder: (context, index) {
-                    return const CircleGradientBorderedImage(image: Assets.assetsPngSandwitch2);
-                  },
-                ),
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                itemCount: widget.plates.length,
+                separatorBuilder: (context, index) => const VerticalSpacing(12),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() => selected = widget.plates[index]);
+                      widget.onSelect(widget.plates[index]);
+                    },
+                    child: CircleGradientBorderedImage(image: widget.plates[index].image),
+                  );
+                },
               ),
             ),
           ),

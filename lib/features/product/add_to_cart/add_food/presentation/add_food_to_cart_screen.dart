@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainAppBar, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+    show MainAppBar, VerticalSpacing;
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_extras_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_image_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_price_summary.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_summary_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/product_types_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/widgets/add_special_note.dart';
 import 'package:go_router/go_router.dart';
 
 part 'add_food_to_cart_screen.g.dart';
@@ -43,8 +46,13 @@ class AddFoodToCartScreen extends StatelessWidget {
                 const VerticalSpacing(24),
                 ProductTypesWidget(product: product),
                 const VerticalSpacing(24),
-                // ProductExtrasWidget(product: product),
+                ProductExtrasWidget(product: [product]),
                 const VerticalSpacing(24),
+                AddSpecialNote(
+                  onNoteChange: (note) {
+                    // Handle note change if needed
+                  },
+                ),
               ],
             ),
           ),

@@ -7,7 +7,7 @@ class _TopRatedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 140,
       margin: const EdgeInsets.symmetric(horizontal: 12),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
@@ -27,10 +27,10 @@ class _TopRatedCard extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(4, 0, 4, 6),
+                padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text.rich(
                       TextSpan(
@@ -42,12 +42,13 @@ class _TopRatedCard extends StatelessWidget {
                       ),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
                     ),
 
                     SizedBox(
                       width: double.infinity,
                       child: Wrap(
-                        alignment: WrapAlignment.spaceBetween,
+                        alignment: WrapAlignment.spaceAround,
                         crossAxisAlignment: WrapCrossAlignment.center,
 
                         children: [

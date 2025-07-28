@@ -98,11 +98,71 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @typeHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Type here'**
+  String get typeHere;
+
+  /// No description provided for @addSpecialNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Special Note'**
+  String get addSpecialNote;
+
   /// No description provided for @vendorCommon_________________Start.
   ///
   /// In en, this message translates to:
   /// **'__________________'**
   String get vendorCommon_________________Start;
+
+  /// No description provided for @soon.
+  ///
+  /// In en, this message translates to:
+  /// **'Soon'**
+  String get soon;
+
+  /// No description provided for @nameisCurrentlyyClosedWeWillOpenAt.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is currently closed. We will open at {time}'**
+  String nameisCurrentlyyClosedWeWillOpenAt(String name, String time);
+
+  /// No description provided for @thisRestaurantIsCurrentlyUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This restaurant is currently unavailable'**
+  String get thisRestaurantIsCurrentlyUnavailable;
+
+  /// No description provided for @alwayeysOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Always Open'**
+  String get alwayeysOpen;
+
+  /// No description provided for @availabilityUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Availability Unknown'**
+  String get availabilityUnknown;
+
+  /// No description provided for @deviceTimeIsInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Device time is invalid'**
+  String get deviceTimeIsInvalid;
+
+  /// No description provided for @notAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Available'**
+  String get notAvailable;
+
+  /// No description provided for @couldnotLoadDataPleaseTryyAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load data. Please try again'**
+  String get couldnotLoadDataPleaseTryyAgain;
 
   /// No description provided for @outOFStock.
   ///

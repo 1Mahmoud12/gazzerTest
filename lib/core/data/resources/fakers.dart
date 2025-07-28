@@ -134,6 +134,8 @@ class Fakers {
   ///
 
   static const restaurant = RestaurantEntity(
+    alwaysClosed: false,
+    alwaysOpen: false,
     id: 1,
     name: "طبق ",
     rate: 3,
@@ -144,7 +146,7 @@ class Fakers {
     address: 'ZAMALEK',
     deliveryFees: 123,
     badge: '30%',
-    priceRange: '\$10 - \$20',
+    priceRange: '',
     tag: ['Free delivery'],
     location: 'ZAMALEK',
     subCategories: [
@@ -157,10 +159,14 @@ class Fakers {
     deliveryTime: '30-45 min',
     deliveryFee: 30.0,
     rateCount: 13,
+    isFavorite: false,
+    isOpen: true,
   );
   static final List<RestaurantEntity> restaurants = List.generate(
     8,
     (index) => const RestaurantEntity(
+      alwaysClosed: false,
+      alwaysOpen: false,
       id: 1,
       name: "طبق ",
       rate: 3,
@@ -184,6 +190,8 @@ class Fakers {
       deliveryTime: '30-45 min',
       deliveryFee: 30.0,
       rateCount: 13,
+      isFavorite: false,
+      isOpen: true,
     ),
   );
 
@@ -191,6 +199,8 @@ class Fakers {
   static final List<StoreEntity> stores = List.generate(
     8,
     (index) => StoreEntity(
+      alwaysClosed: false,
+      alwaysOpen: false,
       id: index,
       name: "طبق ${index + 1}",
       rate: _random.nextDouble() * 5,
@@ -215,6 +225,8 @@ class Fakers {
       deliveryTime: '30-45 min',
       deliveryFee: 30.0,
       rateCount: 13,
+      isFavorite: false,
+      isOpen: true,
     ),
   );
 
@@ -248,7 +260,8 @@ class Fakers {
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',
-      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+      description:
+          'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
 
       id: index,
     ),

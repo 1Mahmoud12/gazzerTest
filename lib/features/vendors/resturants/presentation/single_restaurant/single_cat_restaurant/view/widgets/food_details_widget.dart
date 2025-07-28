@@ -5,40 +5,40 @@ class _FoodDetailsWidget extends StatelessWidget {
   final GenericItemEntity product;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: AppConst.defaultHrPadding,
-      child: Column(
-        spacing: 12,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 16,
-            children: [
-              GradientText(text: product.name, style: TStyle.blackBold(18)),
-              const Spacer(),
-              const DecoratedFavoriteWidget(size: 16),
-              AddIcon(
-                onTap: () {
-                  SystemSound.play(SystemSoundType.click);
-                  AddFoodToCartRoute($extra: product).push(context);
-                },
-                padding: const EdgeInsets.all(6),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              GradientTextWzShadow(
-                text: Helpers.getProperPrice(product.price),
-                shadow: AppDec.blackTextShadow.first,
-                style: TStyle.blackSemi(14),
-              ),
-              const HorizontalSpacing(32),
-              const Icon(Icons.star, color: Co.secondary, size: 20),
-              Text(product.rate.toStringAsFixed(1), style: TStyle.secondaryBold(14)),
-            ],
-          ),
-          DecoratedBox(
+    return Column(
+      spacing: 12,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 16,
+          children: [
+            GradientText(text: product.name, style: TStyle.blackBold(18)),
+            const Spacer(),
+            const DecoratedFavoriteWidget(size: 16),
+            // AddIcon(
+            //   onTap: () {
+            //     SystemSound.play(SystemSoundType.click);
+            //     AddFoodToCartRoute($extra: product).push(context);
+            //   },
+            //   padding: const EdgeInsets.all(6),
+            // ),
+          ],
+        ),
+        Row(
+          children: [
+            GradientTextWzShadow(
+              text: Helpers.getProperPrice(product.price),
+              shadow: AppDec.blackTextShadow.first,
+              style: TStyle.blackSemi(14),
+            ),
+            const HorizontalSpacing(32),
+            const Icon(Icons.star, color: Co.secondary, size: 20),
+            Text(product.rate.toStringAsFixed(1), style: TStyle.secondaryBold(14)),
+          ],
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: DecoratedBox(
             decoration: BoxDecoration(border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2)),
             child: Padding(
               padding: AppConst.defaultPadding,
@@ -52,8 +52,7 @@ class _FoodDetailsWidget extends StatelessWidget {
                     const TextSpan(text: "\n"),
                     const WidgetSpan(child: VerticalSpacing(24)),
                     TextSpan(
-                      text:
-                          "lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit.  ",
+                      text: product.description,
                       style: TStyle.blackSemi(14),
                     ),
                   ],
@@ -61,8 +60,8 @@ class _FoodDetailsWidget extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

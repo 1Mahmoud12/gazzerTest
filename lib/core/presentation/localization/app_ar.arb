@@ -1,5 +1,25 @@
 {
+  "typeHere": "اكتب هنا",
+  "addSpecialNote": "إضافة ملاحظة خاصة",
   "vendorCommon_________________Start": "__________________",
+  "soon": "قريباً",
+  "nameisCurrentlyyClosedWeWillOpenAt": "{name} مغلق حالياً، وسيفتح في {time}",
+  "@nameisCurrentlyyClosedWeWillOpenAt": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "thisRestaurantIsCurrentlyUnavailable": "هذا المطعم غير متوفر حالياً",
+  "alwayeysOpen": "دائماً مفتوح",
+  "availabilityUnknown": "توافر غير معروف",
+  "deviceTimeIsInvalid": "وقت الجهاز غير صالح",
+  "notAvailable": "غير متوفر",
+  "couldnotLoadDataPleaseTryyAgain": "تعذر تحميل البيانات، يرجى المحاولة مرة أخرى",
   "outOFStock": "غير متوفر",
   "closed": "مغلق",
   "from": "من",

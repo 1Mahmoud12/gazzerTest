@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
+import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
+import 'package:gazzer/features/auth/forgot_password/presentation/reset_password_screen.dart';
+import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
+import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
+import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
+import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
+import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
+import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
+import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
+import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
+import 'package:gazzer/features/intro/presentation/loading_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/diatery_lifestyle_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/frequancy_combos_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support_screen.dart';
+import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
+import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
+import 'package:go_router/go_router.dart';
+
+final List<RouteBase>  unnestedRoutes = [
+  ...authRoutes,
+  ...checkoutRoutes,
+  ...planScreens,
+  $addFoodToCartRoute,
+
+  /// plan & intro
+  $congratsScreenRoute,
+  $loadingScreenRoute,
+  $introVideoTutorialRoute,
+
+  // restaurants
+  $singleCatRestaurantRoute,
+
+  /// scattered;
+  $deleteAccountRoute,
+  $addEditAddressRoute,
+  GoRoute(
+    path: SelectLocationScreen.route,
+    builder: (context, state) => const SelectLocationScreen(),
+  ),
+];
+
+final checkoutRoutes = [
+  GoRoute(
+    path: CartScreen.route,
+    builder: (context, state) => const CartScreen(),
+  ),
+  GoRoute(
+    path: ConfirmOrderScreen.route,
+    builder: (context, state) => const ConfirmOrderScreen(),
+  ),
+  GoRoute(
+    path: PostCheckoutScreen.route,
+    builder: (context, state) => const PostCheckoutScreen(),
+  ),
+];
+
+final planScreens = [
+  GoRoute(path: HealthFocusScreen.route, builder: (context, state) => const HealthFocusScreen()),
+  GoRoute(path: DiateryLifestyleScreen.route, builder: (context, state) => const DiateryLifestyleScreen()),
+  GoRoute(path: SupplementsScreen.route, builder: (context, state) => const SupplementsScreen()),
+  GoRoute(path: NuttrationSupportScreen.route, builder: (context, state) => const NuttrationSupportScreen()),
+  GoRoute(path: FrequancyCombosScreen.route, builder: (context, state) => const FrequancyCombosScreen()),
+];
+
+final authRoutes = [
+  GoRoute(
+    path: LoginScreen.route,
+    pageBuilder: (context, state) => CustomTransitionPage(
+      key: state.pageKey,
+      child: const LoginScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(1, 0),
+            end: Offset.zero,
+          ).animate(animation),
+          child: child,
+        );
+      },
+    ),
+  ),
+  GoRoute(
+    path: RegisterScreen.route,
+    builder: (context, state) => const RegisterScreen(),
+  ),
+  GoRoute(
+    path: ResetPasswordScreen.route,
+    builder: (context, state) => const ResetPasswordScreen(),
+  ),
+  $createPasswordRoute,
+  $verifyOTPScreenRoute,
+];
