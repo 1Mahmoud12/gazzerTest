@@ -22,7 +22,7 @@ class _TopRatedCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Image.network(product.image, fit: BoxFit.cover, width: double.infinity),
+              child: CustomNetworkImage(product.image, fit: BoxFit.cover, width: double.infinity),
             ),
             Expanded(
               flex: 3,

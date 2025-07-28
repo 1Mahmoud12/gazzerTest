@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
 class CircleGradientBorderedImage extends StatelessWidget {
   const CircleGradientBorderedImage({super.key, required this.image, this.shadow, this.showBorder = true});
@@ -20,9 +21,8 @@ class CircleGradientBorderedImage extends StatelessWidget {
         child: ClipOval(
           child: AspectRatio(
             aspectRatio: 1.0,
-            child: Image.network(
+            child: CustomNetworkImage(
               image,
-              errorBuilder: (context, error, stackTrace) => const Icon(Icons.image, size: 24),
 
               fit: BoxFit.cover,
             ),

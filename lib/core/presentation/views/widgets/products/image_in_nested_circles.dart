@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
 class ImageInNestedCircles extends StatelessWidget {
   const ImageInNestedCircles({super.key, required this.image, required this.imageRatio, this.text});
@@ -42,7 +43,7 @@ class ImageInNestedCircles extends StatelessWidget {
                     ),
                     child: AspectRatio(
                       aspectRatio: 1,
-                      child: Image.network(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+                      child: CustomNetworkImage(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
                     ),
                   ),
                 ),

@@ -1,11 +1,14 @@
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_reponse.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_of_categoryy_response.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_page_response.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_page_reponse.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_of_categoryy_page_response.dart';
 import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
 
@@ -135,6 +138,26 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.restaurantsOfCategoryPage(id)),
       parser: (response) {
         return RestaurantsOfCategoryyResponse.fromJson(response.data['data']);
+      },
+    );
+  }
+
+  @override
+  Future<Result<RestaurantPageResponse>> loadRestaurantPage(int id) {
+    return super.call(
+      apiCall: () => _apiClient.get(endpoint: Endpoints.restaurantPage(id)),
+      parser: (response) {
+        return RestaurantPageResponse.fromJson(response.data['data']);
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<PlateEntity>>> getPlatesOfSpecificRestaurantCategory(int restId, int catId) {
+    return super.call(
+      apiCall: () => _apiClient.get(endpoint: Endpoints.platesOfRestaurantCategory(restId, catId)),
+      parser: (response) {
+        return (response.data['data'] as List).map((e) => PlateDTO.fromJson(e).toPlateEntity()).toList();
       },
     );
   }

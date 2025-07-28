@@ -10,7 +10,7 @@ class RestaurantsOfCategoryyResponse {
   late final List<BannerEntity> banners;
 
   RestaurantsOfCategoryyResponse.fromJson(Map<String, dynamic> json) {
-    name = json['name'].toString();
+    name = json['plate_category'] is Map ? json['plate_category']['name'].toString() : '';
     banners = <BannerEntity>[];
     if (json['banners'] != null) {
       for (var item in json['banners']) {
@@ -21,10 +21,10 @@ class RestaurantsOfCategoryyResponse {
     if (json['lists'] != null) {
       for (var item in json['lists']) {
         final name = item['name'].toString();
-        final style = CardStyle.fromString(item['style'].toString());
+        final style = CardStyle.fromString(item['card_style'].toString());
         final restaurants = <RestaurantEntity>[];
-        if (item['restaurants'] != null) {
-          for (var rest in item['restaurants']) {
+        if (item['entities'] != null) {
+          for (var rest in item['entities']) {
             restaurants.add(RestaurantDTO.fromJson(rest).toRestEntity());
           }
         }

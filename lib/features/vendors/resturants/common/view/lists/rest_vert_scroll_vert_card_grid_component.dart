@@ -21,7 +21,7 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
   final Function()? onViewAllPressed;
   final List<T> items;
   final Corner? corner;
-  final void Function<T>(T item) onSingleCardPressed;
+  final void Function(T item) onSingleCardPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
                   height: 150,
                   item: item,
                   corner: corner,
-                  onTap: (item) => onSingleCardPressed(item),
+                  onTap: (item) => onSingleCardPressed(items[index]),
                 );
               }
               if (item is PlateEntity) {
@@ -66,7 +66,7 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
                   imgToTextRatio: 0.6,
                   width: double.infinity,
                   corner: corner,
-                  onTap: (item) => onSingleCardPressed(item),
+                  onTap: (item) => onSingleCardPressed(items[index]),
                 );
               }
               return const SizedBox();

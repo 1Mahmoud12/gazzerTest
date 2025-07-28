@@ -9,15 +9,6 @@ class CategoryOfPlateDTO {
   String? cardStyle;
   String? layout;
 
-  CategoryOfPlateDTO({
-    this.id,
-    this.name,
-    this.image,
-    this.cardStyle,
-    this.layout,
-    this.parentId,
-  });
-
   CategoryOfPlateDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

@@ -15,16 +15,13 @@ class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
     this.onViewAllPressed,
     this.imgToTextRatio = 0.8,
     required this.onSingleCardPressed,
-  }) : assert(
-         items is List<GenericVendorEntity> || items is List<GenericItemEntity>,
-         'HorzScrollHorzCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
-       );
+  });
   final Corner? corner;
   final String? title;
   final Function()? onViewAllPressed;
   final List<T> items;
   final double imgToTextRatio;
-  final void Function<T>(T item) onSingleCardPressed;
+  final void Function(T item) onSingleCardPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +54,7 @@ class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
                     imgToTextRatio: imgToTextRatio,
                     width: 260,
                     item: item,
-                    onTap: (item) => onSingleCardPressed(item),
+                    onTap: (item) => onSingleCardPressed(items[index]),
                   );
                 }
                 if (item is PlateEntity) {
@@ -67,7 +64,7 @@ class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
                     height: 120,
                     width: 300,
                     imgToTextRatio: 1.05,
-                    onTap: (item) => onSingleCardPressed(item),
+                    onTap: (item) => onSingleCardPressed(items[index]),
                   );
                 }
                 return const SizedBox();

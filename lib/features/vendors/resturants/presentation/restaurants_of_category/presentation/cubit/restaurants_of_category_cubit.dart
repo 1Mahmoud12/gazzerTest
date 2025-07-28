@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_of_categoryy_page_response.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_states.dart';
 
@@ -8,20 +9,27 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
   final RestaurantsRepo _repo;
   final int id;
   RestaurantsOfCategoryCubit(this._repo, this.id) : super(RestaurantsOfCategoryInitial()) {
-    getPageBanners();
-    getTopRatedSection();
-    getOffersSection();
-    getTodaysSickSection();
-    getCategoryRelatedSection();
+    loadPageData();
   }
+
   Future<void> loadPageData() async {
-    await Future.wait([
-      getPageBanners(),
-      getTopRatedSection(),
-      getOffersSection(),
-      getTodaysSickSection(),
-      getCategoryRelatedSection(),
-    ]);
+    emit(RestaurantsOfCategoryPageDataLoading());
+    final result = await _repo.loadRestaurantsOfCategoryPage(id);
+    switch (result) {
+      case Ok<RestaurantsOfCategoryyResponse> ok:
+        emit(
+          RestaurantsOfCategoryPageDataLoaded(
+            restaurants: ok.value.restaurants,
+            banners: ok.value.banners,
+            lists: ok.value.lists,
+            name: ok.value.name,
+          ),
+        );
+        break;
+      case Err err:
+        emit(RestaurantsOfCategoryPageDataError(err.error.message));
+        break;
+    }
   }
 
   Future<void> getTopRatedSection() async {

@@ -5,8 +5,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 
 class SearchResultVendor extends StatelessWidget {
   const SearchResultVendor({super.key, required this.vendor});
@@ -25,15 +24,7 @@ class SearchResultVendor extends StatelessWidget {
           borderRadius: AppConst.defaultBorderRadius,
           child: InkWell(
             onTap: () {
-              if (vendor.id.isEven) {
-                SingleCatRestaurantRoute(id: vendor.id).push(context);
-                // final widget = AppTransitions().slideTransition(
-                //   SingleCatRestaurantScreen(vendorId: vendor.id),
-                //   start: const Offset(1, 0),
-                // );
-              } else {
-                MultiCatRestaurantsRoute(id: vendor.id).push(context);
-              }
+              RestaurantDetilsRoute(id: vendor.id).push(context);
             },
             child: Row(
               children: [

@@ -7,15 +7,14 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
 import 'package:gazzer/features/vendors/gorcery/presentation/view/grocery_screen.dart';
+import 'package:gazzer/features/vendors/groceries/presentation/store_menu/view/store_screen.dart';
+import 'package:gazzer/features/vendors/groceries/presentation/stores_of_category/view/stores_of_category_screen.dart';
 import 'package:gazzer/features/vendors/pharmacy/presentation/pharmacy_menu/view/pharmacy_menu_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant_category_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/store_menu/view/store_screen.dart';
-import 'package:gazzer/features/vendors/groceries/presentation/stores_of_category/view/stores_of_category_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant__sub_category_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:go_router/go_router.dart';
 
 get nestedRoutes => ShellRoute(
@@ -38,9 +37,8 @@ get nestedRoutes => ShellRoute(
     ),
     GoRoute(path: GroceryScreen.route, builder: (context, state) => const GroceryScreen()),
     $restaurantsOfCategoryRoute,
-    $multiCatRestaurantsRoute,
     $restaurantCategoryRoute,
-    $singleCatRestaurantRoute,
+    $restaurantDetilsRoute,
 
     ///
     GoRoute(

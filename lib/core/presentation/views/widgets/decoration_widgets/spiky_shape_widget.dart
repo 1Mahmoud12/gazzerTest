@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_painter.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:lottie/lottie.dart';
 
 class SpikyShapeWidget extends StatelessWidget {
@@ -44,10 +45,10 @@ class SpikyShapeWidget extends StatelessWidget {
                                   ? SvgPicture.network(image!, height: 150, fit: BoxFit.fitHeight)
                                   : image!.endsWith('json')
                                   ? Lottie.network(image!, fit: BoxFit.fitHeight)
-                                  : Image.network(image!, height: 150, fit: BoxFit.fitHeight),
+                                  : CustomNetworkImage(image!, height: 150, fit: BoxFit.fitHeight),
                             ),
                           ),
-          
+
                       Expanded(flex: 3, child: rtChild),
                     ],
                   ),

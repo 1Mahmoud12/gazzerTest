@@ -28,7 +28,7 @@ sealed class GenericVendorEntity {
   final double rate;
   final int? rateCount;
 
-  bool get isClosed => startTime?.isBefore(DateTime.now()) == true && endTime?.isAfter(DateTime.now()) == true;
+  bool get isClosed => startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
 
   const GenericVendorEntity({
     required this.id,

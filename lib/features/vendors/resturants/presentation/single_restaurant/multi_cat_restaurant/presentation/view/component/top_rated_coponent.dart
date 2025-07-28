@@ -1,12 +1,10 @@
 part of '../multi_cat_restaurant_screen.dart';
 
 class _TopRatedComponent extends StatelessWidget {
-  const _TopRatedComponent({required this.subCats, required this.vendor});
-  final List<CategoryOfPlateEntity> subCats;
-  final RestaurantEntity vendor;
+  const _TopRatedComponent({required this.toprated});
+  final List<PlateEntity> toprated;
   @override
   Widget build(BuildContext context) {
-    int currentindex = 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -20,45 +18,15 @@ class _TopRatedComponent extends StatelessWidget {
         ),
         SizedBox(
           height: 420,
-          child: Stack(
-            fit: StackFit.expand,
-            alignment: Alignment.topCenter,
-            children: [
-              Directionality(
-                textDirection: TextDirection.ltr,
-                child: CircularCarousalWidget(
-                  itemsCount: Fakers.fakeProds.length,
-                  maxItemWidth: 128,
-                  itemBuilder: (BuildContext context, int index) {
-                    return _TopRatedCard(Fakers.fakeProds[index]);
-                  },
-                ),
-              ),
-              Align(
-                alignment: const Alignment(0, 0.7),
-                child: Column(
-                  spacing: 8,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(L10n.tr().earnYourFirst5OrdersForFree, style: TStyle.blackBold(16)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: StatefulBuilder(
-                        builder: (context, setState) {
-                          return SubCategoriesWidget(
-                            subCategories: subCats.map((e) => (name: e.name, image: e.image, id: e.id, isAdd: false)).toList(),
-                            onSubCategorySelected: (index) {
-                              RestaurantCategoryRoute(subcatName: subCats[index].name, subCatId: subCats[index].id, $extra: vendor).push(context);
-                            },
-                            selectedId: currentindex,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: CircularCarousalWidget(
+              itemsCount: Fakers.fakeProds.length,
+              maxItemWidth: 128,
+              itemBuilder: (BuildContext context, int index) {
+                return _TopRatedCard(Fakers.fakeProds[index]);
+              },
+            ),
           ),
         ),
       ],

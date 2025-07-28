@@ -1,4 +1,5 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 sealed class RestaurantsOfCategoryStates {
@@ -13,6 +14,43 @@ sealed class RestaurantsOfCategoryErrorState extends RestaurantsOfCategoryStates
 
 class RestaurantsOfCategoryInitial extends RestaurantsOfCategoryStates {
   RestaurantsOfCategoryInitial() : super(restaurants: []);
+}
+
+///
+/// page data states
+sealed class RestaurantsOfCategoryPageDataStates extends RestaurantsOfCategoryStates {
+  final String name;
+  final List<(String, CardStyle, List<RestaurantEntity>)> lists;
+  final List<BannerEntity> banners;
+  RestaurantsOfCategoryPageDataStates({
+    super.restaurants = const [],
+    this.name = '',
+    this.lists = const [],
+    this.banners = const [],
+  });
+}
+
+class RestaurantsOfCategoryPageDataLoading extends RestaurantsOfCategoryPageDataStates {
+  RestaurantsOfCategoryPageDataLoading()
+    : super(
+        restaurants: Fakers.restaurants,
+        lists: [('', CardStyle.typeOne, Fakers.restaurants)],
+        banners: Fakers.banners,
+      );
+}
+
+class RestaurantsOfCategoryPageDataLoaded extends RestaurantsOfCategoryPageDataStates {
+  RestaurantsOfCategoryPageDataLoaded({
+    required super.restaurants,
+    required super.name,
+    required super.lists,
+    required super.banners,
+  });
+}
+
+class RestaurantsOfCategoryPageDataError extends RestaurantsOfCategoryPageDataStates {
+  final String error;
+  RestaurantsOfCategoryPageDataError(this.error);
 }
 
 ///

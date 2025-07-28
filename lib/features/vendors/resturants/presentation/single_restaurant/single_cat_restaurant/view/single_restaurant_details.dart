@@ -13,31 +13,18 @@ import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
-import 'package:go_router/go_router.dart';
 
-part 'single_restaurant_details.g.dart';
 part 'widgets/food_details_widget.dart';
 part 'widgets/food_images_gallery.dart';
 
-@TypedGoRoute<SingleCatRestaurantRoute>(path: SingleCatRestaurantScreen.routeUriId)
-@immutable
-class SingleCatRestaurantRoute extends GoRouteData with _$SingleCatRestaurantRoute {
-  const SingleCatRestaurantRoute({required this.id});
-  final int id;
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return SingleCatRestaurantScreen(vendorId: id);
-  }
-}
-
 class SingleCatRestaurantScreen extends StatelessWidget {
-  const SingleCatRestaurantScreen({super.key, required this.vendorId});
-  final int vendorId;
-  static const routeUriId = '/single-cat-restaurant';
+  const SingleCatRestaurantScreen({super.key, required this.restaurant});
+  final RestaurantEntity restaurant;
   @override
   Widget build(BuildContext context) {
-    final listItems = [VendorInfoCard(Fakers.restaurants.first), const _FoodImagesGallery(), _FoodDetailsWidget(product: Fakers.fakeProds.first)];
+    final listItems = [VendorInfoCard(restaurant), const _FoodImagesGallery(), _FoodDetailsWidget(product: Fakers.fakeProds.first)];
     return Scaffold(
       appBar: const MainAppBar(),
       body: ListView.separated(

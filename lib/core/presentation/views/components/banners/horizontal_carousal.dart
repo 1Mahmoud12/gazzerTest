@@ -1,30 +1,27 @@
-// part of '../restaurants_menu_screen.dart';
-
 import 'dart:async';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class RestCatCarousal extends StatefulWidget {
-  const RestCatCarousal({super.key});
-
+class HorizontalCarousal extends StatefulWidget {
+  const HorizontalCarousal({super.key, required this.images});
+  final List<String> images;
   @override
-  State<RestCatCarousal> createState() => _RestCatCarousalState();
+  State<HorizontalCarousal> createState() => _HorizontalCarousalState();
 }
 
-class _RestCatCarousalState extends State<RestCatCarousal> {
+class _HorizontalCarousalState extends State<HorizontalCarousal> {
   final PageController controller = PageController(viewportFraction: 1);
-  final adds = [Assets.assetsPngRestAdd1, Assets.assetsPngRestAdd2, Assets.assetsPngRestAdd3];
   late final Timer timer;
   int index = 0;
 
-  _animate() {
-    if (index < (adds.length - 1)) {
+  void _animate() {
+    if (index < (widget.images.length - 1)) {
       controller.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeInOut);
       setState(() => index++);
     } else {
@@ -57,11 +54,10 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
         children: [
           PageTransitionSwitcher(
             duration: Durations.long4,
-            transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
-                FadeTransition(opacity: primaryAnimation, child: child),
-            child: Image.asset(
+            transitionBuilder: (child, primaryAnimation, secondaryAnimation) => FadeTransition(opacity: primaryAnimation, child: child),
+            child: CustomNetworkImage(
               key: ValueKey(index),
-              adds[index],
+              widget.images[index],
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
@@ -72,7 +68,7 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
             width: double.infinity,
             child: PageView.builder(
               controller: controller,
-              itemCount: adds.length,
+              itemCount: widget.images.length,
               scrollDirection: Axis.horizontal,
               padEnds: true,
               onPageChanged: (value) => setState(() => index = value),
@@ -95,7 +91,7 @@ class _RestCatCarousalState extends State<RestCatCarousal> {
             alignment: const Alignment(0, 0.9),
             child: SmoothPageIndicator(
               controller: controller, // PageController
-              count: adds.length,
+              count: widget.images.length,
               effect: CustomizableEffect(
                 dotDecoration: DotDecoration(
                   height: 7,

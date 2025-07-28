@@ -62,7 +62,24 @@ class PlateDTO extends StoreItemDTO {
       options: [],
       outOfStock: id?.isEven ?? false,
       badge: '30%',
-      reviewCount: 20
+      reviewCount: 20,
+    );
+  }
+
+  PlateEntity toPlateEntity() {
+    return PlateEntity(
+      id: id!,
+      categoryPlateId: plateCategoryId ?? 0,
+      name: plateName ?? '',
+      description: plateDescription ?? '',
+      image: Fakers.netWorkPRoductImage,
+      price: double.tryParse(price.toString()) ?? 0,
+      rate: 0.0,
+      priceBeforeDiscount: 0,
+      options: [],
+      outOfStock: id?.isEven ?? false,
+      badge: '30%',
+      reviewCount: 20,
     );
   }
 }
@@ -121,7 +138,7 @@ class ProductDTO extends StoreItemDTO {
       priceBeforeDiscount: double.tryParse(appPrice.toString()) ?? 0,
       outOfStock: id?.isEven ?? false,
       badge: '30%',
-      reviewCount: 20
+      reviewCount: 20,
     );
   }
 }

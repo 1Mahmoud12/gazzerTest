@@ -64,7 +64,7 @@ class _ProfileHeaderWidget extends StatelessWidget {
                     child: ClipOval(
                       child: AspectRatio(
                         aspectRatio: 1,
-                        child: Image.network(
+                        child: CustomNetworkImage(
                           client?.image ?? Fakers.netWorkImage,
                         ),
                       ),

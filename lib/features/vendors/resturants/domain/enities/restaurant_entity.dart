@@ -9,7 +9,7 @@ class RestaurantEntity extends GenericVendorEntity {
   final String? address;
   final List<CategoryOfPlateEntity>? categoryOfPlate;
 
-  RestaurantEntity({
+  const RestaurantEntity({
     this.reviewCount = 0,
     this.deliveryFees,
     this.promotionalMessage,

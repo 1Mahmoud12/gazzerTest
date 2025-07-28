@@ -7,17 +7,19 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_horz_scroll_horz_card_list_component.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_list_switche.dart';
+import 'package:gazzer/features/vendors/resturants/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 // part 'widgets/rest_cat_carousal.dart';
@@ -48,6 +50,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
     final topPadding = MediaQuery.paddingOf(context).top;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: FloatingDraggableWidget(
         floatingWidget: const CartFloatingBtn(),
         floatingWidgetHeight: 50,
@@ -57,16 +60,23 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
           builder: (context, state) {
             if (state is! ScreenDataStates) return const SizedBox.shrink();
             if (state is ScreenDataError) {
-              return FailureWidget(
-                message: state.error,
-                onRetry: () => cubit.loadScreenData(),
+              return Column(
+                children: [
+                  const RestCatHeaderWidget(),
+                  Expanded(
+                    child: FailureWidget(
+                      message: state.error,
+                      onRetry: () => cubit.loadScreenData(),
+                    ),
+                  ),
+                ],
               );
             }
             final isLoading = state is ScreenDataLoading;
             final tabs = state.categories.map((e) => (e.$1.image, e.$1.name, e.$1.id)).toList();
             return RefreshIndicator(
               onRefresh: () async {
-                await Future.wait([cubit.getCategoriesOfPlates(), cubit.gettBanners()]);
+                cubit.loadScreenData();
               },
               child: Skeletonizer(
                 enabled: isLoading,
@@ -75,15 +85,21 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   ///
                   ///
                   preHerader: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      RestCatHeaderWidget(
-                        title: L10n.tr().bestMenuOfRestaurants,
+                      const RestCatHeaderWidget(),
+                      Skeleton.shade(
+                        child: GradientText(text: L10n.tr().bestMenuOfRestaurants, style: TStyle.primaryBold(24)),
                       ),
+                      Text(L10n.tr().chooseYourFavorite, style: TStyle.greyBold(14).copyWith(letterSpacing: 2)),
+
                       VerticalSpacing(topPadding + 16),
                       // const RestCatCarousal(),
-                      if (state.banners.isNotEmpty) MainBannerWidget(banner: state.banners.first),
+                      if (isLoading || state.banners.isNotEmpty)
+                        MainBannerWidget(
+                          banner: isLoading ? Fakers.banners.first : state.banners.first,
+                        ),
                       const VerticalSpacing(24),
                       Padding(
                         padding: AppConst.defaultHrPadding,
@@ -91,34 +107,37 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                       ),
                     ],
                   ),
-                  itemsCount: state.categories.length,
+                  itemsCount: (isLoading ? Fakers.categoriesOfPlateentity : state.categories).length,
 
                   ///
                   tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
-                  tabBuilder: (p0, index) => Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircleGradientBorderedImage(image: tabs[index].$1),
-                      Padding(
-                        padding: AppConst.defaultHrPadding,
-                        child: Text(tabs[index].$2, style: TStyle.blackSemi(13)),
-                      ),
-                    ],
-                  ),
+                  tabBuilder: (p0, index) {
+                    final tab = isLoading ? ('test', Fakers.netWorkImage, index) : tabs[index];
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleGradientBorderedImage(image: tab.$1),
+                        Padding(
+                          padding: AppConst.defaultHrPadding,
+                          child: Text(tab.$2, style: TStyle.blackSemi(13)),
+                        ),
+                      ],
+                    );
+                  },
 
                   ///
                   listItemBuilder: (context, index) {
-                    final cat = state.categories[index];
+                    final cat = isLoading ? (Fakers.categoryOfPlate, Fakers.restaurants) : state.categories[index];
                     return Column(
                       children: [
-                        RestListSwitche(
+                        RestaurantsListSwitche(
                           title: cat.$1.name,
                           items: cat.$2.isNotEmpty ? cat.$2 : Fakers.restaurants,
-                          onViewAllPressed: () => RestaurantsOfCategoryRoute($extra: cat.$1).push(context),
+                          onViewAllPressed: () => RestaurantsOfCategoryRoute(id: cat.$1.id).push(context),
                           cardImageToTextRatios: {CardStyle.typeOne: 0.8},
                           corners: {CardStyle.typeThree: Corner.topLeft},
-                          onSingleCardPressed: <RestaurantEntity>(item) {
-                            RestaurantsOfCategoryRoute($extra: cat.$1).push(context);
+                          onSingleCardPressed: (item) {
+                            RestaurantDetilsRoute(id: item.id).push(context);
                           },
                           // TODO: Ask Product Owner about this
                           style: index == state.categories.length - 1 ? CardStyle.typeThree : cat.$1.style,

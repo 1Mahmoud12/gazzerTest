@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -34,7 +35,7 @@ class VendorInfoCard extends StatelessWidget {
                       spacing: 6,
                       children: [
                         ClipOval(
-                          child: Image.network(vendor.image, height: imageSize, width: imageSize, fit: BoxFit.cover),
+                          child: CustomNetworkImage(vendor.image, height: imageSize, width: imageSize, fit: BoxFit.cover),
                         ),
                         Expanded(
                           child: Column(

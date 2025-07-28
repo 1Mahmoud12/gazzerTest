@@ -1,7 +1,8 @@
 enum BannerType {
   image('Image'),
   detailed('Detailed'),
-  slider('Slider'),
+  sliderHorizontal('SliderHorizontal'),
+  sliderVertical('SliderVertical'),
   countdown('Countdown'),
   shaking('Shaking'),
   unknown('Unknown');

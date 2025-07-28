@@ -40,7 +40,7 @@ class PlatesRepoImp extends PlatesRepo {
   @override
   Future<Result<List<PlateEntity>>> getPlatesByRestAnCatOfPlate(int restId, int catOfPlateId) {
     return super.call(
-      apiCall: () => _apiClient.get(endpoint: Endpoints.platesByRestAnCatOfPlate(restId, catOfPlateId)),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.platesOfRestaurantCategory(restId, catOfPlateId)),
       parser: (response) {
         final data = <PlateEntity>[];
         for (var item in response.data['data']) {

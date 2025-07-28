@@ -3,6 +3,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
@@ -54,12 +55,11 @@ class StoreCardThree extends StatelessWidget {
                           padding: const EdgeInsets.all(2),
                           child: ClipPath(
                             clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: Corner.bottomRight),
-                            child: Image.network(
+                            child: CustomNetworkImage(
                               vendor.image,
                               width: double.infinity,
                               height: double.infinity,
                               fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) => const Icon(Icons.info, color: Co.red),
                             ),
                           ),
                         ),

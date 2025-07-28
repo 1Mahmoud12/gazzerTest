@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
@@ -50,11 +51,9 @@ class StoreCardOne extends StatelessWidget {
                   child: Stack(
                     children: [
                       SizedBox.expand(
-                        child: Image.network(
+                        child: CustomNetworkImage(
                           vendor.image,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              Icon(Icons.info_outline, size: 50, color: Co.tertiary),
                         ),
                       ),
                       const CardBadge(text: '30%', alignment: AlignmentDirectional.topStart),

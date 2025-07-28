@@ -3,7 +3,7 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/domain/repos/banner_repo.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_reponse.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_page_reponse.dart';
 import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';
@@ -22,8 +22,6 @@ class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
     final result = await _restRepo.loadRestaurantsMenuPage();
     switch (result) {
       case Ok<RestaurantsMenuReponse> data:
-        print('data: ${data.value.categoryWithrestaurants.length}');
-        print('banners: ${data.value.banners.length}');
         emit(ScreenDataLoaded(categories: data.value.categoryWithrestaurants, banners: data.value.banners));
         break;
       case Err error:

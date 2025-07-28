@@ -54,7 +54,15 @@ class Fakers {
       type: "طعام",
     ),
   );
-  static const fakeSubCats = [
+  static const categoryOfPlate = CategoryOfPlateEntity(
+    id: 0,
+    name: "فئة 0",
+    image: "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    parentId: 0,
+    style: CardStyle.typeOne,
+    layout: LayoutType.grid,
+  );
+  static const categoriesOfPlateentity = [
     CategoryOfPlateEntity(
       id: 0,
       name: "فئة 0",
@@ -125,16 +133,41 @@ class Fakers {
 
   ///
 
+  static const restaurant = RestaurantEntity(
+    id: 1,
+    name: "طبق ",
+    rate: 3,
+    image:
+        "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+    reviewCount: 25,
+    categoryOfPlate: categoriesOfPlateentity,
+    address: 'ZAMALEK',
+    deliveryFees: 123,
+    badge: '30%',
+    priceRange: '\$10 - \$20',
+    tag: ['Free delivery'],
+    location: 'ZAMALEK',
+    subCategories: [
+      GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
+      GenericSubCategoryEntity(id: 2, name: 'Pizza', image: ''),
+    ],
+    startTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
+    endTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
+    parentId: 1,
+    deliveryTime: '30-45 min',
+    deliveryFee: 30.0,
+    rateCount: 13,
+  );
   static final List<RestaurantEntity> restaurants = List.generate(
     8,
-    (index) => RestaurantEntity(
-      id: index,
-      name: "طبق ${index + 1}",
-      rate: _random.nextDouble() * 5,
+    (index) => const RestaurantEntity(
+      id: 1,
+      name: "طبق ",
+      rate: 3,
       image:
           "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-      reviewCount: _random.nextInt(100),
-      categoryOfPlate: fakeSubCats,
+      reviewCount: 25,
+      categoryOfPlate: categoriesOfPlateentity,
       address: 'ZAMALEK',
       deliveryFees: 123,
       badge: '30%',
@@ -145,9 +178,9 @@ class Fakers {
         GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
         GenericSubCategoryEntity(id: 2, name: 'Pizza', image: ''),
       ],
-      startTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
-      endTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
-      parentId: index % 3 == 0 ? null : index - 1, // Random parent ID for testing
+      startTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
+      endTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
+      parentId: 1,
       deliveryTime: '30-45 min',
       deliveryFee: 30.0,
       rateCount: 13,
