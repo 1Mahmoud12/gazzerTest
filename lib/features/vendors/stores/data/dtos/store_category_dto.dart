@@ -1,5 +1,5 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 
 class StoreCategoryDto {
   int? id;
@@ -11,7 +11,7 @@ class StoreCategoryDto {
 
   StoreCategoryDto.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = json['name'] ?? json['category_name'];
     image = json['image'];
     cardStyle = json['card_style'];
     layout = json['layout'];

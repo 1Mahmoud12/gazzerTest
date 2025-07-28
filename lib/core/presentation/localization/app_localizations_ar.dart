@@ -21,7 +21,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get soon => 'قريباً';
 
   @override
-  String nameisCurrentlyyClosedWeWillOpenAt(String name, String time) {
+  String nameisCurrentlyClosedWeWillOpenAt(String name, String time) {
     return '$name مغلق حالياً، وسيفتح في $time';
   }
 

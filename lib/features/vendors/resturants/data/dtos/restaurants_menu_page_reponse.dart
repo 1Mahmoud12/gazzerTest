@@ -1,6 +1,6 @@
 import 'package:gazzer/core/data/dto/banner_dto.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart';

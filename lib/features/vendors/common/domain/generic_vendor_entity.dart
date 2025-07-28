@@ -1,9 +1,9 @@
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 
 export 'package:gazzer/core/presentation/extensions/enum.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/restaurant_entity.dart';
-part 'package:gazzer/features/vendors/stores/domain/store_entity.dart';
+part 'package:gazzer/features/vendors/stores/domain/entities/store_entity.dart';
 
 /// generic class for both [RestaurantEntity] for restaurants and [StoreEntity] for stores
 

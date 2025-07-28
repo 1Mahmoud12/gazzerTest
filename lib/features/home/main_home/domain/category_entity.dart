@@ -18,5 +18,5 @@ class CategoryEntity {
   final String image;
   final CategoryType type;
 
-  CategoryEntity(this.id, this.name, this.image, this.type);
+ const CategoryEntity(this.id, this.name, this.image, this.type);
 }

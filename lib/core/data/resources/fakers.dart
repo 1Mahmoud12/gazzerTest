@@ -6,7 +6,7 @@ import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/category_add_model.dart';
 
@@ -41,6 +41,12 @@ class Fakers {
       _catsImages[_random.nextInt(_catsImages.length)],
       CategoryType.restaurant,
     ),
+  );
+  static const mainCategory = CategoryEntity(
+    0,
+    "فئة 0  ",
+    netWorkImage,
+    CategoryType.restaurant,
   );
 
   static final restCatAdds = List.generate(
@@ -98,12 +104,12 @@ class Fakers {
     ),
   ];
 
-  static final netWorkImage =
+  static const netWorkImage =
       "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
   static final netWorkPRoductImage =
       "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
 
-  static final _catsImages = const [
+  static const _catsImages = [
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
     "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",

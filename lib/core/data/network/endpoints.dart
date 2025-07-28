@@ -42,7 +42,7 @@ class Endpoints {
   static String restaurantPage(int id) => 'pages/restaurant-page/$id';
   // stores
   static String storesMenuPage(int mainId) => 'pages/store-category-page/$mainId';
-  static String storesOfSpecificCategoryyPage(int mainId, int subId) =>
+  static String storesOfSpecificCategoryPage(int mainId, int subId) =>
       'pages/store-category/$mainId/item-category-page/$subId';
 
   /// ** stores categories
@@ -55,6 +55,7 @@ class Endpoints {
       "restaurants/category/$catId/top-rated";
   static String offersRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/has-offers";
   static String todaysPicRestaurants(int catId, {int pag = 0, int limit = 10}) => "lists/todays-picks-restaurants";
+  static String orderWith(int restId, int plateId) => "restaurants/$restId/plates/plate/$plateId/ordered-with";
 
   /// ** categoryOfPlates
   static const platesCategories = 'restaurants/plates/categories';
@@ -62,7 +63,8 @@ class Endpoints {
 
   /// ** paltes
   static String platesByRest(int restId) => "restaurants/$restId/plates";
-  static String platesOfRestaurantCategory(int restId, int catId) => "restaurants/$restId/plates/category/$catId?is_paginated=0";
+  static String platesOfRestaurantCategory(int restId, int catId) =>
+      "restaurants/$restId/plates/category/$catId?is_paginated=0";
 
   // ** banners
   static const restaurantsMenuBanners = "banners/restaurants-page";

@@ -126,7 +126,7 @@ class ProductDTO extends StoreItemDTO {
   }
 
   @override
-  GenericItemEntity toProductItem() {
+  ProductEntity toProductItem() {
     return ProductEntity(
       id: id!,
       name: plateName ?? '',

@@ -13,9 +13,10 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_c
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant__sub_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/store_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/store_menu_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/view/pharmacy_menu_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
 import 'package:go_router/go_router.dart';
 
 ShellRoute get nestedRoutes => ShellRoute(
@@ -28,7 +29,8 @@ ShellRoute get nestedRoutes => ShellRoute(
       builder: (context, state) => BlocProvider(create: (context) => di<HomeCubit>(), child: const HomeScreen()),
     ),
 
-    /// home screen nested
+    /// *** home screen nested
+    /// restauratns
     GoRoute(
       path: RestaurantsMenuScreen.route,
       builder: (context, state) => BlocProvider(
@@ -40,6 +42,9 @@ ShellRoute get nestedRoutes => ShellRoute(
     $restaurantCategoryRoute,
     $restaurantDetilsRoute,
     $multiCatRestaurantsRoute,
+
+    /// stores
+    $storeMenuSwitcherRoute,
 
     ///
     GoRoute(
@@ -75,6 +80,8 @@ final storesRoutes = [
     path: StoreMenuScreen.route,
     builder: (context, state) => const StoreMenuScreen(),
   ),
+  $storeMenuSwitcherRoute,
+
   $storeOfCategoryRoute,
 ];
 

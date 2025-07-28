@@ -5,16 +5,15 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/store_card_three.dart';
 
-class StoreHorzScrollCardOneList<T> extends StatelessWidget {
-  const StoreHorzScrollCardOneList({
+class GrocHorzScrollList<T> extends StatelessWidget {
+  /// [cardImageToTextRatio] and [corner] has no role
+  const GrocHorzScrollList({
     super.key,
     required this.title,
     required this.onViewAllPressed,
     required this.items,
     this.cardWidth,
     this.cardHeight,
-    this.cardImageToTextRatio,
-    this.corner,
     required this.onSinglceCardPressed,
   }) : assert(
          items is List<GenericVendorEntity> || items is List<GenericItemEntity>,
@@ -26,8 +25,6 @@ class StoreHorzScrollCardOneList<T> extends StatelessWidget {
   final List<T> items;
   final double? cardWidth;
   final double? cardHeight;
-  final double? cardImageToTextRatio;
-  final Corner? corner;
 
   @override
   Widget build(BuildContext context) {

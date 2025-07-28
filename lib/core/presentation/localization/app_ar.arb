@@ -3,8 +3,8 @@
   "addSpecialNote": "إضافة ملاحظة خاصة",
   "vendorCommon_________________Start": "__________________",
   "soon": "قريباً",
-  "nameisCurrentlyyClosedWeWillOpenAt": "{name} مغلق حالياً، وسيفتح في {time}",
-  "@nameisCurrentlyyClosedWeWillOpenAt": {
+  "nameisCurrentlyClosedWeWillOpenAt": "{name} مغلق حالياً، وسيفتح في {time}",
+  "@nameisCurrentlyClosedWeWillOpenAt": {
     "placeholders": {
       "name": {
         "type": "String"

@@ -60,7 +60,7 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
             if (difference < 1)
               Expanded(
                 child: Text(
-                  L10n.tr().nameisCurrentlyyClosedWeWillOpenAt(
+                  L10n.tr().nameisCurrentlyClosedWeWillOpenAt(
                     widget.name,
                     widget.startTime?.defaultTimeFormat ?? L10n.tr().soon,
                   ),

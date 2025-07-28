@@ -122,11 +122,11 @@ abstract class AppLocalizations {
   /// **'Soon'**
   String get soon;
 
-  /// No description provided for @nameisCurrentlyyClosedWeWillOpenAt.
+  /// No description provided for @nameisCurrentlyClosedWeWillOpenAt.
   ///
   /// In en, this message translates to:
   /// **'{name} is currently closed. We will open at {time}'**
-  String nameisCurrentlyyClosedWeWillOpenAt(String name, String time);
+  String nameisCurrentlyClosedWeWillOpenAt(String name, String time);
 
   /// No description provided for @thisRestaurantIsCurrentlyUnavailable.
   ///

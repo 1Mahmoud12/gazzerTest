@@ -25,6 +25,9 @@ import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
+import 'package:gazzer/features/vendors/stores/data/repos/stores_repo_imp.dart';
+import 'package:gazzer/features/vendors/stores/domain/stores_repo.dart';
+import 'package:gazzer/features/vendors/stores/presentation/cubit/stores_menu_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +64,7 @@ void _registerRepos() {
   di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get(), di.get()));
   di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get(), di.get()));
   di.registerLazySingleton<BannerRepo>(() => BannerRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<StoresRepo>(() => StoresRepoImp(di.get(), di.get()));
 }
 
 void _registerCubits() {
@@ -70,6 +74,11 @@ void _registerCubits() {
   di.registerFactory(() => RestaurantsMenuCubit(di.get(), di.get()));
   di.registerFactory(() => SplashCubit(di.get(), di.get()));
   di.registerFactory(() => ProfileCubit(di.get()));
-  di.registerCachedFactoryParam<RestaurantsOfCategoryCubit, int, Null>((id, _) => RestaurantsOfCategoryCubit(di.get(), id));
-  di.registerCachedFactoryParam<SingleRestaurantCubit, int, Null>((id, _) => SingleRestaurantCubit(di.get(), id));
+  di.registerFactoryParam<RestaurantsOfCategoryCubit, int, Null>(
+    (id, _) => RestaurantsOfCategoryCubit(di.get(), id),
+  );
+  di.registerFactoryParam<SingleRestaurantCubit, int, Null>(
+    (id, _) => SingleRestaurantCubit(di.get(), id),
+  );
+  di.registerFactoryParam<StoresMenuCubit, int, Null>((id, _) => StoresMenuCubit(di.get(), id));
 }

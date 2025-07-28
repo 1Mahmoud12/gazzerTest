@@ -1,5 +1,5 @@
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 sealed class RestaurantsMenuStates {

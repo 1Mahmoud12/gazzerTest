@@ -20,7 +20,9 @@ class StoresRepoImp extends StoresRepo {
 
   @override
   Future<Result<StoresOfCategoryResponse>> loadStoresOfCategoryPage(int mainId, int subId) {
-    // TODO: implement loadStoresOfCategoryPage
-    throw UnimplementedError();
+    return super.call(
+      apiCall: () async => _apiClient.get(endpoint: Endpoints.storesOfSpecificCategoryPage(mainId, subId)),
+      parser: (response) => StoresOfCategoryResponse.fromJson(response.data['data']),
+    );
   }
 }

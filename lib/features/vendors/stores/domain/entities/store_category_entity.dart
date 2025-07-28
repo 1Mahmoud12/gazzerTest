@@ -1,4 +1,4 @@
-part of 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+part of 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 
 class StoreCategoryEntity extends GenericSubCategoryEntity {
   const StoreCategoryEntity({

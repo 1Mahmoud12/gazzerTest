@@ -3,8 +3,8 @@
   "addSpecialNote": "Add Special Note",
   "vendorCommon_________________Start": "__________________",
   "soon": "Soon",
-  "nameisCurrentlyyClosedWeWillOpenAt": "{name} is currently closed. We will open at {time}",
-  "@nameisCurrentlyyClosedWeWillOpenAt": {
+  "nameisCurrentlyClosedWeWillOpenAt": "{name} is currently closed. We will open at {time}",
+  "@nameisCurrentlyClosedWeWillOpenAt": {
     "placeholders": {
       "name": {
         "type": "String"

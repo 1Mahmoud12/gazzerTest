@@ -12,7 +12,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';

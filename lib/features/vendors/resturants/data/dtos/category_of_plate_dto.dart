@@ -1,5 +1,5 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 
 class CategoryOfPlateDTO {
   int? id;
