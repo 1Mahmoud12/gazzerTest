@@ -59,6 +59,7 @@ class ApiClient {
     required String endpoint,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   }) async {
     try {
       final response = await _dio.get(
@@ -91,6 +92,7 @@ class ApiClient {
     Map<String, dynamic>? headers,
     Duration? customRequestDuration,
     void Function(int, int)? onSendProgress,
+    CancelToken? cancelToken,
   }) async {
     assert(requestBody is Map? || requestBody is FormData, 'requestBody must be a Map or FormData for file uploads');
     try {

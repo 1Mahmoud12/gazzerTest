@@ -60,6 +60,7 @@ class RestaurantDetilsScreen extends StatelessWidget {
         } else {
           return Skeletonizer(
             child: SingleCatRestaurantScreen(
+              showOrderedWith: false,
               state: SingleRestaurantLoaded(
                 banners: [],
                 restaurant: Fakers.restaurant,

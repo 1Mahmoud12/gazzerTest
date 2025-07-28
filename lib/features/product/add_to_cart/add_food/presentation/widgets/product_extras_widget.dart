@@ -3,14 +3,17 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
     show GradientText, HorizontalSpacing;
-import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/ordered_with_card.dart';
+import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
 
-class ProductExtrasWidget extends StatelessWidget {
-  const ProductExtrasWidget({super.key, required this.product});
-  final List<GenericItemEntity> product;
+class OrderedWithComponent extends StatelessWidget {
+  const OrderedWithComponent({super.key, required this.product});
+  final List<OrderedWithEntityy> product;
   @override
   Widget build(BuildContext context) {
+    // if (product.isEmpty) {
+    //   return const SizedBox.shrink();
+    // }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 8,
@@ -26,7 +29,9 @@ class ProductExtrasWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               return SizedBox(
                 width: 150,
-                child: VerticalProductCard(product: product[index], canAdd: true, fontFactor: 0.9),
+                child: OrderedWithCard(
+                  product: product[index],
+                ),
               );
             },
           ),

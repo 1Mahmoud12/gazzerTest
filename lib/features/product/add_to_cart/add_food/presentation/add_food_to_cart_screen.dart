@@ -46,7 +46,7 @@ class AddFoodToCartScreen extends StatelessWidget {
                 const VerticalSpacing(24),
                 ProductTypesWidget(product: product),
                 const VerticalSpacing(24),
-                ProductExtrasWidget(product: [product]),
+                const OrderedWithComponent(product: []),
                 const VerticalSpacing(24),
                 AddSpecialNote(
                   onNoteChange: (note) {
