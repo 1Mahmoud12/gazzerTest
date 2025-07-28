@@ -1,17 +1,7 @@
 part of 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class StoreEntity extends GenericVendorEntity {
-  final int reviewCount;
-  final String estimateDeliveryTime;
-  final double? deliveryFees;
-  final String? promotionalMessage;
-
   ///
-  final String? address;
-  final bool? isRestaurant;
-  final int? storeCategoryId;
-  // final List<CategoryOfPlateEntity>? categoryOfPlate;
-
   StoreEntity({
     required super.id,
     required super.name,
@@ -19,13 +9,6 @@ class StoreEntity extends GenericVendorEntity {
     required super.rate,
     super.badge,
     super.priceRange,
-    this.reviewCount = 0,
-    this.estimateDeliveryTime = '',
-    this.deliveryFees,
-    this.promotionalMessage,
-    this.address,
-    this.isRestaurant,
-    this.storeCategoryId,
     super.tag,
     required super.startTime,
     required super.endTime,
@@ -39,6 +22,7 @@ class StoreEntity extends GenericVendorEntity {
     required super.alwaysClosed,
     required super.isFavorite,
     required super.isOpen,
+    super.address,
 
     // this.categoryOfPlate,
   });

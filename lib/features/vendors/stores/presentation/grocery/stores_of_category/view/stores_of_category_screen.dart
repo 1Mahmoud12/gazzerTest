@@ -9,9 +9,9 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_b
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
-import 'package:gazzer/features/vendors/stores/grocery/presentation/store_menu/view/components/store_horz_scroll_card_one_list.dart';
-import 'package:gazzer/features/vendors/stores/grocery/presentation/store_menu/view/widgets/store_header_container.dart';
-import 'package:gazzer/features/vendors/stores/grocery/presentation/stores_of_category/view/components/stores_top_rated_component.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/components/store_horz_scroll_card_one_list.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/store_header_container.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/components/stores_top_rated_component.dart';
 import 'package:go_router/go_router.dart';
 
 part 'store_of_category_screen.g.dart';

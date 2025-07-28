@@ -1,17 +1,13 @@
 part of 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class RestaurantEntity extends GenericVendorEntity {
-  final int reviewCount;
   final double? deliveryFees;
 
   ///
-  final String? address;
   final List<CategoryOfPlateEntity>? categoryOfPlate;
 
   const RestaurantEntity({
-    this.reviewCount = 0,
     this.deliveryFees,
-    this.address,
     this.categoryOfPlate,
     required super.id,
     required super.parentId,
@@ -32,5 +28,6 @@ class RestaurantEntity extends GenericVendorEntity {
     required super.alwaysClosed,
     required super.isFavorite,
     required super.isOpen,
+    super.address,
   });
 }

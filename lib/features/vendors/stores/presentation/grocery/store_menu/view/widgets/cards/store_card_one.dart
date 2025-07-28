@@ -110,7 +110,7 @@ class StoreCardOne extends StatelessWidget {
                             vendor.rate.toStringAsFixed(2),
                             style: TStyle.blackSemi(12).copyWith(color: Co.tertiary),
                           ),
-                          Text("(${vendor.reviewCount})", style: TStyle.blackSemi(11)),
+                          Text("(${vendor.rateCount})", style: TStyle.blackSemi(11)),
                         ],
                       ),
                       // StackedImagesWidget(images: vendor.categoryOfPlate?.map((e) => e.image).toList() ?? []),
@@ -118,7 +118,7 @@ class StoreCardOne extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Icon(Icons.access_time_outlined, color: Co.purple, size: 20),
-                          Text(vendor.estimateDeliveryTime, style: TStyle.greySemi(12)),
+                          Text(vendor.deliveryTime ?? '', style: TStyle.greySemi(12)),
                         ],
                       ),
                     ],

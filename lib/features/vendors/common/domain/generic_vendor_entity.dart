@@ -1,9 +1,9 @@
-import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
 
 export 'package:gazzer/core/presentation/extensions/enum.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/restaurant_entity.dart';
-part 'package:gazzer/features/vendors/stores/grocery/domain/store_entity.dart';
+part 'package:gazzer/features/vendors/stores/domain/store_entity.dart';
 
 /// generic class for both [RestaurantEntity] for restaurants and [StoreEntity] for stores
 
@@ -32,6 +32,8 @@ sealed class GenericVendorEntity {
   final bool isFavorite;
   final bool isOpen;
 
+  final String? address; // ** pending api
+
   bool get isClosed =>
       alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
 
@@ -55,17 +57,6 @@ sealed class GenericVendorEntity {
     required this.alwaysClosed,
     required this.isFavorite,
     required this.isOpen,
-  });
-}
-
-class GenericSubCategoryEntity {
-  final int id;
-  final String name;
-  final String? image;
-
-  const GenericSubCategoryEntity({
-    required this.id,
-    required this.name,
-    required this.image,
+    this.address,
   });
 }

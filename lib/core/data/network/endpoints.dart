@@ -62,7 +62,7 @@ class Endpoints {
 
   /// ** paltes
   static String platesByRest(int restId) => "restaurants/$restId/plates";
-  static String platesOfRestaurantCategory(int restId, int catId) => "restaurants/$restId/plates/$catId?is_paginated=0";
+  static String platesOfRestaurantCategory(int restId, int catId) => "restaurants/$restId/plates/category/$catId?is_paginated=0";
 
   // ** banners
   static const restaurantsMenuBanners = "banners/restaurants-page";

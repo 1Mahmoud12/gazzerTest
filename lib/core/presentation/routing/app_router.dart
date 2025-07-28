@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/routing/routers/unnested_routes.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/view/splash_screen.dart';
-import 'package:gazzer/features/vendors/stores/grocery/presentation/store_menu/view/store_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/store_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(

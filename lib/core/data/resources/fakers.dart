@@ -6,9 +6,9 @@ import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/category_add_model.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
@@ -141,7 +141,6 @@ class Fakers {
     rate: 3,
     image:
         "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-    reviewCount: 25,
     categoryOfPlate: categoriesOfPlateentity,
     address: 'ZAMALEK',
     deliveryFees: 123,
@@ -150,8 +149,8 @@ class Fakers {
     tag: ['Free delivery'],
     location: 'ZAMALEK',
     subCategories: [
-      GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
-      GenericSubCategoryEntity(id: 2, name: 'Pizza', image: ''),
+      CategoryOfPlateEntity(id: 1, name: 'Crepe', image: ''),
+      CategoryOfPlateEntity(id: 2, name: 'Pizza', image: ''),
     ],
     startTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
     endTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
@@ -172,7 +171,6 @@ class Fakers {
       rate: 3,
       image:
           "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-      reviewCount: 25,
       categoryOfPlate: categoriesOfPlateentity,
       address: 'ZAMALEK',
       deliveryFees: 123,
@@ -181,8 +179,8 @@ class Fakers {
       tag: ['Free delivery'],
       location: 'ZAMALEK',
       subCategories: const [
-        GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
-        GenericSubCategoryEntity(id: 2, name: 'Pizza', image: ''),
+        CategoryOfPlateEntity(id: 1, name: 'Crepe', image: ''),
+        CategoryOfPlateEntity(id: 2, name: 'Pizza', image: ''),
       ],
       startTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
       endTime: null, //DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),
@@ -206,18 +204,14 @@ class Fakers {
       rate: _random.nextDouble() * 5,
       image:
           "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
-      reviewCount: _random.nextInt(100),
-      estimateDeliveryTime: "${_random.nextInt(20)} - ${_random.nextInt(20) + 20} دقيقة",
       address: 'ZAMALEK',
-      deliveryFees: 123,
-      isRestaurant: true,
       badge: '30%',
       priceRange: '\$10 - \$20',
       tag: ['Free delivery'],
       location: 'ZAMALEK',
       subCategories: const [
-        GenericSubCategoryEntity(id: 1, name: 'Crepe', image: ''),
-        GenericSubCategoryEntity(id: 2, name: 'Pizza', image: ''),
+        CategoryOfPlateEntity(id: 1, name: 'Crepe', image: ''),
+        CategoryOfPlateEntity(id: 2, name: 'Pizza', image: ''),
       ],
       startTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 0),
       endTime: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 22, 0),

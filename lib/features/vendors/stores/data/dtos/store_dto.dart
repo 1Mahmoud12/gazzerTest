@@ -1,8 +1,6 @@
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_dto.dart';
 
-class RestaurantDTO {
+class StoreDTO {
   int? id;
   String? storeName;
   String? image;
@@ -16,17 +14,27 @@ class RestaurantDTO {
   String? workFrom;
   String? workTo;
   int? is24Hours;
+
   List<String>? tags;
   String? provinceZone;
 
-  // TODO: need to be loaded from api
-  List<CategoryOfPlateDTO>? subcategories;
-  double? deliveryFees;
-  int? rateCount;
-  String? badge;
-  String? priceRange;
+  StoreDTO({
+    this.id,
+    this.storeName,
+    this.image,
+    this.storeCategoryId,
+    this.vendorId,
+    this.address,
+    this.estimatedDeliveryTime,
+    this.rate,
+    this.isFavorite,
+    this.isOpen,
+    this.workFrom,
+    this.workTo,
+    this.is24Hours,
+  });
 
-  RestaurantDTO.fromJson(Map<String, dynamic> json) {
+  StoreDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     storeName = json['store_name'];
     image = json['image'];
@@ -61,35 +69,32 @@ class RestaurantDTO {
     }
   }
 
-  RestaurantEntity toRestEntity() {
-    return RestaurantEntity(
-      id: id!,
-      name: storeName!,
+  StoreEntity toEntityy() {
+    return StoreEntity(
+      id: id ?? 0,
+      name: storeName ?? '',
       image: image ?? '',
       rate: double.tryParse(rate ?? '0') ?? 0.0,
-      location: provinceZone ?? '',
-      address: address,
-      parentId: storeCategoryId,
-      categoryOfPlate: subcategories?.map((e) => e.toCategoryOfPlateEntity()).toList(),
-      tag: tags,
-      isFavorite: isFavorite == 1,
       isOpen: isOpen == 1,
+      isFavorite: isFavorite == 1,
       alwaysOpen: is24Hours == 1,
       startTime: _formDateTimeFromString(workFrom ?? ''),
       endTime: _formDateTimeFromString(workTo ?? ''),
-      subCategories: subcategories
-          ?.map((e) => CategoryOfPlateEntity(id: e.id!, name: e.name ?? '', image: e.image ?? ''))
-          .toList(),
-      deliveryTime: estimatedDeliveryTime != null
-          ? '${(estimatedDeliveryTime! * 0.7).floor()} - ${(estimatedDeliveryTime! * 1.3).ceil()} '
-          : null,
+      address: address,
+      parentId: storeCategoryId,
+      deliveryTime: estimatedDeliveryTime?.toString(),
 
       ///
-      badge: badge,
-      deliveryFees: deliveryFees ?? 0.0,
-      rateCount: rateCount,
-      alwaysClosed: false, // TODO: Determine if this is needed
-      priceRange: priceRange ?? '\$10 - \$20',
+      location: "**BLANK**",
+      deliveryFee: null,
+      badge: null,
+      tag: null,
+      rateCount: null,
+      alwaysClosed: false,
+
+      /// not sure will be needed
+      priceRange: null,
+      subCategories: null,
     );
   }
 }

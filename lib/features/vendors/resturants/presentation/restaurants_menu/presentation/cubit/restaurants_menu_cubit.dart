@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/domain/repos/banner_repo.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_page_reponse.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_states.dart';
 

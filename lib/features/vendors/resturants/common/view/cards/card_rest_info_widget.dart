@@ -30,7 +30,7 @@ class CardRestInfoWidget extends StatelessWidget {
             const Icon(Icons.star, color: Co.tertiary, size: 18),
             const Spacer(),
             Text(vendor.rate.toStringAsFixed(2), style: TStyle.blackBold(13).copyWith(color: Co.tertiary)),
-            Text("(${vendor.reviewCount})", style: TStyle.blackBold(12)),
+            Text("(${vendor.rateCount})", style: TStyle.blackBold(12)),
           ],
         ),
         Row(

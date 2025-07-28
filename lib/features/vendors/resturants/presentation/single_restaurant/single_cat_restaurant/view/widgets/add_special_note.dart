@@ -66,6 +66,15 @@ class _NoteSheetState extends State<_NoteSheet> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                final note = controller.text.trim();
+                context.pop<String>(note);
+              },
+              child: Container(color: Colors.transparent), // Dismissible area
+            ),
+          ),
           DecoratedBox(
             decoration: BoxDecoration(
               color: Co.secText,

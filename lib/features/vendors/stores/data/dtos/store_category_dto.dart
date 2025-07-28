@@ -1,7 +1,7 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
 
-class CategoryOfPlateDTO {
+class StoreCategoryDto {
   int? id;
   int? parentId;
   String? name;
@@ -9,7 +9,7 @@ class CategoryOfPlateDTO {
   String? cardStyle;
   String? layout;
 
-  CategoryOfPlateDTO.fromJson(Map<String, dynamic> json) {
+  StoreCategoryDto.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     image = json['image'];
@@ -18,12 +18,12 @@ class CategoryOfPlateDTO {
     parentId = json['parent_id'];
   }
 
-  CategoryOfPlateEntity toCategoryOfPlateEntity() => CategoryOfPlateEntity(
+  StoreCategoryEntity toEntity() => StoreCategoryEntity(
     id: id!,
     name: name!,
     image: image!,
-    style: CardStyle.fromString(cardStyle ?? ''),
     parentId: parentId,
+    style: CardStyle.fromString(cardStyle ?? ''),
     layout: LayoutType.fromString(layout ?? ''),
   );
 }

@@ -1,7 +1,7 @@
 export 'package:gazzer/core/presentation/extensions/enum.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/plate_entity.dart';
-part 'package:gazzer/features/vendors/stores/grocery/domain/product_entity.dart';
+part 'package:gazzer/features/vendors/stores/domain/product_entity.dart';
 
 /// generic class for both [PlateEntity] for restaurants and [ProductEntity] for stores
 sealed class GenericItemEntity {

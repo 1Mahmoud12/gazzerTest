@@ -1,21 +1,13 @@
-import 'package:equatable/equatable.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+part of 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
 
-class CategoryOfPlateEntity extends Equatable {
-  final int id;
-  final String name;
-  final String image;
-  final int? parentId;
-  final CardStyle style;
-  final LayoutType layout;
-
+class CategoryOfPlateEntity extends GenericSubCategoryEntity {
   const CategoryOfPlateEntity({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.style,
-    required this.layout,
-    required this.parentId,
+    required super.id,
+    required super.name,
+    required super.image,
+    super.style,
+    super.layout,
+    super.parentId,
   });
 
   CategoryOfPlateEntity copyWith({

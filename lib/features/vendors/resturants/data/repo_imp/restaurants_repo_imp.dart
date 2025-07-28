@@ -2,6 +2,7 @@ import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entityy.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
@@ -9,7 +10,6 @@ import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_page_response.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_menu_page_reponse.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurants_of_categoryy_page_response.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
 
 class RestaurantsRepoImp extends RestaurantsRepo {
