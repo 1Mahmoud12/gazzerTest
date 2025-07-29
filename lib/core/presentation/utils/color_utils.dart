@@ -6,7 +6,7 @@ class ColorUtils {
   /// Converts a hex string to a Color object
   /// Supports formats: #RRGGBB, #AARRGGBB, RRGGBB, AARRGGBB
   /// Examples: "#FF5733", "#80FF5733", "FF5733", "80FF5733"
-  static Color _hexToColor(String hexString) {
+  static Color? _hexToColor(String hexString) {
     // Remove # if present
     hexString = hexString.replaceAll('#', '');
 
@@ -17,7 +17,8 @@ class ColorUtils {
 
     // Parse the hex string
     if (hexString.length == 8) {
-      return Color(int.parse('0x$hexString'));
+      final hex = int.tryParse('0x$hexString');
+      return hex == null ? null : Color(hex);
     } else {
       throw ArgumentError('Invalid hex color format: $hexString');
     }
@@ -41,7 +42,8 @@ class ColorUtils {
   static Color safeHexToColor(String? hexString, {Color defaultColor = Colors.grey}) {
     if (hexString == null || hexString.isEmpty) return defaultColor;
     try {
-      return _hexToColor(hexString);
+      final val = _hexToColor(hexString);
+      return val ?? defaultColor;
     } catch (e, stack) {
       di<CrashlyticsRepo>().sendToCrashlytics(e, stack);
       return defaultColor;

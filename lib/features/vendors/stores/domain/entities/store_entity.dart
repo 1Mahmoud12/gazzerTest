@@ -2,7 +2,7 @@ part of 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dar
 
 class StoreEntity extends GenericVendorEntity {
   ///
-  StoreEntity({
+  const StoreEntity({
     required super.id,
     required super.name,
     required super.image,

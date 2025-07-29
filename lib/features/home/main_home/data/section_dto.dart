@@ -38,7 +38,7 @@ class SectionDTO {
     data = [];
     if (type == SectionType.categories) {
       for (var item in json['data']) {
-        data!.add(CategoryDTO.fromJson(item));
+        data!.add(MainCategoryDTO.fromJson(item));
       }
     } else if (type == SectionType.topVendors) {
       for (var item in json['data']) {

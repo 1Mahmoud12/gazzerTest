@@ -54,3 +54,17 @@ enum LayoutType {
     return LayoutType.values.firstWhere((e) => e.type == type, orElse: () => horizontal);
   }
 }
+
+enum DiscountType {
+  percentage('percent'),
+  fixed('fixed'),
+  unkown('unknown');
+
+  final String type;
+
+  const DiscountType(this.type);
+
+  factory DiscountType.fromString(String type) {
+    return DiscountType.values.firstWhere((e) => e.type == type, orElse: () => unkown);
+  }
+}

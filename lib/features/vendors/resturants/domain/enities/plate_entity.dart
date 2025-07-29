@@ -10,13 +10,14 @@ class PlateEntity extends GenericItemEntity {
     required super.description,
     required super.image,
     required super.price,
-    super.priceBeforeDiscount,
     required this.categoryPlateId,
     required this.options,
     required super.rate,
     required super.reviewCount,
     required super.outOfStock,
     super.badge,
+    super.tags,
+    super.offer,
   });
 }
 

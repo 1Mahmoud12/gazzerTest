@@ -8,7 +8,7 @@ final class HomeInitialState extends HomeStates {}
 
 /// Category states
 sealed class CategoryStates extends HomeStates {
-  final List<CategoryEntity> categories;
+  final List<MainCategoryEntity> categories;
   CategoryStates({this.categories = const []});
 }
 
@@ -17,7 +17,7 @@ final class CategoryLoadingState extends CategoryStates {
 }
 
 final class CategorySuccessState extends CategoryStates {
-  CategorySuccessState(List<CategoryEntity> categories) : super(categories: categories);
+  CategorySuccessState(List<MainCategoryEntity> categories) : super(categories: categories);
 }
 
 final class CategoryErrorState extends CategoryStates {

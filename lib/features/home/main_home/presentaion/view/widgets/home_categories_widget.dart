@@ -2,7 +2,7 @@ part of '../home_screen.dart';
 
 class _HomeCategoriesComponent extends StatelessWidget {
   const _HomeCategoriesComponent({required this.items});
-  final List<CategoryEntity> items;
+  final List<MainCategoryEntity> items;
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SizedBox.shrink();
@@ -39,7 +39,7 @@ class _HomeCategoriesComponent extends StatelessWidget {
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.category});
-  final CategoryEntity category;
+  final MainCategoryEntity category;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -73,6 +73,8 @@ class CategoryCard extends StatelessWidget {
             } else if (category.type == CategoryType.grocery) {
               StoreMenuSwitcherRoute(id: category.id).push(context);
             } else {
+              StoreMenuSwitcherRoute(id: category.id).push(context);
+
               print("Unknown category type: ${category.type}");
             }
           },

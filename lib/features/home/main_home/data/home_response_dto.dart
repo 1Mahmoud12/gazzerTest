@@ -4,7 +4,7 @@ import 'package:gazzer/features/home/main_home/data/section_dto.dart';
 import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
 
 class HomeResponseDTO {
-  late final (List<CategoryDTO>, BannerDTO?)? categories;
+  late final (List<MainCategoryDTO>, BannerDTO?)? categories;
   late final (List<SectionItemDTO?>, BannerDTO?)? dailyOffers;
   late final (List<SectionItemDTO?>, BannerDTO?)? suggested;
   late final (List<SectionItemDTO?>, BannerDTO?)? topItems;
@@ -28,7 +28,7 @@ class HomeResponseDTO {
     for (final sec in sections) {
       switch (sec.type) {
         case SectionType.categories:
-          categories = (sec.data!.cast<CategoryDTO>(), sec.banner);
+          categories = (sec.data!.cast<MainCategoryDTO>(), sec.banner);
           break;
         case SectionType.dailyOffers:
           dailyOffers = (sec.data!.cast<SectionItemDTO>(), sec.banner);

@@ -19,7 +19,7 @@ class _RecentOrders extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
-              final prod = Fakers.fakeProds[index];
+              final prod = Fakers.plates[index];
               return SizedBox(
                 width: 150,
                 child: DecoratedBox(

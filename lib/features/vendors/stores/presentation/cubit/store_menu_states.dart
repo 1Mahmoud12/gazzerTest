@@ -5,7 +5,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entit
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 sealed class StoresMenuStates {
-  late final CategoryEntity mainCategory;
+  late final MainCategoryEntity mainCategory;
   late final List<BannerEntity> banners;
   late final List<(StoreCategoryEntity, List<StoreEntity>)> categoryWithStores;
 

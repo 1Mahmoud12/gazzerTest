@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -32,7 +33,7 @@ class _StoresTopRatedComponentState extends State<StoresTopRatedComponent> {
         alignment: const Alignment(-0.6, 0),
         backgroundColor: Colors.transparent,
         label: GradientText(
-          text: "Explore Best",
+          text: L10n.tr().exploreBest,
           style: TStyle.blackBold(32),
         ),
         child: SvgPicture.asset(
@@ -46,7 +47,7 @@ class _StoresTopRatedComponentState extends State<StoresTopRatedComponent> {
         child: Stack(
           children: [
             RotatingItemWidget(
-              items: widget.items.take(5).toList(),
+              items: widget.items.length > 5 ? widget.items.sublist(0, 5) : widget.items,
               onTap: (item) {
                 setState(() => this.item = item);
                 shadowColor.value = Colors.primaries[item.id % Colors.primaries.length];

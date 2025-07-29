@@ -6,6 +6,6 @@ import 'package:gazzer/features/home/main_home/presentaion/data/home_response_mo
 abstract class HomeRepo extends BaseApiRepo {
   HomeRepo(super.crashlyticsRepo);
 
-  Future<Result<List<CategoryEntity>>> getCategories();
+  Future<Result<List<MainCategoryEntity>>> getCategories();
   Future<Result<HomeDataModel>> getHome();
 }

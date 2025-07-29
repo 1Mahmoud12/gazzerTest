@@ -4,7 +4,12 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class RotatingItemWidget extends StatelessWidget {
-  const RotatingItemWidget({super.key, required this.items, required this.onTap, required this.shadowColor});
+  const RotatingItemWidget({
+    super.key,
+    required this.items,
+    required this.onTap,
+    required this.shadowColor,
+  });
   final List<GenericItemEntity> items;
   final Function(GenericItemEntity item) onTap;
   final Color backgroundColor = Colors.transparent;
@@ -71,7 +76,7 @@ class RotatingItemWidget extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: LayoutBuilder(
                 builder: (context, constraints) => CircularMotion.builder(
-                  itemCount: 21,
+                  itemCount: 19,
                   builder: (context, index) {
                     final item = items[index % items.length];
                     return GestureDetector(
@@ -86,8 +91,10 @@ class RotatingItemWidget extends StatelessWidget {
                               backgroundImage: NetworkImage(item.image),
                             ),
                             Text(
-                              item.name,
+                              item.name.length > 10 ? '${item.name.substring(0, 10)}...' : item.name,
                               style: TStyle.greySemi(16),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),

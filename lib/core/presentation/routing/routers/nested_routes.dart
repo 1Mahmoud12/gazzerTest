@@ -13,7 +13,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_c
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant__sub_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/store_menu_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/view/pharmacy_menu_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
@@ -76,13 +76,10 @@ ShellRoute get nestedRoutes => ShellRoute(
 );
 
 final storesRoutes = [
-  GoRoute(
-    path: StoreMenuScreen.route,
-    builder: (context, state) => const StoreMenuScreen(),
-  ),
   $storeMenuSwitcherRoute,
 
-  $storeOfCategoryRoute,
+  $storesOfCategoryRoute,
+  $storeDetailsRoute,
 ];
 
 final pharmacyRoutes = [

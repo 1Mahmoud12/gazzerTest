@@ -135,12 +135,14 @@ class MockApiClient extends _i1.Mock implements _i5.ApiClient {
     required String? endpoint,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
+    _i2.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#get, [], {
               #endpoint: endpoint,
               #queryParameters: queryParameters,
               #headers: headers,
+              #cancelToken: cancelToken,
             }),
             returnValue: _i4.Future<_i2.Response<dynamic>>.value(
               _FakeResponse_2<dynamic>(
@@ -149,6 +151,7 @@ class MockApiClient extends _i1.Mock implements _i5.ApiClient {
                   #endpoint: endpoint,
                   #queryParameters: queryParameters,
                   #headers: headers,
+                  #cancelToken: cancelToken,
                 }),
               ),
             ),
@@ -163,6 +166,7 @@ class MockApiClient extends _i1.Mock implements _i5.ApiClient {
     Map<String, dynamic>? headers,
     Duration? customRequestDuration,
     void Function(int, int)? onSendProgress,
+    _i2.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#post, [], {
@@ -172,6 +176,7 @@ class MockApiClient extends _i1.Mock implements _i5.ApiClient {
               #headers: headers,
               #customRequestDuration: customRequestDuration,
               #onSendProgress: onSendProgress,
+              #cancelToken: cancelToken,
             }),
             returnValue: _i4.Future<_i2.Response<dynamic>>.value(
               _FakeResponse_2<dynamic>(
@@ -183,6 +188,7 @@ class MockApiClient extends _i1.Mock implements _i5.ApiClient {
                   #headers: headers,
                   #customRequestDuration: customRequestDuration,
                   #onSendProgress: onSendProgress,
+                  #cancelToken: cancelToken,
                 }),
               ),
             ),

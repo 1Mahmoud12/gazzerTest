@@ -23,7 +23,6 @@ class CircleGradientBorderedImage extends StatelessWidget {
             aspectRatio: 1.0,
             child: CustomNetworkImage(
               image,
-
               fit: BoxFit.cover,
             ),
           ),

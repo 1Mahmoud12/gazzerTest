@@ -70,7 +70,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         itemCount: 5,
                         separatorBuilder: (context, index) => const HorizontalSpacing(16),
                         itemBuilder: (context, index) {
-                          final prod = Fakers.fakeProds[index];
+                          final prod = Fakers.plates[index];
                           return VerticalRotatedImgCard(
                             prod: prod,
                             onTap: () {

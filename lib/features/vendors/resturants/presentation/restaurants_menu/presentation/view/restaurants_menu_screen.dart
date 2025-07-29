@@ -107,7 +107,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                       ),
                     ],
                   ),
-                  itemsCount: (isLoading ? Fakers.categoriesOfPlateentity : state.categories).length,
+                  itemsCount: (isLoading ? Fakers.categoriesOfPlate : state.categories).length,
 
                   ///
                   tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),

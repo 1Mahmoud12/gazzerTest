@@ -4,7 +4,7 @@ import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class HomeDataModel {
-  late final List<CategoryEntity>? categories;
+  late final List<MainCategoryEntity>? categories;
   late final BannerEntity? categoriesBanner;
   late final List<GenericItemEntity?>? dailyOffers;
   late final BannerEntity? dailyOffersBanner;

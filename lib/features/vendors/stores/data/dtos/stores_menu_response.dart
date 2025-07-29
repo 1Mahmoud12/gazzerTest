@@ -8,12 +8,12 @@ import 'package:gazzer/features/vendors/stores/data/dtos/store_category_dto.dart
 import 'package:gazzer/features/vendors/stores/data/dtos/store_dto.dart';
 
 class StoresMenuResponse {
-  late final CategoryEntity mainCategory;
+  late final MainCategoryEntity mainCategory;
   late final List<BannerEntity> banners;
   late final List<(StoreCategoryEntity, List<StoreEntity>)> categoryWzStores;
 
   StoresMenuResponse.fromJson(Map<String, dynamic> json) {
-    mainCategory = CategoryDTO.fromJson(json['store_category']).toCategoryEntity();
+    mainCategory = MainCategoryDTO.fromJson(json['store_category']).toCategoryEntity();
     banners = [];
     if (json['banners'] != null) {
       for (var banner in json['banners']) {

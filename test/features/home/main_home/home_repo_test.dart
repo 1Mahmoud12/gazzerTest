@@ -45,8 +45,8 @@ void main() async {
 
         final result = await homeRepo.getCategories();
 
-        expect(result, isInstanceOf<Ok<List<CategoryEntity>>>());
-        expect((result as Ok<List<CategoryEntity>>).value, isNotEmpty);
+        expect(result, isInstanceOf<Ok<List<MainCategoryEntity>>>());
+        expect((result as Ok<List<MainCategoryEntity>>).value, isNotEmpty);
       },
     );
 
@@ -62,8 +62,8 @@ void main() async {
 
         final result = await homeRepo.getCategories();
 
-        expect(result, isInstanceOf<Err<List<CategoryEntity>>>());
-        expect((result as Err<List<CategoryEntity>>).error.message, isNotNull);
+        expect(result, isInstanceOf<Err<List<MainCategoryEntity>>>());
+        expect((result as Err<List<MainCategoryEntity>>).error.message, isNotNull);
         expect(result.error.message, contains('error'));
       },
     );

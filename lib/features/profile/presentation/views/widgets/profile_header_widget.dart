@@ -65,7 +65,7 @@ class _ProfileHeaderWidget extends StatelessWidget {
                       child: AspectRatio(
                         aspectRatio: 1,
                         child: CustomNetworkImage(
-                          client?.image ?? Fakers.netWorkImage,
+                          client.image ?? Fakers.netWorkImage,
                         ),
                       ),
                     ),
@@ -78,16 +78,16 @@ class _ProfileHeaderWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(client?.clientName ?? L10n.tr().notSetYet, style: TStyle.primarySemi(16)),
-                    if (client?.email != null)
+                    Text(client.clientName, style: TStyle.primarySemi(16)),
+                    if (client.email != null)
                       Text(
-                        client?.email ?? L10n.tr().notSetYet,
+                        client.email ?? L10n.tr().notSetYet,
                         style: TStyle.primaryRegular(12, font: FFamily.inter).copyWith(
                           color: Colors.black87,
                         ),
                       ),
-                    SizedBox.shrink(),
-                    Text("${L10n.tr().memberSince} ${client?.formatedCreatedAt}", style: TStyle.blackRegular(12, font: FFamily.inter)),
+                    const SizedBox.shrink(),
+                    Text("${L10n.tr().memberSince} ${client.formatedCreatedAt}", style: TStyle.blackRegular(12, font: FFamily.inter)),
                   ],
                 ),
               ),

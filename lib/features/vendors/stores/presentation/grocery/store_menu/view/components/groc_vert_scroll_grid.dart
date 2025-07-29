@@ -44,37 +44,34 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
             title: title ?? '',
             onPressed: onViewAllPressed,
           ),
-          SizedBox(
-            height: cardHeight ?? 160,
-            child: GridView.builder(
-              physics: canScroll ? null : const NeverScrollableScrollPhysics(),
+          GridView.builder(
+            physics: canScroll ? null : const NeverScrollableScrollPhysics(),
 
-              shrinkWrap: shrinkWrap,
-              padding: EdgeInsets.zero,
-              itemCount: items.length,
-              gridDelegate:
-                  gridDelegate ??
-                  SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                    childAspectRatio: childAspectRatio ?? 0.5,
-                  ),
-              itemBuilder: (context, index) {
-                final item = items[index];
-                if (item is StoreEntity) {
-                  return GrocCardSwitcher<StoreEntity>(
-                    width: cardWidth ?? 140,
-                    entity: item,
-                    onPressed: () => onSinglceCardPressed(item),
-                    height: cardHeight,
-                    cardStyle: CardStyle.typeOne,
-                  );
-                }
-                if (item is PlateEntity) return const SizedBox();
-                return const SizedBox();
-              },
-            ),
+            shrinkWrap: shrinkWrap,
+            padding: EdgeInsets.zero,
+            itemCount: items.length,
+            gridDelegate:
+                gridDelegate ??
+                SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: childAspectRatio ?? 0.5,
+                ),
+            itemBuilder: (context, index) {
+              final item = items[index];
+              if (item is StoreEntity) {
+                return GrocCardSwitcher<StoreEntity>(
+                  width: cardWidth ?? 140,
+                  entity: item,
+                  onPressed: () => onSinglceCardPressed(item),
+                  height: cardHeight,
+                  cardStyle: CardStyle.typeOne,
+                );
+              }
+              if (item is PlateEntity) return const SizedBox();
+              return const SizedBox();
+            },
           ),
         ],
       ),

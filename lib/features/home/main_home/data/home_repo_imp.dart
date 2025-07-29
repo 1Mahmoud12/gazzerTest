@@ -12,13 +12,13 @@ class HomeRepoImp extends HomeRepo {
   HomeRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<List<CategoryEntity>>> getCategories() {
-    return super.call<List<CategoryEntity>>(
+  Future<Result<List<MainCategoryEntity>>> getCategories() {
+    return super.call<List<MainCategoryEntity>>(
       apiCall: () async => _apiClient.get(endpoint: Endpoints.storesCategories),
       parser: (respo) {
-        final cats = <CategoryEntity>[];
+        final cats = <MainCategoryEntity>[];
         for (final item in respo.data['data']) {
-          cats.add(CategoryDTO.fromJson(item).toCategoryEntity());
+          cats.add(MainCategoryDTO.fromJson(item).toCategoryEntity());
         }
         return cats;
       },

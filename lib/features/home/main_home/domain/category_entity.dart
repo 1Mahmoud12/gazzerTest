@@ -12,11 +12,16 @@ enum CategoryType {
   }
 }
 
-class CategoryEntity {
+class MainCategoryEntity {
   final int id;
   final String name;
   final String image;
   final CategoryType type;
 
- const CategoryEntity(this.id, this.name, this.image, this.type);
+  const MainCategoryEntity({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.type,
+  });
 }

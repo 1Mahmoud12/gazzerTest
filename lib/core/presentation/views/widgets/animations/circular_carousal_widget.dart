@@ -23,8 +23,7 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
   double _calculatePosition(int index) {
     if (_controller.position.haveDimensions) {
       final value = _controller.page! - index;
-      double position = (-1 + (0.4 * math.pow( value.abs(), 1.8))).clamp(-1, 1.0);
-      print('Item $index, value $value, pow ${math.pow(2, value.abs())} position: $position');
+      double position = (-1 + (0.4 * math.pow(value.abs(), 1.8))).clamp(-1, 1.0);
       return position;
     }
     return 0.0;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
-class StoreHeaderContainer extends StatelessWidget {
-  const StoreHeaderContainer({super.key, required this.child});
+class GrocHeaderContainer extends StatelessWidget {
+  const GrocHeaderContainer({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) {

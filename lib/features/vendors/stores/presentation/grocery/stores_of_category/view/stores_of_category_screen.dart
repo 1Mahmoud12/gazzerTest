@@ -1,36 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/components/groc_horz_scroll_list.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/store_header_container.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/groc_card_switcher.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/groc_header_container.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/components/stores_top_rated_component.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/cubit/stores_of_category_cubit.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/cubit/stores_of_category_states.dart';
 import 'package:go_router/go_router.dart';
 
-part 'store_of_category_screen.g.dart';
+part 'stores_of_category_screen.g.dart';
 
 @TypedGoRoute<StoresOfCategoryRoute>(path: StoresOfCategoryScreen.routeUriId)
 @immutable
 class StoresOfCategoryRoute extends GoRouteData with _$StoresOfCategoryRoute {
-  const StoresOfCategoryRoute({required this.vendorId});
-  final int vendorId;
+  const StoresOfCategoryRoute({required this.mainCatId, required this.subCatId});
+  final int mainCatId;
+  final int subCatId;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return StoresOfCategoryScreen(vendorId: vendorId);
+    return BlocProvider(
+      create: (context) => di<StoresOfCategoryCubit>(param1: mainCatId, param2: subCatId),
+      child: const StoresOfCategoryScreen(),
+    );
   }
 }
 
 class StoresOfCategoryScreen extends StatelessWidget {
   static const routeUriId = '/stores-of-category';
-  const StoresOfCategoryScreen({super.key, required this.vendorId});
-  final int vendorId;
+  const StoresOfCategoryScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -47,55 +53,79 @@ class StoresOfCategoryScreen extends StatelessWidget {
         ),
         extendBody: true,
         extendBodyBehindAppBar: true,
-        body: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            StoreHeaderContainer(
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  spacing: 12,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      spacing: 12,
-                      children: [
-                        Expanded(
-                          child: MainSearchWidget(
-                            height: 60,
-                            hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                          ),
-                        ),
-                        HorizontalSpacing(AppConst.floatingCartWidth),
-                      ],
-                    ),
-                    const SizedBox.shrink(),
-                    GradientText(
-                      text: "Fresh Fruits Markets",
-                      style: TStyle.blackBold(22),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const VerticalSpacing(24),
-            StoresTopRatedComponent(
-              items: Fakers.plates,
-            ),
-            const VerticalSpacing(120),
-
-            ...List.generate(
-              4,
-              (index) {
-                return GrocHorzScrollList(
-                  items: Fakers.stores,
-                  title: 'Section ${index + 1}',
-                  onViewAllPressed: () {},
-                  onSinglceCardPressed: (tiem) {},
-                );
+        body: BlocBuilder<StoresOfCategoryCubit, StoresOfCategoryStates>(
+          builder: (context, state) {
+            if (state is StoresOfCategoryLoading) {
+              return const Center(child: AdaptiveProgressIndicator());
+            }
+            return RefreshIndicator(
+              onRefresh: () {
+                return context.read<StoresOfCategoryCubit>().loadStoresOfCategory();
               },
-            ),
-          ],
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  GrocHeaderContainer(
+                    child: SafeArea(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 12,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            spacing: 12,
+                            children: [
+                              Expanded(
+                                child: MainSearchWidget(
+                                  height: 60,
+                                  hintText: L10n.tr().searchForStoresItemsAndCAtegories,
+                                ),
+                              ),
+                              HorizontalSpacing(AppConst.floatingCartWidth),
+                            ],
+                          ),
+                          const SizedBox.shrink(),
+                          GradientText(
+                            text: state.subCategory.name,
+                            style: TStyle.blackBold(22),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const VerticalSpacing(24),
+                  if (state.todaysDeals.isNotEmpty) StoresTopRatedComponent(items: state.todaysDeals),
+                  const VerticalSpacing(120),
+
+                  GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+
+                    shrinkWrap: true,
+                    padding: AppConst.defaultPadding,
+                    itemCount: state.stores.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      childAspectRatio: 0.57,
+                      // mainAxisExtent: 300,
+                    ),
+                    itemBuilder: (context, index) {
+                      return GrocCardSwitcher<StoreEntity>(
+                        width: 140,
+                        entity: state.stores[index],
+                        onPressed: () {
+                          StoreDetailsRoute(storeId: state.stores[index].id).push(context);
+                        },
+                        // height: cardHeight,
+                        cardStyle: CardStyle.typeOne,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

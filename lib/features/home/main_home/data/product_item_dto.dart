@@ -29,7 +29,7 @@ class SectionItemDTO extends ProductItemDTO {
   String? expiredAt;
   int? discount;
   late final ItemType itemType;
-  StoreItemDTO? item;
+  GenericItemDTO? item;
 
   GenericItemEntity? toEntity() {
     switch (itemType) {

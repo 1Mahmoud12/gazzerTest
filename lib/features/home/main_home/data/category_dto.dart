@@ -1,16 +1,24 @@
 part of 'product_item_dto.dart';
 
-class CategoryDTO extends ProductItemDTO {
-  final int? id;
-  final String? name;
-  final String? image;
-  final String? type;
+class MainCategoryDTO extends ProductItemDTO {
+  late final int? id;
+  late final String? name;
+  late final String? image;
+  late final String? type;
 
-  CategoryDTO(this.id, this.name, this.image, this.type);
+  MainCategoryDTO.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    type = json['type'];
+    image = json['image'];
+  }
 
-  CategoryDTO.fromJson(Map<String, dynamic> json) : id = json['id'], name = json['name'], type = json['type'], image = json['image'];
-
-  CategoryEntity toCategoryEntity() => CategoryEntity(id!, name!, image ?? '', CategoryType.fromString(type ?? ''));
+  MainCategoryEntity toCategoryEntity() => MainCategoryEntity(
+    id: id!,
+    name: name!,
+    image: image ?? '',
+    type: CategoryType.fromString(type ?? ''),
+  );
 }
 
 class VendorDTO extends ProductItemDTO {
