@@ -77,17 +77,13 @@ class RestaurantDTO {
       alwaysOpen: is24Hours == 1,
       startTime: _formDateTimeFromString(workFrom ?? ''),
       endTime: _formDateTimeFromString(workTo ?? ''),
-      subCategories: subcategories
-          ?.map((e) => CategoryOfPlateEntity(id: e.id!, name: e.name ?? '', image: e.image ?? ''))
-          .toList(),
-      deliveryTime: estimatedDeliveryTime != null
-          ? '${(estimatedDeliveryTime! * 0.7).floor()} - ${(estimatedDeliveryTime! * 1.3).ceil()} '
-          : null,
+      subCategories: subcategories?.map((e) => CategoryOfPlateEntity(id: e.id!, name: e.name ?? '', image: e.image ?? '')).toList(),
+      deliveryTime: estimatedDeliveryTime != null ? '${(estimatedDeliveryTime! * 0.7).floor()} - ${(estimatedDeliveryTime! * 1.3).ceil()} ' : null,
 
       ///
       badge: badge,
       deliveryFees: deliveryFees ?? 0.0,
-      rateCount: rateCount,
+      rateCount: rateCount ?? 0,
       alwaysClosed: false, // TODO: Determine if this is needed
       priceRange: priceRange ?? '\$10 - \$20',
     );

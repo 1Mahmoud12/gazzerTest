@@ -69,7 +69,7 @@ class StoreDTO {
     }
   }
 
-  StoreEntity toEntityy() {
+  StoreEntity toEntity() {
     return StoreEntity(
       id: id ?? 0,
       name: storeName ?? '',

@@ -14,8 +14,9 @@ import 'package:gazzer/features/vendors/resturants/common/view/app_bar_row_widge
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/stores/presentation/cubit/store_menu_states.dart';
 import 'package:gazzer/features/vendors/stores/presentation/cubit/stores_menu_cubit.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/groc_card_switcher.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/groc_header_container.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_header_container.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
 
 class StoreMenuScreen extends StatelessWidget {
@@ -98,7 +99,9 @@ class StoreMenuScreen extends StatelessWidget {
                           cardStyle: category.style,
                           width: 160,
                           entity: rest[i],
-                          onPressed: () {},
+                          onPressed: () {
+                            StoreDetailsRoute(storeId: rest[index].id).push(context);
+                          },
                         );
                       },
                     ),

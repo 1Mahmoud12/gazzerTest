@@ -10,6 +10,13 @@ class Grad {
     stops: [0.1, 1],
   );
 
+  /// grcery gradients
+  RadialGradient get grocRadial => const RadialGradient(
+    colors: [Color(0x88FF9F08), Co.darkMauve],
+    center: Alignment.center,
+    radius: 1,
+  );
+
   /// restaurant gradients
   final linearGradient = LinearGradient(
     colors: [Co.lightPurple, Co.darkPurple.withAlpha(201), Co.darkPurple.withAlpha(0)],

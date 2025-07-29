@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/store_card_one.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/store_card_two.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_one.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_two.dart';
 
 class GrocCardSwitcher<T> extends StatelessWidget {
   const GrocCardSwitcher({
@@ -22,8 +22,8 @@ class GrocCardSwitcher<T> extends StatelessWidget {
     switch (cardStyle) {
       case CardStyle.typeOne:
         if (entity is StoreEntity) {
-          return StoreCardOne(
-            vendor: entity as StoreEntity ,
+          return GrocCardOne(
+            vendor: entity as StoreEntity,
             width: width,
             height: height,
             onPressed: onPressed,
@@ -33,7 +33,7 @@ class GrocCardSwitcher<T> extends StatelessWidget {
         }
       case CardStyle.typeTwo:
         if (entity is StoreEntity) {
-          return StoreCardTwo(
+          return GrocCardTwo(
             vendor: entity as StoreEntity,
             width: width,
             height: height,
@@ -44,7 +44,7 @@ class GrocCardSwitcher<T> extends StatelessWidget {
         }
       case CardStyle.typeThree:
         if (entity is StoreEntity) {
-          return StoreCardOne(
+          return GrocCardOne(
             vendor: entity as StoreEntity,
             width: width,
             height: height,
@@ -55,7 +55,7 @@ class GrocCardSwitcher<T> extends StatelessWidget {
         }
       case CardStyle.typeFour:
         if (entity is StoreEntity) {
-          return StoreCardTwo(
+          return GrocCardTwo(
             vendor: entity as StoreEntity,
             width: width,
             height: height,

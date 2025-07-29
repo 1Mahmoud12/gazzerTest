@@ -7,8 +7,8 @@ import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
-class StoreCardThree extends StatelessWidget {
-  const StoreCardThree({
+class GrocCardThree extends StatelessWidget {
+  const GrocCardThree({
     super.key,
     required this.width,
     required this.vendor,

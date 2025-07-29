@@ -11,7 +11,7 @@ class StoresOfCategoryResponse {
   late final StoreCategoryEntity subCategory;
   StoresOfCategoryResponse.fromJson(Map<String, dynamic> json) {
     todaysDeals = (json['items'] as List).map((e) => ProductDTO.fromJson(e).toProductItem()).toList();
-    stores = (json['stores'] as List).map((e) => StoreDTO.fromJson(e).toEntityy()).toList();
+    stores = (json['stores'] as List).map((e) => StoreDTO.fromJson(e).toEntity()).toList();
     subCategory = StoreCategoryDto.fromJson(json['item_category']).toEntity();
   }
 }

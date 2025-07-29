@@ -1,6 +1,7 @@
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/features/vendors/stores/data/dtos/store_details_response.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/stores_menu_response.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/stores_of_category_response.dart';
 import 'package:gazzer/features/vendors/stores/domain/stores_repo.dart';
@@ -23,6 +24,14 @@ class StoresRepoImp extends StoresRepo {
     return super.call(
       apiCall: () async => _apiClient.get(endpoint: Endpoints.storesOfSpecificCategoryPage(mainId, subId)),
       parser: (response) => StoresOfCategoryResponse.fromJson(response.data['data']),
+    );
+  }
+
+  @override
+  Future<Result<StoreDetailsResponse>> loadStoreDetails(int storeId) {
+    return super.call(
+      apiCall: () async => _apiClient.get(endpoint: Endpoints.storeDetailsPage(storeId)),
+      parser: (response) => StoreDetailsResponse.fromJson(response.data['data']),
     );
   }
 }

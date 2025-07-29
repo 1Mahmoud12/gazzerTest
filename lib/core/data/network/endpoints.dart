@@ -40,11 +40,12 @@ class Endpoints {
   static const restaurantsMenuPage = "pages/restaurants-page";
   static String restaurantsOfCategoryPage(int id) => "pages/restaurants-page/category/$id";
   static String restaurantPage(int id) => 'pages/restaurant-page/$id';
-
-  /// ** stores categories
   // stores
   static String storesMenuPage(int mainId) => 'pages/store-category-page/$mainId';
   static String storesOfSpecificCategoryPage(int mainId, int subId) => 'pages/store-category/$mainId/item-category-page/$subId';
+  static String storeDetailsPage(int id) => "pages/store-page/$id";
+
+  /// ** stores categories
   static const storesCategories = "stores/categories";
 
   /// ** restaurants

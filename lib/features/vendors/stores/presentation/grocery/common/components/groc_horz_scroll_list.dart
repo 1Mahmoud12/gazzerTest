@@ -3,7 +3,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.da
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/store_card_three.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_three.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_prod_card.dart';
 
 class GrocHorzScrollList<T> extends StatelessWidget {
   /// [cardImageToTextRatio] and [corner] has no role
@@ -47,13 +48,19 @@ class GrocHorzScrollList<T> extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = items[index];
                 if (item is StoreEntity) {
-                  return StoreCardThree(
+                  return GrocCardThree(
                     width: cardWidth ?? 140,
                     vendor: item,
                     onPressed: () => onSinglceCardPressed(item),
                   );
                 }
-                if (item is PlateEntity) return const SizedBox();
+                if (item is ProductEntity) {
+                  return GrocProdCard(
+                    product: item,
+                    shape: GrodPodShape.values[index % GrodPodShape.values.length],
+                  );
+                }
+
                 return const SizedBox();
               },
             ),

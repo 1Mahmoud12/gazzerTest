@@ -29,7 +29,8 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/stores/data/repos/stores_repo_imp.dart';
 import 'package:gazzer/features/vendors/stores/domain/stores_repo.dart';
 import 'package:gazzer/features/vendors/stores/presentation/cubit/stores_menu_cubit.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/cubit/stores_of_category_cubit.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/cubit/stores_of_category_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,4 +88,5 @@ void _registerCubits() {
   di.registerFactoryParam<StoresOfCategoryCubit, int, int>(
     (mainId, subCatId) => StoresOfCategoryCubit(di.get(), mainId, subCatId),
   );
+  di.registerFactoryParam<StoreDetailsCubit, int, Null>((storeId, _) => StoreDetailsCubit(di.get(), storeId));
 }

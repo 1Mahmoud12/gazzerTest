@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/stores_of_category_response.dart';
 import 'package:gazzer/features/vendors/stores/domain/stores_repo.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/cubit/stores_of_category_states.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/cubit/stores_of_category_states.dart';
 
 class StoresOfCategoryCubit extends Cubit<StoresOfCategoryStates> {
   final StoresRepo _repo;

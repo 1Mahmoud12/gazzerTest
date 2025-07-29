@@ -9,12 +9,12 @@ import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_header_container.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/groc_card_switcher.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/groc_header_container.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/cubit/stores_of_category_cubit.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/cubit/stores_of_category_states.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/components/stores_top_rated_component.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/cubit/stores_of_category_cubit.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/cubit/stores_of_category_states.dart';
 import 'package:go_router/go_router.dart';
 
 part 'stores_of_category_screen.g.dart';

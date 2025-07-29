@@ -14,6 +14,7 @@ import 'package:gazzer/gazzer_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Helpers.customTryCatch(() async => await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform));
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);

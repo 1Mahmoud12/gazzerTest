@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/widgets/cards/groc_card_switcher.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_prod_card.dart';
 
 class GrocVertScrollGrid<T> extends StatelessWidget {
   /// [childAspectRatio] and [corner] has no role
@@ -38,7 +39,7 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
-        spacing: 4,
+        spacing: 16,
         children: [
           TitleWithMore(
             title: title ?? '',
@@ -69,7 +70,12 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
                   cardStyle: CardStyle.typeOne,
                 );
               }
-              if (item is PlateEntity) return const SizedBox();
+              if (item is ProductEntity) {
+                return GrocProdCard(
+                  product: item,
+                  shape: GrodPodShape.values[index % GrodPodShape.values.length],
+                );
+              }
               return const SizedBox();
             },
           ),

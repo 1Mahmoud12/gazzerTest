@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/pkgs/scrolable_list_tab_scroller/scrollable_list_tab_scroller.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/sub_categories_widget.dart';
+import 'package:scrollable_list_tab_scroller/scrollable_list_tab_scroller.dart';
 
 class UnScollableLTabedList extends StatefulWidget {
   const UnScollableLTabedList({
@@ -24,6 +24,7 @@ class _UnScollableLTabedListState extends State<UnScollableLTabedList> {
 
   @override
   Widget build(BuildContext context) {
+    print('asdadasd');
     return ScrollableListTabScroller(
       itemScrollController: controller,
       animationDuration: Durations.medium3,

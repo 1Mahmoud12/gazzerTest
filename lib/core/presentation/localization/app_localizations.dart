@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @min.
+  ///
+  /// In en, this message translates to:
+  /// **'MIN'**
+  String get min;
+
   /// No description provided for @typeHere.
   ///
   /// In en, this message translates to:

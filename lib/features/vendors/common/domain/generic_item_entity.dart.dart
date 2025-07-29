@@ -15,7 +15,7 @@ sealed class GenericItemEntity {
   final String description;
   final double _price;
   final double rate;
-  final double reviewCount;
+  final int reviewCount;
   final bool outOfStock;
   final String? badge;
   final List<String>? tags;

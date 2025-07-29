@@ -72,7 +72,7 @@ dependencies:
   dotted_border: ^3.0.1
   circular_motion: ^0.0.6
   # 
-  # scrollable_list_tab_scroller: ^3.1.1
+  scrollable_list_tab_scroller: ^3.1.1
   # anchor_scroll_controller: ^0.4.4
   # flutter_sticky_header: ^0.8.0
   scrollable_positioned_list: ^0.3.8

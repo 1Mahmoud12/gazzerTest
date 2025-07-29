@@ -207,7 +207,7 @@ class Fakers {
       options: [],
       outOfStock: _random.nextBool(),
       badge: _random.nextBool() ? '30%' : null,
-      reviewCount: _random.nextDouble() * 100,
+      reviewCount: _random.nextDouble().toInt() * 100,
     ),
   );
 
@@ -249,6 +249,21 @@ class Fakers {
       isOpen: true,
     ),
   ];
+  static const store = StoreEntity(
+    alwaysClosed: false,
+    alwaysOpen: false,
+    id: 0,
+    name: "طبق ",
+    rate: 3,
+    image: plateNetWorkImg,
+    tag: ['Free delivery'],
+    location: 'ZAMALEK',
+    startTime: null,
+    endTime: null,
+    parentId: 1,
+    isFavorite: false,
+    isOpen: true,
+  );
   static const fakeProds = [
     ProductEntity(
       id: 0,
