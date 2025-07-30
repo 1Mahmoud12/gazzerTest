@@ -13,9 +13,10 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 import 'package:gazzer/features/vendors/common/presentation/vendor_closing_timer.dart';
 
 class VendorInfoCard extends StatelessWidget {
-  const VendorInfoCard(this.vendor, {super.key, this.padding});
+  const VendorInfoCard(this.vendor, {super.key, this.padding, required this.categories});
   final GenericVendorEntity vendor;
   final EdgeInsets? padding;
+  final Iterable<String>? categories;
   @override
   Widget build(BuildContext context) {
     final imageSize = 60.0;
@@ -49,9 +50,9 @@ class VendorInfoCard extends StatelessWidget {
                             spacing: 12,
                             children: [
                               GradientText(text: vendor.name, style: TStyle.blackBold(16)),
-                              if (vendor.subCategories != null)
+                              if (categories?.isNotEmpty == true)
                                 Text(
-                                  vendor.subCategories!.map((e) => e.name).join(', '),
+                                  shortCategorNames(categories!)!,
                                   style: TStyle.greyRegular(12),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -69,48 +70,48 @@ class VendorInfoCard extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 )
                               else
-                                Row(
+                                Wrap(
+                                  spacing: 16,
+                                  alignment: WrapAlignment.end,
+                                  runAlignment: WrapAlignment.center,
                                   children: [
                                     const Icon(Icons.access_time, color: Co.purple, size: 18),
-                                    Expanded(
-                                      child: Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(12)),
-                                            if (vendor.startTime != null)
-                                              TextSpan(
-                                                text: vendor.startTime!.defaultTimeFormat,
-                                                style: TStyle.greyRegular(12),
-                                              )
-                                            else
-                                              TextSpan(
-                                                text: L10n.tr().availabilityUnknown,
-                                                style: TStyle.greyRegular(12),
-                                              ),
-                                          ],
-                                        ),
-                                        textAlign: TextAlign.center,
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(11)),
+                                          if (vendor.startTime != null)
+                                            TextSpan(
+                                              text: vendor.startTime!.defaultTimeFormat,
+                                              style: TStyle.greyRegular(11),
+                                            )
+                                          else
+                                            TextSpan(
+                                              text: L10n.tr().availabilityUnknown,
+                                              style: TStyle.greyRegular(11),
+                                            ),
+                                        ],
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    Expanded(
-                                      child: Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(12)),
-                                            if (vendor.endTime != null)
-                                              TextSpan(
-                                                text: vendor.endTime!.defaultTimeFormat,
-                                                style: TStyle.greyRegular(12),
-                                              )
-                                            else
-                                              TextSpan(
-                                                text: L10n.tr().availabilityUnknown,
-                                                style: TStyle.greyRegular(12),
-                                              ),
-                                          ],
-                                        ),
-                                        textAlign: TextAlign.center,
+
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(11)),
+                                          if (vendor.endTime != null)
+                                            TextSpan(
+                                              text: vendor.endTime!.defaultTimeFormat,
+                                              style: TStyle.greyRegular(11),
+                                            )
+                                          else
+                                            TextSpan(
+                                              text: L10n.tr().availabilityUnknown,
+                                              style: TStyle.greyRegular(11),
+                                            ),
+                                        ],
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
@@ -211,5 +212,19 @@ class VendorInfoCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String? shortCategorNames(Iterable<String> categories) {
+    if (categories.isEmpty) return null;
+    final shortTag = StringBuffer(categories.first);
+    for (var i = 1; i < categories.length; i++) {
+      if (categories.elementAt(i).length + shortTag.length < 38) {
+        shortTag.write(', ${categories.elementAt(i)}');
+      } else {
+        shortTag.write(', ...');
+        break;
+      }
+    }
+    return shortTag.toString();
   }
 }

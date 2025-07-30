@@ -22,6 +22,7 @@ class PlatesRepoImp extends PlatesRepo {
         for (var item in response.data['data']) {
           data.add(PlateDTO.fromJson(item).toProductItem() as PlateEntity);
         }
+        data.sort((a, b) => a.outOfStock ? 1 : -1);
         return data;
       },
     );
@@ -36,6 +37,8 @@ class PlatesRepoImp extends PlatesRepo {
         for (var item in response.data['data']) {
           data.add(PlateDTO.fromJson(item).toProductItem() as PlateEntity);
         }
+        data.sort((a, b) => a.outOfStock ? 1 : -1);
+
         return data;
       },
     );
@@ -50,6 +53,8 @@ class PlatesRepoImp extends PlatesRepo {
         for (var item in response.data['data']) {
           data.add(PlateDTO.fromJson(item).toProductItem() as PlateEntity);
         }
+        data.sort((a, b) => a.outOfStock ? 1 : -1);
+
         return data;
       },
     );

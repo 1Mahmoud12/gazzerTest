@@ -27,6 +27,7 @@ class StoreDetailsResponse {
           final prod = ProductDTO.fromJson(items).toProductItem();
           prods.add(prod);
         }
+        prods.sort((a, b) => a.outOfStock ? 1 : -1);
       }
       catsWithProds.add(
         (cat, subCats, prods),

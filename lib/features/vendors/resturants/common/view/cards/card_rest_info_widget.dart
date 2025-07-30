@@ -17,9 +17,9 @@ class CardRestInfoWidget extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        if (vendor.tag != null)
+        if (vendor.tag != null && vendor.tag!.isNotEmpty)
           Text(
-            vendor.tag!.join(', '),
+            vendor.shortTag(25)!,
             style: TStyle.secondarySemi(12),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

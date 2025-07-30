@@ -24,6 +24,7 @@ class StoresMenuResponse {
     for (var item in json['item_categories'] as List) {
       final storeCategory = StoreCategoryDto.fromJson(item);
       final stores = (item['stores'] as List).map((store) => StoreDTO.fromJson(store).toEntity()).toList();
+      stores.sort((a, b) => a.isClosed ? 1 : -1);
       categoryWzStores.add((storeCategory.toEntity(), stores));
     }
   }

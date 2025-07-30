@@ -7,7 +7,6 @@ import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_d
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart';
 
-
 class RestaurantPageResponse {
   late final RestaurantEntity restaurant;
   late final List<PlateEntity> topRated;
@@ -30,6 +29,8 @@ class RestaurantPageResponse {
             plates.add(PlateDTO.fromJson(plate).toPlateEntity());
           }
         }
+        plates.sort((a, b) => a.outOfStock ? 1 : -1);
+
         categoriesWithPlates.add((category, plates));
       }
     }
@@ -39,6 +40,7 @@ class RestaurantPageResponse {
         topRated.add(PlateDTO.fromJson(item).toPlateEntity());
       }
     }
+    topRated.sort((a, b) => a.outOfStock ? 1 : -1);
 
     banners = [];
     if (json['banners'] != null) {

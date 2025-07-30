@@ -59,4 +59,18 @@ sealed class GenericVendorEntity extends Equatable {
     required this.isOpen,
     this.address,
   });
+
+  String? shortTag(int max) {
+    if (tag == null || tag!.isEmpty) return null;
+    final shortTag = StringBuffer(tag!.first);
+    for (var i = 1; i < tag!.length; i++) {
+      if (tag![i].length + shortTag.length < max) {
+        shortTag.write(', ${tag![i]}');
+      } else {
+        shortTag.write(', ...');
+        break;
+      }
+    }
+    return shortTag.toString();
+  }
 }

@@ -22,13 +22,14 @@ class RestaurantsOfCategoryyResponse {
       for (var item in json['lists']) {
         final name = item['name'].toString();
         final style = CardStyle.fromString(item['card_style'].toString());
-        final restaurants = <RestaurantEntity>[];
+        final listRestaurants = <RestaurantEntity>[];
         if (item['entities'] != null) {
           for (var rest in item['entities']) {
-            restaurants.add(RestaurantDTO.fromJson(rest).toRestEntity());
+            listRestaurants.add(RestaurantDTO.fromJson(rest).toRestEntity());
           }
         }
-        lists.add((name, style, restaurants));
+        listRestaurants.sort((a, b) => a.isClosed ? 1 : -1);
+        lists.add((name, style, listRestaurants));
       }
     }
     restaurants = <RestaurantEntity>[];
@@ -36,6 +37,7 @@ class RestaurantsOfCategoryyResponse {
       for (var item in json['restaurants']) {
         restaurants.add(RestaurantDTO.fromJson(item).toRestEntity());
       }
+      restaurants.sort((a, b) => a.isClosed ? 1 : -1);
     }
   }
 }

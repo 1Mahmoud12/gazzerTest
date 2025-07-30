@@ -91,6 +91,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                   VendorInfoCard(
                     restaurant,
                     padding: EdgeInsets.zero,
+                    categories: null,
                   ),
                   const SizedBox.shrink(),
                   OverflowBox(

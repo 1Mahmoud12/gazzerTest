@@ -31,6 +31,7 @@ class RestaurantsMenuReponse {
             restaurants.add(RestaurantDTO.fromJson(rest).toRestEntity());
           }
         }
+        restaurants.sort((a, b) => a.isClosed ? 1 : -1);
         categoryWithrestaurants.add((category, restaurants));
       }
     }

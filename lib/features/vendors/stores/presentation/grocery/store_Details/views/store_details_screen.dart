@@ -65,7 +65,10 @@ class StoreDetailsScreen extends StatelessWidget {
                 GrocHeaderContainer(
                   child: Padding(
                     padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top + 8, bottom: 16),
-                    child: VendorInfoCard(store),
+                    child: VendorInfoCard(
+                      store,
+                      categories: catWithSubCatProds.map((e) => e.$1.name),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -128,10 +131,7 @@ class _gridWidget extends StatelessWidget {
       children: [
         Padding(
           padding: AppConst.defaultHrPadding,
-          child: TitleWithMore(
-            title: maincat.name,
-            onPressed: () {},
-          ),
+          child: TitleWithMore(title: maincat.name),
         ),
         GridView.builder(
           physics: const NeverScrollableScrollPhysics(),

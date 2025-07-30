@@ -34,7 +34,7 @@ class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
         children: [
           TitleWithMore(
             title: title ?? '',
-            onPressed: onViewAllPressed,
+            onPressed: items.length > 10 ? onViewAllPressed : null,
           ),
 
           GridView.builder(

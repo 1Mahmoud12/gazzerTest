@@ -41,7 +41,7 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
         children: [
           TitleWithMore(
             title: title,
-            onPressed: onViewAllPressed,
+            onPressed: items.length > 10 ? onViewAllPressed : null,
           ),
           SizedBox(
             height: cardHeight ?? 235,
