@@ -10,12 +10,12 @@ import 'package:gazzer/core/presentation/views/widgets/animations/circular_carou
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant__sub_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
@@ -65,7 +65,6 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(showNotification: false, onShare: () {}),
       extendBody: true,
       extendBodyBehindAppBar: true,
       body: ScrollableTabedList(
@@ -97,7 +96,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
             children: [
               RestaurantsListSwitche(
                 title: cat.$1.name,
-                items: cat.$2.isNotEmpty ? cat.$2 : Fakers.restaurants,
+                items: cat.$2.isNotEmpty ? cat.$2 : Fakers.plates,
                 onViewAllPressed: () {
                   RestaurantCategoryRoute(
                     $extra: restaurant,
@@ -107,7 +106,9 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
                 },
                 cardImageToTextRatios: {CardStyle.typeOne: 0.8},
                 corners: {CardStyle.typeThree: Corner.topLeft},
-                onSingleCardPressed: (item) {},
+                onSingleCardPressed: (item) {
+                  PlateDetailsRoute(id: item.id).push(context);
+                },
                 // TODO: Ask Product Owner about this
                 style: index == categoriesWithPlates.length - 1 ? CardStyle.typeThree : cat.$1.style,
               ),

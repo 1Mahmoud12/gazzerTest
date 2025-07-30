@@ -1,8 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/ordered_with_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_details_response.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
+import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/plates_repo.dart';
 
 class PlatesRepoImp extends PlatesRepo {
@@ -47,6 +51,28 @@ class PlatesRepoImp extends PlatesRepo {
           data.add(PlateDTO.fromJson(item).toProductItem() as PlateEntity);
         }
         return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<PlateDetailsResponse>> getPlateDetails(int plateId) {
+    return super.call(
+      apiCall: () => _apiClient.get(endpoint: Endpoints.plateDetailsPage(plateId)),
+      parser: (response) {
+        return PlateDetailsResponse.fromJson(response.data);
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<OrderedWithEntityy>>> getPlateOrderedWith(int restId, int plateId, {CancelToken? cancelToken}) {
+    return super.call(
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.orderWith(restId, plateId),
+      ),
+      parser: (response) {
+        return (response.data['data'] as List).map((e) => OrderedWithDTO.fromJson(e).toEntity()).toList();
       },
     );
   }

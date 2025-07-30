@@ -1,4 +1,4 @@
-part of '../single_restaurant_details.dart';
+part of '../single_cat_restaurant_details.dart';
 
 class _FoodDetailsWidget extends StatelessWidget {
   const _FoodDetailsWidget({required this.product});

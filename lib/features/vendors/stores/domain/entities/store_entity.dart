@@ -26,4 +26,28 @@ class StoreEntity extends GenericVendorEntity {
 
     // this.categoryOfPlate,
   });
+
+  @override
+  List<Object?> get props => [
+    id,
+    name,
+    image,
+    rate,
+    badge,
+    priceRange,
+    tag,
+    startTime,
+    endTime,
+    subCategories,
+    deliveryTime,
+    deliveryFee,
+    location,
+    rateCount,
+    parentId,
+    alwaysOpen,
+    alwaysClosed,
+    isFavorite,
+    isOpen,
+    address,
+  ];
 }

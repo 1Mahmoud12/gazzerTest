@@ -39,6 +39,23 @@ enum CardStyle {
   factory CardStyle.fromString(String type) {
     return CardStyle.values.firstWhere((e) => e.type == type, orElse: () => typeOne);
   }
+  static BorderRadius getShapeRadius(CardStyle shape) {
+    switch (shape) {
+      case CardStyle.typeOne:
+        return const BorderRadius.only(
+          topRight: Radius.circular(50),
+          topLeft: Radius.circular(8),
+          bottomRight: Radius.circular(8),
+          bottomLeft: Radius.circular(50),
+        );
+      case CardStyle.typeTwo:
+        return BorderRadius.circular(100);
+      case CardStyle.typeThree:
+        return const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100));
+      case CardStyle.typeFour:
+        return BorderRadius.circular(16);
+    }
+  }
 }
 
 enum LayoutType {
@@ -66,5 +83,18 @@ enum DiscountType {
 
   factory DiscountType.fromString(String type) {
     return DiscountType.values.firstWhere((e) => e.type == type, orElse: () => unkown);
+  }
+}
+
+enum OptionType {
+  radio('radio'),
+  checkbox('checkbox'),
+  unknown('unknown');
+
+  final String value;
+  const OptionType(this.value);
+
+  static OptionType fromString(String value) {
+    return OptionType.values.firstWhere((e) => e.value == value, orElse: () => unknown);
   }
 }

@@ -76,9 +76,7 @@ class HorizontalPlateCard extends StatelessWidget {
                                 child: Stack(
                                   children: [
                                     Container(
-                                      foregroundDecoration: !item.outOfStock
-                                          ? null
-                                          : BoxDecoration(color: Co.secText.withAlpha(200)),
+                                      foregroundDecoration: !item.outOfStock ? null : BoxDecoration(color: Co.secText.withAlpha(200)),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: NetworkImage(item.image),
@@ -96,9 +94,7 @@ class HorizontalPlateCard extends StatelessWidget {
                                     else if (item.badge != null)
                                       CardBadge(
                                         text: item.badge!,
-                                        alignment: corner == Corner.topRight
-                                            ? AlignmentDirectional.topStart
-                                            : AlignmentDirectional.topEnd,
+                                        alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
                                       ),
                                   ],
                                 ),
@@ -116,7 +112,11 @@ class HorizontalPlateCard extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 2),
                       child: AbsorbPointer(
                         absorbing: item.outOfStock,
-                        child: AddIcon(onTap: () {}),
+                        child: AddIcon(
+                          onTap: () {
+                            if (onTap != null) onTap!(item);
+                          },
+                        ),
                       ),
                     ),
                   ],

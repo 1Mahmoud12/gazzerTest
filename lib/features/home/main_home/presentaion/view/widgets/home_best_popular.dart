@@ -30,7 +30,7 @@ class _HomeBestPopular extends StatelessWidget {
                 return VerticalRotatedImgCard(
                   prod: prod,
                   onTap: () {
-                    AddFoodToCartRoute($extra: prod).push(context);
+                    PlateDetailsRoute(id: prod.id).push(context);
                   },
                 );
               },

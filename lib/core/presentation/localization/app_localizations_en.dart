@@ -314,9 +314,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addToCart => 'Add To Cart';
 
   @override
-  String get eg => 'e.g.';
-
-  @override
   String get selectType => 'Select Type';
 
   @override

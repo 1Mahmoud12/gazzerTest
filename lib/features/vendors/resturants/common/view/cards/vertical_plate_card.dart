@@ -71,9 +71,7 @@ class VerticalPlateCard extends StatelessWidget {
                         child: Stack(
                           children: [
                             Container(
-                              foregroundDecoration: !item.outOfStock
-                                  ? null
-                                  : BoxDecoration(color: Co.secText.withAlpha(200)),
+                              foregroundDecoration: !item.outOfStock ? null : BoxDecoration(color: Co.secText.withAlpha(200)),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(item.image),
@@ -92,9 +90,7 @@ class VerticalPlateCard extends StatelessWidget {
                             else if (item.badge != null)
                               CardBadge(
                                 text: item.badge!,
-                                alignment: corner == Corner.topRight
-                                    ? AlignmentDirectional.topStart
-                                    : AlignmentDirectional.topEnd,
+                                alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
                               ),
                           ],
                         ),
@@ -111,7 +107,11 @@ class VerticalPlateCard extends StatelessWidget {
                             const DecoratedFavoriteWidget(size: 24, padding: 4),
                             AbsorbPointer(
                               absorbing: item.outOfStock,
-                              child: AddIcon(onTap: () {}),
+                              child: AddIcon(
+                                onTap: () {
+                                  if (onTap != null) onTap!(item);
+                                },
+                              ),
                             ),
                           ],
                         ),

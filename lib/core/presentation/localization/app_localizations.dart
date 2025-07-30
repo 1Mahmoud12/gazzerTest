@@ -692,12 +692,6 @@ abstract class AppLocalizations {
   /// **'Add To Cart'**
   String get addToCart;
 
-  /// No description provided for @eg.
-  ///
-  /// In en, this message translates to:
-  /// **'e.g.'**
-  String get eg;
-
   /// No description provided for @selectType.
   ///
   /// In en, this message translates to:

@@ -16,7 +16,7 @@ class _TopRatedCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          AddFoodToCartRoute($extra: product).push(context);
+          PlateDetailsRoute(id: product.id).push(context);
         },
         child: Column(
           children: [

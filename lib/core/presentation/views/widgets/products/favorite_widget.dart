@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class FavoriteWidget extends StatefulWidget {
   const FavoriteWidget({super.key, this.size = 32, this.padding = 8});
@@ -92,9 +93,11 @@ class DecoratedFavoriteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isDarkContainer) {
-      return DoubledDecoratedWidget(
-        innerDecoration: BoxDecoration(borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12), gradient: Grad().linearGradient),
-        child: FavoriteWidget(size: size, padding: padding),
+      return Skeleton.shade(
+        child: DoubledDecoratedWidget(
+          innerDecoration: BoxDecoration(borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12), gradient: Grad().linearGradient),
+          child: FavoriteWidget(size: size, padding: padding),
+        ),
       );
     }
     return DecoratedBox(

@@ -5,8 +5,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_t
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class ProductSummaryWidget extends StatelessWidget {
-  const ProductSummaryWidget({super.key, required this.product});
-  final GenericItemEntity product;
+  const ProductSummaryWidget({super.key, required this.plate});
+  final PlateEntity plate;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,11 +14,11 @@ class ProductSummaryWidget extends StatelessWidget {
         Row(
           spacing: 12,
           children: [
-            GradientText(text: product.name.toUpperCase(), style: TStyle.blackBold(20), gradient: Grad().textGradient),
+            GradientText(text: plate.name.toUpperCase(), style: TStyle.blackBold(20), gradient: Grad().textGradient),
             const Spacer(),
-            Text(L10n.tr().eg, style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
+            Text(L10n.tr().egp, style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
             Text(
-              product.price.toStringAsFixed(2),
+              plate.price.toStringAsFixed(2),
               style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow),
             ),
           ],
@@ -26,10 +26,10 @@ class ProductSummaryWidget extends StatelessWidget {
         Row(
           spacing: 8,
           children: [
-            Text("Valid until May 15, 2025", style: TStyle.blackRegular(14)),
+            Text(plate.description, style: TStyle.blackRegular(14)),
             const Spacer(),
             const Icon(Icons.star, color: Co.secondary, size: 20),
-            Text(product.rate.toStringAsFixed(1), style: TStyle.secondaryBold(13)),
+            Text(plate.rate.toStringAsFixed(1), style: TStyle.secondaryBold(13)),
           ],
         ),
       ],

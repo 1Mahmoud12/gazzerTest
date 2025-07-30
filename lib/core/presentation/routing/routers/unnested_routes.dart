@@ -17,16 +17,16 @@ import 'package:gazzer/features/intro/presentation/plan/views/health_focus_scree
 import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
 import 'package:go_router/go_router.dart';
 
-final List<RouteBase>  unnestedRoutes = [
+final List<RouteBase> unNestedRoutes = [
   ...authRoutes,
   ...checkoutRoutes,
   ...planScreens,
-  $addFoodToCartRoute,
+  $plateDetailsRoute,
 
   /// plan & intro
   $congratsScreenRoute,

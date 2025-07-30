@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -26,13 +27,13 @@ class GrocCardOne extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: vendor.isClosed ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
+          disabledBackgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
           padding: const EdgeInsetsGeometry.all(0),
-          disabledBackgroundColor: Colors.transparent,
         ),
         child: Column(
           children: [
@@ -52,12 +53,20 @@ class GrocCardOne extends StatelessWidget {
                   child: Stack(
                     children: [
                       SizedBox.expand(
-                        child: CustomNetworkImage(
-                          vendor.image,
-                          fit: BoxFit.cover,
+                        child: DecoratedBox(
+                          position: DecorationPosition.foreground,
+                          decoration: vendor.isClosed ? BoxDecoration(color: Colors.red.withAlpha(75)) : const BoxDecoration(),
+                          child: CustomNetworkImage(
+                            vendor.image,
+                            fit: BoxFit.cover,
+                            opacity: vendor.isClosed ? 0.4 : 1,
+                          ),
                         ),
                       ),
-                      const CardBadge(text: '30%', alignment: AlignmentDirectional.topStart),
+                      if (vendor.isClosed)
+                        CardBadge(text: L10n.tr().closed, fullWidth: true, alignment: AlignmentDirectional.topStart)
+                      else if (vendor.badge != null)
+                        CardBadge(text: vendor.badge!, alignment: AlignmentDirectional.topStart),
                     ],
                   ),
                 ),

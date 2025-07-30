@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
@@ -47,6 +49,12 @@ class StoreDetailsScreen extends StatelessWidget {
       extendBody: true,
       body: BlocBuilder<StoreDetailsCubit, StoreDetailsStates>(
         builder: (context, state) {
+          if (state is StoreDetailsError) {
+            return FailureWidget(
+              message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+              onRetry: () => context.read<StoreDetailsCubit>().loadScreenData(),
+            );
+          }
           final store = state.store;
           final catWithSubCatProds = state.catsWthSubatsAndProds;
           return Skeletonizer(
@@ -141,13 +149,13 @@ class _gridWidget extends StatelessWidget {
             if (index < subcats.length) {
               return GrocSubCatCard(
                 subCat: subcats[index],
-                shape: GrocPodShape.values[index % GrocPodShape.values.length],
+                shape: maincat.style,
               );
             }
             if (index >= subcats.length) {
               return GrocProdCard(
                 product: products[index - subcats.length],
-                shape: GrodPodShape.values[(index - subcats.length) % GrodPodShape.values.length],
+                shape: maincat.style,
               );
             }
             return const SizedBox();

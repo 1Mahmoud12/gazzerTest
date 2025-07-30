@@ -2,47 +2,70 @@ part of 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.
 
 class PlateEntity extends GenericItemEntity {
   final int categoryPlateId;
-  final List<PlateOptionsEnitiy> options;
 
-  PlateEntity({
+  const PlateEntity({
     required super.id,
     required super.name,
     required super.description,
     required super.image,
     required super.price,
-    required this.categoryPlateId,
-    required this.options,
     required super.rate,
     required super.reviewCount,
     required super.outOfStock,
+    required this.categoryPlateId,
     super.badge,
     super.tags,
     super.offer,
   });
+
+  @override
+  List<Object?> get props => [
+    super.id,
+    super.name,
+    super.description,
+    super.image,
+    super.price,
+    super.rate,
+    super.reviewCount,
+    super.outOfStock,
+    categoryPlateId,
+    categoryPlateId,
+  ];
 }
 
-class PlateOptionsEnitiy {
-  final bool isRequired;
+class PlateOptionEntity extends Equatable {
+  final int id;
   final String name;
-  final bool isMultiple;
-  final List<SingleOptionEntity> options;
+  final bool isRequired;
+  final OptionType type;
+  final bool controlsPrice;
+  final List<OpionValueEntity> values;
 
-  PlateOptionsEnitiy({
-    required this.isRequired,
+  const PlateOptionEntity({
+    required this.id,
     required this.name,
-    required this.isMultiple,
-    required this.options,
+    required this.isRequired,
+    required this.type,
+    required this.controlsPrice,
+    required this.values,
   });
+
+  @override
+  List<Object?> get props => [id, name, isRequired, type, controlsPrice, values];
 }
 
-class SingleOptionEntity {
+class OpionValueEntity extends Equatable {
   final int id;
   final String name;
   final double price;
-
-  SingleOptionEntity({
+  final bool isDefault;
+  const OpionValueEntity({
     required this.id,
     required this.name,
     required this.price,
+    required this.isDefault,
   });
+
+  @override
+  List<Object?> get props => [id, name, price, isDefault];
 }

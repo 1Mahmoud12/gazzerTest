@@ -7,7 +7,7 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -74,7 +74,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           return VerticalRotatedImgCard(
                             prod: prod,
                             onTap: () {
-                              AddFoodToCartRoute($extra: prod).push(context);
+                              PlateDetailsRoute(id: prod.id).push(context);
                             },
                           );
                         },

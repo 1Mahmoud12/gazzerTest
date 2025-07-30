@@ -4,8 +4,8 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
 class MiniProductCard extends StatelessWidget {
   const MiniProductCard({super.key, required this.product});
@@ -22,7 +22,8 @@ class MiniProductCard extends StatelessWidget {
           height: constraints.maxHeight,
           width: constraints.maxHeight * 0.71,
           child: InkWell(
-            onTap: () => AddFoodToCartRoute($extra: product).push(context),
+            onTap: () => PlateDetailsRoute(id: product.id).push(context),
+
             borderRadius: AppConst.defaultBorderRadius,
             child: Stack(
               children: [

@@ -136,8 +136,10 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
     return false;
   }
 
+  DragLimit? dragLimit;
   @override
   void initState() {
+    dragLimit = widget.dragLimit;
     top = widget.dy ?? -1;
     left = widget.dx ?? -1;
     super.initState();
@@ -146,186 +148,187 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
   @override
   Widget build(BuildContext context) {
     /// total screen width & height
-    width = widget.screenWidth ?? MediaQuery.of(context).size.width;
-    height = widget.screenHeight ?? MediaQuery.of(context).size.height;
     final containerKey1 = GlobalKey();
     final containerKey2 = GlobalKey();
 
     /// distance from top and left from user
     /// top = widget.dy?? MediaQuery.of(context).size.height / 2;
     /// left = widget.dx?? MediaQuery.of(context).size.width / 2;
-    return Scaffold(
-      resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-      body: GestureDetector(
-        /// if the user touched out side of the widget the tabbed will be false
-        onTap: () {
-          setState(() {
-            isTabbed = false;
-          });
-        },
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        width = widget.screenWidth ?? constraints.maxWidth;
+        height = widget.screenHeight ?? constraints.maxHeight;
+        return GestureDetector(
+          /// if the user touched out side of the widget the tabbed will be false
+          onTap: () {
+            setState(() {
+              isTabbed = false;
+            });
+          },
 
-        /// if the user touched out side of the widget the tabbed will be false
-        onLongPress: () {
-          setState(() {
-            isTabbed = false;
-          });
-        },
+          /// if the user touched out side of the widget the tabbed will be false
+          onLongPress: () {
+            setState(() {
+              isTabbed = false;
+            });
+          },
 
-        /// if the user touch of even gesture detector detect any drag gesture out side of the widget the dragging will be false
-        onPanStart: (value) {
-          widget.onDragging?.call(true);
-          setState(() {
-            isTabbed = false;
-          });
-        },
+          /// if the user touch of even gesture detector detect any drag gesture out side of the widget the dragging will be false
+          onPanStart: (value) {
+            widget.onDragging?.call(true);
+            setState(() {
+              isTabbed = false;
+            });
+          },
 
-        /// setting the top and left globally
-        child: SizedBox(
-          height: height,
-          width: width,
-          child: isRemoved
-              ? widget.mainScreenWidget
-              : Stack(
-                  children: [
-                    widget.mainScreenWidget,
-                    AnimatedPositioned(
-                      /// getting top and left distance where the widget will be floating
-                      /// if user hasn't provide the dy and dx then the widget will auto matically
-                      /// align 20 right and 20 bottom like a FloatingActionButton
-                      /// otherwise the bottom and right will be null.
-                      top: top == -1 ? null : top,
-                      left: left == -1 ? null : left,
-                      right: widget.dx == null && left == -1 && top == -1 ? 20 : null,
-                      bottom: widget.bottom ?? (widget.dy == null && left == -1 && top == -1 ? 20 : null),
-                      duration: Duration(milliseconds: isDragging ? 100 : 700),
+          /// setting the top and left globally
+          child: SizedBox(
+            height: height,
+            width: width,
+            child: isRemoved
+                ? widget.mainScreenWidget
+                : Stack(
+                    children: [
+                      widget.mainScreenWidget,
+                      AnimatedPositioned(
+                        /// getting top and left distance where the widget will be floating
+                        /// if user hasn't provide the dy and dx then the widget will auto matically
+                        /// align 20 right and 20 bottom like a FloatingActionButton
+                        /// otherwise the bottom and right will be null.
+                        top: top == -1 ? null : top,
+                        left: left == -1 ? null : left,
+                        right: widget.dx == null && left == -1 && top == -1 ? 20 : null,
+                        bottom: widget.bottom ?? (widget.dy == null && left == -1 && top == -1 ? 20 : null),
+                        duration: Duration(milliseconds: isDragging ? 100 : 700),
 
-                      /// setting animation time and animation type
-                      /// the widget will bounce when it will touch the main screen border.
-                      /// other wise it has just a simple ease animation.
-                      curve:
-                          top >= (height - widget.floatingWidgetHeight) ||
-                              left >= (width - widget.floatingWidgetWidth) ||
-                              top <= widget.floatingWidgetHeight ||
-                              left <= 1
-                          ? !widget.disableBounceAnimation
-                                ? Curves.bounceOut
-                                : Curves.ease
-                          : Curves.ease,
-                      child: GestureDetector(
-                        /// tabbing on widget makes the isTabbed true.
-                        /// it is because the widget will move only when we are touch it and drag to to somewhere else in the screen
-                        onTap: () {
-                          setState(() {
-                            isTabbed = true;
-                          });
-                        },
+                        /// setting animation time and animation type
+                        /// the widget will bounce when it will touch the main screen border.
+                        /// other wise it has just a simple ease animation.
+                        curve:
+                            top >= (height - widget.floatingWidgetHeight) ||
+                                left >= (width - widget.floatingWidgetWidth) ||
+                                top <= widget.floatingWidgetHeight ||
+                                left <= 1
+                            ? !widget.disableBounceAnimation
+                                  ? Curves.bounceOut
+                                  : Curves.ease
+                            : Curves.ease,
+                        child: GestureDetector(
+                          /// tabbing on widget makes the isTabbed true.
+                          /// it is because the widget will move only when we are touch it and drag to to somewhere else in the screen
+                          onTap: () {
+                            setState(() {
+                              isTabbed = true;
+                            });
+                          },
 
-                        /// also in the case of long press
-                        onLongPress: () {
-                          setState(() {
-                            isTabbed = true;
-                          });
-                        },
+                          /// also in the case of long press
+                          onLongPress: () {
+                            setState(() {
+                              isTabbed = true;
+                            });
+                          },
 
-                        /// also in the case when a user start to drag the widget
-                        onPanStart: (value) {
-                          setState(() {
-                            isTabbed = true;
-                            isDragging = true;
-                            if (widget.onDragging != null) {
-                              widget.onDragging!(true);
-                            }
-                          });
-                        },
-
-                        /// updating top and left variable
-                        onPanUpdate: (value) {
-                          setState(() {
-                            if (isTabbed && isDragEnable) {
-                              isColliding = hasCollision(containerKey1, containerKey2);
-                              top = _getDy(value.globalPosition.dy - (widget.floatingWidgetHeight), height);
-                              left = _getDx(value.globalPosition.dx, width);
-                              if (widget.onDragEvent != null) {
-                                widget.onDragEvent!(left, top);
+                          /// also in the case when a user start to drag the widget
+                          onPanStart: (value) {
+                            setState(() {
+                              isTabbed = true;
+                              isDragging = true;
+                              if (widget.onDragging != null) {
+                                widget.onDragging!(true);
                               }
-                            }
-                          });
-                        },
+                            });
+                          },
 
-                        /// give a sliding animation
-                        onPanEnd: (value) {
-                          widget.onDragging?.call(false);
-                          setState(() {
-                            if (isTabbed && isDragEnable) {
-                              isDragging = false;
-                              left = _getDx(
-                                left + value.velocity.pixelsPerSecond.dx / (widget.speed ?? 50.0).toDouble(),
-                                width,
-                              );
-                              top = _getDy(
-                                top + value.velocity.pixelsPerSecond.dy / (widget.speed ?? 50.0).toDouble(),
-                                height,
-                              );
-                              if (widget.onDragEvent != null) {
-                                widget.onDragEvent!(left, top);
+                          /// updating top and left variable
+                          onPanUpdate: (value) {
+                            setState(() {
+                              if (isTabbed && isDragEnable) {
+                                isColliding = hasCollision(containerKey1, containerKey2);
+                                top = _getDy(value.globalPosition.dy - (widget.floatingWidgetHeight), height);
+                                left = _getDx(value.globalPosition.dx, width);
+                                if (widget.onDragEvent != null) {
+                                  widget.onDragEvent!(left, top);
+                                }
                               }
-                            }
-                            if (isColliding) {
-                              isRemoved = true;
-                            }
-                          });
+                            });
+                          },
 
-                          /// activates only if auto align is set to true
-                          /// the widget will automagically align to left or right of the screen now
-                          /// after the user release the widget
-                          ///  if the widget is on the left screen side then
-                          ///  left = width - widget.floatingWidgetWidth;
-                          ///  if the widget on the right side then
-                          ///  left = 0
-                          if (widget.autoAlign) {
-                            /// widget aligns on the left only
-                            if (widget.autoAlignType == AlignmentType.onlyLeft) {
-                              setState(() {
-                                left = 0;
-                              });
-                            }
-                            /// widget aligns on the right only
-                            else if (widget.autoAlignType == AlignmentType.onlyRight) {
-                              setState(() {
-                                left = width - widget.floatingWidgetWidth;
-                              });
-                            }
-                            /// widget aligns on the both side according to the position
-                            /// default behaviour
-                            else {
-                              if (left >= width / 2) {
-                                setState(() {
-                                  left = width - widget.floatingWidgetWidth;
-                                });
-                              } else {
+                          /// give a sliding animation
+                          onPanEnd: (value) {
+                            widget.onDragging?.call(false);
+                            setState(() {
+                              if (isTabbed && isDragEnable) {
+                                isDragging = false;
+                                left = _getDx(
+                                  left + value.velocity.pixelsPerSecond.dx / (widget.speed ?? 50.0).toDouble(),
+                                  width,
+                                );
+                                top = _getDy(
+                                  top + value.velocity.pixelsPerSecond.dy / (widget.speed ?? 50.0).toDouble(),
+                                  height,
+                                );
+                                if (widget.onDragEvent != null) {
+                                  widget.onDragEvent!(left, top);
+                                }
+                              }
+                              if (isColliding) {
+                                isRemoved = true;
+                              }
+                            });
+
+                            /// activates only if auto align is set to true
+                            /// the widget will automagically align to left or right of the screen now
+                            /// after the user release the widget
+                            ///  if the widget is on the left screen side then
+                            ///  left = width - widget.floatingWidgetWidth;
+                            ///  if the widget on the right side then
+                            ///  left = 0
+                            if (widget.autoAlign) {
+                              /// widget aligns on the left only
+                              if (widget.autoAlignType == AlignmentType.onlyLeft) {
                                 setState(() {
                                   left = 0;
                                 });
                               }
+                              /// widget aligns on the right only
+                              else if (widget.autoAlignType == AlignmentType.onlyRight) {
+                                setState(() {
+                                  left = width - widget.floatingWidgetWidth;
+                                });
+                              }
+                              /// widget aligns on the both side according to the position
+                              /// default behaviour
+                              else {
+                                if (left >= width / 2) {
+                                  setState(() {
+                                    left = width - widget.floatingWidgetWidth;
+                                  });
+                                } else {
+                                  setState(() {
+                                    left = 0;
+                                  });
+                                }
+                              }
                             }
-                          }
-                        },
+                          },
 
-                        /// the floating widget with size
-                        child: isDragging && widget.widgetWhenDragging != null
-                            ? SizedBox(key: containerKey2, child: widget.widgetWhenDragging)
-                            : SizedBox(
-                                key: containerKey2,
-                                width: widget.floatingWidgetWidth,
-                                height: widget.floatingWidgetHeight,
-                                child: widget.floatingWidget,
-                              ),
+                          /// the floating widget with size
+                          child: isDragging && widget.widgetWhenDragging != null
+                              ? SizedBox(key: containerKey2, child: widget.widgetWhenDragging)
+                              : SizedBox(
+                                  key: containerKey2,
+                                  width: widget.floatingWidgetWidth,
+                                  height: widget.floatingWidgetHeight,
+                                  child: widget.floatingWidget,
+                                ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-        ),
-      ),
+                    ],
+                  ),
+          ),
+        );
+      },
     );
   }
 
@@ -341,13 +344,13 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
     /// appbar), if so, then top will be the lowest of highest point of the screen.
     /// top variable will be no more than the screen total height
     double currentTop;
-    if (dy >= (totalHeight - widget.floatingWidgetHeight - (widget.dragLimit?.bottom ?? 0))) {
+    if (dy >= (totalHeight - widget.floatingWidgetHeight - (dragLimit?.bottom ?? 0))) {
       currentTop = (totalHeight - widget.floatingWidgetHeight);
-      currentTop -= widget.dragLimit?.bottom ?? 0;
+      currentTop -= dragLimit?.bottom ?? 0;
     } else {
       if (dy <= 0) {
         currentTop = widget.floatingWidgetHeight;
-        currentTop += widget.dragLimit?.top ?? 0;
+        currentTop += dragLimit?.top ?? 0;
       } else {
         currentTop = dy;
       }
@@ -364,11 +367,11 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
     double currentLeft;
     if (dx >= (totalWidth - widget.floatingWidgetWidth)) {
       currentLeft = (totalWidth - widget.floatingWidgetWidth);
-      currentLeft -= widget.dragLimit?.right ?? 0;
+      currentLeft -= dragLimit?.right ?? 0;
     } else {
       if (dx <= (0 + widget.floatingWidgetWidth)) {
         currentLeft = 0;
-        currentLeft += widget.dragLimit?.left ?? 0;
+        currentLeft += dragLimit?.left ?? 0;
       } else {
         currentLeft = dx;
       }
@@ -386,7 +389,6 @@ class DragLimit {
 
   const DragLimit({this.top, this.left, this.right, this.bottom});
 
-  DragLimit.symetrical({double? horizontal, double? vertical})
-    : this(top: vertical, left: horizontal, right: horizontal, bottom: vertical);
+  DragLimit.symetrical({double? horizontal, double? vertical}) : this(top: vertical, left: horizontal, right: horizontal, bottom: vertical);
   DragLimit.all({required double val}) : this(top: val, left: val, right: val, bottom: val);
 }

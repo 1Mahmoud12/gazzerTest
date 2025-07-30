@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/stores/presentation/cubit/store_menu_states.dart';
@@ -38,9 +40,18 @@ class StoreMenuSwitcher extends StatelessWidget {
       mainScreenWidget: Scaffold(
         body: BlocBuilder<StoresMenuCubit, StoresMenuStates>(
           builder: (context, state) {
-            if (state is ScreenDataLoading) {
-              return const Center(
-                child: AdaptiveProgressIndicator(),
+            if (state is ScreenDataLoading || state is StoresMenuInit || state is ScreenDataError) {
+              return Scaffold(
+                appBar: const MainAppBar(
+                  showNotification: false,
+                  showCart: false, // don't show cart : multiple hero
+                ),
+                body: state is ScreenDataError
+                    ? FailureWidget(
+                        message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+                        onRetry: () => context.read<StoresMenuCubit>().loadScreenData(),
+                      )
+                    : const Center(child: const AdaptiveProgressIndicator()),
               );
             }
             return StoreMenuScreen(state: state);

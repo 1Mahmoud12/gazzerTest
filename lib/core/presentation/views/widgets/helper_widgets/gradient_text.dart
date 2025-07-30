@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class GradientText extends StatelessWidget {
   const GradientText({
@@ -18,17 +19,19 @@ class GradientText extends StatelessWidget {
   final TextAlign textAlign;
   @override
   Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) {
-        return (gradient ?? Grad().textGradient).createShader(bounds);
-      },
-      blendMode: BlendMode.srcIn,
-      child: Text(
-        text,
-        textAlign: textAlign,
-        style: style,
-        maxLines: maxLines,
-        overflow: maxLines != null ? TextOverflow.ellipsis : null,
+    return Skeleton.shade(
+      child: ShaderMask(
+        shaderCallback: (bounds) {
+          return (gradient ?? Grad().textGradient).createShader(bounds);
+        },
+        blendMode: BlendMode.srcIn,
+        child: Text(
+          text,
+          textAlign: textAlign,
+          style: style,
+          maxLines: maxLines,
+          overflow: maxLines != null ? TextOverflow.ellipsis : null,
+        ),
       ),
     );
   }

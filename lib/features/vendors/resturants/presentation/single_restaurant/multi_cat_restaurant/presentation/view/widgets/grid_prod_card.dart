@@ -5,8 +5,8 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
 class SingleGridProduct extends StatelessWidget {
   const SingleGridProduct({super.key, required this.prod, required this.isTop});
@@ -26,7 +26,7 @@ class SingleGridProduct extends StatelessWidget {
               height: constraints.maxHeight * 0.8,
               child: InkWell(
                 onTap: () {
-                  AddFoodToCartRoute($extra: prod).push(context);
+                  PlateDetailsRoute(id: prod.id).push(context);
                 },
                 borderRadius: AppConst.defaultInnerBorderRadius,
                 child: DecoratedBox(

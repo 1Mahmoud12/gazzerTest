@@ -5,8 +5,8 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
 class RestCatMiniProductCard extends StatelessWidget {
   const RestCatMiniProductCard({super.key, required this.prod});
@@ -55,7 +55,7 @@ class RestCatMiniProductCard extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             SystemSound.play(SystemSoundType.click);
-                            AddFoodToCartRoute($extra: prod).push(context);
+                            PlateDetailsRoute(id: prod.id).push(context);
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(4),

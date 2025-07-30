@@ -21,7 +21,7 @@ final GoRouter router = GoRouter(
 
     ///
     nestedRoutes,
-    ...unnestedRoutes,
+    ...unNestedRoutes,
 
     ///
   ],

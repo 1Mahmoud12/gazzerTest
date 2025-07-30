@@ -4,9 +4,8 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show MainBtn, HorizontalSpacing;
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/widgets/increment_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget.dart';
 
 class ProductPriceSummary extends StatelessWidget {
   const ProductPriceSummary({super.key});
@@ -28,7 +27,7 @@ class ProductPriceSummary extends StatelessWidget {
           right: false,
           left: false,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               spacing: 12,

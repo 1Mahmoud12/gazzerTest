@@ -28,9 +28,9 @@ import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
 import 'package:go_router/go_router.dart';
@@ -72,13 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Scaffold(
+        extendBody: false,
+        extendBodyBehindAppBar: false,
         // floatingActionButtonLocation: CustomFloatingBtnPosition(
         //   HomeUtils.headerHeight(context) + 12,
         //   50 + AppConst.defaultHrPadding.right,
         // ),
         // floatingActionButton: const CartFloatingBtn(),
         body: FloatingDraggableWidget(
-          dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
+          // dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
           floatingWidget: const CartFloatingBtn().withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
           floatingWidgetHeight: 50,
           floatingWidgetWidth: 50,

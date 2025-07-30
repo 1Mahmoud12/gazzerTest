@@ -7,6 +7,7 @@ import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.da
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
@@ -204,10 +205,45 @@ class Fakers {
       image:
           "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       categoryPlateId: 0,
-      options: [],
       outOfStock: _random.nextBool(),
       badge: _random.nextBool() ? '30%' : null,
       reviewCount: _random.nextDouble().toInt() * 100,
+    ),
+  );
+  static const plate = PlateEntity(
+    id: 0,
+    name: "طبق 1",
+    description: "وصف الطبق 1",
+    price: 12,
+    rate: 4,
+    image:
+        "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+    categoryPlateId: 0,
+    outOfStock: false,
+    badge: '30%',
+    reviewCount: 12,
+  );
+  static final plateOrderedWith = List.generate(
+    3,
+    (index) => OrderedWithEntityy(id: index, name: 'Item index', image: Fakers.netWorkImage, price: 0, rate: 3),
+  );
+  static final plateOptions = List.generate(
+    3,
+    (index) => PlateOptionEntity(
+      id: index,
+      name: 'Option ${index + 1}',
+      isRequired: _random.nextBool(),
+      type: OptionType.radio,
+      controlsPrice: _random.nextBool(),
+      values: List.generate(
+        3,
+        (valueIndex) => OpionValueEntity(
+          id: valueIndex,
+          name: 'Value ${valueIndex + 1}',
+          price: _random.nextDouble() * 10,
+          isDefault: valueIndex == 0, // First value is default
+        ),
+      ),
     ),
   );
 

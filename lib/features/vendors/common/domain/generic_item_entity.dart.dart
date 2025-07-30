@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 
 export 'package:gazzer/core/presentation/extensions/enum.dart';
@@ -8,7 +9,7 @@ part 'package:gazzer/features/vendors/resturants/domain/enities/plate_entity.dar
 part 'package:gazzer/features/vendors/stores/domain/entities/product_entity.dart';
 
 /// generic class for both [PlateEntity] for restaurants and [ProductEntity] for stores
-sealed class GenericItemEntity {
+sealed class GenericItemEntity extends Equatable {
   final int id;
   final String name;
   final String image;

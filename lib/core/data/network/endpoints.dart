@@ -54,7 +54,8 @@ class Endpoints {
   static String topRatedRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/top-rated";
   static String offersRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/has-offers";
   static String todaysPicRestaurants(int catId, {int pag = 0, int limit = 10}) => "lists/todays-picks-restaurants";
-  static String orderWith(int restId, int plateId) => "restaurants/$restId/plates/plate/$plateId/ordered-with";
+  static String orderWith(int restId, int plateId) => "restaurants/plates/plate/$plateId/ordered-with";
+  static String plateDetailsPage(int plateId) => "restaurants/plates/plate/$plateId";
 
   /// ** categoryOfPlates
   static const platesCategories = 'restaurants/plates/categories';

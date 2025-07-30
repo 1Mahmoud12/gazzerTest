@@ -8,7 +8,7 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_restaurant_details.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -37,9 +37,7 @@ class RestaurantDetilsScreen extends StatelessWidget {
     return BlocConsumer<SingleRestaurantCubit, SingleRestaurantStates>(
       listener: (context, state) {
         if (state is SingleRestaurantLoaded) {
-          if (state.isSingle &&
-              state.categoriesWithPlates.isNotEmpty &&
-              state.categoriesWithPlates.first.$2.isNotEmpty) {
+          if (state.isSingle && state.categoriesWithPlates.isNotEmpty && state.categoriesWithPlates.first.$2.isNotEmpty) {
             SingleCatRestaurantRoute($extra: state).pushReplacement(context);
           } else {
             MultiCatRestaurantsRoute($extra: state).pushReplacement(context);
@@ -48,8 +46,7 @@ class RestaurantDetilsScreen extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is SingleRestaurantError ||
-            (state is SingleRestaurantLoaded &&
-                (state.categoriesWithPlates.isEmpty || state.categoriesWithPlates.first.$2.isEmpty))) {
+            (state is SingleRestaurantLoaded && (state.categoriesWithPlates.isEmpty || state.categoriesWithPlates.first.$2.isEmpty))) {
           return Scaffold(
             appBar: const ClassicAppBar(),
             body: FailureWidget(
@@ -60,7 +57,7 @@ class RestaurantDetilsScreen extends StatelessWidget {
         } else {
           return Skeletonizer(
             child: SingleCatRestaurantScreen(
-              showOrderedWith: false,
+              hasParentProvider: false,
               state: SingleRestaurantLoaded(
                 banners: [],
                 restaurant: Fakers.restaurant,

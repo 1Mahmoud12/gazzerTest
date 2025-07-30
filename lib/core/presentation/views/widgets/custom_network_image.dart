@@ -15,6 +15,7 @@ class CustomNetworkImage extends StatelessWidget {
     this.isInsta = false,
     this.errorWidget,
     this.alignment = Alignment.center,
+    this.opacity,
   });
   final String imageUrl;
   final double? height;
@@ -25,9 +26,20 @@ class CustomNetworkImage extends StatelessWidget {
   final bool isInsta;
   final AlignmentGeometry alignment;
   final Widget? errorWidget;
+  final double? opacity;
   @override
   Widget build(BuildContext context) {
     Widget child;
+    final errorShown =
+        errorWidget ??
+        ColoredBox(
+          color: Colors.grey.shade200,
+          child: Icon(
+            Icons.image,
+            color: Colors.black,
+            size: (height ?? width ?? 100) * 0.5,
+          ),
+        );
     if (imageUrl.endsWith('svg')) {
       child = SvgPicture.network(
         imageUrl,
@@ -37,36 +49,25 @@ class CustomNetworkImage extends StatelessWidget {
         fit: fit ?? BoxFit.cover,
         // ignore: avoid_print
         errorBuilder: (context, url, error) {
-          return errorWidget ??
-              ColoredBox(
-                color: Colors.grey.shade200,
-                child: Icon(
-                  Icons.image,
-                  color: Colors.black,
-                  size: (height ?? width ?? 100) * 0.5,
-                ),
-              );
+          return errorShown;
         },
       );
     } else {
       child = CachedNetworkImage(
         imageUrl: imageUrl,
-        height: height,
-        width: width,
-        fit: fit ?? BoxFit.cover,
-        colorBlendMode: blendMode,
+        imageBuilder: (context, imageProvider) => Image(
+          image: imageProvider,
+          height: height,
+          width: width,
+          fit: fit ?? BoxFit.cover,
+          alignment: alignment,
+          colorBlendMode: blendMode,
+          opacity: AlwaysStoppedAnimation(opacity ?? 1.0),
+        ),
         // ignore: avoid_print
         errorListener: (value) => debugPrint(value.toString()),
         errorWidget: (context, url, error) {
-          return errorWidget ??
-              ColoredBox(
-                color: Colors.grey.shade200,
-                child: Icon(
-                  Icons.image,
-                  color: Colors.black,
-                  size: (height ?? width ?? 100) * 0.5,
-                ),
-              );
+          return errorShown;
         },
       );
     }

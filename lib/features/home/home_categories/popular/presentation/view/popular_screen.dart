@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
 class PopularScreen extends StatelessWidget {
   const PopularScreen({super.key});
@@ -38,7 +38,7 @@ class PopularScreen extends StatelessWidget {
                 return VerticalRotatedImgCard(
                   prod: prod,
                   onTap: () {
-                    AddFoodToCartRoute($extra: prod).push(context);
+                    PlateDetailsRoute(id: prod.id).push(context);
                   },
                 );
               },
@@ -55,7 +55,7 @@ class PopularScreen extends StatelessWidget {
                 return VerticalRotatedImgCard(
                   prod: prod,
                   onTap: () {
-                    AddFoodToCartRoute($extra: prod).push(context);
+                    PlateDetailsRoute(id: prod.id).push(context);
                   },
                 );
               },

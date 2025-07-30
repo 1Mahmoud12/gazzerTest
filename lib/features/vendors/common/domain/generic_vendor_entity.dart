@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 
 export 'package:gazzer/core/presentation/extensions/enum.dart';
@@ -7,7 +8,7 @@ part 'package:gazzer/features/vendors/stores/domain/entities/store_entity.dart';
 
 /// generic class for both [RestaurantEntity] for restaurants and [StoreEntity] for stores
 
-sealed class GenericVendorEntity {
+sealed class GenericVendorEntity extends Equatable {
   final int id;
   final int? parentId;
 
@@ -34,8 +35,7 @@ sealed class GenericVendorEntity {
 
   final String? address; // ** pending api
 
-  bool get isClosed =>
-      alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
+  bool get isClosed => alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
 
   const GenericVendorEntity({
     required this.id,

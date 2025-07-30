@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'single_restaurant_details.dart';
+part of 'single_cat_restaurant_details.dart';
 
 // **************************************************************************
 // GoRouterGenerator
@@ -16,7 +16,7 @@ RouteBase get $singleCatRestaurantRoute => GoRouteData.$route(
 
 mixin _$SingleCatRestaurantRoute on GoRouteData {
   static SingleCatRestaurantRoute _fromState(GoRouterState state) =>
-      SingleCatRestaurantRoute($extra: state.extra as SingleRestaurantLoaded);
+      SingleCatRestaurantRoute($extra: state.extra as SingleRestaurantStates);
 
   SingleCatRestaurantRoute get _self => this as SingleCatRestaurantRoute;
 

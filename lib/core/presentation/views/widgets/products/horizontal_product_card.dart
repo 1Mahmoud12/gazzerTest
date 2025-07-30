@@ -9,8 +9,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
-import 'package:gazzer/features/product/add_to_cart/add_food/presentation/add_food_to_cart_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
 class HorizontalProductCard extends StatelessWidget {
   const HorizontalProductCard({super.key, required this.product});
@@ -22,7 +22,7 @@ class HorizontalProductCard extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: 600, maxHeight: height),
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: () => AddFoodToCartRoute($extra: product).push(context),
+        onTap: () => PlateDetailsRoute(id: product.id).push(context),
         child: Stack(
           children: [
             Align(

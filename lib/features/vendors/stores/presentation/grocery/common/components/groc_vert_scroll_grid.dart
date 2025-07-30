@@ -19,6 +19,7 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
     required this.onSinglceCardPressed,
     required this.shrinkWrap,
     this.gridDelegate,
+    required this.shape,
   }) : assert(
          items is List<GenericVendorEntity> || items is List<GenericItemEntity>,
          'HorzScrollVertCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
@@ -33,6 +34,7 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
   final double? childAspectRatio;
   final bool canScroll;
   final SliverGridDelegate? gridDelegate;
+  final CardStyle shape;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,7 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
               if (item is ProductEntity) {
                 return GrocProdCard(
                   product: item,
-                  shape: GrodPodShape.values[index % GrodPodShape.values.length],
+                  shape: shape,
                 );
               }
               return const SizedBox();

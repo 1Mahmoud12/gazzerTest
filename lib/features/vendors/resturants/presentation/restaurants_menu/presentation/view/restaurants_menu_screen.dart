@@ -65,7 +65,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   const RestCatHeaderWidget(),
                   Expanded(
                     child: FailureWidget(
-                      message: state.error,
+                      message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
                       onRetry: () => cubit.loadScreenData(),
                     ),
                   ),

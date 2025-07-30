@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -43,7 +42,6 @@ class RestaurantCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(showCart: false),
       extendBody: true,
       extendBodyBehindAppBar: true,
       body: Column(

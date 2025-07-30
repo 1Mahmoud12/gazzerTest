@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -16,7 +17,7 @@ class VerticalRestaurantCard extends StatelessWidget {
     required this.item,
     this.height,
     Corner? corner,
-    this.imgToTextRatio = 0.66,
+    this.imgToTextRatio = 0.7,
     required this.onTap,
   }) : corner = corner ?? Corner.bottomRight;
   final double width;
@@ -68,20 +69,21 @@ class VerticalRestaurantCard extends StatelessWidget {
                         clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
                         child: Stack(
                           children: [
-                            Container(
-                              foregroundDecoration: !item.isClosed
-                                  ? null
-                                  : BoxDecoration(color: Colors.red.withAlpha(75)),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(item.image),
-                                  fit: BoxFit.cover,
-                                  opacity: item.isClosed ? 0.4 : 1,
-                                  onError: (error, stackTrace) => print(' Error loading image: $error'),
-                                ),
+                            DecoratedBox(
+                              position: DecorationPosition.foreground,
+                              decoration: item.isClosed
+                                  ? BoxDecoration(
+                                      color: Colors.red.withAlpha(75),
+                                    )
+                                  : const BoxDecoration(),
+                              child: CustomNetworkImage(
+                                item.image,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                opacity: item.isClosed ? 0.4 : 1,
                               ),
                             ),
-                            if (item.isClosed )
+                            if (item.isClosed)
                               CardBadge(
                                 text: L10n.tr().closed,
                                 alignment: AlignmentDirectional.topStart,
@@ -90,9 +92,7 @@ class VerticalRestaurantCard extends StatelessWidget {
                             else if (item.badge != null)
                               CardBadge(
                                 text: item.badge!,
-                                alignment: corner == Corner.topRight
-                                    ? AlignmentDirectional.topStart
-                                    : AlignmentDirectional.topEnd,
+                                alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
                               ),
                           ],
                         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/vendor_info_widget.dart';
 
@@ -23,7 +24,7 @@ class GrocCardTwo extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: vendor.isClosed ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
@@ -39,16 +40,24 @@ class GrocCardTwo extends StatelessWidget {
                 children: [
                   SizedBox.expand(
                     child: DecoratedBox(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: NetworkImage(vendor.image),
-                          fit: BoxFit.cover,
-                          onError: (exception, stackTrace) => print('Error loading image: $exception'),
-                        ),
                         boxShadow: [
-                          const BoxShadow(color: Color(0x442A003C), offset: Offset(0, 4), blurRadius: 4),
+                          BoxShadow(color: Color(0x442A003C), offset: Offset(0, 4), blurRadius: 4),
                         ],
+                      ),
+                      child: DecoratedBox(
+                        decoration: vendor.isClosed
+                            ? BoxDecoration(color: Colors.red.withAlpha(75), shape: BoxShape.circle)
+                            : const BoxDecoration(shape: BoxShape.circle),
+                        child: CustomNetworkImage(
+                          vendor.image,
+                          fit: BoxFit.cover,
+                          height: double.infinity,
+                          borderReduis: 150,
+                          width: double.infinity,
+                          opacity: vendor.isClosed ? 0.4 : 1,
+                        ),
                       ),
                     ),
                   ),

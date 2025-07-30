@@ -1,4 +1,4 @@
-part of '../single_restaurant_details.dart';
+part of '../single_cat_restaurant_details.dart';
 
 class _FoodImagesGallery extends StatefulWidget {
   const _FoodImagesGallery({required this.plates, required this.onSelect, required this.selected});
