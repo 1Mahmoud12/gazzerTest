@@ -13,7 +13,7 @@ abstract class AppBus {
     return _eventBus.on<T>();
   }
 
-  StreamSubscription<T> sunscribe<T extends AppEvent>(Function(T e) todo) {
+  StreamSubscription<T> subscribe<T extends AppEvent>(Function(T e) todo) {
     return _eventBus.on<T>().listen(todo);
   }
 

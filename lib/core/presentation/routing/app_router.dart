@@ -4,14 +4,13 @@ import 'package:gazzer/core/presentation/routing/router_observer.dart';
 import 'package:gazzer/core/presentation/routing/routers/nested_routes.dart';
 import 'package:gazzer/core/presentation/routing/routers/unnested_routes.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/view/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: AppNavigator().mainKey,
-  initialLocation: HomeScreen.route,
+  initialLocation: SplashScreen.route,
   observers: [MyRouteObserver()],
   routes: [
     GoRoute(

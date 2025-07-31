@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class GrocCardThree extends StatelessWidget {
@@ -73,6 +74,7 @@ class GrocCardThree extends StatelessWidget {
                       padding: 4,
                       isDarkContainer: false,
                       borderRadius: BorderRadius.circular(100),
+                      fovorable: vendor,
                     ),
                   ),
                 ],

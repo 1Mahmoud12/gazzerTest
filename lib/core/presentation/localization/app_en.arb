@@ -1,7 +1,27 @@
 {
-  "min": "MIN",
-  "typeHere": "Type here",
-  "addSpecialNote": "Add Special Note",
+  "favorite_________________Start": "__________________",
+  "itemNameAddedToFAvorites": "{itemName} has been added to favorites",
+  "@itemNameAddedToFAvorites": {
+    "placeholders": {
+      "itemName": {
+        "type": "String"
+      }
+    }
+  },
+  "itemNameRemovedFromFavorites": "{itemName} has been removed from favorites",
+  "@itemNameRemovedFromFavorites": {
+    "placeholders": {
+      "itemName": {
+        "type": "String"
+      }
+    }
+  },
+  "youHaveNoFavoritesYet": "You have no favorites yet",
+  "restaurants": "Restaurants",
+  "stores": "Stores",
+  "plates": "Plates",
+  "products": "Products",
+  "favorite_________________End": "__________________",
   "vendorCommon_________________Start": "__________________",
   "soon": "Soon",
   "nameisCurrentlyClosedWeWillOpenAt": "{name} is currently closed. We will open at {time}",
@@ -157,6 +177,9 @@
   "retry": "Retry",
   "home_________________End": "__________________",
   "cart_________________Start": "__________________",
+  "min": "MIN",
+  "typeHere": "Type here",
+  "addSpecialNote": "Add Special Note",
   "total": "TOTAL",
   "deliveryFee": "Delivery Fee",
   "totalAmount": "Total Amount",

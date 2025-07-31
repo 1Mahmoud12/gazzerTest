@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';

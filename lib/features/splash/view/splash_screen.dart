@@ -104,7 +104,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       const IntroVideoTutorialRoute(videoLink: '').go(context);
                     }
                   } else if (state is RefreshTokenSuccess) {
-                    cubit.getClient();
+                    cubit.getClientData();
                   } else if (state is GetClientSuccess) {
                     context.go(HomeScreen.route);
                   } else if (state is RefreshTokenError || state is GetClientError) {
@@ -130,7 +130,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                             const SizedBox.shrink(),
                             if (trialCount < 3)
                               OutlinedButton(
-                                onPressed: state is RefreshTokenError ? cubit.refreshToken : cubit.getClient,
+                                onPressed: state is RefreshTokenError ? cubit.refreshToken : cubit.getClientData,
                                 child: Row(
                                   spacing: 6,
                                   mainAxisSize: MainAxisSize.min,

@@ -1,5 +1,6 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 sealed class RestaurantsOfCategoryStates {

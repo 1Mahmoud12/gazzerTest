@@ -4,12 +4,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdaptiveProgressIndicator extends StatelessWidget {
-  const AdaptiveProgressIndicator({super.key});
-
+  const AdaptiveProgressIndicator({super.key, this.size, this.color});
+  final double? size;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
-    return Platform.isIOS
-        ? const CupertinoActivityIndicator(radius: 15)
-        : const SizedBox(height: 30, width: 30, child: Center(child: CircularProgressIndicator()));
+    return SizedBox(
+      height: (size ?? 30),
+      width: (size ?? 30),
+      child: Platform.isIOS
+          ? CupertinoActivityIndicator(
+              radius: (size ?? 30) / 2,
+              color: color,
+            )
+          : Center(
+              child: CircularProgressIndicator(color: color),
+            ),
+    );
   }
 }

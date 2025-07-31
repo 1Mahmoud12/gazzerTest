@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -6,7 +7,7 @@ import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/cards/card_plate_info_widget.dart';
 
@@ -104,7 +105,7 @@ class VerticalPlateCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const DecoratedFavoriteWidget(size: 24, padding: 4),
+                            DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
                             AbsorbPointer(
                               absorbing: item.outOfStock,
                               child: AddIcon(

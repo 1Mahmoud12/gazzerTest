@@ -7,8 +7,8 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show HorizontalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
@@ -104,7 +104,7 @@ class HorizontalProductCard extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const DecoratedFavoriteWidget(size: 20, isDarkContainer: false),
+                            DecoratedFavoriteWidget(size: 20, isDarkContainer: false, fovorable: product),
                           ],
                         ),
                         const HorizontalSpacing(12),

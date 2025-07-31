@@ -1,14 +1,13 @@
 import 'dart:math';
 
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
-import 'package:gazzer/features/favorites/domain/favorite_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
@@ -227,7 +226,7 @@ class Fakers {
   );
   static final plateOrderedWith = List.generate(
     3,
-    (index) => OrderedWithEntityy(id: index, name: 'Item index', image: Fakers.netWorkImage, price: 0, rate: 3),
+    (index) => OrderedWithEntity(id: index, name: 'Item index', image: Fakers.netWorkImage, price: 0, rate: 3, reviewCount: 0, outOfStock: false),
   );
   static final plateOptions = List.generate(
     3,
@@ -345,14 +344,21 @@ class Fakers {
   );
 
   /// favorties
-  static const favorite = FavoriteEntity(
+  static const favorite = ProductEntity(
     id: 1,
     name: "المفضل ",
     description: "وصف المفضل ",
-    imageUrl: placeHolderImg,
+    image: placeHolderImg,
     rate: 5,
     price: 100,
-    type: FavoriteType.product,
+    outOfStock: false,
+    reviewCount: 50,
   );
-  static const favorites = [favorite, favorite, favorite, favorite, favorite];
+  static const favorites = {
+    0: favorite,
+    1: favorite,
+    2: favorite,
+    3: favorite,
+    4: favorite,
+  };
 }

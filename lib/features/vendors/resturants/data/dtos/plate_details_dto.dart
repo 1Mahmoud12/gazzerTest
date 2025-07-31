@@ -1,3 +1,4 @@
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class PlateDetailsDTO {

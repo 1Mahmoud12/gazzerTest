@@ -1,19 +1,14 @@
-import 'package:equatable/equatable.dart';
+import 'package:gazzer/core/domain/entities/favorable_interface.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
-
-export 'package:gazzer/core/presentation/extensions/enum.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/restaurant_entity.dart';
 part 'package:gazzer/features/vendors/stores/domain/entities/store_entity.dart';
 
 /// generic class for both [RestaurantEntity] for restaurants and [StoreEntity] for stores
-
-sealed class GenericVendorEntity extends Equatable {
-  final int id;
+///
+sealed class GenericVendorEntity extends Favorable {
   final int? parentId;
-
-  final String name;
-  final String image;
   final String location; // zone
   final List<GenericSubCategoryEntity>? subCategories;
 
@@ -26,7 +21,6 @@ sealed class GenericVendorEntity extends Equatable {
 
   final DateTime? startTime;
   final DateTime? endTime;
-  final double rate;
   final int? rateCount;
   final bool alwaysOpen; // is_24_hours
   final bool alwaysClosed;
@@ -35,15 +29,26 @@ sealed class GenericVendorEntity extends Equatable {
 
   final String? address; // ** pending api
 
-  bool get isClosed => alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
+  bool get isClosed =>
+      alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
+
+  @override
+  FavoriteType get favoriteType => switch (this) {
+    RestaurantEntity() => FavoriteType.restaurant,
+    StoreEntity() => FavoriteType.store,
+  };
 
   const GenericVendorEntity({
-    required this.id,
+    /// favorable properties
+    required super.id,
+    required super.name,
+    required super.image,
+    required super.rate,
+    super.description = '',
+
+    ///
     required this.parentId,
-    required this.name,
-    required this.image,
     this.priceRange,
-    required this.rate,
     this.badge,
     this.tag,
     required this.startTime,

@@ -98,23 +98,59 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
-  /// No description provided for @min.
+  /// No description provided for @favorite_________________Start.
   ///
   /// In en, this message translates to:
-  /// **'MIN'**
-  String get min;
+  /// **'__________________'**
+  String get favorite_________________Start;
 
-  /// No description provided for @typeHere.
+  /// No description provided for @itemNameAddedToFAvorites.
   ///
   /// In en, this message translates to:
-  /// **'Type here'**
-  String get typeHere;
+  /// **'{itemName} has been added to favorites'**
+  String itemNameAddedToFAvorites(String itemName);
 
-  /// No description provided for @addSpecialNote.
+  /// No description provided for @itemNameRemovedFromFavorites.
   ///
   /// In en, this message translates to:
-  /// **'Add Special Note'**
-  String get addSpecialNote;
+  /// **'{itemName} has been removed from favorites'**
+  String itemNameRemovedFromFavorites(String itemName);
+
+  /// No description provided for @youHaveNoFavoritesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no favorites yet'**
+  String get youHaveNoFavoritesYet;
+
+  /// No description provided for @restaurants.
+  ///
+  /// In en, this message translates to:
+  /// **'Restaurants'**
+  String get restaurants;
+
+  /// No description provided for @stores.
+  ///
+  /// In en, this message translates to:
+  /// **'Stores'**
+  String get stores;
+
+  /// No description provided for @plates.
+  ///
+  /// In en, this message translates to:
+  /// **'Plates'**
+  String get plates;
+
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// No description provided for @favorite_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get favorite_________________End;
 
   /// No description provided for @vendorCommon_________________Start.
   ///
@@ -925,6 +961,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'__________________'**
   String get cart_________________Start;
+
+  /// No description provided for @min.
+  ///
+  /// In en, this message translates to:
+  /// **'MIN'**
+  String get min;
+
+  /// No description provided for @typeHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Type here'**
+  String get typeHere;
+
+  /// No description provided for @addSpecialNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Special Note'**
+  String get addSpecialNote;
 
   /// No description provided for @total.
   ///

@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 import 'circle_gradient_image.dart';
@@ -81,7 +81,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
             Positioned(
               top: 60,
               right: 0,
-              child: DecoratedFavoriteWidget(size: 20, borderRadius: AppConst.defaultInnerBorderRadius),
+              child: DecoratedFavoriteWidget(size: 20, borderRadius: AppConst.defaultInnerBorderRadius, fovorable: prod),
             ),
           ],
         ),

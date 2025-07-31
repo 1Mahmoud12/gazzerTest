@@ -7,12 +7,15 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/main_switcher.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/drawer/views/widgets/drawer_btn.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({super.key});
@@ -70,7 +73,9 @@ class _MainDrawerState extends State<MainDrawer> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(44)),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: Grad().bglightLinear.copyWith(colors: [Co.buttonGradient.withAlpha(180), Colors.black.withAlpha(0)]),
+          gradient: Grad().bglightLinear.copyWith(
+            colors: [Co.buttonGradient.withAlpha(180), Colors.black.withAlpha(0)],
+          ),
         ),
         child: Column(
           children: [
@@ -104,6 +109,19 @@ class _MainDrawerState extends State<MainDrawer> {
                     svgImg: svgImg is String ? svgImg : null,
                     icon: svgImg is! String ? (svgImg as Widget) : null,
                     onTap: (ctx) => onTap(ctx),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsGeometry.only(bottom: MediaQuery.paddingOf(context).bottom),
+              child: FutureBuilder(
+                future: ShorebirdUpdater().readCurrentPatch(),
+                builder: (context, snapshot) {
+                  final info = di<PackageInfo>();
+                  return Text(
+                    'V${info.version}+${info.buildNumber} (${snapshot.data?.number ?? 0})',
+                    style: TStyle.blackSemi(12),
                   );
                 },
               ),

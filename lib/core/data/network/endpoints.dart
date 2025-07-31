@@ -1,5 +1,6 @@
 class Endpoints {
   Endpoints._();
+
   /// ** Auth
   // Register
   static const register = "clients/auth/register";
@@ -43,7 +44,8 @@ class Endpoints {
   static String restaurantPage(int id) => 'pages/restaurant-page/$id';
   // stores
   static String storesMenuPage(int mainId) => 'pages/store-category-page/$mainId';
-  static String storesOfSpecificCategoryPage(int mainId, int subId) => 'pages/store-category/$mainId/item-category-page/$subId';
+  static String storesOfSpecificCategoryPage(int mainId, int subId) =>
+      'pages/store-category/$mainId/item-category-page/$subId';
   static String storeDetailsPage(int id) => "pages/store-page/$id";
 
   /// ** stores categories
@@ -52,7 +54,8 @@ class Endpoints {
   /// ** restaurants
   static String allRestaurants(int page, int limit) => "restaurants?is_paginated=1&page=$page&limit=$limit";
   static String retaurantsByCatOfPlate(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId";
-  static String topRatedRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/top-rated";
+  static String topRatedRestaurants(int catId, {int pag = 0, int limit = 10}) =>
+      "restaurants/category/$catId/top-rated";
   static String offersRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/has-offers";
   static String todaysPicRestaurants(int catId, {int pag = 0, int limit = 10}) => "lists/todays-picks-restaurants";
   static String orderWith(int restId, int plateId) => "restaurants/plates/plate/$plateId/ordered-with";
@@ -64,15 +67,15 @@ class Endpoints {
 
   /// ** paltes
   static String platesByRest(int restId) => "restaurants/$restId/plates";
-  static String platesOfRestaurantCategory(int restId, int catId) => "restaurants/$restId/plates/category/$catId?is_paginated=0";
+  static String platesOfRestaurantCategory(int restId, int catId) =>
+      "restaurants/$restId/plates/category/$catId?is_paginated=0";
 
   // ** banners
   static const restaurantsMenuBanners = "banners/restaurants-page";
   static String storeCategoryBanners(int id) => "banners/bannerable/store-category/id/$id";
 
-
   // ** Favorites
   static const favorites = "favorites";
-  static const toggleFavorites = "favorites/toggle";
-
+  static const addFavorite = "favorites/add";
+  static const removeFavorite = "favorites/remove";
 }

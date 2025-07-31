@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorites_card.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -19,10 +21,12 @@ class FavoritesScreen extends StatefulWidget {
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
   final controller = TextEditingController();
+  late final FavoriteBus bus;
   @override
   void initState() {
+    bus = di<FavoriteBus>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // AppNavigator().initContext = context;
+      bus.getFavorites();
     });
     super.initState();
   }
@@ -35,7 +39,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final favs = [L10n.tr().recentRestaurants, L10n.tr().recentGroceries, L10n.tr().recentPharmacies];
     return Scaffold(
       appBar: const MainAppBar(showCart: false),
       body: Column(
@@ -53,34 +56,56 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             ),
           ),
           Expanded(
-            child: ListView.separated(
-              itemCount: favs.length,
-              padding: AppConst.defaultPadding,
-              separatorBuilder: (context, index) => const VerticalSpacing(24),
-              itemBuilder: (context, index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 8,
-                  children: [
-                    Text(favs[index], style: TStyle.primaryBold(20)),
-                    SizedBox(
-                      height: 180,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        separatorBuilder: (context, index) => const HorizontalSpacing(16),
-                        itemBuilder: (context, index) {
-                          final prod = Fakers.plates[index];
-                          return VerticalRotatedImgCard(
-                            prod: prod,
-                            onTap: () {
-                              PlateDetailsRoute(id: prod.id).push(context);
-                            },
-                          );
-                        },
-                      ),
+            child: StreamBuilder(
+              stream: bus.getStream<FavoriteEvents>(),
+              builder: (context, snapshot) {
+                // print("favs of restaurant  ${bus.favorites[FavoriteType.restaurant]}");
+                if (snapshot.data is GetFavoriteLoading) {
+                  return const Center(child: AdaptiveProgressIndicator());
+                }
+                if (snapshot.data?.favorites == null || snapshot.data!.favorites.isEmpty) {
+                  return Center(
+                    child: Text(
+                      L10n.tr().youHaveNoFavoritesYet,
+                      style: TStyle.primaryBold(20),
                     ),
-                  ],
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    bus.getFavorites();
+                  },
+                  child: ListView.separated(
+                    itemCount: snapshot.data!.favorites.length,
+                    padding: AppConst.defaultPadding,
+                    separatorBuilder: (context, index) => const VerticalSpacing(24),
+                    itemBuilder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 8,
+                        children: [
+                          Text(snapshot.data!.favorites.keys.elementAt(index).trName, style: TStyle.primaryBold(20)),
+                          SizedBox(
+                            height: 180,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: snapshot.data!.favorites.values.elementAt(index).length,
+                              separatorBuilder: (context, index) => const HorizontalSpacing(16),
+                              itemBuilder: (context, i) {
+                                final prod = snapshot.data!.favorites.values.elementAt(index).values.elementAt(i);
+                                return FavoriteCard(
+                                  favorite: prod,
+                                  onTap: () {
+                                    ///
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 );
               },
             ),

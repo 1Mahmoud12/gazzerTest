@@ -14,7 +14,7 @@ class _FoodDetailsWidget extends StatelessWidget {
           children: [
             GradientText(text: product.name, style: TStyle.blackBold(18)),
             const Spacer(),
-            const DecoratedFavoriteWidget(size: 16),
+            DecoratedFavoriteWidget(size: 16, fovorable: product),
             // AddIcon(
             //   onTap: () {
             //     SystemSound.play(SystemSoundType.click);

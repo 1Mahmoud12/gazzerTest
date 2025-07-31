@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 
 part 'enum_parser.dart';
 
@@ -103,7 +104,7 @@ enum FavoriteType {
   restaurant('restaurant'),
   store('store'),
   plate('plate'),
-  product('product'),
+  product('store-item'),
   unknown('unknown');
 
   final String type;
@@ -112,5 +113,19 @@ enum FavoriteType {
 
   factory FavoriteType.fromString(String type) {
     return FavoriteType.values.firstWhere((e) => e.type == type, orElse: () => unknown);
+  }
+  String get trName {
+    switch (this) {
+      case FavoriteType.restaurant:
+        return L10n.tr().restaurants;
+      case FavoriteType.store:
+        return L10n.tr().stores;
+      case FavoriteType.plate:
+        return L10n.tr().plates;
+      case FavoriteType.product:
+        return L10n.tr().products;
+      default:
+        return '';
+    }
   }
 }

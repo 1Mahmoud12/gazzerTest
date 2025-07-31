@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
@@ -58,7 +58,7 @@ class MiniProductCard extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: GradientBoxBorder(gradient: Grad().shadowGrad()),
                     ),
-                    child: const FavoriteWidget(size: 24),
+                    child: FavoriteWidget(size: 24, fovorable: product),
                   ),
                 ),
               ],

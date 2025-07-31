@@ -6,7 +6,6 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/resturants/data/dtos/ordered_with_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_details_response.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/plates_repo.dart';
 
 class PlatesRepoImp extends PlatesRepo {
@@ -71,7 +70,7 @@ class PlatesRepoImp extends PlatesRepo {
   }
 
   @override
-  Future<Result<List<OrderedWithEntityy>>> getPlateOrderedWith(int restId, int plateId, {CancelToken? cancelToken}) {
+  Future<Result<List<OrderedWithEntity>>> getPlateOrderedWith(int restId, int plateId, {CancelToken? cancelToken}) {
     return super.call(
       apiCall: () => _apiClient.get(
         endpoint: Endpoints.orderWith(restId, plateId),

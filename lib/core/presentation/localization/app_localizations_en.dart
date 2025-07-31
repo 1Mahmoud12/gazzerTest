@@ -9,13 +9,35 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get min => 'MIN';
+  String get favorite_________________Start => '__________________';
 
   @override
-  String get typeHere => 'Type here';
+  String itemNameAddedToFAvorites(String itemName) {
+    return '$itemName has been added to favorites';
+  }
 
   @override
-  String get addSpecialNote => 'Add Special Note';
+  String itemNameRemovedFromFavorites(String itemName) {
+    return '$itemName has been removed from favorites';
+  }
+
+  @override
+  String get youHaveNoFavoritesYet => 'You have no favorites yet';
+
+  @override
+  String get restaurants => 'Restaurants';
+
+  @override
+  String get stores => 'Stores';
+
+  @override
+  String get plates => 'Plates';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get favorite_________________End => '__________________';
 
   @override
   String get vendorCommon_________________Start => '__________________';
@@ -431,6 +453,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cart_________________Start => '__________________';
+
+  @override
+  String get min => 'MIN';
+
+  @override
+  String get typeHere => 'Type here';
+
+  @override
+  String get addSpecialNote => 'Add Special Note';
 
   @override
   String get total => 'TOTAL';

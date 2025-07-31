@@ -8,7 +8,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_closing_timer.dart';
 
@@ -127,6 +127,7 @@ class VendorInfoCard extends StatelessWidget {
                               size: 18,
                               padding: 6,
                               borderRadius: AppConst.defaultInnerBorderRadius,
+                              fovorable: vendor,
                             ),
                             Row(
                               spacing: 6,

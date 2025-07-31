@@ -25,7 +25,7 @@ class CartItemModel {
   CartItemModel.fromProduct(GenericItemEntity product, {this.quantity = 1})
     : id = product.id,
       name = product.name,
-      description = product.description,
+      description = product.description ?? '',
       price = product.price,
       rate = product.rate,
       image = product.image,

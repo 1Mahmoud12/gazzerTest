@@ -11,6 +11,9 @@ import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/register/data/register_repo_imp.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:gazzer/features/favorites/data/favorites_repo_imp.dart';
+import 'package:gazzer/features/favorites/domain/favorites_repo.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
@@ -48,6 +51,10 @@ Future init() async {
   _registerRepos();
 
   ///
+  /// register buses
+  di.registerSingleton(FavoriteBus(di.get()));
+
+  ///
   _registerCubits();
 }
 
@@ -69,6 +76,7 @@ void _registerRepos() {
   di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get(), di.get()));
   di.registerLazySingleton<BannerRepo>(() => BannerRepoImp(di.get(), di.get()));
   di.registerLazySingleton<StoresRepo>(() => StoresRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<FavoritesRepo>(() => FavoritesRepoImp(di.get(), di.get()));
 }
 
 void _registerCubits() {

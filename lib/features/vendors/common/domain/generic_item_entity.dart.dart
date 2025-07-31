@@ -1,21 +1,16 @@
 import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
+import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 
-export 'package:gazzer/core/presentation/extensions/enum.dart';
-
+part 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
 part 'package:gazzer/features/vendors/resturants/domain/enities/plate_entity.dart';
 part 'package:gazzer/features/vendors/stores/domain/entities/product_entity.dart';
 
-/// generic class for both [PlateEntity] for restaurants and [ProductEntity] for stores
-sealed class GenericItemEntity extends Equatable {
-  final int id;
-  final String name;
-  final String image;
-  final String description;
+/// generic class for both [PlateEntity] for restaurants and [ProductEntity] for stores or [OrderedWithEntity] for ordered with
+sealed class GenericItemEntity extends Favorable {
   final double _price;
-  final double rate;
   final int reviewCount;
   final bool outOfStock;
   final String? badge;
@@ -23,15 +18,23 @@ sealed class GenericItemEntity extends Equatable {
   final Offer? offer;
 
   double get price => offer?.priceAfterDiscount(_price) ?? _price;
+  @override
+  double get favorablePrice => offer?.priceAfterDiscount(_price) ?? _price;
   double? get priceBeforeDiscount => offer == null ? null : _price;
 
+  @override
+  FavoriteType get favoriteType => switch (this) {
+    PlateEntity() => FavoriteType.plate,
+    ProductEntity() => FavoriteType.product,
+    OrderedWithEntity() => FavoriteType.plate,
+  };
   const GenericItemEntity({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.description,
+    required super.id,
+    required super.name,
+    required super.image,
+    required super.description,
+    required super.rate,
     required double price,
-    required this.rate,
     required this.reviewCount,
     required this.outOfStock,
     this.badge,

@@ -1,6 +1,5 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
 
 sealed class SingleCatRestaurantStates {
   const SingleCatRestaurantStates();
@@ -9,7 +8,7 @@ sealed class SingleCatRestaurantStates {
 class OrderedWithInitial extends SingleCatRestaurantStates {}
 
 sealed class OrderedWithStates extends SingleCatRestaurantStates {
-  final List<OrderedWithEntityy> items;
+  final List<OrderedWithEntity> items;
   const OrderedWithStates({required this.items});
 }
 
@@ -18,7 +17,15 @@ class OrderedWithLoading extends OrderedWithStates {
     : super(
         items: List.generate(
           3,
-          (index) => OrderedWithEntityy(id: index, name: 'Item index', image: Fakers.netWorkImage, price: 0, rate: 3),
+          (index) => OrderedWithEntity(
+            id: index,
+            name: 'Item index',
+            image: Fakers.netWorkImage,
+            price: 0,
+            rate: 3,
+            reviewCount: 0,
+            outOfStock: false,
+          ),
         ),
       );
 }
@@ -35,7 +42,7 @@ class OrderedWithError extends OrderedWithStates {
 sealed class PlateDetailsStates extends SingleCatRestaurantStates {
   final PlateEntity plate;
   final List<PlateOptionEntity> options;
-  final List<OrderedWithEntityy> orderedWith;
+  final List<OrderedWithEntity> orderedWith;
 
   const PlateDetailsStates({
     this.plate = Fakers.plate,
@@ -47,7 +54,8 @@ sealed class PlateDetailsStates extends SingleCatRestaurantStates {
 class PlateDetailsInitial extends PlateDetailsStates {}
 
 class PlateDetailsLoading extends PlateDetailsStates {
-  PlateDetailsLoading() : super(plate: Fakers.plate, options: Fakers.plateOptions, orderedWith: Fakers.plateOrderedWith);
+  PlateDetailsLoading()
+    : super(plate: Fakers.plate, options: Fakers.plateOptions, orderedWith: Fakers.plateOrderedWith);
 }
 
 class PlateDetailsLoaded extends PlateDetailsStates {

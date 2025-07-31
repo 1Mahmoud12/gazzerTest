@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class VerticalProductCard extends StatelessWidget {
@@ -47,7 +47,7 @@ class VerticalProductCard extends StatelessWidget {
                               showBorder: false,
                             ),
                           ),
-                          FavoriteWidget(size: 32 * fontFactor),
+                          FavoriteWidget(size: 32 * fontFactor, fovorable: product),
                         ],
                       ),
                       Padding(

@@ -7,12 +7,12 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class OrderedWithCard extends StatelessWidget {
   const OrderedWithCard({super.key, required this.product});
-  final OrderedWithEntityy product;
+  final OrderedWithEntity product;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -45,7 +45,7 @@ class OrderedWithCard extends StatelessWidget {
                               showBorder: false,
                             ),
                           ),
-                          const FavoriteWidget(size: 24),
+                          FavoriteWidget(size: 24, fovorable: product),
                         ],
                       ),
                       const VerticalSpacing(8),

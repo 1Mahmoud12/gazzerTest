@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/cards/card_rest_info_widget.dart';
 
@@ -98,7 +99,7 @@ class HorizontalRestaurantCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Align(alignment: corner.alignment, child: const DecoratedFavoriteWidget(size: 24, padding: 4)),
+                    Align(alignment: corner.alignment, child: DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item)),
                   ],
                 ),
               ),

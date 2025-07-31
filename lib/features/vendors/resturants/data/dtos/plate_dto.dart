@@ -1,4 +1,5 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/utils/color_utils.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 

@@ -9,13 +9,35 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get min => 'دقيقة';
+  String get favorite_________________Start => '__________________';
 
   @override
-  String get typeHere => 'اكتب هنا';
+  String itemNameAddedToFAvorites(String itemName) {
+    return '$itemName تمت إضافته إلى المفضلة';
+  }
 
   @override
-  String get addSpecialNote => 'إضافة ملاحظة خاصة';
+  String itemNameRemovedFromFavorites(String itemName) {
+    return '$itemName تمت إزالته من المفضلة';
+  }
+
+  @override
+  String get youHaveNoFavoritesYet => 'You have no favorites yet';
+
+  @override
+  String get restaurants => 'المطاعم';
+
+  @override
+  String get stores => 'المتاجر';
+
+  @override
+  String get plates => 'الأطباق';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String get favorite_________________End => '__________________';
 
   @override
   String get vendorCommon_________________Start => '__________________';
@@ -429,6 +451,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cart_________________Start => '__________________';
+
+  @override
+  String get min => 'دقيقة';
+
+  @override
+  String get typeHere => 'اكتب هنا';
+
+  @override
+  String get addSpecialNote => 'إضافة ملاحظة خاصة';
 
   @override
   String get total => 'الإجمالي';

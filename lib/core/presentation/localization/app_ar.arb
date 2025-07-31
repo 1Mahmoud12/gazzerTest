@@ -1,7 +1,27 @@
 {
-  "min": "دقيقة",
-  "typeHere": "اكتب هنا",
-  "addSpecialNote": "إضافة ملاحظة خاصة",
+  "favorite_________________Start": "__________________",
+  "itemNameAddedToFAvorites": "{itemName} تمت إضافته إلى المفضلة",
+  "@itemNameAddedToFAvorites": {
+    "placeholders": {
+      "itemName": {
+        "type": "String"
+      }
+    }
+  },
+  "itemNameRemovedFromFavorites": "{itemName} تمت إزالته من المفضلة",
+  "@itemNameRemovedFromFavorites": {
+    "placeholders": {
+      "itemName": {
+        "type": "String"
+      }
+    }
+  },
+  "yyouHaveNoFavoritesYet": "ليس لديك مفضلات حتى الآن",
+  "restaurants": "المطاعم",
+  "stores": "المتاجر",
+  "plates": "الأطباق",
+  "products": "المنتجات",
+  "favorite_________________End": "__________________",
   "vendorCommon_________________Start": "__________________",
   "soon": "قريباً",
   "nameisCurrentlyClosedWeWillOpenAt": "{name} مغلق حالياً، وسيفتح في {time}",
@@ -161,6 +181,9 @@
   "retry": "إعادة المحاولة",
   "home_________________End": "__________________",
   "cart_________________Start": "__________________",
+  "min": "دقيقة",
+  "typeHere": "اكتب هنا",
+  "addSpecialNote": "إضافة ملاحظة خاصة",
   "total": "الإجمالي",
   "deliveryFee": "رسوم التوصيل",
   "totalAmount": "إجمالي المبلغ",

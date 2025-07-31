@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 
@@ -59,6 +59,7 @@ class SearchResultVendor extends StatelessWidget {
                           isDarkContainer: false,
                           borderRadius: AppConst.defaultInnerBorderRadius,
                           size: 18,
+                          fovorable: vendor,
                         ),
                         Text("EGP 85 - 250", style: TStyle.blackBold(12)),
                         Row(

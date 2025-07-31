@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/extensions/cancel_token.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_details_response.dart';
-import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/plates_repo.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/ordered_with_cubit/ordered_with_states.dart';
 
@@ -22,7 +22,7 @@ class SingleCatRestaurantCubit extends Cubit<SingleCatRestaurantStates> {
     emit(OrderedWithLoading());
     final items = await _repo.getPlateOrderedWith(restId, plateId, cancelToken: cancelToken);
     switch (items) {
-      case Ok<List<OrderedWithEntityy>> ok:
+      case Ok<List<OrderedWithEntity>> ok:
         emit(OrderedWithLoaded(items: ok.value));
       case Err err:
         emit(OrderedWithError(message: err.error.message));

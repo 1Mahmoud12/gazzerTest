@@ -1,14 +1,15 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/app_bus.dart';
-import 'package:gazzer/features/favorites/domain/favorite_entity.dart';
+import 'package:gazzer/core/domain/entities/favorable_interface.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 
 sealed class FavoriteEvents extends AppEvent {
-  const FavoriteEvents();
+  final Map<FavoriteType, Map<int, Favorable>> favorites;
+  const FavoriteEvents({this.favorites = const {FavoriteType.unknown: {}}});
 }
 
 sealed class GetFavoritesEvent extends FavoriteEvents {
-  final Map<FavoriteType, List<FavoriteEntity>> favorites;
-  const GetFavoritesEvent({this.favorites = const {FavoriteType.unknown: []}});
+  const GetFavoritesEvent({super.favorites});
 }
 
 class GetFavoriteLoading extends GetFavoritesEvent {
@@ -35,19 +36,25 @@ class GetFavoriteFailure extends GetFavoritesEvent {
 ///
 ///
 sealed class ToggleFavoriteStates extends FavoriteEvents {
-  final FavoriteEntity favorite;
-  const ToggleFavoriteStates({required this.favorite});
+  final int id;
+  final FavoriteType type;
+  const ToggleFavoriteStates({required this.id, required this.type, required super.favorites});
 }
 
 class ToggleFavoriteLoading extends ToggleFavoriteStates {
-  const ToggleFavoriteLoading({required super.favorite});
+  const ToggleFavoriteLoading({required super.id, required super.type, required super.favorites});
 }
 
 class ToggleFavoriteSuccess extends ToggleFavoriteStates {
-  const ToggleFavoriteSuccess({required super.favorite});
+  const ToggleFavoriteSuccess({required super.id, required super.type, required super.favorites});
 }
 
 class ToggleFavoriteFailure extends ToggleFavoriteStates {
   final String message;
-  const ToggleFavoriteFailure({required super.favorite, required this.message});
+  const ToggleFavoriteFailure({
+    required super.id,
+    required this.message,
+    required super.type,
+    required super.favorites,
+  });
 }

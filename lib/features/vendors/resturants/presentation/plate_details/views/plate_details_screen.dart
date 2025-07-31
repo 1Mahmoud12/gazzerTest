@@ -58,7 +58,7 @@ class SinglePlateScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
 
               children: [
-                ProductImageWidget(image: state.plate.image),
+                ProductImageWidget(image: state.plate.image, plate: state.plate),
                 ProductSummaryWidget(plate: state.plate),
                 const VerticalSpacing(24),
 

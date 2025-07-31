@@ -1,4 +1,4 @@
-import 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class OrderedWithDTO {
   int? id;
@@ -25,9 +25,7 @@ class OrderedWithDTO {
     id = json['id'];
     itemName = json['item_name'];
     image = json['image'];
-    brand = json['brand'] != null
-        ? (id: json['brand']['id'], name: json['brand']['brand_name']?.toString())
-        : null;
+    brand = json['brand'] != null ? (id: json['brand']['id'], name: json['brand']['brand_name']?.toString()) : null;
     genericUnit = json['generic_unit'] != null
         ? (id: json['generic_unit']['id'], name: json['generic_unit']['generic_unit_name']?.toString())
         : null;
@@ -36,13 +34,15 @@ class OrderedWithDTO {
     // barcode = json['barcode'];
   }
 
-  OrderedWithEntityy toEntity() {
-    return OrderedWithEntityy(
+  OrderedWithEntity toEntity() {
+    return OrderedWithEntity(
       id: id ?? 0,
       name: itemName ?? '',
       image: image ?? '',
       rate: 0.0, // Assuming rate is not provided in DTO
       price: double.tryParse(price ?? '0') ?? 0.0,
+      outOfStock: false,
+      reviewCount: 0,
     );
   }
 }

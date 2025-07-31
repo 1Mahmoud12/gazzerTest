@@ -1,34 +1,38 @@
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/core/domain/api_command.dart';
 import 'package:gazzer/core/domain/app_bus.dart';
-import 'package:gazzer/features/favorites/domain/favorite_entity.dart';
-import 'package:gazzer/features/favorites/domain/favorite_repo.dart';
+import 'package:gazzer/core/domain/entities/favorable_interface.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/favorites/domain/favorites_repo.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
 
+export 'package:gazzer/core/presentation/extensions/enum.dart';
+
+///
+///
+///
+
 class FavoriteBus extends AppBus {
-  final FavoriteRepo _favoriteRepo;
   FavoriteBus(this._favoriteRepo);
-  final restaurantsQueue = <int, ApiCommand>{};
-  final storesQueue = <int, ApiCommand>{};
-  final platesQueue = <int, ApiCommand>{};
-  final productsQueue = <int, ApiCommand>{};
-  final _favorites = <FavoriteType, List<FavoriteEntity>>{
-    FavoriteType.restaurant: [],
-    FavoriteType.store: [],
-    FavoriteType.plate: [],
-    FavoriteType.product: [],
-    FavoriteType.unknown: [],
+  final FavoritesRepo _favoriteRepo;
+  final _favoriteIds = <FavoriteType, Set<int>>{};
+  final _favorites = <FavoriteType, Map<int, Favorable>>{
+    FavoriteType.restaurant: <int, Favorable>{},
+    FavoriteType.store: <int, Favorable>{},
+    FavoriteType.plate: <int, Favorable>{},
+    FavoriteType.product: <int, Favorable>{},
+    FavoriteType.unknown: <int, Favorable>{},
   };
 
   Future<void> getFavorites() async {
     fire(const GetFavoriteLoading());
     final result = await _favoriteRepo.getFavorites();
     switch (result) {
-      case Ok<List<FavoriteEntity>> ok:
+      case Ok<List<Favorable>> ok:
         _favorites.clear();
         for (final fav in ok.value) {
-          _favorites.putIfAbsent(fav.type, () => []).add(fav);
+          _addToFavorites(fav);
         }
+        print(_favorites[FavoriteType.restaurant]);
         fire(GetFavoriteSuccess(favorites: _favorites));
         break;
       case Err error:
@@ -36,44 +40,57 @@ class FavoriteBus extends AppBus {
     }
   }
 
-  Future<void> toggleFavorite(int id, FavoriteType type) async {
-    final queue = _getRelatedQueue(type);
-    if (queue[id] != null && queue[id]!.running && !queue[id]!.canceled) {
-      // stop the existing command if it's running && remove from queue
-      _stopCommandExecution(queue[id]!);
-      queue.remove(id);
-      return;
-    }
-    // ** not exists
-    /// - add command to correct queue
-    /// - execute command
-    /// -- if success: remove command from queue after execution
-    /// -- if failure: undo command && remove from queue
-  }
-
-  Map<int, ApiCommand> _getRelatedQueue(FavoriteType type) {
-    switch (type) {
-      case FavoriteType.restaurant:
-        return restaurantsQueue;
-      case FavoriteType.store:
-        return storesQueue;
-      case FavoriteType.plate:
-        return platesQueue;
-      case FavoriteType.product:
-        return productsQueue;
-      default:
-        return {};
+  Future<void> toggleFavorite(Favorable favorite) async {
+    if (_favorites[favorite.favoriteType]?.containsKey(favorite.id) ?? false) {
+      await _removeFavorite(favorite);
+    } else {
+      await _addFavorite(favorite);
     }
   }
 
-  Future<void> _stopCommandExecution(ApiCommand command) async {
-    command.cancel();
-    await command.unDo();
+  Future<void> _addFavorite(Favorable favorite) async {
+    fire(ToggleFavoriteLoading(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+    final result = await _favoriteRepo.addFavorite(favorite.id, favorite.favoriteType);
+    switch (result) {
+      case Ok<String> _:
+        _addToFavorites(favorite);
+        fire(ToggleFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        break;
+      case Err error:
+        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+    }
   }
 
-  ApiCommand _createCommand(int id){
-    return
+  Future<void> _removeFavorite(Favorable favorite) async {
+    fire(ToggleFavoriteLoading(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+    final result = await _favoriteRepo.removeFavorite(favorite.id, favorite.favoriteType);
+    switch (result) {
+      case Ok<String> _:
+        _removeFromFavorites(favorite);
+        fire(ToggleFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        break;
+      case Err error:
+        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+    }
   }
 
+  bool isFavorite(Favorable favorable) {
+    return _favoriteIds[favorable.favoriteType]?.contains(favorable.id) ?? false;
+  }
 
+  _addToFavorites(Favorable favorable) {
+    _favorites[favorable.favoriteType] ??= <int, Favorable>{};
+    _favorites[favorable.favoriteType]?.addAll({favorable.id: favorable});
+    _favoriteIds[favorable.favoriteType] ??= <int>{};
+    _favoriteIds[favorable.favoriteType]!.add(favorable.id);
+  }
+
+  _removeFromFavorites(Favorable favorable) {
+    _favorites[favorable.favoriteType]?.removeWhere((k, v) => k == favorable.id);
+    _favoriteIds[favorable.favoriteType]?.remove(favorable.id);
+    if (_favoriteIds[favorable.favoriteType]?.isEmpty == true) {
+      _favorites.remove(favorable.favoriteType);
+      _favoriteIds.remove(favorable.favoriteType);
+    }
+  }
 }

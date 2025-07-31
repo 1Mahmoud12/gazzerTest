@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/favorite_widget.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class VendorInfoWidget extends StatelessWidget {
@@ -41,6 +41,7 @@ class VendorInfoWidget extends StatelessWidget {
                   isDarkContainer: false,
                   size: 18,
                   borderRadius: AppConst.defaultInnerBorderRadius,
+                  fovorable: vendor,
                 ),
               ],
             ),
