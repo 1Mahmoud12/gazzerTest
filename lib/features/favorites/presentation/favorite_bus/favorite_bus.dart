@@ -54,7 +54,7 @@ class FavoriteBus extends AppBus {
     switch (result) {
       case Ok<String> _:
         _addToFavorites(favorite);
-        fire(ToggleFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        fire(AddedFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
         break;
       case Err error:
         fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
@@ -67,7 +67,7 @@ class FavoriteBus extends AppBus {
     switch (result) {
       case Ok<String> _:
         _removeFromFavorites(favorite);
-        fire(ToggleFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        fire(RemovedFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
         break;
       case Err error:
         fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType, favorites: _favorites));

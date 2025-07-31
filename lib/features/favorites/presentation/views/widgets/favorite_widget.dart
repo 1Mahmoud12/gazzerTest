@@ -46,12 +46,15 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
     lisnter = bus.subscribe<ToggleFavoriteStates>((v) {
       if (!mounted) return;
       if (v.id != widget.fovorable.id || v.type != widget.fovorable.favoriteType) return;
-      print("FavoriteWidget: ${v.runtimeType} for ${widget.fovorable.name}");
-      if (v is ToggleFavoriteSuccess) {
+      if (v is AddedFavoriteSuccess || v is RemovedFavoriteSuccess) {
         _pulseAnmateFav();
-        Alerts.showToast(L10n.tr().itemNameAddedToFAvorites(widget.fovorable.name), error: false);
+        if (v is AddedFavoriteSuccess) {
+          Alerts.showToast(L10n.tr().itemNameAddedToFAvorites(widget.fovorable.name), error: false);
+        } else {
+          Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.fovorable.name), error: false);
+        }
       } else if (v is ToggleFavoriteFailure) {
-        Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.fovorable.name), error: false);
+        Alerts.showToast(v.message);
       }
     });
   }

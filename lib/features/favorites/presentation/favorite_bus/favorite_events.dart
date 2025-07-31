@@ -45,8 +45,11 @@ class ToggleFavoriteLoading extends ToggleFavoriteStates {
   const ToggleFavoriteLoading({required super.id, required super.type, required super.favorites});
 }
 
-class ToggleFavoriteSuccess extends ToggleFavoriteStates {
-  const ToggleFavoriteSuccess({required super.id, required super.type, required super.favorites});
+class AddedFavoriteSuccess extends ToggleFavoriteStates {
+  const AddedFavoriteSuccess({required super.id, required super.type, required super.favorites});
+}
+class RemovedFavoriteSuccess extends ToggleFavoriteStates {
+  const RemovedFavoriteSuccess({required super.id, required super.type, required super.favorites});
 }
 
 class ToggleFavoriteFailure extends ToggleFavoriteStates {
