@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
+import 'package:gazzer/features/favorites/domain/favorite_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -64,7 +65,8 @@ class Fakers {
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',
-      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+      description:
+          'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
 
       id: index,
     ),
@@ -341,4 +343,16 @@ class Fakers {
       layout: LayoutType.grid,
     ),
   );
+
+  /// favorties
+  static const favorite = FavoriteEntity(
+    id: 1,
+    name: "المفضل ",
+    description: "وصف المفضل ",
+    imageUrl: placeHolderImg,
+    rate: 5,
+    price: 100,
+    type: FavoriteType.product,
+  );
+  static const favorites = [favorite, favorite, favorite, favorite, favorite];
 }

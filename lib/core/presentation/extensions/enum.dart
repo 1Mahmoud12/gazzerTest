@@ -98,3 +98,19 @@ enum OptionType {
     return OptionType.values.firstWhere((e) => e.value == value, orElse: () => unknown);
   }
 }
+
+enum FavoriteType {
+  restaurant('restaurant'),
+  store('store'),
+  plate('plate'),
+  product('product'),
+  unknown('unknown');
+
+  final String type;
+
+  const FavoriteType(this.type);
+
+  factory FavoriteType.fromString(String type) {
+    return FavoriteType.values.firstWhere((e) => e.type == type, orElse: () => unknown);
+  }
+}

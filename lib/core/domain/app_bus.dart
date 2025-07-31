@@ -30,4 +30,6 @@ abstract class AppBus {
   }
 }
 
-abstract class AppEvent {}
+abstract class AppEvent {
+  const AppEvent();
+}

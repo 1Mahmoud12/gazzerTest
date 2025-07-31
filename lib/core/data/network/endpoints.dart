@@ -1,4 +1,5 @@
 class Endpoints {
+  Endpoints._();
   /// ** Auth
   // Register
   static const register = "clients/auth/register";
@@ -68,4 +69,10 @@ class Endpoints {
   // ** banners
   static const restaurantsMenuBanners = "banners/restaurants-page";
   static String storeCategoryBanners(int id) => "banners/bannerable/store-category/id/$id";
+
+
+  // ** Favorites
+  static const favorites = "favorites";
+  static const toggleFavorites = "favorites/toggle";
+
 }
