@@ -15,6 +15,8 @@ class _HomeSearchWidgetState extends State<_HomeSearchWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 12,
       children: [
+        const HorizontalSpacing(6),
+
         Expanded(
           child: GestureDetector(
             onTap: () {

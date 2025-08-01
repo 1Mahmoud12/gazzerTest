@@ -12,7 +12,7 @@ class CardBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final child = ColoredBox(
-      color: color ?? Co.second2,
+      color: color ?? Co.secondary,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 4),
         child: Row(

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/stores_menu_response.dart';
 import 'package:gazzer/features/vendors/stores/domain/stores_repo.dart';
-import 'package:gazzer/features/vendors/stores/presentation/cubit/store_menu_states.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/store_menu_states.dart';
 
 class StoresMenuCubit extends Cubit<StoresMenuStates> {
   final StoresRepo storeRepo;

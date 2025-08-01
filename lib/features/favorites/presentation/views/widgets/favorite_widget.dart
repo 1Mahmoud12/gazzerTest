@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
@@ -11,10 +12,12 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/double
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class FavoriteWidget<T> extends StatefulWidget {
@@ -54,7 +57,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
           Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.fovorable.name), error: false);
         }
       } else if (v is ToggleFavoriteFailure) {
-        Alerts.showToast(v.message);
+        Alerts.showToast("${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}");
       }
     });
   }
@@ -93,6 +96,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
         return IconButton(
           onPressed: () async {
             SystemSound.play(SystemSoundType.click);
+            if (Session().client == null) {
+              Alerts.showToast(L10n.tr().pleaseLoginToUseFavorites);
+              context.go(LoginScreen.route);
+              return;
+            }
             await bus.toggleFavorite(widget.fovorable);
           },
           style: IconButton.styleFrom(

@@ -57,7 +57,7 @@ class VerticalProductCard extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Expanded(child: Text(product.name, style: TStyle.primaryBold(15 * fontFactor))),
+                                Expanded(child: Text(product.name, style: TStyle.primaryBold(13 * fontFactor))),
                                 Row(
                                   children: [
                                     const Icon(Icons.star, color: Co.secondary, size: 16),
@@ -78,7 +78,7 @@ class VerticalProductCard extends StatelessWidget {
                               SizedBox(
                                 width: constraints.maxWidth * 0.55,
                                 child: Text(
-                                  "Valid until May 15, 2025",
+                                  product.description,
                                   style: TStyle.mainwSemi(12 * fontFactor),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,

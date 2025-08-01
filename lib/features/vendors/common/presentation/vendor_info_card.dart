@@ -182,12 +182,14 @@ class VendorInfoCard extends StatelessWidget {
                               colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                             ),
                             Text(
-                              vendor.deliveryTime!,
+                              "${vendor.deliveryTime} ${L10n.tr().min}",
                               style: TStyle.greyRegular(13),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],
-                        ),
+                        )
+                      else
+                        const SizedBox.shrink(),
                       if (vendor.deliveryFee != null)
                         Row(
                           spacing: 4,
@@ -204,7 +206,9 @@ class VendorInfoCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],
-                        ),
+                        )
+                      else
+                        const SizedBox.shrink(),
                     ],
                   ),
                 ),

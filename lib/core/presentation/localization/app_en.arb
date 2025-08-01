@@ -1,5 +1,8 @@
 {
   "favorite_________________Start": "__________________",
+  "pleaseLoginToUseFavorites": "Please login to use favorites",
+  "couldnotUpdateFavorites": "Could not update favorites",
+  "pleaseCheckYourConnection": "Please check your connection",
   "itemNameAddedToFAvorites": "{itemName} has been added to favorites",
   "@itemNameAddedToFAvorites": {
     "placeholders": {

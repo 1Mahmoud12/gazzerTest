@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
@@ -63,14 +64,23 @@ class GrocCardTwo extends StatelessWidget {
                   ),
                   Align(
                     alignment: AlignmentDirectional.topEnd,
-                    child: DecoratedBox(
-                      decoration: const BoxDecoration(color: Co.second2, shape: BoxShape.circle),
-                      child: Padding(
+                    child: IntrinsicWidth(
+                      child: Container(
+                        decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
                         padding: const EdgeInsets.all(8),
-                        child: Text(
-                          '30%',
-                          style: TStyle.primaryBold(12),
-                        ),
+                        height: vendor.isClosed ? 55 : 24,
+                        alignment: Alignment.center,
+                        child: vendor.isClosed
+                            ? Text(
+                                L10n.tr().closed,
+                                style: TStyle.blackSemi(12),
+                              )
+                            : vendor.badge == null
+                            ? null
+                            : Text(
+                                vendor.badge!,
+                                style: TStyle.primaryBold(12),
+                              ),
                       ),
                     ),
                   ),

@@ -104,6 +104,24 @@ abstract class AppLocalizations {
   /// **'__________________'**
   String get favorite_________________Start;
 
+  /// No description provided for @pleaseLoginToUseFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login to use favorites'**
+  String get pleaseLoginToUseFavorites;
+
+  /// No description provided for @couldnotUpdateFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update favorites'**
+  String get couldnotUpdateFavorites;
+
+  /// No description provided for @pleaseCheckYourConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your connection'**
+  String get pleaseCheckYourConnection;
+
   /// No description provided for @itemNameAddedToFAvorites.
   ///
   /// In en, this message translates to:

@@ -6,33 +6,33 @@ class _HomeCategoriesComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SizedBox.shrink();
-    return Padding(
-      padding: AppConst.defaultHrPadding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 12,
-        children: [
-          Text(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 12,
+      children: [
+        Padding(
+          padding: AppConst.defaultHrPadding,
+          child: Text(
             L10n.tr().categories,
             style: TStyle.primaryBold(16),
           ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
-          GridView.builder(
-            padding: AppConst.defaultHrPadding,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 77,
-              mainAxisSpacing: 18,
-              crossAxisSpacing: 18,
-              mainAxisExtent: 117,
-            ),
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return CategoryCard(category: items[index]);
-            },
+        ),
+        GridView.builder(
+          padding: AppConst.defaultHrPadding,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 77,
+            mainAxisSpacing: 18,
+            crossAxisSpacing: 18,
+            mainAxisExtent: 117,
           ),
-        ],
-      ),
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return CategoryCard(category: items[index]);
+          },
+        ),
+      ],
     );
   }
 }

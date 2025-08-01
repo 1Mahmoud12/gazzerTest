@@ -20,6 +20,7 @@ import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tut
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final List<RouteBase> unNestedRoutes = [
@@ -27,6 +28,7 @@ final List<RouteBase> unNestedRoutes = [
   ...checkoutRoutes,
   ...planScreens,
   $plateDetailsRoute,
+  $productDetailsRoute,
 
   /// plan & intro
   $congratsScreenRoute,

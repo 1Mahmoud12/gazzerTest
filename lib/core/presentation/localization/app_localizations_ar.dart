@@ -12,6 +12,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get favorite_________________Start => '__________________';
 
   @override
+  String get pleaseLoginToUseFavorites => 'يرجى تسجيل الدخول لاستخدام المفضلة';
+
+  @override
+  String get couldnotUpdateFavorites => 'تعذر تحديث المفضلة';
+
+  @override
+  String get pleaseCheckYourConnection => 'يرجى التحقق من اتصالك';
+
+  @override
   String itemNameAddedToFAvorites(String itemName) {
     return '$itemName تمت إضافته إلى المفضلة';
   }

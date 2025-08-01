@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class TopRatedItemDetails extends StatelessWidget {
-  const TopRatedItemDetails({super.key, required this.item, required this.shadowColor});
+  const TopRatedItemDetails({super.key, required this.item, required this.shadowColor, this.showFavorite = false});
   final GenericItemEntity item;
   final ValueNotifier<Color> shadowColor;
+  final bool showFavorite;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -60,9 +62,12 @@ class TopRatedItemDetails extends StatelessWidget {
                               item.name,
                               style: TStyle.whiteBold(16).copyWith(fontWeight: TStyle.bolder),
                             ),
-                            AddIcon(
-                              onTap: () {},
-                            ),
+                            if (showFavorite)
+                              DecoratedFavoriteWidget(fovorable: item, size: 20)
+                            else
+                              AddIcon(
+                                onTap: () {},
+                              ),
                           ],
                         ),
                         Text(

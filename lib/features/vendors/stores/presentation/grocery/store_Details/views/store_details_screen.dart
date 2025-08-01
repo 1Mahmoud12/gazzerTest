@@ -64,7 +64,7 @@ class StoreDetailsScreen extends StatelessWidget {
               children: [
                 GrocHeaderContainer(
                   child: Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top + 8, bottom: 16),
+                    padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
                     child: VendorInfoCard(
                       store,
                       categories: catWithSubCatProds.map((e) => e.$1.name),
@@ -120,7 +120,12 @@ class StoreDetailsScreen extends StatelessWidget {
 }
 
 class _gridWidget extends StatelessWidget {
-  const _gridWidget({required this.maincat, required this.onSinglceCardPressed, required this.subcats, required this.products});
+  const _gridWidget({
+    required this.maincat,
+    required this.onSinglceCardPressed,
+    required this.subcats,
+    required this.products,
+  });
   final StoreCategoryEntity maincat;
   final Function(dynamic item) onSinglceCardPressed;
   final List<StoreCategoryEntity> subcats;

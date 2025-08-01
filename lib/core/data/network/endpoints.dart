@@ -47,6 +47,7 @@ class Endpoints {
   static String storesOfSpecificCategoryPage(int mainId, int subId) =>
       'pages/store-category/$mainId/item-category-page/$subId';
   static String storeDetailsPage(int id) => "pages/store-page/$id";
+  static String productDetails(int id) => "stores/item/$id";
 
   /// ** stores categories
   static const storesCategories = "stores/categories";

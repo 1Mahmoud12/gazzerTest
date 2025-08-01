@@ -1,5 +1,8 @@
 {
   "favorite_________________Start": "__________________",
+  "pleaseLoginToUseFavorites": "يرجى تسجيل الدخول لاستخدام المفضلة",
+  "couldnotUpdateFavorites": "تعذر تحديث المفضلة",
+  "pleaseCheckYourConnection": "يرجى التحقق من اتصالك",
   "itemNameAddedToFAvorites": "{itemName} تمت إضافته إلى المفضلة",
   "@itemNameAddedToFAvorites": {
     "placeholders": {

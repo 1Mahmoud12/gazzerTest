@@ -37,7 +37,11 @@ class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
           if (title != null || onViewAllPressed != null)
             TitleWithMore(
               title: title ?? '',
-              onPressed: items.length > 10 ? onViewAllPressed : null,
+              onPressed: T is PlateEntity
+                  ? items.length < 10
+                        ? null
+                        : onViewAllPressed
+                  : onViewAllPressed,
             ),
 
           SizedBox(

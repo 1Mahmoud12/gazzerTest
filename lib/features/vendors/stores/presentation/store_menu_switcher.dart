@@ -6,8 +6,8 @@ import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/vendors/stores/presentation/cubit/store_menu_states.dart';
-import 'package:gazzer/features/vendors/stores/presentation/cubit/stores_menu_cubit.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/store_menu_states.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/view/store_menu_screen.dart';
 import 'package:go_router/go_router.dart';
 

@@ -17,7 +17,7 @@ class StoresTopRatedComponent extends StatefulWidget {
 
 class _StoresTopRatedComponentState extends State<StoresTopRatedComponent> {
   late GenericItemEntity item;
-  final ValueNotifier<Color> shadowColor = ValueNotifier<Color>(Co.second2);
+  late final ValueNotifier<Color> shadowColor = ValueNotifier<Color>(Co.second2);
   @override
   void initState() {
     item = widget.items.first;
@@ -50,7 +50,7 @@ class _StoresTopRatedComponentState extends State<StoresTopRatedComponent> {
               items: widget.items.length > 5 ? widget.items.sublist(0, 5) : widget.items,
               onTap: (item) {
                 setState(() => this.item = item);
-                shadowColor.value = Colors.primaries[item.id % Colors.primaries.length];
+                shadowColor.value = item is ProductEntity ? item.color ?? Co.second2 : Co.second2;
               },
               shadowColor: shadowColor,
             ),
