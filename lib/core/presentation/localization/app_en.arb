@@ -20,6 +20,10 @@
     }
   },
   "youHaveNoFavoritesYet": "You have no favorites yet",
+  "favoriteRestaurants": "Favorite Restaurants",
+  "favoriteStores": "Favorite Stores",
+  "favoritePlates": "Favorite Plates",
+  "favoriteProducts": "Favorite Products",
   "restaurants": "Restaurants",
   "stores": "Stores",
   "plates": "Plates",

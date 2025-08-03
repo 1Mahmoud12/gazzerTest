@@ -111,44 +111,70 @@ class _HomeScreenState extends State<HomeScreen> {
                     onRefresh: () {
                       return context.read<HomeCubit>().getHomeData();
                     },
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      children: [
-                        const _HomeHeader(),
-                        const VerticalSpacing(12),
-                        const _HomeSearchWidget(),
-                        const VerticalSpacing(24),
+                    child: CustomScrollView(
+                      slivers: [
+                        const SliverToBoxAdapter(
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 12),
+                            child: _HomeHeader(),
+                          ),
+                        ),
+                        const SliverToBoxAdapter(
+                          child: Padding(padding: EdgeInsets.only(bottom: 24), child: _HomeSearchWidget()),
+                        ),
 
                         ///
                         _HomeCategoriesComponent(items: state.homeResponse?.categories ?? []),
-                        const VerticalSpacing(24),
-                        if (state.homeResponse?.categoriesBanner != null) MainBannerWidget(banner: state.homeResponse!.categoriesBanner!),
-                        const VerticalSpacing(24),
+                        if (state.homeResponse?.categoriesBanner != null)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
+                              child: MainBannerWidget(banner: state.homeResponse!.categoriesBanner!),
+                            ),
+                          ),
 
-                        ///
+                        // ///
                         _DailyOffersWidget(items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[]),
-                        const VerticalSpacing(24),
-                        if (state.homeResponse?.dailyOffersBanner != null) MainBannerWidget(banner: state.homeResponse!.dailyOffersBanner!),
-                        const VerticalSpacing(24),
+                        if (state.homeResponse?.dailyOffersBanner != null)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
 
-                        /// const SummerSaleAddWidget(),
-                        ///
+                              child: MainBannerWidget(banner: state.homeResponse!.dailyOffersBanner!),
+                            ),
+                          ),
+
+                        // /// const SummerSaleAddWidget(),
+                        // ///
                         _HomeSuggestedProductsWidget(items: state.homeResponse?.suggested ?? <GenericItemEntity>[]),
-                        const VerticalSpacing(24),
-                        if (state.homeResponse?.suggestedBanner != null) MainBannerWidget(banner: state.homeResponse!.suggestedBanner!),
-                        const VerticalSpacing(24),
+                        if (state.homeResponse?.suggestedBanner != null)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
 
-                        ///
+                              child: MainBannerWidget(banner: state.homeResponse!.suggestedBanner!),
+                            ),
+                          ),
+
+                        // ///
                         _HomeTopVendorsWidget(vendors: state.homeResponse?.topVendors ?? <VendorEntity>[]),
-                        const VerticalSpacing(24),
-                        if (state.homeResponse?.topVendorsBanner != null) MainBannerWidget(banner: state.homeResponse!.topVendorsBanner!),
-                        const VerticalSpacing(24),
+                        if (state.homeResponse?.topVendorsBanner != null)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
+                              child: MainBannerWidget(banner: state.homeResponse!.topVendorsBanner!),
+                            ),
+                          ),
 
-                        ///
+                        // ///
                         _HomeBestPopular(items: state.homeResponse?.bestPopular ?? <GenericItemEntity>[]),
-                        const VerticalSpacing(24),
-                        if (state.homeResponse?.bestPopularBanner != null) MainBannerWidget(banner: state.homeResponse!.bestPopularBanner!),
-                        const VerticalSpacing(24),
+                        if (state.homeResponse?.bestPopularBanner != null)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
+                              child: MainBannerWidget(banner: state.homeResponse!.bestPopularBanner!),
+                            ),
+                          ),
 
                         // const ImageWithAlignedBtn(image: Assets.assetsPngHomeAdd, align: Alignment(0, 1), btnText: "Order Now"),
                       ],

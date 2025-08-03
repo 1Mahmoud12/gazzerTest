@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
@@ -56,7 +59,8 @@ class _MainLayoutState extends State<MainLayout> {
   void didUpdateWidget(covariant MainLayout oldWidget) {
     if (oldWidget.state.fullPath != widget.state.fullPath) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _updateBNV(false);
+        currentRoute = _updateBNV(false);
+        route.value = currentRoute;
       });
     }
     super.didUpdateWidget(oldWidget);
@@ -81,25 +85,26 @@ class _MainLayoutState extends State<MainLayout> {
           valueListenable: route,
           builder: (context, value, child) => Scaffold(
             body: widget.child,
-            bottomNavigationBar: Builder(
-              builder: (context) {
-                return MainBnb(
-                  initialIndex: value,
-                  onItemSelected: (index) {
-                    if (index == 3) {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        Scaffold.of(context).openEndDrawer();
-                      });
-                      return;
-                    }
-                    if (index == value) return;
+            bottomNavigationBar: BlocBuilder<AppSettingsCubit, AppSettingsState>(
+              buildWhen: (previous, current) => previous.lang != current.lang,
+              builder: (context, state) => MainBnb(
+                initialIndex: value,
+                onItemSelected: (index) {
+                  if (index == 3) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Scaffold.of(context).openEndDrawer();
+                    });
+                    return;
+                  }
+                  if (index == value) return;
 
-                    route.value = index;
-                    context.pushReplacement(routes[index]!);
-                  },
-                );
-              },
+                  route.value = index;
+                  context.go(routes[index]!);
+                },
+              ),
             ),
+            drawerEnableOpenDragGesture: false,
+            endDrawerEnableOpenDragGesture: false,
             endDrawer: const MainDrawer(),
           ),
         ),

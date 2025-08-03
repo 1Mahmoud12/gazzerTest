@@ -20,6 +20,10 @@
     }
   },
   "yyouHaveNoFavoritesYet": "ليس لديك مفضلات حتى الآن",
+  "favoriteRestaurants": "المطاعم المفضلة",
+  "favoriteStores": "المتاجر المفضلة",
+  "favoritePlates": "الأطباق المفضلة",
+  "favoriteProducts": "المنتجات المفضلة",
   "restaurants": "المطاعم",
   "stores": "المتاجر",
   "plates": "الأطباق",

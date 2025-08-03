@@ -12,8 +12,9 @@ class _FoodDetailsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
           children: [
-            GradientText(text: product.name, style: TStyle.blackBold(18)),
-            const Spacer(),
+            Expanded(
+              child: GradientText(textAlign: TextAlign.start, text: product.name, style: TStyle.blackBold(18)),
+            ),
             DecoratedFavoriteWidget(size: 16, fovorable: product),
             // AddIcon(
             //   onTap: () {

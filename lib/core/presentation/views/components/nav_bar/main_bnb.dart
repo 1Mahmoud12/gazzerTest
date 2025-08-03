@@ -17,12 +17,6 @@ class MainBnb extends StatefulWidget {
 
 class _MainBnbState extends State<MainBnb> {
   late int selectedIndex;
-  final items = {
-    L10n.tr().home: Assets.assetsSvgHomeIcon,
-    L10n.tr().favorites: Assets.assetsSvgFavoriteIcon,
-    L10n.tr().orders: Assets.assetsSvgMenyIcon,
-    L10n.tr().menu: Assets.assetsSvgDrawerIcon,
-  };
 
   @override
   void initState() {
@@ -40,6 +34,13 @@ class _MainBnbState extends State<MainBnb> {
 
   @override
   Widget build(BuildContext context) {
+    final items = {
+      L10n.tr().home: Assets.assetsSvgHomeIcon,
+      L10n.tr().favorites: Assets.assetsSvgFavoriteIcon,
+      L10n.tr().orders: Assets.assetsSvgMenyIcon,
+      L10n.tr().menu: Assets.assetsSvgDrawerIcon,
+    };
+
     return DoubledDecoratedWidget(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(6, 6, 6, 2),

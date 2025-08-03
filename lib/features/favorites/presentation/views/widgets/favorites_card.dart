@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -6,21 +9,50 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/decoration_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing, AdaptiveProgressIndicator;
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
 
-class FavoriteCard extends StatelessWidget {
+class FavoriteCard extends StatefulWidget {
   const FavoriteCard({super.key, required this.favorite, required this.onTap});
   final Favorable favorite;
   final Function() onTap;
+
+  @override
+  State<FavoriteCard> createState() => _FavoriteCardState();
+}
+
+class _FavoriteCardState extends State<FavoriteCard> {
+  late StreamSubscription<ToggleFavoriteStates> lisnter;
+  late final FavoriteBus bus;
+
+  @override
+  void initState() {
+    bus = di<FavoriteBus>();
+
+    lisnter = bus.subscribe<ToggleFavoriteStates>((v) {
+      if (!mounted) return;
+      if (v.id != widget.favorite.id || v.type != widget.favorite.favoriteType) return;
+      if (v is RemovedFavoriteSuccess) {
+        Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.favorite.name), error: false);
+      } else if (v is ToggleFavoriteFailure) {
+        Alerts.showToast("${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}");
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 125,
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
-        onTap: onTap,
+        onTap: widget.onTap,
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -40,10 +72,10 @@ class FavoriteCard extends StatelessWidget {
                         Row(
                           spacing: 6,
                           children: [
-                            SizedBox(height: 30, child: CircleGradientBorderedImage(image: favorite.image)),
+                            SizedBox(height: 30, child: CircleGradientBorderedImage(image: widget.favorite.image)),
                             Expanded(
                               child: Text(
-                                favorite.name,
+                                widget.favorite.name,
                                 style: TStyle.primaryBold(12),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -54,14 +86,14 @@ class FavoriteCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            if (favorite.favorablePrice != null)
-                              Text(Helpers.getProperPrice(favorite.favorablePrice!), style: TStyle.tertiaryBold(12))
+                            if (widget.favorite.favorablePrice != null)
+                              Text(Helpers.getProperPrice(widget.favorite.favorablePrice!), style: TStyle.tertiaryBold(12))
                             else
-                              SizedBox.shrink(),
+                              const SizedBox.shrink(),
                             Row(
                               children: [
                                 const Icon(Icons.star, color: Co.secondary, size: 16),
-                                Text(favorite.rate.toStringAsFixed(1), style: TStyle.secondarySemi(12)),
+                                Text(widget.favorite.rate.toStringAsFixed(1), style: TStyle.secondarySemi(12)),
                               ],
                             ),
                           ],
@@ -79,7 +111,7 @@ class FavoriteCard extends StatelessWidget {
                 angle: -0.25,
                 child: ClipRRect(
                   borderRadius: AppConst.defaultBorderRadius,
-                  child: CustomNetworkImage(favorite.image, fit: BoxFit.cover, width: 95, height: 50),
+                  child: CustomNetworkImage(widget.favorite.image, fit: BoxFit.cover, width: 95, height: 50),
                 ),
               ),
             ),
@@ -87,10 +119,36 @@ class FavoriteCard extends StatelessWidget {
             Positioned(
               top: 60,
               right: 0,
-              child: DecoratedFavoriteWidget(
-                size: 20,
-                borderRadius: AppConst.defaultInnerBorderRadius,
-                fovorable: favorite,
+              child: DoubledDecoratedWidget(
+                child: StreamBuilder(
+                  stream: bus.getStream<ToggleFavoriteStates>(),
+                  builder: (context, snapshot) {
+                    if (snapshot.data is ToggleFavoriteLoading &&
+                        snapshot.data!.id == widget.favorite.id &&
+                        snapshot.data!.type == widget.favorite.favoriteType) {
+                      return const Padding(
+                        padding: EdgeInsets.all(6),
+                        child: AdaptiveProgressIndicator(size: 20, color: Co.bg),
+                      );
+                    }
+                    return IconButton(
+                      onPressed: () {
+                        di<FavoriteBus>().toggleFavorite(widget.favorite);
+                      },
+                      style: IconButton.styleFrom(
+                        padding: const EdgeInsets.all(6),
+                        shape: const CircleBorder(),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      icon: const Icon(
+                        CupertinoIcons.delete,
+                        color: Co.secondary,
+                        size: 18,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],

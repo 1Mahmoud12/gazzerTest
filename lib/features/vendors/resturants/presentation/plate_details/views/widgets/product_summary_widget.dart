@@ -14,8 +14,14 @@ class ProductSummaryWidget extends StatelessWidget {
         Row(
           spacing: 12,
           children: [
-            GradientText(text: plate.name.toUpperCase(), style: TStyle.blackBold(20), gradient: Grad().textGradient),
-            const Spacer(),
+            Expanded(
+              child: GradientText(
+                textAlign: TextAlign.start,
+                text: plate.name.toUpperCase(),
+                style: TStyle.blackBold(20),
+                gradient: Grad().textGradient,
+              ),
+            ),
             Text(L10n.tr().egp, style: TStyle.blackBold(14).copyWith(shadows: AppDec.blackTextShadow)),
             Text(
               plate.price.toStringAsFixed(2),
@@ -26,8 +32,7 @@ class ProductSummaryWidget extends StatelessWidget {
         Row(
           spacing: 8,
           children: [
-            Text(plate.description, style: TStyle.blackRegular(14)),
-            const Spacer(),
+            Expanded(child: Text(plate.description, style: TStyle.blackRegular(14))),
             const Icon(Icons.star, color: Co.secondary, size: 20),
             Text(plate.rate.toStringAsFixed(1), style: TStyle.secondaryBold(13)),
           ],

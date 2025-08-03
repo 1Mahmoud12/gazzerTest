@@ -117,13 +117,13 @@ enum FavoriteType {
   String get trName {
     switch (this) {
       case FavoriteType.restaurant:
-        return L10n.tr().restaurants;
+        return L10n.tr().favoriteRestaurants;
       case FavoriteType.store:
-        return L10n.tr().stores;
+        return L10n.tr().favoriteStores;
       case FavoriteType.plate:
-        return L10n.tr().plates;
+        return L10n.tr().favoritePlates;
       case FavoriteType.product:
-        return L10n.tr().products;
+        return L10n.tr().favoriteProducts;
       default:
         return '';
     }

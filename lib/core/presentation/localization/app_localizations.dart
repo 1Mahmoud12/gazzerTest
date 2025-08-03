@@ -140,6 +140,30 @@ abstract class AppLocalizations {
   /// **'You have no favorites yet'**
   String get youHaveNoFavoritesYet;
 
+  /// No description provided for @favoriteRestaurants.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Restaurants'**
+  String get favoriteRestaurants;
+
+  /// No description provided for @favoriteStores.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Stores'**
+  String get favoriteStores;
+
+  /// No description provided for @favoritePlates.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Plates'**
+  String get favoritePlates;
+
+  /// No description provided for @favoriteProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Products'**
+  String get favoriteProducts;
+
   /// No description provided for @restaurants.
   ///
   /// In en, this message translates to:

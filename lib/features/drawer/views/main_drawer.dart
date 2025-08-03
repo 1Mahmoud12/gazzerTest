@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/icons/main_switcher.dart'
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/drawer/views/widgets/drawer_btn.dart';
+import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
@@ -47,7 +48,7 @@ class _MainDrawerState extends State<MainDrawer> {
         L10n.tr().favorites,
         Assets.assetsSvgFavoritesOutlined,
         (BuildContext ctx) {
-          // LayoutInherited.of(context).changeIndex(1);
+          ctx.pushReplacement(FavoritesScreen.route);
         },
       ),
       (L10n.tr().myOrders, Assets.assetsSvgHistory, (BuildContext ctx) {}),

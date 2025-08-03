@@ -34,6 +34,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get youHaveNoFavoritesYet => 'You have no favorites yet';
 
   @override
+  String get favoriteRestaurants => 'المطاعم المفضلة';
+
+  @override
+  String get favoriteStores => 'المتاجر المفضلة';
+
+  @override
+  String get favoritePlates => 'الأطباق المفضلة';
+
+  @override
+  String get favoriteProducts => 'المنتجات المفضلة';
+
+  @override
   String get restaurants => 'المطاعم';
 
   @override
