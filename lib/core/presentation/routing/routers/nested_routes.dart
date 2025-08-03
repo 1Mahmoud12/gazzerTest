@@ -89,12 +89,11 @@ final pharmacyRoutes = [
   ),
 ];
 
-List<GoRoute> get drowerRoutes => [
+List<RouteBase> get drowerRoutes => [
   GoRoute(
     path: ProfileScreen.route,
     builder: (context, state) => const ProfileScreen(),
-    routes: [
-      $upodatePasswordRoute,
-    ],
+    routes: [],
   ),
+  $upodatePasswordRoute,
 ];

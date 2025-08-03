@@ -49,7 +49,7 @@ part 'widgets/home_suggested_products_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  static const route = '/home';
+  static const route = '/';
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }

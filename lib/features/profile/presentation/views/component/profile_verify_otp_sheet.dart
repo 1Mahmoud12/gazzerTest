@@ -35,7 +35,11 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
   final counter = 30;
 
   Future<void> resend() async {
-    context.read<ProfileCubit>().updateProfile(widget.req);
+    final result = await context.read<ProfileCubit>().updateProfile(widget.req);
+    if (result) {
+      Alerts.showToast(L10n.tr().otpSentSuccessfully, error: false);
+      _setTimer();
+    }
   }
 
   void _setTimer() {
@@ -109,7 +113,9 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                             },
                             builder: (context, state) {
                               return Row(
-                                mainAxisAlignment: state is UpdateProfileLoading ? MainAxisAlignment.center : MainAxisAlignment.end,
+                                mainAxisAlignment: state is UpdateProfileLoading
+                                    ? MainAxisAlignment.center
+                                    : MainAxisAlignment.end,
                                 children: [
                                   state is! UpdateProfileLoading
                                       ? ValueListenableBuilder(
@@ -120,9 +126,13 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                                               onPressed: finished ? () => resend() : null,
 
                                               child: Text(
-                                                finished ? L10n.tr().resendCode : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
+                                                finished
+                                                    ? L10n.tr().resendCode
+                                                    : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
                                                 textAlign: TextAlign.end,
-                                                style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
+                                                style: TStyle.primarySemi(
+                                                  16,
+                                                ).copyWith(color: finished ? Co.purple : Co.tertiary),
                                               ),
                                             );
                                           },

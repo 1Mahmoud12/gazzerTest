@@ -57,7 +57,11 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
       // backgroundColor: Co.secText,
       body: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Co.purple.withAlpha(50), Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          gradient: LinearGradient(
+            colors: [Co.purple.withAlpha(50), Colors.transparent],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
         ),
         child: Form(
           key: _formKey,
@@ -76,7 +80,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                       hintText: L10n.tr().currentPassword,
                       bgColor: Co.secText,
                       isPassword: true,
-                      validator: Validators.passwordValidation,
+                      validator: Validators.notEmpty,
                       autofillHints: [AutofillHints.password],
                     ),
                     const VerticalSpacing(16),
