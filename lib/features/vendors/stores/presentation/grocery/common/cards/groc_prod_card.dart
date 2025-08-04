@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text_wz_shadow.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 
@@ -22,36 +26,86 @@ class GrocProdCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DecoratedBox(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x88FF9F08),
-                  offset: Offset(0, 0),
-                  blurRadius: 80,
-                  spreadRadius: 0,
-                ),
-              ],
-            ),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: const Color(0x20504164),
-                borderRadius: CardStyle.getShapeRadius(shape),
-              ),
-              child: Padding(
-                padding: const EdgeInsetsGeometry.all(8),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: ClipRRect(
-                    borderRadius: CardStyle.getShapeRadius(shape),
-                    child: CustomNetworkImage(
-                      product.image,
-                      fit: BoxFit.contain,
+          Expanded(
+            child: Stack(
+              children: [
+                DecoratedBox(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0x88FF9F08),
+                        offset: Offset(0, 0),
+                        blurRadius: 80,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: const Color(0x20504164),
+                      borderRadius: CardStyle.getShapeRadius(shape),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsetsGeometry.all(8),
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: ClipRRect(
+                          borderRadius: CardStyle.getShapeRadius(shape),
+                          child: CustomNetworkImage(
+                            product.image,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                Align(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  child: Row(
+                    spacing: 6,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      DecoratedFavoriteWidget(
+                        fovorable: product,
+                        isDarkContainer: false,
+                        size: 18,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          border: GradientBoxBorder(gradient: Grad().shadowGrad()),
+                          borderRadius: BorderRadiusGeometry.circular(100),
+                          gradient: Grad().bgLinear.copyWith(
+                            stops: const [0.0, 1],
+                            colors: [const Color(0x55402788), Colors.transparent],
+                          ),
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          style: IconButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            padding: const EdgeInsets.all(6),
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                          ),
+                          icon: SvgPicture.asset(
+                            Assets.assetsSvgCart,
+                            height: 20,
+                            width: 20,
+                            colorFilter: const ColorFilter.mode(
+                              Co.secondary,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -65,6 +119,7 @@ class GrocProdCard extends StatelessWidget {
                     product.name,
                     style: TStyle.primaryBold(12, font: FFamily.inter),
                   ),
+
                   Directionality(
                     textDirection: TextDirection.ltr,
                     child: Row(
@@ -83,7 +138,6 @@ class GrocProdCard extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   Row(
                     children: [
                       const Icon(Icons.favorite, color: Co.secondary, size: 18),

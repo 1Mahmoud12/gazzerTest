@@ -16,11 +16,11 @@ class FavoriteBus extends AppBus {
   final FavoritesRepo _favoriteRepo;
   final _favoriteIds = <FavoriteType, Set<int>>{};
   final _favorites = <FavoriteType, Map<int, Favorable>>{
-    FavoriteType.restaurant: <int, Favorable>{},
-    FavoriteType.store: <int, Favorable>{},
-    FavoriteType.plate: <int, Favorable>{},
-    FavoriteType.product: <int, Favorable>{},
-    FavoriteType.unknown: <int, Favorable>{},
+    // FavoriteType.restaurant: <int, Favorable>{},
+    // FavoriteType.store: <int, Favorable>{},
+    // FavoriteType.plate: <int, Favorable>{},
+    // FavoriteType.product: <int, Favorable>{},
+    // FavoriteType.unknown: <int, Favorable>{},
   };
 
   Future<void> getFavorites() async {

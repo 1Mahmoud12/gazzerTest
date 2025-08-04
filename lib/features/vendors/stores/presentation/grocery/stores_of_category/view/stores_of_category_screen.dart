@@ -101,8 +101,11 @@ class StoresOfCategoryScreen extends StatelessWidget {
                     ),
                   ),
                   const VerticalSpacing(24),
-                  if (state.todaysDeals.isNotEmpty) StoresTopRatedComponent(items: state.todaysDeals),
-                  const VerticalSpacing(120),
+                  if (state.todaysDeals.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 120),
+                      child: StoresTopRatedComponent(items: state.todaysDeals),
+                    ),
 
                   GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
