@@ -36,36 +36,43 @@ class Fakers {
   ///
   ///
   /// General
-  static final addresses = List.generate(
-    3,
-    (index) => AddressEntity(
-      id: index,
-      street: "شارع ${index + 1}",
-      provinceId: _random.nextInt(10),
-      zoneId: _random.nextInt(10),
-      label: index == 0
-          ? 'home'
-          : index == 1
-          ? 'work'
-          : 'other',
+  static const addresses = [
+    AddressEntity(
+      id: 0,
+      street: 'street',
+      provinceId: 1,
+      provinceName: 'provinceName',
+      zoneId: 1,
+      zoneName: 'zoneName',
+      label: 'label',
       lat: 0.0,
       lng: 0.0,
-      isDefault: index == 0, // First address is default
-      floor: _random.nextInt(5),
-      apartment: _random.nextInt(100),
-      building: "مبنى ${index + 1}",
-      description: "وصف العنوان ${index + 1}",
-      landmark: "معلم ${index + 1}",
-      zoneName: "منطقة ${index + 1}",
-      provinceName: "محافظة ${index + 1}",
+      isDefault: true,
+      floor: 1,
+      apartment: 2,
+      building: 'building',
     ),
-  );
+    AddressEntity(
+      id: 0,
+      street: 'street',
+      provinceId: 1,
+      provinceName: 'provinceName',
+      zoneId: 1,
+      zoneName: 'zoneName',
+      label: 'label',
+      lat: 0.0,
+      lng: 0.0,
+      isDefault: false,
+      floor: 1,
+      apartment: 2,
+      building: 'building',
+    ),
+  ];
   static final reasons = List.generate(
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',
-      description:
-          'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
 
       id: index,
     ),

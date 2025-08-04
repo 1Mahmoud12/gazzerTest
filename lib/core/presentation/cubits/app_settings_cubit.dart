@@ -11,7 +11,7 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
   AppSettingsCubit()
     : super(
         AppSettingsState(
-          lang: di<SharedPreferences>().getString(StorageKeys.locale) ?? Platform.localeName,
+          lang: di<SharedPreferences>().getString(StorageKeys.locale) ?? (Platform.localeName.contains('ar') ? 'ar' : 'en'),
           isDarkMode: di<SharedPreferences>().getBool(StorageKeys.isDark) ?? false,
         ),
       );

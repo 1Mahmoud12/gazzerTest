@@ -65,4 +65,24 @@ class AddressRepoImp extends AddressRepo {
       parser: (response) => response.data['message'].toString(),
     );
   }
+
+  @override
+  Future<Result<({int id, String name})>> getProvinces() {
+    return super.call(
+      apiCall: () async => _apiClient.get(endpoint: Endpoints.getProvinces),
+      parser: (response) {
+        return response.data['data'].map<({int id, String name})>((item) => (id: item['id'], name: item['province_name'])).toList();
+      },
+    );
+  }
+
+  @override
+  Future<Result<({int id, String name})>> getZonez(int id) {
+    return super.call(
+      apiCall: () async => _apiClient.get(endpoint: Endpoints.getZones(id)),
+      parser: (response) {
+        return response.data['data'].map<({int id, String name})>((item) => (id: item['id'], name: item['province_name'])).toList();
+      },
+    );
+  }
 }

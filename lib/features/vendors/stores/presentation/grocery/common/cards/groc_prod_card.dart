@@ -54,7 +54,7 @@ class GrocProdCard extends StatelessWidget {
                           borderRadius: CardStyle.getShapeRadius(shape),
                           child: CustomNetworkImage(
                             product.image,
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

@@ -11,6 +11,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/cards/vertical_plate_card.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/restaurants_repo.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -80,7 +81,9 @@ class RestaurantCategoryScreen extends StatelessWidget {
                         imgToTextRatio: 0.6,
                         width: double.infinity,
                         corner: Corner.bottomLeft,
-                        onTap: (item) {},
+                        onTap: (item) {
+                          PlateDetailsRoute(id: item.id).push(context);
+                        },
                       );
                     },
                   ),

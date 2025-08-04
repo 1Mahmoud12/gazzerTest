@@ -39,7 +39,9 @@ class _ProfileAddressesComponent extends StatelessWidget {
                 ),
         ),
         MainBtn(
-          onPressed: () {},
+          onPressed: () {
+            const AddEditAddressRoute($extra: null).push(context);
+          },
           bgColor: Co.secondary,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
           child: Row(
@@ -53,7 +55,7 @@ class _ProfileAddressesComponent extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  L10n.tr().editAccountInformation,
+                  L10n.tr().addNewAddress,
                   style: TStyle.primaryBold(14, font: FFamily.inter),
                   textAlign: TextAlign.center,
                 ),

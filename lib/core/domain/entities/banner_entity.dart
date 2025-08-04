@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum BannerType {
   image('Image'),
   detailed('Detailed'),
@@ -37,6 +39,9 @@ class BannerEntity {
   final String? backgroundColor;
   final num? discountPercent;
   final List<String>? images;
+  final Offset? offset;
+  final String? backgroundImage;
+  final String? foreGroundImage;
 
   const BannerEntity({
     required this.id,
@@ -51,5 +56,8 @@ class BannerEntity {
     this.backgroundColor,
     this.discountPercent,
     this.images,
+    this.offset,
+    this.backgroundImage,
+    this.foreGroundImage,
   });
 }

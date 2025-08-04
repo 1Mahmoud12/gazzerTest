@@ -8,7 +8,6 @@ class AddressRequest {
   final double long;
   final int provinceId;
   final int provinceZoneId;
-  final bool isDefault;
   final int floor;
   final int apartment;
   final String building;
@@ -24,7 +23,6 @@ class AddressRequest {
     required this.long,
     required this.provinceId,
     required this.provinceZoneId,
-    this.isDefault = false,
     this.floor = 0,
     this.apartment = 0,
     this.building = '',
@@ -41,13 +39,13 @@ class AddressRequest {
       'long': long,
       'province_id': provinceId,
       'province_zone_id': provinceZoneId,
-      'is_default': isDefault,
+      'is_default': false,
       'floor': floor,
       'apartment': apartment,
       'building': building,
       'street': street,
       'landmark': landmark,
-      'description': description,
+      'address': description,
     };
   }
 }

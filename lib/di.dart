@@ -3,6 +3,8 @@ import 'package:gazzer/core/data/network/crashlytics_repo_imp.dart';
 import 'package:gazzer/core/data/repo/banner_repo_imp.dart';
 import 'package:gazzer/core/domain/repos/banner_repo.dart';
 import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
+import 'package:gazzer/features/addresses/data/address_repo_imp.dart';
+import 'package:gazzer/features/addresses/domain/address_repo.dart';
 import 'package:gazzer/features/auth/forgot_password/data/forgot_password_imp.dart';
 import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo.dart';
 import 'package:gazzer/features/auth/login/data/login_repo_imp.dart';
@@ -68,6 +70,7 @@ Future _registerAsync() async {
 }
 
 void _registerRepos() {
+  di.registerLazySingleton<AddressRepo>(() => AddressRepoImp(di.get(), di.get()));
   di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(di.get(), di.get()));
   di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get(), di.get()));
   di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get(), di.get()));

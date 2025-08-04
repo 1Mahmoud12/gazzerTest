@@ -15,7 +15,7 @@ class AddressEntity {
   final String? description;
   final String? landmark;
 
-  AddressEntity({
+  const AddressEntity({
     required this.id,
     required this.street,
     required this.provinceId,

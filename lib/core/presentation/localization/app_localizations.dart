@@ -98,6 +98,150 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @address_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get address_________________Start;
+
+  /// No description provided for @addAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Address'**
+  String get addAddress;
+
+  /// No description provided for @editAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Address'**
+  String get editAddress;
+
+  /// No description provided for @addressName.
+  ///
+  /// In en, this message translates to:
+  /// **'Address Name'**
+  String get addressName;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @government.
+  ///
+  /// In en, this message translates to:
+  /// **'Government'**
+  String get government;
+
+  /// No description provided for @area.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get area;
+
+  /// No description provided for @building.
+  ///
+  /// In en, this message translates to:
+  /// **'Building'**
+  String get building;
+
+  /// No description provided for @buildingNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Building Number'**
+  String get buildingNumber;
+
+  /// No description provided for @apartment.
+  ///
+  /// In en, this message translates to:
+  /// **'Apartment'**
+  String get apartment;
+
+  /// No description provided for @work.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get work;
+
+  /// No description provided for @homeAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Address'**
+  String get homeAddress;
+
+  /// No description provided for @floor.
+  ///
+  /// In en, this message translates to:
+  /// **'Floor'**
+  String get floor;
+
+  /// No description provided for @floorNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Floor Number'**
+  String get floorNumber;
+
+  /// No description provided for @apartmentNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Apartment Number'**
+  String get apartmentNumber;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @landmark.
+  ///
+  /// In en, this message translates to:
+  /// **'Landmark'**
+  String get landmark;
+
+  /// No description provided for @nearbyLandmark.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearby Landmark'**
+  String get nearbyLandmark;
+
+  /// No description provided for @province.
+  ///
+  /// In en, this message translates to:
+  /// **'Province'**
+  String get province;
+
+  /// No description provided for @zone.
+  ///
+  /// In en, this message translates to:
+  /// **'Zone'**
+  String get zone;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @addressLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Address Label'**
+  String get addressLabel;
+
+  /// No description provided for @addressLabelHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Address Label Hint'**
+  String get addressLabelHint;
+
+  /// No description provided for @address_________________Ebd.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get address_________________Ebd;
+
   /// No description provided for @favorite_________________Start.
   ///
   /// In en, this message translates to:
@@ -541,72 +685,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Email Address'**
   String get emailAddress;
-
-  /// No description provided for @work.
-  ///
-  /// In en, this message translates to:
-  /// **'Work'**
-  String get work;
-
-  /// No description provided for @homeAddress.
-  ///
-  /// In en, this message translates to:
-  /// **'Home'**
-  String get homeAddress;
-
-  /// No description provided for @floor.
-  ///
-  /// In en, this message translates to:
-  /// **'Floor'**
-  String get floor;
-
-  /// No description provided for @apartmentNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'Apartment Number'**
-  String get apartmentNumber;
-
-  /// No description provided for @description.
-  ///
-  /// In en, this message translates to:
-  /// **'Description'**
-  String get description;
-
-  /// No description provided for @landmark.
-  ///
-  /// In en, this message translates to:
-  /// **'Landmark'**
-  String get landmark;
-
-  /// No description provided for @province.
-  ///
-  /// In en, this message translates to:
-  /// **'Province'**
-  String get province;
-
-  /// No description provided for @zone.
-  ///
-  /// In en, this message translates to:
-  /// **'Zone'**
-  String get zone;
-
-  /// No description provided for @address.
-  ///
-  /// In en, this message translates to:
-  /// **'Address'**
-  String get address;
-
-  /// No description provided for @addressLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Address Description'**
-  String get addressLabel;
-
-  /// No description provided for @addressLabelHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Example: Home, Work, etc.'**
-  String get addressLabelHint;
 
   /// No description provided for @darkMode.
   ///

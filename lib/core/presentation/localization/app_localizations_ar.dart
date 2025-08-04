@@ -9,6 +9,78 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get address_________________Start => '__________________';
+
+  @override
+  String get addAddress => 'إضافة عنوان';
+
+  @override
+  String get editAddress => 'تعديل العنوان';
+
+  @override
+  String get addressName => 'اسم العنوان';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get government => 'المحافظة';
+
+  @override
+  String get area => 'المنطقة';
+
+  @override
+  String get building => 'المبني';
+
+  @override
+  String get buildingNumber => 'رقم المبني';
+
+  @override
+  String get apartment => 'رقم الشقة';
+
+  @override
+  String get work => 'العمل';
+
+  @override
+  String get homeAddress => 'المنزل';
+
+  @override
+  String get floor => 'الطابق';
+
+  @override
+  String get floorNumber => 'رقم الطابق';
+
+  @override
+  String get apartmentNumber => 'رقم الشقة';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get landmark => 'معلم';
+
+  @override
+  String get nearbyLandmark => 'المعلم القريب';
+
+  @override
+  String get province => 'المحافظة';
+
+  @override
+  String get zone => 'المنطقة';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get addressLabel => 'وصف العنوان';
+
+  @override
+  String get addressLabelHint => 'مثال: المنزل، العمل، إلخ.';
+
+  @override
+  String get address_________________Ebd => '__________________';
+
+  @override
   String get favorite_________________Start => '__________________';
 
   @override
@@ -240,39 +312,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get emailAddress => 'البريد الإلكتروني';
-
-  @override
-  String get work => 'العمل';
-
-  @override
-  String get homeAddress => 'المنزل';
-
-  @override
-  String get floor => 'الطابق';
-
-  @override
-  String get apartmentNumber => 'رقم الشقة';
-
-  @override
-  String get description => 'الوصف';
-
-  @override
-  String get landmark => 'معلم';
-
-  @override
-  String get province => 'المحافظة';
-
-  @override
-  String get zone => 'المنطقة';
-
-  @override
-  String get address => 'العنوان';
-
-  @override
-  String get addressLabel => 'وصف العنوان';
-
-  @override
-  String get addressLabelHint => 'مثال: المنزل، العمل، إلخ.';
 
   @override
   String get darkMode => 'الوضع الداكن';

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/views/widgets/animations/slide_timer.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
@@ -49,13 +48,20 @@ class _CountDownBannerState extends State<CountDownBanner> with SingleTickerProv
       height: 155,
       child: Stack(
         children: [
-          SizedBox.expand(child: Image.asset(Assets.assetsPngDailyDealsAdd, fit: BoxFit.cover)),
+          SizedBox.expand(
+            child: CustomNetworkImage(
+              widget.banner.backgroundImage ?? '',
+              fit: BoxFit.cover,
+              height: double.infinity,
+              width: double.infinity,
+            ),
+          ),
           Align(
-            alignment: const Alignment(-0.95, -1),
+            alignment: Alignment(widget.banner.offset?.dx ?? -0.95, widget.banner.offset?.dy ?? -1),
             child: RotationTransition(
               alignment: Alignment.topCenter,
               turns: Tween<double>(begin: 0, end: -0.015).animate(_controller),
-              child: CustomNetworkImage(widget.banner.image ?? '', fit: BoxFit.cover, height: 120),
+              child: CustomNetworkImage(widget.banner.foreGroundImage ?? '', fit: BoxFit.cover, height: 120),
             ),
           ),
           Align(

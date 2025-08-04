@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 
 class BannerDTO {
@@ -13,6 +15,10 @@ class BannerDTO {
   String? backgroundColor;
   num? discountPercent;
   List<String>? images;
+  double? xAxis;
+  double? yAxis;
+  String? backgroundImage;
+  String? foreGroundImage;
   // String? createdAt;
   // List<Null>? timeRemain;
   // int? bannerableId;
@@ -35,6 +41,8 @@ class BannerDTO {
     this.backgroundColor,
     this.discountPercent,
     this.images,
+    this.xAxis,
+    this.yAxis,
   });
 
   BannerDTO.fromJson(Map<String, dynamic> json) {
@@ -50,6 +58,10 @@ class BannerDTO {
     discountPercent = json['discount_percent'];
     expiredAt = json['expired_at'];
     images = json['images'] != null ? List<String>.from(json['images']) : null;
+    xAxis = double.tryParse(json['x_axis'].toString());
+    yAxis = double.tryParse(json['y_axis'].toString());
+    backgroundImage = json['background_image'];
+    foreGroundImage = json['foreground_image'];
     // createdAt = json['created_at'];
     // bannerableId = json['bannerable_id'];
     // bannerableType = json['bannerable_type'];
@@ -75,6 +87,9 @@ class BannerDTO {
       backgroundColor: backgroundColor,
       discountPercent: discountPercent,
       images: images,
+      foreGroundImage: foreGroundImage,
+      backgroundImage: backgroundImage,
+      offset: xAxis != null && yAxis != null ? Offset(xAxis!, yAxis!) : null,
     );
   }
 }
