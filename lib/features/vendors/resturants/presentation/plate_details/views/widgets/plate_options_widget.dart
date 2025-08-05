@@ -12,7 +12,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 class PlateOptionsWidget extends StatefulWidget {
   const PlateOptionsWidget({super.key, required this.option, required this.onSelection});
-  final PlateOptionEntity option;
+  final ItemOptionEntity option;
   final bool Function(Set<int> ids) onSelection;
 
   @override

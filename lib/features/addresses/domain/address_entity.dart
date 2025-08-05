@@ -11,18 +11,15 @@ class AddressEntity extends Equatable {
   final double lat;
   final double lng;
   final bool isDefault;
-  final String street;
   final String floor;
   final String apartment;
   final String building;
-  final String? description;
   final String? landmark;
 
   LatLng get location => LatLng(lat, lng);
 
   const AddressEntity({
     required this.id,
-    required this.street,
     required this.provinceId,
     required this.provinceName,
     required this.zoneId,
@@ -34,14 +31,12 @@ class AddressEntity extends Equatable {
     required this.floor,
     required this.apartment,
     required this.building,
-    this.description,
     this.landmark,
   });
 
   @override
   List<Object?> get props => [
     id,
-    street,
     provinceId,
     provinceName,
     zoneId,
@@ -53,7 +48,6 @@ class AddressEntity extends Equatable {
     floor,
     apartment,
     building,
-    description,
     landmark,
   ];
 }

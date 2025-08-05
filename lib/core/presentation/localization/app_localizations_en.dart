@@ -33,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saveAddress => 'Save Address';
 
   @override
-  String get selectGovernment => 'Select Government';
+  String get selectGovernorate => 'Select governorate';
 
   @override
   String get selectArea => 'Select Area';
@@ -51,7 +51,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get location => 'Location';
 
   @override
-  String get government => 'Government';
+  String get governorate => 'governorate';
 
   @override
   String get area => 'Area';

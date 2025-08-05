@@ -44,7 +44,7 @@ class MainTextField extends StatefulWidget {
     this.prefixOnTap,
     this.prefixColor,
     this.autofillHints,
-    this.max = 50,
+    this.max = 255,
     this.disabledColor,
     this.action = TextInputAction.next,
   });

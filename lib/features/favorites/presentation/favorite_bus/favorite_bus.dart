@@ -78,19 +78,23 @@ class FavoriteBus extends AppBus {
     return _favoriteIds[favorable.favoriteType]?.contains(favorable.id) ?? false;
   }
 
-  _addToFavorites(Favorable favorable) {
+  void _addToFavorites(Favorable favorable) {
     _favorites[favorable.favoriteType] ??= <int, Favorable>{};
     _favorites[favorable.favoriteType]?.addAll({favorable.id: favorable});
     _favoriteIds[favorable.favoriteType] ??= <int>{};
     _favoriteIds[favorable.favoriteType]!.add(favorable.id);
   }
 
-  _removeFromFavorites(Favorable favorable) {
+  void _removeFromFavorites(Favorable favorable) {
     _favorites[favorable.favoriteType]?.removeWhere((k, v) => k == favorable.id);
     _favoriteIds[favorable.favoriteType]?.remove(favorable.id);
     if (_favoriteIds[favorable.favoriteType]?.isEmpty == true) {
       _favorites.remove(favorable.favoriteType);
       _favoriteIds.remove(favorable.favoriteType);
     }
+  }
+
+  void clearFavorites() {
+    _favoriteIds.clear();
   }
 }

@@ -5,7 +5,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 class PlateDetailsResponse {
   late final PlateEntity plate;
-  late final List<PlateOptionEntity> options;
+  late final List<ItemOptionEntity> options;
   late final List<OrderedWithEntity> orderedWith;
 
   PlateDetailsResponse.fromJson(Map<String, dynamic> json) {

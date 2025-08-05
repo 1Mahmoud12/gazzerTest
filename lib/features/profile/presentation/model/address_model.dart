@@ -43,7 +43,6 @@ class AddressModel extends AddressEntity {
     : labelType = AddressLabel.fromString(entity.label),
       super(
         id: entity.id,
-        street: entity.street,
         provinceId: entity.provinceId,
         zoneId: entity.zoneId,
         label: entity.label,
@@ -53,7 +52,6 @@ class AddressModel extends AddressEntity {
         floor: entity.floor,
         apartment: entity.apartment,
         building: entity.building,
-        description: entity.description,
         landmark: entity.landmark,
         provinceName: entity.provinceName,
         zoneName: entity.zoneName,

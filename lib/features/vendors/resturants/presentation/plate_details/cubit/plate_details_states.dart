@@ -1,10 +1,9 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 sealed class PlateDetailsStates {
   final PlateEntity plate;
-  final List<PlateOptionEntity> options;
+  final List<ItemOptionEntity> options;
   final List<OrderedWithEntity> orderedWith;
 
   const PlateDetailsStates({this.plate = Fakers.plate, this.options = const [], this.orderedWith = const []});

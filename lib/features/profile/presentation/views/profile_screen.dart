@@ -80,7 +80,11 @@ class ProfileScreen extends StatelessWidget {
                   showCart: false,
                 ),
                 body: SafeArea(
-                  child: BlocBuilder<AppSettingsCubit, AppSettingsState>(
+                  child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
+                    listenWhen: (previous, current) => previous.lang != current.lang,
+                    listener: (context, state) {
+                      di<AddressesBus>().refreshAddresses();
+                    },
                     buildWhen: (previous, current) => previous.lang != current.lang || previous.isDarkMode != current.isDarkMode,
                     builder: (context, state) {
                       return ListView(

@@ -20,52 +20,7 @@ class PlateEntity extends GenericItemEntity {
 
   @override
   List<Object?> get props => [
-    super.id,
-    super.name,
-    super.description,
-    super.image,
-    super.price,
-    super.rate,
-    super.reviewCount,
-    super.outOfStock,
-    categoryPlateId,
+    ...super.props,
     categoryPlateId,
   ];
-}
-
-class PlateOptionEntity extends Equatable {
-  final int id;
-  final String name;
-  final bool isRequired;
-  final OptionType type;
-  final bool controlsPrice;
-  final List<OpionValueEntity> values;
-
-  const PlateOptionEntity({
-    required this.id,
-    required this.name,
-    required this.isRequired,
-    required this.type,
-    required this.controlsPrice,
-    required this.values,
-  });
-
-  @override
-  List<Object?> get props => [id, name, isRequired, type, controlsPrice, values];
-}
-
-class OpionValueEntity extends Equatable {
-  final int id;
-  final String name;
-  final double price;
-  final bool isDefault;
-  const OpionValueEntity({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.isDefault,
-  });
-
-  @override
-  List<Object?> get props => [id, name, price, isDefault];
 }

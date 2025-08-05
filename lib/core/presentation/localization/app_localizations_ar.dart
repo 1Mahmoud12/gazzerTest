@@ -33,7 +33,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saveAddress => 'حفظ العنوان';
 
   @override
-  String get selectGovernment => 'اختر المحافظة';
+  String get selectGovernorate => 'اختر المحافظة';
 
   @override
   String get selectArea => 'اختر المنطقة';
@@ -51,7 +51,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get location => 'الموقع';
 
   @override
-  String get government => 'المحافظة';
+  String get governorate => 'المحافظة';
 
   @override
   String get area => 'المنطقة';

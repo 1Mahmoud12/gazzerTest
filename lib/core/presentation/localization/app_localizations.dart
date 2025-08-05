@@ -140,11 +140,11 @@ abstract class AppLocalizations {
   /// **'Save Address'**
   String get saveAddress;
 
-  /// No description provided for @selectGovernment.
+  /// No description provided for @selectGovernorate.
   ///
   /// In en, this message translates to:
-  /// **'Select Government'**
-  String get selectGovernment;
+  /// **'Select governorate'**
+  String get selectGovernorate;
 
   /// No description provided for @selectArea.
   ///
@@ -176,11 +176,11 @@ abstract class AppLocalizations {
   /// **'Location'**
   String get location;
 
-  /// No description provided for @government.
+  /// No description provided for @governorate.
   ///
   /// In en, this message translates to:
-  /// **'Government'**
-  String get government;
+  /// **'governorate'**
+  String get governorate;
 
   /// No description provided for @area.
   ///

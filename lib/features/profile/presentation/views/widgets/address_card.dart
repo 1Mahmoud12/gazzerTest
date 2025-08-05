@@ -23,7 +23,7 @@ class AddressCard extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: AppConst.defaultBorderRadius,
-        border: address.isDefault ? null : Border.all(color: Co.purple),
+        border: !address.isDefault ? null : Border.all(color: Co.purple),
       ),
       child: Padding(
         padding: AppConst.defaultPadding,
@@ -85,10 +85,9 @@ class AddressCard extends StatelessWidget {
                               children: [
                                 TextSpan(text: "${address.provinceName}, "),
                                 TextSpan(text: "${address.zoneName}, "),
-                                TextSpan(text: address.street),
+                                TextSpan(text: ", ${L10n.tr().building} ${address.building}."),
                                 TextSpan(text: ", ${L10n.tr().floor} ${address.floor}"),
                                 TextSpan(text: ", ${L10n.tr().apartmentNumber} ${address.apartment}."),
-                                if (address.description != null) TextSpan(text: " ${address.description}."),
                                 if (address.landmark != null) TextSpan(text: " ${L10n.tr().landmark} ${address.landmark}."),
                               ],
                               style: TStyle.greyRegular(12).copyWith(height: 1.7),

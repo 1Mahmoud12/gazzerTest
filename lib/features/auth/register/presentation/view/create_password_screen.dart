@@ -15,13 +15,12 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_ap
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
-import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_states.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
-import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'create_password_screen.g.dart';
@@ -182,12 +181,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             $extra: (
                               di<RegisterRepo>(),
                               (ctx) {
-                                SelectLocationRoute((
-                                  initLocation: null,
-                                  onSubmit: (ctx, latlng) {
-                                    ctx.push(HealthFocusScreen.route);
-                                  },
-                                ));
+                                ctx.go(HomeScreen.route);
                               },
                             ),
                           ).push(context);

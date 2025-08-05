@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -169,14 +170,17 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
               ),
 
               const SizedBox.shrink(),
-              Text(L10n.tr().government, style: TStyle.primaryBold(14)),
+              Text(L10n.tr().governorate, style: TStyle.primaryBold(14)),
 
               BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
                 buildWhen: (previous, current) => current is GetProvincesStates,
                 builder: (context, state) {
                   final items = state is GetProvincesStates ? state.provinces : <({int id, String name})>[];
+                  if (cubit.oldAddress != null && state is GetProvincesSuccess) {
+                    selectedProvince = state.provinces.firstWhereOrNull((e) => e.id == selectedProvince?.id) ?? selectedProvince;
+                  }
                   return SelectSearchMenu<({String name, int id})>(
-                    hintText: L10n.tr().selectGovernment,
+                    hintText: L10n.tr().selectGovernorate,
                     isLoading: state is GetProvincesLoading,
                     showBorder: false,
                     borderRadius: 10,
@@ -200,6 +204,9 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 buildWhen: (previous, current) => current is GetZonesStates,
                 builder: (context, state) {
                   final items = state is GetZonesStates ? state.zones : <({int id, String name})>[];
+                  if (cubit.oldAddress != null && state is GetZonesSuccess) {
+                    selectedZone = state.zones.firstWhereOrNull((e) => e.id == selectedZone?.id) ?? selectedZone;
+                  }
                   return SelectSearchMenu<({String name, int id})>(
                     hintText: L10n.tr().selectArea,
                     isLoading: state is GetZonesLoading,
@@ -272,7 +279,6 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 showBorder: false,
                 borderRadius: 10,
                 hintText: L10n.tr().nearbyLandmark,
-                inputFormatters: FilteringTextInputFormatter.digitsOnly,
                 validator: Validators.notEmpty,
               ),
 

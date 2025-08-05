@@ -16,7 +16,7 @@ class OrderedWithEntity extends GenericItemEntity {
   });
 
   @override
-  List<Object?> get props => [id, name, image, rate, price];
+  List<Object?> get props => [...super.props];
 
   @override
   FavoriteType get favoriteType => FavoriteType.plate;

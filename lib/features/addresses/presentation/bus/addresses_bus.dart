@@ -16,6 +16,7 @@ class AddressesBus extends AppBus {
     switch (result) {
       case Ok<List<AddressEntity>> data:
         Session().addresses.clear();
+        data.value.sort((a, b) => a.isDefault ? -1 : 1);
         Session().addresses.addAll(data.value);
         fire(FetchAddressesSuccess(addresses: data.value));
         break;

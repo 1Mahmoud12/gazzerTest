@@ -2,6 +2,7 @@ import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,7 @@ class Session {
   ClientEntity? get client => _client;
   set setClient(ClientEntity? client) {
     _client = client;
+    if (client == null) clear();
   }
 
   LatLng? tmpLocation;
@@ -31,6 +33,8 @@ class Session {
     addresses.clear();
 
     /// clear cache notifications
+    di<FavoriteBus>().clearFavorites();
+
     /// clear cache cards
     /// clear cache orders
     /// clear cache carts

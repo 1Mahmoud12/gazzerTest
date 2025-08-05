@@ -39,7 +39,6 @@ class Fakers {
   static const addresses = [
     AddressEntity(
       id: 0,
-      street: 'street',
       provinceId: 1,
       provinceName: 'provinceName',
       zoneId: 1,
@@ -54,7 +53,6 @@ class Fakers {
     ),
     AddressEntity(
       id: 0,
-      street: 'street',
       provinceId: 1,
       provinceName: 'provinceName',
       zoneId: 1,
@@ -237,7 +235,7 @@ class Fakers {
   );
   static final plateOptions = List.generate(
     3,
-    (index) => PlateOptionEntity(
+    (index) => ItemOptionEntity(
       id: index,
       name: 'Option ${index + 1}',
       isRequired: _random.nextBool(),

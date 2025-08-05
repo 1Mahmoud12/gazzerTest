@@ -24,18 +24,5 @@ class ProductEntity extends GenericItemEntity {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [
-    id,
-    name,
-    description,
-    _price,
-    image,
-    rate,
-    reviewCount,
-    outOfStock,
-    badge,
-    tags,
-    offer,
-    color, // Include color in props
-  ];
+  List<Object?> get props => [...super.props, color];
 }

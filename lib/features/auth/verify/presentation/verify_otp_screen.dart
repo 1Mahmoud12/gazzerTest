@@ -59,7 +59,6 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   late String phoneNumber;
   final showSupport = ValueNotifier<bool>(false);
   late final VerifyRepo repo;
-  late final Function(BuildContext ctx) onSuccess;
 
   Future<void> resend() async {
     isResendingOtp.value = true;
@@ -90,7 +89,6 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   @override
   void initState() {
     repo = widget.extra.$1;
-    onSuccess = widget.extra.$2;
     phoneNumber = widget.initPhone;
     seconds = ValueNotifier<int>(counter);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -263,7 +261,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                       switch (res) {
                         case Ok<String> ok:
                           Alerts.showToast(ok.value, error: false);
-                          if (context.mounted) onSuccess(context);
+                          if (context.mounted) widget.extra.$2(context);
                           break;
                         case Err err:
                           otpCont.clear();

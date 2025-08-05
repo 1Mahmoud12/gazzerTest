@@ -41,7 +41,7 @@ class OrderedWithError extends OrderedWithStates {
 
 sealed class PlateDetailsStates extends SingleCatRestaurantStates {
   final PlateEntity plate;
-  final List<PlateOptionEntity> options;
+  final List<ItemOptionEntity> options;
   final List<OrderedWithEntity> orderedWith;
 
   const PlateDetailsStates({
@@ -54,8 +54,7 @@ sealed class PlateDetailsStates extends SingleCatRestaurantStates {
 class PlateDetailsInitial extends PlateDetailsStates {}
 
 class PlateDetailsLoading extends PlateDetailsStates {
-  PlateDetailsLoading()
-    : super(plate: Fakers.plate, options: Fakers.plateOptions, orderedWith: Fakers.plateOrderedWith);
+  PlateDetailsLoading() : super(plate: Fakers.plate, options: Fakers.plateOptions, orderedWith: Fakers.plateOrderedWith);
 }
 
 class PlateDetailsLoaded extends PlateDetailsStates {

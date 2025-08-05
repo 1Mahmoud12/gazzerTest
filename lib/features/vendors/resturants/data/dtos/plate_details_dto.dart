@@ -59,9 +59,9 @@ class PlateDetailsDTO {
     );
   }
 
-  List<PlateOptionEntity> toOptionsEntity() {
+  List<ItemOptionEntity> toOptionsEntity() {
     final loadedOptions = options?.map((e) => e.toEntity());
-    final nonNullOptions = loadedOptions?.where((e) => e != null).map((e) => e as PlateOptionEntity).toList();
+    final nonNullOptions = loadedOptions?.where((e) => e != null).map((e) => e as ItemOptionEntity).toList();
     return nonNullOptions ?? [];
   }
 }
@@ -88,9 +88,9 @@ class Options {
     }
   }
 
-  PlateOptionEntity? toEntity() {
+  ItemOptionEntity? toEntity() {
     try {
-      final option = PlateOptionEntity(
+      final option = ItemOptionEntity(
         id: id!,
         name: name!,
         isRequired: required == 1,

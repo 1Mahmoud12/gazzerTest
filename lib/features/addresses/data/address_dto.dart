@@ -12,8 +12,6 @@ class AddressDTO {
   String? building;
   String? floor;
   String? apartment;
-  String? landmark;
-  String? street;
 
   AddressDTO({this.id, this.name, this.address, this.lat, this.long, this.isDefault, this.province, this.provinceZone});
 
@@ -21,23 +19,20 @@ class AddressDTO {
     id = json['id'];
     name = json['name'];
     address = json['address'];
-    lat = json['lat'];
-    long = json['long'];
+    lat = double.tryParse(json['lat'].toString()) ?? 0.0;
+    long = double.tryParse(json['long'].toString()) ?? 0.0;
     isDefault = json['is_default'];
     province = json['province'] != null ? ProvinceDTO.fromJson(json['province']) : null;
     provinceZone = json['province_zone'] != null ? ProvinceZoneDTO.fromJson(json['province_zone']) : null;
     building = json['building'];
     floor = json['floor'];
     apartment = json['apartment'];
-    landmark = json['street'];
-    street = json['street'];
   }
 
   AddressEntity toEntity() {
     return AddressEntity(
       id: id!,
       label: name!,
-      description: address,
       lat: lat!,
       lng: long!,
       isDefault: isDefault == 1,
@@ -45,11 +40,10 @@ class AddressDTO {
       provinceName: province!.provinceName!,
       zoneId: provinceZone!.id!,
       zoneName: provinceZone!.zoneName!,
-      building: building ?? '', // Default value, adjust as needed
-      street: street ?? '', // Default value, adjust as needed
-      apartment: apartment ?? '', // Default value, adjust as needed
-      floor: floor ?? '', // Default value, adjust as needed
-      landmark: landmark ?? '', // Default value, adjust as needed
+      building: building ?? '',
+      apartment: apartment ?? '',
+      floor: floor ?? '',
+      landmark: address ?? '',
     );
   }
 }
