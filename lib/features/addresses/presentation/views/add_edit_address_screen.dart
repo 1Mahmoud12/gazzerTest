@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -60,7 +61,9 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
   @override
   void initState() {
     cubit = context.read<AddEditAddressCubit>();
-    if (cubit.oldAddress != null) {
+    if (Session().tmpLocation != null) {
+      latlng = LatLng(Session().tmpLocation!.latitude, Session().tmpLocation!.longitude);
+    } else if (cubit.oldAddress != null) {
       final add = cubit.oldAddress;
       nameController.text = AddressLabel.fromString(add!.label).label ?? add.label;
       buildingController.text = add.building;
@@ -276,13 +279,15 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
               const SizedBox.shrink(),
               const SizedBox.shrink(),
               BlocConsumer<AddEditAddressCubit, AddEditAddressStates>(
-                listenWhen: (previous, current) => current is SaveAddressStates,
                 listener: (context, state) {
                   if (state is SaveAddressSuccess) {
                     di<AddressesBus>().refreshAddresses();
                     Alerts.showToast(state.message, error: false);
-                    context.pop();
+                    context.pop(true); // indacates success operation
                   } else if (state is SaveAddressError) {
+                    Alerts.showToast(state.error);
+                  } else if (state is GetProvincesError) {
+                  } else if (state is GetZonesError) {
                     Alerts.showToast(state.error);
                   }
                 },

@@ -2,6 +2,7 @@ import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Singleton class to manage the session data.
@@ -19,6 +20,7 @@ class Session {
     _client = client;
   }
 
+  LatLng? tmpLocation;
   final addresses = <AddressEntity>[];
 
   void clear() {

@@ -29,8 +29,9 @@ class AddressesBus extends AppBus {
     fire(SetDefaultLoading(id: id));
     final result = await _repo.setDefaultAddress(id);
     switch (result) {
-      case Ok<String> _:
+      case Ok<String> ok:
         refreshAddresses();
+        Alerts.showToast(ok.value, error: false);
         fire(SetDefaultSuccess(id: id));
         break;
       case Err err:

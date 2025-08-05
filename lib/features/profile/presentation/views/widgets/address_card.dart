@@ -32,8 +32,6 @@ class AddressCard extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.data?.id == address.id && snapshot.data is AddressCardErrors) {
               Alerts.showToast((snapshot.data as AddressCardErrors).error);
-            } else if (snapshot.data?.id == address.id && snapshot.data is SetDefaultSuccess) {
-              Alerts.showToast(L10n.tr().defaultAddressChangedSuccessfully, error: false);
             }
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +121,9 @@ class AddressCard extends StatelessWidget {
                                       useSafeArea: true,
                                       constraints: const BoxConstraints(minHeight: 250),
                                       builder: (context) => ConfirmSheet(
-                                        msg: L10n.tr().confirmDeleteAddressName(address.label),
+                                        msg: L10n.tr().confirmDeleteAddressName(
+                                          AddressLabel.fromString(address.label).label ?? address.label,
+                                        ),
                                         btnText: L10n.tr().confirm,
                                       ),
                                     );
