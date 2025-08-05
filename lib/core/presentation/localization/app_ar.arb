@@ -1,5 +1,20 @@
 {
+  "noData": "لا توجد بيانات",
   "address_________________Start": "__________________",
+  "defaultAddressChangedSuccessfully": "تم تغيير العنوان الافتراضي بنجاح",
+  "confirmDeleteAddressName": "تأكيد حذف العنوان ({label})",
+  "@confirmDeleteAddressName": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "selectLocation": "اختر الموقع",
+  "pleaseSelectYourLocation": "يرجى اختيار موقعك",
+  "saveAddress": "حفظ العنوان",
+  "selectGovernment": "اختر المحافظة",
+  "selectArea": "اختر المنطقة",
   "addAddress": "إضافة عنوان",
   "editAddress": "تعديل العنوان",
   "addressName": "اسم العنوان",
@@ -7,7 +22,7 @@
   "government": "المحافظة",
   "area": "المنطقة",
   "building": "المبني",
-  "buildingNumber": "رقم المبني",
+  "buildingNameNumber": "اسم/رقم المبنى",
   "apartment": "رقم الشقة",
   "work": "العمل",
   "homeAddress": "المنزل",

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:event_bus/event_bus.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class AppBus {
   late EventBus _eventBus;
@@ -22,6 +23,7 @@ abstract class AppBus {
   }
 
   void fire(AppEvent event) {
+    if (kDebugMode) print('Event fired: ${event.runtimeType}');
     _eventBus.fire(event);
   }
 

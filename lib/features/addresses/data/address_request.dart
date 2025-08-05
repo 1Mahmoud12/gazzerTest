@@ -1,19 +1,18 @@
 import 'package:gazzer/features/profile/presentation/model/address_model.dart';
 
 class AddressRequest {
-  final int? id;
+  int? id;
   final AddressLabel label;
   final String? name;
   final double lat;
   final double long;
   final int provinceId;
   final int provinceZoneId;
-  final int floor;
-  final int apartment;
+  final String floor;
+  final String apartment;
   final String building;
-  final String street;
   final String landmark;
-  final String? description;
+  final bool isDefault;
 
   AddressRequest({
     this.id,
@@ -23,12 +22,11 @@ class AddressRequest {
     required this.long,
     required this.provinceId,
     required this.provinceZoneId,
-    this.floor = 0,
-    this.apartment = 0,
-    this.building = '',
-    this.street = '',
-    this.landmark = '',
-    this.description,
+    required this.floor,
+    required this.apartment,
+    required this.building,
+    required this.landmark,
+    required this.isDefault,
   });
 
   Map<String, dynamic> toJson() {
@@ -37,15 +35,14 @@ class AddressRequest {
       'name': label == AddressLabel.other ? name : label.name,
       'lat': lat,
       'long': long,
+      'is_default': isDefault,
       'province_id': provinceId,
       'province_zone_id': provinceZoneId,
-      'is_default': false,
+      'building': building,
       'floor': floor,
       'apartment': apartment,
-      'building': building,
-      'street': street,
-      'landmark': landmark,
-      'address': description,
+      'address': landmark,
+      'street': landmark,
     };
   }
 }

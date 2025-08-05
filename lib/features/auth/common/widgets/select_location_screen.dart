@@ -5,14 +5,27 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+part 'select_location_screen.g.dart';
+
+@TypedGoRoute<SelectLocationRoute>(path: SelectLocationScreen.route)
+@immutable
+class SelectLocationRoute extends GoRouteData with _$SelectLocationRoute {
+  const SelectLocationRoute(this.$extra);
+  final ({LatLng? initLocation, Function(BuildContext context, LatLng) onSubmit}) $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SelectLocationScreen(extra: $extra);
+  }
+}
+
 class SelectLocationScreen extends StatefulWidget {
-  const SelectLocationScreen({super.key});
+  const SelectLocationScreen({super.key, required this.extra});
   static const route = '/select-location';
+  final ({LatLng? initLocation, Function(BuildContext context, LatLng) onSubmit}) extra;
   @override
   State<SelectLocationScreen> createState() => _SelectLocationScreenState();
 }
@@ -38,9 +51,9 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
   }
 
   Future<LatLng?> getCurrentPosition(bool getuserLocation) async {
-    // if (!getuserLocation && widget.selectedLocation != null) {
-    //   return widget.selectedLocation!;
-    // }
+    if (!getuserLocation && widget.extra.initLocation != null) {
+      return widget.extra.initLocation!;
+    }
     LatLng? defaultLocation;
     final isEnabled = await enableService();
     if (isEnabled) {
@@ -53,7 +66,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
   @override
   void initState() {
     super.initState();
-    initLocation = ValueNotifier<LatLng?>(null);
+    initLocation = ValueNotifier(widget.extra.initLocation);
     // di<FirebaseAnalyticServices>()
     //     .setScreen(name: 'MapScreen', className: Constants.userRelatedClass);
   }
@@ -68,9 +81,18 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
           return Stack(
             alignment: Alignment.center,
             children: [
-              if (location.connectionState == ConnectionState.waiting)
-                const Center(child: AdaptiveProgressIndicator())
-              else ...[
+              if (location.connectionState == ConnectionState.waiting) ...[
+                const Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
+                      child: BackButton(),
+                    ),
+                  ),
+                ),
+                const Center(child: AdaptiveProgressIndicator()),
+              ] else ...[
                 DecoratedBox(
                   position: DecorationPosition.foreground,
                   decoration: BoxDecoration(
@@ -160,7 +182,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                       height: 60,
                       width: MediaQuery.sizeOf(context).width / 3,
                       onPressed: () {
-                        context.push(HealthFocusScreen.route);
+                        widget.extra.onSubmit(context, initLocation.value!);
                       },
                       child: GradientText(
                         text: L10n.tr().setYourLocation,

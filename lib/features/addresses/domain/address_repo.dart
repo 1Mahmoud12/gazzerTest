@@ -12,6 +12,6 @@ abstract class AddressRepo extends BaseApiRepo {
   Future<Result<String>> deleteAddress(int addressId);
   Future<Result<String>> setDefaultAddress(int addressId);
 
-  Future<Result<({int id, String name})>> getProvinces();
-  Future<Result<({int id, String name})>> getZonez(int id);
+  Future<Result<List<({int id, String name})>>> getProvinces();
+  Future<Result<List<({int id, String name})>>> getZonez(int id);
 }

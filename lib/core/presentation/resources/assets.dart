@@ -106,6 +106,8 @@ class Assets {
 
   static const String assetsPngLoginShape = "assets/png/login_shape.png";
 
+  static const String assetsPngMap = "assets/png/map.png";
+
   static const String assetsPngMedic = "assets/png/medic.jpg";
 
   static const String assetsPngMoodShape = "assets/png/mood_shape.png";

@@ -41,10 +41,7 @@ final List<RouteBase> unNestedRoutes = [
   /// scattered;
   $deleteAccountRoute,
   $addEditAddressRoute,
-  GoRoute(
-    path: SelectLocationScreen.route,
-    builder: (context, state) => const SelectLocationScreen(),
-  ),
+  $selectLocationRoute,
 ];
 
 final checkoutRoutes = [

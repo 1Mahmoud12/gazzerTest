@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:go_router/go_router.dart';
 
-class DeleteAccountConfirmSheet extends StatelessWidget {
-  const DeleteAccountConfirmSheet({super.key});
-
+class ConfirmSheet extends StatelessWidget {
+  const ConfirmSheet({super.key, required this.btnText, required this.msg});
+  final String btnText;
+  final String msg;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,11 +16,8 @@ class DeleteAccountConfirmSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GradientText(text: L10n.tr().confirmToDelete, style: TStyle.primaryBold(24)),
-            ],
+          Center(
+            child: GradientText(text: msg, style: TStyle.primaryBold(24)),
           ),
           OutlinedButton(
             onPressed: () {
@@ -30,7 +27,7 @@ class DeleteAccountConfirmSheet extends StatelessWidget {
               fixedSize: const Size(250, 60),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
-            child: Text(L10n.tr().deleteAccount, style: TStyle.primaryBold(14)),
+            child: Text(btnText, style: TStyle.primaryBold(14)),
           ),
         ],
       ),

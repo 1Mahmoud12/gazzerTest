@@ -1,5 +1,20 @@
 {
+  "noData": "No Data",
   "address_________________Start": "__________________",
+  "defaultAddressChangedSuccessfully" : "Default address changed successfully",
+  "confirmDeleteAddressName": "Confirm delete address ({label})",
+  "@confirmDeleteAddressName": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "selectLocation": "Select Location",
+  "pleaseSelectYourLocation": "Please, select your location",
+  "saveAddress": "Save Address",
+  "selectGovernment": "Select Government",
+  "selectArea": "Select Area",
   "addAddress": "Add Address",
   "editAddress": "Edit Address",
   "addressName": "Address Name",
@@ -7,10 +22,10 @@
   "government": "Government",
   "area": "Area",
   "building": "Building",
-  "buildingNumber": "Building Number",
+  "buildingNameNumber": "Building Name/Number",
   "apartment": "Apartment",
   "work": "Work",
-  "homeAddress": "Home Address",
+  "homeAddress": "Home",
   "floor": "Floor",
   "floorNumber": "Floor Number",
   "apartmentNumber": "Apartment Number",

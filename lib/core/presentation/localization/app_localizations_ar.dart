@@ -9,7 +9,34 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get noData => 'لا توجد بيانات';
+
+  @override
   String get address_________________Start => '__________________';
+
+  @override
+  String get defaultAddressChangedSuccessfully =>
+      'تم تغيير العنوان الافتراضي بنجاح';
+
+  @override
+  String confirmDeleteAddressName(String label) {
+    return 'تأكيد حذف العنوان ($label)';
+  }
+
+  @override
+  String get selectLocation => 'اختر الموقع';
+
+  @override
+  String get pleaseSelectYourLocation => 'يرجى اختيار موقعك';
+
+  @override
+  String get saveAddress => 'حفظ العنوان';
+
+  @override
+  String get selectGovernment => 'اختر المحافظة';
+
+  @override
+  String get selectArea => 'اختر المنطقة';
 
   @override
   String get addAddress => 'إضافة عنوان';
@@ -33,7 +60,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get building => 'المبني';
 
   @override
-  String get buildingNumber => 'رقم المبني';
+  String get buildingNameNumber => 'اسم/رقم المبنى';
 
   @override
   String get apartment => 'رقم الشقة';

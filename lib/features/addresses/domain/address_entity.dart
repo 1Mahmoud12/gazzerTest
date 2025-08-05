@@ -1,4 +1,7 @@
-class AddressEntity {
+import 'package:equatable/equatable.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+class AddressEntity extends Equatable {
   final int id;
   final int provinceId;
   final String provinceName;
@@ -9,11 +12,13 @@ class AddressEntity {
   final double lng;
   final bool isDefault;
   final String street;
-  final int floor;
-  final int apartment;
+  final String floor;
+  final String apartment;
   final String building;
   final String? description;
   final String? landmark;
+
+  LatLng get location => LatLng(lat, lng);
 
   const AddressEntity({
     required this.id,
@@ -32,4 +37,23 @@ class AddressEntity {
     this.description,
     this.landmark,
   });
+
+  @override
+  List<Object?> get props => [
+    id,
+    street,
+    provinceId,
+    provinceName,
+    zoneId,
+    zoneName,
+    label,
+    lat,
+    lng,
+    isDefault,
+    floor,
+    apartment,
+    building,
+    description,
+    landmark,
+  ];
 }

@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
+import 'package:gazzer/core/presentation/views/components/confirm_sheet.dart';
 import 'package:gazzer/core/presentation/views/components/loading_full_screen.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/decoration_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
@@ -16,7 +17,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/profile/data/models/delete_account_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
-import 'package:gazzer/features/profile/presentation/views/component/delete_account_confirm_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/component/delete_account_otp_sheet.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -241,7 +241,10 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             useSafeArea: true,
                             constraints: const BoxConstraints(minHeight: 250),
                             builder: (context) {
-                              return const DeleteAccountConfirmSheet();
+                              return ConfirmSheet(
+                                btnText: L10n.tr().deleteAccount,
+                                msg: L10n.tr().confirmToDelete,
+                              );
                             },
                           );
                           if (res == true) cubit.requestDeleteAccount();

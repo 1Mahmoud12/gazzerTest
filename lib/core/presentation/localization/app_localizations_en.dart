@@ -9,7 +9,34 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get noData => 'No Data';
+
+  @override
   String get address_________________Start => '__________________';
+
+  @override
+  String get defaultAddressChangedSuccessfully =>
+      'Default address changed successfully';
+
+  @override
+  String confirmDeleteAddressName(String label) {
+    return 'Confirm delete address ($label)';
+  }
+
+  @override
+  String get selectLocation => 'Select Location';
+
+  @override
+  String get pleaseSelectYourLocation => 'Please, select your location';
+
+  @override
+  String get saveAddress => 'Save Address';
+
+  @override
+  String get selectGovernment => 'Select Government';
+
+  @override
+  String get selectArea => 'Select Area';
 
   @override
   String get addAddress => 'Add Address';
@@ -33,7 +60,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get building => 'Building';
 
   @override
-  String get buildingNumber => 'Building Number';
+  String get buildingNameNumber => 'Building Name/Number';
 
   @override
   String get apartment => 'Apartment';
@@ -42,7 +69,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get work => 'Work';
 
   @override
-  String get homeAddress => 'Home Address';
+  String get homeAddress => 'Home';
 
   @override
   String get floor => 'Floor';

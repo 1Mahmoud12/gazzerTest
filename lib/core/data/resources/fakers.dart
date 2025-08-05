@@ -48,8 +48,8 @@ class Fakers {
       lat: 0.0,
       lng: 0.0,
       isDefault: true,
-      floor: 1,
-      apartment: 2,
+      floor: '1',
+      apartment: '2',
       building: 'building',
     ),
     AddressEntity(
@@ -63,8 +63,8 @@ class Fakers {
       lat: 0.0,
       lng: 0.0,
       isDefault: false,
-      floor: 1,
-      apartment: 2,
+      floor: '1',
+      apartment: '2',
       building: 'building',
     ),
   ];

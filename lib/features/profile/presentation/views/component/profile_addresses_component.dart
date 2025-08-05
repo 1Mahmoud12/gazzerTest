@@ -14,29 +14,39 @@ class _ProfileAddressesComponent extends StatelessWidget {
           style: TStyle.primaryBold(16),
         ),
         Divider(height: 15, thickness: 1, color: Co.purple.withAlpha(90)),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 300),
-          child: Fakers.addresses.isEmpty
-              ? SizedBox(
-                  height: 200,
-                  child: Center(
-                    child: Text(
-                      L10n.tr().youHaveNoAddressesYet,
-                      style: TStyle.primaryRegular(14),
-                    ),
-                  ),
-                )
-              : Scrollbar(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    itemCount: Fakers.addresses.length,
-                    separatorBuilder: (context, index) => const VerticalSpacing(16),
-                    itemBuilder: (context, index) {
-                      return AddressCard(address: AddressModel.fromEntity(Fakers.addresses[index]));
-                    },
-                  ),
-                ),
+        StreamBuilder(
+          stream: di<AddressesBus>().getStream<FetchAddressesEvents>(),
+          builder: (context, snapshot) {
+            final addresses = Session().addresses;
+            return ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 300),
+              child: Skeletonizer(
+                enabled: snapshot.data is FetchAddressesLoading,
+                child: addresses.isEmpty
+                    ? SizedBox(
+                        height: 60,
+                        child: Center(
+                          child: Text(
+                            L10n.tr().youHaveNoAddressesYet,
+                            style: TStyle.primarySemi(14),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    : Scrollbar(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          itemCount: addresses.length,
+                          separatorBuilder: (context, index) => const VerticalSpacing(16),
+                          itemBuilder: (context, index) {
+                            return AddressCard(address: AddressModel.fromEntity(addresses[index]));
+                          },
+                        ),
+                      ),
+              ),
+            );
+          },
         ),
         MainBtn(
           onPressed: () {

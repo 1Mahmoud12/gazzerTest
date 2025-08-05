@@ -98,11 +98,59 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data'**
+  String get noData;
+
   /// No description provided for @address_________________Start.
   ///
   /// In en, this message translates to:
   /// **'__________________'**
   String get address_________________Start;
+
+  /// No description provided for @defaultAddressChangedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Default address changed successfully'**
+  String get defaultAddressChangedSuccessfully;
+
+  /// No description provided for @confirmDeleteAddressName.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm delete address ({label})'**
+  String confirmDeleteAddressName(String label);
+
+  /// No description provided for @selectLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Location'**
+  String get selectLocation;
+
+  /// No description provided for @pleaseSelectYourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, select your location'**
+  String get pleaseSelectYourLocation;
+
+  /// No description provided for @saveAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Address'**
+  String get saveAddress;
+
+  /// No description provided for @selectGovernment.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Government'**
+  String get selectGovernment;
+
+  /// No description provided for @selectArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Area'**
+  String get selectArea;
 
   /// No description provided for @addAddress.
   ///
@@ -146,11 +194,11 @@ abstract class AppLocalizations {
   /// **'Building'**
   String get building;
 
-  /// No description provided for @buildingNumber.
+  /// No description provided for @buildingNameNumber.
   ///
   /// In en, this message translates to:
-  /// **'Building Number'**
-  String get buildingNumber;
+  /// **'Building Name/Number'**
+  String get buildingNameNumber;
 
   /// No description provided for @apartment.
   ///
@@ -167,7 +215,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeAddress.
   ///
   /// In en, this message translates to:
-  /// **'Home Address'**
+  /// **'Home'**
   String get homeAddress;
 
   /// No description provided for @floor.

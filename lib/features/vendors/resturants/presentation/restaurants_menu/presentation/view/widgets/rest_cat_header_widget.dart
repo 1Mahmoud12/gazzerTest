@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/main_back_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 
 class RestCatHeaderWidget extends StatelessWidget {
@@ -43,10 +44,7 @@ class RestCatHeaderWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 55),
               child: Row(
                 children: [
-                  IconButton(
-                    onPressed: () => Navigator.maybePop(context),
-                    icon: const Icon(Icons.arrow_back_ios, color: Co.purple),
-                  ),
+                  const MainBackIcon(color: Co.purple),
                   Expanded(
                     child: MainSearchWidget(
                       height: 80,

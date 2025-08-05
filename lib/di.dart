@@ -4,7 +4,10 @@ import 'package:gazzer/core/data/repo/banner_repo_imp.dart';
 import 'package:gazzer/core/domain/repos/banner_repo.dart';
 import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 import 'package:gazzer/features/addresses/data/address_repo_imp.dart';
+import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/addresses/domain/address_repo.dart';
+import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
+import 'package:gazzer/features/addresses/presentation/cubit/add_edit_address_cubit.dart';
 import 'package:gazzer/features/auth/forgot_password/data/forgot_password_imp.dart';
 import 'package:gazzer/features/auth/forgot_password/domain/forgot_password_repo.dart';
 import 'package:gazzer/features/auth/login/data/login_repo_imp.dart';
@@ -55,7 +58,8 @@ Future init() async {
 
   ///
   /// register buses
-  di.registerSingleton(FavoriteBus(di.get()));
+  di.registerLazySingleton(() => FavoriteBus(di.get()));
+  di.registerLazySingleton(() => AddressesBus(di.get()));
 
   ///
   _registerCubits();
@@ -106,4 +110,7 @@ void _registerCubits() {
   di.registerFactoryParam<StoreDetailsCubit, int, Null>((storeId, _) => StoreDetailsCubit(di.get(), storeId));
   di.registerFactoryParam<PlateDetailsCubit, int, Null>((plateId, _) => PlateDetailsCubit(di.get(), plateId));
   di.registerFactoryParam<ProductDetailsCubit, int, Null>((prodId, _) => ProductDetailsCubit(di.get(), prodId));
+  di.registerFactoryParam<AddEditAddressCubit, AddressEntity?, Null>(
+    (address, _) => AddEditAddressCubit(di.get(), oldAddress: address),
+  );
 }

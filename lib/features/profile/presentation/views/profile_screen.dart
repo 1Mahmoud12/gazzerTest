@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -15,6 +16,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/main_switcher.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
+import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
@@ -29,6 +32,7 @@ import 'package:gazzer/features/profile/presentation/views/update_password_scree
 import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/language_drop_list.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 part 'component/account_information_component.dart';
 part 'component/profile_addresses_component.dart';
