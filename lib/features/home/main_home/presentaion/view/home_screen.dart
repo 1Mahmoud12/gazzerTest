@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';

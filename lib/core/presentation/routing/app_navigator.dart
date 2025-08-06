@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 ///
 /// This class is our way to push a page in a specific navigator key (not the nearest one).
 
-enum Parent { main, home, fav, orders }
+// enum Parent { main, home, fav, orders }
 
 class AppNavigator {
   static final AppNavigator _instance = AppNavigator._();
@@ -19,15 +19,15 @@ class AppNavigator {
   factory AppNavigator() => _instance;
 
   final _mainKey = GlobalKey<NavigatorState>();
-  final _homeKey = GlobalKey<NavigatorState>();
-  final _favKey = GlobalKey<NavigatorState>();
-  final _ordersKey = GlobalKey<NavigatorState>();
+  // final _homeKey = GlobalKey<NavigatorState>();
+  // final _favKey = GlobalKey<NavigatorState>();
+  // final _ordersKey = GlobalKey<NavigatorState>();
   // final _drawerKey = GlobalKey<NavigatorState>();
 
   GlobalKey<NavigatorState> get mainKey => _mainKey;
-  GlobalKey<NavigatorState> get homeKey => _homeKey;
-  GlobalKey<NavigatorState> get favKey => _favKey;
-  GlobalKey<NavigatorState> get ordersKey => _ordersKey;
+  // GlobalKey<NavigatorState> get homeKey => _homeKey;
+  // GlobalKey<NavigatorState> get favKey => _favKey;
+  // GlobalKey<NavigatorState> get ordersKey => _ordersKey;
   // GlobalKey<NavigatorState> get drawerKey => _drawerKey;
 
   // late BuildContext _lastUsed;

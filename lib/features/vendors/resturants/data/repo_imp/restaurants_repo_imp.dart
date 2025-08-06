@@ -157,7 +157,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
     return super.call(
       apiCall: () => _apiClient.get(endpoint: Endpoints.platesOfRestaurantCategory(restId, catId)),
       parser: (response) {
-        final plates = (response.data['data'] as List).map((e) => PlateDTO.fromJson(e).toPlateEntity()).toList();
+        final plates = (response.data['data'] as List).map((e) => PlateDTO.fromJson(e).toEntity()).toList();
         plates.sort((a, b) => a.outOfStock ? 1 : -1);
         return plates;
       },

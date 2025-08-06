@@ -142,14 +142,14 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                 builder: (context) {
                                   final addCubit = context.read<AddToCartCubit>();
                                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                                    priceAnQnty.value = (addCubit.state.totalPrice, addCubit.state.qntity);
+                                    priceAnQnty.value = (addCubit.state.totalPrice, addCubit.state.quantity);
                                   });
                                   onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
                                   onsubmit = addCubit.addToCart;
                                   onNoteChange = addCubit.setNote;
                                   return BlocConsumer<AddToCartCubit, AddToCartStates>(
                                     listener: (context, cartState) {
-                                      priceAnQnty.value = (cartState.totalPrice, cartState.qntity);
+                                      priceAnQnty.value = (cartState.totalPrice, cartState.quantity);
                                       noteNotifier.value = cartState.note;
                                     },
                                     builder: (context, cartState) {

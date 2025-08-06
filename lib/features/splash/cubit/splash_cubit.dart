@@ -2,10 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
-import 'package:gazzer/di.dart';
-import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
-import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/profile/domain/profile_repo.dart';
 import 'package:gazzer/features/splash/cubit/splash_states.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,10 +50,11 @@ class SplashCubit extends Cubit<SplashStates> {
     // get addresses
     // get favorites
     // get cart
-    await Future.wait([
-      di<FavoriteBus>().getFavorites(),
-      di<AddressesBus>().refreshAddresses(),
-    ]);
+    await Session().loadUserData();
+    // await Future.wait([
+    //   di<FavoriteBus>().getFavorites(),
+    //   di<AddressesBus>().refreshAddresses(),
+    // ]);
     await getClient();
   }
 

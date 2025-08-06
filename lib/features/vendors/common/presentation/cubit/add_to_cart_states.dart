@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class AddToCartStates extends Equatable {
-  final int qntity;
+  final int quantity;
   final String? note;
   final double totalPrice;
   final Map<int, Set<int>> selectedOptions;
@@ -9,7 +9,7 @@ class AddToCartStates extends Equatable {
   final bool hasUserInteracted;
 
   const AddToCartStates({
-    required this.qntity,
+    required this.quantity,
     required this.note,
     required this.totalPrice,
     required this.selectedOptions,
@@ -19,7 +19,7 @@ class AddToCartStates extends Equatable {
 
   AddToCartStates copyWith({int? qntity, String? note, double? totalPrice, String? message, Map<int, Set<int>>? selectedOptions, bool? hasUserInteracted}) {
     return AddToCartStates(
-      qntity: qntity ?? this.qntity,
+      quantity: qntity ?? this.quantity,
       note: note ?? this.note,
       totalPrice: totalPrice ?? this.totalPrice,
       selectedOptions: selectedOptions ?? this.selectedOptions, // Create a new map to ensure state change detection
@@ -29,5 +29,5 @@ class AddToCartStates extends Equatable {
   }
 
   @override
-  List<Object?> get props => [qntity, note, totalPrice, selectedOptions, errorMessage];
+  List<Object?> get props => [quantity, note, totalPrice, selectedOptions, errorMessage];
 }

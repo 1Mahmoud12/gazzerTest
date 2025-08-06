@@ -1,0 +1,105 @@
+import 'package:equatable/equatable.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+
+class CartItemEntity extends Equatable {
+  final int id;
+  final CartItemType type;
+  final CartableEntity prod;
+  final int quantity;
+  final List<CartOptionEntity> options;
+  final String? notes;
+
+  double get totalPrice => prod.price * quantity; // TODO: calculation
+  // double get _basePRice => options.any((e)=>e.)
+  const CartItemEntity({
+    required this.id,
+    required this.type,
+    required this.quantity,
+    required this.prod,
+    this.notes,
+    this.options = const [],
+  });
+
+  static CartItemEntity fromProduct(GenericItemEntity prod) {
+    return CartItemEntity(
+      id: 0,
+      type: prod is PlateEntity ? CartItemType.plate : CartItemType.product,
+      prod: CartableEntity(
+        id: prod.id,
+        name: prod.name,
+        price: prod.price,
+        priceBeforeDiscount: prod.priceBeforeDiscount,
+        image: prod.image,
+      ),
+      quantity: 1, // Default quantity
+      options: [],
+      notes: null,
+    );
+  }
+
+  CartItemEntity copyWith({
+    int? id,
+    CartItemType? type,
+    int? quantity,
+    String? notes,
+    List<CartOptionEntity>? options,
+    CartableEntity? prod,
+  }) {
+    return CartItemEntity(
+      id: id ?? this.id,
+      type: type ?? this.type,
+      quantity: quantity ?? this.quantity,
+      notes: notes ?? this.notes,
+      prod: prod ?? this.prod,
+      options: options ?? List.from(this.options), // Create a new list to ensure state change detection
+    );
+  }
+
+  @override
+  List<Object?> get props => [id, type, quantity, notes, options, prod];
+}
+
+class CartableEntity extends Equatable {
+  final int id;
+  final String name;
+  final double price;
+  final String image;
+  final double? priceBeforeDiscount;
+
+  const CartableEntity({
+    required this.id,
+    required this.name,
+    required this.price,
+    required this.image,
+    this.priceBeforeDiscount,
+  });
+
+  @override
+  List<Object?> get props => [id, name, price, priceBeforeDiscount, image];
+}
+
+class CartOptionEntity extends Equatable {
+  final int id;
+  final String name;
+  final List<CartOptionValueEntity> values;
+  const CartOptionEntity({required this.id, required this.name, required this.values});
+
+  CartOptionEntity.fromOption(ItemOptionEntity option, List<CartOptionValueEntity> vals) : id = option.id, name = option.name, values = vals;
+
+  @override
+  List<Object?> get props => [id, name, values];
+}
+
+class CartOptionValueEntity extends Equatable {
+  final int id;
+  final String name;
+  final double price;
+
+  const CartOptionValueEntity({required this.id, required this.name, required this.price});
+
+  CartOptionValueEntity.fromOptionValue(OpionValueEntity value) : id = value.id, name = value.name, price = value.price;
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}

@@ -10,7 +10,7 @@ class StoresOfCategoryResponse {
   late final List<StoreEntity> stores;
   late final StoreCategoryEntity subCategory;
   StoresOfCategoryResponse.fromJson(Map<String, dynamic> json) {
-    todaysDeals = (json['items'] as List).map((e) => ProductDTO.fromJson(e).toProductItem()).toList();
+    todaysDeals = (json['items'] as List).map((e) => ProductDTO.fromJson(e).toEntity()).toList();
     stores = (json['stores'] as List).map((e) => StoreDTO.fromJson(e).toEntity()).toList();
     stores.sort((a, b) => a.isClosed ? 1 : -1);
     subCategory = StoreCategoryDto.fromJson(json['item_category']).toEntity();

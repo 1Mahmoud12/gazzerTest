@@ -70,9 +70,9 @@ class CategoryCard extends StatelessWidget {
           ),
           clipBehavior: Clip.hardEdge,
           onPressed: () {
-            if (category.type == CategoryType.restaurant) {
+            if (category.type == VendorType.restaurant) {
               context.push(RestaurantsMenuScreen.route);
-            } else if (category.type == CategoryType.grocery) {
+            } else if (category.type == VendorType.grocery) {
               StoreMenuSwitcherRoute(id: category.id).push(context);
             } else {
               StoreMenuSwitcherRoute(id: category.id).push(context);

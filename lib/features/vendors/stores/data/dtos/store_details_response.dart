@@ -24,7 +24,7 @@ class StoreDetailsResponse {
       }
       if (item['items'] != null) {
         for (var items in item['items']) {
-          final prod = ProductDTO.fromJson(items).toProductItem();
+          final prod = ProductDTO.fromJson(items).toEntity();
           prods.add(prod);
         }
         prods.sort((a, b) => a.outOfStock ? 1 : -1);

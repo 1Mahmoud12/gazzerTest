@@ -1,7 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
-import 'package:gazzer/features/cart/domain/cart_item_entity.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 
@@ -22,7 +25,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
         AddToCartStates(
           hasUserInteracted: false,
           note: null,
-          qntity: 1,
+          quantity: 1,
           totalPrice: options.any((e) => e.controlsPrice)
               ? options.firstWhere((e) => e.controlsPrice).values.firstWhereOrNull((e) => e.isDefault)?.price ?? 0
               : item.price,
@@ -39,12 +42,12 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       );
 
   void increment() {
-    emit(state.copyWith(qntity: state.qntity + 1, hasUserInteracted: true));
+    emit(state.copyWith(qntity: state.quantity + 1, hasUserInteracted: true));
   }
 
   void decrement() {
-    if (state.qntity > 1) {
-      emit(state.copyWith(qntity: state.qntity - 1, hasUserInteracted: true));
+    if (state.quantity > 1) {
+      emit(state.copyWith(qntity: state.quantity - 1, hasUserInteracted: true));
     }
   }
 
@@ -107,24 +110,34 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
         }
       }
     }
-    return (basePrice * state.qntity) + (optionsCost * state.qntity);
+    return (basePrice * state.quantity) + (optionsCost * state.quantity);
   }
 
   Future<void> addToCart() async {
-    _validateCart();
+    final msg = _validateCart();
+    if (msg != null) return emit(state.copyWith(message: msg));
+    final req = CartableItemRequest(
+      id: item.id,
+      quantity: state.quantity,
+      note: state.note,
+      options: state.selectedOptions,
+      type: item is PlateEntity ? CartItemType.plate : CartItemType.product,
+    );
+    final result = await di<CartBus>().addToCart(req);
+    emit(state.copyWith(message: "Doneeeeee"));
   }
 
   String? _validateCart() {
-    // if (cartItem!.quantity < 1) return "Quantity must be at least 1";
-    // final requiredOptions = options.where((o) => o.isRequired);
-    // if (requiredOptions.isEmpty) return null;
-    // for (var opt in requiredOptions) {
-    //   if (cartItem!.options.any((o) => o.id == opt.id && o.values.isNotEmpty)) {
-    //     continue;
-    //   } else {
-    //     return 'Please select at least one value for the option: ${opt.name}';
-    //   }
-    // }
-    // return null;
+    if (state.quantity < 1) return "Quantity must be at least 1";
+    final requiredOptions = options.where((o) => o.isRequired);
+    if (requiredOptions.isEmpty) return null;
+    for (var opt in requiredOptions) {
+      if (state.selectedOptions.containsKey(opt.id) && state.selectedOptions[opt.id]!.isNotEmpty) {
+        continue;
+      } else {
+        return 'Please select at least one value for the option: ${opt.name}';
+      }
+    }
+    return null;
   }
 }

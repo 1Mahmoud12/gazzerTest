@@ -41,7 +41,7 @@ class StoresRepoImp extends StoresRepo {
   Future<Result<ProductEntity>> loadProductDetails(int productId) {
     return super.call(
       apiCall: () async => _apiClient.get(endpoint: Endpoints.productDetails(productId)),
-      parser: (response) => ProductDTO.fromJson(response.data['data']).toProductItem(),
+      parser: (response) => ProductDTO.fromJson(response.data['data']).toEntity(),
     );
   }
 }

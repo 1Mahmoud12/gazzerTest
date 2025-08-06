@@ -26,7 +26,7 @@ class RestaurantPageResponse {
         final plates = <PlateEntity>[];
         if (item['plates'] != null) {
           for (var plate in item['plates']) {
-            plates.add(PlateDTO.fromJson(plate).toPlateEntity());
+            plates.add(PlateDTO.fromJson(plate).toEntity());
           }
         }
         plates.sort((a, b) => a.outOfStock ? 1 : -1);
@@ -37,7 +37,7 @@ class RestaurantPageResponse {
     topRated = [];
     if (json['top_rated_plates'] != null) {
       for (var item in json['top_rated_plates']) {
-        topRated.add(PlateDTO.fromJson(item).toPlateEntity());
+        topRated.add(PlateDTO.fromJson(item).toEntity());
       }
     }
     topRated.sort((a, b) => a.outOfStock ? 1 : -1);

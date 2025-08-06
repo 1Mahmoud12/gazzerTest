@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/cart/domain/cart_item_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/cubit/plate_details_cubit.dart';
@@ -134,7 +134,7 @@ class SinglePlateScreen extends StatelessWidget {
                         builder: (context, cartState) {
                           return ProductPriceSummary(
                             price: cartState.totalPrice,
-                            quantity: cartState.qntity,
+                            quantity: cartState.quantity,
                             onChangeQuantity: (isAdding) {
                               if (isAdding) return cubit.increment();
                               return cubit.decrement();

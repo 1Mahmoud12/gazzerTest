@@ -3,6 +3,79 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 
 part 'enum_parser.dart';
 
+/// ** vendors and items
+
+enum VendorType {
+  restaurant('Restaurant'),
+  grocery('Grocery'),
+  pharmacy('Pharmacy');
+
+  final String value;
+
+  const VendorType(this.value);
+
+  static VendorType fromString(String value) {
+    return VendorType.values.firstWhere((type) => type.value == value, orElse: () => VendorType.restaurant);
+  }
+}
+
+enum ItemType {
+  plate('plate'),
+  product('product'),
+  unknown('unknown');
+
+  final String value;
+  const ItemType(this.value);
+
+  static ItemType fromString(String type) {
+    return ItemType.values.firstWhere((e) => e.value == type.toLowerCase(), orElse: () => ItemType.unknown);
+  }
+}
+
+enum CartItemType {
+  plate('plate'),
+  product('store-item');
+
+  final String value;
+  const CartItemType(this.value);
+  static CartItemType fromString(String type) {
+    return CartItemType.values.firstWhere((e) => e.value == type.toLowerCase(), orElse: () => CartItemType.plate);
+  }
+}
+
+enum FavoriteType {
+  restaurant('restaurant'),
+  store('store'),
+  plate('plate'),
+  product('store-item'),
+  unknown('unknown');
+
+  final String type;
+
+  const FavoriteType(this.type);
+
+  factory FavoriteType.fromString(String type) {
+    return FavoriteType.values.firstWhere((e) => e.type == type, orElse: () => unknown);
+  }
+  String get trName {
+    switch (this) {
+      case FavoriteType.restaurant:
+        return L10n.tr().favoriteRestaurants;
+      case FavoriteType.store:
+        return L10n.tr().favoriteStores;
+      case FavoriteType.plate:
+        return L10n.tr().favoritePlates;
+      case FavoriteType.product:
+        return L10n.tr().favoriteProducts;
+      default:
+        return '';
+    }
+  }
+}
+
+///
+///
+
 enum Corner { topLeft, topRight, bottomLeft, bottomRight }
 
 extension AlignmentCorner on Corner {
@@ -97,35 +170,5 @@ enum OptionType {
 
   static OptionType fromString(String value) {
     return OptionType.values.firstWhere((e) => e.value == value, orElse: () => unknown);
-  }
-}
-
-enum FavoriteType {
-  restaurant('restaurant'),
-  store('store'),
-  plate('plate'),
-  product('store-item'),
-  unknown('unknown');
-
-  final String type;
-
-  const FavoriteType(this.type);
-
-  factory FavoriteType.fromString(String type) {
-    return FavoriteType.values.firstWhere((e) => e.type == type, orElse: () => unknown);
-  }
-  String get trName {
-    switch (this) {
-      case FavoriteType.restaurant:
-        return L10n.tr().favoriteRestaurants;
-      case FavoriteType.store:
-        return L10n.tr().favoriteStores;
-      case FavoriteType.plate:
-        return L10n.tr().favoritePlates;
-      case FavoriteType.product:
-        return L10n.tr().favoriteProducts;
-      default:
-        return '';
-    }
   }
 }

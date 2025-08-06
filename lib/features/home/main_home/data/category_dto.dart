@@ -17,7 +17,7 @@ class MainCategoryDTO extends ProductItemDTO {
     id: id!,
     name: name!,
     image: image ?? '',
-    type: CategoryType.fromString(type ?? ''),
+    type: VendorType.fromString(type ?? ''),
   );
 }
 

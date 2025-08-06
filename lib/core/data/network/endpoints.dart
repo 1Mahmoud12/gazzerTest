@@ -38,6 +38,14 @@ class Endpoints {
   static const getProvinces = 'provinces';
   static String getZones(int provinceId) => 'provinces/$provinceId/zones';
 
+  /// ** cart
+  static const getCart = "cart";
+  static const getAvailableSlots = "cart/available-slots";
+  static const addToCart = "cart/add-to-cart";
+  static const removeFromCart = "cart/remove-from-cart";
+  static const updateCartItem = "cart/update-cart-item";
+  static String updatecartItemNote(int id) => "cart/update-notes/$id";
+
   /// ** pages
   static const homePage = "homepage";
   // restaurants

@@ -4,44 +4,56 @@ import 'package:gazzer/core/presentation/utils/color_utils.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 sealed class GenericItemDTO {
-  GenericItemDTO();
+  int? id;
+  int? storeId;
+  int? caegoryId;
+  String? name;
+  String? image;
+  String? description;
+  double? price;
+  double? appPrice;
+  int? quantityInStock;
+  OfferDTO? offer;
+  // ItemUnitBrand? itemUnitBrand;
+
+  /// missing
+  List<String>? tags;
+  double? rate;
+  double? rateCount;
+  double? priceBeforeDiscount;
+
+  GenericItemDTO({
+    this.id,
+    this.storeId,
+    this.caegoryId,
+    this.name,
+    this.image,
+    this.description,
+    this.price,
+    this.appPrice,
+    this.quantityInStock,
+    this.offer,
+    // this.itemUnitBrand,
+    this.tags,
+    this.rate,
+    this.rateCount,
+    this.priceBeforeDiscount,
+  });
   GenericItemDTO.fromJson(Map<String, dynamic> json);
-  GenericItemEntity toProductItem();
+  GenericItemEntity toEntity();
 }
 
 class PlateDTO extends GenericItemDTO {
-  int? id;
-  int? storeId;
-  String? plateName;
-  int? plateCategoryId;
-  String? plateDescription;
   String? otherVariant;
   String? addons;
   String? size;
-  double? price;
-  double? rate;
-  double? appPrice;
-
-  PlateDTO({
-    this.id,
-    this.storeId,
-    this.plateName,
-    this.plateCategoryId,
-    this.plateDescription,
-    this.otherVariant,
-    this.addons,
-    this.size,
-    this.price,
-    this.rate,
-    this.appPrice,
-  });
 
   PlateDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     storeId = json['store_id'];
-    plateName = json['plate_name'];
-    plateCategoryId = json['plate_category_id'];
-    plateDescription = json['plate_description'];
+    name = json['plate_name'];
+    caegoryId = json['plate_category_id'];
+    description = json['plate_description'];
     otherVariant = json['OtherVariant'];
     addons = json['addons'];
     size = json['size'];
@@ -51,27 +63,12 @@ class PlateDTO extends GenericItemDTO {
   }
 
   @override
-  GenericItemEntity toProductItem() {
+  PlateEntity toEntity() {
     return PlateEntity(
       id: id!,
-      categoryPlateId: plateCategoryId ?? 0,
-      name: plateName ?? '',
-      description: plateDescription ?? '',
-      image: Fakers.netWorkPRoductImage,
-      price: double.tryParse(price.toString()) ?? 0,
-      rate: 0.0,
-      outOfStock: id?.isEven ?? false,
-      badge: '30%',
-      reviewCount: 20,
-    );
-  }
-
-  PlateEntity toPlateEntity() {
-    return PlateEntity(
-      id: id!,
-      categoryPlateId: plateCategoryId ?? 0,
-      name: plateName ?? '',
-      description: plateDescription ?? '',
+      categoryPlateId: caegoryId ?? 0,
+      name: name ?? '',
+      description: description ?? '',
       image: Fakers.netWorkPRoductImage,
       price: double.tryParse(price.toString()) ?? 0,
       rate: 0.0,
@@ -83,21 +80,14 @@ class PlateDTO extends GenericItemDTO {
 }
 
 class ProductDTO extends GenericItemDTO {
-  int? id;
-  String? name;
-  String? description;
-  double? price;
-  double? appPrice;
-  int? quantityInStock;
   String? color;
-  OfferDTO? offer;
   // ItemUnitBrand? itemUnitBrand;
 
   /// missing
-  List<String>? tags;
-  double? rate;
-  double? rateCount;
-  double? priceBeforeDiscount;
+  // List<String>? tags;
+  // double? rate;
+  // double? rateCount;
+  // double? priceBeforeDiscount;
 
   ProductDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -110,7 +100,7 @@ class ProductDTO extends GenericItemDTO {
   }
 
   @override
-  ProductEntity toProductItem() {
+  ProductEntity toEntity() {
     return ProductEntity(
       id: id!,
       name: name ?? '',

@@ -3,6 +3,7 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +34,7 @@ class Session {
     await Future.wait([
       di<FavoriteBus>().getFavorites(),
       di<AddressesBus>().refreshAddresses(),
+      di<CartBus>().loadCart(),
     ]);
   }
 
@@ -49,5 +51,6 @@ class Session {
     /// clear cache cards
     /// clear cache orders
     /// clear cache carts
+    di<CartBus>().clearCart();
   }
 }

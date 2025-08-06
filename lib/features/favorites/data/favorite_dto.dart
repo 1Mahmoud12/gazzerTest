@@ -20,9 +20,9 @@ class FavoriteDto {
       case FavoriteType.store:
         return StoreDTO.fromJson(item).toEntity();
       case FavoriteType.plate:
-        return PlateDTO.fromJson(item).toPlateEntity();
+        return PlateDTO.fromJson(item).toEntity();
       case FavoriteType.product:
-        return ProductDTO.fromJson(item).toProductItem();
+        return ProductDTO.fromJson(item).toEntity();
       default:
         throw Exception('Unknown favorite type: $favType');
     }

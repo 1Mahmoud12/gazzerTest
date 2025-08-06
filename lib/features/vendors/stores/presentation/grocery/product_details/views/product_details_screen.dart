@@ -100,7 +100,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     final cubit = context.read<AddToCartCubit>();
                     return ProductPriceSummary(
                       price: state.totalPrice,
-                      quantity: state.qntity,
+                      quantity: state.quantity,
                       onChangeQuantity: (isAdding) {
                         if (isAdding) {
                           cubit.increment();

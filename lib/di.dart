@@ -16,7 +16,10 @@ import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/register/data/register_repo_imp.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
-import 'package:gazzer/features/cart/domain/cart_item_entity.dart';
+import 'package:gazzer/features/cart/data/cart_repo_imp.dart';
+import 'package:gazzer/features/cart/domain/cart_repo.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/favorites/data/favorites_repo_imp.dart';
 import 'package:gazzer/features/favorites/domain/favorites_repo.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
@@ -61,8 +64,7 @@ Future init() async {
 
   ///
   /// register buses
-  di.registerLazySingleton(() => FavoriteBus(di.get()));
-  di.registerLazySingleton(() => AddressesBus(di.get()));
+  _registerBuses();
 
   ///
   _registerCubits();
@@ -88,6 +90,13 @@ void _registerRepos() {
   di.registerLazySingleton<BannerRepo>(() => BannerRepoImp(di.get(), di.get()));
   di.registerLazySingleton<StoresRepo>(() => StoresRepoImp(di.get(), di.get()));
   di.registerLazySingleton<FavoritesRepo>(() => FavoritesRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<CartRepo>(() => CartRepoImp(di.get(), di.get()));
+}
+
+void _registerBuses() {
+  di.registerLazySingleton(() => FavoriteBus(di.get()));
+  di.registerLazySingleton(() => AddressesBus(di.get()));
+  di.registerLazySingleton<CartBus>(() => CartBus(di.get()));
 }
 
 void _registerCubits() {

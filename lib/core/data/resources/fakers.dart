@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
+import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -82,14 +83,14 @@ class Fakers {
       id: index,
       name: "فئة $index",
       image: _catsImages[_random.nextInt(_catsImages.length)],
-      type: CategoryType.restaurant,
+      type: VendorType.restaurant,
     ),
   );
   static const mainCategory = MainCategoryEntity(
     id: 0,
     name: "فئة 0",
     image: placeHolderImg,
-    type: CategoryType.restaurant,
+    type: VendorType.restaurant,
   );
   static const banners = [
     BannerEntity(
@@ -366,4 +367,16 @@ class Fakers {
     3: favorite,
     4: favorite,
   };
+
+  ///
+  ///
+  static final cartResponse = CartResponse(
+    addressId: null,
+    subTotal: 0.0,
+    deliveryFee: 0.0,
+    serviceFee: 0.0,
+    discount: 0.0,
+    total: 0.0,
+    vendors: [],
+  );
 }
