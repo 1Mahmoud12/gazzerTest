@@ -86,8 +86,10 @@ class _SelectSearchMenuState<T> extends State<SelectSearchMenu<T>> {
       onTap: widget.items?.isNotEmpty != true || widget.isLoading
           ? null
           : () {
+              final currentFocus = FocusScope.of(context).focusedChild;
               showDialog(
                 context: context,
+                barrierDismissible: true,
                 builder: (context) => _SelectMenu(
                   initialSelectedValues: widget.initValue == null ? null : widget.initValue!().map((e) => widget.mapper(e)!).toSet(),
                   items: widget.items?.map((e) => widget.mapper(e)!).toList(),
@@ -108,7 +110,7 @@ class _SelectSearchMenuState<T> extends State<SelectSearchMenu<T>> {
                     }
                   },
                 ),
-              );
+              ).then((_) => currentFocus?.unfocus());
             },
       child: MainTextField(
         controller: controller,
@@ -198,9 +200,9 @@ class __SelectMenuState extends State<_SelectMenu> {
       }
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      FocusScope.of(context).unfocus();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   FocusScope.of(context).unfocus();
+    // });
     super.initState();
   }
 
@@ -269,7 +271,7 @@ class __SelectMenuState extends State<_SelectMenu> {
                           // border: OutlineInputBorder(borderRadius: 0),
                           suffixIcon: InkWell(
                             onTap: () {
-                              FocusScope.of(context).unfocus();
+                              // FocusScope.of(context).unfocus();
                               Navigator.pop(context);
                               searchText.value = TextEditingValue.empty;
                             },
@@ -288,7 +290,10 @@ class __SelectMenuState extends State<_SelectMenu> {
                             textAlign: TextAlign.center,
                           ),
                           IconButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () {
+                              // FocusScope.of(context).unfocus();
+                              Navigator.pop(context);
+                            },
                             icon: Icon(Icons.cancel, color: widget.primaryColor, size: 25),
                           ),
                         ],
@@ -341,6 +346,7 @@ class __SelectMenuState extends State<_SelectMenu> {
                 onPressed: () {
                   if (_selectedValues.isEmpty) return;
                   _onSubmitTap();
+                  // FocusScope.of(context).unfocus();
                   Navigator.pop(context);
                 },
               ),

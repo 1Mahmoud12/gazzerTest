@@ -83,12 +83,12 @@ class AddressCard extends StatelessWidget {
                           RichText(
                             text: TextSpan(
                               children: [
-                                TextSpan(text: "${address.provinceName}, "),
-                                TextSpan(text: "${address.zoneName}, "),
-                                TextSpan(text: ", ${L10n.tr().building} ${address.building}."),
+                                TextSpan(text: address.provinceName),
+                                TextSpan(text: ", ${address.zoneName}"),
+                                TextSpan(text: ", ${L10n.tr().building} ${address.building}"),
                                 TextSpan(text: ", ${L10n.tr().floor} ${address.floor}"),
-                                TextSpan(text: ", ${L10n.tr().apartmentNumber} ${address.apartment}."),
-                                if (address.landmark != null) TextSpan(text: " ${L10n.tr().landmark} ${address.landmark}."),
+                                TextSpan(text: ", ${L10n.tr().apartmentNumber} ${address.apartment}"),
+                                if (address.landmark != null) TextSpan(text: ", ${L10n.tr().landmark} ${address.landmark}."),
                               ],
                               style: TStyle.greyRegular(12).copyWith(height: 1.7),
                             ),

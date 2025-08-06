@@ -120,4 +120,10 @@ class ProfileCubit extends Cubit<ProfileStates> {
         emit(LogoutError(err.error.message));
     }
   }
+
+  @override
+  void emit(ProfileStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

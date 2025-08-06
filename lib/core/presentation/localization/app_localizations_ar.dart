@@ -12,6 +12,49 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noData => 'لا توجد بيانات';
 
   @override
+  String get cart_________________Start => '__________________';
+
+  @override
+  String get yourChoicesWillBeClearedBecauseYouDidntAddToCart =>
+      'سيتم مسح اختياراتك لأنك لم تضف إلى السلة';
+
+  @override
+  String get min => 'دقيقة';
+
+  @override
+  String get typeHere => 'اكتب هنا';
+
+  @override
+  String get addSpecialNote => 'إضافة ملاحظة خاصة';
+
+  @override
+  String get total => 'الإجمالي';
+
+  @override
+  String get deliveryFee => 'رسوم التوصيل';
+
+  @override
+  String get totalAmount => 'إجمالي المبلغ';
+
+  @override
+  String get addItems => 'إضافة عناصر';
+
+  @override
+  String get checkout => 'الدفع';
+
+  @override
+  String get shippingCart => 'سلة التسوق';
+
+  @override
+  String get orderSummary => 'ملخص الطلب';
+
+  @override
+  String get confirmOrder => 'تأكيد الطلب';
+
+  @override
+  String get cart_________________End => '__________________';
+
+  @override
   String get address_________________Start => '__________________';
 
   @override
@@ -535,45 +578,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get home_________________End => '__________________';
-
-  @override
-  String get cart_________________Start => '__________________';
-
-  @override
-  String get min => 'دقيقة';
-
-  @override
-  String get typeHere => 'اكتب هنا';
-
-  @override
-  String get addSpecialNote => 'إضافة ملاحظة خاصة';
-
-  @override
-  String get total => 'الإجمالي';
-
-  @override
-  String get deliveryFee => 'رسوم التوصيل';
-
-  @override
-  String get totalAmount => 'إجمالي المبلغ';
-
-  @override
-  String get addItems => 'إضافة عناصر';
-
-  @override
-  String get checkout => 'الدفع';
-
-  @override
-  String get shippingCart => 'سلة التسوق';
-
-  @override
-  String get orderSummary => 'ملخص الطلب';
-
-  @override
-  String get confirmOrder => 'تأكيد الطلب';
-
-  @override
-  String get cart_________________End => '__________________';
 
   @override
   String get checkout_________________Start => '__________________';

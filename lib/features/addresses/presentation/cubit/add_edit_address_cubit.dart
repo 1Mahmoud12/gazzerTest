@@ -54,4 +54,10 @@ class AddEditAddressCubit extends Cubit<AddEditAddressStates> {
         break;
     }
   }
+
+  @override
+  void emit(AddEditAddressStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

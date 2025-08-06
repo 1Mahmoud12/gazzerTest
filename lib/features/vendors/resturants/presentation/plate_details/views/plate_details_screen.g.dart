@@ -15,8 +15,10 @@ RouteBase get $plateDetailsRoute => GoRouteData.$route(
 );
 
 mixin _$PlateDetailsRoute on GoRouteData {
-  static PlateDetailsRoute _fromState(GoRouterState state) =>
-      PlateDetailsRoute(id: int.parse(state.uri.queryParameters['id']!)!);
+  static PlateDetailsRoute _fromState(GoRouterState state) => PlateDetailsRoute(
+    id: int.parse(state.uri.queryParameters['id']!)!,
+    $extra: state.extra as CartItemEntity?,
+  );
 
   PlateDetailsRoute get _self => this as PlateDetailsRoute;
 
@@ -27,15 +29,14 @@ mixin _$PlateDetailsRoute on GoRouteData {
   );
 
   @override
-  void go(BuildContext context) => context.go(location);
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
   @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location, extra: _self.$extra);
 
   @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location, extra: _self.$extra);
 
   @override
-  void replace(BuildContext context) => context.replace(location);
+  void replace(BuildContext context) => context.replace(location, extra: _self.$extra);
 }

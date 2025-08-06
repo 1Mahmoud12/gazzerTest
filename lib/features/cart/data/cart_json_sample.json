@@ -1,0 +1,136 @@
+{
+  "data": {
+    "items": [
+      {
+        "vendor_id": 1,
+        "vendor_name": "مطعم غازر",
+        "vendor_image": "https://gazzer-dev-do.mostafa.cloud/defaults/banner_image.jpeg",
+        "type": "restaurant/grocery/pharamcy",
+        "items": [
+          {
+            "id": 1,
+            "cartable_type": "plate",
+            "cartable": {
+              "id": 1,
+              "store_id": 1,
+              "plate_name": "سوبر سوبريم",
+              "plate_image": "https://gazzer-dev-do.mostafa.cloud/defaults/banner_image.jpeg",
+              "app_price": "96.00"
+            },
+            "totalPrice": 96.0,
+            "quantity": 2,
+            "option_values": [
+              {
+                "option_id": "1",
+                "option_name": "Size",
+                "values": [
+                  {
+                    "value_id": "2",
+                    "value_name": "Large",
+                    "value_price": "0.00"
+                  }
+                ]
+              }
+            ],
+            "notes": "Notes For item"
+          },
+          {
+            "id": 1,
+            "cartable_type": "plate",
+            "cartable": {
+              "id": 1,
+              "store_id": 1,
+              "plate_name": "سوبر سوبريم",
+              "plate_image": "https://gazzer-dev-do.mostafa.cloud/defaults/banner_image.jpeg",
+              "app_price": "96.00"
+            },
+            "totalPrice": 96.0,
+            "quantity": 2,
+            "option_values": [
+              {
+                "option_id": "1",
+                "option_name": "Size",
+                "values": [
+                  {
+                    "value_id": "2",
+                    "value_name": "Large",
+                    "value_price": "0.00"
+                  }
+                ]
+              }
+            ],
+            "notes": "Notes For item"
+          }
+        ]
+      },
+      {
+        "vendor_id": 1,
+        "vendor_name": "مطعم غازر",
+        "vendor_image": "https://gazzer-dev-do.mostafa.cloud/defaults/banner_image.jpeg",
+        "type": "restaurant/grocery/pharamcy",
+        "items": [
+          {
+            "id": 1,
+            "cartable_type": "plate",
+            "cartable": {
+              "id": 1,
+              "store_id": 1,
+              "plate_name": "سوبر سوبريم",
+              "plate_image": "https://gazzer-dev-do.mostafa.cloud/defaults/banner_image.jpeg",
+              "app_price": "96.00"
+            },
+            "totalPrice": 96.0,
+            "quantity": 2,
+            "option_values": [
+              {
+                "option_id": "1",
+                "option_name": "Size",
+                "values": [
+                  {
+                    "value_id": "2",
+                    "value_name": "Large",
+                    "value_price": "0.00"
+                  }
+                ]
+              }
+            ],
+            "notes": "Notes For item"
+          },
+          {
+            "id": 1,
+            "cartable_type": "plate",
+            "cartable": {
+              "id": 1,
+              "store_id": 1,
+              "plate_name": "سوبر سوبريم",
+              "plate_image": "https://gazzer-dev-do.mostafa.cloud/defaults/banner_image.jpeg",
+              "app_price": "96.00"
+            },
+            "totalPrice": 96.0,
+            "quantity": 2,
+            "option_values": [
+              {
+                "option_id": "1",
+                "option_name": "Size",
+                "values": [
+                  {
+                    "value_id": "2",
+                    "value_name": "Large",
+                    "value_price": "0.00"
+                  }
+                ]
+              }
+            ],
+            "notes": "Notes For item"
+          }
+        ]
+      }
+    ],
+    "user_address_id": 1,
+    "subtotal": 192,
+    "delivery_fee": 50,
+    "service_fee": 50,
+    "discount": 30.72,
+    "total": 261.28
+  }
+}

@@ -28,4 +28,10 @@ class StoresMenuCubit extends Cubit<StoresMenuStates> {
         emit(ScreenDataError(error: error.error.message));
     }
   }
+
+  @override
+  void emit(StoresMenuStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

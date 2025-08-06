@@ -16,6 +16,7 @@ import 'package:gazzer/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:gazzer/features/auth/register/data/register_repo_imp.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:gazzer/features/cart/domain/cart_item_entity.dart';
 import 'package:gazzer/features/favorites/data/favorites_repo_imp.dart';
 import 'package:gazzer/features/favorites/domain/favorites_repo.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
@@ -26,6 +27,8 @@ import 'package:gazzer/features/profile/data/profile_repo_imp.dart';
 import 'package:gazzer/features/profile/domain/profile_repo.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/data/repo_imp/plates_repo_imp.dart';
 import 'package:gazzer/features/vendors/resturants/data/repo_imp/restaurants_repo_imp.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/plates_repo.dart';
@@ -112,5 +115,8 @@ void _registerCubits() {
   di.registerFactoryParam<ProductDetailsCubit, int, Null>((prodId, _) => ProductDetailsCubit(di.get(), prodId));
   di.registerFactoryParam<AddEditAddressCubit, AddressEntity?, Null>(
     (address, _) => AddEditAddressCubit(di.get(), oldAddress: address),
+  );
+  di.registerFactoryParam<AddToCartCubit, (GenericItemEntity, List<ItemOptionEntity>), CartItemEntity?>(
+    (item, cartItem) => AddToCartCubit(item.$1, item.$2, cartItem),
   );
 }

@@ -29,4 +29,10 @@ class StoresOfCategoryCubit extends Cubit<StoresOfCategoryStates> {
         emit(StoresOfCategoryError(message: err.error.message));
     }
   }
+
+  @override
+  void emit(StoresOfCategoryStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

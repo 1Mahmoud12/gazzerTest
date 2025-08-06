@@ -24,7 +24,11 @@ class AddSpecialNote extends StatelessWidget {
           builder: (context) {
             return _NoteSheet(note: note);
           },
-        );
+        ).then((value) {
+          if (value != null && value is String) {
+            onNoteChange(value);
+          }
+        });
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFFF4E2CB),
@@ -52,6 +56,12 @@ class _NoteSheet extends StatefulWidget {
 
 class _NoteSheetState extends State<_NoteSheet> {
   final TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    controller.text = widget.note ?? '';
+    super.initState();
+  }
 
   @override
   void dispose() {

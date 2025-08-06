@@ -151,6 +151,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                           showBorder: false,
                           enabled: value == AddressLabel.other,
                           borderRadius: 10,
+                          max: 50,
                           hintText: L10n.tr().addressLabel,
                           validator: (text) {
                             if (value == AddressLabel.other) return Validators.notEmpty(text);
@@ -171,7 +172,6 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
 
               const SizedBox.shrink(),
               Text(L10n.tr().governorate, style: TStyle.primaryBold(14)),
-
               BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
                 buildWhen: (previous, current) => current is GetProvincesStates,
                 builder: (context, state) {
@@ -247,6 +247,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                           showBorder: false,
                           borderRadius: 10,
                           hintText: L10n.tr().floor,
+                          max: 3,
                           inputFormatters: FilteringTextInputFormatter.digitsOnly,
                           validator: Validators.notEmpty,
                         ),
@@ -264,6 +265,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                           showBorder: false,
                           borderRadius: 10,
                           hintText: L10n.tr().apartmentNumber,
+                          max: 3,
                           inputFormatters: FilteringTextInputFormatter.digitsOnly,
                           validator: Validators.notEmpty,
                         ),
@@ -279,7 +281,9 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 showBorder: false,
                 borderRadius: 10,
                 hintText: L10n.tr().nearbyLandmark,
-                validator: Validators.notEmpty,
+                validator: (v) {
+                  return Validators.notEmpty(v) ?? Validators.valueAtLeastNum(v, L10n.tr().floor, 6);
+                },
               ),
 
               const SizedBox.shrink(),

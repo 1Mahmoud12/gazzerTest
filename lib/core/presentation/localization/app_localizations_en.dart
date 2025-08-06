@@ -12,6 +12,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noData => 'No Data';
 
   @override
+  String get cart_________________Start => '__________________';
+
+  @override
+  String get yourChoicesWillBeClearedBecauseYouDidntAddToCart =>
+      'Your choices will be cleared because you didn\'t add to cart';
+
+  @override
+  String get min => 'MIN';
+
+  @override
+  String get typeHere => 'Type here';
+
+  @override
+  String get addSpecialNote => 'Add Special Note';
+
+  @override
+  String get total => 'TOTAL';
+
+  @override
+  String get deliveryFee => 'Delivery Fee';
+
+  @override
+  String get totalAmount => 'Total Amount';
+
+  @override
+  String get addItems => 'Add Items';
+
+  @override
+  String get checkout => 'Checkout';
+
+  @override
+  String get shippingCart => 'Shipping Cart';
+
+  @override
+  String get orderSummary => 'Order Summary';
+
+  @override
+  String get confirmOrder => 'Confirm Order';
+
+  @override
+  String get cart_________________End => '__________________';
+
+  @override
   String get address_________________Start => '__________________';
 
   @override
@@ -33,7 +76,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saveAddress => 'Save Address';
 
   @override
-  String get selectGovernorate => 'Select governorate';
+  String get selectGovernorate => 'Select Governorate';
 
   @override
   String get selectArea => 'Select Area';
@@ -51,7 +94,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get location => 'Location';
 
   @override
-  String get governorate => 'governorate';
+  String get governorate => 'Governorate';
 
   @override
   String get area => 'Area';
@@ -537,45 +580,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get home_________________End => '__________________';
-
-  @override
-  String get cart_________________Start => '__________________';
-
-  @override
-  String get min => 'MIN';
-
-  @override
-  String get typeHere => 'Type here';
-
-  @override
-  String get addSpecialNote => 'Add Special Note';
-
-  @override
-  String get total => 'TOTAL';
-
-  @override
-  String get deliveryFee => 'Delivery Fee';
-
-  @override
-  String get totalAmount => 'Total Amount';
-
-  @override
-  String get addItems => 'Add Items';
-
-  @override
-  String get checkout => 'Checkout';
-
-  @override
-  String get shippingCart => 'Shipping Cart';
-
-  @override
-  String get orderSummary => 'Order Summary';
-
-  @override
-  String get confirmOrder => 'Confirm Order';
-
-  @override
-  String get cart_________________End => '__________________';
 
   @override
   String get checkout_________________Start => '__________________';

@@ -13,6 +13,8 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
+import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/plate_options_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_extras_widget.dart';
@@ -61,6 +63,13 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
   PlateEntity? selectedPlate;
   late final RestaurantEntity restaurant;
   late final List<PlateEntity> plates;
+
+  final noteNotifier = ValueNotifier<String?>(null);
+  Function(bool isAdding) onChangeQuantity = (isAdding) {};
+  final priceAnQnty = ValueNotifier<(double, int)>((0, 1));
+  Future Function() onsubmit = () async {};
+  Function(String) onNoteChange = (p0) {};
+
   @override
   void initState() {
     if (!widget.hasParentProvider) {
@@ -72,6 +81,13 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
     }
     selectedPlate = plates.first;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    noteNotifier.dispose();
+    priceAnQnty.dispose();
+    super.dispose();
   }
 
   @override
@@ -116,51 +132,88 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                       buildWhen: (previous, current) => current is PlateDetailsStates,
                       builder: (context, state) {
                         if (state is! PlateDetailsStates) return const SizedBox.shrink();
-                        return Skeletonizer(
-                          enabled: state is PlateDetailsLoading,
-                          child: Column(
-                            children: [
-                              _FoodDetailsWidget(product: state.plate),
-                              ...List.generate(
-                                state.options.length,
-                                (index) {
-                                  return PlateOptionsWidget(
-                                    option: state.options[index],
-                                    onSelection: (ids) => true,
+                        if (state is PlateDetailsLoading) return const Center(child: AdaptiveProgressIndicator());
+                        return Column(
+                          children: [
+                            _FoodDetailsWidget(product: state.plate),
+                            BlocProvider(
+                              create: (context) => di<AddToCartCubit>(param1: (state.plate, state.options)),
+                              child: Builder(
+                                builder: (context) {
+                                  final addCubit = context.read<AddToCartCubit>();
+                                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                                    priceAnQnty.value = (addCubit.state.totalPrice, addCubit.state.qntity);
+                                  });
+                                  onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
+                                  onsubmit = addCubit.addToCart;
+                                  onNoteChange = addCubit.setNote;
+                                  return BlocConsumer<AddToCartCubit, AddToCartStates>(
+                                    listener: (context, cartState) {
+                                      priceAnQnty.value = (cartState.totalPrice, cartState.qntity);
+                                      noteNotifier.value = cartState.note;
+                                    },
+                                    builder: (context, cartState) {
+                                      return Column(
+                                        children: List.generate(
+                                          state.options.length,
+                                          (index) {
+                                            return PlateOptionsWidget(
+                                              option: state.options[index],
+                                              selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
+                                              onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                               ),
-                            ],
-                          ),
+                            ),
+                            if (widget.hasParentProvider)
+                              BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
+                                buildWhen: (previous, current) => current is OrderedWithStates,
+                                builder: (context, state) {
+                                  if (state is! OrderedWithStates || state.items.isEmpty) return const SizedBox.shrink();
+                                  return Skeletonizer(
+                                    enabled: state is OrderedWithLoading,
+                                    child: OrderedWithComponent(products: state.items),
+                                  );
+                                },
+                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ValueListenableBuilder(
+                                  valueListenable: noteNotifier,
+                                  builder: (context, value, child) => AddSpecialNote(
+                                    onNoteChange: onNoteChange,
+                                    note: value,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         );
                       },
                     ),
-                  if (widget.hasParentProvider)
-                    BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
-                      buildWhen: (previous, current) => current is OrderedWithStates,
-                      builder: (context, state) {
-                        if (state is! OrderedWithStates || state.items.isEmpty) return const SizedBox.shrink();
-                        return Skeletonizer(
-                          enabled: state is OrderedWithLoading,
-                          child: OrderedWithComponent(products: state.items),
-                        );
-                      },
-                    ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      AddSpecialNote(
-                        onNoteChange: (p0) {},
-                      ),
-                    ],
-                  ),
                 ],
               ],
             ),
           );
         },
       ),
-      bottomNavigationBar: const Skeleton.shade(child: ProductPriceSummary()),
+      bottomNavigationBar: Skeleton.shade(
+        child: ValueListenableBuilder(
+          valueListenable: priceAnQnty,
+          builder: (context, value, child) => ProductPriceSummary(
+            price: value.$1,
+            quantity: value.$2,
+            onChangeQuantity: onChangeQuantity,
+            onsubmit: onsubmit,
+          ),
+        ),
+      ),
     );
   }
 }

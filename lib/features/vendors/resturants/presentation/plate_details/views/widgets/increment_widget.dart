@@ -5,22 +5,10 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 
-class IncrementWidget extends StatefulWidget {
-  const IncrementWidget({super.key, this.initVal = 1});
+class IncrementWidget extends StatelessWidget {
+  const IncrementWidget({super.key, this.initVal = 1, required this.onChanged});
   final int initVal;
-  @override
-  State<IncrementWidget> createState() => _IncrementWidgetState();
-}
-
-class _IncrementWidgetState extends State<IncrementWidget> {
-  late int val;
-
-  @override
-  void initState() {
-    val = widget.initVal;
-    super.initState();
-  }
-
+  final Function(bool isAdding) onChanged;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -35,9 +23,7 @@ class _IncrementWidgetState extends State<IncrementWidget> {
           child: IconButton(
             onPressed: () {
               SystemSound.play(SystemSoundType.click);
-              setState(() {
-                val++;
-              });
+              onChanged(true);
             },
             style: IconButton.styleFrom(
               padding: const EdgeInsets.all(5),
@@ -51,7 +37,7 @@ class _IncrementWidgetState extends State<IncrementWidget> {
         ),
         ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 40),
-          child: Text("$val", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
+          child: Text("$initVal", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
         ),
         DoubledDecoratedWidget(
           innerDecoration: BoxDecoration(
@@ -62,11 +48,9 @@ class _IncrementWidgetState extends State<IncrementWidget> {
           child: IconButton(
             onPressed: () {
               SystemSound.play(SystemSoundType.click);
-              setState(() {
-                if (val > 1) {
-                  val--;
-                }
-              });
+              if (initVal > 1) {
+                onChanged(false);
+              }
             },
             style: IconButton.styleFrom(
               padding: const EdgeInsets.all(5),

@@ -15,6 +15,12 @@ class SplashCubit extends Cubit<SplashStates> {
   final SharedPreferences _prefs;
   SplashCubit(this._repo, this._prefs) : super(SplashInitial());
 
+  @override
+  void emit(SplashStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
+
   Future<void> checkAuth() async {
     if (_prefs.getString(StorageKeys.token) != null) {
       return refreshToken();

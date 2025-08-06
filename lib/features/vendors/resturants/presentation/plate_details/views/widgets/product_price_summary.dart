@@ -8,8 +8,11 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget.dart';
 
 class ProductPriceSummary extends StatelessWidget {
-  const ProductPriceSummary({super.key});
-
+  const ProductPriceSummary({super.key, required this.onChangeQuantity, required this.price, required this.onsubmit, required this.quantity});
+  final Function(bool isAdding) onChangeQuantity;
+  final double price;
+  final int quantity;
+  final Future Function() onsubmit;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -37,7 +40,12 @@ class ProductPriceSummary extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Expanded(child: IncrementWidget()),
+                    Expanded(
+                      child: IncrementWidget(
+                        initVal: quantity,
+                        onChanged: onChangeQuantity,
+                      ),
+                    ),
                     Expanded(
                       child: DecoratedBox(
                         decoration: BoxDecoration(
@@ -50,7 +58,9 @@ class ProductPriceSummary extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(2),
                           child: MainBtn(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await onsubmit();
+                            },
                             text: L10n.tr().addToCart,
                             textStyle: TStyle.secondaryBold(12),
                             bgColor: Colors.transparent,
@@ -80,7 +90,7 @@ class ProductPriceSummary extends StatelessWidget {
                           children: [
                             Text("${L10n.tr().total}:", style: TStyle.secondaryBold(13)),
                             const HorizontalSpacing(12),
-                            Text(Helpers.getProperPrice(20.0), style: TStyle.secondaryBold(13)),
+                            Text(Helpers.getProperPrice(price), style: TStyle.secondaryBold(13)),
                           ],
                         ),
                       ),

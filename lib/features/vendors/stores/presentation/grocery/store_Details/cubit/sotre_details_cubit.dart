@@ -23,4 +23,10 @@ class StoreDetailsCubit extends Cubit<StoreDetailsStates> {
         break;
     }
   }
+
+  @override
+  void emit(StoreDetailsStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

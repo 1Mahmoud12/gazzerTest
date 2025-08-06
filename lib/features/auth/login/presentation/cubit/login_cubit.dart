@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/features/auth/login/domain/login_repo.dart';
 import 'package:gazzer/features/auth/login/presentation/cubit/login_states.dart';
 
@@ -12,6 +13,7 @@ class LoginCubit extends Cubit<LoginStates> {
     final res = await _repo.login(phone, password);
     switch (res) {
       case Ok<String> ok:
+        await Session().loadUserData();
         emit(LoginSuccessState(ok.value));
         break;
       case Err err:
@@ -20,9 +22,9 @@ class LoginCubit extends Cubit<LoginStates> {
     }
   }
 
-  // @override
-  // void emit(LoginStates state) {
-  //   if (isClosed) return;
-  //   super.emit(state);
-  // }
+  @override
+  void emit(LoginStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

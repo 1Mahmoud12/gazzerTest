@@ -31,4 +31,10 @@ class SingleRestaurantCubit extends Cubit<SingleRestaurantStates> {
         break;
     }
   }
+
+  @override
+  void emit(SingleRestaurantStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
 }

@@ -8,6 +8,12 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_c
 class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
   final RestaurantsRepo _repo;
   final int id;
+  @override
+  void emit(RestaurantsOfCategoryStates state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
+
   RestaurantsOfCategoryCubit(this._repo, this.id) : super(RestaurantsOfCategoryInitial()) {
     loadPageData();
   }

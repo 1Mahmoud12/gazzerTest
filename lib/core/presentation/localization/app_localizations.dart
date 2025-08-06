@@ -104,6 +104,90 @@ abstract class AppLocalizations {
   /// **'No Data'**
   String get noData;
 
+  /// No description provided for @cart_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get cart_________________Start;
+
+  /// No description provided for @yourChoicesWillBeClearedBecauseYouDidntAddToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Your choices will be cleared because you didn\'t add to cart'**
+  String get yourChoicesWillBeClearedBecauseYouDidntAddToCart;
+
+  /// No description provided for @min.
+  ///
+  /// In en, this message translates to:
+  /// **'MIN'**
+  String get min;
+
+  /// No description provided for @typeHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Type here'**
+  String get typeHere;
+
+  /// No description provided for @addSpecialNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Special Note'**
+  String get addSpecialNote;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'TOTAL'**
+  String get total;
+
+  /// No description provided for @deliveryFee.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Fee'**
+  String get deliveryFee;
+
+  /// No description provided for @totalAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Amount'**
+  String get totalAmount;
+
+  /// No description provided for @addItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Items'**
+  String get addItems;
+
+  /// No description provided for @checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkout;
+
+  /// No description provided for @shippingCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Cart'**
+  String get shippingCart;
+
+  /// No description provided for @orderSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Summary'**
+  String get orderSummary;
+
+  /// No description provided for @confirmOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Order'**
+  String get confirmOrder;
+
+  /// No description provided for @cart_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get cart_________________End;
+
   /// No description provided for @address_________________Start.
   ///
   /// In en, this message translates to:
@@ -143,7 +227,7 @@ abstract class AppLocalizations {
   /// No description provided for @selectGovernorate.
   ///
   /// In en, this message translates to:
-  /// **'Select governorate'**
+  /// **'Select Governorate'**
   String get selectGovernorate;
 
   /// No description provided for @selectArea.
@@ -179,7 +263,7 @@ abstract class AppLocalizations {
   /// No description provided for @governorate.
   ///
   /// In en, this message translates to:
-  /// **'governorate'**
+  /// **'Governorate'**
   String get governorate;
 
   /// No description provided for @area.
@@ -1123,84 +1207,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'__________________'**
   String get home_________________End;
-
-  /// No description provided for @cart_________________Start.
-  ///
-  /// In en, this message translates to:
-  /// **'__________________'**
-  String get cart_________________Start;
-
-  /// No description provided for @min.
-  ///
-  /// In en, this message translates to:
-  /// **'MIN'**
-  String get min;
-
-  /// No description provided for @typeHere.
-  ///
-  /// In en, this message translates to:
-  /// **'Type here'**
-  String get typeHere;
-
-  /// No description provided for @addSpecialNote.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Special Note'**
-  String get addSpecialNote;
-
-  /// No description provided for @total.
-  ///
-  /// In en, this message translates to:
-  /// **'TOTAL'**
-  String get total;
-
-  /// No description provided for @deliveryFee.
-  ///
-  /// In en, this message translates to:
-  /// **'Delivery Fee'**
-  String get deliveryFee;
-
-  /// No description provided for @totalAmount.
-  ///
-  /// In en, this message translates to:
-  /// **'Total Amount'**
-  String get totalAmount;
-
-  /// No description provided for @addItems.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Items'**
-  String get addItems;
-
-  /// No description provided for @checkout.
-  ///
-  /// In en, this message translates to:
-  /// **'Checkout'**
-  String get checkout;
-
-  /// No description provided for @shippingCart.
-  ///
-  /// In en, this message translates to:
-  /// **'Shipping Cart'**
-  String get shippingCart;
-
-  /// No description provided for @orderSummary.
-  ///
-  /// In en, this message translates to:
-  /// **'Order Summary'**
-  String get orderSummary;
-
-  /// No description provided for @confirmOrder.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm Order'**
-  String get confirmOrder;
-
-  /// No description provided for @cart_________________End.
-  ///
-  /// In en, this message translates to:
-  /// **'__________________'**
-  String get cart_________________End;
 
   /// No description provided for @checkout_________________Start.
   ///
