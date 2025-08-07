@@ -7,11 +7,12 @@ abstract class CartRepo extends BaseApiRepo {
   CartRepo(super.crashlyticsRepo);
 
   Future<Result<CartResponse>> getCart();
-  Future<Result<String>> addToCartItem(CartableItemRequest req);
-  Future<Result<String>> updateCartItem(CartableItemRequest req);
-  Future<Result<String>> removeCartItem(int id);
-  Future<Result<String>> updateItemQuantity(int id, int qnty);
-  Future<Result<String>> updateItemNote(int id, String? note);
+  Future<Result<CartResponse>> addToCartItem(CartableItemRequest req);
+  Future<Result<CartResponse>> updateCartItem(CartableItemRequest req);
+  Future<Result<CartResponse>> removeCartItem(int id);
+  Future<Result<CartResponse>> updateItemQuantity(int id, int qnty);
+  Future<Result<CartResponse>> updateItemNote(int id, String? note);
+  Future<Result<CartResponse>> updateCartAddress(int addressId);
 
-  Future<Result<List<String>>> getAvailableSlots(int cartId);
+  Future<Result<List<String>>> getAvailableSlots();
 }

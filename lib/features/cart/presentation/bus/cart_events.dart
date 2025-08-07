@@ -2,12 +2,14 @@ import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/app_bus.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 
-class CartEvents extends AppEvent {}
+class CartEvents extends AppEvent {
+  final CartResponse data;
+  CartEvents({required this.data});
+}
 
 ///
 sealed class GetCartEvents extends CartEvents {
-  final CartResponse data;
-  GetCartEvents({required this.data});
+  GetCartEvents({required super.data});
 }
 
 class GetCartLoading extends GetCartEvents {
@@ -24,17 +26,39 @@ class GetCartError extends GetCartEvents {
 }
 
 ///
-sealed class AddCartItemEvents extends CartEvents {
+sealed class UpdateCartItems extends CartEvents {
+  final int cartId;
+  UpdateCartItems({required super.data, required this.cartId});
+}
+
+class UpdateCartItemsLoading extends UpdateCartItems {
+  UpdateCartItemsLoading({required super.cartId, required super.data});
+}
+
+class UpdateCartItemsLoaded extends UpdateCartItems {
+  UpdateCartItemsLoaded({required super.data, required super.cartId});
+}
+
+class UpdateCartItemsError extends UpdateCartItems {
   final String? message;
-  AddCartItemEvents({this.message});
+  UpdateCartItemsError(this.message, {required super.cartId}) : super(data: Fakers.cartResponse);
 }
 
-class AddCartItemLoading extends AddCartItemEvents {}
-
-class AddCartItemLoaded extends AddCartItemEvents {
-  AddCartItemLoaded({required super.message});
+///
+sealed class GetTimeSlots extends AppEvent {
+  final List<String> slots;
+  GetTimeSlots({required this.slots});
 }
 
-class AddCartItemError extends AddCartItemEvents {
-  AddCartItemError({required super.message});
+class GetTimeSlotsLoading extends GetTimeSlots {
+  GetTimeSlotsLoading() : super(slots: []);
+}
+
+class GetTimeSlotsLoaded extends GetTimeSlots {
+  GetTimeSlotsLoaded({required super.slots});
+}
+
+class GetTimeSlotsError extends GetTimeSlots {
+  final String? message;
+  GetTimeSlotsError(this.message) : super(slots: []);
 }

@@ -4,7 +4,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_dto.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart';
 
 class RestaurantPageResponse {

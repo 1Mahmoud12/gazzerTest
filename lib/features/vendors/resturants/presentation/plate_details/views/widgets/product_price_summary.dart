@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget.dart';
 
@@ -67,6 +69,9 @@ class ProductPriceSummary extends StatelessWidget {
                           padding: const EdgeInsets.all(2),
                           child: MainBtn(
                             onPressed: () async {
+                              if (Session().client == null) {
+                                return Alerts.showToast(L10n.tr().pleaseLoginToUseCart, isInfo: true);
+                              }
                               await onsubmit();
                             },
                             isLoading: isLoading,

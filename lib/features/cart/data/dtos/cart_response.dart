@@ -2,6 +2,7 @@ import 'package:gazzer/features/cart/data/dtos/cart_vendor_dto.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_vendor_entity.dart';
 
 class CartResponse {
+  late final String? message;
   late final int? addressId;
   late final double subTotal;
   late final double deliveryFee;
@@ -11,6 +12,7 @@ class CartResponse {
   late final List<CartVendorEntity> vendors;
 
   CartResponse({
+    this.message,
     this.addressId,
     required this.subTotal,
     required this.deliveryFee,
@@ -20,7 +22,8 @@ class CartResponse {
     required this.vendors,
   });
 
-  CartResponse.fromJson(Map<String, dynamic> json) {
+  CartResponse.fromJson(Map<String, dynamic> json, {String? msg}) {
+    message = msg;
     addressId = json['address_id'];
     subTotal = json['subtotal']?.toDouble() ?? 0.0;
     deliveryFee = json['delivery_fee']?.toDouble() ?? 0.0;

@@ -44,6 +44,8 @@ class Endpoints {
   static const addToCart = "cart/add-to-cart";
   static const removeFromCart = "cart/remove-from-cart";
   static const updateCartItem = "cart/update-cart-item";
+  static const updateCartAddress = "cart/set-cart-address";
+  static const changeItemQnty = "cart/change-quantity";
   static String updatecartItemNote(int id) => "cart/update-notes/$id";
 
   /// ** pages

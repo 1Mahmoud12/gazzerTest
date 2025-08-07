@@ -110,6 +110,84 @@ abstract class AppLocalizations {
   /// **'__________________'**
   String get cart_________________Start;
 
+  /// No description provided for @cartIsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart is empty'**
+  String get cartIsEmpty;
+
+  /// No description provided for @startShopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Shopping'**
+  String get startShopping;
+
+  /// No description provided for @noAddressesSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No addresses selected'**
+  String get noAddressesSelected;
+
+  /// No description provided for @deliveryAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Address'**
+  String get deliveryAddress;
+
+  /// No description provided for @selectAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Address'**
+  String get selectAddress;
+
+  /// No description provided for @scheduling.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduling'**
+  String get scheduling;
+
+  /// No description provided for @scheduleOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule Order'**
+  String get scheduleOrder;
+
+  /// No description provided for @editItemNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Item Note'**
+  String get editItemNote;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// No description provided for @pleaseLoginToUseCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login to use cart'**
+  String get pleaseLoginToUseCart;
+
+  /// No description provided for @quantityValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity must be at least 1'**
+  String get quantityValidation;
+
+  /// No description provided for @yourCartIsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get yourCartIsEmpty;
+
+  /// No description provided for @pleaseSelectAtLeastOneValueOptionForName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one value option for {name}'**
+  String pleaseSelectAtLeastOneValueOptionForName(String name);
+
   /// No description provided for @yourChoicesWillBeClearedBecauseYouDidntAddToCart.
   ///
   /// In en, this message translates to:
@@ -182,11 +260,11 @@ abstract class AppLocalizations {
   /// **'Checkout'**
   String get checkout;
 
-  /// No description provided for @shippingCart.
+  /// No description provided for @cart.
   ///
   /// In en, this message translates to:
-  /// **'Shipping Cart'**
-  String get shippingCart;
+  /// **'Cart'**
+  String get cart;
 
   /// No description provided for @orderSummary.
   ///

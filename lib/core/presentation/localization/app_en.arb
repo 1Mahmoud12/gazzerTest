@@ -1,6 +1,26 @@
 {
   "noData": "No Data",
   "cart_________________Start": "__________________",
+  "cartIsEmpty": "Cart is empty",
+  "startShopping": "Start Shopping",
+  "noAddressesSelected": "No addresses selected",
+  "deliveryAddress": "Delivery Address",
+  "selectAddress": "Select Address",
+  "scheduling": "Scheduling",
+  "scheduleOrder": "Schedule Order",
+  "editItemNote": "Edit Item Note",
+  "saveChanges": "Save Changes",
+  "pleaseLoginToUseCart": "Please login to use cart",
+  "quantityValidation": "Quantity must be at least 1",
+  "yourCartIsEmpty": "Your cart is empty",
+  "pleaseSelectAtLeastOneValueOptionForName": "Please select at least one value option for {name}",
+  "@pleaseSelectAtLeastOneValueOptionForName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "yourChoicesWillBeClearedBecauseYouDidntAddToCart": "Your choices will be cleared because you didn't add to cart",
   "subTotal": "Sub Total",
   "serviceFee": "Service Fee",
@@ -13,7 +33,7 @@
   "totalAmount": "Total Amount",
   "addItems": "Add Items",
   "checkout": "Checkout",
-  "shippingCart": "Shipping Cart",
+  "cart": "Cart",
   "orderSummary": "Order Summary",
   "confirmOrder": "Confirm Order",
   "cart_________________End": "__________________",

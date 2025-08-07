@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -53,104 +54,104 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
           );
         }
-        if (state is ProductDetailsLoading) {
-          Scaffold(
-            appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
-            body: const Center(child: AdaptiveProgressIndicator()),
-          );
-        }
-        return BlocProvider(
-          create: (context) => AddToCartCubit(state.product, []),
-          child: Builder(
-            builder: (context) {
-              return Scaffold(
-                appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
-                body: ListView(
-                  children: [
-                    Padding(
-                      padding: AppConst.defaultHrPadding,
-                      child: Text(state.product.name, style: TStyle.primaryBold(20)),
-                    ),
-                    ProductDetailsWidget(
-                      product: state.product,
-                    ),
-                    const VerticalSpacing(16),
-
-                    Padding(
-                      padding: AppConst.defaultHrPadding,
-                      child: Column(
-                        children: [
-                          OrderedWithComponent(products: Fakers.plateOrderedWith),
-                          const VerticalSpacing(16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              BlocBuilder<AddToCartCubit, AddToCartStates>(
-                                builder: (context, state) => AddSpecialNote(
-                                  note: state.note,
-                                  onNoteChange: context.read<AddToCartCubit>().setNote,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const VerticalSpacing(16),
-                        ],
+        if (state is ProductDetailsLoaded) {
+          return BlocProvider(
+            create: (context) => AddToCartCubit(state.product, []),
+            child: Builder(
+              builder: (context) {
+                return Scaffold(
+                  appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
+                  body: ListView(
+                    children: [
+                      Padding(
+                        padding: AppConst.defaultHrPadding,
+                        child: Text(state.product.name, style: TStyle.primaryBold(20)),
                       ),
-                    ),
-                  ],
-                ),
-                bottomNavigationBar: BlocConsumer<AddToCartCubit, AddToCartStates>(
-                  listener: (context, state) {
-                    if (state.status == ApiStatus.success) {
-                      if (state.message != null) Alerts.showToast(state.message!, error: false);
-                      context.pop();
-                    } else if (state.status == ApiStatus.error) {
-                      if (state.message != null) Alerts.showToast(state.message!);
-                    }
-                  },
-                  builder: (context, cartState) {
-                    final cubit = context.read<AddToCartCubit>();
-                    return PopScope(
-                      canPop: !cartState.hasUserInteracted,
-                      onPopInvokedWithResult: (didPop, result) {
-                        if (!didPop) {
+                      ProductDetailsWidget(
+                        product: state.product,
+                      ),
+                      const VerticalSpacing(16),
+
+                      Padding(
+                        padding: AppConst.defaultHrPadding,
+                        child: Column(
+                          children: [
+                            OrderedWithComponent(products: Fakers.plateOrderedWith),
+                            const VerticalSpacing(16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                BlocBuilder<AddToCartCubit, AddToCartStates>(
+                                  builder: (context, state) => AddSpecialNote(
+                                    note: state.note,
+                                    onNoteChange: context.read<AddToCartCubit>().setNote,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const VerticalSpacing(16),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  bottomNavigationBar: BlocConsumer<AddToCartCubit, AddToCartStates>(
+                    listener: (context, state) {
+                      if (state.status == ApiStatus.success) {
+                        Alerts.showToast(state.message, error: false);
+                        context.pop();
+                      } else if (state.status == ApiStatus.error) {
+                        Alerts.showToast(state.message);
+                      }
+                    },
+                    builder: (context, cartState) {
+                      final cubit = context.read<AddToCartCubit>();
+                      return PopScope(
+                        canPop: Session().client == null || !cartState.hasUserInteracted,
+                        onPopInvokedWithResult: (didPop, result) {
                           if (!didPop) {
-                            showDialog<bool>(
-                              context: context,
-                              builder: (context) => Dialogs.confirmDialog(
-                                title: L10n.tr().alert,
+                            if (!didPop) {
+                              showDialog<bool>(
                                 context: context,
-                                okBgColor: Colors.redAccent,
-                                message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
-                              ),
-                            ).then((confirmed) {
-                              if (confirmed == true) {
-                                cubit.userEquestClose();
-                                if (context.mounted) context.pop();
-                              }
-                            });
-                          }
-                        }
-                      },
-                      child: ProductPriceSummary(
-                        isLoading: cartState.status == ApiStatus.loading,
-                        price: cartState.totalPrice,
-                        quantity: cartState.quantity,
-                        onChangeQuantity: (isAdding) {
-                          if (isAdding) {
-                            cubit.increment();
-                          } else {
-                            cubit.decrement();
+                                builder: (context) => Dialogs.confirmDialog(
+                                  title: L10n.tr().alert,
+                                  context: context,
+                                  okBgColor: Colors.redAccent,
+                                  message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
+                                ),
+                              ).then((confirmed) {
+                                if (confirmed == true) {
+                                  cubit.userEquestClose();
+                                  if (context.mounted) context.pop();
+                                }
+                              });
+                            }
                           }
                         },
-                        onsubmit: cubit.addToCart,
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
+                        child: ProductPriceSummary(
+                          isLoading: cartState.status == ApiStatus.loading,
+                          price: cartState.totalPrice,
+                          quantity: cartState.quantity,
+                          onChangeQuantity: (isAdding) {
+                            if (isAdding) {
+                              cubit.increment();
+                            } else {
+                              cubit.decrement();
+                            }
+                          },
+                          onsubmit: cubit.addToCart,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          );
+        }
+        return Scaffold(
+          appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
+          body: const Center(child: AdaptiveProgressIndicator()),
         );
       },
     );

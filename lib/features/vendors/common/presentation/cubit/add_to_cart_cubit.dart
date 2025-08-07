@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
@@ -118,7 +120,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
   Future<void> addToCart() async {
     final msg = _validateCart();
-    if (msg != null) return emit(state.copyWith(message: msg));
+    if (msg != null) return emit(state.copyWith(message: msg, status: ApiStatus.error));
     final req = CartableItemRequest(
       id: item.id,
       quantity: state.quantity,
@@ -136,14 +138,15 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   String? _validateCart() {
-    if (state.quantity < 1) return "Quantity must be at least 1";
+    if (Session().client == null) return L10n.tr().pleaseLoginToUseCart;
+    if (state.quantity < 1) return L10n.tr().quantityValidation;
     final requiredOptions = options.where((o) => o.isRequired);
     if (requiredOptions.isEmpty) return null;
     for (var opt in requiredOptions) {
       if (state.selectedOptions.containsKey(opt.id) && state.selectedOptions[opt.id]!.isNotEmpty) {
         continue;
       } else {
-        return 'Please select at least one value for the option: ${opt.name}';
+        return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(opt.name);
       }
     }
     return null;

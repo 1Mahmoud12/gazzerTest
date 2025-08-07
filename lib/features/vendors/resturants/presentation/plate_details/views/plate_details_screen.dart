@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
@@ -66,7 +67,7 @@ class SinglePlateScreen extends StatelessWidget {
                 return ValueListenableBuilder(
                   valueListenable: canPop,
                   builder: (context, value, child) => PopScope(
-                    canPop: value,
+                    canPop: Session().client == null || value,
                     onPopInvokedWithResult: (didPop, result) {
                       if (!didPop) {
                         showDialog<bool>(

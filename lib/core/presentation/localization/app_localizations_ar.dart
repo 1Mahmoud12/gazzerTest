@@ -15,6 +15,47 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cart_________________Start => '__________________';
 
   @override
+  String get cartIsEmpty => 'السلة فارغة';
+
+  @override
+  String get startShopping => 'ابدأ التسوق';
+
+  @override
+  String get noAddressesSelected => 'لم يتم اختيار أي عناوين';
+
+  @override
+  String get deliveryAddress => 'عنوان التوصيل';
+
+  @override
+  String get selectAddress => 'اختر عنواناً';
+
+  @override
+  String get scheduling => 'جدولة';
+
+  @override
+  String get scheduleOrder => 'جدولة الطلب';
+
+  @override
+  String get editItemNote => 'تعديل ملاحظة العنصر';
+
+  @override
+  String get saveChanges => 'حفظ التغييرات';
+
+  @override
+  String get pleaseLoginToUseCart => 'يرجى تسجيل الدخول لاستخدام السلة';
+
+  @override
+  String get quantityValidation => 'الكمية يجب أن تكون على الأقل 1';
+
+  @override
+  String get yourCartIsEmpty => 'السلة فارغة';
+
+  @override
+  String pleaseSelectAtLeastOneValueOptionForName(String name) {
+    return 'يرجى اختيار خيار واحد على الأقل من اختيارات $name';
+  }
+
+  @override
   String get yourChoicesWillBeClearedBecauseYouDidntAddToCart =>
       'سيتم مسح اختياراتك لأنك لم تضف إلى السلة';
 
@@ -52,7 +93,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkout => 'الدفع';
 
   @override
-  String get shippingCart => 'سلة التسوق';
+  String get cart => 'السلة';
 
   @override
   String get orderSummary => 'ملخص الطلب';

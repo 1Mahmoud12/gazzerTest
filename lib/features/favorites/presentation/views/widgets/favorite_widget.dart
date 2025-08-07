@@ -39,6 +39,21 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
   late StreamSubscription<ToggleFavoriteStates> lisnter;
   late final FavoriteBus bus;
 
+  _listen(ToggleFavoriteStates v) {
+    if (!mounted) return;
+    if (v.id != widget.fovorable.id || v.type != widget.fovorable.favoriteType) return;
+    if (v is AddedFavoriteSuccess || v is RemovedFavoriteSuccess) {
+      _pulseAnmateFav();
+      if (v is AddedFavoriteSuccess) {
+        Alerts.showToast(L10n.tr().itemNameAddedToFAvorites(widget.fovorable.name), error: false);
+      } else {
+        Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.fovorable.name), error: false);
+      }
+    } else if (v is ToggleFavoriteFailure) {
+      Alerts.showToast("${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}");
+    }
+  }
+
   @override
   void initState() {
     bus = di<FavoriteBus>();
@@ -46,24 +61,12 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
     controller = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
     animation = Tween<double>(begin: 1, end: 1.25).animate(controller);
     super.initState();
-    lisnter = bus.subscribe<ToggleFavoriteStates>((v) {
-      if (!mounted) return;
-      if (v.id != widget.fovorable.id || v.type != widget.fovorable.favoriteType) return;
-      if (v is AddedFavoriteSuccess || v is RemovedFavoriteSuccess) {
-        _pulseAnmateFav();
-        if (v is AddedFavoriteSuccess) {
-          Alerts.showToast(L10n.tr().itemNameAddedToFAvorites(widget.fovorable.name), error: false);
-        } else {
-          Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.fovorable.name), error: false);
-        }
-      } else if (v is ToggleFavoriteFailure) {
-        Alerts.showToast("${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}");
-      }
-    });
+    lisnter = bus.subscribe<ToggleFavoriteStates>(_listen);
   }
 
   @override
   void dispose() {
+    lisnter.cancel();
     controller.dispose();
     super.dispose();
   }
@@ -85,9 +88,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
     return StreamBuilder(
       stream: bus.getStream<ToggleFavoriteStates>(),
       builder: (context, snapshot) {
-        if (snapshot.data is ToggleFavoriteLoading &&
-            snapshot.data!.id == widget.fovorable.id &&
-            snapshot.data!.type == widget.fovorable.favoriteType) {
+        if (snapshot.data is ToggleFavoriteLoading && snapshot.data!.id == widget.fovorable.id && snapshot.data!.type == widget.fovorable.favoriteType) {
           return Padding(
             padding: EdgeInsets.all(widget.padding),
             child: AdaptiveProgressIndicator(size: widget.size, color: widget.color),

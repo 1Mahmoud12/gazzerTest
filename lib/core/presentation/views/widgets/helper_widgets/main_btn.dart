@@ -60,7 +60,12 @@ class _MainBtnState extends State<MainBtn> {
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
-      return const Center(child: AdaptiveProgressIndicator());
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(2),
+          child: AdaptiveProgressIndicator(),
+        ),
+      );
     }
     return Padding(
       padding: widget.margin,

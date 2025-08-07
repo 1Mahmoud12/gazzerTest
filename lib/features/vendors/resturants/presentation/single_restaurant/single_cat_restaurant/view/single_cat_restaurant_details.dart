@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
@@ -100,7 +101,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
     return ValueListenableBuilder(
       valueListenable: canLeaveItem,
       builder: (context, value, child) => PopScope(
-        canPop: value,
+        canPop: Session().client == null || value,
         onPopInvokedWithResult: (didPop, result) {
           if (!didPop) {
             if (!didPop) {

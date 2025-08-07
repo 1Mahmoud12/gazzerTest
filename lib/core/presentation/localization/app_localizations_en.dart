@@ -15,6 +15,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cart_________________Start => '__________________';
 
   @override
+  String get cartIsEmpty => 'Cart is empty';
+
+  @override
+  String get startShopping => 'Start Shopping';
+
+  @override
+  String get noAddressesSelected => 'No addresses selected';
+
+  @override
+  String get deliveryAddress => 'Delivery Address';
+
+  @override
+  String get selectAddress => 'Select Address';
+
+  @override
+  String get scheduling => 'Scheduling';
+
+  @override
+  String get scheduleOrder => 'Schedule Order';
+
+  @override
+  String get editItemNote => 'Edit Item Note';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get pleaseLoginToUseCart => 'Please login to use cart';
+
+  @override
+  String get quantityValidation => 'Quantity must be at least 1';
+
+  @override
+  String get yourCartIsEmpty => 'Your cart is empty';
+
+  @override
+  String pleaseSelectAtLeastOneValueOptionForName(String name) {
+    return 'Please select at least one value option for $name';
+  }
+
+  @override
   String get yourChoicesWillBeClearedBecauseYouDidntAddToCart =>
       'Your choices will be cleared because you didn\'t add to cart';
 
@@ -52,7 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkout => 'Checkout';
 
   @override
-  String get shippingCart => 'Shipping Cart';
+  String get cart => 'Cart';
 
   @override
   String get orderSummary => 'Order Summary';

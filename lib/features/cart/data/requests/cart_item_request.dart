@@ -29,7 +29,7 @@ class CartableItemRequest {
       'id': id,
       'type': type.value,
       'quantity': quantity,
-      'note': note,
+      'notes': note,
       'options': list.isNotEmpty ? list : null,
     };
   }

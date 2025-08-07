@@ -28,6 +28,8 @@ class Assets {
 
   static const String assetsGazzerLogo = "assets/gazzer_logo.png";
 
+  static const String assetsGifCart = "assets/gif/cart.gif";
+
   static const String assetsGifDelivery = "assets/gif/delivery.gif";
 
   static const String assetsGifWow = "assets/gif/wow.gif";

@@ -20,42 +20,82 @@ class CartRepoImp extends CartRepo {
   }
 
   @override
-  Future<Result<String>> addToCartItem(CartableItemRequest req) {
+  Future<Result<CartResponse>> addToCartItem(CartableItemRequest req) {
     return super.call(
       apiCall: () async => _apiclient.post(endpoint: Endpoints.addToCart, requestBody: req.toJson()),
       parser: (response) {
-        return response.data['message'].toString();
+        return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
       },
     );
   }
 
   @override
-  Future<Result<String>> removeCartItem(int id) {
-    // TODO: implement removeCartItem
-    throw UnimplementedError();
+  Future<Result<CartResponse>> removeCartItem(int id) {
+    return super.call(
+      apiCall: () async => _apiclient.post(endpoint: Endpoints.removeFromCart, requestBody: {'cart_item_id': id}),
+      parser: (response) {
+        return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
+      },
+    );
   }
 
   @override
-  Future<Result<String>> updateCartItem(CartableItemRequest req) {
-    // TODO: implement updateCartItem
-    throw UnimplementedError();
+  Future<Result<CartResponse>> updateCartItem(CartableItemRequest req) {
+    return super.call(
+      apiCall: () async => _apiclient.post(endpoint: Endpoints.updateCartItem, requestBody: req.toJson()),
+      parser: (response) {
+        return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
+      },
+    );
   }
 
   @override
-  Future<Result<String>> updateItemNote(int id, String? note) {
-    // TODO: implement updateItemNote
-    throw UnimplementedError();
+  Future<Result<CartResponse>> updateItemNote(int id, String? note) {
+    return super.call(
+      apiCall: () async => _apiclient.post(
+        endpoint: Endpoints.updatecartItemNote(id),
+        requestBody: {'notes': note},
+      ),
+      parser: (response) {
+        return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
+      },
+    );
   }
 
   @override
-  Future<Result<String>> updateItemQuantity(int id, int qnty) {
-    // TODO: implement updateItemQuantity
-    throw UnimplementedError();
+  Future<Result<CartResponse>> updateItemQuantity(int id, int qnty) {
+    return super.call(
+      apiCall: () async => _apiclient.post(
+        endpoint: Endpoints.changeItemQnty,
+        requestBody: {'cart_item_id': id, 'quantity': qnty},
+      ),
+      parser: (response) {
+        return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
+      },
+    );
   }
 
   @override
-  Future<Result<List<String>>> getAvailableSlots(int cartId) {
-    // TODO: implement getAvailableSlots
-    throw UnimplementedError();
+  Future<Result<CartResponse>> updateCartAddress(int addressId) {
+    return super.call(
+      apiCall: () async => _apiclient.post(
+        endpoint: Endpoints.updateCartAddress,
+        requestBody: {'client_address_id': addressId},
+      ),
+      parser: (response) {
+        return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<String>>> getAvailableSlots() {
+    return super.call(
+      apiCall: () async => _apiclient.get(endpoint: Endpoints.getAvailableSlots),
+      parser: (response) {
+        final data = response.data['data'] as List<dynamic>;
+        return data.map((e) => e.toString()).toList();
+      },
+    );
   }
 }

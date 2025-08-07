@@ -1,6 +1,6 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/generic_item_dto.dart';
 
 class PlateDetailsDTO {
   int? id;

@@ -3,6 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
+import 'package:gazzer/features/cart/presentation/bus/cart_events.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
@@ -40,11 +43,14 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 65,
       actions: [
         if (showCart)
-          Badge(
-            label: const Text("0"),
-            textColor: Co.mainText,
-            backgroundColor: Co.second2,
-            child: CartFloatingBtn(size: 20, padding: 8, navigate: !isCartScreen),
+          StreamBuilder(
+            stream: di<CartBus>().getStream<GetCartEvents>(),
+            builder: (context, snapshot) => Badge(
+              label: Text(di<CartBus>().vendors.fold(0, (previousValue, element) => previousValue + element.items.length).toString()),
+              textColor: Co.mainText,
+              backgroundColor: Co.second2,
+              child: CartFloatingBtn(size: 20, padding: 8, navigate: !isCartScreen),
+            ),
           ),
         if (showNotification)
           IconButton(

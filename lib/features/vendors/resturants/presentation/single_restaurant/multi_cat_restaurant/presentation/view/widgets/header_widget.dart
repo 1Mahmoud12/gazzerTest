@@ -40,7 +40,9 @@ class MultiCatRestHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const AppBarRowWidget(),
+              const AppBarRowWidget(
+                showCart: true,
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40),
                 child: VendorInfoCard(
