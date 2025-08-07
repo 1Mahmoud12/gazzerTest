@@ -1,79 +1,135 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gazzer/core/domain/cart/cart_item_model.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/presentation/views/widgets/cart_option_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget_white.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({super.key, required this.item});
-  final CartItemModel item;
+  final CartItemEntity item;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [BoxShadow(color: Co.secText.withAlpha(80), offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 0)],
       ),
       child: Padding(
         padding: AppConst.defaultPadding,
-        child: SizedBox(
-          height: 125,
-          child: Row(
-            children: [
-              DecoratedBox(
-                position: DecorationPosition.foreground,
-                decoration: BoxDecoration(
-                  border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
-                  borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
-                  child: Image.asset(item.image, fit: BoxFit.cover, height: 125, width: 85),
-                ),
-              ),
-              const HorizontalSpacing(12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GradientText(text: item.name, style: TStyle.blackBold(16), textAlign: TextAlign.start),
-                        ),
-                        const Icon(Icons.star, color: Co.second2, size: 24),
-                        const HorizontalSpacing(6),
-                        Text(item.rate.toStringAsFixed(1), style: TStyle.blackSemi(13)),
-                      ],
+        child: Row(
+          spacing: 12,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                spacing: 12,
+                children: [
+                  Expanded(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 120),
+                      child: Column(
+                        spacing: 6,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            item.prod.name,
+                            style: TStyle.blackBold(12),
+                            maxLines: 2,
+                          ),
+                          if (item.notes?.trim().isNotEmpty == true)
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    item.notes!,
+                                    style: TStyle.greyRegular(12),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  style: IconButton.styleFrom(
+                                    padding: const EdgeInsets.all(4),
+                                    minimumSize: Size.zero,
+                                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  ),
+                                  icon: const Icon(Icons.edit_outlined, size: 24, color: Co.purple),
+                                ),
+                              ],
+                            ),
+                          if (item.options.isNotEmpty)
+                            ...List.generate(
+                              item.options.length,
+                              (index) => CartOptionWidget(option: item.options[index]),
+                            ),
+                          const VerticalSpacing(8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IncrementWidgetWhite(
+                                initVal: item.quantity,
+                                onChanged: (isAdding) {},
+                                isLoading: false,
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                style: IconButton.styleFrom(
+                                  padding: const EdgeInsets.all(4),
+                                  minimumSize: Size.zero,
+                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                ),
+                                icon: const Icon(CupertinoIcons.delete, size: 24, color: Co.purple),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    const VerticalSpacing(4),
-                    Text(
-                      Helpers.getProperPrice(item.price),
-                      style: TStyle.blackSemi(14).copyWith(shadows: AppDec.blackTextShadow),
-                    ),
-                    const Spacer(),
-                    Row(
+                  ),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 120),
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const IncrementWidgetWhite(),
-                        IconButton(
-                          onPressed: () {
-                            SystemSound.play(SystemSoundType.click);
-                          },
-                          icon: const Icon(CupertinoIcons.delete, color: Co.purple, size: 24),
-                        ),
+                        Text(item.prod.price.toString(), style: TStyle.blackBold(12)),
+                        Text(item.totalPrice.toString(), style: TStyle.primaryBold(16)),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 120),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                      children: [
+                        Text(L10n.tr().egp, style: TStyle.blackBold(12)),
+                        Text(L10n.tr().egp, style: TStyle.primaryBold(16)),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 120,
+              width: 120,
+              child: CustomNetworkImage(
+                item.prod.image,
+                borderReduis: 12,
+                height: 120,
+                width: 120,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_extras_widget.dart';
@@ -95,20 +99,52 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                bottomNavigationBar: BlocBuilder<AddToCartCubit, AddToCartStates>(
-                  builder: (context, state) {
+                bottomNavigationBar: BlocConsumer<AddToCartCubit, AddToCartStates>(
+                  listener: (context, state) {
+                    if (state.status == ApiStatus.success) {
+                      if (state.message != null) Alerts.showToast(state.message!, error: false);
+                      context.pop();
+                    } else if (state.status == ApiStatus.error) {
+                      if (state.message != null) Alerts.showToast(state.message!);
+                    }
+                  },
+                  builder: (context, cartState) {
                     final cubit = context.read<AddToCartCubit>();
-                    return ProductPriceSummary(
-                      price: state.totalPrice,
-                      quantity: state.quantity,
-                      onChangeQuantity: (isAdding) {
-                        if (isAdding) {
-                          cubit.increment();
-                        } else {
-                          cubit.decrement();
+                    return PopScope(
+                      canPop: !cartState.hasUserInteracted,
+                      onPopInvokedWithResult: (didPop, result) {
+                        if (!didPop) {
+                          if (!didPop) {
+                            showDialog<bool>(
+                              context: context,
+                              builder: (context) => Dialogs.confirmDialog(
+                                title: L10n.tr().alert,
+                                context: context,
+                                okBgColor: Colors.redAccent,
+                                message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
+                              ),
+                            ).then((confirmed) {
+                              if (confirmed == true) {
+                                cubit.userEquestClose();
+                                if (context.mounted) context.pop();
+                              }
+                            });
+                          }
                         }
                       },
-                      onsubmit: cubit.addToCart,
+                      child: ProductPriceSummary(
+                        isLoading: cartState.status == ApiStatus.loading,
+                        price: cartState.totalPrice,
+                        quantity: cartState.quantity,
+                        onChangeQuantity: (isAdding) {
+                          if (isAdding) {
+                            cubit.increment();
+                          } else {
+                            cubit.decrement();
+                          }
+                        },
+                        onsubmit: cubit.addToCart,
+                      ),
                     );
                   },
                 ),

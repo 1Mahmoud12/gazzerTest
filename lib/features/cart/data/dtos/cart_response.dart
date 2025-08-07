@@ -22,15 +22,15 @@ class CartResponse {
 
   CartResponse.fromJson(Map<String, dynamic> json) {
     addressId = json['address_id'];
-    subTotal = json['sub_total']?.toDouble() ?? 0.0;
+    subTotal = json['subtotal']?.toDouble() ?? 0.0;
     deliveryFee = json['delivery_fee']?.toDouble() ?? 0.0;
     serviceFee = json['service_fee']?.toDouble() ?? 0.0;
     discount = json['discount']?.toDouble() ?? 0.0;
     total = json['total']?.toDouble() ?? 0.0;
 
-    if (json['vendors'] != null) {
+    if (json['items'] != null) {
       vendors = <CartVendorEntity>[];
-      json['vendors'].forEach((v) {
+      json['items'].forEach((v) {
         vendors.add(CartVendorDTO.fromJson(v).toEntity());
       });
     } else {

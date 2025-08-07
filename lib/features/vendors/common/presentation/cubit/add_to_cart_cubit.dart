@@ -15,15 +15,18 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     super.emit(state.copyWith(totalPrice: _calculatePrice(state)));
   }
 
-  // CartItem? cartItem;
+  CartItemEntity? cartITem;
   final GenericItemEntity item;
   final List<ItemOptionEntity> options;
   late final double basePrice;
-  AddToCartCubit(this.item, this.options, [CartItemEntity? cartITem])
+  AddToCartCubit(this.item, this.options, [this.cartITem])
     : basePrice = options.any((e) => e.controlsPrice) ? 0 : item.price,
       super(
         AddToCartStates(
+          message: '',
+          status: ApiStatus.initial,
           hasUserInteracted: false,
+          hasAddedToCArt: false,
           note: null,
           quantity: 1,
           totalPrice: options.any((e) => e.controlsPrice)
@@ -123,8 +126,13 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       options: state.selectedOptions,
       type: item is PlateEntity ? CartItemType.plate : CartItemType.product,
     );
+    emit(state.copyWith(status: ApiStatus.loading));
     final result = await di<CartBus>().addToCart(req);
-    emit(state.copyWith(message: "Doneeeeee"));
+    if (result.$1) {
+      emit(state.copyWith(status: ApiStatus.success, message: result.$2, hasUserInteracted: false));
+    } else {
+      emit(state.copyWith(status: ApiStatus.error, message: result.$2, hasUserInteracted: false));
+    }
   }
 
   String? _validateCart() {
@@ -139,5 +147,34 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       }
     }
     return null;
+  }
+
+  void userEquestClose() {
+    emit(state.copyWith(hasUserInteracted: false));
+  }
+
+  void resetState() {
+    emit(
+      AddToCartStates(
+        message: '',
+        status: ApiStatus.initial,
+        hasUserInteracted: false,
+        hasAddedToCArt: false,
+        note: null,
+        quantity: 1,
+        totalPrice: options.any((e) => e.controlsPrice)
+            ? options.firstWhere((e) => e.controlsPrice).values.firstWhereOrNull((e) => e.isDefault)?.price ?? 0
+            : item.price,
+        selectedOptions: () {
+          final optionsWithDefault = options.where((e) => e.values.any((v) => v.isDefault));
+          if (optionsWithDefault.isEmpty) return <int, Set<int>>{};
+          final map = <int, Set<int>>{};
+          for (var option in optionsWithDefault) {
+            map[option.id] = {option.values.firstWhere((v) => v.isDefault).id};
+          }
+          return map;
+        }(),
+      ),
+    );
   }
 }

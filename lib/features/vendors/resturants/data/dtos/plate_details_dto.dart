@@ -1,5 +1,6 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 
 class PlateDetailsDTO {
   int? id;
@@ -18,6 +19,9 @@ class PlateDetailsDTO {
   String? price;
   String? itemType;
   int? plateCategoryId;
+  List<String>? tags;
+  OfferDTO? offer;
+  String? badge;
 
   PlateDetailsDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -30,6 +34,14 @@ class PlateDetailsDTO {
     rateCount = json['rate_count'];
     appPrice = json['app_price'];
     itemType = json['item_type'];
+    image = json['plate_image'];
+    badge = json['badge'] ?? '';
+    if (json['tags'] != null) {
+      tags = [];
+      json['tags'].forEach((tag) {
+        tags!.add(tag.toString());
+      });
+    }
     if (json['options'] != null) {
       try {
         options = <Options>[];
@@ -40,6 +52,7 @@ class PlateDetailsDTO {
         print(' !!! Opions parsing error ${e.toString()}');
       }
     }
+    offer = json['offer'] != null ? OfferDTO.fromJson(json['offer']) : null;
   }
 
   PlateEntity toEntity() {
@@ -52,9 +65,9 @@ class PlateDetailsDTO {
       description: plateDescription ?? '',
       categoryPlateId: plateCategoryId ?? 0,
       image: image ?? '',
-      tags: [],
-      offer: null,
-      badge: null,
+      tags: tags,
+      offer: offer?.toOfferEntity(),
+      badge: badge,
       outOfStock: false,
     );
   }

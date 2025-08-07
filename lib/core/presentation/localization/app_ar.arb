@@ -1,6 +1,9 @@
 {
   "noData": "لا توجد بيانات",
   "cart_________________Start": "__________________",
+  "subTotal": "المجموع الفرعي",
+  "serviceFee": "تكلفة الخدمة",
+  "discount": "الخصم",
   "yourChoicesWillBeClearedBecauseYouDidntAddToCart": "سيتم مسح اختياراتك لأنك لم تضف إلى السلة",
   "min": "دقيقة",
   "typeHere": "اكتب هنا",

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/core/domain/cart/cart_item_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
@@ -51,23 +49,32 @@ class _CartScreenState extends State<CartScreen> {
                     message: "snapshot.data.data",
                     onRetry: () => bus.loadCart(),
                   );
+                } else if (snapshot.data is GetCartLoading) {
+                  return const Center(child: AdaptiveProgressIndicator());
+                } else if (snapshot.data?.data.vendors.isNotEmpty != true) {
+                  return Center(
+                    child: Text(
+                      L10n.tr().noData,
+                      style: TStyle.primarySemi(16),
+                    ),
+                  );
                 }
-                return Skeletonizer(
-                  enabled: snapshot.data is GetCartLoading,
-                  child: ListView.separated(
-                    padding: EdgeInsets.zero,
-                    itemCount: Fakers.restaurants.length + 1,
-                    separatorBuilder: (context, index) => const VerticalSpacing(24),
-                    // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
-                    itemBuilder: (context, index) {
-                      if (index == Fakers.restaurants.length) {
-                        return const CartSummaryWidget();
-                      }
-                      return VendorCartProductsItem(
-                        vendorName: Fakers.restaurants[index].name,
-                        cartItems: Fakers.plates.map((e) => CartItemModel.fromProduct(e)).toList(),
-                      );
-                    },
+
+                return RefreshIndicator(
+                  onRefresh: () {
+                    return di<CartBus>().loadCart();
+                  },
+                  child: Skeletonizer(
+                    enabled: snapshot.data is GetCartLoading,
+                    child: ListView.separated(
+                      padding: EdgeInsets.zero,
+                      itemCount: (snapshot.data?.data.vendors.length ?? 0),
+                      separatorBuilder: (context, index) => const VerticalSpacing(24),
+                      // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
+                      itemBuilder: (context, index) {
+                        return VendorCartProductsItem(cartVendor: snapshot.data!.data.vendors[index]);
+                      },
+                    ),
                   ),
                 );
               },
@@ -75,6 +82,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: const CartSummaryWidget(),
     );
   }
 }

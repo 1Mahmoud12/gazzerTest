@@ -30,6 +30,7 @@ class CartBus extends AppBus {
         discount = res.value.discount;
         total = res.value.total;
         vendors = res.value.vendors;
+        print("vendors are ${vendors.length}");
         fire(GetCartLoaded(data: res.value));
         break;
       case Err err:
@@ -37,15 +38,18 @@ class CartBus extends AppBus {
     }
   }
 
-  Future<void> addToCart(CartableItemRequest req) async {
+  Future<(bool, String)> addToCart(CartableItemRequest req) async {
     fire(AddCartItemLoading());
     final response = await _repo.addToCartItem(req);
     switch (response) {
       case Ok<String> res:
+        print("Add to cart response: ${res.value}");
         fire(AddCartItemLoaded(message: res.value));
-        break;
+        return (true, res.value);
       case Err err:
         fire(AddCartItemError(message: err.error.message));
+        print("Add to cart response: ${err.error.message}");
+        return (false, err.error.message);
     }
   }
 

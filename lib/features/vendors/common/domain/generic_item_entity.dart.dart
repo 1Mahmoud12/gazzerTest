@@ -27,7 +27,7 @@ sealed class GenericItemEntity extends Favorable {
     PlateEntity() => FavoriteType.plate,
     ProductEntity() => FavoriteType.product,
     OrderedWithEntity() => FavoriteType.plate,
-    _ => FavoriteType.unknown,
+    // _ => FavoriteType.unknown,
   };
   const GenericItemEntity({
     required super.id,

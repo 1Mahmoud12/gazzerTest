@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -30,14 +31,10 @@ class TopRatedItemDetails extends StatelessWidget {
                   elevation: 12,
                   child: child,
                 ),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(item.image),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                child: CustomNetworkImage(
+                  item.image,
+                  borderReduis: 800,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

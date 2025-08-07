@@ -1,4 +1,3 @@
-import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/utils/color_utils.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -11,15 +10,15 @@ sealed class GenericItemDTO {
   String? image;
   String? description;
   double? price;
-  double? appPrice;
   int? quantityInStock;
   OfferDTO? offer;
   // ItemUnitBrand? itemUnitBrand;
 
   /// missing
   List<String>? tags;
+  String? badge;
   double? rate;
-  double? rateCount;
+  int? rateCount;
   double? priceBeforeDiscount;
 
   GenericItemDTO({
@@ -30,7 +29,6 @@ sealed class GenericItemDTO {
     this.image,
     this.description,
     this.price,
-    this.appPrice,
     this.quantityInStock,
     this.offer,
     // this.itemUnitBrand,
@@ -44,22 +42,23 @@ sealed class GenericItemDTO {
 }
 
 class PlateDTO extends GenericItemDTO {
-  String? otherVariant;
-  String? addons;
-  String? size;
-
   PlateDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     storeId = json['store_id'];
     name = json['plate_name'];
     caegoryId = json['plate_category_id'];
     description = json['plate_description'];
-    otherVariant = json['OtherVariant'];
-    addons = json['addons'];
-    size = json['size'];
-    price = double.tryParse(json['price'].toString());
+    image = json['plate_image'];
     rate = double.tryParse(json['rate'].toString());
-    appPrice = double.tryParse(json['app_price'].toString());
+    rateCount = int.tryParse(json['rate_count'].toString());
+    price = double.tryParse(json['app_price'].toString());
+    badge = json['badge'];
+    if (json['tags'] != null) {
+      tags = [];
+      json['tags'].forEach((tag) {
+        tags!.add(tag.toString());
+      });
+    }
   }
 
   @override
@@ -69,12 +68,14 @@ class PlateDTO extends GenericItemDTO {
       categoryPlateId: caegoryId ?? 0,
       name: name ?? '',
       description: description ?? '',
-      image: Fakers.netWorkPRoductImage,
+      image: image ?? '',
       price: double.tryParse(price.toString()) ?? 0,
-      rate: 0.0,
+      rate: rate ?? 0,
       outOfStock: id?.isEven ?? false,
-      badge: '30%',
-      reviewCount: 20,
+      badge: badge,
+      reviewCount: rateCount ?? 0,
+      offer: offer?.toOfferEntity(),
+      tags: tags,
     );
   }
 }
@@ -92,11 +93,20 @@ class ProductDTO extends GenericItemDTO {
   ProductDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    price = double.tryParse(json['price'].toString());
-    appPrice = double.tryParse(json['app_price'].toString());
+    price = double.tryParse(json['app_price'].toString());
     rate = double.tryParse(json['rate'].toString());
     color = json['color'];
     offer = json['offer'] != null ? OfferDTO.fromJson(json['offer']) : null;
+    description = json['description'];
+    badge = json['badge'];
+    image = json['image'];
+    rateCount = int.tryParse(json['rate_count'].toString());
+    if (json['tags'] != null) {
+      tags = [];
+      json['tags'].forEach((tag) {
+        tags!.add(tag.toString());
+      });
+    }
   }
 
   @override
@@ -104,7 +114,7 @@ class ProductDTO extends GenericItemDTO {
     return ProductEntity(
       id: id!,
       name: name ?? '',
-      price: double.tryParse(appPrice.toString()) ?? 0,
+      price: double.tryParse(price.toString()) ?? 0,
       rate: double.tryParse(rate.toString()) ?? 0,
       color: ColorUtils.safeHexToColor(color),
       offer: offer?.toOfferEntity(),
@@ -112,10 +122,11 @@ class ProductDTO extends GenericItemDTO {
       ///
       tags: tags,
       description: description ?? '',
-      badge: '30%',
-      image: Fakers.placeHolderImg,
-      reviewCount: 20,
-      outOfStock: id?.isEven ?? false,
+      badge: badge,
+      image: image ?? '',
+      reviewCount: rateCount ?? 0,
+      outOfStock: false,
+
       // priceBeforeDiscount: double.tryParse(appPrice.toString()) ?? 0,
     );
   }

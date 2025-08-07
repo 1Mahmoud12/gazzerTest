@@ -20,7 +20,7 @@ class OrderedWithLoading extends OrderedWithStates {
           (index) => OrderedWithEntity(
             id: index,
             name: 'Item index',
-            image: Fakers.netWorkImage,
+            image: 'Fakers._netWorkImage',
             price: 0,
             rate: 3,
             reviewCount: 0,

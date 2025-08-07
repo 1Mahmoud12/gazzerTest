@@ -8,11 +8,19 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget.dart';
 
 class ProductPriceSummary extends StatelessWidget {
-  const ProductPriceSummary({super.key, required this.onChangeQuantity, required this.price, required this.onsubmit, required this.quantity});
+  const ProductPriceSummary({
+    super.key,
+    required this.onChangeQuantity,
+    required this.price,
+    required this.onsubmit,
+    required this.quantity,
+    required this.isLoading,
+  });
   final Function(bool isAdding) onChangeQuantity;
   final double price;
   final int quantity;
   final Future Function() onsubmit;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -61,6 +69,7 @@ class ProductPriceSummary extends StatelessWidget {
                             onPressed: () async {
                               await onsubmit();
                             },
+                            isLoading: isLoading,
                             text: L10n.tr().addToCart,
                             textStyle: TStyle.secondaryBold(12),
                             bgColor: Colors.transparent,

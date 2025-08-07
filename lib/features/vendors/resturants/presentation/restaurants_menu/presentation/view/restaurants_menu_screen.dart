@@ -12,7 +12,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_t
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_horz_scroll_horz_card_list_component.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
@@ -113,7 +112,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   ///
                   tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
                   tabBuilder: (p0, index) {
-                    final tab = isLoading ? ('test', Fakers.netWorkImage, index) : tabs[index];
+                    final tab = isLoading ? ('test', 'Fakers._netWorkImage', index) : tabs[index];
                     return Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

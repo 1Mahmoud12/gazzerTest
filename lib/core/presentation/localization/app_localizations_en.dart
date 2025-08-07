@@ -19,6 +19,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your choices will be cleared because you didn\'t add to cart';
 
   @override
+  String get subTotal => 'Sub Total';
+
+  @override
+  String get serviceFee => 'Service Fee';
+
+  @override
+  String get discount => 'Discount';
+
+  @override
   String get min => 'MIN';
 
   @override

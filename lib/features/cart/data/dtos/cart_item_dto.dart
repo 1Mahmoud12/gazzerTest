@@ -92,7 +92,7 @@ extension GenericItemDTOExtension on GenericItemDTO {
       name: name ?? '',
       image: image ?? '',
       price: price ?? 0.0,
-      priceBeforeDiscount: appPrice,
+      priceBeforeDiscount: null,
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/ordered_with_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_details_dto.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class PlateDetailsResponse {
   late final PlateEntity plate;

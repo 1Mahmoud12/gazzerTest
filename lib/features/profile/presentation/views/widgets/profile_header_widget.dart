@@ -65,7 +65,8 @@ class _ProfileHeaderWidget extends StatelessWidget {
                       child: AspectRatio(
                         aspectRatio: 1,
                         child: CustomNetworkImage(
-                          client.image ?? Fakers.netWorkImage,
+                          client.image ??
+                              "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp",
                         ),
                       ),
                     ),

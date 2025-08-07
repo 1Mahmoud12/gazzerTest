@@ -15,13 +15,13 @@ class Fakers {
   Fakers._();
   static final _random = Random();
 
-  static const placeHolderImg = "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png";
-  static const plateNetWorkImg =
+  static const _placeHolderImg = "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png";
+  static const _plateNetWorkImg =
       "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
 
-  static const netWorkImage =
+  static const _netWorkImage =
       "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
-  static final netWorkPRoductImage =
+  static final _netWorkPRoductImage =
       "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
 
   static const _catsImages = [
@@ -89,13 +89,13 @@ class Fakers {
   static const mainCategory = MainCategoryEntity(
     id: 0,
     name: "فئة 0",
-    image: placeHolderImg,
+    image: _placeHolderImg,
     type: VendorType.restaurant,
   );
   static const banners = [
     BannerEntity(
       id: 1,
-      image: netWorkImage,
+      image: _netWorkImage,
       title: "خصم 20% على جميع الطلبات",
       type: BannerType.image,
     ),
@@ -110,7 +110,7 @@ class Fakers {
   static const categoryOfPlate = CategoryOfPlateEntity(
     id: 0,
     name: "فئة 0",
-    image: placeHolderImg,
+    image: _placeHolderImg,
     parentId: 0,
     style: CardStyle.typeOne,
     layout: LayoutType.grid,
@@ -119,7 +119,7 @@ class Fakers {
     CategoryOfPlateEntity(
       id: 0,
       name: "فئة 0",
-      image: placeHolderImg,
+      image: _placeHolderImg,
       parentId: 0,
       style: CardStyle.typeOne,
       layout: LayoutType.grid,
@@ -127,7 +127,7 @@ class Fakers {
     CategoryOfPlateEntity(
       id: 1,
       name: "فئة 1",
-      image: placeHolderImg,
+      image: _placeHolderImg,
       parentId: 0,
       style: CardStyle.typeOne,
       layout: LayoutType.grid,
@@ -135,7 +135,7 @@ class Fakers {
     CategoryOfPlateEntity(
       id: 2,
       name: "فئة 2",
-      image: placeHolderImg,
+      image: _placeHolderImg,
       parentId: 0,
       style: CardStyle.typeOne,
       layout: LayoutType.grid,
@@ -232,7 +232,7 @@ class Fakers {
   );
   static final plateOrderedWith = List.generate(
     3,
-    (index) => OrderedWithEntity(id: index, name: 'Item index', image: Fakers.netWorkImage, price: 0, rate: 3, reviewCount: 0, outOfStock: false),
+    (index) => OrderedWithEntity(id: index, name: 'Item index', image: Fakers._netWorkImage, price: 0, rate: 3, reviewCount: 0, outOfStock: false),
   );
   static final plateOptions = List.generate(
     3,
@@ -267,7 +267,7 @@ class Fakers {
       id: 0,
       name: "طبق ",
       rate: 3,
-      image: plateNetWorkImg,
+      image: _plateNetWorkImg,
       tag: ['Free delivery'],
       location: 'ZAMALEK',
       startTime: null,
@@ -282,7 +282,7 @@ class Fakers {
       id: 0,
       name: "طبق ",
       rate: 3,
-      image: plateNetWorkImg,
+      image: _plateNetWorkImg,
       tag: ['Free delivery'],
       location: 'ZAMALEK',
       startTime: null,
@@ -298,7 +298,7 @@ class Fakers {
     id: 0,
     name: "طبق ",
     rate: 3,
-    image: plateNetWorkImg,
+    image: _plateNetWorkImg,
     tag: ['Free delivery'],
     location: 'ZAMALEK',
     startTime: null,
@@ -314,7 +314,7 @@ class Fakers {
       description: "وصف ",
       price: 0,
       rate: 3.1,
-      image: Fakers.netWorkImage,
+      image: Fakers._netWorkImage,
       outOfStock: false,
       reviewCount: 100,
     ),
@@ -324,7 +324,7 @@ class Fakers {
       description: "وصف ",
       price: 0,
       rate: 3.1,
-      image: Fakers.netWorkImage,
+      image: Fakers._netWorkImage,
       outOfStock: false,
       reviewCount: 100,
     ),
@@ -332,7 +332,7 @@ class Fakers {
   static const storeCat = StoreCategoryEntity(
     id: 0,
     name: "فئة المتجر",
-    image: placeHolderImg,
+    image: _placeHolderImg,
     parentId: 0,
     style: CardStyle.typeOne,
     layout: LayoutType.grid,
@@ -342,7 +342,7 @@ class Fakers {
     (index) => StoreCategoryEntity(
       id: index,
       name: "فئة المتجر ${index + 1}",
-      image: placeHolderImg,
+      image: _placeHolderImg,
       parentId: 0,
       style: CardStyle.typeOne,
       layout: LayoutType.grid,
@@ -354,7 +354,7 @@ class Fakers {
     id: 1,
     name: "المفضل ",
     description: "وصف المفضل ",
-    image: placeHolderImg,
+    image: _placeHolderImg,
     rate: 5,
     price: 100,
     outOfStock: false,

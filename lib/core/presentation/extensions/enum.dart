@@ -3,6 +3,8 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 
 part 'enum_parser.dart';
 
+enum ApiStatus { initial, loading, success, error }
+
 /// ** vendors and items
 
 enum VendorType {

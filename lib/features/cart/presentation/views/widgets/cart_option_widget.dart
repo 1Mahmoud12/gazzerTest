@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+
+class CartOptionWidget extends StatelessWidget {
+  const CartOptionWidget({super.key, required this.option});
+  final CartOptionEntity option;
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        text: "${option.name}: \n",
+        style: TStyle.blackSemi(12),
+        children: List.generate(
+          option.values.length,
+          (index) {
+            return TextSpan(text: "  -${option.values[index].name}  ", style: TStyle.greySemi(12));
+          },
+        ),
+      ),
+      textAlign: TextAlign.start,
+    );
+  }
+}

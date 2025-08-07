@@ -116,6 +116,24 @@ abstract class AppLocalizations {
   /// **'Your choices will be cleared because you didn\'t add to cart'**
   String get yourChoicesWillBeClearedBecauseYouDidntAddToCart;
 
+  /// No description provided for @subTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Sub Total'**
+  String get subTotal;
+
+  /// No description provided for @serviceFee.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Fee'**
+  String get serviceFee;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
   /// No description provided for @min.
   ///
   /// In en, this message translates to:

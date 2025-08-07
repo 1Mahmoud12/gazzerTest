@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
@@ -95,8 +97,13 @@ class SinglePlateScreen extends StatelessWidget {
                         const VerticalSpacing(24),
                         BlocConsumer<AddToCartCubit, AddToCartStates>(
                           listener: (context, state) {
-                            print("Listener ${state.toString()}");
                             canPop.value = !state.hasUserInteracted;
+                            if (state.status == ApiStatus.success) {
+                              Alerts.showToast(state.message, error: false);
+                              context.pop();
+                            } else if (state.status == ApiStatus.error) {
+                              Alerts.showToast(state.message);
+                            }
                           },
                           builder: (context, cartState) {
                             return Column(
@@ -133,6 +140,7 @@ class SinglePlateScreen extends StatelessWidget {
                       child: BlocBuilder<AddToCartCubit, AddToCartStates>(
                         builder: (context, cartState) {
                           return ProductPriceSummary(
+                            isLoading: cartState.status == ApiStatus.loading,
                             price: cartState.totalPrice,
                             quantity: cartState.quantity,
                             onChangeQuantity: (isAdding) {

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/di.dart';
@@ -63,10 +66,11 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
   PlateEntity? selectedPlate;
   late final RestaurantEntity restaurant;
   late final List<PlateEntity> plates;
+  final canLeaveItem = ValueNotifier(true);
 
   final noteNotifier = ValueNotifier<String?>(null);
+  final priceNQntyNLoading = ValueNotifier<(double, int, bool)>((0, 1, false));
   Function(bool isAdding) onChangeQuantity = (isAdding) {};
-  final priceAnQnty = ValueNotifier<(double, int)>((0, 1));
   Future Function() onsubmit = () async {};
   Function(String) onNoteChange = (p0) {};
 
@@ -85,132 +89,194 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
 
   @override
   void dispose() {
+    canLeaveItem.dispose();
     noteNotifier.dispose();
-    priceAnQnty.dispose();
+    priceNQntyNLoading.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const MainAppBar(),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, MediaQuery.paddingOf(context).bottom + 16),
-            child: Column(
-              spacing: 12,
-              children: [
-                if (selectedPlate == null)
-                  Text(L10n.tr().couldnotLoadDataPleaseTryyAgain)
-                else ...[
-                  VendorInfoCard(
-                    restaurant,
-                    padding: EdgeInsets.zero,
-                    categories: null,
-                  ),
-                  const SizedBox.shrink(),
-                  OverflowBox(
-                    maxWidth: constraints.maxWidth,
-                    minWidth: constraints.maxWidth,
-                    fit: OverflowBoxFit.deferToChild,
-                    child: _FoodImagesGallery(
-                      plates: plates,
-                      selected: selectedPlate!,
-                      onSelect: (plate) {
-                        if (plate.id == selectedPlate?.id) return;
-                        if (widget.hasParentProvider) {
-                          context.read<SingleCatRestaurantCubit>().loadItems(plate.id);
-                          context.read<SingleCatRestaurantCubit>().loadPlateDetails(plate.id);
-                        }
-                        setState(() => selectedPlate = plate);
-                      },
-                    ),
-                  ),
-                  if (widget.hasParentProvider)
-                    BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
-                      buildWhen: (previous, current) => current is PlateDetailsStates,
-                      builder: (context, state) {
-                        if (state is! PlateDetailsStates) return const SizedBox.shrink();
-                        if (state is PlateDetailsLoading) return const Center(child: AdaptiveProgressIndicator());
-                        return Column(
-                          children: [
-                            _FoodDetailsWidget(product: state.plate),
-                            BlocProvider(
-                              create: (context) => di<AddToCartCubit>(param1: (state.plate, state.options)),
-                              child: Builder(
-                                builder: (context) {
-                                  final addCubit = context.read<AddToCartCubit>();
-                                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                                    priceAnQnty.value = (addCubit.state.totalPrice, addCubit.state.quantity);
-                                  });
-                                  onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
-                                  onsubmit = addCubit.addToCart;
-                                  onNoteChange = addCubit.setNote;
-                                  return BlocConsumer<AddToCartCubit, AddToCartStates>(
-                                    listener: (context, cartState) {
-                                      priceAnQnty.value = (cartState.totalPrice, cartState.quantity);
-                                      noteNotifier.value = cartState.note;
-                                    },
-                                    builder: (context, cartState) {
-                                      return Column(
-                                        children: List.generate(
-                                          state.options.length,
-                                          (index) {
-                                            return PlateOptionsWidget(
-                                              option: state.options[index],
-                                              selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
-                                              onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
-                                            );
-                                          },
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                            if (widget.hasParentProvider)
-                              BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
-                                buildWhen: (previous, current) => current is OrderedWithStates,
-                                builder: (context, state) {
-                                  if (state is! OrderedWithStates || state.items.isEmpty) return const SizedBox.shrink();
-                                  return Skeletonizer(
-                                    enabled: state is OrderedWithLoading,
-                                    child: OrderedWithComponent(products: state.items),
-                                  );
-                                },
-                              ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ValueListenableBuilder(
-                                  valueListenable: noteNotifier,
-                                  builder: (context, value, child) => AddSpecialNote(
-                                    onNoteChange: onNoteChange,
-                                    note: value,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                ],
-              ],
-            ),
-          );
+    return ValueListenableBuilder(
+      valueListenable: canLeaveItem,
+      builder: (context, value, child) => PopScope(
+        canPop: value,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) {
+            if (!didPop) {
+              showDialog<bool>(
+                context: context,
+                builder: (context) => Dialogs.confirmDialog(
+                  title: L10n.tr().alert,
+                  context: context,
+                  okBgColor: Colors.redAccent,
+                  message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
+                ),
+              ).then((confirmed) {
+                if (confirmed == true) {
+                  if (context.mounted) {
+                    canLeaveItem.value = true;
+                    context.pop();
+                  }
+                }
+              });
+            }
+          }
         },
+        child: child!,
       ),
-      bottomNavigationBar: Skeleton.shade(
-        child: ValueListenableBuilder(
-          valueListenable: priceAnQnty,
-          builder: (context, value, child) => ProductPriceSummary(
-            price: value.$1,
-            quantity: value.$2,
-            onChangeQuantity: onChangeQuantity,
-            onsubmit: onsubmit,
+      child: Scaffold(
+        appBar: const MainAppBar(),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, MediaQuery.paddingOf(context).bottom + 16),
+              child: Column(
+                spacing: 12,
+                children: [
+                  if (selectedPlate == null)
+                    Text(L10n.tr().couldnotLoadDataPleaseTryyAgain)
+                  else ...[
+                    VendorInfoCard(
+                      restaurant,
+                      padding: EdgeInsets.zero,
+                      categories: null,
+                    ),
+                    const SizedBox.shrink(),
+                    OverflowBox(
+                      maxWidth: constraints.maxWidth,
+                      minWidth: constraints.maxWidth,
+                      fit: OverflowBoxFit.deferToChild,
+                      child: _FoodImagesGallery(
+                        plates: plates,
+                        selected: selectedPlate!,
+                        onSelect: (plate) async {
+                          if (plate.id == selectedPlate?.id) return false;
+                          if (widget.hasParentProvider) {
+                            if (canLeaveItem.value == false) {
+                              final isConfirmed = await showDialog<bool>(
+                                context: context,
+                                builder: (context) => Dialogs.confirmDialog(
+                                  title: L10n.tr().alert,
+                                  context: context,
+                                  okBgColor: Colors.redAccent,
+                                  message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
+                                ),
+                              );
+                              if (isConfirmed != true) return false;
+                            }
+                            if (context.mounted) {
+                              canLeaveItem.value = true;
+                              context.read<SingleCatRestaurantCubit>().loadItems(plate.id);
+                              context.read<SingleCatRestaurantCubit>().loadPlateDetails(plate.id);
+                              setState(() => selectedPlate = plate);
+                            }
+                            return true;
+                          } else {
+                            return false;
+                          }
+                        },
+                      ),
+                    ),
+                    if (widget.hasParentProvider)
+                      BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
+                        buildWhen: (previous, current) => current is PlateDetailsStates,
+                        builder: (context, state) {
+                          if (state is! PlateDetailsStates) return const SizedBox.shrink();
+                          if (state is PlateDetailsLoading) return const Center(child: AdaptiveProgressIndicator());
+                          return Column(
+                            children: [
+                              _FoodDetailsWidget(product: state.plate),
+                              BlocProvider(
+                                create: (context) => di<AddToCartCubit>(param1: (state.plate, state.options)),
+                                child: Builder(
+                                  builder: (context) {
+                                    print("Builder Method Was Called");
+                                    final addCubit = context.read<AddToCartCubit>();
+                                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                                      canLeaveItem.value = addCubit.cartITem == null;
+                                      priceNQntyNLoading.value = (
+                                        addCubit.state.totalPrice,
+                                        addCubit.state.quantity,
+                                        addCubit.state.status == ApiStatus.loading,
+                                      );
+                                    });
+                                    onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
+                                    onsubmit = addCubit.addToCart;
+                                    onNoteChange = addCubit.setNote;
+                                    return BlocConsumer<AddToCartCubit, AddToCartStates>(
+                                      listener: (context, cartState) {
+                                        noteNotifier.value = cartState.note;
+                                        canLeaveItem.value = cartState.hasUserInteracted;
+                                        priceNQntyNLoading.value = (cartState.totalPrice, cartState.quantity, cartState.status == ApiStatus.loading);
+                                        if (cartState.status == ApiStatus.success) {
+                                          Alerts.showToast(cartState.message, error: false);
+                                          addCubit.resetState();
+                                        } else if (cartState.status == ApiStatus.error) {
+                                          Alerts.showToast(cartState.message);
+                                        }
+                                      },
+                                      builder: (context, cartState) {
+                                        return Column(
+                                          children: List.generate(
+                                            state.options.length,
+                                            (index) {
+                                              return PlateOptionsWidget(
+                                                option: state.options[index],
+                                                selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
+                                                onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                              if (widget.hasParentProvider)
+                                BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
+                                  buildWhen: (previous, current) => current is OrderedWithStates,
+                                  builder: (context, state) {
+                                    if (state is! OrderedWithStates || state.items.isEmpty) return const SizedBox.shrink();
+                                    return Skeletonizer(
+                                      enabled: state is OrderedWithLoading,
+                                      child: OrderedWithComponent(products: state.items),
+                                    );
+                                  },
+                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ValueListenableBuilder(
+                                    valueListenable: noteNotifier,
+                                    builder: (context, value, child) => AddSpecialNote(
+                                      onNoteChange: onNoteChange,
+                                      note: value,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                  ],
+                ],
+              ),
+            );
+          },
+        ),
+        bottomNavigationBar: Skeleton.shade(
+          child: ValueListenableBuilder(
+            valueListenable: priceNQntyNLoading,
+            builder: (context, value, child) => ProductPriceSummary(
+              isLoading: value.$3,
+              price: value.$1,
+              quantity: value.$2,
+              onChangeQuantity: onChangeQuantity,
+              onsubmit: onsubmit,
+            ),
           ),
         ),
       ),

@@ -17,7 +17,7 @@ class CartVendorDTO {
     if (json['items'] != null) {
       items = <CartItemDTO>[];
       json['items'].forEach((v) {
-        items!.add(CartItemDTO.fromJson(v, json['type'].toString().toLowerCase() == 'plate'));
+        items!.add(CartItemDTO.fromJson(v, v['cartable_type'].toString().toLowerCase() == 'plate'));
       });
     }
   }
@@ -27,7 +27,7 @@ class CartVendorDTO {
       id: storeId ?? 0,
       name: storeName ?? '',
       image: storeImage ?? '',
-      type: VendorType.fromString(type ?? ''),
+      type: VendorType.fromString(type.toString().toLowerCase()),
       items: items?.map((item) => item.toEntity()).toList() ?? [],
     );
   }

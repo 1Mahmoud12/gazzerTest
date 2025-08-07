@@ -4,22 +4,11 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
-class IncrementWidgetWhite extends StatefulWidget {
-  const IncrementWidgetWhite({super.key, this.initVal = 1});
+class IncrementWidgetWhite extends StatelessWidget {
+  const IncrementWidgetWhite({super.key, this.initVal = 1, required this.onChanged, required this.isLoading});
   final int initVal;
-  @override
-  State<IncrementWidgetWhite> createState() => _IncrementWidgetWhiteState();
-}
-
-class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
-  late int val;
-
-  @override
-  void initState() {
-    val = widget.initVal;
-    super.initState();
-  }
-
+  final Function(bool isAdding) onChanged;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -41,23 +30,21 @@ class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
           child: IconButton(
             onPressed: () {
               SystemSound.play(SystemSoundType.click);
-              setState(() {
-                val++;
-              });
+              onChanged(true);
             },
             style: IconButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
               elevation: 0,
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
             ),
-            icon: const Icon(Icons.add, color: Co.secondary, size: 24),
+            icon: const Icon(Icons.add, color: Co.secondary, size: 22),
           ),
         ),
         ConstrainedBox(
-          constraints: const BoxConstraints(minWidth: 40),
-          child: Text("$val", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
+          constraints: const BoxConstraints(minWidth: 30),
+          child: Text("$initVal", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
         ),
         DecoratedBox(
           decoration: BoxDecoration(
@@ -75,14 +62,10 @@ class _IncrementWidgetWhiteState extends State<IncrementWidgetWhite> {
           child: IconButton(
             onPressed: () {
               SystemSound.play(SystemSoundType.click);
-              setState(() {
-                if (val > 1) {
-                  val--;
-                }
-              });
+              onChanged(false);
             },
             style: IconButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
               elevation: 0,
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,

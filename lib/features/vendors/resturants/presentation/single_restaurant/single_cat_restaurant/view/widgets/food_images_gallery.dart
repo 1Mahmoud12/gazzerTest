@@ -3,7 +3,7 @@ part of '../single_cat_restaurant_details.dart';
 class _FoodImagesGallery extends StatefulWidget {
   const _FoodImagesGallery({required this.plates, required this.onSelect, required this.selected});
   final List<PlateEntity> plates;
-  final Function(PlateEntity) onSelect;
+  final Future<bool> Function(PlateEntity) onSelect;
   final PlateEntity selected;
 
   @override
@@ -58,9 +58,8 @@ class _FoodImagesGalleryState extends State<_FoodImagesGallery> {
                 separatorBuilder: (context, index) => const VerticalSpacing(12),
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () {
-                      setState(() => selected = widget.plates[index]);
-                      widget.onSelect(widget.plates[index]);
+                    onTap: () async {
+                      if (await widget.onSelect(widget.plates[index])) setState(() => selected = widget.plates[index]);
                     },
                     child: CircleGradientBorderedImage(image: widget.plates[index].image),
                   );

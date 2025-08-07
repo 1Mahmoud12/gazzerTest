@@ -19,6 +19,15 @@ class AppLocalizationsAr extends AppLocalizations {
       'سيتم مسح اختياراتك لأنك لم تضف إلى السلة';
 
   @override
+  String get subTotal => 'المجموع الفرعي';
+
+  @override
+  String get serviceFee => 'تكلفة الخدمة';
+
+  @override
+  String get discount => 'الخصم';
+
+  @override
   String get min => 'دقيقة';
 
   @override

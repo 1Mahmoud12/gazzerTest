@@ -36,8 +36,8 @@ class CustomNetworkImage extends StatelessWidget {
           color: Colors.grey.shade200,
           child: Icon(
             Icons.image,
-            color: Colors.black,
-            size: (height ?? width ?? 100) * 0.5,
+            color: Colors.red,
+            size: 42,
           ),
         );
     if (imageUrl.endsWith('svg')) {
