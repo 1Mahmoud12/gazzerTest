@@ -1,15 +1,13 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/app_bus.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/presentation/bus/item_fast_actions_state.dart';
 
-class CartEvents extends AppEvent {
+sealed class GetCartEvents extends AppEvent {
   final CartResponse data;
-  CartEvents({required this.data});
-}
 
-///
-sealed class GetCartEvents extends CartEvents {
-  GetCartEvents({required super.data});
+  GetCartEvents({required this.data});
 }
 
 class GetCartLoading extends GetCartEvents {
@@ -26,39 +24,22 @@ class GetCartError extends GetCartEvents {
 }
 
 ///
-sealed class UpdateCartItems extends CartEvents {
-  final int cartId;
-  UpdateCartItems({required super.data, required this.cartId});
+sealed class FastItemEvents extends AppEvent {
+  final int prodId;
+  final ItemFastActionState state;
+  final List<CartItemEntity> items;
+  FastItemEvents({required this.prodId, this.state = const ItemFastActionState(), required this.items});
 }
 
-class UpdateCartItemsLoading extends UpdateCartItems {
-  UpdateCartItemsLoading({required super.cartId, required super.data});
+class FastItemActionsLoading extends FastItemEvents {
+  FastItemActionsLoading({required super.state, required super.items, required super.prodId});
 }
 
-class UpdateCartItemsLoaded extends UpdateCartItems {
-  UpdateCartItemsLoaded({required super.data, required super.cartId});
+class FastItemActionsLoaded extends FastItemEvents {
+  FastItemActionsLoaded({required super.items, required super.prodId});
 }
 
-class UpdateCartItemsError extends UpdateCartItems {
+class FastItemActionsError extends FastItemEvents {
   final String? message;
-  UpdateCartItemsError(this.message, {required super.cartId}) : super(data: Fakers.cartResponse);
-}
-
-///
-sealed class GetTimeSlots extends AppEvent {
-  final List<String> slots;
-  GetTimeSlots({required this.slots});
-}
-
-class GetTimeSlotsLoading extends GetTimeSlots {
-  GetTimeSlotsLoading() : super(slots: []);
-}
-
-class GetTimeSlotsLoaded extends GetTimeSlots {
-  GetTimeSlotsLoaded({required super.slots});
-}
-
-class GetTimeSlotsError extends GetTimeSlots {
-  final String? message;
-  GetTimeSlotsError(this.message) : super(slots: []);
+  FastItemActionsError(this.message, {required super.items, required super.prodId});
 }

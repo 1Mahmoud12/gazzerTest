@@ -20,6 +20,7 @@ import 'package:gazzer/features/cart/data/cart_repo_imp.dart';
 import 'package:gazzer/features/cart/domain/cart_repo.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/favorites/data/favorites_repo_imp.dart';
 import 'package:gazzer/features/favorites/domain/favorites_repo.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
@@ -126,6 +127,7 @@ void _registerCubits() {
     (address, _) => AddEditAddressCubit(di.get(), oldAddress: address),
   );
   di.registerFactoryParam<AddToCartCubit, (GenericItemEntity, List<ItemOptionEntity>), CartItemEntity?>(
-    (item, cartItem) => AddToCartCubit(item.$1, item.$2, cartItem),
+    (item, cartItem) => AddToCartCubit(item.$1, item.$2, di.get(),di.get() ,cartItem),
   );
+  di.registerFactory(() => CartCubit(di.get(), di.get()));
 }

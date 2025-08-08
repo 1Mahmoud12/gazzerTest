@@ -11,7 +11,7 @@ class VendorCartProductsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppConst.defaultPadding,
+      padding: AppConst.defaultHrPadding,
       child: Column(
         spacing: 12,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,6 +24,7 @@ class VendorCartProductsItem extends StatelessWidget {
           ListView.separated(
             physics: const NeverScrollableScrollPhysics(),
             itemCount: cartVendor.items.length,
+            padding: EdgeInsets.zero,
             shrinkWrap: true,
             separatorBuilder: (context, index) => const VerticalSpacing(12),
             itemBuilder: (context, index) {

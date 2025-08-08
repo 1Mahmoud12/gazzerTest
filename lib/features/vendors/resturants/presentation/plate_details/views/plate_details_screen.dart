@@ -13,8 +13,8 @@ import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cu
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/cubit/plate_details_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/cubit/plate_details_states.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/components/ordered_with_component.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/plate_options_widget.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_extras_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_image_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_price_summary.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_summary_widget.dart';
@@ -58,7 +58,8 @@ class SinglePlateScreen extends StatelessWidget {
           );
         } else if (detailsState is PlateDetailsLoaded) {
           return BlocProvider(
-            create: (context) => AddToCartCubit(detailsState.plate, detailsState.options),
+            create: (context) =>
+                di<AddToCartCubit>(param1: (detailsState.plate, detailsState.options), param2: itemToEdit),
             child: Builder(
               builder: (context) {
                 final cubit = context.read<AddToCartCubit>();
@@ -101,7 +102,7 @@ class SinglePlateScreen extends StatelessWidget {
                             canPop.value = !state.hasUserInteracted;
                             if (state.status == ApiStatus.success) {
                               Alerts.showToast(state.message, error: false);
-                              context.pop();
+                              context.pop(true); // ** to declare that the cart has changed
                             } else if (state.status == ApiStatus.error) {
                               Alerts.showToast(state.message);
                             }

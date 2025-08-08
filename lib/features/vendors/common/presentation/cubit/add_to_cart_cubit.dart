@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/di.dart';
+import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
+import 'package:gazzer/features/cart/domain/cart_repo.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -17,11 +19,13 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     super.emit(state.copyWith(totalPrice: _calculatePrice(state)));
   }
 
-  CartItemEntity? cartITem;
+  final CartRepo _repo;
+  CartItemEntity? cartItem;
   final GenericItemEntity item;
   final List<ItemOptionEntity> options;
   late final double basePrice;
-  AddToCartCubit(this.item, this.options, [this.cartITem])
+  final CartBus _bus;
+  AddToCartCubit(this.item, this.options, this._repo, this._bus, [this.cartItem])
     : basePrice = options.any((e) => e.controlsPrice) ? 0 : item.price,
       super(
         AddToCartStates(
@@ -29,12 +33,21 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
           status: ApiStatus.initial,
           hasUserInteracted: false,
           hasAddedToCArt: false,
-          note: null,
-          quantity: 1,
-          totalPrice: options.any((e) => e.controlsPrice)
-              ? options.firstWhere((e) => e.controlsPrice).values.firstWhereOrNull((e) => e.isDefault)?.price ?? 0
-              : item.price,
+          note: cartItem?.notes,
+          quantity: cartItem?.quantity ?? 1,
+          totalPrice:
+              cartItem?.totalPrice ??
+              (options.any((e) => e.controlsPrice)
+                  ? options.firstWhere((e) => e.controlsPrice).values.firstWhereOrNull((e) => e.isDefault)?.price ?? 0
+                  : item.price),
           selectedOptions: () {
+            if (cartItem != null) {
+              final map = <int, Set<int>>{};
+              for (var option in cartItem.options) {
+                map[option.id] = option.values.map((e) => e.id).toSet();
+              }
+              return map;
+            }
             final optionsWithDefault = options.where((e) => e.values.any((v) => v.isDefault));
             if (optionsWithDefault.isEmpty) return <int, Set<int>>{};
             final map = <int, Set<int>>{};
@@ -44,7 +57,10 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
             return map;
           }(),
         ),
-      );
+      ) {
+    print("cart item is ${cartItem?.prod.name}");
+    emit(state);
+  }
 
   void increment() {
     emit(state.copyWith(qntity: state.quantity + 1, hasUserInteracted: true));
@@ -122,18 +138,41 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     final msg = _validateCart();
     if (msg != null) return emit(state.copyWith(message: msg, status: ApiStatus.error));
     final req = CartableItemRequest(
+      cartItemId: cartItem?.cartId,
       id: item.id,
       quantity: state.quantity,
       note: state.note,
       options: state.selectedOptions,
       type: item is PlateEntity ? CartItemType.plate : CartItemType.product,
     );
-    emit(state.copyWith(status: ApiStatus.loading));
-    final result = await di<CartBus>().addToCart(req);
-    if (result.$1) {
-      emit(state.copyWith(status: ApiStatus.success, message: result.$2, hasUserInteracted: false));
+    if (cartItem != null) {
+      _updateCart(req);
     } else {
-      emit(state.copyWith(status: ApiStatus.error, message: result.$2, hasUserInteracted: false));
+      _addCartToRemote(req);
+    }
+  }
+
+  Future<void> _addCartToRemote(CartableItemRequest req) async {
+    emit(state.copyWith(status: ApiStatus.loading));
+    final response = await _repo.addToCartItem(req);
+    switch (response) {
+      case Ok<CartResponse> res:
+        _bus.cartResponseToValues(res.value);
+        emit(state.copyWith(status: ApiStatus.success, message: res.value.message, hasUserInteracted: false));
+      case Err err:
+        emit(state.copyWith(status: ApiStatus.error, message: err.error.message, hasUserInteracted: false));
+    }
+  }
+
+  Future<void> _updateCart(CartableItemRequest req) async {
+    emit(state.copyWith(status: ApiStatus.loading));
+    final response = await _repo.updateCartItem(req);
+    switch (response) {
+      case Ok<CartResponse> res:
+        _bus.cartResponseToValues(res.value);
+        emit(state.copyWith(status: ApiStatus.success, message: res.value.message, hasUserInteracted: false));
+      case Err err:
+        emit(state.copyWith(status: ApiStatus.error, message: err.error.message, hasUserInteracted: false));
     }
   }
 
@@ -152,7 +191,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     return null;
   }
 
-  void userEquestClose() {
+  void userRequestClose() {
     emit(state.copyWith(hasUserInteracted: false));
   }
 

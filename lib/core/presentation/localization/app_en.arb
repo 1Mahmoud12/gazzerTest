@@ -1,6 +1,10 @@
 {
   "noData": "No Data",
   "cart_________________Start": "__________________",
+  "am": "AM",
+  "pm": "PM",
+  "noAvailableSchedulingTimeSlots": "No available scheduling time slots",
+  "editNote": "Edit Note",
   "cartIsEmpty": "Cart is empty",
   "startShopping": "Start Shopping",
   "noAddressesSelected": "No addresses selected",
@@ -129,7 +133,7 @@
   "from": "From",
   "to": "To",
   "hurryUp": "Hurry Up!",
-  "vendorClosesInMinutes": "{vendor} closes in {minutes} minutes",
+  "vendorClosesInMinutes": "{vendor} closes in ({minutes})-minutes",
   "@vendorClosesInMinutes": {
     "placeholders": {
       "minutes": {

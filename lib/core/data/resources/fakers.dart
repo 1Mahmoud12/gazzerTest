@@ -4,6 +4,9 @@ import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_vendor_entity.dart';
+import 'package:gazzer/features/cart/presentation/models/cart_summary_model.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -71,7 +74,8 @@ class Fakers {
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',
-      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+      description:
+          'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
 
       id: index,
     ),
@@ -232,7 +236,15 @@ class Fakers {
   );
   static final plateOrderedWith = List.generate(
     3,
-    (index) => OrderedWithEntity(id: index, name: 'Item index', image: Fakers._netWorkImage, price: 0, rate: 3, reviewCount: 0, outOfStock: false),
+    (index) => OrderedWithEntity(
+      id: index,
+      name: 'Item index',
+      image: Fakers._netWorkImage,
+      price: 0,
+      rate: 3,
+      reviewCount: 0,
+      outOfStock: false,
+    ),
   );
   static final plateOptions = List.generate(
     3,
@@ -372,11 +384,33 @@ class Fakers {
   ///
   static final cartResponse = CartResponse(
     addressId: null,
+    summary: cartSummary,
+    vendors: cartVendors,
+  );
+  static const cartVendors = [
+    CartVendorEntity(
+      id: -1,
+      name: 'name',
+      image: _netWorkImage,
+      type: VendorType.restaurant,
+      items: cartItems,
+    ),
+    CartVendorEntity(
+      id: -2,
+      name: 'name',
+      image: _netWorkImage,
+      type: VendorType.restaurant,
+      items: cartItems,
+    ),
+  ];
+  static const cartItems = [CartItemEntity(cartId: -1, type: CartItemType.product, quantity: 1, prod: cartable)];
+  static const cartable = CartableEntity(id: -1, name: 'name', price: 0.0, image: _netWorkImage);
+  static const cartSummary = CartSummaryModel(
     subTotal: 0.0,
     deliveryFee: 0.0,
     serviceFee: 0.0,
     discount: 0.0,
     total: 0.0,
-    vendors: [],
   );
+  static const timeSlots = ['10:00 AM', '11:00 AM', '12:00 PM'];
 }

@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class CartItemEntity extends Equatable {
-  final int id;
+  final int cartId;
   final CartItemType type;
   final CartableEntity prod;
   final int quantity;
@@ -13,7 +13,7 @@ class CartItemEntity extends Equatable {
   double get totalPrice => prod.price * quantity; // TODO: calculation
   // double get _basePRice => options.any((e)=>e.)
   const CartItemEntity({
-    required this.id,
+    required this.cartId,
     required this.type,
     required this.quantity,
     required this.prod,
@@ -23,7 +23,7 @@ class CartItemEntity extends Equatable {
 
   static CartItemEntity fromProduct(GenericItemEntity prod) {
     return CartItemEntity(
-      id: 0,
+      cartId: 0,
       type: prod is PlateEntity ? CartItemType.plate : CartItemType.product,
       prod: CartableEntity(
         id: prod.id,
@@ -47,7 +47,7 @@ class CartItemEntity extends Equatable {
     CartableEntity? prod,
   }) {
     return CartItemEntity(
-      id: id ?? this.id,
+      cartId: id ?? this.cartId,
       type: type ?? this.type,
       quantity: quantity ?? this.quantity,
       notes: notes ?? this.notes,
@@ -57,7 +57,7 @@ class CartItemEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, type, quantity, notes, options, prod];
+  List<Object?> get props => [cartId, type, quantity, notes, options, prod];
 }
 
 class CartableEntity extends Equatable {

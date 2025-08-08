@@ -15,6 +15,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cart_________________Start => '__________________';
 
   @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
+
+  @override
+  String get noAvailableSchedulingTimeSlots =>
+      'No available scheduling time slots';
+
+  @override
+  String get editNote => 'Edit Note';
+
+  @override
   String get cartIsEmpty => 'Cart is empty';
 
   @override
@@ -300,7 +313,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String vendorClosesInMinutes(int minutes, String vendor) {
-    return '$vendor closes in $minutes minutes';
+    return '$vendor closes in ($minutes)-minutes';
   }
 
   @override

@@ -88,7 +88,8 @@ class AddressCard extends StatelessWidget {
                                 TextSpan(text: ", ${L10n.tr().building} ${address.building}"),
                                 TextSpan(text: ", ${L10n.tr().floor} ${address.floor}"),
                                 TextSpan(text: ", ${L10n.tr().apartmentNumber} ${address.apartment}"),
-                                if (address.landmark != null) TextSpan(text: ", ${L10n.tr().landmark} ${address.landmark}."),
+                                if (address.landmark != null)
+                                  TextSpan(text: ", ${L10n.tr().landmark} ${address.landmark}."),
                               ],
                               style: TStyle.greyRegular(12).copyWith(height: 1.7),
                             ),
@@ -108,7 +109,11 @@ class AddressCard extends StatelessWidget {
                             minimumSize: Size.zero,
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
-                          icon: const Icon(Icons.edit, color: Co.purple),
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Co.purple,
+                            size: 18,
+                          ),
                         ),
                         if (!address.isDefault)
                           IconButton(
@@ -135,7 +140,7 @@ class AddressCard extends StatelessWidget {
                             ),
                             icon: snapshot.data is DeleteAddressLoading && snapshot.data?.id == address.id
                                 ? const AdaptiveProgressIndicator(size: 16)
-                                : const Icon(CupertinoIcons.delete, color: Co.purple),
+                                : const Icon(CupertinoIcons.delete, color: Co.purple, size: 18),
                           ),
                       ],
                     ),
@@ -144,7 +149,10 @@ class AddressCard extends StatelessWidget {
                 if (!address.isDefault)
                   TextButton(
                     onPressed: snapshot.data is SetDefaultLoading ? null : () => bus.setDefault(address.id),
-                    style: TextButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4), minimumSize: Size.zero),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      minimumSize: Size.zero,
+                    ),
                     child: snapshot.data is SetDefaultLoading && (snapshot.data as SetDefaultLoading).id == address.id
                         ? const AdaptiveProgressIndicator(size: 12)
                         : Text(

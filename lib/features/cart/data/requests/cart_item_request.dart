@@ -1,13 +1,15 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 
 class CartableItemRequest {
-  final int? id;
+  final int? cartItemId;
+  final int id;
   final CartItemType type;
   final int quantity;
   final String? note;
   final Map<int, Set<int>> options;
 
   CartableItemRequest({
+    required this.cartItemId,
     required this.id,
     required this.type,
     required this.quantity,
@@ -26,6 +28,7 @@ class CartableItemRequest {
     }
 
     return {
+      "cart_item_id": cartItemId,
       'id': id,
       'type': type.value,
       'quantity': quantity,

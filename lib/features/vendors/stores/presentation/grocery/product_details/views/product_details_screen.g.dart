@@ -18,6 +18,7 @@ mixin _$ProductDetailsRoute on GoRouteData {
   static ProductDetailsRoute _fromState(GoRouterState state) =>
       ProductDetailsRoute(
         productId: int.parse(state.uri.queryParameters['product-id']!)!,
+        $extra: state.extra as CartItemEntity?,
       );
 
   ProductDetailsRoute get _self => this as ProductDetailsRoute;
@@ -29,15 +30,17 @@ mixin _$ProductDetailsRoute on GoRouteData {
   );
 
   @override
-  void go(BuildContext context) => context.go(location);
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
   @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
 
   @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+      context.pushReplacement(location, extra: _self.$extra);
 
   @override
-  void replace(BuildContext context) => context.replace(location);
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
 }

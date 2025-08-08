@@ -1,4 +1,5 @@
 import 'package:gazzer/core/data/services/local_storage.dart';
+import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
@@ -26,6 +27,8 @@ class Session {
 
   LatLng? tmpLocation;
   final addresses = <AddressEntity>[];
+
+  AddressEntity? get defaultAddress => addresses.firstWhereOrNull((e) => e.isDefault);
 
   Future<void> loadUserData() async {
     /// cart

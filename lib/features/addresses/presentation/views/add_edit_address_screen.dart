@@ -104,242 +104,244 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
         title: cubit.oldAddress == null ? L10n.tr().addAddress : L10n.tr().editAddress,
         titleStyle: TStyle.primaryBold(20),
       ),
-      body: SingleChildScrollView(
-        padding: AppConst.defaultPadding,
-        child: Form(
-          key: _formKey,
-          child: Column(
-            spacing: 8,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(L10n.tr().addressName, style: TStyle.primaryBold(14)),
-              const SizedBox.shrink(),
-              ValueListenableBuilder(
-                valueListenable: label,
-                builder: (context, value, child) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 12,
-                  children: [
-                    Wrap(
-                      spacing: 8,
-                      alignment: WrapAlignment.spaceBetween,
-                      crossAxisAlignment: WrapCrossAlignment.start,
-                      runAlignment: WrapAlignment.spaceBetween,
-                      children: List.generate(
-                        AddressLabel.values.length,
-                        (index) {
-                          return LabelItem(
-                            isSelected: value == AddressLabel.values[index],
-                            title: AddressLabel.values[index].label ?? L10n.tr().other,
-                            onSelect: () {
-                              if (AddressLabel.values[index] != AddressLabel.other) {
-                                nameController.clear();
-                              }
-                              label.value = AddressLabel.values[index];
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                    AnimatedSize(
-                      duration: Durations.medium1,
-
-                      child: SizedBox(
-                        height: value == AddressLabel.other ? null : 0,
-                        child: MainTextField(
-                          controller: nameController,
-                          showBorder: false,
-                          enabled: value == AddressLabel.other,
-                          borderRadius: 10,
-                          max: 50,
-                          hintText: L10n.tr().addressLabel,
-                          validator: (text) {
-                            if (value == AddressLabel.other) return Validators.notEmpty(text);
-                            return null;
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: AppConst.defaultPadding,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              spacing: 8,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(L10n.tr().addressName, style: TStyle.primaryBold(14)),
+                const SizedBox.shrink(),
+                ValueListenableBuilder(
+                  valueListenable: label,
+                  builder: (context, value, child) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 12,
+                    children: [
+                      Wrap(
+                        spacing: 8,
+                        alignment: WrapAlignment.spaceBetween,
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        runAlignment: WrapAlignment.spaceBetween,
+                        children: List.generate(
+                          AddressLabel.values.length,
+                          (index) {
+                            return LabelItem(
+                              isSelected: value == AddressLabel.values[index],
+                              title: AddressLabel.values[index].label ?? L10n.tr().other,
+                              onSelect: () {
+                                if (AddressLabel.values[index] != AddressLabel.other) {
+                                  nameController.clear();
+                                }
+                                label.value = AddressLabel.values[index];
+                              },
+                            );
                           },
                         ),
+                      ),
+                      AnimatedSize(
+                        duration: Durations.medium1,
+        
+                        child: SizedBox(
+                          height: value == AddressLabel.other ? null : 0,
+                          child: MainTextField(
+                            controller: nameController,
+                            showBorder: false,
+                            enabled: value == AddressLabel.other,
+                            borderRadius: 10,
+                            max: 50,
+                            hintText: L10n.tr().addressLabel,
+                            validator: (text) {
+                              if (value == AddressLabel.other) return Validators.notEmpty(text);
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox.shrink(),
+                Text(L10n.tr().location, style: TStyle.primaryBold(14)),
+                AddressMapWidget(
+                  location: cubit.oldAddress?.location,
+                  onChangeLocation: (loc) => latlng = loc,
+                ),
+        
+                const SizedBox.shrink(),
+                Text(L10n.tr().governorate, style: TStyle.primaryBold(14)),
+                BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
+                  buildWhen: (previous, current) => current is GetProvincesStates,
+                  builder: (context, state) {
+                    final items = state is GetProvincesStates ? state.provinces : <({int id, String name})>[];
+                    if (cubit.oldAddress != null && state is GetProvincesSuccess) {
+                      selectedProvince = state.provinces.firstWhereOrNull((e) => e.id == selectedProvince?.id) ?? selectedProvince;
+                    }
+                    return SelectSearchMenu<({String name, int id})>(
+                      hintText: L10n.tr().selectGovernorate,
+                      isLoading: state is GetProvincesLoading,
+                      showBorder: false,
+                      borderRadius: 10,
+                      items: items,
+                      initValue: () => selectedProvince != null ? {selectedProvince!} : {},
+                      primaryColor: Co.secondary,
+                      validator: Validators.notEmpty,
+                      onSubmit: (set) {
+                        if (set.first.id == selectedProvince?.id) return;
+                        selectedZone = null;
+                        selectedProvince = (name: set.first.title, id: set.first.id);
+                        if (selectedProvince != null) cubit.getZones(selectedProvince!.id);
+                      },
+                      mapper: (item) => OptionItem(id: item.id, title: item.name),
+                    );
+                  },
+                ),
+                const SizedBox.shrink(),
+                Text(L10n.tr().area, style: TStyle.primaryBold(14)),
+                BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
+                  buildWhen: (previous, current) => current is GetZonesStates,
+                  builder: (context, state) {
+                    final items = state is GetZonesStates ? state.zones : <({int id, String name})>[];
+                    if (cubit.oldAddress != null && state is GetZonesSuccess) {
+                      selectedZone = state.zones.firstWhereOrNull((e) => e.id == selectedZone?.id) ?? selectedZone;
+                    }
+                    return SelectSearchMenu<({String name, int id})>(
+                      hintText: L10n.tr().selectArea,
+                      isLoading: state is GetZonesLoading,
+                      showBorder: false,
+                      borderRadius: 10,
+                      items: items,
+                      initValue: () => selectedZone != null ? {selectedZone!} : {},
+                      primaryColor: Co.secondary,
+                      validator: Validators.notEmpty,
+                      onSubmit: (p0) {
+                        selectedZone = (name: p0.first.title, id: p0.first.id);
+                      },
+                      mapper: (item) => OptionItem(id: item.id, title: item.name),
+                    );
+                  },
+                ),
+                const SizedBox.shrink(),
+                Text(L10n.tr().building, style: TStyle.primaryBold(14)),
+                MainTextField(
+                  controller: buildingController,
+                  showBorder: false,
+                  borderRadius: 10,
+                  hintText: L10n.tr().buildingNameNumber,
+                  validator: Validators.notEmpty,
+                ),
+                const SizedBox.shrink(),
+                Row(
+                  spacing: 16,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        spacing: 6,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(L10n.tr().floor, style: TStyle.primaryBold(14)),
+                          MainTextField(
+                            controller: floorController,
+                            showBorder: false,
+                            borderRadius: 10,
+                            hintText: L10n.tr().floor,
+                            max: 3,
+                            inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                            validator: Validators.notEmpty,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        spacing: 6,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(L10n.tr().apartment, style: TStyle.primaryBold(14)),
+                          MainTextField(
+                            controller: apartmentController,
+                            showBorder: false,
+                            borderRadius: 10,
+                            hintText: L10n.tr().apartmentNumber,
+                            max: 3,
+                            inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                            validator: Validators.notEmpty,
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox.shrink(),
-              Text(L10n.tr().location, style: TStyle.primaryBold(14)),
-              AddressMapWidget(
-                location: cubit.oldAddress?.location,
-                onChangeLocation: (loc) => latlng = loc,
-              ),
-
-              const SizedBox.shrink(),
-              Text(L10n.tr().governorate, style: TStyle.primaryBold(14)),
-              BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
-                buildWhen: (previous, current) => current is GetProvincesStates,
-                builder: (context, state) {
-                  final items = state is GetProvincesStates ? state.provinces : <({int id, String name})>[];
-                  if (cubit.oldAddress != null && state is GetProvincesSuccess) {
-                    selectedProvince = state.provinces.firstWhereOrNull((e) => e.id == selectedProvince?.id) ?? selectedProvince;
-                  }
-                  return SelectSearchMenu<({String name, int id})>(
-                    hintText: L10n.tr().selectGovernorate,
-                    isLoading: state is GetProvincesLoading,
-                    showBorder: false,
-                    borderRadius: 10,
-                    items: items,
-                    initValue: () => selectedProvince != null ? {selectedProvince!} : {},
-                    primaryColor: Co.secondary,
-                    validator: Validators.notEmpty,
-                    onSubmit: (set) {
-                      if (set.first.id == selectedProvince?.id) return;
-                      selectedZone = null;
-                      selectedProvince = (name: set.first.title, id: set.first.id);
-                      if (selectedProvince != null) cubit.getZones(selectedProvince!.id);
-                    },
-                    mapper: (item) => OptionItem(id: item.id, title: item.name),
-                  );
-                },
-              ),
-              const SizedBox.shrink(),
-              Text(L10n.tr().area, style: TStyle.primaryBold(14)),
-              BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
-                buildWhen: (previous, current) => current is GetZonesStates,
-                builder: (context, state) {
-                  final items = state is GetZonesStates ? state.zones : <({int id, String name})>[];
-                  if (cubit.oldAddress != null && state is GetZonesSuccess) {
-                    selectedZone = state.zones.firstWhereOrNull((e) => e.id == selectedZone?.id) ?? selectedZone;
-                  }
-                  return SelectSearchMenu<({String name, int id})>(
-                    hintText: L10n.tr().selectArea,
-                    isLoading: state is GetZonesLoading,
-                    showBorder: false,
-                    borderRadius: 10,
-                    items: items,
-                    initValue: () => selectedZone != null ? {selectedZone!} : {},
-                    primaryColor: Co.secondary,
-                    validator: Validators.notEmpty,
-                    onSubmit: (p0) {
-                      selectedZone = (name: p0.first.title, id: p0.first.id);
-                    },
-                    mapper: (item) => OptionItem(id: item.id, title: item.name),
-                  );
-                },
-              ),
-              const SizedBox.shrink(),
-              Text(L10n.tr().building, style: TStyle.primaryBold(14)),
-              MainTextField(
-                controller: buildingController,
-                showBorder: false,
-                borderRadius: 10,
-                hintText: L10n.tr().buildingNameNumber,
-                validator: Validators.notEmpty,
-              ),
-              const SizedBox.shrink(),
-              Row(
-                spacing: 16,
-                children: [
-                  Expanded(
-                    child: Column(
-                      spacing: 6,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(L10n.tr().floor, style: TStyle.primaryBold(14)),
-                        MainTextField(
-                          controller: floorController,
-                          showBorder: false,
-                          borderRadius: 10,
-                          hintText: L10n.tr().floor,
-                          max: 3,
-                          inputFormatters: FilteringTextInputFormatter.digitsOnly,
-                          validator: Validators.notEmpty,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      spacing: 6,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(L10n.tr().apartment, style: TStyle.primaryBold(14)),
-                        MainTextField(
-                          controller: apartmentController,
-                          showBorder: false,
-                          borderRadius: 10,
-                          hintText: L10n.tr().apartmentNumber,
-                          max: 3,
-                          inputFormatters: FilteringTextInputFormatter.digitsOnly,
-                          validator: Validators.notEmpty,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox.shrink(),
-              Text(L10n.tr().landmark, style: TStyle.primaryBold(14)),
-              MainTextField(
-                controller: landMarkControler,
-                showBorder: false,
-                borderRadius: 10,
-                hintText: L10n.tr().nearbyLandmark,
-                validator: (v) {
-                  return Validators.notEmpty(v) ?? Validators.valueAtLeastNum(v, L10n.tr().floor, 6);
-                },
-              ),
-
-              const SizedBox.shrink(),
-              const SizedBox.shrink(),
-              BlocConsumer<AddEditAddressCubit, AddEditAddressStates>(
-                listener: (context, state) {
-                  if (state is SaveAddressSuccess) {
-                    di<AddressesBus>().refreshAddresses();
-                    Alerts.showToast(state.message, error: false);
-                    context.pop(true); // indacates success operation
-                  } else if (state is SaveAddressError) {
-                    Alerts.showToast(state.error);
-                  } else if (state is GetProvincesError) {
-                  } else if (state is GetZonesError) {
-                    Alerts.showToast(state.error);
-                  }
-                },
-                buildWhen: (previous, current) => current is SaveAddressStates,
-                builder: (context, state) => MainBtn(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() != true) return;
-                    if (latlng == null) {
-                      return Alerts.showToast(L10n.tr().pleaseSelectYourLocation);
-                    }
-                    final req = AddressRequest(
-                      label: label.value,
-                      lat: latlng!.latitude,
-                      long: latlng!.longitude,
-                      provinceId: selectedProvince!.id,
-                      provinceZoneId: selectedZone!.id,
-                      name: nameController.text.trim(),
-                      building: buildingController.text.trim(),
-                      floor: floorController.text.trim(),
-                      apartment: apartmentController.text.trim(),
-                      landmark: landMarkControler.text.trim(),
-                      isDefault: cubit.oldAddress?.isDefault ?? false,
-                    );
-                    cubit.saveAddress(req);
+                const SizedBox.shrink(),
+                Text(L10n.tr().landmark, style: TStyle.primaryBold(14)),
+                MainTextField(
+                  controller: landMarkControler,
+                  showBorder: false,
+                  borderRadius: 10,
+                  hintText: L10n.tr().nearbyLandmark,
+                  validator: (v) {
+                    return Validators.notEmpty(v) ?? Validators.valueAtLeastNum(v, L10n.tr().floor, 6);
                   },
-                  bgColor: Co.secondary,
-                  isLoading: state is SaveAddressLoading,
-                  radius: 12,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.add, size: 24, color: Co.purple),
-                        const Spacer(),
-                        Text(L10n.tr().saveAddress, style: TStyle.primaryBold(14)),
-                        const Spacer(),
-                      ],
+                ),
+        
+                const SizedBox.shrink(),
+                const SizedBox.shrink(),
+                BlocConsumer<AddEditAddressCubit, AddEditAddressStates>(
+                  listener: (context, state) {
+                    if (state is SaveAddressSuccess) {
+                      di<AddressesBus>().refreshAddresses();
+                      Alerts.showToast(state.message, error: false);
+                      context.pop(true); // indacates success operation
+                    } else if (state is SaveAddressError) {
+                      Alerts.showToast(state.error);
+                    } else if (state is GetProvincesError) {
+                    } else if (state is GetZonesError) {
+                      Alerts.showToast(state.error);
+                    }
+                  },
+                  buildWhen: (previous, current) => current is SaveAddressStates,
+                  builder: (context, state) => MainBtn(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() != true) return;
+                      if (latlng == null) {
+                        return Alerts.showToast(L10n.tr().pleaseSelectYourLocation);
+                      }
+                      final req = AddressRequest(
+                        label: label.value,
+                        lat: latlng!.latitude,
+                        long: latlng!.longitude,
+                        provinceId: selectedProvince!.id,
+                        provinceZoneId: selectedZone!.id,
+                        name: nameController.text.trim(),
+                        building: buildingController.text.trim(),
+                        floor: floorController.text.trim(),
+                        apartment: apartmentController.text.trim(),
+                        landmark: landMarkControler.text.trim(),
+                        isDefault: cubit.oldAddress?.isDefault ?? false,
+                      );
+                      cubit.saveAddress(req);
+                    },
+                    bgColor: Co.secondary,
+                    isLoading: state is SaveAddressLoading,
+                    radius: 12,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.add, size: 24, color: Co.purple),
+                          const Spacer(),
+                          Text(L10n.tr().saveAddress, style: TStyle.primaryBold(14)),
+                          const Spacer(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

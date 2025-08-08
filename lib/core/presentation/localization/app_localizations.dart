@@ -110,6 +110,30 @@ abstract class AppLocalizations {
   /// **'__________________'**
   String get cart_________________Start;
 
+  /// No description provided for @am.
+  ///
+  /// In en, this message translates to:
+  /// **'AM'**
+  String get am;
+
+  /// No description provided for @pm.
+  ///
+  /// In en, this message translates to:
+  /// **'PM'**
+  String get pm;
+
+  /// No description provided for @noAvailableSchedulingTimeSlots.
+  ///
+  /// In en, this message translates to:
+  /// **'No available scheduling time slots'**
+  String get noAvailableSchedulingTimeSlots;
+
+  /// No description provided for @editNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Note'**
+  String get editNote;
+
   /// No description provided for @cartIsEmpty.
   ///
   /// In en, this message translates to:
@@ -653,7 +677,7 @@ abstract class AppLocalizations {
   /// No description provided for @vendorClosesInMinutes.
   ///
   /// In en, this message translates to:
-  /// **'{vendor} closes in {minutes} minutes'**
+  /// **'{vendor} closes in ({minutes})-minutes'**
   String vendorClosesInMinutes(int minutes, String vendor);
 
   /// No description provided for @theRestaurant.

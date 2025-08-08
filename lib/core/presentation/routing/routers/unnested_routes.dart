@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
 import 'package:gazzer/features/auth/forgot_password/presentation/reset_password_screen.dart';
@@ -6,7 +8,9 @@ import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
+import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
@@ -47,7 +51,12 @@ final List<RouteBase> unNestedRoutes = [
 final checkoutRoutes = [
   GoRoute(
     path: CartScreen.route,
-    builder: (context, state) => const CartScreen(),
+    builder: (context, state) => BlocProvider(create: (context) => di<CartCubit>(), child: const CartScreen()),
+  ),
+  
+  GoRoute(
+    path: SelectAddressScreen.route,
+    builder: (context, state) => const SelectAddressScreen(),
   ),
   GoRoute(
     path: ConfirmOrderScreen.route,

@@ -17,10 +17,13 @@ class AppTheme {
     fontFamily: 'poppins',
     scaffoldBackgroundColor: Co.bg,
     switchTheme: SwitchThemeData(
-      thumbColor: const WidgetStateColor.fromMap({WidgetState.selected: Co.white, WidgetState.any: Co.tertiary}),
-      trackColor: const WidgetStateColor.fromMap({WidgetState.selected: Co.second2, WidgetState.any: Co.lightGrey}),
+      thumbColor: const WidgetStateColor.fromMap({WidgetState.selected: Co.secondary, WidgetState.any: Co.purple}),
+      trackColor: const WidgetStateColor.fromMap({
+        WidgetState.selected: Color(0x55FF9900),
+        WidgetState.any: Color(0x5552229E),
+      }),
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-      trackOutlineColor: WidgetStatePropertyAll(Colors.grey.shade400),
+      trackOutlineColor: WidgetStatePropertyAll(Colors.transparent),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       padding: EdgeInsets.zero,
     ),
@@ -38,6 +41,10 @@ class AppTheme {
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
     ),
-    buttonTheme: ButtonThemeData(height: 0, minWidth: 0, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius))),
+    buttonTheme: ButtonThemeData(
+      height: 0,
+      minWidth: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius)),
+    ),
   );
 }

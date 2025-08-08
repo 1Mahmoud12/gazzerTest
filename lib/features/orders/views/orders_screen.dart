@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 
 part 'widgets/history_orders_widget.dart';
@@ -39,25 +38,31 @@ class _OrdersScreenState extends State<OrdersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MainAppBar(showCart: false),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          spacing: 12,
-          children: [
-            MainTextField(
-              controller: controller,
-              height: 80,
-              borderRadius: 64,
-              hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-              bgColor: Colors.transparent,
-              prefix: const Icon(Icons.search, color: Co.purple, size: 24),
-            ),
-
-            const _RecentOrders(),
-            const Expanded(child: _HistoryOrdersWidget()),
-          ],
+      body: Center(
+        child: Text(
+          L10n.tr().noData,
+          style: TStyle.primaryBold(16),
         ),
       ),
+      //  Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 24),
+      //   child: Column(
+      //     spacing: 12,
+      //     children: [
+      //       MainTextField(
+      //         controller: controller,
+      //         height: 80,
+      //         borderRadius: 64,
+      //         hintText: L10n.tr().searchForStoresItemsAndCAtegories,
+      //         bgColor: Colors.transparent,
+      //         prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+      //       ),
+
+      //       const _RecentOrders(),
+      //       const Expanded(child: _HistoryOrdersWidget()),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

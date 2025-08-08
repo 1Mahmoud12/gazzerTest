@@ -20,8 +20,8 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/components/ordered_with_component.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/plate_options_widget.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_extras_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_price_summary.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/ordered_with_cubit/ordered_with_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/ordered_with_cubit/ordered_with_states.dart';
@@ -195,7 +195,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                     print("Builder Method Was Called");
                                     final addCubit = context.read<AddToCartCubit>();
                                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                                      canLeaveItem.value = addCubit.cartITem == null;
+                                      canLeaveItem.value = addCubit.cartItem == null;
                                       priceNQntyNLoading.value = (
                                         addCubit.state.totalPrice,
                                         addCubit.state.quantity,

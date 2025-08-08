@@ -23,6 +23,14 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
     if (widget.endTime.isBefore(DateTime.now())) {
       isClosed = true;
       timer?.cancel();
+      // context.pop();
+      // Alerts.showToast(
+      //   L10n.tr().nameisCurrentlyClosedWeWillOpenAt(
+      //     widget.name,
+      //     widget.startTime?.defaultTimeFormat ?? L10n.tr().soon,
+      //   ),
+      //   isInfo: true,
+      // );
     } else {
       setState(() {
         difference = widget.endTime.difference(DateTime.now()).inSeconds;
@@ -55,7 +63,9 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: difference < 1 ? MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
+          spacing: 8,
           children: [
             if (difference < 1)
               Expanded(
@@ -69,9 +79,12 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
                 ),
               )
             else ...[
-              Text(
-                L10n.tr().vendorClosesInMinutes(difference ~/ 60, widget.name),
-                style: TStyle.whiteBold(12, font: FFamily.inter),
+              Expanded(
+                child: Text(
+                  L10n.tr().vendorClosesInMinutes(difference ~/ 60, widget.name),
+                  style: TStyle.whiteBold(12, font: FFamily.inter),
+                  textAlign: TextAlign.center,
+                ),
               ),
               Text.rich(
                 TextSpan(

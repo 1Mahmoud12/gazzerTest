@@ -1,6 +1,10 @@
 {
   "noData": "لا توجد بيانات",
   "cart_________________Start": "__________________",
+  "am": "ص",
+  "pm": "م",
+  "noAvailableSchedulingTimeSlots": "لا توجد أوقات متاحة للجدولة",
+  "editNote": "تعديل الملاحظة",
   "cartIsEmpty": "السلة فارغة",
   "startShopping": "ابدأ التسوق",
   "noAddressesSelected": "لم يتم اختيار أي عناوين",
@@ -129,7 +133,7 @@
   "from": "من",
   "to": "إلى",
   "hurryUp": "أسرع!",
-  "vendorClosesInMinutes": "{vendor} يغلق خلال {minutes} دقيقة",
+  "vendorClosesInMinutes": "{vendor} يغلق خلال ({minutes})-دقيقة",
   "@vendorClosesInMinutes": {
     "placeholders": {
       "minutes": {

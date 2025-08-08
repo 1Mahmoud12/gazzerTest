@@ -32,8 +32,8 @@ class CartItemDTO {
 
   CartItemEntity toEntity() {
     return CartItemEntity(
-      id: id ?? 0,
-      type: cartableType == 'Plate' ? CartItemType.plate : CartItemType.product,
+      cartId: id ?? 0,
+      type: CartItemType.fromString(cartableType?.toLowerCase() ?? ''),
       prod: cartable!.toCartable(),
       quantity: quantity ?? 1,
       options: optionValues?.map((option) => option.toEntity()).toList() ?? [],

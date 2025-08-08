@@ -89,20 +89,31 @@ class _HomeHeader extends StatelessWidget {
                               ).withHotspot(order: 4, title: "", text: L10n.tr().setYourLocation),
                               const HorizontalSpacing(8),
                               Expanded(
-                                child: Text.rich(
-                                  TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: L10n.tr().deliverTo,
-                                        style: TStyle.mainwSemi(15).copyWith(color: Co.white.withAlpha(120)),
+                                child: StreamBuilder(
+                                  stream: di<AddressesBus>().getStream<AddressesEvents>(),
+                                  builder: (context, snapshot) {
+                                    final adderss = Session().defaultAddress;
+                                    if (adderss == null) return SizedBox.shrink();
+                                    return Expanded(
+                                      child: Text.rich(
+                                        TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: L10n.tr().deliverTo,
+                                              style: TStyle.mainwSemi(15).copyWith(color: Co.white.withAlpha(120)),
+                                            ),
+                                            const TextSpan(text: '\n'),
+                                            TextSpan(
+                                              text: '${adderss.zoneName}, ${adderss.provinceName}',
+                                            ),
+                                          ],
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TStyle.whiteSemi(14),
                                       ),
-                                      const TextSpan(text: '\n'),
-                                      const TextSpan(text: '4140 Parker Rd. Allentwon, St.Mark'),
-                                    ],
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TStyle.whiteSemi(14),
+                                    );
+                                  },
                                 ),
                               ),
                               InkWell(
