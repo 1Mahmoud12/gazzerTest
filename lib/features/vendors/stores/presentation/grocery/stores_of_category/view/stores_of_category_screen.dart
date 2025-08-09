@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
@@ -60,7 +60,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
             if (state is StoresOfCategoryLoading) {
               return const Center(child: AdaptiveProgressIndicator());
             } else if (state is StoresOfCategoryError) {
-              return FailureWidget(
+              return FailureComponent(
                 message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
                 onRetry: () => context.read<StoresOfCategoryCubit>().loadStoresOfCategory(),
               );

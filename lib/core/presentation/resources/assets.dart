@@ -62,6 +62,8 @@ class Assets {
 
   static const String assetsPngDrinks = "assets/png/drinks.png";
 
+  static const String assetsPngError = "assets/png/error.png";
+
   static const String assetsPngFastFood = "assets/png/fast-food.jpg";
 
   static const String assetsPngFlagEg = "assets/png/flag_eg.png";

@@ -104,6 +104,18 @@ abstract class AppLocalizations {
   /// **'No Data'**
   String get noData;
 
+  /// No description provided for @oops.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops'**
+  String get oops;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get tryAgain;
+
   /// No description provided for @cart_________________Start.
   ///
   /// In en, this message translates to:

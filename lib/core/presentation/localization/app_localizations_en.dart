@@ -12,6 +12,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noData => 'No Data';
 
   @override
+  String get oops => 'Oops';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
   String get cart_________________Start => '__________________';
 
   @override

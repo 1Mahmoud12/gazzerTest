@@ -30,9 +30,9 @@ class CartAddressComponent extends StatelessWidget {
           ),
           const Divider(height: 9, thickness: 1),
           BlocBuilder<CartCubit, CartStates>(
-            buildWhen: (previous, current) => current is UpdateCartAddress,
+            buildWhen: (previous, current) => current is FullCartStates,
             builder: (context, state) {
-              if (state is! UpdateCartAddress || state.address == null) {
+              if (state is! FullCartStates || state.address == null) {
                 return SizedBox(
                   height: 80,
                   child: Row(
@@ -58,7 +58,7 @@ class CartAddressComponent extends StatelessWidget {
                     ],
                   ),
                 );
-              } else if (state is UpdateCartAddressLoading) {
+              } else if (state is FullCartLoading) {
                 return const Center(child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
                   child: AdaptiveProgressIndicator(),

@@ -114,6 +114,7 @@ class _MainBtnState extends State<MainBtn> {
             ),
             padding: widget.padding ?? const EdgeInsets.all(6),
             elevation: 0,
+            disabledBackgroundColor: widget.disabledColor,
             // minimumSize: Size(0, 0),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             minimumSize: Size(

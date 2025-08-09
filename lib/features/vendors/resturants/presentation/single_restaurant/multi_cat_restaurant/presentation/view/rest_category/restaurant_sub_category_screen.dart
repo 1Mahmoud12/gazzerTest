@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -54,7 +54,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
             future: di<RestaurantsRepo>().getPlatesOfSpecificRestaurantCategory(vendor.id, subCatId),
             builder: (context, snapshot) {
               if (snapshot.hasError || snapshot.data is Err) {
-                return FailureWidget(
+                return FailureComponent(
                   message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
                 );
               }

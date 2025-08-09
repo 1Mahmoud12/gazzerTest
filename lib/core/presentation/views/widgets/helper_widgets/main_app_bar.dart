@@ -46,7 +46,16 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           StreamBuilder(
             stream: di<CartBus>().getStream<GetCartEvents>(),
             builder: (context, snapshot) => Badge(
-              label: Text(di<CartBus>().vendors.fold(0, (previousValue, element) => previousValue + element.items.length).toString()),
+              label: Text(
+                di<CartBus>().vendors
+                    .fold(
+                      0,
+                      (previousValue, element) =>
+                          previousValue +
+                          element.items.fold<int>(0, (previousValue, item) => previousValue + item.quantity),
+                    )
+                    .toString(),
+              ),
               textColor: Co.mainText,
               backgroundColor: Co.second2,
               child: CartFloatingBtn(size: 20, padding: 8, navigate: !isCartScreen),

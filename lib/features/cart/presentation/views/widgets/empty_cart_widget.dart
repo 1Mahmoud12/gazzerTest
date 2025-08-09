@@ -4,6 +4,8 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class EmptyCartWidget extends StatelessWidget {
   const EmptyCartWidget({super.key});
@@ -35,7 +37,9 @@ class EmptyCartWidget extends StatelessWidget {
         ),
         const SizedBox.shrink(),
         MainBtn(
-          onPressed: () {},
+          onPressed: () {
+            context.go(HomeScreen.route);
+          },
           bgColor: Co.secondary,
           width: 250,
           radius: 12,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -51,7 +51,7 @@ class SinglePlateScreen extends StatelessWidget {
         if (detailsState is PlateDetailsError) {
           return Scaffold(
             appBar: const MainAppBar(),
-            body: FailureWidget(
+            body: FailureComponent(
               message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
               onRetry: () => context.read<PlateDetailsCubit>().loadPlateDetails(),
             ),

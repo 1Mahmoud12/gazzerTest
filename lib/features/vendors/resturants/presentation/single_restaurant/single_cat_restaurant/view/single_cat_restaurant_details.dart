@@ -194,22 +194,29 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                   builder: (context) {
                                     print("Builder Method Was Called");
                                     final addCubit = context.read<AddToCartCubit>();
+                                    onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
+                                    onsubmit = addCubit.addToCart;
+                                    onNoteChange = addCubit.setNote;
                                     WidgetsBinding.instance.addPostFrameCallback((_) {
                                       canLeaveItem.value = addCubit.cartItem == null;
+                                      // this line to force rebuild the summaryy widget in order that it reads the newly assigned onSubmit
+                                      // as the [.value] method internally has a guard that prevents build unless it used to set a different value
+                                      priceNQntyNLoading.value = (0, 0, false);
                                       priceNQntyNLoading.value = (
                                         addCubit.state.totalPrice,
                                         addCubit.state.quantity,
                                         addCubit.state.status == ApiStatus.loading,
                                       );
                                     });
-                                    onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
-                                    onsubmit = addCubit.addToCart;
-                                    onNoteChange = addCubit.setNote;
                                     return BlocConsumer<AddToCartCubit, AddToCartStates>(
                                       listener: (context, cartState) {
                                         noteNotifier.value = cartState.note;
                                         canLeaveItem.value = cartState.hasUserInteracted;
-                                        priceNQntyNLoading.value = (cartState.totalPrice, cartState.quantity, cartState.status == ApiStatus.loading);
+                                        priceNQntyNLoading.value = (
+                                          cartState.totalPrice,
+                                          cartState.quantity,
+                                          cartState.status == ApiStatus.loading,
+                                        );
                                         if (cartState.status == ApiStatus.success) {
                                           Alerts.showToast(cartState.message, error: false);
                                           addCubit.resetState();
@@ -225,7 +232,8 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                               return PlateOptionsWidget(
                                                 option: state.options[index],
                                                 selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
-                                                onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
+                                                onValueSelected: (id) =>
+                                                    addCubit.setOptionValue(state.options[index].id, id),
                                               );
                                             },
                                           ),
@@ -239,7 +247,9 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                 BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
                                   buildWhen: (previous, current) => current is OrderedWithStates,
                                   builder: (context, state) {
-                                    if (state is! OrderedWithStates || state.items.isEmpty) return const SizedBox.shrink();
+                                    if (state is! OrderedWithStates || state.items.isEmpty) {
+                                      return const SizedBox.shrink();
+                                    }
                                     return Skeletonizer(
                                       enabled: state is OrderedWithLoading,
                                       child: OrderedWithComponent(products: state.items),

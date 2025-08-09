@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
@@ -50,7 +50,7 @@ class StoreDetailsScreen extends StatelessWidget {
       body: BlocBuilder<StoreDetailsCubit, StoreDetailsStates>(
         builder: (context, state) {
           if (state is StoreDetailsError) {
-            return FailureWidget(
+            return FailureComponent(
               message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
               onRetry: () => context.read<StoreDetailsCubit>().loadScreenData(),
             );

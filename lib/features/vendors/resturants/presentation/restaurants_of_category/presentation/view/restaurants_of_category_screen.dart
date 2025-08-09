@@ -6,7 +6,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/app_bar_row_widget.dart';
@@ -62,7 +62,7 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                     title: '',
                   ),
                   Expanded(
-                    child: FailureWidget(
+                    child: FailureComponent(
                       message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
                       onRetry: () => cubit.loadPageData(),
                     ),

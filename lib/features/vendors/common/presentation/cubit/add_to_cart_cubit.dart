@@ -137,6 +137,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
   Future<void> addToCart() async {
     final msg = _validateCart();
+    print('msg is $msg');
     if (msg != null) return emit(state.copyWith(message: msg, status: ApiStatus.error));
     final req = CartableItemRequest(
       cartItemId: cartItem?.cartId,

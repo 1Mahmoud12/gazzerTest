@@ -7,9 +7,9 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/components/confirm_sheet.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/components/loading_full_screen.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/decoration_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
@@ -146,7 +146,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   buildWhen: (previous, current) => current is FetchDeleteAccountReasonsLoading || previous is FetchDeleteAccountReasonsLoading,
                   builder: (context, state) {
                     if (state is FetchDeleteAccountReasonsError) {
-                      return FailureWidget(
+                      return FailureComponent(
                         message: state.message,
                         onRetry: () => cubit.getDeleteAccountReasons(),
                       );

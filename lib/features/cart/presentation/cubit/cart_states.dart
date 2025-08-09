@@ -9,41 +9,30 @@ sealed class CartStates {}
 class CartInitial extends CartStates {}
 
 ///
-sealed class UpdateVendorsStates extends CartStates {
+sealed class FullCartStates extends CartStates {
   final List<CartVendorEntity> vendors;
-  UpdateVendorsStates({this.vendors = const []});
-}
-
-class UpdateVendorsLoading extends UpdateVendorsStates {
-  UpdateVendorsLoading() : super(vendors: Fakers.cartVendors);
-}
-
-class UpdateVendorsLoaded extends UpdateVendorsStates {
-  UpdateVendorsLoaded({required super.vendors});
-}
-
-class UpdateVendorsError extends UpdateVendorsStates implements BaseErrorState {
-  @override
-  final String message;
-  UpdateVendorsError({required this.message});
-}
-
-///
-sealed class UpdateSummaryStates extends CartStates {
   final CartSummaryModel summary;
-  UpdateSummaryStates({this.summary = Fakers.cartSummary});
+  final AddressEntity? address;
+  final bool isCartValid;
+
+  FullCartStates({
+    this.vendors = Fakers.cartVendors,
+    this.summary = Fakers.cartSummary,
+    this.address,
+    this.isCartValid = false,
+  });
 }
 
-class UpdateSummaryLoading extends UpdateSummaryStates {}
+class FullCartLoading extends FullCartStates {}
 
-class UpdateSummaryLoaded extends UpdateSummaryStates {
-  UpdateSummaryLoaded({required super.summary});
+class FullCartLoaded extends FullCartStates {
+  FullCartLoaded({required super.vendors, required super.summary, required super.address, required super.isCartValid});
 }
 
-class UpdateSummaryError extends UpdateSummaryStates implements BaseErrorState {
+class FullCartError extends FullCartStates implements BaseErrorState {
   @override
   final String message;
-  UpdateSummaryError({required this.message});
+  FullCartError({required this.message});
 }
 
 ///
@@ -63,26 +52,6 @@ class TimeSlotsError extends TimeSlotsStates implements BaseErrorState {
   @override
   final String message;
   TimeSlotsError({required this.message});
-}
-
-///
-sealed class UpdateCartAddress extends CartStates {
-  final AddressEntity? address;
-  UpdateCartAddress({this.address});
-}
-
-class UpdateCartAddressLoading extends UpdateCartAddress {
-  UpdateCartAddressLoading({super.address});
-}
-
-class UpdateCartAddressLoaded extends UpdateCartAddress {
-  UpdateCartAddressLoaded({required super.address});
-}
-
-class UpdateCartAddressError extends UpdateCartAddress implements BaseErrorState {
-  @override
-  final String message;
-  UpdateCartAddressError({required this.message, super.address});
 }
 
 ///

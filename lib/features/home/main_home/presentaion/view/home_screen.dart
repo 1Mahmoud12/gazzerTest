@@ -12,7 +12,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is HomeDataLoadingState) {
                   return const Center(child: AdaptiveProgressIndicator());
                 } else if (state is HomeDataErrorState) {
-                  return FailureWidget(
+                  return FailureComponent(
                     message: state.msg,
                     onRetry: () async {
                       await context.read<HomeCubit>().getHomeData();

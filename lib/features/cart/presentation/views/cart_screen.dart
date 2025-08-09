@@ -4,13 +4,14 @@ import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/base_error_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/cart/presentation/views/component/cart_address_component.dart';
 import 'package:gazzer/features/cart/presentation/views/component/scheduling_component.dart';
+import 'package:gazzer/features/cart/presentation/views/component/un_auth_cart_component.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_summary_widget.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/empty_cart_widget.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/vendor_cart_products_item.dart';
@@ -52,41 +53,34 @@ class _CartScreenState extends State<CartScreen> {
               gradient: Grad().radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
             ),
             if (Session().client == null)
-              Expanded(
-                child: Center(
-                  child: Text(
-                    L10n.tr().pleaseLoginToUseCart,
-                    style: TStyle.primarySemi(16),
-                  ),
-                ),
-              )
+              const UnAuthCartComponent()
             else
               Expanded(
                 child: BlocBuilder<CartCubit, CartStates>(
-                  buildWhen: (previous, current) => current is UpdateVendorsStates,
+                  buildWhen: (previous, current) => current is FullCartStates,
                   builder: (context, state) {
-                    if (state is! UpdateVendorsStates) return const SizedBox.shrink();
-                    if (state is UpdateVendorsError) {
-                      return FailureWidget(
+                    if (state is! FullCartStates) return const SizedBox.shrink();
+                    if (state is FullCartError) {
+                      return FailureComponent(
                         message: state.message,
                         onRetry: () => cubit.loadCart(),
                       );
-                    } else if (state is UpdateVendorsLoaded && state.vendors.isEmpty) {
+                    } else if (state is FullCartLoaded && state.vendors.isEmpty) {
                       return const EmptyCartWidget();
                     }
                     return RefreshIndicator(
                       onRefresh: () => cubit.loadCart(),
                       child: Skeletonizer(
-                        enabled: state is UpdateVendorsLoading,
+                        enabled: state is FullCartLoading,
                         child: ListView.separated(
                           padding: EdgeInsets.zero,
-                          itemCount: state.vendors.length + 3,
+                          itemCount: state.vendors.length + 2,
                           separatorBuilder: (context, index) => const VerticalSpacing(24),
                           // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
                           itemBuilder: (context, index) {
                             if (index == state.vendors.length) return const CartAddressComponent();
                             if (index == state.vendors.length + 1) return const SchedulingComponent();
-                            if (index == state.vendors.length + 2) return const CartSummaryWidget();
+                            // if (index == state.vendors.length + 2) return const CartSummaryWidget();
 
                             return VendorCartProductsItem(cartVendor: state.vendors[index]);
                           },
@@ -98,7 +92,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
           ],
         ),
-        // bottomNavigationBar: Session().client == null ? null : const CartSummaryWidget(),
+        bottomNavigationBar: Session().client == null ? null : const CartSummaryWidget(),
       ),
     );
   }

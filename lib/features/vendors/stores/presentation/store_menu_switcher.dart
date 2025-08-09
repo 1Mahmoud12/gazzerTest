@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/di.dart';
@@ -47,7 +47,7 @@ class StoreMenuSwitcher extends StatelessWidget {
                   showCart: false, // don't show cart : multiple hero
                 ),
                 body: state is ScreenDataError
-                    ? FailureWidget(
+                    ? FailureComponent(
                         message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
                         onRetry: () => context.read<StoresMenuCubit>().loadScreenData(),
                       )

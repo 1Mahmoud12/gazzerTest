@@ -12,6 +12,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noData => 'لا توجد بيانات';
 
   @override
+  String get oops => 'عذرًا';
+
+  @override
+  String get tryAgain => 'حاول مرة أخرى';
+
+  @override
   String get cart_________________Start => '__________________';
 
   @override

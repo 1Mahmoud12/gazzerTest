@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -19,11 +20,11 @@ class CartSummaryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartStates>(
-      buildWhen: (previous, current) => current is UpdateSummaryStates,
+      buildWhen: (previous, current) => current is FullCartStates,
       builder: (context, state) {
-        if (state is! UpdateSummaryStates || state.summary.subTotal == 0) return const SizedBox.shrink();
+        if (state is! FullCartStates || state.summary.subTotal == 0) return const SizedBox.shrink();
         return Skeletonizer(
-          enabled: state is UpdateSummaryLoading,
+          enabled: state is FullCartLoading,
           child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(36), topRight: Radius.circular(36)),
@@ -142,7 +143,9 @@ class CartSummaryWidget extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(2),
                                 child: MainBtn(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.go(HomeScreen.route);
+                                  },
                                   text: L10n.tr().addItems,
                                   padding: const EdgeInsets.symmetric(vertical: 3),
                                   width: double.infinity,
@@ -168,6 +171,8 @@ class CartSummaryWidget extends StatelessWidget {
                                   onPressed: () {
                                     context.push(ConfirmOrderScreen.route);
                                   },
+                                  disabledColor: Co.grey.withAlpha(80),
+                                  isEnabled: state.isCartValid,
                                   text: L10n.tr().checkout,
                                   textStyle: TStyle.secondaryBold(12),
                                   width: double.infinity,

@@ -27,7 +27,7 @@ abstract class Helpers {
       final hours = int.parse(parts[0]);
       final suffix = hours >= 12 ? L10n.tr().pm : L10n.tr().am;
       final formattedHours = hours % 12 == 0 ? 12 : hours % 12; // Convert to 12-hour format
-      return '$formattedHours:${parts[1]} $suffix';
+      return '$formattedHours:${parts[1].replaceAll(RegExp(r'[a-zA-Z]'), '')} $suffix';
     } catch (e) {
       return time; // Return the original time if parsing fails
     }

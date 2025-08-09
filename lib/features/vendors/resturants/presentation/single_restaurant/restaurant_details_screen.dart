@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
@@ -49,7 +49,7 @@ class RestaurantDetilsScreen extends StatelessWidget {
             (state is SingleRestaurantLoaded && (state.categoriesWithPlates.isEmpty || state.categoriesWithPlates.first.$2.isEmpty))) {
           return Scaffold(
             appBar: const ClassicAppBar(),
-            body: FailureWidget(
+            body: FailureComponent(
               message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
               onRetry: () => context.read<SingleRestaurantCubit>().loadSingleRestaurantData(),
             ),

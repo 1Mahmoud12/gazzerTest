@@ -44,7 +44,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                       opacity: state is TimeSlotsStates && state.selectedTime != null ? 1 : 0,
                       duration: Durations.medium1,
                       child: Text(
-                        ' (${state is! TimeSlotsStates ? '' : Helpers.formatTimeSlot(state.selectedTime ?? '')})',
+                        ' (${state is! TimeSlotsStates ? '' : Helpers.formatTimeSlot("${state.selectedTime} AM" ?? '')})',
                         style: TStyle.greySemi(14),
                       ),
                     ),

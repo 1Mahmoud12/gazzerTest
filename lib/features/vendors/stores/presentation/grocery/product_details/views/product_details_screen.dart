@@ -4,7 +4,7 @@ import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/failure_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -53,7 +53,7 @@ class ProductDetailsScreen extends StatelessWidget {
         if (state is ProductDetailsError) {
           return Scaffold(
             appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
-            body: FailureWidget(
+            body: FailureComponent(
               message: state.message,
               onRetry: () => context.read<ProductDetailsCubit>().loadProductDetails(),
             ),

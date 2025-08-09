@@ -22,37 +22,32 @@ class CartCubit extends Cubit<CartStates> {
   final CartBus _bus;
   CartCubit(this._repo, this._bus) : super(CartInitial()) {
     final address = Session().addresses.firstWhereOrNull((e) => e.isDefault);
-    addressId = address?.id;
-    if (addressId != null) emit(UpdateCartAddressLoaded(address: address));
+    if (address != null) {
+      emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: validateCart()));
+    }
   }
 
   final List<CartVendorEntity> _vendors = [];
   CartSummaryModel _summary = Fakers.cartSummary;
-  int? addressId;
-
+  AddressEntity? address;
   void _updateCartWithNEwResponse(CartResponse res) {
     _bus.cartResponseToValues(res);
     _vendors.clear();
     _vendors.addAll(res.vendors);
     _summary = res.summary;
-    addressId = res.addressId;
-    final address = Session().addresses.firstWhereOrNull((e) => e.id == addressId);
-    if (address != null) emit(UpdateCartAddressLoaded(address: address));
-    emit(UpdateVendorsLoaded(vendors: _vendors));
-    emit(UpdateSummaryLoaded(summary: _summary));
+    if (res.addressId != null) address = Session().addresses.firstWhereOrNull((e) => e.id == res.addressId);
+    emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: validateCart()));
   }
 
   Future<void> loadCart() async {
-    emit(UpdateVendorsLoading());
-    emit(UpdateSummaryLoading());
+    emit(FullCartLoading());
     final response = await _repo.getCart();
     switch (response) {
       case Ok<CartResponse> res:
         _updateCartWithNEwResponse(res.value);
         break;
       case Err err:
-        emit(UpdateVendorsError(message: err.error.message));
-        emit(UpdateSummaryError(message: err.error.message));
+        emit(FullCartError(message: err.error.message));
         break;
     }
   }
@@ -101,15 +96,14 @@ class CartCubit extends Cubit<CartStates> {
   }
 
   Future<void> updateCartAddress(AddressEntity address) async {
-    emit(UpdateCartAddressLoading());
+    emit(FullCartLoading());
     final response = await _repo.updateCartAddress(address.id);
     switch (response) {
       case Ok<CartResponse> res:
-        emit(UpdateCartAddressLoaded(address: address));
         _updateCartWithNEwResponse(res.value);
         break;
       case Err err:
-        emit(UpdateCartAddressError(message: err.error.message, address: address));
+        emit(FullCartError(message: err.error.message));
         break;
     }
   }
@@ -136,11 +130,21 @@ class CartCubit extends Cubit<CartStates> {
   }
 
   void selectAddress(AddressEntity address) {
-    addressId = address.id;
-    emit(UpdateCartAddressLoaded(address: address));
+    this.address = address;
+    emit(FullCartLoaded(vendors: _vendors, summary: _summary, isCartValid: validateCart(), address: address));
   }
 
   void onReloadCartBus() {
     loadCart();
+  }
+
+  bool validateCart() {
+    if (address == null) return false;
+
+    /// if total products price less than minimum required, show error
+    /// if any vendor not available
+    /// if any product is out of stock or not available
+    /// if scheduling is active and no timeslot selected
+    return true;
   }
 }
