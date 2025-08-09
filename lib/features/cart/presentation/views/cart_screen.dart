@@ -73,7 +73,7 @@ class _CartScreenState extends State<CartScreen> {
                       child: Skeletonizer(
                         enabled: state is FullCartLoading,
                         child: ListView.separated(
-                          padding: EdgeInsets.zero,
+                          padding: const EdgeInsets.only(bottom: 24),
                           itemCount: state.vendors.length + 2,
                           separatorBuilder: (context, index) => const VerticalSpacing(24),
                           // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),

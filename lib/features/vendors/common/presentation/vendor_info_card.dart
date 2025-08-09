@@ -52,7 +52,7 @@ class VendorInfoCard extends StatelessWidget {
                               GradientText(text: vendor.name, style: TStyle.blackBold(16)),
                               if (categories?.isNotEmpty == true)
                                 Text(
-                                  shortCategorNames(categories!)!,
+                                  Helpers.shortIrretableStrings(categories!, 38) ?? '',
                                   style: TStyle.greyRegular(12),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -217,19 +217,5 @@ class VendorInfoCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String? shortCategorNames(Iterable<String> categories) {
-    if (categories.isEmpty) return null;
-    final shortTag = StringBuffer(categories.first);
-    for (var i = 1; i < categories.length; i++) {
-      if (categories.elementAt(i).length + shortTag.length < 38) {
-        shortTag.write(', ${categories.elementAt(i)}');
-      } else {
-        shortTag.write(', ...');
-        break;
-      }
-    }
-    return shortTag.toString();
   }
 }

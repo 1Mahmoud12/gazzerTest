@@ -11,10 +11,10 @@ class SearchVendorDTO {
   int? rateCount;
   int? isRestaurant;
   List<SearchProductDTO>? products;
+  List<String>? tags;
 
   /// missing
-  // zoone
-  // tags
+  // zone
 
   SearchVendorDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -24,8 +24,19 @@ class SearchVendorDTO {
     rate = json['rate'];
     rateCount = json['rate_count'];
     isRestaurant = json['is_restaurant'];
+    // products
     if (json['items'] != null) {
-      products = (json['items'] as List).map((e) => SearchProductDTO.fromJson(e)).toList();
+      products = (json['items'] as List).map((e) => SearchProductDTO.fromJson(e, ItemType.product)).toList();
+    }
+    //plates
+    if (json['plates'] != null) {
+      products = (json['plates'] as List).map((e) => SearchProductDTO.fromJson(e, ItemType.plate)).toList();
+    }
+    if (json['tags'] is List) {
+      tags = [];
+      for (var e in json['tags']) {
+        tags!.add(e['name']);
+      }
     }
   }
 
@@ -37,10 +48,11 @@ class SearchVendorDTO {
       deliveryTime: estimatedDeliveryTime?.toString(),
       rate: double.tryParse(rate.toString()) ?? 0,
       rateCount: rateCount ?? 0,
-      items: products?.map((e) => e.toEntity()).toList() ?? [],
       type: isRestaurant == 1 ? VendorType.restaurant : VendorType.grocery,
-      zoneName: '',
-      tags: null,
+      items: products?.map((e) => e.toEntity()).toList() ?? [],
+      tags: tags,
+
+      zoneName: '**blank**', //TODO replace with real data
     );
   }
 }

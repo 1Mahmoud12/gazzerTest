@@ -14,23 +14,23 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 part 'restaurant_details_screen.g.dart';
 
-@TypedGoRoute<RestaurantDetilsRoute>(path: RestaurantDetilsScreen.route)
+@TypedGoRoute<RestaurantDetailsRoute>(path: RestaurantDetailsScreen.route)
 @immutable
-class RestaurantDetilsRoute extends GoRouteData with _$RestaurantDetilsRoute {
-  const RestaurantDetilsRoute({required this.id});
+class RestaurantDetailsRoute extends GoRouteData with _$RestaurantDetilsRoute {
+  const RestaurantDetailsRoute({required this.id});
   final int id;
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
       create: (context) => di<SingleRestaurantCubit>(param1: id),
-      child: RestaurantDetilsScreen(id: id),
+      child: RestaurantDetailsScreen(id: id),
     );
   }
 }
 
-class RestaurantDetilsScreen extends StatelessWidget {
+class RestaurantDetailsScreen extends StatelessWidget {
   static const route = '/restaurant-details';
-  const RestaurantDetilsScreen({super.key, required this.id});
+  const RestaurantDetailsScreen({super.key, required this.id});
   final int id;
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class RestaurantDetilsScreen extends StatelessWidget {
           return Scaffold(
             appBar: const ClassicAppBar(),
             body: FailureComponent(
-              message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+              message: L10n.tr().couldnotLoadDataPleaseTryAgain,
               onRetry: () => context.read<SingleRestaurantCubit>().loadSingleRestaurantData(),
             ),
           );

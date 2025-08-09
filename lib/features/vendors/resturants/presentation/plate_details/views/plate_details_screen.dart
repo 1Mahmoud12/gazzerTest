@@ -52,7 +52,7 @@ class SinglePlateScreen extends StatelessWidget {
           return Scaffold(
             appBar: const MainAppBar(showBadge: true, showCart: true, showNotification: false),
             body: FailureComponent(
-              message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+              message: L10n.tr().couldnotLoadDataPleaseTryAgain,
               onRetry: () => context.read<PlateDetailsCubit>().loadPlateDetails(),
             ),
           );

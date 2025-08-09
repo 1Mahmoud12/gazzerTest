@@ -1,10 +1,4 @@
-enum ErrorType {
-  badResponse,
-  noInternetConnection,
-  parseError,
-  expireTokenError,
-  unknownError,
-}
+enum ErrorType { badResponse, noInternetConnection, parseError, expireTokenError, unknownError, cancel }
 
 /// Base class for all error types in the application.
 class BaseError {
@@ -38,7 +32,9 @@ class BadResponse extends BaseError {
       message = _errors!.join(", ");
     } else {
       isSingle = true;
-      message = (json['message'].toString().length < 60) ? json['message'] : '${json['message'].toString().substring(0, 60)}...';
+      message = (json['message'].toString().length < 60)
+          ? json['message']
+          : '${json['message'].toString().substring(0, 60)}...';
     }
   }
 }

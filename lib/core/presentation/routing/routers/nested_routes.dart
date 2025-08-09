@@ -7,6 +7,8 @@ import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart
 import 'package:gazzer/features/orders/views/orders_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
+import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
+import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
@@ -62,6 +64,11 @@ ShellRoute get nestedRoutes => ShellRoute(
       routes: [
         // ShellRoute(routes: []),
       ],
+    ),
+
+    GoRoute(
+      path: SearchScreen.route,
+      builder: (context, state) => BlocProvider(create: (context) => di<SearchCubit>(), child: const SearchScreen()),
     ),
 
     /// stores related

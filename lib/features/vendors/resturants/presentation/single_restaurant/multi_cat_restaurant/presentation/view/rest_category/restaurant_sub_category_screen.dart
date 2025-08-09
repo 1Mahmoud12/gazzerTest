@@ -55,7 +55,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasError || snapshot.data is Err) {
                 return FailureComponent(
-                  message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+                  message: L10n.tr().couldnotLoadDataPleaseTryAgain,
                 );
               }
               final isLoading = snapshot.connectionState == ConnectionState.waiting;

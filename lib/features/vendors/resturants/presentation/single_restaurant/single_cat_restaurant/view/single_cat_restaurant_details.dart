@@ -141,7 +141,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                 spacing: 12,
                 children: [
                   if (selectedPlate == null)
-                    Text(L10n.tr().couldnotLoadDataPleaseTryyAgain)
+                    Text(L10n.tr().couldnotLoadDataPleaseTryAgain)
                   else ...[
                     VendorInfoCard(
                       restaurant,

@@ -21,8 +21,10 @@ class CartCubit extends Cubit<CartStates> {
   final CartRepo _repo;
   final CartBus _bus;
   CartCubit(this._repo, this._bus) : super(CartInitial()) {
+    // if no address linked to cart: select the default address
     final address = Session().addresses.firstWhereOrNull((e) => e.isDefault);
     if (address != null) {
+      // TODO: discuss if this default address would be helpful in case of address validation with vendors int he same zone
       emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: validateCart()));
     }
   }
@@ -35,7 +37,11 @@ class CartCubit extends Cubit<CartStates> {
     _vendors.clear();
     _vendors.addAll(res.vendors);
     _summary = res.summary;
-    if (res.addressId != null) address = Session().addresses.firstWhereOrNull((e) => e.id == res.addressId);
+    if (res.addressId != null) {
+      address = Session().addresses.firstWhereOrNull((e) => e.id == res.addressId);
+    } else {
+      address = Session().addresses.firstWhereOrNull((e) => e.isDefault);
+    }
     emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: validateCart()));
   }
 
@@ -140,7 +146,7 @@ class CartCubit extends Cubit<CartStates> {
 
   bool validateCart() {
     if (address == null) return false;
-
+    // TODO validation:
     /// if total products price less than minimum required, show error
     /// if any vendor not available
     /// if any product is out of stock or not available

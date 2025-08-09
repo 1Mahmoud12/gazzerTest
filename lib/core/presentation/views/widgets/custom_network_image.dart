@@ -11,7 +11,7 @@ class CustomNetworkImage extends StatelessWidget {
     this.width,
     this.fit,
     this.blendMode,
-    this.borderReduis,
+    this.borderRaduis,
     this.isInsta = false,
     this.errorWidget,
     this.alignment = Alignment.center,
@@ -22,7 +22,7 @@ class CustomNetworkImage extends StatelessWidget {
   final double? width;
   final BoxFit? fit;
   final BlendMode? blendMode;
-  final double? borderReduis;
+  final double? borderRaduis;
   final bool isInsta;
   final AlignmentGeometry alignment;
   final Widget? errorWidget;
@@ -30,16 +30,19 @@ class CustomNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget child;
-    final errorShown =
-        errorWidget ??
-        ColoredBox(
-          color: Colors.grey.shade200,
-          child: Icon(
-            Icons.image,
-            color: Colors.red,
-            size: 42,
+    final errorShown = SizedBox(
+      width: width ?? 42,
+      child:
+          errorWidget ??
+          ColoredBox(
+            color: Colors.grey.shade200,
+            child: const Icon(
+              Icons.broken_image,
+              color: Colors.grey,
+              size: 42,
+            ),
           ),
-        );
+    );
     if (imageUrl.endsWith('svg')) {
       child = SvgPicture.network(
         imageUrl,
@@ -72,7 +75,7 @@ class CustomNetworkImage extends StatelessWidget {
       );
     }
     return ClipRRect(
-      borderRadius: BorderRadius.circular(borderReduis ?? 0),
+      borderRadius: BorderRadius.circular(borderRaduis ?? 0),
       child: isInsta ? InstaImageViewer(imageUrl: imageUrl, child: child) : child,
     );
   }

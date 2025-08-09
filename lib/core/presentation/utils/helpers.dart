@@ -32,4 +32,18 @@ abstract class Helpers {
       return time; // Return the original time if parsing fails
     }
   }
+
+  static String? shortIrretableStrings(Iterable<String> list, int length) {
+    if (list.isEmpty) return null;
+    final shortTag = StringBuffer(list.first);
+    for (var i = 1; i < list.length; i++) {
+      if (list.elementAt(i).length + shortTag.length < length) {
+        shortTag.write(', ${list.elementAt(i)}');
+      } else {
+        shortTag.write(', ...');
+        break;
+      }
+    }
+    return shortTag.toString();
+  }
 }

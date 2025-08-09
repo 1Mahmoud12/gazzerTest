@@ -7,21 +7,22 @@ class SearchProductEntity extends Equatable {
   final String name;
   final String image;
   final String? badge;
-  final double price;
+  final double _price;
   final double rate;
   final ItemType type;
   final OfferEntity? offer;
+  double get price => offer?.priceAfterDiscount(_price) ?? _price;
 
   const SearchProductEntity({
     required this.id,
     required this.name,
     required this.image,
     this.badge,
-    required this.price,
+    required double price,
     required this.rate,
     required this.type,
     this.offer,
-  });
+  }) : _price = price;
 
   @override
   List<Object?> get props => [

@@ -66,7 +66,7 @@ class _CartEditNoteState extends State<CartEditNote> {
                           shape: BoxShape.circle,
                           border: Border.all(color: Co.purple),
                         ),
-                        child: CustomNetworkImage(widget.item.prod.image, width: 55, height: 55, borderReduis: 100),
+                        child: CustomNetworkImage(widget.item.prod.image, width: 55, height: 55, borderRaduis: 100),
                       ),
                     ],
                   ),

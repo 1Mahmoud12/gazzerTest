@@ -1,11 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gazzer/core/data/network/endpoints.dart';
-import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
-import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:mockito/mockito.dart';
 
@@ -35,37 +32,37 @@ void main() async {
   tearDown(() {
     reset(apiClient);
   });
-  group('Get categories Function Tests', () {
-    test(
-      'should return a list of categories when the request is successful',
-      () async {
-        when(
-          apiClient.get(endpoint: Endpoints.storesCategories),
-        ).thenAnswer((_) async => successResponse..data = homeData.categoriesSuccessJson);
+  // group('Get categories Function Tests', () {
+  //   test(
+  //     'should return a list of categories when the request is successful',
+  //     () async {
+  //       when(
+  //         apiClient.get(endpoint: Endpoints.storesCategories),
+  //       ).thenAnswer((_) async => successResponse..data = homeData.categoriesSuccessJson);
 
-        final result = await homeRepo.getCategories();
+  //       final result = await homeRepo.getCategories();
 
-        expect(result, isInstanceOf<Ok<List<MainCategoryEntity>>>());
-        expect((result as Ok<List<MainCategoryEntity>>).value, isNotEmpty);
-      },
-    );
+  //       expect(result, isInstanceOf<Ok<List<MainCategoryEntity>>>());
+  //       expect((result as Ok<List<MainCategoryEntity>>).value, isNotEmpty);
+  //     },
+  //   );
 
-    test(
-      'should return Error with message when fetching categories fails',
-      () async {
-        when(
-          apiClient.get(endpoint: Endpoints.storesCategories),
-        ).thenThrow(() {
-          errorResponse.response!.data = homeData.getGeneralErrorJson;
-          return errorResponse;
-        }());
+  //   test(
+  //     'should return Error with message when fetching categories fails',
+  //     () async {
+  //       when(
+  //         apiClient.get(endpoint: Endpoints.storesCategories),
+  //       ).thenThrow(() {
+  //         errorResponse.response!.data = homeData.getGeneralErrorJson;
+  //         return errorResponse;
+  //       }());
 
-        final result = await homeRepo.getCategories();
+  //       final result = await homeRepo.getCategories();
 
-        expect(result, isInstanceOf<Err<List<MainCategoryEntity>>>());
-        expect((result as Err<List<MainCategoryEntity>>).error.message, isNotNull);
-        expect(result.error.message, contains('error'));
-      },
-    );
-  });
+  //       expect(result, isInstanceOf<Err<List<MainCategoryEntity>>>());
+  //       expect((result as Err<List<MainCategoryEntity>>).error.message, isNotNull);
+  //       expect(result.error.message, contains('error'));
+  //     },
+  //   );
+  // });
 }

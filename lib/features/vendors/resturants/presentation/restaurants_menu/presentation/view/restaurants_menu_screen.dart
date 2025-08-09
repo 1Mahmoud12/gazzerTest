@@ -65,7 +65,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   const RestCatHeaderWidget(),
                   Expanded(
                     child: FailureComponent(
-                      message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+                      message: L10n.tr().couldnotLoadDataPleaseTryAgain,
                       onRetry: () => cubit.loadScreenData(),
                     ),
                   ),
@@ -137,7 +137,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                           cardImageToTextRatios: {CardStyle.typeOne: 0.8},
                           corners: {CardStyle.typeThree: Corner.topLeft},
                           onSingleCardPressed: (item) {
-                            RestaurantDetilsRoute(id: item.id).push(context);
+                            RestaurantDetailsRoute(id: item.id).push(context);
                           },
                           // TODO: Ask Product Owner about this
                           style: index == state.categories.length - 1 ? CardStyle.typeThree : cat.$1.style,

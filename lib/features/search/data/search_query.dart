@@ -1,13 +1,52 @@
 import 'package:equatable/equatable.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 
+enum AlphaSort {
+  asc,
+  desc,
+  none;
+
+  String get name {
+    switch (this) {
+      case AlphaSort.asc:
+        return 'asc';
+      case AlphaSort.desc:
+        return 'desc';
+      case AlphaSort.none:
+        return '';
+    }
+  }
+
+  String get uncodeIcon {
+    switch (this) {
+      case AlphaSort.asc:
+        return '\u2191';
+      case AlphaSort.desc:
+        return '\u2193';
+      case AlphaSort.none:
+        return '';
+    }
+  }
+
+  AlphaSort next() {
+    switch (this) {
+      case AlphaSort.asc:
+        return AlphaSort.desc;
+      case AlphaSort.desc:
+        return AlphaSort.none;
+      case AlphaSort.none:
+        return AlphaSort.asc;
+    }
+  }
+}
+
 class SearchQuery extends Equatable {
   final String searchWord;
   final int perPage;
   final bool sortedByRate;
   final bool sortByDeliveryTime;
-  final bool ascendingAlphabetic;
-  final VendorType type;
+  final AlphaSort alpha;
+  final int categoryId;
 
   final int currentPage;
 
@@ -17,12 +56,12 @@ class SearchQuery extends Equatable {
     this.currentPage = 1,
     this.sortedByRate = false,
     this.sortByDeliveryTime = false,
-    this.ascendingAlphabetic = false,
-    this.type = VendorType.restaurant,
+    this.alpha = AlphaSort.none,
+    this.categoryId = 0,
   });
 
   String toQuery() =>
-      '?is_paginated=1&page=$currentPage&search=$searchWord&per_page=$perPage&by_rate=$sortedByRate&by_delivery_time=$sortByDeliveryTime&alpha_order=${ascendingAlphabetic ? 'asc' : 'desc'}&type=${type.value}';
+      '?is_paginated=1&page=$currentPage&search=$searchWord&per_page=$perPage&by_rate=${sortedByRate ? 1 : 0}&by_delivery_time=${sortByDeliveryTime ? 1 : 0}&alpha_order=${alpha.name}&category_id=$categoryId';
 
   SearchQuery copyWith({
     String? searchWord,
@@ -30,8 +69,9 @@ class SearchQuery extends Equatable {
     int? currentPage,
     bool? sortedByRate,
     bool? sortByDeliveryTime,
-    bool? ascendingAlphabetic,
+    AlphaSort? alpha,
     VendorType? type,
+    int? categoryId,
   }) {
     return SearchQuery(
       searchWord: searchWord ?? this.searchWord,
@@ -39,8 +79,8 @@ class SearchQuery extends Equatable {
       currentPage: currentPage ?? this.currentPage,
       sortedByRate: sortedByRate ?? this.sortedByRate,
       sortByDeliveryTime: sortByDeliveryTime ?? this.sortByDeliveryTime,
-      ascendingAlphabetic: ascendingAlphabetic ?? this.ascendingAlphabetic,
-      type: type ?? this.type,
+      alpha: alpha ?? this.alpha,
+      categoryId: categoryId ?? this.categoryId,
     );
   }
 
@@ -51,7 +91,7 @@ class SearchQuery extends Equatable {
     currentPage,
     sortedByRate,
     sortByDeliveryTime,
-    ascendingAlphabetic,
-    type,
+    alpha,
+    categoryId,
   ];
 }

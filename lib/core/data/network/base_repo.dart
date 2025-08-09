@@ -57,7 +57,7 @@ abstract class BaseApiRepo {
           return BaseError(message: L10n.tr().weakOrNoInternetConnection, e: ErrorType.noInternetConnection);
 
         case DioExceptionType.cancel:
-          return BaseError(message: L10n.tr().requestToServerWasCancelled, e: ErrorType.noInternetConnection);
+          return BaseError(message: L10n.tr().requestToServerWasCancelled, e: ErrorType.cancel);
 
         case DioExceptionType.unknown:
           return BaseError(message: L10n.tr().unknownErorOccurred, e: ErrorType.unknownError);

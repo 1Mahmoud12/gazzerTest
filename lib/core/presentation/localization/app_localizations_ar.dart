@@ -18,6 +18,39 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tryAgain => 'حاول مرة أخرى';
 
   @override
+  String get search_________________Start => '__________________';
+
+  @override
+  String get noResultsFoundTryAdjustingYourFilter =>
+      'لم يتم العثور على نتائج، حاول تعديل عوامل التصفية الخاص بك';
+
+  @override
+  String get unableToLoadResultsPleaseTryAgainLater =>
+      'تعذر تحميل النتائج، يرجى المحاولة مرة أخرى لاحقًا';
+
+  @override
+  String get rating => 'تقييم';
+
+  @override
+  String get sort => '(أ-ي) ترتيب';
+
+  @override
+  String get under30mins => 'أقل من 30 دقيقة';
+
+  @override
+  String get delivery => 'توصيل';
+
+  @override
+  String get enterTheWordYouWantToSearchFor =>
+      'أدخل الكلمة التي تريد البحث عنها';
+
+  @override
+  String get enterThreeLetterOrMore => 'أدخل ثلاثة أحرف أو أكثر...';
+
+  @override
+  String get search_________________End => '__________________';
+
+  @override
   String get cart_________________Start => '__________________';
 
   @override
@@ -298,7 +331,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notAvailable => 'غير متوفر';
 
   @override
-  String get couldnotLoadDataPleaseTryyAgain =>
+  String get couldnotLoadDataPleaseTryAgain =>
       'تعذر تحميل البيانات، يرجى المحاولة مرة أخرى';
 
   @override

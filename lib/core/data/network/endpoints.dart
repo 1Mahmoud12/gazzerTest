@@ -62,7 +62,7 @@ class Endpoints {
       'pages/store-category/$mainId/item-category-page/$subId';
   static String storeDetailsPage(int id) => "pages/store-page/$id";
   static String productDetails(int id) => "pages/item-page/$id";
-  static String search(SearchQuery query) => "api/search${query.toQuery()}";
+  static String search(SearchQuery query) => "search${query.toQuery()}";
 
   /// ** stores categories
   static const storesCategories = "stores/categories";

@@ -55,7 +55,7 @@ class GrocCardTwo extends StatelessWidget {
                           vendor.image,
                           fit: BoxFit.cover,
                           height: double.infinity,
-                          borderReduis: 150,
+                          borderRaduis: 150,
                           width: double.infinity,
                           opacity: vendor.isClosed ? 0.4 : 1,
                         ),

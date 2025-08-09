@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
@@ -13,9 +14,9 @@ class SearchRepoImp extends SearchRepo {
   SearchRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<SearchResponse>> search(SearchQuery query) {
+  Future<Result<SearchResponse>> search(SearchQuery query, CancelToken token) {
     return super.call(
-      apiCall: () async => _apiClient.get(endpoint: Endpoints.search(query)),
+      apiCall: () async => _apiClient.get(endpoint: Endpoints.search(query), cancelToken: token),
       parser: (response) {
         return SearchResponse.fromJson(response.data);
       },

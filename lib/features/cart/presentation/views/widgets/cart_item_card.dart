@@ -181,7 +181,7 @@ class CartItemCard extends StatelessWidget {
                 width: imageSize,
                 child: CustomNetworkImage(
                   item.prod.image,
-                  borderReduis: 12,
+                  borderRaduis: 12,
                   height: imageSize,
                   width: imageSize,
                 ),

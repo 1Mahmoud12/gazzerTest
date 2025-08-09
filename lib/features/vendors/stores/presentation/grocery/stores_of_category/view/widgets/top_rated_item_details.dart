@@ -33,7 +33,7 @@ class TopRatedItemDetails extends StatelessWidget {
                 ),
                 child: CustomNetworkImage(
                   item.image,
-                  borderReduis: 800,
+                  borderRaduis: 800,
                   fit: BoxFit.cover,
                 ),
               ),

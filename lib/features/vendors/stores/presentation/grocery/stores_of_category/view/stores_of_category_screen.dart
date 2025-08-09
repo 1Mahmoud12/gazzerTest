@@ -61,7 +61,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
               return const Center(child: AdaptiveProgressIndicator());
             } else if (state is StoresOfCategoryError) {
               return FailureComponent(
-                message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+                message: L10n.tr().couldnotLoadDataPleaseTryAgain,
                 onRetry: () => context.read<StoresOfCategoryCubit>().loadStoresOfCategory(),
               );
             }

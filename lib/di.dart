@@ -30,6 +30,9 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit
 import 'package:gazzer/features/profile/data/profile_repo_imp.dart';
 import 'package:gazzer/features/profile/domain/profile_repo.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:gazzer/features/search/data/search_repo_imp.dart';
+import 'package:gazzer/features/search/domain/search_repo.dart';
+import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
@@ -93,6 +96,7 @@ void _registerRepos() {
   di.registerLazySingleton<StoresRepo>(() => StoresRepoImp(di.get(), di.get()));
   di.registerLazySingleton<FavoritesRepo>(() => FavoritesRepoImp(di.get(), di.get()));
   di.registerLazySingleton<CartRepo>(() => CartRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<SearchRepo>(() => SearchRepoImp(di.get(), di.get()));
 }
 
 void _registerBuses() {
@@ -128,7 +132,8 @@ void _registerCubits() {
     (address, _) => AddEditAddressCubit(di.get(), oldAddress: address),
   );
   di.registerFactoryParam<AddToCartCubit, (GenericItemEntity, List<ItemOptionEntity>), CartItemEntity?>(
-    (item, cartItem) => AddToCartCubit(item.$1, item.$2, di.get(),di.get() ,cartItem),
+    (item, cartItem) => AddToCartCubit(item.$1, item.$2, di.get(), di.get(), cartItem),
   );
   di.registerFactory(() => CartCubit(di.get(), di.get()));
+  di.registerFactory(() => SearchCubit(di.get()));
 }

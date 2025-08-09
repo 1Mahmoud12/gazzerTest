@@ -18,24 +18,13 @@ class _HomeSearchWidgetState extends State<_HomeSearchWidget> {
         const HorizontalSpacing(6),
 
         Expanded(
-          child: GestureDetector(
-            onTap: () {
-              context.push(SearchScreen.route);
-            },
-            child: AbsorbPointer(
-              absorbing: true,
-              child: Hero(
-                tag: Tags.searchBar,
-                child: MainTextField(
-                  controller: controller,
-                  height: 80,
-                  borderRadius: 64,
-                  hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                  bgColor: Colors.transparent,
-                  prefix: const Icon(Icons.search, color: Co.purple, size: 24),
-                ),
-              ),
-            ),
+          child: MainSearchWidget(
+            controller: controller,
+            height: 80,
+            borderRadius: 64,
+            hintText: L10n.tr().searchForStoresItemsAndCAtegories,
+            bgColor: Colors.transparent,
+            prefix: const Icon(Icons.search, color: Co.purple, size: 24),
           ),
         ),
         HorizontalSpacing(AppConst.floatingCartWidth),

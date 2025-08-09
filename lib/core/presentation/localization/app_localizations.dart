@@ -116,6 +116,66 @@ abstract class AppLocalizations {
   /// **'Try Again'**
   String get tryAgain;
 
+  /// No description provided for @search_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get search_________________Start;
+
+  /// No description provided for @noResultsFoundTryAdjustingYourFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found, try adjusting your filter'**
+  String get noResultsFoundTryAdjustingYourFilter;
+
+  /// No description provided for @unableToLoadResultsPleaseTryAgainLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load results, please try again later'**
+  String get unableToLoadResultsPleaseTryAgainLater;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// No description provided for @sort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort (A-Z)'**
+  String get sort;
+
+  /// No description provided for @under30mins.
+  ///
+  /// In en, this message translates to:
+  /// **'Under 30 mins'**
+  String get under30mins;
+
+  /// No description provided for @delivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get delivery;
+
+  /// No description provided for @enterTheWordYouWantToSearchFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the word you want to search for'**
+  String get enterTheWordYouWantToSearchFor;
+
+  /// No description provided for @enterThreeLetterOrMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter three letters or more...'**
+  String get enterThreeLetterOrMore;
+
+  /// No description provided for @search_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get search_________________End;
+
   /// No description provided for @cart_________________Start.
   ///
   /// In en, this message translates to:
@@ -650,11 +710,11 @@ abstract class AppLocalizations {
   /// **'Not Available'**
   String get notAvailable;
 
-  /// No description provided for @couldnotLoadDataPleaseTryyAgain.
+  /// No description provided for @couldnotLoadDataPleaseTryAgain.
   ///
   /// In en, this message translates to:
   /// **'Could not load data. Please try again'**
-  String get couldnotLoadDataPleaseTryyAgain;
+  String get couldnotLoadDataPleaseTryAgain;
 
   /// No description provided for @outOFStock.
   ///

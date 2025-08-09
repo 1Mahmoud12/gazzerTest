@@ -50,7 +50,7 @@ class StoreDetailsScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is StoreDetailsError) {
             return FailureComponent(
-              message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+              message: L10n.tr().couldnotLoadDataPleaseTryAgain,
               onRetry: () => context.read<StoreDetailsCubit>().loadScreenData(),
             );
           }

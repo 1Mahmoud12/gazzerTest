@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class MainSearchWidget extends StatefulWidget {
   const MainSearchWidget({
@@ -39,13 +42,24 @@ class _MainSearchWidgetState extends State<MainSearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MainTextField(
-      controller: controller,
-      height: widget.height,
-      borderRadius: widget.borderRadius,
-      bgColor: widget.bgColor ?? Colors.transparent,
-      hintText: widget.hintText,
-      prefix: widget.prefix ?? const Icon(Icons.search, color: Co.purple, size: 32),
+    return GestureDetector(
+      onTap: () {
+        context.push(SearchScreen.route);
+      },
+      child: AbsorbPointer(
+        absorbing: true,
+        child: Hero(
+          tag: Tags.searchBar,
+          child: MainTextField(
+            controller: controller,
+            height: widget.height,
+            borderRadius: widget.borderRadius,
+            bgColor: widget.bgColor ?? Colors.transparent,
+            hintText: widget.hintText,
+            prefix: widget.prefix ?? const Icon(Icons.search, color: Co.purple, size: 32),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -15,10 +15,10 @@ RouteBase get $restaurantDetilsRoute => GoRouteData.$route(
 );
 
 mixin _$RestaurantDetilsRoute on GoRouteData {
-  static RestaurantDetilsRoute _fromState(GoRouterState state) =>
-      RestaurantDetilsRoute(id: int.parse(state.uri.queryParameters['id']!)!);
+  static RestaurantDetailsRoute _fromState(GoRouterState state) =>
+      RestaurantDetailsRoute(id: int.parse(state.uri.queryParameters['id']!)!);
 
-  RestaurantDetilsRoute get _self => this as RestaurantDetilsRoute;
+  RestaurantDetailsRoute get _self => this as RestaurantDetailsRoute;
 
   @override
   String get location => GoRouteData.$location(

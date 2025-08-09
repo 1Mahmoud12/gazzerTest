@@ -66,6 +66,7 @@ class ApiClient {
         endpoint,
         queryParameters: queryParameters,
         options: Options(headers: _getHeaders(headers)),
+        cancelToken: cancelToken,
       );
       return response;
     } on DioException catch (e) {
@@ -106,6 +107,7 @@ class ApiClient {
           sendTimeout: customRequestDuration,
           headers: _getHeaders(headers),
         ),
+        cancelToken: cancelToken,
       );
       return response;
     } on DioException catch (e) {

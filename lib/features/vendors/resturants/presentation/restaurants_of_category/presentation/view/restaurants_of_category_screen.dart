@@ -63,7 +63,7 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: FailureComponent(
-                      message: L10n.tr().couldnotLoadDataPleaseTryyAgain,
+                      message: L10n.tr().couldnotLoadDataPleaseTryAgain,
                       onRetry: () => cubit.loadPageData(),
                     ),
                   ),
@@ -92,7 +92,7 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                         onViewAllPressed: null,
                         title: lists[index].$1,
                         onSingleCardPressed: (item) {
-                          RestaurantDetilsRoute(id: item.id).push(context);
+                          RestaurantDetailsRoute(id: item.id).push(context);
                         },
                       );
                     },
@@ -106,7 +106,7 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                     items: restaurants,
                     onViewAllPressed: null,
                     onSingleCardPressed: (item) {
-                      RestaurantDetilsRoute(id: item.id).push(context);
+                      RestaurantDetailsRoute(id: item.id).push(context);
                     },
                   ),
 

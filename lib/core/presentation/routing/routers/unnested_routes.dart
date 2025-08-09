@@ -22,10 +22,12 @@ import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support
 import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
-import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final List<RouteBase> unNestedRoutes = [
@@ -41,16 +43,16 @@ final List<RouteBase> unNestedRoutes = [
   $introVideoTutorialRoute,
 
   // restaurants
+  $restaurantDetilsRoute,
   $singleCatRestaurantRoute,
+  $multiCatRestaurantsRoute,
+  // stores
+  $storeDetailsRoute,
 
   /// scattered;
   $deleteAccountRoute,
   $addEditAddressRoute,
   $selectLocationRoute,
-  GoRoute(
-    path: SearchScreen.route,
-    builder: (context, state) => const SearchScreen(),
-  ),
 ];
 
 final checkoutRoutes = [
