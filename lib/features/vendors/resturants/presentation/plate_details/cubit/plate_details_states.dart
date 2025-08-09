@@ -1,5 +1,6 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
 sealed class PlateDetailsStates {
   final PlateEntity plate;

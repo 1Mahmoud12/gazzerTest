@@ -7,7 +7,7 @@ import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
-import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
 class PlateOptionsWidget extends StatelessWidget {
   const PlateOptionsWidget({super.key, required this.option, required this.onValueSelected, required this.selectedId});

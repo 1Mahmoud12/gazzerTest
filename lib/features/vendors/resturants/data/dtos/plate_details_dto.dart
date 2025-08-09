@@ -1,6 +1,7 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/vendors/common/data/offer_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/generic_item_dto.dart';
+import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
 class PlateDetailsDTO {
   int? id;
@@ -66,7 +67,7 @@ class PlateDetailsDTO {
       categoryPlateId: plateCategoryId ?? 0,
       image: image ?? '',
       tags: tags,
-      offer: offer?.toOfferEntity(),
+      offer: offer?.toEntityy(),
       badge: badge,
       outOfStock: false,
     );

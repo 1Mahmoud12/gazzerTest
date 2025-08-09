@@ -9,9 +9,11 @@ import 'package:gazzer/features/cart/domain/entities/cart_vendor_entity.dart';
 import 'package:gazzer/features/cart/presentation/models/cart_summary_model.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
+import 'package:gazzer/features/search/domain/search_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
 /// A class that provides fake data for developing and for showing [Skeletonizer] widgets while loading real data.
 class Fakers {
@@ -413,4 +415,16 @@ class Fakers {
     total: 0.0,
   );
   static const timeSlots = ['10:00 AM', '11:00 AM', '12:00 PM'];
+
+  static const searchVendor = SearchVendorEntity(
+    id: 1,
+    name: "البائع 1",
+    image: _placeHolderImg,
+    rate: 4.5,
+    items: [],
+    rateCount: 0,
+    type: VendorType.restaurant,
+    zoneName: 'zone',
+  );
+  static const searchVendors = [searchVendor, searchVendor];
 }

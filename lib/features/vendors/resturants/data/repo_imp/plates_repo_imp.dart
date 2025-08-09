@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/features/vendors/common/data/ordered_with_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/generic_item_dto.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/ordered_with_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_details_response.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/resturants/domain/repos/plates_repo.dart';
 
 class PlatesRepoImp extends PlatesRepo {
@@ -19,7 +19,7 @@ class PlatesRepoImp extends PlatesRepo {
       parser: (response) {
         final data = <PlateEntity>[];
         for (var item in response.data['data']) {
-          data.add(PlateDTO.fromJson(item).toEntity() as PlateEntity);
+          data.add(PlateDTO.fromJson(item).toEntity());
         }
         data.sort((a, b) => a.outOfStock ? 1 : -1);
         return data;
@@ -34,7 +34,7 @@ class PlatesRepoImp extends PlatesRepo {
       parser: (response) {
         final data = <PlateEntity>[];
         for (var item in response.data['data']) {
-          data.add(PlateDTO.fromJson(item).toEntity() as PlateEntity);
+          data.add(PlateDTO.fromJson(item).toEntity());
         }
         data.sort((a, b) => a.outOfStock ? 1 : -1);
 
@@ -50,7 +50,7 @@ class PlatesRepoImp extends PlatesRepo {
       parser: (response) {
         final data = <PlateEntity>[];
         for (var item in response.data['data']) {
-          data.add(PlateDTO.fromJson(item).toEntity() as PlateEntity);
+          data.add(PlateDTO.fromJson(item).toEntity());
         }
         data.sort((a, b) => a.outOfStock ? 1 : -1);
 

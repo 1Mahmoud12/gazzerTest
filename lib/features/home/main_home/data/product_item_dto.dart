@@ -1,8 +1,10 @@
 import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
+import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/generic_item_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
+import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
 
 part 'category_dto.dart';
 

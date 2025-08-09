@@ -11,9 +11,10 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/components/ordered_with_component.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_price_summary.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/widgets/add_special_note.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/cubit/product_details_cubit.dart';
@@ -81,7 +82,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         padding: AppConst.defaultHrPadding,
                         child: Column(
                           children: [
-                            // OrderedWithComponent(products: Fakers.plateOrderedWith),
+                            OrderedWithComponent(products: state.orderedWith),
                             const VerticalSpacing(16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,

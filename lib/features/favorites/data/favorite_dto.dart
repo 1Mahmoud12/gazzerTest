@@ -1,7 +1,8 @@
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/features/vendors/resturants/data/dtos/generic_item_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart';
+import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/store_dto.dart';
 
 class FavoriteDto {

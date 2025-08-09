@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
 class CartItemEntity extends Equatable {
   final int cartId;
