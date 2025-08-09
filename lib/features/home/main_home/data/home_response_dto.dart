@@ -54,7 +54,7 @@ class HomeResponseDTO {
 
   HomeDataModel toModel() {
     return HomeDataModel(
-      categories: categories!.$1.map((e) => e.toCategoryEntity()).toList(),
+      categories: categories!.$1.map((e) => e.toEntity()).toList(),
       categoriesBanner: categories!.$2?.toEntity(),
       dailyOffers: dailyOffers!.$1.map((e) => e?.toEntity()).toList(),
       dailyOffersBanner: dailyOffers!.$2?.toEntity(),

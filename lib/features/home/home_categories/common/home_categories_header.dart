@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 
 class HomeCategoriesHeader extends StatefulWidget {
@@ -71,7 +71,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                       ),
                     ),
                   ),
-                  const CartFloatingBtn(),
+                  const MainCartWidget(),
                 ],
               ),
             ),

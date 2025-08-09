@@ -13,7 +13,7 @@ class StoresMenuResponse {
   late final List<(StoreCategoryEntity, List<StoreEntity>)> categoryWzStores;
 
   StoresMenuResponse.fromJson(Map<String, dynamic> json) {
-    mainCategory = MainCategoryDTO.fromJson(json['store_category']).toCategoryEntity();
+    mainCategory = MainCategoryDTO.fromJson(json['store_category']).toEntity();
     banners = [];
     if (json['banners'] != null) {
       for (var banner in json['banners']) {

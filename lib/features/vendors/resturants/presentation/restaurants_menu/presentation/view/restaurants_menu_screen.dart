@@ -10,8 +10,8 @@ import 'package:gazzer/core/presentation/views/components/banners/main_banner_wi
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/rest_horz_scroll_horz_card_list_component.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/scrollable_tabed_list.dart';
@@ -52,7 +52,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: FloatingDraggableWidget(
-        floatingWidget: const CartFloatingBtn(),
+        floatingWidget: const MainCartWidget(),
         floatingWidgetHeight: 50,
         floatingWidgetWidth: 50,
         mainScreenWidget: BlocBuilder<RestaurantsMenuCubit, RestaurantsMenuStates>(

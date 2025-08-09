@@ -42,7 +42,6 @@ class StoreDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(
-        showCart: true,
         onShare: () {},
       ),
       extendBodyBehindAppBar: true,

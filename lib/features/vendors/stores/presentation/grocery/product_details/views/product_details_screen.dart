@@ -66,7 +66,7 @@ class ProductDetailsScreen extends StatelessWidget {
             child: Builder(
               builder: (context) {
                 return Scaffold(
-                  appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
+                  appBar: MainAppBar(showCart: true, onShare: () {}, showBadge: true),
                   body: ListView(
                     children: [
                       Padding(

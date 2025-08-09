@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
-import 'package:gazzer/di.dart';
-import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
-import 'package:gazzer/features/cart/presentation/bus/cart_events.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
@@ -16,9 +13,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showLanguage = false,
     this.bacButtonColor,
     this.onShare,
-    this.showNotification = true,
+    this.showNotification = false,
     this.title,
     this.titleStyle,
+    this.showBadge = false,
   });
   final bool showCart;
   final bool showLanguage;
@@ -29,6 +27,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onShare;
   final String? title;
   final TextStyle? titleStyle;
+  final bool showBadge;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -42,25 +42,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       leadingWidth: 65,
       actions: [
-        if (showCart)
-          StreamBuilder(
-            stream: di<CartBus>().getStream<GetCartEvents>(),
-            builder: (context, snapshot) => Badge(
-              label: Text(
-                di<CartBus>().vendors
-                    .fold(
-                      0,
-                      (previousValue, element) =>
-                          previousValue +
-                          element.items.fold<int>(0, (previousValue, item) => previousValue + item.quantity),
-                    )
-                    .toString(),
-              ),
-              textColor: Co.mainText,
-              backgroundColor: Co.second2,
-              child: CartFloatingBtn(size: 20, padding: 8, navigate: !isCartScreen),
-            ),
-          ),
+        if (showCart) MainCartWidget(size: 20, padding: 8, navigate: !isCartScreen, showBadge: showBadge),
         if (showNotification)
           IconButton(
             onPressed: () {},

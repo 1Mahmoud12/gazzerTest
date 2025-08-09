@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/store_menu_states.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
@@ -34,7 +34,7 @@ class StoreMenuSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingDraggableWidget(
-      floatingWidget: const CartFloatingBtn(),
+      floatingWidget: const MainCartWidget(),
       floatingWidgetHeight: 50,
       floatingWidgetWidth: 50,
       mainScreenWidget: Scaffold(

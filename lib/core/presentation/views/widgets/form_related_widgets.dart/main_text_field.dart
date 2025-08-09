@@ -116,92 +116,95 @@ class _MainTextFieldState extends State<MainTextField> {
   @override
   Widget build(BuildContext context) {
     final iconContraints = widget.iconsConstraints ?? const BoxConstraints(minHeight: 25, maxHeight: 40, maxWidth: 40, minWidth: 25);
-    return ValueListenableBuilder(
-      valueListenable: isObscure,
-      builder: (context, value, child) {
-        return TextFormField(
-          maxLines: widget.maxLines ?? 1,
-          cursorColor: Co.purple,
-          controller: widget.controller,
-          enabled: widget.enabled,
-          style: widget.style ?? TStyle.greySemi(14),
-          validator: widget.validator,
-          onChanged: widget.onChange,
-          autofillHints: widget.autofillHints,
-          onSaved: widget.onSaved,
-          onFieldSubmitted: widget.onSubmitting,
-          obscureText: value,
-          maxLength: widget.max,
-
-          onTapOutside: (event) {
-            FocusScope.of(context).unfocus();
-          },
-          textInputAction: widget.action,
-          inputFormatters: widget.inputFormatters != null ? [widget.inputFormatters!] : null,
-          keyboardType: widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null,
-          decoration: InputDecoration(
-            errorStyle: TStyle.errorSemi(13),
-            errorMaxLines: 5,
-            contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-            isDense: true,
-            counterText: '',
-            hintText: widget.hintText,
-            hintStyle: widget.style ?? TStyle.greyRegular(12),
-            labelStyle: TStyle.greySemi(15),
-            labelText: widget.label,
-            prefixIcon: widget.prefix == null
-                ? null
-                : Padding(
-                    padding: EdgeInsets.only(right: L10n.isAr(context) ? 0 : 5, left: L10n.isAr(context) ? 5 : 0),
-                    child: MaterialButton(
-                      minWidth: 20,
-                      onPressed: widget.prefixOnTap,
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      shape: RoundedRectangleBorder(borderRadius: AppConst.defaultInnerBorderRadius),
-                      color: widget.prefixColor,
-                      child: widget.prefix,
-                    ),
-                  ),
-            suffixIconConstraints: iconContraints,
-            suffixIcon: Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: getSiffixIcon(value)),
-            suffix: widget.suffixWidget,
-            filled: widget.isFilled || widget.bgColor != null,
-            fillColor: widget.bgColor ?? Co.white,
+    return Material(
+      color: Colors.transparent,
+      child: ValueListenableBuilder(
+        valueListenable: isObscure,
+        builder: (context, value, child) {
+          return TextFormField(
+            maxLines: widget.maxLines ?? 1,
+            cursorColor: Co.purple,
+            controller: widget.controller,
             enabled: widget.enabled,
-
-            focusedBorder: widget.showBorder
-                ? focusedBorder
-                : OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                  ),
-            errorBorder: widget.showBorder
-                ? errorBorder
-                : OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                  ),
-            focusedErrorBorder: widget.showBorder
-                ? errorBorder
-                : OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                  ),
-            enabledBorder: widget.showBorder
-                ? focusedBorder
-                : OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                  ),
-            disabledBorder: widget.showBorder
-                ? focusedBorder
-                : OutlineInputBorder(
-                    borderSide: widget.disabledColor == null ? BorderSide.none : BorderSide(color: widget.disabledColor!),
-                    borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                  ),
-          ),
-        );
-      },
+            style: widget.style ?? TStyle.greySemi(14),
+            validator: widget.validator,
+            onChanged: widget.onChange,
+            autofillHints: widget.autofillHints,
+            onSaved: widget.onSaved,
+            onFieldSubmitted: widget.onSubmitting,
+            obscureText: value,
+            maxLength: widget.max,
+      
+            onTapOutside: (event) {
+              FocusScope.of(context).unfocus();
+            },
+            textInputAction: widget.action,
+            inputFormatters: widget.inputFormatters != null ? [widget.inputFormatters!] : null,
+            keyboardType: widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null,
+            decoration: InputDecoration(
+              errorStyle: TStyle.errorSemi(13),
+              errorMaxLines: 5,
+              contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+              isDense: true,
+              counterText: '',
+              hintText: widget.hintText,
+              hintStyle: widget.style ?? TStyle.greyRegular(12),
+              labelStyle: TStyle.greySemi(15),
+              labelText: widget.label,
+              prefixIcon: widget.prefix == null
+                  ? null
+                  : Padding(
+                      padding: EdgeInsets.only(right: L10n.isAr(context) ? 0 : 5, left: L10n.isAr(context) ? 5 : 0),
+                      child: MaterialButton(
+                        minWidth: 20,
+                        onPressed: widget.prefixOnTap,
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        shape: RoundedRectangleBorder(borderRadius: AppConst.defaultInnerBorderRadius),
+                        color: widget.prefixColor,
+                        child: widget.prefix,
+                      ),
+                    ),
+              suffixIconConstraints: iconContraints,
+              suffixIcon: Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: getSiffixIcon(value)),
+              suffix: widget.suffixWidget,
+              filled: widget.isFilled || widget.bgColor != null,
+              fillColor: widget.bgColor ?? Co.white,
+              enabled: widget.enabled,
+      
+              focusedBorder: widget.showBorder
+                  ? focusedBorder
+                  : OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                    ),
+              errorBorder: widget.showBorder
+                  ? errorBorder
+                  : OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                    ),
+              focusedErrorBorder: widget.showBorder
+                  ? errorBorder
+                  : OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                    ),
+              enabledBorder: widget.showBorder
+                  ? focusedBorder
+                  : OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                    ),
+              disabledBorder: widget.showBorder
+                  ? focusedBorder
+                  : OutlineInputBorder(
+                      borderSide: widget.disabledColor == null ? BorderSide.none : BorderSide(color: widget.disabledColor!),
+                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                    ),
+            ),
+          );
+        },
+      ),
     );
   }
 

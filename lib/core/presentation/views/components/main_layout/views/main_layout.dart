@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
@@ -104,6 +105,7 @@ class _MainLayoutState extends State<MainLayout> {
               ),
             ),
             drawerEnableOpenDragGesture: false,
+            drawerDragStartBehavior: DragStartBehavior.down,
             endDrawerEnableOpenDragGesture: false,
             endDrawer: const MainDrawer(),
           ),

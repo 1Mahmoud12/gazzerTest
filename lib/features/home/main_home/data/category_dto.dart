@@ -13,7 +13,7 @@ class MainCategoryDTO extends ProductItemDTO {
     image = json['image'];
   }
 
-  MainCategoryEntity toCategoryEntity() => MainCategoryEntity(
+  MainCategoryEntity toEntity() => MainCategoryEntity(
     id: id!,
     name: name!,
     image: image ?? '',

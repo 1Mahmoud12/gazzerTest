@@ -15,9 +15,9 @@ import 'package:gazzer/core/presentation/views/components/banners/main_banner_wi
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/cart_floating_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // floatingActionButton: const CartFloatingBtn(),
         body: FloatingDraggableWidget(
           // dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
-          floatingWidget: const CartFloatingBtn().withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
+          floatingWidget: const MainCartWidget().withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
           floatingWidgetHeight: 50,
           floatingWidgetWidth: 50,
           autoAlign: false,
