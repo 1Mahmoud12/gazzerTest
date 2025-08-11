@@ -50,7 +50,7 @@ class SinglePlateScreen extends StatelessWidget {
       builder: (context, detailsState) {
         if (detailsState is PlateDetailsError) {
           return Scaffold(
-            appBar: const MainAppBar(showBadge: true, showCart: true, showNotification: false),
+            appBar: MainAppBar(showBadge: true, showCart: true, onShare: () {}),
             body: FailureComponent(
               message: L10n.tr().couldnotLoadDataPleaseTryAgain,
               onRetry: () => context.read<PlateDetailsCubit>().loadPlateDetails(),
@@ -89,7 +89,7 @@ class SinglePlateScreen extends StatelessWidget {
                     child: child!,
                   ),
                   child: Scaffold(
-                    appBar: const MainAppBar(showBadge: true, showCart: true, showNotification: false),
+                    appBar: MainAppBar(showBadge: true, showCart: true, onShare: () {}),
                     body: ListView(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                       children: [

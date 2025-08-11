@@ -38,7 +38,7 @@ class CardRestInfoWidget extends StatelessWidget {
           children: [
             const Icon(Icons.location_on, color: Co.purple, size: 18),
 
-            Text(vendor.location, style: TStyle.primaryRegular(12)),
+            Text(vendor.zoneName, style: TStyle.primaryRegular(12)),
           ],
         ),
         if (vendor.deliveryTime != null)

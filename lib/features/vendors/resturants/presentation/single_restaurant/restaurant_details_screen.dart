@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
@@ -10,7 +10,6 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 part 'restaurant_details_screen.g.dart';
 
@@ -55,17 +54,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
             ),
           );
         } else {
-          return Skeletonizer(
-            child: SingleCatRestaurantScreen(
-              hasParentProvider: false,
-              state: SingleRestaurantLoaded(
-                banners: [],
-                restaurant: Fakers.restaurant,
-                toprated: [],
-                categoriesWithPlates: [(Fakers.categoryOfPlate, Fakers.plates)],
-              ),
-            ),
-          );
+          return const Scaffold(body: Center(child: AdaptiveProgressIndicator()));
         }
       },
     );

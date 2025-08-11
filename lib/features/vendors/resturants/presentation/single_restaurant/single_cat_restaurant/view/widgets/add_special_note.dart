@@ -109,7 +109,7 @@ class _NoteSheetState extends State<_NoteSheet> {
                         key: _formKey,
                         child: MainTextField(
                           controller: controller,
-                          hintText: L10n.tr().yourFullName,
+                          hintText: L10n.tr().typeHere,
                           bgColor: Colors.transparent,
                           maxLines: 5,
                           showBorder: true,

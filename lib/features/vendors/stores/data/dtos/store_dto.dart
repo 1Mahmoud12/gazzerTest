@@ -1,3 +1,4 @@
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class StoreDTO {
@@ -6,7 +7,7 @@ class StoreDTO {
   String? image;
   int? storeCategoryId;
   int? vendorId;
-  String? address;
+  // String? address;
   int? estimatedDeliveryTime;
   String? rate;
   int? isFavorite;
@@ -24,7 +25,7 @@ class StoreDTO {
     this.image,
     this.storeCategoryId,
     this.vendorId,
-    this.address,
+    // this.address,
     this.estimatedDeliveryTime,
     this.rate,
     this.isFavorite,
@@ -40,7 +41,7 @@ class StoreDTO {
     image = json['image'];
     storeCategoryId = json['store_category_id'];
     vendorId = json['vendor_id'];
-    address = json['address'];
+    // // address = json['address'];
     estimatedDeliveryTime = json['estimated_delivery_time'];
     rate = json['rate'];
     isFavorite = json['is_favorite'];
@@ -80,12 +81,11 @@ class StoreDTO {
       alwaysOpen: is24Hours == 1,
       startTime: _formDateTimeFromString(workFrom ?? ''),
       endTime: _formDateTimeFromString(workTo ?? ''),
-      address: address,
       parentId: storeCategoryId,
-      deliveryTime: estimatedDeliveryTime?.toString(),
+      deliveryTime: estimatedDeliveryTime != null ? Helpers.convertIntToRange(estimatedDeliveryTime!, 0.3) : null,
 
       ///
-      location: "**BLANK**",
+      zoneName: provinceZone ?? '',
       deliveryFee: null,
       badge: null,
       tag: null,

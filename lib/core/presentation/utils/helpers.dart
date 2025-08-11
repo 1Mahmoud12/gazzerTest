@@ -46,4 +46,11 @@ abstract class Helpers {
     }
     return shortTag.toString();
   }
+
+  /// used mainly to form the delivery time range
+  /// [edge] must be value between 0-1, [value] must be positive
+  static String convertIntToRange(int value, double edge) {
+    assert(value >= 0 && edge > 0 && edge < 1, 'Value must be positive and edge must be between 0 and 1');
+    return '${(value * (1 - edge)).floor()} - ${(value * 1.3).ceil()} ';
+  }
 }

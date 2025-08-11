@@ -4,8 +4,8 @@ import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 
 sealed class FavoriteEvents extends AppEvent {
-  final Map<FavoriteType, Map<int, Favorable>> favorites;
-  const FavoriteEvents({this.favorites = const {FavoriteType.unknown: {}}});
+  final Map<FavoritesViewType, Map<int, Favorable>> favorites;
+  const FavoriteEvents({this.favorites = const {FavoritesViewType.vendor: {}}});
 }
 
 sealed class GetFavoritesEvent extends FavoriteEvents {
@@ -16,8 +16,8 @@ class GetFavoriteLoading extends GetFavoritesEvent {
   const GetFavoriteLoading()
     : super(
         favorites: const {
-          FavoriteType.restaurant: Fakers.favorites,
-          FavoriteType.product: Fakers.favorites,
+          FavoritesViewType.vendor: Fakers.favorites,
+          FavoritesViewType.product: Fakers.favorites,
         },
       );
 }
@@ -35,7 +35,7 @@ class GetFavoriteFailure extends GetFavoritesEvent {
 ///
 sealed class ToggleFavoriteStates extends FavoriteEvents {
   final int id;
-  final FavoriteType type;
+  final FavoritesViewType type;
   const ToggleFavoriteStates({required this.id, required this.type, required super.favorites});
 }
 

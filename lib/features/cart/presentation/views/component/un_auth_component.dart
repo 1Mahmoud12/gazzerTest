@@ -7,9 +7,9 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.da
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:go_router/go_router.dart';
 
-class UnAuthCartComponent extends StatelessWidget {
-  const UnAuthCartComponent({super.key});
-
+class UnAuthComponent extends StatelessWidget {
+  const UnAuthComponent({super.key, required this.msg});
+  final String msg;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -19,7 +19,7 @@ class UnAuthCartComponent extends StatelessWidget {
         children: [
           const Row(),
           Text(
-            L10n.tr().pleaseLoginToUseCart,
+            msg,
             style: TStyle.primarySemi(16),
           ),
           const VerticalSpacing(24),

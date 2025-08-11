@@ -26,7 +26,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
   final animDuration = const Duration(milliseconds: 500);
 
   Future navigateToLoginScreen() async {
-    context.push(LoginScreen.route);
+    context.pushReplacement(LoginScreen.route);
   }
 
   Future<void> changeLanguage(String lang) async {

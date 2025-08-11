@@ -7,9 +7,16 @@ import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 class VendorClosingTimer extends StatefulWidget {
-  const VendorClosingTimer({super.key, required this.endTime, required this.name, required this.startTime});
+  const VendorClosingTimer({
+    super.key,
+    required this.endTime,
+    required this.name,
+    required this.startTime,
+    required this.onTimerFinish,
+  });
   final DateTime endTime;
   final DateTime? startTime;
+  final Function(BuildContext ctx) onTimerFinish;
   final String name;
   @override
   State<VendorClosingTimer> createState() => _VendorClosingTimerState();
@@ -23,6 +30,7 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
     if (widget.endTime.isBefore(DateTime.now())) {
       isClosed = true;
       timer?.cancel();
+      if (mounted) widget.onTimerFinish(context);
       // context.pop();
       // Alerts.showToast(
       //   L10n.tr().nameisCurrentlyClosedWeWillOpenAt(

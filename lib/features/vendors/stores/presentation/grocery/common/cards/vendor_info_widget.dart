@@ -66,13 +66,13 @@ class VendorInfoWidget extends StatelessWidget {
                 const Spacer(),
               ],
             ),
-            if (vendor.address != null)
+            if (vendor.zoneName.trim().isNotEmpty)
               Row(
                 children: [
                   const Icon(Icons.location_on, size: 24),
                   Expanded(
                     child: Text(
-                      vendor.address!,
+                      vendor.zoneName,
                       style: TStyle.greySemi(12),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

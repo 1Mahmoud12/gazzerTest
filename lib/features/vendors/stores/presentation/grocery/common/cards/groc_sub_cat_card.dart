@@ -33,13 +33,24 @@ class GrocSubCatCard extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsetsGeometry.all(8),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: ClipRRect(
-                  borderRadius: CardStyle.getShapeRadius(shape),
-                  child: CustomNetworkImage(
-                    subCat.image,
-                    fit: BoxFit.contain,
+              child: Badge(
+                alignment: const AlignmentDirectional(0.75, -1),
+                backgroundColor: Colors.transparent,
+                label: const DecoratedBox(
+                  decoration: BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
+                  child: Padding(
+                    padding: EdgeInsets.all(4),
+                    child: Icon(Icons.arrow_forward_ios_rounded, size: 18, color: Co.purple),
+                  ),
+                ),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: ClipRRect(
+                    borderRadius: CardStyle.getShapeRadius(shape),
+                    child: CustomNetworkImage(
+                      subCat.image,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),

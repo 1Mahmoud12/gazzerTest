@@ -22,10 +22,10 @@ class _HomeCategoriesComponent extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 77,
+              maxCrossAxisExtent: 87,
               mainAxisSpacing: 18,
               crossAxisSpacing: 18,
-              mainAxisExtent: 117,
+              mainAxisExtent: 140,
             ),
             itemCount: items.length,
             itemBuilder: (context, index) {
@@ -89,7 +89,7 @@ class CategoryCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: Text(
                     category.name,
-                    style: TStyle.blackSemi(12),
+                    style: TStyle.blackSemi(11),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.fade,
                   ),

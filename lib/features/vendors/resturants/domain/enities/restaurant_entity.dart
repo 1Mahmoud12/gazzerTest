@@ -22,38 +22,18 @@ class RestaurantEntity extends GenericVendorEntity {
     super.subCategories,
     super.deliveryTime,
     super.deliveryFee,
-    required super.location,
+    required super.zoneName,
     super.rateCount,
     required super.alwaysOpen,
     required super.alwaysClosed,
     required super.isFavorite,
     required super.isOpen,
-    super.address,
   });
 
   @override
   List<Object?> get props => [
-    id,
-    parentId,
-    name,
-    image,
+    ...super.props,
     deliveryFees,
-    rate,
-    badge,
-    priceRange,
-    tag,
-    startTime,
-    endTime,
-    subCategories,
-    deliveryTime,
-    deliveryFee,
-    location,
-    rateCount,
-    alwaysOpen,
-    alwaysClosed,
-    isFavorite,
-    isOpen,
-    address,
-    categoryOfPlate, // Include categoryOfPlate in props
+    categoryOfPlate,
   ];
 }

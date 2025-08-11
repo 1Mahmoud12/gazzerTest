@@ -48,7 +48,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: Column(
         children: [
-          MultiCatRestHeader(vendor: vendor, categires: null),
+          MultiCatRestHeader(restaurant: vendor, categires: null),
           Text(subcatName, style: TStyle.primaryBold(16)),
           FutureBuilder(
             future: di<RestaurantsRepo>().getPlatesOfSpecificRestaurantCategory(vendor.id, subCatId),

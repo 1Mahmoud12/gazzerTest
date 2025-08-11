@@ -76,8 +76,7 @@ class Fakers {
     5,
     (index) => DeleteAccountReasonDTO(
       title: 'asd  asd sad a dads',
-      description:
-          'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit  lorem ipsum dolor sit amet, consectetur adipiscing elit  ',
 
       id: index,
     ),
@@ -156,12 +155,11 @@ class Fakers {
     image:
         "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
     categoryOfPlate: categoriesOfPlate,
-    address: 'ZAMALEK',
+    zoneName: 'ZAMALEK',
     deliveryFees: 123,
     badge: '30%',
     priceRange: '',
     tag: ['Free delivery'],
-    location: 'ZAMALEK',
     subCategories: [
       CategoryOfPlateEntity(id: 1, name: 'Crepe', image: ''),
       CategoryOfPlateEntity(id: 2, name: 'Pizza', image: ''),
@@ -186,12 +184,11 @@ class Fakers {
       image:
           "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
       categoryOfPlate: categoriesOfPlate,
-      address: 'ZAMALEK',
+      zoneName: 'ZAMALEK',
       deliveryFees: 123,
       badge: '30%',
       priceRange: '\$10 - \$20',
       tag: ['Free delivery'],
-      location: 'ZAMALEK',
       subCategories: const [
         CategoryOfPlateEntity(id: 1, name: 'Crepe', image: ''),
         CategoryOfPlateEntity(id: 2, name: 'Pizza', image: ''),
@@ -283,7 +280,7 @@ class Fakers {
       rate: 3,
       image: _plateNetWorkImg,
       tag: ['Free delivery'],
-      location: 'ZAMALEK',
+      zoneName: 'ZAMALEK',
       startTime: null,
       endTime: null,
       parentId: 1,
@@ -298,7 +295,7 @@ class Fakers {
       rate: 3,
       image: _plateNetWorkImg,
       tag: ['Free delivery'],
-      location: 'ZAMALEK',
+      zoneName: 'ZAMALEK',
       startTime: null,
       endTime: null,
       parentId: 1,
@@ -314,7 +311,7 @@ class Fakers {
     rate: 3,
     image: _plateNetWorkImg,
     tag: ['Free delivery'],
-    location: 'ZAMALEK',
+    zoneName: 'ZAMALEK',
     startTime: null,
     endTime: null,
     parentId: 1,

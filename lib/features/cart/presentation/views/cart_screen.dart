@@ -11,7 +11,7 @@ import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/cart/presentation/views/component/cart_address_component.dart';
 import 'package:gazzer/features/cart/presentation/views/component/scheduling_component.dart';
-import 'package:gazzer/features/cart/presentation/views/component/un_auth_cart_component.dart';
+import 'package:gazzer/features/cart/presentation/views/component/un_auth_component.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_summary_widget.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/empty_cart_widget.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/vendor_cart_products_item.dart';
@@ -53,7 +53,7 @@ class _CartScreenState extends State<CartScreen> {
               gradient: Grad().radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
             ),
             if (Session().client == null)
-              const UnAuthCartComponent()
+              UnAuthComponent(msg: L10n.tr().pleaseLoginToUseCart)
             else
               Expanded(
                 child: BlocBuilder<CartCubit, CartStates>(

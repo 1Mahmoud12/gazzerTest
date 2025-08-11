@@ -23,6 +23,17 @@ class FavoriteBus extends AppBus {
     // FavoriteType.unknown: <int, Favorable>{},
   };
 
+  Map<FavoritesViewType, Map<int, Favorable>> get favorites {
+    final result = <FavoritesViewType, Map<int, Favorable>>{};
+    for (final entry in _favorites.entries) {
+      if (entry.value.isNotEmpty) {
+        result[entry.key.toView] ??= {};
+        result[entry.key.toView]!.addAll(entry.value);
+      }
+    }
+    return result;
+  }
+
   Future<void> getFavorites() async {
     fire(const GetFavoriteLoading());
     final result = await _favoriteRepo.getFavorites();
@@ -32,11 +43,10 @@ class FavoriteBus extends AppBus {
         for (final fav in ok.value) {
           _addToFavorites(fav);
         }
-        print(_favorites[FavoriteType.restaurant]);
-        fire(GetFavoriteSuccess(favorites: _favorites));
+        fire(GetFavoriteSuccess(favorites: favorites));
         break;
       case Err error:
-        fire(GetFavoriteFailure(message: error.error.message, favorites: _favorites));
+        fire(GetFavoriteFailure(message: error.error.message, favorites: favorites));
     }
   }
 
@@ -49,28 +59,47 @@ class FavoriteBus extends AppBus {
   }
 
   Future<void> _addFavorite(Favorable favorite) async {
-    fire(ToggleFavoriteLoading(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+    fire(
+      ToggleFavoriteLoading(
+        id: favorite.id,
+        type: favorite.favoriteType.toView,
+        favorites: favorites,
+      ),
+    );
     final result = await _favoriteRepo.addFavorite(favorite.id, favorite.favoriteType);
     switch (result) {
       case Ok<String> _:
         _addToFavorites(favorite);
-        fire(AddedFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        fire(
+          AddedFavoriteSuccess(
+            id: favorite.id,
+            type: (favorite.favoriteType.toView),
+            favorites: favorites,
+          ),
+        );
         break;
       case Err error:
-        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        fire(
+          ToggleFavoriteFailure(
+            message: error.error.message,
+            id: favorite.id,
+            type: (favorite.favoriteType.toView),
+            favorites: favorites,
+          ),
+        );
     }
   }
 
   Future<void> _removeFavorite(Favorable favorite) async {
-    fire(ToggleFavoriteLoading(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+    fire(ToggleFavoriteLoading(id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
     final result = await _favoriteRepo.removeFavorite(favorite.id, favorite.favoriteType);
     switch (result) {
       case Ok<String> _:
         _removeFromFavorites(favorite);
-        fire(RemovedFavoriteSuccess(id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        fire(RemovedFavoriteSuccess(id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
         break;
       case Err error:
-        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType, favorites: _favorites));
+        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
     }
   }
 
@@ -96,5 +125,8 @@ class FavoriteBus extends AppBus {
 
   void clearFavorites() {
     _favoriteIds.clear();
+    _favorites.clear();
+    fire(GetFavoriteSuccess(favorites: favorites));
   }
 }
+/*  */

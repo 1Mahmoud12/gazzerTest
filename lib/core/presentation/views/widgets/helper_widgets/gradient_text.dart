@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -19,7 +20,12 @@ class GradientText extends StatelessWidget {
   final TextAlign textAlign;
   @override
   Widget build(BuildContext context) {
-    return Skeleton.shade(
+    return Skeleton.replace(
+      replacement: Container(
+        width: 60,
+        height: style.fontSize ?? 16,
+        decoration: BoxDecoration(color: Colors.white60, borderRadius: AppConst.defaultBorderRadius),
+      ),
       child: ShaderMask(
         shaderCallback: (bounds) {
           return (gradient ?? Grad().textGradient).createShader(bounds);

@@ -13,10 +13,12 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 import 'package:gazzer/features/vendors/common/presentation/vendor_closing_timer.dart';
 
 class VendorInfoCard extends StatelessWidget {
-  const VendorInfoCard(this.vendor, {super.key, this.padding, required this.categories});
+  const VendorInfoCard(this.vendor, {super.key, this.padding, required this.categories, required this.onTimerFinish});
   final GenericVendorEntity vendor;
   final EdgeInsets? padding;
   final Iterable<String>? categories;
+  final Function(BuildContext ctx) onTimerFinish;
+
   @override
   Widget build(BuildContext context) {
     final imageSize = 60.0;
@@ -24,137 +26,140 @@ class VendorInfoCard extends StatelessWidget {
       borderRadius: AppConst.defaultBorderRadius,
       child: ColoredBox(
         color: Co.secText.withAlpha(100),
-        child: Padding(
-          padding: padding ?? const EdgeInsetsGeometry.fromLTRB(16, 0, 16, 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(6),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 4,
-                      children: [
-                        ClipOval(
-                          child: CustomNetworkImage(
-                            vendor.image,
-                            height: imageSize,
-                            width: imageSize,
-                            fit: BoxFit.cover,
-                          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(6),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 4,
+                    children: [
+                      ClipOval(
+                        child: CustomNetworkImage(
+                          vendor.image,
+                          height: imageSize,
+                          width: imageSize,
+                          fit: BoxFit.cover,
                         ),
-                        Expanded(
-                          child: Column(
-                            spacing: 12,
-                            children: [
-                              GradientText(text: vendor.name, style: TStyle.blackBold(16)),
-                              if (categories?.isNotEmpty == true)
-                                Text(
-                                  Helpers.shortIrretableStrings(categories!, 38) ?? '',
-                                  style: TStyle.greyRegular(12),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              if (vendor.alwaysOpen)
-                                Text(
-                                  L10n.tr().alwayeysOpen,
-                                  style: TStyle.blackSemi(13),
-                                  textAlign: TextAlign.center,
-                                )
-                              else if (vendor.alwaysClosed)
-                                Text(
-                                  L10n.tr().thisRestaurantIsCurrentlyUnavailable,
-                                  style: TStyle.blackRegular(11).copyWith(color: Co.darkRed),
-                                  textAlign: TextAlign.center,
-                                )
-                              else
-                                Wrap(
-                                  spacing: 16,
-                                  alignment: WrapAlignment.end,
-                                  runAlignment: WrapAlignment.center,
-                                  children: [
-                                    const Icon(Icons.access_time, color: Co.purple, size: 18),
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(11)),
-                                          if (vendor.startTime != null)
-                                            TextSpan(
-                                              text: vendor.startTime!.defaultTimeFormat,
-                                              style: TStyle.greyRegular(11),
-                                            )
-                                          else
-                                            TextSpan(
-                                              text: L10n.tr().availabilityUnknown,
-                                              style: TStyle.greyRegular(11),
-                                            ),
-                                        ],
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(11)),
-                                          if (vendor.endTime != null)
-                                            TextSpan(
-                                              text: vendor.endTime!.defaultTimeFormat,
-                                              style: TStyle.greyRegular(11),
-                                            )
-                                          else
-                                            TextSpan(
-                                              text: L10n.tr().availabilityUnknown,
-                                              style: TStyle.greyRegular(11),
-                                            ),
-                                        ],
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          spacing: 6,
+                      ),
+                      Expanded(
+                        child: Column(
+                          spacing: 12,
                           children: [
-                            DecoratedFavoriteWidget(
-                              isDarkContainer: false,
-                              size: 18,
-                              padding: 6,
-                              borderRadius: AppConst.defaultInnerBorderRadius,
-                              fovorable: vendor,
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: GradientText(text: vendor.name, style: TStyle.blackBold(16)),
                             ),
-                            Row(
-                              spacing: 6,
-                              children: [
-                                const Icon(Icons.star, color: Co.secondary, size: 20),
-                                Text(vendor.rate.toStringAsFixed(1), style: TStyle.primaryBold(13)),
-                              ],
-                            ),
+                            if (categories?.isNotEmpty == true)
+                              Text(
+                                Helpers.shortIrretableStrings(categories!, 38) ?? '',
+                                style: TStyle.greyRegular(12),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            if (vendor.alwaysOpen)
+                              Text(
+                                L10n.tr().alwayeysOpen,
+                                style: TStyle.blackSemi(13),
+                                textAlign: TextAlign.center,
+                              )
+                            else if (vendor.alwaysClosed)
+                              Text(
+                                L10n.tr().thisRestaurantIsCurrentlyUnavailable,
+                                style: TStyle.blackRegular(11).copyWith(color: Co.darkRed),
+                                textAlign: TextAlign.center,
+                              )
+                            else
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Icon(Icons.access_time, color: Co.purple, size: 18),
+                                  Flexible(
+                                    child: FittedBox(
+                                      child: Text.rich(
+                                        TextSpan(
+                                          children: [
+                                            TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(12)),
+                                            if (vendor.startTime != null)
+                                              TextSpan(
+                                                text: vendor.startTime!.defaultTimeFormat,
+                                                style: TStyle.greyRegular(12),
+                                              )
+                                            else
+                                              TextSpan(
+                                                text: L10n.tr().availabilityUnknown,
+                                                style: TStyle.greyRegular(12),
+                                              ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox.shrink(),
+                                  Flexible(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text.rich(
+                                        TextSpan(
+                                          children: [
+                                            TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(12)),
+                                            if (vendor.endTime != null)
+                                              TextSpan(
+                                                text: vendor.endTime!.defaultTimeFormat,
+                                                style: TStyle.greyRegular(12),
+                                              )
+                                            else
+                                              TextSpan(
+                                                text: L10n.tr().availabilityUnknown,
+                                                style: TStyle.greyRegular(12),
+                                              ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                           ],
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 6,
+                        children: [
+                          DecoratedFavoriteWidget(
+                            isDarkContainer: false,
+                            size: 18,
+                            padding: 6,
+                            borderRadius: AppConst.defaultInnerBorderRadius,
+                            fovorable: vendor,
+                          ),
+                          Row(
+                            spacing: 6,
+                            children: [
+                              const Icon(Icons.star, color: Co.secondary, size: 20),
+                              Text(vendor.rate.toStringAsFixed(1), style: TStyle.primaryBold(13)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              if (vendor.endTime != null && vendor.endTime!.difference(DateTime.now()) < const Duration(minutes: 45))
-                VendorClosingTimer(
-                  endTime: vendor.endTime!,
-                  name: vendor.name,
-                  startTime: vendor.startTime,
-                )
-              else
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+            ),
+            if (!vendor.isClosed)
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (vendor.zoneName.trim().isNotEmpty)
                       Row(
                         spacing: 4,
                         children: [
@@ -165,55 +170,63 @@ class VendorInfoCard extends StatelessWidget {
                             colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                           ),
                           Text(
-                            vendor.location.toUpperCase(),
+                            vendor.zoneName.toUpperCase(),
                             style: TStyle.greyRegular(13),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
-                      ),
-                      if (vendor.deliveryTime != null)
-                        Row(
-                          spacing: 4,
-                          children: [
-                            SvgPicture.asset(
-                              Assets.assetsSvgTruck,
-                              height: 24,
-                              width: 24,
-                              colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
-                            ),
-                            Text(
-                              "${vendor.deliveryTime} ${L10n.tr().min}",
-                              style: TStyle.greyRegular(13),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        )
-                      else
-                        const SizedBox.shrink(),
-                      if (vendor.deliveryFee != null)
-                        Row(
-                          spacing: 4,
-                          children: [
-                            SvgPicture.asset(
-                              Assets.assetsSvgMoney,
-                              height: 24,
-                              width: 24,
-                              colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
-                            ),
-                            Text(
-                              Helpers.getProperPrice(vendor.deliveryFee!),
-                              style: TStyle.greyRegular(13),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        )
-                      else
-                        const SizedBox.shrink(),
-                    ],
-                  ),
+                      )
+                    else
+                      const SizedBox.shrink(),
+                    if (vendor.deliveryTime != null)
+                      Row(
+                        spacing: 4,
+                        children: [
+                          SvgPicture.asset(
+                            Assets.assetsSvgTruck,
+                            height: 24,
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+                          ),
+                          Text(
+                            "${vendor.deliveryTime} ${L10n.tr().min}",
+                            style: TStyle.greyRegular(13),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      )
+                    else
+                      const SizedBox.shrink(),
+                    if (vendor.deliveryFee != null)
+                      Row(
+                        spacing: 4,
+                        children: [
+                          SvgPicture.asset(
+                            Assets.assetsSvgMoney,
+                            height: 24,
+                            width: 24,
+                            colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+                          ),
+                          Text(
+                            Helpers.getProperPrice(vendor.deliveryFee!),
+                            style: TStyle.greyRegular(13),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      )
+                    else
+                      const SizedBox.shrink(),
+                  ],
                 ),
-            ],
-          ),
+              ),
+            if (vendor.endTime != null && vendor.endTime!.difference(DateTime.now()) < const Duration(minutes: 45))
+              VendorClosingTimer(
+                endTime: vendor.endTime!,
+                name: vendor.name,
+                startTime: vendor.startTime,
+                onTimerFinish: (ctx) {},
+              ),
+          ],
         ),
       ),
     );

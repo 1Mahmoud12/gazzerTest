@@ -45,8 +45,18 @@ class StoreMenuScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const AppBarRowWidget(),
-                      MainSearchWidget(
-                        hintText: L10n.tr().searchForStoresItemsAndCAtegories,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 12,
+                        children: [
+                          const HorizontalSpacing(6),
+                          Expanded(
+                            child: MainSearchWidget(
+                              hintText: L10n.tr().searchForStoresItemsAndCAtegories,
+                            ),
+                          ),
+                          HorizontalSpacing(AppConst.floatingCartWidth),
+                        ],
                       ),
                       const SizedBox.shrink(),
                       GradientText(
@@ -77,7 +87,6 @@ class StoreMenuScreen extends StatelessWidget {
           listItemBuilder: (context, index) {
             final rest = catWzPlates[index].$2;
             final category = catWzPlates[index].$1;
-            print(rest.length);
             return Padding(
               padding: AppConst.defaultPadding,
               child: Column(

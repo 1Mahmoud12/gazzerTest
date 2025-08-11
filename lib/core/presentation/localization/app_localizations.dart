@@ -1889,7 +1889,7 @@ abstract class AppLocalizations {
   /// No description provided for @fullNameShouldBeThreeLettersOrMore.
   ///
   /// In en, this message translates to:
-  /// **'Full name Should be tree letters or more'**
+  /// **'Full name Should be three letters or more'**
   String get fullNameShouldBeThreeLettersOrMore;
 
   /// No description provided for @valueShouldBeNumAtelase.

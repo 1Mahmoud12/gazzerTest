@@ -153,9 +153,15 @@ class _MainTextFieldState extends State<MainTextField> {
               contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
               isDense: true,
               counterText: widget.showMaxLegnth ? null : '',
-              hintText: widget.hintText,
+              hint: widget.hintText == null
+                  ? null
+                  : Text(
+                      widget.hintText!,
+                      style: widget.style ?? TStyle.greyRegular(12),
+                      maxLines: 1,
+                    ),
+              helperMaxLines: 1,
               // helperMaxLines: 5,
-              hintStyle: widget.style ?? TStyle.greyRegular(12),
               labelStyle: TStyle.greySemi(15),
               labelText: widget.label,
               prefixIcon: widget.prefix == null

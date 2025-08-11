@@ -67,6 +67,9 @@ class StoreDetailsScreen extends StatelessWidget {
                     child: VendorInfoCard(
                       store,
                       categories: catWithSubCatProds.map((e) => e.$1.name),
+                      onTimerFinish: (ctx) {
+                        StoreDetailsRoute(storeId: storeId).pushReplacement(ctx);
+                      },
                     ),
                   ),
                 ),

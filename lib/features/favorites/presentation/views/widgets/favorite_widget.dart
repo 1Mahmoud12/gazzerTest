@@ -41,7 +41,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
 
   _listen(ToggleFavoriteStates v) {
     if (!mounted) return;
-    if (v.id != widget.fovorable.id || v.type != widget.fovorable.favoriteType) return;
+    if (v.id != widget.fovorable.id || v.type != widget.fovorable.favoriteType.toView) return;
     if (v is AddedFavoriteSuccess || v is RemovedFavoriteSuccess) {
       _pulseAnmateFav();
       if (v is AddedFavoriteSuccess) {
@@ -88,7 +88,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
     return StreamBuilder(
       stream: bus.getStream<ToggleFavoriteStates>(),
       builder: (context, snapshot) {
-        if (snapshot.data is ToggleFavoriteLoading && snapshot.data!.id == widget.fovorable.id && snapshot.data!.type == widget.fovorable.favoriteType) {
+        if (snapshot.data is ToggleFavoriteLoading && snapshot.data!.id == widget.fovorable.id && snapshot.data!.type == widget.fovorable.favoriteType.toView) {
           return Padding(
             padding: EdgeInsets.all(widget.padding),
             child: AdaptiveProgressIndicator(size: widget.size, color: widget.color),
@@ -99,7 +99,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
             SystemSound.play(SystemSoundType.click);
             if (Session().client == null) {
               Alerts.showToast(L10n.tr().pleaseLoginToUseFavorites);
-              context.go(LoginScreen.route);
+              context.push(LoginScreen.route);
               return;
             }
             await bus.toggleFavorite(widget.fovorable);

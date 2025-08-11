@@ -352,7 +352,7 @@
   "pleaseReEnterYourNewPassword": "Please re-enter your new password.",
   "clickBackAgainToExit": "Click back again to exit",
   "thisFieldIsRequired": "This field is required.",
-  "fullNameShouldBeThreeLettersOrMore": "Full name Should be tree letters or more",
+  "fullNameShouldBeThreeLettersOrMore": "Full name Should be three letters or more",
   "valueShouldBeNumAtelase": "Value {val} should be at least {num} characters",
   "@valueShouldBeNumAtelase": {
     "placeholders": {

@@ -71,7 +71,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
       body: ScrollableTabedList(
         preHerader: Column(
           children: [
-            MultiCatRestHeader(vendor: restaurant, categires: categoriesWithPlates.map((e) => e.$1.name)),
+            MultiCatRestHeader(restaurant: restaurant, categires: categoriesWithPlates.map((e) => e.$1.name)),
             _TopRatedComponent(toprated: toprated.take(5).toList()),
           ],
         ),

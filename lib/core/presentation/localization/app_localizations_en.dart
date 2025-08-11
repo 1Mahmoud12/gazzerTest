@@ -932,7 +932,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fullNameShouldBeThreeLettersOrMore =>
-      'Full name Should be tree letters or more';
+      'Full name Should be three letters or more';
 
   @override
   String valueShouldBeNumAtelase(int num, String val) {

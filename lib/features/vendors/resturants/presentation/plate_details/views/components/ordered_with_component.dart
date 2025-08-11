@@ -12,9 +12,8 @@ class OrderedWithComponent extends StatelessWidget {
   final CartItemType type;
   @override
   Widget build(BuildContext context) {
-    // if (product.isEmpty) {
-    //   return const SizedBox.shrink();
-    // }
+    if (products.isEmpty) return const SizedBox.shrink();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 8,

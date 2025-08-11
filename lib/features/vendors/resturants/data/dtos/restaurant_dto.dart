@@ -1,3 +1,4 @@
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/category_of_plate_dto.dart';
@@ -8,7 +9,7 @@ class RestaurantDTO {
   String? image;
   int? storeCategoryId;
   int? vendorId;
-  String? address;
+  // String? address;
   int? estimatedDeliveryTime;
   String? rate;
   int? isFavorite;
@@ -32,7 +33,7 @@ class RestaurantDTO {
     image = json['image'];
     storeCategoryId = json['store_category_id'];
     vendorId = json['vendor_id'];
-    address = json['address'];
+    // // address = json['address'];
     estimatedDeliveryTime = json['estimated_delivery_time'];
     rate = json['rate'];
     isFavorite = json['is_favorite'];
@@ -67,8 +68,8 @@ class RestaurantDTO {
       name: storeName!,
       image: image ?? '',
       rate: double.tryParse(rate ?? '0') ?? 0.0,
-      location: provinceZone ?? '',
-      address: address,
+      zoneName: provinceZone ?? '',
+      // address: address,
       parentId: storeCategoryId,
       categoryOfPlate: subcategories?.map((e) => e.toCategoryOfPlateEntity()).toList(),
       tag: tags,
@@ -78,7 +79,7 @@ class RestaurantDTO {
       startTime: _formDateTimeFromString(workFrom ?? ''),
       endTime: _formDateTimeFromString(workTo ?? ''),
       subCategories: subcategories?.map((e) => CategoryOfPlateEntity(id: e.id!, name: e.name ?? '', image: e.image ?? '')).toList(),
-      deliveryTime: estimatedDeliveryTime != null ? '${(estimatedDeliveryTime! * 0.7).floor()} - ${(estimatedDeliveryTime! * 1.3).ceil()} ' : null,
+      deliveryTime: estimatedDeliveryTime != null ? Helpers.convertIntToRange(estimatedDeliveryTime!, 0.3) : null,
 
       ///
       badge: badge,

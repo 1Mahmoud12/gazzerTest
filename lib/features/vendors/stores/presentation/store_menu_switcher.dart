@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
@@ -33,29 +34,34 @@ class StoreMenuSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingDraggableWidget(
-      floatingWidget: const MainCartWidget(),
-      floatingWidgetHeight: 50,
-      floatingWidgetWidth: 50,
-      mainScreenWidget: Scaffold(
-        body: BlocBuilder<StoresMenuCubit, StoresMenuStates>(
-          builder: (context, state) {
-            if (state is ScreenDataLoading || state is StoresMenuInit || state is ScreenDataError) {
-              return Scaffold(
-                appBar: const MainAppBar(
-                  showNotification: false,
-                  showCart: false, // don't show cart : multiple hero
-                ),
-                body: state is ScreenDataError
-                    ? FailureComponent(
-                        message: L10n.tr().couldnotLoadDataPleaseTryAgain,
-                        onRetry: () => context.read<StoresMenuCubit>().loadScreenData(),
-                      )
-                    : const Center(child: const AdaptiveProgressIndicator()),
-              );
-            }
-            return StoreMenuScreen(state: state);
-          },
+    final padding = MediaQuery.paddingOf(context);
+    return LayoutBuilder(
+      builder: (context, constraints) => FloatingDraggableWidget(
+        floatingWidget: const MainCartWidget(),
+        floatingWidgetHeight: 50,
+        floatingWidgetWidth: 50,
+        dy: padding.top + 60,
+        dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
+        mainScreenWidget: Scaffold(
+          body: BlocBuilder<StoresMenuCubit, StoresMenuStates>(
+            builder: (context, state) {
+              if (state is ScreenDataLoading || state is StoresMenuInit || state is ScreenDataError) {
+                return Scaffold(
+                  appBar: const MainAppBar(
+                    showNotification: false,
+                    showCart: false, // don't show cart : multiple hero
+                  ),
+                  body: state is ScreenDataError
+                      ? FailureComponent(
+                          message: L10n.tr().couldnotLoadDataPleaseTryAgain,
+                          onRetry: () => context.read<StoresMenuCubit>().loadScreenData(),
+                        )
+                      : const Center(child: const AdaptiveProgressIndicator()),
+                );
+              }
+              return StoreMenuScreen(state: state);
+            },
+          ),
         ),
       ),
     );

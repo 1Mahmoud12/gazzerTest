@@ -4,17 +4,15 @@ import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
 import 'package:gazzer/features/vendors/resturants/common/view/app_bar_row_widget.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 
 class MultiCatRestHeader extends StatelessWidget {
-  const MultiCatRestHeader({super.key, required this.vendor, required this.categires});
-  final RestaurantEntity vendor;
+  const MultiCatRestHeader({super.key, required this.restaurant, required this.categires});
+  final RestaurantEntity restaurant;
   final Iterable<String>? categires;
   @override
   Widget build(BuildContext context) {
-    final height =
-        MediaQuery.paddingOf(context).top +
-        2 * kToolbarHeight +
-        120.0; // 105 is the expected height of vendor info card
+    final height = MediaQuery.paddingOf(context).top + 2 * kToolbarHeight + 120.0; // 105 is the expected height of vendor info card
 
     return SizedBox(
       height: height,
@@ -51,8 +49,11 @@ class MultiCatRestHeader extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 40),
                 child: VendorInfoCard(
-                  vendor,
+                  restaurant,
                   categories: categires,
+                  onTimerFinish: (ctx) {
+                    RestaurantDetailsRoute(id: restaurant.id).pushReplacement(ctx);
+                  },
                 ),
               ),
             ],

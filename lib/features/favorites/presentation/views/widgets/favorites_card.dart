@@ -49,7 +49,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 125,
+      width: 140,
       child: InkWell(
         borderRadius: AppConst.defaultBorderRadius,
         onTap: widget.onTap,
@@ -64,7 +64,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                 child: CustomPaint(
                   painter: ProductShapePaint(),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 0, 4, 4),
+                    padding: const EdgeInsets.fromLTRB(4, 58, 4, 4),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -75,14 +75,15 @@ class _FavoriteCardState extends State<FavoriteCard> {
                             SizedBox(height: 30, child: CircleGradientBorderedImage(image: widget.favorite.image)),
                             Expanded(
                               child: Text(
-                                widget.favorite.name,
+                                Helpers.shortIrretableStrings(widget.favorite.name.split(' '), 24) ?? '',
                                 style: TStyle.primaryBold(12),
                                 overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
                               ),
                             ),
                           ],
                         ),
-                        const VerticalSpacing(8),
+                        const VerticalSpacing(4),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -98,7 +99,12 @@ class _FavoriteCardState extends State<FavoriteCard> {
                             ),
                           ],
                         ),
-                        Text(L10n.tr().onAllGrills, style: TStyle.blackSemi(12)),
+                        Expanded(
+                          child: Text(
+                            widget.favorite.description,
+                            style: TStyle.blackSemi(12),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -125,7 +131,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                   builder: (context, snapshot) {
                     if (snapshot.data is ToggleFavoriteLoading &&
                         snapshot.data!.id == widget.favorite.id &&
-                        snapshot.data!.type == widget.favorite.favoriteType) {
+                        snapshot.data!.type == widget.favorite.favoriteType.toView) {
                       return const Padding(
                         padding: EdgeInsets.all(6),
                         child: AdaptiveProgressIndicator(size: 20, color: Co.bg),

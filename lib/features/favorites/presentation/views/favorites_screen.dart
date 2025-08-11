@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -7,9 +8,14 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_b
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/cart/presentation/views/component/un_auth_component.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorites_card.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -50,61 +56,78 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               hintText: L10n.tr().searchForStoresItemsAndCAtegories,
             ),
           ),
-          Expanded(
-            child: StreamBuilder(
-              stream: bus.getStream<FavoriteEvents>(),
-              builder: (context, snapshot) {
-                // print("favs of restaurant  ${bus.favorites[FavoriteType.restaurant]}");
-                if (snapshot.data is GetFavoriteLoading) {
-                  return const Center(child: AdaptiveProgressIndicator());
-                }
-                if (snapshot.data?.favorites == null || snapshot.data!.favorites.isEmpty) {
-                  return Center(
-                    child: Text(
-                      L10n.tr().youHaveNoFavoritesYet,
-                      style: TStyle.primaryBold(20),
+          if (Session().client == null)
+            UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites)
+          else
+            Expanded(
+              child: StreamBuilder(
+                stream: bus.getStream<FavoriteEvents>(),
+                builder: (context, snapshot) {
+                  // print("favs of restaurant  ${bus.favorites[FavoriteType.restaurant]}");
+                  if (snapshot.data is GetFavoriteLoading) {
+                    return const Center(child: AdaptiveProgressIndicator());
+                  }
+                  if (snapshot.data?.favorites == null || snapshot.data!.favorites.isEmpty) {
+                    return Center(
+                      child: Text(
+                        L10n.tr().youHaveNoFavoritesYet,
+                        style: TStyle.primaryBold(20),
+                      ),
+                    );
+                  }
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      bus.getFavorites();
+                    },
+                    child: ListView.separated(
+                      itemCount: snapshot.data!.favorites.length,
+                      padding: AppConst.defaultPadding,
+                      separatorBuilder: (context, index) => const VerticalSpacing(24),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 8,
+                          children: [
+                            Text(snapshot.data!.favorites.keys.elementAt(index).trName, style: TStyle.primaryBold(20)),
+                            SizedBox(
+                              height: 200,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data!.favorites.values.elementAt(index).length,
+                                separatorBuilder: (context, index) => const HorizontalSpacing(16),
+                                itemBuilder: (context, i) {
+                                  final fav = snapshot.data!.favorites.values.elementAt(index).values.elementAt(i);
+                                  return FavoriteCard(
+                                    favorite: fav,
+                                    onTap: () {
+                                      switch (fav.favoriteType) {
+                                        case FavoriteType.restaurant:
+                                          RestaurantDetailsRoute(id: fav.id).push(context);
+                                          break;
+                                        case FavoriteType.store:
+                                          StoreDetailsRoute(storeId: fav.id).push(context);
+                                          break;
+                                        case FavoriteType.plate:
+                                          PlateDetailsRoute(id: fav.id).push(context);
+                                        case FavoriteType.product:
+                                          ProductDetailsRoute(productId: fav.id).push(context);
+                                          break;
+                                        default:
+                                          break;
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   );
-                }
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    bus.getFavorites();
-                  },
-                  child: ListView.separated(
-                    itemCount: snapshot.data!.favorites.length,
-                    padding: AppConst.defaultPadding,
-                    separatorBuilder: (context, index) => const VerticalSpacing(24),
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 8,
-                        children: [
-                          Text(snapshot.data!.favorites.keys.elementAt(index).trName, style: TStyle.primaryBold(20)),
-                          SizedBox(
-                            height: 180,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: snapshot.data!.favorites.values.elementAt(index).length,
-                              separatorBuilder: (context, index) => const HorizontalSpacing(16),
-                              itemBuilder: (context, i) {
-                                final prod = snapshot.data!.favorites.values.elementAt(index).values.elementAt(i);
-                                return FavoriteCard(
-                                  favorite: prod,
-                                  onTap: () {
-                                    ///
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                );
-              },
+                },
+              ),
             ),
-          ),
         ],
       ),
     );

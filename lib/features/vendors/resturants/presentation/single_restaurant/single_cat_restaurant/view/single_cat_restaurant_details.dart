@@ -26,6 +26,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/plate_details/vi
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/ordered_with_cubit/ordered_with_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/ordered_with_cubit/ordered_with_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_states.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/widgets/add_special_note.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -147,6 +148,9 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                       restaurant,
                       padding: EdgeInsets.zero,
                       categories: null,
+                      onTimerFinish: (ctx) {
+                        RestaurantDetailsRoute(id: restaurant.id).pushReplacement(ctx);
+                      },
                     ),
                     const SizedBox.shrink(),
                     OverflowBox(
@@ -197,15 +201,12 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                 create: (context) => di<AddToCartCubit>(param1: (state.plate, state.options)),
                                 child: Builder(
                                   builder: (context) {
-                                    print("Builder Method Was Called");
                                     final addCubit = context.read<AddToCartCubit>();
                                     onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
                                     onsubmit = addCubit.addToCart;
                                     onNoteChange = addCubit.setNote;
                                     WidgetsBinding.instance.addPostFrameCallback((_) {
                                       canLeaveItem.value = addCubit.cartItem == null;
-                                      // this line to force rebuild the summaryy widget in order that it reads the newly assigned onSubmit
-                                      // as the [.value] method internally has a guard that prevents build unless it used to set a different value
                                       priceNQntyNLoading.value = (0, 0, false);
                                       priceNQntyNLoading.value = (
                                         addCubit.state.totalPrice,
@@ -216,7 +217,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                     return BlocConsumer<AddToCartCubit, AddToCartStates>(
                                       listener: (context, cartState) {
                                         noteNotifier.value = cartState.note;
-                                        canLeaveItem.value = cartState.hasUserInteracted;
+                                        canLeaveItem.value = !cartState.hasUserInteracted;
                                         priceNQntyNLoading.value = (
                                           cartState.totalPrice,
                                           cartState.quantity,

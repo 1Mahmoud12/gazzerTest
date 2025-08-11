@@ -60,16 +60,31 @@ enum FavoriteType {
   factory FavoriteType.fromString(String type) {
     return FavoriteType.values.firstWhere((e) => e.type == type, orElse: () => unknown);
   }
-  String get trName {
+
+  FavoritesViewType get toView {
     switch (this) {
       case FavoriteType.restaurant:
       case FavoriteType.store:
-        return L10n.tr().favoriteVendors;
+        return FavoritesViewType.vendor;
       case FavoriteType.plate:
       case FavoriteType.product:
-        return L10n.tr().favoriteItems;
+        return FavoritesViewType.product;
       default:
-        return '';
+        return FavoritesViewType.product; // Default fallback
+    }
+  }
+}
+
+enum FavoritesViewType {
+  product,
+  vendor;
+
+  String get trName {
+    switch (this) {
+      case FavoritesViewType.product:
+        return L10n.tr().favoriteItems;
+      case FavoritesViewType.vendor:
+        return L10n.tr().favoriteVendors;
     }
   }
 }

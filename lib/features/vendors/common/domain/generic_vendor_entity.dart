@@ -9,7 +9,7 @@ part 'package:gazzer/features/vendors/stores/domain/entities/store_entity.dart';
 ///
 sealed class GenericVendorEntity extends Favorable {
   final int? parentId;
-  final String location; // zone
+  final String zoneName; // zone
   final List<GenericSubCategoryEntity>? subCategories;
 
   ///
@@ -27,7 +27,7 @@ sealed class GenericVendorEntity extends Favorable {
   final bool isFavorite;
   final bool isOpen;
 
-  final String? address; // ** pending api
+  // final String? address; // ** pending api
 
   bool get isClosed => alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
 
@@ -55,13 +55,13 @@ sealed class GenericVendorEntity extends Favorable {
     this.subCategories,
     this.deliveryTime,
     this.deliveryFee,
-    required this.location,
+    required this.zoneName,
     this.rateCount,
     required this.alwaysOpen,
     required this.alwaysClosed,
     required this.isFavorite,
     required this.isOpen,
-    this.address,
+    // this.address,
   });
 
   String? shortTag(int max) {

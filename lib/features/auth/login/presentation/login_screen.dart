@@ -151,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(
                             child: OptionBtn(
                               onPressed: () {
+                                if (Navigator.canPop(context)) return context.pop();
                                 const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                               },
                               textStyle: TStyle.mainwSemi(15),
