@@ -9,8 +9,8 @@ import 'package:gazzer/core/presentation/views/components/banners/main_banner_wi
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/app_bar_row_widget.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/lists/restaurants_list_switche.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/app_bar_row_widget.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
@@ -21,6 +21,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 // part 'components/explore_best.dart';
 // part 'components/pick_to_you.dart';
 part 'restaurants_of_category_screen.g.dart';
+
 /// screen widgets
 // part 'widgets/add_widget.dart';
 part 'widgets/type_related_restaurants_header.dart';

@@ -9,7 +9,7 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/unscollable_tabed_list.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/unscollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_prod_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_sub_cat_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_header_container.dart';

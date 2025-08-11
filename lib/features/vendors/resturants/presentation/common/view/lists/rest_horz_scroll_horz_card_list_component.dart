@@ -4,8 +4,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.da
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/cards/horizontal_plate_card.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/cards/horizontal_restaurant_card.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/horizontal_plate_card.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/horizontal_restaurant_card.dart';
 
 class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
   const RestHorzScrollHorzCardListComponent({

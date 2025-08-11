@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_option_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cartable_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
 class CartItemEntity extends Equatable {
   final int cartId;
@@ -59,48 +60,4 @@ class CartItemEntity extends Equatable {
 
   @override
   List<Object?> get props => [cartId, type, quantity, notes, options, prod];
-}
-
-class CartableEntity extends Equatable {
-  final int id;
-  final String name;
-  final double price;
-  final String image;
-  final double? priceBeforeDiscount;
-
-  const CartableEntity({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.image,
-    this.priceBeforeDiscount,
-  });
-
-  @override
-  List<Object?> get props => [id, name, price, priceBeforeDiscount, image];
-}
-
-class CartOptionEntity extends Equatable {
-  final int id;
-  final String name;
-  final List<CartOptionValueEntity> values;
-  const CartOptionEntity({required this.id, required this.name, required this.values});
-
-  CartOptionEntity.fromOption(ItemOptionEntity option, List<CartOptionValueEntity> vals) : id = option.id, name = option.name, values = vals;
-
-  @override
-  List<Object?> get props => [id, name, values];
-}
-
-class CartOptionValueEntity extends Equatable {
-  final int id;
-  final String name;
-  final double price;
-
-  const CartOptionValueEntity({required this.id, required this.name, required this.price});
-
-  CartOptionValueEntity.fromOptionValue(OpionValueEntity value) : id = value.id, name = value.name, price = value.price;
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }

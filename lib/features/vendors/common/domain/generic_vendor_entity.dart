@@ -1,9 +1,13 @@
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
+import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/restaurant_entity.dart';
 part 'package:gazzer/features/vendors/stores/domain/entities/store_entity.dart';
+
+/// TODO:
+/// emove [VendorEntity] class and use [GenericVendorEntity] instead
 
 /// generic class for both [RestaurantEntity] for restaurants and [StoreEntity] for stores
 ///

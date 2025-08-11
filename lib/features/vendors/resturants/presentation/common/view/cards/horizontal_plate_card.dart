@@ -10,7 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/cards/card_plate_info_widget.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/card_plate_info_widget.dart';
 
 class HorizontalPlateCard extends StatelessWidget {
   const HorizontalPlateCard({

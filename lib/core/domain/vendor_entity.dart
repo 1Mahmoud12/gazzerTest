@@ -1,3 +1,7 @@
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+
+/// this class should be removed adn replaced by [GenericVendorEntity]
+
 class VendorEntity {
   final int id;
   final String name;

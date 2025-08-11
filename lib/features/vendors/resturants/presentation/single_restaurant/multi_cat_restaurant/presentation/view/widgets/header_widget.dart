@@ -3,7 +3,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/app_bar_row_widget.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/app_bar_row_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 
 class MultiCatRestHeader extends StatelessWidget {

@@ -9,7 +9,7 @@ import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/cards/card_rest_info_widget.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/card_rest_info_widget.dart';
 
 class VerticalRestaurantCard extends StatelessWidget {
   const VerticalRestaurantCard({
@@ -99,7 +99,10 @@ class VerticalRestaurantCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Align(alignment: corner.alignment, child: DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item)),
+                    Align(
+                      alignment: corner.alignment,
+                      child: DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
+                    ),
                   ],
                 ),
               ),

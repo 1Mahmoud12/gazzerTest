@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/cards/horizontal_plate_card.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/cards/horizontal_restaurant_card.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/vertical_plate_card.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/vertical_restaurant_card.dart';
 
-class RestVertScrollHorzCardListComponent<T> extends StatelessWidget {
-  const RestVertScrollHorzCardListComponent({
+class RestVertScrollVertCardGridComponent<T> extends StatelessWidget {
+  const RestVertScrollVertCardGridComponent({
     super.key,
-    this.title,
+    required this.title,
     this.onViewAllPressed,
     required this.items,
-    this.cardHeight,
-    this.cardImageToTextRatio,
-    this.corner,
+    this.corner = Corner.bottomLeft,
     required this.onSingleCardPressed,
   }) : assert(
          items is List<GenericVendorEntity> || items is List<GenericItemEntity>,
-         'HorzScrollHorzCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
+         'HorzScrollVertCardVendorsListComponent can only be used with RestaurantEntity or PlateEntity',
        );
   final String? title;
   final Function()? onViewAllPressed;
   final List<T> items;
-  final double? cardHeight;
-  final double? cardImageToTextRatio;
   final Corner? corner;
   final void Function(T item) onSingleCardPressed;
 
@@ -37,7 +32,6 @@ class RestVertScrollHorzCardListComponent<T> extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
 
       child: Column(
-        spacing: 4,
         children: [
           TitleWithMore(
             title: title ?? '',
@@ -48,30 +42,35 @@ class RestVertScrollHorzCardListComponent<T> extends StatelessWidget {
                 : onViewAllPressed,
           ),
 
-          ListView.separated(
+          GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(vertical: 8),
+
             itemCount: items.length,
-            separatorBuilder: (context, index) => const VerticalSpacing(12),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 235,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+            ),
             itemBuilder: (context, index) {
               final item = items[index];
               if (item is RestaurantEntity) {
-                return HorizontalRestaurantCard(
-                  imgToTextRatio: cardImageToTextRatio ?? 1.4,
-                  // width: 350,
-                  height: cardHeight ?? 140,
-                  item: item as RestaurantEntity,
-                  corner: Corner.topLeft,
+                return VerticalRestaurantCard(
+                  width: 350,
+                  height: 150,
+                  item: item,
+                  corner: corner,
                   onTap: (item) => onSingleCardPressed(items[index]),
                 );
               }
               if (item is PlateEntity) {
-                return HorizontalPlateCard(
-                  corner: Corner.bottomRight,
+                return VerticalPlateCard(
                   item: item,
-                  height: cardHeight ?? 140,
-                  imgToTextRatio: 1.05,
+                  imgToTextRatio: 0.6,
+                  width: double.infinity,
+                  corner: corner,
                   onTap: (item) => onSingleCardPressed(items[index]),
                 );
               }

@@ -6,6 +6,7 @@ import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_vendor_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cartable_entity.dart';
 import 'package:gazzer/features/cart/presentation/models/cart_summary_model.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';

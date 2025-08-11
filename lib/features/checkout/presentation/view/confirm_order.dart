@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
-import 'package:gazzer/core/domain/cart/cart_item_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
-    show GradientText;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText;
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 
 class ConfirmOrderScreen extends StatelessWidget {
   const ConfirmOrderScreen({super.key});
@@ -14,7 +13,7 @@ class ConfirmOrderScreen extends StatelessWidget {
     final btnText = [L10n.tr().addPRomoCode, L10n.tr().addDeliveryInstruction, L10n.tr().addTip];
     final cartITems = List.generate(
       5,
-      (index) => CartItemModel.fromProduct(Fakers.plates[index % Fakers.plates.length]),
+      (index) => CartItemEntity.fromProduct(Fakers.plates[index % Fakers.plates.length]),
     );
     return Scaffold(
       appBar: AppBar(

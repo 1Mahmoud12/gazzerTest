@@ -5,33 +5,30 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
-import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/common/view/cards/card_plate_info_widget.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/card_rest_info_widget.dart';
 
-class VerticalPlateCard extends StatelessWidget {
-  const VerticalPlateCard({
+class HorizontalRestaurantCard extends StatelessWidget {
+  const HorizontalRestaurantCard({
     super.key,
-    required this.width,
+    this.width,
     required this.item,
     this.height,
-    Corner? corner,
+    this.corner = Corner.bottomRight,
     this.imgToTextRatio = 0.66,
     required this.onTap,
-  }) : corner = corner ?? Corner.bottomLeft;
-  final double width;
+  });
+  final double? width;
   final double? height;
-  final PlateEntity item;
+  final RestaurantEntity item;
   final Corner corner;
   final double imgToTextRatio;
-  final double iconsWidth = 72;
-  final Function(PlateEntity)? onTap;
+  final Function(RestaurantEntity)? onTap;
 
   @override
   Widget build(BuildContext context) {
-    print(item.image);
     return SizedBox(
       width: width,
       height: height,
@@ -45,19 +42,20 @@ class VerticalPlateCard extends StatelessWidget {
           borderRadius: AppConst.defaultBorderRadius,
         ),
         child: ElevatedButton(
-          onPressed: item.outOfStock
+          onPressed: item.isClosed
               ? null
               : onTap == null
               ? null
               : () => onTap!(item),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
             disabledBackgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
             padding: const EdgeInsetsGeometry.all(8),
           ),
-          child: Column(
+          child: Row(
+            spacing: 12,
             children: [
               Expanded(
                 flex: (imgToTextRatio * 10).toInt(),
@@ -66,25 +64,25 @@ class VerticalPlateCard extends StatelessWidget {
                   children: [
                     CustomPaint(
                       isComplex: true,
-                      foregroundPainter: CornerIndendetShape(indent: Size(iconsWidth, 36), corner: corner),
+                      foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
                       child: ClipPath(
-                        clipper: ConrerIndentedClipper(indent: Size(iconsWidth, 36), corner: corner),
+                        clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
                         child: Stack(
                           children: [
                             Container(
-                              foregroundDecoration: !item.outOfStock ? null : BoxDecoration(color: Co.secText.withAlpha(200)),
+                              foregroundDecoration: !item.isClosed ? null : BoxDecoration(color: Colors.red.withAlpha(75)),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(item.image),
                                   fit: BoxFit.cover,
-                                  // opacity: item.outOfStock ? 0.4 : 1,
+                                  opacity: item.isClosed ? 0.4 : 1,
                                   onError: (error, stackTrace) => print(' Error loading image: $error'),
                                 ),
                               ),
                             ),
-                            if (item.outOfStock)
+                            if (item.isClosed)
                               CardBadge(
-                                text: L10n.tr().notAvailable,
+                                text: L10n.tr().closed,
                                 alignment: AlignmentDirectional.topStart,
                                 fullWidth: true,
                               )
@@ -99,29 +97,13 @@ class VerticalPlateCard extends StatelessWidget {
                     ),
                     Align(
                       alignment: corner.alignment,
-                      child: SizedBox(
-                        width: iconsWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
-                            AbsorbPointer(
-                              absorbing: item.outOfStock,
-                              child: AddIcon(
-                                onTap: () {
-                                  if (onTap != null) onTap!(item);
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      child: DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
                     ),
                   ],
                 ),
               ),
-              Expanded(flex: 10, child: CardPlateInfoWidget(plate: item)),
+
+              Expanded(flex: 10, child: CardRestInfoWidget(vendor: item)),
             ],
           ),
         ),

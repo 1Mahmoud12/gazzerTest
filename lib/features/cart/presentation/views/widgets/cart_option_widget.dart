@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_option_entity.dart';
 
 class CartOptionWidget extends StatelessWidget {
   const CartOptionWidget({super.key, required this.option});

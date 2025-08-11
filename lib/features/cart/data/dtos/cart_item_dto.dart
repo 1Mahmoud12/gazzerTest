@@ -1,5 +1,7 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_option_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cartable_entity.dart';
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
