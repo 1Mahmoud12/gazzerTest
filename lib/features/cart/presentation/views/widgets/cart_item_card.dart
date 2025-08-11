@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -32,6 +33,10 @@ class CartItemCard extends StatelessWidget {
               print('hasCartChanges $hasChanged');
               if (hasChanged == true) cubit.loadCart();
             });
+            break;
+          case CartItemType.restaurantItem:
+            // TODO restaurant item isn't retrivied from cart,
+            // TODO and will not show the correct item if navigated to plate details
             break;
           case CartItemType.plate:
             PlateDetailsRoute(id: item.prod.id, $extra: item).push(context).then((hasChanged) {
@@ -141,9 +146,20 @@ class CartItemCard extends StatelessWidget {
                                         },
                                       ),
                                       IconButton(
-                                        onPressed: () {
+                                        onPressed: () async {
                                           if (state is UpdateItemLoading) return;
-                                          cubit.removeItemFromCart(item.cartId);
+                                          final confirmed = await showDialog<bool>(
+                                            context: context,
+                                            builder: (context) {
+                                              return Dialogs.confirmDialog(
+                                                title: L10n.tr().warning,
+                                                message: L10n.tr().areYouSureYouWantToDeleteThisItem,
+                                                okBgColor: Co.red,
+                                                context: context,
+                                              );
+                                            },
+                                          );
+                                          if (confirmed == true) cubit.removeItemFromCart(item.cartId);
                                         },
                                         style: IconButton.styleFrom(
                                           padding: const EdgeInsets.all(4),

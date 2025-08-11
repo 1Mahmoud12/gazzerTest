@@ -29,9 +29,11 @@ class StoreDetailsResponse {
         }
         prods.sort((a, b) => a.outOfStock ? 1 : -1);
       }
-      catsWithProds.add(
-        (cat, subCats, prods),
-      );
+      if (subCats.isNotEmpty || prods.isNotEmpty) {
+        catsWithProds.add(
+          (cat, subCats, prods),
+        );
+      }
     }
   }
 }

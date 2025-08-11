@@ -82,7 +82,11 @@ class ProductDetailsScreen extends StatelessWidget {
                         padding: AppConst.defaultHrPadding,
                         child: Column(
                           children: [
-                            OrderedWithComponent(products: state.orderedWith),
+                            OrderedWithComponent(
+                              products: state.orderedWith,
+                              type: CartItemType.product,
+                              title: L10n.tr().youMayAlsoLike,
+                            ),
                             const VerticalSpacing(16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,

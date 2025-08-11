@@ -256,6 +256,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get favorite_________________Start => '__________________';
 
   @override
+  String get favoriteVendors => 'Favorite Vendors';
+
+  @override
+  String get favoriteItems => 'Favorite Items';
+
+  @override
   String get pleaseLoginToUseFavorites => 'Please login to use favorites';
 
   @override
@@ -572,6 +578,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get alsoOrderWith => 'Also Order With';
+
+  @override
+  String get youMayAlsoLike => 'You May Also Like';
 
   @override
   String get product_________________End => '__________________';

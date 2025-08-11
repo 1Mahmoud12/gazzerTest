@@ -41,6 +41,8 @@ class MainTextField extends StatefulWidget {
     this.showBorder = true,
     this.maxLines,
     this.isOutLinedBorder = true,
+    this.autofocus = false,
+    this.showMaxLegnth = false,
     this.prefixOnTap,
     this.prefixColor,
     this.autofillHints,
@@ -80,6 +82,8 @@ class MainTextField extends StatefulWidget {
   final List<String>? autofillHints;
   final int max;
   final TextInputAction action;
+  final bool autofocus;
+  final bool showMaxLegnth;
   @override
   State<MainTextField> createState() => _MainTextFieldState();
 }
@@ -122,6 +126,7 @@ class _MainTextFieldState extends State<MainTextField> {
         valueListenable: isObscure,
         builder: (context, value, child) {
           return TextFormField(
+            autofocus: widget.autofocus,
             maxLines: widget.maxLines ?? 1,
             cursorColor: Co.purple,
             controller: widget.controller,
@@ -134,7 +139,7 @@ class _MainTextFieldState extends State<MainTextField> {
             onFieldSubmitted: widget.onSubmitting,
             obscureText: value,
             maxLength: widget.max,
-      
+
             onTapOutside: (event) {
               FocusScope.of(context).unfocus();
             },
@@ -144,10 +149,12 @@ class _MainTextFieldState extends State<MainTextField> {
             decoration: InputDecoration(
               errorStyle: TStyle.errorSemi(13),
               errorMaxLines: 5,
+              hintMaxLines: 5,
               contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
               isDense: true,
-              counterText: '',
+              counterText: widget.showMaxLegnth ? null : '',
               hintText: widget.hintText,
+              // helperMaxLines: 5,
               hintStyle: widget.style ?? TStyle.greyRegular(12),
               labelStyle: TStyle.greySemi(15),
               labelText: widget.label,
@@ -170,7 +177,7 @@ class _MainTextFieldState extends State<MainTextField> {
               filled: widget.isFilled || widget.bgColor != null,
               fillColor: widget.bgColor ?? Co.white,
               enabled: widget.enabled,
-      
+
               focusedBorder: widget.showBorder
                   ? focusedBorder
                   : OutlineInputBorder(

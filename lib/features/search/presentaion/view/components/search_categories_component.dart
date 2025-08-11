@@ -3,9 +3,10 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 
 class SearchCategoriesComponent extends StatefulWidget {
-  const SearchCategoriesComponent({super.key, required this.categories, required this.onTap});
+  const SearchCategoriesComponent({super.key, required this.categories, required this.onTap, this.initIndex});
   final List<MainCategoryEntity> categories;
   final Function(int id) onTap;
+  final int? initIndex;
   @override
   State<SearchCategoriesComponent> createState() => _SearchCategoriesComponentState();
 }
@@ -17,6 +18,14 @@ class _SearchCategoriesComponentState extends State<SearchCategoriesComponent> w
   void initState() {
     tabController = TabController(length: widget.categories.length, vsync: this);
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant SearchCategoriesComponent oldWidget) {
+    if (widget.initIndex != null && tabController.index != widget.initIndex!) {
+      tabController.animateTo(widget.initIndex!);
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

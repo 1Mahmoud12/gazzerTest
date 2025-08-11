@@ -20,12 +20,12 @@ class VendorInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageSize = 60.0;
-    return Padding(
-      padding: padding ?? const EdgeInsetsGeometry.fromLTRB(16, 0, 16, 0),
-      child: ClipRRect(
-        borderRadius: AppConst.defaultBorderRadius,
-        child: ColoredBox(
-          color: Co.secText.withAlpha(100),
+    return ClipRRect(
+      borderRadius: AppConst.defaultBorderRadius,
+      child: ColoredBox(
+        color: Co.secText.withAlpha(100),
+        child: Padding(
+          padding: padding ?? const EdgeInsetsGeometry.fromLTRB(16, 0, 16, 0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

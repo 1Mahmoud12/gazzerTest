@@ -7,9 +7,9 @@ import 'package:gazzer/core/presentation/views/components/failure_component.dart
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/main_back_icon.dart';
-import 'package:gazzer/features/search/presentaion/components/search_categories_component.dart';
 import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
 import 'package:gazzer/features/search/presentaion/cubit/search_states.dart';
+import 'package:gazzer/features/search/presentaion/view/components/search_categories_component.dart';
 import 'package:gazzer/features/search/presentaion/view/widgets/filter_widget.dart';
 import 'package:gazzer/features/search/presentaion/view/widgets/search_vendor_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -58,6 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: MainTextField(
                           controller: cubit.controller,
                           height: 80,
+                          autofocus: true,
                           borderRadius: 64,
                           action: TextInputAction.done,
                           hintText: L10n.tr().enterThreeLetterOrMore,
@@ -86,6 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         if (id == cubit.state.query.categoryId) return;
                         cubit.performSearch(cubit.state.query.copyWith(categoryId: id));
                       },
+                      initIndex: state is LoadCategoriesState ? state.categories.indexWhere((element) => element.id == cubit.state.query.categoryId) : null,
                       categories: state is LoadCategoriesState ? state.categories : [],
                     ),
                   ),
@@ -108,9 +110,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       return Expanded(
                         child: Center(
                           child: Text(
-                            state.query.searchWord.trim().isEmpty
-                                ? L10n.tr().enterTheWordYouWantToSearchFor
-                                : L10n.tr().noResultsFoundTryAdjustingYourFilter,
+                            state.query.searchWord.trim().isEmpty ? L10n.tr().enterTheWordYouWantToSearchFor : L10n.tr().noResultsFoundTryAdjustingYourFilter,
                             style: TStyle.greyBold(16),
                             textAlign: TextAlign.center,
                           ),

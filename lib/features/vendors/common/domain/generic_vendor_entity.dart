@@ -29,8 +29,7 @@ sealed class GenericVendorEntity extends Favorable {
 
   final String? address; // ** pending api
 
-  bool get isClosed =>
-      alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
+  bool get isClosed => alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
 
   @override
   FavoriteType get favoriteType => switch (this) {

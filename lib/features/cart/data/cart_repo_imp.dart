@@ -93,8 +93,9 @@ class CartRepoImp extends CartRepo {
     return super.call(
       apiCall: () async => _apiclient.get(endpoint: Endpoints.getAvailableSlots),
       parser: (response) {
+        if (response.data is! Map) return [];
         final data = response.data['data'] as List<dynamic>;
-        return data.map((e) => e.toString()).toList();
+        return data.isNotEmpty ? data.map((e) => e.toString()).toList() : [];
       },
     );
   }

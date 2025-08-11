@@ -17,8 +17,10 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/ordered_with_increment.dart';
 
 class OrderedWithCard extends StatelessWidget {
-  const OrderedWithCard({super.key, required this.product});
+  const OrderedWithCard({super.key, required this.product, required this.type});
   final OrderedWithEntity product;
+  final CartItemType type;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -77,7 +79,7 @@ class OrderedWithCard extends StatelessWidget {
                   ],
                 ),
                 Align(
-                  alignment: Alignment.bottomRight,
+                  alignment: AlignmentDirectional.bottomEnd,
                   child: StreamBuilder(
                     stream: di<CartBus>().getStream<FastItemEvents>(),
                     builder: (context, snapshot) {
@@ -111,7 +113,7 @@ class OrderedWithCard extends StatelessWidget {
                                 id: product.id,
                                 quantity: 1,
                                 options: {},
-                                type: CartItemType.plate,
+                                type: type,
                                 note: null,
                                 cartItemId: null,
                               ),

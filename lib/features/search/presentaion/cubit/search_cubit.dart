@@ -19,6 +19,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   final _vendors = <SearchVendorEntity>[];
   final controller = TextEditingController();
+  int? defaultCatId;
   // SearchQuery _query = const SearchQuery();
   // SearchQuery get query => _query;
 
@@ -29,29 +30,33 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   Future<void> performSearch(SearchQuery query) async {
-    query = query.copyWith(searchWord: controller.text, currentPage: 1);
-    if (query.searchWord.trim().length < 3) {
-      emit(SearchSuccess(vendors: [], query: query));
+    final newQuery = query.copyWith(
+      searchWord: controller.text,
+      currentPage: 1,
+      categoryId: query.categoryId ?? defaultCatId,
+    );
+    if (newQuery.searchWord.trim().length < 3) {
+      emit(SearchSuccess(vendors: [], query: newQuery));
       return;
     }
     _terminatePrevCalss();
     currentPage = 1;
-    emit(SearchLoading(query: query));
-    final result = await _repo.search(query, token);
+    emit(SearchLoading(query: newQuery));
+    final result = await _repo.search(newQuery, token);
     switch (result) {
       case Ok<SearchResponse> ok:
         currentPage = ok.value.currentPage;
         lastPage = ok.value.lastPage;
         _vendors.clear();
         _vendors.addAll(ok.value.vendors);
-        emit(SearchSuccess(vendors: _vendors, query: query));
+        emit(SearchSuccess(vendors: _vendors, query: newQuery));
         break;
       case Err<SearchResponse> err:
         if (err.error.e == ErrorType.cancel) {
           // Request was cancelled, do nothing
           return;
         }
-        emit(SearchError(message: err.error.message, query: query));
+        emit(SearchError(message: err.error.message, query: newQuery));
         break;
     }
   }
@@ -80,6 +85,7 @@ class SearchCubit extends Cubit<SearchState> {
     final result = await _repo.getCategories();
     switch (result) {
       case Ok<List<MainCategoryEntity>> ok:
+        if (ok.value.isNotEmpty) defaultCatId = ok.value.first.id;
         emit(LoadCategoriesSuccess(categories: ok.value));
         break;
       case Err<List<MainCategoryEntity>> err:

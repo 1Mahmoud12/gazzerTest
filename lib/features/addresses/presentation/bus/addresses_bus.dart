@@ -55,4 +55,9 @@ class AddressesBus extends AppBus {
         break;
     }
   }
+
+  void clearAddresses() {
+    Session().addresses.clear();
+    fire(FetchAddressesSuccess(addresses: []));
+  }
 }

@@ -100,7 +100,7 @@ class StoreMenuScreen extends StatelessWidget {
                           width: 160,
                           entity: rest[i],
                           onPressed: () {
-                            StoreDetailsRoute(storeId: rest[index].id).push(context);
+                            StoreDetailsRoute(storeId: rest[i].id).push(context);
                           },
                         );
                       },

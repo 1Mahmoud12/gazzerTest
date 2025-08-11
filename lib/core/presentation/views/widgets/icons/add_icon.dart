@@ -23,9 +23,9 @@ class AddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return DoubledDecoratedWidget(
       innerDecoration: innterDecoration,
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(radius ?? 7),
-        bottomRight: Radius.circular(radius ?? 7),
+      borderRadius: BorderRadiusDirectional.only(
+        topStart: Radius.circular(radius ?? 7),
+        bottomEnd: Radius.circular(radius ?? 7),
       ),
       child: InkWell(
         onTap: onTap,

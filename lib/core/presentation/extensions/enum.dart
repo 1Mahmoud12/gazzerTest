@@ -36,6 +36,7 @@ enum ItemType {
 
 enum CartItemType {
   plate('plate'),
+  restaurantItem('restaurant-item'),
   product('store-item');
 
   final String value;
@@ -62,13 +63,11 @@ enum FavoriteType {
   String get trName {
     switch (this) {
       case FavoriteType.restaurant:
-        return L10n.tr().favoriteRestaurants;
       case FavoriteType.store:
-        return L10n.tr().favoriteStores;
+        return L10n.tr().favoriteVendors;
       case FavoriteType.plate:
-        return L10n.tr().favoritePlates;
       case FavoriteType.product:
-        return L10n.tr().favoriteProducts;
+        return L10n.tr().favoriteItems;
       default:
         return '';
     }

@@ -98,13 +98,15 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
               RestaurantsListSwitche(
                 title: cat.$1.name,
                 items: cat.$2.isNotEmpty ? cat.$2 : Fakers.plates,
-                onViewAllPressed: () {
-                  RestaurantCategoryRoute(
-                    $extra: restaurant,
-                    subCatId: cat.$1.id,
-                    subcatName: cat.$1.name,
-                  ).push(context);
-                },
+                onViewAllPressed: cat.$2.length < 10
+                    ? null
+                    : () {
+                        RestaurantCategoryRoute(
+                          $extra: restaurant,
+                          subCatId: cat.$1.id,
+                          subcatName: cat.$1.name,
+                        ).push(context);
+                      },
                 cardImageToTextRatios: {CardStyle.typeOne: 0.8},
                 corners: {CardStyle.typeThree: Corner.topLeft},
                 onSingleCardPressed: (item) {

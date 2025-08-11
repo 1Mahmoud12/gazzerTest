@@ -46,7 +46,7 @@ class SearchQuery extends Equatable {
   final bool sortedByRate;
   final bool sortByDeliveryTime;
   final AlphaSort alpha;
-  final int categoryId;
+  final int? categoryId;
 
   final int currentPage;
 
@@ -57,7 +57,7 @@ class SearchQuery extends Equatable {
     this.sortedByRate = false,
     this.sortByDeliveryTime = false,
     this.alpha = AlphaSort.none,
-    this.categoryId = 0,
+    this.categoryId,
   });
 
   String toQuery() =>

@@ -237,8 +237,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                               return PlateOptionsWidget(
                                                 option: state.options[index],
                                                 selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
-                                                onValueSelected: (id) =>
-                                                    addCubit.setOptionValue(state.options[index].id, id),
+                                                onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
                                               );
                                             },
                                           ),
@@ -257,7 +256,11 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                     }
                                     return Skeletonizer(
                                       enabled: state is OrderedWithLoading,
-                                      child: OrderedWithComponent(products: state.items),
+                                      child: OrderedWithComponent(
+                                        products: state.items,
+                                        title: L10n.tr().alsoOrderWith,
+                                        type: CartItemType.restaurantItem,
+                                      ),
                                     );
                                   },
                                 ),

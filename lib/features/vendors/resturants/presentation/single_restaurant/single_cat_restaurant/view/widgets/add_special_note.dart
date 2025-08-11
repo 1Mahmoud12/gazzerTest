@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -56,7 +57,7 @@ class _NoteSheet extends StatefulWidget {
 
 class _NoteSheetState extends State<_NoteSheet> {
   final TextEditingController controller = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     controller.text = widget.note ?? '';
@@ -65,6 +66,7 @@ class _NoteSheetState extends State<_NoteSheet> {
 
   @override
   void dispose() {
+    _formKey.currentState?.dispose();
     controller.dispose();
     super.dispose();
   }
@@ -103,12 +105,18 @@ class _NoteSheetState extends State<_NoteSheet> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: MainTextField(
-                        controller: controller,
-                        hintText: L10n.tr().yourFullName,
-                        bgColor: Colors.transparent,
-                        maxLines: 5,
-                        showBorder: true,
+                      child: Form(
+                        key: _formKey,
+                        child: MainTextField(
+                          controller: controller,
+                          hintText: L10n.tr().yourFullName,
+                          bgColor: Colors.transparent,
+                          maxLines: 5,
+                          showBorder: true,
+                          max: 150,
+                          showMaxLegnth: true,
+                          validator: Validators.notEmpty,
+                        ),
                       ),
                     ),
                     Row(
@@ -118,6 +126,7 @@ class _NoteSheetState extends State<_NoteSheet> {
                           width: 150,
                           child: OptionBtn(
                             onPressed: () {
+                              if (_formKey.currentState?.validate() != true) return;
                               final note = controller.text.trim();
                               context.pop<String>(note);
                             },

@@ -58,8 +58,7 @@ class SinglePlateScreen extends StatelessWidget {
           );
         } else if (detailsState is PlateDetailsLoaded) {
           return BlocProvider(
-            create: (context) =>
-                di<AddToCartCubit>(param1: (detailsState.plate, detailsState.options), param2: itemToEdit),
+            create: (context) => di<AddToCartCubit>(param1: (detailsState.plate, detailsState.options), param2: itemToEdit),
             child: Builder(
               builder: (context) {
                 final cubit = context.read<AddToCartCubit>();
@@ -121,7 +120,11 @@ class SinglePlateScreen extends StatelessWidget {
                           },
                         ),
                         const VerticalSpacing(24),
-                        OrderedWithComponent(products: detailsState.orderedWith),
+                        OrderedWithComponent(
+                          products: detailsState.orderedWith,
+                          title: L10n.tr().alsoOrderWith,
+                          type: CartItemType.restaurantItem,
+                        ),
                         const VerticalSpacing(24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,

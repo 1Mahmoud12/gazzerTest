@@ -18,20 +18,22 @@ class SearchVendorWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsetsGeometry.all(12),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             spacing: 10,
             children: [
               SearchVendorInfoCard(vendor: vendor),
-              SizedBox(
-                height: 125,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: vendor.items.length,
-                  separatorBuilder: (context, index) => const HorizontalSpacing(12),
-                  itemBuilder: (context, index) {
-                    return SearchProductWidget(product: vendor.items[index]);
-                  },
+              if (vendor.items.isNotEmpty)
+                SizedBox(
+                  height: 125,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: vendor.items.length,
+                    separatorBuilder: (context, index) => const HorizontalSpacing(12),
+                    itemBuilder: (context, index) {
+                      return SearchProductWidget(product: vendor.items[index]);
+                    },
+                  ),
                 ),
-              ),
             ],
           ),
         ),

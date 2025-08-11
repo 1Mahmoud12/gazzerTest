@@ -16,6 +16,7 @@ class ApiClient {
 
   /// Static for handling deep linking
   static final mainDomain = "https://gazzer-dev-do.mostafa.cloud";
+  static final testDomain = "https://gazzer-test-do.mostafa.cloud/";
   final String baseURL = "$mainDomain/api/";
 
   /// Headers

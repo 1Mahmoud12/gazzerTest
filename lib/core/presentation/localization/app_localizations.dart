@@ -572,6 +572,18 @@ abstract class AppLocalizations {
   /// **'__________________'**
   String get favorite_________________Start;
 
+  /// No description provided for @favoriteVendors.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Vendors'**
+  String get favoriteVendors;
+
+  /// No description provided for @favoriteItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Items'**
+  String get favoriteItems;
+
   /// No description provided for @pleaseLoginToUseFavorites.
   ///
   /// In en, this message translates to:
@@ -1183,6 +1195,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Also Order With'**
   String get alsoOrderWith;
+
+  /// No description provided for @youMayAlsoLike.
+  ///
+  /// In en, this message translates to:
+  /// **'You May Also Like'**
+  String get youMayAlsoLike;
 
   /// No description provided for @product_________________End.
   ///

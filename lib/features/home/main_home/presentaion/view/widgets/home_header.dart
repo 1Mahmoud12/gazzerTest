@@ -76,61 +76,61 @@ class _HomeHeader extends StatelessWidget {
                     width: width,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: width * 0.1),
-                      child: Column(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // spacing: 12,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            // spacing: 12,
-                            children: [
-                              SvgPicture.asset(
-                                Assets.assetsSvgLocation,
-                                height: 32,
-                                width: 32,
-                              ).withHotspot(order: 4, title: "", text: L10n.tr().setYourLocation),
-                              const HorizontalSpacing(8),
-                              Expanded(
-                                child: StreamBuilder(
-                                  stream: di<AddressesBus>().getStream<AddressesEvents>(),
-                                  builder: (context, snapshot) {
-                                    final adderss = Session().defaultAddress;
-                                    if (adderss == null) return SizedBox.shrink();
-                                    return Expanded(
-                                      child: Text.rich(
-                                        TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: L10n.tr().deliverTo,
-                                              style: TStyle.mainwSemi(15).copyWith(color: Co.white.withAlpha(120)),
-                                            ),
-                                            const TextSpan(text: '\n'),
-                                            TextSpan(
-                                              text: '${adderss.zoneName}, ${adderss.provinceName}',
-                                            ),
-                                          ],
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TStyle.whiteSemi(14),
+                          SvgPicture.asset(
+                            Assets.assetsSvgLocation,
+                            height: 32,
+                            width: 32,
+                          ).withHotspot(order: 4, title: "", text: L10n.tr().setYourLocation),
+                          const HorizontalSpacing(8),
+                          StreamBuilder(
+                            stream: di<AddressesBus>().getStream<AddressesEvents>(),
+                            builder: (context, snapshot) {
+                              final adderss = Session().defaultAddress;
+
+                              return Expanded(
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: L10n.tr().deliverTo,
+                                        style: TStyle.mainwSemi(15).copyWith(color: Co.white.withAlpha(120)),
                                       ),
-                                    );
-                                  },
+                                      const TextSpan(text: '\n'),
+                                      if (adderss != null)
+                                        TextSpan(
+                                          text: '${adderss.zoneName}, ${adderss.provinceName}',
+                                        )
+                                      else
+                                        TextSpan(
+                                          text: L10n.tr().noAddressesSelected,
+                                          style: TStyle.mainwSemi(13).copyWith(color: Co.white.withAlpha(180)),
+                                        ),
+                                    ],
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TStyle.whiteSemi(14),
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6),
-                                  child: SvgPicture.asset(Assets.assetsSvgNotification),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6),
-                                  child: SvgPicture.asset(Assets.assetsSvgLanguage),
-                                ),
-                              ),
-                            ],
+                              );
+                            },
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: SvgPicture.asset(Assets.assetsSvgNotification),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: SvgPicture.asset(Assets.assetsSvgLanguage),
+                            ),
                           ),
                         ],
                       ),

@@ -12,7 +12,7 @@ class GrocHeaderContainer extends StatelessWidget {
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
       ),
       child: Padding(
-        padding: const EdgeInsetsGeometry.fromLTRB(16, 0, 16, 16),
+        padding: const EdgeInsetsGeometry.fromLTRB(8, 0, 8, 8),
         child: child,
       ),
     );

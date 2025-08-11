@@ -66,13 +66,27 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
           ),
           if (switchToggled) ...[
             const Divider(height: 25, thickness: 1),
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Co.secondary,
+              ),
+              child: Padding(
+                padding: EdgeInsetsGeometry.all(6),
+                child: Icon(
+                  Icons.access_time_outlined,
+                  color: Co.purple,
+                ),
+              ),
+            ),
+            const VerticalSpacing(8),
             SizedBox(
               height: 40,
               child: BlocBuilder<CartCubit, CartStates>(
                 buildWhen: (previous, current) => current is TimeSlotsStates,
                 builder: (context, state) {
                   if (state is! TimeSlotsStates) return const SizedBox.shrink();
-                  if (state is TimeSlotsLoaded && state.timeSlots.isEmpty) {
+                  if (state is TimeSlotsError || (state is TimeSlotsLoaded && state.timeSlots.isEmpty)) {
                     return Center(
                       child: Text(L10n.tr().noAvailableSchedulingTimeSlots, style: TStyle.greyBold(14)),
                     );
@@ -89,9 +103,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                             context.read<CartCubit>().selectTimeSlot(state.timeSlots[index]);
                           },
                           style: OutlinedButton.styleFrom(
-                            backgroundColor: state.selectedTime == state.timeSlots[index]
-                                ? Co.purple.withAlpha(70)
-                                : Colors.transparent,
+                            backgroundColor: state.selectedTime == state.timeSlots[index] ? Co.purple.withAlpha(70) : Colors.transparent,
                             minimumSize: Size.zero,
                             side: const BorderSide(color: Co.purple),
                             padding: const EdgeInsets.symmetric(horizontal: 16),

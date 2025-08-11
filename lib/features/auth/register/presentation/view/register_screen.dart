@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: _nameController,
                       hintText: L10n.tr().yourFullName,
                       bgColor: Colors.transparent,
-                      max: 255,
+                      max: 250,
                       validator: (v) {
                         return Validators.dashedCharactersOnly(v) ??
                             Validators.valueAtLeastNum(

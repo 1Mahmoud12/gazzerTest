@@ -17,9 +17,7 @@ class GetFavoriteLoading extends GetFavoritesEvent {
     : super(
         favorites: const {
           FavoriteType.restaurant: Fakers.favorites,
-          FavoriteType.store: Fakers.favorites,
           FavoriteType.product: Fakers.favorites,
-          FavoriteType.plate: Fakers.favorites,
         },
       );
 }
@@ -48,6 +46,7 @@ class ToggleFavoriteLoading extends ToggleFavoriteStates {
 class AddedFavoriteSuccess extends ToggleFavoriteStates {
   const AddedFavoriteSuccess({required super.id, required super.type, required super.favorites});
 }
+
 class RemovedFavoriteSuccess extends ToggleFavoriteStates {
   const RemovedFavoriteSuccess({required super.id, required super.type, required super.favorites});
 }

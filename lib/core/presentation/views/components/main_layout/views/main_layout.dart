@@ -39,8 +39,6 @@ class _MainLayoutState extends State<MainLayout> {
 
   String _getBaseRoute() {
     final baseRoute = widget.state.fullPath?.split('/')[1];
-    print("FULL PATH IS  :::::::::::::: ${widget.state.fullPath}");
-    print("BASE ROUTE IS :::::::::::::: $baseRoute");
     return "/$baseRoute";
   }
 

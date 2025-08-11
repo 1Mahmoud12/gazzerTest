@@ -52,7 +52,7 @@ class PlateOptionsWidget extends StatelessWidget {
                           GradientRadioBtn(isSelected: selectedId.contains(value.id), size: 8),
 
                         const HorizontalSpacing(24),
-                        Text(value.name, style: TStyle.blackBold(14)),
+                        Text(value.name, style: TStyle.blackRegular(14)),
                         const Spacer(),
                         Text(Helpers.getProperPrice(value.price), style: TStyle.blackBold(14)),
                       ],

@@ -31,7 +31,7 @@ class RestaurantPageResponse {
         }
         plates.sort((a, b) => a.outOfStock ? 1 : -1);
 
-        categoriesWithPlates.add((category, plates));
+        if (plates.isNotEmpty) categoriesWithPlates.add((category, plates));
       }
     }
     topRated = [];

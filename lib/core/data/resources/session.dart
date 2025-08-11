@@ -46,7 +46,7 @@ class Session {
     TokenService.deleteToken();
 
     /// clear cache addresses
-    addresses.clear();
+    di<AddressesBus>().clearAddresses();
 
     /// clear cache notifications
     di<FavoriteBus>().clearFavorites();
