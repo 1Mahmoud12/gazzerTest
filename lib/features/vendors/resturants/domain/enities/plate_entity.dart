@@ -13,6 +13,7 @@ class PlateEntity extends GenericItemEntity {
     required super.reviewCount,
     required super.outOfStock,
     required this.categoryPlateId,
+    required super.hasOptions,
     super.badge,
     super.tags,
     super.offer,

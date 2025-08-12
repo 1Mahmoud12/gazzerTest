@@ -1,8 +1,9 @@
 part of '../multi_cat_restaurant_screen.dart';
 
 class _TopRatedComponent extends StatelessWidget {
-  const _TopRatedComponent({required this.toprated});
+  const _TopRatedComponent({required this.toprated, required this.isCardDisabled});
   final List<PlateEntity> toprated;
+  final bool isCardDisabled;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -19,7 +20,7 @@ class _TopRatedComponent extends StatelessWidget {
                 itemsCount: toprated.length,
                 maxItemWidth: 120,
                 itemBuilder: (BuildContext context, int index) {
-                  return _TopRatedCard(toprated[index]);
+                  return AbsorbPointer(absorbing: isCardDisabled, child: _TopRatedCard(toprated[index]));
                 },
               ),
             ),

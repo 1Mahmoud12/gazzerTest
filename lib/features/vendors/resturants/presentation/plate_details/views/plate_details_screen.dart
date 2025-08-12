@@ -124,6 +124,7 @@ class SinglePlateScreen extends StatelessWidget {
                           products: detailsState.orderedWith,
                           title: L10n.tr().alsoOrderWith,
                           type: CartItemType.restaurantItem,
+                          isDisabled: false,
                         ),
                         const VerticalSpacing(24),
                         Row(

@@ -19,7 +19,7 @@ class RestaurantDTO {
   int? is24Hours;
   List<String>? tags;
   String? provinceZone;
-
+  int? closingAlertAppearBefore;
   // TODO: need to be loaded from api
   List<CategoryOfPlateDTO>? subcategories;
   double? deliveryFees;
@@ -41,6 +41,7 @@ class RestaurantDTO {
     workFrom = json['work_from'];
     workTo = json['work_to'];
     is24Hours = json['is_24_hours'];
+    closingAlertAppearBefore = int.tryParse(json['closing_alert_appear_before'].toString());
     if (json['tags'] != null) {
       tags = [];
       for (var tag in json['tags']) {
@@ -80,6 +81,7 @@ class RestaurantDTO {
       endTime: _formDateTimeFromString(workTo ?? ''),
       subCategories: subcategories?.map((e) => CategoryOfPlateEntity(id: e.id!, name: e.name ?? '', image: e.image ?? '')).toList(),
       deliveryTime: estimatedDeliveryTime != null ? Helpers.convertIntToRange(estimatedDeliveryTime!, 0.3) : null,
+      mintsBeforClosingAlert: closingAlertAppearBefore ?? 0,
 
       ///
       badge: badge,

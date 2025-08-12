@@ -1094,6 +1094,12 @@ abstract class AppLocalizations {
   /// **'__________________'**
   String get restaurants_________________Start;
 
+  /// No description provided for @thisVendorIsClosedOrBusyRightNow.
+  ///
+  /// In en, this message translates to:
+  /// **'This vendor is closed/busy right now'**
+  String get thisVendorIsClosedOrBusyRightNow;
+
   /// No description provided for @details.
   ///
   /// In en, this message translates to:
@@ -1913,7 +1919,7 @@ abstract class AppLocalizations {
   /// No description provided for @valueMoreThanNum.
   ///
   /// In en, this message translates to:
-  /// **'Value {val} must be {num} characters or more'**
+  /// **'{val} must be {num} characters or more'**
   String valueMoreThanNum(int num, String val);
 
   /// No description provided for @invalidPhoneNumber.

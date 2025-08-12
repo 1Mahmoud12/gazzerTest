@@ -1,6 +1,7 @@
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/app_bus.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/cart_repo.dart';
@@ -15,12 +16,18 @@ class CartBus extends AppBus {
 
   final List<CartVendorEntity> _vendors = [];
   List<CartVendorEntity> get vendors => _vendors;
-
+  final Map<CartItemType, Set<int>> _cartIds = {};
+  Map<CartItemType, Set<int>> get cartIds => _cartIds;
+  final List<CartItemEntity> _cartItems = [];
+  List<CartItemEntity> get cartItems => _cartItems;
   Future<Result<CartResponse>> loadCart() async {
     fire(GetCartLoading());
     final response = await _repo.getCart();
     switch (response) {
       case Ok<CartResponse> res:
+        _vendors.clear();
+        _vendors.addAll(res.value.vendors);
+        _cartITems();
         cartResponseToValues(res.value);
       case Err err:
         fire(GetCartError(err.error.message));
@@ -51,7 +58,14 @@ class CartBus extends AppBus {
   }
 
   List<CartItemEntity> _cartITems() {
-    return _vendors.map((e) => e.items).expand((element) => element).toList();
+    _cartIds.clear();
+    _cartItems.clear();
+    _cartItems.addAll(_vendors.map((e) => e.items).expand((element) => element).toList());
+    for (final item in _cartItems) {
+      _cartIds[item.type] ??= {};
+      _cartIds[item.type]!.add(item.prod.id);
+    }
+    return _cartItems;
   }
 
   Future<void> updateItemQuantity(int id, int qnty, bool isAdding) async {

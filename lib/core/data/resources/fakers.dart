@@ -148,6 +148,7 @@ class Fakers {
     ),
   ];
   static const restaurant = RestaurantEntity(
+    mintsBeforClosingAlert: 0,
     alwaysClosed: false,
     alwaysOpen: false,
     id: 1,
@@ -177,6 +178,8 @@ class Fakers {
   static final List<RestaurantEntity> restaurants = List.generate(
     8,
     (index) => const RestaurantEntity(
+      mintsBeforClosingAlert: 0,
+
       alwaysClosed: false,
       alwaysOpen: false,
       id: 1,
@@ -208,6 +211,7 @@ class Fakers {
   static final List<PlateEntity> plates = List.generate(
     8,
     (index) => PlateEntity(
+      hasOptions: false,
       id: index,
       name: "طبق ${index + 1}",
       description: "وصف الطبق ${index + 1}",
@@ -222,6 +226,7 @@ class Fakers {
     ),
   );
   static const plate = PlateEntity(
+    hasOptions: false,
     id: 0,
     name: "طبق 1",
     description: "وصف الطبق 1",
@@ -274,6 +279,8 @@ class Fakers {
   /// stores
   static const List<StoreEntity> stores = [
     StoreEntity(
+      mintsBeforClosingAlert: 0,
+
       alwaysClosed: false,
       alwaysOpen: false,
       id: 0,
@@ -289,6 +296,8 @@ class Fakers {
       isOpen: true,
     ),
     StoreEntity(
+      mintsBeforClosingAlert: 0,
+
       alwaysClosed: false,
       alwaysOpen: false,
       id: 0,
@@ -305,6 +314,8 @@ class Fakers {
     ),
   ];
   static const store = StoreEntity(
+    mintsBeforClosingAlert: 0,
+
     alwaysClosed: false,
     alwaysOpen: false,
     id: 0,

@@ -16,6 +16,7 @@ sealed class GenericItemEntity extends Favorable {
   final String? badge;
   final List<String>? tags;
   final OfferEntity? offer;
+  final bool hasOptions;
 
   double get price => offer?.priceAfterDiscount(_price) ?? _price;
   @override
@@ -38,6 +39,7 @@ sealed class GenericItemEntity extends Favorable {
     required double price,
     required this.reviewCount,
     required this.outOfStock,
+    required this.hasOptions,
     this.badge,
     this.tags,
     this.offer,
@@ -52,5 +54,6 @@ sealed class GenericItemEntity extends Favorable {
     badge,
     tags,
     offer,
+    hasOptions,
   ];
 }

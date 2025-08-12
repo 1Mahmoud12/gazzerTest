@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/switching_decorated_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+
+class GlobalIncrementWidget extends StatelessWidget {
+  const GlobalIncrementWidget({
+    super.key,
+    required this.initVal,
+    required this.onChanged,
+    required this.isAdding,
+    required this.isRemoving,
+    required this.isHorizonal,
+    required this.isDarkContainer,
+    this.iconSize = 18,
+  });
+  final int initVal;
+  final Function(bool isAdding) onChanged;
+  final bool isAdding;
+  final bool isRemoving;
+  final bool isHorizonal;
+  final bool isDarkContainer;
+  final double iconSize;
+  @override
+  Widget build(BuildContext context) {
+    final children = [
+      SwitchingDecoratedwidget(
+        isDarkContainer: isDarkContainer,
+        borderRadius: BorderRadius.circular(100),
+        child: IconButton(
+          onPressed: () {
+            if (isAdding || isRemoving) return;
+            SystemSound.play(SystemSoundType.click);
+            onChanged(true);
+          },
+          style: IconButton.styleFrom(
+            padding: const EdgeInsets.all(3),
+            elevation: 0,
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+          ),
+          icon: isAdding ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary) : Icon(Icons.add, color: Co.secondary, size: iconSize),
+        ),
+      ),
+      ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 15),
+        child: Text("$initVal", style: TStyle.secondarySemi(13), textAlign: TextAlign.center),
+      ),
+      SwitchingDecoratedwidget(
+        isDarkContainer: isDarkContainer,
+        borderRadius: BorderRadius.circular(100),
+        child: IconButton(
+          onPressed: () {
+            if (isAdding || isRemoving) return;
+            SystemSound.play(SystemSoundType.click);
+            onChanged(false);
+          },
+          style: IconButton.styleFrom(
+            padding: const EdgeInsets.all(3),
+            elevation: 0,
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+          ),
+          icon: isRemoving ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary) : Icon(Icons.remove, color: Co.secondary, size: iconSize),
+        ),
+      ),
+    ];
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: isHorizonal
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ...children,
+                const HorizontalSpacing(2),
+              ],
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [...children],
+            ),
+    );
+  }
+}

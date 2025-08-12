@@ -1,4 +1,3 @@
-
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
@@ -13,6 +12,7 @@ class PlateDTO extends GenericItemDTO {
     rate = double.tryParse(json['rate'].toString());
     rateCount = int.tryParse(json['rate_count'].toString());
     price = double.tryParse(json['app_price'].toString());
+    hasOptions = json['has_options'] == true;
     badge = json['badge'];
     if (json['tags'] != null) {
       tags = [];
@@ -37,6 +37,7 @@ class PlateDTO extends GenericItemDTO {
       reviewCount: rateCount ?? 0,
       offer: offer?.toEntityy(),
       tags: tags,
+      hasOptions: hasOptions ?? false,
     );
   }
 }

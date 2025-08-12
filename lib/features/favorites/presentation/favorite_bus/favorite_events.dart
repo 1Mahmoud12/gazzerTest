@@ -60,3 +60,7 @@ class ToggleFavoriteFailure extends ToggleFavoriteStates {
     required super.favorites,
   });
 }
+
+class ClearFavorites extends FavoriteEvents {
+  const ClearFavorites() : super(favorites: const {FavoritesViewType.vendor: {}, FavoritesViewType.product: {}});
+}

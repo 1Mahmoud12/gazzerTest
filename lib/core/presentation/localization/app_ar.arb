@@ -213,6 +213,7 @@
   "recentOrders": "الطلبات الأخيرة",
   "ordersHistory_________________End": "__________________",
   "restaurants_________________Start": "__________________",
+  "thisVendorIsClosedOrBusyRightNow" : "هذا البائع مغلق أو مشغول الآن",
   "details": "التفاصيل",
   "todayPicks": "اختيارات اليوم",
   "exploreBest": "استكشف الأفضل",

@@ -32,7 +32,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   void initState() {
     bus = di<FavoriteBus>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      bus.getFavorites();
+      if (Session().client != null) bus.getFavorites();
     });
     super.initState();
   }
@@ -57,7 +57,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             ),
           ),
           if (Session().client == null)
-            UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites)
+            Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites))
           else
             Expanded(
               child: StreamBuilder(
@@ -66,6 +66,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   // print("favs of restaurant  ${bus.favorites[FavoriteType.restaurant]}");
                   if (snapshot.data is GetFavoriteLoading) {
                     return const Center(child: AdaptiveProgressIndicator());
+                  }
+                  if (snapshot.data is ClearFavorites) {
+                    return UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites);
                   }
                   if (snapshot.data?.favorites == null || snapshot.data!.favorites.isEmpty) {
                     return Center(

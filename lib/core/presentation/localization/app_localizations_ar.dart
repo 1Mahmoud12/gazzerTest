@@ -527,6 +527,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get restaurants_________________Start => '__________________';
 
   @override
+  String get thisVendorIsClosedOrBusyRightNow =>
+      'هذا البائع مغلق أو مشغول الآن';
+
+  @override
   String get details => 'التفاصيل';
 
   @override

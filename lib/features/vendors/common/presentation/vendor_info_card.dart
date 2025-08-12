@@ -7,10 +7,12 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_closing_timer.dart';
+import 'package:go_router/go_router.dart';
 
 class VendorInfoCard extends StatelessWidget {
   const VendorInfoCard(this.vendor, {super.key, this.padding, required this.categories, required this.onTimerFinish});
@@ -21,6 +23,25 @@ class VendorInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (!vendor.isOpen) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) {
+            return Dialogs.infoDialog(
+              title: L10n.tr().alert,
+              message: L10n.tr().thisVendorIsClosedOrBusyRightNow,
+              okBgColor: Co.greyText,
+              onConfirm: () {
+                context.pop();
+                context.pop();
+              },
+            );
+          },
+        );
+      });
+    }
     final imageSize = 60.0;
     return ClipRRect(
       borderRadius: AppConst.defaultBorderRadius,
@@ -219,7 +240,7 @@ class VendorInfoCard extends StatelessWidget {
                   ],
                 ),
               ),
-            if (vendor.endTime != null && vendor.endTime!.difference(DateTime.now()) < const Duration(minutes: 45))
+            if (vendor.endTime != null && vendor.endTime!.difference(DateTime.now()) < Duration(minutes: vendor.mintsBeforClosingAlert))
               VendorClosingTimer(
                 endTime: vendor.endTime!,
                 name: vendor.name,

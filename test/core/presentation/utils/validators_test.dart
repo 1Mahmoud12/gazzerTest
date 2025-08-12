@@ -14,7 +14,7 @@ void main() {
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        navigatorKey: AppNavigator().mainKey,
+        navigatorKey: AppNavigator.mainKey,
         locale: const Locale('en'), // Set the desired locale
         home: Builder(
           builder: (BuildContext context) {

@@ -213,6 +213,7 @@
   "recentOrders": "Recent Orders",
   "ordersHistory_________________End": "__________________",
   "restaurants_________________Start": "__________________",
+  "thisVendorIsClosedOrBusyRightNow" : "This vendor is closed/busy right now",
   "details": "Details",
   "todayPicks": "Today's Picks",
   "exploreBest": "Explore Best",
@@ -376,7 +377,7 @@
       }
     }
   },
-  "valueMoreThanNum": "Value {val} must be {num} characters or more",
+  "valueMoreThanNum": "{val} must be {num} characters or more",
   "@valueMoreThanNum": {
     "placeholders": {
       "num": {

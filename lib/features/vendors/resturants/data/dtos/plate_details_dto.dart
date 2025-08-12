@@ -11,6 +11,7 @@ class PlateDetailsDTO {
   int? rateCount;
   String? appPrice;
   List<Options>? options;
+  bool? hasOptions;
 
   /// missing
   String? image;
@@ -37,6 +38,7 @@ class PlateDetailsDTO {
     itemType = json['item_type'];
     image = json['plate_image'];
     badge = json['badge'] ?? '';
+    hasOptions = json['has_options'] == true;
     if (json['tags'] != null) {
       tags = [];
       json['tags'].forEach((tag) {
@@ -70,6 +72,7 @@ class PlateDetailsDTO {
       offer: offer?.toEntityy(),
       badge: badge,
       outOfStock: false,
+      hasOptions: hasOptions ?? false,
     );
   }
 

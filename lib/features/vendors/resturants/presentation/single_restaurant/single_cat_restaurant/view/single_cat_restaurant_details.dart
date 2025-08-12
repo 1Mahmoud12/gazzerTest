@@ -144,13 +144,17 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                   if (selectedPlate == null)
                     Text(L10n.tr().couldnotLoadDataPleaseTryAgain)
                   else ...[
-                    VendorInfoCard(
-                      restaurant,
-                      padding: EdgeInsets.zero,
-                      categories: null,
-                      onTimerFinish: (ctx) {
-                        RestaurantDetailsRoute(id: restaurant.id).pushReplacement(ctx);
-                      },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: VendorInfoCard(
+                        restaurant,
+                        padding: EdgeInsets.zero,
+                        categories: null,
+                        onTimerFinish: (ctx) {
+                          context.pop();
+                          RestaurantDetailsRoute(id: restaurant.id).pushReplacement(context);
+                        },
+                      ),
                     ),
                     const SizedBox.shrink(),
                     OverflowBox(
@@ -235,10 +239,13 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                           children: List.generate(
                                             state.options.length,
                                             (index) {
-                                              return PlateOptionsWidget(
-                                                option: state.options[index],
-                                                selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
-                                                onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
+                                              return AbsorbPointer(
+                                                absorbing: restaurant.isClosed,
+                                                child: PlateOptionsWidget(
+                                                  option: state.options[index],
+                                                  selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
+                                                  onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
+                                                ),
                                               );
                                             },
                                           ),
@@ -261,22 +268,24 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                         products: state.items,
                                         title: L10n.tr().alsoOrderWith,
                                         type: CartItemType.restaurantItem,
+                                        isDisabled: restaurant.isClosed,
                                       ),
                                     );
                                   },
                                 ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  ValueListenableBuilder(
-                                    valueListenable: noteNotifier,
-                                    builder: (context, value, child) => AddSpecialNote(
-                                      onNoteChange: onNoteChange,
-                                      note: value,
+                              if (!restaurant.isClosed)
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ValueListenableBuilder(
+                                      valueListenable: noteNotifier,
+                                      builder: (context, value, child) => AddSpecialNote(
+                                        onNoteChange: onNoteChange,
+                                        note: value,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
                             ],
                           );
                         },
@@ -287,18 +296,20 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
             );
           },
         ),
-        bottomNavigationBar: Skeleton.shade(
-          child: ValueListenableBuilder(
-            valueListenable: priceNQntyNLoading,
-            builder: (context, value, child) => ProductPriceSummary(
-              isLoading: value.$3,
-              price: value.$1,
-              quantity: value.$2,
-              onChangeQuantity: onChangeQuantity,
-              onsubmit: onsubmit,
-            ),
-          ),
-        ),
+        bottomNavigationBar: restaurant.isClosed
+            ? SizedBox.shrink()
+            : Skeleton.shade(
+                child: ValueListenableBuilder(
+                  valueListenable: priceNQntyNLoading,
+                  builder: (context, value, child) => ProductPriceSummary(
+                    isLoading: value.$3,
+                    price: value.$1,
+                    quantity: value.$2,
+                    onChangeQuantity: onChangeQuantity,
+                    onsubmit: onsubmit,
+                  ),
+                ),
+              ),
       ),
     );
   }

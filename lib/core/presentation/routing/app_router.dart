@@ -9,17 +9,18 @@ import 'package:gazzer/features/splash/view/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
-  navigatorKey: AppNavigator().mainKey,
+  navigatorKey: AppNavigator.mainKey,
   initialLocation: SplashScreen.route,
   observers: [MyRouteObserver()],
   routes: [
+    nestedRoutes,
+
     GoRoute(
       path: SplashScreen.route,
       builder: (context, state) => BlocProvider(create: (context) => di<SplashCubit>(), child: const SplashScreen()),
     ),
 
     ///
-    nestedRoutes,
     ...unNestedRoutes,
 
     ///

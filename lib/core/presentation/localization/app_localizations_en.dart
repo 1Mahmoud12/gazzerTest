@@ -529,6 +529,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restaurants_________________Start => '__________________';
 
   @override
+  String get thisVendorIsClosedOrBusyRightNow =>
+      'This vendor is closed/busy right now';
+
+  @override
   String get details => 'Details';
 
   @override
@@ -949,7 +953,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String valueMoreThanNum(int num, String val) {
-    return 'Value $val must be $num characters or more';
+    return '$val must be $num characters or more';
   }
 
   @override

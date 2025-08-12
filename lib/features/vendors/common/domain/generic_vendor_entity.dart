@@ -15,6 +15,7 @@ sealed class GenericVendorEntity extends Favorable {
   final int? parentId;
   final String zoneName; // zone
   final List<GenericSubCategoryEntity>? subCategories;
+  final int mintsBeforClosingAlert;
 
   ///
   final String? priceRange;
@@ -33,7 +34,7 @@ sealed class GenericVendorEntity extends Favorable {
 
   // final String? address; // ** pending api
 
-  bool get isClosed => alwaysClosed || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
+  bool get isClosed => alwaysClosed || isOpen == false || startTime?.isBefore(DateTime.now()) != true || endTime?.isAfter(DateTime.now()) != true;
 
   @override
   FavoriteType get favoriteType => switch (this) {
@@ -48,6 +49,7 @@ sealed class GenericVendorEntity extends Favorable {
     required super.image,
     required super.rate,
     super.description = '',
+    required this.mintsBeforClosingAlert,
 
     ///
     required this.parentId,
@@ -81,4 +83,25 @@ sealed class GenericVendorEntity extends Favorable {
     }
     return shortTag.toString();
   }
+
+  @override
+  List<Object?> get props => [
+    ...super.props,
+    parentId,
+    zoneName,
+    subCategories,
+    mintsBeforClosingAlert,
+    priceRange,
+    deliveryTime,
+    deliveryFee,
+    badge,
+    tag,
+    startTime,
+    endTime,
+    rateCount,
+    alwaysOpen,
+    alwaysClosed,
+    isFavorite,
+    isOpen,
+  ];
 }

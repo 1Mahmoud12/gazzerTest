@@ -28,6 +28,8 @@ class RestaurantEntity extends GenericVendorEntity {
     required super.alwaysClosed,
     required super.isFavorite,
     required super.isOpen,
+    required super.mintsBeforClosingAlert,
+    super.description,
   });
 
   @override

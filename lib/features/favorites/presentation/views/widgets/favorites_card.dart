@@ -47,6 +47,12 @@ class _FavoriteCardState extends State<FavoriteCard> {
   }
 
   @override
+  void dispose() {
+    bus.unSubscribe<ToggleFavoriteStates>(lisnter);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 140,

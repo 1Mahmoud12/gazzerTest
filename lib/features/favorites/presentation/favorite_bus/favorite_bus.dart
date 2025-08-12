@@ -127,6 +127,7 @@ class FavoriteBus extends AppBus {
     _favoriteIds.clear();
     _favorites.clear();
     fire(GetFavoriteSuccess(favorites: favorites));
+    fire(const ClearFavorites());
   }
 }
 /*  */

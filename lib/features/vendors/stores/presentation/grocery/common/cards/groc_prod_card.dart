@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text_wz_shadow.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
@@ -64,6 +62,7 @@ class GrocProdCard extends StatelessWidget {
                 Align(
                   alignment: AlignmentDirectional.bottomEnd,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     spacing: 6,
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -73,34 +72,11 @@ class GrocProdCard extends StatelessWidget {
                         size: 18,
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(gradient: Grad().shadowGrad()),
-                          borderRadius: BorderRadiusGeometry.circular(100),
-                          gradient: Grad().bgLinear.copyWith(
-                            stops: const [0.0, 1],
-                            colors: [const Color(0x55402788), Colors.transparent],
-                          ),
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          style: IconButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            padding: const EdgeInsets.all(6),
-                            minimumSize: Size.zero,
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                          ),
-                          icon: SvgPicture.asset(
-                            Assets.assetsSvgCart,
-                            height: 20,
-                            width: 20,
-                            colorFilter: const ColorFilter.mode(
-                              Co.secondary,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                        ),
+                      CartToIncrementIcon(
+                        isHorizonal: false,
+                        product: product,
+                        iconSize: 20,
+                        isDarkContainer: false,
                       ),
                     ],
                   ),

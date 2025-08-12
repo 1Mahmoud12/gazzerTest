@@ -81,9 +81,11 @@ class RestaurantCategoryScreen extends StatelessWidget {
                         imgToTextRatio: 0.6,
                         width: double.infinity,
                         corner: Corner.bottomLeft,
-                        onTap: (item) {
-                          PlateDetailsRoute(id: item.id).push(context);
-                        },
+                        onTap: vendor.isClosed
+                            ? null
+                            : (item) {
+                                PlateDetailsRoute(id: item.id).push(context);
+                              },
                       );
                     },
                   ),

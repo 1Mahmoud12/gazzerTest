@@ -12,6 +12,7 @@ abstract class GenericItemDTO {
   int? quantityInStock;
   OfferDTO? offer;
   // ItemUnitBrand? itemUnitBrand;
+  bool? hasOptions;
 
   /// missing
   List<String>? tags;
@@ -35,8 +36,8 @@ abstract class GenericItemDTO {
     this.rate,
     this.rateCount,
     this.priceBeforeDiscount,
+    this.hasOptions,
   });
   GenericItemDTO.fromJson(Map<String, dynamic> json);
   GenericItemEntity toEntity();
 }
-

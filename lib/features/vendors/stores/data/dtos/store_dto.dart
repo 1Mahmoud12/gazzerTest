@@ -15,6 +15,7 @@ class StoreDTO {
   String? workFrom;
   String? workTo;
   int? is24Hours;
+  int? closingAlertAppearBefore;
 
   List<String>? tags;
   String? provinceZone;
@@ -49,6 +50,8 @@ class StoreDTO {
     workFrom = json['work_from'];
     workTo = json['work_to'];
     is24Hours = json['is_24_hours'];
+    closingAlertAppearBefore = int.tryParse(json['closing_alert_appear_before'].toString());
+
     if (json['tags'] != null) {
       tags = [];
       for (var tag in json['tags']) {
@@ -91,6 +94,8 @@ class StoreDTO {
       tag: null,
       rateCount: null,
       alwaysClosed: false,
+
+      mintsBeforClosingAlert: closingAlertAppearBefore ?? 0,
 
       /// not sure will be needed
       priceRange: null,

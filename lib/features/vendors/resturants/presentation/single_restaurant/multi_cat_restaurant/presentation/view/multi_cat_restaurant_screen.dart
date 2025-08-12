@@ -72,7 +72,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
         preHerader: Column(
           children: [
             MultiCatRestHeader(restaurant: restaurant, categires: categoriesWithPlates.map((e) => e.$1.name)),
-            _TopRatedComponent(toprated: toprated.take(5).toList()),
+            _TopRatedComponent(isCardDisabled: restaurant.isClosed, toprated: toprated.take(5).toList()),
           ],
         ),
         itemsCount: categoriesWithPlates.length,
@@ -110,6 +110,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
                 cardImageToTextRatios: {CardStyle.typeOne: 0.8},
                 corners: {CardStyle.typeThree: Corner.topLeft},
                 onSingleCardPressed: (item) {
+                  if (restaurant.isClosed) return;
                   PlateDetailsRoute(id: item.id).push(context);
                 },
                 // TODO: Ask Product Owner about this

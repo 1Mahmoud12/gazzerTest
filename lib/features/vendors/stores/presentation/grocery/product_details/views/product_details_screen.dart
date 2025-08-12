@@ -86,6 +86,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               products: state.orderedWith,
                               type: CartItemType.product,
                               title: L10n.tr().youMayAlsoLike,
+                              isDisabled: false,
                             ),
                             const VerticalSpacing(16),
                             Row(

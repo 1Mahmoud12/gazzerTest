@@ -23,7 +23,7 @@ class L10n {
     return null;
   }
 
-  static AppLocalizations tr([BuildContext? ctx]) => AppLocalizations.of(ctx ?? AppNavigator().mainKey.currentContext!)!;
+  static AppLocalizations tr([BuildContext? ctx]) => AppLocalizations.of(ctx ?? AppNavigator.mainKey.currentContext!)!;
 
   static bool isAr(BuildContext context) => Localizations.localeOf(context).languageCode == 'ar';
 }

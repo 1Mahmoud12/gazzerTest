@@ -17,7 +17,7 @@ class MultiCatRestHeader extends StatelessWidget {
     return SizedBox(
       height: height,
       child: Stack(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.topCenter,
         children: [
           OverflowBox(
             alignment: const Alignment(0, 0.63),
@@ -37,26 +37,33 @@ class MultiCatRestHeader extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AppBarRowWidget(
-                showCart: false,
-                showNotification: false,
-                onShare: () {},
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 40),
-                child: VendorInfoCard(
-                  restaurant,
-                  categories: categires,
-                  onTimerFinish: (ctx) {
-                    RestaurantDetailsRoute(id: restaurant.id).pushReplacement(ctx);
-                  },
+          Padding(
+            padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AppBarRowWidget(
+                  showCart: false,
+                  showNotification: false,
+                  onShare: () {},
                 ),
-              ),
-            ],
+                Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 40),
+                      child: VendorInfoCard(
+                        restaurant,
+                        categories: categires,
+                        onTimerFinish: (ctx) {
+                          RestaurantDetailsRoute(id: restaurant.id).pushReplacement(ctx);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

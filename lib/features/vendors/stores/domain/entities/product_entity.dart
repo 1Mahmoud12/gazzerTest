@@ -14,6 +14,7 @@ class ProductEntity extends GenericItemEntity {
     required super.rate,
     required super.reviewCount,
     required super.outOfStock,
+    super.hasOptions = false, // ** as per backend developer, all store-items has no options.
     super.badge,
     super.tags,
 

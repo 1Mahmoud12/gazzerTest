@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -16,7 +16,6 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/store_details_states.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 part 'store_details_screen.g.dart';
 
@@ -53,67 +52,66 @@ class StoreDetailsScreen extends StatelessWidget {
               message: L10n.tr().couldnotLoadDataPleaseTryAgain,
               onRetry: () => context.read<StoreDetailsCubit>().loadScreenData(),
             );
+          } else if (state is StoreDetailsLoading) {
+            return const Center(child: AdaptiveProgressIndicator());
           }
           final store = state.store;
           final catWithSubCatProds = state.catsWthSubatsAndProds;
-          return Skeletonizer(
-            enabled: state is StoreDetailsLoading,
-            child: Column(
-              spacing: 12,
-              children: [
-                GrocHeaderContainer(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
-                    child: VendorInfoCard(
-                      store,
-                      categories: catWithSubCatProds.map((e) => e.$1.name),
-                      onTimerFinish: (ctx) {
-                        StoreDetailsRoute(storeId: storeId).pushReplacement(ctx);
+          return Column(
+            spacing: 12,
+            children: [
+              GrocHeaderContainer(
+                child: Padding(
+                  padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
+                  child: VendorInfoCard(
+                    store,
+                    categories: catWithSubCatProds.map((e) => e.$1.name),
+                    onTimerFinish: (ctx) {
+                      StoreDetailsRoute(storeId: storeId).pushReplacement(ctx);
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) => RefreshIndicator(
+                    onRefresh: () async {
+                      return context.read<StoreDetailsCubit>().loadScreenData();
+                    },
+                    child: UnScollableLTabedList(
+                      tabs: catWithSubCatProds.map((e) => (e.$1.image, e.$1.name)).toList(),
+                      maxHeight: constraints.maxHeight,
+                      itemCount: catWithSubCatProds.length,
+                      listItemBuilder: (context, index) {
+                        final item = state.catsWthSubatsAndProds[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: _gridWidget(
+                            maincat: item.$1,
+                            onSinglceCardPressed: (item) {},
+                            subcats: item.$2,
+                            products: item.$3,
+                          ),
+                        );
+                        // GrocVertScrollGrid(
+                        //   title: catWithSubCatProds[index].$1.name,
+                        //   onViewAllPressed: () {},
+                        //   items: [...catWithSubCatProds[index].$2, ...catWithSubCatProds[index].$3],
+                        //   onSinglceCardPressed: (item) {},
+                        //   shrinkWrap: true,
+                        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        //     crossAxisCount: 3,
+                        //     childAspectRatio: 0.56,
+                        //     crossAxisSpacing: 8,
+                        //     mainAxisSpacing: 8,
+                        //   ),
+                        // ),
                       },
                     ),
                   ),
                 ),
-                Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) => RefreshIndicator(
-                      onRefresh: () async {
-                        return context.read<StoreDetailsCubit>().loadScreenData();
-                      },
-                      child: UnScollableLTabedList(
-                        tabs: catWithSubCatProds.map((e) => (e.$1.image, e.$1.name)).toList(),
-                        maxHeight: constraints.maxHeight,
-                        itemCount: catWithSubCatProds.length,
-                        listItemBuilder: (context, index) {
-                          final item = state.catsWthSubatsAndProds[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: _gridWidget(
-                              maincat: item.$1,
-                              onSinglceCardPressed: (item) {},
-                              subcats: item.$2,
-                              products: item.$3,
-                            ),
-                          );
-                          // GrocVertScrollGrid(
-                          //   title: catWithSubCatProds[index].$1.name,
-                          //   onViewAllPressed: () {},
-                          //   items: [...catWithSubCatProds[index].$2, ...catWithSubCatProds[index].$3],
-                          //   onSinglceCardPressed: (item) {},
-                          //   shrinkWrap: true,
-                          //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          //     crossAxisCount: 3,
-                          //     childAspectRatio: 0.56,
-                          //     crossAxisSpacing: 8,
-                          //     mainAxisSpacing: 8,
-                          //   ),
-                          // ),
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           );
         },
       ),

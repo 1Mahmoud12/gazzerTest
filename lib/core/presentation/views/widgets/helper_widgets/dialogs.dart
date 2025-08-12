@@ -186,38 +186,33 @@ class Dialogs {
   // //   );
   // // }
 
-  // static infoDialog({required String title, String? message, String? okBtn, Color? okColor, Color? okBgColor}) {
-  //   return Dialog(
-  //     child: Container(
-  //       decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(15)),
-  //       child: Padding(
-  //         padding: const EdgeInsets.symmetric(horizontal: 15),
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             const VerticalSpacing(20),
-  //             Text(title, style: TStyle.darkBold(18)),
-  //             const VerticalSpacing(10),
-  //             if (message != null) Text(message, style: TStyle.darkRegular(16)),
-  //             // const VericalSpacing(20),
-  //             // Padding(
-  //             //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-  //             //   child: MainBtn(
-  //             //     text: okBtn ?? L10n.tr().confirm,
-  //             //     bgColor: okBgColor ?? Co.primary,
-  //             //     style: okColor == null
-  //             //         ? null
-  //             //         : TStyle.whiteSemi(16).copyWith(color: okColor),
-  //             //     onPressed: () {
-  //             //       AppConsts.navigatorKey.currentState!.context
-  //             //           .myPop(result: true);
-  //             //     },
-  //             //   ),
-  //             // )
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  static infoDialog({required Function() onConfirm, required String title, String? message, String? okBtn, Color? okColor, Color? okBgColor}) {
+    return Dialog(
+      child: Container(
+        decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const VerticalSpacing(20),
+              Text(title, style: TStyle.blackBold(18)),
+              const VerticalSpacing(10),
+              if (message != null) Text(message, style: TStyle.blackRegular(16)),
+              const VerticalSpacing(20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: MainBtn(
+                  text: okBtn ?? L10n.tr().confirm,
+                  bgColor: okBgColor ?? Co.purple,
+                  textStyle: okColor == null ? null : TStyle.whiteSemi(16).copyWith(color: okColor),
+                  onPressed: onConfirm,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

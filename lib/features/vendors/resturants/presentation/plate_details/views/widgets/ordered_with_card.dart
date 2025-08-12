@@ -14,12 +14,13 @@ import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_events.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/ordered_with_increment.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/global_increment_widget.dart';
 
 class OrderedWithCard extends StatelessWidget {
-  const OrderedWithCard({super.key, required this.product, required this.type});
+  const OrderedWithCard({super.key, required this.product, required this.type, required this.isDisabled});
   final OrderedWithEntity product;
   final CartItemType type;
+  final bool isDisabled;
 
   @override
   Widget build(BuildContext context) {
@@ -84,41 +85,48 @@ class OrderedWithCard extends StatelessWidget {
                     stream: di<CartBus>().getStream<FastItemEvents>(),
                     builder: (context, snapshot) {
                       final cartItem = snapshot.data?.items.firstWhereOrNull((e) => e.prod.id == product.id);
-                      final isLoading = snapshot.data?.prodId == cartItem?.cartId;
-                      print("Isloading item: $isLoading");
+                      final isQuantityChangeLoading = snapshot.data?.prodId == cartItem?.cartId;
                       if (cartItem != null) {
-                        return OrderedWithIncrement(
-                          isAdding: isLoading && snapshot.data?.state.isIncreasing == true,
-                          isRemoving: isLoading && snapshot.data?.state.isDecreasing == true,
-                          onChanged: (isAdding) {
-                            if (isAdding) {
-                              di<CartBus>().updateItemQuantity(cartItem.cartId, cartItem.quantity + 1, true);
-                            } else {
-                              if (cartItem.quantity == 1) {
-                                di<CartBus>().removeItemFromCart(cartItem.cartId);
+                        return AbsorbPointer(
+                          absorbing: isDisabled,
+                          child: GlobalIncrementWidget(
+                            isDarkContainer: true,
+                            isHorizonal: true,
+                            isAdding: isQuantityChangeLoading && snapshot.data?.state.isIncreasing == true,
+                            isRemoving: isQuantityChangeLoading && snapshot.data?.state.isDecreasing == true,
+                            onChanged: (isAdding) {
+                              if (isAdding) {
+                                di<CartBus>().updateItemQuantity(cartItem.cartId, cartItem.quantity + 1, true);
                               } else {
-                                di<CartBus>().updateItemQuantity(cartItem.cartId, cartItem.quantity - 1, false);
+                                if (cartItem.quantity == 1) {
+                                  di<CartBus>().removeItemFromCart(cartItem.cartId);
+                                } else {
+                                  di<CartBus>().updateItemQuantity(cartItem.cartId, cartItem.quantity - 1, false);
+                                }
                               }
-                            }
-                          },
-                          initVal: cartItem.quantity,
+                            },
+                            initVal: cartItem.quantity,
+                          ),
                         );
                       } else {
-                        return AddIcon(
-                          isLoading: snapshot.data?.prodId == product.id && snapshot.data?.state.isAdding == true,
-                          onTap: () {
-                            SystemSound.play(SystemSoundType.click);
-                            di<CartBus>().addToCart(
-                              CartableItemRequest(
-                                id: product.id,
-                                quantity: 1,
-                                options: {},
-                                type: type,
-                                note: null,
-                                cartItemId: null,
-                              ),
-                            );
-                          },
+                        return AbsorbPointer(
+                          absorbing: isDisabled,
+                          child: AddIcon(
+                            isLoading: snapshot.data?.prodId == product.id && snapshot.data?.state.isAdding == true,
+                            onTap: () {
+                              SystemSound.play(SystemSoundType.click);
+                              di<CartBus>().addToCart(
+                                CartableItemRequest(
+                                  id: product.id,
+                                  quantity: 1,
+                                  options: {},
+                                  type: type,
+                                  note: null,
+                                  cartItemId: null,
+                                ),
+                              );
+                            },
+                          ),
                         );
                       }
                     },

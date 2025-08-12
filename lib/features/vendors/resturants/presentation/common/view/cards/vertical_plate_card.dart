@@ -5,8 +5,8 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
-import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/card_plate_info_widget.dart';
@@ -108,10 +108,12 @@ class VerticalPlateCard extends StatelessWidget {
                             DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
                             AbsorbPointer(
                               absorbing: item.outOfStock,
-                              child: AddIcon(
-                                onTap: () {
-                                  if (onTap != null) onTap!(item);
-                                },
+                              child: CartToIncrementIcon(
+                                isDarkContainer: true,
+                                isHorizonal: false,
+                                product: item,
+                                iconSize: 20,
+                                isCartIcon: false,
                               ),
                             ),
                           ],

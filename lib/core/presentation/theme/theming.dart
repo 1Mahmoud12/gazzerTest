@@ -16,13 +16,13 @@ class AppTheme {
     textTheme: TextTheme(titleMedium: TStyle.whiteSemi(14), bodyMedium: TStyle.whiteSemi(13)),
     fontFamily: 'poppins',
     scaffoldBackgroundColor: Co.bg,
-    switchTheme: SwitchThemeData(
-      thumbColor: const WidgetStateColor.fromMap({WidgetState.selected: Co.secondary, WidgetState.any: Co.purple}),
-      trackColor: const WidgetStateColor.fromMap({
+    switchTheme: const SwitchThemeData(
+      thumbColor: WidgetStateColor.fromMap({WidgetState.selected: Co.secondary, WidgetState.any: Co.purple}),
+      trackColor: WidgetStateColor.fromMap({
         WidgetState.selected: Color(0x55FF9900),
         WidgetState.any: Color(0x5552229E),
       }),
-      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+      overlayColor: WidgetStatePropertyAll(Colors.transparent),
       trackOutlineColor: WidgetStatePropertyAll(Colors.transparent),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       padding: EdgeInsets.zero,

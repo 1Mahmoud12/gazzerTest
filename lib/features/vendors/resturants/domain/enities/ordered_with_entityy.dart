@@ -10,6 +10,9 @@ class OrderedWithEntity extends GenericItemEntity {
     required super.price,
     required super.reviewCount,
     required super.outOfStock,
+
+    super.hasOptions = false, // ** as per backend developer, all ordered with has no options.
+
     super.offer,
     super.tags,
     super.badge,

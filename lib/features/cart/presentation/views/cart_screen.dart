@@ -53,7 +53,7 @@ class _CartScreenState extends State<CartScreen> {
               gradient: Grad().radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
             ),
             if (Session().client == null)
-              UnAuthComponent(msg: L10n.tr().pleaseLoginToUseCart)
+              Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseCart))
             else
               Expanded(
                 child: BlocBuilder<CartCubit, CartStates>(

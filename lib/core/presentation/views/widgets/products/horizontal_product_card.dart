@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/extensions/alignment.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
@@ -84,27 +83,18 @@ class HorizontalProductCard extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            IconButton(
-                              onPressed: () {},
-                              style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                              icon: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: GradientBoxBorder(gradient: Grad().shadowGrad()),
-                                  gradient: Grad().bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: SvgPicture.asset(
-                                    Assets.assetsSvgCart,
-                                    height: 20,
-                                    width: 20,
-                                    colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
-                                  ),
-                                ),
-                              ),
+                            CartToIncrementIcon(
+                              product: product,
+                              isHorizonal: false,
+                              iconSize: 18,
+                              isDarkContainer: false,
                             ),
-                            DecoratedFavoriteWidget(size: 20, isDarkContainer: false, fovorable: product),
+                            DecoratedFavoriteWidget(
+                              size: 20,
+                              isDarkContainer: false,
+                              fovorable: product,
+                              borderRadius: AppConst.defaultInnerBorderRadius,
+                            ),
                           ],
                         ),
                         const HorizontalSpacing(12),

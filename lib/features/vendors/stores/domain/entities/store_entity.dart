@@ -22,7 +22,12 @@ class StoreEntity extends GenericVendorEntity {
     required super.alwaysClosed,
     required super.isFavorite,
     required super.isOpen,
+    required super.mintsBeforClosingAlert,
+    super.description,
 
     // this.categoryOfPlate,
   });
+
+  @override
+  List<Object?> get props => [...super.props];
 }

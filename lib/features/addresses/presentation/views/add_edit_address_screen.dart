@@ -144,7 +144,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                       ),
                       AnimatedSize(
                         duration: Durations.medium1,
-        
+
                         child: SizedBox(
                           height: value == AddressLabel.other ? null : 0,
                           child: MainTextField(
@@ -170,7 +170,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                   location: cubit.oldAddress?.location,
                   onChangeLocation: (loc) => latlng = loc,
                 ),
-        
+
                 const SizedBox.shrink(),
                 Text(L10n.tr().governorate, style: TStyle.primaryBold(14)),
                 BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
@@ -236,6 +236,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 const SizedBox.shrink(),
                 Row(
                   spacing: 16,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Column(
@@ -283,10 +284,10 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                   borderRadius: 10,
                   hintText: L10n.tr().nearbyLandmark,
                   validator: (v) {
-                    return Validators.notEmpty(v) ?? Validators.valueAtLeastNum(v, L10n.tr().floor, 6);
+                    return Validators.notEmpty(v) ?? Validators.valueAtLeastNum(v, L10n.tr().landmark, 6);
                   },
                 ),
-        
+
                 const SizedBox.shrink(),
                 const SizedBox.shrink(),
                 BlocConsumer<AddEditAddressCubit, AddEditAddressStates>(
