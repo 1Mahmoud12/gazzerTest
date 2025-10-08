@@ -5,7 +5,7 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
   final List<GenericItemEntity?> items;
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) return const SizedBox.shrink();
+    if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
 
     return SliverPadding(
       padding: AppConst.defaultHrPadding,

@@ -21,6 +21,14 @@ class HomeResponseDTO {
   });
 
   HomeResponseDTO.fromJson(Map<String, dynamic> json) {
+    // Initialize all fields to null to prevent LateInitializationError
+    categories = null;
+    dailyOffers = null;
+    suggested = null;
+    topItems = null;
+    topVendors = null;
+    bestPopular = null;
+
     final sections = <SectionDTO>[];
     for (var item in json['data']) {
       sections.add(SectionDTO.fromJson(item));
@@ -54,18 +62,18 @@ class HomeResponseDTO {
 
   HomeDataModel toModel() {
     return HomeDataModel(
-      categories: categories!.$1.map((e) => e.toEntity()).toList(),
-      categoriesBanner: categories!.$2?.toEntity(),
-      dailyOffers: dailyOffers!.$1.map((e) => e?.toEntity()).toList(),
-      dailyOffersBanner: dailyOffers!.$2?.toEntity(),
-      suggested: suggested!.$1.map((e) => e?.toEntity()).toList(),
-      suggestedBanner: suggested!.$2?.toEntity(),
-      topItems: topItems!.$1.map((e) => e?.toEntity()).toList(),
-      topItemsBanner: topItems!.$2?.toEntity(),
-      topVendors: topVendors!.$1.map((e) => e?.toEntity()).toList(),
-      topVendorsBanner: topVendors!.$2?.toEntity(),
-      bestPopular: bestPopular!.$1.map((e) => e?.toEntity()).toList(),
-      bestPopularBanner: bestPopular!.$2?.toEntity(),
+      categories: categories?.$1.map((e) => e.toEntity()).toList() ?? [],
+      categoriesBanner: categories?.$2?.toEntity(),
+      dailyOffers: dailyOffers?.$1.map((e) => e?.toEntity()).toList() ?? [],
+      dailyOffersBanner: dailyOffers?.$2?.toEntity(),
+      suggested: suggested?.$1.map((e) => e?.toEntity()).toList() ?? [],
+      suggestedBanner: suggested?.$2?.toEntity(),
+      topItems: topItems?.$1.map((e) => e?.toEntity()).toList() ?? [],
+      topItemsBanner: topItems?.$2?.toEntity(),
+      topVendors: topVendors?.$1.map((e) => e?.toEntity()).toList() ?? [],
+      topVendorsBanner: topVendors?.$2?.toEntity(),
+      bestPopular: bestPopular?.$1.map((e) => e?.toEntity()).toList() ?? [],
+      bestPopularBanner: bestPopular?.$2?.toEntity(),
     );
   }
 }

@@ -5,6 +5,7 @@ class _HomeTopVendorsWidget extends StatelessWidget {
   final List<VendorEntity?> vendors;
   @override
   Widget build(BuildContext context) {
+    if (vendors.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(
@@ -35,7 +36,11 @@ class _HomeTopVendorsWidget extends StatelessWidget {
                       spacing: 6,
                       children: [
                         CircleGradientBorderedImage(image: vendor!.image),
-                        Text("${vendor.name} ${vendor.name}", style: TStyle.blackBold(12), textAlign: TextAlign.center),
+                        Text(
+                          "${vendor.name} ${vendor.name}",
+                          style: TStyle.blackBold(12),
+                          textAlign: TextAlign.center,
+                        ),
                         const HorizontalSpacing(8),
                       ],
                     ),
@@ -59,7 +64,11 @@ class _HomeTopVendorsWidget extends StatelessWidget {
                       child: Column(
                         spacing: 8,
                         children: [
-                          Expanded(child: CircleGradientBorderedImage(image: cuisne!.image)),
+                          Expanded(
+                            child: CircleGradientBorderedImage(
+                              image: cuisne!.image,
+                            ),
+                          ),
                           Text(
                             cuisne.name,
                             style: TStyle.blackBold(12),

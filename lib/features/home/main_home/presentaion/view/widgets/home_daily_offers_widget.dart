@@ -5,7 +5,7 @@ class _DailyOffersWidget extends StatelessWidget {
   final List<GenericItemEntity?> items;
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) return const SizedBox.shrink();
+    if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(
@@ -34,7 +34,10 @@ class _DailyOffersWidget extends StatelessWidget {
               itemCount: items.length > 4 ? 4 : items.length,
               itemBuilder: (context, index) {
                 if (items[index] == null) return const SizedBox.shrink();
-                return VerticalProductCard(product: items[index]!, canAdd: false);
+                return VerticalProductCard(
+                  product: items[index]!,
+                  canAdd: false,
+                );
               },
             ),
             const VerticalSpacing(24),

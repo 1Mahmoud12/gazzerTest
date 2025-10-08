@@ -5,16 +5,21 @@ class _HomeCategoriesComponent extends StatelessWidget {
   final List<MainCategoryEntity> items;
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) return const SizedBox.shrink();
+    if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
     return SliverList(
       delegate: SliverChildListDelegate(
         [
           Padding(
             padding: AppConst.defaultHrPadding,
-            child: Text(
-              L10n.tr().categories,
-              style: TStyle.primaryBold(16),
-            ).withHotspot(order: 2, title: "", text: L10n.tr().chooseYourCategories),
+            child:
+                Text(
+                  L10n.tr().categories,
+                  style: TStyle.primaryBold(16),
+                ).withHotspot(
+                  order: 2,
+                  title: "",
+                  text: L10n.tr().chooseYourCategories,
+                ),
           ),
           const VerticalSpacing(12),
           GridView.builder(
@@ -48,7 +53,10 @@ class CategoryCard extends StatelessWidget {
       builder: (context, constraints) => Container(
         // clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          border: GradientBoxBorder(gradient: Grad().shadowGrad(false), width: 1.5),
+          border: GradientBoxBorder(
+            gradient: Grad().shadowGrad(false),
+            width: 1.5,
+          ),
           borderRadius: BorderRadius.circular(constraints.maxWidth),
           // shadows will enforce that the gradient has no opacity
           gradient: Grad().bglightLinear.copyWith(
@@ -56,7 +64,13 @@ class CategoryCard extends StatelessWidget {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),
-          boxShadow: [const BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
+          boxShadow: [
+            const BoxShadow(
+              color: Colors.black26,
+              blurRadius: 4,
+              offset: Offset(0, 4),
+            ),
+          ],
         ),
         height: constraints.minHeight,
         width: constraints.maxWidth,
@@ -66,7 +80,9 @@ class CategoryCard extends StatelessWidget {
             padding: EdgeInsets.zero,
             shadowColor: Colors.transparent,
             elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(constraints.maxWidth)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(constraints.maxWidth),
+            ),
           ),
           clipBehavior: Clip.hardEdge,
           onPressed: () {
