@@ -1058,6 +1058,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get fullName => 'الاسم الكامل';
 
   @override
+  String get fullEmail => 'Full Email';
+
+  @override
+  String get enterYourFullEmail => 'ادخل البريد الالكتروني';
+
+  @override
   String get yourFullName => 'اسمك الكامل';
 
   @override

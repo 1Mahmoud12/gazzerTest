@@ -1,11 +1,11 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/home/rober/development/flutter"
-export "FLUTTER_APPLICATION_PATH=/media/rober/xFAT/projects/AZ/new/Gazzer_AZ_user_app"
+export "FLUTTER_ROOT=/Users/mahmoud/Documents/flutterVersions/3.32.4/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/mahmoud/StudioProjects/gazar"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=0.0.1"
-export "FLUTTER_BUILD_NUMBER=9"
+export "FLUTTER_BUILD_NUMBER=10"
 export "DART_OBFUSCATION=false"
 export "TRACK_WIDGET_CREATION=true"
 export "TREE_SHAKE_ICONS=false"

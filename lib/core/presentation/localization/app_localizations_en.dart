@@ -1060,6 +1060,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fullName => 'Full Name';
 
   @override
+  String get fullEmail => 'Full Email';
+
+  @override
+  String get enterYourFullEmail => 'Enter your full email';
+
+  @override
   String get yourFullName => 'Your Full Name';
 
   @override

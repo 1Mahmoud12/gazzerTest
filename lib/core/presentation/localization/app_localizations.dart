@@ -2120,6 +2120,18 @@ abstract class AppLocalizations {
   /// **'Full Name'**
   String get fullName;
 
+  /// No description provided for @fullEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Email'**
+  String get fullEmail;
+
+  /// No description provided for @enterYourFullEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full email'**
+  String get enterYourFullEmail;
+
   /// No description provided for @yourFullName.
   ///
   /// In en, this message translates to:

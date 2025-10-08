@@ -15,7 +15,7 @@ class ApiClient {
   final Dio _dio = Dio();
 
   /// Static for handling deep linking
-  static final mainDomain = "https://gazzer-dev-do.mostafa.cloud";
+  static final mainDomain = "https://tkgazzer.com";
   // static final mainDomain = "https://gazzer-test-do.mostafa.cloud/"; // test domain
   final String baseURL = "$mainDomain/api/";
 

@@ -25,12 +25,15 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _emailKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   String countryCode = "EG";
   @override
   void dispose() {
     _nameController.dispose();
+    _emailController.dispose();
     _phoneController.dispose();
     super.dispose();
   }
@@ -52,54 +55,77 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: ListView(
             padding: AppConst.defaultHrPadding,
             children: [
-              Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+              Center(
+                child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
+              ),
               Row(
                 children: [
-                  GradientText(text: L10n.tr().signUp, style: TStyle.mainwBold(32), gradient: Grad().textGradient),
+                  GradientText(
+                    text: L10n.tr().signUp,
+                    style: TStyle.mainwBold(32),
+                    gradient: Grad().textGradient,
+                  ),
                 ],
               ),
               const VerticalSpacing(8),
-              Text(L10n.tr().singUpToExploreWideVarietyOfProducts, maxLines: 2, style: TStyle.greySemi(16)),
+              Text(
+                L10n.tr().singUpToExploreWideVarietyOfProducts,
+                maxLines: 2,
+                style: TStyle.greySemi(16),
+              ),
+
               const VerticalSpacing(24),
               AutofillGroup(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(L10n.tr().fullName, style: TStyle.blackBold(20)),
-                    const VerticalSpacing(8),
-                    MainTextField(
-                      controller: _nameController,
-                      hintText: L10n.tr().yourFullName,
-                      bgColor: Colors.transparent,
-                      max: 250,
-                      validator: (v) {
-                        return Validators.dashedCharactersOnly(v) ??
-                            Validators.valueAtLeastNum(
-                              v,
-                              L10n.tr().fullName,
-                              3,
-                              msg: L10n.tr().fullNameShouldBeThreeLettersOrMore,
-                            );
-                      },
-                      autofillHints: [AutofillHints.username, AutofillHints.name],
-                    ),
-                    const VerticalSpacing(24),
-                    Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
-                    const VerticalSpacing(8),
-                    PhoneTextField(
-                      controller: _phoneController,
-                      hasLabel: false,
-                      hasHint: true,
-                      code: countryCode,
-                      validator: (v, code) {
-                        countryCode = code;
-                        if (code == 'EG') {
-                          return Validators.mobileEGValidator(v);
-                        }
-                        return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
-                      },
-                    ),
-                  ],
+                child: Form(
+                  key: _emailKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(L10n.tr().fullName, style: TStyle.blackBold(20)),
+                      const VerticalSpacing(8),
+                      MainTextField(
+                        controller: _nameController,
+                        hintText: L10n.tr().yourFullName,
+                        bgColor: Colors.transparent,
+                        max: 250,
+                        autofillHints: [
+                          AutofillHints.username,
+                          AutofillHints.name,
+                        ],
+                      ),
+                      const VerticalSpacing(24),
+                      Text(L10n.tr().emailAddress, style: TStyle.blackBold(20)),
+                      const VerticalSpacing(8),
+                      MainTextField(
+                        controller: _emailController,
+                        hintText: L10n.tr().enterYourFullEmail,
+                        bgColor: Colors.transparent,
+                        max: 250,
+                        validator: Validators.emailValidator,
+                        autofillHints: [AutofillHints.email],
+                      ),
+                      const VerticalSpacing(24),
+                      Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
+                      const VerticalSpacing(8),
+                      PhoneTextField(
+                        controller: _phoneController,
+                        hasLabel: false,
+                        hasHint: true,
+                        code: countryCode,
+                        validator: (v, code) {
+                          countryCode = code;
+                          if (code == 'EG') {
+                            return Validators.mobileEGValidator(v);
+                          }
+                          return Validators.valueAtLeastNum(
+                            v,
+                            L10n.tr().mobileNumber,
+                            6,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const VerticalSpacing(24),
@@ -124,7 +150,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                   textStyle: TStyle.mainwSemi(15),
                   bgColor: Colors.transparent,
-                  child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
+                  child: GradientText(
+                    text: L10n.tr().continu,
+                    style: TStyle.blackSemi(16),
+                  ),
                 ),
               ),
               // const VerticalSpacing(24),
