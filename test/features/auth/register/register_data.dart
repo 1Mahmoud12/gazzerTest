@@ -7,6 +7,7 @@ class RegisterData {
     name: "Test User",
     phone: "1234567890",
     password: "!Ss123456",
+
     passwordConfirmation: "!Ss123456",
   );
   final String code = "123456";

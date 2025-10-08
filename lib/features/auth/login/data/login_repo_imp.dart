@@ -15,7 +15,7 @@ class LoginRepoImp extends LoginRepo {
     return super.call<String>(
       apiCall: () => _apiClient.post(
         endpoint: Endpoints.login,
-        requestBody: {"phone": phone, "password": password},
+        requestBody: {"login": phone, "password": password},
       ),
       parser: (result) {
         final response = ClientResponse.fromWholeResponse(result.data);

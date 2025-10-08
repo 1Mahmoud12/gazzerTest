@@ -67,7 +67,7 @@ class ProfileRepoImp extends ProfileRepo {
     return super.call(
       apiCall: () => _apiClient.get(endpoint: Endpoints.profile),
       parser: (response) {
-        return ClientDTO.fromJson(response.data['data']).toClientEntity();
+        return ClientDTO.fromJson(response.data['data'] ?? {}).toClientEntity();
       },
     );
   }

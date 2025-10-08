@@ -142,6 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           name: _nameController.text,
                           countryIso: countryCode,
                           phone: _phoneController.text,
+                          email: _emailController.text,
                           password: '',
                           passwordConfirmation: '',
                         ),

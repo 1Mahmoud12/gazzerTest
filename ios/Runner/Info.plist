@@ -72,5 +72,8 @@
           <string>sms</string>
           <string>tel</string>
         </array>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>This app requires access to make phone calls to contact support.</string>
+
 	</dict>
 </plist>
