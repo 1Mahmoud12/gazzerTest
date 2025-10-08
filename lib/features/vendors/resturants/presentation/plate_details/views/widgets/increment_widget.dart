@@ -6,9 +6,14 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 
 class IncrementWidget extends StatelessWidget {
-  const IncrementWidget({super.key, this.initVal = 1, required this.onChanged});
+  const IncrementWidget({
+    super.key,
+    this.initVal = 1,
+    required this.onChanged,
+  });
   final int initVal;
   final Function(bool isAdding) onChanged;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -35,33 +40,35 @@ class IncrementWidget extends StatelessWidget {
             icon: const Icon(Icons.add, color: Co.secondary, size: 22),
           ),
         ),
-        ConstrainedBox(
-          constraints: const BoxConstraints(minWidth: 40),
-          child: Text("$initVal", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
-        ),
-        DoubledDecoratedWidget(
-          innerDecoration: BoxDecoration(
-            borderRadius: AppConst.defaultBorderRadius,
-            gradient: Grad().linearGradient,
-            border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
+        if (initVal != 0)
+          ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 40),
+            child: Text("$initVal", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
           ),
-          child: IconButton(
-            onPressed: () {
-              SystemSound.play(SystemSoundType.click);
-              if (initVal > 1) {
-                onChanged(false);
-              }
-            },
-            style: IconButton.styleFrom(
-              padding: const EdgeInsets.all(5),
-              elevation: 0,
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+        if (initVal != 0)
+          DoubledDecoratedWidget(
+            innerDecoration: BoxDecoration(
+              borderRadius: AppConst.defaultBorderRadius,
+              gradient: Grad().linearGradient,
+              border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
             ),
-            icon: const Icon(Icons.remove, color: Co.secondary, size: 20),
+            child: IconButton(
+              onPressed: () {
+                SystemSound.play(SystemSoundType.click);
+                if (initVal > 1) {
+                  onChanged(false);
+                }
+              },
+              style: IconButton.styleFrom(
+                padding: const EdgeInsets.all(5),
+                elevation: 0,
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+              ),
+              icon: const Icon(Icons.remove, color: Co.secondary, size: 20),
+            ),
           ),
-        ),
       ],
     );
   }

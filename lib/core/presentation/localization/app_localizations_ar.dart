@@ -1114,4 +1114,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bored => 'ممل';
+
+  @override
+  String get outOfStock => 'غير متوفر في المخزون';
 }

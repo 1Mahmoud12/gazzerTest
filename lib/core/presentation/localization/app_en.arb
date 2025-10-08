@@ -445,5 +445,6 @@
   "sad": "Sad",
   "angry": "Angry",
   "excited": "Excited",
-  "bored": "Bored"
+  "bored": "Bored",
+  "outOfStock": "Out of Stock"
 }

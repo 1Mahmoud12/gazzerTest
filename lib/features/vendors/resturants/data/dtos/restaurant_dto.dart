@@ -70,7 +70,7 @@ class RestaurantDTO {
       image: image ?? '',
       rate: double.tryParse(rate ?? '0') ?? 0.0,
       zoneName: provinceZone ?? '',
-      // address: address,
+      outOfStock: false,
       parentId: storeCategoryId,
       categoryOfPlate: subcategories?.map((e) => e.toCategoryOfPlateEntity()).toList(),
       tag: tags,
@@ -82,6 +82,7 @@ class RestaurantDTO {
       subCategories: subcategories?.map((e) => CategoryOfPlateEntity(id: e.id!, name: e.name ?? '', image: e.image ?? '')).toList(),
       deliveryTime: estimatedDeliveryTime != null ? Helpers.convertIntToRange(estimatedDeliveryTime!, 0.3) : null,
       mintsBeforClosingAlert: closingAlertAppearBefore ?? 0,
+      reviewCount: 20,
 
       ///
       badge: badge,

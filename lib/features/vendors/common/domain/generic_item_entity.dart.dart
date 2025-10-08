@@ -11,8 +11,6 @@ part 'package:gazzer/features/vendors/stores/domain/entities/product_entity.dart
 /// generic class for both [PlateEntity] for restaurants and [ProductEntity] for stores or [OrderedWithEntity] for ordered with
 sealed class GenericItemEntity extends Favorable {
   final double _price;
-  final int reviewCount;
-  final bool outOfStock;
   final String? badge;
   final List<String>? tags;
   final OfferEntity? offer;
@@ -32,13 +30,14 @@ sealed class GenericItemEntity extends Favorable {
   };
   const GenericItemEntity({
     required super.id,
+    super.productId,
     required super.name,
     required super.image,
     required super.description,
     required super.rate,
+    required super.outOfStock,
     required double price,
-    required this.reviewCount,
-    required this.outOfStock,
+    required super.reviewCount,
     required this.hasOptions,
     this.badge,
     this.tags,
@@ -49,8 +48,6 @@ sealed class GenericItemEntity extends Favorable {
   List<Object?> get props => [
     ...super.props,
     _price,
-    reviewCount,
-    outOfStock,
     badge,
     tags,
     offer,

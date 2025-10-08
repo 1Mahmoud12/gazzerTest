@@ -17,6 +17,7 @@ class PlateEntity extends GenericItemEntity {
     super.badge,
     super.tags,
     super.offer,
+    super.productId,
   });
 
   @override

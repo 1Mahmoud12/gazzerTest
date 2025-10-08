@@ -2269,6 +2269,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Bored'**
   String get bored;
+
+  /// No description provided for @outOfStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Out of Stock'**
+  String get outOfStock;
 }
 
 class _AppLocalizationsDelegate

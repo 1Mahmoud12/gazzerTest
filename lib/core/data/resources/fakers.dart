@@ -154,6 +154,8 @@ class Fakers {
     id: 1,
     name: "طبق ",
     rate: 3,
+    outOfStock: false,
+    reviewCount: 20,
     image:
         "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
     categoryOfPlate: categoriesOfPlate,
@@ -161,6 +163,7 @@ class Fakers {
     deliveryFees: 123,
     badge: '30%',
     priceRange: '',
+
     tag: ['Free delivery'],
     subCategories: [
       CategoryOfPlateEntity(id: 1, name: 'Crepe', image: ''),
@@ -179,7 +182,8 @@ class Fakers {
     8,
     (index) => const RestaurantEntity(
       mintsBeforClosingAlert: 0,
-
+      outOfStock: false,
+      reviewCount: 20,
       alwaysClosed: false,
       alwaysOpen: false,
       id: 1,
@@ -213,6 +217,8 @@ class Fakers {
     (index) => PlateEntity(
       hasOptions: false,
       id: index,
+      productId: 0,
+
       name: "طبق ${index + 1}",
       description: "وصف الطبق ${index + 1}",
       price: _random.nextDouble() * 100,
@@ -228,6 +234,8 @@ class Fakers {
   static const plate = PlateEntity(
     hasOptions: false,
     id: 0,
+    productId: 0,
+
     name: "طبق 1",
     description: "وصف الطبق 1",
     price: 12,
@@ -280,10 +288,11 @@ class Fakers {
   static const List<StoreEntity> stores = [
     StoreEntity(
       mintsBeforClosingAlert: 0,
-
+      outOfStock: false,
       alwaysClosed: false,
       alwaysOpen: false,
       id: 0,
+      reviewCount: 20,
       name: "طبق ",
       rate: 3,
       image: _plateNetWorkImg,
@@ -297,7 +306,8 @@ class Fakers {
     ),
     StoreEntity(
       mintsBeforClosingAlert: 0,
-
+      outOfStock: false,
+      reviewCount: 20,
       alwaysClosed: false,
       alwaysOpen: false,
       id: 0,
@@ -315,7 +325,8 @@ class Fakers {
   ];
   static const store = StoreEntity(
     mintsBeforClosingAlert: 0,
-
+    outOfStock: false,
+    reviewCount: 20,
     alwaysClosed: false,
     alwaysOpen: false,
     id: 0,
@@ -347,6 +358,7 @@ class Fakers {
       description: "وصف ",
       price: 0,
       rate: 3.1,
+
       image: Fakers._netWorkImage,
       outOfStock: false,
       reviewCount: 100,

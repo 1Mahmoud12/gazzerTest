@@ -1114,4 +1114,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bored => 'Bored';
+
+  @override
+  String get outOfStock => 'Out of Stock';
 }

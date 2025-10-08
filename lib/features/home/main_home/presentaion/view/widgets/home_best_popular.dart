@@ -7,7 +7,6 @@ class _HomeBestPopular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
-    print('_HomeBestPopular is rendered');
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(

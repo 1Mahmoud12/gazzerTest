@@ -3,6 +3,7 @@ part of 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.
 class OrderedWithEntity extends GenericItemEntity {
   const OrderedWithEntity({
     required super.id,
+    super.productId,
     required super.name,
     required super.image,
     required super.rate,

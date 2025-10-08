@@ -50,6 +50,8 @@ sealed class GenericVendorEntity extends Favorable {
     required super.rate,
     super.description = '',
     required this.mintsBeforClosingAlert,
+    required super.outOfStock,
+    required super.reviewCount,
 
     ///
     required this.parentId,

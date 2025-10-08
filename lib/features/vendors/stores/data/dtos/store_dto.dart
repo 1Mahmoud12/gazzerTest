@@ -86,8 +86,8 @@ class StoreDTO {
       endTime: _formDateTimeFromString(workTo ?? ''),
       parentId: storeCategoryId,
       deliveryTime: estimatedDeliveryTime != null ? Helpers.convertIntToRange(estimatedDeliveryTime!, 0.3) : null,
-
-      ///
+      outOfStock: false,
+      reviewCount: 20,
       zoneName: provinceZone ?? '',
       deliveryFee: null,
       badge: null,

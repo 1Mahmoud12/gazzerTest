@@ -26,6 +26,7 @@ class PlateDTO extends GenericItemDTO {
   PlateEntity toEntity() {
     return PlateEntity(
       id: id!,
+      productId: storeId,
       categoryPlateId: caegoryId ?? 0,
       name: name ?? '',
       description: description ?? '',

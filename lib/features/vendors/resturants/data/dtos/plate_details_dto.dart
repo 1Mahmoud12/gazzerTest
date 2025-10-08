@@ -61,6 +61,7 @@ class PlateDetailsDTO {
   PlateEntity toEntity() {
     return PlateEntity(
       id: id ?? 0,
+      productId: storeId,
       name: plateName ?? '',
       price: double.tryParse(appPrice ?? '0') ?? 0.0,
       rate: double.tryParse(rate ?? '0') ?? 0.0,

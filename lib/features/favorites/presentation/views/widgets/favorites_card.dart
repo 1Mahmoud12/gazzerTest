@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
@@ -13,9 +14,12 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/decora
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing, AdaptiveProgressIndicator;
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/smart_cart_widget.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class FavoriteCard extends StatefulWidget {
   const FavoriteCard({super.key, required this.favorite, required this.onTap});
@@ -54,6 +58,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.favorite);
     return SizedBox(
       width: 140,
       child: InkWell(
@@ -65,7 +70,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
             Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                height: 150,
+                height: Session().client != null ? 175 : 150,
                 width: double.infinity,
                 child: CustomPaint(
                   painter: ProductShapePaint(),
@@ -111,6 +116,27 @@ class _FavoriteCardState extends State<FavoriteCard> {
                             style: TStyle.blackSemi(12),
                           ),
                         ),
+                        const VerticalSpacing(8),
+                        if (Session().client != null)
+                          Align(
+                            alignment: AlignmentDirectional.center,
+                            child: SmartCartWidget(
+                              product: PlateEntity(
+                                id: widget.favorite.id,
+                                categoryPlateId: -1,
+                                productId: widget.favorite.productId,
+                                hasOptions: false,
+                                name: widget.favorite.name,
+                                description: widget.favorite.description,
+                                price: widget.favorite.favorablePrice ?? 0.0,
+                                image: widget.favorite.image,
+                                rate: widget.favorite.rate,
+                                reviewCount: widget.favorite.reviewCount,
+                                outOfStock: widget.favorite.outOfStock,
+                              ),
+                              cartBus: di<CartBus>(),
+                            ),
+                          ),
                       ],
                     ),
                   ),

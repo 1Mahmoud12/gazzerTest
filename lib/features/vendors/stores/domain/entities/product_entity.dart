@@ -7,6 +7,7 @@ class ProductEntity extends GenericItemEntity {
 
   const ProductEntity({
     required super.id,
+    super.productId,
     required super.name,
     required super.description,
     required super.price,
