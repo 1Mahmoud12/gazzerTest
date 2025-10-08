@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -21,12 +22,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search_________________Start => '__________________';
 
   @override
-  String get noResultsFoundTryAdjustingYourFilter =>
-      'لم يتم العثور على نتائج، حاول تعديل عوامل التصفية الخاص بك';
+  String get noResultsFoundTryAdjustingYourFilter => 'لم يتم العثور على نتائج، حاول تعديل عوامل التصفية الخاص بك';
 
   @override
-  String get unableToLoadResultsPleaseTryAgainLater =>
-      'تعذر تحميل النتائج، يرجى المحاولة مرة أخرى لاحقًا';
+  String get unableToLoadResultsPleaseTryAgainLater => 'تعذر تحميل النتائج، يرجى المحاولة مرة أخرى لاحقًا';
 
   @override
   String get rating => 'تقييم';
@@ -41,8 +40,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get delivery => 'توصيل';
 
   @override
-  String get enterTheWordYouWantToSearchFor =>
-      'أدخل الكلمة التي تريد البحث عنها';
+  String get enterTheWordYouWantToSearchFor => 'أدخل الكلمة التي تريد البحث عنها';
 
   @override
   String get enterThreeLetterOrMore => 'أدخل ثلاثة أحرف أو أكثر...';
@@ -107,8 +105,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get yourChoicesWillBeClearedBecauseYouDidntAddToCart =>
-      'سيتم مسح اختياراتك لأنك لم تضف إلى السلة';
+  String get yourChoicesWillBeClearedBecauseYouDidntAddToCart => 'سيتم مسح اختياراتك لأنك لم تضف إلى السلة';
 
   @override
   String get subTotal => 'المجموع الفرعي';
@@ -159,8 +156,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get address_________________Start => '__________________';
 
   @override
-  String get defaultAddressChangedSuccessfully =>
-      'تم تغيير العنوان الافتراضي بنجاح';
+  String get defaultAddressChangedSuccessfully => 'تم تغيير العنوان الافتراضي بنجاح';
 
   @override
   String confirmDeleteAddressName(String label) {
@@ -321,8 +317,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get thisRestaurantIsCurrentlyUnavailable =>
-      'هذا المطعم غير متوفر حالياً';
+  String get thisRestaurantIsCurrentlyUnavailable => 'هذا المطعم غير متوفر حالياً';
 
   @override
   String get alwayeysOpen => 'دائماً مفتوح';
@@ -337,8 +332,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notAvailable => 'غير متوفر';
 
   @override
-  String get couldnotLoadDataPleaseTryAgain =>
-      'تعذر تحميل البيانات، يرجى المحاولة مرة أخرى';
+  String get couldnotLoadDataPleaseTryAgain => 'تعذر تحميل البيانات، يرجى المحاولة مرة أخرى';
 
   @override
   String get outOFStock => 'غير متوفر';
@@ -397,8 +391,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get whyAreYouDeletingYourAccount => 'لماذا تريد حذف حسابك؟';
 
   @override
-  String get thisFeedbackHelpsUsImproveOurServices =>
-      'هذا التعليق يساعدنا على تحسين خدماتنا.';
+  String get thisFeedbackHelpsUsImproveOurServices => 'هذا التعليق يساعدنا على تحسين خدماتنا.';
 
   @override
   String get otherReason => 'سبب آخر';
@@ -527,8 +520,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get restaurants_________________Start => '__________________';
 
   @override
-  String get thisVendorIsClosedOrBusyRightNow =>
-      'هذا البائع مغلق أو مشغول الآن';
+  String get thisVendorIsClosedOrBusyRightNow => 'هذا البائع مغلق أو مشغول الآن';
 
   @override
   String get details => 'التفاصيل';
@@ -645,8 +637,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get freeDelivery => 'توصيل مجاني';
 
   @override
-  String get searchForStoresItemsAndCAtegories =>
-      'ابحث عن المتاجر والعناصر والفئات';
+  String get searchForStoresItemsAndCAtegories => 'ابحث عن المتاجر والعناصر والفئات';
 
   @override
   String get categories => 'الفئات';
@@ -871,6 +862,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get howToLogin => 'كيف تريد تسجيل الدخول؟';
 
   @override
+  String get loginWithPhone => 'تسجيل الدخول بالهاتف';
+
+  @override
+  String get loginWithEmail => 'تسجيل الدخول بالبريد الإلكتروني';
+
+  @override
   String get enterYourPassword => 'أدخل كلمة المرور الخاصة بك';
 
   @override
@@ -884,6 +881,18 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get support => 'الدعم';
+
+  @override
+  String get callSupport => 'الاتصال بالدعم';
+
+  @override
+  String get unableToMakeCall => 'تعذر إجراء المكالمة. يرجى التحقق من بطاقة SIM الخاصة بك.';
+
+  @override
+  String get callFailed => 'فشلت المكالمة. يرجى المحاولة مرة أخرى أو التحقق من إعدادات جهازك.';
+
+  @override
+  String get callingSupport => 'جاري الاتصال بالدعم...';
 
   @override
   String enterNumDigitCodeNumber(int num) {
@@ -915,15 +924,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmNewPassword => 'تأكيد كلمة المرور الجديدة';
 
   @override
-  String get nameAcceptsOnlyDashedAndCharacters =>
-      'الاسم الكامل يجب ان يحتوي فقط على الاحرف والمسافة والشرطة (-).';
+  String get nameAcceptsOnlyDashedAndCharacters => 'الاسم الكامل يجب ان يحتوي فقط على الاحرف والمسافة والشرطة (-).';
 
   @override
   String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين.';
 
   @override
-  String get pleaseReEnterYourNewPassword =>
-      'يرجى إعادة إدخال كلمة المرور الجديدة الخاصة بك.';
+  String get pleaseReEnterYourNewPassword => 'يرجى إعادة إدخال كلمة المرور الجديدة الخاصة بك.';
 
   @override
   String get clickBackAgainToExit => 'اضغط مرة أخرى للخروج';
@@ -932,8 +939,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thisFieldIsRequired => 'هذا الحقل مطلوب.';
 
   @override
-  String get fullNameShouldBeThreeLettersOrMore =>
-      'الاسم الكامل يجب أن يكون ثلاثة أحرف او اكثر.';
+  String get fullNameShouldBeThreeLettersOrMore => 'الاسم الكامل يجب أن يكون ثلاثة أحرف او اكثر.';
 
   @override
   String valueShouldBeNumAtelase(int num, String val) {
@@ -996,19 +1002,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get alert => 'تنبيه';
 
   @override
-  String get areYouSureYouWantToDeleteThisItem =>
-      'هل أنت متأكد أنك تريد حذف هذا العنصر؟';
+  String get areYouSureYouWantToDeleteThisItem => 'هل أنت متأكد أنك تريد حذف هذا العنصر؟';
 
   @override
-  String get areYouSureYouWantToClearAllItems =>
-      'هل أنت متأكد أنك تريد مسح جميع العناصر؟';
+  String get areYouSureYouWantToClearAllItems => 'هل أنت متأكد أنك تريد مسح جميع العناصر؟';
 
   @override
   String get areYouSureYouWantToLogout => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 
   @override
-  String get areYouSureYouWantToDeleteThisAccount =>
-      'هل أنت متأكد أنك تريد حذف هذا الحساب؟';
+  String get areYouSureYouWantToDeleteThisAccount => 'هل أنت متأكد أنك تريد حذف هذا الحساب؟';
 
   @override
   String get pressDoubleBackToExit => 'اضغط مرتين للخروج';
@@ -1020,8 +1023,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requestTimeOut => 'انتهت مهلة الطلب';
 
   @override
-  String get weakOrNoInternetConnection =>
-      'اتصال ضعيف أو لا يوجد اتصال بالإنترنت';
+  String get weakOrNoInternetConnection => 'اتصال ضعيف أو لا يوجد اتصال بالإنترنت';
 
   @override
   String get requestToServerWasCancelled => 'تم إلغاء الطلب إلى الخادم';
@@ -1051,8 +1053,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectMode => 'اختر الوضع';
 
   @override
-  String get singUpToExploreWideVarietyOfProducts =>
-      'سجل لاستكشاف مجموعة واسعة من المنتجات';
+  String get singUpToExploreWideVarietyOfProducts => 'سجل لاستكشاف مجموعة واسعة من المنتجات';
 
   @override
   String get fullName => 'الاسم الكامل';
@@ -1082,8 +1083,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get healthyPlan => 'خطة صحية';
 
   @override
-  String get thisPartHelpYouToBeMoreHealthy =>
-      'هذا الجزء يساعدك لتكون أكثر صحة';
+  String get thisPartHelpYouToBeMoreHealthy => 'هذا الجزء يساعدك لتكون أكثر صحة';
 
   @override
   String get setHealthPlan => 'تحديد الخطة الصحية';

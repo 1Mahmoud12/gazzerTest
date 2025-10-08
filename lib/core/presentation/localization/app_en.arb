@@ -327,11 +327,17 @@
   "or": "Or",
   "forgotPassword": "Forgot Password",
   "howToLogin": "How to Login?",
+  "loginWithPhone": "Login with Phone",
+  "loginWithEmail": "Login with Email",
   "enterYourPassword": "Enter Your Password",
   "otpVerification": "OTP Verification",
   "resendCode": "Resend Code",
   "anOTPhasBeenSentTo": "An OTP has been sent to",
   "support": "Support",
+  "callSupport": "Call Support",
+  "unableToMakeCall": "Unable to make a call. Please check your SIM card.",
+  "callFailed": "Call failed. Please try again or check your device settings.",
+  "callingSupport": "Calling support...",
   "enterNumDigitCodeNumber": "Enter {num}-Digit code number",
   "@enterNumDigitCodeNumber": {
     "placeholders": {

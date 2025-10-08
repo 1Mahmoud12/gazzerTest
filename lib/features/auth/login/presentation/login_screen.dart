@@ -35,8 +35,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
   final _pasword = TextEditingController();
-
-  final social = [Assets.assetsSvgFacebook, Assets.assetsSvgGoogle, Assets.assetsSvgApple];
+  bool loginByPhone = true;
+  final social = [
+    Assets.assetsSvgFacebook,
+    Assets.assetsSvgGoogle,
+    Assets.assetsSvgApple,
+  ];
 
   @override
   void dispose() {
@@ -69,7 +73,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ListView(
                     padding: AppConst.defaultHrPadding,
                     children: [
-                      Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+                      Center(
+                        child: SvgPicture.asset(
+                          Assets.assetsSvgCharacter,
+                          height: 130,
+                        ),
+                      ),
                       Row(
                         children: [
                           GradientText(
@@ -80,25 +89,79 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       const VerticalSpacing(16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            loginByPhone ? L10n.tr().loginWithPhone : L10n.tr().loginWithEmail,
+                            style: TStyle.blackSemi(16),
+                          ),
+                          Switch(
+                            value: !loginByPhone,
+                            onChanged: (value) {
+                              setState(() {
+                                loginByPhone = !value;
+                                _phoneController.clear();
+                              });
+                            },
+                            activeThumbColor: Co.purple,
+                            inactiveThumbColor: Co.grey,
+                            activeTrackColor: Co.purple.withAlpha(50),
+                            inactiveTrackColor: Co.grey.withAlpha(50),
+                          ),
+                        ],
+                      ),
+                      const VerticalSpacing(16),
+
                       AutofillGroup(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(L10n.tr().mobileNumber, maxLines: 1, style: TStyle.greySemi(16)),
-                            const VerticalSpacing(8),
-                            PhoneTextField(
-                              hasLabel: false,
-                              hasHint: true,
-                              controller: _phoneController,
-                              validator: (v, code) {
-                                if (code == 'EG') {
-                                  return Validators.mobileEGValidator(v);
-                                }
-                                return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
-                              },
-                            ),
+                            if (loginByPhone) ...[
+                              Text(
+                                L10n.tr().mobileNumber,
+                                maxLines: 1,
+                                style: TStyle.greySemi(16),
+                              ),
+                              const VerticalSpacing(8),
+                              PhoneTextField(
+                                hasLabel: false,
+                                hasHint: true,
+                                controller: _phoneController,
+                                validator: (v, code) {
+                                  if (code == 'EG') {
+                                    return Validators.mobileEGValidator(v);
+                                  }
+                                  return Validators.valueAtLeastNum(
+                                    v,
+                                    L10n.tr().mobileNumber,
+                                    6,
+                                  );
+                                },
+                                onChange: (value) {},
+                              ),
+                            ] else ...[
+                              Text(
+                                L10n.tr().emailAddress,
+                                maxLines: 1,
+                                style: TStyle.greySemi(16),
+                              ),
+                              const VerticalSpacing(8),
+                              MainTextField(
+                                controller: _phoneController,
+                                hintText: L10n.tr().enterYourFullEmail,
+                                bgColor: Colors.transparent,
+                                max: 250,
+                                validator: Validators.emailValidator,
+                                autofillHints: [AutofillHints.email],
+                              ),
+                            ],
                             const VerticalSpacing(16),
-                            Text(L10n.tr().password, maxLines: 1, style: TStyle.greySemi(16)),
+                            Text(
+                              L10n.tr().password,
+                              maxLines: 1,
+                              style: TStyle.greySemi(16),
+                            ),
                             const VerticalSpacing(8),
                             MainTextField(
                               controller: _pasword,
@@ -106,7 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               bgColor: Colors.transparent,
                               isPassword: true,
                               borderRadius: 32,
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 16,
+                              ),
                               validator: Validators.notEmpty,
                               autofillHints: [AutofillHints.newPassword],
                             ),
@@ -123,7 +189,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         listener: (context, state) {
                           if (state is LoginSuccessState) {
                             Alerts.showToast(state.message, error: false);
-                            const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
+                            const LoadingScreenRoute(
+                              navigateToRoute: HomeScreen.route,
+                            ).go(context);
                           } else if (state is LoginErrorState) {
                             Alerts.showToast(state.error);
                           }
@@ -135,12 +203,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               if (_formKey.currentState?.validate() == true) {
                                 TextInput.finishAutofillContext();
-                                context.read<LoginCubit>().login(_phoneController.text.trim(), _pasword.text.trim());
+                                context.read<LoginCubit>().login(
+                                  _phoneController.text.trim(),
+                                  _pasword.text.trim(),
+                                );
                               }
                             },
                             textStyle: TStyle.mainwSemi(15),
                             bgColor: Colors.transparent,
-                            child: GradientText(text: L10n.tr().login, style: TStyle.blackSemi(16)),
+                            child: GradientText(
+                              text: L10n.tr().login,
+                              style: TStyle.blackSemi(16),
+                            ),
                           ),
                         ),
                       ),
@@ -152,11 +226,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: OptionBtn(
                               onPressed: () {
                                 if (Navigator.canPop(context)) return context.pop();
-                                const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
+                                const LoadingScreenRoute(
+                                  navigateToRoute: HomeScreen.route,
+                                ).go(context);
                               },
                               textStyle: TStyle.mainwSemi(15),
                               bgColor: Colors.transparent,
-                              child: Text(L10n.tr().skip, style: TStyle.primarySemi(16)),
+                              child: Text(
+                                L10n.tr().skip,
+                                style: TStyle.primarySemi(16),
+                              ),
                             ),
                           ),
                           Expanded(
@@ -166,7 +245,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               textStyle: TStyle.mainwSemi(15),
                               bgColor: Colors.transparent,
-                              child: Text(L10n.tr().signUp, style: TStyle.primarySemi(16)),
+                              child: Text(
+                                L10n.tr().signUp,
+                                style: TStyle.primarySemi(16),
+                              ),
                             ),
                           ),
                         ],

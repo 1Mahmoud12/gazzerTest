@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -23,7 +24,11 @@ part 'verify_otp_screen.g.dart';
 @TypedGoRoute<VerifyOTPScreenRoute>(path: VerifyOTPScreen.route)
 @immutable
 class VerifyOTPScreenRoute extends GoRouteData with _$VerifyOTPScreenRoute {
-  const VerifyOTPScreenRoute({required this.$extra, required this.initPhone, required this.data});
+  const VerifyOTPScreenRoute({
+    required this.$extra,
+    required this.initPhone,
+    required this.data,
+  });
   final (VerifyRepo repo, Function(BuildContext ctx) onSuccess) $extra;
   final String initPhone;
   final String data;
@@ -120,7 +125,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
           child: ListView(
             padding: AppConst.defaultHrPadding,
             children: [
-              Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+              Center(
+                child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
+              ),
               Row(
                 children: [
                   GradientText(
@@ -154,7 +161,10 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                             return ChangePhoneNumberSheet(
                               initialPhone: phoneNumber,
                               onConfirm: (val) async {
-                                final res = await repo.onChangePhone(val, widget.data);
+                                final res = await repo.onChangePhone(
+                                  val,
+                                  widget.data,
+                                );
                                 switch (res) {
                                   case Ok<String> ok:
                                     Alerts.showToast(ok.value, error: false);
@@ -173,12 +183,21 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           },
                         );
                       },
-                      child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
+                      child: Text(
+                        L10n.tr().wrongNumber,
+                        style: TStyle.primaryBold(14),
+                      ),
                     ),
                 ],
               ),
               const VerticalSpacing(24),
-              OtpWidget(controller: otpCont, count: 6, width: 60, height: 50, spacing: 8),
+              OtpWidget(
+                controller: otpCont,
+                count: 6,
+                width: 60,
+                height: 50,
+                spacing: 8,
+              ),
               const VerticalSpacing(24),
               Row(
                 children: [
@@ -195,7 +214,13 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                         return Row(
                           mainAxisAlignment: value ? MainAxisAlignment.center : MainAxisAlignment.end,
                           children: [
-                            !value ? child! : const SizedBox(height: 32, width: 32, child: AdaptiveProgressIndicator()),
+                            !value
+                                ? child!
+                                : const SizedBox(
+                                    height: 32,
+                                    width: 32,
+                                    child: AdaptiveProgressIndicator(),
+                                  ),
                           ],
                         );
                       },
@@ -209,7 +234,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                             child: Text(
                               finished ? L10n.tr().resendCode : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
                               textAlign: TextAlign.end,
-                              style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
+                              style: TStyle.primarySemi(16).copyWith(
+                                color: finished ? Co.purple : Co.tertiary,
+                              ),
                             ),
                           );
                         },
@@ -221,21 +248,32 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
               ),
               ValueListenableBuilder(
                 valueListenable: showSupport,
-                builder: (context, value, child) => AnimatedScale(scale: value ? 1 : 0, duration: Durations.short4, child: child),
+                builder: (context, value, child) => AnimatedScale(
+                  scale: value ? 1 : 0,
+                  duration: Durations.short4,
+                  child: child,
+                ),
                 child: Column(
                   children: [
                     const Divider(),
                     Row(
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () => Helpers.callSupport(context),
                           style: TextButton.styleFrom(padding: EdgeInsets.zero),
                           child: Row(
                             spacing: 12,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.wifi_calling_3, size: 32, color: Co.purple),
-                              Text(L10n.tr().support),
+                              const Icon(
+                                Icons.phone,
+                                size: 32,
+                                color: Co.purple,
+                              ),
+                              Text(
+                                L10n.tr().callSupport,
+                                style: TStyle.primarySemi(16),
+                              ),
                             ],
                           ),
                         ),
@@ -253,7 +291,9 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     isLoading: value,
                     onPressed: () async {
                       if (_formKey.currentState?.validate() != true) {
-                        return Alerts.showToast(L10n.tr().valueMustBeNum(6, L10n.tr().code));
+                        return Alerts.showToast(
+                          L10n.tr().valueMustBeNum(6, L10n.tr().code),
+                        );
                       }
                       isSubmitting.value = true;
                       final res = await repo.verify(otpCont.text, widget.data);
@@ -271,7 +311,10 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     },
                     textStyle: TStyle.mainwSemi(15),
                     bgColor: Colors.transparent,
-                    child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
+                    child: GradientText(
+                      text: L10n.tr().continu,
+                      style: TStyle.blackSemi(16),
+                    ),
                   ),
                 ),
               ),

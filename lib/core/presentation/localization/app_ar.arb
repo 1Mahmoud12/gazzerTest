@@ -327,10 +327,16 @@
   "register": "إنشاء حساب",
   "forgotPassword": "نسيت كلمة المرور",
   "howToLogin": "كيف تريد تسجيل الدخول؟",
+  "loginWithPhone": "تسجيل الدخول بالهاتف",
+  "loginWithEmail": "تسجيل الدخول بالبريد الإلكتروني",
   "enterYourPassword": "أدخل كلمة المرور الخاصة بك",
   "resendCode": "إعادة إرسال الرمز",
   "otpVerification": "التحقق من رمز OTP",
   "anOTPhasBeenSentTo": "تم إرسال رمز OTP إلى",
+  "callSupport": "الاتصال بالدعم",
+  "unableToMakeCall": "تعذر إجراء المكالمة. يرجى التحقق من بطاقة SIM الخاصة بك.",
+  "callFailed": "فشلت المكالمة. يرجى المحاولة مرة أخرى أو التحقق من إعدادات جهازك.",
+  "callingSupport": "جاري الاتصال بالدعم...",
   "enterNumDigitCodeNumber": "أدخل الرمز المكون من {num} أرقام",
   "@enterNumDigitCodeNumber": {
     "placeholders": {

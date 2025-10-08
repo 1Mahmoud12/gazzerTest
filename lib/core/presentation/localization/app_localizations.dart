@@ -1778,6 +1778,18 @@ abstract class AppLocalizations {
   /// **'How to Login?'**
   String get howToLogin;
 
+  /// No description provided for @loginWithPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Phone'**
+  String get loginWithPhone;
+
+  /// No description provided for @loginWithEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Email'**
+  String get loginWithEmail;
+
   /// No description provided for @enterYourPassword.
   ///
   /// In en, this message translates to:
@@ -1807,6 +1819,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Support'**
   String get support;
+
+  /// No description provided for @callSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Call Support'**
+  String get callSupport;
+
+  /// No description provided for @unableToMakeCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to make a call. Please check your SIM card.'**
+  String get unableToMakeCall;
+
+  /// No description provided for @callFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Call failed. Please try again or check your device settings.'**
+  String get callFailed;
+
+  /// No description provided for @callingSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Calling support...'**
+  String get callingSupport;
 
   /// No description provided for @enterNumDigitCodeNumber.
   ///

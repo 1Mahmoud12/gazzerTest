@@ -49,7 +49,10 @@ dependencies:
   package_info_plus: ^9.0.0
   shorebird_code_push: ^2.0.5
   # upgrader: ^11.4.0
-  # url_launcher: ^6.3.1
+
+  #phone
+  url_launcher: ^6.3.1
+  permission_handler: ^12.0.1
 
   #API
   dio: ^5.9.0

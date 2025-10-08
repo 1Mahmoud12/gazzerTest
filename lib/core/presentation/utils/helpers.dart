@@ -1,6 +1,8 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/support_call.dart';
 
 abstract class Helpers {
   static Future customTryCatch(Future Function() func) async {
@@ -50,7 +52,23 @@ abstract class Helpers {
   /// used mainly to form the delivery time range
   /// [edge] must be value between 0-1, [value] must be positive
   static String convertIntToRange(int value, double edge) {
-    assert(value >= 0 && edge > 0 && edge < 1, 'Value must be positive and edge must be between 0 and 1');
+    assert(
+      value >= 0 && edge > 0 && edge < 1,
+      'Value must be positive and edge must be between 0 and 1',
+    );
     return '${(value * (1 - edge)).floor()} - ${(value * 1.3).ceil()} ';
+  }
+
+  /// Call support with comprehensive error handling
+  /// Handles all scenarios: SIM availability, permissions, airplane mode, dual SIM, call cancellation
+  /// Returns true if call was initiated successfully
+  static Future<bool> callSupport(BuildContext context) async {
+    return await SupportCallService.callSupport(context);
+  }
+
+  /// Show dialog with call options (useful for dual SIM devices)
+  /// This allows users to see the number before calling
+  static void showCallOptionsDialog(BuildContext context) {
+    SupportCallService.showCallOptionsDialog(context);
   }
 }
