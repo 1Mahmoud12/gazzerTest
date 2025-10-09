@@ -1844,6 +1844,24 @@ abstract class AppLocalizations {
   /// **'Calling support...'**
   String get callingSupport;
 
+  /// No description provided for @deviceInAirplaneMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Your device is in airplane mode. Please disable airplane mode to make calls.'**
+  String get deviceInAirplaneMode;
+
+  /// No description provided for @noSimCardDetected.
+  ///
+  /// In en, this message translates to:
+  /// **'No SIM card detected. Please insert a SIM card to make calls.'**
+  String get noSimCardDetected;
+
+  /// No description provided for @simCardNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'SIM card is not ready. Please check your SIM card.'**
+  String get simCardNotReady;
+
   /// No description provided for @enterNumDigitCodeNumber.
   ///
   /// In en, this message translates to:

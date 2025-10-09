@@ -12,38 +12,35 @@ import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_events.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class SmartCartWidget extends StatelessWidget {
   const SmartCartWidget({
     super.key,
-    required this.product,
+    required this.id,
+    required this.type,
+    required this.outOfStock,
     required this.cartBus,
   });
 
-  final GenericItemEntity product;
+  final int id;
+  final CartItemType type;
+  final bool outOfStock;
   final CartBus cartBus;
 
   /// Check if item is in cart
   bool _isInCart() {
-    final type = _getItemType();
-    return cartBus.cartIds[type]?.contains(product.id) ?? false;
-  }
-
-  /// Get cart item type (plate or product)
-  CartItemType _getItemType() {
-    return product is PlateEntity ? CartItemType.plate : CartItemType.product;
+    return cartBus.cartIds[type]?.contains(id) ?? false;
   }
 
   /// Get current quantity from cart
   int _getQuantity() {
-    return cartBus.cartItems.firstWhereOrNull((item) => item.prod.id == product.id)?.quantity ?? 0;
+    return cartBus.cartItems.firstWhereOrNull((item) => item.prod.id == id)?.quantity ?? 0;
   }
 
   /// Get cart item entity
   CartItemEntity? _getCartItem() {
     return cartBus.cartItems.firstWhereOrNull(
-      (item) => item.prod.id == product.id,
+      (item) => item.prod.id == id,
     );
   }
 
@@ -51,11 +48,11 @@ class SmartCartWidget extends StatelessWidget {
   void _addToCart() {
     final req = CartableItemRequest(
       cartItemId: null,
-      id: product.id,
+      id: id,
       quantity: 1,
       note: null,
       options: {},
-      type: _getItemType(),
+      type: type,
     );
     cartBus.addToCart(req);
   }
@@ -91,7 +88,7 @@ class SmartCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return product.outOfStock
+    return outOfStock
         ? Center(
             child: SizedBox(
               height: 30,
@@ -119,7 +116,7 @@ class SmartCartWidget extends StatelessWidget {
     return StreamBuilder(
       stream: cartBus.getStream<FastItemActionsLoading>(),
       builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data!.prodId == product.id) {
+        if (snapshot.hasData && snapshot.data!.prodId == id) {
           return _buildLoadingIndicator();
         }
         return _buildAddButton();
@@ -132,7 +129,7 @@ class SmartCartWidget extends StatelessWidget {
     return StreamBuilder(
       stream: cartBus.getStream<FastItemActionsLoading>(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active && product.id == snapshot.data!.prodId) {
+        if (snapshot.connectionState == ConnectionState.active && id == snapshot.data!.prodId) {
           return _buildLoadingIndicator();
         }
         return _buildQuantityControls();

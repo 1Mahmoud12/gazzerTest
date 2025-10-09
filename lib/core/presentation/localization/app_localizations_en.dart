@@ -895,6 +895,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get callingSupport => 'Calling support...';
 
   @override
+  String get deviceInAirplaneMode => 'Your device is in airplane mode. Please disable airplane mode to make calls.';
+
+  @override
+  String get noSimCardDetected => 'No SIM card detected. Please insert a SIM card to make calls.';
+
+  @override
+  String get simCardNotReady => 'SIM card is not ready. Please check your SIM card.';
+
+  @override
   String enterNumDigitCodeNumber(int num) {
     return 'Enter $num-Digit code number';
   }

@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -893,6 +893,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get callingSupport => 'جاري الاتصال بالدعم...';
+
+  @override
+  String get deviceInAirplaneMode => 'جهازك في وضع الطيران. يرجى تعطيل وضع الطيران لإجراء المكالمات.';
+
+  @override
+  String get noSimCardDetected => 'لم يتم اكتشاف بطاقة SIM. يرجى إدخال بطاقة SIM لإجراء المكالمات.';
+
+  @override
+  String get simCardNotReady => 'بطاقة SIM غير جاهزة. يرجى التحقق من بطاقة SIM الخاصة بك.';
 
   @override
   String enterNumDigitCodeNumber(int num) {

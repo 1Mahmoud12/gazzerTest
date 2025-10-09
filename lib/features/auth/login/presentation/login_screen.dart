@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _phoneController.clear();
                               });
                             },
-                            activeColor: Co.purple,
+                            activeThumbColor: Co.purple,
                             inactiveThumbColor: Co.grey,
                             activeTrackColor: Co.purple.withAlpha(50),
                             inactiveTrackColor: Co.grey.withAlpha(50),

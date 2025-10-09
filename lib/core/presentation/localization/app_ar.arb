@@ -337,6 +337,9 @@
   "unableToMakeCall": "تعذر إجراء المكالمة. يرجى التحقق من بطاقة SIM الخاصة بك.",
   "callFailed": "فشلت المكالمة. يرجى المحاولة مرة أخرى أو التحقق من إعدادات جهازك.",
   "callingSupport": "جاري الاتصال بالدعم...",
+  "deviceInAirplaneMode": "جهازك في وضع الطيران. يرجى تعطيل وضع الطيران لإجراء المكالمات.",
+  "noSimCardDetected": "لم يتم اكتشاف بطاقة SIM. يرجى إدخال بطاقة SIM لإجراء المكالمات.",
+  "simCardNotReady": "بطاقة SIM غير جاهزة. يرجى التحقق من بطاقة SIM الخاصة بك.",
   "enterNumDigitCodeNumber": "أدخل الرمز المكون من {num} أرقام",
   "@enterNumDigitCodeNumber": {
     "placeholders": {

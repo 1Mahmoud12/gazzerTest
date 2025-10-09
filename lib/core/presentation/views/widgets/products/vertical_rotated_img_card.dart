@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
@@ -96,7 +97,9 @@ class VerticalRotatedImgCard extends StatelessWidget {
                           Align(
                             alignment: AlignmentDirectional.center,
                             child: SmartCartWidget(
-                              product: prod,
+                              id: prod.id,
+                              type: prod is PlateEntity ? CartItemType.plate : CartItemType.product,
+                              outOfStock: prod.outOfStock,
                               cartBus: di<CartBus>(),
                             ),
                           ),

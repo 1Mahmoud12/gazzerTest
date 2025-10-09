@@ -20,3 +20,17 @@ flutter pub get
 flutter build apk
 open build/app/outputs/flutter-apk/
 ```
+
+```shell
+flutter clean 
+flutter pub get
+cd ios
+rm podfile.lock
+rm -rf pods
+rm -rf .symlinks
+pod install
+open .
+cd ..
+flutter build appbundle
+open build/app/outputs/bundle/release/
+```

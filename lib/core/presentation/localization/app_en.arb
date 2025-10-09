@@ -338,6 +338,9 @@
   "unableToMakeCall": "Unable to make a call. Please check your SIM card.",
   "callFailed": "Call failed. Please try again or check your device settings.",
   "callingSupport": "Calling support...",
+  "deviceInAirplaneMode": "Your device is in airplane mode. Please disable airplane mode to make calls.",
+  "noSimCardDetected": "No SIM card detected. Please insert a SIM card to make calls.",
+  "simCardNotReady": "SIM card is not ready. Please check your SIM card.",
   "enterNumDigitCodeNumber": "Enter {num}-Digit code number",
   "@enterNumDigitCodeNumber": {
     "placeholders": {

@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -16,6 +18,10 @@ import 'package:url_launcher/url_launcher.dart';
 /// Comprehensive Support Call Service
 /// Handles all call scenarios including SIM detection, permissions, and errors
 class SupportCallService {
+  static const MethodChannel _channel = MethodChannel(
+    'com.gazzer/device_state',
+  );
+
   /// Main method to initiate a support call
   /// Returns true if call was initiated successfully, false otherwise
   static Future<bool> callSupport(BuildContext context) async {
@@ -26,7 +32,23 @@ class SupportCallService {
         return false;
       }
 
-      // Step 2: Check phone permission (Android only)
+      // Step 2: Check airplane mode
+      final isAirplaneModeOn = await _checkAirplaneMode();
+      if (isAirplaneModeOn && context.mounted) {
+        Alerts.showToast(L10n.tr().deviceInAirplaneMode);
+        return false;
+      }
+
+      // Step 3: Check SIM card status (Android only)
+      if (Platform.isAndroid) {
+        final simStatus = await _checkSimCardStatus();
+        if (!simStatus && context.mounted) {
+          Alerts.showToast(L10n.tr().noSimCardDetected);
+          return false;
+        }
+      }
+
+      // Step 4: Check phone permission (Android only)
       if (Platform.isAndroid) {
         final hasPermission = await _checkPhonePermission(context);
         if (!hasPermission) {
@@ -34,7 +56,7 @@ class SupportCallService {
         }
       }
 
-      // Step 3: Attempt to make the call
+      // Step 5: Attempt to make the call
       return await _makeCall(context, AppConst.supportPhoneNumber);
     } catch (e) {
       if (kDebugMode) {
@@ -42,6 +64,53 @@ class SupportCallService {
       }
       Alerts.showToast(L10n.tr().callFailed);
       return false;
+    }
+  }
+
+  /// Check if device is in airplane mode
+  static Future<bool> _checkAirplaneMode() async {
+    try {
+      final connectivityResult = await Connectivity().checkConnectivity();
+
+      // If there's no connectivity at all, it might be airplane mode
+      // However, connectivity_plus can't definitively detect airplane mode
+      // So we use platform channels for a more accurate check on Android
+      if (Platform.isAndroid) {
+        try {
+          final result = await _channel.invokeMethod<bool>('isAirplaneModeOn');
+          return result ?? false;
+        } catch (e) {
+          // Fallback: if no network connectivity, assume possible airplane mode
+          if (kDebugMode) {
+            print('Platform channel failed, using fallback: $e');
+          }
+          return connectivityResult.contains(ConnectivityResult.none);
+        }
+      }
+
+      // For iOS, check if there's no connectivity
+      return connectivityResult.contains(ConnectivityResult.none);
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error checking airplane mode: $e');
+      }
+      // If we can't check, assume it's not in airplane mode to allow call attempt
+      return false;
+    }
+  }
+
+  /// Check SIM card status (Android only)
+  static Future<bool> _checkSimCardStatus() async {
+    try {
+      // Use platform channel to check SIM card state
+      final result = await _channel.invokeMethod<bool>('hasSimCard');
+      return result ?? true; // Default to true if check fails
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error checking SIM card status: $e');
+      }
+      // If we can't check, assume SIM is present to allow call attempt
+      return true;
     }
   }
 
