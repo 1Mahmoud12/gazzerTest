@@ -19,4 +19,8 @@ class OfferEntity {
       _ => price, // No discount
     };
   }
+
+  bool isExpired() {
+    return expiredAt != null && DateTime.now().isAfter(DateTime.parse(expiredAt!));
+  }
 }

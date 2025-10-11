@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/smart_cart_widget.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
@@ -32,6 +36,7 @@ class VerticalProductCard extends StatelessWidget {
             child: CustomPaint(
               painter: ProductShapePaint(),
               child: Stack(
+                alignment: AlignmentDirectional.bottomCenter,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,43 +95,59 @@ class VerticalProductCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: Grad().radialGradient,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          bottomRight: Radius.circular(12),
-                        ),
-                      ),
-                      child: DecoratedBox(
+                  Row(
+                    children: [
+                      DecoratedBox(
                         decoration: BoxDecoration(
-                          gradient: Grad().linearGradient,
+                          gradient: Grad().radialGradient,
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(12),
                             bottomRight: Radius.circular(12),
                           ),
                         ),
-                        child: canAdd
-                            ? InkWell(
-                                onTap: () {
-                                  SystemSound.play(SystemSoundType.click);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(6),
-                                  child: Icon(Icons.add, color: Co.second2, size: 24 * fontFactor),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: Grad().linearGradient,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              bottomRight: Radius.circular(12),
+                            ),
+                          ),
+                          child: canAdd
+                              ? InkWell(
+                                  onTap: () {
+                                    SystemSound.play(SystemSoundType.click);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6),
+                                    child: Icon(Icons.add, color: Co.second2, size: 24 * fontFactor),
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Text(
+                                    "${product.offer?.discount}${product.offer?.discountType == DiscountType.percentage ? "%" : ""}\n${(product.offer?.isExpired() ?? false) ? "On" : "OFF"}",
+                                    style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary),
+                                  ),
                                 ),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Text(
-                                  "40%\nOFF",
-                                  style: TStyle.mainwBold(11 * fontFactor).copyWith(color: Co.secondary),
-                                ),
-                              ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SmartCartWidget(
+                              id: product.id,
+                              type: product is PlateEntity ? CartItemType.plate : CartItemType.product,
+                              outOfStock: product.outOfStock,
+                              cartBus: di<CartBus>(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                    ],
                   ),
                 ],
               ),

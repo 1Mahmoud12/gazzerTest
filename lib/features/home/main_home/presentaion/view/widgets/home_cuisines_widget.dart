@@ -37,7 +37,7 @@ class _HomeTopVendorsWidget extends StatelessWidget {
                       children: [
                         CircleGradientBorderedImage(image: vendor!.image),
                         Text(
-                          "${vendor.name} ${vendor.name}",
+                          vendor.name,
                           style: TStyle.blackBold(12),
                           textAlign: TextAlign.center,
                         ),
@@ -48,6 +48,7 @@ class _HomeTopVendorsWidget extends StatelessWidget {
                 },
               ),
             ),
+            const VerticalSpacing(12),
             if (vendors.length > 6) ...[
               const SizedBox.shrink(),
               SizedBox(
