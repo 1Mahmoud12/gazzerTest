@@ -1126,4 +1126,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get outOfStock => 'Out of Stock';
+
+  @override
+  String get fullNameIsRequired => 'Full name is required';
+
+  @override
+  String get phoneMustStartWithZero => 'Phone number must start with 0';
+
+  @override
+  String get phoneMustBeElevenDigits => 'Phone number must be exactly 11 digits';
+
+  @override
+  String get phoneMustContainOnlyDigits => 'Phone number must contain only digits';
 }

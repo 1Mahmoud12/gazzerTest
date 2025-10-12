@@ -449,5 +449,9 @@
   "angry": "Angry",
   "excited": "Excited",
   "bored": "Bored",
-  "outOfStock": "Out of Stock"
+  "outOfStock": "Out of Stock",
+  "fullNameIsRequired": "Full name is required",
+  "phoneMustStartWithZero": "Phone number must start with 0",
+  "phoneMustBeElevenDigits": "Phone number must be exactly 11 digits",
+  "phoneMustContainOnlyDigits": "Phone number must contain only digits"
 }

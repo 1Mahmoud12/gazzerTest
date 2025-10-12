@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/extensions/exports.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -87,6 +88,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             hintText: L10n.tr().yourFullName,
                             bgColor: Colors.white,
                             showBorder: false,
+
                             validator: (v) {
                               return Validators.dashedCharactersOnly(v) ??
                                   Validators.valueAtLeastNum(
@@ -121,6 +123,9 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             hintText: L10n.tr().emailAddress,
                             bgColor: Colors.white,
                             showBorder: false,
+                            inputFormatters: FilteringTextInputFormatter.deny(
+                              RegExp(r'\s'),
+                            ),
                             validator: (v) {
                               if (v?.trim().isNotEmpty != true) return null;
                               return Validators.emailValidator(v);
@@ -154,10 +159,25 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             showBorder: false,
                             code: "EG",
                             validator: (v, code) {
-                              if (code == 'EG') {
-                                return Validators.mobileEGValidator(v);
+                              // if (code == 'EG') {
+                              //   return Validators.mobileEGValidator(v);
+                              // }
+                              if (v == null || v.isEmpty) {
+                                return L10n.tr().enterYourMobileNumber;
                               }
-                              return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
+                              // Check if phone starts with 0 and is exactly 11 digits
+                              if (!v.startsWith('0')) {
+                                return L10n.tr().phoneMustStartWithZero;
+                              }
+                              if (v.length != 11) {
+                                return L10n.tr().phoneMustBeElevenDigits;
+                              }
+                              // Check if all characters are digits
+                              if (!RegExp(r'^\d+$').hasMatch(v)) {
+                                return L10n.tr().phoneMustContainOnlyDigits;
+                              }
+                              return null;
+                              //  return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
                             },
                           ),
                         ],
@@ -175,7 +195,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
               final req = UpdateProfileReq(
                 name: _nameController.text.trim(),
                 email: _emailController.text.trim(),
-                phone: _phoneController.text.trim(),
+                phone: _phoneController.text.trim().removeCharAt(0),
               );
               context.pop(req);
             },

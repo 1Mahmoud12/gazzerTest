@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_multi_formatter/extensions/exports.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -25,7 +26,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -76,56 +76,74 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               const VerticalSpacing(24),
               AutofillGroup(
-                child: Form(
-                  key: _emailKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(L10n.tr().fullName, style: TStyle.blackBold(20)),
-                      const VerticalSpacing(8),
-                      MainTextField(
-                        controller: _nameController,
-                        hintText: L10n.tr().yourFullName,
-                        bgColor: Colors.transparent,
-                        max: 250,
-                        autofillHints: [
-                          AutofillHints.username,
-                          AutofillHints.name,
-                        ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(L10n.tr().fullName, style: TStyle.blackBold(20)),
+                    const VerticalSpacing(8),
+                    MainTextField(
+                      controller: _nameController,
+                      hintText: L10n.tr().yourFullName,
+                      bgColor: Colors.transparent,
+                      max: 250,
+                      autofillHints: [
+                        AutofillHints.username,
+                        AutofillHints.name,
+                      ],
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return L10n.tr().fullNameIsRequired;
+                        }
+                        return null;
+                      },
+                    ),
+                    const VerticalSpacing(24),
+                    Text(L10n.tr().emailAddress, style: TStyle.blackBold(20)),
+                    const VerticalSpacing(8),
+                    MainTextField(
+                      controller: _emailController,
+                      hintText: L10n.tr().enterYourFullEmail,
+                      bgColor: Colors.transparent,
+                      max: 250,
+                      inputFormatters: FilteringTextInputFormatter.deny(
+                        RegExp(r'\s'),
                       ),
-                      const VerticalSpacing(24),
-                      Text(L10n.tr().emailAddress, style: TStyle.blackBold(20)),
-                      const VerticalSpacing(8),
-                      MainTextField(
-                        controller: _emailController,
-                        hintText: L10n.tr().enterYourFullEmail,
-                        bgColor: Colors.transparent,
-                        max: 250,
-                        validator: Validators.emailValidator,
-                        autofillHints: [AutofillHints.email],
-                      ),
-                      const VerticalSpacing(24),
-                      Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
-                      const VerticalSpacing(8),
-                      PhoneTextField(
-                        controller: _phoneController,
-                        hasLabel: false,
-                        hasHint: true,
-                        code: countryCode,
-                        validator: (v, code) {
-                          countryCode = code;
-                          if (code == 'EG') {
-                            return Validators.mobileEGValidator(v);
-                          }
-                          return Validators.valueAtLeastNum(
-                            v,
-                            L10n.tr().mobileNumber,
-                            6,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                      validator: (value) {
+                        if (value != null && value.isNotEmpty) {
+                          return Validators.emailValidator(value.trim());
+                        }
+                        return null;
+                      },
+                      autofillHints: [AutofillHints.email],
+                    ),
+                    const VerticalSpacing(24),
+                    Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
+                    const VerticalSpacing(8),
+                    PhoneTextField(
+                      controller: _phoneController,
+                      hasLabel: false,
+                      hasHint: true,
+                      code: countryCode,
+                      validator: (v, code) {
+                        countryCode = code;
+                        if (v == null || v.isEmpty) {
+                          return L10n.tr().enterYourMobileNumber;
+                        }
+                        // Check if phone starts with 0 and is exactly 11 digits
+                        if (!v.startsWith('0')) {
+                          return L10n.tr().phoneMustStartWithZero;
+                        }
+                        if (v.length != 11) {
+                          return L10n.tr().phoneMustBeElevenDigits;
+                        }
+                        // Check if all characters are digits
+                        if (!RegExp(r'^\d+$').hasMatch(v)) {
+                          return L10n.tr().phoneMustContainOnlyDigits;
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
                 ),
               ),
               const VerticalSpacing(24),
@@ -134,15 +152,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 tag: Tags.btn,
                 child: OptionBtn(
                   onPressed: () {
-                    if (_formKey.currentState?.validate() == true) {
+                    if (_formKey.currentState!.validate()) {
                       TextInput.finishAutofillContext();
                       context.push(
                         CreatePasswordScreen.routeWithExtra,
                         extra: RegisterRequest(
-                          name: _nameController.text,
+                          name: _nameController.text.trim(),
                           countryIso: countryCode,
-                          phone: _phoneController.text,
-                          email: _emailController.text,
+                          phone: _phoneController.text.trim().removeCharAt(0),
+                          email: _emailController.text.trim(),
                           password: '',
                           passwordConfirmation: '',
                         ),

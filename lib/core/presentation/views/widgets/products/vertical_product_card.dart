@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -133,19 +134,20 @@ class VerticalProductCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SmartCartWidget(
-                              id: product.id,
-                              type: product is PlateEntity ? CartItemType.plate : CartItemType.product,
-                              outOfStock: product.outOfStock,
-                              cartBus: di<CartBus>(),
-                            ),
-                          ],
+                      if (Session().client != null)
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SmartCartWidget(
+                                id: product.id,
+                                type: product is PlateEntity ? CartItemType.plate : CartItemType.product,
+                                outOfStock: product.outOfStock,
+                                cartBus: di<CartBus>(),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       const SizedBox(width: 16),
                     ],
                   ),

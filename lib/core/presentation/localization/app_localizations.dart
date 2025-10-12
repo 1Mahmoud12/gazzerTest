@@ -2293,6 +2293,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Out of Stock'**
   String get outOfStock;
+
+  /// No description provided for @fullNameIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name is required'**
+  String get fullNameIsRequired;
+
+  /// No description provided for @phoneMustStartWithZero.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must start with 0'**
+  String get phoneMustStartWithZero;
+
+  /// No description provided for @phoneMustBeElevenDigits.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must be exactly 11 digits'**
+  String get phoneMustBeElevenDigits;
+
+  /// No description provided for @phoneMustContainOnlyDigits.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must contain only digits'**
+  String get phoneMustContainOnlyDigits;
 }
 
 class _AppLocalizationsDelegate

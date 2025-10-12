@@ -450,5 +450,9 @@
   "angry": "غاضب",
   "excited": "متحمس",
   "bored": "ممل",
-  "outOfStock": "غير متوفر في المخزون"
+  "outOfStock": "غير متوفر في المخزون",
+  "fullNameIsRequired": "الاسم الكامل مطلوب",
+  "phoneMustStartWithZero": "رقم الهاتف يجب أن يبدأ بـ 0",
+  "phoneMustBeElevenDigits": "رقم الهاتف يجب أن يكون 11 رقماً بالضبط",
+  "phoneMustContainOnlyDigits": "رقم الهاتف يجب أن يحتوي على أرقام فقط"
 }

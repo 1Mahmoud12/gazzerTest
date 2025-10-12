@@ -1126,4 +1126,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get outOfStock => 'غير متوفر في المخزون';
+
+  @override
+  String get fullNameIsRequired => 'الاسم الكامل مطلوب';
+
+  @override
+  String get phoneMustStartWithZero => 'رقم الهاتف يجب أن يبدأ بـ 0';
+
+  @override
+  String get phoneMustBeElevenDigits => 'رقم الهاتف يجب أن يكون 11 رقماً بالضبط';
+
+  @override
+  String get phoneMustContainOnlyDigits => 'رقم الهاتف يجب أن يحتوي على أرقام فقط';
 }
