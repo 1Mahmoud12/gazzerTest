@@ -11,7 +11,7 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show PhoneTextField, MainTextField;
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show MainTextField;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -33,9 +33,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _phoneController = TextEditingController();
+  final _phoneOrEmailController = TextEditingController();
   final _pasword = TextEditingController();
-  bool loginByPhone = true;
+  TextInputFormatter? _inputFormatter;
   final social = [
     Assets.assetsSvgFacebook,
     Assets.assetsSvgGoogle,
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     _pasword.dispose();
-    _phoneController.dispose();
+    _phoneOrEmailController.dispose();
     super.dispose();
   }
 
@@ -88,74 +88,102 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                      const VerticalSpacing(16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            loginByPhone ? L10n.tr().loginWithPhone : L10n.tr().loginWithEmail,
-                            style: TStyle.blackSemi(16),
-                          ),
-                          Switch(
-                            value: !loginByPhone,
-                            onChanged: (value) {
-                              setState(() {
-                                loginByPhone = !value;
-                                _phoneController.clear();
-                              });
-                            },
-                            activeColor: Co.purple,
-                            inactiveThumbColor: Co.grey,
-                            activeTrackColor: Co.purple.withAlpha(50),
-                            inactiveTrackColor: Co.grey.withAlpha(50),
-                          ),
-                        ],
-                      ),
+                      // const VerticalSpacing(16),
+                      // Text(
+                      //   L10n.tr().howToLogin,
+                      //   style: TStyle.blackSemi(16),
+                      // ),
                       const VerticalSpacing(16),
 
                       AutofillGroup(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (loginByPhone) ...[
-                              Text(
-                                L10n.tr().mobileNumber,
-                                maxLines: 1,
-                                style: TStyle.greySemi(16),
-                              ),
-                              const VerticalSpacing(8),
-                              PhoneTextField(
-                                hasLabel: false,
-                                hasHint: true,
-                                controller: _phoneController,
-                                validator: (v, code) {
-                                  if (code == 'EG') {
-                                    return Validators.mobileEGValidator(v);
+                            Text(
+                              '${L10n.tr().mobileNumber} / ${L10n.tr().emailAddress}',
+                              maxLines: 1,
+                              style: TStyle.greySemi(16),
+                            ),
+                            const VerticalSpacing(8),
+                            MainTextField(
+                              controller: _phoneOrEmailController,
+                              hintText: '${L10n.tr().mobileNumber} / ${L10n.tr().emailAddress}',
+                              bgColor: Colors.transparent,
+                              max: 250,
+                              inputFormatters: _inputFormatter,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return L10n.tr().thisFieldIsRequired;
+                                }
+
+                                final trimmedValue = value.trim();
+
+                                // Check if first character is a digit (phone number)
+                                if (RegExp(r'^\d').hasMatch(trimmedValue)) {
+                                  // Phone validation
+                                  if (!trimmedValue.startsWith('0')) {
+                                    return L10n.tr().phoneMustStartWithZero;
                                   }
-                                  return Validators.valueAtLeastNum(
-                                    v,
-                                    L10n.tr().mobileNumber,
-                                    6,
+                                  if (trimmedValue.length != 11) {
+                                    return L10n.tr().phoneMustBeElevenDigits;
+                                  }
+                                  if (!RegExp(
+                                    r'^\d+$',
+                                  ).hasMatch(trimmedValue)) {
+                                    return L10n.tr().phoneMustContainOnlyDigits;
+                                  }
+                                  return null;
+                                } else {
+                                  // Email validation
+                                  return Validators.emailValidator(
+                                    trimmedValue,
                                   );
-                                },
-                                onChange: (value) {},
-                              ),
-                            ] else ...[
-                              Text(
-                                L10n.tr().emailAddress,
-                                maxLines: 1,
-                                style: TStyle.greySemi(16),
-                              ),
-                              const VerticalSpacing(8),
-                              MainTextField(
-                                controller: _phoneController,
-                                hintText: L10n.tr().enterYourFullEmail,
-                                bgColor: Colors.transparent,
-                                max: 250,
-                                validator: Validators.emailValidator,
-                                autofillHints: [AutofillHints.email],
-                              ),
-                            ],
+                                }
+                              },
+                              onChange: (value) {
+                                // Update keyboard type based on first character
+                                if (value.isNotEmpty) {
+                                  final firstChar = value[0];
+                                  if (RegExp(r'\d').hasMatch(firstChar)) {
+                                    // First char is digit - switch to number keyboard
+                                    if (_inputFormatter != FilteringTextInputFormatter.digitsOnly) {
+                                      setState(() {
+                                        _inputFormatter = FilteringTextInputFormatter.digitsOnly;
+                                      });
+                                    }
+                                  } else {
+                                    // First char is letter - switch to text keyboard
+                                    if (_inputFormatter != null) {
+                                      setState(() {
+                                        _inputFormatter = null;
+                                      });
+                                    }
+                                  }
+                                } else {
+                                  // Empty field - reset to text keyboard
+                                  if (_inputFormatter != null) {
+                                    setState(() {
+                                      _inputFormatter = null;
+                                    });
+                                  }
+                                }
+
+                                // Remove spaces on the fly
+                                if (value.contains(' ')) {
+                                  final newValue = value.replaceAll(' ', '');
+                                  _phoneOrEmailController.value = TextEditingValue(
+                                    text: newValue,
+                                    selection: TextSelection.collapsed(
+                                      offset: newValue.length,
+                                    ),
+                                  );
+                                }
+                              },
+                              autofillHints: [
+                                AutofillHints.email,
+                                AutofillHints.telephoneNumber,
+                              ],
+                            ),
                             const VerticalSpacing(16),
                             Text(
                               L10n.tr().password,
@@ -203,8 +231,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               if (_formKey.currentState?.validate() == true) {
                                 TextInput.finishAutofillContext();
+                                final input = _phoneOrEmailController.text.trim().replaceAll(' ', '');
+
+                                // If it's a phone number (starts with digit), remove first char
+                                final loginValue = RegExp(r'^\d').hasMatch(input) ? input.substring(1) : input;
+
                                 context.read<LoginCubit>().login(
-                                  _phoneController.text.trim(),
+                                  loginValue,
                                   _pasword.text.trim(),
                                 );
                               }
