@@ -1,4 +1,3 @@
-
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/domain/offer_entity.dart';
 
@@ -18,7 +17,8 @@ class OfferDTO {
     discountType = json['discount_type'];
     maxDiscount = json['max_discount'];
   }
-  OfferEntity? toEntityy() {
+
+  OfferEntity? toEntity() {
     if (discount == null || discountType == null) return null;
     return OfferEntity(
       id: id ?? 0,

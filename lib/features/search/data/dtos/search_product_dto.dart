@@ -30,7 +30,7 @@ class SearchProductDTO {
       id: id!,
       name: name!,
       price: double.tryParse(price.toString()) ?? 0,
-      offer: offer?.toEntityy(),
+      offer: offer?.toEntity(),
       type: ItemType.fromString(type ?? ''),
       image: image ?? '',
       rate: rate ?? 0,

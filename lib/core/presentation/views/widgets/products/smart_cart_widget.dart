@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
@@ -8,53 +10,114 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_events.dart';
 
-class SmartCartWidget extends StatelessWidget {
+class SmartCartWidget extends StatefulWidget {
   const SmartCartWidget({
     super.key,
     required this.id,
     required this.type,
     required this.outOfStock,
-    required this.cartBus,
   });
 
   final int id;
   final CartItemType type;
   final bool outOfStock;
-  final CartBus cartBus;
 
-  /// Check if item is in cart
-  bool _isInCart() {
-    return cartBus.cartIds[type]?.contains(id) ?? false;
+  @override
+  State<SmartCartWidget> createState() => _SmartCartWidgetState();
+}
+
+class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProviderStateMixin {
+  late Animation<double> animation;
+  late AnimationController controller;
+  final quantity = ValueNotifier<int>(0);
+  late StreamSubscription<dynamic> cartListener;
+  late StreamSubscription<dynamic> loadingListener;
+  late final CartBus cartBus;
+
+  @override
+  void initState() {
+    super.initState();
+    cartBus = di<CartBus>();
+
+    // Initialize animation
+    controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    animation = Tween<double>(begin: 1, end: 1.25).animate(controller);
+
+    // Set initial quantity
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      quantity.value = _getQuantity();
+    });
+
+    // Listen to cart events
+    cartListener = cartBus.getStream<GetCartEvents>().listen((_) {
+      if (mounted) {
+        quantity.value = _getQuantity();
+      }
+    });
+
+    // Listen to loading events to update quantity when loading completes
+    loadingListener = cartBus.getStream<FastItemActionsLoading>().listen((
+      event,
+    ) {
+      if (mounted && event.prodId == widget.id) {
+        // Update quantity when loading completes
+        quantity.value = _getQuantity();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    cartListener.cancel();
+    loadingListener.cancel();
+    controller.dispose();
+    quantity.dispose();
+    super.dispose();
   }
 
   /// Get current quantity from cart
   int _getQuantity() {
-    return cartBus.cartItems.firstWhereOrNull((item) => item.prod.id == id)?.quantity ?? 0;
+    return cartBus.cartItems.firstWhereOrNull((item) => item.prod.id == widget.id)?.quantity ?? 0;
   }
 
   /// Get cart item entity
   CartItemEntity? _getCartItem() {
     return cartBus.cartItems.firstWhereOrNull(
-      (item) => item.prod.id == id,
+      (item) => item.prod.id == widget.id,
     );
+  }
+
+  /// Pulse animation for cart actions
+  Future<void> _pulseAnimate() async {
+    controller.forward().then((_) async {
+      if (!mounted) return;
+      controller.reverse();
+      controller.forward();
+      controller.reverse();
+    });
   }
 
   /// Add item to cart with quantity 1
   void _addToCart() {
     final req = CartableItemRequest(
       cartItemId: null,
-      id: id,
+      id: widget.id,
       quantity: 1,
       note: null,
       options: {},
-      type: type,
+      type: widget.type,
     );
     cartBus.addToCart(req);
+    _pulseAnimate();
   }
 
   /// Increment quantity
@@ -66,6 +129,7 @@ class SmartCartWidget extends StatelessWidget {
         cartItem.quantity + 1,
         true, // isAdding
       );
+      _pulseAnimate();
     }
   }
 
@@ -83,12 +147,13 @@ class SmartCartWidget extends StatelessWidget {
         // Remove from cart if quantity would be 0
         cartBus.removeItemFromCart(cartItem.cartId);
       }
+      _pulseAnimate();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return outOfStock
+    return widget.outOfStock
         ? Center(
             child: SizedBox(
               height: 30,
@@ -98,146 +163,132 @@ class SmartCartWidget extends StatelessWidget {
               ),
             ),
           )
-        : StreamBuilder(
-            stream: cartBus.getStream<GetCartEvents>(),
-            builder: (context, snapshot) {
-              // Show quantity controls if in cart, otherwise show add button
-              if (_isInCart()) {
-                return _buildQuantityControlsWithLoading();
-              } else {
-                return _buildAddButtonWithLoading();
-              }
+        : ValueListenableBuilder<int>(
+            valueListenable: quantity,
+            builder: (context, qty, child) {
+              return StreamBuilder(
+                stream: cartBus.getStream<FastItemActionsLoading>(),
+                builder: (context, snapshot) {
+                  // if (snapshot.hasData && snapshot.data!.prodId == widget.id) {
+                  //   return _buildLoadingIndicator();
+                  // }
+
+                  if (qty > 0) {
+                    return _buildQuantityControls(qty);
+                  } else {
+                    return _buildAddButton();
+                  }
+                },
+              );
             },
           );
   }
 
-  /// Build add button with loading check
-  Widget _buildAddButtonWithLoading() {
-    return StreamBuilder(
-      stream: cartBus.getStream<FastItemActionsLoading>(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data!.prodId == id) {
-          return _buildLoadingIndicator();
-        }
-        return _buildAddButton();
-      },
-    );
-  }
-
-  /// Build quantity controls with loading check
-  Widget _buildQuantityControlsWithLoading() {
-    return StreamBuilder(
-      stream: cartBus.getStream<FastItemActionsLoading>(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.active && id == snapshot.data!.prodId) {
-          return _buildLoadingIndicator();
-        }
-        return _buildQuantityControls();
-      },
-    );
-  }
-
   /// Build add button (when item is NOT in cart)
   Widget _buildAddButton() {
-    return DoubledDecoratedWidget(
-      innerDecoration: BoxDecoration(
-        borderRadius: AppConst.defaultBorderRadius,
-        gradient: Grad().linearGradient,
-        border: GradientBoxBorder(
-          gradient: Grad().shadowGrad().copyWith(
-            colors: [Co.white.withAlpha(0), Co.white],
+    return ScaleTransition(
+      scale: animation,
+      child: DoubledDecoratedWidget(
+        innerDecoration: BoxDecoration(
+          borderRadius: AppConst.defaultBorderRadius,
+          gradient: Grad().linearGradient,
+          border: GradientBoxBorder(
+            gradient: Grad().shadowGrad().copyWith(
+              colors: [Co.white.withAlpha(0), Co.white],
+            ),
           ),
         ),
-      ),
-      child: IconButton(
-        onPressed: () {
-          SystemSound.play(SystemSoundType.click);
-          _addToCart();
-        },
-        style: IconButton.styleFrom(
-          padding: const EdgeInsets.all(5),
-          elevation: 0,
-          minimumSize: Size.zero,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: RoundedRectangleBorder(
-            borderRadius: AppConst.defaultBorderRadius,
+        child: IconButton(
+          onPressed: () {
+            SystemSound.play(SystemSoundType.click);
+            _addToCart();
+          },
+          style: IconButton.styleFrom(
+            padding: const EdgeInsets.all(5),
+            elevation: 0,
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            shape: RoundedRectangleBorder(
+              borderRadius: AppConst.defaultBorderRadius,
+            ),
           ),
+          icon: const Icon(Icons.add, color: Co.secondary, size: 22),
         ),
-        icon: const Icon(Icons.add, color: Co.secondary, size: 22),
       ),
     );
   }
 
   /// Build quantity controls (when item IS in cart)
-  Widget _buildQuantityControls() {
-    final quantity = _getQuantity();
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        DoubledDecoratedWidget(
-          innerDecoration: BoxDecoration(
-            borderRadius: AppConst.defaultBorderRadius,
-            gradient: Grad().linearGradient,
-            border: GradientBoxBorder(
-              gradient: Grad().shadowGrad().copyWith(
-                colors: [Co.white.withAlpha(0), Co.white],
+  Widget _buildQuantityControls(int qty) {
+    return ScaleTransition(
+      scale: animation,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          DoubledDecoratedWidget(
+            innerDecoration: BoxDecoration(
+              borderRadius: AppConst.defaultBorderRadius,
+              gradient: Grad().linearGradient,
+              border: GradientBoxBorder(
+                gradient: Grad().shadowGrad().copyWith(
+                  colors: [Co.white.withAlpha(0), Co.white],
+                ),
               ),
             ),
-          ),
-          child: IconButton(
-            onPressed: () {
-              SystemSound.play(SystemSoundType.click);
-              _increment();
-            },
-            style: IconButton.styleFrom(
-              padding: const EdgeInsets.all(5),
-              elevation: 0,
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              shape: RoundedRectangleBorder(
-                borderRadius: AppConst.defaultBorderRadius,
+            child: IconButton(
+              onPressed: () {
+                SystemSound.play(SystemSoundType.click);
+                _increment();
+              },
+              style: IconButton.styleFrom(
+                padding: const EdgeInsets.all(5),
+                elevation: 0,
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                  borderRadius: AppConst.defaultBorderRadius,
+                ),
               ),
-            ),
-            icon: const Icon(Icons.add, color: Co.secondary, size: 22),
-          ),
-        ),
-        ConstrainedBox(
-          constraints: const BoxConstraints(minWidth: 40),
-          child: Text(
-            "$quantity",
-            style: TStyle.secondaryBold(16),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        DoubledDecoratedWidget(
-          innerDecoration: BoxDecoration(
-            borderRadius: AppConst.defaultBorderRadius,
-            gradient: Grad().linearGradient,
-            border: GradientBoxBorder(
-              gradient: Grad().shadowGrad().copyWith(
-                colors: [Co.white.withAlpha(0), Co.white],
-              ),
+              icon: const Icon(Icons.add, color: Co.secondary, size: 22),
             ),
           ),
-          child: IconButton(
-            onPressed: () {
-              SystemSound.play(SystemSoundType.click);
-              _decrement();
-            },
-            style: IconButton.styleFrom(
-              padding: const EdgeInsets.all(5),
-              elevation: 0,
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              shape: RoundedRectangleBorder(
-                borderRadius: AppConst.defaultBorderRadius,
+          ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 40),
+            child: Text(
+              "$qty",
+              style: TStyle.secondaryBold(16),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          DoubledDecoratedWidget(
+            innerDecoration: BoxDecoration(
+              borderRadius: AppConst.defaultBorderRadius,
+              gradient: Grad().linearGradient,
+              border: GradientBoxBorder(
+                gradient: Grad().shadowGrad().copyWith(
+                  colors: [Co.white.withAlpha(0), Co.white],
+                ),
               ),
             ),
-            icon: const Icon(Icons.remove, color: Co.secondary, size: 20),
+            child: IconButton(
+              onPressed: () {
+                SystemSound.play(SystemSoundType.click);
+                _decrement();
+              },
+              style: IconButton.styleFrom(
+                padding: const EdgeInsets.all(5),
+                elevation: 0,
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                  borderRadius: AppConst.defaultBorderRadius,
+                ),
+              ),
+              icon: const Icon(Icons.remove, color: Co.secondary, size: 20),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

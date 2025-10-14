@@ -1137,5 +1137,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phoneMustBeElevenDigits => 'Phone number must be exactly 11 digits';
 
   @override
+  String get phoneMustBeTenDigits => 'Phone number must be exactly 10 digits';
+
+  @override
   String get phoneMustContainOnlyDigits => 'Phone number must contain only digits';
 }

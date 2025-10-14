@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_multi_formatter/extensions/exports.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -129,15 +128,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (v == null || v.isEmpty) {
                           return L10n.tr().enterYourMobileNumber;
                         }
-                        // Check if phone starts with 0 and is exactly 11 digits
-                        if (!v.startsWith('0')) {
-                          return L10n.tr().phoneMustStartWithZero;
+                        // Remove leading 0 if exists and check if exactly 10 digits
+                        String phoneNumber = v;
+                        if (phoneNumber.startsWith('0')) {
+                          phoneNumber = phoneNumber.substring(1);
                         }
-                        if (v.length != 11) {
-                          return L10n.tr().phoneMustBeElevenDigits;
+                        // Check if exactly 10 digits
+                        if (phoneNumber.length != 10) {
+                          return L10n.tr().phoneMustBeTenDigits;
                         }
                         // Check if all characters are digits
-                        if (!RegExp(r'^\d+$').hasMatch(v)) {
+                        if (!RegExp(r'^\d+$').hasMatch(phoneNumber)) {
                           return L10n.tr().phoneMustContainOnlyDigits;
                         }
                         return null;
@@ -154,12 +155,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       TextInput.finishAutofillContext();
+                      // Remove leading 0 if exists to ensure 10 digits
+                      String phoneNumber = _phoneController.text.trim();
+                      if (phoneNumber.startsWith('0')) {
+                        phoneNumber = phoneNumber.substring(1);
+                      }
+
                       context.push(
                         CreatePasswordScreen.routeWithExtra,
                         extra: RegisterRequest(
                           name: _nameController.text.trim(),
                           countryIso: countryCode,
-                          phone: _phoneController.text.trim().removeCharAt(0),
+                          phone: phoneNumber,
                           email: _emailController.text.trim(),
                           password: '',
                           passwordConfirmation: '',

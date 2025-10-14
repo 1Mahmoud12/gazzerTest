@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
+import 'package:gazzer/features/vendors/common/data/unit_brand_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/offer_entity.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/ordered_with_entityy.dart';
@@ -14,6 +16,8 @@ sealed class GenericItemEntity extends Favorable {
   final String? badge;
   final List<String>? tags;
   final OfferEntity? offer;
+  final ItemUnitBrandEntity? itemUnitBrand;
+  final SimpleStoreEntity? store;
   final bool hasOptions;
 
   double get price => offer?.priceAfterDiscount(_price) ?? _price;
@@ -40,6 +44,8 @@ sealed class GenericItemEntity extends Favorable {
     required super.reviewCount,
     required this.hasOptions,
     this.badge,
+    this.itemUnitBrand,
+    this.store,
     this.tags,
     this.offer,
   }) : _price = price;

@@ -1,6 +1,7 @@
 import 'package:gazzer/core/presentation/utils/color_utils.dart';
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/data/offer_dto.dart';
+import 'package:gazzer/features/vendors/common/data/unit_brand_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class ProductDTO extends GenericItemDTO {
@@ -21,6 +22,8 @@ class ProductDTO extends GenericItemDTO {
     rate = double.tryParse(json['rate'].toString());
     color = json['color'];
     offer = json['offer'] != null ? OfferDTO.fromJson(json['offer']) : null;
+    itemUnitBrand = json['item_unit_brand'] != null ? ItemUnitBrandDTO.fromJson(json['item_unit_brand']) : null;
+    store = json['store_info'] != null ? SimpleStoreDTO.fromJson(json['store_info']) : null;
     description = json['description'];
     badge = json['badge'];
     image = json['image'];
@@ -42,7 +45,9 @@ class ProductDTO extends GenericItemDTO {
       price: double.tryParse(price.toString()) ?? 0,
       rate: double.tryParse(rate.toString()) ?? 0,
       color: ColorUtils.safeHexToColor(color),
-      offer: offer?.toEntityy(),
+      offer: offer?.toEntity(),
+      itemUnitBrand: itemUnitBrand?.toEntity(),
+      store: store?.toEntity(),
 
       ///
       tags: tags,

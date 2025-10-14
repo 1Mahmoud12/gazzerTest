@@ -1,4 +1,6 @@
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
+import 'package:gazzer/features/vendors/common/data/offer_dto.dart';
+import 'package:gazzer/features/vendors/common/data/unit_brand_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class PlateDTO extends GenericItemDTO {
@@ -20,6 +22,15 @@ class PlateDTO extends GenericItemDTO {
         tags!.add(tag.toString());
       });
     }
+    if (json['offer'] != null) {
+      offer = OfferDTO.fromJson(json['offer']);
+    }
+    if (json['item_unit_brand'] != null) {
+      itemUnitBrand = ItemUnitBrandDTO.fromJson(json['item_unit_brand']);
+    }
+    if (json['store'] != null) {
+      store = SimpleStoreDTO.fromJson(json['store_info']);
+    }
   }
 
   @override
@@ -36,9 +47,11 @@ class PlateDTO extends GenericItemDTO {
       outOfStock: id?.isEven ?? false,
       badge: badge,
       reviewCount: rateCount ?? 0,
-      offer: offer?.toEntityy(),
+      offer: offer?.toEntity(),
       tags: tags,
       hasOptions: hasOptions ?? false,
+      itemUnitBrand: itemUnitBrand?.toEntity(),
+      store: store?.toEntity(),
     );
   }
 }

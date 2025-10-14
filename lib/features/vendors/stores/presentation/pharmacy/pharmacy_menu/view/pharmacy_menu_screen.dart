@@ -14,7 +14,7 @@ class PharmacyMenuScreen extends StatelessWidget {
             clipper: PharmacyHeaderShape(),
             child: DecoratedBox(
               decoration: BoxDecoration(gradient: Grad().pharmacyLinearGrad, color: Colors.red),
-              child: SizedBox(
+              child: const SizedBox(
                 height: 200,
                 width: double.infinity,
               ),

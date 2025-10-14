@@ -18,6 +18,8 @@ class PlateEntity extends GenericItemEntity {
     super.tags,
     super.offer,
     super.productId,
+    super.itemUnitBrand,
+    super.store,
   });
 
   @override

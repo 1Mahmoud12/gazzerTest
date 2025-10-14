@@ -18,6 +18,8 @@ class ProductEntity extends GenericItemEntity {
     super.hasOptions = false, // ** as per backend developer, all store-items has no options.
     super.badge,
     super.tags,
+    super.itemUnitBrand,
+    super.store,
 
     ///
     this.color,

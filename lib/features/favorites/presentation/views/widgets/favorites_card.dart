@@ -16,7 +16,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/smart_cart_widget.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
 
@@ -162,7 +161,6 @@ class _FavoriteCardState extends State<FavoriteCard> {
                               id: widget.favorite.id,
                               type: _getCartItemType()!,
                               outOfStock: widget.favorite.outOfStock,
-                              cartBus: di<CartBus>(),
                             ),
                           ),
                       ],

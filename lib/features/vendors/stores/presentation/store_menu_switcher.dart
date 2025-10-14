@@ -56,7 +56,7 @@ class StoreMenuSwitcher extends StatelessWidget {
                           message: L10n.tr().couldnotLoadDataPleaseTryAgain,
                           onRetry: () => context.read<StoresMenuCubit>().loadScreenData(),
                         )
-                      : const Center(child: const AdaptiveProgressIndicator()),
+                      : const Center(child: AdaptiveProgressIndicator()),
                 );
               }
               return StoreMenuScreen(state: state);

@@ -121,15 +121,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 // Check if first character is a digit (phone number)
                                 if (RegExp(r'^\d').hasMatch(trimmedValue)) {
                                   // Phone validation
-                                  if (!trimmedValue.startsWith('0')) {
-                                    return L10n.tr().phoneMustStartWithZero;
+                                  String phoneNumber = trimmedValue;
+                                  // Remove leading 0 if exists
+                                  if (phoneNumber.startsWith('0')) {
+                                    phoneNumber = phoneNumber.substring(1);
                                   }
-                                  if (trimmedValue.length != 11) {
-                                    return L10n.tr().phoneMustBeElevenDigits;
+                                  // Check if exactly 10 digits
+                                  if (phoneNumber.length != 10) {
+                                    return L10n.tr().phoneMustBeTenDigits;
                                   }
                                   if (!RegExp(
                                     r'^\d+$',
-                                  ).hasMatch(trimmedValue)) {
+                                  ).hasMatch(phoneNumber)) {
                                     return L10n.tr().phoneMustContainOnlyDigits;
                                   }
                                   return null;
@@ -233,8 +236,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                 TextInput.finishAutofillContext();
                                 final input = _phoneOrEmailController.text.trim().replaceAll(' ', '');
 
-                                // If it's a phone number (starts with digit), remove first char
-                                final loginValue = RegExp(r'^\d').hasMatch(input) ? input.substring(1) : input;
+                                // If it's a phone number (starts with digit), ensure 10 digits
+                                String loginValue;
+                                if (RegExp(r'^\d').hasMatch(input)) {
+                                  // Remove leading 0 if exists
+                                  loginValue = input.startsWith('0') ? input.substring(1) : input;
+                                  // Ensure exactly 10 digits
+                                  if (loginValue.length != 10) {
+                                    Alerts.showToast(
+                                      L10n.tr().phoneMustBeTenDigits,
+                                    );
+                                    return;
+                                  }
+                                } else {
+                                  loginValue = input;
+                                }
 
                                 context.read<LoginCubit>().login(
                                   loginValue,

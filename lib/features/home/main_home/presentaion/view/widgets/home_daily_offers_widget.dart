@@ -15,7 +15,8 @@ class _DailyOffersWidget extends StatelessWidget {
               title: L10n.tr().dailyOffersForYou,
               titleStyle: TStyle.primaryBold(16),
               onPressed: () {
-                context.push(DailyOffersScreen.route);
+                context.push(DailyOffersScreen.route, extra: {'items': items});
+                // DailyOffersScreen().pu;
               },
             ),
             const VerticalSpacing(12),
@@ -27,7 +28,7 @@ class _DailyOffersWidget extends StatelessWidget {
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.88,
+                childAspectRatio: 0.77,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
               ),

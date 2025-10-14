@@ -13,6 +13,7 @@ import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
+import 'package:gazzer/features/home/home_categories/daily_offers/presentation/view/daily_offers_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/diatery_lifestyle_screen.dart';
@@ -53,12 +54,27 @@ final List<RouteBase> unNestedRoutes = [
   $deleteAccountRoute,
   $addEditAddressRoute,
   $selectLocationRoute,
+
+  // home categories
+  GoRoute(
+    path: DailyOffersScreen.route,
+    builder: (context, state) {
+      final extra = state.extra as Map<String, dynamic>?;
+      final items = extra?['items'] as List<dynamic>?;
+      return DailyOffersScreen(
+        items: items?.cast(),
+      );
+    },
+  ),
 ];
 
 final checkoutRoutes = [
   GoRoute(
     path: CartScreen.route,
-    builder: (context, state) => BlocProvider(create: (context) => di<CartCubit>(), child: const CartScreen()),
+    builder: (context, state) => BlocProvider(
+      create: (context) => di<CartCubit>(),
+      child: const CartScreen(),
+    ),
   ),
 
   GoRoute(
@@ -76,11 +92,26 @@ final checkoutRoutes = [
 ];
 
 final planScreens = [
-  GoRoute(path: HealthFocusScreen.route, builder: (context, state) => const HealthFocusScreen()),
-  GoRoute(path: DiateryLifestyleScreen.route, builder: (context, state) => const DiateryLifestyleScreen()),
-  GoRoute(path: SupplementsScreen.route, builder: (context, state) => const SupplementsScreen()),
-  GoRoute(path: NuttrationSupportScreen.route, builder: (context, state) => const NuttrationSupportScreen()),
-  GoRoute(path: FrequancyCombosScreen.route, builder: (context, state) => const FrequancyCombosScreen()),
+  GoRoute(
+    path: HealthFocusScreen.route,
+    builder: (context, state) => const HealthFocusScreen(),
+  ),
+  GoRoute(
+    path: DiateryLifestyleScreen.route,
+    builder: (context, state) => const DiateryLifestyleScreen(),
+  ),
+  GoRoute(
+    path: SupplementsScreen.route,
+    builder: (context, state) => const SupplementsScreen(),
+  ),
+  GoRoute(
+    path: NuttrationSupportScreen.route,
+    builder: (context, state) => const NuttrationSupportScreen(),
+  ),
+  GoRoute(
+    path: FrequancyCombosScreen.route,
+    builder: (context, state) => const FrequancyCombosScreen(),
+  ),
 ];
 
 final authRoutes = [

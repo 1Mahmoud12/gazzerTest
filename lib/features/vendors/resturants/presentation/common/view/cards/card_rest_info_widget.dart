@@ -8,7 +8,7 @@ class CardRestInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -28,24 +28,29 @@ class CardRestInfoWidget extends StatelessWidget {
           spacing: 4,
           children: [
             const Icon(Icons.star, color: Co.tertiary, size: 18),
-            const Spacer(),
+
             Text(vendor.rate.toStringAsFixed(2), style: TStyle.blackBold(13).copyWith(color: Co.tertiary)),
             Text("(${vendor.rateCount ?? 0})", style: TStyle.blackBold(12)),
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Icon(Icons.location_on, color: Co.purple, size: 18),
-
+            const SizedBox(
+              width: 10,
+            ),
             Text(vendor.zoneName, style: TStyle.primaryRegular(12)),
           ],
         ),
         if (vendor.deliveryTime != null)
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Icon(Icons.access_time_outlined, color: Co.purple, size: 18),
+              const SizedBox(
+                width: 10,
+              ),
               Text(vendor.deliveryTime!, style: TStyle.greySemi(13)),
             ],
           ),

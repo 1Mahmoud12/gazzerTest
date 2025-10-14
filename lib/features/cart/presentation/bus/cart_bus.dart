@@ -2,6 +2,7 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/app_bus.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/cart_repo.dart';
@@ -52,6 +53,8 @@ class CartBus extends AppBus {
         );
         return;
       case Err err:
+        Alerts.showToast("${err.error.message}.");
+
         fire(FastItemActionsError(err.error.message, prodId: req.id, items: _cartITems()));
         return;
     }

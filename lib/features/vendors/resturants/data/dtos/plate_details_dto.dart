@@ -70,7 +70,7 @@ class PlateDetailsDTO {
       categoryPlateId: plateCategoryId ?? 0,
       image: image ?? '',
       tags: tags,
-      offer: offer?.toEntityy(),
+      offer: offer?.toEntity(),
       badge: badge,
       outOfStock: false,
       hasOptions: hasOptions ?? false,

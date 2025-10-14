@@ -2312,6 +2312,12 @@ abstract class AppLocalizations {
   /// **'Phone number must be exactly 11 digits'**
   String get phoneMustBeElevenDigits;
 
+  /// No description provided for @phoneMustBeTenDigits.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must be exactly 10 digits'**
+  String get phoneMustBeTenDigits;
+
   /// No description provided for @phoneMustContainOnlyDigits.
   ///
   /// In en, this message translates to:

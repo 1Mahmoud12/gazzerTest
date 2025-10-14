@@ -17,6 +17,8 @@ class OrderedWithEntity extends GenericItemEntity {
     super.offer,
     super.tags,
     super.badge,
+    super.itemUnitBrand,
+    super.store,
   });
 
   @override

@@ -8,8 +8,6 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
-import 'package:gazzer/di.dart';
-import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
@@ -37,7 +35,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                height: Session().client != null ? 180 : 150,
+                height: Session().client != null ? 260 : 200,
                 width: double.infinity,
                 child: CustomPaint(
                   painter: ProductShapePaint(),
@@ -92,6 +90,39 @@ class VerticalRotatedImgCard extends StatelessWidget {
                           L10n.tr().onAllGrills,
                           style: TStyle.blackSemi(12),
                         ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     if (prod.store?.id == null) {
+                        //       return;
+                        //     }
+                        //
+                        //     if (prod.store!.type == VendorType.restaurant.value) {
+                        //       RestaurantDetailsRoute(id: prod.store!.id).push(context);
+                        //     } else if (prod.store!.type == VendorType.grocery.value) {
+                        //       StoreDetailsRoute(storeId: prod.store?.id ?? -1).push(context);
+                        //     } else {
+                        //       StoreDetailsRoute(storeId: prod.store?.id ?? -1).push(context);
+                        //     }
+                        //   },
+                        //   child: Row(
+                        //     children: [
+                        //       SizedBox(
+                        //         width: 24,
+                        //         height: 24,
+                        //         child: CircleGradientBorderedImage(
+                        //           image: prod.store?.image ?? '',
+                        //           shadow: const BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
+                        //           showBorder: false,
+                        //         ),
+                        //       ),
+                        //       const SizedBox(width: 8),
+                        //       Text(
+                        //         prod.store?.name ?? 'brand',
+                        //         style: TStyle.mainwSemi(13),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         if (Session().client != null) ...[
                           const VerticalSpacing(8),
                           Align(
@@ -100,7 +131,6 @@ class VerticalRotatedImgCard extends StatelessWidget {
                               id: prod.id,
                               type: prod is PlateEntity ? CartItemType.plate : CartItemType.product,
                               outOfStock: prod.outOfStock,
-                              cartBus: di<CartBus>(),
                             ),
                           ),
                         ],
@@ -111,7 +141,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 1),
               child: Transform.rotate(
                 angle: -0.25,
                 child: ClipRRect(

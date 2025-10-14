@@ -83,7 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
         // floatingActionButton: const CartFloatingBtn(),
         body: FloatingDraggableWidget(
           // dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
-          floatingWidget: const MainCartWidget().withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
+          floatingWidget: const MainCartWidget(
+            showBadge: true,
+          ).withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
           floatingWidgetHeight: 50,
           floatingWidgetWidth: 50,
           autoAlign: false,
