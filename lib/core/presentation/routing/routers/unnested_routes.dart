@@ -13,7 +13,7 @@ import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
-import 'package:gazzer/features/home/home_categories/daily_offers/presentation/view/daily_offers_screen.dart';
+import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/diatery_lifestyle_screen.dart';
@@ -59,11 +59,7 @@ final List<RouteBase> unNestedRoutes = [
   GoRoute(
     path: DailyOffersScreen.route,
     builder: (context, state) {
-      final extra = state.extra as Map<String, dynamic>?;
-      final items = extra?['items'] as List<dynamic>?;
-      return DailyOffersScreen(
-        items: items?.cast(),
-      );
+      return const DailyOffersScreen();
     },
   ),
 ];

@@ -24,7 +24,7 @@ class _HomeBestPopular extends StatelessWidget {
               child: ListView.separated(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                itemCount: items.length,
                 separatorBuilder: (context, index) => const HorizontalSpacing(12),
                 itemBuilder: (context, index) {
                   final prod = items[index];

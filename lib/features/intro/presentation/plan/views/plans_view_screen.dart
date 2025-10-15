@@ -28,7 +28,11 @@ class PlansViewScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(text: L10n.tr().yourPlanToOptimizeCalories, style: TStyle.blackBold(20), gradient: Grad().textGradient),
+              child: GradientText(
+                text: L10n.tr().yourPlanToOptimizeCalories,
+                style: TStyle.blackBold(20),
+                gradient: Grad().textGradient,
+              ),
             ),
             Expanded(
               child: GridView.builder(
@@ -43,18 +47,36 @@ class PlansViewScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   return DecoratedBox(
-                    decoration: BoxDecoration(gradient: Grad().bglightLinear, borderRadius: AppConst.defaultBorderRadius),
+                    decoration: BoxDecoration(
+                      gradient: Grad().bglightLinear,
+                      borderRadius: AppConst.defaultBorderRadius,
+                    ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 8,
+                      ),
                       child: Text.rich(
                         TextSpan(
                           children: [
-                            TextSpan(text: L10n.tr().weightLossPlan, style: TStyle.primaryBold(16)),
+                            TextSpan(
+                              text: L10n.tr().weightLossPlan,
+                              style: TStyle.primaryBold(16),
+                            ),
                             const TextSpan(text: '\n'),
-                            TextSpan(text: "Daily Calorie Range: 1200–1500 kcal (adjusted based on user data)\nFeatures:", style: TStyle.blackRegular(12)),
+                            TextSpan(
+                              text: "Daily Calorie Range: 1200–1500 kcal (adjusted based on user data)\nFeatures:",
+                              style: TStyle.blackRegular(12),
+                            ),
                             const TextSpan(text: '\n'),
 
-                            ...List.generate(4, (i) => TextSpan(text: "\n•  Low-carb, high-protein meals", style: TStyle.blackRegular(12))),
+                            ...List.generate(
+                              4,
+                              (i) => TextSpan(
+                                text: "\n•  Low-carb, high-protein meals",
+                                style: TStyle.blackRegular(12),
+                              ),
+                            ),
                           ],
                         ),
                         overflow: TextOverflow.fade,
@@ -70,7 +92,9 @@ class PlansViewScreen extends StatelessWidget {
                 onPressed: () async {
                   const LoadingScreenRoute(navigateToRoute: '').go(context);
                   await Future.delayed(const Duration(seconds: 3));
-                  const CongratsScreenRoute(navigateToRoute: IntroVideoTutorialScreen.routeUriLink).go(context);
+                  const CongratsScreenRoute(
+                    navigateToRoute: IntroVideoTutorialScreen.routeUriLink,
+                  ).go(context);
                 },
                 width: 209,
                 text: L10n.tr().continu,

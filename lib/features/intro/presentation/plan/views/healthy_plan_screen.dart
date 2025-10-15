@@ -49,7 +49,11 @@ class _HealthyPlanScreenState extends State<HealthyPlanScreen> {
           spacing: 12,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().healthyPlan, style: TStyle.blackBold(20), gradient: Grad().textGradient),
+            GradientText(
+              text: L10n.tr().healthyPlan,
+              style: TStyle.blackBold(20),
+              gradient: Grad().textGradient,
+            ),
             SizedBox(
               width: 250,
               child: Text(
@@ -71,7 +75,9 @@ class _HealthyPlanScreenState extends State<HealthyPlanScreen> {
               tag: Tags.btn,
               child: PlanAnimatedBtn(
                 onPressed: () {
-                  const CongratsScreenRoute(navigateToRoute: HomeScreen.route).go(context);
+                  const CongratsScreenRoute(
+                    navigateToRoute: HomeScreen.route,
+                  ).go(context);
                 },
                 text: L10n.tr().skip,
                 isAnimating: isAnimating,

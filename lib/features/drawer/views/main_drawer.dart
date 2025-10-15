@@ -71,7 +71,14 @@ class _MainDrawerState extends State<MainDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(44)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.only(
+          topLeft: Radius.circular(L10n.isAr(context) ? 0 : 44),
+          bottomLeft: Radius.circular(L10n.isAr(context) ? 0 : 44),
+          topRight: Radius.circular(L10n.isAr(context) ? 44 : 0),
+          bottomRight: Radius.circular(L10n.isAr(context) ? 44 : 0),
+        ),
+      ),
       child: DecoratedBox(
         decoration: BoxDecoration(
           gradient: Grad().bglightLinear.copyWith(

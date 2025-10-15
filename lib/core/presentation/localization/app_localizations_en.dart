@@ -1141,4 +1141,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phoneMustContainOnlyDigits => 'Phone number must contain only digits';
+
+  @override
+  String get storesOffersForYou => 'Stores Offers For You';
 }

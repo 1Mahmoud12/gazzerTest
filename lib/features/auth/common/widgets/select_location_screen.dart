@@ -15,6 +15,7 @@ part 'select_location_screen.g.dart';
 @immutable
 class SelectLocationRoute extends GoRouteData with _$SelectLocationRoute {
   const SelectLocationRoute(this.$extra);
+
   final ({LatLng? initLocation, Function(BuildContext context, LatLng) onSubmit}) $extra;
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -130,7 +131,11 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                     alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 60),
-                      child: Icon(Icons.location_pin, size: 60, color: Co.purple),
+                      child: Icon(
+                        Icons.location_pin,
+                        size: 60,
+                        color: Co.purple,
+                      ),
                     ),
                   ),
                 ),
@@ -149,7 +154,9 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                               final location = await getCurrentPosition(true);
                               if (location != null) {
                                 mapController?.animateCamera(
-                                  CameraUpdate.newCameraPosition(CameraPosition(target: location, zoom: 17)),
+                                  CameraUpdate.newCameraPosition(
+                                    CameraPosition(target: location, zoom: 17),
+                                  ),
                                 );
                               }
                               isgetttingCurrent.value = false;
@@ -159,7 +166,13 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                               builder: (context, value, child) => CircleAvatar(
                                 backgroundColor: Colors.blueGrey,
                                 radius: 25,
-                                child: value == true ? const AdaptiveProgressIndicator() : const Icon(Icons.my_location_rounded, color: Colors.white, size: 35),
+                                child: value == true
+                                    ? const AdaptiveProgressIndicator()
+                                    : const Icon(
+                                        Icons.my_location_rounded,
+                                        color: Colors.white,
+                                        size: 35,
+                                      ),
                               ),
                             ),
                           ),

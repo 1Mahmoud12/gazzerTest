@@ -37,12 +37,21 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Navigator.canPop(context)
           ? IconButton(
               onPressed: () => Navigator.maybePop(context),
-              icon: Icon(Icons.arrow_back_ios, color: bacButtonColor ?? Co.purple),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: bacButtonColor ?? Co.purple,
+              ),
             )
           : null,
       leadingWidth: 65,
       actions: [
-        if (showCart) MainCartWidget(size: 20, padding: 8, navigate: !isCartScreen, showBadge: showBadge),
+        if (showCart)
+          MainCartWidget(
+            size: 20,
+            padding: 8,
+            navigate: !isCartScreen,
+            showBadge: showBadge,
+          ),
         if (showNotification)
           IconButton(
             onPressed: () {},

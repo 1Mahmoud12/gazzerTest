@@ -55,8 +55,16 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
           SizedBox.expand(
             child: AnimatedCrossFade(
               duration: Durations.extralong1,
-              secondChild: Image.asset(Assets.assetsPngVideoTutorialPlaceholder2, fit: BoxFit.fill),
-              firstChild: Image.asset(Assets.assetsPngVideotutorialVideoPlaceholder, fit: BoxFit.fill),
+              secondChild: Image.asset(
+                Assets.assetsPngVideoTutorialPlaceholder2,
+                fit: BoxFit.fill,
+                width: double.infinity,
+              ),
+              firstChild: Image.asset(
+                Assets.assetsPngVideotutorialVideoPlaceholder,
+                fit: BoxFit.fill,
+                width: double.infinity,
+              ),
               crossFadeState: isNextPPressed ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             ),
           ),

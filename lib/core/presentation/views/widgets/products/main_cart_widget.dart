@@ -11,7 +11,13 @@ import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class MainCartWidget extends StatelessWidget {
-  const MainCartWidget({super.key, this.size = 25, this.padding = 12, this.navigate = true, this.showBadge = false});
+  const MainCartWidget({
+    super.key,
+    this.size = 25,
+    this.padding = 12,
+    this.navigate = true,
+    this.showBadge = false,
+  });
   final double size;
   final double padding;
   final bool navigate;
@@ -27,12 +33,22 @@ class MainCartWidget extends StatelessWidget {
           if (navigate) context.push(CartScreen.route);
         },
         child: DecoratedBox(
-          decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().radialGradient),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: Grad().radialGradient,
+          ),
           child: DecoratedBox(
-            decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().linearGradient),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: Grad().linearGradient,
+            ),
             child: Padding(
               padding: EdgeInsets.all(padding),
-              child: SvgPicture.asset(Assets.assetsSvgCart, height: size, width: size),
+              child: SvgPicture.asset(
+                Assets.assetsSvgCart,
+                height: size,
+                width: size,
+              ),
             ),
           ),
         ),
@@ -48,7 +64,10 @@ class MainCartWidget extends StatelessWidget {
                   0,
                   (previousValue, element) =>
                       previousValue +
-                      element.items.fold<int>(0, (previousValue, item) => previousValue + item.quantity),
+                      element.items.fold<int>(
+                        0,
+                        (previousValue, item) => previousValue + item.quantity,
+                      ),
                 )
                 .toString(),
           ),

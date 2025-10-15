@@ -66,7 +66,9 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
                       isAnimating.value = false;
                       const LoadingScreenRoute(navigateToRoute: '').go(context);
                       await Future.delayed(const Duration(seconds: 3));
-                      const CongratsScreenRoute(navigateToRoute: HomeScreen.route).go(context);
+                      const CongratsScreenRoute(
+                        navigateToRoute: HomeScreen.route,
+                      ).go(context);
                     },
                     isAnimating: isAnimating,
                     animDuration: animDuration,

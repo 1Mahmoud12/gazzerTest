@@ -16,9 +16,9 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
         ),
       );
 
-  void changeLanguage(String lang) {
+  Future<void> changeLanguage(String lang) async {
     if (lang == state.lang) return;
-    di<SharedPreferences>().setString(StorageKeys.locale, lang);
+    await di<SharedPreferences>().setString(StorageKeys.locale, lang);
     di<ApiClient>().changeLocale(lang);
     emit(state.copyWith(lang: lang));
   }

@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/smart_cart_widget.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 
 class VerticalProductCard extends StatelessWidget {
@@ -21,10 +26,12 @@ class VerticalProductCard extends StatelessWidget {
     required this.product,
     required this.canAdd,
     this.fontFactor = 1.0,
+    this.onTap,
   });
   final GenericItemEntity product;
   final bool canAdd;
   final double fontFactor;
+  final Function? onTap;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -36,11 +43,15 @@ class VerticalProductCard extends StatelessWidget {
             borderRadius: AppConst.defaultBorderRadius,
             onTap: () {
               SystemSound.play(SystemSoundType.click);
-              // Navigate based on item type
-              if (product is PlateEntity) {
-                PlateDetailsRoute(id: product.id).push(context);
-              } else if (product is ProductEntity) {
-                ProductDetailsRoute(productId: product.id).push(context);
+              if (onTap != null) {
+                onTap?.call();
+              } else {
+                // Navigate based on item type
+                if (product is PlateEntity) {
+                  PlateDetailsRoute(id: product.id).push(context);
+                } else if (product is ProductEntity) {
+                  ProductDetailsRoute(productId: product.id).push(context);
+                }
               }
             },
 
@@ -103,49 +114,94 @@ class VerticalProductCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            InkWell(
-                              onTap: () {
-                                if (product.store?.id == null) {
-                                  return;
-                                }
+                            if (product.store != null)
+                              InkWell(
+                                onTap: () {
+                                  if (product.store?.id == null) {
+                                    return;
+                                  }
 
-                                if (product.store!.type == VendorType.restaurant.value) {
-                                  RestaurantDetailsRoute(
-                                    id: product.store!.id,
-                                  ).push(context);
-                                } else if (product.store!.type == VendorType.grocery.value) {
-                                  StoreDetailsRoute(
-                                    storeId: product.store?.id ?? -1,
-                                  ).push(context);
-                                } else {
-                                  StoreDetailsRoute(
-                                    storeId: product.store?.id ?? -1,
-                                  ).push(context);
-                                }
-                              },
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 24,
-                                    height: 24,
-                                    child: CircleGradientBorderedImage(
-                                      image: product.store?.image ?? '',
-                                      shadow: const BoxShadow(
-                                        color: Colors.black26,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 2),
+                                  if (product.store!.type == VendorType.restaurant.value) {
+                                    context.navigateToPage(
+                                      BlocProvider(
+                                        create: (context) => di<SingleRestaurantCubit>(
+                                          param1: product.store!.id,
+                                        ),
+                                        child: RestaurantDetailsScreen(
+                                          id: product.store!.id,
+                                        ),
                                       ),
-                                      showBorder: false,
+                                    );
+                                    context.navigateToPage(
+                                      BlocProvider(
+                                        create: (context) => di<StoreDetailsCubit>(
+                                          param1: product.store!.id,
+                                        ),
+                                        child: StoreDetailsScreen(
+                                          storeId: product.store!.id,
+                                        ),
+                                      ),
+                                    );
+                                    // RestaurantDetailsScreen(
+                                    //   id: product.store!.id,
+                                    // ).push(context);
+                                  } else if (product.store!.type == VendorType.grocery.value) {
+                                    // context.push(StoreDetailsScreen.route, extra: {'store_id': product.store?.id});
+                                    context.navigateToPage(
+                                      BlocProvider(
+                                        create: (context) => di<StoreDetailsCubit>(
+                                          param1: product.store!.id,
+                                        ),
+                                        child: StoreDetailsScreen(
+                                          storeId: product.store!.id,
+                                        ),
+                                      ),
+                                    );
+                                    // StoreDetailsRoute(
+                                    //   storeId: product.store?.id ?? -1,
+                                    // ).push(context);
+                                  } else {
+                                    context.navigateToPage(
+                                      BlocProvider(
+                                        create: (context) => di<StoreDetailsCubit>(
+                                          param1: product.store!.id,
+                                        ),
+                                        child: StoreDetailsScreen(
+                                          storeId: product.store!.id,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: CircleGradientBorderedImage(
+                                        image: product.store?.image ?? '',
+                                        shadow: const BoxShadow(
+                                          color: Colors.black26,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 2),
+                                        ),
+                                        showBorder: false,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    product.store?.name ?? 'brand',
-                                    style: TStyle.mainwSemi(13 * fontFactor),
-                                  ),
-                                ],
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        product.store?.name ?? '',
+                                        style: TStyle.mainwSemi(
+                                          13 * fontFactor,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
                             if (canAdd)
                               Text(
                                 Helpers.getProperPrice(product.price),
@@ -213,7 +269,7 @@ class VerticalProductCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      if (Session().client != null)
+                      if (Session().client != null && !(key?.toString().contains('store') ?? false))
                         Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,

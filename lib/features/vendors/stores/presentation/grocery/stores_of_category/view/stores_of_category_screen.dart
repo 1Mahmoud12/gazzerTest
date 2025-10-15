@@ -24,7 +24,10 @@ part 'stores_of_category_screen.g.dart';
 @TypedGoRoute<StoresOfCategoryRoute>(path: StoresOfCategoryScreen.routeUriId)
 @immutable
 class StoresOfCategoryRoute extends GoRouteData with _$StoresOfCategoryRoute {
-  const StoresOfCategoryRoute({required this.mainCatId, required this.subCatId});
+  const StoresOfCategoryRoute({
+    required this.mainCatId,
+    required this.subCatId,
+  });
   final int mainCatId;
   final int subCatId;
   @override
@@ -125,7 +128,9 @@ class StoresOfCategoryScreen extends StatelessWidget {
                         width: 140,
                         entity: state.stores[index],
                         onPressed: () {
-                          StoreDetailsRoute(storeId: state.stores[index].id).push(context);
+                          StoreDetailsRoute(
+                            storeId: state.stores[index].id,
+                          ).push(context);
                         },
                         // height: cardHeight,
                         cardStyle: CardStyle.typeOne,

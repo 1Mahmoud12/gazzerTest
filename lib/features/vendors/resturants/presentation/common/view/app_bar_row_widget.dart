@@ -38,7 +38,13 @@ class AppBarRowWidget extends StatelessWidget {
         const MainBackIcon(),
 
         const Spacer(),
-        if (showCart) MainCartWidget(size: 20, padding: 8, navigate: true, showBadge: showBadge),
+        if (showCart)
+          MainCartWidget(
+            size: 20,
+            padding: 8,
+            navigate: true,
+            showBadge: showBadge,
+          ),
 
         if (showNotification)
           IconButton(

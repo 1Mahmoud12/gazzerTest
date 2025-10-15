@@ -85,7 +85,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 child: ListView(
                   padding: AppConst.defaultHrPadding,
                   children: [
-                    Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+                    Center(
+                      child: SvgPicture.asset(
+                        Assets.assetsSvgCharacter,
+                        height: 130,
+                      ),
+                    ),
                     Row(
                       children: [
                         GradientText(
@@ -111,7 +116,10 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       children: [
                         Directionality(
                           textDirection: TextDirection.ltr,
-                          child: Text('(+20)-${req.phone}', style: TStyle.greySemi(14)),
+                          child: Text(
+                            '(+20)-${req.phone}',
+                            style: TStyle.greySemi(14),
+                          ),
                         ),
                         TextButton(
                           onPressed: () async {
@@ -131,7 +139,10 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             );
                             setState(() {});
                           },
-                          child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
+                          child: Text(
+                            L10n.tr().wrongNumber,
+                            style: TStyle.primaryBold(14),
+                          ),
                         ),
                       ],
                     ),
@@ -151,7 +162,10 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             autofillHints: [AutofillHints.newPassword],
                           ),
                           const VerticalSpacing(32),
-                          Text(L10n.tr().confirmPassword, style: TStyle.blackBold(20)),
+                          Text(
+                            L10n.tr().confirmPassword,
+                            style: TStyle.blackBold(20),
+                          ),
                           const VerticalSpacing(8),
                           MainTextField(
                             controller: confirmPassword,
@@ -205,7 +219,10 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           isLoading: state is RegisterLoading,
                           textStyle: TStyle.mainwSemi(15),
                           bgColor: Colors.transparent,
-                          child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
+                          child: GradientText(
+                            text: L10n.tr().continu,
+                            style: TStyle.blackSemi(16),
+                          ),
                         ),
                       ),
                     ),

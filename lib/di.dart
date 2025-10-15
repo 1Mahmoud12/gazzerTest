@@ -21,6 +21,9 @@ import 'package:gazzer/features/cart/domain/cart_repo.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:gazzer/features/dailyOffers/data/daily_offer_repo_imp.dart';
+import 'package:gazzer/features/dailyOffers/domain/daily_offer_repo.dart';
+import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_cubit.dart';
 import 'package:gazzer/features/favorites/data/favorites_repo_imp.dart';
 import 'package:gazzer/features/favorites/domain/favorites_repo.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
@@ -76,27 +79,47 @@ Future init() async {
 }
 
 Future _registerAsync() async {
-  di.registerSingletonAsync<SharedPreferences>(() => SharedPreferences.getInstance());
+  di.registerSingletonAsync<SharedPreferences>(
+    () => SharedPreferences.getInstance(),
+  );
   di.registerSingletonAsync<PackageInfo>(() => PackageInfo.fromPlatform());
 
   ///
-  await Future.wait([di.getAsync<SharedPreferences>(), di.getAsync<PackageInfo>()]);
+  await Future.wait([
+    di.getAsync<SharedPreferences>(),
+    di.getAsync<PackageInfo>(),
+  ]);
 }
 
 void _registerRepos() {
-  di.registerLazySingleton<AddressRepo>(() => AddressRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<AddressRepo>(
+    () => AddressRepoImp(di.get(), di.get()),
+  );
+  di.registerLazySingleton<RegisterRepo>(
+    () => RegisterRepoImp(di.get(), di.get()),
+  );
   di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get(), di.get()));
+  di.registerLazySingleton<ForgotPasswordRepo>(
+    () => ForgotPasswordImp(di.get(), di.get()),
+  );
   di.registerLazySingleton<HomeRepo>(() => HomeRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<RestaurantsRepo>(() => RestaurantsRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<RestaurantsRepo>(
+    () => RestaurantsRepoImp(di.get(), di.get()),
+  );
   di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepoImp(di.get(), di.get()),
+  );
   di.registerLazySingleton<BannerRepo>(() => BannerRepoImp(di.get(), di.get()));
   di.registerLazySingleton<StoresRepo>(() => StoresRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<FavoritesRepo>(() => FavoritesRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<FavoritesRepo>(
+    () => FavoritesRepoImp(di.get(), di.get()),
+  );
   di.registerLazySingleton<CartRepo>(() => CartRepoImp(di.get(), di.get()));
   di.registerLazySingleton<SearchRepo>(() => SearchRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<DailyOfferRepo>(
+    () => DailyOfferRepoImp(di.get(), di.get()),
+  );
 }
 
 void _registerBuses() {
@@ -118,16 +141,24 @@ void _registerCubits() {
   di.registerFactoryParam<SingleRestaurantCubit, int, Null>(
     (id, _) => SingleRestaurantCubit(di.get(), id),
   );
-  di.registerFactoryParam<StoresMenuCubit, int, Null>((id, _) => StoresMenuCubit(di.get(), id));
+  di.registerFactoryParam<StoresMenuCubit, int, Null>(
+    (id, _) => StoresMenuCubit(di.get(), id),
+  );
   di.registerFactoryParam<SingleCatRestaurantCubit, int, int>(
     (id, plateId) => SingleCatRestaurantCubit(di.get(), id, plateId),
   );
   di.registerFactoryParam<StoresOfCategoryCubit, int, int>(
     (mainId, subCatId) => StoresOfCategoryCubit(di.get(), mainId, subCatId),
   );
-  di.registerFactoryParam<StoreDetailsCubit, int, Null>((storeId, _) => StoreDetailsCubit(di.get(), storeId));
-  di.registerFactoryParam<PlateDetailsCubit, int, Null>((plateId, _) => PlateDetailsCubit(di.get(), plateId));
-  di.registerFactoryParam<ProductDetailsCubit, int, Null>((prodId, _) => ProductDetailsCubit(di.get(), prodId));
+  di.registerFactoryParam<StoreDetailsCubit, int, Null>(
+    (storeId, _) => StoreDetailsCubit(di.get(), storeId),
+  );
+  di.registerFactoryParam<PlateDetailsCubit, int, Null>(
+    (plateId, _) => PlateDetailsCubit(di.get(), plateId),
+  );
+  di.registerFactoryParam<ProductDetailsCubit, int, Null>(
+    (prodId, _) => ProductDetailsCubit(di.get(), prodId),
+  );
   di.registerFactoryParam<AddEditAddressCubit, AddressEntity?, Null>(
     (address, _) => AddEditAddressCubit(di.get(), oldAddress: address),
   );
@@ -136,4 +167,5 @@ void _registerCubits() {
   );
   di.registerFactory(() => CartCubit(di.get(), di.get()));
   di.registerFactory(() => SearchCubit(di.get()));
+  di.registerFactory(() => DailyOfferCubit(di.get()));
 }

@@ -103,7 +103,7 @@ dependencies:
   geolocator: ^14.0.2
   flutter_multi_formatter: ^2.13.10
   # share_plus: ^11.0.0
-
+  page_transition: any
   # social
   # google_sign_in: ^7.0.0
   # sign_in_with_apple: ^7.0.1

@@ -455,5 +455,6 @@
   "phoneMustStartWithZero": "رقم الهاتف يجب أن يبدأ بـ 0",
   "phoneMustBeElevenDigits": "رقم الهاتف يجب أن يكون 11 رقماً بالضبط",
   "phoneMustBeTenDigits": "رقم الهاتف يجب أن يكون 10 أرقام بالضبط",
-  "phoneMustContainOnlyDigits": "رقم الهاتف يجب أن يحتوي على أرقام فقط"
+  "phoneMustContainOnlyDigits": "رقم الهاتف يجب أن يحتوي على أرقام فقط",
+  "storesOffersForYou": "عروض المتاجر لك"
 }

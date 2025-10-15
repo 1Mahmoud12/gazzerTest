@@ -55,17 +55,27 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       appBar: const ClassicAppBar(),
       body: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Co.purple.withAlpha(50), Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          gradient: LinearGradient(
+            colors: [Co.purple.withAlpha(50), Colors.transparent],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
         ),
         child: Form(
           key: _formKey,
           child: ListView(
             padding: AppConst.defaultHrPadding,
             children: [
-              Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+              Center(
+                child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
+              ),
               Row(
                 children: [
-                  GradientText(text: L10n.tr().resetPassword, style: TStyle.mainwBold(32), gradient: Grad().textGradient),
+                  GradientText(
+                    text: L10n.tr().resetPassword,
+                    style: TStyle.mainwBold(32),
+                    gradient: Grad().textGradient,
+                  ),
                 ],
               ),
               const VerticalSpacing(32),
@@ -84,7 +94,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       autofillHints: [AutofillHints.newPassword],
                     ),
                     const VerticalSpacing(16),
-                    Text(L10n.tr().confirmPassword, style: TStyle.blackBold(20)),
+                    Text(
+                      L10n.tr().confirmPassword,
+                      style: TStyle.blackBold(20),
+                    ),
                     const VerticalSpacing(8),
                     MainTextField(
                       controller: confirmPassword,
@@ -117,7 +130,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     },
                     textStyle: TStyle.mainwSemi(15),
                     bgColor: Colors.transparent,
-                    child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
+                    child: GradientText(
+                      text: L10n.tr().continu,
+                      style: TStyle.blackSemi(16),
+                    ),
                   ),
                 ),
               ),

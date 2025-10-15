@@ -2323,6 +2323,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Phone number must contain only digits'**
   String get phoneMustContainOnlyDigits;
+
+  /// No description provided for @storesOffersForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Stores Offers For You'**
+  String get storesOffersForYou;
 }
 
 class _AppLocalizationsDelegate

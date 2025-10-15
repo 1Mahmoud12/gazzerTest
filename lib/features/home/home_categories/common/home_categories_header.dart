@@ -17,7 +17,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
   final width = 550.0;
   @override
   void dispose() {
-    controller.dispose();
+    if (mounted) controller.dispose();
     super.dispose();
   }
 
@@ -52,7 +52,12 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
           Align(
             alignment: const Alignment(0, -1),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(16, MediaQuery.paddingOf(context).top, 16, 0),
+              padding: EdgeInsets.fromLTRB(
+                16,
+                MediaQuery.paddingOf(context).top,
+                16,
+                0,
+              ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 12,
@@ -64,7 +69,11 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                       hintText: L10n.tr().searchForStoresItemsAndCAtegories,
                       borderRadius: 64,
                       bgColor: Colors.transparent,
-                      prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+                      prefix: const Icon(
+                        Icons.search,
+                        color: Co.purple,
+                        size: 24,
+                      ),
                     ),
                   ),
                   const MainCartWidget(),
