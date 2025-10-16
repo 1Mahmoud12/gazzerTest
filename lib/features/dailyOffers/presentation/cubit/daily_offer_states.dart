@@ -8,8 +8,9 @@ final class DailyOfferLoadingState extends DailyOfferStates {}
 
 final class DailyOfferSuccessState extends DailyOfferStates {
   final DailyOfferDataModel? dailyOfferDataModel;
+  final bool isFromCache;
 
-  DailyOfferSuccessState(this.dailyOfferDataModel);
+  DailyOfferSuccessState(this.dailyOfferDataModel, {this.isFromCache = false});
 }
 
 final class DailyOfferErrorState extends DailyOfferStates {

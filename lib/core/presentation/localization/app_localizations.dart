@@ -2329,6 +2329,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stores Offers For You'**
   String get storesOffersForYou;
+
+  /// No description provided for @updating.
+  ///
+  /// In en, this message translates to:
+  /// **'Updating...'**
+  String get updating;
 }
 
 class _AppLocalizationsDelegate

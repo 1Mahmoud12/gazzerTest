@@ -1144,4 +1144,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get storesOffersForYou => 'Stores Offers For You';
+
+  @override
+  String get updating => 'Updating...';
 }

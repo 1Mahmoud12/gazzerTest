@@ -455,5 +455,6 @@
   "phoneMustBeElevenDigits": "Phone number must be exactly 11 digits",
   "phoneMustBeTenDigits": "Phone number must be exactly 10 digits",
   "phoneMustContainOnlyDigits": "Phone number must contain only digits",
-  "storesOffersForYou": "Stores Offers For You"
+  "storesOffersForYou": "Stores Offers For You",
+  "updating": "Updating..."
 }

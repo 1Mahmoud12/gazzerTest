@@ -83,7 +83,6 @@ class DailyOffersScreen extends StatelessWidget {
                             itemCount: stores.length,
                             itemBuilder: (context, index) {
                               final s = stores[index];
-                              final type = s.storeType;
                               final entity = ProductEntity(
                                 id: s.id ?? 0,
                                 productId: s.id,
@@ -103,7 +102,7 @@ class DailyOffersScreen extends StatelessWidget {
                                 ),
                               );
                               return VerticalProductCard(
-                                key: ValueKey('store_${DateTime.now().millisecondsSinceEpoch}'),
+                                key: ValueKey('store_${entity.id}'),
                                 product: entity,
                                 canAdd: false,
                                 onTap: () {
@@ -164,6 +163,7 @@ class DailyOffersScreen extends StatelessWidget {
                                   0;
 
                               return VerticalProductCard(
+                                key: ValueKey('item_${item.id}'),
                                 product: ProductEntity(
                                   id: item.id!,
                                   name: item.name!,

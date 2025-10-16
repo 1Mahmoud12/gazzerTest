@@ -1144,4 +1144,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get storesOffersForYou => 'عروض المتاجر لك';
+
+  @override
+  String get updating => 'جاري التحديث...';
 }

@@ -11,13 +11,26 @@ class DailyOfferCubit extends Cubit<DailyOfferStates> {
 
   Future<void> getAllOffers() async {
     emit(DailyOfferLoadingState());
+
+    // Try to load from cache first
+    final cached = await _repo.getCachedDailyOffer();
+    final hasCachedData = cached != null && ((cached.itemsWithOffers.isNotEmpty) || (cached.storesWithOffers.isNotEmpty));
+
+    if (hasCachedData) {
+      emit(DailyOfferSuccessState(cached, isFromCache: true));
+    }
+
+    // Fetch fresh data
     final res = await _repo.getAllDailyOffer();
     switch (res) {
       case Ok<DailyOfferDataModel?> ok:
-        emit(DailyOfferSuccessState(ok.value));
+        emit(DailyOfferSuccessState(ok.value, isFromCache: false));
         break;
       case Err err:
+        // Only emit error if we didn't show cached data
+        //if (!hasCachedData) {
         emit(DailyOfferErrorState(err.error.message));
+
         break;
     }
   }

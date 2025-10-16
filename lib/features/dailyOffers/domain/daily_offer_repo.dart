@@ -6,4 +6,6 @@ abstract class DailyOfferRepo extends BaseApiRepo {
   DailyOfferRepo(super.crashlyticsRepo);
 
   Future<Result<DailyOfferDataModel?>> getAllDailyOffer();
+
+  Future<DailyOfferDataModel?> getCachedDailyOffer();
 }
