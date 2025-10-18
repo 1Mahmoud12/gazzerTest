@@ -6,6 +6,7 @@ import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/features/auth/common/data/auth_response.dart';
 import 'package:gazzer/features/auth/common/data/client_response.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/auth/register/data/check_phone_email_dto.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 
@@ -16,9 +17,32 @@ class RegisterRepoImp extends RegisterRepo {
   // late String _sessionId;
 
   @override
+  Future<Result<CheckPhoneEmailData>> checkPhoneEmail(
+    String phone,
+    String? email,
+  ) {
+    return call<CheckPhoneEmailData>(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.checkPhoneEmail,
+        requestBody: {
+          'phone': phone,
+          if (email != null && email.isNotEmpty) 'email': email,
+        },
+      ),
+      parser: (result) {
+        final dto = CheckPhoneEmailDto.fromJson(result.data);
+        return dto.data ?? CheckPhoneEmailData(phoneFound: false, emailFound: false);
+      },
+    );
+  }
+
+  @override
   Future<Result<AuthResponse>> register(RegisterRequest req) {
     return call<AuthResponse>(
-      apiCall: () => _apiClient.post(endpoint: Endpoints.register, requestBody: req.toJson()),
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.register,
+        requestBody: req.toJson(),
+      ),
       parser: (result) {
         return AuthResponse.fromJson(result.data);
       },

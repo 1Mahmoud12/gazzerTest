@@ -5,7 +5,7 @@ class Endpoints {
 
   /// ** Auth
   // Register
-  static const checkPhoneEmail = "check-phone-email";
+  static const checkPhoneEmail = "clients/auth/check-phone-email";
   static const register = "clients/auth/register";
   static const verifyOTP = "clients/auth/register/verify-otp";
   static String editPhoneNum = "clients/auth/register/edit-phone";

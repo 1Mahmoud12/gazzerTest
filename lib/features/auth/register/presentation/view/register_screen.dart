@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -10,9 +11,12 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart' show MainTextField, PhoneTextField;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
+import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,13 +32,79 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _isChecking = ValueNotifier<bool>(false);
   String countryCode = "EG";
+
   @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
+    _isChecking.dispose();
     super.dispose();
+  }
+
+  Future<void> _checkAndProceed() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    TextInput.finishAutofillContext();
+
+    // Remove leading 0 if exists to ensure 10 digits
+    String phoneNumber = _phoneController.text.trim();
+    if (phoneNumber.startsWith('0')) {
+      phoneNumber = phoneNumber.substring(1);
+    }
+
+    final email = _emailController.text.trim();
+
+    // Show loading
+    _isChecking.value = true;
+
+    // Call check API
+    final repo = di<RegisterRepo>();
+    final result = await repo.checkPhoneEmail(
+      phoneNumber,
+      email.isEmpty ? null : email,
+    );
+
+    _isChecking.value = false;
+
+    switch (result) {
+      case Ok ok:
+        final data = ok.value;
+
+        // Check if phone or email is already registered
+        if (data.phoneFound && data.emailFound) {
+          Alerts.showToast(L10n.tr().phoneAndEmailAlreadyRegistered);
+          return;
+        } else if (data.phoneFound) {
+          Alerts.showToast(L10n.tr().phoneAlreadyRegistered);
+          return;
+        } else if (data.emailFound) {
+          Alerts.showToast(L10n.tr().emailAlreadyRegistered);
+          return;
+        }
+
+        // Proceed to password screen if both are available
+        if (mounted) {
+          context.push(
+            CreatePasswordScreen.routeWithExtra,
+            extra: RegisterRequest(
+              name: _nameController.text.trim(),
+              countryIso: countryCode,
+              phone: phoneNumber,
+              email: email,
+              password: '',
+              passwordConfirmation: '',
+            ),
+          );
+        }
+        break;
+
+      case Err err:
+        Alerts.showToast(err.error.message);
+        break;
+    }
   }
 
   @override
@@ -128,7 +198,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onChange: (phone) {
                           // Check if exactly 10 digits
                           if (phone.number.length > 11) {
-                            _phoneController.text = phone.number.substring(0, 11);
+                            _phoneController.text = phone.number.substring(
+                              0,
+                              11,
+                            );
                           }
                         },
                         validator: (v, code) {
@@ -159,35 +232,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const VerticalSpacing(24),
               Hero(
                 tag: Tags.btn,
-                child: OptionBtn(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      TextInput.finishAutofillContext();
-                      // Remove leading 0 if exists to ensure 10 digits
-                      String phoneNumber = _phoneController.text.trim();
-                      if (phoneNumber.startsWith('0')) {
-                        phoneNumber = phoneNumber.substring(1);
-                      }
-
-                      context.push(
-                        CreatePasswordScreen.routeWithExtra,
-                        extra: RegisterRequest(
-                          name: _nameController.text.trim(),
-                          countryIso: countryCode,
-                          phone: phoneNumber,
-                          email: _emailController.text.trim(),
-                          password: '',
-                          passwordConfirmation: '',
-                        ),
-                      );
-                    }
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: _isChecking,
+                  builder: (context, isChecking, child) {
+                    return OptionBtn(
+                      isLoading: isChecking,
+                      onPressed: () {
+                        if (!isChecking) _checkAndProceed();
+                      },
+                      textStyle: TStyle.mainwSemi(15),
+                      bgColor: Colors.transparent,
+                      child: GradientText(
+                        text: L10n.tr().continu,
+                        style: TStyle.blackSemi(16),
+                      ),
+                    );
                   },
-                  textStyle: TStyle.mainwSemi(15),
-                  bgColor: Colors.transparent,
-                  child: GradientText(
-                    text: L10n.tr().continu,
-                    style: TStyle.blackSemi(16),
-                  ),
                 ),
               ),
               // const VerticalSpacing(24),

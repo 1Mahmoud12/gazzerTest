@@ -2347,6 +2347,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No results found'**
   String get noSearchResults;
+
+  /// No description provided for @phoneAlreadyRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone number is already registered'**
+  String get phoneAlreadyRegistered;
+
+  /// No description provided for @emailAlreadyRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'This email address is already registered'**
+  String get emailAlreadyRegistered;
+
+  /// No description provided for @phoneAndEmailAlreadyRegistered.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone number and email are already registered'**
+  String get phoneAndEmailAlreadyRegistered;
 }
 
 class _AppLocalizationsDelegate

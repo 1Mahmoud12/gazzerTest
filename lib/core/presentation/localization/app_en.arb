@@ -458,6 +458,9 @@
   "storesOffersForYou": "Stores Offers For You",
   "updating": "Updating...",
   "phoneMustBeTenOrElevenDigits": "Phone number must be 10 or 11 digits",
-  "noSearchResults": "No results found"
+  "noSearchResults": "No results found",
+  "phoneAlreadyRegistered": "This phone number is already registered",
+  "emailAlreadyRegistered": "This email address is already registered",
+  "phoneAndEmailAlreadyRegistered": "This phone number and email are already registered"
 
 }

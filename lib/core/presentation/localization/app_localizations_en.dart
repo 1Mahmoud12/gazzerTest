@@ -1153,4 +1153,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noSearchResults => 'No results found';
+
+  @override
+  String get phoneAlreadyRegistered => 'This phone number is already registered';
+
+  @override
+  String get emailAlreadyRegistered => 'This email address is already registered';
+
+  @override
+  String get phoneAndEmailAlreadyRegistered => 'This phone number and email are already registered';
 }

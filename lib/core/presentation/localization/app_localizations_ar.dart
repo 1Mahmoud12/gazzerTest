@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1153,4 +1153,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noSearchResults => 'لا توجد نتائج';
+
+  @override
+  String get phoneAlreadyRegistered => 'رقم الهاتف هذا مسجل بالفعل';
+
+  @override
+  String get emailAlreadyRegistered => 'البريد الإلكتروني هذا مسجل بالفعل';
+
+  @override
+  String get phoneAndEmailAlreadyRegistered => 'رقم الهاتف والبريد الإلكتروني مسجلان بالفعل';
 }
