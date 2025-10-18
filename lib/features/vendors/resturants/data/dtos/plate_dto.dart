@@ -6,6 +6,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 class PlateDTO extends GenericItemDTO {
   PlateDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    productId = json['id'];
     storeId = json['store_id'];
     name = json['plate_name'];
     caegoryId = json['plate_category_id'];
@@ -37,7 +38,7 @@ class PlateDTO extends GenericItemDTO {
   PlateEntity toEntity() {
     return PlateEntity(
       id: id!,
-      productId: storeId,
+      productId: productId,
       categoryPlateId: caegoryId ?? 0,
       name: name ?? '',
       description: description ?? '',

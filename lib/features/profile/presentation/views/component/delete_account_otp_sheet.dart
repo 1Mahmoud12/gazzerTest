@@ -78,9 +78,15 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             DecoratedBox(
-              decoration: BoxDecoration(color: Co.white, borderRadius: AppConst.defaultBorderRadius),
+              decoration: BoxDecoration(
+                color: Co.white,
+                borderRadius: AppConst.defaultBorderRadius,
+              ),
               child: Padding(
-                padding: const EdgeInsetsGeometry.symmetric(vertical: 32, horizontal: 24),
+                padding: const EdgeInsetsGeometry.symmetric(
+                  vertical: 32,
+                  horizontal: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -95,53 +101,85 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                     Form(
                       key: _formKey,
 
-                      child: OtpWidget(controller: otpCont, count: 6, width: 60, height: 50, spacing: 8),
+                      child: OtpWidget(
+                        controller: otpCont,
+                        count: 6,
+                        width: 60,
+                        height: 50,
+                        spacing: 8,
+                      ),
                     ),
                     const VerticalSpacing(24),
-                    Row(
-                      children: [
-                        const Icon(Icons.message, color: Co.purple, size: 32),
-                        const HorizontalSpacing(12),
-                        Text(
-                          L10n.tr().resendCode,
-                          style: TStyle.primaryBold(14),
-                        ),
-                        Expanded(
-                          child: BlocConsumer<ProfileCubit, ProfileStates>(
+                    SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.timer,
+                                  color: Co.purple,
+                                  size: 25,
+                                ),
+                                const HorizontalSpacing(8),
+                                Text(
+                                  L10n.tr().resendCode,
+                                  style: TStyle.primaryBold(14),
+                                ),
+                              ],
+                            ),
+                          ),
+                          BlocConsumer<ProfileCubit, ProfileStates>(
                             listener: (context, state) {
                               if (state is RequestDeleteAccountSuccess) {
                                 req = req.copyWith(sessionId: state.sessionId);
                                 _setTimer();
-                                Alerts.showToast(L10n.tr().otpSentSuccessfully, error: false);
+                                Alerts.showToast(
+                                  L10n.tr().otpSentSuccessfully,
+                                  error: false,
+                                );
                               }
                             },
                             builder: (context, state) {
-                              return Row(
-                                mainAxisAlignment: state is RequestDeleteAccountLoading ? MainAxisAlignment.center : MainAxisAlignment.end,
-                                children: [
-                                  state is! RequestDeleteAccountLoading
-                                      ? ValueListenableBuilder(
-                                          valueListenable: seconds,
-                                          builder: (context, value, child) {
-                                            final finished = value <= 0;
-                                            return TextButton(
-                                              onPressed: finished ? () => context.read<ProfileCubit>().requestDeleteAccount() : null,
-                                              child: Text(
-                                                finished ? L10n.tr().resendCode : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
-                                                textAlign: TextAlign.end,
-                                                style: TStyle.primarySemi(16).copyWith(color: finished ? Co.purple : Co.tertiary),
-                                              ),
-                                            );
-                                          },
-                                        )
-                                      : const SizedBox(height: 32, width: 32, child: AdaptiveProgressIndicator()),
-                                ],
+                              if (state is RequestDeleteAccountLoading) {
+                                return const Center(
+                                  child: SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: AdaptiveProgressIndicator(),
+                                  ),
+                                );
+                              }
+
+                              return ValueListenableBuilder(
+                                valueListenable: seconds,
+                                builder: (context, value, child) {
+                                  final finished = value <= 0;
+                                  if (!finished) {
+                                    return Text(
+                                      "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
+                                      textAlign: TextAlign.end,
+                                      style: TStyle.primarySemi(16).copyWith(
+                                        color: Co.tertiary,
+                                      ),
+                                    );
+                                  }
+
+                                  return InkWell(
+                                    onTap: () => context.read<ProfileCubit>().requestDeleteAccount(),
+                                    child: const Icon(
+                                      Icons.refresh,
+                                      color: Co.purple,
+                                      size: 24,
+                                    ),
+                                  );
+                                },
                               );
                             },
                           ),
-                        ),
-                        const SizedBox.shrink(),
-                      ],
+                        ],
+                      ),
                     ),
 
                     const VerticalSpacing(20),
@@ -149,15 +187,24 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                       isLoading: state is DeleteAccountLoading,
                       onPressed: () async {
                         if (_formKey.currentState?.validate() != true) {
-                          return Alerts.showToast(L10n.tr().valueMustBeNum(6, L10n.tr().code));
+                          return Alerts.showToast(
+                            L10n.tr().valueMustBeNum(6, L10n.tr().code),
+                          );
                         }
                         print("OTP is ${otpCont.text}");
-                        final newReq = req.copyWith(otpCode: otpCont.text.trim());
-                        context.read<ProfileCubit>().confirmDeleteAccount(newReq);
+                        final newReq = req.copyWith(
+                          otpCode: otpCont.text.trim(),
+                        );
+                        context.read<ProfileCubit>().confirmDeleteAccount(
+                          newReq,
+                        );
                       },
                       textStyle: TStyle.mainwSemi(15),
                       bgColor: Colors.transparent,
-                      child: Text(L10n.tr().continu, style: TStyle.primarySemi(16)),
+                      child: Text(
+                        L10n.tr().continu,
+                        style: TStyle.primarySemi(16),
+                      ),
                     ),
                   ],
                 ),

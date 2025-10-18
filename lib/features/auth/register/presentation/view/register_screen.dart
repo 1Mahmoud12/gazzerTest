@@ -118,31 +118,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const VerticalSpacing(24),
                     Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),
                     const VerticalSpacing(8),
-                    PhoneTextField(
-                      controller: _phoneController,
-                      hasLabel: false,
-                      hasHint: true,
-                      code: countryCode,
-                      validator: (v, code) {
-                        countryCode = code;
-                        if (v == null || v.isEmpty) {
-                          return L10n.tr().enterYourMobileNumber;
-                        }
-                        // Remove leading 0 if exists and check if exactly 10 digits
-                        String phoneNumber = v;
-                        if (phoneNumber.startsWith('0')) {
-                          phoneNumber = phoneNumber.substring(1);
-                        }
-                        // Check if exactly 10 digits
-                        if (phoneNumber.length != 10) {
-                          return L10n.tr().phoneMustBeTenDigits;
-                        }
-                        // Check if all characters are digits
-                        if (!RegExp(r'^\d+$').hasMatch(phoneNumber)) {
-                          return L10n.tr().phoneMustContainOnlyDigits;
-                        }
-                        return null;
-                      },
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: PhoneTextField(
+                        controller: _phoneController,
+                        hasLabel: false,
+                        hasHint: true,
+                        code: countryCode,
+                        onChange: (phone) {
+                          // Check if exactly 10 digits
+                          if (phone.number.length > 11) {
+                            _phoneController.text = phone.number.substring(0, 11);
+                          }
+                        },
+                        validator: (v, code) {
+                          countryCode = code;
+                          if (v == null || v.isEmpty) {
+                            return L10n.tr().enterYourMobileNumber;
+                          }
+                          // Remove leading 0 if exists and check if exactly 10 digits
+                          String phoneNumber = v;
+                          if (phoneNumber.startsWith('0')) {
+                            phoneNumber = phoneNumber.substring(1);
+                          }
+                          if (phoneNumber.length > 11) {
+                            return L10n.tr().phoneMustBeTenOrElevenDigits;
+                          }
+                          // Check if all characters are digits
+                          if (!RegExp(r'^\d+$').hasMatch(phoneNumber)) {
+                            return L10n.tr().phoneMustContainOnlyDigits;
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                   ],
                 ),

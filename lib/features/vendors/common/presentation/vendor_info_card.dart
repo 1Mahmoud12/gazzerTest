@@ -240,7 +240,9 @@ class VendorInfoCard extends StatelessWidget {
                   ],
                 ),
               ),
-            if (vendor.endTime != null && vendor.endTime!.difference(DateTime.now()) < Duration(minutes: vendor.mintsBeforClosingAlert))
+            if (vendor.alwaysOpen != true &&
+                vendor.endTime != null &&
+                vendor.endTime!.difference(DateTime.now()) < Duration(minutes: vendor.mintsBeforClosingAlert))
               VendorClosingTimer(
                 endTime: vendor.endTime!,
                 name: vendor.name,

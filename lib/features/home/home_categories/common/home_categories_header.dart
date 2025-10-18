@@ -6,7 +6,9 @@ import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 
 class HomeCategoriesHeader extends StatefulWidget {
-  const HomeCategoriesHeader({super.key});
+  final Function(String)? onChange;
+
+  const HomeCategoriesHeader({super.key, this.onChange});
 
   @override
   State<HomeCategoriesHeader> createState() => _HomeCategoriesHeaderState();
@@ -41,7 +43,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                   decoration: BoxDecoration(
                     gradient: Grad().bglightLinear.copyWith(
                       begin: Alignment.centerRight,
-                      colors: [Co.buttonGradient, Colors.black.withAlpha(0)],
+                      colors: [Co.buttonGradient.withAlpha(100), Colors.black],
                     ),
                   ),
                   // foregroundDecoration: BoxDecoration(gradient: Grad().linearGradient),
@@ -64,6 +66,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                 children: [
                   Expanded(
                     child: MainSearchWidget(
+                      onChange: widget.onChange,
                       controller: controller,
                       height: 80,
                       hintText: L10n.tr().searchForStoresItemsAndCAtegories,

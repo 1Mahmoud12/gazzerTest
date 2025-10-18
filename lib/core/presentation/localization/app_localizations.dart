@@ -2335,6 +2335,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Updating...'**
   String get updating;
+
+  /// No description provided for @phoneMustBeTenOrElevenDigits.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must be 10 or 11 digits'**
+  String get phoneMustBeTenOrElevenDigits;
+
+  /// No description provided for @noSearchResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noSearchResults;
 }
 
 class _AppLocalizationsDelegate

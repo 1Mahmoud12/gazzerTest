@@ -17,6 +17,7 @@ class ProductDTO extends GenericItemDTO {
   ProductDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     storeId = json['store_id'];
+    productId = json['id'];
     name = json['name'];
     price = double.tryParse(json['app_price'].toString());
     rate = double.tryParse(json['rate'].toString());
@@ -40,7 +41,7 @@ class ProductDTO extends GenericItemDTO {
   ProductEntity toEntity() {
     return ProductEntity(
       id: id!,
-      productId: storeId,
+      productId: productId,
       name: name ?? '',
       price: double.tryParse(price.toString()) ?? 0,
       rate: double.tryParse(rate.toString()) ?? 0,

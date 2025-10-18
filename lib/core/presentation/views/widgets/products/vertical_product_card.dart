@@ -275,9 +275,26 @@ class VerticalProductCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               SmartCartWidget(
-                                id: product.id,
-                                type: product is PlateEntity ? CartItemType.plate : CartItemType.product,
+                                id: product.productId ?? product.id,
+                                type: product is PlateEntity
+                                    ? CartItemType.plate
+                                    : product is ProductEntity
+                                    ? CartItemType.product
+                                    : CartItemType.restaurantItem,
                                 outOfStock: product.outOfStock,
+                                onDoubleTap: () {
+                                  SystemSound.play(SystemSoundType.click);
+                                  if (onTap != null) {
+                                    onTap?.call();
+                                  } else {
+                                    // Navigate based on item type
+                                    if (product is PlateEntity) {
+                                      PlateDetailsRoute(id: product.id).push(context);
+                                    } else if (product is ProductEntity) {
+                                      ProductDetailsRoute(productId: product.id).push(context);
+                                    }
+                                  }
+                                },
                               ),
                             ],
                           ),

@@ -261,6 +261,7 @@ class StoresWithOffer {
     required this.storeType,
     required this.image,
     required this.storeCategoryId,
+    required this.storeCategoryType,
     required this.vendorId,
     required this.address,
     required this.estimatedDeliveryTime,
@@ -285,6 +286,7 @@ class StoresWithOffer {
   final String? storeType;
   final String? image;
   final int? storeCategoryId;
+  final String? storeCategoryType;
   final int? vendorId;
   final String? address;
   final num? estimatedDeliveryTime;
@@ -310,6 +312,7 @@ class StoresWithOffer {
       storeType: json["store_type"],
       image: json["image"],
       storeCategoryId: json["store_category_id"],
+      storeCategoryType: json["store_category_type"],
       vendorId: json["vendor_id"],
       address: json["address"],
       estimatedDeliveryTime: json["estimated_delivery_time"],
@@ -336,6 +339,7 @@ class StoresWithOffer {
     "store_type": storeType,
     "image": image,
     "store_category_id": storeCategoryId,
+    "storeCategoryType": storeCategoryType,
     "vendor_id": vendorId,
     "address": address,
     "estimated_delivery_time": estimatedDeliveryTime,

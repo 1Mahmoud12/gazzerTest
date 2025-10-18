@@ -1147,4 +1147,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get updating => 'جاري التحديث...';
+
+  @override
+  String get phoneMustBeTenOrElevenDigits => 'يجب أن يتكون رقم الهاتف من 10 أو 11 رقمًا';
+
+  @override
+  String get noSearchResults => 'لا توجد نتائج';
 }

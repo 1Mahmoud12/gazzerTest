@@ -37,6 +37,7 @@ class SectionItemDTO extends ProductItemDTO {
     id = json['id'];
     expiredAt = json['expired_at'];
     discount = json['discount'];
+
     itemType = ItemType.fromString(json['item_type'] ?? 'Unknown');
     if (json['item'] != null) {
       if (itemType == ItemType.plate) {

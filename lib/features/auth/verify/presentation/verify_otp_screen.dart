@@ -14,7 +14,6 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
 import 'package:gazzer/features/auth/verify/domain/verify_repo.dart';
 import 'package:gazzer/features/auth/verify/presentation/widgets/otp_widget.dart';
 import 'package:go_router/go_router.dart';
@@ -138,58 +137,58 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 ],
               ),
               const VerticalSpacing(8),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Text(
-                      "${L10n.tr().anOTPhasBeenSentTo} (+20)-$phoneNumber",
-                      maxLines: 3,
-                      style: TStyle.greySemi(16),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  if (repo.canChangePhone)
-                    TextButton(
-                      onPressed: () async {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return ChangePhoneNumberSheet(
-                              initialPhone: phoneNumber,
-                              onConfirm: (val) async {
-                                final res = await repo.onChangePhone(
-                                  val,
-                                  widget.data,
-                                );
-                                switch (res) {
-                                  case Ok<String> ok:
-                                    Alerts.showToast(ok.value, error: false);
-                                    if (context.mounted) {
-                                      setState(() => phoneNumber = val);
-                                      timer.cancel();
-                                      _setTimer();
-                                    }
-                                    return true;
-                                  case Err err:
-                                    Alerts.showToast(err.error.message);
-                                    return false;
-                                }
-                              },
-                            );
-                          },
-                        );
-                      },
-                      child: Text(
-                        L10n.tr().wrongNumber,
-                        style: TStyle.primaryBold(14),
-                      ),
-                    ),
-                ],
-              ),
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Flexible(
+              //       child: Text(
+              //         "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
+              //         maxLines: 3,
+              //         style: TStyle.greySemi(16),
+              //         textAlign: TextAlign.start,
+              //       ),
+              //     ),
+              //     if (repo.canChangePhone)
+              //       TextButton(
+              //         onPressed: () async {
+              //           showModalBottomSheet(
+              //             context: context,
+              //             isScrollControlled: true,
+              //             backgroundColor: Colors.transparent,
+              //             builder: (context) {
+              //               return ChangePhoneNumberSheet(
+              //                 initialPhone: phoneNumber,
+              //                 onConfirm: (val) async {
+              //                   final res = await repo.onChangePhone(
+              //                     val,
+              //                     widget.data,
+              //                   );
+              //                   switch (res) {
+              //                     case Ok<String> ok:
+              //                       Alerts.showToast(ok.value, error: false);
+              //                       if (context.mounted) {
+              //                         setState(() => phoneNumber = val);
+              //                         timer.cancel();
+              //                         _setTimer();
+              //                       }
+              //                       return true;
+              //                     case Err err:
+              //                       Alerts.showToast(err.error.message);
+              //                       return false;
+              //                   }
+              //                 },
+              //               );
+              //             },
+              //           );
+              //         },
+              //         child: Text(
+              //           L10n.tr().wrongNumber,
+              //           style: TStyle.primaryBold(14),
+              //         ),
+              //       ),
+              //   ],
+              // ),
               const VerticalSpacing(24),
               OtpWidget(
                 controller: otpCont,
@@ -199,52 +198,65 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 spacing: 8,
               ),
               const VerticalSpacing(24),
-              Row(
-                children: [
-                  const Icon(Icons.message, color: Co.purple, size: 32),
-                  const HorizontalSpacing(12),
-                  Text(
-                    L10n.tr().resendCode,
-                    style: TStyle.primaryBold(14),
-                  ),
-                  Expanded(
-                    child: ValueListenableBuilder(
-                      valueListenable: isResendingOtp,
-                      builder: (context, value, child) {
-                        return Row(
-                          mainAxisAlignment: value ? MainAxisAlignment.center : MainAxisAlignment.end,
-                          children: [
-                            !value
-                                ? child!
-                                : const SizedBox(
-                                    height: 32,
-                                    width: 32,
-                                    child: AdaptiveProgressIndicator(),
-                                  ),
-                          ],
-                        );
-                      },
-                      child: ValueListenableBuilder(
-                        valueListenable: seconds,
-                        builder: (context, value, child) {
-                          final finished = value <= 0;
-                          return TextButton(
-                            onPressed: finished ? () => resend() : null,
 
-                            child: Text(
-                              finished ? L10n.tr().resendCode : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
-                              textAlign: TextAlign.end,
-                              style: TStyle.primarySemi(16).copyWith(
-                                color: finished ? Co.purple : Co.tertiary,
-                              ),
-                            ),
-                          );
-                        },
+              SizedBox(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          const Icon(Icons.timer, color: Co.purple, size: 25),
+                          const HorizontalSpacing(8),
+                          Text(
+                            L10n.tr().resendCode,
+                            style: TStyle.primaryBold(14),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox.shrink(),
-                ],
+                    ValueListenableBuilder(
+                      valueListenable: seconds,
+                      builder: (context, value, child) {
+                        final finished = value <= 0;
+                        if (!finished) {
+                          return Text(
+                            "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
+                            textAlign: TextAlign.end,
+                            style: TStyle.primarySemi(16).copyWith(
+                              color: Co.tertiary,
+                            ),
+                          );
+                        }
+
+                        return ValueListenableBuilder(
+                          valueListenable: isResendingOtp,
+                          builder: (context, isResending, child) {
+                            if (isResending) {
+                              return const Center(
+                                child: SizedBox(
+                                  height: 50,
+                                  width: 50,
+                                  child: AdaptiveProgressIndicator(),
+                                ),
+                              );
+                            }
+
+                            return InkWell(
+                              onTap: () => resend(),
+
+                              child: const Icon(
+                                Icons.refresh,
+                                color: Co.purple,
+                                size: 24,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
               ValueListenableBuilder(
                 valueListenable: showSupport,
@@ -283,37 +295,40 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 ),
               ),
               const VerticalSpacing(80),
-              Hero(
-                tag: Tags.btn,
-                child: ValueListenableBuilder(
-                  valueListenable: isSubmitting,
-                  builder: (context, value, child) => OptionBtn(
-                    isLoading: value,
-                    onPressed: () async {
-                      if (_formKey.currentState?.validate() != true) {
-                        return Alerts.showToast(
-                          L10n.tr().valueMustBeNum(6, L10n.tr().code),
-                        );
-                      }
-                      isSubmitting.value = true;
-                      final res = await repo.verify(otpCont.text, widget.data);
-                      isSubmitting.value = false;
-                      switch (res) {
-                        case Ok<String> ok:
-                          Alerts.showToast(ok.value, error: false);
-                          if (context.mounted) widget.extra.$2(context);
-                          break;
-                        case Err err:
-                          otpCont.clear();
-                          Alerts.showToast(err.error.message);
-                          break;
-                      }
-                    },
-                    textStyle: TStyle.mainwSemi(15),
-                    bgColor: Colors.transparent,
-                    child: GradientText(
-                      text: L10n.tr().continu,
-                      style: TStyle.blackSemi(16),
+              SizedBox(
+                height: 70,
+                child: Hero(
+                  tag: Tags.btn,
+                  child: ValueListenableBuilder(
+                    valueListenable: isSubmitting,
+                    builder: (context, value, child) => OptionBtn(
+                      isLoading: value,
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() != true) {
+                          return Alerts.showToast(
+                            L10n.tr().valueMustBeNum(6, L10n.tr().code),
+                          );
+                        }
+                        isSubmitting.value = true;
+                        final res = await repo.verify(otpCont.text, widget.data);
+                        isSubmitting.value = false;
+                        switch (res) {
+                          case Ok<String> ok:
+                            Alerts.showToast(ok.value, error: false);
+                            if (context.mounted) widget.extra.$2(context);
+                            break;
+                          case Err err:
+                            otpCont.clear();
+                            Alerts.showToast(err.error.message);
+                            break;
+                        }
+                      },
+                      textStyle: TStyle.mainwSemi(15),
+                      bgColor: Colors.transparent,
+                      child: GradientText(
+                        text: L10n.tr().continu,
+                        style: TStyle.blackSemi(16),
+                      ),
                     ),
                   ),
                 ),

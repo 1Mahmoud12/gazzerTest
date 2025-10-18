@@ -1147,4 +1147,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updating => 'Updating...';
+
+  @override
+  String get phoneMustBeTenOrElevenDigits => 'Phone number must be 10 or 11 digits';
+
+  @override
+  String get noSearchResults => 'No results found';
 }

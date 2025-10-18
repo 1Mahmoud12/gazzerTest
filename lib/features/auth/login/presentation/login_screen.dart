@@ -105,87 +105,94 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TStyle.greySemi(16),
                             ),
                             const VerticalSpacing(8),
-                            MainTextField(
-                              controller: _phoneOrEmailController,
-                              hintText: '${L10n.tr().mobileNumber} / ${L10n.tr().emailAddress}',
-                              bgColor: Colors.transparent,
-                              max: 250,
-                              inputFormatters: _inputFormatter,
-                              validator: (value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return L10n.tr().thisFieldIsRequired;
-                                }
+                            Directionality(
+                              textDirection: TextDirection.ltr,
+                              child: MainTextField(
+                                controller: _phoneOrEmailController,
+                                hintText: '${L10n.tr().mobileNumber} / ${L10n.tr().emailAddress}',
+                                bgColor: Colors.transparent,
+                                max: 250,
+                                inputFormatters: _inputFormatter,
+                                keyboardType: TextInputType.visiblePassword,
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return L10n.tr().thisFieldIsRequired;
+                                  }
 
-                                final trimmedValue = value.trim();
+                                  final trimmedValue = value.trim();
 
-                                // Check if first character is a digit (phone number)
-                                if (RegExp(r'^\d').hasMatch(trimmedValue)) {
-                                  // Phone validation
-                                  String phoneNumber = trimmedValue;
-                                  // Remove leading 0 if exists
-                                  if (phoneNumber.startsWith('0')) {
-                                    phoneNumber = phoneNumber.substring(1);
+                                  // Check if first character is a digit (phone number)
+                                  if (RegExp(r'^\d').hasMatch(trimmedValue)) {
+                                    // Phone validation
+                                    String phoneNumber = trimmedValue;
+                                    // Remove leading 0 if exists
+                                    if (phoneNumber.startsWith('0')) {
+                                      phoneNumber = phoneNumber.substring(1);
+                                    }
+                                    // Check if exactly 10 digits
+                                    if (phoneNumber.length != 10) {
+                                      return L10n.tr().phoneMustBeTenOrElevenDigits;
+                                    }
+                                    if (!RegExp(
+                                      r'^\d+$',
+                                    ).hasMatch(phoneNumber)) {
+                                      return L10n.tr().phoneMustContainOnlyDigits;
+                                    }
+                                    return null;
+                                  } else {
+                                    // Email validation
+                                    return Validators.emailValidator(
+                                      trimmedValue,
+                                    );
                                   }
-                                  // Check if exactly 10 digits
-                                  if (phoneNumber.length != 10) {
-                                    return L10n.tr().phoneMustBeTenDigits;
-                                  }
-                                  if (!RegExp(
-                                    r'^\d+$',
-                                  ).hasMatch(phoneNumber)) {
-                                    return L10n.tr().phoneMustContainOnlyDigits;
-                                  }
-                                  return null;
-                                } else {
-                                  // Email validation
-                                  return Validators.emailValidator(
-                                    trimmedValue,
-                                  );
-                                }
-                              },
-                              onChange: (value) {
-                                // Update keyboard type based on first character
-                                if (value.isNotEmpty) {
-                                  final firstChar = value[0];
-                                  if (RegExp(r'\d').hasMatch(firstChar)) {
-                                    // First char is digit - switch to number keyboard
-                                    if (_inputFormatter != FilteringTextInputFormatter.digitsOnly) {
-                                      setState(() {
-                                        _inputFormatter = FilteringTextInputFormatter.digitsOnly;
-                                      });
+                                },
+                                onChange: (value) {
+                                  // Update keyboard type based on first character
+                                  if (value.isNotEmpty) {
+                                    final firstChar = value[0];
+                                    if (RegExp(r'\d').hasMatch(firstChar)) {
+                                      // Check if exactly 10 digits
+                                      if (value.length > 11) _phoneOrEmailController.text = value.substring(0, 11);
+
+                                      // First char is digit - switch to number keyboard
+                                      if (_inputFormatter != FilteringTextInputFormatter.digitsOnly) {
+                                        setState(() {
+                                          _inputFormatter = FilteringTextInputFormatter.digitsOnly;
+                                        });
+                                      }
+                                    } else {
+                                      // First char is letter - switch to text keyboard
+                                      if (_inputFormatter != null) {
+                                        setState(() {
+                                          _inputFormatter = null;
+                                        });
+                                      }
                                     }
                                   } else {
-                                    // First char is letter - switch to text keyboard
+                                    // Empty field - reset to text keyboard
                                     if (_inputFormatter != null) {
                                       setState(() {
                                         _inputFormatter = null;
                                       });
                                     }
                                   }
-                                } else {
-                                  // Empty field - reset to text keyboard
-                                  if (_inputFormatter != null) {
-                                    setState(() {
-                                      _inputFormatter = null;
-                                    });
-                                  }
-                                }
 
-                                // Remove spaces on the fly
-                                if (value.contains(' ')) {
-                                  final newValue = value.replaceAll(' ', '');
-                                  _phoneOrEmailController.value = TextEditingValue(
-                                    text: newValue,
-                                    selection: TextSelection.collapsed(
-                                      offset: newValue.length,
-                                    ),
-                                  );
-                                }
-                              },
-                              autofillHints: [
-                                AutofillHints.email,
-                                AutofillHints.telephoneNumber,
-                              ],
+                                  // Remove spaces on the fly
+                                  if (value.contains(' ')) {
+                                    final newValue = value.replaceAll(' ', '');
+                                    _phoneOrEmailController.value = TextEditingValue(
+                                      text: newValue,
+                                      selection: TextSelection.collapsed(
+                                        offset: newValue.length,
+                                      ),
+                                    );
+                                  }
+                                },
+                                autofillHints: [
+                                  AutofillHints.email,
+                                  AutofillHints.telephoneNumber,
+                                ],
+                              ),
                             ),
                             const VerticalSpacing(16),
                             Text(

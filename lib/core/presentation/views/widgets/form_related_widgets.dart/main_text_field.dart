@@ -46,6 +46,7 @@ class MainTextField extends StatefulWidget {
     this.prefixOnTap,
     this.prefixColor,
     this.autofillHints,
+    this.keyboardType,
     this.max = 255,
     this.disabledColor,
     this.action = TextInputAction.next,
@@ -76,6 +77,7 @@ class MainTextField extends StatefulWidget {
   final bool? isValid;
   final bool showBorder;
   final int? maxLines;
+  final TextInputType? keyboardType;
   final bool isOutLinedBorder;
   final VoidCallback? prefixOnTap;
   final Color? prefixColor;
@@ -95,11 +97,23 @@ class _MainTextFieldState extends State<MainTextField> {
 
   void formBorders() {
     if (widget.isOutLinedBorder) {
-      focusedBorder = GradientOutlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad().shadowGrad(), width: 2);
+      focusedBorder = GradientOutlineInputBorder(
+        borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+        gradient: Grad().shadowGrad(),
+        width: 2,
+      );
     } else {
-      focusedBorder = GradientUnderlineInputBorder(borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)), gradient: Grad().shadowGrad(), width: 2);
+      focusedBorder = GradientUnderlineInputBorder(
+        borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+        gradient: Grad().shadowGrad(),
+        width: 2,
+      );
     }
-    errorBorder = GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)));
+    errorBorder = GradientOutlineInputBorder(
+      gradient: Grad().errorGradient,
+      width: 1,
+      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+    );
   }
 
   @override
@@ -145,7 +159,10 @@ class _MainTextFieldState extends State<MainTextField> {
             },
             textInputAction: widget.action,
             inputFormatters: widget.inputFormatters != null ? [widget.inputFormatters!] : null,
-            keyboardType: widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null,
+            keyboardType:
+                widget.keyboardType ??
+                (widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null),
+
             decoration: InputDecoration(
               errorStyle: TStyle.errorSemi(13),
               errorMaxLines: 5,

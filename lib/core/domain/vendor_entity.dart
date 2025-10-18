@@ -7,6 +7,7 @@ class VendorEntity {
   final String name;
   final String? contactPerson;
   final String? secondContactPerson;
+  final String? type;
 
   /// not given by api yet;
   final String image;
@@ -15,6 +16,7 @@ class VendorEntity {
     required this.name,
     this.contactPerson,
     this.secondContactPerson,
+    this.type,
     required this.image,
   });
 }

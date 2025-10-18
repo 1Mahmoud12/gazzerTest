@@ -131,6 +131,9 @@ class VerticalRotatedImgCard extends StatelessWidget {
                               id: prod.id,
                               type: prod is PlateEntity ? CartItemType.plate : CartItemType.product,
                               outOfStock: prod.outOfStock,
+                              onDoubleTap: () {
+                                onTap.call();
+                              },
                             ),
                           ),
                         ],

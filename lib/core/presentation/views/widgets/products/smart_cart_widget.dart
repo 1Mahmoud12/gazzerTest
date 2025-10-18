@@ -9,7 +9,6 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
@@ -22,11 +21,13 @@ class SmartCartWidget extends StatefulWidget {
     required this.id,
     required this.type,
     required this.outOfStock,
+    this.onDoubleTap,
   });
 
   final int id;
   final CartItemType type;
   final bool outOfStock;
+  final Function? onDoubleTap;
 
   @override
   State<SmartCartWidget> createState() => _SmartCartWidgetState();
@@ -68,7 +69,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
     loadingListener = cartBus.getStream<FastItemActionsLoading>().listen((
       event,
     ) {
-      if (mounted && event.prodId == widget.id) {
+      if (mounted && (event.prodId == widget.id)) {
         // Update quantity when loading completes
         quantity.value = _getQuantity();
       }
@@ -86,13 +87,18 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
 
   /// Get current quantity from cart
   int _getQuantity() {
-    return cartBus.cartItems.firstWhereOrNull((item) => item.prod.id == widget.id)?.quantity ?? 0;
+    return cartBus.cartItems
+            .firstWhereOrNull(
+              (item) => (item.prod.id == widget.id && item.type == widget.type),
+            )
+            ?.quantity ??
+        0;
   }
 
   /// Get cart item entity
   CartItemEntity? _getCartItem() {
     return cartBus.cartItems.firstWhereOrNull(
-      (item) => item.prod.id == widget.id,
+      (item) => item.prod.id == widget.id && item.type == widget.type,
     );
   }
 
@@ -235,21 +241,30 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
                 ),
               ),
             ),
-            child: IconButton(
-              onPressed: () {
+            child: InkWell(
+              onTap: () {
                 SystemSound.play(SystemSoundType.click);
-                _increment();
+                _decrement();
               },
-              style: IconButton.styleFrom(
-                padding: const EdgeInsets.all(5),
-                elevation: 0,
-                minimumSize: Size.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppConst.defaultBorderRadius,
-                ),
+              onDoubleTap: () {
+                SystemSound.play(SystemSoundType.click);
+                widget.onDoubleTap?.call();
+              },
+              borderRadius: AppConst.defaultBorderRadius,
+              customBorder: const CircleBorder(),
+              // style: IconButton.styleFrom(
+              //   padding: const EdgeInsets.all(5),
+              //   elevation: 0,
+              //   minimumSize: Size.zero,
+              //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              //   shape: RoundedRectangleBorder(
+              //     borderRadius: AppConst.defaultBorderRadius,
+              //   ),
+              // ),
+              child: const Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Icon(Icons.remove, color: Co.secondary, size: 20),
               ),
-              icon: const Icon(Icons.add, color: Co.secondary, size: 22),
             ),
           ),
           ConstrainedBox(
@@ -270,34 +285,25 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
                 ),
               ),
             ),
-            child: IconButton(
-              onPressed: () {
+            child: InkWell(
+              onTap: () {
                 SystemSound.play(SystemSoundType.click);
-                _decrement();
+                _increment();
               },
-              style: IconButton.styleFrom(
-                padding: const EdgeInsets.all(5),
-                elevation: 0,
-                minimumSize: Size.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                shape: RoundedRectangleBorder(
-                  borderRadius: AppConst.defaultBorderRadius,
-                ),
+              onDoubleTap: () {
+                SystemSound.play(SystemSoundType.click);
+                widget.onDoubleTap?.call();
+              },
+              borderRadius: AppConst.defaultBorderRadius,
+              customBorder: const CircleBorder(),
+              child: const Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Icon(Icons.add, color: Co.secondary, size: 20),
               ),
-              icon: const Icon(Icons.remove, color: Co.secondary, size: 20),
             ),
           ),
         ],
       ),
-    );
-  }
-
-  /// Build loading indicator
-  Widget _buildLoadingIndicator() {
-    return const SizedBox(
-      height: 32,
-      width: 32,
-      child: AdaptiveProgressIndicator(),
     );
   }
 }

@@ -14,6 +14,7 @@ class MainSearchWidget extends StatefulWidget {
     this.bgColor,
     this.hintText,
     this.prefix,
+    this.onChange,
   });
   final TextEditingController? controller;
   final double height;
@@ -21,6 +22,7 @@ class MainSearchWidget extends StatefulWidget {
   final Color? bgColor;
   final String? hintText;
   final Widget? prefix;
+  final Function(String)? onChange;
   @override
   State<MainSearchWidget> createState() => _MainSearchWidgetState();
 }
@@ -43,11 +45,13 @@ class _MainSearchWidgetState extends State<MainSearchWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.push(SearchScreen.route);
-      },
+      onTap: widget.onChange != null
+          ? null
+          : () {
+              context.push(SearchScreen.route);
+            },
       child: AbsorbPointer(
-        absorbing: true,
+        absorbing: widget.onChange != null ? false : true,
         child: Hero(
           tag: Tags.searchBar,
           child: MainTextField(
@@ -57,6 +61,7 @@ class _MainSearchWidgetState extends State<MainSearchWidget> {
             bgColor: widget.bgColor ?? Colors.transparent,
             hintText: widget.hintText,
             prefix: widget.prefix ?? const Icon(Icons.search, color: Co.purple, size: 32),
+            onChange: widget.onChange,
           ),
         ),
       ),

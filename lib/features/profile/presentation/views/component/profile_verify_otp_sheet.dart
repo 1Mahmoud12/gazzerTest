@@ -18,7 +18,11 @@ import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileVerifyOtpScreen extends StatefulWidget {
-  const ProfileVerifyOtpScreen({super.key, required this.sessionId, required this.req});
+  const ProfileVerifyOtpScreen({
+    super.key,
+    required this.sessionId,
+    required this.req,
+  });
   final String sessionId;
   final UpdateProfileReq req;
   @override
@@ -33,13 +37,16 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
   late String phoneNumber;
   late String sessionId;
   final counter = 30;
+  final isResendingOtp = ValueNotifier<bool>(false);
 
   Future<void> resend() async {
+    isResendingOtp.value = true;
     final result = await context.read<ProfileCubit>().updateProfile(widget.req);
     if (result) {
       Alerts.showToast(L10n.tr().otpSentSuccessfully, error: false);
       _setTimer();
     }
+    isResendingOtp.value = false;
   }
 
   void _setTimer() {
@@ -80,73 +87,96 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             DecoratedBox(
-              decoration: BoxDecoration(color: Co.white, borderRadius: AppConst.defaultBorderRadius),
+              decoration: BoxDecoration(
+                color: Co.white,
+                borderRadius: AppConst.defaultBorderRadius,
+              ),
               child: Padding(
-                padding: const EdgeInsetsGeometry.symmetric(vertical: 32, horizontal: 24),
+                padding: const EdgeInsetsGeometry.symmetric(
+                  vertical: 32,
+                  horizontal: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "${L10n.tr().anOTPhasBeenSentTo} (+20)-$phoneNumber",
+                      "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
                       maxLines: 2,
                       style: TStyle.greySemi(16),
                       textAlign: TextAlign.start,
                     ),
                     const VerticalSpacing(24),
-                    OtpWidget(controller: otpCont, count: 6, width: 60, height: 50, spacing: 8),
+                    OtpWidget(
+                      controller: otpCont,
+                      count: 6,
+                      width: 60,
+                      height: 50,
+                      spacing: 8,
+                    ),
                     const VerticalSpacing(24),
-                    Row(
-                      children: [
-                        const Icon(Icons.message, color: Co.purple, size: 32),
-                        const HorizontalSpacing(12),
-                        Text(
-                          L10n.tr().resendCode,
-                          style: TStyle.primaryBold(14),
-                        ),
-                        Expanded(
-                          child: BlocConsumer<ProfileCubit, ProfileStates>(
-                            listener: (context, state) {
-                              if (state is UpdateSuccessWithSession) {
-                                sessionId = state.sessionId;
+                    SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.timer,
+                                  color: Co.purple,
+                                  size: 25,
+                                ),
+                                const HorizontalSpacing(8),
+                                Text(
+                                  L10n.tr().resendCode,
+                                  style: TStyle.primaryBold(14),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ValueListenableBuilder(
+                            valueListenable: seconds,
+                            builder: (context, value, child) {
+                              final finished = value <= 0;
+                              if (!finished) {
+                                return Text(
+                                  "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
+                                  textAlign: TextAlign.end,
+                                  style: TStyle.primarySemi(16).copyWith(
+                                    color: Co.tertiary,
+                                  ),
+                                );
                               }
-                            },
-                            builder: (context, state) {
-                              return Row(
-                                mainAxisAlignment: state is UpdateProfileLoading
-                                    ? MainAxisAlignment.center
-                                    : MainAxisAlignment.end,
-                                children: [
-                                  state is! UpdateProfileLoading
-                                      ? ValueListenableBuilder(
-                                          valueListenable: seconds,
-                                          builder: (context, value, child) {
-                                            final finished = value <= 0;
-                                            return TextButton(
-                                              onPressed: finished ? () => resend() : null,
 
-                                              child: Text(
-                                                finished
-                                                    ? L10n.tr().resendCode
-                                                    : "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
-                                                textAlign: TextAlign.end,
-                                                style: TStyle.primarySemi(
-                                                  16,
-                                                ).copyWith(color: finished ? Co.purple : Co.tertiary),
-                                              ),
-                                            );
-                                          },
-                                        )
-                                      : const SizedBox(height: 32, width: 32, child: AdaptiveProgressIndicator()),
-                                ],
+                              return ValueListenableBuilder(
+                                valueListenable: isResendingOtp,
+                                builder: (context, isResending, child) {
+                                  if (isResending) {
+                                    return const Center(
+                                      child: SizedBox(
+                                        height: 50,
+                                        width: 50,
+                                        child: AdaptiveProgressIndicator(),
+                                      ),
+                                    );
+                                  }
+
+                                  return InkWell(
+                                    onTap: () => resend(),
+                                    child: const Icon(
+                                      Icons.refresh,
+                                      color: Co.purple,
+                                      size: 24,
+                                    ),
+                                  );
+                                },
                               );
                             },
                           ),
-                        ),
-                        const SizedBox.shrink(),
-                      ],
+                        ],
+                      ),
                     ),
-
                     const VerticalSpacing(20),
                     BlocConsumer<ProfileCubit, ProfileStates>(
                       listener: (context, state) {
@@ -161,15 +191,23 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                         isLoading: state is VerifyOTPLoading,
                         onPressed: () async {
                           if (_formKey.currentState?.validate() != true) {
-                            return Alerts.showToast(L10n.tr().valueMustBeNum(6, L10n.tr().code));
+                            return Alerts.showToast(
+                              L10n.tr().valueMustBeNum(6, L10n.tr().code),
+                            );
                           }
                           context.read<ProfileCubit>().verifyOtp(
-                            ProfileVerifyOtpReq(otpCode: otpCont.text, sessionId: sessionId),
+                            ProfileVerifyOtpReq(
+                              otpCode: otpCont.text,
+                              sessionId: sessionId,
+                            ),
                           );
                         },
                         textStyle: TStyle.mainwSemi(15),
                         bgColor: Colors.transparent,
-                        child: Text(L10n.tr().continu, style: TStyle.primarySemi(16)),
+                        child: Text(
+                          L10n.tr().continu,
+                          style: TStyle.primarySemi(16),
+                        ),
                       ),
                     ),
                   ],

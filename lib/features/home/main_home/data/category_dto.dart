@@ -27,6 +27,7 @@ class VendorDTO extends ProductItemDTO {
   String? contactPerson;
   String? secondContactPerson;
   String? image;
+  String? type;
 
   VendorDTO({this.id, this.vendorName, this.contactPerson, this.secondContactPerson});
 
@@ -36,6 +37,7 @@ class VendorDTO extends ProductItemDTO {
     contactPerson = json['contact_person'];
     secondContactPerson = json['second_contact_person'];
     image = json['image'];
+    type = json['type'];
   }
 
   VendorEntity toEntity() {
@@ -45,6 +47,7 @@ class VendorDTO extends ProductItemDTO {
       contactPerson: contactPerson,
       secondContactPerson: secondContactPerson,
       image: image ?? '',
+      type: type ?? '',
     );
   }
 }

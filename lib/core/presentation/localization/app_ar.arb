@@ -457,5 +457,14 @@
   "phoneMustBeTenDigits": "رقم الهاتف يجب أن يكون 10 أرقام بالضبط",
   "phoneMustContainOnlyDigits": "رقم الهاتف يجب أن يحتوي على أرقام فقط",
   "storesOffersForYou": "عروض المتاجر لك",
-  "updating": "جاري التحديث..."
+  "updating": "جاري التحديث...",
+  "phoneMustBeTenOrElevenDigits": "يجب أن يتكون رقم الهاتف من 10 أو 11 رقمًا",
+  "noSearchResults": "لا توجد نتائج"
+
+
+
+
+
+
+
 }

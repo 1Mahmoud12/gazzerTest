@@ -5,6 +5,7 @@ class Endpoints {
 
   /// ** Auth
   // Register
+  static const checkPhoneEmail = "check-phone-email";
   static const register = "clients/auth/register";
   static const verifyOTP = "clients/auth/register/verify-otp";
   static String editPhoneNum = "clients/auth/register/edit-phone";
@@ -53,8 +54,10 @@ class Endpoints {
   /// ** pages
   static const homePage = "homepage";
   static const getAllOffers = "homepage/widget/stores-with-offers-and-items-offers";
+  static const topVendors = "homepage/widget/top-vendors";
   // restaurants
   static const restaurantsMenuPage = "pages/restaurants-page";
+
   static String restaurantsOfCategoryPage(int id) => "pages/restaurants-page/category/$id";
   static String restaurantPage(int id) => 'pages/restaurant-page/$id';
   // stores
@@ -70,16 +73,30 @@ class Endpoints {
 
   /// ** restaurants
   static String allRestaurants(int page, int limit) => "restaurants?is_paginated=1&page=$page&limit=$limit";
-  static String retaurantsByCatOfPlate(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId";
+
+  static String retaurantsByCatOfPlate(
+    int catId, {
+    int pag = 0,
+    int limit = 10,
+  }) => "restaurants/category/$catId";
 
   static String topRatedRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/top-rated";
+
   static String offersRestaurants(int catId, {int pag = 0, int limit = 10}) => "restaurants/category/$catId/has-offers";
-  static String todaysPicRestaurants(int catId, {int pag = 0, int limit = 10}) => "lists/todays-picks-restaurants";
+
+  static String todaysPicRestaurants(
+    int catId, {
+    int pag = 0,
+    int limit = 10,
+  }) => "lists/todays-picks-restaurants";
+
   static String orderWith(int restId, int plateId) => "restaurants/plates/plate/$plateId/ordered-with";
+
   static String plateDetailsPage(int plateId) => "restaurants/plates/plate/$plateId";
 
   /// ** categoryOfPlates
   static const platesCategories = 'restaurants/plates/categories';
+
   static String categoryOfPlatesByRest(int restId) => "restaurants/$restId/plates/categories?is_paginated=0";
 
   /// ** paltes
@@ -89,6 +106,7 @@ class Endpoints {
 
   // ** banners
   static const restaurantsMenuBanners = "banners/restaurants-page";
+
   static String storeCategoryBanners(int id) => "banners/bannerable/store-category/id/$id";
 
   // ** Favorites

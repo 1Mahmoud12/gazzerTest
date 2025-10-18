@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_multi_formatter/extensions/exports.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -72,7 +71,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                       Assets.assetsSvgUser,
                       height: 25,
                       width: 25,
-                      colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn),
+                      colorFilter: const ColorFilter.mode(
+                        Co.secondary,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     Expanded(
                       child: Column(
@@ -81,7 +83,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().fullName, style: TStyle.blackRegular(14)),
+                            child: Text(
+                              L10n.tr().fullName,
+                              style: TStyle.blackRegular(14),
+                            ),
                           ),
                           MainTextField(
                             controller: _nameController,
@@ -98,7 +103,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                                     msg: L10n.tr().fullNameShouldBeThreeLettersOrMore,
                                   );
                             },
-                            autofillHints: [AutofillHints.username, AutofillHints.name],
+                            autofillHints: [
+                              AutofillHints.username,
+                              AutofillHints.name,
+                            ],
                           ),
                         ],
                       ),
@@ -108,7 +116,11 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 Row(
                   spacing: 14,
                   children: [
-                    const Icon(Icons.email_outlined, size: 25, color: Co.secondary),
+                    const Icon(
+                      Icons.email_outlined,
+                      size: 25,
+                      color: Co.secondary,
+                    ),
                     Expanded(
                       child: Column(
                         spacing: 8,
@@ -116,7 +128,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().emailAddress, style: TStyle.blackRegular(14)),
+                            child: Text(
+                              L10n.tr().emailAddress,
+                              style: TStyle.blackRegular(14),
+                            ),
                           ),
                           MainTextField(
                             controller: _emailController,
@@ -130,7 +145,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                               if (v?.trim().isNotEmpty != true) return null;
                               return Validators.emailValidator(v);
                             },
-                            autofillHints: [AutofillHints.username, AutofillHints.name],
+                            autofillHints: [
+                              AutofillHints.username,
+                              AutofillHints.name,
+                            ],
                           ),
                         ],
                       ),
@@ -140,7 +158,11 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 Row(
                   spacing: 14,
                   children: [
-                    const Icon(Icons.phone_outlined, size: 25, color: Co.secondary),
+                    const Icon(
+                      Icons.phone_outlined,
+                      size: 25,
+                      color: Co.secondary,
+                    ),
                     Expanded(
                       child: Column(
                         spacing: 8,
@@ -148,37 +170,51 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().mobileNumber, style: TStyle.blackRegular(14)),
+                            child: Text(
+                              L10n.tr().mobileNumber,
+                              style: TStyle.blackRegular(14),
+                            ),
                           ),
-                          PhoneTextField(
-                            controller: _phoneController,
-                            hasLabel: false,
-                            hasHint: true,
-                            borderColor: Colors.red,
-                            bgColor: Co.white,
-                            showBorder: false,
-                            code: "EG",
-                            validator: (v, code) {
-                              // if (code == 'EG') {
-                              //   return Validators.mobileEGValidator(v);
-                              // }
-                              if (v == null || v.isEmpty) {
-                                return L10n.tr().enterYourMobileNumber;
-                              }
-                              // Check if phone starts with 0 and is exactly 11 digits
-                              if (!v.startsWith('0')) {
-                                return L10n.tr().phoneMustStartWithZero;
-                              }
-                              if (v.length != 11) {
-                                return L10n.tr().phoneMustBeElevenDigits;
-                              }
-                              // Check if all characters are digits
-                              if (!RegExp(r'^\d+$').hasMatch(v)) {
-                                return L10n.tr().phoneMustContainOnlyDigits;
-                              }
-                              return null;
-                              //  return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
-                            },
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: PhoneTextField(
+                              controller: _phoneController,
+                              hasLabel: false,
+                              hasHint: true,
+                              borderColor: Colors.red,
+                              bgColor: Co.white,
+                              showBorder: false,
+                              code: "EG",
+                              onChange: (phone) {
+                                // Check if exactly 10 digits
+                                if (phone.number.length > 11) {
+                                  _phoneController.text = phone.number.substring(0, 11);
+                                }
+                              },
+                              validator: (v, code) {
+                                if (v == null || v.isEmpty) {
+                                  return L10n.tr().enterYourMobileNumber;
+                                }
+
+                                // Phone validation - remove leading 0 if exists and ensure 10 digits
+                                String phoneNumber = v;
+                                if (phoneNumber.startsWith('0')) {
+                                  phoneNumber = phoneNumber.substring(1);
+                                }
+
+                                // Check if exactly 10 digits
+                                if (phoneNumber.length != 10) {
+                                  return L10n.tr().phoneMustBeTenOrElevenDigits;
+                                }
+
+                                // Check if all characters are digits
+                                if (!RegExp(r'^\d+$').hasMatch(phoneNumber)) {
+                                  return L10n.tr().phoneMustContainOnlyDigits;
+                                }
+
+                                return null;
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -192,10 +228,17 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
           MainBtn(
             onPressed: () {
               if (_formKey.currentState?.validate() != true) return;
+
+              // Remove leading 0 if exists and ensure 10 digits for API
+              String phone = _phoneController.text.trim();
+              if (phone.startsWith('0')) {
+                phone = phone.substring(1);
+              }
+
               final req = UpdateProfileReq(
                 name: _nameController.text.trim(),
                 email: _emailController.text.trim(),
-                phone: _phoneController.text.trim().removeCharAt(0),
+                phone: phone,
               );
               context.pop(req);
             },
@@ -209,7 +252,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                   Assets.assetsSvgEditSquare,
                   height: 20,
                   width: 20,
-                  colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+                  colorFilter: const ColorFilter.mode(
+                    Co.purple,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 Expanded(
                   child: Text(

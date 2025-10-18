@@ -49,13 +49,22 @@ class CartBus extends AppBus {
       case Ok<CartResponse> res:
         cartResponseToValues(res.value);
         fire(
-          FastItemActionsLoaded(items: _cartITems(), prodId: req.id),
+          FastItemActionsLoaded(
+            items: _cartITems(),
+            prodId: req.id,
+          ),
         );
         return;
       case Err err:
         Alerts.showToast("${err.error.message}.");
 
-        fire(FastItemActionsError(err.error.message, prodId: req.id, items: _cartITems()));
+        fire(
+          FastItemActionsError(
+            err.error.message,
+            prodId: req.id,
+            items: _cartITems(),
+          ),
+        );
         return;
     }
   }
@@ -63,7 +72,9 @@ class CartBus extends AppBus {
   List<CartItemEntity> _cartITems() {
     _cartIds.clear();
     _cartItems.clear();
-    _cartItems.addAll(_vendors.map((e) => e.items).expand((element) => element).toList());
+    _cartItems.addAll(
+      _vendors.map((e) => e.items).expand((element) => element).toList(),
+    );
     for (final item in _cartItems) {
       _cartIds[item.type] ??= {};
       _cartIds[item.type]!.add(item.prod.id);
@@ -76,17 +87,34 @@ class CartBus extends AppBus {
       FastItemActionsLoading(
         items: _cartITems(),
         prodId: id,
-        state: ItemFastActionState(isIncreasing: isAdding, isDecreasing: !isAdding),
+
+        state: ItemFastActionState(
+          isIncreasing: isAdding,
+          isDecreasing: !isAdding,
+        ),
       ),
     );
     final response = await _repo.updateItemQuantity(id, qnty);
     switch (response) {
       case Ok<CartResponse> res:
         cartResponseToValues(res.value);
-        fire(FastItemActionsLoaded(items: _cartITems(), prodId: id));
+        fire(
+          FastItemActionsLoaded(
+            items: _cartITems(),
+            prodId: id,
+          ),
+        );
         return;
       case Err err:
-        fire(FastItemActionsError(err.error.message, prodId: id, items: _cartITems()));
+        Alerts.showToast("${err.error.message}.");
+        fire(
+          FastItemActionsError(
+            err.error.message,
+            prodId: id,
+
+            items: _cartITems(),
+          ),
+        );
         return;
     }
   }
@@ -96,6 +124,7 @@ class CartBus extends AppBus {
       FastItemActionsLoading(
         items: _cartITems(),
         prodId: id,
+
         state: const ItemFastActionState(isDecreasing: true),
       ),
     );
@@ -103,10 +132,22 @@ class CartBus extends AppBus {
     switch (response) {
       case Ok<CartResponse> res:
         cartResponseToValues(res.value);
-        fire(FastItemActionsLoaded(items: _cartITems(), prodId: id));
+        fire(
+          FastItemActionsLoaded(
+            items: _cartITems(),
+            prodId: id,
+          ),
+        );
         return;
       case Err err:
-        fire(FastItemActionsError(err.error.message, prodId: id, items: _cartITems()));
+        Alerts.showToast("${err.error.message}.");
+        fire(
+          FastItemActionsError(
+            err.error.message,
+            prodId: id,
+            items: _cartITems(),
+          ),
+        );
         return;
     }
   }
@@ -114,6 +155,7 @@ class CartBus extends AppBus {
   void cartResponseToValues(CartResponse response) {
     _vendors.clear();
     _vendors.addAll(response.vendors);
+    _cartITems(); // Update internal cart items and IDs
     fire(GetCartLoaded(data: response));
   }
 

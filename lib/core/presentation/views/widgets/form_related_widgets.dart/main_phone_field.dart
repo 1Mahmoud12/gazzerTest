@@ -69,7 +69,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
     return InternationalPhoneNumberInput(
       height: (widget.height ?? 60),
       controller: widget.controller,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       initCountry: country,
       betweenPadding: 10,
       showBorder: widget.showBorder,

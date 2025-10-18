@@ -43,6 +43,7 @@ class SimpleStoreEntity {
 
 abstract class GenericItemDTO {
   int? id;
+  int? productId;
   int? storeId;
   int? caegoryId;
   String? name;
@@ -64,6 +65,7 @@ abstract class GenericItemDTO {
 
   GenericItemDTO({
     this.id,
+    this.productId,
     this.storeId,
     this.caegoryId,
     this.name,

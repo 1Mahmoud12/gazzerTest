@@ -57,7 +57,10 @@ class CartToIncrementIcon extends StatelessWidget {
     // TODO: It needs to be verified with the business owner.
     return StreamBuilder(
       stream: di<CartBus>().getStream<FastItemEvents>(),
-      initialData: FastItemActionsLoaded(items: di<CartBus>().cartItems, prodId: product.id),
+      initialData: FastItemActionsLoaded(
+        items: di<CartBus>().cartItems,
+        prodId: product.id,
+      ),
       builder: (context, snapshot) {
         final cartItem = snapshot.data?.items.firstWhereOrNull((e) => e.prod.id == product.id);
 
