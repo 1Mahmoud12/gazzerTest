@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 part 'package:gazzer/features/vendors/resturants/domain/enities/category_of_plate_entity.dart';
@@ -13,6 +14,7 @@ sealed class GenericSubCategoryEntity extends Equatable {
   final int? parentId;
   final CardStyle style;
   final LayoutType layout;
+  final List<ProductEntity>? products;
 
   const GenericSubCategoryEntity({
     required this.id,
@@ -21,8 +23,9 @@ sealed class GenericSubCategoryEntity extends Equatable {
     this.style = CardStyle.typeOne,
     this.layout = LayoutType.vertical,
     this.parentId,
+    this.products,
   });
 
   @override
-  List<Object?> get props => [id, name, image, parentId, style, layout];
+  List<Object?> get props => [id, name, image, parentId, style, layout, products];
 }

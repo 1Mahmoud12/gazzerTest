@@ -65,7 +65,9 @@ class GlobalIncrementWidget extends StatelessWidget {
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
           ),
-          icon: isRemoving ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary) : Icon(Icons.remove, color: Co.secondary, size: iconSize),
+          icon: isRemoving
+              ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary)
+              : Icon(Icons.remove, color: Co.secondary, size: iconSize),
         ),
       ),
     ];
@@ -73,7 +75,8 @@ class GlobalIncrementWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: isHorizonal
           ? Row(
-              mainAxisSize: MainAxisSize.min,
+              //mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ...children,
                 const HorizontalSpacing(2),

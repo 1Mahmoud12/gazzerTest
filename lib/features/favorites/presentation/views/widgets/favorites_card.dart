@@ -13,11 +13,12 @@ import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/decoration_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing, AdaptiveProgressIndicator;
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/smart_cart_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class FavoriteCard extends StatefulWidget {
   const FavoriteCard({super.key, required this.favorite, required this.onTap});
@@ -34,7 +35,11 @@ class _FavoriteCardState extends State<FavoriteCard> {
 
   @override
   void initState() {
+    super.initState();
     bus = di<FavoriteBus>();
+
+    // Initialize itemEntity on startup
+    getItemType();
 
     lisnter = bus.subscribe<ToggleFavoriteStates>((v) {
       if (!mounted) return;
@@ -49,8 +54,8 @@ class _FavoriteCardState extends State<FavoriteCard> {
           "${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}",
         );
       }
+      getItemType();
     });
-    super.initState();
   }
 
   @override
@@ -71,6 +76,41 @@ class _FavoriteCardState extends State<FavoriteCard> {
   /// Check if favorite can be added to cart
   bool _canAddToCart() {
     return Session().client != null && _getCartItemType() != null;
+  }
+
+  GenericItemEntity? itemEntity;
+
+  void getItemType() {
+    final type = widget.favorite.favoriteType.type;
+    final price = widget.favorite.favorablePrice ?? 0.0;
+
+    if (type == CartItemType.plate.value) {
+      itemEntity = PlateEntity(
+        id: widget.favorite.id,
+        name: widget.favorite.name,
+        description: widget.favorite.description,
+        price: price,
+        categoryPlateId: 0,
+        // Default value if not available
+        image: widget.favorite.image,
+        rate: widget.favorite.rate,
+        reviewCount: widget.favorite.reviewCount,
+        outOfStock: widget.favorite.outOfStock,
+        hasOptions: false,
+      );
+    } else if (type == CartItemType.product.value || type == CartItemType.restaurantItem.value) {
+      itemEntity = ProductEntity(
+        id: widget.favorite.id,
+        name: widget.favorite.name,
+        description: widget.favorite.description,
+        price: price,
+        image: widget.favorite.image,
+        rate: widget.favorite.rate,
+        reviewCount: widget.favorite.reviewCount,
+        outOfStock: widget.favorite.outOfStock,
+        hasOptions: false,
+      );
+    }
   }
 
   @override
@@ -157,11 +197,16 @@ class _FavoriteCardState extends State<FavoriteCard> {
                         if (_canAddToCart())
                           Align(
                             alignment: AlignmentDirectional.center,
-                            child: SmartCartWidget(
+                            child: CartToIncrementIcon(
+                              isHorizonal: true,
+                              product: itemEntity!,
+                              iconSize: 20,
+                              isDarkContainer: false,
+                            ) /*SmartCartWidget(
                               id: widget.favorite.id,
                               type: _getCartItemType()!,
                               outOfStock: widget.favorite.outOfStock,
-                            ),
+                            ),*/,
                           ),
                       ],
                     ),

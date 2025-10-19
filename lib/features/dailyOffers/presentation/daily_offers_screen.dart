@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -31,12 +32,29 @@ class DailyOffersScreen extends StatefulWidget {
 }
 
 class _DailyOffersScreenState extends State<DailyOffersScreen> {
-  final searchQuery = ValueNotifier<String>('');
+  Timer? _debounceTimer;
+  String _currentSearch = '';
+  DailyOfferCubit? _cubit;
 
   @override
   void dispose() {
-    searchQuery.dispose();
+    _debounceTimer?.cancel();
     super.dispose();
+  }
+
+  void _onSearchChanged(String value) {
+    // Cancel previous timer
+    _debounceTimer?.cancel();
+
+    // Create new timer for debouncing
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
+      if (_currentSearch != value) {
+        _currentSearch = value;
+        _cubit?.getAllOffers(
+          search: value.isEmpty ? null : value,
+        );
+      }
+    });
   }
 
   @override
@@ -49,14 +67,15 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HomeCategoriesHeader(
-            onChange: (String value) {
-              searchQuery.value = value.toLowerCase();
-            },
+            onChange: _onSearchChanged,
           ),
 
           Expanded(
             child: BlocProvider(
-              create: (context) => di<DailyOfferCubit>()..getAllOffers(),
+              create: (context) {
+                _cubit = di<DailyOfferCubit>()..getAllOffers();
+                return _cubit!;
+              },
               child: BlocBuilder<DailyOfferCubit, DailyOfferStates>(
                 builder: (context, state) {
                   if (state is DailyOfferLoadingState) {
@@ -65,247 +84,225 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                   if (state is DailyOfferErrorState) {
                     return FailureComponent(
                       message: state.error,
-                      onRetry: () => context.read<DailyOfferCubit>().getAllOffers(),
+                      onRetry: () => context.read<DailyOfferCubit>().getAllOffers(
+                        search: _currentSearch.isEmpty ? null : _currentSearch,
+                      ),
                     );
                   }
                   if (state is DailyOfferSuccessState) {
                     final data = state.dailyOfferDataModel;
-                    final allItems = data?.itemsWithOffers ?? const [];
-                    final allStores = data?.storesWithOffers ?? const [];
+                    final items = data?.itemsWithOffers ?? const [];
+                    final stores = data?.storesWithOffers ?? const [];
 
-                    return ValueListenableBuilder<String>(
-                      valueListenable: searchQuery,
-                      builder: (context, query, child) {
-                        // Filter items based on search query
-                        final items = query.isEmpty
-                            ? allItems
-                            : allItems.where((it) {
-                                final item = it.item;
-                                if (item == null) return false;
-                                final itemName = (item.name ?? '').toLowerCase();
-                                final storeName = (item.storeInfo?.storeName ?? '').toLowerCase();
-                                return itemName.contains(query) || storeName.contains(query);
-                              }).toList();
+                    if (items.isEmpty && stores.isEmpty) {
+                      return Center(
+                        child: Text(
+                          _currentSearch.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
+                          style: TStyle.mainwSemi(14),
+                        ),
+                      );
+                    }
 
-                        // Filter stores based on search query
-                        final stores = query.isEmpty
-                            ? allStores
-                            : allStores.where((s) {
-                                final storeName = (s.storeName ?? '').toLowerCase();
-                                return storeName.contains(query);
-                              }).toList();
-
-                        if ((items.isEmpty) && (stores.isEmpty)) {
-                          return Center(
-                            child: Text(
-                              query.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
-                              style: TStyle.mainwSemi(14),
+                    return CustomScrollView(
+                      cacheExtent: 100,
+                      slivers: [
+                        if (items.isNotEmpty) ...[
+                          const SliverToBoxAdapter(
+                            child: VerticalSpacing(16),
+                          ),
+                          SliverPadding(
+                            padding: AppConst.defaultHrPadding,
+                            sliver: SliverToBoxAdapter(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  GradientText(
+                                    text: L10n.tr().dailyOffersForYou,
+                                    style: TStyle.blackBold(16),
+                                  ),
+                                ],
+                              ),
                             ),
-                          );
-                        }
-
-                        return CustomScrollView(
-                          cacheExtent: 100,
-                          slivers: [
-                            if (items.isNotEmpty) ...[
-                              const SliverToBoxAdapter(
-                                child: VerticalSpacing(16),
+                          ),
+                          const SliverToBoxAdapter(
+                            child: VerticalSpacing(16),
+                          ),
+                          SliverPadding(
+                            padding: AppConst.defaultPadding,
+                            sliver: SliverGrid(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.84,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
                               ),
-                              SliverPadding(
-                                padding: AppConst.defaultHrPadding,
-                                sliver: SliverToBoxAdapter(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      GradientText(
-                                        text: L10n.tr().dailyOffersForYou,
-                                        style: TStyle.blackBold(16),
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  final it = items[index];
+                                  final item = it.item;
+                                  if (item == null) {
+                                    return const SizedBox.shrink();
+                                  }
+                                  final price =
+                                      double.tryParse(
+                                        (item.appPrice ?? item.price ?? '0').toString(),
+                                      ) ??
+                                      0;
+
+                                  return VerticalProductCard(
+                                    key: ValueKey('item_${item.id}'),
+                                    product: ProductEntity(
+                                      id: item.id!,
+                                      name: item.name!,
+                                      description: '',
+                                      price: price,
+                                      image: item.image!,
+                                      rate: 0,
+                                      reviewCount: 0,
+                                      outOfStock: false,
+                                      offer: OfferEntity(
+                                        id: item.offer!.id!,
+                                        discount: item.offer!.discount!.toDouble(),
+                                        discountType: DiscountType.fromString(
+                                          item.offer!.discountType ?? '',
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                ),
+                                      store: SimpleStoreEntity(
+                                        id: item.storeInfo!.storeId!,
+                                        name: item.storeInfo!.storeName!,
+                                        image: item.storeInfo!.storeImage!,
+                                        type: item.storeInfo!.storeCategoryType!,
+                                      ),
+                                    ),
+                                    canAdd: false,
+                                  );
+                                },
+                                childCount: items.length,
                               ),
-                              const SliverToBoxAdapter(
-                                child: VerticalSpacing(16),
-                              ),
-                              SliverPadding(
-                                padding: AppConst.defaultPadding,
-                                sliver: SliverGrid(
-                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.84,
-                                    crossAxisSpacing: 12,
-                                    mainAxisSpacing: 12,
+                            ),
+                          ),
+                        ],
+                        if (stores.isNotEmpty) ...[
+                          SliverPadding(
+                            padding: AppConst.defaultPadding,
+                            sliver: SliverToBoxAdapter(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  GradientText(
+                                    text: L10n.tr().storesOffersForYou,
+                                    style: TStyle.blackBold(16),
                                   ),
-                                  delegate: SliverChildBuilderDelegate(
-                                    (context, index) {
-                                      final it = items[index];
-                                      final item = it.item;
-                                      if (item == null) {
-                                        return const SizedBox.shrink();
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SliverToBoxAdapter(
+                            child: VerticalSpacing(8),
+                          ),
+                          SliverPadding(
+                            padding: AppConst.defaultPadding,
+                            sliver: SliverGrid(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.84,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
+                              ),
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  final s = stores[index];
+                                  final entity = ProductEntity(
+                                    id: s.id ?? 0,
+                                    productId: s.id,
+                                    name: s.storeName ?? '',
+                                    description: '',
+                                    price: 0,
+                                    image: s.image ?? '',
+                                    rate: double.tryParse(s.rate ?? '0') ?? 0,
+                                    reviewCount: (s.rateCount ?? 0).toInt(),
+                                    outOfStock: false,
+                                    offer: OfferEntity(
+                                      id: s.offer?.id ?? 0,
+                                      discount: (s.offer?.discount ?? 0).toDouble(),
+                                      discountType: DiscountType.fromString(
+                                        s.offer?.discountType ?? '',
+                                      ),
+                                    ),
+                                  );
+                                  return VerticalProductCard(
+                                    key: ValueKey('store_${entity.id}'),
+                                    product: entity,
+                                    canAdd: false,
+                                    onTap: () {
+                                      log('id==> ${s.storeCategoryType}');
+                                      if (s.id == null) {
+                                        return;
                                       }
-                                      final price =
-                                          double.tryParse(
-                                            (item.appPrice ?? item.price ?? '0').toString(),
-                                          ) ??
-                                          0;
 
-                                      return VerticalProductCard(
-                                        key: ValueKey('item_${item.id}'),
-                                        product: ProductEntity(
-                                          id: item.id!,
-                                          name: item.name!,
-                                          description: '',
-                                          price: price,
-                                          image: item.image!,
-                                          rate: 0,
-                                          reviewCount: 0,
-                                          outOfStock: false,
-                                          offer: OfferEntity(
-                                            id: item.offer!.id!,
-                                            discount: item.offer!.discount!.toDouble(),
-                                            discountType: DiscountType.fromString(
-                                              item.offer!.discountType ?? '',
+                                      if (s.storeCategoryType == VendorType.restaurant.value) {
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<SingleRestaurantCubit>(
+                                              param1: s.id,
+                                            ),
+                                            child: RestaurantDetailsScreen(
+                                              id: s.id!,
                                             ),
                                           ),
-                                          store: SimpleStoreEntity(
-                                            id: item.storeInfo!.storeId!,
-                                            name: item.storeInfo!.storeName!,
-                                            image: item.storeInfo!.storeImage!,
-                                            type: item.storeInfo!.storeCategoryType!,
+                                        );
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<StoreDetailsCubit>(
+                                              param1: s.id,
+                                            ),
+                                            child: StoreDetailsScreen(
+                                              storeId: s.id!,
+                                            ),
                                           ),
-                                        ),
-                                        canAdd: false,
-                                      );
-                                    },
-                                    childCount: items.length,
-                                  ),
-                                ),
-                              ),
-                            ],
-                            if (stores.isNotEmpty) ...[
-                              SliverPadding(
-                                padding: AppConst.defaultPadding,
-                                sliver: SliverToBoxAdapter(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      GradientText(
-                                        text: L10n.tr().storesOffersForYou,
-                                        style: TStyle.blackBold(16),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SliverToBoxAdapter(
-                                child: VerticalSpacing(8),
-                              ),
-                              SliverPadding(
-                                padding: AppConst.defaultPadding,
-                                sliver: SliverGrid(
-                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.84,
-                                    crossAxisSpacing: 12,
-                                    mainAxisSpacing: 12,
-                                  ),
-                                  delegate: SliverChildBuilderDelegate(
-                                    (context, index) {
-                                      final s = stores[index];
-                                      final entity = ProductEntity(
-                                        id: s.id ?? 0,
-                                        productId: s.id,
-                                        name: s.storeName ?? '',
-                                        description: '',
-                                        price: 0,
-                                        image: s.image ?? '',
-                                        rate: double.tryParse(s.rate ?? '0') ?? 0,
-                                        reviewCount: (s.rateCount ?? 0).toInt(),
-                                        outOfStock: false,
-                                        offer: OfferEntity(
-                                          id: s.offer?.id ?? 0,
-                                          discount: (s.offer?.discount ?? 0).toDouble(),
-                                          discountType: DiscountType.fromString(
-                                            s.offer?.discountType ?? '',
+                                        );
+                                        // RestaurantDetailsScreen(
+                                        //   id: s.id,
+                                        // ).push(context);
+                                      } else if (s.storeCategoryType == VendorType.grocery.value) {
+                                        // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<StoreDetailsCubit>(
+                                              param1: s.id,
+                                            ),
+                                            child: StoreDetailsScreen(
+                                              storeId: s.id!,
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                      return VerticalProductCard(
-                                        key: ValueKey('store_${entity.id}'),
-                                        product: entity,
-                                        canAdd: false,
-                                        onTap: () {
-                                          log('id==> ${s.storeCategoryType}');
-                                          if (s.id == null) {
-                                            return;
-                                          }
-
-                                          if (s.storeCategoryType == VendorType.restaurant.value) {
-                                            context.navigateToPage(
-                                              BlocProvider(
-                                                create: (context) => di<SingleRestaurantCubit>(
-                                                  param1: s.id,
-                                                ),
-                                                child: RestaurantDetailsScreen(
-                                                  id: s.id!,
-                                                ),
-                                              ),
-                                            );
-                                            context.navigateToPage(
-                                              BlocProvider(
-                                                create: (context) => di<StoreDetailsCubit>(
-                                                  param1: s.id,
-                                                ),
-                                                child: StoreDetailsScreen(
-                                                  storeId: s.id!,
-                                                ),
-                                              ),
-                                            );
-                                            // RestaurantDetailsScreen(
-                                            //   id: s.id,
-                                            // ).push(context);
-                                          } else if (s.storeCategoryType == VendorType.grocery.value) {
-                                            // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
-                                            context.navigateToPage(
-                                              BlocProvider(
-                                                create: (context) => di<StoreDetailsCubit>(
-                                                  param1: s.id,
-                                                ),
-                                                child: StoreDetailsScreen(
-                                                  storeId: s.id!,
-                                                ),
-                                              ),
-                                            );
-                                            // StoreDetailsRoute(
-                                            //   storeId: s.id ?? -1,
-                                            // ).push(context);
-                                          } else {
-                                            context.navigateToPage(
-                                              BlocProvider(
-                                                create: (context) => di<StoreDetailsCubit>(
-                                                  param1: s.id,
-                                                ),
-                                                child: StoreDetailsScreen(
-                                                  storeId: s.id!,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                      );
+                                        );
+                                        // StoreDetailsRoute(
+                                        //   storeId: s.id ?? -1,
+                                        // ).push(context);
+                                      } else {
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<StoreDetailsCubit>(
+                                              param1: s.id,
+                                            ),
+                                            child: StoreDetailsScreen(
+                                              storeId: s.id!,
+                                            ),
+                                          ),
+                                        );
+                                      }
                                     },
-                                    childCount: stores.length,
-                                  ),
-                                ),
+                                  );
+                                },
+                                childCount: stores.length,
                               ),
-                              const SliverToBoxAdapter(
-                                child: VerticalSpacing(16),
-                              ),
-                            ],
-                          ],
-                        );
-                      },
+                            ),
+                          ),
+                          const SliverToBoxAdapter(
+                            child: VerticalSpacing(16),
+                          ),
+                        ],
+                      ],
                     );
                   }
 

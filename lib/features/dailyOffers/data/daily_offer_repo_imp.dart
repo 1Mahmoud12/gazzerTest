@@ -16,12 +16,21 @@ class DailyOfferRepoImp extends DailyOfferRepo {
   DailyOfferRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<DailyOfferDataModel?>> getAllDailyOffer() async {
+  Future<Result<DailyOfferDataModel?>> getAllDailyOffer({
+    String? search,
+  }) async {
     final result = await super.call(
-      apiCall: () => _apiClient.get(endpoint: Endpoints.getAllOffers),
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.getAllOffers,
+        queryParameters: {
+          if (search != null && search.isNotEmpty) 'search': search,
+        },
+      ),
       parser: (response) {
-        // Save to cache in background
-        _saveToCache(response.data);
+        // Save to cache in background only if no search
+        if (search == null || search.isEmpty) {
+          _saveToCache(response.data);
+        }
 
         final dto = DailyOffersDto.fromJson(response.data);
         return dto.data?.data;

@@ -15,6 +15,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onShare,
     this.showNotification = false,
     this.title,
+    this.backgroundColor,
     this.titleStyle,
     this.showBadge = false,
   });
@@ -23,6 +24,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showNotification;
   final Color iconsColor;
   final Color? bacButtonColor;
+  final Color? backgroundColor;
   final bool isCartScreen;
   final Function()? onShare;
   final String? title;
@@ -33,6 +35,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+      backgroundColor: backgroundColor,
       title: title == null ? null : Text(title!, style: titleStyle),
       leading: Navigator.canPop(context)
           ? IconButton(

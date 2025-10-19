@@ -8,5 +8,6 @@ class StoreCategoryEntity extends GenericSubCategoryEntity {
     super.style,
     super.layout,
     super.parentId,
+    super.products,
   });
 }

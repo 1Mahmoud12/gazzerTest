@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
@@ -15,6 +16,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_header_container.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/store_details_states.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/sub_category_details/sub_category_details_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'store_details_screen.g.dart';
@@ -62,7 +64,9 @@ class StoreDetailsScreen extends StatelessWidget {
             children: [
               GrocHeaderContainer(
                 child: Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.paddingOf(context).top,
+                  ),
                   child: VendorInfoCard(
                     store,
                     categories: catWithSubCatProds.map((e) => e.$1.name),
@@ -88,7 +92,19 @@ class StoreDetailsScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           child: _gridWidget(
                             maincat: item.$1,
-                            onSinglceCardPressed: (item) {},
+                            onSinglceCardPressed: (subCat) {
+                              // Pass all products from this main category
+                              // The API should be returning products grouped by subcategory
+                              context.navigateToPage(
+                                SubCategoryDetailsScreen(
+                                  subCategory: subCat,
+                                  products: subCat.products ?? [],
+                                  store: state.store,
+                                  cardStyle: item.$1.style,
+                                  categories: catWithSubCatProds.map((e) => e.$1.name).toList(),
+                                ),
+                              );
+                            },
                             subcats: item.$2,
                             products: item.$3,
                           ),
@@ -127,7 +143,7 @@ class _gridWidget extends StatelessWidget {
     required this.products,
   });
   final StoreCategoryEntity maincat;
-  final Function(dynamic item) onSinglceCardPressed;
+  final Function(StoreCategoryEntity subCat) onSinglceCardPressed;
   final List<StoreCategoryEntity> subcats;
   final List<ProductEntity> products;
   @override
@@ -152,9 +168,12 @@ class _gridWidget extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             if (index < subcats.length) {
-              return GrocSubCatCard(
-                subCat: subcats[index],
-                shape: maincat.style,
+              return GestureDetector(
+                onTap: () => onSinglceCardPressed(subcats[index]),
+                child: GrocSubCatCard(
+                  subCat: subcats[index],
+                  shape: maincat.style,
+                ),
               );
             }
             if (index >= subcats.length) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
-import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
@@ -8,11 +7,11 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 import 'circle_gradient_image.dart';
-import 'smart_cart_widget.dart';
 
 class VerticalRotatedImgCard extends StatelessWidget {
   const VerticalRotatedImgCard({
@@ -127,13 +126,11 @@ class VerticalRotatedImgCard extends StatelessWidget {
                           const VerticalSpacing(8),
                           Align(
                             alignment: AlignmentDirectional.center,
-                            child: SmartCartWidget(
-                              id: prod.id,
-                              type: prod is PlateEntity ? CartItemType.plate : CartItemType.product,
-                              outOfStock: prod.outOfStock,
-                              onDoubleTap: () {
-                                onTap.call();
-                              },
+                            child: CartToIncrementIcon(
+                              isHorizonal: true,
+                              product: prod,
+                              iconSize: 25,
+                              isDarkContainer: true,
                             ),
                           ),
                         ],

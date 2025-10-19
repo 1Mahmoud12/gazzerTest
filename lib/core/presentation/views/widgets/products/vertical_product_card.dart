@@ -8,8 +8,8 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/smart_cart_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -226,6 +226,7 @@ class VerticalProductCard extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       DecoratedBox(
                         decoration: BoxDecoration(
@@ -268,37 +269,44 @@ class VerticalProductCard extends StatelessWidget {
                                 ),
                         ),
                       ),
+                      const Spacer(),
                       const SizedBox(width: 8),
                       if (Session().client != null && !(key?.toString().contains('store') ?? false))
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SmartCartWidget(
-                                id: product.productId ?? product.id,
-                                type: product is PlateEntity
-                                    ? CartItemType.plate
-                                    : product is ProductEntity
-                                    ? CartItemType.product
-                                    : CartItemType.restaurantItem,
-                                outOfStock: product.outOfStock,
-                                onDoubleTap: () {
-                                  SystemSound.play(SystemSoundType.click);
-                                  if (onTap != null) {
-                                    onTap?.call();
-                                  } else {
-                                    // Navigate based on item type
-                                    if (product is PlateEntity) {
-                                      PlateDetailsRoute(id: product.id).push(context);
-                                    } else if (product is ProductEntity) {
-                                      ProductDetailsRoute(productId: product.id).push(context);
-                                    }
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
+                        CartToIncrementIcon(
+                          isHorizonal: true,
+                          product: product,
+                          iconSize: 25,
+                          isDarkContainer: true,
                         ),
+                      // Expanded(
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //     children: [
+                      //       // SmartCartWidget(
+                      //       //   id: product.productId ?? product.id,
+                      //       //   type: product is PlateEntity
+                      //       //       ? CartItemType.plate
+                      //       //       : product is ProductEntity
+                      //       //       ? CartItemType.product
+                      //       //       : CartItemType.restaurantItem,
+                      //       //   outOfStock: product.outOfStock,
+                      //       //   onDoubleTap: () {
+                      //       //     SystemSound.play(SystemSoundType.click);
+                      //       //     if (onTap != null) {
+                      //       //       onTap?.call();
+                      //       //     } else {
+                      //       //       // Navigate based on item type
+                      //       //       if (product is PlateEntity) {
+                      //       //         PlateDetailsRoute(id: product.id).push(context);
+                      //       //       } else if (product is ProductEntity) {
+                      //       //         ProductDetailsRoute(productId: product.id).push(context);
+                      //       //       }
+                      //       //     }
+                      //       //   },
+                      //       // ),
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(width: 16),
                     ],
                   ),
