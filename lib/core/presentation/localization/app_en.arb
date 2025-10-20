@@ -461,6 +461,14 @@
   "noSearchResults": "No results found",
   "phoneAlreadyRegistered": "This phone number is already registered",
   "emailAlreadyRegistered": "This email address is already registered",
-  "phoneAndEmailAlreadyRegistered": "This phone number and email are already registered"
+  "phoneAndEmailAlreadyRegistered": "This phone number and email are already registered",
+  "uploadPrescription": "Upload Prescription",
+  "pharmacyStores": "Pharmacy Stores",
+  "bestSellers": "Best Sellers",
+  "freeDeliveryOver": "Free delivery on orders over 300 EG",
+  "hours": "Hours",
+  "mins": "Mins",
+  "secs": "Secs",
+  "dailyDeal": "Daily Deal"
 
 }

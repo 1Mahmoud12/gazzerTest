@@ -462,7 +462,15 @@
   "noSearchResults": "لا توجد نتائج",
   "phoneAlreadyRegistered": "رقم الهاتف هذا مسجل بالفعل",
   "emailAlreadyRegistered": "البريد الإلكتروني هذا مسجل بالفعل",
-  "phoneAndEmailAlreadyRegistered": "رقم الهاتف والبريد الإلكتروني مسجلان بالفعل"
+  "phoneAndEmailAlreadyRegistered": "رقم الهاتف والبريد الإلكتروني مسجلان بالفعل",
+  "uploadPrescription": "رفع الروشتة",
+  "pharmacyStores": "الصيدليات",
+  "bestSellers": "الأكثر مبيعاً",
+  "freeDeliveryOver": "توصيل مجاني للطلبات أكثر من 300 جنيه",
+  "hours": "ساعات",
+  "mins": "دقائق",
+  "secs": "ثواني",
+  "dailyDeal": "عرض اليوم"
 
 
 

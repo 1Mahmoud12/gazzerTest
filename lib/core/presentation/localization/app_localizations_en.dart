@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -712,13 +712,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get egp => 'EGP';
 
   @override
-  String get hours => 'hours';
+  String get hours => 'Hours';
 
   @override
-  String get mins => 'mins';
+  String get mins => 'Mins';
 
   @override
-  String get secs => 'secs';
+  String get secs => 'Secs';
 
   @override
   String get onAllGrills => 'On All Grills';
@@ -1162,4 +1162,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phoneAndEmailAlreadyRegistered => 'This phone number and email are already registered';
+
+  @override
+  String get uploadPrescription => 'Upload Prescription';
+
+  @override
+  String get pharmacyStores => 'Pharmacy Stores';
+
+  @override
+  String get bestSellers => 'Best Sellers';
+
+  @override
+  String get freeDeliveryOver => 'Free delivery on orders over 300 EG';
+
+  @override
+  String get dailyDeal => 'Daily Deal';
 }

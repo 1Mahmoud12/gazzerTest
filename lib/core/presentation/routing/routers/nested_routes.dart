@@ -17,7 +17,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/view/pharmacy_menu_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/pharmacy_menu_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
 import 'package:go_router/go_router.dart';
 
@@ -91,7 +91,7 @@ final storesRoutes = [
 
 final pharmacyRoutes = [
   GoRoute(
-    path: PharmacyMenuScreen.route,
+    path: PharmacyMenuRoute.route,
     builder: (context, state) => const PharmacyMenuScreen(),
   ),
 ];

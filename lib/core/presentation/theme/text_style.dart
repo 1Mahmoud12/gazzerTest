@@ -64,8 +64,9 @@ abstract class TStyle {
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.white);
   static TextStyle blackRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
-  static TextStyle blackSemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.dark);
+
+  static TextStyle blackSemi(double fontSize, {FFamily font = FFamily.poppins, List<Shadow>? shadows}) =>
+      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.dark, shadows: shadows);
   static TextStyle blackBold(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.dark);
 }

@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -718,7 +718,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mins => 'دقائق';
 
   @override
-  String get secs => 'ثوان';
+  String get secs => 'ثواني';
 
   @override
   String get onAllGrills => 'على جميع الشوايات';
@@ -1162,4 +1162,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get phoneAndEmailAlreadyRegistered => 'رقم الهاتف والبريد الإلكتروني مسجلان بالفعل';
+
+  @override
+  String get uploadPrescription => 'رفع الروشتة';
+
+  @override
+  String get pharmacyStores => 'الصيدليات';
+
+  @override
+  String get bestSellers => 'الأكثر مبيعاً';
+
+  @override
+  String get freeDeliveryOver => 'توصيل مجاني للطلبات أكثر من 300 جنيه';
+
+  @override
+  String get dailyDeal => 'عرض اليوم';
 }

@@ -1481,19 +1481,19 @@ abstract class AppLocalizations {
   /// No description provided for @hours.
   ///
   /// In en, this message translates to:
-  /// **'hours'**
+  /// **'Hours'**
   String get hours;
 
   /// No description provided for @mins.
   ///
   /// In en, this message translates to:
-  /// **'mins'**
+  /// **'Mins'**
   String get mins;
 
   /// No description provided for @secs.
   ///
   /// In en, this message translates to:
-  /// **'secs'**
+  /// **'Secs'**
   String get secs;
 
   /// No description provided for @onAllGrills.
@@ -2365,6 +2365,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This phone number and email are already registered'**
   String get phoneAndEmailAlreadyRegistered;
+
+  /// No description provided for @uploadPrescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Prescription'**
+  String get uploadPrescription;
+
+  /// No description provided for @pharmacyStores.
+  ///
+  /// In en, this message translates to:
+  /// **'Pharmacy Stores'**
+  String get pharmacyStores;
+
+  /// No description provided for @bestSellers.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Sellers'**
+  String get bestSellers;
+
+  /// No description provided for @freeDeliveryOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Free delivery on orders over 300 EG'**
+  String get freeDeliveryOver;
+
+  /// No description provided for @dailyDeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Deal'**
+  String get dailyDeal;
 }
 
 class _AppLocalizationsDelegate

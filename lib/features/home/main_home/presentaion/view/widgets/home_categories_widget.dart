@@ -90,6 +90,8 @@ class CategoryCard extends StatelessWidget {
               context.push(RestaurantsMenuScreen.route);
             } else if (category.type == VendorType.grocery) {
               StoreMenuSwitcherRoute(id: category.id).push(context);
+            } else if (category.type == VendorType.pharmacy) {
+              context.push(PharmacyMenuRoute.route);
             } else {
               StoreMenuSwitcherRoute(id: category.id).push(context);
 
