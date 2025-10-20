@@ -15,6 +15,7 @@ class GlobalIncrementWidget extends StatelessWidget {
     required this.isHorizonal,
     required this.isDarkContainer,
     this.iconSize = 18,
+    this.canAdd = true,
   });
   final int initVal;
   final Function(bool isAdding) onChanged;
@@ -23,32 +24,11 @@ class GlobalIncrementWidget extends StatelessWidget {
   final bool isHorizonal;
   final bool isDarkContainer;
   final double iconSize;
+  final bool canAdd;
+
   @override
   Widget build(BuildContext context) {
     final children = [
-      SwitchingDecoratedwidget(
-        isDarkContainer: isDarkContainer,
-        borderRadius: BorderRadius.circular(100),
-        child: IconButton(
-          onPressed: () {
-            if (isAdding || isRemoving) return;
-            SystemSound.play(SystemSoundType.click);
-            onChanged(true);
-          },
-          style: IconButton.styleFrom(
-            padding: const EdgeInsets.all(3),
-            elevation: 0,
-            minimumSize: Size.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
-          ),
-          icon: isAdding ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary) : Icon(Icons.add, color: Co.secondary, size: iconSize),
-        ),
-      ),
-      ConstrainedBox(
-        constraints: const BoxConstraints(minWidth: 15),
-        child: Text("$initVal", style: TStyle.secondarySemi(13), textAlign: TextAlign.center),
-      ),
       SwitchingDecoratedwidget(
         isDarkContainer: isDarkContainer,
         borderRadius: BorderRadius.circular(100),
@@ -63,11 +43,57 @@ class GlobalIncrementWidget extends StatelessWidget {
             elevation: 0,
             minimumSize: Size.zero,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+            shape: RoundedRectangleBorder(
+              borderRadius: AppConst.defaultBorderRadius,
+            ),
           ),
           icon: isRemoving
-              ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary)
+              ? AdaptiveProgressIndicator(
+                  size: iconSize - 2,
+                  color: Co.secondary,
+                )
               : Icon(Icons.remove, color: Co.secondary, size: iconSize),
+        ),
+      ),
+
+      ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 15),
+        child: Text(
+          "$initVal",
+          style: TStyle.secondaryBold(14),
+          textAlign: TextAlign.center,
+        ),
+      ),
+      SwitchingDecoratedwidget(
+        isDarkContainer: isDarkContainer,
+        borderRadius: BorderRadius.circular(100),
+        child: IconButton(
+          onPressed: canAdd
+              ? () {
+                  if (isAdding || isRemoving) return;
+                  SystemSound.play(SystemSoundType.click);
+                  onChanged(true);
+                }
+              : null,
+          style: IconButton.styleFrom(
+            padding: const EdgeInsets.all(3),
+            elevation: 0,
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            shape: RoundedRectangleBorder(
+              borderRadius: AppConst.defaultBorderRadius,
+            ),
+          ),
+          icon: isAdding
+              ? AdaptiveProgressIndicator(
+                  size: iconSize - 2,
+                  color: Co.secondary,
+                )
+              : Icon(
+                  Icons.add,
+                  color: canAdd ? Co.secondary : Co.secondary.withOpacity(0.3),
+                  size: iconSize,
+                ),
         ),
       ),
     ];
@@ -75,6 +101,7 @@ class GlobalIncrementWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: isHorizonal
           ? Row(
+              spacing: 2,
               //mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

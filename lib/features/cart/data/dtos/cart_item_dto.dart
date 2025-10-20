@@ -11,6 +11,7 @@ class CartItemDTO {
   String? cartableType;
   GenericItemDTO? cartable;
   int? quantity;
+  int? quantityInStock;
   List<CartOptionDTO>? optionValues;
   String? notes;
 
@@ -26,6 +27,7 @@ class CartItemDTO {
     }
     notes = json['notes'];
     if (json['cartable'] != null) {
+      quantityInStock = json['cartable']['quantity_in_stock'];
       if (isPlate) {
         cartable = PlateDTO.fromJson(json['cartable']);
       } else {
@@ -40,6 +42,7 @@ class CartItemDTO {
       type: CartItemType.fromString(cartableType?.toLowerCase() ?? ''),
       prod: cartable!.toCartable(),
       quantity: quantity ?? 1,
+      quantityInStock: quantityInStock,
       options: optionValues?.map((option) => option.toEntity()).toList() ?? [],
       notes: notes,
     );

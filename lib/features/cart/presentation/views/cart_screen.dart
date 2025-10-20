@@ -41,7 +41,9 @@ class _CartScreenState extends State<CartScreen> {
     return BlocListener<CartCubit, CartStates>(
       listenWhen: (previous, current) => current is BaseErrorState && previous is! BaseErrorState,
       listener: (context, state) {
-        if (state is BaseErrorState) Alerts.showToast((state as BaseErrorState).message);
+        if (state is BaseErrorState) {
+          Alerts.showToast((state as BaseErrorState).message);
+        }
       },
       child: Scaffold(
         appBar: const MainAppBar(isCartScreen: true),
@@ -50,16 +52,23 @@ class _CartScreenState extends State<CartScreen> {
             GradientText(
               text: L10n.tr().cart,
               style: TStyle.blackBold(24),
-              gradient: Grad().radialGradient.copyWith(radius: 2, center: Alignment.centerLeft),
+              gradient: Grad().radialGradient.copyWith(
+                radius: 2,
+                center: Alignment.centerLeft,
+              ),
             ),
             if (Session().client == null)
-              Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseCart))
+              Expanded(
+                child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseCart),
+              )
             else
               Expanded(
                 child: BlocBuilder<CartCubit, CartStates>(
                   buildWhen: (previous, current) => current is FullCartStates,
                   builder: (context, state) {
-                    if (state is! FullCartStates) return const SizedBox.shrink();
+                    if (state is! FullCartStates) {
+                      return const SizedBox.shrink();
+                    }
                     if (state is FullCartError) {
                       return FailureComponent(
                         message: state.message,
@@ -78,11 +87,17 @@ class _CartScreenState extends State<CartScreen> {
                           separatorBuilder: (context, index) => const VerticalSpacing(24),
                           // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
                           itemBuilder: (context, index) {
-                            if (index == state.vendors.length) return const CartAddressComponent();
-                            if (index == state.vendors.length + 1) return const SchedulingComponent();
+                            if (index == state.vendors.length) {
+                              return const CartAddressComponent();
+                            }
+                            if (index == state.vendors.length + 1) {
+                              return const SchedulingComponent();
+                            }
                             // if (index == state.vendors.length + 2) return const CartSummaryWidget();
 
-                            return VendorCartProductsItem(cartVendor: state.vendors[index]);
+                            return VendorCartProductsItem(
+                              cartVendor: state.vendors[index],
+                            );
                           },
                         ),
                       ),

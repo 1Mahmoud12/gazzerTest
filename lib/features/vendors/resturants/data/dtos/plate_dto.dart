@@ -12,6 +12,7 @@ class PlateDTO extends GenericItemDTO {
     caegoryId = json['plate_category_id'];
     description = json['plate_description'];
     image = json['plate_image'];
+    quantityInStock = json['quantity_in_stock'];
     rate = double.tryParse(json['rate'].toString());
     rateCount = int.tryParse(json['rate_count'].toString());
     price = double.tryParse(json['app_price'].toString());

@@ -22,8 +22,8 @@ class StoreCategoryDto {
     products = json['items'] == null
         ? []
         : List<ProductEntity>.from(
-            json['items'].map(
-              (x) => ProductDTO.fromJson(x as Map<String, dynamic>).toEntity(),
+            (json['items'] as List).map(
+              (item) => ProductDTO.fromJson(item as Map<String, dynamic>).toEntity(),
             ),
           );
   }

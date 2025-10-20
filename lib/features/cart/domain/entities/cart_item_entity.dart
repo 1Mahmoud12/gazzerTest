@@ -9,6 +9,7 @@ class CartItemEntity extends Equatable {
   final CartItemType type;
   final CartableEntity prod;
   final int quantity;
+  final int? quantityInStock;
   final List<CartOptionEntity> options;
   final String? notes;
 
@@ -19,6 +20,7 @@ class CartItemEntity extends Equatable {
     required this.type,
     required this.quantity,
     required this.prod,
+    this.quantityInStock,
     this.notes,
     this.options = const [],
   });
@@ -44,6 +46,7 @@ class CartItemEntity extends Equatable {
     int? id,
     CartItemType? type,
     int? quantity,
+    int? quantityInStock,
     String? notes,
     List<CartOptionEntity>? options,
     CartableEntity? prod,
@@ -52,12 +55,25 @@ class CartItemEntity extends Equatable {
       cartId: id ?? this.cartId,
       type: type ?? this.type,
       quantity: quantity ?? this.quantity,
+      quantityInStock: quantityInStock ?? this.quantityInStock,
       notes: notes ?? this.notes,
       prod: prod ?? this.prod,
-      options: options ?? List.from(this.options), // Create a new list to ensure state change detection
+      options:
+          options ??
+          List.from(
+            this.options,
+          ), // Create a new list to ensure state change detection
     );
   }
 
   @override
-  List<Object?> get props => [cartId, type, quantity, notes, options, prod];
+  List<Object?> get props => [
+    cartId,
+    type,
+    quantity,
+    quantityInStock,
+    notes,
+    options,
+    prod,
+  ];
 }

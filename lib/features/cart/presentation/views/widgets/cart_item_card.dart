@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +32,7 @@ class CartItemCard extends StatelessWidget {
         switch (item.type) {
           case CartItemType.product:
             ProductDetailsRoute(productId: item.prod.id, $extra: item).push<bool>(context).then((hasChanged) {
-              print('hasCartChanges $hasChanged');
+              log('hasCartChanges $hasChanged');
               if (hasChanged == true) cubit.loadCart();
             });
             break;

@@ -35,11 +35,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
 
   @override
   void initState() {
-    super.initState();
     bus = di<FavoriteBus>();
-
-    // Initialize itemEntity on startup
-    getItemType();
 
     lisnter = bus.subscribe<ToggleFavoriteStates>((v) {
       if (!mounted) return;
@@ -56,6 +52,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
       }
       getItemType();
     });
+    super.initState();
   }
 
   @override
@@ -79,31 +76,33 @@ class _FavoriteCardState extends State<FavoriteCard> {
   }
 
   GenericItemEntity? itemEntity;
-
   void getItemType() {
-    final type = widget.favorite.favoriteType.type;
-    final price = widget.favorite.favorablePrice ?? 0.0;
+    String? type = widget.favorite.favoriteType.type;
+    if (type == CartItemType.plate.value) type = CartItemType.plate.value;
+    if (type == CartItemType.product.value) type = CartItemType.product.value;
+    if (type == CartItemType.restaurantItem.value) type = CartItemType.restaurantItem.value;
 
     if (type == CartItemType.plate.value) {
       itemEntity = PlateEntity(
         id: widget.favorite.id,
         name: widget.favorite.name,
         description: widget.favorite.description,
-        price: price,
-        categoryPlateId: 0,
-        // Default value if not available
+        price: 2,
+        categoryPlateId: 2,
         image: widget.favorite.image,
         rate: widget.favorite.rate,
         reviewCount: widget.favorite.reviewCount,
         outOfStock: widget.favorite.outOfStock,
         hasOptions: false,
       );
-    } else if (type == CartItemType.product.value || type == CartItemType.restaurantItem.value) {
+    } else
+    /*if (type == CartItemType.product.value)*/ {
       itemEntity = ProductEntity(
         id: widget.favorite.id,
         name: widget.favorite.name,
         description: widget.favorite.description,
-        price: price,
+        price: 2,
+
         image: widget.favorite.image,
         rate: widget.favorite.rate,
         reviewCount: widget.favorite.reviewCount,
@@ -198,7 +197,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                           Align(
                             alignment: AlignmentDirectional.center,
                             child: CartToIncrementIcon(
-                              isHorizonal: true,
+                              isHorizonal: false,
                               product: itemEntity!,
                               iconSize: 20,
                               isDarkContainer: false,
