@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
@@ -7,8 +6,8 @@ import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_wi
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 /// Reusable circular product card for pharmacy best sellers
-class PharmacyProductCard extends StatelessWidget {
-  const PharmacyProductCard({
+class ViewAllPharmacyProductCard extends StatelessWidget {
+  const ViewAllPharmacyProductCard({
     super.key,
     required this.product,
     required this.vendorName,
@@ -23,42 +22,28 @@ class PharmacyProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate dimensions based on the provided width or screen width
-    final cardWidth = width ?? MediaQuery.sizeOf(context).width * 0.8;
-    final circleSize = cardWidth * 0.625; // 62.5% of card width (was 0.5 of screen)
-    final imageWidth = cardWidth * 0.5; // 50% of card width (was 0.4 of screen)
-    final imageHeight = circleSize * 0.36; // Proportional to circle size
-    final nameWidth = cardWidth * 0.375; // 37.5% of card width (was 0.3 of screen)
-    final padding = cardWidth * 0.025; // 2.5% of card width (was 8)
-    final largeBorderRadius = cardWidth * 0.625; // For the circular edges (was 200)
-    final smallBorderRadius = cardWidth * 0.0625; // For the small corners (was 20)
-    final fontSize = cardWidth * 0.05; // Base font size proportional to width
-    final iconSize = cardWidth * 0.05625; // Icon size proportional to width
-    final spacing = cardWidth * 0.025; // Spacing proportional to width
+    // Calculate dimensions based on the provided width or a default size
+    final cardWidth = width ?? MediaQuery.sizeOf(context).width * 0.45;
+    final imageWidth = cardWidth * 0.44; // 44% of card width (was 0.2 of screen)
+    final imageHeight = cardWidth * 0.22; // Proportional to card width
+    final nameWidth = cardWidth * 0.67; // 67% of card width (was 0.3 of screen)
+    final padding = cardWidth * 0.04; // 4% of card width (was 8)
+    final borderRadius = cardWidth * 0.06; // Proportional border radius (was 12)
+    final fontSize = cardWidth * 0.065; // Base font size proportional to width
+    final smallFontSize = cardWidth * 0.055; // Small font size
+    final iconSize = cardWidth * 0.08; // Icon size proportional to width
+    final smallIconSize = cardWidth * 0.06; // Small icon size
+    final spacing = cardWidth * 0.06; // Spacing proportional to width
+    final smallSpacing = cardWidth * 0.02; // Small spacing
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: cardWidth,
-        height: cardWidth * .8,
-        margin: EdgeInsets.symmetric(horizontal: spacing),
         padding: EdgeInsets.all(padding),
         decoration: BoxDecoration(
           color: Co.buttonGradient.withOpacity(.1), // Light purple background
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(
-              L10n.isAr(context) ? smallBorderRadius : largeBorderRadius,
-            ),
-            bottomLeft: Radius.circular(
-              L10n.isAr(context) ? smallBorderRadius : largeBorderRadius,
-            ),
-            topRight: Radius.circular(
-              L10n.isAr(context) ? largeBorderRadius : smallBorderRadius,
-            ),
-            bottomRight: Radius.circular(
-              L10n.isAr(context) ? largeBorderRadius : smallBorderRadius,
-            ),
-          ),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -66,14 +51,12 @@ class PharmacyProductCard extends StatelessWidget {
             // Main circular container with product and info
             // Large circular container
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   // Circular border container
                   Container(
-                    width: circleSize,
-                    height: circleSize,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -87,7 +70,7 @@ class PharmacyProductCard extends StatelessWidget {
                         // Product Image
                         ClipOval(
                           child: Padding(
-                            padding: EdgeInsets.all(spacing * 2.5),
+                            padding: EdgeInsets.all(padding * 2.5),
                             child: CustomNetworkImage(
                               'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', //product.image,
                               width: imageWidth,
@@ -96,19 +79,17 @@ class PharmacyProductCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: spacing),
+                        SizedBox(height: smallSpacing),
 
                         // Product Name
                         SizedBox(
                           width: nameWidth,
-                          child: Flexible(
-                            child: Text(
-                              product.name,
-                              style: TStyle.burbleBold(fontSize),
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          child: Text(
+                            product.name,
+                            style: TStyle.burbleBold(fontSize),
+                            textAlign: TextAlign.center,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(height: spacing),
@@ -133,16 +114,16 @@ class PharmacyProductCard extends StatelessWidget {
                           DecoratedFavoriteWidget(
                             fovorable: product,
                             isDarkContainer: false,
-                            size: iconSize,
+                            size: smallIconSize,
                             borderRadius: BorderRadius.circular(100),
                           ),
-                          SizedBox(height: spacing * 1.5),
+                          SizedBox(height: spacing),
 
                           Text(
                             'EG',
-                            style: TStyle.blackBold(fontSize),
+                            style: TStyle.blackBold(smallFontSize),
                           ),
-                          SizedBox(height: spacing * 1.5),
+                          SizedBox(height: spacing),
                           Icon(
                             Icons.star,
                             color: Co.secondary,
@@ -155,20 +136,20 @@ class PharmacyProductCard extends StatelessWidget {
                           CartToIncrementIcon(
                             isHorizonal: false,
                             product: product,
-                            iconSize: iconSize * 1.1,
+                            iconSize: iconSize,
                             isDarkContainer: false,
                           ),
-                          SizedBox(height: spacing * 1.5),
+                          SizedBox(height: spacing),
 
                           Text(
                             product.price.toStringAsFixed(0),
-                            style: TStyle.blackBold(fontSize),
+                            style: TStyle.blackBold(smallFontSize),
                           ),
-                          SizedBox(height: spacing * 1.5),
+                          SizedBox(height: spacing),
                           Text(
                             product.rate.toStringAsFixed(2),
                             style: TStyle.blackBold(
-                              fontSize * 0.875,
+                              smallFontSize,
                             ).copyWith(color: Co.secondary),
                           ),
                         ],
@@ -180,7 +161,7 @@ class PharmacyProductCard extends StatelessWidget {
 
                   Text(
                     vendorName,
-                    style: TStyle.greyRegular(fontSize * 0.875),
+                    style: TStyle.greyRegular(fontSize),
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

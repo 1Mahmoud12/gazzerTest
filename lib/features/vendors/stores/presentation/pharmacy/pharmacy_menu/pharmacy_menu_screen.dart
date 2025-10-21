@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/best_sellers/pharmacy_best_sellers_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_deal_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/delivery_banner.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_category_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_header.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_product_card.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_product_card_style2.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/prescription_upload_button.dart';
 import 'package:go_router/go_router.dart';
 
@@ -75,7 +78,7 @@ class PharmacyMenuScreen extends StatelessWidget {
 
                   // Daily Deal Card
                   DailyDealCard(
-                    imageUrl: 'https://via.placeholder.com/150',
+                    imageUrl: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
                     discountPercentage: 30,
                     endTime: DateTime.now().add(
                       const Duration(hours: 14, minutes: 20, seconds: 30),
@@ -160,7 +163,7 @@ class PharmacyMenuScreen extends StatelessWidget {
                   (index) {
                     final category = categories[index];
                     return SizedBox(
-                      width: ((MediaQuery.sizeOf(context).width ?? 0) / 3) - 10,
+                      width: (MediaQuery.sizeOf(context).width / 3) - 10,
                       height: 170,
                       child: PharmacyCategoryCard(
                         id: category['id'],
@@ -193,27 +196,43 @@ class PharmacyMenuScreen extends StatelessWidget {
           child: TitleWithMore(
             title: 'Best Sellers',
             onPressed: () {
-              // TODO: Navigate to all best sellers
+              context.navigateToPage(const PharmacyBestSellersScreen());
             },
           ),
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 240,
-          child: ListView.builder(
+          height: 250,
+          child: SingleChildScrollView(
             padding: AppConst.defaultHrPadding,
             scrollDirection: Axis.horizontal,
-            itemCount: bestSellers.length,
-            itemBuilder: (context, index) {
-              final product = bestSellers[index];
-              return PharmacyProductCard(
-                product: product['product'],
-                vendorName: product['vendorName'],
-                onTap: () {
-                  // TODO: Navigate to product details
+            child: Row(
+              children: List.generate(
+                bestSellers.length,
+                (index) {
+                  final product = bestSellers[index];
+                  return index % 2 == 0
+                      ? PharmacyProductCardStyle2(
+                          product: product['product'],
+                          vendorName: product['vendorName'],
+                          width: MediaQuery.sizeOf(context).width * .8,
+                          height: MediaQuery.sizeOf(context).height * .25,
+                          onTap: () {
+                            // Handle tap
+                          },
+                        )
+                      : PharmacyProductCard(
+                          product: product['product'],
+                          vendorName: product['vendorName'],
+                          width: MediaQuery.sizeOf(context).width * .8,
+
+                          onTap: () {
+                            // TODO: Navigate to product details
+                          },
+                        );
                 },
-              );
-            },
+              ),
+            ),
           ),
         ),
       ],
@@ -227,63 +246,63 @@ class PharmacyMenuScreen extends StatelessWidget {
       {
         'id': 1,
         'name': 'Medications',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 2,
         'name': 'Skin Care',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 3,
         'name': 'Hair Care',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 4,
         'name': 'Vitamins & Dietary',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 5,
         'name': 'Beauty Products',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 6,
         'name': 'Lose Weight',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 7,
         'name': 'Personal Care',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 8,
         'name': 'Mother And Child',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
         'id': 9,
         'name': 'Medical Supplies',
-        'image': 'https://via.placeholder.com/150',
+        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
@@ -293,12 +312,12 @@ class PharmacyMenuScreen extends StatelessWidget {
   List<Map<String, dynamic>> _getStaticBestSellers() {
     return [
       {
-        'product': ProductEntity(
+        'product': const ProductEntity(
           id: 1,
           name: 'Hair Straightening Cream',
           description: 'Professional hair care product',
           price: 110.0,
-          image: 'https://via.placeholder.com/150',
+          image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 5.0,
           reviewCount: 120,
           outOfStock: false,
@@ -307,12 +326,12 @@ class PharmacyMenuScreen extends StatelessWidget {
         'vendorName': 'Al-Azab Pharmacy',
       },
       {
-        'product': ProductEntity(
+        'product': const ProductEntity(
           id: 2,
           name: 'Skin Serum',
           description: 'Anti-aging serum',
           price: 95.0,
-          image: 'https://via.placeholder.com/150',
+          image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 4.8,
           reviewCount: 85,
           outOfStock: false,
@@ -321,12 +340,12 @@ class PharmacyMenuScreen extends StatelessWidget {
         'vendorName': 'Health Plus Pharmacy',
       },
       {
-        'product': ProductEntity(
+        'product': const ProductEntity(
           id: 3,
           name: 'Vitamin C Tablets',
           description: 'Immune system support',
           price: 45.0,
-          image: 'https://via.placeholder.com/150',
+          image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 4.7,
           reviewCount: 200,
           outOfStock: false,
@@ -335,12 +354,12 @@ class PharmacyMenuScreen extends StatelessWidget {
         'vendorName': 'Care Pharmacy',
       },
       {
-        'product': ProductEntity(
+        'product': const ProductEntity(
           id: 4,
           name: 'Pain Relief Gel',
           description: 'Fast acting pain relief',
           price: 65.0,
-          image: 'https://via.placeholder.com/150',
+          image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 4.9,
           reviewCount: 150,
           outOfStock: false,
@@ -349,12 +368,12 @@ class PharmacyMenuScreen extends StatelessWidget {
         'vendorName': 'Al-Azab Pharmacy',
       },
       {
-        'product': ProductEntity(
+        'product': const ProductEntity(
           id: 5,
           name: 'Face Moisturizer',
           description: 'Hydrating face cream',
           price: 120.0,
-          image: 'https://via.placeholder.com/150',
+          image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 4.6,
           reviewCount: 95,
           outOfStock: false,
