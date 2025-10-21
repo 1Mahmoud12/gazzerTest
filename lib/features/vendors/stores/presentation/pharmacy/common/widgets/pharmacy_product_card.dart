@@ -25,7 +25,7 @@ class PharmacyProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // Calculate dimensions based on the provided width or screen width
     final cardWidth = width ?? MediaQuery.sizeOf(context).width * 0.8;
-    final circleSize = cardWidth * 0.625; // 62.5% of card width (was 0.5 of screen)
+    final circleSize = cardWidth * 0.6; // 62.5% of card width (was 0.5 of screen)
     final imageWidth = cardWidth * 0.5; // 50% of card width (was 0.4 of screen)
     final imageHeight = circleSize * 0.36; // Proportional to circle size
     final nameWidth = cardWidth * 0.375; // 37.5% of card width (was 0.3 of screen)
@@ -34,7 +34,7 @@ class PharmacyProductCard extends StatelessWidget {
     final smallBorderRadius = cardWidth * 0.0625; // For the small corners (was 20)
     final fontSize = cardWidth * 0.05; // Base font size proportional to width
     final iconSize = cardWidth * 0.05625; // Icon size proportional to width
-    final spacing = cardWidth * 0.025; // Spacing proportional to width
+    final spacing = cardWidth * 0.015; // Spacing proportional to width
 
     return GestureDetector(
       onTap: onTap,
@@ -128,51 +128,55 @@ class PharmacyProductCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Column(
-                        children: [
-                          DecoratedFavoriteWidget(
-                            fovorable: product,
-                            isDarkContainer: false,
-                            size: iconSize,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          SizedBox(height: spacing * 1.5),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            DecoratedFavoriteWidget(
+                              fovorable: product,
+                              isDarkContainer: false,
+                              size: iconSize,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            SizedBox(height: spacing * 1.5),
 
-                          Text(
-                            'EG',
-                            style: TStyle.blackBold(fontSize),
-                          ),
-                          SizedBox(height: spacing * 1.5),
-                          Icon(
-                            Icons.star,
-                            color: Co.secondary,
-                            size: iconSize,
-                          ),
-                        ],
+                            Text(
+                              'EG',
+                              style: TStyle.blackBold(fontSize),
+                            ),
+                            SizedBox(height: spacing * 1.5),
+                            Icon(
+                              Icons.star,
+                              color: Co.secondary,
+                              size: iconSize,
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(width: 10),
-                      Column(
-                        children: [
-                          CartToIncrementIcon(
-                            isHorizonal: false,
-                            product: product,
-                            iconSize: iconSize * 1.1,
-                            isDarkContainer: false,
-                          ),
-                          SizedBox(height: spacing * 1.5),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            CartToIncrementIcon(
+                              isHorizonal: false,
+                              product: product,
+                              iconSize: iconSize * 1.1,
+                              isDarkContainer: false,
+                            ),
+                            SizedBox(height: spacing * 1.5),
 
-                          Text(
-                            product.price.toStringAsFixed(0),
-                            style: TStyle.blackBold(fontSize),
-                          ),
-                          SizedBox(height: spacing * 1.5),
-                          Text(
-                            product.rate.toStringAsFixed(2),
-                            style: TStyle.blackBold(
-                              fontSize * 0.875,
-                            ).copyWith(color: Co.secondary),
-                          ),
-                        ],
+                            Text(
+                              product.price.toStringAsFixed(0),
+                              style: TStyle.blackBold(fontSize),
+                            ),
+                            SizedBox(height: spacing * 1.5),
+                            Text(
+                              product.rate.toStringAsFixed(2),
+                              style: TStyle.blackBold(
+                                fontSize * 0.875,
+                              ).copyWith(color: Co.secondary),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

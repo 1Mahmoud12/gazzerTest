@@ -43,5 +43,5 @@ class Co {
   /// pharmacy colors
   static const greenish = Color(0xFF6FB490);
   static const blueish = Color(0xFF42497D);
-
+  static const closed = Color(0xFFFE0000);
 }

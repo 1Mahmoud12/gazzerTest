@@ -13,6 +13,7 @@ import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widg
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_product_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_product_card_style2.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/prescription_upload_button.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/subcategory/pharmacy_subcategory_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'pharmacy_menu_screen.g.dart';
@@ -172,7 +173,12 @@ class PharmacyMenuScreen extends StatelessWidget {
                         rating: category['rating'],
                         reviewCount: category['reviews'],
                         onTap: () {
-                          // TODO: Navigate to category products
+                          context.navigateToPage(
+                            PharmacySubcategoryScreen(
+                              categoryId: category['id'],
+                              categoryName: category['name'],
+                            ),
+                          );
                         },
                       ),
                     );

@@ -70,9 +70,9 @@ class PharmacyBestSellersScreen extends StatelessWidget {
                     Expanded(
                       child: Wrap(
                         runSpacing: 10,
-                        spacing: 10,
+                        spacing: 5,
                         runAlignment: WrapAlignment.spaceAround,
-                        alignment: WrapAlignment.spaceAround,
+                        alignment: WrapAlignment.spaceEvenly,
                         children: List.generate(bestSellers.length, (index) {
                           final product = bestSellers[index];
                           return index % 2 == 0
@@ -80,7 +80,7 @@ class PharmacyBestSellersScreen extends StatelessWidget {
                                   product: product['product'],
                                   vendorName: product['vendorName'],
                                   height: MediaQuery.sizeOf(context).height * .15,
-                                  width: MediaQuery.sizeOf(context).width * .45,
+                                  width: MediaQuery.sizeOf(context).width * .46,
                                   onTap: () {
                                     // Handle tap
                                   },
@@ -90,7 +90,7 @@ class PharmacyBestSellersScreen extends StatelessWidget {
                                   vendorName: product['vendorName'],
 
                                   // height: MediaQuery.sizeOf(context).height * .15,
-                                  width: MediaQuery.sizeOf(context).width * .45,
+                                  width: MediaQuery.sizeOf(context).width * .46,
                                   onTap: () {
                                     // Handle tap
                                   },
