@@ -33,8 +33,9 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
   late DeleteAccountReq req;
   final counter = 30;
 
-  void _setTimer() {
-    seconds.value = counter;
+  void _setTimer({int? counter}) {
+    final initialValue = counter ?? this.counter;
+    seconds.value = initialValue;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds.value <= 0) {
         timer.cancel();
@@ -139,6 +140,10 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                                   L10n.tr().otpSentSuccessfully,
                                   error: false,
                                 );
+                              } else if (state is RequestDeleteAccountRateLimitError) {
+                                // Handle rate limit error with remaining seconds
+                                _setTimer(counter: state.remainingSeconds);
+                                Alerts.showToast(state.message);
                               }
                             },
                             builder: (context, state) {

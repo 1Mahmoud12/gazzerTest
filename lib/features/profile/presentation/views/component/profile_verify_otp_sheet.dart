@@ -49,8 +49,9 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
     isResendingOtp.value = false;
   }
 
-  void _setTimer() {
-    seconds.value = counter;
+  void _setTimer({int? counter}) {
+    final initialValue = counter ?? this.counter;
+    seconds.value = initialValue;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds.value <= 0) {
         timer.cancel();
@@ -79,142 +80,151 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: Co.white,
-                borderRadius: AppConst.defaultBorderRadius,
-              ),
-              child: Padding(
-                padding: const EdgeInsetsGeometry.symmetric(
-                  vertical: 32,
-                  horizontal: 24,
+    return BlocListener<ProfileCubit, ProfileStates>(
+      listener: (context, state) {
+        // Handle rate limit error when resending OTP
+        if (state is UpdateProfileRateLimitError) {
+          _setTimer(counter: state.remainingSeconds);
+          Alerts.showToast(state.message);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Co.white,
+                  borderRadius: AppConst.defaultBorderRadius,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
-                      maxLines: 2,
-                      style: TStyle.greySemi(16),
-                      textAlign: TextAlign.start,
-                    ),
-                    const VerticalSpacing(24),
-                    OtpWidget(
-                      controller: otpCont,
-                      count: 6,
-                      width: 60,
-                      height: 50,
-                      spacing: 8,
-                    ),
-                    const VerticalSpacing(24),
-                    SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.timer,
-                                  color: Co.purple,
-                                  size: 25,
-                                ),
-                                const HorizontalSpacing(8),
-                                Text(
-                                  L10n.tr().resendCode,
-                                  style: TStyle.primaryBold(14),
-                                ),
-                              ],
-                            ),
-                          ),
-                          ValueListenableBuilder(
-                            valueListenable: seconds,
-                            builder: (context, value, child) {
-                              final finished = value <= 0;
-                              if (!finished) {
-                                return Text(
-                                  "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
-                                  textAlign: TextAlign.end,
-                                  style: TStyle.primarySemi(16).copyWith(
-                                    color: Co.tertiary,
+                child: Padding(
+                  padding: const EdgeInsetsGeometry.symmetric(
+                    vertical: 32,
+                    horizontal: 24,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
+                        maxLines: 2,
+                        style: TStyle.greySemi(16),
+                        textAlign: TextAlign.start,
+                      ),
+                      const VerticalSpacing(24),
+                      OtpWidget(
+                        controller: otpCont,
+                        count: 6,
+                        width: 60,
+                        height: 50,
+                        spacing: 8,
+                      ),
+                      const VerticalSpacing(24),
+                      SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.timer,
+                                    color: Co.purple,
+                                    size: 25,
                                   ),
-                                );
-                              }
-
-                              return ValueListenableBuilder(
-                                valueListenable: isResendingOtp,
-                                builder: (context, isResending, child) {
-                                  if (isResending) {
-                                    return const Center(
-                                      child: SizedBox(
-                                        height: 50,
-                                        width: 50,
-                                        child: AdaptiveProgressIndicator(),
-                                      ),
-                                    );
-                                  }
-
-                                  return InkWell(
-                                    onTap: () => resend(),
-                                    child: const Icon(
-                                      Icons.refresh,
-                                      color: Co.purple,
-                                      size: 24,
+                                  const HorizontalSpacing(8),
+                                  Text(
+                                    L10n.tr().resendCode,
+                                    style: TStyle.primaryBold(14),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ValueListenableBuilder(
+                              valueListenable: seconds,
+                              builder: (context, value, child) {
+                                final finished = value <= 0;
+                                if (!finished) {
+                                  return Text(
+                                    "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
+                                    textAlign: TextAlign.end,
+                                    style: TStyle.primarySemi(16).copyWith(
+                                      color: Co.tertiary,
                                     ),
                                   );
-                                },
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    const VerticalSpacing(20),
-                    BlocConsumer<ProfileCubit, ProfileStates>(
-                      listener: (context, state) {
-                        if (state is VerifyOTPSuccess) {
-                          Alerts.showToast(state.message, error: false);
-                          context.pop();
-                        } else if (state is VerifyOTPError) {
-                          Alerts.showToast(state.message);
-                        }
-                      },
-                      builder: (context, state) => OptionBtn(
-                        isLoading: state is VerifyOTPLoading,
-                        onPressed: () async {
-                          if (_formKey.currentState?.validate() != true) {
-                            return Alerts.showToast(
-                              L10n.tr().valueMustBeNum(6, L10n.tr().code),
-                            );
-                          }
-                          context.read<ProfileCubit>().verifyOtp(
-                            ProfileVerifyOtpReq(
-                              otpCode: otpCont.text,
-                              sessionId: sessionId,
+                                }
+
+                                return ValueListenableBuilder(
+                                  valueListenable: isResendingOtp,
+                                  builder: (context, isResending, child) {
+                                    if (isResending) {
+                                      return const Center(
+                                        child: SizedBox(
+                                          height: 50,
+                                          width: 50,
+                                          child: AdaptiveProgressIndicator(),
+                                        ),
+                                      );
+                                    }
+
+                                    return InkWell(
+                                      onTap: () => resend(),
+                                      child: const Icon(
+                                        Icons.refresh,
+                                        color: Co.purple,
+                                        size: 24,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                             ),
-                          );
-                        },
-                        textStyle: TStyle.mainwSemi(15),
-                        bgColor: Colors.transparent,
-                        child: Text(
-                          L10n.tr().continu,
-                          style: TStyle.primarySemi(16),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      const VerticalSpacing(20),
+                      BlocConsumer<ProfileCubit, ProfileStates>(
+                        listener: (context, state) {
+                          if (state is VerifyOTPSuccess) {
+                            Alerts.showToast(state.message, error: false);
+                            context.pop();
+                          } else if (state is VerifyOTPError) {
+                            Alerts.showToast(state.message);
+                          }
+                        },
+                        builder: (context, state) => OptionBtn(
+                          isLoading: state is VerifyOTPLoading,
+                          onPressed: () async {
+                            if (_formKey.currentState?.validate() != true) {
+                              return Alerts.showToast(
+                                L10n.tr().valueMustBeNum(6, L10n.tr().code),
+                              );
+                            }
+                            context.read<ProfileCubit>().verifyOtp(
+                              ProfileVerifyOtpReq(
+                                otpCode: otpCont.text,
+                                sessionId: sessionId,
+                              ),
+                            );
+                          },
+                          textStyle: TStyle.mainwSemi(15),
+                          bgColor: Colors.transparent,
+                          child: Text(
+                            L10n.tr().continu,
+                            style: TStyle.primarySemi(16),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

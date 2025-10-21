@@ -469,6 +469,6 @@
   "hours": "Hours",
   "mins": "Mins",
   "secs": "Secs",
-  "dailyDeal": "Daily Deal"
-
+  "dailyDeal": "Daily Deal",
+  "max_quantity_reached_for_product": "You have reached the maximum quantity available for this product"
 }

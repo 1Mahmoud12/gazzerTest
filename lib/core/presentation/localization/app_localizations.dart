@@ -2395,6 +2395,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Daily Deal'**
   String get dailyDeal;
+
+  /// No description provided for @max_quantity_reached_for_product.
+  ///
+  /// In en, this message translates to:
+  /// **'You have reached the maximum quantity available for this product'**
+  String get max_quantity_reached_for_product;
 }
 
 class _AppLocalizationsDelegate

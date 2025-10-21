@@ -201,18 +201,22 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TStyle.greySemi(16),
                             ),
                             const VerticalSpacing(8),
-                            MainTextField(
-                              controller: _pasword,
-                              hintText: L10n.tr().enterYourPassword,
-                              bgColor: Colors.transparent,
-                              isPassword: true,
-                              borderRadius: 32,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 16,
+                            Directionality(
+                              textDirection: TextDirection.ltr,
+
+                              child: MainTextField(
+                                controller: _pasword,
+                                hintText: L10n.tr().enterYourPassword,
+                                bgColor: Colors.transparent,
+                                isPassword: true,
+                                borderRadius: 32,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 16,
+                                ),
+                                validator: Validators.notEmpty,
+                                autofillHints: [AutofillHints.newPassword],
                               ),
-                              validator: Validators.notEmpty,
-                              autofillHints: [AutofillHints.newPassword],
                             ),
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.end,

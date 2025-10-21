@@ -51,8 +51,8 @@ class OtpRateLimitError extends BadResponse {
   final double remainingSeconds;
 
   OtpRateLimitError.fromJson(
-    Map<String, dynamic> json, {
+    super.json, {
     super.e = ErrorType.badResponse,
   }) : remainingSeconds = (json['data']?['remaining_seconds'] as num?)?.toDouble() ?? 0,
-       super.fromJson(json);
+       super.fromJson();
 }

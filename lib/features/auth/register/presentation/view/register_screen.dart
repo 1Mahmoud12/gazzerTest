@@ -169,21 +169,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const VerticalSpacing(24),
                     Text(L10n.tr().emailAddress, style: TStyle.blackBold(20)),
                     const VerticalSpacing(8),
-                    MainTextField(
-                      controller: _emailController,
-                      hintText: L10n.tr().enterYourFullEmail,
-                      bgColor: Colors.transparent,
-                      max: 250,
-                      inputFormatters: FilteringTextInputFormatter.deny(
-                        RegExp(r'\s'),
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+
+                      child: MainTextField(
+                        controller: _emailController,
+                        hintText: L10n.tr().enterYourFullEmail,
+                        bgColor: Colors.transparent,
+                        max: 250,
+                        inputFormatters: FilteringTextInputFormatter.deny(
+                          RegExp(r'\s'),
+                        ),
+                        validator: (value) {
+                          if (value != null && value.isNotEmpty) {
+                            return Validators.emailValidator(value.trim());
+                          }
+                          return null;
+                        },
+                        autofillHints: [AutofillHints.email],
                       ),
-                      validator: (value) {
-                        if (value != null && value.isNotEmpty) {
-                          return Validators.emailValidator(value.trim());
-                        }
-                        return null;
-                      },
-                      autofillHints: [AutofillHints.email],
                     ),
                     const VerticalSpacing(24),
                     Text(L10n.tr().mobileNumber, style: TStyle.blackBold(20)),

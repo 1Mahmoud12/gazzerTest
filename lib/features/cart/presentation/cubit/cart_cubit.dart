@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
@@ -7,6 +9,7 @@ import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/cart_repo.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_vendor_entity.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
@@ -35,6 +38,12 @@ class CartCubit extends Cubit<CartStates> {
   String? selectedTime;
   final List<String> _timeSlots = [];
 
+  // ==================== Debouncing State ====================
+
+  final Map<int, Timer?> _updateTimers = {};
+  final Map<int, int> _pendingQuantities = {};
+  static const _debounceDuration = Duration(milliseconds: 1000);
+
   // ==================== Public Getters ====================
 
   /// Returns an unmodifiable view of all vendors in the cart.
@@ -54,6 +63,18 @@ class CartCubit extends Cubit<CartStates> {
   void emit(CartStates state) {
     if (isClosed) return;
     super.emit(state);
+  }
+
+  @override
+  Future<void> close() {
+    // Cancel all pending timers
+    for (final timer in _updateTimers.values) {
+      timer?.cancel();
+    }
+    _updateTimers.clear();
+    _pendingQuantities.clear();
+    _originalQuantities.clear();
+    return super.close();
   }
 
   // ==================== Initialization ====================
@@ -110,6 +131,7 @@ class CartCubit extends Cubit<CartStates> {
         _updateCartWithNewResponse(value);
         break;
       case Err(:final error):
+        // Emit error for toast notification
         emit(
           UpdateItemError(
             message: error.message,
@@ -117,22 +139,177 @@ class CartCubit extends Cubit<CartStates> {
             isAdding: true,
           ),
         );
+
+        // Emit FullCartLoaded to clear loading state (no cart changes)
+        emit(
+          FullCartLoaded(
+            vendors: _vendors,
+            summary: _summary,
+            address: address,
+            isCartValid: _validateCart(),
+          ),
+        );
         break;
     }
   }
 
-  /// Updates the quantity of an existing cart item.
+  /// Updates the quantity of an existing cart item with debouncing.
   ///
   /// [id] is the cart item ID (not the product ID)
   /// [quantity] is the new quantity
   /// [isAdding] indicates if this is an increment (true) or decrement (false)
-  Future<void> updateItemQuantity(
+  ///
+  /// This method implements debouncing: if called multiple times within 500ms,
+  /// only the final quantity will be sent to the server.
+  void updateItemQuantity(
+    int id,
+    int quantity,
+    bool isAdding,
+  ) {
+    if (quantity < 1) return;
+
+    // Cancel existing timer for this item
+    _updateTimers[id]?.cancel();
+
+    // Store the pending quantity
+    _pendingQuantities[id] = quantity;
+
+    // Update the cart item quantity optimistically (without loading state)
+    _updateCartItemQuantityOptimistically(id, quantity);
+
+    // Set new timer
+    _updateTimers[id] = Timer(_debounceDuration, () {
+      final finalQuantity = _pendingQuantities[id];
+      if (finalQuantity != null) {
+        _executeQuantityUpdate(id, finalQuantity, isAdding);
+        _pendingQuantities.remove(id);
+        _updateTimers.remove(id);
+      }
+    });
+  }
+
+  /// Stores original quantities before optimistic update for rollback on error.
+  final Map<int, int> _originalQuantities = {};
+
+  /// Updates cart item quantity optimistically without API call.
+  void _updateCartItemQuantityOptimistically(int id, int quantity) {
+    // Find the cart item and update its quantity locally
+    for (int vendorIndex = 0; vendorIndex < _vendors.length; vendorIndex++) {
+      final vendor = _vendors[vendorIndex];
+      for (int itemIndex = 0; itemIndex < vendor.items.length; itemIndex++) {
+        final item = vendor.items[itemIndex];
+        if (item.cartId == id) {
+          // Store original quantity for rollback on error
+          if (!_originalQuantities.containsKey(id)) {
+            _originalQuantities[id] = item.quantity;
+          }
+
+          // Create new item with updated quantity
+          final updatedItem = item.copyWith(quantity: quantity);
+
+          // Create new vendor with updated item
+          final updatedItems = List<CartItemEntity>.from(vendor.items);
+          updatedItems[itemIndex] = updatedItem;
+          final updatedVendor = CartVendorEntity(
+            id: vendor.id,
+            name: vendor.name,
+            image: vendor.image,
+            type: vendor.type,
+            items: updatedItems,
+          );
+
+          // Update the vendor in the list
+          _vendors[vendorIndex] = updatedVendor;
+
+          // Emit updated state without loading indicator
+          emit(
+            FullCartLoaded(
+              vendors: _vendors,
+              summary: _summary,
+              address: address,
+              isCartValid: _validateCart(),
+            ),
+          );
+          return;
+        }
+      }
+    }
+  }
+
+  /// Reverts the optimistic update by restoring the original quantity.
+  void _revertOptimisticUpdate(int id) {
+    final originalQuantity = _originalQuantities[id];
+    if (originalQuantity == null) {
+      // If no original quantity stored, just reload cart from current state
+      emit(
+        FullCartLoaded(
+          vendors: _vendors,
+          summary: _summary,
+          address: address,
+          isCartValid: _validateCart(),
+        ),
+      );
+      return;
+    }
+
+    // Find the cart item and revert its quantity
+    for (int vendorIndex = 0; vendorIndex < _vendors.length; vendorIndex++) {
+      final vendor = _vendors[vendorIndex];
+      for (int itemIndex = 0; itemIndex < vendor.items.length; itemIndex++) {
+        final item = vendor.items[itemIndex];
+        if (item.cartId == id) {
+          // Restore original quantity
+          final revertedItem = item.copyWith(quantity: originalQuantity);
+
+          // Create new vendor with reverted item
+          final revertedItems = List<CartItemEntity>.from(vendor.items);
+          revertedItems[itemIndex] = revertedItem;
+          final revertedVendor = CartVendorEntity(
+            id: vendor.id,
+            name: vendor.name,
+            image: vendor.image,
+            type: vendor.type,
+            items: revertedItems,
+          );
+
+          // Update the vendor in the list
+          _vendors[vendorIndex] = revertedVendor;
+
+          // Clear the stored original quantity
+          _originalQuantities.remove(id);
+
+          // Emit updated state to clear loading state
+          emit(
+            FullCartLoaded(
+              vendors: _vendors,
+              summary: _summary,
+              address: address,
+              isCartValid: _validateCart(),
+            ),
+          );
+          return;
+        }
+      }
+    }
+
+    // If item not found in cart, just emit current state to clear loading
+    emit(
+      FullCartLoaded(
+        vendors: _vendors,
+        summary: _summary,
+        address: address,
+        isCartValid: _validateCart(),
+      ),
+    );
+  }
+
+  /// Executes the actual API call for quantity update.
+  Future<void> _executeQuantityUpdate(
     int id,
     int quantity,
     bool isAdding,
   ) async {
-    if (quantity < 1) return;
-
+    // Show loading indicator only when API call starts
     emit(
       UpdateItemLoading(
         cartId: id,
@@ -145,6 +322,9 @@ class CartCubit extends Cubit<CartStates> {
 
     switch (response) {
       case Ok<CartResponse>(:final value):
+        // Clear the original quantity on success
+        _originalQuantities.remove(id);
+
         emit(
           UpdateItemSuccess(
             cartId: id,
@@ -155,6 +335,7 @@ class CartCubit extends Cubit<CartStates> {
         _updateCartWithNewResponse(value);
         break;
       case Err(:final error):
+        // First emit error for toast notification
         emit(
           UpdateItemError(
             message: error.message,
@@ -163,6 +344,9 @@ class CartCubit extends Cubit<CartStates> {
             isRemoving: !isAdding,
           ),
         );
+
+        // Then revert the optimistic update (emits FullCartLoaded to clear loading)
+        _revertOptimisticUpdate(id);
         break;
     }
   }
@@ -179,13 +363,32 @@ class CartCubit extends Cubit<CartStates> {
         _updateCartWithNewResponse(value);
         break;
       case Err(:final error):
+        // Emit error for toast notification
         emit(UpdateItemError(message: error.message, cartId: cartId));
+
+        // Emit FullCartLoaded to clear loading state
+        emit(
+          FullCartLoaded(
+            vendors: _vendors,
+            summary: _summary,
+            address: address,
+            isCartValid: _validateCart(),
+          ),
+        );
         break;
     }
   }
 
   /// Removes an item from the cart completely.
+  ///
+  /// This method cancels any pending quantity updates for the item
+  /// and immediately removes it from the cart.
   Future<void> removeItemFromCart(int id) async {
+    // Cancel any pending quantity updates for this item
+    _updateTimers[id]?.cancel();
+    _updateTimers.remove(id);
+    _pendingQuantities.remove(id);
+
     emit(UpdateItemLoading(cartId: id, isDeleting: true));
 
     final response = await _repo.removeCartItem(id);
@@ -196,7 +399,18 @@ class CartCubit extends Cubit<CartStates> {
         _updateCartWithNewResponse(value);
         break;
       case Err(:final error):
+        // Emit error for toast notification
         emit(UpdateItemError(message: error.message, cartId: id));
+
+        // Emit FullCartLoaded to clear loading state (item not removed)
+        emit(
+          FullCartLoaded(
+            vendors: _vendors,
+            summary: _summary,
+            address: address,
+            isCartValid: _validateCart(),
+          ),
+        );
         break;
     }
   }

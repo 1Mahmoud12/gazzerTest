@@ -133,22 +133,26 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                               style: TStyle.blackRegular(14),
                             ),
                           ),
-                          MainTextField(
-                            controller: _emailController,
-                            hintText: L10n.tr().emailAddress,
-                            bgColor: Colors.white,
-                            showBorder: false,
-                            inputFormatters: FilteringTextInputFormatter.deny(
-                              RegExp(r'\s'),
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+
+                            child: MainTextField(
+                              controller: _emailController,
+                              hintText: L10n.tr().emailAddress,
+                              bgColor: Colors.white,
+                              showBorder: false,
+                              inputFormatters: FilteringTextInputFormatter.deny(
+                                RegExp(r'\s'),
+                              ),
+                              validator: (v) {
+                                if (v?.trim().isNotEmpty != true) return null;
+                                return Validators.emailValidator(v);
+                              },
+                              autofillHints: [
+                                AutofillHints.username,
+                                AutofillHints.name,
+                              ],
                             ),
-                            validator: (v) {
-                              if (v?.trim().isNotEmpty != true) return null;
-                              return Validators.emailValidator(v);
-                            },
-                            autofillHints: [
-                              AutofillHints.username,
-                              AutofillHints.name,
-                            ],
                           ),
                         ],
                       ),

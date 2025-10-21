@@ -470,12 +470,8 @@
   "hours": "ساعات",
   "mins": "دقائق",
   "secs": "ثواني",
-  "dailyDeal": "عرض اليوم"
+  "dailyDeal": "عرض اليوم",
 
-
-
-
-
-
+"max_quantity_reached_for_product": "لقد وصلت إلى أقصى كمية متاحة لهذا المنتج"
 
 }

@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1177,4 +1177,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dailyDeal => 'عرض اليوم';
+
+  @override
+  String get max_quantity_reached_for_product => 'لقد وصلت إلى أقصى كمية متاحة لهذا المنتج';
 }

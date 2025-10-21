@@ -30,6 +30,12 @@ class UpdateProfileError extends ProfileErrorStates {
   UpdateProfileError(super.message);
 }
 
+class UpdateProfileRateLimitError extends ProfileErrorStates {
+  final int remainingSeconds;
+
+  UpdateProfileRateLimitError(super.message, this.remainingSeconds);
+}
+
 /// verify otp
 class VerifyOTPLoading extends ProfileLoadingStates {}
 
@@ -67,6 +73,12 @@ class RequestDeleteAccountSuccess extends ProfileStates {
 
 class RequestDeleteAccountError extends ProfileErrorStates {
   RequestDeleteAccountError(super.message);
+}
+
+class RequestDeleteAccountRateLimitError extends ProfileErrorStates {
+  final int remainingSeconds;
+
+  RequestDeleteAccountRateLimitError(super.message, this.remainingSeconds);
 }
 
 /// fetch reasons

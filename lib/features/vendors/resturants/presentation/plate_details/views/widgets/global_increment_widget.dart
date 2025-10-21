@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/switching_decorated_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
 class GlobalIncrementWidget extends StatelessWidget {
@@ -74,7 +76,9 @@ class GlobalIncrementWidget extends StatelessWidget {
                   SystemSound.play(SystemSoundType.click);
                   onChanged(true);
                 }
-              : null,
+              : () {
+                  Alerts.showToast(L10n.tr(context).max_quantity_reached_for_product);
+                },
           style: IconButton.styleFrom(
             padding: const EdgeInsets.all(3),
             elevation: 0,

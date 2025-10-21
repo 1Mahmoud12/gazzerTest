@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/switching_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
@@ -39,7 +41,19 @@ class CartToIncrementIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartStates>(
+    return BlocConsumer<CartCubit, CartStates>(
+      listener: (context, state) {
+        // Show alert when there's an error updating the cart
+        if (state is UpdateItemError) {
+          final cubit = context.read<CartCubit>();
+          final cartItem = _findCartItem(cubit);
+
+          // Check if error is for this product (either by cartId or product id)
+          if (state.cartId == cartItem?.cartId || state.cartId == product.id) {
+            Alerts.showToast(state.message);
+          }
+        }
+      },
       buildWhen: _shouldRebuild,
       builder: (context, state) => _buildCartWidget(context, state),
     );
@@ -141,7 +155,10 @@ class CartToIncrementIcon extends StatelessWidget {
     bool hasReachedMaxStock,
   ) {
     // Prevent adding beyond stock limit
-    if (hasReachedMaxStock) return;
+    if (hasReachedMaxStock) {
+      Alerts.showToast(L10n.tr(context).max_quantity_reached_for_product);
+      return;
+    }
 
     context.read<CartCubit>().updateItemQuantity(
       cartItem.cartId,

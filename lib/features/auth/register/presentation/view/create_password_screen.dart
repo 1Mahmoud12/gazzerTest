@@ -153,13 +153,17 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         children: [
                           Text(L10n.tr().password, style: TStyle.blackBold(20)),
                           const VerticalSpacing(8),
-                          MainTextField(
-                            controller: password,
-                            hintText: L10n.tr().yourNewPassword,
-                            bgColor: Colors.transparent,
-                            isPassword: true,
-                            validator: Validators.passwordValidation,
-                            autofillHints: [AutofillHints.newPassword],
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+
+                            child: MainTextField(
+                              controller: password,
+                              hintText: L10n.tr().yourNewPassword,
+                              bgColor: Colors.transparent,
+                              isPassword: true,
+                              validator: Validators.passwordValidation,
+                              autofillHints: [AutofillHints.newPassword],
+                            ),
                           ),
                           const VerticalSpacing(32),
                           Text(
@@ -167,18 +171,22 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             style: TStyle.blackBold(20),
                           ),
                           const VerticalSpacing(8),
-                          MainTextField(
-                            controller: confirmPassword,
-                            hintText: L10n.tr().confirmNewPassword,
-                            bgColor: Colors.transparent,
-                            isPassword: true,
-                            validator: (value) {
-                              if (value != password.text) {
-                                return L10n.tr().passwordsDoNotMatch;
-                              }
-                              return null;
-                            },
-                            autofillHints: [AutofillHints.newPassword],
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+
+                            child: MainTextField(
+                              controller: confirmPassword,
+                              hintText: L10n.tr().confirmNewPassword,
+                              bgColor: Colors.transparent,
+                              isPassword: true,
+                              validator: (value) {
+                                if (value != password.text) {
+                                  return L10n.tr().passwordsDoNotMatch;
+                                }
+                                return null;
+                              },
+                              autofillHints: [AutofillHints.newPassword],
+                            ),
                           ),
                         ],
                       ),

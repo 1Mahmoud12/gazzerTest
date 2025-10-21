@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/local_storage/local_storage.dart';
+import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -32,12 +33,29 @@ class ProfileCubit extends Cubit<ProfileStates> {
         } else {
           client = ok.value.$1?.client.toClientEntity();
           Session().setClient = client;
-          emit(UpdateSuccessWithClient(ok.value.$1?.message ?? L10n.tr().profileUpdatedSuccessfully));
+          emit(
+            UpdateSuccessWithClient(
+              ok.value.$1?.message ?? L10n.tr().profileUpdatedSuccessfully,
+            ),
+          );
           return true;
         }
       case Err err:
-        emit(UpdateProfileError(err.error.message));
-        return false;
+        // Check if it's an OTP rate limit error
+        if (err.error is OtpRateLimitError) {
+          final rateLimitError = err.error as OtpRateLimitError;
+          final remainingSeconds = rateLimitError.remainingSeconds.ceil();
+          emit(
+            UpdateProfileRateLimitError(
+              rateLimitError.message,
+              remainingSeconds,
+            ),
+          );
+          return false;
+        } else {
+          emit(UpdateProfileError(err.error.message));
+          return false;
+        }
     }
   }
 
@@ -49,7 +67,11 @@ class ProfileCubit extends Cubit<ProfileStates> {
         TokenService.setToken(ok.value.accessToken);
         client = ok.value.client.toClientEntity();
         Session().setClient = client;
-        emit(VerifyOTPSuccess(ok.value.message ?? L10n.tr().profileUpdatedSuccessfully));
+        emit(
+          VerifyOTPSuccess(
+            ok.value.message ?? L10n.tr().profileUpdatedSuccessfully,
+          ),
+        );
         break;
       case Err err:
         emit(VerifyOTPError(err.error.message));
@@ -76,7 +98,19 @@ class ProfileCubit extends Cubit<ProfileStates> {
         emit(RequestDeleteAccountSuccess(ok.value));
         break;
       case Err err:
-        emit(RequestDeleteAccountError(err.error.message));
+        // Check if it's an OTP rate limit error
+        if (err.error is OtpRateLimitError) {
+          final rateLimitError = err.error as OtpRateLimitError;
+          final remainingSeconds = rateLimitError.remainingSeconds.ceil();
+          emit(
+            RequestDeleteAccountRateLimitError(
+              rateLimitError.message,
+              remainingSeconds,
+            ),
+          );
+        } else {
+          emit(RequestDeleteAccountError(err.error.message));
+        }
     }
   }
 

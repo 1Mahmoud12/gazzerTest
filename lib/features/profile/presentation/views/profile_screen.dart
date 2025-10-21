@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
@@ -65,7 +64,10 @@ class ProfileScreen extends StatelessWidget {
                     useSafeArea: true,
                     builder: (context) => BlocProvider.value(
                       value: cubit,
-                      child: ProfileVerifyOtpScreen(sessionId: state.sessionId, req: state.req),
+                      child: ProfileVerifyOtpScreen(
+                        sessionId: state.sessionId,
+                        req: state.req,
+                      ),
                     ),
                   );
                 }
