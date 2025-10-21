@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -73,13 +74,23 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
         _setTimer();
         break;
       case Err err:
-        showSupport.value = true;
-        Alerts.showToast(err.error.message);
+        // Check if it's an OTP rate limit error
+        if (err.error is OtpRateLimitError) {
+          final rateLimitError = err.error as OtpRateLimitError;
+          final remainingSeconds = rateLimitError.remainingSeconds.ceil();
+          showSupport.value = true;
+          _setTimer(counter: remainingSeconds);
+          Alerts.showToast(rateLimitError.message);
+        } else {
+          showSupport.value = true;
+          _setTimer(counter: 60 * 10);
+          Alerts.showToast(err.error.message);
+        }
     }
     isResendingOtp.value = false;
   }
 
-  void _setTimer() {
+  void _setTimer({int counter = 60}) {
     seconds.value = counter;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (seconds.value <= 0) {
@@ -310,7 +321,10 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           );
                         }
                         isSubmitting.value = true;
-                        final res = await repo.verify(otpCont.text, widget.data);
+                        final res = await repo.verify(
+                          otpCont.text,
+                          widget.data,
+                        );
                         isSubmitting.value = false;
                         switch (res) {
                           case Ok<String> ok:

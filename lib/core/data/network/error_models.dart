@@ -1,4 +1,11 @@
-enum ErrorType { badResponse, noInternetConnection, parseError, expireTokenError, unknownError, cancel }
+enum ErrorType {
+  badResponse,
+  noInternetConnection,
+  parseError,
+  expireTokenError,
+  unknownError,
+  cancel,
+}
 
 /// Base class for all error types in the application.
 class BaseError {
@@ -11,7 +18,10 @@ class BadResponse extends BaseError {
   late bool isSingle;
   List<String>? _errors;
   @override
-  BadResponse.fromJson(Map<String, dynamic> json, {super.e = ErrorType.badResponse}) {
+  BadResponse.fromJson(
+    Map<String, dynamic> json, {
+    super.e = ErrorType.badResponse,
+  }) {
     if (json['errors'] is Map) {
       final errors = json['errors'] as Map<String, dynamic>;
       final List<String> errosList = [];
@@ -32,9 +42,17 @@ class BadResponse extends BaseError {
       message = _errors!.join(", ");
     } else {
       isSingle = true;
-      message = (json['message'].toString().length < 60)
-          ? json['message']
-          : '${json['message'].toString().substring(0, 60)}...';
+      message = (json['message'].toString().length < 60) ? json['message'] : '${json['message'].toString().substring(0, 60)}...';
     }
   }
+}
+
+class OtpRateLimitError extends BadResponse {
+  final double remainingSeconds;
+
+  OtpRateLimitError.fromJson(
+    Map<String, dynamic> json, {
+    super.e = ErrorType.badResponse,
+  }) : remainingSeconds = (json['data']?['remaining_seconds'] as num?)?.toDouble() ?? 0,
+       super.fromJson(json);
 }

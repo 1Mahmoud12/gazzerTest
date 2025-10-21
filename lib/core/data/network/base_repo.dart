@@ -44,26 +44,54 @@ abstract class BaseApiRepo {
         return _formParsingError(error, stack);
       }
       if ((error.response?.statusCode ?? 400) > 499) {
-        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
+        return BaseError(
+          message: L10n.tr().somethingWentWrong,
+          e: ErrorType.unknownError,
+        );
       }
       switch (error.type) {
         case DioExceptionType.badResponse:
-          return BadResponse.fromJson(error.response?.data, e: ErrorType.badResponse);
+          // Check for OTP rate limit error (400 with remaining_seconds)
+          if (error.response?.statusCode == 400 && error.response?.data?['data']?['remaining_seconds'] != null) {
+            return OtpRateLimitError.fromJson(
+              error.response?.data,
+              e: ErrorType.badResponse,
+            );
+          }
+          return BadResponse.fromJson(
+            error.response?.data,
+            e: ErrorType.badResponse,
+          );
         case DioExceptionType.receiveTimeout:
         case DioExceptionType.connectionTimeout:
-          return BaseError(message: L10n.tr().requestTimeOut, e: ErrorType.noInternetConnection);
+          return BaseError(
+            message: L10n.tr().requestTimeOut,
+            e: ErrorType.noInternetConnection,
+          );
         case DioExceptionType.connectionError:
         case DioExceptionType.sendTimeout:
-          return BaseError(message: L10n.tr().weakOrNoInternetConnection, e: ErrorType.noInternetConnection);
+          return BaseError(
+            message: L10n.tr().weakOrNoInternetConnection,
+            e: ErrorType.noInternetConnection,
+          );
 
         case DioExceptionType.cancel:
-          return BaseError(message: L10n.tr().requestToServerWasCancelled, e: ErrorType.cancel);
+          return BaseError(
+            message: L10n.tr().requestToServerWasCancelled,
+            e: ErrorType.cancel,
+          );
 
         case DioExceptionType.unknown:
-          return BaseError(message: L10n.tr().unknownErorOccurred, e: ErrorType.unknownError);
+          return BaseError(
+            message: L10n.tr().unknownErorOccurred,
+            e: ErrorType.unknownError,
+          );
 
         default:
-          return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
+          return BaseError(
+            message: L10n.tr().somethingWentWrong,
+            e: ErrorType.unknownError,
+          );
       }
     } catch (e, stack) {
       // exception here can occurs from many reasons, like:
@@ -73,11 +101,21 @@ abstract class BaseApiRepo {
       //   and throws an exception
       try {
         // if the exception is due to parsin, it will succeed here
-        _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing errors');
-        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
+        _crashlyticsRepo.sendToCrashlytics(
+          error,
+          stack,
+          reason: 'Parsing errors',
+        );
+        return BaseError(
+          message: L10n.tr().somethingWentWrong,
+          e: ErrorType.unknownError,
+        );
       } catch (e) {
         // if the exception is due to sending to crashlytics, or translation, it will fail here
-        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
+        return BaseError(
+          message: L10n.tr().somethingWentWrong,
+          e: ErrorType.unknownError,
+        );
       }
     }
   }
@@ -86,7 +124,10 @@ abstract class BaseApiRepo {
   //  TODO: should implenet logic te refresh token in this case??
   BaseError? isTokenExpired(Object error) {
     if (error is DioException && error.response?.statusCode == 498) {
-      return BaseError(message: "Token has been expired", e: ErrorType.expireTokenError);
+      return BaseError(
+        message: "Token has been expired",
+        e: ErrorType.expireTokenError,
+      );
     }
     return null;
   }
@@ -95,9 +136,15 @@ abstract class BaseApiRepo {
     /// if the error is not a DioException, it means it is an Exception due to parsing the response
     _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing data');
     try {
-      return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.parseError);
+      return BaseError(
+        message: L10n.tr().somethingWentWrong,
+        e: ErrorType.parseError,
+      );
     } catch (e) {
-      return BaseError(message: "Something went wrong", e: ErrorType.parseError);
+      return BaseError(
+        message: "Something went wrong",
+        e: ErrorType.parseError,
+      );
     }
   }
 }
