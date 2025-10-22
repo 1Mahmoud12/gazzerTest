@@ -67,32 +67,38 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ClipOval(
-                        child: CustomNetworkImage(
-                          'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', //product.image,
-                          width: double.infinity,
-                          height: cardWidth * .4,
-                          fit: BoxFit.contain,
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Flexible(
+                          child: ClipOval(
+                            child: CustomNetworkImage(
+                              'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', //product.image,
+                              width: double.infinity,
+                              height: cardWidth * .4,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: spacing),
+                        SizedBox(height: spacing),
 
-                      // Product Name
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          product.name,
-                          style: TStyle.burbleBold(fontSize),
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                        // Product Name
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Flexible(
+                            child: Text(
+                              product.name,
+                              style: TStyle.burbleBold(fontSize),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: iconSize + spacing),
-                    ],
+                        SizedBox(height: iconSize + spacing),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -109,50 +115,55 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Column(
-                        children: [
-                          DecoratedFavoriteWidget(
-                            fovorable: product,
-                            isDarkContainer: false,
-                            size: iconSize,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          SizedBox(height: spacing * 1.5),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            DecoratedFavoriteWidget(
+                              fovorable: product,
+                              isDarkContainer: false,
+                              size: iconSize,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            SizedBox(height: spacing * 1.5),
 
-                          Text(
-                            'EG',
-                            style: TStyle.blackBold(fontSize),
-                          ),
-                          SizedBox(height: spacing * 1.5),
-                          Icon(
-                            Icons.star,
-                            color: Co.secondary,
-                            size: iconSize,
-                          ),
-                        ],
+                            Text(
+                              'EG',
+                              style: TStyle.blackBold(fontSize),
+                            ),
+                            SizedBox(height: spacing * 1.5),
+                            Icon(
+                              Icons.star,
+                              color: Co.secondary,
+                              size: iconSize,
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          CartToIncrementIcon(
-                            isHorizonal: false,
-                            product: product,
-                            iconSize: iconSize * 1.1,
-                            isDarkContainer: false,
-                          ),
-                          SizedBox(height: spacing * 1.5),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            CartToIncrementIcon(
+                              isHorizonal: false,
+                              product: product,
+                              iconSize: iconSize * 1.1,
+                              isDarkContainer: false,
+                            ),
+                            SizedBox(height: spacing * 1.5),
 
-                          Text(
-                            product.price.toStringAsFixed(0),
-                            style: TStyle.blackBold(fontSize),
-                          ),
-                          SizedBox(height: spacing * 1.5),
-                          Text(
-                            product.rate.toStringAsFixed(2),
-                            style: TStyle.blackBold(
-                              fontSize * 0.875,
-                            ).copyWith(color: Co.secondary),
-                          ),
-                        ],
+                            Text(
+                              product.price.toStringAsFixed(0),
+                              style: TStyle.blackBold(fontSize),
+                            ),
+                            SizedBox(height: spacing * 1.5),
+                            Text(
+                              product.rate.toStringAsFixed(2),
+                              style: TStyle.blackBold(
+                                fontSize * 0.875,
+                              ).copyWith(color: Co.secondary),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

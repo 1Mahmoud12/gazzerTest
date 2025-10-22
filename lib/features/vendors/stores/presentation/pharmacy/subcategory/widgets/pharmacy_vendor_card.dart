@@ -90,17 +90,19 @@ class PharmacyVendorCard extends StatelessWidget {
                 // Discount or Closed Badge
                 if (isClosed)
                   Container(
-                    width: 50,
-                    height: 50,
+                    width: 60,
+                    height: 60,
                     alignment: AlignmentDirectional.center,
-                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    padding: const EdgeInsets.all(4),
                     decoration: const BoxDecoration(
                       color: Co.secondary,
                       shape: BoxShape.circle,
                     ),
-                    child: Text(
-                      L10n.tr().closed,
-                      style: TStyle.burbleBold(15),
+                    child: FittedBox(
+                      child: Text(
+                        L10n.tr().closed,
+                        style: TStyle.burbleBold(15),
+                      ),
                     ),
                   ),
               ],
@@ -125,27 +127,28 @@ class PharmacyVendorCard extends StatelessWidget {
                   // Top Rated + Rating
                   Row(
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
 
-                          children: [
-                            Text(
-                              'Top Rated',
-                              style: TStyle.mainwSemi(
-                                12,
-                              ).copyWith(color: Co.tertiary),
-                            ),
-                            VerticalSpacing(4),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  color: Co.purple,
-                                  size: 16,
-                                ),
-                                const SizedBox(width: 4),
-                                Expanded(
+                        children: [
+                          Text(
+                            'Top Rated',
+                            style: TStyle.mainwSemi(
+                              12,
+                            ).copyWith(color: Co.tertiary),
+                          ),
+                          const VerticalSpacing(4),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: Co.purple,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 4),
+                              SizedBox(
+                                width: 60,
+                                child: Flexible(
                                   child: Text(
                                     location,
                                     style: TStyle.greySemi(12),
@@ -153,51 +156,49 @@ class PharmacyVendorCard extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
 
                       const Spacer(),
                       const SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.star,
-                                  color: Co.tertiary,
-                                  size: 18,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '$rating ( $reviewCount )',
-                                  style: TStyle.blackBold(12).copyWith(color: Co.tertiary),
-                                ),
-                              ],
-                            ),
-                            VerticalSpacing(4),
-                            // Delivery Time
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.access_time,
-                                  color: Co.purple,
-                                  size: 16,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  deliveryTime,
-                                  style: TStyle.greySemi(12),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.star,
+                                color: Co.tertiary,
+                                size: 18,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                '$rating ( $reviewCount )',
+                                style: TStyle.blackBold(12).copyWith(color: Co.tertiary),
+                              ),
+                            ],
+                          ),
+                          VerticalSpacing(4),
+                          // Delivery Time
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.access_time,
+                                color: Co.purple,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                deliveryTime,
+                                style: TStyle.greySemi(12),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),

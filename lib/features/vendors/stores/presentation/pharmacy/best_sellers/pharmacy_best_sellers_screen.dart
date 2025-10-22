@@ -79,7 +79,7 @@ class PharmacyBestSellersScreen extends StatelessWidget {
                               ? PharmacyProductCardStyle2(
                                   product: product['product'],
                                   vendorName: product['vendorName'],
-                                  height: MediaQuery.sizeOf(context).height * .15,
+                                  height: MediaQuery.sizeOf(context).height * .19,
                                   width: MediaQuery.sizeOf(context).width * .46,
                                   onTap: () {
                                     // Handle tap
@@ -89,7 +89,7 @@ class PharmacyBestSellersScreen extends StatelessWidget {
                                   product: product['product'],
                                   vendorName: product['vendorName'],
 
-                                  // height: MediaQuery.sizeOf(context).height * .15,
+                                  height: MediaQuery.sizeOf(context).height * .19,
                                   width: MediaQuery.sizeOf(context).width * .46,
                                   onTap: () {
                                     // Handle tap

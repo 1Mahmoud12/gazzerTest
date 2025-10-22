@@ -13,18 +13,22 @@ class PharmacyProductCard extends StatelessWidget {
     required this.product,
     required this.vendorName,
     this.width,
+    this.height,
     this.onTap,
   });
 
   final ProductEntity product;
   final String vendorName;
   final double? width;
+  final double? height;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     // Calculate dimensions based on the provided width or screen width
     final cardWidth = width ?? MediaQuery.sizeOf(context).width * 0.8;
+    final cardHeight = height ?? (cardWidth * 0.8); // 25% of width for height
+
     final circleSize = cardWidth * 0.6; // 62.5% of card width (was 0.5 of screen)
     final imageWidth = cardWidth * 0.5; // 50% of card width (was 0.4 of screen)
     final imageHeight = circleSize * 0.36; // Proportional to circle size
@@ -40,7 +44,7 @@ class PharmacyProductCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: cardWidth,
-        height: cardWidth * .8,
+        height: cardHeight,
         margin: EdgeInsets.symmetric(horizontal: spacing),
         padding: EdgeInsets.all(padding),
         decoration: BoxDecoration(
@@ -156,11 +160,13 @@ class PharmacyProductCard extends StatelessWidget {
                       Flexible(
                         child: Column(
                           children: [
-                            CartToIncrementIcon(
-                              isHorizonal: false,
-                              product: product,
-                              iconSize: iconSize * 1.1,
-                              isDarkContainer: false,
+                            FittedBox(
+                              child: CartToIncrementIcon(
+                                isHorizonal: false,
+                                product: product,
+                                iconSize: iconSize * 1.1,
+                                isDarkContainer: false,
+                              ),
                             ),
                             SizedBox(height: spacing * 1.5),
 
