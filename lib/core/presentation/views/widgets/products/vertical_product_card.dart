@@ -67,7 +67,7 @@ class VerticalProductCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            height: constraints.maxWidth * 0.7,
+                            height: constraints.maxWidth * 0.6,
                             child: CircleGradientBorderedImage(
                               image: product.image,
                               shadow: const BoxShadow(

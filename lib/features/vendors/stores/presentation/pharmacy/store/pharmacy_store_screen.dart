@@ -3,6 +3,7 @@ import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
@@ -17,6 +18,7 @@ import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widg
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_banner_slider.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_reviews_section.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/prescription_upload_button.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/products/pharmacy_products_screen.dart';
 
 /// Pharmacy store screen showing products by category
 class PharmacyStoreScreen extends StatefulWidget {
@@ -147,31 +149,41 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
                   (index) {
                     final selected = index == 0;
                     final category = categories[index];
-                    return Container(
-                      margin: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(90),
-                        border: Border.all(
-                          color: Co.buttonGradient.withOpacityNew(.3),
-                          width: 2,
+                    return InkWell(
+                      onTap: () {
+                        context.navigateToPage(
+                          PharmacyProductsScreen(
+                            categoryId: category['id'],
+                            categoryName: category['name'],
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(90),
+                          border: Border.all(
+                            color: Co.buttonGradient.withOpacityNew(.3),
+                            width: 2,
+                          ),
+                          color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
                         ),
-                        color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CircleGradientBorderedImage(
-                            image: category['image'],
-                            showBorder: false,
-                          ),
-                          Padding(
-                            padding: AppConst.defaultHrPadding,
-                            child: Text(
-                              category['name'],
-                              style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircleGradientBorderedImage(
+                              image: category['image'],
+                              showBorder: false,
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding: AppConst.defaultHrPadding,
+                              child: Text(
+                                category['name'],
+                                style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -246,17 +258,21 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
     return [
       {
         'name': 'Daily Offers',
+        'id': 1,
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
       },
       {
+        'id': 2,
         'name': 'Medications',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
       },
       {
+        'id': 3,
         'name': 'Skin Care',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
       },
       {
+        'id': 4,
         'name': 'Hair Care',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
       },
