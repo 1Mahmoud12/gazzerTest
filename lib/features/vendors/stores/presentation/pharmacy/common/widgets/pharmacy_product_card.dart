@@ -32,7 +32,6 @@ class PharmacyProductCard extends StatelessWidget {
     final circleSize = cardWidth * 0.6; // 62.5% of card width (was 0.5 of screen)
     final imageWidth = cardWidth * 0.5; // 50% of card width (was 0.4 of screen)
     final imageHeight = circleSize * 0.36; // Proportional to circle size
-    final nameWidth = cardWidth * 0.375; // 37.5% of card width (was 0.3 of screen)
     final padding = cardWidth * 0.025; // 2.5% of card width (was 8)
     final largeBorderRadius = cardWidth * 0.625; // For the circular edges (was 200)
     final smallBorderRadius = cardWidth * 0.0625; // For the small corners (was 20)
@@ -103,16 +102,16 @@ class PharmacyProductCard extends StatelessWidget {
                         SizedBox(height: spacing),
 
                         // Product Name
-                        SizedBox(
-                          width: nameWidth,
-                          child: Flexible(
-                            child: Text(
-                              product.name,
-                              style: TStyle.burbleBold(fontSize),
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: padding * 2,
+                          ),
+                          child: Text(
+                            product.name,
+                            style: TStyle.burbleBold(fontSize),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(height: spacing),
@@ -132,57 +131,53 @@ class PharmacyProductCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Flexible(
-                        child: Column(
-                          children: [
-                            DecoratedFavoriteWidget(
-                              fovorable: product,
-                              isDarkContainer: false,
-                              size: iconSize,
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            SizedBox(height: spacing * 1.5),
+                      Column(
+                        children: [
+                          DecoratedFavoriteWidget(
+                            fovorable: product,
+                            isDarkContainer: false,
+                            size: iconSize,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          SizedBox(height: spacing * 1.5),
 
-                            Text(
-                              'EG',
-                              style: TStyle.blackBold(fontSize),
-                            ),
-                            SizedBox(height: spacing * 1.5),
-                            Icon(
-                              Icons.star,
-                              color: Co.secondary,
-                              size: iconSize,
-                            ),
-                          ],
-                        ),
+                          Text(
+                            'EG',
+                            style: TStyle.blackBold(fontSize),
+                          ),
+                          SizedBox(height: spacing * 1.5),
+                          Icon(
+                            Icons.star,
+                            color: Co.secondary,
+                            size: iconSize,
+                          ),
+                        ],
                       ),
                       const SizedBox(width: 10),
-                      Flexible(
-                        child: Column(
-                          children: [
-                            FittedBox(
-                              child: CartToIncrementIcon(
-                                isHorizonal: false,
-                                product: product,
-                                iconSize: iconSize * 1.1,
-                                isDarkContainer: false,
-                              ),
+                      Column(
+                        children: [
+                          FittedBox(
+                            child: CartToIncrementIcon(
+                              isHorizonal: false,
+                              product: product,
+                              iconSize: iconSize * 1.1,
+                              isDarkContainer: false,
                             ),
-                            SizedBox(height: spacing * 1.5),
+                          ),
+                          SizedBox(height: spacing * 1.5),
 
-                            Text(
-                              product.price.toStringAsFixed(0),
-                              style: TStyle.blackBold(fontSize),
-                            ),
-                            SizedBox(height: spacing * 1.5),
-                            Text(
-                              product.rate.toStringAsFixed(2),
-                              style: TStyle.blackBold(
-                                fontSize * 0.875,
-                              ).copyWith(color: Co.secondary),
-                            ),
-                          ],
-                        ),
+                          Text(
+                            product.price.toStringAsFixed(0),
+                            style: TStyle.blackBold(fontSize),
+                          ),
+                          SizedBox(height: spacing * 1.5),
+                          Text(
+                            product.rate.toStringAsFixed(2),
+                            style: TStyle.blackBold(
+                              fontSize * 0.875,
+                            ).copyWith(color: Co.secondary),
+                          ),
+                        ],
                       ),
                     ],
                   ),

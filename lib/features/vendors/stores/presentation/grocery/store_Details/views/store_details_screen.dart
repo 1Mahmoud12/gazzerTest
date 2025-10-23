@@ -88,7 +88,7 @@ class StoreDetailsScreen extends StatelessWidget {
                         final item = state.catsWthSubatsAndProds[index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: _gridWidget(
+                          child: _GridWidget(
                             maincat: item.$1,
                             onSinglceCardPressed: (item) {},
                             subcats: item.$2,
@@ -121,8 +121,8 @@ class StoreDetailsScreen extends StatelessWidget {
   }
 }
 
-class _gridWidget extends StatelessWidget {
-  const _gridWidget({
+class _GridWidget extends StatelessWidget {
+  const _GridWidget({
     required this.maincat,
     required this.onSinglceCardPressed,
     required this.subcats,

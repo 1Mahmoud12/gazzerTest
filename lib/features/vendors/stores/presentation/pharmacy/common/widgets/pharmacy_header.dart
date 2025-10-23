@@ -14,6 +14,7 @@ class PharmacyHeader extends StatelessWidget {
     this.onLanguageTap,
     this.onBackTap,
     this.searchHint = 'search for medication',
+    this.height = 200.0,
   });
 
   final VoidCallback? onSearch;
@@ -21,6 +22,7 @@ class PharmacyHeader extends StatelessWidget {
   final VoidCallback? onLanguageTap;
   final VoidCallback? onBackTap;
   final String searchHint;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,9 @@ class PharmacyHeader extends StatelessWidget {
       children: [
         // Gradient Background with Custom Shape
         ClipPath(
-          clipper: PharmacyHeaderShape(),
+          clipper: PharmacyHeaderShape(height: height),
           child: Container(
-            height: 200,
+            height: height,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: Grad().pharmacyLinearGrad,

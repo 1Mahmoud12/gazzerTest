@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_header.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/subcategory/widgets/pharmacy_scrollable_tab_list.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/subcategory/widgets/pharmacy_vendor_card.dart';
 import 'package:go_router/go_router.dart';
@@ -101,7 +103,10 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(90),
-              border: Border.all(color: Co.buttonGradient.withOpacity(.3), width: 2),
+              border: Border.all(
+                color: Co.buttonGradient.withOpacity(.3),
+                width: 2,
+              ),
               color: selected == index ? Co.buttonGradient.withOpacity(.1) : Colors.transparent,
             ),
             child: Row(
@@ -113,7 +118,10 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                 ),
                 Padding(
                   padding: AppConst.defaultHrPadding,
-                  child: Text(subcategory['name'], style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13)),
+                  child: Text(
+                    subcategory['name'],
+                    style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
+                  ),
                 ),
               ],
             ),
@@ -158,7 +166,13 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                       isClosed: vendor['isClosed'],
                       isFavorite: isFavorite,
                       onTap: () {
-                        // TODO: Navigate to vendor menu
+                        context.navigateToPage(
+                          PharmacyStoreScreen(
+                            vendorId: vendor['id'],
+                            name: vendor['name'],
+                            logoUrl: vendor['logo'],
+                          ),
+                        );
                       },
                       onFavoriteTap: () {
                         setState(() {

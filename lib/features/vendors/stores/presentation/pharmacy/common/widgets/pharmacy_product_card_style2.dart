@@ -67,7 +67,7 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
+                  Positioned.fill(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -86,14 +86,12 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                         // Product Name
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Flexible(
-                            child: Text(
-                              product.name,
-                              style: TStyle.burbleBold(fontSize),
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          child: Text(
+                            product.name,
+                            style: TStyle.burbleBold(fontSize),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(height: iconSize + spacing),

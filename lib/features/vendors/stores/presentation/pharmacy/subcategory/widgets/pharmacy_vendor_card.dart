@@ -59,7 +59,7 @@ class PharmacyVendorCard extends StatelessWidget {
               children: [
                 // Logo
                 Stack(
-                  alignment: AlignmentGeometry.bottomCenter,
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: [
                     Container(
                       width: 50,
@@ -148,7 +148,9 @@ class PharmacyVendorCard extends StatelessWidget {
                               const SizedBox(width: 4),
                               SizedBox(
                                 width: 60,
-                                child: Flexible(
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: AlignmentDirectional.centerStart,
                                   child: Text(
                                     location,
                                     style: TStyle.greySemi(12),

@@ -4,7 +4,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_header.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_product_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_product_card_style2.dart';
 import 'package:go_router/go_router.dart';
 
@@ -85,7 +84,7 @@ class PharmacyBestSellersScreen extends StatelessWidget {
                                     // Handle tap
                                   },
                                 )
-                              : PharmacyProductCard(
+                              : PharmacyProductCardStyle2(
                                   product: product['product'],
                                   vendorName: product['vendorName'],
 

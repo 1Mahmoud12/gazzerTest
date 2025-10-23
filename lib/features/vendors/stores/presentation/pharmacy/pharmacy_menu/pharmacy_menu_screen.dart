@@ -200,7 +200,7 @@ class PharmacyMenuScreen extends StatelessWidget {
         Padding(
           padding: AppConst.defaultHrPadding,
           child: TitleWithMore(
-            title: 'Best Sellers',
+            title: L10n.tr().bestSellers,
             onPressed: () {
               context.navigateToPage(const PharmacyBestSellersScreen());
             },
@@ -208,7 +208,7 @@ class PharmacyMenuScreen extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 250,
+          height: MediaQuery.sizeOf(context).height * .27,
           child: SingleChildScrollView(
             padding: AppConst.defaultHrPadding,
             scrollDirection: Axis.horizontal,
@@ -231,6 +231,7 @@ class PharmacyMenuScreen extends StatelessWidget {
                           product: product['product'],
                           vendorName: product['vendorName'],
                           width: MediaQuery.sizeOf(context).width * .8,
+                          height: MediaQuery.sizeOf(context).height * .25,
 
                           onTap: () {
                             // TODO: Navigate to product details
