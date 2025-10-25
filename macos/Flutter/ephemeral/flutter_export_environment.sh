@@ -1,10 +1,10 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/mahmoud/Documents/flutterVersions/3.32.4/flutter"
+export "FLUTTER_ROOT=/Users/mahmoud/Documents/flutterVersions/3.35.3/flutter"
 export "FLUTTER_APPLICATION_PATH=/Users/mahmoud/StudioProjects/gazar"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
-export "FLUTTER_BUILD_NAME=1.4.1"
+export "FLUTTER_BUILD_NAME=1.4.2"
 export "FLUTTER_BUILD_NUMBER=10"
 export "DART_OBFUSCATION=false"
 export "TRACK_WIDGET_CREATION=true"

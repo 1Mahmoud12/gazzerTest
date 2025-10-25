@@ -1,0 +1,19 @@
+platform :android do
+  desc "Test FastLane"
+  lane :beta do
+    # Build the Flutter release APK
+    sh "flutter clean"
+    sh "flutter build apk --release"
+
+    # Distribute the app to Firebase App Distribution
+    firebase_app_distribution(
+      app: "1:426479468960:android:aa9ab90f82111e3a31a4c5", # Replace with your Firebase App ID.
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
+      android_artifact_type: "APK",
+      release_notes: "New Version",
+      testers: "tester1@example.com,tester2@example.com", # Add tester emails.
+      groups: "qa-team", # Add tester group aliases.
+      firebase_cli_token: "1//033fzFmWqTSZQCgYIARAAGAMSNwF-L9IrdLrGq0lOk6Oo0wECVqNhf7Q34rrirc8SidFCaIqQ5sO9ygl043m_ACD2Ro4QFlzpuRc" # Path to your service account key.
+    )
+  end
+end
