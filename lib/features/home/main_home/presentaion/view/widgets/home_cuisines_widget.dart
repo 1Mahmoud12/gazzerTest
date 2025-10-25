@@ -30,59 +30,60 @@ class _HomeTopVendorsWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   if (vendors[index] == null) return const SizedBox.shrink();
                   final vendor = vendors[index];
+
                   return InkWell(
                     onTap: () {
-                      // if (vendor.type == VendorType.restaurant.value) {
-                      //   context.navigateToPage(
-                      //     BlocProvider(
-                      //       create: (context) => di<SingleRestaurantCubit>(
-                      //         param1: vendor.id,
-                      //       ),
-                      //       child: RestaurantDetailsScreen(
-                      //         id: vendor.id,
-                      //       ),
-                      //     ),
-                      //   );
-                      //   context.navigateToPage(
-                      //     BlocProvider(
-                      //       create: (context) => di<StoreDetailsCubit>(
-                      //         param1: vendor.id,
-                      //       ),
-                      //       child: StoreDetailsScreen(
-                      //         storeId: vendor.id,
-                      //       ),
-                      //     ),
-                      //   );
-                      //   // RestaurantDetailsScreen(
-                      //   //   id: vendor.id,
-                      //   // ).push(context);
-                      // } else if (vendor.type == VendorType.grocery.value) {
-                      //   // context.push(StoreDetailsScreen.route, extra: {'store_id': vendor.id});
-                      //   context.navigateToPage(
-                      //     BlocProvider(
-                      //       create: (context) => di<StoreDetailsCubit>(
-                      //         param1: vendor.id,
-                      //       ),
-                      //       child: StoreDetailsScreen(
-                      //         storeId: vendor.id,
-                      //       ),
-                      //     ),
-                      //   );
-                      //   // StoreDetailsRoute(
-                      //   //   storeId: vendor.id ?? -1,
-                      //   // ).push(context);
-                      // } else {
-                      //   context.navigateToPage(
-                      //     BlocProvider(
-                      //       create: (context) => di<StoreDetailsCubit>(
-                      //         param1: vendor.id,
-                      //       ),
-                      //       child: StoreDetailsScreen(
-                      //         storeId: vendor.id,
-                      //       ),
-                      //     ),
-                      //   );
-                      // }
+                      if (vendor.type == VendorType.restaurant.value) {
+                        context.navigateToPage(
+                          BlocProvider(
+                            create: (context) => di<SingleRestaurantCubit>(
+                              param1: vendor.id,
+                            ),
+                            child: RestaurantDetailsScreen(
+                              id: vendor.id,
+                            ),
+                          ),
+                        );
+                        context.navigateToPage(
+                          BlocProvider(
+                            create: (context) => di<StoreDetailsCubit>(
+                              param1: vendor.id,
+                            ),
+                            child: StoreDetailsScreen(
+                              storeId: vendor.id,
+                            ),
+                          ),
+                        );
+                        // RestaurantDetailsScreen(
+                        //   id: vendor.id,
+                        // ).push(context);
+                      } else if (vendor.type == VendorType.grocery.value) {
+                        // context.push(StoreDetailsScreen.route, extra: {'store_id': vendor.id});
+                        context.navigateToPage(
+                          BlocProvider(
+                            create: (context) => di<StoreDetailsCubit>(
+                              param1: vendor.id,
+                            ),
+                            child: StoreDetailsScreen(
+                              storeId: vendor.id,
+                            ),
+                          ),
+                        );
+                        // StoreDetailsRoute(
+                        //   storeId: vendor.id ?? -1,
+                        // ).push(context);
+                      } else {
+                        context.navigateToPage(
+                          BlocProvider(
+                            create: (context) => di<StoreDetailsCubit>(
+                              param1: vendor.id,
+                            ),
+                            child: StoreDetailsScreen(
+                              storeId: vendor.id,
+                            ),
+                          ),
+                        );
+                      }
                     },
 
                     child: DecoratedBox(

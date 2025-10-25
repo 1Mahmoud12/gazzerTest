@@ -13,7 +13,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/app_bar_row_widget.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/widgets/gradient_large_wave_container.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/widgets/gradient_wave_container.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/all_reviews/all_reviews_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_offer_style_one.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_offer_style_two.dart';
@@ -70,215 +70,203 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            GradientLargeWaveContainer(
-              height: 380,
-              child: Column(
-                children: [
-                  VerticalSpacing(MediaQuery.paddingOf(context).top),
-                  const AppBarRowWidget(
-                    bacButtonColor: Co.mauve,
-                    iconsColor: Co.mauve,
-                  ),
-                  // Vendor info card
-                  VendorInfoCard(
-                    mockVendor,
-                    categories: categories.map((c) => c['name'] as String),
-                    onTimerFinish: (ctx) {
-                      // Handle timer finish
-                    },
-                  ),
-
-                  const VerticalSpacing(16),
-
-                  Padding(
-                    padding: AppConst.defaultHrPadding,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            L10n.tr().pharmacyStores,
-                            style: TStyle.blackBold(
-                              22,
-                            ).copyWith(color: Co.purple),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                          child: PrescriptionUploadButton(
-                            onTap: () {
-                              // TODO: Navigate to prescription upload
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-            // Search Button
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 12,
+      body: ListView(
+        children: [
+          GradientWaveContainer(
+            height: 350,
+            child: Column(
               children: [
-                const HorizontalSpacing(6),
-                Expanded(
-                  child: MainSearchWidget(
-                    hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                  ),
-                ),
-                const MainCartWidget(),
-                const HorizontalSpacing(6),
-              ],
-            ),
-            const SizedBox(height: 16),
-            // Banner Slider with Dots
-            const PharmacyBannerSlider(
-              height: 180,
-            ),
+                const AppBarRowWidget(),
 
-            SizedBox(
-              height: 60,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                    3,
-                    (index) {
-                      final selected = index == 0;
-                      final category = categories[index];
-                      return InkWell(
-                        onTap: () {
-                          context.navigateToPage(
-                            PharmacyProductsScreen(
-                              categoryId: category['id'],
-                              categoryName: category['name'],
-                            ),
-                          );
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(90),
-                            border: Border.all(
-                              color: Co.buttonGradient.withOpacityNew(.3),
-                              width: 2,
-                            ),
-                            color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CircleGradientBorderedImage(
-                                image: category['image'],
-                                showBorder: false,
-                              ),
-                              Padding(
-                                padding: AppConst.defaultHrPadding,
-                                child: Text(
-                                  category['name'],
-                                  style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                // Vendor info card
+                VendorInfoCard(
+                  mockVendor,
+                  categories: categories.map((c) => c['name'] as String),
+                  onTimerFinish: (ctx) {
+                    // Handle timer finish
+                  },
                 ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: TitleWithMore(
-                title: L10n.tr().dailyOffersForYou,
-                titleStyle: TStyle.blackBold(20),
-                onPressed: () {
-                  context.navigateToPage(const ViewAllDailyOffersScreen());
-                },
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Wrap(
-                      alignment: WrapAlignment.spaceBetween,
-                      spacing: 10,
-                      children: [
-                        ...List.generate(
-                          4,
-                          (index) {
-                            return SizedBox(
-                              width: MediaQuery.sizeOf(context).width * .3,
-                              child: index % 2 == 0
-                                  ? DailyOfferStyleTwo(
-                                      product: const ProductEntity(
-                                        id: 1,
-                                        name: 'Medical Product Bundle',
-                                        description: 'Complete medical product set with nasal spray, dropper, and medication',
-                                        price: 110.0,
-                                        image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                                        rate: 4.5,
-                                        reviewCount: 100,
-                                        outOfStock: false,
-                                      ),
-                                      discountPercentage: 30,
-                                      onTap: () {
-                                        // TODO: Navigate to product details
-                                      },
-                                    )
-                                  : DailyOfferStyleOne(
-                                      product: const ProductEntity(
-                                        id: 1,
-                                        name: 'Medical Product Bundle',
-                                        description: 'Complete medical product set with nasal spray, dropper, and medication',
-                                        price: 110.0,
-                                        image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                                        rate: 4.5,
-                                        reviewCount: 100,
-                                        outOfStock: false,
-                                      ),
-                                      discountPercentage: 30,
-                                      onTap: () {
-                                        // TODO: Navigate to product details
-                                      },
-                                    ),
-                            );
+
+                const VerticalSpacing(16),
+
+                Padding(
+                  padding: AppConst.defaultHrPadding,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          L10n.tr().pharmacyStores,
+                          style: TStyle.blackBold(
+                            22,
+                          ).copyWith(color: Co.purple),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                        child: PrescriptionUploadButton(
+                          onTap: () {
+                            // TODO: Navigate to prescription upload
                           },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 16),
+          // Search Button
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 12,
+            children: [
+              const HorizontalSpacing(6),
+              Expanded(
+                child: MainSearchWidget(
+                  hintText: L10n.tr().searchForStoresItemsAndCAtegories,
+                ),
+              ),
+              const MainCartWidget(),
+              const HorizontalSpacing(6),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // Banner Slider with Dots
+          const PharmacyBannerSlider(
+            height: 180,
+          ),
+
+          SizedBox(
+            height: 60,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(
+                  3,
+                  (index) {
+                    final selected = index == 0;
+                    final category = categories[index];
+                    return InkWell(
+                      onTap: () {
+                        context.navigateToPage(
+                          PharmacyProductsScreen(
+                            categoryId: category['id'],
+                            categoryName: category['name'],
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(90),
+                          border: Border.all(
+                            color: Co.buttonGradient.withOpacityNew(.3),
+                            width: 2,
+                          ),
+                          color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircleGradientBorderedImage(
+                              image: category['image'],
+                              showBorder: false,
+                            ),
+                            Padding(
+                              padding: AppConst.defaultHrPadding,
+                              child: Text(
+                                category['name'],
+                                style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-            const SizedBox(height: 16),
+          ),
+          const SizedBox(height: 16),
+          TitleWithMore(
+            title: L10n.tr().dailyOffersForYou,
+            titleStyle: TStyle.blackBold(20),
+            onPressed: () {
+              context.navigateToPage(const ViewAllDailyOffersScreen());
+            },
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  spacing: 10,
+                  children: [
+                    ...List.generate(
+                      4,
+                      (index) {
+                        return SizedBox(
+                          width: MediaQuery.sizeOf(context).width * .3,
+                          child: false
+                              ? DailyOfferStyleTwo(
+                                  product: const ProductEntity(
+                                    id: 1,
+                                    name: 'Medical Product Bundle',
+                                    description: 'Complete medical product set with nasal spray, dropper, and medication',
+                                    price: 110.0,
+                                    image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+                                    rate: 4.5,
+                                    reviewCount: 100,
+                                    outOfStock: false,
+                                  ),
+                                  discountPercentage: 30,
+                                  onTap: () {
+                                    // TODO: Navigate to product details
+                                  },
+                                )
+                              : DailyOfferStyleOne(
+                                  product: const ProductEntity(
+                                    id: 1,
+                                    name: 'Medical Product Bundle',
+                                    description: 'Complete medical product set with nasal spray, dropper, and medication',
+                                    price: 110.0,
+                                    image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+                                    rate: 4.5,
+                                    reviewCount: 100,
+                                    outOfStock: false,
+                                  ),
+                                  discountPercentage: 30,
+                                  onTap: () {
+                                    // TODO: Navigate to product details
+                                  },
+                                ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
 
-            // Reviews Section
-            PharmacyReviewsSection(
-              onViewAll: () {
-                context.navigateToPage(const AllReviewsScreen());
-              },
-            ),
-            const SizedBox(height: 16),
-          ],
-        ),
+          // Reviews Section
+          PharmacyReviewsSection(
+            onViewAll: () {
+              context.navigateToPage(const AllReviewsScreen());
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
       ),
     );
   }
