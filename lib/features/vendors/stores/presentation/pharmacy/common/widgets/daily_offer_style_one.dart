@@ -27,27 +27,25 @@ class DailyOfferStyleOne extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
         ),
-        child: IntrinsicWidth(
-          child: Column(
-            children: [
-              // Top Section - Product Images and Icons
-              _TopSection(
-                product: product,
-                discountPercentage: discountPercentage,
-                isAr: isAr,
-              ),
+        child: Column(
+          children: [
+            // Top Section - Product Images and Icons
+            _TopSection(
+              product: product,
+              discountPercentage: discountPercentage,
+              isAr: isAr,
+            ),
 
-              // Bottom Section - Product Details
-              _BottomSection(
-                product: product,
-                isAr: isAr,
-              ),
-            ],
-          ),
+            // Bottom Section - Product Details
+            _BottomSection(
+              product: product,
+              isAr: isAr,
+            ),
+          ],
         ),
       ),
     );
@@ -67,132 +65,156 @@ class _TopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 140,
-      width: 150,
-      decoration: BoxDecoration(
-        color: Co.bg.withOpacityNew(0.5),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+    return LayoutBuilder(
+      builder: (context, constraints) => Container(
+        height: 140,
+        width: constraints.maxWidth,
+        decoration: BoxDecoration(
+          color: Co.bg.withOpacityNew(0.5),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
         ),
-      ),
-      child: Stack(
-        children: [
-          // Product Images Stack
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: Co.buttonGradient.withOpacityNew(.35),
-                      width: 2,
-                    ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadiusGeometry.circular(20),
-                    child: const CustomNetworkImage(
-                      height: 140,
-                      'https://cdn.thewirecutter.com/wp-content/media/2024/12/ROUNDUP-KOREAN-SKINCARE-2048px-9736-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp',
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          // Discount Tag
-          Positioned(
-            top: 0,
-            left: isAr ? null : 0,
-            right: isAr ? 0 : null,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: Co.buttonGradient,
-                borderRadius: isAr
-                    ? const BorderRadius.only(
-                        topRight: Radius.circular(6),
-                        bottomLeft: Radius.circular(6),
-                      )
-                    : const BorderRadius.only(
-                        topLeft: Radius.circular(6),
-                        bottomRight: Radius.circular(6),
-                      ),
-              ),
-              child: Text(
-                '$discountPercentage%',
-                style: TStyle.burbleBold(14).copyWith(
-                  color: Co.secondary,
-                ),
-              ),
-            ),
-          ),
-          // Interactive Icons
-          Positioned(
-            bottom: 0,
-            right: isAr ? null : 0,
-            left: isAr ? 0 : null,
-            child: ClipRRect(
-              borderRadius: isAr
-                  ? const BorderRadiusGeometry.only(
-                      topRight: Radius.circular(20),
-                    )
-                  : const BorderRadiusGeometry.only(
-                      topLeft: Radius.circular(20),
-                    ),
-              child: Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: Co.white,
-                  border: Border(
-                    top: BorderSide(
-                      color: Co.buttonGradient.withOpacityNew(.35),
-                      width: 2,
-                    ),
-                    left: isAr
-                        ? const BorderSide(color: Colors.white, width: 2)
-                        : BorderSide(
-                            color: Co.buttonGradient.withOpacityNew(.35),
-                            width: 2,
-                          ),
-                    bottom: const BorderSide(color: Colors.white, width: 2),
-                    right: isAr
-                        ? BorderSide(
-                            color: Co.buttonGradient.withOpacityNew(.35),
-                            width: 2,
-                          )
-                        : const BorderSide(color: Colors.white, width: 2),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Cart Icon
-                    CartToIncrementIcon(
-                      product: product,
-                      iconSize: 18,
-                      isDarkContainer: false,
-                      isHorizonal: false,
-                    ),
-                    const SizedBox(width: 8),
-
-                    // Favorite Icon
-                    DecoratedFavoriteWidget(
-                      fovorable: product,
-                      isDarkContainer: false,
-                      size: 16,
+        child: Stack(
+          children: [
+            // Product Images Stack
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Co.buttonGradient.withOpacityNew(.35),
+                        width: 2,
+                      ),
                     ),
-                  ],
+                    child: ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(20),
+                      child: Stack(
+                        children: [
+                          CustomNetworkImage(
+                            height: 140,
+                            width: constraints.maxWidth,
+
+                            'https://cdn.thewirecutter.com/wp-content/media/2024/12/ROUNDUP-KOREAN-SKINCARE-2048px-9736-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp',
+                            fit: BoxFit.fill,
+                          ),
+                          if (product.outOfStock)
+                            Positioned.fill(
+                              child: Container(
+                                height: 140,
+                                width: constraints.maxWidth,
+                                decoration: BoxDecoration(
+                                  color: Co.closed.withOpacityNew(.4),
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: Co.buttonGradient.withOpacityNew(.35),
+                                    width: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            // Discount Tag
+            if (discountPercentage > 0)
+              Positioned(
+                top: 0,
+                left: isAr ? null : 0,
+                right: isAr ? 0 : null,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Co.buttonGradient,
+                    borderRadius: isAr
+                        ? const BorderRadius.only(
+                            topRight: Radius.circular(6),
+                            bottomLeft: Radius.circular(6),
+                          )
+                        : const BorderRadius.only(
+                            topLeft: Radius.circular(6),
+                            bottomRight: Radius.circular(6),
+                          ),
+                  ),
+                  child: Text(
+                    '$discountPercentage%',
+                    style: TStyle.burbleBold(14).copyWith(
+                      color: Co.secondary,
+                    ),
+                  ),
+                ),
+              ),
+            // Interactive Icons
+            Positioned(
+              bottom: 0,
+              right: isAr ? null : 0,
+              left: isAr ? 0 : null,
+              child: ClipRRect(
+                borderRadius: isAr
+                    ? const BorderRadiusGeometry.only(
+                        topRight: Radius.circular(20),
+                      )
+                    : const BorderRadiusGeometry.only(
+                        topLeft: Radius.circular(20),
+                      ),
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Co.white,
+                    border: Border(
+                      top: BorderSide(
+                        color: Co.buttonGradient.withOpacityNew(.35),
+                        width: 2,
+                      ),
+                      left: isAr
+                          ? const BorderSide(color: Colors.white, width: 2)
+                          : BorderSide(
+                              color: Co.buttonGradient.withOpacityNew(.35),
+                              width: 2,
+                            ),
+                      bottom: const BorderSide(color: Colors.white, width: 2),
+                      right: isAr
+                          ? BorderSide(
+                              color: Co.buttonGradient.withOpacityNew(.35),
+                              width: 2,
+                            )
+                          : const BorderSide(color: Colors.white, width: 2),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Cart Icon
+                      CartToIncrementIcon(
+                        product: product,
+                        iconSize: 18,
+                        isDarkContainer: false,
+                        isHorizonal: true,
+                      ),
+                      const SizedBox(width: 8),
+
+                      // Favorite Icon
+                      DecoratedFavoriteWidget(
+                        fovorable: product,
+                        isDarkContainer: false,
+                        size: 16,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -239,7 +261,7 @@ class _BottomSection extends StatelessWidget {
             Co.buttonGradient.withOpacityNew(.4),
           ],
           end: AlignmentDirectional.bottomCenter,
-          begin: AlignmentGeometry.topCenter,
+          begin: AlignmentDirectional.topCenter,
         ),
       ),
       child: Column(

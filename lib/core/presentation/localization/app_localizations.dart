@@ -2401,6 +2401,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You have reached the maximum quantity available for this product'**
   String get max_quantity_reached_for_product;
+
+  /// No description provided for @reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get reviews;
+
+  /// No description provided for @typeYouReviewHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your review here'**
+  String get typeYouReviewHere;
 }
 
 class _AppLocalizationsDelegate

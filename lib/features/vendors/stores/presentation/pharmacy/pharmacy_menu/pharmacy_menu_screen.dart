@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -39,72 +40,64 @@ class PharmacyMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          // Pharmacy Header
-          PharmacyHeader(
-            onBackTap: () => context.pop(),
-            onSearch: () {
-              // TODO: Navigate to pharmacy search
-            },
-            onNotificationTap: () {
-              // TODO: Navigate to notifications
-            },
-            onLanguageTap: () {
-              // TODO: Toggle language
-            },
-          ),
-
-          // Main Content
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-
-                  // Pharmacy Title and Upload Button
-                  _buildTitleSection(context),
-
-                  const SizedBox(height: 16),
-
-                  // Delivery Banner
-                  DeliveryBanner(
-                    message: 'Free delivery on orders over 300 EG',
-                    backgroundColor: Co.buttonGradient.withOpacity(.1),
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  // Daily Deal Card
-                  DailyDealCard(
-                    imageUrl: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                    discountPercentage: 30,
-                    endTime: DateTime.now().add(
-                      const Duration(hours: 14, minutes: 20, seconds: 30),
-                    ),
-                    onTap: () {
-                      // TODO: Navigate to daily deal details
-                    },
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Categories Section
-                  _buildCategoriesSection(context),
-
-                  const SizedBox(height: 24),
-
-                  // Best Sellers Section
-                  _buildBestSellersSection(context),
-
-                  const SizedBox(height: 80),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Pharmacy Header
+            PharmacyHeader(
+              onBackTap: () => context.pop(),
+              onSearch: () {
+                // TODO: Navigate to pharmacy search
+              },
+              onNotificationTap: () {
+                // TODO: Navigate to notifications
+              },
+              onLanguageTap: () {
+                // TODO: Toggle language
+              },
             ),
-          ),
-        ],
+
+            // Main Content
+            const SizedBox(height: 8),
+
+            // Pharmacy Title and Upload Button
+            _buildTitleSection(context),
+
+            const SizedBox(height: 16),
+
+            // Delivery Banner
+            DeliveryBanner(
+              message: 'Free delivery on orders over 300 EG',
+              backgroundColor: Co.buttonGradient.withOpacityNew(.1),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Daily Deal Card
+            DailyDealCard(
+              imageUrl: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+              discountPercentage: 30,
+              endTime: DateTime.now().add(
+                const Duration(hours: 14, minutes: 20, seconds: 30),
+              ),
+              onTap: () {
+                // TODO: Navigate to daily deal details
+              },
+            ),
+
+            const SizedBox(height: 24),
+
+            // Categories Section
+            _buildCategoriesSection(context),
+
+            const SizedBox(height: 24),
+
+            // Best Sellers Section
+            _buildBestSellersSection(context),
+
+            const SizedBox(height: 80),
+          ],
+        ),
       ),
     );
   }
@@ -117,7 +110,7 @@ class PharmacyMenuScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              'Pharmacy Stores',
+              L10n.tr().pharmacyStores,
               style: TStyle.blackBold(22).copyWith(color: Co.purple),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

@@ -472,6 +472,8 @@
   "secs": "ثواني",
   "dailyDeal": "عرض اليوم",
 
-"max_quantity_reached_for_product": "لقد وصلت إلى أقصى كمية متاحة لهذا المنتج"
+"max_quantity_reached_for_product": "لقد وصلت إلى أقصى كمية متاحة لهذا المنتج",
+"reviews": "المراجعات",
+"typeYouReviewHere": "اكتب مراجعتك هنا"
 
 }

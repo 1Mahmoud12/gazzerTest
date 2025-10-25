@@ -39,7 +39,9 @@ class AppBarRowWidget extends StatelessWidget {
       child: Row(
         spacing: 18,
         children: [
-          const MainBackIcon(),
+          MainBackIcon(
+            color: bacButtonColor,
+          ),
 
           const Spacer(),
           if (showCart)

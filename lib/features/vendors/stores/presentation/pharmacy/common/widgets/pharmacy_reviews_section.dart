@@ -10,46 +10,48 @@ class PharmacyReviewsSection extends StatelessWidget {
   const PharmacyReviewsSection({
     super.key,
     this.onViewAll,
-    this.onAddReview,
   });
 
   final VoidCallback? onViewAll;
-  final VoidCallback? onAddReview;
 
   @override
   Widget build(BuildContext context) {
     final isAr = L10n.isAr(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Header Section
-        _HeaderSection(
-          isAr: isAr,
-          onViewAll: onViewAll,
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header Section
+          HeaderSection(
+            isAr: isAr,
+            onViewAll: onViewAll,
+          ),
 
-        VerticalSpacing(16),
+          const VerticalSpacing(16),
 
-        // Divider
-        Container(
-          height: 1,
-          color: Co.grey.withOpacityNew(0.3),
-        ),
+          // Divider
+          Container(
+            height: 1,
+            color: Co.grey.withOpacityNew(0.3),
+          ),
 
-        VerticalSpacing(20),
+          const VerticalSpacing(20),
 
-        // Reviews List
-        _ReviewsList(
-          isAr: isAr,
-        ),
-      ],
+          // Reviews List
+          ReviewsList(
+            isAr: isAr,
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _HeaderSection extends StatelessWidget {
-  const _HeaderSection({
+class HeaderSection extends StatelessWidget {
+  const HeaderSection({
+    super.key,
     required this.isAr,
     this.onViewAll,
   });
@@ -62,18 +64,16 @@ class _HeaderSection extends StatelessWidget {
     return Column(
       children: [
         TitleWithMore(
-          title: 'L10n.tr().reviews',
+          title: L10n.tr().reviews,
           titleStyle: TStyle.blackBold(20),
-          onPressed: () {
-            // TODO: Navigate to all categories
-          },
+          onPressed: onViewAll,
         ),
         const VerticalSpacing(12),
         Row(
           children: [
             Expanded(
               child: Text(
-                'L10n.tr(context).typeYouReviewHere',
+                L10n.tr(context).typeYouReviewHere,
                 style: TStyle.burbleRegular(12),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -113,8 +113,9 @@ class _HeaderSection extends StatelessWidget {
   }
 }
 
-class _ReviewsList extends StatelessWidget {
-  const _ReviewsList({
+class ReviewsList extends StatelessWidget {
+  const ReviewsList({
+    super.key,
     required this.isAr,
   });
 
@@ -131,7 +132,7 @@ class _ReviewsList extends StatelessWidget {
             .map(
               (review) => Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: _ReviewItem(
+                child: ReviewItem(
                   review: review,
                   isAr: isAr,
                 ),
@@ -166,8 +167,9 @@ class _ReviewsList extends StatelessWidget {
   }
 }
 
-class _ReviewItem extends StatelessWidget {
-  const _ReviewItem({
+class ReviewItem extends StatelessWidget {
+  const ReviewItem({
+    super.key,
     required this.review,
     required this.isAr,
   });

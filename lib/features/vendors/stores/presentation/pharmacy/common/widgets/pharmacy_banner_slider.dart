@@ -29,13 +29,12 @@ class _PharmacyBannerSliderState extends State<PharmacyBannerSlider> {
     final banners = _getBanners();
 
     return Stack(
-      alignment: AlignmentGeometry.bottomCenter,
+      alignment: AlignmentDirectional.bottomCenter,
       children: [
         SizedBox(
           height: widget.height,
           child: PageView.builder(
             controller: _pageController,
-
             onPageChanged: (index) {
               setState(() {
                 _currentPage = index;
@@ -106,7 +105,7 @@ class _BannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 2),
+      margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
