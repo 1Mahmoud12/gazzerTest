@@ -14,9 +14,43 @@ import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 
-class PopularScreen extends StatelessWidget {
+class PopularScreen extends StatefulWidget {
   const PopularScreen({super.key});
   static const route = '/popular-screen';
+
+  @override
+  State<PopularScreen> createState() => _PopularScreenState();
+}
+
+class _PopularScreenState extends State<PopularScreen> {
+  String _searchQuery = '';
+  List<dynamic> _allItems = [];
+  List<dynamic> _filteredItems = [];
+
+  void _onSearchChanged(String value) {
+    if (!context.mounted) return;
+
+    setState(() {
+      _searchQuery = value;
+      if (value.isEmpty) {
+        _filteredItems = _allItems;
+      } else {
+        _filteredItems = _allItems.where((item) {
+          final itemData = item.item;
+          if (itemData == null) return false;
+          return (itemData.plateName?.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ) ??
+                  false) ||
+              (itemData.plateDescription?.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ) ??
+                  false);
+        }).toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -27,41 +61,66 @@ class PopularScreen extends StatelessWidget {
         appBar: const MainAppBar(showCart: false, iconsColor: Co.secondary),
         extendBody: true,
         extendBodyBehindAppBar: true,
-        body: BlocBuilder<TopItemsCubit, TopItemsStates>(
-          builder: (context, state) {
-            if (state is TopItemsLoadingState) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HomeCategoriesHeader(
+              onChange: _onSearchChanged,
+            ),
+            Expanded(
+              child: BlocBuilder<TopItemsCubit, TopItemsStates>(
+                builder: (context, state) {
+                  if (state is TopItemsLoadingState) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-            if (state is TopItemsErrorState) {
-              return FailureComponent(
-                message: state.message,
-                onRetry: () {
-                  context.read<TopItemsCubit>().getTopItems();
+                  if (state is TopItemsErrorState) {
+                    return FailureComponent(
+                      message: state.message,
+                      onRetry: () {
+                        context.read<TopItemsCubit>().getTopItems();
+                      },
+                    );
+                  }
+
+                  if (state is TopItemsSuccessState) {
+                    // Store all items for local filtering
+                    if (_allItems.isEmpty) {
+                      _allItems = state.data?.entities ?? [];
+                      _filteredItems = _allItems;
+                    }
+
+                    return _buildContent(
+                      context,
+                      _filteredItems,
+                      state.isFromCache,
+                    );
+                  }
+
+                  return const Center(child: CircularProgressIndicator());
                 },
-              );
-            }
-
-            if (state is TopItemsSuccessState) {
-              return _buildContent(context, state.data, state.isFromCache);
-            }
-
-            return const Center(child: CircularProgressIndicator());
-          },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, data, bool isFromCache) {
-    final items = data?.entities ?? [];
+  Widget _buildContent(
+    BuildContext context,
+    List<dynamic> items,
+    bool isFromCache,
+  ) {
+    if (items.isEmpty) {
+      return FailureComponent(
+        message: _searchQuery.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
+      );
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HomeCategoriesHeader(
-          onChange: (value) {},
-        ),
         Padding(
           padding: AppConst.defaultHrPadding,
           child: GradientText(
@@ -69,25 +128,6 @@ class PopularScreen extends StatelessWidget {
             style: TStyle.blackBold(16),
           ),
         ),
-        // const VerticalSpacing(12),
-        // SizedBox(
-        //   height: 180,
-        //   child: ListView.separated(
-        //     scrollDirection: Axis.horizontal,
-        //     padding: AppConst.defaultHrPadding,
-        //     itemCount: items.length > 5 ? 5 : items.length,
-        //     separatorBuilder: (context, index) => const HorizontalSpacing(12),
-        //     itemBuilder: (context, index) {
-        //       final item = items[index];
-        //       return VerticalRotatedImgCard(
-        //         prod: _convertToProductEntity(item),
-        //         onTap: () {
-        //           PlateDetailsRoute(id: item.item?.id ?? 0).push(context);
-        //         },
-        //       );
-        //     },
-        //   ),
-        // ),
         const VerticalSpacing(16),
         Expanded(
           child: GridView.builder(

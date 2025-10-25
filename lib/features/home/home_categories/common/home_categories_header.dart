@@ -19,7 +19,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
   final width = 550.0;
   @override
   void dispose() {
-    if (mounted) controller.dispose();
+    if (context.mounted) controller.dispose();
     super.dispose();
   }
 
