@@ -1,0 +1,61 @@
+import 'dart:convert';
+
+import 'package:gazzer/core/data/network/api_client.dart';
+import 'package:gazzer/core/data/network/endpoints.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/features/home/home_categories/suggested/data/dtos/suggests_dto.dart';
+import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_repo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const _kSuggestsJson = 'suggests_json';
+const _kSuggestsTs = 'suggests_timestamp';
+
+class SuggestsRepoImpl extends SuggestsRepo {
+  final ApiClient _apiClient;
+
+  SuggestsRepoImpl(this._apiClient, super.crashlyticsRepo);
+
+  @override
+  Future<Result<SuggestsDtoData?>> getSuggests() async {
+    final result = await super.call(
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.suggests,
+      ),
+      parser: (response) {
+        // Save to cache in background
+        _saveToCache(response.data);
+
+        final dto = SuggestsDto.fromJson(response.data);
+        return dto.data;
+      },
+    );
+
+    return result;
+  }
+
+  Future<void> _saveToCache(dynamic responseData) async {
+    try {
+      final sp = await SharedPreferences.getInstance();
+      await sp.setString(_kSuggestsJson, jsonEncode(responseData));
+      await sp.setInt(_kSuggestsTs, DateTime.now().millisecondsSinceEpoch);
+    } catch (e) {
+      // Ignore cache errors
+    }
+  }
+
+  @override
+  Future<SuggestsDtoData?> getCachedSuggests() async {
+    try {
+      final sp = await SharedPreferences.getInstance();
+      final jsonString = sp.getString(_kSuggestsJson);
+
+      if (jsonString == null) return null;
+
+      final jsonData = jsonDecode(jsonString);
+      final dto = SuggestsDto.fromJson(jsonData);
+      return dto.data;
+    } catch (e) {
+      return null;
+    }
+  }
+}

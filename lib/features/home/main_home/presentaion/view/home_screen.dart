@@ -27,7 +27,7 @@ import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
-import 'package:gazzer/features/home/home_categories/suggested_screen/presentation/view/suggested_screen.dart';
+import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';

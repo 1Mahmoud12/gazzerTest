@@ -30,6 +30,9 @@ import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus
 import 'package:gazzer/features/home/home_categories/popular/data/top_items_repo_impl.dart';
 import 'package:gazzer/features/home/home_categories/popular/domain/top_items_repo.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_cubit.dart';
+import 'package:gazzer/features/home/home_categories/suggested/data/suggests_repo_impl.dart';
+import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_repo.dart';
+import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_cubit.dart';
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
@@ -132,6 +135,9 @@ void _registerRepos() {
   di.registerLazySingleton<TopVendorsRepo>(
     () => TopVendorsRepoImp(di.get(), di.get()),
   );
+  di.registerLazySingleton<SuggestsRepo>(
+    () => SuggestsRepoImpl(di.get(), di.get()),
+  );
 }
 
 void _registerBuses() {
@@ -182,4 +188,5 @@ void _registerCubits() {
   di.registerFactory(() => DailyOfferCubit(di.get()));
   di.registerFactory(() => TopItemsCubit(di.get()));
   di.registerFactory(() => TopVendorsCubit(di.get()));
+  di.registerFactory(() => SuggestsCubit(di.get()));
 }

@@ -12,6 +12,7 @@ import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
+import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
@@ -72,6 +73,12 @@ final List<RouteBase> unNestedRoutes = [
     path: PopularScreen.route,
     builder: (context, state) {
       return const PopularScreen();
+    },
+  ),
+  GoRoute(
+    path: SuggestedScreen.route,
+    builder: (context, state) {
+      return const SuggestedScreen();
     },
   ),
 ];

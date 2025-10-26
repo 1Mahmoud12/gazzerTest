@@ -1,0 +1,166 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
+import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_repo.dart';
+import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_cubit.dart';
+import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_states.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+
+class SuggestedScreen extends StatefulWidget {
+  const SuggestedScreen({super.key});
+
+  static const route = '/suggested-screen';
+
+  @override
+  State<SuggestedScreen> createState() => _SuggestedScreenState();
+}
+
+class _SuggestedScreenState extends State<SuggestedScreen> {
+  String _searchQuery = '';
+  List<dynamic> _allItems = [];
+  List<dynamic> _filteredItems = [];
+
+  void _onSearchChanged(String value) {
+    if (!context.mounted) return;
+
+    setState(() {
+      _searchQuery = value;
+      if (value.isEmpty) {
+        _filteredItems = _allItems;
+      } else {
+        _filteredItems = _allItems.where((item) {
+          final itemData = item.item;
+          if (itemData == null) return false;
+
+          // Search in both plate and store_item fields
+          final plateName = itemData.plateName?.toLowerCase() ?? '';
+          final name = itemData.name?.toLowerCase() ?? '';
+          final plateDescription = itemData.plateDescription?.toLowerCase() ?? '';
+          final searchLower = value.toLowerCase();
+
+          return plateName.contains(searchLower) || name.contains(searchLower) || plateDescription.contains(searchLower);
+        }).toList();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SuggestsCubit(
+        di.get<SuggestsRepo>(),
+      )..getSuggests(),
+      child: Scaffold(
+        appBar: const MainAppBar(showCart: false, iconsColor: Co.secondary),
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HomeCategoriesHeader(
+              onChange: _onSearchChanged,
+            ),
+            Expanded(
+              child: BlocBuilder<SuggestsCubit, SuggestsStates>(
+                builder: (context, state) {
+                  if (state is SuggestsLoadingState) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (state is SuggestsErrorState) {
+                    return FailureComponent(
+                      message: state.message,
+                      onRetry: () {
+                        context.read<SuggestsCubit>().getSuggests();
+                      },
+                    );
+                  }
+
+                  if (state is SuggestsSuccessState) {
+                    // Store all items for local filtering
+                    if (_allItems.isEmpty) {
+                      _allItems = state.data?.entities ?? [];
+                      _filteredItems = _allItems;
+                    }
+
+                    return _buildContent(
+                      context,
+                      _filteredItems,
+                      state.isFromCache,
+                    );
+                  }
+
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContent(
+    BuildContext context,
+    List<dynamic> items,
+    bool isFromCache,
+  ) {
+    if (items.isEmpty) {
+      return FailureComponent(
+        message: _searchQuery.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: AppConst.defaultHrPadding,
+          child: GradientText(
+            text: L10n.tr().suggestedForYou,
+            style: TStyle.blackBold(16),
+          ),
+        ),
+        const VerticalSpacing(16),
+        Expanded(
+          child: ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemCount: items.length,
+            separatorBuilder: (context, index) => const VerticalSpacing(12),
+            itemBuilder: (context, index) {
+              if (items[index] == null) return const SizedBox.shrink();
+              return HorizontalProductCard(
+                product: _convertToProductEntity(items[index]!),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Convert SuggestEntity to ProductEntity for VerticalRotatedImgCard
+  ProductEntity _convertToProductEntity(item) {
+    final itemData = item.item;
+
+    return ProductEntity(
+      id: itemData?.id ?? 0,
+      name: itemData?.plateName ?? itemData?.name ?? '',
+      description: itemData?.plateDescription ?? '',
+      price: double.tryParse(itemData?.price ?? '0') ?? 0.0,
+      image: itemData?.plateImage ?? itemData?.image ?? '',
+      rate: double.tryParse(itemData?.rate ?? '0') ?? 0.0,
+      reviewCount: itemData?.rateCount ?? 0,
+      outOfStock: false,
+    );
+  }
+}

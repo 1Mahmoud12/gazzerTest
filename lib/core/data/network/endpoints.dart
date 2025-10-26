@@ -56,6 +56,7 @@ class Endpoints {
   static const getAllOffers = "homepage/widget/stores-with-offers-and-items-offers";
   static const topVendors = "homepage/widget/top-vendors";
   static const topItems = "homepage/widget/top-items";
+  static const suggests = "homepage/widget/suggests";
   // restaurants
   static const restaurantsMenuPage = "pages/restaurants-page";
 
