@@ -30,56 +30,55 @@ class _HomeTopVendorsWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   if (vendors[index] == null) return const SizedBox.shrink();
                   final vendor = vendors[index];
-
                   return InkWell(
                     onTap: () {
                       if (vendor.type == VendorType.restaurant.value) {
                         context.navigateToPage(
                           BlocProvider(
                             create: (context) => di<SingleRestaurantCubit>(
-                              param1: vendor.id,
+                              param1: vendor.storeId,
                             ),
                             child: RestaurantDetailsScreen(
-                              id: vendor.id,
+                              id: vendor.storeId,
                             ),
                           ),
                         );
                         context.navigateToPage(
                           BlocProvider(
                             create: (context) => di<StoreDetailsCubit>(
-                              param1: vendor.id,
+                              param1: vendor.storeId,
                             ),
                             child: StoreDetailsScreen(
-                              storeId: vendor.id,
+                              storeId: vendor.storeId,
                             ),
                           ),
                         );
                         // RestaurantDetailsScreen(
-                        //   id: vendor.id,
+                        //   id: vendor.storeId,
                         // ).push(context);
                       } else if (vendor.type == VendorType.grocery.value) {
-                        // context.push(StoreDetailsScreen.route, extra: {'store_id': vendor.id});
+                        // context.push(StoreDetailsScreen.route, extra: {'store_id': vendor.storeId});
                         context.navigateToPage(
                           BlocProvider(
                             create: (context) => di<StoreDetailsCubit>(
-                              param1: vendor.id,
+                              param1: vendor.storeId,
                             ),
                             child: StoreDetailsScreen(
-                              storeId: vendor.id,
+                              storeId: vendor.storeId,
                             ),
                           ),
                         );
                         // StoreDetailsRoute(
-                        //   storeId: vendor.id ?? -1,
+                        //   storeId: vendor.storeId ?? -1,
                         // ).push(context);
                       } else {
                         context.navigateToPage(
                           BlocProvider(
                             create: (context) => di<StoreDetailsCubit>(
-                              param1: vendor.id,
+                              param1: vendor.storeId,
                             ),
                             child: StoreDetailsScreen(
-                              storeId: vendor.id,
+                              storeId: vendor.storeId,
                             ),
                           ),
                         );

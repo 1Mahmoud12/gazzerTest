@@ -17,20 +17,27 @@ enum VendorType {
   const VendorType(this.value);
 
   static VendorType fromString(String value) {
-    return VendorType.values.firstWhere((type) => type.value == value, orElse: () => VendorType.restaurant);
+    return VendorType.values.firstWhere(
+      (type) => type.value == value,
+      orElse: () => VendorType.restaurant,
+    );
   }
 }
 
 enum ItemType {
   plate('plate'),
   product('product'),
+  storeItem('store_item'),
   unknown('unknown');
 
   final String value;
   const ItemType(this.value);
 
   static ItemType fromString(String type) {
-    return ItemType.values.firstWhere((e) => e.value == type.toLowerCase(), orElse: () => ItemType.unknown);
+    return ItemType.values.firstWhere(
+      (e) => e.value == type.toLowerCase(),
+      orElse: () => ItemType.unknown,
+    );
   }
 }
 
@@ -42,7 +49,10 @@ enum CartItemType {
   final String value;
   const CartItemType(this.value);
   static CartItemType fromString(String type) {
-    return CartItemType.values.firstWhere((e) => e.value == type.toLowerCase(), orElse: () => CartItemType.plate);
+    return CartItemType.values.firstWhere(
+      (e) => e.value == type.toLowerCase(),
+      orElse: () => CartItemType.plate,
+    );
   }
 }
 
@@ -58,7 +68,10 @@ enum FavoriteType {
   const FavoriteType(this.type);
 
   factory FavoriteType.fromString(String type) {
-    return FavoriteType.values.firstWhere((e) => e.type == type, orElse: () => unknown);
+    return FavoriteType.values.firstWhere(
+      (e) => e.type == type,
+      orElse: () => unknown,
+    );
   }
 
   FavoritesViewType get toView {
@@ -127,7 +140,10 @@ enum CardStyle {
   const CardStyle(this.type);
 
   factory CardStyle.fromString(String type) {
-    return CardStyle.values.firstWhere((e) => e.type == type, orElse: () => typeOne);
+    return CardStyle.values.firstWhere(
+      (e) => e.type == type,
+      orElse: () => typeOne,
+    );
   }
   static BorderRadius getShapeRadius(CardStyle shape) {
     switch (shape) {
@@ -141,7 +157,10 @@ enum CardStyle {
       case CardStyle.typeTwo:
         return BorderRadius.circular(100);
       case CardStyle.typeThree:
-        return const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100));
+        return const BorderRadius.only(
+          topLeft: Radius.circular(100),
+          topRight: Radius.circular(100),
+        );
       case CardStyle.typeFour:
         return BorderRadius.circular(16);
     }
@@ -158,7 +177,10 @@ enum LayoutType {
   const LayoutType(this.type);
 
   factory LayoutType.fromString(String type) {
-    return LayoutType.values.firstWhere((e) => e.type == type, orElse: () => horizontal);
+    return LayoutType.values.firstWhere(
+      (e) => e.type == type,
+      orElse: () => horizontal,
+    );
   }
 }
 
@@ -172,7 +194,10 @@ enum DiscountType {
   const DiscountType(this.type);
 
   factory DiscountType.fromString(String type) {
-    return DiscountType.values.firstWhere((e) => e.type == type, orElse: () => unkown);
+    return DiscountType.values.firstWhere(
+      (e) => e.type == type,
+      orElse: () => unkown,
+    );
   }
 }
 
@@ -185,6 +210,9 @@ enum OptionType {
   const OptionType(this.value);
 
   static OptionType fromString(String value) {
-    return OptionType.values.firstWhere((e) => e.value == value, orElse: () => unknown);
+    return OptionType.values.firstWhere(
+      (e) => e.value == value,
+      orElse: () => unknown,
+    );
   }
 }

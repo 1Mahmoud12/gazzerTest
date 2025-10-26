@@ -47,6 +47,7 @@ class TopVendor {
     this.secondContactPerson,
     this.image,
     this.type,
+    this.storeInfo,
   });
 
   final int? id;
@@ -55,6 +56,7 @@ class TopVendor {
   final String? secondContactPerson;
   final String? image;
   final String? type;
+  final StoreInfo? storeInfo;
 
   factory TopVendor.fromJson(Map<String, dynamic> json) {
     return TopVendor(
@@ -64,6 +66,7 @@ class TopVendor {
       secondContactPerson: json["second_contact_person"],
       image: json["image"],
       type: json["type"],
+      storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
     );
   }
 }
@@ -123,6 +126,44 @@ class Banner {
       buttonDisplayed: json["button_displayed"],
       buttonText: json["button_text"],
       images: json["images"] == null ? [] : List<dynamic>.from(json["images"]!.map((x) => x)),
+    );
+  }
+}
+
+class StoreInfo {
+  StoreInfo({
+    this.storeCategoryType,
+    this.storeCategoryId,
+    this.storeId,
+    this.storeName,
+    this.storeImage,
+    this.isOpen,
+    this.orderCount,
+    this.rating,
+    this.storeCategoryName,
+  });
+
+  final String? storeCategoryType;
+  final int? storeCategoryId;
+  final int? storeId;
+  final String? storeName;
+  final String? storeImage;
+  final int? isOpen;
+  final int? orderCount;
+  final String? rating;
+  final String? storeCategoryName;
+
+  factory StoreInfo.fromJson(Map<String, dynamic> json) {
+    return StoreInfo(
+      storeCategoryType: json["store_category_type"],
+      storeCategoryId: json["store_category_id"],
+      storeId: json["store_id"],
+      storeName: json["store_name"],
+      storeImage: json["store_image"],
+      isOpen: json["is_open"],
+      orderCount: json["order_count"],
+      rating: json["rating"],
+      storeCategoryName: json["store_category_name"],
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 class VendorEntity {
   final int id;
   final String name;
+  final int storeId;
   final String? contactPerson;
   final String? secondContactPerson;
   final String? type;
@@ -14,6 +15,7 @@ class VendorEntity {
   VendorEntity({
     required this.id,
     required this.name,
+    required this.storeId,
     this.contactPerson,
     this.secondContactPerson,
     this.type,

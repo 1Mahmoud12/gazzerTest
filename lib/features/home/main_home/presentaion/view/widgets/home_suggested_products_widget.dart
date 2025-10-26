@@ -6,7 +6,6 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
-
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(
@@ -27,7 +26,6 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
               separatorBuilder: (context, index) => const VerticalSpacing(12),
               itemBuilder: (context, index) {
                 if (items[index] == null) return const SizedBox.shrink();
-
                 return HorizontalProductCard(product: items[index]!);
               },
             ),

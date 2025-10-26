@@ -26,6 +26,8 @@ class SectionItemDTO extends ProductItemDTO {
         return item?.toEntity();
       case ItemType.product:
         return item?.toEntity();
+      case ItemType.storeItem:
+        return item?.toEntity();
       default:
         // throw Exception('Unsupported item? type: $item?Type');
         // return item?.toProductItem();
@@ -34,7 +36,11 @@ class SectionItemDTO extends ProductItemDTO {
   }
 
   SectionItemDTO.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'] is int
+        ? json['id']
+        : (json['item_id'] != null && json['item_id'] is int)
+        ? json['item_id']
+        : -1;
     expiredAt = json['expired_at'];
     discount = json['discount'];
 
@@ -43,6 +49,8 @@ class SectionItemDTO extends ProductItemDTO {
       if (itemType == ItemType.plate) {
         item = PlateDTO.fromJson(json['item']);
       } else if (itemType == ItemType.product) {
+        item = ProductDTO.fromJson(json['item']);
+      } else if (itemType == ItemType.storeItem) {
         item = ProductDTO.fromJson(json['item']);
       } else {
         // item = ProductItemDTO.fromJson(json['item']);

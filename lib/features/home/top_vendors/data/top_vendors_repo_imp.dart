@@ -20,11 +20,12 @@ class TopVendorsRepoImp extends TopVendorsRepo {
                 .map(
                   (vendor) => VendorEntity(
                     id: vendor.id ?? 0,
+                    storeId: vendor.storeInfo?.storeId ?? 0,
                     name: vendor.vendorName ?? '',
                     contactPerson: vendor.contactPerson,
                     secondContactPerson: vendor.secondContactPerson,
                     image: vendor.image ?? '',
-                    type: vendor.type,
+                    type: vendor.storeInfo?.storeCategoryType ?? '',
                   ),
                 )
                 .toList() ??
