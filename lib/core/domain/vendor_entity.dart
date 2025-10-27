@@ -9,6 +9,7 @@ class VendorEntity {
   final String? contactPerson;
   final String? secondContactPerson;
   final String? type;
+  final int? totalOrders;
 
   /// not given by api yet;
   final String image;
@@ -19,6 +20,7 @@ class VendorEntity {
     this.contactPerson,
     this.secondContactPerson,
     this.type,
+    this.totalOrders,
     required this.image,
   });
 }

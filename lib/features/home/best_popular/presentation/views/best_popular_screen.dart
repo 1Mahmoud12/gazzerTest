@@ -126,6 +126,13 @@ class _VendorCard extends StatelessWidget {
             maxLines: 2,
             textAlign: TextAlign.center,
           ),
+          Text(
+            vendor.totalOrders.toString(),
+            style: TStyle.blackRegular(12),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

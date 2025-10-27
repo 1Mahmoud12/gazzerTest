@@ -135,6 +135,7 @@ class BestPopularStoreDto {
       image: image,
       storeId: storeId,
       type: storeCategoryType,
+      totalOrders: totalOrders,
     );
   }
 }

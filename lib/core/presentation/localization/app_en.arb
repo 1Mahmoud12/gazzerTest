@@ -475,6 +475,7 @@
   "dailyDeal": "Daily Deal",
   "max_quantity_reached_for_product": "You have reached the maximum quantity available for this product",
   "reviews": "Reviews",
-  "typeYouReviewHere": "Type your review here"
+  "typeYouReviewHere": "Type your review here",
+  "totalOrders": "Total Order"
 
 }

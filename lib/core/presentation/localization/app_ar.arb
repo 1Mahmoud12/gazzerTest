@@ -477,6 +477,7 @@
 
 "max_quantity_reached_for_product": "لقد وصلت إلى أقصى كمية متاحة لهذا المنتج",
 "reviews": "المراجعات",
-"typeYouReviewHere": "اكتب مراجعتك هنا"
+"typeYouReviewHere": "اكتب مراجعتك هنا",
+"totalOrders": "مجموع الاوردرات"
 
 }

@@ -1,51 +1,26 @@
 {
   "project_info": {
-    "project_number": "426479468960",
-    "project_id": "azgazzer",
-    "storage_bucket": "azgazzer.firebasestorage.app"
+    "project_number": "493725024975",
+    "project_id": "tk-gazzerapp",
+    "storage_bucket": "tk-gazzerapp.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:426479468960:android:aa9ab90f82111e3a31a4c5",
+        "mobilesdk_app_id": "1:493725024975:android:c53ac88e28f20f7916adba",
         "android_client_info": {
           "package_name": "com.az.gazzer"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "426479468960-r5siorok0phk6r7falibkvi21vgdg18c.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.az.gazzer",
-            "certificate_hash": "ba2b05bc8b9a052b85ea7cad3711bbeaf6cbcf53"
-          }
-        },
-        {
-          "client_id": "426479468960-n2tths5d4nqoo6pvhjn89htskb8mc1h9.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAlzNdub1O9O4YhJxDXHczxp4B_KkiLAuw"
+          "current_key": "AIzaSyDVNaSYE-_AsNwLRkTrd3fXoQ4HrwgmMEM"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "426479468960-n2tths5d4nqoo6pvhjn89htskb8mc1h9.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "426479468960-o81gqb39gcnl6u9sapr0fudk6u3rsbun.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.az.gazzer"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

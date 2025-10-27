@@ -2431,6 +2431,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type your review here'**
   String get typeYouReviewHere;
+
+  /// No description provided for @totalOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Order'**
+  String get totalOrders;
 }
 
 class _AppLocalizationsDelegate

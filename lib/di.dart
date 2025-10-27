@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/crashlytics_repo_imp.dart';
 import 'package:gazzer/core/data/repo/banner_repo_imp.dart';
@@ -81,6 +82,7 @@ Future init() async {
   di.registerSingleton<ApiClient>(ApiClient());
   di.registerSingleton<CrashlyticsRepo>(CrashlyticsRepoImp());
   _registerRepos();
+  await dotenv.load(fileName: ".env");
 
   ///
   /// register buses
