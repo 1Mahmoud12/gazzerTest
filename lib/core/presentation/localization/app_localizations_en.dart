@@ -772,6 +772,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bestSellingItems => 'Best Selling Items';
 
   @override
+  String get noItemsAvailableInThisCategory => 'No items available in this category';
+
+  @override
   String get gotIt => 'Got It';
 
   @override

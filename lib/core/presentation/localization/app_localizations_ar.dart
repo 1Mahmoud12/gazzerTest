@@ -772,6 +772,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bestSellingItems => 'الأصناف الأكثر مبيعاً';
 
   @override
+  String get noItemsAvailableInThisCategory => 'لا توجد أصناف متاحة في هذه الفئة';
+
+  @override
   String get gotIt => 'فهمت';
 
   @override
