@@ -1592,6 +1592,12 @@ abstract class AppLocalizations {
   /// **'Suggested For You'**
   String get suggestedForYou;
 
+  /// No description provided for @bestSellingItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Selling Items'**
+  String get bestSellingItems;
+
   /// No description provided for @gotIt.
   ///
   /// In en, this message translates to:

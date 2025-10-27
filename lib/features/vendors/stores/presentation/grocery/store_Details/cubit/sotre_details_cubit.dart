@@ -16,7 +16,13 @@ class StoreDetailsCubit extends Cubit<StoreDetailsStates> {
     final response = await _repo.loadStoreDetails(storeId);
     switch (response) {
       case Ok<StoreDetailsResponse> ok:
-        emit(StoreDetailsLoaded(store: ok.value.store, catsWthSubatsAndProds: ok.value.catsWithProds));
+        emit(
+          StoreDetailsLoaded(
+            store: ok.value.store,
+            catsWthSubatsAndProds: ok.value.catsWithProds,
+            bestSellingItems: ok.value.bestSellingItems,
+          ),
+        );
         break;
       case Err err:
         emit(StoreDetailsError(message: err.error.message));

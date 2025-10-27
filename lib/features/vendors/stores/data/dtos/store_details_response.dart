@@ -8,6 +8,7 @@ import 'package:gazzer/features/vendors/stores/data/dtos/store_dto.dart';
 class StoreDetailsResponse {
   late final StoreEntity store;
   late final List<(StoreCategoryEntity, List<StoreCategoryEntity> subCats, List<ProductEntity> prods)> catsWithProds;
+  late final List<ProductEntity> bestSellingItems;
 
   StoreDetailsResponse.fromJson(Map<String, dynamic> json) {
     store = StoreDTO.fromJson(json['store']).toEntity();
@@ -33,6 +34,15 @@ class StoreDetailsResponse {
         catsWithProds.add(
           (cat, subCats, prods),
         );
+      }
+    }
+
+    // Parse best selling items
+    bestSellingItems = [];
+    if (json['best_selling_items'] != null) {
+      for (var item in json['best_selling_items'] as List) {
+        final prod = ProductDTO.fromJson(item).toEntity();
+        bestSellingItems.add(prod);
       }
     }
   }

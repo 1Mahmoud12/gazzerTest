@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
@@ -69,7 +70,9 @@ class StoreDetailsScreen extends StatelessWidget {
                     store,
                     categories: catWithSubCatProds.map((e) => e.$1.name),
                     onTimerFinish: (ctx) {
-                      StoreDetailsRoute(storeId: storeId).pushReplacement(ctx);
+                      StoreDetailsRoute(
+                        storeId: storeId,
+                      ).pushReplacement(ctx);
                     },
                   ),
                 ),
@@ -81,11 +84,30 @@ class StoreDetailsScreen extends StatelessWidget {
                       return context.read<StoreDetailsCubit>().loadScreenData();
                     },
                     child: UnScollableLTabedList(
-                      tabs: catWithSubCatProds.map((e) => (e.$1.image, e.$1.name)).toList(),
+                      tabs: [
+                        // Add best selling items as first tab if available
+                        if (state.bestSellingItems.isNotEmpty) ('', L10n.tr().bestSellingItems),
+                        // Add all category tabs
+                        ...catWithSubCatProds.map(
+                          (e) => (e.$1.image, e.$1.name),
+                        ),
+                      ],
                       maxHeight: constraints.maxHeight,
-                      itemCount: catWithSubCatProds.length,
+                      itemCount: catWithSubCatProds.length + (state.bestSellingItems.isNotEmpty ? 1 : 0),
                       listItemBuilder: (context, index) {
-                        final item = state.catsWthSubatsAndProds[index];
+                        // Handle best selling items tab
+                        if (state.bestSellingItems.isNotEmpty && index == 0) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: _BestSellingItemsWidget(
+                              items: state.bestSellingItems,
+                            ),
+                          );
+                        }
+
+                        // Handle category tabs (adjust index if best selling items tab exists)
+                        final categoryIndex = state.bestSellingItems.isNotEmpty ? index - 1 : index;
+                        final item = state.catsWthSubatsAndProds[categoryIndex];
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           child: _GridWidget(
@@ -95,19 +117,6 @@ class StoreDetailsScreen extends StatelessWidget {
                             products: item.$3,
                           ),
                         );
-                        // GrocVertScrollGrid(
-                        //   title: catWithSubCatProds[index].$1.name,
-                        //   onViewAllPressed: () {},
-                        //   items: [...catWithSubCatProds[index].$2, ...catWithSubCatProds[index].$3],
-                        //   onSinglceCardPressed: (item) {},
-                        //   shrinkWrap: true,
-                        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        //     crossAxisCount: 3,
-                        //     childAspectRatio: 0.56,
-                        //     crossAxisSpacing: 8,
-                        //     mainAxisSpacing: 8,
-                        //   ),
-                        // ),
                       },
                     ),
                   ),
@@ -117,6 +126,44 @@ class StoreDetailsScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _BestSellingItemsWidget extends StatelessWidget {
+  const _BestSellingItemsWidget({
+    required this.items,
+  });
+
+  final List<ProductEntity> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: AppConst.defaultHrPadding,
+          child: TitleWithMore(title: L10n.tr().bestSellingItems),
+        ),
+        GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding: AppConst.defaultPadding,
+          itemCount: items.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 0.59,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+          ),
+          itemBuilder: (context, index) {
+            return GrocProdCard(
+              product: items[index],
+              shape: CardStyle.typeOne,
+            );
+          },
+        ),
+      ],
     );
   }
 }
@@ -142,7 +189,6 @@ class _GridWidget extends StatelessWidget {
         ),
         GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
-
           shrinkWrap: true,
           padding: AppConst.defaultPadding,
           itemCount: subcats.length + products.length,
