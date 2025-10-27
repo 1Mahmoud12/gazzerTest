@@ -18,7 +18,12 @@ class _HomeBestPopularStoresWidget extends StatelessWidget {
             TitleWithMore(
               title: L10n.tr().bestPopularStores,
               onPressed: () {
-                // TODO: Navigate to best popular stores screen
+                context.navigateToPage(
+                  BlocProvider(
+                    create: (context) => di<BestPopularCubit>()..getBestPopularStores(),
+                    child: const BestPopularScreen(),
+                  ),
+                );
               },
             ),
             const VerticalSpacing(12),
