@@ -69,6 +69,9 @@ class ApiClient {
         options: Options(headers: _getHeaders(headers)),
         cancelToken: cancelToken,
       );
+      if (response.data['data'] == null) {
+        throw Exception(response.data['message']);
+      }
       return response;
     } on DioException catch (e) {
       _noInternetConnection(e.type);

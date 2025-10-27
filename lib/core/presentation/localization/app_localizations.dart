@@ -1598,6 +1598,12 @@ abstract class AppLocalizations {
   /// **'Best Selling Items'**
   String get bestSellingItems;
 
+  /// No description provided for @bestPopularStores.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Popular Stores'**
+  String get bestPopularStores;
+
   /// No description provided for @noItemsAvailableInThisCategory.
   ///
   /// In en, this message translates to:

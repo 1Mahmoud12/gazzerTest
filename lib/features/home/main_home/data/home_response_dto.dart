@@ -1,4 +1,6 @@
 import 'package:gazzer/core/data/dto/banner_dto.dart';
+import 'package:gazzer/core/domain/vendor_entity.dart';
+import 'package:gazzer/features/home/main_home/data/dtos/best_popular_dto.dart';
 import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
 import 'package:gazzer/features/home/main_home/data/section_dto.dart';
 import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
@@ -9,7 +11,7 @@ class HomeResponseDTO {
   final (List<SectionItemDTO?>?, BannerDTO?)? suggested;
   final (List<SectionItemDTO?>?, BannerDTO?)? topItems;
   final (List<VendorDTO?>?, BannerDTO?)? topVendors;
-  final (List<SectionItemDTO?>?, BannerDTO?)? bestPopular;
+  final (List<VendorEntity?>?, BannerDTO?)? bestPopular;
 
   HomeResponseDTO({
     this.categories,
@@ -26,7 +28,7 @@ class HomeResponseDTO {
     (List<SectionItemDTO?>?, BannerDTO?)? suggested;
     (List<SectionItemDTO?>?, BannerDTO?)? topItems;
     (List<VendorDTO?>?, BannerDTO?)? topVendors;
-    (List<SectionItemDTO?>?, BannerDTO?)? bestPopular;
+    (List<VendorEntity?>?, BannerDTO?)? bestPopular;
 
     if (json['data'] != null && json['data'] is List) {
       final sections = <SectionDTO>[];
@@ -52,7 +54,19 @@ class HomeResponseDTO {
             topVendors = (sec.data?.cast<VendorDTO>(), sec.banner);
             break;
           case SectionType.bestPopular:
-            bestPopular = (sec.data?.cast<SectionItemDTO>(), sec.banner);
+            // Parse best popular from raw JSON data
+            final rawSections = json['data'] as List;
+            for (var rawSection in rawSections) {
+              if (rawSection['type'] == 'best_popular' && rawSection['data'] != null) {
+                final stores = (rawSection['data'] as List)
+                    .map(
+                      (store) => BestPopularStoreDto.fromJson(store).toEntity(),
+                    )
+                    .toList();
+                bestPopular = (stores, sec.banner);
+                break;
+              }
+            }
             break;
           case SectionType.unknown:
             break;
@@ -82,7 +96,7 @@ class HomeResponseDTO {
       topItemsBanner: topItems?.$2?.toEntity(),
       topVendors: topVendors?.$1?.map((e) => e?.toEntity()).toList() ?? [],
       topVendorsBanner: topVendors?.$2?.toEntity(),
-      bestPopular: bestPopular?.$1?.map((e) => e?.toEntity()).toList() ?? [],
+      bestPopular: bestPopular?.$1 ?? [],
       bestPopularBanner: bestPopular?.$2?.toEntity(),
     );
   }

@@ -18,7 +18,7 @@ class HomeDataModel {
   late final List<VendorEntity?>? topVendors;
   late final BannerEntity? topVendorsBanner;
 
-  late final List<GenericItemEntity?>? bestPopular;
+  late final List<VendorEntity?>? bestPopular;
   late final BannerEntity? bestPopularBanner;
 
   HomeDataModel({

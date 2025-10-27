@@ -14,7 +14,7 @@ class PlateDetailsResponse {
     options = platedetails.toOptionsEntity();
     orderedWith = <OrderedWithEntity>[];
 
-    if (json['data']['ordered_with'] != null) {
+    if (json['data'] != null && json['data']['ordered_with'] != null) {
       json['data']['ordered_with'].forEach((v) {
         orderedWith.add(OrderedWithDTO.fromJson(v).toEntity());
       });

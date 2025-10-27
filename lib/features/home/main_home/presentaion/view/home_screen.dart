@@ -49,6 +49,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 ///
 part 'widgets/home_best_popular.dart';
+part 'widgets/home_best_popular_stores.dart';
 part 'widgets/home_categories_widget.dart';
 part 'widgets/home_cuisines_widget.dart';
 part 'widgets/home_daily_offers_widget.dart';
@@ -167,7 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
 
                         // /// const SummerSaleAddWidget(),
-                        // ///
                         _HomeSuggestedProductsWidget(
                           items: state.homeResponse?.suggested ?? <GenericItemEntity>[],
                         ),
@@ -197,8 +197,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
 
                         // ///
-                        _HomeBestPopular(
-                          items: state.homeResponse?.bestPopular ?? <GenericItemEntity>[],
+                        _HomeBestPopularStoresWidget(
+                          stores: state.homeResponse?.bestPopular ?? <VendorEntity>[],
                         ),
                         if (state.homeResponse?.bestPopularBanner != null)
                           SliverToBoxAdapter(
@@ -209,6 +209,32 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+
+                        // ///
+                        _HomeBestPopular(
+                          items: state.homeResponse?.topItems ?? <GenericItemEntity>[],
+                        ),
+                        if (state.homeResponse?.bestPopularBanner != null)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
+                              child: MainBannerWidget(
+                                banner: state.homeResponse!.bestPopularBanner!,
+                              ),
+                            ),
+                          ),
+                        // _HomeTopItems(
+                        //   items: state.homeResponse?.topItems ?? <GenericItemEntity>[],
+                        // ),
+                        // if (state.homeResponse?.topItems != null)
+                        //   SliverToBoxAdapter(
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.only(bottom: 24),
+                        //       child: MainBannerWidget(
+                        //         banner: state.homeResponse!.topItemsBanner!,
+                        //       ),
+                        //     ),
+                        //   ),
 
                         // const ImageWithAlignedBtn(image: Assets.assetsPngHomeAdd, align: Alignment(0, 1), btnText: "Order Now"),
                       ],

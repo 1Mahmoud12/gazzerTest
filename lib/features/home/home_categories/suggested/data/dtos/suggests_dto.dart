@@ -61,7 +61,7 @@ class SuggestEntity {
     this.score,
   });
 
-  final String? id;
+  final int? id;
   final String? itemType;
   final int? itemId;
   final SuggestItem? item;

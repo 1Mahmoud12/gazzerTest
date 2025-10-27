@@ -53,7 +53,7 @@ class SectionItemDTO extends ProductItemDTO {
       } else if (itemType == ItemType.storeItem) {
         item = ProductDTO.fromJson(json['item']);
       } else {
-        // item = ProductItemDTO.fromJson(json['item']);
+        item = ProductDTO.fromJson(json['item']);
       }
     }
     // if (json['item'] != null) {
