@@ -7,6 +7,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 class SingleRestaurantCubit extends Cubit<SingleRestaurantStates> {
   final RestaurantsRepo _repo;
   final int id;
+
   SingleRestaurantCubit(this._repo, this.id) : super(SingleRestaurantInitial()) {
     loadSingleRestaurantData();
   }
@@ -21,6 +22,7 @@ class SingleRestaurantCubit extends Cubit<SingleRestaurantStates> {
           SingleRestaurantLoaded(
             restaurant: ok.value.restaurant,
             toprated: ok.value.topRated,
+            bestSelling: ok.value.bestSelling,
             categoriesWithPlates: ok.value.categoriesWithPlates,
             banners: ok.value.banners,
           ),

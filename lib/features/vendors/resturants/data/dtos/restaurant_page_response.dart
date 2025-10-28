@@ -10,6 +10,7 @@ import 'package:gazzer/features/vendors/resturants/data/dtos/restaurant_dto.dart
 class RestaurantPageResponse {
   late final RestaurantEntity restaurant;
   late final List<PlateEntity> topRated;
+  late final List<PlateEntity> bestSelling;
   late final List<(CategoryOfPlateEntity, List<PlateEntity>)> categoriesWithPlates;
   late final List<BannerEntity> banners;
 
@@ -22,7 +23,9 @@ class RestaurantPageResponse {
     if (json['plate_categories'] != null) {
       categoriesWithPlates = [];
       for (var item in json['plate_categories']) {
-        final category = CategoryOfPlateDTO.fromJson(item).toCategoryOfPlateEntity();
+        final category = CategoryOfPlateDTO.fromJson(
+          item,
+        ).toCategoryOfPlateEntity();
         final plates = <PlateEntity>[];
         if (item['plates'] != null) {
           for (var plate in item['plates']) {
@@ -41,6 +44,14 @@ class RestaurantPageResponse {
       }
     }
     topRated.sort((a, b) => a.outOfStock ? 1 : -1);
+
+    bestSelling = [];
+    if (json['best_selling_items'] != null) {
+      for (var item in json['best_selling_items']) {
+        bestSelling.add(PlateDTO.fromJson(item).toEntity());
+      }
+    }
+    bestSelling.sort((a, b) => a.outOfStock ? 1 : -1);
 
     banners = [];
     if (json['banners'] != null) {

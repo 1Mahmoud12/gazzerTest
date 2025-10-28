@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -22,8 +23,10 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
 import 'package:go_router/go_router.dart';
 
+part 'component/best_selling_component.dart';
 part 'component/top_rated_coponent.dart';
 part 'multi_cat_restaurant_screen.g.dart';
+part 'widgets/best_selling_card.dart';
 part 'widgets/top_rated_card.dart';
 
 @TypedGoRoute<MultiCatRestaurantsRoute>(path: MultiCatRestaurantsScreen.route)
@@ -51,6 +54,7 @@ class MultiCatRestaurantsScreen extends StatefulWidget {
 class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
   late final RestaurantEntity restaurant;
   late final List<PlateEntity> toprated;
+  late final List<PlateEntity> bestSelling;
   late final List<(CategoryOfPlateEntity, List<GenericItemEntity>)> categoriesWithPlates;
   late final List<BannerEntity> banners;
 
@@ -58,6 +62,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
   void initState() {
     restaurant = widget.state.restaurant;
     toprated = widget.state.toprated;
+    bestSelling = widget.state.bestSelling;
     categoriesWithPlates = widget.state.categoriesWithPlates;
     banners = widget.state.banners;
     super.initState();
@@ -71,8 +76,19 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
       body: ScrollableTabedList(
         preHerader: Column(
           children: [
-            MultiCatRestHeader(restaurant: restaurant, categires: categoriesWithPlates.map((e) => e.$1.name)),
-            _TopRatedComponent(isCardDisabled: restaurant.isClosed, toprated: toprated.take(5).toList()),
+            MultiCatRestHeader(
+              restaurant: restaurant,
+              categires: categoriesWithPlates.map((e) => e.$1.name),
+            ),
+            _TopRatedComponent(
+              isCardDisabled: restaurant.isClosed,
+              toprated: toprated.take(5).toList(),
+            ),
+            if (bestSelling.isNotEmpty)
+              _BestSellingComponent(
+                isCardDisabled: restaurant.isClosed,
+                bestSelling: bestSelling,
+              ),
           ],
         ),
         itemsCount: categoriesWithPlates.length,
@@ -81,10 +97,15 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleGradientBorderedImage(image: categoriesWithPlates[index].$1.image),
+              CircleGradientBorderedImage(
+                image: categoriesWithPlates[index].$1.image,
+              ),
               Padding(
                 padding: AppConst.defaultHrPadding,
-                child: Text(categoriesWithPlates[index].$1.name, style: TStyle.blackSemi(13)),
+                child: Text(
+                  categoriesWithPlates[index].$1.name,
+                  style: TStyle.blackSemi(13),
+                ),
               ),
             ],
           );

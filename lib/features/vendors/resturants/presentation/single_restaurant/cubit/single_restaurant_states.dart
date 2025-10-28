@@ -7,12 +7,14 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 sealed class SingleRestaurantStates {
   final RestaurantEntity restaurant;
   final List<PlateEntity> toprated;
+  final List<PlateEntity> bestSelling;
   final List<(CategoryOfPlateEntity, List<PlateEntity>)> categoriesWithPlates;
   final List<BannerEntity> banners;
   bool get isSingle => categoriesWithPlates.length < 2;
   const SingleRestaurantStates({
     this.restaurant = Fakers.restaurant,
     this.toprated = const [],
+    this.bestSelling = const [],
     this.categoriesWithPlates = const [],
     this.banners = const [],
   });
@@ -26,6 +28,7 @@ final class SingleRestaurantLoaded extends SingleRestaurantStates {
   const SingleRestaurantLoaded({
     required super.restaurant,
     required super.toprated,
+    required super.bestSelling,
     required super.categoriesWithPlates,
     required super.banners,
   });
