@@ -9,6 +9,7 @@ class RestaurantDTO {
   String? image;
   int? storeCategoryId;
   int? vendorId;
+  int? totalOrders;
   // String? address;
   int? estimatedDeliveryTime;
   String? rate;
@@ -33,6 +34,7 @@ class RestaurantDTO {
     image = json['image'];
     storeCategoryId = json['store_category_id'];
     vendorId = json['vendor_id'];
+    totalOrders = json['order_count'];
     // // address = json['address'];
     estimatedDeliveryTime = json['estimated_delivery_time'];
     rate = json['rate'];
@@ -71,6 +73,7 @@ class RestaurantDTO {
       rate: double.tryParse(rate ?? '0') ?? 0.0,
       zoneName: provinceZone ?? '',
       outOfStock: false,
+      totalOrders: totalOrders,
       parentId: storeCategoryId,
       categoryOfPlate: subcategories?.map((e) => e.toCategoryOfPlateEntity()).toList(),
       tag: tags,

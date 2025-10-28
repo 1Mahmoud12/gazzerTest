@@ -60,7 +60,7 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
-                  childAspectRatio: childAspectRatio ?? 0.5,
+                  childAspectRatio: childAspectRatio ?? 0.53,
                 ),
             itemBuilder: (context, index) {
               final item = items[index];

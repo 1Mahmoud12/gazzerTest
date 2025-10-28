@@ -45,6 +45,7 @@ abstract class GenericItemDTO {
   int? id;
   int? productId;
   int? storeId;
+  int? orderCount;
   int? caegoryId;
   String? name;
   String? image;
@@ -74,6 +75,7 @@ abstract class GenericItemDTO {
     this.price,
     this.quantityInStock,
     this.offer,
+    this.orderCount,
     this.itemUnitBrand,
     this.store,
     this.tags,

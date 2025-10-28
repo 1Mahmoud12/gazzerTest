@@ -18,6 +18,7 @@ class PlateDetailsDTO {
 
   /// unused
   int? storeId;
+  int? totalOrders;
   String? price;
   String? itemType;
   int? plateCategoryId;
@@ -33,6 +34,7 @@ class PlateDetailsDTO {
     plateDescription = json['plate_description'];
     price = json['price'];
     rate = json['rate'];
+    totalOrders = json['order_count'];
     rateCount = json['rate_count'];
     appPrice = json['app_price'];
     itemType = json['item_type'];
@@ -67,6 +69,7 @@ class PlateDetailsDTO {
       rate: double.tryParse(rate ?? '0') ?? 0.0,
       reviewCount: rateCount ?? 0,
       description: plateDescription ?? '',
+      orderCount: totalOrders ?? -1,
       categoryPlateId: plateCategoryId ?? 0,
       image: image ?? '',
       tags: tags,
@@ -159,10 +162,11 @@ class SubAddon {
       price: double.tryParse(price ?? '0') ?? 0.0,
       isDefault: isDefault == 1,
       isFree: isFree == 1,
-      type: OptionType.fromString(type ?? 'radio'),
+      type: type != null ? OptionType.fromString(type!) : null,
       isRequired: required == 1,
       controlsPrice: controlsBasePrice == 1,
       subAddons: subAddons?.map((e) => e.toEntity()).toList() ?? [],
+      isLeafValue: type == null, // Mark as leaf value when type is null
     );
   }
 }

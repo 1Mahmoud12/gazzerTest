@@ -30,6 +30,7 @@ class ProductDTO extends GenericItemDTO {
       store = SimpleStoreDTO.fromJson(json['restaurant_info']);
     }
     description = json['description'];
+    orderCount = json['order_count'];
     badge = json['badge'];
     image = json['image'];
     rateCount = int.tryParse(json['rate_count'].toString());
@@ -53,6 +54,8 @@ class ProductDTO extends GenericItemDTO {
       offer: offer?.toEntity(),
       itemUnitBrand: itemUnitBrand?.toEntity(),
       store: store?.toEntity(),
+
+      orderCount: orderCount,
 
       ///
       tags: tags,

@@ -20,6 +20,7 @@ class ProductEntity extends GenericItemEntity {
     super.tags,
     super.itemUnitBrand,
     super.store,
+    super.orderCount,
 
     ///
     this.color,

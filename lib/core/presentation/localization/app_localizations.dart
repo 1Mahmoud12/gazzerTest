@@ -2437,6 +2437,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total Order'**
   String get totalOrders;
+
+  /// No description provided for @choose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose'**
+  String get choose;
+
+  /// No description provided for @noPersonalizedSuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'No personalized suggestions yet. Start exploring our latest offers!'**
+  String get noPersonalizedSuggestions;
+
+  /// No description provided for @totalUnitSolid.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Unit Solid'**
+  String get totalUnitSolid;
 }
 
 class _AppLocalizationsDelegate

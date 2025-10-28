@@ -120,7 +120,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 20,
-                      childAspectRatio: 0.57,
+                      childAspectRatio: 0.53,
                       // mainAxisExtent: 300,
                     ),
                     itemBuilder: (context, index) {

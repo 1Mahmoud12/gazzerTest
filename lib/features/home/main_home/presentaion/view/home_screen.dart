@@ -36,10 +36,12 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
 import 'package:gazzer/features/home/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/pharmacy_menu_screen.dart';
@@ -200,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         // ///
                         _HomeBestPopularStoresWidget(
-                          stores: state.homeResponse?.bestPopular ?? <VendorEntity>[],
+                          stores: state.homeResponse?.bestPopular ?? <StoreEntity>[],
                         ),
                         if (state.homeResponse?.bestPopularBanner != null)
                           SliverToBoxAdapter(

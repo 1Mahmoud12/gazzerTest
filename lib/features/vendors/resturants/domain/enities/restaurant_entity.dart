@@ -11,6 +11,7 @@ class RestaurantEntity extends GenericVendorEntity {
     this.categoryOfPlate,
     required super.id,
     required super.parentId,
+    required super.totalOrders,
     required super.name,
     required super.image,
     required super.rate,

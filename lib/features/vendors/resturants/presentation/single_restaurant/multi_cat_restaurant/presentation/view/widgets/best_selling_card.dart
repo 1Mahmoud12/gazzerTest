@@ -52,6 +52,30 @@ class _BestSellingCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
+                    if (product.orderCount != null && product.orderCount! > 0)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: AlignmentDirectional.centerStart,
+                              child: Text(
+                                '${L10n.tr().totalUnitSolid}: ',
+                                style: TStyle.primaryBold(10, font: FFamily.inter),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                          const HorizontalSpacing(5),
+                          Text(
+                            '${product.orderCount ?? 0}',
+                            style: TStyle.primaryBold(12, font: FFamily.inter),
+                          ),
+                        ],
+                      ),
+
                     Text(
                       product.description,
                       style: TStyle.greyRegular(10),

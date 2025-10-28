@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -52,7 +54,43 @@ class VendorInfoWidget extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-
+            if (vendor.totalOrders != null)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('${L10n.tr().totalOrders}: ', style: TStyle.blackRegular(13)),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Text(
+                    vendor.totalOrders.toString(),
+                    style: TStyle.blackRegular(12),
+                    textAlign: TextAlign.center,
+                  ),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                ],
+              ),
+            if (vendor.estimatedDeliveryTime != null)
+              Row(
+                spacing: 4,
+                children: [
+                  SvgPicture.asset(
+                    Assets.assetsSvgTruck,
+                    height: 24,
+                    width: 24,
+                    colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "${vendor.estimatedDeliveryTime} ${L10n.tr().min}",
+                    style: TStyle.greyRegular(13),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const Spacer(),
+                ],
+              ),
             Row(
               spacing: 4,
               children: [

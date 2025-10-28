@@ -1,4 +1,4 @@
-import 'package:gazzer/core/domain/vendor_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class BestPopularDto {
   final int id;
@@ -123,13 +123,26 @@ class BestPopularStoreDto {
     );
   }
 
-  VendorEntity toEntity() {
-    return VendorEntity(
+  StoreEntity toEntity() {
+    return StoreEntity(
       id: id,
       name: storeName,
+      storeCategoryType: storeCategoryType,
       image: image,
-      storeId: storeId,
-      type: storeCategoryType,
+      parentId: storeId,
+      alwaysClosed: isAlwaysClose == 1,
+      isOpen: isOpen == 1,
+      alwaysOpen: is24Hours == 1,
+      startTime: DateTime.now(),
+      estimatedDeliveryTime: estimatedDeliveryTime,
+      endTime: DateTime.now(),
+      rate: double.tryParse(rate) ?? 0,
+      rateCount: rateCount,
+      zoneName: provinceZone?.zoneName ?? '',
+      isFavorite: isFavorite == 1,
+      mintsBeforClosingAlert: closingAlertAppearBefore ?? -1,
+      outOfStock: false,
+      reviewCount: rateCount,
       totalOrders: totalOrders,
     );
   }

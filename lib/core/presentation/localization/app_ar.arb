@@ -478,6 +478,8 @@
 "max_quantity_reached_for_product": "لقد وصلت إلى أقصى كمية متاحة لهذا المنتج",
 "reviews": "المراجعات",
 "typeYouReviewHere": "اكتب مراجعتك هنا",
-"totalOrders": "مجموع الاوردرات"
-
+"totalOrders": "مجموع الاوردرات",
+"choose":"اختر",
+"noPersonalizedSuggestions":"لا توجد اقتراحات بعد، ابدأ بتصفح أحدث العروض!",
+"totalUnitSolid":"عدد الوحدات المباعه"
 }

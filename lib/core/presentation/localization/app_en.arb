@@ -476,6 +476,10 @@
   "max_quantity_reached_for_product": "You have reached the maximum quantity available for this product",
   "reviews": "Reviews",
   "typeYouReviewHere": "Type your review here",
-  "totalOrders": "Total Order"
+  "totalOrders": "Total Order",
+  "choose":"Choose",
+  "noPersonalizedSuggestions":"No personalized suggestions yet. Start exploring our latest offers!",
+  "totalUnitSolid":"Total Unit Solid"
+
 
 }

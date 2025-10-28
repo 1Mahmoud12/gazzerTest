@@ -64,8 +64,14 @@ class SinglePlateScreen extends StatelessWidget {
             ),
             child: Builder(
               builder: (context) {
+                print("cart item is ${detailsState.plate.price}");
                 final cubit = context.read<AddToCartCubit>();
                 final canPop = ValueNotifier(true);
+
+                // Ensure default selections are applied
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  cubit.ensureDefaultSelections();
+                });
 
                 return ValueListenableBuilder(
                   valueListenable: canPop,
@@ -119,20 +125,20 @@ class SinglePlateScreen extends StatelessWidget {
                             }
                           },
                           builder: (context, cartState) {
-                            // Get all visible options (including sub-addons based on selections)
-                            final visibleOptions = cubit.getAllVisibleOptions();
-
+                            // Show all options directly (no dynamic visibility)
                             return Column(
-                              children: visibleOptions.map((record) {
+                              children: detailsState.options.map((option) {
                                 return PlateOptionsWidget(
-                                  optionName: record.optionName,
-                                  values: record.values,
-                                  type: record.type,
-                                  selectedId: cartState.selectedOptions[record.path] ?? {},
-                                  onValueSelected: (id) => cubit.setOptionValue(
-                                    record.path,
+                                  optionId: option.id,
+                                  optionName: option.name,
+                                  values: option.subAddons,
+                                  type: option.type,
+                                  selectedId: cartState.selectedOptions[option.id] ?? {},
+                                  getSelectedOptions: (path) => cartState.selectedOptions[path] ?? {},
+                                  onValueSelected: ({required fullPath, required id}) => cubit.setOptionValue(
                                     id,
-                                    record.type,
+                                    fullPath,
+                                    option.type,
                                   ),
                                 );
                               }).toList(),

@@ -1,9 +1,9 @@
 import 'package:gazzer/core/data/dto/banner_dto.dart';
-import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/features/home/main_home/data/dtos/best_popular_dto.dart';
 import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
 import 'package:gazzer/features/home/main_home/data/section_dto.dart';
 import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class HomeResponseDTO {
   final (List<MainCategoryDTO>?, BannerDTO?)? categories;
@@ -11,7 +11,7 @@ class HomeResponseDTO {
   final (List<SectionItemDTO?>?, BannerDTO?)? suggested;
   final (List<SectionItemDTO?>?, BannerDTO?)? topItems;
   final (List<VendorDTO?>?, BannerDTO?)? topVendors;
-  final (List<VendorEntity?>?, BannerDTO?)? bestPopular;
+  final (List<StoreEntity?>?, BannerDTO?)? bestPopular;
 
   HomeResponseDTO({
     this.categories,
@@ -28,7 +28,7 @@ class HomeResponseDTO {
     (List<SectionItemDTO?>?, BannerDTO?)? suggested;
     (List<SectionItemDTO?>?, BannerDTO?)? topItems;
     (List<VendorDTO?>?, BannerDTO?)? topVendors;
-    (List<VendorEntity?>?, BannerDTO?)? bestPopular;
+    (List<StoreEntity?>?, BannerDTO?)? bestPopular;
 
     if (json['data'] != null && json['data'] is List) {
       final sections = <SectionDTO>[];

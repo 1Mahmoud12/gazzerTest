@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -49,7 +50,10 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
     final mockVendor = StoreEntity(
       id: widget.vendorId,
       name: widget.name,
+      totalOrders: 120,
       image: widget.logoUrl,
+      estimatedDeliveryTime: 20,
+      storeCategoryType: VendorType.pharmacy.value,
       rate: 4.5,
       rateCount: 120,
       zoneName: 'ZAMALEK',

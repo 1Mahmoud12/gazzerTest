@@ -1,4 +1,4 @@
-import 'package:gazzer/core/domain/vendor_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class BestPopularResponseDto {
   final String status;
@@ -117,8 +117,8 @@ class BestPopularStoreDto {
       rate: json['rate'],
       rateCount: json['rate_count'],
       isFavorite: json['is_favorite'],
-      workFrom: json['work_from'],
-      workTo: json['work_to'],
+      workFrom: json['work_from'] ?? '',
+      workTo: json['work_to'] ?? '',
       is24Hours: json['is_24_hours'],
       isAlwaysClose: json['is_always_close'],
       closingAlertAppearBefore: json['closing_alert_appear_before'],
@@ -128,14 +128,27 @@ class BestPopularStoreDto {
     );
   }
 
-  VendorEntity toEntity() {
-    return VendorEntity(
+  StoreEntity toEntity() {
+    return StoreEntity(
       id: id,
       name: storeName,
+      estimatedDeliveryTime: estimatedDeliveryTime,
       image: image,
-      storeId: storeId,
-      type: storeCategoryType,
+      rate: double.tryParse(rating) ?? 0.0,
+      startTime: DateTime.tryParse(workFrom) ?? DateTime.now(),
+      endTime: DateTime.tryParse(workTo) ?? DateTime.now(),
+      zoneName: provinceZone?.zoneName ?? '',
+      parentId: storeCategoryId,
+      alwaysOpen: is24Hours == 1,
+      alwaysClosed: isAlwaysClose == 1,
+      isFavorite: isFavorite == 1,
+      isOpen: isOpen == 1,
+      mintsBeforClosingAlert: closingAlertAppearBefore ?? 0,
+      outOfStock: false,
+      // Default value
+      reviewCount: rateCount,
       totalOrders: totalOrders,
+      storeCategoryType: storeCategoryType,
     );
   }
 }

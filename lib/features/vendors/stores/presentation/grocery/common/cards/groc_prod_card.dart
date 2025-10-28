@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text_wz_shadow.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -95,6 +95,29 @@ class GrocProdCard extends StatelessWidget {
                     product.name,
                     style: TStyle.primaryBold(12, font: FFamily.inter),
                   ),
+                  if (product.orderCount != null)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Text(
+                              '${L10n.tr().totalUnitSolid}: ',
+                              style: TStyle.primaryBold(10, font: FFamily.inter),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                        const HorizontalSpacing(5),
+                        Text(
+                          '${product.orderCount ?? 0}',
+                          style: TStyle.primaryBold(12, font: FFamily.inter),
+                        ),
+                      ],
+                    ),
 
                   Directionality(
                     textDirection: TextDirection.ltr,

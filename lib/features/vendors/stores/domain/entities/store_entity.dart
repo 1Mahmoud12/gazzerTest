@@ -26,6 +26,9 @@ class StoreEntity extends GenericVendorEntity {
     super.description,
     required super.outOfStock,
     required super.reviewCount,
+    required super.totalOrders,
+    required super.storeCategoryType,
+    required super.estimatedDeliveryTime,
     // this.categoryOfPlate,
   });
 

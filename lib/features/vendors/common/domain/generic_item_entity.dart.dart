@@ -19,6 +19,7 @@ sealed class GenericItemEntity extends Favorable {
   final ItemUnitBrandEntity? itemUnitBrand;
   final SimpleStoreEntity? store;
   final bool hasOptions;
+  final int? orderCount;
 
   double get price => offer?.priceAfterDiscount(_price) ?? _price;
   @override
@@ -48,6 +49,7 @@ sealed class GenericItemEntity extends Favorable {
     this.store,
     this.tags,
     this.offer,
+    this.orderCount,
   }) : _price = price;
 
   @override
@@ -57,6 +59,7 @@ sealed class GenericItemEntity extends Favorable {
     badge,
     tags,
     offer,
+    orderCount,
     hasOptions,
   ];
 }

@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1227,4 +1228,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get totalOrders => 'مجموع الاوردرات';
+
+  @override
+  String get choose => 'اختر';
+
+  @override
+  String get noPersonalizedSuggestions => 'لا توجد اقتراحات بعد، ابدأ بتصفح أحدث العروض!';
+
+  @override
+  String get totalUnitSolid => 'عدد الوحدات المباعه';
 }

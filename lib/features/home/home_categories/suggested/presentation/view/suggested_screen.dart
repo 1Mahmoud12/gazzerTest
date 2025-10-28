@@ -90,7 +90,6 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                       _allItems = state.data?.entities ?? [];
                       _filteredItems = _allItems;
                     }
-
                     return _buildContent(
                       context,
                       _filteredItems,
@@ -98,7 +97,12 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                     );
                   }
 
-                  return const Center(child: CircularProgressIndicator());
+                  return FailureComponent(
+                    message: L10n.tr().noPersonalizedSuggestions,
+                    onRetry: () {
+                      context.read<SuggestsCubit>().getSuggests();
+                    },
+                  );
                 },
               ),
             ),
@@ -115,7 +119,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
   ) {
     if (items.isEmpty) {
       return FailureComponent(
-        message: _searchQuery.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
+        message: _searchQuery.isEmpty ? L10n.tr().noPersonalizedSuggestions : L10n.tr().noSearchResults,
       );
     }
 

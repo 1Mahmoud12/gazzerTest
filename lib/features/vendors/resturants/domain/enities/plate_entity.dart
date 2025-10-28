@@ -20,6 +20,7 @@ class PlateEntity extends GenericItemEntity {
     super.productId,
     super.itemUnitBrand,
     super.store,
+    super.orderCount,
   });
 
   @override

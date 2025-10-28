@@ -50,8 +50,8 @@ class _FavoriteCardState extends State<FavoriteCard> {
           "${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}",
         );
       }
-      getItemType();
     });
+    getItemType();
     super.initState();
   }
 

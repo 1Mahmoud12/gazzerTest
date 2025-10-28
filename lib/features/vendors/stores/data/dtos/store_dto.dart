@@ -5,10 +5,12 @@ class StoreDTO {
   int? id;
   String? storeName;
   String? image;
+  String? storeCategoryType;
   int? storeCategoryId;
   int? vendorId;
   // String? address;
   int? estimatedDeliveryTime;
+  int? totalOrders;
   String? rate;
   int? isFavorite;
   int? isOpen;
@@ -24,6 +26,7 @@ class StoreDTO {
     this.id,
     this.storeName,
     this.image,
+    this.totalOrders,
     this.storeCategoryId,
     this.vendorId,
     // this.address,
@@ -34,6 +37,7 @@ class StoreDTO {
     this.workFrom,
     this.workTo,
     this.is24Hours,
+    this.storeCategoryType,
   });
 
   StoreDTO.fromJson(Map<String, dynamic> json) {
@@ -48,6 +52,7 @@ class StoreDTO {
     isFavorite = json['is_favorite'];
     isOpen = json['is_open'];
     workFrom = json['work_from'];
+    totalOrders = json['totalOrders'];
     workTo = json['work_to'];
     is24Hours = json['is_24_hours'];
     closingAlertAppearBefore = int.tryParse(json['closing_alert_appear_before'].toString());
@@ -77,9 +82,12 @@ class StoreDTO {
     return StoreEntity(
       id: id ?? 0,
       name: storeName ?? '',
+      estimatedDeliveryTime: estimatedDeliveryTime,
+      storeCategoryType: storeCategoryType,
       image: image ?? '',
       rate: double.tryParse(rate ?? '0') ?? 0.0,
       isOpen: isOpen == 1,
+      totalOrders: totalOrders,
       isFavorite: isFavorite == 1,
       alwaysOpen: is24Hours == 1,
       startTime: _formDateTimeFromString(workFrom ?? ''),

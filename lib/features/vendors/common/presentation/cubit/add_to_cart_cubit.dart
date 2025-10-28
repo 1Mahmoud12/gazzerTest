@@ -46,7 +46,6 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
            selectedOptions: _initializeDefaultSelections(options),
          ),
        ) {
-    print("cart item is ${cartItem?.prod.name}");
     emit(state);
   }
 
@@ -90,54 +89,70 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   ) {
     final map = <String, Set<String>>{};
 
-    void processAddons(List<SubAddonEntity> addons, String parentPath) {
-      // Group addons by their parent option (if they have type)
-      final addonsByOption = <String, List<SubAddonEntity>>{};
-
-      for (var addon in addons) {
-        if (addon.type != null) {
-          // This addon is itself an option
-          final key = addon.id;
-          if (!addonsByOption.containsKey(key)) {
-            addonsByOption[key] = [];
-          }
-        } else {
-          // This is a value for the parent option
-          final defaults = addons.where((a) => a.isDefault && a.type == null);
-          if (defaults.isNotEmpty) {
-            map[parentPath] = defaults.map((a) => a.id).toSet();
-
-            // Process sub-addons of default values
-            for (var defaultAddon in defaults) {
-              if (defaultAddon.subAddons.isNotEmpty) {
-                final valuePath = '${parentPath}_${defaultAddon.id}';
-                processAddons(defaultAddon.subAddons, valuePath);
-              }
-            }
-          }
-          break;
-        }
-      }
-    }
-
+    // Process each top-level option
     for (var option in options) {
-      final defaultAddons = option.subAddons.where(
-        (v) => v.isDefault && v.type == null,
-      );
-      if (defaultAddons.isNotEmpty) {
-        map[option.id] = defaultAddons.map((v) => v.id).toSet();
+      // Find default values (items with isDefault = true and isLeafValue = true)
+      final defaultValues = option.subAddons
+          .where(
+            (addon) => addon.isDefault && addon.isLeafValue,
+          )
+          .toList();
 
-        // Process sub-addons of default values
-        for (var defaultAddon in defaultAddons) {
-          if (defaultAddon.subAddons.isNotEmpty) {
-            final valuePath = '${option.id}_${defaultAddon.id}';
-            processAddons(defaultAddon.subAddons, valuePath);
+      if (defaultValues.isNotEmpty) {
+        // Select the default values
+        map[option.id] = defaultValues.map((v) => v.id).toSet();
+
+        // Process sub-addons of each default value (only if they have sub-addons)
+        for (var defaultValue in defaultValues) {
+          if (defaultValue.subAddons.isNotEmpty) {
+            _processSubAddons(
+              defaultValue.subAddons,
+              '${option.id}_${defaultValue.id}',
+              map,
+            );
           }
         }
       }
     }
 
     return map;
+  }
+
+  // Helper method to recursively process sub-addons
+  static void _processSubAddons(
+    List<SubAddonEntity> subAddons,
+    String parentPath,
+    Map<String, Set<String>> map,
+  ) {
+    for (var subAddon in subAddons) {
+      if (subAddon.type != null) {
+        // This sub-addon is itself an option group
+        final optionPath = '${parentPath}_${subAddon.id}';
+
+        // Find default values within this option group (leaf values only)
+        final defaultValues = subAddon.subAddons
+            .where(
+              (value) => value.isDefault && value.isLeafValue,
+            )
+            .toList();
+
+        if (defaultValues.isNotEmpty) {
+          // Select the default values for this option
+          map[optionPath] = defaultValues.map((v) => v.id).toSet();
+
+          // Process nested sub-addons of each default value (only if they have sub-addons)
+          for (var defaultValue in defaultValues) {
+            if (defaultValue.subAddons.isNotEmpty) {
+              _processSubAddons(
+                defaultValue.subAddons,
+                '${optionPath}_${defaultValue.id}',
+                map,
+              );
+            }
+          }
+        }
+      }
+    }
   }
 
   void increment() {
@@ -154,34 +169,85 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     emit(state.copyWith(note: note, hasUserInteracted: true));
   }
 
-  // Main method to set option value with path-based selection
-  void setOptionValue(String optionPath, String valueId, OptionType type) {
+  // Method to ensure all default items are selected and added to cart
+  void ensureDefaultSelections() {
     final newMap = Map<String, Set<String>>.from(state.selectedOptions);
+    bool hasChanges = false;
+
+    // Process all top-level options to find unselected defaults
+    for (var option in options) {
+      final currentSelections = newMap[option.id] ?? <String>{};
+      // Only select leaf values (final values that can be selected)
+      final defaultValues = option.subAddons.where((v) => v.isDefault && v.isLeafValue).toList();
+
+      for (var defaultValue in defaultValues) {
+        if (!currentSelections.contains(defaultValue.id)) {
+          if (!newMap.containsKey(option.id)) {
+            newMap[option.id] = <String>{};
+          }
+          newMap[option.id]!.add(defaultValue.id);
+          hasChanges = true;
+        }
+      }
+    }
+
+    if (hasChanges) {
+      emit(state.copyWith(selectedOptions: newMap, hasUserInteracted: false));
+
+      // Automatically add to cart if there are default selections and no user interaction yet
+      if (!state.hasUserInteracted && !state.hasAddedToCArt) {
+        // Add a small delay to ensure the UI is updated
+        Future.delayed(const Duration(milliseconds: 100), () {
+          addToCart();
+        });
+      }
+    }
+  }
+
+  // Main method to set option value with path-based selection
+  void setOptionValue(String optionPath, String fullPath, OptionType type) {
+    final newMap = Map<String, Set<String>>.from(state.selectedOptions);
+
+    // Extract the actual value ID from the full path (last segment)
+    final pathSegments = fullPath.split('_');
+    final valueId = pathSegments.last;
+
+    // For nested selections, we need to determine the correct option key
+    // If it's a top-level selection, use the option ID
+    // If it's a nested selection, use the parent path as the option key
+    String optionKey;
+    if (pathSegments.length == 1) {
+      // Top-level selection
+      optionKey = pathSegments.first;
+    } else {
+      // Nested selection - use the parent path as the option key
+      optionKey = pathSegments.sublist(0, pathSegments.length - 1).join('_');
+    }
 
     if (type == OptionType.radio) {
       // Radio: clear previous selection and set new one
-      if (newMap.containsKey(optionPath)) {
+      if (newMap.containsKey(optionKey)) {
         // Clear sub-addons of previously selected values
-        for (var oldValueId in newMap[optionPath]!) {
-          _clearChildSelections(newMap, '${optionPath}_$oldValueId');
+        for (var oldValueId in newMap[optionKey]!) {
+          _clearChildSelections(newMap, '${optionKey}_$oldValueId');
         }
       }
-      newMap[optionPath] = {valueId};
+      newMap[optionKey] = {valueId};
     } else {
       // Checkbox: toggle selection
-      if (!newMap.containsKey(optionPath)) {
-        newMap[optionPath] = {valueId};
+      if (!newMap.containsKey(optionKey)) {
+        newMap[optionKey] = {valueId};
       } else {
-        if (newMap[optionPath]!.contains(valueId)) {
+        if (newMap[optionKey]!.contains(valueId)) {
           // Deselecting - clear child selections
-          _clearChildSelections(newMap, '${optionPath}_$valueId');
-          newMap[optionPath] = newMap[optionPath]!.where((id) => id != valueId).toSet();
-          if (newMap[optionPath]!.isEmpty) {
-            newMap.remove(optionPath);
+          _clearChildSelections(newMap, '${optionKey}_$valueId');
+          newMap[optionKey] = newMap[optionKey]!.where((id) => id != valueId).toSet();
+          if (newMap[optionKey]!.isEmpty) {
+            newMap.remove(optionKey);
           }
         } else {
           // Selecting
-          newMap[optionPath] = {...newMap[optionPath]!, valueId};
+          newMap[optionKey] = {...newMap[optionKey]!, valueId};
         }
       }
     }
@@ -205,64 +271,9 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     }
   }
 
-  // Get all visible options as a flat list (including visible sub-addons based on selections)
-  List<({String optionId, String optionName, List<SubAddonEntity> values, OptionType type, bool isRequired, String path})> getAllVisibleOptions() {
-    final result = <({String optionId, String optionName, List<SubAddonEntity> values, OptionType type, bool isRequired, String path})>[];
-
-    void processAddons(List<SubAddonEntity> addons, String parentPath) {
-      for (var addon in addons) {
-        // If this addon has a type, it's an option group
-        if (addon.type != null) {
-          final optionPath = parentPath.isEmpty ? addon.id : '${parentPath}_${addon.id}';
-
-          // This addon itself is an option, so add it
-          result.add((
-            optionId: addon.id,
-            optionName: addon.name,
-            values: addon.subAddons,
-            type: addon.type!,
-            isRequired: addon.isRequired ?? false,
-            path: optionPath,
-          ));
-
-          // Check if any value of this option is selected and has sub-addons
-          final selectedValueIds = state.selectedOptions[optionPath];
-          if (selectedValueIds != null) {
-            for (var subAddon in addon.subAddons) {
-              if (selectedValueIds.contains(subAddon.id) && subAddon.subAddons.isNotEmpty) {
-                final valuePath = '${optionPath}_${subAddon.id}';
-                processAddons(subAddon.subAddons, valuePath);
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // Process top-level options
-    for (var option in options) {
-      result.add((
-        optionId: option.id,
-        optionName: option.name,
-        values: option.subAddons,
-        type: option.type,
-        isRequired: option.isRequired,
-        path: option.id,
-      ));
-
-      // Check if any value is selected and has sub-addons
-      final selectedValueIds = state.selectedOptions[option.id];
-      if (selectedValueIds != null) {
-        for (var addon in option.subAddons) {
-          if (selectedValueIds.contains(addon.id) && addon.subAddons.isNotEmpty) {
-            final valuePath = '${option.id}_${addon.id}';
-            processAddons(addon.subAddons, valuePath);
-          }
-        }
-      }
-    }
-
-    return result;
+  // Get all top-level options (no dynamic visibility needed)
+  List<ItemOptionEntity> getAllOptions() {
+    return options;
   }
 
   double _calculatePrice(AddToCartStates state) {
@@ -450,14 +461,13 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     if (Session().client == null) return L10n.tr().pleaseLoginToUseCart;
     if (state.quantity < 1) return L10n.tr().quantityValidation;
 
-    // Validate only visible required options
-    final visibleOptions = getAllVisibleOptions();
-    for (var record in visibleOptions) {
-      if (record.isRequired) {
-        final selectedValueIds = state.selectedOptions[record.path];
+    // Validate only top-level required options
+    for (var option in options) {
+      if (option.isRequired) {
+        final selectedValueIds = state.selectedOptions[option.id];
         if (selectedValueIds == null || selectedValueIds.isEmpty) {
           return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(
-            record.optionName,
+            option.name,
           );
         }
       }

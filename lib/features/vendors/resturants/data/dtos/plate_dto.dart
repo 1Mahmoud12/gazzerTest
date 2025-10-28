@@ -18,6 +18,7 @@ class PlateDTO extends GenericItemDTO {
     price = double.tryParse(json['app_price'].toString());
     hasOptions = json['has_options'] == true;
     badge = json['badge'];
+    orderCount = json['order_count'];
     if (json['tags'] != null) {
       tags = [];
       json['tags'].forEach((tag) {
@@ -50,6 +51,7 @@ class PlateDTO extends GenericItemDTO {
       rate: rate ?? 0,
       outOfStock: id?.isEven ?? false,
       badge: badge,
+      orderCount: orderCount,
       reviewCount: rateCount ?? 0,
       offer: offer?.toEntity(),
       tags: tags,

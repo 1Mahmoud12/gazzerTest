@@ -225,6 +225,11 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                     onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
                                     onsubmit = addCubit.addToCart;
                                     onNoteChange = addCubit.setNote;
+
+                                    // Ensure default selections are applied
+                                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                                      addCubit.ensureDefaultSelections();
+                                    });
                                     WidgetsBinding.instance.addPostFrameCallback((_) {
                                       canLeaveItem.value = addCubit.cartItem == null;
                                       priceNQntyNLoading.value = (
@@ -258,25 +263,29 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                         }
                                       },
                                       builder: (context, cartState) {
-                                        // Get all visible options (including sub-addons based on selections)
-                                        final visibleOptions = addCubit.getAllVisibleOptions();
-
+                                        // Show all options directly (no dynamic visibility)
                                         return Column(
-                                          children: visibleOptions.map((
-                                            record,
+                                          children: state.options.map((
+                                            option,
                                           ) {
                                             return AbsorbPointer(
                                               absorbing: restaurant.isClosed,
                                               child: PlateOptionsWidget(
-                                                optionName: record.optionName,
-                                                values: record.values,
-                                                type: record.type,
-                                                selectedId: cartState.selectedOptions[record.path] ?? {},
-                                                onValueSelected: (id) => addCubit.setOptionValue(
-                                                  record.path,
-                                                  id,
-                                                  record.type,
-                                                ),
+                                                optionId: option.id,
+                                                optionName: option.name,
+                                                values: option.subAddons,
+                                                type: option.type,
+                                                selectedId: cartState.selectedOptions[option.id] ?? {},
+                                                getSelectedOptions: (path) => cartState.selectedOptions[path] ?? {},
+                                                onValueSelected:
+                                                    ({
+                                                      required fullPath,
+                                                      required id,
+                                                    }) => addCubit.setOptionValue(
+                                                      id,
+                                                      fullPath,
+                                                      option.type,
+                                                    ),
                                               ),
                                             );
                                           }).toList(),
@@ -328,7 +337,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
           },
         ),
         bottomNavigationBar: restaurant.isClosed
-            ? SizedBox.shrink()
+            ? const SizedBox.shrink()
             : Skeleton.shade(
                 child: ValueListenableBuilder(
                   valueListenable: priceNQntyNLoading,

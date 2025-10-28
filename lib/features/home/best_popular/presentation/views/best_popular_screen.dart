@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
-import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_cubit.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_states.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -59,15 +59,20 @@ class BestPopularScreen extends StatelessWidget {
               return GridView.builder(
                 padding: AppConst.defaultPadding,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 0.85,
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.55,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 16,
                 ),
                 itemCount: stores.length,
                 itemBuilder: (context, index) {
-                  final vendor = stores[index];
-                  return _VendorCard(vendor: vendor);
+                  final store = stores[index];
+                  return GrocCardSwitcher<StoreEntity>(
+                    cardStyle: CardStyle.typeOne,
+                    width: double.infinity,
+                    entity: store,
+                    onPressed: () => _navigateToStore(context, store),
+                  );
                 },
               );
             }
@@ -83,115 +88,90 @@ class BestPopularScreen extends StatelessWidget {
     return GridView.builder(
       padding: AppConst.defaultPadding,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 0.85,
+        crossAxisCount: 2,
+        childAspectRatio: 0.8,
         crossAxisSpacing: 12,
         mainAxisSpacing: 16,
       ),
-      itemCount: 12,
+      itemCount: 8,
       itemBuilder: (context, index) {
-        return const _VendorCardSkeleton();
+        return const _StoreCardSkeleton();
       },
     );
   }
 }
 
-class _VendorCard extends StatelessWidget {
-  const _VendorCard({required this.vendor});
-
-  final VendorEntity vendor;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => _navigateToVendor(context),
-      borderRadius: BorderRadius.circular(12),
-      child: Column(
-        spacing: 8,
-        children: [
-          Expanded(
-            child: ClipOval(
-              child: CustomNetworkImage(
-                vendor.image,
-                fit: BoxFit.cover,
-                width: 80,
-                height: 80,
-              ),
-            ),
-          ),
-          Text(
-            vendor.name,
-            style: TStyle.blackBold(12),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            vendor.totalOrders.toString(),
-            style: TStyle.blackRegular(12),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-          ),
-        ],
+void _navigateToStore(BuildContext context, StoreEntity store) {
+  if (store.storeCategoryType == 'Restaurant') {
+    context.navigateToPage(
+      BlocProvider(
+        create: (context) => di<SingleRestaurantCubit>(param1: store.id),
+        child: RestaurantDetailsScreen(id: store.id),
+      ),
+    );
+  } else {
+    context.navigateToPage(
+      BlocProvider(
+        create: (context) => di<StoreDetailsCubit>(param1: store.id),
+        child: StoreDetailsScreen(storeId: store.id),
       ),
     );
   }
-
-  void _navigateToVendor(BuildContext context) {
-    if (vendor.type == VendorType.restaurant.value) {
-      context.navigateToPage(
-        BlocProvider(
-          create: (context) => di<SingleRestaurantCubit>(param1: vendor.storeId),
-          child: RestaurantDetailsScreen(id: vendor.storeId),
-        ),
-      );
-    } else if (vendor.type == VendorType.grocery.value) {
-      context.navigateToPage(
-        BlocProvider(
-          create: (context) => di<StoreDetailsCubit>(param1: vendor.storeId),
-          child: StoreDetailsScreen(storeId: vendor.storeId),
-        ),
-      );
-    } else {
-      context.navigateToPage(
-        BlocProvider(
-          create: (context) => di<StoreDetailsCubit>(param1: vendor.storeId),
-          child: StoreDetailsScreen(storeId: vendor.storeId),
-        ),
-      );
-    }
-  }
 }
 
-class _VendorCardSkeleton extends StatelessWidget {
-  const _VendorCardSkeleton();
+class _StoreCardSkeleton extends StatelessWidget {
+  const _StoreCardSkeleton();
 
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      child: Column(
-        spacing: 8,
-        children: [
-          Expanded(
-            child: Container(
-              width: 80,
-              height: 80,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 3,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: 60,
-            height: 12,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(4),
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Container(
+                      width: 80,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

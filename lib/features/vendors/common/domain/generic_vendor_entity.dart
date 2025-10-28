@@ -19,9 +19,12 @@ sealed class GenericVendorEntity extends Favorable {
 
   ///
   final String? priceRange;
+  final String? storeCategoryType;
   final String? deliveryTime;
   final double? deliveryFee;
   final String? badge;
+  final int? totalOrders;
+  final int? estimatedDeliveryTime;
   final List<String>? tag;
 
   final DateTime? startTime;
@@ -52,10 +55,13 @@ sealed class GenericVendorEntity extends Favorable {
     required this.mintsBeforClosingAlert,
     required super.outOfStock,
     required super.reviewCount,
+    required this.totalOrders,
 
     ///
     required this.parentId,
     this.priceRange,
+    this.estimatedDeliveryTime,
+    this.storeCategoryType,
     this.badge,
     this.tag,
     required this.startTime,
@@ -91,6 +97,8 @@ sealed class GenericVendorEntity extends Favorable {
     ...super.props,
     parentId,
     zoneName,
+    estimatedDeliveryTime,
+    totalOrders,
     subCategories,
     mintsBeforClosingAlert,
     priceRange,
