@@ -32,6 +32,8 @@ class PlateDTO extends GenericItemDTO {
     }
     if (json['store_info'] != null) {
       store = SimpleStoreDTO.fromJson(json['store_info']);
+    } else if (json['restaurant_info'] != null) {
+      store = SimpleStoreDTO.fromJson(json['restaurant_info']);
     }
   }
 

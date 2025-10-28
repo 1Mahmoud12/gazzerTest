@@ -1,3 +1,5 @@
+import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
+
 class SuggestsDto {
   SuggestsDto({
     this.status,
@@ -65,7 +67,7 @@ class SuggestEntity {
   final String? itemType;
   final int? itemId;
   final SuggestItem? item;
-  final SuggestStoreInfo? storeInfo;
+  final SimpleStoreDTO? storeInfo;
   final String? recommendationType;
   final int? score;
 
@@ -75,7 +77,7 @@ class SuggestEntity {
       itemType: json["item_type"],
       itemId: json["item_id"],
       item: json["item"] == null ? null : SuggestItem.fromJson(json["item"]),
-      storeInfo: json["store_info"] == null ? null : SuggestStoreInfo.fromJson(json["store_info"]),
+      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
       recommendationType: json["recommendation_type"],
       score: json["score"],
     );
@@ -86,7 +88,7 @@ class SuggestEntity {
     "item_type": itemType,
     "item_id": itemId,
     "item": item?.toJson(),
-    "store_info": storeInfo?.toJson(),
+    "store_info": storeInfo?.toEntity(),
     "recommendation_type": recommendationType,
     "score": score,
   };
@@ -116,6 +118,7 @@ class SuggestItem {
     this.color,
     this.offer,
     this.itemUnitBrand,
+    this.storeInfo,
   });
 
   final int? id;
@@ -138,6 +141,7 @@ class SuggestItem {
   final bool? hasOptions;
   final int? quantityInStock;
   final String? color;
+  final SimpleStoreDTO? storeInfo;
   final SuggestOffer? offer;
   final dynamic itemUnitBrand;
 
@@ -165,6 +169,7 @@ class SuggestItem {
       color: json["color"],
       offer: json["offer"] == null ? null : SuggestOffer.fromJson(json["offer"]),
       itemUnitBrand: json["item_unit_brand"],
+      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
     );
   }
 
@@ -191,6 +196,7 @@ class SuggestItem {
     "color": color,
     "offer": offer?.toJson(),
     "item_unit_brand": itemUnitBrand,
+    "store_info": storeInfo,
   };
 }
 

@@ -8,6 +8,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
+import 'package:gazzer/features/home/home_categories/suggested/data/dtos/suggests_dto.dart';
 import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_repo.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_cubit.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_states.dart';
@@ -24,8 +25,8 @@ class SuggestedScreen extends StatefulWidget {
 
 class _SuggestedScreenState extends State<SuggestedScreen> {
   String _searchQuery = '';
-  List<dynamic> _allItems = [];
-  List<dynamic> _filteredItems = [];
+  List<SuggestEntity> _allItems = [];
+  List<SuggestEntity> _filteredItems = [];
 
   void _onSearchChanged(String value) {
     if (!context.mounted) return;
@@ -109,7 +110,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
 
   Widget _buildContent(
     BuildContext context,
-    List<dynamic> items,
+    List<SuggestEntity> items,
     bool isFromCache,
   ) {
     if (items.isEmpty) {
@@ -132,14 +133,14 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
         Expanded(
           child: ListView.separated(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.symmetric(horizontal: AppConst.defaultHrPadding.left),
             shrinkWrap: true,
             itemCount: items.length,
             separatorBuilder: (context, index) => const VerticalSpacing(12),
             itemBuilder: (context, index) {
-              if (items[index] == null) return const SizedBox.shrink();
+              if (items[index].id == null) return const SizedBox.shrink();
               return HorizontalProductCard(
-                product: _convertToProductEntity(items[index]!),
+                product: _convertToProductEntity(items[index]),
               );
             },
           ),
@@ -149,18 +150,19 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
   }
 
   // Convert SuggestEntity to ProductEntity for VerticalRotatedImgCard
-  ProductEntity _convertToProductEntity(item) {
-    final itemData = item.item;
+  ProductEntity _convertToProductEntity(SuggestEntity item) {
+    final SuggestEntity itemData = item;
 
     return ProductEntity(
-      id: itemData?.id ?? 0,
-      name: itemData?.plateName ?? itemData?.name ?? '',
-      description: itemData?.plateDescription ?? '',
-      price: double.tryParse(itemData?.price ?? '0') ?? 0.0,
-      image: itemData?.plateImage ?? itemData?.image ?? '',
-      rate: double.tryParse(itemData?.rate ?? '0') ?? 0.0,
-      reviewCount: itemData?.rateCount ?? 0,
+      id: itemData.id ?? 0,
+      name: itemData.item?.name ?? itemData.item?.name ?? '',
+      description: itemData.item?.plateDescription ?? '',
+      price: double.tryParse(itemData.item?.price ?? '0') ?? 0.0,
+      image: itemData.item?.plateImage ?? itemData.item?.image ?? '',
+      rate: double.tryParse(itemData.item?.rate ?? '0') ?? 0.0,
+      reviewCount: itemData.item?.rateCount ?? 0,
       outOfStock: false,
+      store: itemData.item?.storeInfo?.toEntity(),
     );
   }
 }

@@ -24,7 +24,11 @@ class ProductDTO extends GenericItemDTO {
     color = json['color'];
     offer = json['offer'] != null ? OfferDTO.fromJson(json['offer']) : null;
     itemUnitBrand = json['item_unit_brand'] != null ? ItemUnitBrandDTO.fromJson(json['item_unit_brand']) : null;
-    store = json['store_info'] != null ? SimpleStoreDTO.fromJson(json['store_info']) : null;
+    if (json['store_info'] != null) {
+      store = SimpleStoreDTO.fromJson(json['store_info']);
+    } else if (json['restaurant_info'] != null) {
+      store = SimpleStoreDTO.fromJson(json['restaurant_info']);
+    }
     description = json['description'];
     badge = json['badge'];
     image = json['image'];
