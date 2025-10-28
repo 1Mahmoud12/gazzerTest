@@ -7,7 +7,11 @@ sealed class PlateDetailsStates {
   final List<ItemOptionEntity> options;
   final List<OrderedWithEntity> orderedWith;
 
-  const PlateDetailsStates({this.plate = Fakers.plate, this.options = const [], this.orderedWith = const []});
+  const PlateDetailsStates({
+    this.plate = Fakers.plate,
+    this.options = const [],
+    this.orderedWith = const [],
+  });
 }
 
 class PlateDetailsInitial extends PlateDetailsStates {}

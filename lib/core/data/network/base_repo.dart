@@ -52,13 +52,15 @@ abstract class BaseApiRepo {
       switch (error.type) {
         case DioExceptionType.badResponse:
           // Check for OTP rate limit error (400 with remaining_seconds)
-          if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) &&
-              error.response?.data?['data']?['remaining_seconds'] != null) {
+          final data = error.response?.data?['data'];
+
+          if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['remaining_seconds'] != null) {
             return OtpRateLimitError.fromJson(
               error.response?.data,
               e: ErrorType.badResponse,
             );
           }
+
           return BadResponse.fromJson(
             error.response?.data,
             e: ErrorType.badResponse,

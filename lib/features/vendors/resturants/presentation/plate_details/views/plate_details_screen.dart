@@ -58,7 +58,10 @@ class SinglePlateScreen extends StatelessWidget {
           );
         } else if (detailsState is PlateDetailsLoaded) {
           return BlocProvider(
-            create: (context) => di<AddToCartCubit>(param1: (detailsState.plate, detailsState.options), param2: itemToEdit),
+            create: (context) => di<AddToCartCubit>(
+              param1: (detailsState.plate, detailsState.options),
+              param2: itemToEdit,
+            ),
             child: Builder(
               builder: (context) {
                 final cubit = context.read<AddToCartCubit>();
@@ -89,11 +92,18 @@ class SinglePlateScreen extends StatelessWidget {
                     child: child!,
                   ),
                   child: Scaffold(
-                    appBar: MainAppBar(showBadge: true, showCart: true, onShare: () {}),
+                    appBar: MainAppBar(
+                      showBadge: true,
+                      showCart: true,
+                      onShare: () {},
+                    ),
                     body: ListView(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                       children: [
-                        ProductImageWidget(image: detailsState.plate.image, plate: detailsState.plate),
+                        ProductImageWidget(
+                          image: detailsState.plate.image,
+                          plate: detailsState.plate,
+                        ),
                         ProductSummaryWidget(plate: detailsState.plate),
                         const VerticalSpacing(24),
                         BlocConsumer<AddToCartCubit, AddToCartStates>(
@@ -101,21 +111,31 @@ class SinglePlateScreen extends StatelessWidget {
                             canPop.value = !state.hasUserInteracted;
                             if (state.status == ApiStatus.success) {
                               Alerts.showToast(state.message, error: false);
-                              context.pop(true); // ** to declare that the cart has changed
+                              context.pop(
+                                true,
+                              ); // ** to declare that the cart has changed
                             } else if (state.status == ApiStatus.error) {
                               Alerts.showToast(state.message);
                             }
                           },
                           builder: (context, cartState) {
+                            // Get all visible options (including sub-addons based on selections)
+                            final visibleOptions = cubit.getAllVisibleOptions();
+
                             return Column(
-                              children: List.generate(detailsState.options.length, (index) {
-                                final detailsOption = detailsState.options[index];
+                              children: visibleOptions.map((record) {
                                 return PlateOptionsWidget(
-                                  option: detailsState.options[index],
-                                  selectedId: cartState.selectedOptions[detailsOption.id] ?? {},
-                                  onValueSelected: (id) => cubit.setOptionValue(detailsOption.id, id),
+                                  optionName: record.optionName,
+                                  values: record.values,
+                                  type: record.type,
+                                  selectedId: cartState.selectedOptions[record.path] ?? {},
+                                  onValueSelected: (id) => cubit.setOptionValue(
+                                    record.path,
+                                    id,
+                                    record.type,
+                                  ),
                                 );
-                              }),
+                              }).toList(),
                             );
                           },
                         ),

@@ -262,15 +262,15 @@ class Fakers {
   static final plateOptions = List.generate(
     3,
     (index) => ItemOptionEntity(
-      id: index,
+      id: "$index",
       name: 'Option ${index + 1}',
       isRequired: _random.nextBool(),
       type: OptionType.radio,
       controlsPrice: _random.nextBool(),
-      values: List.generate(
+      subAddons: List.generate(
         3,
-        (valueIndex) => OpionValueEntity(
-          id: valueIndex,
+        (valueIndex) => SubAddonEntity(
+          id: "$valueIndex",
           name: 'Value ${valueIndex + 1}',
           price: _random.nextDouble() * 10,
           isDefault: valueIndex == 0, // First value is default
@@ -426,8 +426,20 @@ class Fakers {
       items: cartItems,
     ),
   ];
-  static const cartItems = [CartItemEntity(cartId: -1, type: CartItemType.product, quantity: 1, prod: cartable)];
-  static const cartable = CartableEntity(id: -1, name: 'name', price: 0.0, image: _netWorkImage);
+  static const cartItems = [
+    CartItemEntity(
+      cartId: -1,
+      type: CartItemType.product,
+      quantity: 1,
+      prod: cartable,
+    ),
+  ];
+  static const cartable = CartableEntity(
+    id: -1,
+    name: 'name',
+    price: 0.0,
+    image: _netWorkImage,
+  );
   static const cartSummary = CartSummaryModel(
     subTotal: 0.0,
     deliveryFee: 0.0,

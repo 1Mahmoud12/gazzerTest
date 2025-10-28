@@ -4,7 +4,11 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 abstract class ProductDetailsState {
   final List<OrderedWithEntity> orderedWith;
   final ProductEntity product;
-  ProductDetailsState({this.product = Fakers.favorite, this.orderedWith = const []});
+
+  ProductDetailsState({
+    this.product = Fakers.favorite,
+    this.orderedWith = const [],
+  });
 }
 
 class ProductDetailsInitial extends ProductDetailsState {}

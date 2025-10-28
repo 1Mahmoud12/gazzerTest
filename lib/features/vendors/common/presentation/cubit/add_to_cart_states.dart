@@ -5,7 +5,7 @@ class AddToCartStates extends Equatable {
   final int quantity;
   final String? note;
   final double totalPrice;
-  final Map<int, Set<int>> selectedOptions;
+  final Map<String, Set<String>> selectedOptions;
   final String message;
   final bool hasUserInteracted;
   final bool hasAddedToCArt;
@@ -38,7 +38,7 @@ class AddToCartStates extends Equatable {
     String? note,
     double? totalPrice,
     String? message,
-    Map<int, Set<int>>? selectedOptions,
+    Map<String, Set<String>>? selectedOptions,
     bool? hasUserInteracted,
     bool? hasAddedToCArt,
     ApiStatus? status,
@@ -49,7 +49,8 @@ class AddToCartStates extends Equatable {
       hasAddedToCArt: hasAddedToCArt ?? this.hasAddedToCArt,
       note: note ?? this.note,
       totalPrice: totalPrice ?? this.totalPrice,
-      selectedOptions: selectedOptions ?? this.selectedOptions, // Create a new map to ensure state change detection
+      selectedOptions: selectedOptions ?? this.selectedOptions,
+      // Create a new map to ensure state change detection
       hasUserInteracted: hasUserInteracted ?? this.hasUserInteracted,
       message: message ?? this.message, // error message wont be passed to other states by default
     );

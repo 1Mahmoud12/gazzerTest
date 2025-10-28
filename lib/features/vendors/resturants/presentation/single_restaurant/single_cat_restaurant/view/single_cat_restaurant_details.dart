@@ -56,7 +56,11 @@ class SingleCatRestaurantScreen extends StatefulWidget {
   static const route = '/single-cat-restaurant';
 
   /// [hasParentProvider] is used in loading state to hide both the ordered with section & product price summary
-  const SingleCatRestaurantScreen({super.key, required this.hasParentProvider, required this.state});
+  const SingleCatRestaurantScreen({
+    super.key,
+    required this.hasParentProvider,
+    required this.state,
+  });
   final bool hasParentProvider;
   final SingleRestaurantStates state;
 
@@ -137,7 +141,12 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, MediaQuery.paddingOf(context).bottom + 16),
+              padding: EdgeInsets.fromLTRB(
+                16,
+                0,
+                16,
+                MediaQuery.paddingOf(context).bottom + 16,
+              ),
               child: Column(
                 spacing: 12,
                 children: [
@@ -152,7 +161,9 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                         categories: null,
                         onTimerFinish: (ctx) {
                           context.pop();
-                          RestaurantDetailsRoute(id: restaurant.id).pushReplacement(context);
+                          RestaurantDetailsRoute(
+                            id: restaurant.id,
+                          ).pushReplacement(context);
                         },
                       ),
                     ),
@@ -197,12 +208,17 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                         buildWhen: (previous, current) => current is PlateDetailsStates,
                         builder: (context, state) {
                           if (state is! PlateDetailsStates) return const SizedBox.shrink();
-                          if (state is PlateDetailsLoading) return const Center(child: AdaptiveProgressIndicator());
+                          if (state is PlateDetailsLoading)
+                            return const Center(
+                              child: AdaptiveProgressIndicator(),
+                            );
                           return Column(
                             children: [
                               _FoodDetailsWidget(product: state.plate),
                               BlocProvider(
-                                create: (context) => di<AddToCartCubit>(param1: (state.plate, state.options)),
+                                create: (context) => di<AddToCartCubit>(
+                                  param1: (state.plate, state.options),
+                                ),
                                 child: Builder(
                                   builder: (context) {
                                     final addCubit = context.read<AddToCartCubit>();
@@ -211,7 +227,11 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                     onNoteChange = addCubit.setNote;
                                     WidgetsBinding.instance.addPostFrameCallback((_) {
                                       canLeaveItem.value = addCubit.cartItem == null;
-                                      priceNQntyNLoading.value = (0, 0, false);
+                                      priceNQntyNLoading.value = (
+                                        0,
+                                        0,
+                                        false,
+                                      );
                                       priceNQntyNLoading.value = (
                                         addCubit.state.totalPrice,
                                         addCubit.state.quantity,
@@ -228,27 +248,38 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                           cartState.status == ApiStatus.loading,
                                         );
                                         if (cartState.status == ApiStatus.success) {
-                                          Alerts.showToast(cartState.message, error: false);
+                                          Alerts.showToast(
+                                            cartState.message,
+                                            error: false,
+                                          );
                                           addCubit.resetState();
                                         } else if (cartState.status == ApiStatus.error) {
                                           Alerts.showToast(cartState.message);
                                         }
                                       },
                                       builder: (context, cartState) {
+                                        // Get all visible options (including sub-addons based on selections)
+                                        final visibleOptions = addCubit.getAllVisibleOptions();
+
                                         return Column(
-                                          children: List.generate(
-                                            state.options.length,
-                                            (index) {
-                                              return AbsorbPointer(
-                                                absorbing: restaurant.isClosed,
-                                                child: PlateOptionsWidget(
-                                                  option: state.options[index],
-                                                  selectedId: cartState.selectedOptions[state.options[index].id] ?? {},
-                                                  onValueSelected: (id) => addCubit.setOptionValue(state.options[index].id, id),
+                                          children: visibleOptions.map((
+                                            record,
+                                          ) {
+                                            return AbsorbPointer(
+                                              absorbing: restaurant.isClosed,
+                                              child: PlateOptionsWidget(
+                                                optionName: record.optionName,
+                                                values: record.values,
+                                                type: record.type,
+                                                selectedId: cartState.selectedOptions[record.path] ?? {},
+                                                onValueSelected: (id) => addCubit.setOptionValue(
+                                                  record.path,
+                                                  id,
+                                                  record.type,
                                                 ),
-                                              );
-                                            },
-                                          ),
+                                              ),
+                                            );
+                                          }).toList(),
                                         );
                                       },
                                     );

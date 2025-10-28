@@ -55,7 +55,12 @@ sealed class PlateDetailsStates extends SingleCatRestaurantStates {
 class PlateDetailsInitial extends PlateDetailsStates {}
 
 class PlateDetailsLoading extends PlateDetailsStates {
-  PlateDetailsLoading() : super(plate: Fakers.plate, options: Fakers.plateOptions, orderedWith: Fakers.plateOrderedWith);
+  PlateDetailsLoading()
+    : super(
+        plate: Fakers.plate,
+        options: Fakers.plateOptions,
+        orderedWith: Fakers.plateOrderedWith,
+      );
 }
 
 class PlateDetailsLoaded extends PlateDetailsStates {

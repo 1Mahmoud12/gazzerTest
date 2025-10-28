@@ -85,23 +85,23 @@ class PlateDetailsDTO {
 }
 
 class Options {
-  int? id;
+  String? id;
   String? name;
   String? type;
   int? required;
   int? controlsBasePrice;
-  List<Values>? values;
+  List<SubAddon>? subAddons;
 
   Options.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = "${json['id']}";
     name = json['name'];
     type = json['type'];
     required = json['required'];
     controlsBasePrice = json['controls_base_price'];
-    if (json['values'] != null) {
-      values = <Values>[];
-      json['values'].forEach((v) {
-        values!.add(Values.fromJson(v));
+    if (json['sub_addons'] != null) {
+      subAddons = <SubAddon>[];
+      json['sub_addons'].forEach((v) {
+        subAddons!.add(SubAddon.fromJson(v));
       });
     }
   }
@@ -114,36 +114,55 @@ class Options {
         isRequired: required == 1,
         type: OptionType.fromString(type ?? ''),
         controlsPrice: controlsBasePrice == 1,
-        values: values!.map((e) => e.toEntity()).toList(),
+        subAddons: subAddons?.map((e) => e.toEntity()).toList() ?? [],
       );
       return option;
     } catch (e) {
+      print('Error parsing option: $e');
       return null;
     }
   }
 }
 
-class Values {
-  int? id;
+class SubAddon {
+  String? id;
   String? name;
   String? price;
   int? isFree;
   int? isDefault;
+  String? type;
+  int? required;
+  int? controlsBasePrice;
+  List<SubAddon>? subAddons;
 
-  Values.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  SubAddon.fromJson(Map<String, dynamic> json) {
+    id = "${json['id']}";
     name = json['name'];
     price = json['price'];
     isFree = json['is_free'];
     isDefault = json['is_default'];
+    type = json['type'];
+    required = json['required'];
+    controlsBasePrice = json['controls_base_price'];
+    if (json['sub_addons'] != null) {
+      subAddons = <SubAddon>[];
+      json['sub_addons'].forEach((v) {
+        subAddons!.add(SubAddon.fromJson(v));
+      });
+    }
   }
 
-  OpionValueEntity toEntity() {
-    return OpionValueEntity(
+  SubAddonEntity toEntity() {
+    return SubAddonEntity(
       id: id!,
       name: name ?? '',
       price: double.tryParse(price ?? '0') ?? 0.0,
       isDefault: isDefault == 1,
+      isFree: isFree == 1,
+      type: OptionType.fromString(type ?? 'radio'),
+      isRequired: required == 1,
+      controlsPrice: controlsBasePrice == 1,
+      subAddons: subAddons?.map((e) => e.toEntity()).toList() ?? [],
     );
   }
 }

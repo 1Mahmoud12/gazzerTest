@@ -153,10 +153,10 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                     key: ValueKey('item_${item.id}'),
                                     product: ProductEntity(
                                       id: item.id!,
-                                      name: item.name!,
+                                      name: item.name ?? '',
                                       description: '',
                                       price: price,
-                                      image: item.image!,
+                                      image: item.image ?? '',
                                       rate: 0,
                                       reviewCount: 0,
                                       outOfStock: false,
