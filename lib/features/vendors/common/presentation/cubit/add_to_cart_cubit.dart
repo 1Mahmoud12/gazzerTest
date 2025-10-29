@@ -277,6 +277,11 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     String parentPath,
   ) {
     final keysToRemove = <String>[];
+    // Remove the immediate group key itself
+    if (selections.containsKey(parentPath)) {
+      keysToRemove.add(parentPath);
+    }
+    // Remove all nested children under this path
     for (var key in selections.keys) {
       if (key.startsWith('${parentPath}_')) {
         keysToRemove.add(key);
