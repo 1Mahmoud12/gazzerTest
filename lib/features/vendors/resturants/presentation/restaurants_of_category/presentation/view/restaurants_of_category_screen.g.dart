@@ -15,10 +15,9 @@ RouteBase get $restaurantsOfCategoryRoute => GoRouteData.$route(
 );
 
 mixin _$RestaurantsOfCategoryRoute on GoRouteData {
-  static RestaurantsOfCategoryRoute _fromState(GoRouterState state) =>
-      RestaurantsOfCategoryRoute(
-        id: int.parse(state.uri.queryParameters['id']!)!,
-      );
+  static RestaurantsOfCategoryRoute _fromState(GoRouterState state) => RestaurantsOfCategoryRoute(
+    id: int.parse(state.uri.queryParameters['id']!),
+  );
 
   RestaurantsOfCategoryRoute get _self => this as RestaurantsOfCategoryRoute;
 
@@ -35,8 +34,7 @@ mixin _$RestaurantsOfCategoryRoute on GoRouteData {
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
 
   @override
   void replace(BuildContext context) => context.replace(location);

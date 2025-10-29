@@ -17,7 +17,8 @@ class FCMService {
     LocalNotificationServices.inst;
     _init();
   }
-  _init() async {
+
+  void _init() async {
     _fcm.setAutoInitEnabled(true);
     await _fcm.requestPermission(alert: true, sound: true, badge: true, criticalAlert: true, provisional: false, announcement: true, carPlay: false);
     // only for ios as andoid won't show pop up notification whilst foreground
@@ -54,7 +55,7 @@ class FCMService {
   //   return fcmToken;
   // }
 
-  fcmForegroundHandler() async {
+  void fcmForegroundHandler() async {
     FirebaseMessaging.onMessage.listen((message) async {
       debugPrint('fcmForegroundHandler');
       debugPrint(message.data.toString());
@@ -64,7 +65,7 @@ class FCMService {
     });
   }
 
-  fcmBackgroundOpenedAppHandler() {
+  void fcmBackgroundOpenedAppHandler() {
     debugPrint('fcmBackgroundOpenedAppHandler');
     // Returns a [Stream] that is called when a user presses a notification message displayed via FCM
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
@@ -73,7 +74,7 @@ class FCMService {
     });
   }
 
-  fcmOnBackground() {
+  void fcmOnBackground() {
     debugPrint('fcmBackgroundOpenedAppHandler');
     // Returns a [Stream] that is called when a user presses a notification message displayed via FCM
     FirebaseMessaging.onBackgroundMessage((message) async {
