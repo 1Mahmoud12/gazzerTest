@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 
 class VerticalProductCard extends StatelessWidget {
@@ -122,55 +117,17 @@ class VerticalProductCard extends StatelessWidget {
                                   }
 
                                   if (product.store!.type == VendorType.restaurant.value) {
-                                    context.navigateToPage(
-                                      BlocProvider(
-                                        create: (context) => di<SingleRestaurantCubit>(
-                                          param1: product.store!.id,
-                                        ),
-                                        child: RestaurantDetailsScreen(
-                                          id: product.store!.id,
-                                        ),
-                                      ),
-                                    );
-                                    context.navigateToPage(
-                                      BlocProvider(
-                                        create: (context) => di<StoreDetailsCubit>(
-                                          param1: product.store!.id,
-                                        ),
-                                        child: StoreDetailsScreen(
-                                          storeId: product.store!.id,
-                                        ),
-                                      ),
-                                    );
-                                    // RestaurantDetailsScreen(
-                                    //   id: product.store!.id,
-                                    // ).push(context);
+                                    RestaurantDetailsRoute(
+                                      id: product.store!.id,
+                                    ).push(context);
                                   } else if (product.store!.type == VendorType.grocery.value) {
-                                    // context.push(StoreDetailsScreen.route, extra: {'store_id': product.store?.id});
-                                    context.navigateToPage(
-                                      BlocProvider(
-                                        create: (context) => di<StoreDetailsCubit>(
-                                          param1: product.store!.id,
-                                        ),
-                                        child: StoreDetailsScreen(
-                                          storeId: product.store!.id,
-                                        ),
-                                      ),
-                                    );
-                                    // StoreDetailsRoute(
-                                    //   storeId: product.store?.id ?? -1,
-                                    // ).push(context);
+                                    StoreDetailsRoute(
+                                      storeId: product.store!.id,
+                                    ).push(context);
                                   } else {
-                                    context.navigateToPage(
-                                      BlocProvider(
-                                        create: (context) => di<StoreDetailsCubit>(
-                                          param1: product.store!.id,
-                                        ),
-                                        child: StoreDetailsScreen(
-                                          storeId: product.store!.id,
-                                        ),
-                                      ),
-                                    );
+                                    StoreDetailsRoute(
+                                      storeId: product.store!.id,
+                                    ).push(context);
                                   }
                                 },
                                 child: Row(

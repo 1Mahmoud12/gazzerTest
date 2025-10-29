@@ -1,4 +1,7 @@
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
+import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
 
 class SuggestsDto {
   SuggestsDto({
@@ -72,11 +75,31 @@ class SuggestEntity {
   final int? score;
 
   factory SuggestEntity.fromJson(Map<String, dynamic> json) {
+    ItemType parsedItemType = ItemType.fromString(
+      json["item_type"] ?? 'Unknown',
+    );
+    SuggestItem? parsedItem;
+
+    if (json["item"] != null) {
+      if (parsedItemType == ItemType.plate) {
+        // For plates, use PlateDTO structure
+        final plateDto = PlateDTO.fromJson(json["item"]);
+        parsedItem = SuggestItem.fromPlateDTO(json["item"], plateDto);
+      } else if (parsedItemType == ItemType.product || parsedItemType == ItemType.storeItem) {
+        // For products/store items, use ProductDTO structure
+        final productDto = ProductDTO.fromJson(json["item"]);
+        parsedItem = SuggestItem.fromProductDTO(json["item"], productDto);
+      } else {
+        // Fallback to basic SuggestItem parsing
+        parsedItem = SuggestItem.fromJson(json["item"]);
+      }
+    }
+
     return SuggestEntity(
       id: json["id"],
       itemType: json["item_type"],
       itemId: json["item_id"],
-      item: json["item"] == null ? null : SuggestItem.fromJson(json["item"]),
+      item: parsedItem,
       storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
       recommendationType: json["recommendation_type"],
       score: json["score"],
@@ -161,6 +184,71 @@ class SuggestItem {
       appPrice: json["app_price"],
       itemType: json["item_type"],
       orderedWith: json["ordered_with"] == null ? [] : List<dynamic>.from(json["ordered_with"]!.map((x) => x)),
+      isFavorite: json["is_favorite"],
+      isHaveCartTimes: json["is_have_cart_times"],
+      cartTimeQuantity: json["cart_time_quantity"],
+      hasOptions: json["has_options"],
+      quantityInStock: json["quantity_in_stock"],
+      color: json["color"],
+      offer: json["offer"] == null ? null : SuggestOffer.fromJson(json["offer"]),
+      itemUnitBrand: json["item_unit_brand"],
+      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
+    );
+  }
+
+  // Helper factory for plate items (uses plate_* fields)
+  factory SuggestItem.fromPlateDTO(
+    Map<String, dynamic> json,
+    PlateDTO plateDto,
+  ) {
+    return SuggestItem(
+      id: json["id"],
+      storeId: json["store_id"],
+      plateName: json["plate_name"],
+      name: json["plate_name"],
+      // For consistency, use plate_name as name
+      plateCategoryId: json["plate_category_id"],
+      plateDescription: json["plate_description"],
+      plateImage: json["plate_image"],
+      image: json["plate_image"],
+      price: json["price"],
+      rate: json["rate"],
+      rateCount: json["rate_count"],
+      appPrice: json["app_price"],
+      itemType: json["item_type"],
+      orderedWith: json["ordered_with"] == null ? [] : List<dynamic>.from(json["ordered_with"]!.map((x) => x)),
+      isFavorite: json["is_favorite"],
+      isHaveCartTimes: json["is_have_cart_times"],
+      cartTimeQuantity: json["cart_time_quantity"],
+      hasOptions: json["has_options"],
+      quantityInStock: json["quantity_in_stock"],
+      color: json["color"],
+      offer: json["offer"] == null ? null : SuggestOffer.fromJson(json["offer"]),
+      itemUnitBrand: json["item_unit_brand"],
+      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
+    );
+  }
+
+  // Helper factory for product items (uses standard fields, no plate_* fields)
+  factory SuggestItem.fromProductDTO(
+    Map<String, dynamic> json,
+    ProductDTO productDto,
+  ) {
+    return SuggestItem(
+      id: json["id"],
+      storeId: json["store_id"],
+      plateName: null,
+      name: json["name"],
+      plateCategoryId: null,
+      plateDescription: null,
+      plateImage: null,
+      image: json["image"],
+      price: json["price"],
+      rate: json["rate"],
+      rateCount: json["rate_count"],
+      appPrice: json["app_price"],
+      itemType: json["item_type"],
+      orderedWith: [],
       isFavorite: json["is_favorite"],
       isHaveCartTimes: json["is_have_cart_times"],
       cartTimeQuantity: json["cart_time_quantity"],
