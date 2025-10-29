@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_option_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_ordered_with_entity.dart';
 import 'package:gazzer/features/cart/domain/entities/cartable_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
@@ -11,9 +12,18 @@ class CartItemEntity extends Equatable {
   final int quantity;
   final int? quantityInStock;
   final List<CartOptionEntity> options;
+  final List<CartOrderedWithEntity> orderedWith;
   final String? notes;
 
-  double get totalPrice => prod.price * quantity; // TODO: calculation
+  double get totalPrice {
+    final basePrice = prod.price * quantity;
+    final orderedWithTotal = orderedWith.fold<double>(
+      0.0,
+      (sum, item) => sum + item.totalPrice,
+    );
+    return basePrice + orderedWithTotal; // TODO: include options pricing
+  }
+
   // double get _basePRice => options.any((e)=>e.)
   const CartItemEntity({
     required this.cartId,
@@ -23,6 +33,7 @@ class CartItemEntity extends Equatable {
     this.quantityInStock,
     this.notes,
     this.options = const [],
+    this.orderedWith = const [],
   });
 
   static CartItemEntity fromProduct(GenericItemEntity prod) {
@@ -38,6 +49,7 @@ class CartItemEntity extends Equatable {
       ),
       quantity: 1, // Default quantity
       options: [],
+      orderedWith: [],
       notes: null,
     );
   }
@@ -49,6 +61,7 @@ class CartItemEntity extends Equatable {
     int? quantityInStock,
     String? notes,
     List<CartOptionEntity>? options,
+    List<CartOrderedWithEntity>? orderedWith,
     CartableEntity? prod,
   }) {
     return CartItemEntity(
@@ -63,6 +76,7 @@ class CartItemEntity extends Equatable {
           List.from(
             this.options,
           ), // Create a new list to ensure state change detection
+      orderedWith: orderedWith ?? List.from(this.orderedWith),
     );
   }
 
@@ -74,6 +88,7 @@ class CartItemEntity extends Equatable {
     quantityInStock,
     notes,
     options,
+    orderedWith,
     prod,
   ];
 }

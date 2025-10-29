@@ -15,6 +15,7 @@ import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_edit_note.dart';
 import 'package:gazzer/features/cart/presentation/views/widgets/cart_option_widget.dart';
+import 'package:gazzer/features/cart/presentation/views/widgets/cart_ordered_with_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget_white.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
@@ -31,7 +32,10 @@ class CartItemCard extends StatelessWidget {
       onTap: () {
         switch (item.type) {
           case CartItemType.product:
-            ProductDetailsRoute(productId: item.prod.id, $extra: item).push<bool>(context).then((hasChanged) {
+            ProductDetailsRoute(
+              productId: item.prod.id,
+              $extra: item,
+            ).push<bool>(context).then((hasChanged) {
               log('hasCartChanges $hasChanged');
               if (hasChanged == true) cubit.loadCart();
             });
@@ -41,7 +45,10 @@ class CartItemCard extends StatelessWidget {
             // TODO and will not show the correct item if navigated to plate details
             break;
           case CartItemType.plate:
-            PlateDetailsRoute(id: item.prod.id, $extra: item).push(context).then((hasChanged) {
+            PlateDetailsRoute(
+              id: item.prod.id,
+              $extra: item,
+            ).push(context).then((hasChanged) {
               if (hasChanged == true) cubit.loadCart();
             });
             break;
@@ -51,7 +58,12 @@ class CartItemCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
-            BoxShadow(color: Co.secText.withAlpha(80), offset: const Offset(0, 0), blurRadius: 0, spreadRadius: 0),
+            BoxShadow(
+              color: Co.secText.withAlpha(80),
+              offset: const Offset(0, 0),
+              blurRadius: 0,
+              spreadRadius: 0,
+            ),
           ],
         ),
         child: Padding(
@@ -80,7 +92,10 @@ class CartItemCard extends StatelessWidget {
                                 maxLines: 2,
                               ),
                             ),
-                            Text(item.prod.price.toString(), style: TStyle.blackBold(12)),
+                            Text(
+                              item.prod.price.toString(),
+                              style: TStyle.blackBold(12),
+                            ),
                             Text(L10n.tr().egp, style: TStyle.blackBold(12)),
                           ],
                         ),
@@ -89,6 +104,13 @@ class CartItemCard extends StatelessWidget {
                           ...List.generate(
                             item.options.length,
                             (index) => CartOptionWidget(option: item.options[index]),
+                          ),
+                        if (item.orderedWith.isNotEmpty)
+                          ...List.generate(
+                            item.orderedWith.length,
+                            (index) => CartOrderedWithWidget(
+                              orderedWith: item.orderedWith[index],
+                            ),
                           ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -118,7 +140,10 @@ class CartItemCard extends StatelessWidget {
                                               builder: (context) => CartEditNote(item: item),
                                             );
                                             if (note != null && note != item.notes) {
-                                              cubit.updateItemNote(item.cartId, note);
+                                              cubit.updateItemNote(
+                                                item.cartId,
+                                                note,
+                                              );
                                             }
                                           },
                                           style: IconButton.styleFrom(
@@ -127,8 +152,14 @@ class CartItemCard extends StatelessWidget {
                                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                           ),
                                           icon: state is UpdateItemStates && state.isEditNote
-                                              ? const AdaptiveProgressIndicator(size: 18)
-                                              : const Icon(Icons.edit_outlined, size: 18, color: Co.purple),
+                                              ? const AdaptiveProgressIndicator(
+                                                  size: 18,
+                                                )
+                                              : const Icon(
+                                                  Icons.edit_outlined,
+                                                  size: 18,
+                                                  color: Co.purple,
+                                                ),
                                         ),
                                       ],
                                     ),
@@ -161,7 +192,10 @@ class CartItemCard extends StatelessWidget {
                                               );
                                             },
                                           );
-                                          if (confirmed == true) cubit.removeItemFromCart(item.cartId);
+                                          if (confirmed == true)
+                                            cubit.removeItemFromCart(
+                                              item.cartId,
+                                            );
                                         },
                                         style: IconButton.styleFrom(
                                           padding: const EdgeInsets.all(4),
@@ -169,8 +203,14 @@ class CartItemCard extends StatelessWidget {
                                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                         ),
                                         icon: state is UpdateItemLoading && state.isDeleting
-                                            ? const AdaptiveProgressIndicator(size: 18)
-                                            : const Icon(CupertinoIcons.delete, size: 18, color: Co.purple),
+                                            ? const AdaptiveProgressIndicator(
+                                                size: 18,
+                                              )
+                                            : const Icon(
+                                                CupertinoIcons.delete,
+                                                size: 18,
+                                                color: Co.purple,
+                                              ),
                                       ),
                                     ],
                                   ),
@@ -182,8 +222,14 @@ class CartItemCard extends StatelessWidget {
                               child: Row(
                                 spacing: horzSpacing,
                                 children: [
-                                  Text(item.totalPrice.toString(), style: TStyle.primaryBold(12)),
-                                  Text(L10n.tr().egp, style: TStyle.primaryBold(12)),
+                                  Text(
+                                    item.totalPrice.toString(),
+                                    style: TStyle.primaryBold(12),
+                                  ),
+                                  Text(
+                                    L10n.tr().egp,
+                                    style: TStyle.primaryBold(12),
+                                  ),
                                 ],
                               ),
                             ),

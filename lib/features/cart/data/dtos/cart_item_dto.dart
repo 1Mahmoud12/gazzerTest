@@ -1,6 +1,7 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_option_entity.dart';
+import 'package:gazzer/features/cart/domain/entities/cart_ordered_with_entity.dart';
 import 'package:gazzer/features/cart/domain/entities/cartable_entity.dart';
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
@@ -13,6 +14,7 @@ class CartItemDTO {
   int? quantity;
   int? quantityInStock;
   List<CartOptionDTO>? optionValues;
+  List<CartOrderedWithDTO>? orderedWith;
   String? notes;
 
   CartItemDTO.fromJson(Map<String, dynamic> json, bool isPlate) {
@@ -23,6 +25,12 @@ class CartItemDTO {
       optionValues = <CartOptionDTO>[];
       json['option_values'].forEach((v) {
         optionValues!.add(CartOptionDTO.fromJson(v));
+      });
+    }
+    if (json['ordered_with'] != null) {
+      orderedWith = <CartOrderedWithDTO>[];
+      json['ordered_with'].forEach((v) {
+        orderedWith!.add(CartOrderedWithDTO.fromJson(v));
       });
     }
     notes = json['notes'];
@@ -44,6 +52,7 @@ class CartItemDTO {
       quantity: quantity ?? 1,
       quantityInStock: quantityInStock,
       options: optionValues?.map((option) => option.toEntity()).toList() ?? [],
+      orderedWith: orderedWith?.map((ow) => ow.toEntity()).toList() ?? [],
       notes: notes,
     );
   }
@@ -88,6 +97,44 @@ class CartOptionValueDTO {
       id: valueId ?? '0',
       name: valueName ?? '',
       price: price ?? 0.0,
+    );
+  }
+}
+
+class CartOrderedWithDTO {
+  int? id;
+  String? name;
+  String? image;
+  String? price;
+  int? quantityInStock;
+  double? rate;
+  int? reviewCount;
+  String? relatedTo;
+  int? quantity;
+
+  CartOrderedWithDTO.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    image = json['image'];
+    price = json['price']?.toString();
+    quantityInStock = json['quantity_in_stock'];
+    rate = double.tryParse(json['rate']?.toString() ?? '0');
+    reviewCount = json['reviewCount'];
+    relatedTo = json['related_to'];
+    quantity = json['quantity'];
+  }
+
+  CartOrderedWithEntity toEntity() {
+    return CartOrderedWithEntity(
+      id: id ?? 0,
+      name: name ?? '',
+      image: image ?? '',
+      price: double.tryParse(price ?? '0') ?? 0.0,
+      quantity: quantity ?? 1,
+      quantityInStock: quantityInStock,
+      rate: rate ?? 0.0,
+      reviewCount: reviewCount ?? 0,
+      relatedTo: relatedTo ?? '',
     );
   }
 }
