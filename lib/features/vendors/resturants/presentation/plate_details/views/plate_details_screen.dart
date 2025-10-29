@@ -64,7 +64,6 @@ class SinglePlateScreen extends StatelessWidget {
             ),
             child: Builder(
               builder: (context) {
-                print("cart item is ${detailsState.plate.price}");
                 final cubit = context.read<AddToCartCubit>();
                 final canPop = ValueNotifier(true);
 

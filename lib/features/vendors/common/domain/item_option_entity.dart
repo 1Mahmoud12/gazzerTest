@@ -71,7 +71,7 @@ class SubAddonEntity extends Equatable {
 
 // Keep old OpionValueEntity for backward compatibility
 class OpionValueEntity extends Equatable {
-  final int id;
+  final String id;
   final String name;
   final double price;
   final bool isDefault;

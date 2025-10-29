@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
@@ -49,107 +48,68 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     emit(state);
   }
 
-  // Calculate base price - if any option controls price, use its default value's price
+  // Calculate base price - always use item base price
   static double _calculateBasePrice(
     List<ItemOptionEntity> options,
     double itemPrice,
   ) {
-    final controlsPriceOption = options.firstWhereOrNull(
-      (e) => e.controlsPrice,
-    );
-    if (controlsPriceOption != null) {
-      final defaultAddon = controlsPriceOption.subAddons.firstWhereOrNull(
-        (v) => v.isDefault,
-      );
-      return defaultAddon?.price ?? 0;
-    }
     return itemPrice;
   }
 
-  // Calculate initial total price
+  // Calculate initial total price: base + default selected addons
   static double _calculateInitialPrice(
     List<ItemOptionEntity> options,
     double itemPrice,
   ) {
-    final controlsPriceOption = options.firstWhereOrNull(
-      (e) => e.controlsPrice,
-    );
-    if (controlsPriceOption != null) {
-      final defaultAddon = controlsPriceOption.subAddons.firstWhereOrNull(
-        (v) => v.isDefault,
-      );
-      return defaultAddon?.price ?? 0;
+    double total = itemPrice;
+    for (var option in options) {
+      for (var addon in option.subAddons) {
+        if (addon.isDefault && !addon.isFree) {
+          total += addon.price;
+        }
+      }
     }
-    return itemPrice;
+    return total;
   }
 
-  // Initialize default selections recursively with path-based keys
+  // Initialize default selections - select all items with isDefault = true
   static Map<String, Set<String>> _initializeDefaultSelections(
     List<ItemOptionEntity> options,
   ) {
     final map = <String, Set<String>>{};
 
-    // Process each top-level option
     for (var option in options) {
-      // Find default values (items with isDefault = true and isLeafValue = true)
-      final defaultValues = option.subAddons
-          .where(
-            (addon) => addon.isDefault && addon.isLeafValue,
-          )
-          .toList();
+      // Find all default values (isDefault = true)
+      final defaultValues = option.subAddons.where((addon) => addon.isDefault).toList();
 
       if (defaultValues.isNotEmpty) {
-        // Select the default values
         map[option.id] = defaultValues.map((v) => v.id).toSet();
 
-        // Process sub-addons of each default value (only if they have sub-addons)
-        for (var defaultValue in defaultValues) {
-          if (defaultValue.subAddons.isNotEmpty) {
-            _processSubAddons(
-              defaultValue.subAddons,
-              '${option.id}_${defaultValue.id}',
-              map,
-            );
-          }
-        }
+        // Process nested defaults
+        _processNestedDefaults(defaultValues, option.id, map);
       }
     }
 
     return map;
   }
 
-  // Helper method to recursively process sub-addons
-  static void _processSubAddons(
+  // Helper method to process nested default selections
+  static void _processNestedDefaults(
     List<SubAddonEntity> subAddons,
     String parentPath,
     Map<String, Set<String>> map,
   ) {
     for (var subAddon in subAddons) {
       if (subAddon.type != null) {
-        // This sub-addon is itself an option group
+        // This is an option group, find its defaults
         final optionPath = '${parentPath}_${subAddon.id}';
-
-        // Find default values within this option group (leaf values only)
-        final defaultValues = subAddon.subAddons
-            .where(
-              (value) => value.isDefault && value.isLeafValue,
-            )
-            .toList();
+        final defaultValues = subAddon.subAddons.where((value) => value.isDefault).toList();
 
         if (defaultValues.isNotEmpty) {
-          // Select the default values for this option
           map[optionPath] = defaultValues.map((v) => v.id).toSet();
 
-          // Process nested sub-addons of each default value (only if they have sub-addons)
-          for (var defaultValue in defaultValues) {
-            if (defaultValue.subAddons.isNotEmpty) {
-              _processSubAddons(
-                defaultValue.subAddons,
-                '${optionPath}_${defaultValue.id}',
-                map,
-              );
-            }
-          }
+          // Process deeper nested defaults
+          _processNestedDefaults(defaultValues, optionPath, map);
         }
       }
     }
@@ -169,16 +129,14 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     emit(state.copyWith(note: note, hasUserInteracted: true));
   }
 
-  // Method to ensure all default items are selected and added to cart
+  // Method to ensure all default items are selected (no auto add to cart)
   void ensureDefaultSelections() {
     final newMap = Map<String, Set<String>>.from(state.selectedOptions);
     bool hasChanges = false;
 
-    // Process all top-level options to find unselected defaults
     for (var option in options) {
       final currentSelections = newMap[option.id] ?? <String>{};
-      // Only select leaf values (final values that can be selected)
-      final defaultValues = option.subAddons.where((v) => v.isDefault && v.isLeafValue).toList();
+      final defaultValues = option.subAddons.where((v) => v.isDefault).toList();
 
       for (var defaultValue in defaultValues) {
         if (!currentSelections.contains(defaultValue.id)) {
@@ -189,18 +147,15 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
           hasChanges = true;
         }
       }
+
+      // Process nested defaults
+      if (hasChanges) {
+        _processNestedDefaults(defaultValues, option.id, newMap);
+      }
     }
 
     if (hasChanges) {
       emit(state.copyWith(selectedOptions: newMap, hasUserInteracted: false));
-
-      // Automatically add to cart if there are default selections and no user interaction yet
-      if (!state.hasUserInteracted && !state.hasAddedToCArt) {
-        // Add a small delay to ensure the UI is updated
-        Future.delayed(const Duration(milliseconds: 100), () {
-          addToCart();
-        });
-      }
     }
   }
 
@@ -277,78 +232,62 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   double _calculatePrice(AddToCartStates state) {
-    double total = basePrice;
-    double addonsCost = 0;
+    double total = item.price; // Start with base price (app_price)
 
-    // Recursively calculate price for all selected addons
-    double calculateAddonsPrice(
-      List<SubAddonEntity> addons,
-      String parentPath,
-    ) {
-      double nestedCost = 0;
-
-      for (var addon in addons) {
-        if (addon.type != null) {
-          // This is an option group, check its selections
-          final optionPath = parentPath.isEmpty ? addon.id : '${parentPath}_${addon.id}';
-          final selectedValueIds = state.selectedOptions[optionPath];
-
-          if (selectedValueIds != null) {
-            for (var subAddon in addon.subAddons) {
-              if (selectedValueIds.contains(subAddon.id)) {
-                // Add price if not free
-                if (!subAddon.isFree) {
-                  if (addon.controlsPrice == true) {
-                    total = subAddon.price;
-                  } else {
-                    nestedCost += subAddon.price;
-                  }
-                }
-
-                // Process nested sub-addons
-                if (subAddon.subAddons.isNotEmpty) {
-                  final valuePath = '${optionPath}_${subAddon.id}';
-                  nestedCost += calculateAddonsPrice(
-                    subAddon.subAddons,
-                    valuePath,
-                  );
-                }
-              }
-            }
-          }
-        }
-      }
-
-      return nestedCost;
-    }
-
-    // Process top-level options
+    // Calculate price for all selected options
     for (var option in options) {
       final selectedValueIds = state.selectedOptions[option.id];
-
       if (selectedValueIds != null) {
         for (var addon in option.subAddons) {
-          if (selectedValueIds.contains(addon.id)) {
-            // Add price if not free
-            if (!addon.isFree) {
-              if (option.controlsPrice) {
-                total = addon.price;
-              } else {
-                addonsCost += addon.price;
-              }
-            }
+          if (selectedValueIds.contains(addon.id) && !addon.isFree) {
+            total += addon.price; // Always add on top of base price
 
             // Process nested sub-addons
-            if (addon.subAddons.isNotEmpty) {
-              final valuePath = '${option.id}_${addon.id}';
-              addonsCost += calculateAddonsPrice(addon.subAddons, valuePath);
+            total += _calculateNestedPrice(
+              addon.subAddons,
+              '${option.id}_${addon.id}',
+              state,
+            );
+          }
+        }
+      }
+    }
+
+    return total * state.quantity;
+  }
+
+  // Helper method to calculate nested sub-addon prices (always additive)
+  double _calculateNestedPrice(
+    List<SubAddonEntity> subAddons,
+    String parentPath,
+    AddToCartStates state,
+  ) {
+    double cost = 0;
+
+    for (var subAddon in subAddons) {
+      if (subAddon.type != null) {
+        // This is an option group
+        final optionPath = '${parentPath}_${subAddon.id}';
+        final selectedValueIds = state.selectedOptions[optionPath];
+
+        if (selectedValueIds != null) {
+          for (var value in subAddon.subAddons) {
+            if (selectedValueIds.contains(value.id) && !value.isFree) {
+              cost += value.price; // Always add to accumulated cost
+
+              // Process deeper nested sub-addons
+              cost += _calculateNestedPrice(
+                value.subAddons,
+                '${optionPath}_${value.id}',
+                state,
+              );
             }
           }
         }
       }
     }
 
-    return (total + addonsCost) * state.quantity;
+    return cost;
   }
 
   Future<void> addToCart() async {

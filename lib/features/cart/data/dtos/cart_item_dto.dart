@@ -74,7 +74,7 @@ class CartOptionDTO {
 }
 
 class CartOptionValueDTO {
-  int? valueId;
+  String? valueId;
   String? valueName;
   double? price;
 
@@ -85,7 +85,7 @@ class CartOptionValueDTO {
   }
   CartOptionValueEntity toEntity() {
     return CartOptionValueEntity(
-      id: valueId ?? 0,
+      id: valueId ?? '0',
       name: valueName ?? '',
       price: price ?? 0.0,
     );

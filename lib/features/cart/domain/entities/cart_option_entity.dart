@@ -24,7 +24,7 @@ class CartOptionEntity extends Equatable {
 }
 
 class CartOptionValueEntity extends Equatable {
-  final int id;
+  final String id;
   final String name;
   final double price;
 
