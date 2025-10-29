@@ -51,6 +51,9 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
          ),
        ) {
     emit(state);
+    if (cartItem != null) {
+      _hydrateFromExistingCartItem(cartItem!);
+    }
   }
 
   // Calculate base price - always use item base price
@@ -295,6 +298,80 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   // Get all top-level options (no dynamic visibility needed)
   List<ItemOptionEntity> getAllOptions() {
     return options;
+  }
+
+  void _hydrateFromExistingCartItem(CartItemEntity existing) {
+    final hydratedSelections = <String, Set<String>>{};
+
+    for (final opt in existing.options) {
+      if (opt.values.isEmpty) continue;
+      final topOption = options.firstWhereOrNull((o) => o.id == opt.id);
+      if (topOption == null) continue;
+
+      for (final val in opt.values) {
+        final idPath = _findIdPath(topOption, val.id);
+        if (idPath == null || idPath.isEmpty) {
+          hydratedSelections[topOption.id] = {
+            ...(hydratedSelections[topOption.id] ?? <String>{}),
+            val.id,
+          };
+          continue;
+        }
+
+        // Top-level selection
+        final firstSeg = idPath.first;
+        hydratedSelections[topOption.id] = {
+          ...(hydratedSelections[topOption.id] ?? <String>{}),
+          firstSeg,
+        };
+
+        // Nested selections for each level
+        for (int i = 0; i < idPath.length - 1; i++) {
+          final parentKey = [topOption.id, ...idPath.take(i + 1)].join('_');
+          final childId = idPath[i + 1];
+          hydratedSelections[parentKey] = {
+            ...(hydratedSelections[parentKey] ?? <String>{}),
+            childId,
+          };
+        }
+      }
+    }
+
+    _orderedWith
+      ..clear()
+      ..addEntries(existing.orderedWith.map((e) => MapEntry(e.id, e.quantity)));
+
+    emit(
+      state.copyWith(
+        qntity: existing.quantity,
+        note: existing.notes,
+        selectedOptions: hydratedSelections.isNotEmpty ? hydratedSelections : state.selectedOptions,
+        hasUserInteracted: false,
+      ),
+    );
+  }
+
+  // Returns the chain of ids from the first child under the option to the target id, including group ids
+  List<String>? _findIdPath(ItemOptionEntity option, String targetId) {
+    final out = <String>[];
+    final ok = _dfsFind(option.subAddons, targetId, out);
+    return ok ? out : null;
+  }
+
+  bool _dfsFind(List<SubAddonEntity> nodes, String targetId, List<String> out) {
+    for (final node in nodes) {
+      if (node.id == targetId) {
+        out.add(node.id);
+        return true;
+      }
+      if (node.subAddons.isNotEmpty) {
+        out.add(node.id);
+        final found = _dfsFind(node.subAddons, targetId, out);
+        if (found) return true;
+        out.removeLast();
+      }
+    }
+    return false;
   }
 
   double _calculatePrice(AddToCartStates state) {

@@ -87,8 +87,8 @@ class ProductDetailsScreen extends StatelessWidget {
                               type: CartItemType.product,
                               title: L10n.tr().youMayAlsoLike,
                               isDisabled: false,
-                              initialQuantities: context.read<AddToCartCubit>().orderedWithSelections,
-                              onQuantityChanged: (id, qty) => context.read<AddToCartCubit>().setOrderedWithQuantity(id, qty),
+                              //initialQuantities: context.read<AddToCartCubit>().orderedWithSelections,
+                              //onQuantityChanged: (id, qty) => context.read<AddToCartCubit>().setOrderedWithQuantity(id, qty),
                             ),
                             const VerticalSpacing(16),
                             Row(

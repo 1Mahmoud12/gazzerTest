@@ -18,14 +18,14 @@ class OrderedWithComponent extends StatefulWidget {
     required this.title,
     required this.type,
     required this.isDisabled,
-    required this.onQuantityChanged,
+    this.onQuantityChanged,
     this.initialQuantities,
   });
   final List<OrderedWithEntity> products;
   final String title;
   final CartItemType type;
   final bool isDisabled;
-  final void Function(int id, int quantity) onQuantityChanged;
+  final void Function(int id, int quantity)? onQuantityChanged;
   final Map<int, int>? initialQuantities;
 
   @override
@@ -52,7 +52,7 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
         _quantities[id] = next;
       }
     });
-    widget.onQuantityChanged(id, next <= 0 ? 0 : next);
+    widget.onQuantityChanged?.call(id, next <= 0 ? 0 : next);
   }
 
   @override
