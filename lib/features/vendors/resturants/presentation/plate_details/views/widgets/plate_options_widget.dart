@@ -130,9 +130,9 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(value.name, style: TStyle.blackRegular(14)),
-                          // Always show price under the name, even if 0.0
+                          // Show price if not free, else show "مجاني" (free)
                           Text(
-                            '${value.price} جنيه', // Force show price with currency
+                            value.isFree ? 'مجاني' : '${value.price} جنيه',
                             style: TStyle.blackRegular(12).copyWith(
                               color: Colors.grey[600],
                             ),

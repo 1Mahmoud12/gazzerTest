@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
@@ -7,6 +8,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
+import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget.dart';
 
 class ProductPriceSummary extends StatelessWidget {
@@ -75,7 +77,7 @@ class ProductPriceSummary extends StatelessWidget {
                               await onsubmit();
                             },
                             isLoading: isLoading,
-                            text: L10n.tr().addToCart,
+                            text: context.read<AddToCartCubit>().cartItem?.cartId != null ? L10n.tr().updateCart : L10n.tr().addToCart,
                             textStyle: TStyle.secondaryBold(12),
                             bgColor: Colors.transparent,
                             height: 0,

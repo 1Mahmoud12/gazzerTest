@@ -510,7 +510,8 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       orderedWith: orderedWithPayload.isEmpty ? null : orderedWithPayload,
       type: item is PlateEntity ? CartItemType.plate : CartItemType.product,
     );
-    if (cartItem != null) {
+    final shouldUpdate = req.cartItemId != null;
+    if (shouldUpdate) {
       _updateCart(req);
     } else {
       _addCartToRemote(req);

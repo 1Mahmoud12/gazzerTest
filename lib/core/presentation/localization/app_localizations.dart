@@ -2455,6 +2455,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total Unit Solid'**
   String get totalUnitSolid;
+
+  /// No description provided for @updateCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Cart'**
+  String get updateCart;
 }
 
 class _AppLocalizationsDelegate
