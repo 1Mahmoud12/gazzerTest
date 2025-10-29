@@ -1,3 +1,7 @@
+import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
+import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
+
 class DailyOffersDto {
   DailyOffersDto({
     required this.status,
@@ -106,6 +110,26 @@ class ItemsWithOffer {
   final Item? item;
 
   factory ItemsWithOffer.fromJson(Map<String, dynamic> json) {
+    ItemType parsedItemType = ItemType.fromString(
+      json["item_type"] ?? 'Unknown',
+    );
+    Item? parsedItem;
+
+    if (json["item"] != null) {
+      if (parsedItemType == ItemType.plate) {
+        // For plates, parse via PlateDTO
+        final plateDto = PlateDTO.fromJson(json["item"]);
+        parsedItem = Item.fromPlateDTO(json["item"], plateDto);
+      } else if (parsedItemType == ItemType.product || parsedItemType == ItemType.storeItem) {
+        // For products/store items, parse via ProductDTO
+        final productDto = ProductDTO.fromJson(json["item"]);
+        parsedItem = Item.fromProductDTO(json["item"], productDto);
+      } else {
+        // Fallback to basic Item parsing
+        parsedItem = Item.fromJson(json["item"]);
+      }
+    }
+
     return ItemsWithOffer(
       id: json["id"],
       expiredAt: DateTime.tryParse(json["expired_at"] ?? ""),
@@ -113,7 +137,7 @@ class ItemsWithOffer {
       discountType: json["discount_type"],
       maxDiscount: json["max_discount"],
       itemType: json["item_type"],
-      item: json["item"] == null ? null : Item.fromJson(json["item"]),
+      item: parsedItem,
     );
   }
 
@@ -154,6 +178,43 @@ class Item {
   final StoreInfo? storeInfo;
 
   factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
+      id: json["id"],
+      name: json["name"],
+      price: json["price"],
+      appPrice: json["app_price"],
+      quantityInStock: json["quantity_in_stock"],
+      color: json["color"],
+      offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
+      isFavorite: json["is_favorite"],
+      image: json["image"],
+      storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
+    );
+  }
+
+  // Helper factory for plate items (uses plate_* fields)
+  factory Item.fromPlateDTO(Map<String, dynamic> json, PlateDTO plateDto) {
+    return Item(
+      id: json["id"],
+      name: json["plate_name"],
+      // Use plate_name for plates
+      price: json["price"],
+      appPrice: json["app_price"],
+      quantityInStock: json["quantity_in_stock"],
+      color: json["color"],
+      offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
+      isFavorite: json["is_favorite"],
+      image: json["plate_image"],
+      // Use plate_image for plates
+      storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
+    );
+  }
+
+  // Helper factory for product items (uses standard fields, no plate_* fields)
+  factory Item.fromProductDTO(
+    Map<String, dynamic> json,
+    ProductDTO productDto,
+  ) {
     return Item(
       id: json["id"],
       name: json["name"],
