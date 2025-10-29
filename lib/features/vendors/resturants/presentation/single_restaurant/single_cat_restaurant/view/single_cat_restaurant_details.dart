@@ -309,6 +309,8 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                         title: L10n.tr().alsoOrderWith,
                                         type: CartItemType.restaurantItem,
                                         isDisabled: restaurant.isClosed,
+                                        initialQuantities: context.read<AddToCartCubit>().orderedWithSelections,
+                                        onQuantityChanged: (id, qty) => context.read<AddToCartCubit>().setOrderedWithQuantity(id, qty),
                                       ),
                                     );
                                   },

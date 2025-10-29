@@ -6,7 +6,6 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
@@ -125,11 +124,21 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
                       ),
 
                     const HorizontalSpacing(24),
-                    Text(value.name, style: TStyle.blackRegular(14)),
-                    const Spacer(),
-                    Text(
-                      Helpers.getProperPrice(value.price),
-                      style: TStyle.blackBold(14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(value.name, style: TStyle.blackRegular(14)),
+                          // Always show price under the name, even if 0.0
+                          Text(
+                            '${value.price} جنيه', // Force show price with currency
+                            style: TStyle.blackRegular(12).copyWith(
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

@@ -6,7 +6,8 @@ class CartableItemRequest {
   final CartItemType type;
   final int quantity;
   final String? note;
-  final Map<int, Set<int>> options;
+  final Map<int, Set<String>> options;
+  final List<Map<String, dynamic>>? orderedWith;
 
   CartableItemRequest({
     required this.cartItemId,
@@ -15,6 +16,7 @@ class CartableItemRequest {
     required this.quantity,
     required this.note,
     required this.options,
+    this.orderedWith,
   });
 
   Map<String, dynamic> toJson() {
@@ -34,6 +36,7 @@ class CartableItemRequest {
       'quantity': quantity,
       'notes': note,
       'options': list.isNotEmpty ? list : null,
+      'ordered_with': orderedWith,
     };
   }
 }

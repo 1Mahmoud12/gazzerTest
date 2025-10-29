@@ -70,6 +70,11 @@ class SinglePlateScreen extends StatelessWidget {
                 // Ensure default selections are applied
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   cubit.ensureDefaultSelections();
+                  // Seed ordered-with prices so totals update when quantities change
+                  final prices = {
+                    for (final ow in detailsState.orderedWith) ow.id: ow.price,
+                  };
+                  cubit.setOrderedWithPrices(prices);
                 });
 
                 return ValueListenableBuilder(
@@ -150,6 +155,8 @@ class SinglePlateScreen extends StatelessWidget {
                           title: L10n.tr().alsoOrderWith,
                           type: CartItemType.restaurantItem,
                           isDisabled: false,
+                          initialQuantities: context.read<AddToCartCubit>().orderedWithSelections,
+                          onQuantityChanged: (id, qty) => context.read<AddToCartCubit>().setOrderedWithQuantity(id, qty),
                         ),
                         const VerticalSpacing(24),
                         Row(

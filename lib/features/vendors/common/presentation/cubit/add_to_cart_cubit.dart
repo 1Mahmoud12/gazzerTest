@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
@@ -25,6 +28,8 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   final List<ItemOptionEntity> options;
   late final double basePrice;
   final CartBus _bus;
+  final Map<int, int> _orderedWith = {};
+  final Map<int, double> _orderedWithPrices = {};
 
   AddToCartCubit(
     this.item,
@@ -129,6 +134,26 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     emit(state.copyWith(note: note, hasUserInteracted: true));
   }
 
+  // Ordered-with helpers
+  void setOrderedWithQuantity(int id, int quantity) {
+    if (quantity <= 0) {
+      _orderedWith.remove(id);
+    } else {
+      _orderedWith[id] = quantity;
+    }
+    emit(state.copyWith(hasUserInteracted: true));
+  }
+
+  int getOrderedWithQuantity(int id) => _orderedWith[id] ?? 0;
+
+  Map<int, int> get orderedWithSelections => Map.unmodifiable(_orderedWith);
+
+  void setOrderedWithPrices(Map<int, double> idToPrice) {
+    _orderedWithPrices
+      ..clear()
+      ..addAll(idToPrice);
+  }
+
   // Method to ensure all default items are selected (no auto add to cart)
   void ensureDefaultSelections() {
     final newMap = Map<String, Set<String>>.from(state.selectedOptions);
@@ -167,19 +192,23 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     final pathSegments = fullPath.split('_');
     final valueId = pathSegments.last;
 
-    // For nested selections, we need to determine the correct option key
-    // If it's a top-level selection, use the option ID
-    // If it's a nested selection, use the parent path as the option key
+    // Determine the correct option key based on the path structure
     String optionKey;
-    if (pathSegments.length == 1) {
-      // Top-level selection
+    if (pathSegments.length == 2 && pathSegments.first == optionPath) {
+      // Top-level selection: "optionId_valueId" -> use "optionId"
       optionKey = pathSegments.first;
-    } else {
-      // Nested selection - use the parent path as the option key
+    } else if (pathSegments.length > 2) {
+      // Nested selection: "optionId_valueId_groupId_childId" -> use "optionId_valueId_groupId"
       optionKey = pathSegments.sublist(0, pathSegments.length - 1).join('_');
+    } else {
+      // Fallback: use the first segment as option key
+      optionKey = pathSegments.first;
     }
 
-    if (type == OptionType.radio) {
+    // Resolve actual group type from path to avoid UI/type mismatches
+    final resolvedType = _resolveOptionTypeForKey(optionKey) ?? type;
+
+    if (resolvedType == OptionType.radio) {
       // Radio: clear previous selection and set new one
       if (newMap.containsKey(optionKey)) {
         // Clear sub-addons of previously selected values
@@ -206,8 +235,40 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
         }
       }
     }
+    log('=== SETTING OPTION VALUE ===');
+    log('optionKey: $optionKey');
+    log('valueId: $valueId');
+    log('newMap: $newMap');
+    log('============================');
 
     emit(state.copyWith(selectedOptions: newMap, hasUserInteracted: true));
+  }
+
+  // Determine option group's type (radio/checkbox) from optionKey path
+  OptionType? _resolveOptionTypeForKey(String optionKey) {
+    if (optionKey.isEmpty) return null;
+    final segments = optionKey.split('_');
+    if (segments.isEmpty) return null;
+
+    // First segment is top-level option id
+    final topId = segments.first;
+    final topOption = options.firstWhereOrNull((o) => o.id == topId);
+    if (topOption == null) return null;
+    if (segments.length == 1) return topOption.type;
+
+    // Walk down the tree to the last group id
+    List<SubAddonEntity> current = topOption.subAddons;
+    OptionType? currentType = topOption.type;
+
+    for (int i = 1; i < segments.length; i++) {
+      final groupId = segments[i];
+      final node = current.firstWhereOrNull((n) => n.id == groupId);
+      if (node == null) break;
+      currentType = node.type ?? currentType;
+      current = node.subAddons;
+    }
+
+    return currentType;
   }
 
   // Clear all selections under a given path (recursive)
@@ -233,70 +294,130 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
   double _calculatePrice(AddToCartStates state) {
     double total = item.price; // Start with base price (app_price)
+    log('=== PRICE CALCULATION ===');
+    log('Base price: $total');
+    log('All selections: ${state.selectedOptions}');
 
-    // Calculate price for all selected options
-    for (var option in options) {
-      final selectedValueIds = state.selectedOptions[option.id];
-      if (selectedValueIds != null) {
-        for (var addon in option.subAddons) {
-          if (selectedValueIds.contains(addon.id) && !addon.isFree) {
-            total += addon.price; // Always add on top of base price
+    // Calculate price for all selected options (top-level and nested)
+    for (var entry in state.selectedOptions.entries) {
+      final path = entry.key;
+      final selectedValueIds = entry.value;
+      log('Processing path: $path with values: $selectedValueIds');
 
-            // Process nested sub-addons
-            total += _calculateNestedPrice(
-              addon.subAddons,
-              '${option.id}_${addon.id}',
-              state,
+      // Find the corresponding option for this path
+      final optionAndAddon = _findOptionAndAddonByPath(path);
+      if (optionAndAddon != null) {
+        final option = optionAndAddon['option'] as ItemOptionEntity;
+
+        // Resolve the actual group type for this specific path (not just the top-level option type)
+        final groupType = _resolveOptionTypeForKey(path) ?? option.type;
+
+        // For radio type, only add the first selected item (radio = single selection)
+        // For checkbox type, add all selected items (checkbox = multiple selection)
+        final valuesToProcess = groupType == OptionType.radio ? selectedValueIds.take(1) : selectedValueIds;
+
+        for (var valueId in valuesToProcess) {
+          // Find the specific sub-addon that matches this valueId
+          final subAddon = _findSubAddonById(option, valueId);
+          if (subAddon != null && !subAddon.isFree) {
+            log(
+              'Adding ${subAddon.name}: +${subAddon.price} (${groupType == OptionType.radio ? 'radio' : 'checkbox'})',
             );
+            total += subAddon.price;
           }
         }
       }
     }
 
-    return total * state.quantity;
+    // Subtotal for main item including selected options multiplied by main quantity
+    final mainSubtotal = total * state.quantity;
+
+    // Add ordered-with items (not multiplied by main item quantity)
+    double orderedWithTotal = 0.0;
+    _orderedWith.forEach((id, qty) {
+      final price = _orderedWithPrices[id] ?? 0.0;
+      orderedWithTotal += price * qty;
+    });
+
+    final grandTotal = mainSubtotal + orderedWithTotal;
+    log('Ordered-with total: $orderedWithTotal');
+    log('Grand total: $grandTotal');
+    log('=======================');
+    return grandTotal;
   }
 
-  // Helper method to calculate nested sub-addon prices (always additive)
-  double _calculateNestedPrice(
-    List<SubAddonEntity> subAddons,
-    String parentPath,
-    AddToCartStates state,
-  ) {
-    double cost = 0;
+  // Find option and addon by path (handles both top-level and nested paths)
+  Map<String, dynamic>? _findOptionAndAddonByPath(String path) {
+    final segments = path.split('_');
 
-    for (var subAddon in subAddons) {
-      if (subAddon.type != null) {
-        // This is an option group
-        final optionPath = '${parentPath}_${subAddon.id}';
-        final selectedValueIds = state.selectedOptions[optionPath];
+    if (segments.length == 1) {
+      // Top-level option
+      final option = options.firstWhereOrNull((opt) => opt.id == segments[0]);
+      if (option != null) {
+        return {'option': option, 'addon': null};
+      }
+    } else if (segments.length >= 2) {
+      // Nested path: optionId_addonId_...
+      final optionId = segments[0];
+      final addonId = segments[1];
 
-        if (selectedValueIds != null) {
-          for (var value in subAddon.subAddons) {
-            if (selectedValueIds.contains(value.id) && !value.isFree) {
-              cost += value.price; // Always add to accumulated cost
-
-              // Process deeper nested sub-addons
-              cost += _calculateNestedPrice(
-                value.subAddons,
-                '${optionPath}_${value.id}',
-                state,
-              );
-            }
-          }
-        }
+      final option = options.firstWhereOrNull((opt) => opt.id == optionId);
+      if (option != null) {
+        final addon = _findSubAddonById(option, addonId);
+        return {'option': option, 'addon': addon};
       }
     }
 
-    return cost;
+    return null;
+  }
+
+  // Find sub-addon by ID recursively
+  SubAddonEntity? _findSubAddonById(ItemOptionEntity option, String id) {
+    for (var addon in option.subAddons) {
+      if (addon.id == id) return addon;
+
+      // Search in nested sub-addons
+      final found = _findSubAddonInList(addon.subAddons, id);
+      if (found != null) return found;
+    }
+    return null;
+  }
+
+  // Helper to search in a list of sub-addons
+  SubAddonEntity? _findSubAddonInList(
+    List<SubAddonEntity> subAddons,
+    String id,
+  ) {
+    for (var addon in subAddons) {
+      if (addon.id == id) return addon;
+
+      // Search deeper
+      final found = _findSubAddonInList(addon.subAddons, id);
+      if (found != null) return found;
+    }
+    return null;
   }
 
   Future<void> addToCart() async {
     final msg = _validateCart();
-    print('msg is $msg');
+    log('msg is $msg');
     if (msg != null) return emit(state.copyWith(message: msg, status: ApiStatus.error));
 
-    // Convert String-based selections to int-based for API
+    // Build options payload as a list of { option_id, value_ids }
+    final optionsPayload = _buildOptionsPayload(state.selectedOptions);
+    log('options payload: $optionsPayload');
+    // If your API still expects the legacy map<int, Set<int>> format, keep this line until you switch
     final convertedOptions = _convertToIntBasedMap(state.selectedOptions);
+
+    // Build ordered_with payload: [{ id, quantity }]
+    final orderedWithPayload = _orderedWith.entries
+        .map(
+          (e) => {
+            'id': e.key,
+            'quantity': e.value,
+          },
+        )
+        .toList();
 
     final req = CartableItemRequest(
       cartItemId: cartItem?.cartId,
@@ -304,6 +425,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       quantity: state.quantity,
       note: state.note,
       options: convertedOptions,
+      orderedWith: orderedWithPayload.isEmpty ? null : orderedWithPayload,
       type: item is PlateEntity ? CartItemType.plate : CartItemType.product,
     );
     if (cartItem != null) {
@@ -314,10 +436,10 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   // Convert String-based path map to int-based flat map for API
-  Map<int, Set<int>> _convertToIntBasedMap(
+  Map<int, Set<String>> _convertToIntBasedMap(
     Map<String, Set<String>> selections,
   ) {
-    final result = <int, Set<int>>{};
+    final result = <int, Set<String>>{};
 
     for (var entry in selections.entries) {
       try {
@@ -329,23 +451,43 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
         final optionId = int.tryParse(optionIdStr);
         if (optionId == null) continue;
 
-        final valueIds = <int>{};
+        final valueIds = <String>{};
         for (var valueIdStr in entry.value) {
-          final valueId = int.tryParse(valueIdStr);
-          if (valueId != null) {
-            valueIds.add(valueId);
-          }
+          valueIds.add(valueIdStr);
         }
 
         if (valueIds.isNotEmpty) {
           result[optionId] = valueIds;
         }
       } catch (e) {
-        print('Error converting selection: ${entry.key} -> ${entry.value}');
+        log('Error converting selection: ${entry.key} -> ${entry.value}');
       }
     }
 
     return result;
+  }
+
+  // Build API-ready payload: [{ option_id, value_ids }]
+  // - option_id is derived from the LAST segment of the option path (works for nested groups)
+  // - value_ids are kept as strings to support ULID/UUID
+
+  List<Map<String, dynamic>> _buildOptionsPayload(
+    Map<String, Set<String>> selections,
+  ) {
+    final List<Map<String, dynamic>> payload = [];
+
+    for (final entry in selections.entries) {
+      final segments = entry.key.split('_');
+      final optionIdStr = segments.isNotEmpty ? segments.last : entry.key;
+      final optionIdInt = int.tryParse(optionIdStr);
+
+      payload.add({
+        'option_id': optionIdInt ?? optionIdStr,
+        'value_ids': entry.value.toList(),
+      });
+    }
+
+    return payload;
   }
 
   Future<void> _addCartToRemote(CartableItemRequest req) async {
