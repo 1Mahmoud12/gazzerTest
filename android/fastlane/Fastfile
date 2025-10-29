@@ -3,7 +3,11 @@ require 'dotenv'
 Dotenv.load('../.env')
 
 platform :android do
-  desc "Test FastLane"
+  desc "Suggested for you Page will display the Items according to the previous Customers behaviour \n Best Populer Page \n
+
+Top vendors will be display the Stores\n Adding the best-selling Item section\n
+
+Adding a selection for extra addon === else add to cart ====="
   lane :beta do
    # Navigate to Flutter root and build
        sh "cd .. && flutter clean"
