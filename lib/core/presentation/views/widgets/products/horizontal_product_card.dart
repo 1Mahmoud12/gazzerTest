@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/extensions/alignment.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
@@ -8,6 +9,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
@@ -27,9 +29,9 @@ class HorizontalProductCard extends StatelessWidget {
         borderRadius: AppConst.defaultBorderRadius,
         onTap: () {
           if (product is PlateEntity) {
-            PlateDetailsRoute(id: product.id).push(context);
+            PlateDetailsRoute(id: product.id, $extra: findCartItem(context.read<CartCubit>(), product)).push(context);
           } else if (product is ProductEntity) {
-            ProductDetailsRoute(productId: product.id).push(context);
+            ProductDetailsRoute(productId: product.id, $extra: findCartItem(context.read<CartCubit>(), product)).push(context);
           }
         },
         child: Stack(

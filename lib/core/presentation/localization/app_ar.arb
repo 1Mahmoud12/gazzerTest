@@ -481,5 +481,8 @@
 "totalOrders": "مجموع الاوردرات",
 "choose":"اختر",
 "noPersonalizedSuggestions":"لا توجد اقتراحات بعد، ابدأ بتصفح أحدث العروض!",
-"totalUnitSolid":"عدد الوحدات المباعه","updateCart":"تحديث السله"
+"totalUnitSolid":"عدد الوحدات المباعه","updateCart":"تحديث السله",
+  "exceedPouch":"المنتجات المختارة تتجاوز حجم الكيس. هل تريد إزالة بعض المنتجات أو تعيين مندوب توصيل إضافي؟",
+    "editItems":"تعديل علي المنتحات",
+    "assignAdditionalDelivery":"اضافة دليفري اخر"
 }

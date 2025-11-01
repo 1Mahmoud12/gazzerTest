@@ -9,6 +9,7 @@ import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
+import 'package:gazzer/core/presentation/views/widgets/cart_capacity_progress_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
@@ -83,7 +84,16 @@ class _MainLayoutState extends State<MainLayout> {
         child: ValueListenableBuilder(
           valueListenable: route,
           builder: (context, value, child) => Scaffold(
-            body: widget.child,
+            body: Stack(
+              alignment: AlignmentDirectional.centerStart,
+              children: [
+                widget.child,
+                SizedBox(
+                  height: MediaQuery.sizeOf(context).height * .3,
+                  child: const RotatedBox(quarterTurns: 3, child: CartCapacityProgressBar(height: 10.0)),
+                ),
+              ],
+            ),
             bottomNavigationBar: BlocBuilder<AppSettingsCubit, AppSettingsState>(
               buildWhen: (previous, current) => previous.lang != current.lang,
               builder: (context, state) => MainBnb(

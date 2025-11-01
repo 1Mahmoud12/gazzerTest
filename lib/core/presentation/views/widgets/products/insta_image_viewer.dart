@@ -150,7 +150,7 @@ class FullScreenViewerState extends State<FullScreenViewer> {
     setDisposeLevel();
   }
 
-  setDisposeLevel() {
+  void setDisposeLevel() {
     if (widget.disposeLevel == DisposeLevel.high) {
       _disposeLimit = 300;
     } else if (widget.disposeLevel == DisposeLevel.medium) {

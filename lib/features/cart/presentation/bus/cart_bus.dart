@@ -163,7 +163,7 @@ class CartBus extends AppBus {
     vendors.clear();
     fire(
       GetCartLoaded(
-        data: CartResponse(summary: Fakers.cartSummary, vendors: vendors),
+        data: CartResponse(summary: Fakers.cartSummary, vendors: vendors, pouchSummary: Fakers.pouchSummary, pouches: Fakers.pouches),
       ),
     );
   }

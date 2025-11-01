@@ -60,7 +60,7 @@ class BestPopularScreen extends StatelessWidget {
                 padding: AppConst.defaultPadding,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.55,
+                  childAspectRatio: 0.5,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 16,
                 ),

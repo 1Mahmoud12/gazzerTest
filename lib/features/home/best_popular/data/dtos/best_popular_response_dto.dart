@@ -132,6 +132,7 @@ class BestPopularStoreDto {
     return StoreEntity(
       id: id,
       name: storeName,
+      hasOptions: false,
       estimatedDeliveryTime: estimatedDeliveryTime,
       image: image,
       rate: double.tryParse(rating) ?? 0.0,

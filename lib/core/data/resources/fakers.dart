@@ -149,6 +149,7 @@ class Fakers {
   ];
   static const restaurant = RestaurantEntity(
     mintsBeforClosingAlert: 0,
+    hasOptions: false,
     alwaysClosed: false,
     alwaysOpen: false,
     id: 1,
@@ -209,6 +210,7 @@ class Fakers {
       deliveryTime: '30-45 min',
       deliveryFee: 30.0,
       rateCount: 13,
+      hasOptions: false,
       isFavorite: false,
       isOpen: true,
     ),
@@ -306,10 +308,12 @@ class Fakers {
       startTime: null,
       endTime: null,
       parentId: 1,
+      hasOptions: false,
       isFavorite: false,
       isOpen: true,
     ),
     StoreEntity(
+      hasOptions: false,
       mintsBeforClosingAlert: 0,
       outOfStock: false,
       reviewCount: 20,
@@ -333,6 +337,7 @@ class Fakers {
   ];
   static const store = StoreEntity(
     mintsBeforClosingAlert: 0,
+    hasOptions: false,
     outOfStock: false,
     reviewCount: 20,
     alwaysClosed: false,
@@ -420,6 +425,38 @@ class Fakers {
     addressId: null,
     summary: cartSummary,
     vendors: cartVendors,
+    pouchSummary: pouchSummary,
+    pouches: pouches,
+  );
+  static List<ItemPouch> pouches = [
+    ItemPouch(
+      pouchId: -1,
+      currentLoad: -1,
+      loadPercentageExact: -1,
+      isOverCapacity: false,
+      remainingCapacity: -10,
+      fillPercentage: -1,
+      maxCapacity: 1000,
+      items: [],
+    ),
+    ItemPouch(
+      pouchId: -1,
+      currentLoad: -1,
+      loadPercentageExact: -1,
+      isOverCapacity: false,
+      remainingCapacity: -10,
+      fillPercentage: -1,
+      maxCapacity: 1000,
+      items: [],
+    ),
+  ];
+
+  static PouchSummary pouchSummary = PouchSummary(
+    totalPouches: 1,
+    totalCapacity: 1000,
+    totalLoad: 1000,
+    totalFillPercentage: 100,
+    totalLoadPercentageExact: 10,
   );
   static const cartVendors = [
     CartVendorEntity(

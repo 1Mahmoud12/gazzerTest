@@ -7,8 +7,9 @@ platform :android do
 
 Top vendors will be display the Stores\n Adding the best-selling Item section\n
 
-Adding a selection for extra addon === else add to cart ====="
+Adding a selection for extra addon === add to cart ====="
   lane :beta do
+
    # Navigate to Flutter root and build
        sh "cd .. && flutter clean"
        sh "cd .. && flutter build apk --release"

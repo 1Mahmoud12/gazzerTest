@@ -56,6 +56,7 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
       storeCategoryType: VendorType.pharmacy.value,
       rate: 4.5,
       rateCount: 120,
+      hasOptions: false,
       zoneName: 'ZAMALEK',
       deliveryTime: '20-30',
       deliveryFee: 15.0,

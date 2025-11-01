@@ -56,3 +56,13 @@ class OtpRateLimitError extends BadResponse {
   }) : remainingSeconds = (json['data']?['remaining_seconds'] as num?)?.toDouble() ?? 0,
        super.fromJson();
 }
+
+class CartError extends BadResponse {
+  final bool needsNewPouchApproval;
+
+  CartError.fromJson(
+    super.json, {
+    super.e = ErrorType.badResponse,
+  }) : needsNewPouchApproval = (json['data']?['needs_new_pouch_approval'] as bool?) ?? false,
+       super.fromJson();
+}

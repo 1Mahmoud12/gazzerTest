@@ -1210,4 +1210,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateCart => 'Update Cart';
+
+  @override
+  String get exceedPouch => 'Selected items exceed pouch size. Remove some items or assign additional deliveryman?';
+
+  @override
+  String get editItems => 'Edit Items';
+
+  @override
+  String get assignAdditionalDelivery => 'Assign Additional Delivery';
 }

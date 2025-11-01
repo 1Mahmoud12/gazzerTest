@@ -127,6 +127,7 @@ class BestPopularStoreDto {
     return StoreEntity(
       id: id,
       name: storeName,
+      hasOptions: false,
       storeCategoryType: storeCategoryType,
       image: image,
       parentId: storeId,

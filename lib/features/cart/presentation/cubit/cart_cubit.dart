@@ -1,10 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
@@ -14,6 +18,7 @@ import 'package:gazzer/features/cart/domain/entities/cart_vendor_entity.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/cart/presentation/models/cart_summary_model.dart';
+import 'package:gazzer/features/vendors/common/presentation/exceed_bottom_sheet.dart';
 
 /// Manages the shopping cart state and operations.
 ///
@@ -37,6 +42,7 @@ class CartCubit extends Cubit<CartStates> {
   AddressEntity? address;
   String? selectedTime;
   final List<String> _timeSlots = [];
+  PouchSummary? _pouchSummary;
 
   // ==================== Debouncing State ====================
 
@@ -92,6 +98,7 @@ class CartCubit extends Cubit<CartStates> {
           summary: _summary,
           address: address,
           isCartValid: _validateCart(),
+          pouchSummary: _pouchSummary,
         ),
       );
     }
@@ -120,7 +127,7 @@ class CartCubit extends Cubit<CartStates> {
   /// Adds a new item to the cart.
   ///
   /// [req] contains the item details, quantity, and any customization options.
-  Future<void> addToCart(CartableItemRequest req) async {
+  Future<void> addToCart(BuildContext context, CartableItemRequest req) async {
     emit(UpdateItemLoading(cartId: req.id, isAdding: true));
 
     final response = await _repo.addToCartItem(req);
@@ -131,14 +138,37 @@ class CartCubit extends Cubit<CartStates> {
         _updateCartWithNewResponse(value);
         break;
       case Err(:final error):
-        // Emit error for toast notification
-        emit(
-          UpdateItemError(
-            message: error.message,
-            cartId: req.id,
-            isAdding: true,
-          ),
-        );
+        // Check if error is CartError with needs_new_pouch_approval = true
+        if (context.mounted && error is CartError && error.needsNewPouchApproval) {
+          final confirmed = await warningAlert(
+            title: L10n.tr().exceedPouch,
+            context: context,
+            cancelBtn: L10n.tr().editItems,
+            okBtn: L10n.tr().assignAdditionalDelivery,
+          );
+
+          if (confirmed == true && context.mounted) {
+            await addToCart(context, req.copyWith(exceedPouch: true));
+          }
+          emit(
+            UpdateItemError(
+              message: error.message,
+              cartId: req.id,
+              isAdding: true,
+              needsNewPouchApproval: true,
+            ),
+          );
+        } else if (context.mounted) {
+          // Show error message in alert/toast for other errors
+          Alerts.showToast(error.message);
+          emit(
+            UpdateItemError(
+              message: error.message,
+              cartId: req.id,
+              isAdding: true,
+            ),
+          );
+        }
 
         // Emit FullCartLoaded to clear loading state (no cart changes)
         emit(
@@ -165,6 +195,7 @@ class CartCubit extends Cubit<CartStates> {
     int id,
     int quantity,
     bool isAdding,
+    BuildContext context,
   ) {
     if (quantity < 1) return;
 
@@ -181,7 +212,7 @@ class CartCubit extends Cubit<CartStates> {
     _updateTimers[id] = Timer(_debounceDuration, () {
       final finalQuantity = _pendingQuantities[id];
       if (finalQuantity != null) {
-        _executeQuantityUpdate(id, finalQuantity, isAdding);
+        _executeQuantityUpdate(id, finalQuantity, isAdding, context);
         _pendingQuantities.remove(id);
         _updateTimers.remove(id);
       }
@@ -247,6 +278,7 @@ class CartCubit extends Cubit<CartStates> {
           summary: _summary,
           address: address,
           isCartValid: _validateCart(),
+          pouchSummary: _pouchSummary,
         ),
       );
       return;
@@ -308,7 +340,9 @@ class CartCubit extends Cubit<CartStates> {
     int id,
     int quantity,
     bool isAdding,
-  ) async {
+    BuildContext context, {
+    bool exceedPouch = false,
+  }) async {
     // Show loading indicator only when API call starts
     emit(
       UpdateItemLoading(
@@ -318,7 +352,11 @@ class CartCubit extends Cubit<CartStates> {
       ),
     );
 
-    final response = await _repo.updateItemQuantity(id, quantity);
+    final response = await _repo.updateItemQuantity(
+      id,
+      quantity,
+      exceedPouch: exceedPouch,
+    );
 
     switch (response) {
       case Ok<CartResponse>(:final value):
@@ -335,15 +373,47 @@ class CartCubit extends Cubit<CartStates> {
         _updateCartWithNewResponse(value);
         break;
       case Err(:final error):
-        // First emit error for toast notification
-        emit(
-          UpdateItemError(
-            message: error.message,
-            cartId: id,
-            isAdding: isAdding,
-            isRemoving: !isAdding,
-          ),
-        );
+        // Check if error is CartError with needs_new_pouch_approval = true
+        if (context.mounted && error is CartError && error.needsNewPouchApproval) {
+          final confirmed = await warningAlert(
+            title: L10n.tr().exceedPouch,
+            context: context,
+            cancelBtn: L10n.tr().editItems,
+            okBtn: L10n.tr().assignAdditionalDelivery,
+          );
+
+          if (confirmed == true) {
+            if (context.mounted) {
+              _executeQuantityUpdate(
+                id,
+                quantity,
+                isAdding,
+                context,
+                exceedPouch: true,
+              );
+            }
+          }
+          emit(
+            UpdateItemError(
+              message: error.message,
+              cartId: id,
+              isAdding: isAdding,
+              needsNewPouchApproval: true,
+              isRemoving: !isAdding,
+            ),
+          );
+        } else if (context.mounted) {
+          // Show error message in alert/toast for other errors
+          Alerts.showToast(error.message);
+          emit(
+            UpdateItemError(
+              message: error.message,
+              cartId: id,
+              isAdding: isAdding,
+              isRemoving: !isAdding,
+            ),
+          );
+        }
 
         // Then revert the optimistic update (emits FullCartLoaded to clear loading)
         _revertOptimisticUpdate(id);
@@ -431,6 +501,7 @@ class CartCubit extends Cubit<CartStates> {
         summary: _summary,
         address: address,
         isCartValid: false,
+        pouchSummary: _pouchSummary,
       ),
     );
   }
@@ -521,6 +592,7 @@ class CartCubit extends Cubit<CartStates> {
     _vendors.clear();
     _vendors.addAll(response.vendors);
     _summary = response.summary;
+    _pouchSummary = response.pouchSummary;
 
     // Resolve delivery address
     address = _resolveDeliveryAddress(response.addressId);
@@ -532,6 +604,7 @@ class CartCubit extends Cubit<CartStates> {
         summary: _summary,
         address: address,
         isCartValid: _validateCart(),
+        pouchSummary: _pouchSummary,
       ),
     );
   }

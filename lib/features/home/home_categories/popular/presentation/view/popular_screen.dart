@@ -7,12 +7,15 @@ import 'package:gazzer/core/presentation/views/components/failure_component.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
+import 'package:gazzer/features/home/home_categories/popular/data/dtos/top_items_dto.dart';
 import 'package:gazzer/features/home/home_categories/popular/domain/top_items_repo.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_cubit.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_states.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 
 class PopularScreen extends StatefulWidget {
   const PopularScreen({super.key});
@@ -24,8 +27,8 @@ class PopularScreen extends StatefulWidget {
 
 class _PopularScreenState extends State<PopularScreen> {
   String _searchQuery = '';
-  List<dynamic> _allItems = [];
-  List<dynamic> _filteredItems = [];
+  List<TopItemEntity> _allItems = [];
+  List<TopItemEntity> _filteredItems = [];
 
   void _onSearchChanged(String value) {
     if (!context.mounted) return;
@@ -109,7 +112,7 @@ class _PopularScreenState extends State<PopularScreen> {
 
   Widget _buildContent(
     BuildContext context,
-    List<dynamic> items,
+    List<TopItemEntity> items,
     bool isFromCache,
   ) {
     if (items.isEmpty) {
@@ -124,7 +127,7 @@ class _PopularScreenState extends State<PopularScreen> {
         Padding(
           padding: AppConst.defaultHrPadding,
           child: GradientText(
-            text: L10n.tr().suggestedForYou,
+            text: L10n.tr().bestPopular,
             style: TStyle.blackBold(16),
           ),
         ),
@@ -136,14 +139,25 @@ class _PopularScreenState extends State<PopularScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
+              childAspectRatio: .8,
             ),
             itemCount: items.length,
             itemBuilder: (context, index) {
-              final item = items[index];
+              final TopItemEntity item = items[index];
+              ItemType type = ItemType.plate;
+
               return VerticalRotatedImgCard(
-                prod: _convertToProductEntity(item),
+                prod: _convertToProductEntity(item, type),
                 onTap: () {
-                  PlateDetailsRoute(id: item.item?.id ?? 0).push(context);
+                  if (type == ItemType.plate) {
+                    PlateDetailsRoute(
+                      id: item.item?.id ?? 0,
+                    ).push(context);
+                  } else if (type == ItemType.product) {
+                    ProductDetailsRoute(
+                      productId: item.item?.id ?? 0,
+                    ).push(context);
+                  }
                 },
               );
             },
@@ -154,7 +168,22 @@ class _PopularScreenState extends State<PopularScreen> {
   }
 
   // Convert TopItemEntity to ProductEntity for VerticalRotatedImgCard
-  ProductEntity _convertToProductEntity(item) {
+  GenericItemEntity _convertToProductEntity(TopItemEntity item, ItemType type) {
+    if (type == ItemType.plate) {
+      return PlateEntity(
+        id: item.item?.id ?? 0,
+        name: item.item?.plateName ?? '',
+        description: item.item?.plateDescription ?? '',
+        price: double.tryParse(item.item?.price ?? '0') ?? 0.0,
+        image: item.item?.plateImage ?? '',
+        rate: double.tryParse(item.item?.rate ?? '0') ?? 0.0,
+        reviewCount: item.item?.rateCount ?? 0,
+        outOfStock: false,
+        categoryPlateId: -1,
+        hasOptions: false,
+        store: item.item?.storeInfo?.toEntity(),
+      );
+    }
     return ProductEntity(
       id: item.item?.id ?? 0,
       name: item.item?.plateName ?? '',

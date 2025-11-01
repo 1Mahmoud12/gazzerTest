@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
@@ -14,6 +16,7 @@ import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
+import 'package:gazzer/features/vendors/common/presentation/exceed_bottom_sheet.dart';
 
 class AddToCartCubit extends Cubit<AddToCartStates> {
   @override
@@ -480,9 +483,8 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     return null;
   }
 
-  Future<void> addToCart() async {
+  Future<void> addToCart(BuildContext context) async {
     final msg = _validateCart();
-    log('msg is $msg');
     if (msg != null) return emit(state.copyWith(message: msg, status: ApiStatus.error));
 
     // Build options payload as a list of { option_id, value_ids }
@@ -512,9 +514,9 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     );
     final shouldUpdate = req.cartItemId != null;
     if (shouldUpdate) {
-      _updateCart(req);
+      _updateCart(context, req);
     } else {
-      _addCartToRemote(req);
+      _addCartToRemote(context, req);
     }
   }
 
@@ -573,7 +575,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     return payload;
   }
 
-  Future<void> _addCartToRemote(CartableItemRequest req) async {
+  Future<void> _addCartToRemote(BuildContext context, CartableItemRequest req) async {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.addToCartItem(req);
     switch (response) {
@@ -587,6 +589,20 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
           ),
         );
       case Err err:
+        if (context.mounted && err.error is CartError && (err.error as CartError).needsNewPouchApproval) {
+          final confirmed = await warningAlert(
+            title: L10n.tr().exceedPouch,
+            context: context,
+            cancelBtn: L10n.tr().editItems,
+            okBtn: L10n.tr().assignAdditionalDelivery,
+          );
+          if (confirmed == true && context.mounted) {
+            // Keep loading state and make recursive call - it will handle state management
+
+            await _addCartToRemote(context, req.copyWith(exceedPouch: true));
+          }
+        }
+        // Only emit error if user didn't confirm or it's not a pouch approval error
         emit(
           state.copyWith(
             status: ApiStatus.error,
@@ -597,7 +613,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     }
   }
 
-  Future<void> _updateCart(CartableItemRequest req) async {
+  Future<void> _updateCart(BuildContext context, CartableItemRequest req) async {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.updateCartItem(req);
     switch (response) {
@@ -611,6 +627,22 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
           ),
         );
       case Err err:
+        if (context.mounted && err.error is CartError && (err.error as CartError).needsNewPouchApproval) {
+          final confirmed = await warningAlert(
+            title: L10n.tr().exceedPouch,
+            context: context,
+            cancelBtn: L10n.tr().editItems,
+            okBtn: L10n.tr().assignAdditionalDelivery,
+          );
+          if (confirmed == true) {
+            // Keep loading state and make recursive call - it will handle state management
+            if (context.mounted) {
+              await _updateCart(context, req.copyWith(exceedPouch: true));
+            }
+            return; // Exit early - recursive call handled state
+          }
+        }
+        // Only emit error if user didn't confirm or it's not a pouch approval error
         emit(
           state.copyWith(
             status: ApiStatus.error,

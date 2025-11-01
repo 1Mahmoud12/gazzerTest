@@ -18,7 +18,7 @@ class LocalNotificationServices {
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   }
 
-  init() async {
+  Future<void> init() async {
     var initializationSettingsAndroid = const AndroidInitializationSettings('@drawable/ic_launcher_foreground');
     var initializationSettingsIOS = const DarwinInitializationSettings(requestProvisionalPermission: true, requestCriticalPermission: true);
 

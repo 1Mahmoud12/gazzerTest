@@ -7,8 +7,10 @@ import 'package:gazzer/core/presentation/views/components/failure_component.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/cubit/plate_details_cubit.dart';
@@ -57,10 +59,17 @@ class SinglePlateScreen extends StatelessWidget {
             ),
           );
         } else if (detailsState is PlateDetailsLoaded) {
+          // Find cart item from current cart state using findCartItem
+          final cartCubit = context.read<CartCubit>();
+          final cartItemInCart = findCartItem(cartCubit, detailsState.plate);
+
+          // Use cart item from cart state, fallback to itemToEdit from route
+          final cartItemToUse = cartItemInCart ?? itemToEdit;
+
           return BlocProvider(
             create: (context) => di<AddToCartCubit>(
               param1: (detailsState.plate, detailsState.options),
-              param2: itemToEdit,
+              param2: cartItemToUse,
             ),
             child: Builder(
               builder: (context) {
@@ -120,6 +129,8 @@ class SinglePlateScreen extends StatelessWidget {
                           listener: (context, state) {
                             canPop.value = !state.hasUserInteracted;
                             if (state.status == ApiStatus.success) {
+                              // Reload CartCubit to reflect the updated cart state
+                              context.read<CartCubit>().loadCart();
                               Alerts.showToast(state.message, error: false);
                               context.pop(
                                 true,
@@ -185,7 +196,9 @@ class SinglePlateScreen extends StatelessWidget {
                               if (isAdding) return cubit.increment();
                               return cubit.decrement();
                             },
-                            onsubmit: cubit.addToCart,
+                            onsubmit: () async {
+                              cubit.addToCart(context);
+                            },
                           );
                         },
                       ),

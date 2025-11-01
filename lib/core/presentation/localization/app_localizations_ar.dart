@@ -1210,4 +1210,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get updateCart => 'تحديث السله';
+
+  @override
+  String get exceedPouch => 'المنتجات المختارة تتجاوز حجم الكيس. هل تريد إزالة بعض المنتجات أو تعيين مندوب توصيل إضافي؟';
+
+  @override
+  String get editItems => 'تعديل علي المنتحات';
+
+  @override
+  String get assignAdditionalDelivery => 'اضافة دليفري اخر';
 }

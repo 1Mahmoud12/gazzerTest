@@ -70,6 +70,7 @@ class RestaurantDTO {
       id: id!,
       name: storeName!,
       image: image ?? '',
+      hasOptions: false,
       rate: double.tryParse(rate ?? '0') ?? 0.0,
       zoneName: provinceZone ?? '',
       outOfStock: false,

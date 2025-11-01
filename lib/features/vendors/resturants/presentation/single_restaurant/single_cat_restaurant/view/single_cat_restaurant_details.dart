@@ -223,7 +223,9 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                   builder: (context) {
                                     final addCubit = context.read<AddToCartCubit>();
                                     onChangeQuantity = (v) => v ? addCubit.increment() : addCubit.decrement();
-                                    onsubmit = addCubit.addToCart;
+                                    onsubmit = () async {
+                                      addCubit.addToCart(context);
+                                    };
                                     onNoteChange = addCubit.setNote;
 
                                     // Ensure default selections are applied

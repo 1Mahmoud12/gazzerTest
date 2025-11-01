@@ -63,11 +63,11 @@ class CartRepoImp extends CartRepo {
   }
 
   @override
-  Future<Result<CartResponse>> updateItemQuantity(int id, int qnty) {
+  Future<Result<CartResponse>> updateItemQuantity(int id, int qnty, {bool exceedPouch = false}) {
     return super.call(
       apiCall: () async => _apiclient.post(
         endpoint: Endpoints.changeItemQnty,
-        requestBody: {'cart_item_id': id, 'quantity': qnty},
+        requestBody: {'cart_item_id': id, 'quantity': qnty, 'add_new_pouch_approval': exceedPouch},
       ),
       parser: (response) {
         return CartResponse.fromJson(response.data['data'], msg: response.data['message']);

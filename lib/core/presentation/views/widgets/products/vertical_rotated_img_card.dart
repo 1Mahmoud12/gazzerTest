@@ -118,9 +118,15 @@ class VerticalRotatedImgCard extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Text(
-                                prod.store?.name ?? 'brand',
-                                style: TStyle.mainwSemi(13),
+                              Flexible(
+                                child: FittedBox(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    prod.store?.name ?? 'brand',
+                                    style: TStyle.mainwSemi(13),
+                                  ),
+                                ),
                               ),
                             ],
                           ),

@@ -82,6 +82,7 @@ class StoreDTO {
     return StoreEntity(
       id: id ?? 0,
       name: storeName ?? '',
+      hasOptions: false,
       estimatedDeliveryTime: estimatedDeliveryTime,
       storeCategoryType: storeCategoryType,
       image: image ?? '',

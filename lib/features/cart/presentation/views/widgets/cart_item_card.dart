@@ -175,6 +175,7 @@ class CartItemCard extends StatelessWidget {
                                             item.cartId,
                                             item.quantity + (isAdding ? 1 : -1),
                                             isAdding,
+                                            context,
                                           );
                                         },
                                       ),
@@ -192,10 +193,11 @@ class CartItemCard extends StatelessWidget {
                                               );
                                             },
                                           );
-                                          if (confirmed == true)
+                                          if (confirmed == true) {
                                             cubit.removeItemFromCart(
                                               item.cartId,
                                             );
+                                          }
                                         },
                                         style: IconButton.styleFrom(
                                           padding: const EdgeInsets.all(4),

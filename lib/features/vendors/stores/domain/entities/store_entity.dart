@@ -8,6 +8,7 @@ class StoreEntity extends GenericVendorEntity {
     required super.image,
     required super.rate,
     super.badge,
+    required super.hasOptions,
     super.priceRange,
     super.tag,
     required super.startTime,

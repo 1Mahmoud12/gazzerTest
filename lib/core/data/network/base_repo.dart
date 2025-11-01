@@ -43,26 +43,44 @@ abstract class BaseApiRepo {
       if (error is! DioException) {
         return _formParsingError(error, stack);
       }
-      if ((error.response?.statusCode ?? 400) > 499) {
-        return BaseError(
-          message: L10n.tr().somethingWentWrong,
-          e: ErrorType.unknownError,
-        );
-      }
+      // if ((error.response?.statusCode ?? 400) > 499) {
+      //   return BaseError(
+      //     message: L10n.tr().somethingWentWrong,
+      //     e: ErrorType.unknownError,
+      //   );
+      // }
       switch (error.type) {
         case DioExceptionType.badResponse:
-          // Check for OTP rate limit error (400 with remaining_seconds)
-          final data = error.response?.data?['data'];
+          // Check if response data is available and is a Map
+          final responseData = error.response?.data;
 
-          if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['remaining_seconds'] != null) {
-            return OtpRateLimitError.fromJson(
-              error.response?.data,
+          if (responseData is Map<String, dynamic>) {
+            // Check for OTP rate limit error (400 with remaining_seconds)
+            final data = responseData['data'];
+
+            if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['remaining_seconds'] != null) {
+              return OtpRateLimitError.fromJson(
+                responseData,
+                e: ErrorType.badResponse,
+              );
+            }
+            if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['needs_new_pouch_approval'] != null) {
+              return CartError.fromJson(
+                responseData,
+                e: ErrorType.badResponse,
+              );
+            }
+
+            // Try to parse the backend error message for all bad responses
+            return BadResponse.fromJson(
+              responseData,
               e: ErrorType.badResponse,
             );
           }
 
-          return BadResponse.fromJson(
-            error.response?.data,
+          // If response data is not available or not a Map, return generic error
+          return BaseError(
+            message: L10n.tr().somethingWentWrong,
             e: ErrorType.badResponse,
           );
         case DioExceptionType.receiveTimeout:

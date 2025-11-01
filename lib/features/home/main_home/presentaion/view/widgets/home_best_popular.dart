@@ -20,7 +20,7 @@ class _HomeBestPopular extends StatelessWidget {
             ),
             const VerticalSpacing(12),
             SizedBox(
-              height: 180,
+              height: 240,
               child: ListView.separated(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.horizontal,

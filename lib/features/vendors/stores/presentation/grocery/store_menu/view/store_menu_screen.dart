@@ -103,7 +103,7 @@ class StoreMenuScreen extends StatelessWidget {
                     ).push(context),
                   ),
                   SizedBox(
-                    height: 330,
+                    height: 360,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       padding: EdgeInsets.zero,

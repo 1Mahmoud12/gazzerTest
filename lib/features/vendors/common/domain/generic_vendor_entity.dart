@@ -64,6 +64,7 @@ sealed class GenericVendorEntity extends Favorable {
     this.storeCategoryType,
     this.badge,
     this.tag,
+    required super.hasOptions,
     required this.startTime,
     required this.endTime,
     this.subCategories,

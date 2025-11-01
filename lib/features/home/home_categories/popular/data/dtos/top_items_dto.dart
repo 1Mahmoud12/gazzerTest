@@ -1,3 +1,5 @@
+import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
+
 class TopItemsDto {
   TopItemsDto({
     required this.status,
@@ -111,7 +113,7 @@ class TopItemData {
   final int? isHaveCartTimes;
   final int? cartTimeQuantity;
   final bool? hasOptions;
-  final TopItemStoreInfo? storeInfo;
+  final SimpleStoreDTO? storeInfo;
 
   factory TopItemData.fromJson(Map<String, dynamic> json) {
     return TopItemData(
@@ -132,7 +134,7 @@ class TopItemData {
       isHaveCartTimes: json["is_have_cart_times"],
       cartTimeQuantity: json["cart_time_quantity"],
       hasOptions: json["has_options"],
-      storeInfo: json["store_info"] == null ? null : TopItemStoreInfo.fromJson(json["store_info"]),
+      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
     );
   }
 
@@ -154,44 +156,6 @@ class TopItemData {
     "is_have_cart_times": isHaveCartTimes,
     "cart_time_quantity": cartTimeQuantity,
     "has_options": hasOptions,
-    "store_info": storeInfo?.toJson(),
-  };
-}
-
-class TopItemStoreInfo {
-  TopItemStoreInfo({
-    required this.storeCategoryType,
-    required this.storeCategoryId,
-    required this.storeId,
-    required this.storeName,
-    required this.storeImage,
-    required this.isOpen,
-  });
-
-  final String? storeCategoryType;
-  final int? storeCategoryId;
-  final int? storeId;
-  final String? storeName;
-  final String? storeImage;
-  final int? isOpen;
-
-  factory TopItemStoreInfo.fromJson(Map<String, dynamic> json) {
-    return TopItemStoreInfo(
-      storeCategoryType: json["store_category_type"],
-      storeCategoryId: json["store_category_id"],
-      storeId: json["store_id"],
-      storeName: json["store_name"],
-      storeImage: json["store_image"],
-      isOpen: json["is_open"],
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-    "store_category_type": storeCategoryType,
-    "store_category_id": storeCategoryId,
-    "store_id": storeId,
-    "store_name": storeName,
-    "store_image": storeImage,
-    "is_open": isOpen,
+    "store_info": storeInfo?.toEntity(),
   };
 }

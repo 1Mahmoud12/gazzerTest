@@ -41,6 +41,9 @@ class _CartScreenState extends State<CartScreen> {
     return BlocListener<CartCubit, CartStates>(
       listenWhen: (previous, current) => current is BaseErrorState && previous is! BaseErrorState,
       listener: (context, state) {
+        if (state is UpdateItemError && state.needsNewPouchApproval) {
+          return;
+        }
         if (state is BaseErrorState) {
           Alerts.showToast((state as BaseErrorState).message);
         }

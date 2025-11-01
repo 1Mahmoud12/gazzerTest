@@ -46,8 +46,10 @@ class CartToIncrementIcon extends StatelessWidget {
         // Show alert when there's an error updating the cart
         if (state is UpdateItemError) {
           final cubit = context.read<CartCubit>();
-          final cartItem = _findCartItem(cubit);
-
+          final cartItem = findCartItem(cubit, product);
+          if (state.needsNewPouchApproval) {
+            return;
+          }
           // Check if error is for this product (either by cartId or product id)
           if (state.cartId == cartItem?.cartId || state.cartId == product.id) {
             Alerts.showToast(state.message);
@@ -62,6 +64,11 @@ class CartToIncrementIcon extends StatelessWidget {
   // ==================== Build When Logic ====================
 
   bool _shouldRebuild(CartStates previous, CartStates current) {
+    // Rebuild on any cart state change that affects cart items
+    // This ensures the widget updates when:
+    // - Cart is loaded/updated (FullCartStates)
+    // - Items are added/removed/updated (UpdateItemStates)
+    // - Navigating back after updating items in detail screens
     return current is FullCartStates || current is UpdateItemStates;
   }
 
@@ -69,7 +76,7 @@ class CartToIncrementIcon extends StatelessWidget {
 
   Widget _buildCartWidget(BuildContext context, CartStates state) {
     final cubit = context.read<CartCubit>();
-    final cartItem = _findCartItem(cubit);
+    final cartItem = findCartItem(cubit, product);
     final updateState = _extractUpdateState(state);
 
     if (cartItem != null) {
@@ -77,15 +84,6 @@ class CartToIncrementIcon extends StatelessWidget {
     } else {
       return _buildAddToCartWidget(context, updateState);
     }
-  }
-
-  // ==================== Cart Item Retrieval ====================
-
-  CartItemEntity? _findCartItem(CartCubit cubit) {
-    final allCartItems = cubit.vendors.expand((vendor) => vendor.items);
-    return allCartItems.firstWhereOrNull(
-      (item) => item.prod.id == product.id && item.type == _getProductType(),
-    );
   }
 
   UpdateItemStates? _extractUpdateState(CartStates state) {
@@ -164,6 +162,7 @@ class CartToIncrementIcon extends StatelessWidget {
       cartItem.cartId,
       cartItem.quantity + 1,
       true,
+      context,
     );
   }
 
@@ -179,6 +178,7 @@ class CartToIncrementIcon extends StatelessWidget {
         cartItem.cartId,
         cartItem.quantity - 1,
         false,
+        context,
       );
     }
   }
@@ -252,11 +252,12 @@ class CartToIncrementIcon extends StatelessWidget {
 
     // Add item to cart with default options
     context.read<CartCubit>().addToCart(
+      context,
       CartableItemRequest(
         id: product.id,
         quantity: 1,
         options: {},
-        type: _getProductType(),
+        type: getProductType(product),
         note: null,
         cartItemId: null,
       ),
@@ -284,14 +285,21 @@ class CartToIncrementIcon extends StatelessWidget {
         break;
     }
   }
+}
+// ==================== Cart Item Retrieval ====================
 
-  // ==================== Helper Methods ====================
+CartItemEntity? findCartItem(CartCubit cubit, GenericItemEntity product) {
+  final allCartItems = cubit.vendors.expand((vendor) => vendor.items);
+  return allCartItems.firstWhereOrNull(
+    (item) => item.prod.id == product.id && item.type == getProductType(product),
+  );
+}
+// ==================== Helper Methods ====================
 
-  CartItemType _getProductType() {
-    return switch (product) {
-      PlateEntity() => CartItemType.plate,
-      ProductEntity() => CartItemType.product,
-      OrderedWithEntity() => CartItemType.restaurantItem,
-    };
-  }
+CartItemType getProductType(GenericItemEntity product) {
+  return switch (product) {
+    PlateEntity() => CartItemType.plate,
+    ProductEntity() => CartItemType.product,
+    OrderedWithEntity() => CartItemType.restaurantItem,
+  };
 }

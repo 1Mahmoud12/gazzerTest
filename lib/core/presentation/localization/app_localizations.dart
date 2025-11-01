@@ -2461,6 +2461,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Cart'**
   String get updateCart;
+
+  /// No description provided for @exceedPouch.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected items exceed pouch size. Remove some items or assign additional deliveryman?'**
+  String get exceedPouch;
+
+  /// No description provided for @editItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Items'**
+  String get editItems;
+
+  /// No description provided for @assignAdditionalDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Additional Delivery'**
+  String get assignAdditionalDelivery;
 }
 
 class _AppLocalizationsDelegate

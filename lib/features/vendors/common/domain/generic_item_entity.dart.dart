@@ -18,7 +18,6 @@ sealed class GenericItemEntity extends Favorable {
   final OfferEntity? offer;
   final ItemUnitBrandEntity? itemUnitBrand;
   final SimpleStoreEntity? store;
-  final bool hasOptions;
   final int? orderCount;
 
   double get price => offer?.priceAfterDiscount(_price) ?? _price;
@@ -43,7 +42,7 @@ sealed class GenericItemEntity extends Favorable {
     required super.outOfStock,
     required double price,
     required super.reviewCount,
-    required this.hasOptions,
+    required super.hasOptions,
     this.badge,
     this.itemUnitBrand,
     this.store,

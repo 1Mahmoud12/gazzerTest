@@ -1,6 +1,7 @@
 import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/cubits/base_error_state.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
+import 'package:gazzer/features/cart/data/dtos/cart_response.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_vendor_entity.dart';
 import 'package:gazzer/features/cart/presentation/models/cart_summary_model.dart';
 
@@ -14,19 +15,27 @@ sealed class FullCartStates extends CartStates {
   final CartSummaryModel summary;
   final AddressEntity? address;
   final bool isCartValid;
+  final PouchSummary? pouchSummary;
 
   FullCartStates({
     this.vendors = Fakers.cartVendors,
     this.summary = Fakers.cartSummary,
     this.address,
     this.isCartValid = false,
+    this.pouchSummary,
   });
 }
 
 class FullCartLoading extends FullCartStates {}
 
 class FullCartLoaded extends FullCartStates {
-  FullCartLoaded({required super.vendors, required super.summary, required super.address, required super.isCartValid});
+  FullCartLoaded({
+    required super.vendors,
+    required super.summary,
+    required super.address,
+    required super.isCartValid,
+    super.pouchSummary,
+  });
 }
 
 class FullCartError extends FullCartStates implements BaseErrorState {
@@ -93,6 +102,7 @@ class UpdateItemSuccess extends UpdateItemStates {
 class UpdateItemError extends UpdateItemStates implements BaseErrorState {
   @override
   final String message;
+  final bool needsNewPouchApproval;
   UpdateItemError({
     required this.message,
     required super.cartId,
@@ -100,5 +110,6 @@ class UpdateItemError extends UpdateItemStates implements BaseErrorState {
     super.isRemoving,
     super.isDeleting,
     super.isEditNote,
+    this.needsNewPouchApproval = false,
   });
 }

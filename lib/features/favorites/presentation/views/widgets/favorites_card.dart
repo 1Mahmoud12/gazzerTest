@@ -93,7 +93,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
         rate: widget.favorite.rate,
         reviewCount: widget.favorite.reviewCount,
         outOfStock: widget.favorite.outOfStock,
-        hasOptions: false,
+        hasOptions: widget.favorite.hasOptions,
       );
     } else
     /*if (type == CartItemType.product.value)*/ {
@@ -107,7 +107,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
         rate: widget.favorite.rate,
         reviewCount: widget.favorite.reviewCount,
         outOfStock: widget.favorite.outOfStock,
-        hasOptions: false,
+        hasOptions: widget.favorite.hasOptions,
       );
     }
   }
@@ -197,7 +197,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                           Align(
                             alignment: AlignmentDirectional.center,
                             child: CartToIncrementIcon(
-                              isHorizonal: false,
+                              isHorizonal: true,
                               product: itemEntity!,
                               iconSize: 20,
                               isDarkContainer: false,

@@ -15,6 +15,7 @@ abstract class Favorable extends Equatable {
   final double rate;
   final double? favorablePrice;
   final bool outOfStock;
+  final bool hasOptions;
   final int reviewCount;
 
   const Favorable({
@@ -27,6 +28,7 @@ abstract class Favorable extends Equatable {
     this.favorablePrice,
     required this.reviewCount,
     required this.outOfStock,
+    required this.hasOptions,
   });
 
   @override
@@ -39,6 +41,7 @@ abstract class Favorable extends Equatable {
     rate,
     favorablePrice,
     outOfStock,
+    hasOptions,
     reviewCount,
   ];
 

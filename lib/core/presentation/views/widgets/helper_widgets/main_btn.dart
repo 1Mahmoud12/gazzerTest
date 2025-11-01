@@ -159,7 +159,13 @@ class _MainBtnState extends State<MainBtn> {
                             ),
                           ),
                         ),
-                      Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(14)),
+                      Flexible(
+                        child: FittedBox(
+                          alignment: AlignmentDirectional.center,
+                          fit: BoxFit.scaleDown,
+                          child: Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(14)),
+                        ),
+                      ),
                     ],
                   ),
             ),

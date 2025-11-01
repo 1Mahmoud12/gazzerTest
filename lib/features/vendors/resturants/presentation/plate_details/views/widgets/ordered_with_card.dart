@@ -125,6 +125,7 @@ class OrderedWithCard extends StatelessWidget {
                                   cartItem.cartId,
                                   cartItem.quantity + 1,
                                   true,
+                                  context,
                                 );
                               } else {
                                 if (cartItem.quantity == 1) {
@@ -134,6 +135,7 @@ class OrderedWithCard extends StatelessWidget {
                                     cartItem.cartId,
                                     cartItem.quantity - 1,
                                     false,
+                                    context,
                                   );
                                 }
                               }
@@ -152,6 +154,7 @@ class OrderedWithCard extends StatelessWidget {
                             onTap: () {
                               SystemSound.play(SystemSoundType.click);
                               cubit.addToCart(
+                                context,
                                 CartableItemRequest(
                                   id: product.id,
                                   quantity: 1,

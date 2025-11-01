@@ -28,7 +28,7 @@ class _HomeBestPopularStoresWidget extends StatelessWidget {
             ),
             const VerticalSpacing(12),
             SizedBox(
-              height: 330,
+              height: 350,
               child: ListView.separated(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.horizontal,
@@ -113,7 +113,7 @@ class _HomeBestPopularStoresWidget extends StatelessWidget {
                     ),
                   );*/ GrocCardSwitcher(
                     cardStyle: CardStyle.typeOne,
-                    width: 160,
+                    width: 170,
                     entity: store,
                     onPressed: () {
                       if (store!.storeCategoryType == VendorType.restaurant.value) {

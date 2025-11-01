@@ -31,6 +31,7 @@ class ProductDTO extends GenericItemDTO {
     }
     description = json['description'];
     orderCount = json['order_count'];
+    hasOptions = json['has_options'];
     badge = json['badge'];
     image = json['image'];
     rateCount = int.tryParse(json['rate_count'].toString());

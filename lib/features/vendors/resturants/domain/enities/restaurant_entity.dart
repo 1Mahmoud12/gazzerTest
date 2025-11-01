@@ -15,6 +15,7 @@ class RestaurantEntity extends GenericVendorEntity {
     required super.name,
     required super.image,
     required super.rate,
+    required super.hasOptions,
     super.badge,
     super.priceRange,
     super.tag,
