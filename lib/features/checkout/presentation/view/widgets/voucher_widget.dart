@@ -11,6 +11,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.d
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_states.dart';
+import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_alert_widget.dart';
 
 class VoucherWidget extends StatefulWidget {
   const VoucherWidget({
@@ -134,10 +135,11 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                           child: BlocConsumer<CheckoutCubit, CheckoutStates>(
                             listener: (context, state) {
                               if (state is VoucherApplied) {
-                                Alerts.showToast(
-                                  'Voucher applied! ${state.discountAmount}% discount',
-                                  error: false,
-                                );
+                                voucherAlert(title: 'Voucher applied! ${state.discountAmount}% discount', context: context, asDialog: true);
+                                // Alerts.showToast(
+                                //   'Voucher applied! ${state.discountAmount}% discount',
+                                //   error: false,
+                                // );
                               } else if (state is VoucherError) {
                                 Alerts.showToast(state.message);
                               }

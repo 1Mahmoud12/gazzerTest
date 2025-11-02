@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_r
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_states.dart';
+import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_alert_widget.dart';
 
 class PaymentMethodWidget extends StatelessWidget {
   const PaymentMethodWidget({super.key});
@@ -58,7 +59,13 @@ class PaymentMethodWidget extends StatelessWidget {
                     title: L10n.tr().gazzarWallet,
                     icon: Assets.wallet,
                     isSelected: selectedMethod == PaymentMethod.gazzerWallet,
-                    onTap: () => cubit.selectPaymentMethod(PaymentMethod.gazzerWallet),
+                    onTap: () {
+                      cubit.selectPaymentMethod(PaymentMethod.gazzerWallet);
+                      voucherAlert(
+                        title: 'Your wallet balance is insufficient. You can complete the remaining amount using a bank card only',
+                        context: context,
+                      );
+                    },
                     balance: cubit.walletBalance,
                   ),
                 ],

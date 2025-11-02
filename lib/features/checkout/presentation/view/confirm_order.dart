@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -40,36 +39,23 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
           const PaymentMethodWidget(),
           const VerticalSpacing(20), // Space for bottom button
           // Place Order Button
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Co.bg,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacityNew(0.1),
-                  blurRadius: 4,
-                  offset: const Offset(0, -2),
-                ),
-              ],
-            ),
-            child: SafeArea(
-              top: false,
-              child: BlocBuilder<CheckoutCubit, CheckoutStates>(
-                builder: (context, state) {
-                  final cubit = context.read<CheckoutCubit>();
-                  return MainBtn(
-                    onPressed: () {
-                      cubit.placeOrder();
-                      // TODO: Navigate to success screen or show loading
-                    },
-                    text: 'Place Order',
-                    bgColor: Co.secondary,
-                    textStyle: TStyle.blackBold(16),
-                    width: double.infinity,
-                    height: 50,
-                  );
-                },
-              ),
+          SafeArea(
+            top: false,
+            child: BlocBuilder<CheckoutCubit, CheckoutStates>(
+              builder: (context, state) {
+                final cubit = context.read<CheckoutCubit>();
+                return MainBtn(
+                  onPressed: () {
+                    cubit.placeOrder();
+                    // TODO: Navigate to success screen or show loading
+                  },
+                  text: 'Place Order',
+                  bgColor: Co.secondary,
+                  textStyle: TStyle.blackBold(16),
+                  width: double.infinity,
+                  height: 50,
+                );
+              },
             ),
           ),
         ],

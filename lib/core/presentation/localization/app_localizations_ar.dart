@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1245,7 +1245,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get creditCard => 'بطاقة الائتمان';
 
   @override
-  String get gazzarWallet => 'محفظة جزار';
+  String get gazzarWallet => 'محفظة جزر';
 
   @override
   String get balance => 'الرصيد';
