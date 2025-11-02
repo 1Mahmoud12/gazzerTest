@@ -52,3 +52,22 @@ class VoucherError extends CheckoutStates {
   @override
   List<Object?> get props => [message];
 }
+
+enum PaymentMethod {
+  cashOnDelivery,
+  creditDebitCard,
+  gazzerWallet,
+}
+
+class PaymentMethodLoaded extends CheckoutStates {
+  const PaymentMethodLoaded({
+    required this.selectedPaymentMethod,
+    this.walletBalance = 500.0,
+  });
+
+  final PaymentMethod selectedPaymentMethod;
+  final double walletBalance;
+
+  @override
+  List<Object?> get props => [selectedPaymentMethod, walletBalance];
+}

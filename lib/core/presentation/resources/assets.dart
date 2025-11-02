@@ -254,6 +254,9 @@ class Assets {
   static const String assetsSvgUser = "assets/svg/user.svg";
 
   static const String assetsSvgVideo = "assets/svg/video.svg";
+  static const String cashOnDelivery = "assets/svg/cashOnDelivery.svg";
+  static const String creditCard = "assets/svg/creditCard.svg";
+  static const String wallet = "assets/svg/wallet.svg";
 
   static const String assetsSvgWork = "assets/svg/work.svg";
 

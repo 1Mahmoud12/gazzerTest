@@ -489,5 +489,9 @@
 "havePromoCode": "هل لديك رمز خصم؟",
 "addVoucher": "إضافة قسيمة",
 "enterCode": "أدخل الرمز",
-"apply": "تطبيق"
-}
+"apply": "تطبيق",
+"choosePaymentMethod": "اختر طريقة الدفع",
+"cashOnDelivery": "الدفع عند الاستلام",
+"creditCard": "بطاقة الائتمان",
+"gazzarWallet": "محفظة جزر",
+"balance": "الرصيد"}

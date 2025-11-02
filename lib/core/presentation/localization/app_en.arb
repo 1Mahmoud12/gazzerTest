@@ -487,6 +487,11 @@
     "havePromoCode": "Have a promo code?",
     "addVoucher": "Add Voucher",
     "enterCode": "Enter Code",
-    "apply": "Apply"
+    "apply": "Apply",
+    "choosePaymentMethod": "Choose Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "creditCard": "Credit Card",
+    "gazzarWallet": "Gazzar Wallet",
+    "balance": "Balance"
 
 }
