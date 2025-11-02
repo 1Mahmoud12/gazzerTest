@@ -32,6 +32,14 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
   double get walletBalance => _walletBalance;
 
+  // Card management
+  final List<CardEntity> _cards = [];
+  bool _isCreatingCard = false;
+
+  List<CardEntity> get cards => _cards;
+
+  bool get isCreatingCard => _isCreatingCard;
+
   @override
   void emit(CheckoutStates state) {
     if (isClosed) return;
@@ -97,5 +105,51 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   Future<void> placeOrder() async {
     // TODO: Implement place order logic
     // This will call the API to place the order with the selected payment method
+  }
+
+  /// Loads cards
+  void loadCards() {
+    emit(
+      CardsLoaded(
+        cards: _cards,
+        isCreating: _isCreatingCard,
+      ),
+    );
+  }
+
+  /// Creates a new card
+  Future<void> createCard({
+    required String cardNumber,
+    required int expiryMonth,
+    required int expiryYear,
+    required String cardHolderName,
+  }) async {
+    _isCreatingCard = true;
+    emit(
+      CardsLoaded(
+        cards: _cards,
+        isCreating: _isCreatingCard,
+      ),
+    );
+
+    // Simulate API delay
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    final card = CardEntity(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      cardNumber: cardNumber.replaceAll(' ', ''),
+      expiryMonth: expiryMonth,
+      expiryYear: expiryYear,
+      cardHolderName: cardHolderName,
+    );
+
+    _cards.add(card);
+    _isCreatingCard = false;
+
+    emit(
+      CardCreated(
+        card: card,
+      ),
+    );
   }
 }

@@ -71,3 +71,58 @@ class PaymentMethodLoaded extends CheckoutStates {
   @override
   List<Object?> get props => [selectedPaymentMethod, walletBalance];
 }
+
+class CardEntity {
+  const CardEntity({
+    required this.id,
+    required this.cardNumber,
+    required this.expiryMonth,
+    required this.expiryYear,
+    required this.cardHolderName,
+    this.isDefault = false,
+  });
+
+  final String id;
+  final String cardNumber;
+  final int expiryMonth;
+  final int expiryYear;
+  final String cardHolderName;
+  final bool isDefault;
+
+  String get maskedCardNumber {
+    if (cardNumber.length >= 4) {
+      return '**** **** **** ${cardNumber.substring(cardNumber.length - 4)}';
+    }
+    return cardNumber;
+  }
+
+  String get formattedExpiry => '$expiryMonth / $expiryYear';
+}
+
+class CardsLoaded extends CheckoutStates {
+  const CardsLoaded({required this.cards, required this.isCreating});
+
+  final List<CardEntity> cards;
+  final bool isCreating;
+
+  @override
+  List<Object?> get props => [cards, isCreating];
+}
+
+class CardCreated extends CheckoutStates {
+  const CardCreated({required this.card});
+
+  final CardEntity card;
+
+  @override
+  List<Object?> get props => [card];
+}
+
+class CardError extends CheckoutStates {
+  const CardError({required this.message});
+
+  final String message;
+
+  @override
+  List<Object?> get props => [message];
+}
