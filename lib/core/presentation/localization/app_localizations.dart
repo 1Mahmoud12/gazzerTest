@@ -2479,6 +2479,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Assign Additional Delivery'**
   String get assignAdditionalDelivery;
+
+  /// No description provided for @cartCapacity.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Cart Capacity'**
+  String get cartCapacity;
+
+  /// No description provided for @havePromoCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a promo code?'**
+  String get havePromoCode;
+
+  /// No description provided for @addVoucher.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Voucher'**
+  String get addVoucher;
+
+  /// No description provided for @enterCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Code'**
+  String get enterCode;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
 }
 
 class _AppLocalizationsDelegate

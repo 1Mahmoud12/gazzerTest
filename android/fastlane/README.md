@@ -28,7 +28,7 @@ Best Populer Page
 Top vendors will be display the Stores
 Adding the best-selling Item section
 
-Adding a selection for extra addon === else add to cart =====
+Adding a selection for extra addon === add to cart =====
 
 ----
 

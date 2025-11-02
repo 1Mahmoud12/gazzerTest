@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/widgets/select_location_screen.dart';
 import 'package:gazzer/features/auth/forgot_password/presentation/reset_password_screen.dart';
@@ -8,6 +10,7 @@ import 'package:gazzer/features/auth/register/presentation/view/register_screen.
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
@@ -88,7 +91,10 @@ final checkoutRoutes = [
   ),
   GoRoute(
     path: ConfirmOrderScreen.route,
-    builder: (context, state) => const ConfirmOrderScreen(),
+    builder: (context, state) => BlocProvider(
+      create: (context) => di<CheckoutCubit>(),
+      child: const ConfirmOrderScreen(),
+    ),
   ),
   GoRoute(
     path: PostCheckoutScreen.route,

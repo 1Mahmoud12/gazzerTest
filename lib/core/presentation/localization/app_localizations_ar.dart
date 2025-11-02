@@ -1219,4 +1219,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get assignAdditionalDelivery => 'اضافة دليفري اخر';
+
+  @override
+  String get cartCapacity => 'سعة السله الحاليه';
+
+  @override
+  String get havePromoCode => 'هل لديك رمز خصم؟';
+
+  @override
+  String get addVoucher => 'إضافة قسيمة';
+
+  @override
+  String get enterCode => 'أدخل الرمز';
+
+  @override
+  String get apply => 'تطبيق';
 }

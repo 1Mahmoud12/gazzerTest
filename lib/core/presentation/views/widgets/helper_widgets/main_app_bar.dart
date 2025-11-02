@@ -89,11 +89,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
           ],
         ),
-        const CartCapacityProgressBar(height: 3.0),
+        const CartCapacityProgressBar(height: 5.0),
       ],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 3.0);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 6.0);
 }

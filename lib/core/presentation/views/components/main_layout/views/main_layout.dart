@@ -90,7 +90,7 @@ class _MainLayoutState extends State<MainLayout> {
                 widget.child,
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * .3,
-                  child: const RotatedBox(quarterTurns: 3, child: CartCapacityProgressBar(height: 10.0)),
+                  child: const RotatedBox(quarterTurns: 3, child: CartCapacityProgressBar(height: 6.0)),
                 ),
               ],
             ),

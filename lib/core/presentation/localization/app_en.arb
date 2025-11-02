@@ -482,6 +482,11 @@
   "totalUnitSolid":"Total Unit Solid","updateCart":"Update Cart",
   "exceedPouch":"Selected items exceed pouch size. Remove some items or assign additional deliveryman?",
 "editItems":"Edit Items",
-    "assignAdditionalDelivery":"Assign Additional Delivery"
+    "assignAdditionalDelivery":"Assign Additional Delivery",
+    "cartCapacity":"Current Cart Capacity",
+    "havePromoCode": "Have a promo code?",
+    "addVoucher": "Add Voucher",
+    "enterCode": "Enter Code",
+    "apply": "Apply"
 
 }

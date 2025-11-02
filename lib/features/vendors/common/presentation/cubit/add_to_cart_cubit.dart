@@ -575,7 +575,10 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     return payload;
   }
 
-  Future<void> _addCartToRemote(BuildContext context, CartableItemRequest req) async {
+  Future<void> _addCartToRemote(
+    BuildContext context,
+    CartableItemRequest req,
+  ) async {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.addToCartItem(req);
     switch (response) {
@@ -613,7 +616,10 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     }
   }
 
-  Future<void> _updateCart(BuildContext context, CartableItemRequest req) async {
+  Future<void> _updateCart(
+    BuildContext context,
+    CartableItemRequest req,
+  ) async {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.updateCartItem(req);
     switch (response) {

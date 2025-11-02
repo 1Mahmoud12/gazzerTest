@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 
@@ -58,14 +60,23 @@ class CartCapacityProgressBar extends StatelessWidget {
           progressColor = Co.red;
         }
 
-        return ClipRRect(
-          borderRadius: borderRadius ?? BorderRadius.circular(height / 2),
-          child: LinearProgressIndicator(
-            value: fillPercentage / 100,
-            minHeight: height,
-            backgroundColor: Colors.grey.withOpacityNew(0.5),
-            valueColor: AlwaysStoppedAnimation<Color>(progressColor),
-            borderRadius: BorderRadius.circular(20),
+        return InkWell(
+          onTap: () {
+            Alerts.showToast(
+              L10n.tr().cartCapacity,
+              error: false,
+              isInfo: true,
+            );
+          },
+          child: ClipRRect(
+            borderRadius: borderRadius ?? BorderRadius.circular(height / 2),
+            child: LinearProgressIndicator(
+              value: fillPercentage / 100,
+              minHeight: height,
+              backgroundColor: Colors.grey.withOpacityNew(0.5),
+              valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+              borderRadius: BorderRadius.circular(20),
+            ),
           ),
         );
       },

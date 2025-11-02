@@ -1219,4 +1219,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assignAdditionalDelivery => 'Assign Additional Delivery';
+
+  @override
+  String get cartCapacity => 'Current Cart Capacity';
+
+  @override
+  String get havePromoCode => 'Have a promo code?';
+
+  @override
+  String get addVoucher => 'Add Voucher';
+
+  @override
+  String get enterCode => 'Enter Code';
+
+  @override
+  String get apply => 'Apply';
 }

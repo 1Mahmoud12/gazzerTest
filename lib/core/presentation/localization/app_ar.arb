@@ -484,5 +484,10 @@
 "totalUnitSolid":"عدد الوحدات المباعه","updateCart":"تحديث السله",
   "exceedPouch":"المنتجات المختارة تتجاوز حجم الكيس. هل تريد إزالة بعض المنتجات أو تعيين مندوب توصيل إضافي؟",
     "editItems":"تعديل علي المنتحات",
-    "assignAdditionalDelivery":"اضافة دليفري اخر"
+    "assignAdditionalDelivery":"اضافة دليفري اخر",
+    "cartCapacity":"سعة السله الحاليه",
+"havePromoCode": "هل لديك رمز خصم؟",
+"addVoucher": "إضافة قسيمة",
+"enterCode": "أدخل الرمز",
+"apply": "تطبيق"
 }
