@@ -6,8 +6,10 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_radio_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/card_details_screen.dart';
@@ -56,9 +58,10 @@ class PaymentMethodWidget extends StatelessWidget {
                     title: L10n.tr().creditCard,
                     icon: Assets.creditCard,
                     isSelected: selectedMethod == PaymentMethod.creditDebitCard,
-                    onTap: () => cubit.selectPaymentMethod(PaymentMethod.creditDebitCard),
+                    onTap: () => cubit.selectPaymentMethod(
+                      PaymentMethod.creditDebitCard,
+                    ),
                   ),
-                  // Show cards when credit card is selected
                   if (selectedMethod == PaymentMethod.creditDebitCard) ...[
                     const SizedBox(height: 12),
                     ...cards.map(
@@ -66,16 +69,21 @@ class PaymentMethodWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 12),
                         child: _CardItem(
                           card: card,
-                          isSelected: card.isDefault,
+                          isSelected: (cubit.selectedCard == null) ? card.isDefault : cubit.selectedCard == card,
                           onTap: () {
-                            // TODO: Select card
+                            cubit.selectCard(card);
                           },
                         ),
                       ),
                     ),
                     const SizedBox(height: 12),
                     _AddCardItem(
-                      onTap: () => context.push(CardDetailsScreen.route),
+                      onTap: () async {
+                        await context.push(CardDetailsScreen.route);
+                        if (context.mounted) {
+                          context.read<CheckoutCubit>().loadCheckoutData();
+                        }
+                      },
                     ),
                   ],
                   const SizedBox(height: 12),
@@ -142,19 +150,15 @@ class _PaymentMethodItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Radio button
             GradientRadioBtn(
               isSelected: isSelected,
               size: 4,
             ),
-
             const SizedBox(width: 12),
-            // Icon
             SvgPicture.asset(
               icon,
             ),
             const SizedBox(width: 12),
-            // Title and balance
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,9 +176,33 @@ class _PaymentMethodItem extends StatelessWidget {
                   ],
                   if (availablePoints != null && availablePoints! >= 0) ...[
                     const SizedBox(height: 2),
-                    Text(
-                      '${L10n.tr().availablePoints}: $availablePoints',
-                      style: TStyle.greyRegular(12),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${L10n.tr().availablePoints}: $availablePoints',
+                            style: TStyle.greyRegular(12),
+                          ),
+                        ),
+                        if (method == PaymentMethod.gazzerWallet && (availablePoints ?? 0) > 0)
+                          TextButton(
+                            onPressed: () => _showConvertPointsSheet(
+                              context,
+                              availablePoints!,
+                            ),
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 0,
+                              ),
+                              minimumSize: Size.zero,
+                            ),
+                            child: Text(
+                              L10n.tr().convert,
+                              style: TStyle.primaryBold(12),
+                            ),
+                          ),
+                      ],
                     ),
                   ],
                 ],
@@ -185,6 +213,62 @@ class _PaymentMethodItem extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showConvertPointsSheet(BuildContext context, int availablePoints) {
+  final controller = TextEditingController(text: availablePoints.toString());
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (ctx) {
+      return Padding(
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: MediaQuery.of(ctx).viewInsets.bottom + 16,
+          top: 16,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(L10n.tr().convertPoints, style: TStyle.blackBold(16)),
+            const SizedBox(height: 8),
+            MainTextField(
+              controller: controller,
+              keyboardType: TextInputType.number,
+              hintText: L10n.tr().enterPoints,
+              inputFormatters: FilteringTextInputFormatter.digitsOnly,
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: MainBtn(
+                onPressed: () async {
+                  final text = controller.text.trim();
+                  final points = int.tryParse(text) ?? 0;
+                  if (points <= 0) {
+                    voucherAlert(title: L10n.tr().invalidPoints, context: ctx);
+                    return;
+                  }
+                  if (points > availablePoints) {
+                    voucherAlert(
+                      title: L10n.tr().insufficientPoints,
+                      context: ctx,
+                    );
+                    return;
+                  }
+                  await context.read<CheckoutCubit>().convertPoints(points);
+                  if (ctx.mounted) Navigator.of(ctx).pop();
+                },
+                text: L10n.tr().convert,
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
 
 class _CardItem extends StatelessWidget {

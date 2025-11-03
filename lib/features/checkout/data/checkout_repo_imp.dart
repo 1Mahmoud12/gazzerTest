@@ -20,7 +20,12 @@ class CheckoutRepoImp extends CheckoutRepo {
   @override
   Future<Result<List<VoucherDTO>>> getVouchers() {
     return super.call(
-      apiCall: () => _apiClient.get(endpoint: Endpoints.getVoucher),
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.getVoucher,
+        headers: const {
+          'Accept-Language': 'en', // Force English until backend supports AR properly
+        },
+      ),
       parser: (response) {
         final list = response.data['data'] as List<dynamic>?;
         if (list == null) return <VoucherDTO>[];
@@ -43,6 +48,42 @@ class CheckoutRepoImp extends CheckoutRepo {
         final voucher = data['voucher'] as Map<String, dynamic>? ?? {};
         return VoucherDTO.fromJson(voucher);
       },
+    );
+  }
+
+  @override
+  Future<Result<String>> addCard({
+    required String cardNumber,
+    required String cardholderName,
+    required String expiryMonth,
+    required String expiryYear,
+    required bool isDefault,
+  }) {
+    return super.call(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.addNewCard,
+        requestBody: {
+          'card_number': cardNumber.replaceAll(' ', ''),
+          'cardholder_name': cardholderName,
+          'expiry_month': expiryMonth,
+          'expiry_year': expiryYear,
+          'is_default': isDefault,
+        },
+      ),
+      parser: (response) => response.data['message']?.toString() ?? 'Card added successfully',
+    );
+  }
+
+  @override
+  Future<Result<String>> convertPoints(int points) {
+    return super.call(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.convertPoints,
+        requestBody: {
+          'points': points,
+        },
+      ),
+      parser: (response) => response.data['message']?.toString() ?? 'Points converted successfully',
     );
   }
 }

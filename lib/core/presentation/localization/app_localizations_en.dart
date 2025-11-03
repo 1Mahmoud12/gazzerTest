@@ -954,7 +954,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clickBackAgainToExit => 'Click back again to exit';
 
   @override
-  String get thisFieldIsRequired => 'This field is required.';
+  String get thisFieldIsRequired => 'This field is required';
 
   @override
   String get fullNameShouldBeThreeLettersOrMore => 'Full name Should be three letters or more';
@@ -1260,7 +1260,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get availablePoints => 'Available Points';
 
   @override
-  String get insufficientWalletBalance => 'Your wallet balance is insufficient. You can complete the remaining amount using a bank card only';
+  String get insufficientWalletBalance => 'Insufficient wallet balance';
 
   @override
   String get placeOrder => 'Place Order';
@@ -1279,4 +1279,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get promoCode => 'Promo Code';
+
+  @override
+  String get createYourCard => 'Create Your Card';
+
+  @override
+  String get cardNumber => 'Card Number';
+
+  @override
+  String get expiryMonth => 'Expiry Month';
+
+  @override
+  String get expiryYear => 'Expiry Year';
+
+  @override
+  String get cardHolderName => 'Card Holder Name';
+
+  @override
+  String get createCard => 'Create Card';
+
+  @override
+  String get cardNumberMustBe16Digits => 'Card number must be 16 digits';
+
+  @override
+  String get invalidMonth => 'Invalid month';
+
+  @override
+  String get invalidYear => 'Invalid year';
+
+  @override
+  String get expiryDateMustBeInFuture => 'Expiry date must be in the future';
+
+  @override
+  String get nameMustBeGreaterThanOneWord => 'Name must be greater than one word';
+
+  @override
+  String get setAsDefaultCard => 'Set as default card';
+
+  @override
+  String get convert => 'Convert';
+
+  @override
+  String get convertPoints => 'Convert Points';
+
+  @override
+  String get enterPoints => 'Enter points';
+
+  @override
+  String get invalidPoints => 'Invalid points';
+
+  @override
+  String get insufficientPoints => 'Insufficient points';
 }

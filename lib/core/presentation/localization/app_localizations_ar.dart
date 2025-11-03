@@ -954,7 +954,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get clickBackAgainToExit => 'اضغط مرة أخرى للخروج';
 
   @override
-  String get thisFieldIsRequired => 'هذا الحقل مطلوب.';
+  String get thisFieldIsRequired => 'هذا الحقل مطلوب';
 
   @override
   String get fullNameShouldBeThreeLettersOrMore => 'الاسم الكامل يجب أن يكون ثلاثة أحرف او اكثر.';
@@ -1260,7 +1260,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get availablePoints => 'النقاط المتاحة';
 
   @override
-  String get insufficientWalletBalance => 'رصيد محفظتك غير كافٍ. يمكنك إتمام المبلغ المتبقي باستخدام بطاقة بنكية فقط';
+  String get insufficientWalletBalance => 'رصيد المحفظة غير كافٍ';
 
   @override
   String get placeOrder => 'إتمام الطلب';
@@ -1279,4 +1279,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get promoCode => 'رمز العرض الترويجي';
+
+  @override
+  String get createYourCard => 'إنشاء بطاقتك';
+
+  @override
+  String get cardNumber => 'رقم البطاقة';
+
+  @override
+  String get expiryMonth => 'شهر الانتهاء';
+
+  @override
+  String get expiryYear => 'سنة الانتهاء';
+
+  @override
+  String get cardHolderName => 'اسم حامل البطاقة';
+
+  @override
+  String get createCard => 'إنشاء البطاقة';
+
+  @override
+  String get cardNumberMustBe16Digits => 'يجب أن يتكون رقم البطاقة من 16 رقمًا';
+
+  @override
+  String get invalidMonth => 'شهر غير صالح';
+
+  @override
+  String get invalidYear => 'سنة غير صالحة';
+
+  @override
+  String get expiryDateMustBeInFuture => 'يجب أن يكون تاريخ الانتهاء في المستقبل';
+
+  @override
+  String get nameMustBeGreaterThanOneWord => 'يجب أن يتكون الاسم من أكثر من كلمة';
+
+  @override
+  String get setAsDefaultCard => 'تعيين كبطاقة افتراضية';
+
+  @override
+  String get convert => 'تحويل';
+
+  @override
+  String get convertPoints => 'تحويل النقاط';
+
+  @override
+  String get enterPoints => 'أدخل عدد النقاط';
+
+  @override
+  String get invalidPoints => 'عدد النقاط غير صالح';
+
+  @override
+  String get insufficientPoints => 'النقاط غير كافية';
 }

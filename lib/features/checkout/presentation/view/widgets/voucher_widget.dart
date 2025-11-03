@@ -53,9 +53,12 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        L10n.tr().havePromoCode,
-                        style: TStyle.blackBold(14),
+                      InkWell(
+                        onTap: () => cubit.loadVouchers(),
+                        child: Text(
+                          L10n.tr().havePromoCode,
+                          style: TStyle.blackBold(14),
+                        ),
                       ),
                       InkWell(
                         onTap: cubit.toggleTextField,
@@ -72,7 +75,8 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                       listener: (context, state) {
                         if (state is VoucherApplied) {
                           voucherAlert(
-                            title: '${L10n.tr().voucherApplied} ${state.discountAmount}% ${L10n.tr().discount}',
+                            title:
+                                '${L10n.tr().voucherApplied} ${state.discountAmount} ${state.discountType.contains('percent') ? '%' : ''} ${L10n.tr().discount}',
                             context: context,
                             asDialog: true,
                           );

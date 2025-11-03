@@ -503,6 +503,27 @@
     "selectVoucher": "Select Voucher",
     "pleaseEnterVoucherCode": "Please enter a voucher code",
     "invalidVoucherCode": "Invalid voucher code",
-    "promoCode": "Promo Code"
+    "promoCode": "Promo Code",
+    "createYourCard": "Create Your Card",
+      "cardNumber": "Card Number",
+      "expiryMonth": "Expiry Month",
+      "expiryYear": "Expiry Year",
+      "cardHolderName": "Card Holder Name",
+      "createCard": "Create Card",
+      "cardNumberMustBe16Digits": "Card number must be 16 digits",
+      "invalidMonth": "Invalid month",
+      "invalidYear": "Invalid year",
+      "expiryDateMustBeInFuture": "Expiry date must be in the future",
+      "nameMustBeGreaterThanOneWord": "Name must be greater than one word",
+      "thisFieldIsRequired": "This field is required",
+        "setAsDefaultCard": "Set as default card",
+         "convert": "Convert",
+          "convertPoints": "Convert Points",
+          "enterPoints": "Enter points",
+          "invalidPoints": "Invalid points",
+          "insufficientPoints": "Insufficient points",
+          "insufficientWalletBalance": "Insufficient wallet balance",
+          "defaultCard": "Default Card",
+          "addCard": "Add Card"
 
 }

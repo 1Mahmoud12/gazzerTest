@@ -10,4 +10,14 @@ abstract class CheckoutRepo extends BaseApiRepo {
   Future<Result<List<VoucherDTO>>> getVouchers();
 
   Future<Result<VoucherDTO>> checkVoucher(String code);
+
+  Future<Result<String>> addCard({
+    required String cardNumber,
+    required String cardholderName,
+    required String expiryMonth,
+    required String expiryYear,
+    required bool isDefault,
+  });
+
+  Future<Result<String>> convertPoints(int points);
 }

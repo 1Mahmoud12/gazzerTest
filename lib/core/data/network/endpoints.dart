@@ -121,4 +121,6 @@ class Endpoints {
   static const getCheckoutData = "wallet";
   static const getVoucher = "vouchers/list";
   static const checkVoucher = "vouchers/validate";
+  static const convertPoints = "wallet/convert-points";
+  static const addNewCard = "wallet/cards";
 }

@@ -24,6 +24,7 @@ import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/checkout/data/checkout_repo_imp.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/cards_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/vouchers_cubit.dart';
 import 'package:gazzer/features/dailyOffers/data/daily_offer_repo_imp.dart';
@@ -201,6 +202,7 @@ void _registerCubits() {
   di.registerFactory(() => CartCubit(di.get(), di.get()));
   di.registerFactory(() => CheckoutCubit(di.get()));
   di.registerFactory(() => VouchersCubit(di.get()));
+  di.registerFactory(() => CardsCubit(di.get()));
   di.registerFactory(() => SearchCubit(di.get()));
   di.registerFactory(() => DailyOfferCubit(di.get()));
   di.registerFactory(() => TopItemsCubit(di.get()));

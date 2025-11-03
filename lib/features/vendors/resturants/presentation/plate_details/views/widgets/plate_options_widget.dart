@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 
@@ -132,7 +133,7 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
                           Text(value.name, style: TStyle.blackRegular(14)),
                           // Show price if not free, else show "مجاني" (free)
                           Text(
-                            value.isFree ? 'مجاني' : '${value.price} جنيه',
+                            value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ',
                             style: TStyle.blackRegular(12).copyWith(
                               color: Colors.grey[600],
                             ),

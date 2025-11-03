@@ -89,3 +89,12 @@ class CardError extends CheckoutStates {
   @override
   List<Object?> get props => [message];
 }
+
+class CardChange extends CheckoutStates {
+  const CardChange({required this.timestamp});
+
+  final int timestamp;
+
+  @override
+  List<Object?> get props => [timestamp];
+}

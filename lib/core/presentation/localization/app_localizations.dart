@@ -1961,7 +1961,7 @@ abstract class AppLocalizations {
   /// No description provided for @thisFieldIsRequired.
   ///
   /// In en, this message translates to:
-  /// **'This field is required.'**
+  /// **'This field is required'**
   String get thisFieldIsRequired;
 
   /// No description provided for @fullNameShouldBeThreeLettersOrMore.
@@ -2561,7 +2561,7 @@ abstract class AppLocalizations {
   /// No description provided for @insufficientWalletBalance.
   ///
   /// In en, this message translates to:
-  /// **'Your wallet balance is insufficient. You can complete the remaining amount using a bank card only'**
+  /// **'Insufficient wallet balance'**
   String get insufficientWalletBalance;
 
   /// No description provided for @placeOrder.
@@ -2599,6 +2599,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Promo Code'**
   String get promoCode;
+
+  /// No description provided for @createYourCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Your Card'**
+  String get createYourCard;
+
+  /// No description provided for @cardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Number'**
+  String get cardNumber;
+
+  /// No description provided for @expiryMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry Month'**
+  String get expiryMonth;
+
+  /// No description provided for @expiryYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry Year'**
+  String get expiryYear;
+
+  /// No description provided for @cardHolderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Holder Name'**
+  String get cardHolderName;
+
+  /// No description provided for @createCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Card'**
+  String get createCard;
+
+  /// No description provided for @cardNumberMustBe16Digits.
+  ///
+  /// In en, this message translates to:
+  /// **'Card number must be 16 digits'**
+  String get cardNumberMustBe16Digits;
+
+  /// No description provided for @invalidMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid month'**
+  String get invalidMonth;
+
+  /// No description provided for @invalidYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid year'**
+  String get invalidYear;
+
+  /// No description provided for @expiryDateMustBeInFuture.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry date must be in the future'**
+  String get expiryDateMustBeInFuture;
+
+  /// No description provided for @nameMustBeGreaterThanOneWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be greater than one word'**
+  String get nameMustBeGreaterThanOneWord;
+
+  /// No description provided for @setAsDefaultCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as default card'**
+  String get setAsDefaultCard;
+
+  /// No description provided for @convert.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert'**
+  String get convert;
+
+  /// No description provided for @convertPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert Points'**
+  String get convertPoints;
+
+  /// No description provided for @enterPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter points'**
+  String get enterPoints;
+
+  /// No description provided for @invalidPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid points'**
+  String get invalidPoints;
+
+  /// No description provided for @insufficientPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Insufficient points'**
+  String get insufficientPoints;
 }
 
 class _AppLocalizationsDelegate

@@ -9,8 +9,9 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/cards_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/cards_states.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkout_cubit.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/checkout_states.dart';
 import 'package:go_router/go_router.dart';
 
 class CardDetailsScreen extends StatefulWidget {
@@ -28,6 +29,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
   late final TextEditingController _expiryMonthController;
   late final TextEditingController _expiryYearController;
   late final TextEditingController _cardHolderNameController;
+  bool _isDefault = true;
 
   @override
   void initState() {
@@ -36,7 +38,6 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
     _expiryMonthController = TextEditingController();
     _expiryYearController = TextEditingController();
     _cardHolderNameController = TextEditingController();
-    context.read<CheckoutCubit>().loadCards();
   }
 
   @override
@@ -54,7 +55,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
     }
     final digitsOnly = value.replaceAll(' ', '');
     if (digitsOnly.length != 16) {
-      return 'Card number must be 16 digits';
+      return L10n.tr().cardNumberMustBe16Digits;
     }
     return null;
   }
@@ -65,7 +66,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
     }
     final month = int.tryParse(value);
     if (month == null || month < 1 || month > 12) {
-      return 'Invalid month';
+      return L10n.tr().invalidMonth;
     }
     return null;
   }
@@ -76,18 +77,15 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
     }
     final year = int.tryParse(value);
     if (year == null) {
-      return 'Invalid year';
+      return L10n.tr().invalidYear;
     }
 
-    // Get current year
     final currentYear = DateTime.now().year % 100;
-
-    // Check if the date is in the future
     final month = int.tryParse(_expiryMonthController.text);
     if (month != null) {
       final currentMonth = DateTime.now().month;
       if (year < currentYear || (year == currentYear && month <= currentMonth)) {
-        return 'Expiry date must be in the future';
+        return L10n.tr().expiryDateMustBeInFuture;
       }
     }
 
@@ -100,158 +98,182 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
     }
     final words = value.trim().split(' ');
     if (words.length < 2) {
-      return 'Name must be greater than one word';
+      return L10n.tr().nameMustBeGreaterThanOneWord;
     }
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: di<CheckoutCubit>(),
-
-      child: Scaffold(
-        appBar: AppBar(
-          title: GradientText(
-            text: 'Create Your Card',
-            style: TStyle.blackBold(18),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => di<CardsCubit>()),
+        BlocProvider.value(value: di<CheckoutCubit>()),
+      ],
+      child: PopScope(
+        canPop: true,
+        onPopInvokedWithResult: (didPop, result) async {
+          if (didPop) return;
+          context.read<CheckoutCubit>().loadCheckoutData();
+          if (context.mounted) context.pop();
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: GradientText(
+              text: L10n.tr().createYourCard,
+              style: TStyle.blackBold(18),
+            ),
           ),
-        ),
-        body: ListView(
-          padding: AppConst.defaultPadding,
-          children: [
-            BlocConsumer<CheckoutCubit, CheckoutStates>(
-              listener: (context, state) {
-                if (state is CardCreated) {
-                  Alerts.showToast('Card created successfully', error: false);
-                  context.pop();
-                } else if (state is CardError) {
-                  Alerts.showToast(state.message);
-                }
-              },
-              builder: (context, state) {
-                return Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Card Number',
-                        style: TStyle.blackBold(14),
-                      ),
-                      const VerticalSpacing(8),
-                      MainTextField(
-                        controller: _cardNumberController,
-                        hintText: '4916 6272 1991 9310',
-                        showBorder: true,
-                        borderRadius: 16,
-                        validator: _validateCardNumber,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: CardNumberFormatter(),
-                        max: 19, // 16 digits + 3 spaces
-                      ),
-                      const VerticalSpacing(16),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Expiry Month',
-                                  style: TStyle.blackBold(14),
-                                ),
-                                const VerticalSpacing(8),
-                                MainTextField(
-                                  controller: _expiryMonthController,
-                                  hintText: '10',
-                                  showBorder: true,
-                                  borderRadius: 16,
-                                  validator: _validateExpiryMonth,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: FilteringTextInputFormatter.digitsOnly,
-                                  max: 2,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const HorizontalSpacing(16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Expiry Year',
-                                  style: TStyle.blackBold(14),
-                                ),
-                                const VerticalSpacing(8),
-                                MainTextField(
-                                  controller: _expiryYearController,
-                                  hintText: '27',
-                                  showBorder: true,
-                                  borderRadius: 16,
-                                  validator: _validateExpiryYear,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: FilteringTextInputFormatter.digitsOnly,
-                                  max: 2,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const VerticalSpacing(16),
-                      Text(
-                        'Card Holder Name',
-                        style: TStyle.blackBold(14),
-                      ),
-                      const VerticalSpacing(8),
-                      MainTextField(
-                        controller: _cardHolderNameController,
-                        hintText: 'John Doe',
-                        showBorder: true,
-                        borderRadius: 16,
-                        validator: _validateCardHolderName,
-                        keyboardType: TextInputType.name,
-                      ),
-                      const VerticalSpacing(24),
-                      const VerticalSpacing(16),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        bottomNavigationBar: SafeArea(
-          top: false,
-          child: Padding(
+          body: ListView(
             padding: AppConst.defaultPadding,
-            child: BlocBuilder<CheckoutCubit, CheckoutStates>(
-              builder: (context, state) {
-                final isLoading = state is CardsLoaded && state.isCreating;
-                return MainBtn(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() == true) {
-                      context.read<CheckoutCubit>().createCard(
-                        cardNumber: _cardNumberController.text,
-                        expiryMonth: int.parse(_expiryMonthController.text),
-                        expiryYear: int.parse(_expiryYearController.text),
-                        cardHolderName: _cardHolderNameController.text,
-                      );
-                    }
-                  },
-                  isLoading: isLoading,
-                  text: 'Create Card',
-                  bgColor: Co.purple.withOpacity(0.1),
-                  borderColor: Co.purple,
-                  borderThickness: 1,
-                  textStyle: TStyle.primaryBold(16),
-                  width: double.infinity,
-                  height: 50,
-                );
-              },
-            ),
+            children: [
+              BlocConsumer<CardsCubit, CardsStates>(
+                listener: (context, state) {
+                  if (state is CardAddedSuccess) {
+                    context.read<CheckoutCubit>().loadCheckoutData();
+                    Alerts.showToast(state.message, error: false);
+                    context.pop();
+                  } else if (state is CardAddedError) {
+                    Alerts.showToast(state.message);
+                  }
+                },
+                builder: (context, state) {
+                  final isLoading = state is CardsLoading;
+                  return Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(L10n.tr().cardNumber, style: TStyle.blackBold(14)),
+                        const VerticalSpacing(8),
+                        MainTextField(
+                          controller: _cardNumberController,
+                          hintText: '4916 6272 1991 9310',
+                          showBorder: true,
+                          borderRadius: 16,
+                          validator: _validateCardNumber,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: CardNumberFormatter(),
+                          max: 19,
+                        ),
+                        const VerticalSpacing(16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    L10n.tr().expiryMonth,
+                                    style: TStyle.blackBold(14),
+                                  ),
+                                  const VerticalSpacing(8),
+                                  MainTextField(
+                                    controller: _expiryMonthController,
+                                    hintText: '10',
+                                    showBorder: true,
+                                    borderRadius: 16,
+                                    validator: _validateExpiryMonth,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                                    max: 2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const HorizontalSpacing(16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    L10n.tr().expiryYear,
+                                    style: TStyle.blackBold(14),
+                                  ),
+                                  const VerticalSpacing(8),
+                                  MainTextField(
+                                    controller: _expiryYearController,
+                                    hintText: '27',
+                                    showBorder: true,
+                                    borderRadius: 16,
+                                    validator: _validateExpiryYear,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                                    max: 2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const VerticalSpacing(16),
+                        Text(
+                          L10n.tr().cardHolderName,
+                          style: TStyle.blackBold(14),
+                        ),
+                        const VerticalSpacing(8),
+                        MainTextField(
+                          controller: _cardHolderNameController,
+                          hintText: 'John Doe',
+                          showBorder: true,
+                          borderRadius: 16,
+                          validator: _validateCardHolderName,
+                          keyboardType: TextInputType.name,
+                        ),
+                        const VerticalSpacing(12),
+                        Row(
+                          children: [
+                            Transform.scale(
+                              scale: 1.1,
+                              child: Checkbox(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                value: _isDefault,
+                                visualDensity: VisualDensity.compact,
+                                onChanged: (val) {
+                                  if (val == null) return;
+                                  setState(() => _isDefault = val);
+                                },
+                              ),
+                            ),
+                            const HorizontalSpacing(8),
+                            Expanded(
+                              child: Text(
+                                L10n.tr().setAsDefaultCard,
+                                style: TStyle.blackBold(14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const VerticalSpacing(16),
+                        MainBtn(
+                          onPressed: () {
+                            if (isLoading) return;
+                            if (_formKey.currentState?.validate() == true) {
+                              context.read<CardsCubit>().addCard(
+                                cardNumber: _cardNumberController.text,
+                                cardholderName: _cardHolderNameController.text,
+                                expiryMonth: _expiryMonthController.text.padLeft(2, '0'),
+                                expiryYear: _expiryYearController.text.length == 2 ? '20${_expiryYearController.text}' : _expiryYearController.text,
+                                isDefault: _isDefault,
+                              );
+                            }
+                          },
+                          isLoading: isLoading,
+                          text: L10n.tr().createCard,
+
+                          borderThickness: 1,
+                          width: double.infinity,
+                          height: 50,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
@@ -267,18 +289,13 @@ class CardNumberFormatter extends TextInputFormatter {
   ) {
     final text = newValue.text;
     if (text.isEmpty) return newValue;
-
     final digitsOnly = text.replaceAll(' ', '');
     if (digitsOnly.length > 16) return oldValue;
-
     final buffer = StringBuffer();
     for (int i = 0; i < digitsOnly.length; i++) {
-      if (i > 0 && i % 4 == 0) {
-        buffer.write(' ');
-      }
+      if (i > 0 && i % 4 == 0) buffer.write(' ');
       buffer.write(digitsOnly[i]);
     }
-
     final formatted = buffer.toString();
     return TextEditingValue(
       text: formatted,

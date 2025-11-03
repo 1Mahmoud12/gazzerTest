@@ -20,7 +20,6 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
   PaymentMethod get selectedPaymentMethod => _selectedPaymentMethod;
   double get walletBalance => _walletBalance;
-
   int get availablePoints => _availablePoints;
 
   // Card management
@@ -34,6 +33,17 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   void emit(CheckoutStates state) {
     if (isClosed) return;
     super.emit(state);
+  }
+
+  Future<void> convertPoints(int points) async {
+    final res = await _checkoutRepo.convertPoints(points);
+    switch (res) {
+      case Ok<String>(:final value):
+        Alerts.showToast(value, error: false);
+        await loadCheckoutData();
+      case Err(:final error):
+        Alerts.showToast(error.message);
+    }
   }
 
   /// Loads checkout data (wallet, loyalty points, payment cards)
@@ -71,25 +81,48 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     emit(CardsLoaded(cards: _cards, isCreating: _isCreatingCard));
   }
 
-  /// Creates a new card (local only for now)
+  /// Creates a new card via API
   Future<void> createCard({required String cardNumber, required int expiryMonth, required int expiryYear, required String cardHolderName}) async {
     _isCreatingCard = true;
     emit(CardsLoaded(cards: _cards, isCreating: _isCreatingCard));
 
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    final card = CardEntity(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      cardNumber: cardNumber.replaceAll(' ', ''),
-      expiryMonth: expiryMonth,
-      expiryYear: expiryYear,
-      cardHolderName: cardHolderName,
+    final result = await _checkoutRepo.addCard(
+      cardNumber: cardNumber,
+      cardholderName: cardHolderName,
+      expiryMonth: expiryMonth.toString().padLeft(2, '0'),
+      expiryYear: expiryYear.toString(),
+      isDefault: true,
     );
 
-    _cards.add(card);
-    _isCreatingCard = false;
+    switch (result) {
+      case Ok<String>(:final value):
+        Alerts.showToast(value, error: false);
+        _isCreatingCard = false;
+        emit(
+          CardCreated(
+            card: CardEntity(
+              id: DateTime.now().millisecondsSinceEpoch.toString(),
+              cardNumber: cardNumber.replaceAll(' ', ''),
+              expiryMonth: expiryMonth,
+              expiryYear: expiryYear,
+              cardHolderName: cardHolderName,
+            ),
+          ),
+        );
+        await loadCheckoutData();
+      case Err(:final error):
+        _isCreatingCard = false;
+        Alerts.showToast(error.message);
+        emit(CardError(message: error.message));
+    }
+  }
 
-    emit(CardCreated(card: card));
-    await loadCheckoutData();
+  CardEntity? _selectedCard;
+
+  CardEntity? get selectedCard => _selectedCard;
+
+  void selectCard(CardEntity card) {
+    _selectedCard = card;
+    emit(CardChange(timestamp: DateTime.now().millisecondsSinceEpoch));
   }
 }
