@@ -49,7 +49,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     cubit.placeOrder();
                     // TODO: Navigate to success screen or show loading
                   },
-                  text: 'Place Order',
+                  text: L10n.tr().placeOrder,
                   bgColor: Co.secondary,
                   textStyle: TStyle.blackBold(16),
                   width: double.infinity,

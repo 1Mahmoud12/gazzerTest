@@ -9,67 +9,30 @@ sealed class CheckoutStates extends Equatable {
 
 class CheckoutInitial extends CheckoutStates {}
 
-class VoucherLoading extends CheckoutStates {}
+class CheckoutDataLoading extends CheckoutStates {}
 
-class VoucherChange extends CheckoutStates {
-  const VoucherChange({required this.timestamp});
+class CheckoutDataLoaded extends CheckoutStates {
+  const CheckoutDataLoaded({required this.walletBalance, required this.availablePoints, required this.paymentCards});
 
-  final int timestamp;
-
-  @override
-  List<Object?> get props => [timestamp];
-}
-
-class VoucherLoaded extends CheckoutStates {
-  const VoucherLoaded({
-    required this.voucherCode,
-  });
-
-  final String? voucherCode;
+  final double walletBalance;
+  final int availablePoints;
+  final List<CardEntity> paymentCards;
 
   @override
-  List<Object?> get props => [voucherCode];
+  List<Object?> get props => [walletBalance, availablePoints, paymentCards];
 }
 
-class VoucherApplied extends CheckoutStates {
-  const VoucherApplied({
-    required this.voucherCode,
-    required this.discountAmount,
-  });
-
-  final String voucherCode;
-  final double discountAmount;
-
-  @override
-  List<Object?> get props => [voucherCode, discountAmount];
-}
-
-class VoucherError extends CheckoutStates {
-  const VoucherError({required this.message});
-
-  final String message;
-
-  @override
-  List<Object?> get props => [message];
-}
-
-enum PaymentMethod {
-  cashOnDelivery,
-  creditDebitCard,
-  gazzerWallet,
-}
+enum PaymentMethod { cashOnDelivery, creditDebitCard, gazzerWallet }
 
 class PaymentMethodLoaded extends CheckoutStates {
-  const PaymentMethodLoaded({
-    required this.selectedPaymentMethod,
-    this.walletBalance = 500.0,
-  });
+  const PaymentMethodLoaded({required this.selectedPaymentMethod, this.walletBalance = 500.0, this.availablePoints = 0});
 
   final PaymentMethod selectedPaymentMethod;
   final double walletBalance;
+  final int availablePoints;
 
   @override
-  List<Object?> get props => [selectedPaymentMethod, walletBalance];
+  List<Object?> get props => [selectedPaymentMethod, walletBalance, availablePoints];
 }
 
 class CardEntity {

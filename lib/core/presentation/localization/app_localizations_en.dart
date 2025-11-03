@@ -1249,4 +1249,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get balance => 'Balance';
+
+  @override
+  String get addCard => 'Add Card';
+
+  @override
+  String get defaultCard => 'Default Card';
+
+  @override
+  String get availablePoints => 'Available Points';
+
+  @override
+  String get insufficientWalletBalance => 'Your wallet balance is insufficient. You can complete the remaining amount using a bank card only';
+
+  @override
+  String get placeOrder => 'Place Order';
+
+  @override
+  String get voucherApplied => 'Voucher applied!';
+
+  @override
+  String get selectVoucher => 'Select Voucher';
+
+  @override
+  String get pleaseEnterVoucherCode => 'Please enter a voucher code';
+
+  @override
+  String get invalidVoucherCode => 'Invalid voucher code';
+
+  @override
+  String get promoCode => 'Promo Code';
 }

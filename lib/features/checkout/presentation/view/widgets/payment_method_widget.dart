@@ -23,6 +23,9 @@ class PaymentMethodWidget extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<CheckoutCubit>();
         final selectedMethod = cubit.selectedPaymentMethod;
+        final walletBalance = cubit.walletBalance;
+        final availablePoints = cubit.availablePoints;
+        final cards = cubit.cards;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,11 +56,28 @@ class PaymentMethodWidget extends StatelessWidget {
                     title: L10n.tr().creditCard,
                     icon: Assets.creditCard,
                     isSelected: selectedMethod == PaymentMethod.creditDebitCard,
-                    onTap: () {
-                      cubit.selectPaymentMethod(PaymentMethod.creditDebitCard);
-                      context.push(CardDetailsScreen.route);
-                    },
+                    onTap: () => cubit.selectPaymentMethod(PaymentMethod.creditDebitCard),
                   ),
+                  // Show cards when credit card is selected
+                  if (selectedMethod == PaymentMethod.creditDebitCard) ...[
+                    const SizedBox(height: 12),
+                    ...cards.map(
+                      (card) => Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: _CardItem(
+                          card: card,
+                          isSelected: card.isDefault,
+                          onTap: () {
+                            // TODO: Select card
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    _AddCardItem(
+                      onTap: () => context.push(CardDetailsScreen.route),
+                    ),
+                  ],
                   const SizedBox(height: 12),
                   _PaymentMethodItem(
                     method: PaymentMethod.gazzerWallet,
@@ -66,12 +86,15 @@ class PaymentMethodWidget extends StatelessWidget {
                     isSelected: selectedMethod == PaymentMethod.gazzerWallet,
                     onTap: () {
                       cubit.selectPaymentMethod(PaymentMethod.gazzerWallet);
-                      voucherAlert(
-                        title: 'Your wallet balance is insufficient. You can complete the remaining amount using a bank card only',
-                        context: context,
-                      );
+                      if (walletBalance <= 0) {
+                        voucherAlert(
+                          title: L10n.tr().insufficientWalletBalance,
+                          context: context,
+                        );
+                      }
                     },
-                    balance: cubit.walletBalance,
+                    balance: walletBalance,
+                    availablePoints: availablePoints,
                   ),
                 ],
               ),
@@ -91,6 +114,7 @@ class _PaymentMethodItem extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
     this.balance,
+    this.availablePoints,
   });
 
   final PaymentMethod method;
@@ -99,6 +123,7 @@ class _PaymentMethodItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
   final double? balance;
+  final int? availablePoints;
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +170,123 @@ class _PaymentMethodItem extends StatelessWidget {
                       style: TStyle.greyRegular(12),
                     ),
                   ],
+                  if (availablePoints != null && availablePoints! >= 0) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      '${L10n.tr().availablePoints}: $availablePoints',
+                      style: TStyle.greyRegular(12),
+                    ),
+                  ],
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardItem extends StatelessWidget {
+  const _CardItem({
+    required this.card,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final CardEntity card;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? Co.purple : Colors.transparent,
+            width: 1,
+          ),
+          color: Co.bg,
+        ),
+        child: Row(
+          children: [
+            GradientRadioBtn(
+              isSelected: isSelected,
+              size: 4,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    card.cardNumber,
+                    style: TStyle.blackBold(16),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${card.cardHolderName} • ${card.formattedExpiry}',
+                    style: TStyle.greyRegular(12),
+                  ),
+                ],
+              ),
+            ),
+            if (card.isDefault)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Co.purple.withOpacityNew(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  L10n.tr().defaultCard,
+                  style: TStyle.primaryBold(10),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AddCardItem extends StatelessWidget {
+  const _AddCardItem({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Co.purple.withOpacityNew(0.3),
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+          color: Co.purple.withOpacityNew(0.05),
+        ),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.add_circle_outline,
+              color: Co.purple,
+              size: 20,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              L10n.tr().addCard,
+              style: TStyle.primaryBold(16),
             ),
           ],
         ),

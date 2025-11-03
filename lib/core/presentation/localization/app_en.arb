@@ -492,6 +492,17 @@
     "cashOnDelivery": "Cash on Delivery",
     "creditCard": "Credit Card",
     "gazzarWallet": "Gazzar Wallet",
-    "balance": "Balance"
+    "balance": "Balance",
+    "addCard": "Add Card",
+    "defaultCard": "Default Card",
+    "availablePoints": "Available Points",
+    "insufficientWalletBalance": "Your wallet balance is insufficient. You can complete the remaining amount using a bank card only",
+    "placeOrder": "Place Order",
+    "voucherApplied": "Voucher applied!",
+    "discount": "Discount",
+    "selectVoucher": "Select Voucher",
+    "pleaseEnterVoucherCode": "Please enter a voucher code",
+    "invalidVoucherCode": "Invalid voucher code",
+    "promoCode": "Promo Code"
 
 }

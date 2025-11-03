@@ -494,4 +494,15 @@
 "cashOnDelivery": "الدفع عند الاستلام",
 "creditCard": "بطاقة الائتمان",
 "gazzarWallet": "محفظة جزر",
-"balance": "الرصيد"}
+"balance": "الرصيد","addCard": "إضافة بطاقة",
+                    "defaultCard": "البطاقة الافتراضية",
+                    "availablePoints": "النقاط المتاحة",
+                    "insufficientWalletBalance": "رصيد محفظتك غير كافٍ. يمكنك إتمام المبلغ المتبقي باستخدام بطاقة بنكية فقط",
+                    "placeOrder": "إتمام الطلب",
+                    "voucherApplied": "تم تطبيق القسيمة!",
+                    "discount": "الخصم",
+                    "selectVoucher": "اختر القسيمة",
+                    "pleaseEnterVoucherCode": "يرجى إدخال رمز القسيمة",
+                    "invalidVoucherCode": "رمز القسيمة غير صالح",
+                    "promoCode": "رمز العرض الترويجي"
+                    }

@@ -116,4 +116,9 @@ class Endpoints {
   static const favorites = "favorites";
   static const addFavorite = "favorites/add";
   static const removeFavorite = "favorites/remove";
+
+  // ** CheckOut
+  static const getCheckoutData = "wallet";
+  static const getVoucher = "vouchers/list";
+  static const checkVoucher = "vouchers/validate";
 }

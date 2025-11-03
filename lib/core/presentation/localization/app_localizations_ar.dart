@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1249,4 +1249,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get balance => 'الرصيد';
+
+  @override
+  String get addCard => 'إضافة بطاقة';
+
+  @override
+  String get defaultCard => 'البطاقة الافتراضية';
+
+  @override
+  String get availablePoints => 'النقاط المتاحة';
+
+  @override
+  String get insufficientWalletBalance => 'رصيد محفظتك غير كافٍ. يمكنك إتمام المبلغ المتبقي باستخدام بطاقة بنكية فقط';
+
+  @override
+  String get placeOrder => 'إتمام الطلب';
+
+  @override
+  String get voucherApplied => 'تم تطبيق القسيمة!';
+
+  @override
+  String get selectVoucher => 'اختر القسيمة';
+
+  @override
+  String get pleaseEnterVoucherCode => 'يرجى إدخال رمز القسيمة';
+
+  @override
+  String get invalidVoucherCode => 'رمز القسيمة غير صالح';
+
+  @override
+  String get promoCode => 'رمز العرض الترويجي';
 }

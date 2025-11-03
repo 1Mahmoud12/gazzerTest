@@ -2539,6 +2539,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Balance'**
   String get balance;
+
+  /// No description provided for @addCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Card'**
+  String get addCard;
+
+  /// No description provided for @defaultCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Default Card'**
+  String get defaultCard;
+
+  /// No description provided for @availablePoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Points'**
+  String get availablePoints;
+
+  /// No description provided for @insufficientWalletBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Your wallet balance is insufficient. You can complete the remaining amount using a bank card only'**
+  String get insufficientWalletBalance;
+
+  /// No description provided for @placeOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Place Order'**
+  String get placeOrder;
+
+  /// No description provided for @voucherApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Voucher applied!'**
+  String get voucherApplied;
+
+  /// No description provided for @selectVoucher.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Voucher'**
+  String get selectVoucher;
+
+  /// No description provided for @pleaseEnterVoucherCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a voucher code'**
+  String get pleaseEnterVoucherCode;
+
+  /// No description provided for @invalidVoucherCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid voucher code'**
+  String get invalidVoucherCode;
+
+  /// No description provided for @promoCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Promo Code'**
+  String get promoCode;
 }
 
 class _AppLocalizationsDelegate
