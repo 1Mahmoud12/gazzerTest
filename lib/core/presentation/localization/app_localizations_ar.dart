@@ -1330,4 +1330,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get insufficientPoints => 'النقاط غير كافية';
+
+  @override
+  String get completePayment => 'اكمال عملية الدفع';
+
+  @override
+  String get wallet => 'المحعظه الالكترونيه';
 }

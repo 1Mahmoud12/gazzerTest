@@ -524,5 +524,7 @@
                         "insufficientPoints": "النقاط غير كافية",
                         "insufficientWalletBalance": "رصيد المحفظة غير كافٍ",
                         "defaultCard": "البطاقة الافتراضية",
-                        "addCard": "إضافة بطاقة"
+                        "addCard": "إضافة بطاقة",
+                        "completePayment":"اكمال عملية الدفع",
+                        "wallet":"المحعظه الالكترونيه"
                     }

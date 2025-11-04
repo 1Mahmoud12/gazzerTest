@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/pkgs/paymob/check_out_service.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
@@ -74,7 +76,13 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   }
 
   /// Places the order
-  Future<void> placeOrder() async {}
+  Future<void> placeOrder(BuildContext context) async {
+    if (_selectedPaymentMethod == PaymentMethod.creditDebitCard) {
+      await CheckoutService().processUnifiedCheckout(context, amountCents: 10000);
+    } else if (_selectedPaymentMethod == PaymentMethod.wallet) {
+      CheckoutService().processWalletPayment(context, "01010101010");
+    }
+  }
 
   /// Loads cards
   void loadCards() {

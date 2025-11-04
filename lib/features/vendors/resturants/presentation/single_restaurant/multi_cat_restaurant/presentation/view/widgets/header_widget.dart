@@ -12,7 +12,7 @@ class MultiCatRestHeader extends StatelessWidget {
   final Iterable<String>? categires;
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.paddingOf(context).top + 2 * kToolbarHeight + 120.0; // 105 is the expected height of vendor info card
+    final height = MediaQuery.paddingOf(context).top + 2 * kToolbarHeight + 125.0; // 105 is the expected height of vendor info card
 
     return SizedBox(
       height: height,
@@ -23,7 +23,7 @@ class MultiCatRestHeader extends StatelessWidget {
             alignment: const Alignment(0, 0.63),
             maxWidth: 1306,
             minWidth: 1306,
-            maxHeight: 394,
+            maxHeight: 410,
             minHeight: 394,
             child: ClipPath(
               clipper: AddShapeClipper(),
@@ -51,7 +51,7 @@ class MultiCatRestHeader extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 40),
+                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 20),
                       child: VendorInfoCard(
                         restaurant,
                         categories: categires,

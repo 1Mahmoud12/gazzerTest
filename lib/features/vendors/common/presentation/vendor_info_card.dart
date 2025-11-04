@@ -174,7 +174,7 @@ class VendorInfoCard extends StatelessWidget {
                 ],
               ),
             ),
-            if (!vendor.isClosed)
+            if (vendor.isOpen)
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(
@@ -240,9 +240,7 @@ class VendorInfoCard extends StatelessWidget {
                   ],
                 ),
               ),
-            if (vendor.alwaysOpen != true &&
-                vendor.endTime != null &&
-                vendor.endTime!.difference(DateTime.now()) < Duration(minutes: vendor.mintsBeforClosingAlert))
+            if (!vendor.isOpen)
               VendorClosingTimer(
                 endTime: vendor.endTime!,
                 name: vendor.name,

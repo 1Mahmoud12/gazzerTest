@@ -10,7 +10,9 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/di.dart';
 import 'package:gazzer/firebase_options.dart';
 import 'package:gazzer/gazzer_app.dart';
+import 'package:logger/logger.dart';
 
+Logger logger = Logger();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);

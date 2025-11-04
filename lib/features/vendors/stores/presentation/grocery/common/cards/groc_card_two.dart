@@ -25,7 +25,7 @@ class GrocCardTwo extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        onPressed: vendor.isClosed ? null : onPressed,
+        onPressed: !vendor.isOpen ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
@@ -48,7 +48,7 @@ class GrocCardTwo extends StatelessWidget {
                         ],
                       ),
                       child: DecoratedBox(
-                        decoration: vendor.isClosed
+                        decoration: !vendor.isOpen
                             ? BoxDecoration(color: Colors.red.withAlpha(75), shape: BoxShape.circle)
                             : const BoxDecoration(shape: BoxShape.circle),
                         child: CustomNetworkImage(
@@ -57,33 +57,34 @@ class GrocCardTwo extends StatelessWidget {
                           height: double.infinity,
                           borderRaduis: 150,
                           width: double.infinity,
-                          opacity: vendor.isClosed ? 0.4 : 1,
+                          opacity: !vendor.isOpen ? 0.4 : 1,
                         ),
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: AlignmentDirectional.topEnd,
-                    child: IntrinsicWidth(
-                      child: Container(
-                        decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
-                        padding: const EdgeInsets.all(8),
-                        height: vendor.isClosed ? 55 : 24,
-                        alignment: Alignment.center,
-                        child: vendor.isClosed
-                            ? Text(
-                                L10n.tr().closed,
-                                style: TStyle.blackSemi(12),
-                              )
-                            : vendor.badge == null
-                            ? null
-                            : Text(
-                                vendor.badge!,
-                                style: TStyle.primaryBold(12),
-                              ),
+                  if (!vendor.isOpen && vendor.badge == null)
+                    Align(
+                      alignment: AlignmentDirectional.topEnd,
+                      child: IntrinsicWidth(
+                        child: Container(
+                          decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
+                          padding: const EdgeInsets.all(8),
+                          height: !vendor.isOpen ? 55 : 24,
+                          alignment: Alignment.center,
+                          child: !vendor.isOpen
+                              ? Text(
+                                  L10n.tr().closed,
+                                  style: TStyle.blackSemi(12),
+                                )
+                              : vendor.badge == null
+                              ? null
+                              : Text(
+                                  vendor.badge!,
+                                  style: TStyle.primaryBold(12),
+                                ),
+                        ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),

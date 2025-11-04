@@ -2701,6 +2701,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Insufficient points'**
   String get insufficientPoints;
+
+  /// No description provided for @completePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete Payment'**
+  String get completePayment;
+
+  /// No description provided for @wallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get wallet;
 }
 
 class _AppLocalizationsDelegate

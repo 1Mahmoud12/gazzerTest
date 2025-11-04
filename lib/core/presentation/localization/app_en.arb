@@ -524,6 +524,8 @@
           "insufficientPoints": "Insufficient points",
           "insufficientWalletBalance": "Insufficient wallet balance",
           "defaultCard": "Default Card",
-          "addCard": "Add Card"
+          "addCard": "Add Card",
+          "completePayment":"Complete Payment",
+          "wallet":"Wallet"
 
 }

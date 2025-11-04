@@ -27,7 +27,7 @@ class GrocCardOne extends StatelessWidget {
       width: width,
       height: height,
       child: ElevatedButton(
-        onPressed: vendor.isClosed ? null : onPressed,
+        onPressed: !vendor.isOpen ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           disabledBackgroundColor: Colors.transparent,
@@ -55,15 +55,15 @@ class GrocCardOne extends StatelessWidget {
                       SizedBox.expand(
                         child: DecoratedBox(
                           position: DecorationPosition.foreground,
-                          decoration: vendor.isClosed ? BoxDecoration(color: Colors.red.withAlpha(75)) : const BoxDecoration(),
+                          decoration: !vendor.isOpen ? BoxDecoration(color: Colors.red.withAlpha(75)) : const BoxDecoration(),
                           child: CustomNetworkImage(
                             vendor.image,
                             fit: BoxFit.cover,
-                            opacity: vendor.isClosed ? 0.4 : 1,
+                            opacity: !vendor.isOpen ? 0.4 : 1,
                           ),
                         ),
                       ),
-                      if (vendor.isClosed)
+                      if (!vendor.isOpen)
                         CardBadge(text: L10n.tr().closed, fullWidth: true, alignment: AlignmentDirectional.topStart)
                       else if (vendor.badge != null)
                         CardBadge(text: vendor.badge!, alignment: AlignmentDirectional.topStart),

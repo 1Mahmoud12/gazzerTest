@@ -22,7 +22,7 @@ class CheckoutDataLoaded extends CheckoutStates {
   List<Object?> get props => [walletBalance, availablePoints, paymentCards];
 }
 
-enum PaymentMethod { cashOnDelivery, creditDebitCard, gazzerWallet }
+enum PaymentMethod { cashOnDelivery, creditDebitCard, wallet, gazzerWallet }
 
 class PaymentMethodLoaded extends CheckoutStates {
   const PaymentMethodLoaded({required this.selectedPaymentMethod, this.walletBalance = 500.0, this.availablePoints = 0});

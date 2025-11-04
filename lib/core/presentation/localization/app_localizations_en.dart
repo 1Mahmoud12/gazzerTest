@@ -1330,4 +1330,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get insufficientPoints => 'Insufficient points';
+
+  @override
+  String get completePayment => 'Complete Payment';
+
+  @override
+  String get wallet => 'Wallet';
 }

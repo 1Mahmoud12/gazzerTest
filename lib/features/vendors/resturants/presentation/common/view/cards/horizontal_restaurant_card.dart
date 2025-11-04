@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -42,7 +43,7 @@ class HorizontalRestaurantCard extends StatelessWidget {
           borderRadius: AppConst.defaultBorderRadius,
         ),
         child: ElevatedButton(
-          onPressed: item.isClosed
+          onPressed: !item.isOpen
               ? null
               : onTap == null
               ? null
@@ -69,18 +70,19 @@ class HorizontalRestaurantCard extends StatelessWidget {
                         clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
                         child: Stack(
                           children: [
-                            Container(
-                              foregroundDecoration: !item.isClosed ? null : BoxDecoration(color: Colors.red.withAlpha(75)),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(item.image),
+                            SizedBox.expand(
+                              child: DecoratedBox(
+                                position: DecorationPosition.foreground,
+                                decoration: !item.isOpen ? BoxDecoration(color: Colors.red.withAlpha(75)) : const BoxDecoration(),
+                                child: CustomNetworkImage(
+                                  item.image,
                                   fit: BoxFit.cover,
-                                  opacity: item.isClosed ? 0.4 : 1,
-                                  onError: (error, stackTrace) => print(' Error loading image: $error'),
+                                  opacity: !item.isOpen ? 0.4 : 1,
                                 ),
                               ),
                             ),
-                            if (item.isClosed)
+
+                            if (!item.isOpen)
                               CardBadge(
                                 text: L10n.tr().closed,
                                 alignment: AlignmentDirectional.topStart,

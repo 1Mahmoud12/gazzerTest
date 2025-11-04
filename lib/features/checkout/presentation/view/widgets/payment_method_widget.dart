@@ -54,6 +54,15 @@ class PaymentMethodWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   _PaymentMethodItem(
+                    method: PaymentMethod.wallet,
+                    title: L10n.tr().wallet,
+                    icon: Assets.wallet,
+                    isSelected: selectedMethod == PaymentMethod.wallet,
+                    onTap: () => cubit.selectPaymentMethod(PaymentMethod.wallet),
+                  ),
+
+                  const SizedBox(height: 12),
+                  _PaymentMethodItem(
                     method: PaymentMethod.creditDebitCard,
                     title: L10n.tr().creditCard,
                     icon: Assets.creditCard,

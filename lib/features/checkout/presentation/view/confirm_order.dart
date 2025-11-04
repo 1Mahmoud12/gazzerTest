@@ -46,7 +46,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 final cubit = context.read<CheckoutCubit>();
                 return MainBtn(
                   onPressed: () {
-                    cubit.placeOrder();
+                    cubit.placeOrder(context);
                     // TODO: Navigate to success screen or show loading
                   },
                   text: L10n.tr().placeOrder,
