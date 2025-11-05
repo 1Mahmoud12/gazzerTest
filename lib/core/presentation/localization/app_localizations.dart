@@ -2755,6 +2755,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Orange Cash'**
   String get orangeCash;
+
+  /// No description provided for @payment_completed_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment completed successfully!'**
+  String get payment_completed_successfully;
+
+  /// No description provided for @payment_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment failed. Please try again.'**
+  String get payment_failed;
+
+  /// No description provided for @order_placed_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed successfully!'**
+  String get order_placed_successfully;
 }
 
 class _AppLocalizationsDelegate

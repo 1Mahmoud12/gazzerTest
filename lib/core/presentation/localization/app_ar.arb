@@ -533,5 +533,8 @@
                         "totalBeforeCode":"الاجمالي قبل الضريبه",
                         "vodafoneCash": "فودافون كاش",
                           "eCash": "اتصالات كاش",
-                          "orangeCash": "أورانج كاش"
+                          "orangeCash": "أورانج كاش",
+                          "payment_completed_successfully": "تم الدفع بنجاح!",
+                            "payment_failed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
+                            "order_placed_successfully": "تم إنشاء الطلب بنجاح!"
                     }

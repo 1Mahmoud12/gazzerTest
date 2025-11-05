@@ -1357,4 +1357,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get orangeCash => 'أورانج كاش';
+
+  @override
+  String get payment_completed_successfully => 'تم الدفع بنجاح!';
+
+  @override
+  String get payment_failed => 'فشل الدفع. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get order_placed_successfully => 'تم إنشاء الطلب بنجاح!';
 }

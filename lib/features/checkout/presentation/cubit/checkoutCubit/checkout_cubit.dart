@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/paymob/paymob_view.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -186,16 +187,11 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     double? orderTotal,
     String? notes,
   }) async {
-    logger.d(
-      'main payment method ${_selectedPaymentMethod} | remaining ${_remainingPaymentMethod}',
-    );
     final methods = <String>[];
-    // Helper to get wallet provider name (vodafone_cash, etisalat_cash, orange_cash)
     String? getWalletProviderName() {
       return _walletProviderName; // Already set via setWalletInfo()
     }
 
-    // Helper to map payment method to backend value
     String? mapMethodToBackend(PaymentMethod m) {
       switch (m) {
         case PaymentMethod.cashOnDelivery:
@@ -203,7 +199,6 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
         case PaymentMethod.creditDebitCard:
           return 'pay_by_card';
         case PaymentMethod.wallet:
-          // For wallet, use the specific provider name (vodafone_cash, etisalat_cash, orange_cash)
           final providerName = getWalletProviderName();
           if (providerName != null && providerName.isNotEmpty) {
             return providerName; // Returns vodafone_cash, etisalat_cash, or orange_cash
@@ -253,28 +248,29 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
                 builder: (context) => PaymentScreen(paymentUrl: value.iframeUrl!),
               ),
             );
-
+            logger.e(result == 'success');
             if (result == 'success') {
-              if (context.mounted) {
-                Alerts.showToast(
-                  'Payment completed successfully!',
-                  error: false,
-                );
-                // TODO: Navigate to success screen or handle success
-                context.read<CartCubit>().loadCart();
+              // if (context.mounted) {
+              Alerts.showToast(
+                L10n.tr().payment_completed_successfully,
+                error: false,
+              );
+              // TODO: Navigate to success screen or handle success
+              context.read<CartCubit>().loadCart();
 
-                context.go('/orders');
-              }
+              context.go('/orders');
             } else if (result == 'failed') {
               if (context.mounted) {
-                Alerts.showToast('Payment failed. Please try again.');
+                Alerts.showToast(
+                  L10n.tr().payment_failed,
+                );
               }
             }
           }
         } else {
           // Payment method doesn't require iframe (e.g., cash on delivery)
           if (context.mounted) {
-            Alerts.showToast('Order placed successfully!', error: false);
+            Alerts.showToast(L10n.tr().order_placed_successfully, error: false);
             // TODO: Navigate to success screen
             context.read<CartCubit>().loadCart();
             context.go('/orders');

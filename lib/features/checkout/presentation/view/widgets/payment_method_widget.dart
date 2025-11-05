@@ -361,11 +361,14 @@ void _showConvertPointsSheet(BuildContext context, int availablePoints) {
           children: [
             Text(L10n.tr().convertPoints, style: TStyle.blackBold(16)),
             const SizedBox(height: 8),
-            MainTextField(
-              controller: controller,
-              keyboardType: TextInputType.number,
-              hintText: L10n.tr().enterPoints,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: MainTextField(
+                controller: controller,
+                keyboardType: TextInputType.number,
+                hintText: L10n.tr().enterPoints,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
             ),
             const SizedBox(height: 12),
             Align(

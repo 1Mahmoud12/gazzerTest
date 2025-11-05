@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/main.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -54,6 +55,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _checkPaymentStatus(String url) {
     // Check if payment is successful
+    logger.d('url WebView====> $url');
     if (url.contains('success=true') || url.contains('txn_response_code=APPROVED')) {
       Navigator.pop(context, 'success');
     }

@@ -1357,4 +1357,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orangeCash => 'Orange Cash';
+
+  @override
+  String get payment_completed_successfully => 'Payment completed successfully!';
+
+  @override
+  String get payment_failed => 'Payment failed. Please try again.';
+
+  @override
+  String get order_placed_successfully => 'Order placed successfully!';
 }
