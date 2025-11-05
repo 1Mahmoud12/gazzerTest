@@ -91,7 +91,10 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                   if (state is! TimeSlotsStates) return const SizedBox.shrink();
                   if (state is TimeSlotsError || (state is TimeSlotsLoaded && state.timeSlots.isEmpty)) {
                     return Center(
-                      child: Text(L10n.tr().noAvailableSchedulingTimeSlots, style: TStyle.greyBold(14)),
+                      child: Text(
+                        L10n.tr().noAvailableSchedulingTimeSlots,
+                        style: TStyle.greyBold(14),
+                      ),
                     );
                   }
                   return Skeletonizer(
@@ -103,8 +106,12 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                       itemBuilder: (context, index) {
                         return OutlinedButton(
                           onPressed: () {
-                            context.read<CartCubit>().selectTimeSlot(state.timeSlots[index]);
-                            context.read<CheckoutCubit>().setTimeSlots(state.timeSlots[index]);
+                            context.read<CartCubit>().selectTimeSlot(
+                              state.timeSlots[index],
+                            );
+                            context.read<CheckoutCubit>().setTimeSlots(
+                              state.timeSlots[index],
+                            );
                           },
                           style: OutlinedButton.styleFrom(
                             backgroundColor: state.selectedTime == state.timeSlots[index] ? Co.purple.withAlpha(70) : Colors.transparent,
@@ -112,7 +119,9 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                             side: const BorderSide(color: Co.purple),
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                           child: Text(
                             Helpers.formatTimeSlot(state.timeSlots[index]),

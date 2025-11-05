@@ -59,4 +59,9 @@ class VouchersCubit extends Cubit<VouchersStates> {
     final discount = double.tryParse(item.discountValue) ?? 0.0;
     emit(VoucherApplied(voucherCode: item.code, discountAmount: discount, discountType: item.discountType));
   }
+
+  /// Clear/reset voucher state
+  void clearVoucher() {
+    emit(VouchersInitial());
+  }
 }

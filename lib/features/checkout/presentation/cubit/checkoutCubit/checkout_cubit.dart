@@ -120,7 +120,10 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   }
 
   /// Selects a payment method
-  void selectPaymentMethod(PaymentMethod method, {bool removeRemainingMethod = true}) {
+  void selectPaymentMethod(
+    PaymentMethod method, {
+    bool removeRemainingMethod = true,
+  }) {
     _selectedPaymentMethod = method;
     if (removeRemainingMethod) {
       _remainingPaymentMethod = null;
@@ -183,7 +186,9 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     double? orderTotal,
     String? notes,
   }) async {
-    logger.d('main payment method ${_selectedPaymentMethod} | remaining ${_remainingPaymentMethod}');
+    logger.d(
+      'main payment method ${_selectedPaymentMethod} | remaining ${_remainingPaymentMethod}',
+    );
     final methods = <String>[];
     // Helper to get wallet provider name (vodafone_cash, etisalat_cash, orange_cash)
     String? getWalletProviderName() {
