@@ -526,8 +526,12 @@
                         "defaultCard": "البطاقة الافتراضية",
                         "addCard": "إضافة بطاقة",
                         "completePayment":"اكمال عملية الدفع",
-                        "wallet":"المحعظه الالكترونيه",
+                        "wallet":"المحفظة الالكترونيه",
                         "remainingAmount":"المبلغ المتبقي",
                         "enterPhoneNumber":"ادخل رقم هاتفك",
-                        "remainingPaymentBy":"اكمال عملية الدفع من خلال"
+                        "remainingPaymentBy":"اكمال عملية الدفع من خلال",
+                        "totalBeforeCode":"الاجمالي قبل الضريبه",
+                        "vodafoneCash": "فودافون كاش",
+                          "eCash": "اتصالات كاش",
+                          "orangeCash": "أورانج كاش"
                     }

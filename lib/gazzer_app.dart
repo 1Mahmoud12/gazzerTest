@@ -7,6 +7,7 @@ import 'package:gazzer/core/presentation/routing/app_router.dart';
 import 'package:gazzer/core/presentation/theme/theming.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 
 class GazzerApp extends StatelessWidget {
   const GazzerApp({super.key});
@@ -20,6 +21,9 @@ class GazzerApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => di<CartCubit>()..loadCart(),
+        ),
+        BlocProvider(
+          create: (context) => di<CheckoutCubit>(),
         ),
       ],
       child: Builder(

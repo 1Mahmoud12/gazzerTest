@@ -10,7 +10,6 @@ import 'package:gazzer/features/auth/register/presentation/view/register_screen.
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/view/card_details_screen.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
@@ -102,7 +101,7 @@ final checkoutRoutes = [
   ),
   GoRoute(
     path: CardDetailsScreen.route,
-    builder: (context, state) => BlocProvider.value(value: di<CheckoutCubit>(), child: const CardDetailsScreen()),
+    builder: (context, state) => const CardDetailsScreen(),
   ),
   GoRoute(
     path: PostCheckoutScreen.route,

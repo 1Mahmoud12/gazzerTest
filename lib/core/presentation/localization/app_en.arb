@@ -529,6 +529,10 @@
           "wallet":"Wallet",
           "remainingAmount":"Remaining Amount",
           "enterPhoneNumber":"Enter Phone Number",
-          "remainingPaymentBy":"Remaining Payment by"
+          "remainingPaymentBy":"Remaining Payment by",
+          "totalBeforeCode":"Total Before Code",
+            "vodafoneCash": "Vodafone Cash",
+            "eCash": "e& Cash",
+            "orangeCash": "Orange Cash"
 
 }

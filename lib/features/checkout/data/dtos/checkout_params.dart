@@ -1,15 +1,15 @@
 class CheckoutParams {
   final List<String> paymentMethod;
   final String? voucher;
+  final String? phoneNumber;
   final String? timeSlot;
-  final bool? isScheduled;
   final String? notes;
 
   CheckoutParams({
     required this.paymentMethod,
+    this.phoneNumber,
     this.voucher,
     this.timeSlot,
-    this.isScheduled,
     this.notes,
   });
 
@@ -18,13 +18,13 @@ class CheckoutParams {
     if (paymentMethod.length == 1) {
       map['payment_method'] = paymentMethod[0];
     } else {
-      for (int i = 0; i < paymentMethod.length; i++) {
-        map['payment_method[$i]'] = paymentMethod[i];
-      }
+      map['payment_method'] = paymentMethod;
     }
+
     if (voucher != null) map['voucher'] = voucher;
+    if (phoneNumber != '') map['phone'] = phoneNumber;
     if (timeSlot != null) map['time_slot'] = timeSlot;
-    if (isScheduled != null) map['is_scheduled'] = isScheduled;
+    if (timeSlot != null) map['is_scheduled'] = 1;
     if (notes != null) map['notes'] = notes;
     return map;
   }

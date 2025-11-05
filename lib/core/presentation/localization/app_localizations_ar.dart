@@ -1335,7 +1335,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get completePayment => 'اكمال عملية الدفع';
 
   @override
-  String get wallet => 'المحعظه الالكترونيه';
+  String get wallet => 'المحفظة الالكترونيه';
 
   @override
   String get remainingAmount => 'المبلغ المتبقي';
@@ -1345,4 +1345,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get remainingPaymentBy => 'اكمال عملية الدفع من خلال';
+
+  @override
+  String get totalBeforeCode => 'الاجمالي قبل الضريبه';
+
+  @override
+  String get vodafoneCash => 'فودافون كاش';
+
+  @override
+  String get eCash => 'اتصالات كاش';
+
+  @override
+  String get orangeCash => 'أورانج كاش';
 }

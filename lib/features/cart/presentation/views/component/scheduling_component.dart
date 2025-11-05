@@ -9,6 +9,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/icons/main_switcher.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class SchedulingComponent extends StatefulWidget {
@@ -56,8 +57,10 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                 onChanged: (v) {
                   if (v) {
                     context.read<CartCubit>().getTimeSlots();
+                    context.read<CheckoutCubit>().setTimeSlots('10:10');
                   } else {
                     context.read<CartCubit>().selectTimeSlot(null);
+                    context.read<CheckoutCubit>().setTimeSlots(null);
                   }
                   setState(() => switchToggled = v);
                 },
@@ -101,7 +104,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                         return OutlinedButton(
                           onPressed: () {
                             context.read<CartCubit>().selectTimeSlot(state.timeSlots[index]);
-                            //  context.read<CheckoutCubit>().setTimeSlots(state.timeSlots[index]);
+                            context.read<CheckoutCubit>().setTimeSlots(state.timeSlots[index]);
                           },
                           style: OutlinedButton.styleFrom(
                             backgroundColor: state.selectedTime == state.timeSlots[index] ? Co.purple.withAlpha(70) : Colors.transparent,

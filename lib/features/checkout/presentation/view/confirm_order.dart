@@ -21,6 +21,14 @@ class ConfirmOrderScreen extends StatefulWidget {
 
 class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
   @override
+  void initState() {
+    super.initState();
+    context.read<CheckoutCubit>().loadCheckoutData();
+    context.read<CheckoutCubit>().applyVoucher(null);
+    context.read<CheckoutCubit>().selectPaymentMethod(PaymentMethod.cashOnDelivery);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

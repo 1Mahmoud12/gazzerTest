@@ -67,9 +67,10 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                   const SizedBox(height: 8),
                   ItemSummary(title: L10n.tr().serviceFee, value: state.summary.serviceFee),
                   const SizedBox(height: 8),
-                  ItemSummary(title: L10n.tr().subTotal, value: state.summary.total),
-                  const SizedBox(height: 8),
+
                   if (voucherFormatted != null) ...[
+                    ItemSummary(title: L10n.tr().totalBeforeCode, value: state.summary.total),
+                    const SizedBox(height: 8),
                     ItemSummary(
                       title: L10n.tr().promoCode,
                       value: voucherDeduction,

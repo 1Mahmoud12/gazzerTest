@@ -1,12 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/pkgs/paymob/paymob_view.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_params.dart';
+import 'package:gazzer/features/checkout/data/dtos/checkout_response_dto.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/main.dart';
+import 'package:go_router/go_router.dart';
 
 class CheckoutCubit extends Cubit<CheckoutStates> {
   CheckoutCubit(
@@ -47,7 +51,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
   String? get walletProviderName => _walletProviderName;
 
-  void setTimeSlots(String value) {
+  void setTimeSlots(String? value) {
     timeSlots = value;
     emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
   }
@@ -116,12 +120,14 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   }
 
   /// Selects a payment method
-  void selectPaymentMethod(PaymentMethod method) {
+  void selectPaymentMethod(PaymentMethod method, {bool removeRemainingMethod = true}) {
     _selectedPaymentMethod = method;
-    _remainingPaymentMethod = null;
+    if (removeRemainingMethod) {
+      _remainingPaymentMethod = null;
 
-    _walletProviderName = '';
-    _walletPhoneNumber = '';
+      _walletProviderName = '';
+      _walletPhoneNumber = '';
+    }
     emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
     emit(
       PaymentMethodLoaded(
@@ -133,7 +139,6 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   }
 
   void applyVoucher(String? code) {
-    logger.d(code);
     _voucherCode = (code == null || code.trim().isEmpty) ? null : code.trim();
     emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
   }
@@ -178,13 +183,12 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     double? orderTotal,
     String? notes,
   }) async {
+    logger.d('main payment method ${_selectedPaymentMethod} | remaining ${_remainingPaymentMethod}');
     final methods = <String>[];
     // Helper to get wallet provider name (vodafone_cash, etisalat_cash, orange_cash)
     String? getWalletProviderName() {
       return _walletProviderName; // Already set via setWalletInfo()
     }
-
-    logger.d('primary payment $_voucherCode secondary payment $_remainingPaymentMethod. ');
 
     // Helper to map payment method to backend value
     String? mapMethodToBackend(PaymentMethod m) {
@@ -226,23 +230,56 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
       paymentMethod: methods,
       voucher: _voucherCode,
       timeSlot: timeSlots,
-      isScheduled: timeSlots != null,
+      phoneNumber: _walletPhoneNumber,
       notes: notes,
     );
 
-    logger.d(params.toJson());
+    // logger.d(params.toJson());
+    final res = await _checkoutRepo.submitCheckout(params: params);
+    switch (res) {
+      case Ok<CheckoutResponseDTO>(:final value):
+        // If iframe URL is provided, navigate to payment screen
 
-    // final res = await _checkoutRepo.submitCheckout(params: params);
-    // switch (res) {
-    //   case Ok<String>(:final value):
-    //     if (context.mounted) {
-    //       Alerts.showToast(value, error: false);
-    //     }
-    //   case Err(:final error):
-    //     if (context.mounted) {
-    //       Alerts.showToast(error.message);
-    //     }
-    // }
+        if (value.iframeUrl != null && value.iframeUrl!.isNotEmpty) {
+          if (context.mounted) {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaymentScreen(paymentUrl: value.iframeUrl!),
+              ),
+            );
+
+            if (result == 'success') {
+              if (context.mounted) {
+                Alerts.showToast(
+                  'Payment completed successfully!',
+                  error: false,
+                );
+                // TODO: Navigate to success screen or handle success
+                context.read<CartCubit>().loadCart();
+
+                context.go('/orders');
+              }
+            } else if (result == 'failed') {
+              if (context.mounted) {
+                Alerts.showToast('Payment failed. Please try again.');
+              }
+            }
+          }
+        } else {
+          // Payment method doesn't require iframe (e.g., cash on delivery)
+          if (context.mounted) {
+            Alerts.showToast('Order placed successfully!', error: false);
+            // TODO: Navigate to success screen
+            context.read<CartCubit>().loadCart();
+            context.go('/orders');
+          }
+        }
+      case Err(:final error):
+        if (context.mounted) {
+          Alerts.showToast(error.message);
+        }
+    }
   }
 
   /// Loads cards

@@ -1345,4 +1345,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get remainingPaymentBy => 'Remaining Payment by';
+
+  @override
+  String get totalBeforeCode => 'Total Before Code';
+
+  @override
+  String get vodafoneCash => 'Vodafone Cash';
+
+  @override
+  String get eCash => 'e& Cash';
+
+  @override
+  String get orangeCash => 'Orange Cash';
 }

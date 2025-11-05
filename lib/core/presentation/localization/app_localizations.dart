@@ -2731,6 +2731,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remaining Payment by'**
   String get remainingPaymentBy;
+
+  /// No description provided for @totalBeforeCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Before Code'**
+  String get totalBeforeCode;
+
+  /// No description provided for @vodafoneCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Vodafone Cash'**
+  String get vodafoneCash;
+
+  /// No description provided for @eCash.
+  ///
+  /// In en, this message translates to:
+  /// **'e& Cash'**
+  String get eCash;
+
+  /// No description provided for @orangeCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Orange Cash'**
+  String get orangeCash;
 }
 
 class _AppLocalizationsDelegate
