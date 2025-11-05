@@ -9,6 +9,7 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_alert_widget.dart';
@@ -72,7 +73,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                   ),
                   if (!cubit.isTextFieldEnabled) ...[
                     const VerticalSpacing(10),
-                    BlocBuilder<CheckoutCubit, dynamic>(
+                    BlocBuilder<CheckoutCubit, CheckoutStates>(
                       builder: (context, state) {
                         final checkoutCubit = context.read<CheckoutCubit>();
                         final appliedVoucher = checkoutCubit.voucherCode;
@@ -165,7 +166,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                     ),
                   ] else ...[
                     const VerticalSpacing(10),
-                    BlocBuilder<CheckoutCubit, dynamic>(
+                    BlocBuilder<CheckoutCubit, CheckoutStates>(
                       builder: (context, state) {
                         final checkoutCubit = context.read<CheckoutCubit>();
                         final appliedVoucher = checkoutCubit.voucherCode;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/pkgs/paymob/paymob_view.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -10,7 +11,6 @@ import 'package:gazzer/features/checkout/data/dtos/checkout_params.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_response_dto.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
-import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 
 class CheckoutCubit extends Cubit<CheckoutStates> {
@@ -235,7 +235,9 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     );
 
     // logger.d(params.toJson());
+    animationDialogLoading(context);
     final res = await _checkoutRepo.submitCheckout(params: params);
+    closeDialog(context);
     switch (res) {
       case Ok<CheckoutResponseDTO>(:final value):
         // If iframe URL is provided, navigate to payment screen
@@ -248,7 +250,6 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
                 builder: (context) => PaymentScreen(paymentUrl: value.iframeUrl!),
               ),
             );
-            logger.e(result == 'success');
             if (result == 'success') {
               // if (context.mounted) {
               Alerts.showToast(
