@@ -141,9 +141,11 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                               hintText: L10n.tr().emailAddress,
                               bgColor: Colors.white,
                               showBorder: false,
-                              inputFormatters: FilteringTextInputFormatter.deny(
-                                RegExp(r'\s'),
-                              ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.deny(
+                                  RegExp(r'\s'),
+                                ),
+                              ],
                               validator: (v) {
                                 if (v?.trim().isNotEmpty != true) return null;
                                 return Validators.emailValidator(v);

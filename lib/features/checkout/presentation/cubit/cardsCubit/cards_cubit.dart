@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/cards_states.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/cardsCubit/cards_states.dart';
 
 class CardsCubit extends Cubit<CardsStates> {
   CardsCubit(this._repo) : super(CardsInitial());

@@ -177,9 +177,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintText: L10n.tr().enterYourFullEmail,
                         bgColor: Colors.transparent,
                         max: 250,
-                        inputFormatters: FilteringTextInputFormatter.deny(
-                          RegExp(r'\s'),
-                        ),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(
+                            RegExp(r'\s'),
+                          ),
+                        ],
                         validator: (value) {
                           if (value != null && value.isNotEmpty) {
                             return Validators.emailValidator(value.trim());

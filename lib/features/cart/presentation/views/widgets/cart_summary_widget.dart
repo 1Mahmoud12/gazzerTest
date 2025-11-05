@@ -169,7 +169,9 @@ class CartSummaryWidget extends StatelessWidget {
                                 padding: const EdgeInsets.all(2),
                                 child: MainBtn(
                                   onPressed: () {
-                                    context.push(ConfirmOrderScreen.route);
+                                    context.push(
+                                      ConfirmOrderScreen.route,
+                                    );
                                   },
                                   disabledColor: Co.grey.withAlpha(80),
                                   isEnabled: state.isCartValid,

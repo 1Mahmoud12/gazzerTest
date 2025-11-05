@@ -6,8 +6,9 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/vouchers_cubit.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/vouchers_states.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_states.dart';
 
 class OrderSummaryWidget extends StatefulWidget {
   const OrderSummaryWidget({super.key});
@@ -49,7 +50,7 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
             }
 
             final finalTotal = (baseTotal - voucherDeduction).clamp(0.0, double.infinity);
-
+            context.read<CheckoutCubit>().addFinalTotal(finalTotal);
             return Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -65,15 +66,18 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                   ItemSummary(title: L10n.tr().deliveryFee, value: state.summary.deliveryFee),
                   const SizedBox(height: 8),
                   ItemSummary(title: L10n.tr().serviceFee, value: state.summary.serviceFee),
-                  const SizedBox(height: 12),
-                  if (voucherFormatted != null)
+                  const SizedBox(height: 8),
+                  ItemSummary(title: L10n.tr().subTotal, value: state.summary.total),
+                  const SizedBox(height: 8),
+                  if (voucherFormatted != null) ...[
                     ItemSummary(
                       title: L10n.tr().promoCode,
                       value: voucherDeduction,
                       discount: true,
                       formattedValue: voucherFormatted,
                     ),
-                  const SizedBox(height: 12),
+                    const SizedBox(height: 8),
+                  ],
                   ItemSummary(title: L10n.tr().total, value: finalTotal, total: true),
                 ],
               ),

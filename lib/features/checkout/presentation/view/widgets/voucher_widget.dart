@@ -8,8 +8,9 @@ import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/vouchers_cubit.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/vouchers_states.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_alert_widget.dart';
 
 class VoucherWidget extends StatefulWidget {
@@ -88,15 +89,24 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: AppConst.defaultBorderRadius,
-                            borderSide: const BorderSide(color: Co.purple, width: 1),
+                            borderSide: const BorderSide(
+                              color: Co.purple,
+                              width: 1,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: AppConst.defaultBorderRadius,
-                            borderSide: const BorderSide(color: Co.purple, width: 1),
+                            borderSide: const BorderSide(
+                              color: Co.purple,
+                              width: 1,
+                            ),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: AppConst.defaultBorderRadius,
-                            borderSide: const BorderSide(color: Co.purple, width: 1),
+                            borderSide: const BorderSide(
+                              color: Co.purple,
+                              width: 1,
+                            ),
                           ),
                         ),
                         focusColor: Co.purple,
@@ -114,7 +124,8 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                         onChanged: (value) {
                           if (value != null) {
                             _voucherController.text = value;
-                            cubit.applyVoucher(value);
+                            cubit.applyLocalVoucher(value);
+                            context.read<CheckoutCubit>().applyVoucher(value);
                           }
                         },
                       ),
@@ -144,8 +155,12 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                   context: context,
                                   asDialog: true,
                                 );
+                                context.read<CheckoutCubit>().applyVoucher(state.voucherCode);
                               } else if (state is VoucherError) {
-                                voucherAlert(title: state.message, context: context);
+                                voucherAlert(
+                                  title: state.message,
+                                  context: context,
+                                );
                               }
                             },
                             builder: (context, state) {

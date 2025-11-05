@@ -35,6 +35,15 @@ class PaymentMethodLoaded extends CheckoutStates {
   List<Object?> get props => [selectedPaymentMethod, walletBalance, availablePoints];
 }
 
+class InsufficientWalletBalance extends CheckoutStates {
+  const InsufficientWalletBalance({required this.shortfall});
+
+  final double shortfall;
+
+  @override
+  List<Object?> get props => [shortfall];
+}
+
 class CardEntity {
   const CardEntity({
     required this.id,

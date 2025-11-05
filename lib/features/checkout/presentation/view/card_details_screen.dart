@@ -9,9 +9,9 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/cards_cubit.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/cards_states.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/checkout_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/cardsCubit/cards_cubit.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/cardsCubit/cards_states.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 class CardDetailsScreen extends StatefulWidget {
@@ -153,7 +153,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                           borderRadius: 16,
                           validator: _validateCardNumber,
                           keyboardType: TextInputType.number,
-                          inputFormatters: CardNumberFormatter(),
+                          inputFormatters: [CardNumberFormatter()],
                           max: 19,
                         ),
                         const VerticalSpacing(16),
@@ -175,7 +175,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                                     borderRadius: 16,
                                     validator: _validateExpiryMonth,
                                     keyboardType: TextInputType.number,
-                                    inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                     max: 2,
                                   ),
                                 ],
@@ -198,7 +198,7 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                                     borderRadius: 16,
                                     validator: _validateExpiryYear,
                                     keyboardType: TextInputType.number,
-                                    inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                     max: 2,
                                   ),
                                 ],

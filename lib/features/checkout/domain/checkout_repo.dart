@@ -1,6 +1,7 @@
 import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
+import 'package:gazzer/features/checkout/data/dtos/checkout_params.dart';
 
 abstract class CheckoutRepo extends BaseApiRepo {
   CheckoutRepo(super.crashlyticsRepo);
@@ -20,4 +21,6 @@ abstract class CheckoutRepo extends BaseApiRepo {
   });
 
   Future<Result<String>> convertPoints(int points);
+
+  Future<Result<String>> submitCheckout({required CheckoutParams params});
 }

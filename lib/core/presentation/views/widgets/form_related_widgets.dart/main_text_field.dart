@@ -71,7 +71,7 @@ class MainTextField extends StatefulWidget {
   final bool isFilled;
   final Color? bgColor;
   final Color? disabledColor;
-  final TextInputFormatter? inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
   final EdgeInsets? padding;
   final BoxConstraints? iconsConstraints;
   final bool? isValid;
@@ -158,7 +158,7 @@ class _MainTextFieldState extends State<MainTextField> {
               FocusScope.of(context).unfocus();
             },
             textInputAction: widget.action,
-            inputFormatters: widget.inputFormatters != null ? [widget.inputFormatters!] : null,
+            inputFormatters: widget.inputFormatters,
             keyboardType:
                 widget.keyboardType ??
                 (widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null),

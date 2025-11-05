@@ -66,7 +66,11 @@ class ApiClient {
       final response = await _dio.get(
         endpoint,
         queryParameters: queryParameters,
-        options: Options(headers: _getHeaders(headers)),
+        options: Options(
+          headers: _getHeaders(headers),
+          receiveTimeout: const Duration(seconds: 30),
+          sendTimeout: const Duration(seconds: 30),
+        ),
         cancelToken: cancelToken,
       );
       if (response.data['data'] == null) {
@@ -107,8 +111,8 @@ class ApiClient {
         data: requestBody,
         onSendProgress: onSendProgress,
         options: Options(
-          receiveTimeout: customRequestDuration,
-          sendTimeout: customRequestDuration,
+          receiveTimeout: customRequestDuration ?? const Duration(seconds: 30),
+          sendTimeout: customRequestDuration ?? const Duration(seconds: 30),
           headers: _getHeaders(headers),
         ),
         cancelToken: cancelToken,

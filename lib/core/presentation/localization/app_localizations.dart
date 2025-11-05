@@ -2713,6 +2713,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Wallet'**
   String get wallet;
+
+  /// No description provided for @remainingAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Amount'**
+  String get remainingAmount;
+
+  /// No description provided for @enterPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Phone Number'**
+  String get enterPhoneNumber;
+
+  /// No description provided for @remainingPaymentBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Payment by'**
+  String get remainingPaymentBy;
 }
 
 class _AppLocalizationsDelegate

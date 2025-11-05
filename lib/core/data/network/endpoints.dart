@@ -123,4 +123,5 @@ class Endpoints {
   static const checkVoucher = "vouchers/validate";
   static const convertPoints = "wallet/convert-points";
   static const addNewCard = "wallet/cards";
+  static const ordersCheckout = "orders/checkout";
 }

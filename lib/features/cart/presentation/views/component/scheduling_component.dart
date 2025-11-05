@@ -101,6 +101,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                         return OutlinedButton(
                           onPressed: () {
                             context.read<CartCubit>().selectTimeSlot(state.timeSlots[index]);
+                            //  context.read<CheckoutCubit>().setTimeSlots(state.timeSlots[index]);
                           },
                           style: OutlinedButton.styleFrom(
                             backgroundColor: state.selectedTime == state.timeSlots[index] ? Co.purple.withAlpha(70) : Colors.transparent,

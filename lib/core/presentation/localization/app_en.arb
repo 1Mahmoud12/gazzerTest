@@ -526,6 +526,9 @@
           "defaultCard": "Default Card",
           "addCard": "Add Card",
           "completePayment":"Complete Payment",
-          "wallet":"Wallet"
+          "wallet":"Wallet",
+          "remainingAmount":"Remaining Amount",
+          "enterPhoneNumber":"Enter Phone Number",
+          "remainingPaymentBy":"Remaining Payment by"
 
 }

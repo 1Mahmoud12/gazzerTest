@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: '${L10n.tr().mobileNumber} / ${L10n.tr().emailAddress}',
                                 bgColor: Colors.transparent,
                                 max: 250,
-                                inputFormatters: _inputFormatter,
+                                inputFormatters: _inputFormatter != null ? [_inputFormatter!] : null,
                                 keyboardType: TextInputType.visiblePassword,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {

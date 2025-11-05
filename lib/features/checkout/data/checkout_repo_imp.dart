@@ -2,6 +2,7 @@ import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
+import 'package:gazzer/features/checkout/data/dtos/checkout_params.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
 
 class CheckoutRepoImp extends CheckoutRepo {
@@ -84,6 +85,17 @@ class CheckoutRepoImp extends CheckoutRepo {
         },
       ),
       parser: (response) => response.data['message']?.toString() ?? 'Points converted successfully',
+    );
+  }
+
+  @override
+  Future<Result<String>> submitCheckout({required CheckoutParams params}) {
+    return super.call(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.ordersCheckout,
+        requestBody: params.toJson(),
+      ),
+      parser: (response) => response.data['message']?.toString() ?? 'Order placed successfully',
     );
   }
 }

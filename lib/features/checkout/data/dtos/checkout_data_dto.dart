@@ -1,4 +1,4 @@
-import 'package:gazzer/features/checkout/presentation/cubit/checkout_states.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 
 class CheckoutDataDTO {
   final WalletDTO wallet;

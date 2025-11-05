@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/vouchers_states.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_states.dart';
 
 class VouchersCubit extends Cubit<VouchersStates> {
   VouchersCubit(this._checkoutRepo) : super(VouchersInitial()) {
@@ -52,5 +52,11 @@ class VouchersCubit extends Cubit<VouchersStates> {
       case Err(:final error):
         emit(VoucherError(message: error.message.isEmpty ? L10n.tr().invalidVoucherCode : error.message));
     }
+  }
+
+  void applyLocalVoucher(String code) {
+    final item = _voucherList.firstWhere((element) => element.code == code);
+    final discount = double.tryParse(item.discountValue) ?? 0.0;
+    emit(VoucherApplied(voucherCode: item.code, discountAmount: discount, discountType: item.discountType));
   }
 }
