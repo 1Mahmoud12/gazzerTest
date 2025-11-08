@@ -136,7 +136,7 @@ class CartSummaryWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalSpacing(8),
+                const VerticalSpacing(16),
                 Row(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -158,7 +158,7 @@ class CartSummaryWidget extends StatelessWidget {
                               context.go(HomeScreen.route);
                             },
                             text: L10n.tr().continueShopping,
-                            padding: const EdgeInsets.symmetric(vertical: 3),
+                            padding: const EdgeInsets.symmetric(vertical: 6),
                             width: double.infinity,
                             height: 0,
                             borderColor: Co.purple,
@@ -190,8 +190,8 @@ class CartSummaryWidget extends StatelessWidget {
                             text: L10n.tr().checkout,
                             textStyle: TStyle.whiteRegular(16),
                             width: double.infinity,
-                            padding: const EdgeInsets.symmetric(vertical: 3),
-                            bgColor: Colors.purple,
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            bgColor: Co.purple,
                           ),
                         ),
                       ),

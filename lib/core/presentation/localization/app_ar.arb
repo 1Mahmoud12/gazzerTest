@@ -504,7 +504,7 @@
                     "selectVoucher": "اختر القسيمة",
                     "pleaseEnterVoucherCode": "يرجى إدخال رمز القسيمة",
                     "invalidVoucherCode": "رمز القسيمة غير صالح",
-                    "promoCode": "رمز العرض الترويجي",
+                    "promoCode": "قينة الخصم",
                       "createYourCard": "إنشاء بطاقتك",
                       "cardNumber": "رقم البطاقة",
                       "expiryMonth": "شهر الانتهاء",

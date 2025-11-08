@@ -4,9 +4,9 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 enum FFamily { inter, playfair, poppins, roboto }
 
 abstract class TStyle {
-  static const regular = FontWeight.w200;
+  static const regular = FontWeight.w400;
 
-  static const semi = FontWeight.w500;
+  static const semi = FontWeight.w600;
 
   static const bold = FontWeight.w700;
   static const medium = FontWeight.w500;
