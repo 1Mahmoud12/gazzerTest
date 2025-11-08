@@ -74,7 +74,7 @@ class ApiClient {
         cancelToken: cancelToken,
       );
       if (response.data['data'] == null) {
-        throw Exception(response.data['message']);
+        // throw Exception(response.data['message']);
       }
       return response;
     } on DioException catch (e) {

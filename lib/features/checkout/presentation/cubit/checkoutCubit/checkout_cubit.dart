@@ -11,6 +11,7 @@ import 'package:gazzer/features/checkout/data/dtos/checkout_params.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_response_dto.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
+import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 
 class CheckoutCubit extends Cubit<CheckoutStates> {
@@ -244,26 +245,29 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
         if (value.iframeUrl != null && value.iframeUrl!.isNotEmpty) {
           if (context.mounted) {
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PaymentScreen(paymentUrl: value.iframeUrl!),
-              ),
-            );
-            if (result == 'success') {
+            final String result =
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentScreen(paymentUrl: value.iframeUrl!),
+                  ),
+                ) ??
+                'error,${L10n.tr().payment_failed}';
+            logger.d(' result result : $result');
+            if (result.split(',').first == 'success') {
               // if (context.mounted) {
               Alerts.showToast(
-                L10n.tr().payment_completed_successfully,
+                result.replaceAll('success,', ''),
                 error: false,
               );
               // TODO: Navigate to success screen or handle success
               context.read<CartCubit>().loadCart();
 
               context.go('/orders');
-            } else if (result == 'failed') {
+            } else {
               if (context.mounted) {
                 Alerts.showToast(
-                  L10n.tr().payment_failed,
+                  result.replaceAll('error,', ''),
                 );
               }
             }

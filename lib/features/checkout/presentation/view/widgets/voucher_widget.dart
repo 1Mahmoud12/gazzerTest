@@ -9,6 +9,7 @@ import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_cubit.dart';
@@ -141,10 +142,16 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                   isExpanded: true,
                                   iconEnabledColor: Co.purple,
                                   hint: Text(L10n.tr().selectVoucher),
-                                  items: cubit.vouchers.map((code) {
+                                  items: cubit.vouchers.map((VoucherDTO voucher) {
                                     return DropdownMenuItem(
-                                      value: code,
-                                      child: Text(code),
+                                      value: voucher.code,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(voucher.code),
+                                          Text('${voucher.discountValue} ${voucher.discountType.contains('percent') ? '%' : L10n.tr().egp}'),
+                                        ],
+                                      ),
                                     );
                                   }).toList(),
                                   onChanged: (value) {

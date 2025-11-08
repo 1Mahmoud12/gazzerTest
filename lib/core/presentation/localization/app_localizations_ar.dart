@@ -1278,7 +1278,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalidVoucherCode => 'رمز القسيمة غير صالح';
 
   @override
-  String get promoCode => 'قينة الخصم';
+  String get promoCode => 'قيمة الخصم';
 
   @override
   String get createYourCard => 'إنشاء بطاقتك';

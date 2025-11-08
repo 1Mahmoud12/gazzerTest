@@ -57,11 +57,13 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                 onChanged: (v) {
                   if (v) {
                     context.read<CartCubit>().getTimeSlots();
-                    context.read<CheckoutCubit>().setTimeSlots('10:10');
                   } else {
                     context.read<CartCubit>().selectTimeSlot(null);
-                    context.read<CheckoutCubit>().setTimeSlots(null);
+                    context.read<CheckoutCubit>().setTimeSlots(
+                      null,
+                    );
                   }
+
                   setState(() => switchToggled = v);
                 },
               ).withScale(scale: 0.8),

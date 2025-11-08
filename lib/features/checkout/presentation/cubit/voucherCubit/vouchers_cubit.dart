@@ -16,7 +16,7 @@ class VouchersCubit extends Cubit<VouchersStates> {
   // Vouchers list from API
   final List<VoucherDTO> _voucherList = [];
 
-  List<String> get vouchers => _voucherList.map((e) => e.code).toList();
+  List<VoucherDTO> get vouchers => _voucherList;
 
   /// Toggles text field enabled/disabled state for VoucherWidget
   bool isTextFieldEnabled = false;

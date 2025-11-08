@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/data/network/api_client.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/main.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -19,6 +21,7 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   late final WebViewController _controller;
   bool isLoading = true;
+  bool _hasHandledPayment = false;
 
   @override
   void initState() {
@@ -53,16 +56,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
       ..loadRequest(Uri.parse(widget.paymentUrl));
   }
 
-  void _checkPaymentStatus(String url) {
+  Future<void> _checkPaymentStatus(String url) async {
     // Check if payment is successful
-    logger.d('url WebView====> $url');
-    if (url.contains('success=true') || url.contains('txn_response_code=APPROVED')) {
-      Navigator.pop(context, 'success');
-    }
-    // Check if payment failed
-    else if (url.contains('success=false') || url.contains('txn_response_code=DECLINED')) {
-      Navigator.pop(context, 'failed');
-    }
+    if (_hasHandledPayment) return;
+    final response = await _handlePaymentWebhook(url);
+    Navigator.pop(context, response);
+  }
+
+  Future<String> _handlePaymentWebhook(String url) async {
+    final uri = Uri.parse(url);
+    final endpoint = uri.path.replaceFirst('/api/', '');
+    final response = await di<ApiClient>().get(
+      endpoint: endpoint,
+      queryParameters: uri.queryParameters,
+    );
+    logger.d('Payment webhook response: ${response.data['message']}');
+
+    return "${response.data['status']},${response.data['message']}";
   }
 
   @override
