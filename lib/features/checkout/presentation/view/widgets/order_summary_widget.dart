@@ -147,11 +147,11 @@ class ItemSummary extends StatelessWidget {
       children: [
         Text(
           title,
-          style: total ? TStyle.burbleBold(16) : TStyle.blackBold(14),
+          style: total ? TStyle.burbleSemi(16, font: FFamily.roboto) : TStyle.blackSemi(16, font: FFamily.roboto),
         ),
         Text(
           valueText,
-          style: total ? TStyle.burbleBold(16) : TStyle.blackBold(14),
+          style: total ? TStyle.burbleBold(18, font: FFamily.roboto) : TStyle.blackSemi(18, font: FFamily.roboto),
         ),
       ],
     );

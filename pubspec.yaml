@@ -201,6 +201,21 @@ flutter:
     - family: playfair
       fonts:
         - asset: assets/fonts/Playfair.ttf
+    - family: roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
+          weight: 200
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Black.ttf
+          weight: 900
 flutter_assets:
   assets_path:
     - assets/

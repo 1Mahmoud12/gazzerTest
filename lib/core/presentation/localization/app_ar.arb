@@ -538,5 +538,7 @@
                             "payment_failed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
                             "order_placed_successfully": "تم إنشاء الطلب بنجاح!",
                             "startsWith01":"رقم الهاتف يجب ان يبدا ب 01",
-                            "swipeTwiceToExit":"اسحب مرا اخري للخروج"
+                            "swipeTwiceToExit":"اسحب مرا اخري للخروج",
+                            "amountToPay":"المبلغ المطلوب دفعه",
+                            "continueShopping":"اكمل عملية الشراء"
                     }

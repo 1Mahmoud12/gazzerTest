@@ -2785,6 +2785,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Swipe twice to exit'**
   String get swipeTwiceToExit;
+
+  /// No description provided for @amountToPay.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount to Pay'**
+  String get amountToPay;
+
+  /// No description provided for @continueShopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Shopping'**
+  String get continueShopping;
 }
 
 class _AppLocalizationsDelegate

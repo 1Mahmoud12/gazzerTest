@@ -1372,4 +1372,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get swipeTwiceToExit => 'اسحب مرا اخري للخروج';
+
+  @override
+  String get amountToPay => 'المبلغ المطلوب دفعه';
+
+  @override
+  String get continueShopping => 'اكمل عملية الشراء';
 }

@@ -1372,4 +1372,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get swipeTwiceToExit => 'Swipe twice to exit';
+
+  @override
+  String get amountToPay => 'Amount to Pay';
+
+  @override
+  String get continueShopping => 'Continue Shopping';
 }

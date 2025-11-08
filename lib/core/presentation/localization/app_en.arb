@@ -538,6 +538,7 @@
               "payment_failed": "Payment failed. Please try again.",
               "order_placed_successfully": "Order placed successfully!",
               "startsWith01":"Phone number must start with 01",
-              "swipeTwiceToExit":"Swipe twice to exit"
+              "swipeTwiceToExit":"Swipe twice to exit",
+              "amountToPay":"Amount to Pay","continueShopping":"Continue Shopping"
 
 }

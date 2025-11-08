@@ -86,7 +86,7 @@ class _CartScreenState extends State<CartScreen> {
                         enabled: state is FullCartLoading,
                         child: ListView.separated(
                           padding: const EdgeInsets.only(bottom: 24),
-                          itemCount: state.vendors.length + 2,
+                          itemCount: state.vendors.length + 3,
                           separatorBuilder: (context, index) => const VerticalSpacing(24),
                           // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
                           itemBuilder: (context, index) {
@@ -95,6 +95,9 @@ class _CartScreenState extends State<CartScreen> {
                             }
                             if (index == state.vendors.length + 1) {
                               return const SchedulingComponent();
+                            }
+                            if (index == state.vendors.length + 2) {
+                              return Session().client == null ? null : const CartSummaryWidget();
                             }
                             // if (index == state.vendors.length + 2) return const CartSummaryWidget();
 
@@ -110,7 +113,6 @@ class _CartScreenState extends State<CartScreen> {
               ),
           ],
         ),
-        bottomNavigationBar: Session().client == null ? null : const CartSummaryWidget(),
       ),
     );
   }

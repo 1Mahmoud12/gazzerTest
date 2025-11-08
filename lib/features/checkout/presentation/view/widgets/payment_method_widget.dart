@@ -9,8 +9,8 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_radio_btn.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_alert_widget.dart';
@@ -282,9 +282,21 @@ class _PaymentMethodItem extends StatelessWidget {
                               availablePoints!,
                             ),
 
-                            child: Text(
-                              L10n.tr().convert,
-                              style: TStyle.primaryBold(12),
+                            child: Row(
+                              children: [
+                                Text(
+                                  L10n.tr().convert,
+                                  style: TStyle.primaryBold(12),
+                                ),
+                                //const HorizontalSpacing(2),
+                                RotatedBox(
+                                  quarterTurns: L10n.isAr(context) ? 2 : 0,
+                                  child: const Icon(
+                                    Icons.arrow_back_ios,
+                                    size: 12,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                       ],

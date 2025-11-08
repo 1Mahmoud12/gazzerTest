@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
-enum FFamily { inter, playfair, poppins }
+enum FFamily { inter, playfair, poppins, roboto }
 
 abstract class TStyle {
   static const regular = FontWeight.w200;
@@ -9,6 +9,7 @@ abstract class TStyle {
   static const semi = FontWeight.w500;
 
   static const bold = FontWeight.w700;
+  static const medium = FontWeight.w500;
   static const bolder = FontWeight.w900;
 
   //
@@ -69,4 +70,7 @@ abstract class TStyle {
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.dark, shadows: shadows);
   static TextStyle blackBold(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.dark);
+
+  static TextStyle blackMedium(double fontSize, {FFamily font = FFamily.poppins}) =>
+      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
 }

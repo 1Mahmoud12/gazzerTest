@@ -15,7 +15,6 @@ import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
-import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
@@ -51,7 +50,6 @@ class _MainLayoutState extends State<MainLayout> {
 
   bool _shouldShowBottomNav() {
     final fullPath = widget.state.fullPath ?? '';
-    logger.d(fullPath);
     if (fullPath == '/' || fullPath == '/favorites' || fullPath == '/orders' || fullPath == '/profile') {
       return true;
     }

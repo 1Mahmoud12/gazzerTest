@@ -32,6 +32,8 @@ class Co {
   static const grey = Color(0xFF777777);
   static const white = Color(0xFFFFFFFF);
   static const dark = Color(0xFF000000);
+  static const backOrderSummary = Color(0xFFEBE3FE);
+  static const gryPrimary = Color(0xFF9F93C3);
 
   // for decorations
   static const shadowColor = Color(0xFFFAF5FF);
