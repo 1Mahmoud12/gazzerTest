@@ -3,11 +3,7 @@ require 'dotenv'
 Dotenv.load('../.env')
 
 platform :android do
-  desc "Suggested for you Page will display the Items according to the previous Customers behaviour \n Best Populer Page \n
-
-Top vendors will be display the Stores\n Adding the best-selling Item section\n
-
-Adding a selection for extra addon === add to cart ====="
+  desc "New Version"
   lane :beta do
 
    # Navigate to Flutter root and build
@@ -19,7 +15,7 @@ Adding a selection for extra addon === add to cart ====="
       app: "1:493725024975:android:c53ac88e28f20f7916adba", # Replace with your Firebase App ID.
       android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
       android_artifact_type: "APK",
-      release_notes: "Dynamic Payment Options, Saved Card Management & Wallet/Points Integration in Checkout (Support Mixed Payment Methods) =====. Scheduale Orders will only be paid via (cash, loyalty and wallet)",
+      release_notes: "Scenarios:US_Redesign Order Summary in Cart Screen to a vertical list (Cart Screen) \n US_Allow Partial Payments (Loyalty Points and Wallet) Only When Paying with (Credit/Debit)Cards. \n Bugs: Bug_Validation on covert Points to Gazzer Wallet. \n Bug_The item discount value appeared if the value equals 0. \n Bug_The Add Voucher behaviour needs Modifications. \n Bug_The discount value should also appear if the coupon was a percentage of the total amount. \n Bug_Remove the 010, 011, and 012 from the  E-wallet payment. \n Bug_Some Item Cards didn't load in the View all Daily offers screen. \n BUg_Swipe Back from Mobile put the app into the background. \n Bug_The Home bar below should disappear after navigating to any other page. \n Bug_The Validation Message on Signup and Login pages should be Localized. \n. Bug_The Validation Message on Signup and Login pages should be Localized. \n. Bug_Typing into Password and Email fields should be LTR in both languages (Those fields accepts english only). \n ",
       groups: "gazar", # Add tester group aliases.
       firebase_cli_token: ENV['FIREBASE_TOKEN'] # Path to your service account key.
     )

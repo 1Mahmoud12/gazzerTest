@@ -22,13 +22,7 @@ _fastlane_](https://docs.fastlane.tools/#installing-fastlane)
 [bundle exec] fastlane android beta
 ```
 
-Suggested for you Page will display the Items according to the previous Customers behaviour
-Best Populer Page
-
-Top vendors will be display the Stores
-Adding the best-selling Item section
-
-Adding a selection for extra addon === add to cart =====
+New Version
 
 ----
 

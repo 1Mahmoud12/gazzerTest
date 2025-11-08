@@ -149,7 +149,8 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(voucher.code),
-                                          Text('${voucher.discountValue} ${voucher.discountType.contains('percent') ? '%' : L10n.tr().egp}'),
+                                          if (cubit.selectedVoucherCode != voucher.code)
+                                            Text('${voucher.discountValue} ${voucher.discountType.contains('percent') ? '%' : L10n.tr().egp}'),
                                         ],
                                       ),
                                     );
