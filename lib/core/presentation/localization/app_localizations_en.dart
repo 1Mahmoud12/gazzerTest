@@ -1366,4 +1366,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get order_placed_successfully => 'Order placed successfully!';
+
+  @override
+  String get startsWith01 => 'Phone number must start with 01';
+
+  @override
+  String get swipeTwiceToExit => 'Swipe twice to exit';
 }

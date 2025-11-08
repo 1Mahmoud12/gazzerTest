@@ -160,19 +160,23 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                       rate: 0,
                                       reviewCount: 0,
                                       outOfStock: false,
-                                      offer: OfferEntity(
-                                        id: item.offer!.id!,
-                                        discount: item.offer!.discount!.toDouble(),
-                                        discountType: DiscountType.fromString(
-                                          item.offer!.discountType ?? '',
-                                        ),
-                                      ),
-                                      store: SimpleStoreEntity(
-                                        id: item.storeInfo!.storeId!,
-                                        name: item.storeInfo!.storeName!,
-                                        image: item.storeInfo!.storeImage!,
-                                        type: item.storeInfo!.storeCategoryType!,
-                                      ),
+                                      offer: item.offer != null
+                                          ? null
+                                          : OfferEntity(
+                                              id: item.offer!.id!,
+                                              discount: item.offer!.discount!.toDouble(),
+                                              discountType: DiscountType.fromString(
+                                                item.offer!.discountType ?? '',
+                                              ),
+                                            ),
+                                      store: item.storeInfo?.storeId == null
+                                          ? null
+                                          : SimpleStoreEntity(
+                                              id: item.storeInfo!.storeId!,
+                                              name: item.storeInfo!.storeName!,
+                                              image: item.storeInfo!.storeImage!,
+                                              type: item.storeInfo!.storeCategoryType!,
+                                            ),
                                     ),
                                     canAdd: false,
                                   );

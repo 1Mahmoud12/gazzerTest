@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
@@ -14,6 +17,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
@@ -82,170 +86,187 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  int exitApp = 0;
+
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => Scaffold(
-        extendBody: false,
-        extendBodyBehindAppBar: false,
-        // floatingActionButtonLocation: CustomFloatingBtnPosition(
-        //   HomeUtils.headerHeight(context) + 12,
-        //   50 + AppConst.defaultHrPadding.right,
-        // ),
-        // floatingActionButton: const CartFloatingBtn(),
-        body: FloatingDraggableWidget(
-          // dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
-          floatingWidget: const MainCartWidget(
-            showBadge: true,
-          ).withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
-          floatingWidgetHeight: 50,
-          floatingWidgetWidth: 50,
-          autoAlign: false,
-          autoAlignType: AlignmentType.both,
-          speed: 1,
-          dy: HomeUtils.headerHeight(context) + 12,
-          dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
-          disableBounceAnimation: true,
-          mainScreenWidget: RefreshIndicator(
-            onRefresh: () async {
-              await context.read<HomeCubit>().getHomeData();
-            },
-            child: BlocBuilder<HomeCubit, HomeStates>(
-              builder: (context, state) {
-                if (state is! HomeDataStates) return const SizedBox.shrink();
-                if (state is HomeDataLoadingState) {
-                  return const Center(child: AdaptiveProgressIndicator());
-                } else if (state is HomeDataErrorState) {
-                  return FailureComponent(
-                    message: state.msg,
-                    onRetry: () async {
-                      await context.read<HomeCubit>().getHomeData();
-                    },
-                  );
-                } else {
-                  return RefreshIndicator(
-                    onRefresh: () {
-                      return context.read<HomeCubit>().getHomeData();
-                    },
-                    child: CustomScrollView(
-                      slivers: [
-                        const SliverToBoxAdapter(
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 12),
-                            child: _HomeHeader(),
-                          ),
-                        ),
-                        const SliverToBoxAdapter(
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 24),
-                            child: _HomeSearchWidget(),
-                          ),
-                        ),
-
-                        ///
-                        _HomeCategoriesComponent(
-                          items: state.homeResponse?.categories ?? [],
-                        ),
-                        if (state.homeResponse?.categoriesBanner != null)
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24),
-                              child: MainBannerWidget(
-                                banner: state.homeResponse!.categoriesBanner!,
-                              ),
-                            ),
-                          ),
-
-                        // ///
-                        _DailyOffersWidget(
-                          items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[],
-                        ),
-                        if (state.homeResponse?.dailyOffersBanner != null)
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24),
-
-                              child: MainBannerWidget(
-                                banner: state.homeResponse!.dailyOffersBanner!,
-                              ),
-                            ),
-                          ),
-
-                        // /// const SummerSaleAddWidget(),
-                        _HomeSuggestedProductsWidget(
-                          items: state.homeResponse?.suggested ?? <GenericItemEntity>[],
-                        ),
-                        if (state.homeResponse?.suggestedBanner != null)
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24),
-
-                              child: MainBannerWidget(
-                                banner: state.homeResponse!.suggestedBanner!,
-                              ),
-                            ),
-                          ),
-
-                        // ///
-                        _HomeTopVendorsWidget(
-                          vendors: state.homeResponse?.topVendors ?? <VendorEntity>[],
-                        ),
-                        if (state.homeResponse?.topVendorsBanner != null)
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24),
-                              child: MainBannerWidget(
-                                banner: state.homeResponse!.topVendorsBanner!,
-                              ),
-                            ),
-                          ),
-
-                        // ///
-                        _HomeBestPopularStoresWidget(
-                          stores: state.homeResponse?.bestPopular ?? <StoreEntity>[],
-                        ),
-                        if (state.homeResponse?.bestPopularBanner != null)
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24),
-                              child: MainBannerWidget(
-                                banner: state.homeResponse!.bestPopularBanner!,
-                              ),
-                            ),
-                          ),
-
-                        // ///
-                        _HomeBestPopular(
-                          items: state.homeResponse?.topItems ?? <GenericItemEntity>[],
-                        ),
-                        if (state.homeResponse?.bestPopularBanner != null)
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24),
-                              child: MainBannerWidget(
-                                banner: state.homeResponse!.bestPopularBanner!,
-                              ),
-                            ),
-                          ),
-                        // _HomeTopItems(
-                        //   items: state.homeResponse?.topItems ?? <GenericItemEntity>[],
-                        // ),
-                        // if (state.homeResponse?.topItems != null)
-                        //   SliverToBoxAdapter(
-                        //     child: Padding(
-                        //       padding: const EdgeInsets.only(bottom: 24),
-                        //       child: MainBannerWidget(
-                        //         banner: state.homeResponse!.topItemsBanner!,
-                        //       ),
-                        //     ),
-                        //   ),
-
-                        // const ImageWithAlignedBtn(image: Assets.assetsPngHomeAdd, align: Alignment(0, 1), btnText: "Order Now"),
-                      ],
-                    ),
-                  );
-                }
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        exitApp++;
+        //Utils.showToast(title: 'swipe twice to exit', state: UtilState.success);
+        Alerts.showToast(L10n.tr().swipeTwiceToExit, error: false, isInfo: true, toastGravity: ToastGravity.CENTER);
+        Future.delayed(const Duration(seconds: 5), () {
+          exitApp = 0;
+          setState(() {});
+        });
+        if (exitApp == 2) {
+          exit(0);
+        }
+      },
+      child: LayoutBuilder(
+        builder: (context, constraints) => Scaffold(
+          extendBody: false,
+          extendBodyBehindAppBar: false,
+          // floatingActionButtonLocation: CustomFloatingBtnPosition(
+          //   HomeUtils.headerHeight(context) + 12,
+          //   50 + AppConst.defaultHrPadding.right,
+          // ),
+          // floatingActionButton: const CartFloatingBtn(),
+          body: FloatingDraggableWidget(
+            // dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
+            floatingWidget: const MainCartWidget(
+              showBadge: true,
+            ).withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
+            floatingWidgetHeight: 50,
+            floatingWidgetWidth: 50,
+            autoAlign: false,
+            autoAlignType: AlignmentType.both,
+            speed: 1,
+            dy: HomeUtils.headerHeight(context) + 12,
+            dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
+            disableBounceAnimation: true,
+            mainScreenWidget: RefreshIndicator(
+              onRefresh: () async {
+                await context.read<HomeCubit>().getHomeData();
               },
+              child: BlocBuilder<HomeCubit, HomeStates>(
+                builder: (context, state) {
+                  if (state is! HomeDataStates) return const SizedBox.shrink();
+                  if (state is HomeDataLoadingState) {
+                    return const Center(child: AdaptiveProgressIndicator());
+                  } else if (state is HomeDataErrorState) {
+                    return FailureComponent(
+                      message: state.msg,
+                      onRetry: () async {
+                        await context.read<HomeCubit>().getHomeData();
+                      },
+                    );
+                  } else {
+                    return RefreshIndicator(
+                      onRefresh: () {
+                        return context.read<HomeCubit>().getHomeData();
+                      },
+                      child: CustomScrollView(
+                        slivers: [
+                          const SliverToBoxAdapter(
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 12),
+                              child: _HomeHeader(),
+                            ),
+                          ),
+                          const SliverToBoxAdapter(
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 24),
+                              child: _HomeSearchWidget(),
+                            ),
+                          ),
+
+                          ///
+                          _HomeCategoriesComponent(
+                            items: state.homeResponse?.categories ?? [],
+                          ),
+                          if (state.homeResponse?.categoriesBanner != null)
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 24),
+                                child: MainBannerWidget(
+                                  banner: state.homeResponse!.categoriesBanner!,
+                                ),
+                              ),
+                            ),
+
+                          // ///
+                          _DailyOffersWidget(
+                            items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[],
+                          ),
+                          if (state.homeResponse?.dailyOffersBanner != null)
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 24),
+
+                                child: MainBannerWidget(
+                                  banner: state.homeResponse!.dailyOffersBanner!,
+                                ),
+                              ),
+                            ),
+
+                          // /// const SummerSaleAddWidget(),
+                          _HomeSuggestedProductsWidget(
+                            items: state.homeResponse?.suggested ?? <GenericItemEntity>[],
+                          ),
+                          if (state.homeResponse?.suggestedBanner != null)
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 24),
+
+                                child: MainBannerWidget(
+                                  banner: state.homeResponse!.suggestedBanner!,
+                                ),
+                              ),
+                            ),
+
+                          // ///
+                          _HomeTopVendorsWidget(
+                            vendors: state.homeResponse?.topVendors ?? <VendorEntity>[],
+                          ),
+                          if (state.homeResponse?.topVendorsBanner != null)
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 24),
+                                child: MainBannerWidget(
+                                  banner: state.homeResponse!.topVendorsBanner!,
+                                ),
+                              ),
+                            ),
+
+                          // ///
+                          _HomeBestPopularStoresWidget(
+                            stores: state.homeResponse?.bestPopular ?? <StoreEntity>[],
+                          ),
+                          if (state.homeResponse?.bestPopularBanner != null)
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 24),
+                                child: MainBannerWidget(
+                                  banner: state.homeResponse!.bestPopularBanner!,
+                                ),
+                              ),
+                            ),
+
+                          // ///
+                          _HomeBestPopular(
+                            items: state.homeResponse?.topItems ?? <GenericItemEntity>[],
+                          ),
+                          if (state.homeResponse?.bestPopularBanner != null)
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 24),
+                                child: MainBannerWidget(
+                                  banner: state.homeResponse!.bestPopularBanner!,
+                                ),
+                              ),
+                            ),
+                          // _HomeTopItems(
+                          //   items: state.homeResponse?.topItems ?? <GenericItemEntity>[],
+                          // ),
+                          // if (state.homeResponse?.topItems != null)
+                          //   SliverToBoxAdapter(
+                          //     child: Padding(
+                          //       padding: const EdgeInsets.only(bottom: 24),
+                          //       child: MainBannerWidget(
+                          //         banner: state.homeResponse!.topItemsBanner!,
+                          //       ),
+                          //     ),
+                          //   ),
+
+                          // const ImageWithAlignedBtn(image: Assets.assetsPngHomeAdd, align: Alignment(0, 1), btnText: "Order Now"),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ),

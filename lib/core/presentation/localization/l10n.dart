@@ -5,7 +5,11 @@ import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 
 class L10n {
   L10n._();
-  static final List<Locale> supportedLocales = [const Locale("en", ""), const Locale("ar", "")];
+
+  static final List<Locale> supportedLocales = [
+    const Locale("ar", ""),
+    const Locale("en", ""),
+  ];
 
   static const List<LocalizationsDelegate> localizationDelegates = [
     AppLocalizations.delegate,

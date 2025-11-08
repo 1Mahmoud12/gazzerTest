@@ -536,5 +536,7 @@
                           "orangeCash": "أورانج كاش",
                           "payment_completed_successfully": "تم الدفع بنجاح!",
                             "payment_failed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
-                            "order_placed_successfully": "تم إنشاء الطلب بنجاح!"
+                            "order_placed_successfully": "تم إنشاء الطلب بنجاح!",
+                            "startsWith01":"رقم الهاتف يجب ان يبدا ب 01",
+                            "swipeTwiceToExit":"اسحب مرا اخري للخروج"
                     }

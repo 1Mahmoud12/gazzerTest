@@ -1366,4 +1366,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get order_placed_successfully => 'تم إنشاء الطلب بنجاح!';
+
+  @override
+  String get startsWith01 => 'رقم الهاتف يجب ان يبدا ب 01';
+
+  @override
+  String get swipeTwiceToExit => 'اسحب مرا اخري للخروج';
 }

@@ -15,6 +15,7 @@ import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
+import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 
@@ -46,6 +47,16 @@ class _MainLayoutState extends State<MainLayout> {
   int _updateBNV(bool isInit) {
     final initRoute = _getBaseRoute();
     return routes.entries.firstWhere((k) => k.value == initRoute, orElse: () => routes.entries.first).key;
+  }
+
+  bool _shouldShowBottomNav() {
+    final fullPath = widget.state.fullPath ?? '';
+    logger.d(fullPath);
+    if (fullPath == '/' || fullPath == '/favorites' || fullPath == '/orders' || fullPath == '/profile') {
+      return true;
+    }
+
+    return false;
   }
 
   @override
@@ -94,24 +105,26 @@ class _MainLayoutState extends State<MainLayout> {
                 ),
               ],
             ),
-            bottomNavigationBar: BlocBuilder<AppSettingsCubit, AppSettingsState>(
-              buildWhen: (previous, current) => previous.lang != current.lang,
-              builder: (context, state) => MainBnb(
-                initialIndex: value,
-                onItemSelected: (index) {
-                  if (index == 3) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Scaffold.of(context).openEndDrawer();
-                    });
-                    return;
-                  }
-                  if (index == value) return;
+            bottomNavigationBar: _shouldShowBottomNav()
+                ? BlocBuilder<AppSettingsCubit, AppSettingsState>(
+                    buildWhen: (previous, current) => previous.lang != current.lang,
+                    builder: (context, state) => MainBnb(
+                      initialIndex: value,
+                      onItemSelected: (index) {
+                        if (index == 3) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            Scaffold.of(context).openEndDrawer();
+                          });
+                          return;
+                        }
+                        if (index == value) return;
 
-                  route.value = index;
-                  context.go(routes[index]!);
-                },
-              ),
-            ),
+                        route.value = index;
+                        context.go(routes[index]!);
+                      },
+                    ),
+                  )
+                : null,
             drawerEnableOpenDragGesture: false,
             drawerDragStartBehavior: DragStartBehavior.down,
             endDrawerEnableOpenDragGesture: false,

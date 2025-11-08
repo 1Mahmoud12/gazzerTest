@@ -61,42 +61,17 @@ class PaymentMethodWidget extends StatelessWidget {
                       walletPhoneNumber: cubit.walletPhoneNumber,
                       onTap: () async {
                         String number = '';
-                        String prefix = '';
-                        String providerName = '';
-                        await _showWalletProviderSheet(
-                          context,
-                          onPicked: (provider) async {
-                            switch (provider) {
-                              case _WalletProvider.vodafone:
-                                prefix = '010';
-                                providerName = 'vodafone_cash';
-                                break;
-                              case _WalletProvider.etisalat:
-                                prefix = '011';
-                                providerName = 'etisalat_cash';
-                                break;
-                              case _WalletProvider.orange:
-                                prefix = '012';
-                                providerName = 'orange_cash';
-                                break;
-                            }
-                            // Navigator.of(context).pop();
-                          },
-                        );
-                        if (prefix.isEmpty || providerName.isEmpty) {
-                          return;
-                        }
+
                         await _showWalletNumberSheet(
                           context,
-                          prefix: prefix,
                         ).then((value) {
                           number = value ?? '';
                         });
-                        if (number.isNotEmpty && prefix.isNotEmpty && providerName.isNotEmpty) {
+                        if (number.isNotEmpty) {
                           cubit.selectPaymentMethod(PaymentMethod.wallet);
 
                           cubit.setWalletInfo(
-                            providerName: providerName,
+                            providerName: 'e_wallet',
                             phoneNumber: number,
                           );
                         }
@@ -168,32 +143,14 @@ class PaymentMethodWidget extends StatelessWidget {
                           cubit.setWalletInfo(providerName: '', phoneNumber: '');
                         }
                         if (cubit.remainingPaymentMethod == PaymentMethod.wallet) {
-                          String prefix = '';
                           String providerName = '';
-                          await _showWalletProviderSheet(
+                          await _showWalletNumberSheet(
                             context,
-                            onPicked: (provider) async {
-                              switch (provider) {
-                                case _WalletProvider.vodafone:
-                                  prefix = '010';
-                                  providerName = 'vodafone_cash';
-                                  break;
-                                case _WalletProvider.etisalat:
-                                  prefix = '011';
-                                  providerName = 'etisalat_cash';
-                                  break;
-                                case _WalletProvider.orange:
-                                  prefix = '012';
-                                  providerName = 'orange_cash';
-                                  break;
-                              }
-                            },
                           );
 
-                          if (prefix.isNotEmpty && providerName.isNotEmpty && context.mounted) {
+                          if (context.mounted) {
                             final number = await _showWalletNumberSheet(
                               context,
-                              prefix: prefix,
                             );
                             if (number != null && number.isNotEmpty) {
                               cubit.selectPaymentMethod(PaymentMethod.gazzerWallet, removeRemainingMethod: false);
@@ -472,58 +429,58 @@ Future<void> _showInsufficientWalletSheet(
   );
 }
 
-enum _WalletProvider { vodafone, etisalat, orange }
+//enum _WalletProvider { vodafone, etisalat, orange }
 
-Future<void> _showWalletProviderSheet(
-  BuildContext context, {
-  required void Function(_WalletProvider provider) onPicked,
-}) async {
-  await showModalBottomSheet(
-    context: context,
-    builder: (ctx) {
-      return Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(L10n.tr().choosePaymentMethod, style: TStyle.blackBold(16)),
-            const SizedBox(height: 12),
-            MainBtn(
-              onPressed: () {
-                onPicked(_WalletProvider.vodafone);
-                Navigator.of(context).pop();
-              },
-              text: L10n.tr().vodafoneCash,
-            ),
-            const SizedBox(height: 8),
-            MainBtn(
-              onPressed: () {
-                onPicked(_WalletProvider.etisalat);
-                Navigator.of(context).pop();
-              },
-              text: L10n.tr().eCash,
-            ),
-            const SizedBox(height: 8),
-            MainBtn(
-              onPressed: () {
-                onPicked(_WalletProvider.orange);
-                Navigator.of(context).pop();
-              },
-              text: L10n.tr().orangeCash,
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
+// Future<void> _showWalletProviderSheet(
+//   BuildContext context, {
+//   required void Function(_WalletProvider provider) onPicked,
+// }) async {
+//   await showModalBottomSheet(
+//     context: context,
+//     builder: (ctx) {
+//       return Padding(
+//         padding: const EdgeInsets.all(16),
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(L10n.tr().choosePaymentMethod, style: TStyle.blackBold(16)),
+//             const SizedBox(height: 12),
+//             MainBtn(
+//               onPressed: () {
+//                 onPicked(_WalletProvider.vodafone);
+//                 Navigator.of(context).pop();
+//               },
+//               text: L10n.tr().vodafoneCash,
+//             ),
+//             const SizedBox(height: 8),
+//             MainBtn(
+//               onPressed: () {
+//                 onPicked(_WalletProvider.etisalat);
+//                 Navigator.of(context).pop();
+//               },
+//               text: L10n.tr().eCash,
+//             ),
+//             const SizedBox(height: 8),
+//             MainBtn(
+//               onPressed: () {
+//                 onPicked(_WalletProvider.orange);
+//                 Navigator.of(context).pop();
+//               },
+//               text: L10n.tr().orangeCash,
+//             ),
+//           ],
+//         ),
+//       );
+//     },
+//   );
+// }
 
 Future<String?> _showWalletNumberSheet(
-  BuildContext context, {
-  required String prefix,
-}) async {
+  BuildContext context,
+) async {
   final controller = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
   return await showModalBottomSheet<String>(
     context: context,
     isScrollControlled: true,
@@ -558,15 +515,30 @@ Future<String?> _showWalletNumberSheet(
                   // ),
                   // const SizedBox(width: 8),
                   Expanded(
-                    child: MainTextField(
-                      controller: controller,
-                      prefix: Text(prefix, style: TStyle.primaryBold(14)),
-                      hintText: 'XXXXXXXXX',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(8),
-                      ],
+                    child: Form(
+                      key: _formkey,
+                      child: MainTextField(
+                        controller: controller,
+
+                        hintText: 'XXXXXXXXXXX',
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return L10n.tr().thisFieldIsRequired;
+                          }
+                          if (!value.startsWith('01')) {
+                            return L10n.tr().startsWith01;
+                          }
+                          if (value.length != 11) {
+                            return L10n.tr().invalidPhoneNumber;
+                          }
+                          return null;
+                        },
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(11),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -577,15 +549,10 @@ Future<String?> _showWalletNumberSheet(
               alignment: AlignmentDirectional.centerEnd,
               child: MainBtn(
                 onPressed: () {
+                  if (!_formkey.currentState!.validate()) return;
                   final digits = controller.text.trim();
-                  if (digits.length != 8) {
-                    voucherAlert(
-                      title: L10n.tr().invalidPhoneNumber,
-                      context: context,
-                    );
-                    return;
-                  }
-                  Navigator.of(context).pop('$prefix$digits');
+
+                  Navigator.of(context).pop(digits);
                 },
                 text: L10n.tr().confirm,
               ),

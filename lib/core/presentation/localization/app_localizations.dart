@@ -2773,6 +2773,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Order placed successfully!'**
   String get order_placed_successfully;
+
+  /// No description provided for @startsWith01.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must start with 01'**
+  String get startsWith01;
+
+  /// No description provided for @swipeTwiceToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe twice to exit'**
+  String get swipeTwiceToExit;
 }
 
 class _AppLocalizationsDelegate
