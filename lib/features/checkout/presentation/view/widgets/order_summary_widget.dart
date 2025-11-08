@@ -37,19 +37,28 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
             final baseTotal = state.summary.total.toDouble();
             double voucherDeduction = 0.0;
             String? voucherFormatted;
-
-            if (vState is VoucherApplied) {
-              final isPercent = vState.discountType.toLowerCase().contains('percent');
+            final voucherCubit = context.read<VouchersCubit>();
+            if (voucherCubit.selectedDiscountType != null &&
+                voucherCubit.selectedDiscountAmount != null &&
+                voucherCubit.selectedDiscountType!.isNotEmpty &&
+                voucherCubit.selectedDiscountAmount! > 0 &&
+                voucherCubit.selectedVoucherCode != null) {
+              final isPercent = voucherCubit.selectedDiscountType!.toLowerCase().contains(
+                'percent',
+              );
               if (isPercent) {
-                voucherDeduction = baseTotal * (vState.discountAmount / 100.0);
-                voucherFormatted = '- ${vState.discountAmount.toStringAsFixed(0)}%';
+                voucherDeduction = baseTotal * (voucherCubit.selectedDiscountAmount! / 100.0);
+                voucherFormatted = '- ${voucherCubit.selectedDiscountAmount!.toStringAsFixed(0)}%';
               } else {
-                voucherDeduction = vState.discountAmount;
-                voucherFormatted = '- ${Helpers.getProperPrice(vState.discountAmount)}';
+                voucherDeduction = voucherCubit.selectedDiscountAmount!;
+                voucherFormatted = '- ${Helpers.getProperPrice(voucherCubit.selectedDiscountAmount!)}';
               }
             }
 
-            final finalTotal = (baseTotal - voucherDeduction).clamp(0.0, double.infinity);
+            final finalTotal = (baseTotal - voucherDeduction).clamp(
+              0.0,
+              double.infinity,
+            );
             context.read<CheckoutCubit>().addFinalTotal(finalTotal);
             return Container(
               padding: const EdgeInsets.all(16),
@@ -59,17 +68,37 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
               ),
               child: Column(
                 children: [
-                  ItemSummary(title: L10n.tr().subTotal, value: state.summary.subTotal),
+                  if (state.summary.subTotal != 0)
+                    ItemSummary(
+                      title: L10n.tr().subTotal,
+                      value: state.summary.subTotal,
+                    ),
                   const SizedBox(height: 8),
-                  ItemSummary(title: L10n.tr().discount, value: state.summary.discount, discount: true),
+                  if (state.summary.discount != 0)
+                    ItemSummary(
+                      title: L10n.tr().discount,
+                      value: state.summary.discount,
+                      discount: true,
+                    ),
                   const SizedBox(height: 8),
-                  ItemSummary(title: L10n.tr().deliveryFee, value: state.summary.deliveryFee),
+                  if (state.summary.deliveryFee != 0)
+                    ItemSummary(
+                      title: L10n.tr().deliveryFee,
+                      value: state.summary.deliveryFee,
+                    ),
                   const SizedBox(height: 8),
-                  ItemSummary(title: L10n.tr().serviceFee, value: state.summary.serviceFee),
+                  if (state.summary.serviceFee != 0)
+                    ItemSummary(
+                      title: L10n.tr().serviceFee,
+                      value: state.summary.serviceFee,
+                    ),
                   const SizedBox(height: 8),
 
                   if (voucherFormatted != null) ...[
-                    ItemSummary(title: L10n.tr().totalBeforeCode, value: state.summary.total),
+                    ItemSummary(
+                      title: L10n.tr().totalBeforeCode,
+                      value: state.summary.total,
+                    ),
                     const SizedBox(height: 8),
                     ItemSummary(
                       title: L10n.tr().promoCode,
@@ -79,7 +108,11 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                     ),
                     const SizedBox(height: 8),
                   ],
-                  ItemSummary(title: L10n.tr().total, value: finalTotal, total: true),
+                  ItemSummary(
+                    title: L10n.tr().total,
+                    value: finalTotal,
+                    total: true,
+                  ),
                 ],
               ),
             );
@@ -97,7 +130,14 @@ class ItemSummary extends StatelessWidget {
   final bool total;
   final String? formattedValue;
 
-  const ItemSummary({super.key, required this.title, required this.value, this.discount = false, this.total = false, this.formattedValue});
+  const ItemSummary({
+    super.key,
+    required this.title,
+    required this.value,
+    this.discount = false,
+    this.total = false,
+    this.formattedValue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +145,14 @@ class ItemSummary extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: total ? TStyle.burbleBold(16) : TStyle.blackBold(14)),
-        Text(valueText, style: total ? TStyle.burbleBold(16) : TStyle.blackBold(14)),
+        Text(
+          title,
+          style: total ? TStyle.burbleBold(16) : TStyle.blackBold(14),
+        ),
+        Text(
+          valueText,
+          style: total ? TStyle.burbleBold(16) : TStyle.blackBold(14),
+        ),
       ],
     );
   }

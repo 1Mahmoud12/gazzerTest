@@ -21,6 +21,10 @@ class VouchersCubit extends Cubit<VouchersStates> {
   /// Toggles text field enabled/disabled state for VoucherWidget
   bool isTextFieldEnabled = false;
 
+  String? selectedVoucherCode;
+  double? selectedDiscountAmount;
+  String? selectedDiscountType;
+
   void toggleTextField() {
     isTextFieldEnabled = !isTextFieldEnabled;
     emit(VoucherChange(timestamp: DateTime.now().millisecondsSinceEpoch));
@@ -48,20 +52,65 @@ class VouchersCubit extends Cubit<VouchersStates> {
     switch (result) {
       case Ok<VoucherDTO>(:final value):
         final discount = double.tryParse(value.discountValue) ?? 0.0;
-        emit(VoucherApplied(voucherCode: value.code, discountAmount: discount, discountType: value.discountType));
+        _cacheSelectedVoucher(
+          code: value.code,
+          discountAmount: discount,
+          discountType: value.discountType,
+        );
+        selectedVoucherCode = value.code;
+        selectedDiscountAmount = discount;
+        selectedDiscountType = value.discountType;
+        emit(
+          VoucherApplied(
+            voucherCode: value.code,
+            discountAmount: discount,
+            discountType: value.discountType,
+          ),
+        );
       case Err(:final error):
-        emit(VoucherError(message: error.message.isEmpty ? L10n.tr().invalidVoucherCode : error.message));
+        emit(
+          VoucherError(
+            message: error.message.isEmpty ? L10n.tr().invalidVoucherCode : error.message,
+          ),
+        );
     }
   }
 
   void applyLocalVoucher(String code) {
     final item = _voucherList.firstWhere((element) => element.code == code);
     final discount = double.tryParse(item.discountValue) ?? 0.0;
-    emit(VoucherApplied(voucherCode: item.code, discountAmount: discount, discountType: item.discountType));
+    _cacheSelectedVoucher(
+      code: item.code,
+      discountAmount: discount,
+      discountType: item.discountType,
+    );
+    selectedVoucherCode = item.code;
+    selectedDiscountAmount = discount;
+    selectedDiscountType = item.discountType;
+    emit(
+      VoucherApplied(
+        voucherCode: item.code,
+        discountAmount: discount,
+        discountType: item.discountType,
+      ),
+    );
   }
 
   /// Clear/reset voucher state
   void clearVoucher() {
+    selectedVoucherCode = null;
+    selectedDiscountAmount = null;
+    selectedDiscountType = null;
     emit(VouchersInitial());
+  }
+
+  void _cacheSelectedVoucher({
+    required String code,
+    required double discountAmount,
+    required String discountType,
+  }) {
+    selectedVoucherCode = code;
+    selectedDiscountAmount = discountAmount;
+    selectedDiscountType = discountType;
   }
 }

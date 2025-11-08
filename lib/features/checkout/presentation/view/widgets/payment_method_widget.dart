@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -344,6 +345,7 @@ class _PaymentMethodItem extends StatelessWidget {
 
 void _showConvertPointsSheet(BuildContext context, int availablePoints) {
   final controller = TextEditingController(text: availablePoints.toString());
+  final formKey = GlobalKey<FormState>();
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -363,11 +365,27 @@ void _showConvertPointsSheet(BuildContext context, int availablePoints) {
             const SizedBox(height: 8),
             Directionality(
               textDirection: TextDirection.ltr,
-              child: MainTextField(
-                controller: controller,
-                keyboardType: TextInputType.number,
-                hintText: L10n.tr().enterPoints,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              child: Form(
+                key: formKey,
+                child: MainTextField(
+                  controller: controller,
+                  keyboardType: TextInputType.number,
+                  hintText: L10n.tr().enterPoints,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return L10n.tr().enterPoints;
+                    }
+                    final points = int.tryParse(value);
+                    if (points == null || points <= 0) {
+                      return L10n.tr().invalidPoints;
+                    }
+                    if (points > availablePoints) {
+                      return L10n.tr().insufficientPoints;
+                    }
+                    return null;
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 12),
@@ -375,6 +393,7 @@ void _showConvertPointsSheet(BuildContext context, int availablePoints) {
               alignment: AlignmentDirectional.centerEnd,
               child: MainBtn(
                 onPressed: () async {
+                  if (!formKey.currentState!.validate()) return;
                   final text = controller.text.trim();
                   final points = int.tryParse(text) ?? 0;
                   if (points <= 0) {
@@ -388,7 +407,10 @@ void _showConvertPointsSheet(BuildContext context, int availablePoints) {
                     );
                     return;
                   }
+                  animationDialogLoading(context);
+
                   await context.read<CheckoutCubit>().convertPoints(points);
+                  if (ctx.mounted) closeDialog(context);
                   if (ctx.mounted) Navigator.of(ctx).pop();
                 },
                 text: L10n.tr().convert,

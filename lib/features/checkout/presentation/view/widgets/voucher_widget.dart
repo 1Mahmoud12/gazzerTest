@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
@@ -63,10 +64,24 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                         ),
                       ),
                       InkWell(
-                        onTap: cubit.toggleTextField,
-                        child: Text(
-                          L10n.tr().addVoucher,
-                          style: TStyle.blackBold(14),
+                        onTap: () {
+                          _voucherController.clear();
+                          cubit.toggleTextField();
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              L10n.tr().addVoucher,
+                              style: TStyle.blackBold(14),
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            const Icon(
+                              Icons.add,
+                              size: 16,
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -84,11 +99,9 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                             BlocListener<VouchersCubit, VouchersStates>(
                               listener: (context, state) {
                                 if (state is VoucherApplied) {
-                                  voucherAlert(
-                                    title:
-                                        '${L10n.tr().voucherApplied} ${state.discountAmount} ${state.discountType.contains('percent') ? '%' : ''} ${L10n.tr().discount}',
-                                    context: context,
-                                    asDialog: true,
+                                  Alerts.showToast(
+                                    '${L10n.tr().voucherApplied} ${state.discountAmount} ${state.discountType.contains('percent') ? '%' : ''} ${L10n.tr().discount}',
+                                    error: false,
                                   );
                                 } else if (state is VoucherError) {
                                   voucherAlert(
@@ -99,7 +112,6 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                               },
                               child: Expanded(
                                 child: DropdownButtonFormField<String>(
-                                  value: hasVoucher ? appliedVoucher : null,
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: AppConst.defaultBorderRadius,
@@ -171,18 +183,25 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                         final checkoutCubit = context.read<CheckoutCubit>();
                         final appliedVoucher = checkoutCubit.voucherCode;
                         final hasVoucher = appliedVoucher != null && appliedVoucher.isNotEmpty;
-
+                        final formKey = GlobalKey<FormState>();
                         return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              child: MainTextField(
-                                controller: _voucherController,
-                                showBorder: true,
-                                borderRadius: 16,
-                                hintText: L10n.tr().enterCode,
-                                validator: Validators.notEmpty,
-                                keyboardType: TextInputType.text,
-                                onChange: (value) => setState(() {}),
+                              child: Form(
+                                key: formKey,
+                                child: MainTextField(
+                                  controller: _voucherController,
+                                  showBorder: true,
+                                  borderRadius: 16,
+                                  hintText: L10n.tr().enterCode,
+                                  validator: Validators.notEmpty,
+                                  keyboardType: TextInputType.text,
+
+                                  onChange: (value) {
+                                    setState(() {});
+                                  },
+                                ),
                               ),
                             ),
                             const HorizontalSpacing(10),
@@ -190,11 +209,11 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                               child: BlocConsumer<VouchersCubit, VouchersStates>(
                                 listener: (context, state) {
                                   if (state is VoucherApplied) {
-                                    voucherAlert(
-                                      title: '${L10n.tr().voucherApplied} ${state.discountAmount}% ${L10n.tr().discount}',
-                                      context: context,
-                                      asDialog: true,
+                                    Alerts.showToast(
+                                      '${L10n.tr().voucherApplied} ${state.discountAmount}% ${L10n.tr().discount}',
+                                      error: false,
                                     );
+
                                     checkoutCubit.applyVoucher(
                                       state.voucherCode,
                                     );
@@ -209,6 +228,9 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                   final isLoading = state is VoucherLoading;
                                   return MainBtn(
                                     onPressed: () {
+                                      if (formKey.currentState!.validate()) {
+                                        return;
+                                      }
                                       if (_voucherController.text.trim().isNotEmpty) {
                                         cubit.applyVoucher(
                                           _voucherController.text,
