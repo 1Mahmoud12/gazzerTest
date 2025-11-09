@@ -70,7 +70,6 @@ abstract class BaseApiRepo {
                 e: ErrorType.badResponse,
               );
             }
-
             // Try to parse the backend error message for all bad responses
             return BadResponse.fromJson(
               responseData,

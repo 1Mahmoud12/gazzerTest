@@ -289,12 +289,9 @@ class _PaymentMethodItem extends StatelessWidget {
                                   style: TStyle.primaryBold(12),
                                 ),
                                 //const HorizontalSpacing(2),
-                                RotatedBox(
-                                  quarterTurns: L10n.isAr(context) ? 2 : 0,
-                                  child: const Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 12,
-                                  ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 12,
                                 ),
                               ],
                             ),

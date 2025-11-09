@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/data/network/api_client.dart';
-import 'package:gazzer/di.dart';
 import 'package:gazzer/main.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -57,22 +55,33 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Future<void> _checkPaymentStatus(String url) async {
-    // Check if payment is successful
     if (_hasHandledPayment) return;
-    final response = await _handlePaymentWebhook(url);
-    Navigator.pop(context, response);
-  }
 
-  Future<String> _handlePaymentWebhook(String url) async {
-    final uri = Uri.parse(url);
-    final endpoint = uri.path.replaceFirst('/api/', '');
-    final response = await di<ApiClient>().get(
-      endpoint: endpoint,
-      queryParameters: uri.queryParameters,
-    );
-    logger.d('Payment webhook response: ${response.data['message']}');
-
-    return "${response.data['status']},${response.data['message']}";
+    if (url.contains('success=true')) {
+      _hasHandledPayment = true;
+      try {
+        Navigator.pop(context, url);
+        // final result = await PaymobWebhookService.fetchWebhookResponse(url);
+        // logger.d('Payment webhook response: $result');
+        // if (!mounted) return;
+        // final status = result['status'];
+        // final paymentStatus = result['payment_status'];
+      } catch (error, stackTrace) {
+        logger.e(
+          'Failed to confirm payment',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        if (mounted) {
+          Navigator.pop(context, url);
+        }
+      }
+    } else if (url.contains('success=false') || url.contains('txn_response_code=DECLINED')) {
+      _hasHandledPayment = true;
+      if (mounted) {
+        Navigator.pop(context, url);
+      }
+    }
   }
 
   @override

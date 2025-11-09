@@ -4,6 +4,8 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/pkgs/paymob/paymob_view.dart';
+import 'package:gazzer/core/presentation/pkgs/paymob/paymob_webhook_service.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
@@ -235,10 +237,10 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
       notes: notes,
     );
 
-    // logger.d(params.toJson());
-    animationDialogLoading(context);
+    final rootContext = AppNavigator.mainKey.currentContext;
+    animationDialogLoading(rootContext);
     final res = await _checkoutRepo.submitCheckout(params: params);
-    closeDialog(context);
+    closeDialog(rootContext);
     switch (res) {
       case Ok<CheckoutResponseDTO>(:final value):
         // If iframe URL is provided, navigate to payment screen
@@ -254,22 +256,34 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
                 ) ??
                 'error,${L10n.tr().payment_failed}';
             logger.d(' result result : $result');
-            if (result.split(',').first == 'success') {
-              // if (context.mounted) {
+            animationDialogLoading(rootContext);
+            if (!result.split(',').last.contains('http')) {
               Alerts.showToast(
-                result.replaceAll('success,', ''),
+                L10n.tr().payment_failed,
+              );
+              closeDialog(rootContext);
+
+              return;
+            }
+            final response = await PaymobWebhookService.fetchWebhookResponse(
+              result.split(',').last,
+            );
+            final message = response['message'];
+            final status = response['data']?['payment_status'];
+            closeDialog(rootContext);
+            if (status == 'completed') {
+              logger.d('Payment webhook response: $result');
+              Alerts.showToast(
+                message,
                 error: false,
               );
-              // TODO: Navigate to success screen or handle success
-              context.read<CartCubit>().loadCart();
+              rootContext!.read<CartCubit>().loadCart();
 
-              context.go('/orders');
+              rootContext.go('/orders');
             } else {
-              if (context.mounted) {
-                Alerts.showToast(
-                  result.replaceAll('error,', ''),
-                );
-              }
+              Alerts.showToast(
+                message,
+              );
             }
           }
         } else {
@@ -282,9 +296,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
           }
         }
       case Err(:final error):
-        if (context.mounted) {
-          Alerts.showToast(error.message);
-        }
+        Alerts.showToast(error.message);
     }
   }
 
