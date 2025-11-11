@@ -539,6 +539,38 @@
               "order_placed_successfully": "Order placed successfully!",
               "startsWith01":"Phone number must start with 01",
               "swipeTwiceToExit":"Swipe twice to exit",
-              "amountToPay":"Amount to Pay","continueShopping":"Continue Shopping"
+              "amountToPay":"Amount to Pay","continueShopping":"Continue Shopping",
+                "deliveryFeeDiscount": "Delivery Fee Discount",
+                "vatAmount": "VAT Amount",
+                "itemsDiscount": "Items Discount",
+                "grossAmount": "Gross Amount",
+                "pleaseLoginToUseLoyalty": "please login to use loyalty program",
+                "needToAddAddressFirst": "You need to add an address first",
+                  "loyaltyProgram": "Loyalty Program",
+                  "yourLoyaltyJourney": "Your Loyalty Journey",
+                  "level": "Level",
+                  "yourPoints": "Your Points",
+                  "pointsPer": "Points per",
+                  "earningRate": "Earning Rate",
+                  "points": "Points",
+                  "conversionRate": "Conversion Rate",
+                  "validUntill": "Valid Until",
+                  "expiration": "Expiration",
+                  "ourTierBenefits": "Our Tier Benefits",
+                  "birthdayVouchers": "Birthday Vouchers",
+                "exclusiveDeals": "Exclusive Deals",
+                "exclusiveOffers": "Exclusive Offers",
+                "loyaltySpendSummary": "You've spent {amount} in the last {days} days",
+                "@loyaltySpendSummary": {
+                  "placeholders": {
+                    "amount": {
+                      "type": "String"
+                    },
+                    "days": {
+                      "type": "int"
+                    }
+                  }
+                }
+
 
 }

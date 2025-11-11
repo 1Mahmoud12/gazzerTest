@@ -89,32 +89,30 @@ class PaymentMethodWidget extends StatelessWidget {
                         PaymentMethod.creditDebitCard,
                       ),
                     ),
-                  // if (selectedMethod == PaymentMethod.creditDebitCard) ...[
-                  //   const SizedBox(height: 12),
-                  //   ...cards.map(
-                  //     (card) => Padding(
-                  //       padding: const EdgeInsets.only(bottom: 12),
-                  //       child: _CardItem(
-                  //         card: card,
-                  //         isSelected: (cubit.selectedCard == null)
-                  //             ? card.isDefault
-                  //             : cubit.selectedCard == card,
-                  //         onTap: () {
-                  //           cubit.selectCard(card);
-                  //         },
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   const SizedBox(height: 12),
-                  //   _AddCardItem(
-                  //     onTap: () async {
-                  //       await context.push(CardDetailsScreen.route);
-                  //       if (context.mounted) {
-                  //         context.read<CheckoutCubit>().loadCheckoutData();
-                  //       }
-                  //     },
-                  //   ),
-                  // ],
+                  if (selectedMethod == PaymentMethod.creditDebitCard) ...[
+                    const SizedBox(height: 12),
+                    ...cards.map(
+                      (card) => Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: _CardItem(
+                          card: card,
+                          isSelected: (cubit.selectedCard == null) ? card.isDefault : cubit.selectedCard == card,
+                          onTap: () {
+                            cubit.selectCard(card);
+                          },
+                        ),
+                      ),
+                    ),
+                    // const SizedBox(height: 12),
+                    // _AddCardItem(
+                    //   onTap: () async {
+                    //     await context.push(CardDetailsScreen.route);
+                    //     if (context.mounted) {
+                    //       context.read<CheckoutCubit>().loadCheckoutData();
+                    //     }
+                    //   },
+                    // ),
+                  ],
                   if (cubit.timeSlots == null) const SizedBox(height: 12),
 
                   _PaymentMethodItem(
@@ -573,110 +571,113 @@ Future<String?> _showWalletNumberSheet(
   );
 }
 
-// class _CardItem extends StatelessWidget {
-//   const _CardItem({
-//     required this.card,
-//     required this.isSelected,
-//     required this.onTap,
-//   });
-//
-//   final CardEntity card;
-//   final bool isSelected;
-//   final VoidCallback onTap;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: onTap,
-//       borderRadius: BorderRadius.circular(12),
-//       child: Container(
-//         padding: const EdgeInsets.all(12),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(12),
-//           border: Border.all(
-//             color: isSelected ? Co.purple : Colors.transparent,
-//             width: 1,
-//           ),
-//           color: Co.bg,
-//         ),
-//         child: Row(
-//           children: [
-//             GradientRadioBtn(
-//               isSelected: isSelected,
-//               size: 4,
-//             ),
-//             const SizedBox(width: 12),
-//             Expanded(
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(
-//                     card.cardNumber,
-//                     style: TStyle.blackBold(16),
-//                   ),
-//                   const SizedBox(height: 4),
-//                   Text(
-//                     '${card.cardHolderName} • ${card.formattedExpiry}',
-//                     style: TStyle.greyRegular(12),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             if (card.isDefault)
-//               Container(
-//                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-//                 decoration: BoxDecoration(
-//                   color: Co.purple.withOpacityNew(0.1),
-//                   borderRadius: BorderRadius.circular(8),
-//                 ),
-//                 child: Text(
-//                   L10n.tr().defaultCard,
-//                   style: TStyle.primaryBold(10),
-//                 ),
-//               ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// class _AddCardItem extends StatelessWidget {
-//   const _AddCardItem({required this.onTap});
-//
-//   final VoidCallback onTap;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: onTap,
-//       borderRadius: BorderRadius.circular(12),
-//       child: Container(
-//         padding: const EdgeInsets.all(12),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(12),
-//           border: Border.all(
-//             color: Co.purple.withOpacityNew(0.3),
-//             width: 1,
-//             style: BorderStyle.solid,
-//           ),
-//           color: Co.purple.withOpacityNew(0.05),
-//         ),
-//         child: Row(
-//           children: [
-//             const Icon(
-//               Icons.add_circle_outline,
-//               color: Co.purple,
-//               size: 20,
-//             ),
-//             const SizedBox(width: 12),
-//             Text(
-//               L10n.tr().addCard,
-//               style: TStyle.primaryBold(16),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+class _CardItem extends StatelessWidget {
+  const _CardItem({
+    required this.card,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final CardEntity card;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? Co.purple : Colors.transparent,
+            width: 1,
+          ),
+          color: Co.bg,
+        ),
+        child: Row(
+          children: [
+            GradientRadioBtn(
+              isSelected: isSelected,
+              size: 4,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Text(
+                      card.cardNumber,
+                      style: TStyle.blackBold(16),
+                    ),
+                  ),
+                  // const SizedBox(height: 4),
+                  // Text(
+                  //   '${card.cardHolderName} • ${card.formattedExpiry}',
+                  //   style: TStyle.greyRegular(12),
+                  // ),
+                ],
+              ),
+            ),
+            if (card.isDefault)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Co.purple.withOpacityNew(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  L10n.tr().defaultCard,
+                  style: TStyle.primaryBold(10),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AddCardItem extends StatelessWidget {
+  const _AddCardItem({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Co.purple.withOpacityNew(0.3),
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+          color: Co.purple.withOpacityNew(0.05),
+        ),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.add_circle_outline,
+              color: Co.purple,
+              size: 20,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              L10n.tr().addCard,
+              style: TStyle.primaryBold(16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

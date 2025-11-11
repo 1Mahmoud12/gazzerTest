@@ -71,6 +71,17 @@ class MainCartWidget extends StatelessWidget {
                 )
                 .toString(),
           ),
+          isLabelVisible:
+              di<CartBus>().vendors.fold(
+                0,
+                (previousValue, element) =>
+                    previousValue +
+                    element.items.fold<int>(
+                      0,
+                      (previousValue, item) => previousValue + item.quantity,
+                    ),
+              ) >
+              0,
           textColor: Co.mainText,
           backgroundColor: Co.second2,
           child: child,

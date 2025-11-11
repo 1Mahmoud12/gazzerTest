@@ -158,7 +158,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
     final SuggestEntity itemData = item;
 
     return ProductEntity(
-      id: itemData.id ?? 0,
+      id: itemData.item?.id ?? 0,
       name: itemData.item?.name ?? itemData.item?.name ?? '',
       description: itemData.item?.plateDescription ?? '',
       price: double.tryParse(itemData.item?.price ?? '0') ?? 0.0,

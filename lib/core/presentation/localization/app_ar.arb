@@ -540,5 +540,37 @@
                             "startsWith01":"رقم الهاتف يجب ان يبدا ب 01",
                             "swipeTwiceToExit":"اسحب مرا اخري للخروج",
                             "amountToPay":"المبلغ المطلوب دفعه",
-                            "continueShopping":"اكمل عملية الشراء"
+                            "continueShopping":"اكمل عملية الشراء",
+                              "deliveryFeeDiscount": "خصم مصاريف التوصيل",
+                              "vatAmount": "قيمة الضريبة",
+                              "itemsDiscount": "خصم المنتجات",
+                              "grossAmount": "المبلغ الإجمالي",
+                              "pleaseLoginToUseLoyalty":"يرجى تسجيل الدخول لعرض نقاط الولاء",
+                              "needToAddAddressFirst": "يجب إضافة عنوان أولاً",
+                                "loyaltyProgram": "برنامج الولاء",
+                                "yourLoyaltyJourney": "رحلتك في برنامج الولاء",
+                                "level": "المستوى",
+                                "yourPoints": "نقاطك",
+                                "pointsPer": "نقاط لكل",
+                                "earningRate": "معدل الكسب",
+                                "points": "نقاط",
+                                "conversionRate": "معدل التحويل",
+                                "validUntill": "صالح حتى",
+                                "expiration": "تاريخ الانتهاء",
+                                "ourTierBenefits": "مزايا مستوياتنا",
+                                "birthdayVouchers": "قسائم عيد الميلاد",
+                                "exclusiveDeals": "عروض حصرية",
+                                "exclusiveOffers": "عروض مميزة",
+                                "loyaltySpendSummary": "لقد أنفقت {amount} خلال آخر {days} يومًا",
+                                "@loyaltySpendSummary": {
+                                  "placeholders": {
+                                    "amount": {
+                                      "type": "String"
+                                    },
+                                    "days": {
+                                      "type": "int"
+                                    }
+                                  }
+                                }
+
                     }

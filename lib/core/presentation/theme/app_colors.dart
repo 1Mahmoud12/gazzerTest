@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Co {
-  static const bg = Color(0xFFF2EFEF);
+  static const bg = Color(0xFFFFFFFF);
 
   // Assets Colors
   static const purple = Color(0xFF52229E);
@@ -30,9 +30,10 @@ class Co {
   // others
   static const lightGrey = Color(0xFFD9D9D9);
   static const grey = Color(0xFF777777);
+  static const w100 = Color(0xFFF1EFEF);
+  static const darkGrey = Color(0xFF5D5D5D);
   static const white = Color(0xFFFFFFFF);
   static const dark = Color(0xFF000000);
-  static const backOrderSummary = Color(0xFFEBE3FE);
   static const gryPrimary = Color(0xFF9F93C3);
 
   // for decorations
@@ -46,4 +47,7 @@ class Co {
   static const greenish = Color(0xFF6FB490);
   static const blueish = Color(0xFF42497D);
   static const closed = Color(0xFFFE0000);
+
+  static const purple100 = Color(0xFFEBE3FE);
+  static const purple600 = Color(0xFF8C64E6);
 }

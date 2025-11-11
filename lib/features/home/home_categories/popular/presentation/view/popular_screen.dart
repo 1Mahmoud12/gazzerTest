@@ -178,9 +178,10 @@ class _PopularScreenState extends State<PopularScreen> {
         image: item.item?.plateImage ?? '',
         rate: double.tryParse(item.item?.rate ?? '0') ?? 0.0,
         reviewCount: item.item?.rateCount ?? 0,
+
         outOfStock: false,
         categoryPlateId: -1,
-        hasOptions: false,
+        hasOptions: item.item?.hasOptions ?? false,
         store: item.item?.storeInfo?.toEntity(),
       );
     }

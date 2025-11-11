@@ -19,12 +19,6 @@ class OrderSummaryWidget extends StatefulWidget {
 
 class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
   @override
-  void initState() {
-    super.initState();
-    context.read<CartCubit>().loadCart();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartStates>(
       buildWhen: (previous, current) => current is FullCartStates,

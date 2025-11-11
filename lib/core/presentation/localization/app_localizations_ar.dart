@@ -1,6 +1,7 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1378,4 +1379,69 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get continueShopping => 'اكمل عملية الشراء';
+
+  @override
+  String get deliveryFeeDiscount => 'خصم مصاريف التوصيل';
+
+  @override
+  String get vatAmount => 'قيمة الضريبة';
+
+  @override
+  String get itemsDiscount => 'خصم المنتجات';
+
+  @override
+  String get grossAmount => 'المبلغ الإجمالي';
+
+  @override
+  String get pleaseLoginToUseLoyalty => 'يرجى تسجيل الدخول لعرض نقاط الولاء';
+
+  @override
+  String get needToAddAddressFirst => 'يجب إضافة عنوان أولاً';
+
+  @override
+  String get loyaltyProgram => 'برنامج الولاء';
+
+  @override
+  String get yourLoyaltyJourney => 'رحلتك في برنامج الولاء';
+
+  @override
+  String get level => 'المستوى';
+
+  @override
+  String get yourPoints => 'نقاطك';
+
+  @override
+  String get pointsPer => 'نقاط لكل';
+
+  @override
+  String get earningRate => 'معدل الكسب';
+
+  @override
+  String get points => 'نقاط';
+
+  @override
+  String get conversionRate => 'معدل التحويل';
+
+  @override
+  String get validUntill => 'صالح حتى';
+
+  @override
+  String get expiration => 'تاريخ الانتهاء';
+
+  @override
+  String get ourTierBenefits => 'مزايا مستوياتنا';
+
+  @override
+  String get birthdayVouchers => 'قسائم عيد الميلاد';
+
+  @override
+  String get exclusiveDeals => 'عروض حصرية';
+
+  @override
+  String get exclusiveOffers => 'عروض مميزة';
+
+  @override
+  String loyaltySpendSummary(String amount, int days) {
+    return 'لقد أنفقت $amount خلال آخر $days يومًا';
+  }
 }

@@ -494,6 +494,8 @@ class Fakers {
     serviceFee: 0.0,
     discount: 0.0,
     total: 0.0,
+    tax: 0.0,
+    deliveryFeeDiscount: 0.0,
   );
   static const timeSlots = ['10:00 AM', '11:00 AM', '12:00 PM'];
 

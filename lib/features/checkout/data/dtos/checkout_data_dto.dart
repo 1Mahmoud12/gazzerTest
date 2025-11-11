@@ -99,7 +99,7 @@ class PaymentCardDTO {
     }
 
     return CardEntity(
-      id: id.toString(),
+      id: id,
       cardNumber: '**** **** **** $last4Digits',
       expiryMonth: int.tryParse(expiryMonth) ?? 0,
       expiryYear: parsedYear,

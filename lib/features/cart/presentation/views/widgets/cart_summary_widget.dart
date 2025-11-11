@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradie
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show DashedBorder, HorizontalSpacing, VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -39,64 +40,95 @@ class CartSummaryWidget extends StatelessWidget {
                 DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(36),
-                    color: Co.backOrderSummary,
+                    color: Co.purple100,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(L10n.tr().subTotal, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                            const HorizontalSpacing(6),
-                            Text(
-                              Helpers.getProperPrice(state.summary.subTotal),
-                              style: TStyle.blackSemi(18, font: FFamily.roboto),
-                            ),
-                          ],
-                        ),
+                        if (state.summary.subTotal > 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(L10n.tr().grossAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                              const HorizontalSpacing(6),
+                              Text(
+                                Helpers.getProperPrice(state.summary.subTotal),
+                                style: TStyle.blackSemi(18, font: FFamily.roboto),
+                              ),
+                            ],
+                          ),
+
                         const VerticalSpacing(12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(L10n.tr().serviceFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                            const HorizontalSpacing(6),
-                            Text(
-                              Helpers.getProperPrice(state.summary.serviceFee),
-                              style: TStyle.blackSemi(18, font: FFamily.roboto),
-                            ),
-                          ],
-                        ),
+                        if (state.summary.discount > 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(L10n.tr().itemsDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                              const HorizontalSpacing(12),
+                              Text(
+                                '-${Helpers.getProperPrice(state.summary.discount)}',
+                                style: TStyle.blackSemi(18, font: FFamily.roboto),
+                              ),
+                            ],
+                          ),
+                        const VerticalSpacing(12),
+                        if (state.summary.tax > 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(L10n.tr().vatAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                              const HorizontalSpacing(12),
+                              Text(
+                                Helpers.getProperPrice(state.summary.tax),
+                                style: TStyle.blackSemi(18, font: FFamily.roboto),
+                              ),
+                            ],
+                          ),
                         const VerticalSpacing(12),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(L10n.tr().discount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                            const HorizontalSpacing(12),
-                            Text(
-                              '-${Helpers.getProperPrice(state.summary.discount)}',
-                              style: TStyle.blackSemi(18, font: FFamily.roboto),
-                            ),
-                          ],
-                        ),
+                        if (state.summary.serviceFee > 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(L10n.tr().serviceFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                              const HorizontalSpacing(6),
+                              Text(
+                                Helpers.getProperPrice(state.summary.serviceFee),
+                                style: TStyle.blackSemi(18, font: FFamily.roboto),
+                              ),
+                            ],
+                          ),
                         const VerticalSpacing(12),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(L10n.tr().deliveryFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                            const HorizontalSpacing(12),
-                            Text(
-                              Helpers.getProperPrice(state.summary.deliveryFee),
-                              style: TStyle.blackSemi(18, font: FFamily.roboto),
-                            ),
-                          ],
-                        ),
+                        if (state.summary.deliveryFee > 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(L10n.tr().deliveryFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                              const HorizontalSpacing(6),
+                              Text(
+                                Helpers.getProperPrice(state.summary.deliveryFee),
+                                style: TStyle.blackSemi(18, font: FFamily.roboto),
+                              ),
+                            ],
+                          ),
                         const VerticalSpacing(12),
 
+                        if (state.summary.deliveryFeeDiscount > 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(L10n.tr().deliveryFeeDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                              const HorizontalSpacing(6),
+                              Text(
+                                Helpers.getProperPrice(state.summary.deliveryFeeDiscount),
+                                style: TStyle.blackSemi(18, font: FFamily.roboto),
+                              ),
+                            ],
+                          ),
+                        const VerticalSpacing(12),
                         const DashedBorder(
                           width: 10,
                           gap: 8,
@@ -181,12 +213,16 @@ class CartSummaryWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(2),
                           child: MainBtn(
                             onPressed: () {
+                              if (!state.isCartValid) {
+                                Alerts.showToast(L10n.tr().needToAddAddressFirst);
+                                return;
+                              }
                               context.push(
                                 ConfirmOrderScreen.route,
                               );
                             },
                             disabledColor: Co.grey.withAlpha(80),
-                            isEnabled: state.isCartValid,
+
                             text: L10n.tr().checkout,
                             textStyle: TStyle.whiteRegular(16),
                             width: double.infinity,

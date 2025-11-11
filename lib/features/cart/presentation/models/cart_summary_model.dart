@@ -6,6 +6,8 @@ class CartSummaryModel extends Equatable {
   final double serviceFee;
   final double discount;
   final double total;
+  final double tax;
+  final double deliveryFeeDiscount;
 
   const CartSummaryModel({
     required this.subTotal,
@@ -13,8 +15,10 @@ class CartSummaryModel extends Equatable {
     required this.serviceFee,
     required this.discount,
     required this.total,
+    required this.tax,
+    required this.deliveryFeeDiscount,
   });
 
   @override
-  List<Object?> get props => [subTotal, deliveryFee, serviceFee, discount, total];
+  List<Object?> get props => [subTotal, deliveryFee, serviceFee, discount, total, tax, deliveryFeeDiscount];
 }

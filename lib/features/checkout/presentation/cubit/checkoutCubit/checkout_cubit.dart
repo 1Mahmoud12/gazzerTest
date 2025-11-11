@@ -235,6 +235,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
       timeSlot: timeSlots,
       phoneNumber: _walletPhoneNumber,
       notes: notes,
+      idCard: _selectedCard?.id,
     );
 
     final rootContext = AppNavigator.mainKey.currentContext;
@@ -268,6 +269,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
             final response = await PaymobWebhookService.fetchWebhookResponse(
               result.split(',').last,
             );
+            logger.d('Response : custom $response');
             final message = response['message'];
             final status = response['data']?['payment_status'];
             closeDialog(rootContext);
@@ -281,6 +283,8 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
               rootContext.go('/orders');
             } else {
+              logger.d('Payment webhook Failure');
+
               Alerts.showToast(
                 message,
               );
@@ -290,7 +294,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
           // Payment method doesn't require iframe (e.g., cash on delivery)
           if (context.mounted) {
             Alerts.showToast(L10n.tr().order_placed_successfully, error: false);
-            // TODO: Navigate to success screen
+            logger.d('Response Failure');
             context.read<CartCubit>().loadCart();
             context.go('/orders');
           }
@@ -350,7 +354,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
   CardEntity? get selectedCard => _selectedCard;
 
-  void selectCard(CardEntity card) {
+  void selectCard(CardEntity? card) {
     _selectedCard = card;
     emit(CardChange(timestamp: DateTime.now().millisecondsSinceEpoch));
   }

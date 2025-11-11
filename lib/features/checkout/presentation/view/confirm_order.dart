@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, VerticalSpacing;
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/order_summary_widget.dart';
@@ -19,17 +20,24 @@ class ConfirmOrderScreen extends StatefulWidget {
   State<ConfirmOrderScreen> createState() => _ConfirmOrderScreenState();
 }
 
-class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
+class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> with AutomaticKeepAliveClientMixin<ConfirmOrderScreen> {
   @override
   void initState() {
     super.initState();
     context.read<CheckoutCubit>().loadCheckoutData();
+    context.read<CartCubit>().loadCart();
+
     context.read<CheckoutCubit>().applyVoucher(null);
+    context.read<CheckoutCubit>().selectCard(null);
     context.read<CheckoutCubit>().selectPaymentMethod(PaymentMethod.cashOnDelivery);
   }
 
   @override
+  bool get wantKeepAlive => true; // 👈 keeps state alive
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: GradientText(

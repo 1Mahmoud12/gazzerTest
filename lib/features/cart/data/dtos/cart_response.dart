@@ -28,6 +28,8 @@ class CartResponse {
       serviceFee: json['service_fee']?.toDouble() ?? 0.0,
       discount: json['discount']?.toDouble() ?? 0.0,
       total: json['total']?.toDouble() ?? 0.0,
+      tax: json['tax']?.toDouble() ?? 0.0,
+      deliveryFeeDiscount: json['delivery_fee_discount']?.toDouble() ?? 0.0,
     );
     pouchSummary = PouchSummary.fromJson(json['vehicle_box_types_summary']);
     if (json['items'] != null) {

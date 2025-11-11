@@ -54,7 +54,7 @@ class CardEntity {
     this.isDefault = false,
   });
 
-  final String id;
+  final int id;
   final String cardNumber;
   final int expiryMonth;
   final int expiryYear;

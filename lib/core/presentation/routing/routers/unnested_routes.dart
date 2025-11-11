@@ -25,6 +25,7 @@ import 'package:gazzer/features/intro/presentation/plan/views/health_focus_scree
 import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
@@ -76,6 +77,12 @@ final List<RouteBase> unNestedRoutes = [
     path: PopularScreen.route,
     builder: (context, state) {
       return const PopularScreen();
+    },
+  ),
+  GoRoute(
+    path: LoyaltyProgramScreen.route,
+    builder: (context, state) {
+      return const LoyaltyProgramScreen();
     },
   ),
 ];

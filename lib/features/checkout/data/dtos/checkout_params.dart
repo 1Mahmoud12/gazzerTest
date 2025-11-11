@@ -4,6 +4,7 @@ class CheckoutParams {
   final String? phoneNumber;
   final String? timeSlot;
   final String? notes;
+  final int? idCard;
 
   CheckoutParams({
     required this.paymentMethod,
@@ -11,6 +12,7 @@ class CheckoutParams {
     this.voucher,
     this.timeSlot,
     this.notes,
+    this.idCard,
   });
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class CheckoutParams {
     }
 
     if (voucher != null) map['voucher'] = voucher;
+    if (idCard != null) map['client_card_id'] = idCard;
     if (phoneNumber != '') map['phone'] = phoneNumber;
     if (timeSlot != null) map['time_slot'] = timeSlot;
     if (timeSlot != null) map['is_scheduled'] = 1;

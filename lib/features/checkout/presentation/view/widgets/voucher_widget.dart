@@ -113,6 +113,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                               },
                               child: Expanded(
                                 child: DropdownButtonFormField<String>(
+                                  value: hasVoucher ? appliedVoucher : cubit.selectedVoucherCode,
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: AppConst.defaultBorderRadius,
@@ -142,7 +143,9 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                   isExpanded: true,
                                   iconEnabledColor: Co.purple,
                                   hint: Text(L10n.tr().selectVoucher),
-                                  items: cubit.vouchers.map((VoucherDTO voucher) {
+                                  items: cubit.vouchers.map((
+                                    VoucherDTO voucher,
+                                  ) {
                                     return DropdownMenuItem(
                                       value: voucher.code,
                                       child: Row(
@@ -150,7 +153,9 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                         children: [
                                           Text(voucher.code),
                                           if (cubit.selectedVoucherCode != voucher.code)
-                                            Text('${voucher.discountValue} ${voucher.discountType.contains('percent') ? '%' : L10n.tr().egp}'),
+                                            Text(
+                                              '${voucher.discountValue} ${voucher.discountType.contains('percent') ? '%' : L10n.tr().egp}',
+                                            ),
                                         ],
                                       ),
                                     );

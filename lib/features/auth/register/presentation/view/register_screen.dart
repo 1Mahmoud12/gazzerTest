@@ -223,6 +223,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (phoneNumber.length > 11) {
                             return L10n.tr().phoneMustBeTenOrElevenDigits;
                           }
+                          if (phoneNumber.length < 10) {
+                            return L10n.tr().phoneMustBeTenOrElevenDigits;
+                          }
                           // Check if all characters are digits
                           if (!RegExp(r'^\d+$').hasMatch(phoneNumber)) {
                             return L10n.tr().phoneMustContainOnlyDigits;

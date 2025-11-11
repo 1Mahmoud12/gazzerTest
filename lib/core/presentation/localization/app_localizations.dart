@@ -2797,6 +2797,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue Shopping'**
   String get continueShopping;
+
+  /// No description provided for @deliveryFeeDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Fee Discount'**
+  String get deliveryFeeDiscount;
+
+  /// No description provided for @vatAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'VAT Amount'**
+  String get vatAmount;
+
+  /// No description provided for @itemsDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Items Discount'**
+  String get itemsDiscount;
+
+  /// No description provided for @grossAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Gross Amount'**
+  String get grossAmount;
+
+  /// No description provided for @pleaseLoginToUseLoyalty.
+  ///
+  /// In en, this message translates to:
+  /// **'please login to use loyalty program'**
+  String get pleaseLoginToUseLoyalty;
+
+  /// No description provided for @needToAddAddressFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to add an address first'**
+  String get needToAddAddressFirst;
+
+  /// No description provided for @loyaltyProgram.
+  ///
+  /// In en, this message translates to:
+  /// **'Loyalty Program'**
+  String get loyaltyProgram;
+
+  /// No description provided for @yourLoyaltyJourney.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Loyalty Journey'**
+  String get yourLoyaltyJourney;
+
+  /// No description provided for @level.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get level;
+
+  /// No description provided for @yourPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Points'**
+  String get yourPoints;
+
+  /// No description provided for @pointsPer.
+  ///
+  /// In en, this message translates to:
+  /// **'Points per'**
+  String get pointsPer;
+
+  /// No description provided for @earningRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Earning Rate'**
+  String get earningRate;
+
+  /// No description provided for @points.
+  ///
+  /// In en, this message translates to:
+  /// **'Points'**
+  String get points;
+
+  /// No description provided for @conversionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get conversionRate;
+
+  /// No description provided for @validUntill.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid Until'**
+  String get validUntill;
+
+  /// No description provided for @expiration.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiration'**
+  String get expiration;
+
+  /// No description provided for @ourTierBenefits.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Tier Benefits'**
+  String get ourTierBenefits;
+
+  /// No description provided for @birthdayVouchers.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday Vouchers'**
+  String get birthdayVouchers;
+
+  /// No description provided for @exclusiveDeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Exclusive Deals'**
+  String get exclusiveDeals;
+
+  /// No description provided for @exclusiveOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Exclusive Offers'**
+  String get exclusiveOffers;
+
+  /// No description provided for @loyaltySpendSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve spent {amount} in the last {days} days'**
+  String loyaltySpendSummary(String amount, int days);
 }
 
 class _AppLocalizationsDelegate

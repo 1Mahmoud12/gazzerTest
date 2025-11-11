@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/main.dart';
 
 class PaymobWebhookService {
   const PaymobWebhookService._();
@@ -16,14 +15,12 @@ class PaymobWebhookService {
       );
       final data = response.data;
 
-      if (data is Map<String, dynamic> && data['status'] == 'completed') {
+      if (data is Map<String, dynamic> && data['data']['payment_status'] == 'completed') {
         return data;
       }
       return {'status': 'error', 'message': 'Invalid response'};
     } on Exception catch (e) {
       final response = e is DioException ? e.response : null;
-      logger.d('badResponse ===> ${e.toString()}');
-
       return response?.data;
     }
   }

@@ -35,6 +35,9 @@ abstract class TStyle {
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.lightPurple);
   static TextStyle burbleSemi(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.lightPurple);
+
+  static TextStyle burbleMed(double fontSize, {FFamily font = FFamily.poppins}) =>
+      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.lightPurple);
   static TextStyle burbleBold(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.lightPurple);
   static TextStyle mainwRegular(double fontSize, {FFamily font = FFamily.poppins}) =>

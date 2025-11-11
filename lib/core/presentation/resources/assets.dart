@@ -263,4 +263,12 @@ class Assets {
   static const String assetsSvgYellowPatches = "assets/svg/yellow_patches.svg";
 
   static const String assetsVendorLogo = "assets/vendor_logo.png";
+
+  //Loyalty Program
+  static const String assetsSvgBirthdayIc = "assets/svg/birthdayIc.svg";
+  static const String assetsSvgOfferIc = "assets/svg/offerIc.svg";
+  static const String availablePointsIc = "assets/svg/availablePointsIc.svg";
+  static const String conversionRateIc = "assets/svg/ConversionRateIc.svg";
+  static const String earningPointsIc = "assets/svg/earningPoints.svg";
+  static const String expirationIc = "assets/svg/expirationIc.svg";
 }

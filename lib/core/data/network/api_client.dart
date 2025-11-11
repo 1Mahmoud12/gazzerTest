@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -40,7 +41,10 @@ class ApiClient {
     );
 
     /// Adding interceptors for logging only in debug mode
-    if (kDebugMode) _dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
+    if (kDebugMode)
+      _dio.interceptors.add(
+        PrettyDioLogger(requestHeader: true, requestBody: true),
+      );
   }
 
   void changeLocale(String languageCode) => _dio.options.headers[_acceptLanguage] = languageCode;
@@ -62,6 +66,13 @@ class ApiClient {
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
   }) async {
+    final effectiveCancelToken = cancelToken ?? CancelToken();
+    Timer(const Duration(seconds: 30), () {
+      if (!effectiveCancelToken.isCancelled) {
+        effectiveCancelToken.cancel('Request timed out');
+      }
+    });
+
     try {
       final response = await _dio.get(
         endpoint,
@@ -71,7 +82,7 @@ class ApiClient {
           receiveTimeout: const Duration(seconds: 30),
           sendTimeout: const Duration(seconds: 30),
         ),
-        cancelToken: cancelToken,
+        cancelToken: effectiveCancelToken,
       );
       // if (response.data['data'] == null) {
       //   throw Exception(response.data['message']);
@@ -81,7 +92,13 @@ class ApiClient {
       _noInternetConnection(e.type);
       // final message = e.response?.data is Map ? (e.response?.data?['message'] ?? '') : '';
       // _unAuthenticated(message);
-      rethrow;
+      if (!effectiveCancelToken.isCancelled) rethrow;
+      // If cancelled due to timeout, surface a consistent error structure.
+      throw DioException(
+        requestOptions: e.requestOptions,
+        type: DioExceptionType.cancel,
+        message: 'Request timed out',
+      );
     }
   }
 
@@ -103,7 +120,17 @@ class ApiClient {
     void Function(int, int)? onSendProgress,
     CancelToken? cancelToken,
   }) async {
-    assert(requestBody is Map? || requestBody is FormData, 'requestBody must be a Map or FormData for file uploads');
+    assert(
+      requestBody is Map? || requestBody is FormData,
+      'requestBody must be a Map or FormData for file uploads',
+    );
+    final effectiveCancelToken = cancelToken ?? CancelToken();
+    Timer(customRequestDuration ?? const Duration(seconds: 30), () {
+      if (!effectiveCancelToken.isCancelled) {
+        effectiveCancelToken.cancel('Request timed out');
+      }
+    });
+
     try {
       final response = await _dio.post(
         endpoint,
@@ -115,14 +142,17 @@ class ApiClient {
           sendTimeout: customRequestDuration ?? const Duration(seconds: 30),
           headers: _getHeaders(headers),
         ),
-        cancelToken: cancelToken,
+        cancelToken: effectiveCancelToken,
       );
       return response;
     } on DioException catch (e) {
       _noInternetConnection(e.type);
-      // final message = e.response?.data is Map ? (e.response?.data?['message'] ?? '') : '';
-      // _unAuthenticated(message);
-      rethrow;
+      if (!effectiveCancelToken.isCancelled) rethrow;
+      throw DioException(
+        requestOptions: e.requestOptions,
+        type: DioExceptionType.cancel,
+        message: 'Request timed out',
+      );
     }
   }
 
