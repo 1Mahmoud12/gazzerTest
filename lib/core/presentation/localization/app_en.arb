@@ -642,6 +642,7 @@
                   "silverBanner": "You’re just getting started — earn points with every order!"
 , "exclusiveVoucher": "Exclusive Voucher",
    "exclusiveAccessLevel": "Exclusive Access Level",
-   "exclusiveDiscount": "Exclusive Discount"
+   "exclusiveDiscount": "Exclusive Discount",
+   "phoneMustStartWithZeroOrOne": "Egyptian number must start with 1 or 01"
 
 }

@@ -3133,6 +3133,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exclusive Discount'**
   String get exclusiveDiscount;
+
+  /// No description provided for @phoneMustStartWithZeroOrOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Egyptian number must start with 1 or 01'**
+  String get phoneMustStartWithZeroOrOne;
 }
 
 class _AppLocalizationsDelegate

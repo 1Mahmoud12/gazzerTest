@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/pkgs/intl_phone/intl_phone.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -53,10 +54,15 @@ class PhoneTextField extends StatefulWidget {
 class _PhoneTextFieldState extends State<PhoneTextField> {
   String? countryCode;
   CountryCodeModel? country;
+  late final TextEditingController _controller;
+  late final bool _ownsController;
+
   @override
   void initState() {
+    _ownsController = widget.controller == null;
+    _controller = widget.controller ?? TextEditingController();
     if (widget.phoneNumb != null) {
-      widget.controller?.text = widget.phoneNumb!;
+      _controller.text = widget.phoneNumb!;
     }
     final countries = GeneralUtil.loadJson();
     countryCode = widget.code ?? 'EG';
@@ -65,18 +71,53 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
   }
 
   @override
+  void dispose() {
+    if (_ownsController) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
+
+  String _normalizeEgyptNumber(String number) {
+    var normalized = number;
+    if (normalized.length >= 3 && normalized.startsWith('001')) {
+      normalized = '01${normalized.substring(3)}';
+    }
+    if (normalized.startsWith('0') && !normalized.startsWith('01')) {
+      while (normalized.length > 1 && normalized.startsWith('0') && normalized[1] != '1') {
+        normalized = normalized.substring(1);
+      }
+    }
+    return normalized;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return InternationalPhoneNumberInput(
       height: (widget.height ?? 60),
-      controller: widget.controller,
+      controller: _controller,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
       ],
       initCountry: country,
       betweenPadding: 10,
       showBorder: widget.showBorder,
+
       onInputChanged: (phone) {
+        if (!mounted) {
+          return;
+        }
         setState(() => countryCode = phone.code);
+        if (phone.code == 'EG') {
+          final normalized = _normalizeEgyptNumber(phone.number);
+          if (normalized != phone.number) {
+            _controller.value = TextEditingValue(
+              text: normalized,
+              selection: TextSelection.collapsed(offset: normalized.length),
+            );
+            return;
+          }
+        }
         if (widget.onChange == null) return;
         if (phone.number.trim().isNotEmpty) {
           widget.onChange!(phone);
@@ -107,8 +148,15 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         textStyle: TStyle.greyRegular(14),
       ),
       validator: (v) {
+        final currentCode = countryCode ?? 'SA';
+        if (currentCode == 'EG') {
+          final value = (v ?? '').trim();
+          if (value.isNotEmpty && !(value.startsWith('1') || value.startsWith('01'))) {
+            return L10n.tr(context).phoneMustStartWithZeroOrOne;
+          }
+        }
         if (widget.validator != null) {
-          return widget.validator!(v, countryCode ?? 'SA');
+          return widget.validator!(v, currentCode);
         }
         return null;
       },

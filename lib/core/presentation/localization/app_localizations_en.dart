@@ -1556,4 +1556,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exclusiveDiscount => 'Exclusive Discount';
+
+  @override
+  String get phoneMustStartWithZeroOrOne => 'Egyptian number must start with 1 or 01';
 }

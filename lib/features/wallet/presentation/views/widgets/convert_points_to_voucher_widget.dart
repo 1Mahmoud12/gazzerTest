@@ -84,7 +84,12 @@ class _VoucherTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const VoucherVendorsScreen(title: '100 EGP off Using 2000 Points', id: -1)),
+            MaterialPageRoute(
+              builder: (_) => const VoucherVendorsScreen(
+                title: '100 EGP off Using 2000 Points',
+                id: -1,
+              ),
+            ),
           );
         },
         child: Row(

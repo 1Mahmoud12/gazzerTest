@@ -642,6 +642,7 @@
                                   "gainerBanner": "أنت تتقدم بسرعة! احصل على توصيل مجاني ومزايا حصرية مبكرة.",
                                   "silverBanner": "لقد بدأت للتو — اكسب النقاط مع كل طلب!","exclusiveVoucher": "قسيمة حصرية",
                                                                                              "exclusiveAccessLevel": "مستوى وصول حصري",
-                                                                                             "exclusiveDiscount": "خصم حصري"
+                                                                                             "exclusiveDiscount": "خصم حصري",
+                                                                                             "phoneMustStartWithZeroOrOne":"يجب ان يبدآ رقم الهاتف ب 0 او 01"
 
                     }

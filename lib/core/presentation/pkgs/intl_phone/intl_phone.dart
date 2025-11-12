@@ -77,7 +77,9 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
 
   void controllerOnChange() {
     if (widget.onInputChanged != null) {
-      widget.onInputChanged!(IntPhoneNumber(code: selected.code, dialCode: selected.dial_code, number: widget.controller.text.trimLeft().trimRight()));
+      widget.onInputChanged!(
+        IntPhoneNumber(code: selected.code, dialCode: selected.dial_code, number: widget.controller.text.trimLeft().trimRight()),
+      );
     }
   }
 
@@ -164,7 +166,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             // expands: expands,
             autofocus: widget.phoneConfig.autoFocus,
             showCursor: widget.phoneConfig.showCursor,
-
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             textInputAction: widget.phoneConfig.textInputAction,
             focusNode: widget.phoneConfig.focusNode,
             style: widget.phoneConfig.textStyle.copyWith(decoration: TextDecoration.none),
