@@ -10,19 +10,20 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/our_ti
 import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/progress_loyalty_program.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/your_points_widget.dart';
 
-class LoyaltyProgramScreen extends StatefulWidget {
-  const LoyaltyProgramScreen({super.key});
+class LoyaltyProgramGainerFourScreen extends StatefulWidget {
+  const LoyaltyProgramGainerFourScreen({super.key});
 
-  static const route = '/loyalty-programs';
+  static const route = '/loyalty-programs-gainer-four';
 
   @override
-  State<LoyaltyProgramScreen> createState() => _LoyaltyProgramScreenState();
+  State<LoyaltyProgramGainerFourScreen> createState() => _LoyaltyProgramGainerFourScreenState();
 }
 
-class _LoyaltyProgramScreenState extends State<LoyaltyProgramScreen> {
-  final Color _mainColor = Co.purple;
-  final Color firstTextColor = Co.white;
-  final Color secondTextColor = Co.lightGrey;
+class _LoyaltyProgramGainerFourScreenState extends State<LoyaltyProgramGainerFourScreen> {
+  final Color _mainColor = Co.purple200;
+  final Color firstTextColor = Colors.black;
+  final Color secondTextColor = Co.darkGrey;
+  final String logoProgram = Assets.silverIc;
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +44,14 @@ class _LoyaltyProgramScreenState extends State<LoyaltyProgramScreen> {
               children: [
                 const SizedBox(height: 16),
                 Text(
-                  'You’ve reached the top — you’re one of our elite customers!',
+                  L10n.tr().gainerBanner,
                   style: TStyle.blackMedium(16, font: FFamily.roboto),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 NameLogoLoyaltyProgram(
                   mainColor: _mainColor,
-                  logo: Assets.assetsDeliveryLogo,
+                  logo: logoProgram,
                   nameProgram: 'Hero',
                   firstTextColor: firstTextColor,
                   secondTextColor: secondTextColor,

@@ -271,4 +271,9 @@ class Assets {
   static const String conversionRateIc = "assets/svg/ConversionRateIc.svg";
   static const String earningPointsIc = "assets/svg/earningPoints.svg";
   static const String expirationIc = "assets/svg/expirationIc.svg";
+
+  static const String gainerIc = "assets/svg/gainerIc.svg";
+  static const String heroIc = "assets/svg/heroIc.svg";
+  static const String silverIc = "assets/svg/silverIc.svg";
+  static const String winnerIc = "assets/svg/winnerIc.svg";
 }

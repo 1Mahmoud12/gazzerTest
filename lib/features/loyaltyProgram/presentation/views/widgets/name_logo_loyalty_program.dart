@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
@@ -28,7 +29,7 @@ class NameLogoLoyaltyProgram extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
+          SvgPicture.asset(
             logo,
             width: 64,
             height: 64,

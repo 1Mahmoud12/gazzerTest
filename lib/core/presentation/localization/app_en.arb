@@ -570,7 +570,13 @@
                       "type": "int"
                     }
                   }
-                }
-
+                },
+                "heroBanner": "You’ve reached the top — you’re one of our elite customers!",
+                  "winnerBanner": "You’re among our top customers, enjoy special discounts and surprises.",
+                  "gainerBanner": "You’re gaining momentum! Unlock free delivery and early perks.",
+                  "silverBanner": "You’re just getting started — earn points with every order!"
+, "exclusiveVoucher": "Exclusive Voucher",
+   "exclusiveAccessLevel": "Exclusive Access Level",
+   "exclusiveDiscount": "Exclusive Discount"
 
 }

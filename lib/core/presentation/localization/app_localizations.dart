@@ -2923,6 +2923,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You\'ve spent {amount} in the last {days} days'**
   String loyaltySpendSummary(String amount, int days);
+
+  /// No description provided for @heroBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You’ve reached the top — you’re one of our elite customers!'**
+  String get heroBanner;
+
+  /// No description provided for @winnerBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You’re among our top customers, enjoy special discounts and surprises.'**
+  String get winnerBanner;
+
+  /// No description provided for @gainerBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You’re gaining momentum! Unlock free delivery and early perks.'**
+  String get gainerBanner;
+
+  /// No description provided for @silverBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You’re just getting started — earn points with every order!'**
+  String get silverBanner;
+
+  /// No description provided for @exclusiveVoucher.
+  ///
+  /// In en, this message translates to:
+  /// **'Exclusive Voucher'**
+  String get exclusiveVoucher;
+
+  /// No description provided for @exclusiveAccessLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Exclusive Access Level'**
+  String get exclusiveAccessLevel;
+
+  /// No description provided for @exclusiveDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Exclusive Discount'**
+  String get exclusiveDiscount;
 }
 
 class _AppLocalizationsDelegate

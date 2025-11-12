@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 
-;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1444,4 +1443,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String loyaltySpendSummary(String amount, int days) {
     return 'لقد أنفقت $amount خلال آخر $days يومًا';
   }
+
+  @override
+  String get heroBanner => 'لقد وصلت إلى القمة — أنت من عملائنا المميزين!';
+
+  @override
+  String get winnerBanner => 'أنت من بين عملائنا الأفضل، استمتع بخصومات ومفاجآت خاصة.';
+
+  @override
+  String get gainerBanner => 'أنت تتقدم بسرعة! احصل على توصيل مجاني ومزايا حصرية مبكرة.';
+
+  @override
+  String get silverBanner => 'لقد بدأت للتو — اكسب النقاط مع كل طلب!';
+
+  @override
+  String get exclusiveVoucher => 'قسيمة حصرية';
+
+  @override
+  String get exclusiveAccessLevel => 'مستوى وصول حصري';
+
+  @override
+  String get exclusiveDiscount => 'خصم حصري';
 }

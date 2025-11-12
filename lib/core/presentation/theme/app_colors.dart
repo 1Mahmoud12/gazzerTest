@@ -14,6 +14,7 @@ class Co {
   static const mainText = Color(0xFF000000);
   static const secText = Color(0xFFD7D7D7);
   static const greyText = Color(0xFF525252);
+  static const black = Color(0xFF000000);
 
   // button gradient
   static const buttonGradient = Color(0xFF402788);
@@ -49,5 +50,6 @@ class Co {
   static const closed = Color(0xFFFE0000);
 
   static const purple100 = Color(0xFFEBE3FE);
+  static const purple200 = Color(0xFFBBA3F9);
   static const purple600 = Color(0xFF8C64E6);
 }
