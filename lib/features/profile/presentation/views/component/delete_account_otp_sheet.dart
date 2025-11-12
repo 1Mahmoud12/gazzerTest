@@ -93,7 +93,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "${L10n.tr().anOTPhasBeenSentTo} (+20)-${Session().client?.phoneNumber ?? ''}",
+                      "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}${Session().client?.phoneNumber ?? ''}${!L10n.isAr(context) ? '' : '-(20+)'}",
                       maxLines: 2,
                       style: TStyle.greySemi(16),
                       textAlign: TextAlign.start,

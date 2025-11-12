@@ -15,6 +15,7 @@ import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
 import 'package:gazzer/features/auth/verify/domain/verify_repo.dart';
 import 'package:gazzer/features/auth/verify/presentation/widgets/otp_widget.dart';
 import 'package:go_router/go_router.dart';
@@ -148,58 +149,58 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 ],
               ),
               const VerticalSpacing(8),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Flexible(
-              //       child: Text(
-              //         "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
-              //         maxLines: 3,
-              //         style: TStyle.greySemi(16),
-              //         textAlign: TextAlign.start,
-              //       ),
-              //     ),
-              //     if (repo.canChangePhone)
-              //       TextButton(
-              //         onPressed: () async {
-              //           showModalBottomSheet(
-              //             context: context,
-              //             isScrollControlled: true,
-              //             backgroundColor: Colors.transparent,
-              //             builder: (context) {
-              //               return ChangePhoneNumberSheet(
-              //                 initialPhone: phoneNumber,
-              //                 onConfirm: (val) async {
-              //                   final res = await repo.onChangePhone(
-              //                     val,
-              //                     widget.data,
-              //                   );
-              //                   switch (res) {
-              //                     case Ok<String> ok:
-              //                       Alerts.showToast(ok.value, error: false);
-              //                       if (context.mounted) {
-              //                         setState(() => phoneNumber = val);
-              //                         timer.cancel();
-              //                         _setTimer();
-              //                       }
-              //                       return true;
-              //                     case Err err:
-              //                       Alerts.showToast(err.error.message);
-              //                       return false;
-              //                   }
-              //                 },
-              //               );
-              //             },
-              //           );
-              //         },
-              //         child: Text(
-              //           L10n.tr().wrongNumber,
-              //           style: TStyle.primaryBold(14),
-              //         ),
-              //       ),
-              //   ],
-              // ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
+                      maxLines: 3,
+                      style: TStyle.greySemi(16),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  if (repo.canChangePhone)
+                    InkWell(
+                      onTap: () async {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) {
+                            return ChangePhoneNumberSheet(
+                              initialPhone: phoneNumber,
+                              onConfirm: (val) async {
+                                final res = await repo.onChangePhone(
+                                  val,
+                                  widget.data,
+                                );
+                                switch (res) {
+                                  case Ok<String> ok:
+                                    Alerts.showToast(ok.value, error: false);
+                                    if (context.mounted) {
+                                      setState(() => phoneNumber = val);
+                                      timer.cancel();
+                                      _setTimer();
+                                    }
+                                    return true;
+                                  case Err err:
+                                    Alerts.showToast(err.error.message);
+                                    return false;
+                                }
+                              },
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        L10n.tr().wrongNumber,
+                        style: TStyle.primaryBold(14),
+                      ),
+                    ),
+                ],
+              ),
               const VerticalSpacing(24),
               OtpWidget(
                 controller: otpCont,
