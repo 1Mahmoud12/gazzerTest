@@ -1706,6 +1706,18 @@ abstract class AppLocalizations {
   /// **'Valid until {date}'**
   String walletValidUntil(String date);
 
+  /// No description provided for @walletVoucherVendors.
+  ///
+  /// In en, this message translates to:
+  /// **'Voucher Vendors'**
+  String get walletVoucherVendors;
+
+  /// No description provided for @walletVoucherAllStores.
+  ///
+  /// In en, this message translates to:
+  /// **'All Stores'**
+  String get walletVoucherAllStores;
+
   /// No description provided for @walletHistory.
   ///
   /// In en, this message translates to:

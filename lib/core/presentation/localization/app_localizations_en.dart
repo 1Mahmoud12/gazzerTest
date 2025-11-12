@@ -832,6 +832,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get walletVoucherVendors => 'Voucher Vendors';
+
+  @override
+  String get walletVoucherAllStores => 'All Stores';
+
+  @override
   String get walletHistory => 'Wallet History';
 
   @override

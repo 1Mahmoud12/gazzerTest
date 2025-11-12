@@ -349,6 +349,8 @@
       }
     }
   },
+  "walletVoucherVendors": "متاجر القسيمة",
+  "walletVoucherAllStores": "كل المتاجر",
   "walletHistory": "سجل المحفظة",
   "walletRefund": "استرداد",
   "walletRecharge": "شحن",

@@ -345,6 +345,8 @@
       }
     }
   },
+  "walletVoucherVendors": "Voucher Vendors",
+  "walletVoucherAllStores": "All Stores",
   "walletHistory": "Wallet History",
   "walletRefund": "Refund",
   "walletRecharge": "Recharge",
