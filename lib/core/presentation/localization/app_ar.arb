@@ -306,6 +306,63 @@
   "gotIt": "فهمت",
   "sideMenuSetting": "إعدادات القائمة الجانبية",
   "mainScreens_________________End": "__________________",
+  "wallet_________________Start": "__________________",
+  "walletKeepItUp": "واصل التقدم",
+  "walletNewAchievements": "للمزيد من الإنجازات!",
+  "walletBalanceLabel": "رصيدك : {amount} {currency}",
+  "@walletBalanceLabel": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "walletAddFunds": "شحن الرصيد",
+  "walletRechargeViaCard": "اشحن عبر البطاقة",
+  "walletEnterAmount": "أدخل المبلغ",
+  "walletRechargeNow": "اشحن الآن",
+  "walletConvertPointsToMoney": "حوّل النقاط إلى نقود",
+  "walletConvertLoyaltyPoints": "حوّل نقاط الولاء",
+  "walletConvertPointsToVoucher": "حوّل النقاط إلى قسيمة",
+  "walletVoucherOffer": "{discount} جنيه خصم مقابل\\n{points} {pointsLabel}",
+  "@walletVoucherOffer": {
+    "placeholders": {
+      "discount": {
+        "type": "int"
+      },
+      "points": {
+        "type": "int"
+      },
+      "pointsLabel": {
+        "type": "String"
+      }
+    }
+  },
+  "walletValidUntil": "صالح حتى {date}",
+  "@walletValidUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "walletHistory": "سجل المحفظة",
+  "walletRefund": "استرداد",
+  "walletRecharge": "شحن",
+  "walletPointsConversion": "تحويل النقاط",
+  "walletCardPayment": "دفع بالبطاقة",
+  "walletOrderNumber": "طلب رقم #{orderId}",
+  "@walletOrderNumber": {
+    "placeholders": {
+      "orderId": {
+        "type": "String"
+      }
+    }
+  },
+  "wallet_________________End": "__________________",
   "drawer_________________Start": "__________________",
   "myCart": "سلتي",
   "themeMode": "وضع السمة",

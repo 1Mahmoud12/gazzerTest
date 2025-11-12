@@ -18,6 +18,7 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_progra
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_silver_three.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_winner_two.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
+import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
@@ -41,32 +42,14 @@ class _MainDrawerState extends State<MainDrawer> {
         Switch(value: true, onChanged: (v) {}).withScale(scale: 0.8, alignment: Alignment.centerRight),
         (BuildContext ctx) {},
       ),
-      (L10n.tr().foodPlan, Assets.assetsSvgFoodPlan, (BuildContext ctx) => ctx.push(HealthFocusScreen.route)),
+
       (
-        L10n.tr().videoTutorials,
-        Assets.assetsSvgVideo,
-        (BuildContext ctx) => ctx.push(VideoTutorialScreen.route),
-      ),
-      (L10n.tr().rewards, Assets.assetsSvgRewards, (BuildContext ctx) {}),
-      (
-        L10n.tr().favorites,
-        Assets.assetsSvgFavoritesOutlined,
+        L10n.tr().wallet,
+        Assets.wallet,
         (BuildContext ctx) {
-          ctx.pushReplacement(FavoritesScreen.route);
+          ctx.push(WalletScreen.route);
         },
       ),
-      (L10n.tr().myOrders, Assets.assetsSvgHistory, (BuildContext ctx) {}),
-      (L10n.tr().language, Assets.assetsSvgLanguage, (BuildContext ctx) {}),
-      (L10n.tr().gazzerChat, Assets.assetsSvgChat, (BuildContext ctx) {}),
-      (
-        L10n.tr().myProfile,
-        Assets.assetsSvgCommunity,
-        (BuildContext ctx) {
-          ctx.push(ProfileScreen.route);
-        },
-      ),
-      (L10n.tr().paymentSetting, Assets.assetsSvgPaymentSettings, (BuildContext ctx) {}),
-      (L10n.tr().termsAndConditions, Assets.assetsSvgTerms, (BuildContext ctx) {}),
       (
         '1',
         Assets.assetsSvgTerms,
@@ -95,6 +78,32 @@ class _MainDrawerState extends State<MainDrawer> {
           ctx.push(LoyaltyProgramGainerFourScreen.route);
         },
       ),
+      (L10n.tr().foodPlan, Assets.assetsSvgFoodPlan, (BuildContext ctx) => ctx.push(HealthFocusScreen.route)),
+      (
+        L10n.tr().videoTutorials,
+        Assets.assetsSvgVideo,
+        (BuildContext ctx) => ctx.push(VideoTutorialScreen.route),
+      ),
+      (L10n.tr().rewards, Assets.assetsSvgRewards, (BuildContext ctx) {}),
+      (
+        L10n.tr().favorites,
+        Assets.assetsSvgFavoritesOutlined,
+        (BuildContext ctx) {
+          ctx.pushReplacement(FavoritesScreen.route);
+        },
+      ),
+      (L10n.tr().myOrders, Assets.assetsSvgHistory, (BuildContext ctx) {}),
+      (L10n.tr().language, Assets.assetsSvgLanguage, (BuildContext ctx) {}),
+      (L10n.tr().gazzerChat, Assets.assetsSvgChat, (BuildContext ctx) {}),
+      (
+        L10n.tr().myProfile,
+        Assets.assetsSvgCommunity,
+        (BuildContext ctx) {
+          ctx.push(ProfileScreen.route);
+        },
+      ),
+      (L10n.tr().paymentSetting, Assets.assetsSvgPaymentSettings, (BuildContext ctx) {}),
+      (L10n.tr().termsAndConditions, Assets.assetsSvgTerms, (BuildContext ctx) {}),
     ];
     super.initState();
   }

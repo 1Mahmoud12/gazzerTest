@@ -276,4 +276,12 @@ class Assets {
   static const String heroIc = "assets/svg/heroIc.svg";
   static const String silverIc = "assets/svg/silverIc.svg";
   static const String winnerIc = "assets/svg/winnerIc.svg";
+
+  // Wallet
+  // Add Fund
+  static const String visaIc = "assets/svg/visaIc.svg";
+  static const String voucherIc = "assets/svg/voucherIc.svg";
+  static const String convertIc = "assets/svg/convertIc.svg";
+  static const String cashedPng = "assets/png/cashedPng.png";
+  static const String winnerPoints = "assets/png/winnerPoints.png";
 }

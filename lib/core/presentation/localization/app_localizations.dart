@@ -1628,6 +1628,126 @@ abstract class AppLocalizations {
   /// **'__________________'**
   String get mainScreens_________________End;
 
+  /// No description provided for @wallet_________________Start.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get wallet_________________Start;
+
+  /// No description provided for @walletKeepItUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep it up'**
+  String get walletKeepItUp;
+
+  /// No description provided for @walletNewAchievements.
+  ///
+  /// In en, this message translates to:
+  /// **'For new achievements!'**
+  String get walletNewAchievements;
+
+  /// No description provided for @walletBalanceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Balance : {amount} {currency}'**
+  String walletBalanceLabel(String amount, String currency);
+
+  /// No description provided for @walletAddFunds.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Funds'**
+  String get walletAddFunds;
+
+  /// No description provided for @walletRechargeViaCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Recharge Via Card'**
+  String get walletRechargeViaCard;
+
+  /// No description provided for @walletEnterAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Amount'**
+  String get walletEnterAmount;
+
+  /// No description provided for @walletRechargeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Recharge Now'**
+  String get walletRechargeNow;
+
+  /// No description provided for @walletConvertPointsToMoney.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert Points to Money'**
+  String get walletConvertPointsToMoney;
+
+  /// No description provided for @walletConvertLoyaltyPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert Loyalty Points'**
+  String get walletConvertLoyaltyPoints;
+
+  /// No description provided for @walletConvertPointsToVoucher.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert Points to Voucher'**
+  String get walletConvertPointsToVoucher;
+
+  /// No description provided for @walletVoucherOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'{discount} EGP off Using\\n{points} {pointsLabel}'**
+  String walletVoucherOffer(int discount, int points, String pointsLabel);
+
+  /// No description provided for @walletValidUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid until {date}'**
+  String walletValidUntil(String date);
+
+  /// No description provided for @walletHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet History'**
+  String get walletHistory;
+
+  /// No description provided for @walletRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund'**
+  String get walletRefund;
+
+  /// No description provided for @walletRecharge.
+  ///
+  /// In en, this message translates to:
+  /// **'Recharge'**
+  String get walletRecharge;
+
+  /// No description provided for @walletPointsConversion.
+  ///
+  /// In en, this message translates to:
+  /// **'Points Conversion'**
+  String get walletPointsConversion;
+
+  /// No description provided for @walletCardPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Payment'**
+  String get walletCardPayment;
+
+  /// No description provided for @walletOrderNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Order #{orderId}'**
+  String walletOrderNumber(String orderId);
+
+  /// No description provided for @wallet_________________End.
+  ///
+  /// In en, this message translates to:
+  /// **'__________________'**
+  String get wallet_________________End;
+
   /// No description provided for @drawer_________________Start.
   ///
   /// In en, this message translates to:

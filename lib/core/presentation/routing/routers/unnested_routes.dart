@@ -36,6 +36,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
+import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final List<RouteBase> unNestedRoutes = [
@@ -92,6 +93,12 @@ final List<RouteBase> unNestedRoutes = [
     path: LoyaltyProgramWinnerTwoScreen.route,
     builder: (context, state) {
       return const LoyaltyProgramWinnerTwoScreen();
+    },
+  ),
+  GoRoute(
+    path: WalletScreen.route,
+    builder: (context, state) {
+      return const WalletScreen();
     },
   ),
   GoRoute(

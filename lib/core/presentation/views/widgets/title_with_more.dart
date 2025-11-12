@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
@@ -25,7 +24,7 @@ class TitleWithMore extends StatelessWidget {
             child: Skeleton.shade(
               child: GradientText(
                 text: title!,
-                style: titleStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: titleStyle ?? TStyle.robotBlackTitle(),
                 gradient: Grad().textGradient,
                 textAlign: TextAlign.start,
                 // maxLines: 1,
@@ -37,7 +36,6 @@ class TitleWithMore extends StatelessWidget {
             valueListenable: isHovering,
             builder: (context, value, child) => DecoratedBox(
               decoration: BoxDecoration(
-                color: value ? null : Co.secondary.withAlpha(50),
                 borderRadius: AppConst.defaultBorderRadius,
                 gradient: value ? Grad().hoverGradient : null,
                 // boxShadow: value
@@ -61,7 +59,7 @@ class TitleWithMore extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
                 disabledBackgroundColor: Colors.transparent,
               ),
-              child: Text(L10n.tr().viewAll, style: TStyle.primarySemi(14)),
+              child: Text(L10n.tr().viewAll, style: TStyle.robotBlackRegular()),
             ),
           ),
       ],

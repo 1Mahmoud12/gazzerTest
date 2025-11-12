@@ -49,6 +49,7 @@ class Co {
   static const blueish = Color(0xFF42497D);
   static const closed = Color(0xFFFE0000);
 
+  static const customWalletColor = Color(0xFFFFE06D);
   static const purple100 = Color(0xFFEBE3FE);
   static const purple200 = Color(0xFFBBA3F9);
   static const purple600 = Color(0xFF8C64E6);

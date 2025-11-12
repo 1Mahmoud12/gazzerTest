@@ -2,11 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/input_borders/gradient_outline_input_border.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/input_borders/gradient_underline_input_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
@@ -49,6 +46,7 @@ class MainTextField extends StatefulWidget {
     this.keyboardType,
     this.max = 255,
     this.disabledColor,
+    this.borderColor,
     this.action = TextInputAction.next,
   });
   final TextEditingController controller;
@@ -71,6 +69,8 @@ class MainTextField extends StatefulWidget {
   final bool isFilled;
   final Color? bgColor;
   final Color? disabledColor;
+  final Color? borderColor;
+
   final List<TextInputFormatter>? inputFormatters;
   final EdgeInsets? padding;
   final BoxConstraints? iconsConstraints;
@@ -95,39 +95,14 @@ class _MainTextFieldState extends State<MainTextField> {
   late InputBorder focusedBorder;
   late InputBorder errorBorder;
 
-  void formBorders() {
-    if (widget.isOutLinedBorder) {
-      focusedBorder = GradientOutlineInputBorder(
-        borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-        gradient: Grad().shadowGrad(),
-        width: 2,
-      );
-    } else {
-      focusedBorder = GradientUnderlineInputBorder(
-        borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-        gradient: Grad().shadowGrad(),
-        width: 2,
-      );
-    }
-    errorBorder = GradientOutlineInputBorder(
-      gradient: Grad().errorGradient,
-      width: 1,
-      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-    );
-  }
-
   @override
   void initState() {
     isObscure = ValueNotifier<bool>(widget.isPassword);
-    formBorders();
     super.initState();
   }
 
   @override
   void didUpdateWidget(covariant MainTextField oldWidget) {
-    if (widget.isOutLinedBorder != oldWidget.isOutLinedBorder || widget.borderRadius != oldWidget.borderRadius) {
-      setState(formBorders);
-    }
     super.didUpdateWidget(oldWidget);
   }
 
@@ -159,9 +134,7 @@ class _MainTextFieldState extends State<MainTextField> {
             },
             textInputAction: widget.action,
             inputFormatters: widget.inputFormatters,
-            keyboardType:
-                widget.keyboardType ??
-                (widget.inputFormatters == FilteringTextInputFormatter.digitsOnly ? const TextInputType.numberWithOptions(signed: true) : null),
+            keyboardType: widget.keyboardType ?? TextInputType.emailAddress,
 
             decoration: InputDecoration(
               errorStyle: TStyle.errorSemi(13),
@@ -201,36 +174,26 @@ class _MainTextFieldState extends State<MainTextField> {
               fillColor: widget.bgColor ?? Co.white,
               enabled: widget.enabled,
 
-              focusedBorder: widget.showBorder
-                  ? focusedBorder
-                  : OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                    ),
-              errorBorder: widget.showBorder
-                  ? errorBorder
-                  : OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                    ),
-              focusedErrorBorder: widget.showBorder
-                  ? errorBorder
-                  : OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                    ),
-              enabledBorder: widget.showBorder
-                  ? focusedBorder
-                  : OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                    ),
-              disabledBorder: widget.showBorder
-                  ? focusedBorder
-                  : OutlineInputBorder(
-                      borderSide: widget.disabledColor == null ? BorderSide.none : BorderSide(color: widget.disabledColor!),
-                      borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
-                    ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderSide: BorderSide(color: widget.borderColor ?? Co.purple),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderSide: const BorderSide(color: Co.red),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderSide: BorderSide(color: widget.borderColor ?? Co.red),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderSide: BorderSide(color: widget.borderColor ?? Co.lightGrey),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: widget.disabledColor ?? Co.grey),
+                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+              ),
             ),
           );
         },

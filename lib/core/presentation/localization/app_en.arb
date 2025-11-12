@@ -302,6 +302,63 @@
   "gotIt": "Got It",
   "sideMenuSetting": "Side Menu Setting",
   "mainScreens_________________End": "__________________",
+  "wallet_________________Start": "__________________",
+  "walletKeepItUp": "Keep it up",
+  "walletNewAchievements": "For new achievements!",
+  "walletBalanceLabel": "Your Balance : {amount} {currency}",
+  "@walletBalanceLabel": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "walletAddFunds": "Add Funds",
+  "walletRechargeViaCard": "Recharge Via Card",
+  "walletEnterAmount": "Enter Your Amount",
+  "walletRechargeNow": "Recharge Now",
+  "walletConvertPointsToMoney": "Convert Points to Money",
+  "walletConvertLoyaltyPoints": "Convert Loyalty Points",
+  "walletConvertPointsToVoucher": "Convert Points to Voucher",
+  "walletVoucherOffer": "{discount} EGP off Using\\n{points} {pointsLabel}",
+  "@walletVoucherOffer": {
+    "placeholders": {
+      "discount": {
+        "type": "int"
+      },
+      "points": {
+        "type": "int"
+      },
+      "pointsLabel": {
+        "type": "String"
+      }
+    }
+  },
+  "walletValidUntil": "Valid until {date}",
+  "@walletValidUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "walletHistory": "Wallet History",
+  "walletRefund": "Refund",
+  "walletRecharge": "Recharge",
+  "walletPointsConversion": "Points Conversion",
+  "walletCardPayment": "Card Payment",
+  "walletOrderNumber": "Order #{orderId}",
+  "@walletOrderNumber": {
+    "placeholders": {
+      "orderId": {
+        "type": "String"
+      }
+    }
+  },
+  "wallet_________________End": "__________________",
   "drawer_________________Start": "__________________",
   "myCart": "My Cart",
   "themeMode": "Theme Mode",
