@@ -362,6 +362,12 @@
       }
     }
   },
+  "walletFilterAll": "الكل",
+  "walletFilterAdded": "المضاف",
+  "walletFilterSpent": "المصروف",
+  "walletFilterFromPoints": "من النقاط",
+  "walletHistoryTitle": "سجل المحفظة",
+  "walletHistorySubtitle": "تابع كل نشاط محفظتك في مكان واحد",
   "wallet_________________End": "__________________",
   "drawer_________________Start": "__________________",
   "myCart": "سلتي",

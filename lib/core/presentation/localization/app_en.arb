@@ -358,6 +358,12 @@
       }
     }
   },
+  "walletFilterAll": "All",
+  "walletFilterAdded": "Added",
+  "walletFilterSpent": "Spent",
+  "walletFilterFromPoints": "From Points",
+  "walletHistoryTitle": "Wallet History",
+  "walletHistorySubtitle": "Track all your wallet activity in one place",
   "wallet_________________End": "__________________",
   "drawer_________________Start": "__________________",
   "myCart": "My Cart",

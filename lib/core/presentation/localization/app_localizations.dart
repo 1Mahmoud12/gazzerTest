@@ -1742,6 +1742,42 @@ abstract class AppLocalizations {
   /// **'Order #{orderId}'**
   String walletOrderNumber(String orderId);
 
+  /// No description provided for @walletFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get walletFilterAll;
+
+  /// No description provided for @walletFilterAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Added'**
+  String get walletFilterAdded;
+
+  /// No description provided for @walletFilterSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent'**
+  String get walletFilterSpent;
+
+  /// No description provided for @walletFilterFromPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'From Points'**
+  String get walletFilterFromPoints;
+
+  /// No description provided for @walletHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet History'**
+  String get walletHistoryTitle;
+
+  /// No description provided for @walletHistorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track all your wallet activity in one place'**
+  String get walletHistorySubtitle;
+
   /// No description provided for @wallet_________________End.
   ///
   /// In en, this message translates to:
