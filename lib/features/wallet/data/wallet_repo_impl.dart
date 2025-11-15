@@ -3,12 +3,16 @@ import 'dart:convert';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/features/wallet/data/dto/add_balance_response_dto.dart';
 import 'package:gazzer/features/wallet/data/dto/wallet_dto.dart';
 import 'package:gazzer/features/wallet/data/dto/wallet_transactions_dto.dart';
+import 'package:gazzer/features/wallet/data/requests/add_balance_request.dart';
 import 'package:gazzer/features/wallet/data/requests/convert_points_request.dart';
+import 'package:gazzer/features/wallet/domain/entities/add_balance_entity.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_transactions_entity.dart';
 import 'package:gazzer/features/wallet/domain/wallet_repo.dart';
+import 'package:gazzer/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _kWalletCache = 'wallet_json';
@@ -142,5 +146,39 @@ class WalletRepoImpl extends WalletRepo {
     } catch (_) {
       return null;
     }
+  }
+
+  @override
+  Future<Result<AddBalanceResponse?>> addBalance({
+    required double amount,
+    required String description,
+    required String paymentMethod,
+    String? phone,
+    int? cardId,
+  }) async {
+    final request = AddBalanceRequest(
+      amount: amount,
+      description: description,
+      paymentMethod: paymentMethod,
+      phone: phone,
+      cardId: cardId,
+    );
+    return super.call(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.addBalance,
+        requestBody: request.toJson(),
+      ),
+      parser: (response) {
+        logger.d(response.data);
+        final dto = AddBalanceResponseDto.fromJson(response.data as Map<String, dynamic>);
+        return AddBalanceResponse(
+          walletTopUpId: dto.walletTopUpId,
+          amount: dto.amount,
+          paymentMethod: dto.paymentMethod,
+          paymentStatus: dto.paymentStatus,
+          iframeUrl: dto.iframeUrl,
+        );
+      },
+    );
   }
 }

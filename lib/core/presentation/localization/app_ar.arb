@@ -370,6 +370,24 @@
   "walletFilterFromPoints": "من النقاط",
   "walletHistoryTitle": "سجل المحفظة",
   "walletHistorySubtitle": "تابع كل نشاط محفظتك في مكان واحد",
+  "walletYouWillRecharge": "ستقوم بشحن {amount} {currency} إلى محفظة Gazzer الخاصة بك، يرجى اختيار طريقة الدفع التي تريدها:",
+  "@walletYouWillRecharge": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "walletPleaseSelectPaymentMethod": "يرجى اختيار طريقة الدفع التي تريدها:",
+  "walletCreditOrDebit": "بطاقة ائتمان أو خصم",
+  "walletApplePay": "Apple Pay",
+  "walletEWallet": "محفظة إلكترونية",
+  "walletEnterWalletNumber": "أدخل رقم المحفظة",
+  "walletPayWithAnotherCard": "الدفع ببطاقة أخرى",
+  "walletPayNow": "ادفع الآن",
   "wallet_________________End": "__________________",
   "drawer_________________Start": "__________________",
   "myCart": "سلتي",

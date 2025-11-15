@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 
 class GradientRadioBtn extends StatelessWidget {
   const GradientRadioBtn({super.key, required this.isSelected, this.onPressed, this.size = 12});
@@ -12,7 +10,7 @@ class GradientRadioBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
+        border: Border.all(color: Co.purple, width: 2),
         shape: BoxShape.circle,
       ),
       child: AnimatedOpacity(

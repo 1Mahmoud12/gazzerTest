@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -874,6 +874,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get walletHistorySubtitle => 'تابع كل نشاط محفظتك في مكان واحد';
+
+  @override
+  String walletYouWillRecharge(String amount, String currency) {
+    return 'ستقوم بشحن $amount $currency إلى محفظة Gazzer الخاصة بك، يرجى اختيار طريقة الدفع التي تريدها:';
+  }
+
+  @override
+  String get walletPleaseSelectPaymentMethod => 'يرجى اختيار طريقة الدفع التي تريدها:';
+
+  @override
+  String get walletCreditOrDebit => 'بطاقة ائتمان أو خصم';
+
+  @override
+  String get walletApplePay => 'Apple Pay';
+
+  @override
+  String get walletEWallet => 'محفظة إلكترونية';
+
+  @override
+  String get walletEnterWalletNumber => 'أدخل رقم المحفظة';
+
+  @override
+  String get walletPayWithAnotherCard => 'الدفع ببطاقة أخرى';
+
+  @override
+  String get walletPayNow => 'ادفع الآن';
 
   @override
   String get wallet_________________End => '__________________';

@@ -78,6 +78,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/c
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/cubit/stores_of_category_cubit.dart';
 import 'package:gazzer/features/wallet/data/wallet_repo_impl.dart';
 import 'package:gazzer/features/wallet/domain/wallet_repo.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/add_balance_cubit.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/convert_points_cubit.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/wallet_cubit.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/wallet_transactions_cubit.dart';
@@ -226,5 +227,6 @@ void _registerCubits() {
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));
   di.registerFactory(() => ConvertPointsCubit(di.get()));
+  di.registerFactory(() => AddBalanceCubit(di.get()));
   di.registerFactory(() => WalletTransactionsCubit(di.get()));
 }

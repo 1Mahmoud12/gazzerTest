@@ -366,6 +366,24 @@
   "walletFilterFromPoints": "From Points",
   "walletHistoryTitle": "Wallet History",
   "walletHistorySubtitle": "Track all your wallet activity in one place",
+  "walletYouWillRecharge": "You will recharge {amount} {currency} to your Gazzer Wallet, Please select the payment method you want:",
+  "@walletYouWillRecharge": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "walletPleaseSelectPaymentMethod": "Please select the payment method you want:",
+  "walletCreditOrDebit": "Credit or Debit",
+  "walletApplePay": "Apple Pay",
+  "walletEWallet": "E-Wallet",
+  "walletEnterWalletNumber": "Enter Wallet Number",
+  "walletPayWithAnotherCard": "Pay with another card",
+  "walletPayNow": "Pay Now",
   "wallet_________________End": "__________________",
   "drawer_________________Start": "__________________",
   "myCart": "My Cart",

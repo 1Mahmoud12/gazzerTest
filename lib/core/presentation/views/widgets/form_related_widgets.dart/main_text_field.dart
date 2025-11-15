@@ -47,6 +47,7 @@ class MainTextField extends StatefulWidget {
     this.max = 255,
     this.disabledColor,
     this.borderColor,
+    this.autovalidateMode,
     this.action = TextInputAction.next,
   });
   final TextEditingController controller;
@@ -84,6 +85,7 @@ class MainTextField extends StatefulWidget {
   final List<String>? autofillHints;
   final int max;
   final TextInputAction action;
+  final AutovalidateMode? autovalidateMode;
   final bool autofocus;
   final bool showMaxLegnth;
   @override
@@ -135,7 +137,7 @@ class _MainTextFieldState extends State<MainTextField> {
             textInputAction: widget.action,
             inputFormatters: widget.inputFormatters,
             keyboardType: widget.keyboardType ?? TextInputType.emailAddress,
-
+            autovalidateMode: widget.autovalidateMode,
             decoration: InputDecoration(
               errorStyle: TStyle.errorSemi(13),
               errorMaxLines: 5,
@@ -153,6 +155,7 @@ class _MainTextFieldState extends State<MainTextField> {
               helperMaxLines: 1,
               // helperMaxLines: 5,
               labelStyle: TStyle.greySemi(15),
+
               labelText: widget.label,
               prefixIcon: widget.prefix == null
                   ? null

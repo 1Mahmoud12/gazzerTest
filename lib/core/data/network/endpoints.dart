@@ -128,6 +128,7 @@ class Endpoints {
   /// ** Wallet
   static const wallet = "wallet";
   static const walletTransactions = "wallet/transactions";
+  static const addBalance = "wallet/add-balance";
 
   /// ** Loyalty Program
   static const loyaltyProgram = "loyalty/program";

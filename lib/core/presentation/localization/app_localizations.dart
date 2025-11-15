@@ -1790,6 +1790,54 @@ abstract class AppLocalizations {
   /// **'Track all your wallet activity in one place'**
   String get walletHistorySubtitle;
 
+  /// No description provided for @walletYouWillRecharge.
+  ///
+  /// In en, this message translates to:
+  /// **'You will recharge {amount} {currency} to your Gazzer Wallet, Please select the payment method you want:'**
+  String walletYouWillRecharge(String amount, String currency);
+
+  /// No description provided for @walletPleaseSelectPaymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select the payment method you want:'**
+  String get walletPleaseSelectPaymentMethod;
+
+  /// No description provided for @walletCreditOrDebit.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit or Debit'**
+  String get walletCreditOrDebit;
+
+  /// No description provided for @walletApplePay.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple Pay'**
+  String get walletApplePay;
+
+  /// No description provided for @walletEWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'E-Wallet'**
+  String get walletEWallet;
+
+  /// No description provided for @walletEnterWalletNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Wallet Number'**
+  String get walletEnterWalletNumber;
+
+  /// No description provided for @walletPayWithAnotherCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay with another card'**
+  String get walletPayWithAnotherCard;
+
+  /// No description provided for @walletPayNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay Now'**
+  String get walletPayNow;
+
   /// No description provided for @wallet_________________End.
   ///
   /// In en, this message translates to:

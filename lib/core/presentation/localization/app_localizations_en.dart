@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -874,6 +874,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get walletHistorySubtitle => 'Track all your wallet activity in one place';
+
+  @override
+  String walletYouWillRecharge(String amount, String currency) {
+    return 'You will recharge $amount $currency to your Gazzer Wallet, Please select the payment method you want:';
+  }
+
+  @override
+  String get walletPleaseSelectPaymentMethod => 'Please select the payment method you want:';
+
+  @override
+  String get walletCreditOrDebit => 'Credit or Debit';
+
+  @override
+  String get walletApplePay => 'Apple Pay';
+
+  @override
+  String get walletEWallet => 'E-Wallet';
+
+  @override
+  String get walletEnterWalletNumber => 'Enter Wallet Number';
+
+  @override
+  String get walletPayWithAnotherCard => 'Pay with another card';
+
+  @override
+  String get walletPayNow => 'Pay Now';
 
   @override
   String get wallet_________________End => '__________________';

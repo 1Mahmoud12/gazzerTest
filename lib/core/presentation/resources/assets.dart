@@ -282,6 +282,10 @@ class Assets {
   static const String visaIc = "assets/svg/visaIc.svg";
   static const String voucherIc = "assets/svg/voucherIc.svg";
   static const String convertIc = "assets/svg/convertIc.svg";
+  static const String paymentIc = "assets/svg/paymentIc.svg";
+  static const String eWalletIc = "assets/svg/eWalletIc.svg";
+  static const String applePayIc = "assets/svg/applePayIc.svg";
+  static const String creditIc = "assets/svg/creditIc.svg";
   static const String cashedPng = "assets/png/cashedPng.png";
   static const String winnerPoints = "assets/png/winnerPoints.png";
 }
