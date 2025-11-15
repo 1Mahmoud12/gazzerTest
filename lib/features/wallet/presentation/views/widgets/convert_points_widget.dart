@@ -1,157 +1,227 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/convert_points_cubit.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/convert_points_state.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/wallet_cubit.dart';
 
 class ConvertPointsWidget extends StatefulWidget {
-  const ConvertPointsWidget({super.key});
+  const ConvertPointsWidget({
+    super.key,
+    this.loyaltyPoints,
+  });
+
+  final WalletLoyaltyPointsEntity? loyaltyPoints;
 
   @override
   State<ConvertPointsWidget> createState() => _ConvertPointsWidgetState();
 }
 
 class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
-  static const int _availablePoints = 2450;
-  static const int _step = 100;
-  static const double _conversionRate = 0.02; // 100 points => 2.0 EGP
+  int _selectedPoints = 0;
 
-  int _selectedPoints = 1000;
+  int get _availablePoints => widget.loyaltyPoints?.availablePoints ?? 0;
 
-  double get _convertedAmount => _selectedPoints * _conversionRate;
+  int get _conversionRate => widget.loyaltyPoints?.conversionRate ?? 100;
+
+  double get _estimatedValue => widget.loyaltyPoints?.estimatedValue ?? 0.0;
+
+  double get _convertedAmount => _selectedPoints / _conversionRate;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedPoints = _conversionRate;
+  }
+
+  @override
+  void didUpdateWidget(ConvertPointsWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.loyaltyPoints?.conversionRate != widget.loyaltyPoints?.conversionRate) {
+      _selectedPoints = _conversionRate;
+    }
+  }
 
   void _increment() {
     setState(() {
-      _selectedPoints = (_selectedPoints + _step).clamp(0, _availablePoints);
+      _selectedPoints = (_selectedPoints + _conversionRate).clamp(
+        0,
+        _availablePoints,
+      );
     });
   }
 
   void _decrement() {
     setState(() {
-      _selectedPoints = (_selectedPoints - _step).clamp(0, _availablePoints);
+      _selectedPoints = (_selectedPoints - _conversionRate).clamp(
+        0,
+        _availablePoints,
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          L10n.tr().walletConvertPointsToMoney,
-          style: TStyle.robotBlackTitle(),
-        ),
-        const SizedBox(height: 20),
-        Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Co.bg,
-            borderRadius: BorderRadius.circular(28),
-            border: Border.all(color: Co.purple100),
-          ),
-          child: Column(
+    return BlocProvider(
+      create: (_) => di<ConvertPointsCubit>(),
+      child: BlocConsumer<ConvertPointsCubit, ConvertPointsState>(
+        listener: (context, state) {
+          if (state is ConvertPointsSuccess) {
+            Alerts.showToast(state.message, error: false);
+            // Refresh wallet data after successful conversion
+            context.read<WalletCubit>().load(forceRefresh: true);
+            // Reset selected points
+            setState(() {
+              _selectedPoints = _conversionRate;
+            });
+          } else if (state is ConvertPointsError) {
+            Alerts.showToast(state.message);
+          }
+        },
+        builder: (context, convertState) {
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(
-                      L10n.tr().walletConvertLoyaltyPoints,
-                      style: TStyle.robotBlackSubTitle(font: FFamily.roboto),
-                    ),
-                  ),
-                  const HorizontalSpacing(12),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 10,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: Co.secondary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '$_availablePoints',
-                          style: TStyle.whiteBold(16, font: FFamily.roboto),
-                        ),
-                        Text(
-                          L10n.tr().points,
-                          style: TStyle.whiteSemi(12, font: FFamily.roboto),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              Text(
+                L10n.tr().walletConvertPointsToMoney,
+                style: TStyle.robotBlackTitle(),
               ),
-              const SizedBox(height: 24),
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  final bool isVertical = constraints.maxWidth < 350;
-
-                  final controls = _PointsSelector(
-                    value: _selectedPoints,
-                    onDecrement: _decrement,
-                    onIncrement: _increment,
-                  );
-
-                  final amountPreview = _AmountPreview(
-                    amount: _convertedAmount,
-                  );
-
-                  final convertButton = MainBtn(
-                    onPressed: () {},
-                    bgColor: Co.purple,
-                    text: L10n.tr().convert,
-                    textStyle: TStyle.whiteBold(16, font: FFamily.roboto),
-                    radius: 40,
-                    width: double.infinity,
-                  );
-
-                  final exchangeIcon = SvgPicture.asset(Assets.convertIc);
-
-                  if (isVertical) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Co.bg,
+                  borderRadius: BorderRadius.circular(28),
+                  border: Border.all(color: Co.purple100),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        controls,
-                        const SizedBox(height: 16),
-                        Center(child: exchangeIcon),
-                        const SizedBox(height: 16),
-                        amountPreview,
-                        const SizedBox(height: 24),
-                        convertButton,
+                        Flexible(
+                          child: Text(
+                            L10n.tr().walletConvertLoyaltyPoints,
+                            style: TStyle.robotBlackSubTitle(
+                              font: FFamily.roboto,
+                            ),
+                          ),
+                        ),
+                        const HorizontalSpacing(12),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
+                          decoration: const BoxDecoration(
+                            color: Co.secondary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                '$_availablePoints',
+                                style: TStyle.whiteBold(
+                                  16,
+                                  font: FFamily.roboto,
+                                ),
+                              ),
+                              Text(
+                                L10n.tr().points,
+                                style: TStyle.whiteSemi(
+                                  12,
+                                  font: FFamily.roboto,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
-                    );
-                  }
+                    ),
+                    const SizedBox(height: 24),
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final bool isVertical = constraints.maxWidth < 350;
+                        final isLoading = convertState is ConvertPointsLoading;
 
-                  return Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(flex: 2, child: controls),
-                          const SizedBox(width: 16),
-                          exchangeIcon,
-                          const SizedBox(width: 16),
-                          Expanded(flex: 2, child: amountPreview),
-                        ],
-                      ),
-                      const VerticalSpacing(10),
-                      convertButton,
-                    ],
-                  );
-                },
+                        final controls = _PointsSelector(
+                          value: _selectedPoints,
+                          onDecrement: isLoading || _selectedPoints <= 0 ? null : _decrement,
+                          onIncrement: isLoading || _selectedPoints >= _availablePoints ? null : _increment,
+                        );
+
+                        final amountPreview = _AmountPreview(
+                          amount: _convertedAmount,
+                          estimatedValue: _estimatedValue,
+                        );
+
+                        final convertButton = MainBtn(
+                          onPressed: () {
+                            context.read<ConvertPointsCubit>().convertPoints(
+                              _selectedPoints,
+                            );
+                          },
+                          isEnabled: !isLoading && _selectedPoints > 0,
+                          isLoading: isLoading,
+                          bgColor: Co.purple,
+                          text: L10n.tr().convert,
+                          textStyle: TStyle.whiteBold(16, font: FFamily.roboto),
+                          radius: 40,
+                          width: double.infinity,
+                        );
+
+                        final exchangeIcon = SvgPicture.asset(Assets.convertIc);
+
+                        if (isVertical) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              controls,
+                              const SizedBox(height: 16),
+                              Center(child: exchangeIcon),
+                              const SizedBox(height: 16),
+                              amountPreview,
+                              const SizedBox(height: 24),
+                              convertButton,
+                            ],
+                          );
+                        }
+
+                        return Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(flex: 2, child: controls),
+                                const SizedBox(width: 16),
+                                exchangeIcon,
+                                const SizedBox(width: 16),
+                                Expanded(flex: 2, child: amountPreview),
+                              ],
+                            ),
+                            const VerticalSpacing(10),
+                            convertButton,
+                          ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
-          ),
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
 }
@@ -164,8 +234,8 @@ class _PointsSelector extends StatelessWidget {
   });
 
   final int value;
-  final VoidCallback onIncrement;
-  final VoidCallback onDecrement;
+  final VoidCallback? onIncrement;
+  final VoidCallback? onDecrement;
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +251,16 @@ class _PointsSelector extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-            child: _RoundIconButton(icon: Icons.remove, onTap: onDecrement),
+            child: _RoundIconButton(
+              icon: Icons.remove,
+              onTap: () {
+                if (onDecrement == null) {
+                  Alerts.showToast(L10n.tr().cantConvertLessZanZero);
+                } else {
+                  onDecrement?.call();
+                }
+              },
+            ),
           ),
           const SizedBox(width: 12),
           Text(
@@ -190,7 +269,16 @@ class _PointsSelector extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: _RoundIconButton(icon: Icons.add, onTap: onIncrement),
+            child: _RoundIconButton(
+              icon: Icons.add,
+              onTap: () {
+                if (onIncrement == null) {
+                  Alerts.showToast(L10n.tr().cantConvertMoreThanAvailable);
+                } else {
+                  onIncrement?.call();
+                }
+              },
+            ),
           ),
         ],
       ),
@@ -199,9 +287,13 @@ class _PointsSelector extends StatelessWidget {
 }
 
 class _AmountPreview extends StatelessWidget {
-  const _AmountPreview({required this.amount});
+  const _AmountPreview({
+    required this.amount,
+    required this.estimatedValue,
+  });
 
   final double amount;
+  final double estimatedValue;
 
   @override
   Widget build(BuildContext context) {

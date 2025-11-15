@@ -1,69 +1,99 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:gazzer/features/wallet/presentation/views/wallet_history_screen.dart';
 import 'package:gazzer/features/wallet/presentation/views/widgets/wallet_history_tile.dart';
+import 'package:intl/intl.dart';
 
 class WalletHistoryWidget extends StatelessWidget {
-  const WalletHistoryWidget({super.key});
+  const WalletHistoryWidget({
+    super.key,
+    required this.transactions,
+  });
+
+  final List<TransactionEntity> transactions;
+
+  List<WalletHistoryEntry> _convertTransactionsToEntries(List<TransactionEntity> transactions) {
+    final l10n = L10n.tr();
+    return transactions.map((transaction) {
+      String title;
+      String subtitle;
+
+      switch (transaction.type.toLowerCase()) {
+        case 'deposit':
+          if (transaction.source == 'loyalty_points') {
+            title = l10n.walletPointsConversion;
+            subtitle = transaction.note ?? l10n.walletCardPayment;
+          } else {
+            title = l10n.walletRecharge;
+            subtitle = transaction.source == 'manual' ? l10n.walletCardPayment : transaction.source;
+          }
+          break;
+        case 'withdrawal':
+          title = l10n.walletRefund;
+          subtitle = transaction.note ?? transaction.source;
+          break;
+        default:
+          title = transaction.type;
+          subtitle = transaction.note ?? transaction.source;
+      }
+
+      final date = DateFormat('dd\\MM\\yyyy').format(transaction.createdAt);
+      final time = transaction.createdAt.defaultTimeFormat;
+
+      return WalletHistoryEntry(
+        title: title,
+        subtitle: subtitle,
+        date: date,
+        time: time,
+        amount: transaction.amount.toInt(),
+      );
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.tr();
-    final entries = [
-      WalletHistoryEntry(
-        title: l10n.walletRefund,
-        subtitle: l10n.walletValidUntil('23\\2\\2025'),
-        date: '11\\11\\2025',
-        time: '04:34 PM',
-        amount: 500,
-      ),
-      WalletHistoryEntry(
-        title: l10n.walletRecharge,
-        subtitle: l10n.walletCardPayment,
-        date: '11\\11\\2025',
-        time: '04:34 PM',
-        amount: 500,
-      ),
-      WalletHistoryEntry(
-        title: l10n.walletPointsConversion,
-        subtitle: l10n.walletCardPayment,
-        date: '11\\11\\2025',
-        time: '04:34 PM',
-        amount: 500,
-      ),
-      WalletHistoryEntry(
-        title: l10n.walletOrderNumber('345778'),
-        subtitle: l10n.walletCardPayment,
-        date: '11\\11\\2025',
-        time: '04:34 PM',
-        amount: -500,
-      ),
-    ];
+    final entries = _convertTransactionsToEntries(transactions);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TitleWithMore(
           title: l10n.walletHistory,
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => WalletHistoryScreen(entries: entries),
-              ),
-            );
-          },
+          onPressed: entries.isEmpty
+              ? null
+              : () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const WalletHistoryScreen(),
+                    ),
+                  );
+                },
         ),
-
         const SizedBox(height: 16),
-        Column(
-          children: [
-            for (int i = 0; i < entries.length; i++) ...[
-              WalletHistoryTile(entry: entries[i]),
-              if (i != entries.length - 1) const SizedBox(height: 12),
+        if (entries.isEmpty)
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                l10n.walletHistorySubtitle,
+                style: TStyle.robotBlackRegular(font: FFamily.roboto).copyWith(color: Co.grey),
+              ),
+            ),
+          )
+        else
+          Column(
+            children: [
+              for (int i = 0; i < entries.length && i < 3; i++) ...[
+                WalletHistoryTile(entry: entries[i]),
+                if (i != entries.length - 1 && i < 2) const SizedBox(height: 12),
+              ],
             ],
-          ],
-        ),
+          ),
       ],
     );
   }

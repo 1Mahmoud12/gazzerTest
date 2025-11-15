@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/component/un_auth_component.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/wallet_cubit.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/wallet_state.dart';
 import 'package:gazzer/features/wallet/presentation/views/widgets/add_fund_widget.dart';
 import 'package:gazzer/features/wallet/presentation/views/widgets/balance_widget.dart';
 import 'package:gazzer/features/wallet/presentation/views/widgets/convert_points_to_voucher_widget.dart';
@@ -22,35 +26,47 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MainAppBar(
-        showCart: false,
-        iconsColor: Co.secondary,
-        title: L10n.tr().wallet,
-        titleStyle: TStyle.burbleMed(22, font: FFamily.roboto),
-      ),
-
-      body: Session().client == null
-          ? Expanded(
-              child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty),
-            )
-          : ListView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 24,
+    return BlocProvider(
+      create: (_) => di<WalletCubit>()..load(),
+      child: Scaffold(
+        appBar: MainAppBar(
+          showCart: false,
+          iconsColor: Co.secondary,
+          title: L10n.tr().wallet,
+          titleStyle: TStyle.burbleMed(22, font: FFamily.roboto),
+        ),
+        body: Session().client == null
+            ? Expanded(
+                child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty),
+              )
+            : BlocBuilder<WalletCubit, WalletState>(
+                builder: (context, state) {
+                  return ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 24,
+                    ),
+                    children: [
+                      BalanceWidget(
+                        balance: state is WalletLoaded ? state.data.wallet?.balance : null,
+                      ),
+                      const VerticalSpacing(24),
+                      const AddFundWidget(),
+                      const VerticalSpacing(24),
+                      ConvertPointsWidget(
+                        loyaltyPoints: state is WalletLoaded ? state.data.loyaltyPoints : null,
+                      ),
+                      const VerticalSpacing(24),
+                      const ConvertPointsToVoucherWidget(),
+                      const VerticalSpacing(24),
+                      WalletHistoryWidget(
+                        transactions: state is WalletLoaded ? state.data.recentTransactions : const [],
+                      ),
+                    ],
+                  );
+                },
               ),
-              children: [
-                const BalanceWidget(),
-                const VerticalSpacing(24),
-                const AddFundWidget(),
-                const VerticalSpacing(24),
-                const ConvertPointsWidget(),
-                const VerticalSpacing(24),
-                const ConvertPointsToVoucherWidget(),
-                const VerticalSpacing(24),
-                const WalletHistoryWidget(),
-              ],
-            ),
+      ),
     );
   }
 }

@@ -7,10 +7,16 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 class BalanceWidget extends StatelessWidget {
   const BalanceWidget({
     super.key,
+    this.balance,
   });
+
+  final double? balance;
 
   @override
   Widget build(BuildContext context) {
+    final displayBalance = balance ?? 0.0;
+    final balanceText = displayBalance.toStringAsFixed(0);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -32,7 +38,7 @@ class BalanceWidget extends StatelessWidget {
                   style: TStyle.whiteSemi(16, font: FFamily.roboto),
                 ),
                 Text(
-                  L10n.tr().walletBalanceLabel('1260', L10n.tr().egp),
+                  L10n.tr().walletBalanceLabel(balanceText, L10n.tr().egp),
                   style: TStyle.whiteSemi(16, font: FFamily.roboto),
                 ),
               ],
@@ -44,14 +50,13 @@ class BalanceWidget extends StatelessWidget {
             dashLength: 6,
             gapLength: 3,
             borderRadius: 90,
-
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 12,
                 vertical: 8,
               ),
               child: Text(
-                '1220 \n ${L10n.tr().egp}',
+                '$balanceText \n ${L10n.tr().egp}',
                 textAlign: TextAlign.center,
                 style: TStyle.whiteBold(22, font: FFamily.roboto),
               ),

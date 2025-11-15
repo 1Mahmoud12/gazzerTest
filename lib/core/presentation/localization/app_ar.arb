@@ -643,6 +643,8 @@
                                   "silverBanner": "لقد بدأت للتو — اكسب النقاط مع كل طلب!","exclusiveVoucher": "قسيمة حصرية",
                                                                                              "exclusiveAccessLevel": "مستوى وصول حصري",
                                                                                              "exclusiveDiscount": "خصم حصري",
-                                                                                             "phoneMustStartWithZeroOrOne":"يجب ان يبدآ رقم الهاتف ب 0 او 01"
+                                                                                             "phoneMustStartWithZeroOrOne":"يجب ان يبدآ رقم الهاتف ب 0 او 01",
+                                                                                              "cantConvertLessZanZero": "لا يمكنك تحويل نقاط أقل من الصفر",
+                                                                                               "cantConvertMoreThanAvailable": "لا يمكنك تحويل نقاط أكثر من المتاحة"
 
                     }

@@ -643,6 +643,8 @@
 , "exclusiveVoucher": "Exclusive Voucher",
    "exclusiveAccessLevel": "Exclusive Access Level",
    "exclusiveDiscount": "Exclusive Discount",
-   "phoneMustStartWithZeroOrOne": "Egyptian number must start with 1 or 01"
+   "phoneMustStartWithZeroOrOne": "Egyptian number must start with 1 or 01",
+    "cantConvertLessZanZero": "You cannot convert less than zero points",
+     "cantConvertMoreThanAvailable": "You cannot convert more points than available"
 
 }

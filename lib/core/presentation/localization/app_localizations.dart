@@ -3139,6 +3139,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Egyptian number must start with 1 or 01'**
   String get phoneMustStartWithZeroOrOne;
+
+  /// No description provided for @cantConvertLessZanZero.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot convert less than zero points'**
+  String get cantConvertLessZanZero;
+
+  /// No description provided for @cantConvertMoreThanAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot convert more points than available'**
+  String get cantConvertMoreThanAvailable;
 }
 
 class _AppLocalizationsDelegate

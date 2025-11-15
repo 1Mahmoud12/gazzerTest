@@ -76,6 +76,11 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/product_deta
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/cubit/stores_of_category_cubit.dart';
+import 'package:gazzer/features/wallet/data/wallet_repo_impl.dart';
+import 'package:gazzer/features/wallet/domain/wallet_repo.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/convert_points_cubit.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/wallet_cubit.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/wallet_transactions_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -160,6 +165,9 @@ void _registerRepos() {
   di.registerLazySingleton<LoyaltyProgramRepo>(
     () => LoyaltyProgramRepoImpl(di.get(), di.get()),
   );
+  di.registerLazySingleton<WalletRepo>(
+    () => WalletRepoImpl(di.get(), di.get()),
+  );
 }
 
 void _registerBuses() {
@@ -216,4 +224,7 @@ void _registerCubits() {
   di.registerFactory(() => SuggestsCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
+  di.registerFactory(() => WalletCubit(di.get()));
+  di.registerFactory(() => ConvertPointsCubit(di.get()));
+  di.registerFactory(() => WalletTransactionsCubit(di.get()));
 }
