@@ -31,6 +31,7 @@ class VerticalProductCard extends StatelessWidget {
   final Function? onTap;
   @override
   Widget build(BuildContext context) {
+    //    logger.d(product.offer!.discount.toString());
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
@@ -218,6 +219,8 @@ class VerticalProductCard extends StatelessWidget {
                                     ),
                                   ),
                                 )
+                              : product.offer == null
+                              ? const SizedBox()
                               : Padding(
                                   padding: const EdgeInsets.all(6.0),
                                   child: Text(

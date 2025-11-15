@@ -11,13 +11,15 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
     required this.totalPoints,
     required this.maxProgramPoints,
     required this.mainColor,
+    required this.progress,
   });
 
-  final int spentPoints;
+  final num spentPoints;
   final int spendDuration;
-  final int totalPoints;
-  final int maxProgramPoints;
+  final num totalPoints;
+  final num maxProgramPoints;
   final Color mainColor;
+  final double progress;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           LinearProgressIndicator(
-            value: 0.5,
+            value: progress,
             color: Co.secondary,
             backgroundColor: Co.w100,
             minHeight: 16,

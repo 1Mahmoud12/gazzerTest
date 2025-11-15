@@ -48,6 +48,9 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit
 import 'package:gazzer/features/home/top_vendors/data/top_vendors_repo_imp.dart';
 import 'package:gazzer/features/home/top_vendors/domain/top_vendors_repo.dart';
 import 'package:gazzer/features/home/top_vendors/presentation/cubit/top_vendors_cubit.dart';
+import 'package:gazzer/features/loyaltyProgram/data/loyalty_program_repo_impl.dart';
+import 'package:gazzer/features/loyaltyProgram/domain/loyalty_program_repo.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/cubit/loyalty_program_cubit.dart';
 import 'package:gazzer/features/profile/data/profile_repo_imp.dart';
 import 'package:gazzer/features/profile/domain/profile_repo.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
@@ -154,6 +157,9 @@ void _registerRepos() {
   di.registerLazySingleton<CheckoutRepo>(
     () => CheckoutRepoImp(di.get(), di.get()),
   );
+  di.registerLazySingleton<LoyaltyProgramRepo>(
+    () => LoyaltyProgramRepoImpl(di.get(), di.get()),
+  );
 }
 
 void _registerBuses() {
@@ -209,4 +215,5 @@ void _registerCubits() {
   di.registerFactory(() => TopVendorsCubit(di.get()));
   di.registerFactory(() => SuggestsCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
+  di.registerFactory(() => LoyaltyProgramCubit(di.get()));
 }

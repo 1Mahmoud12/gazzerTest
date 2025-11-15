@@ -124,4 +124,7 @@ class Endpoints {
   static const convertPoints = "wallet/convert-points";
   static const addNewCard = "wallet/cards";
   static const ordersCheckout = "orders/checkout";
+
+  /// ** Loyalty Program
+  static const loyaltyProgram = "loyalty/program";
 }

@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/features/loyaltyProgram/domain/entities/loyalty_program_entity.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/tier_visual_details.dart';
 
 class OurTierBenefitsWidget extends StatelessWidget {
-  const OurTierBenefitsWidget({super.key});
+  const OurTierBenefitsWidget({
+    super.key,
+    required this.tiers,
+    required this.currentTierName,
+    required this.tierVisuals,
+  });
+
+  final List<TierBenefits> tiers;
+  final String currentTierName;
+  final Map<String, TierVisualDetails> tierVisuals;
 
   @override
   Widget build(BuildContext context) {
+    if (tiers.isEmpty) return const SizedBox.shrink();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,17 +29,21 @@ class OurTierBenefitsWidget extends StatelessWidget {
           style: TStyle.blackMedium(22, font: FFamily.roboto),
         ),
         const SizedBox(height: 16),
-        const SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+        SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           child: Row(
-            spacing: 10,
-            children: [
-              ProgramWidget(mainColor: Co.purple, textColor: Co.white, iconColor: Co.purple, bgIconColo: Co.lightPurple, nameProgram: 'Hero'),
-              ProgramWidget(mainColor: Co.purple600, textColor: Co.white, iconColor: Co.white, bgIconColo: Co.purple, nameProgram: 'Winner'),
-              ProgramWidget(mainColor: Co.purple200, textColor: Co.black, iconColor: Co.white, bgIconColo: Co.purple, nameProgram: 'Silver'),
-              ProgramWidget(mainColor: Co.purple100, textColor: Co.black, iconColor: Co.white, bgIconColo: Co.purple, nameProgram: 'Gainer'),
-            ],
+            spacing: 12,
+            children: tiers.map((tier) {
+              final nameKey = (tier.tier?.name ?? tier.tier?.displayName ?? '').toLowerCase();
+              final visual = tierVisuals[nameKey] ?? TierVisualResolver.resolve(tier.tier);
+              final isCurrent = nameKey == currentTierName.toLowerCase();
+              return _TierBenefitsCard(
+                tier: tier,
+                visual: visual,
+                isCurrent: isCurrent,
+              );
+            }).toList(),
           ),
         ),
       ],
@@ -35,121 +51,89 @@ class OurTierBenefitsWidget extends StatelessWidget {
   }
 }
 
-class ProgramWidget extends StatelessWidget {
-  final Color mainColor;
-  final Color textColor;
-  final Color iconColor;
-  final Color bgIconColo;
-  final String nameProgram;
-
-  const ProgramWidget({
-    super.key,
-    required this.mainColor,
-    required this.textColor,
-    required this.iconColor,
-    required this.bgIconColo,
-    required this.nameProgram,
+class _TierBenefitsCard extends StatelessWidget {
+  const _TierBenefitsCard({
+    required this.tier,
+    required this.visual,
+    required this.isCurrent,
   });
+
+  final TierBenefits tier;
+  final TierVisualDetails visual;
+  final bool isCurrent;
 
   @override
   Widget build(BuildContext context) {
+    final title = tier.tier?.displayName ?? tier.tier?.name ?? '—';
     return Container(
+      width: 220,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: mainColor,
+        color: visual.mainColor,
         borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: isCurrent ? Co.secondary : visual.mainColor.withOpacityNew(0.4), width: isCurrent ? 2 : 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '$nameProgram tier benefits',
-            style: TStyle.whiteBold(20, font: FFamily.roboto).copyWith(color: textColor),
+            '${L10n.tr().level} $title',
+            style: TStyle.whiteBold(18, font: FFamily.roboto).copyWith(color: visual.primaryTextColor),
           ),
-          const SizedBox(height: 16),
-          TierRowWidget(
-            icon: Assets.assetsSvgBirthdayIc,
-            title: L10n.tr().freeDelivery,
-            available: true,
-            iconColor: iconColor,
-            textColor: textColor,
-            bgColor: bgIconColo,
+          const SizedBox(height: 12),
+          ...tier.benefits.map(
+            (benefit) => _BenefitRow(
+              title: benefit.title ?? benefit.benefitType ?? '',
+              isEnabled: benefit.isEnabled ?? false,
+              textColor: visual.secondaryTextColor,
+            ),
           ),
-          const SizedBox(height: 16),
-          TierRowWidget(
-            icon: Assets.assetsSvgOfferIc,
-            title: L10n.tr().exclusiveVoucher,
-            available: false,
-            iconColor: iconColor,
-            textColor: textColor,
-            bgColor: bgIconColo,
-          ),
-          const SizedBox(height: 16),
-          TierRowWidget(
-            icon: Assets.assetsSvgOfferIc,
-            title: L10n.tr().exclusiveDiscount,
-            available: false,
-            iconColor: iconColor,
-            textColor: textColor,
-            bgColor: bgIconColo,
-          ),
-          const SizedBox(height: 16),
-          TierRowWidget(
-            icon: Assets.assetsSvgOfferIc,
-            title: L10n.tr().exclusiveAccessLevel,
-            available: false,
-            iconColor: iconColor,
-            textColor: textColor,
-            bgColor: bgIconColo,
-          ),
-          const SizedBox(height: 16),
         ],
       ),
     );
   }
 }
 
-class TierRowWidget extends StatelessWidget {
-  const TierRowWidget({
-    super.key,
-    required this.icon,
+class _BenefitRow extends StatelessWidget {
+  const _BenefitRow({
     required this.title,
-    required this.available,
-    required this.iconColor,
+    required this.isEnabled,
     required this.textColor,
-    required this.bgColor,
   });
 
-  final String icon;
   final String title;
-  final bool available;
-  final Color iconColor;
+  final bool isEnabled;
   final Color textColor;
-  final Color bgColor;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(color: bgColor, shape: BoxShape.circle),
-          child: SvgPicture.asset(
-            icon,
-            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            isEnabled ? Icons.check_circle : Icons.radio_button_unchecked,
+            size: 20,
+            color: isEnabled ? Co.white : Co.white.withOpacityNew(0.5),
           ),
-        ),
-        const SizedBox(width: 10),
-        Text(
-          title,
-          style: TStyle.whiteBold(16, font: FFamily.roboto).copyWith(
-            color: textColor,
-            decoration: !available ? null : TextDecoration.lineThrough,
-            decorationColor: textColor,
-            decorationThickness: 1,
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              title,
+              style:
+                  TStyle.whiteSemi(
+                    14,
+                    font: FFamily.roboto,
+                  ).copyWith(
+                    color: textColor,
+                    decorationColor: textColor,
+                    decoration: !isEnabled ? TextDecoration.lineThrough : TextDecoration.none,
+                  ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

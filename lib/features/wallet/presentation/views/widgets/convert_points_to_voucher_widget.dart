@@ -73,6 +73,11 @@ class _VoucherTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final title = L10n.tr().walletVoucherOffer(
+      voucher.discountValue,
+      voucher.requiredPoints,
+      L10n.tr().points,
+    );
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -85,9 +90,9 @@ class _VoucherTile extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => const VoucherVendorsScreen(
-                title: '100 EGP off Using 2000 Points',
-                id: -1,
+              builder: (_) => VoucherVendorsScreen(
+                title: title,
+                id: voucher.discountValue,
               ),
             ),
           );
@@ -106,7 +111,7 @@ class _VoucherTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '100 EGP off Using 2000 Points',
+                    title,
                     style: TStyle.robotBlackMedium(
                       fontSize: 18,
                       font: FFamily.roboto,

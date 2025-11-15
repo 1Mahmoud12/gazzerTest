@@ -195,7 +195,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
 
 class GeneralUtil {
   static List<CountryCodeModel> loadJson() {
-    List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(countries.map((model) => CountryCodeModel.fromJson(model)));
+    List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(
+      countries.map((model) => CountryCodeModel.fromJson(model)),
+    );
 
     return listCountryCodeModel;
   }

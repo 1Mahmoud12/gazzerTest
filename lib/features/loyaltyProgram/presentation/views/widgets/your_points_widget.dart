@@ -19,12 +19,14 @@ class YourPointsWidget extends StatelessWidget {
     required this.conversionPound,
     required this.expirationPoints,
     required this.expirationDate,
+    required this.totalPoints,
   });
 
   final Color mainColor;
   final Color firstColorText;
   final Color secondTextColor;
   final int availablePoints;
+  final int totalPoints;
   final int earningPoints;
   final int earningPerPound;
   final int conversionRate;
@@ -60,7 +62,7 @@ class YourPointsWidget extends StatelessWidget {
                     style: TStyle.whiteSemi(24, font: FFamily.roboto).copyWith(color: firstColorText),
                   ),
                   Text(
-                    L10n.tr().availablePoints,
+                    '${L10n.tr().availablePoints} / ${Helpers.getProperPrice(totalPoints)}',
                     style: TStyle.whiteSemi(20, font: FFamily.roboto).copyWith(color: secondTextColor),
                   ),
                 ],
