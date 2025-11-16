@@ -13,11 +13,9 @@ import 'package:gazzer/features/drawer/views/widgets/drawer_btn.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_gainer_three.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_silver_three.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_winner_two.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/support_screen.dart';
 import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -51,31 +49,17 @@ class _MainDrawerState extends State<MainDrawer> {
         },
       ),
       (
-        '1',
+        'loyalty',
         Assets.assetsSvgTerms,
         (BuildContext ctx) {
           ctx.push(LoyaltyProgramHeroOneScreen.route);
         },
       ),
       (
-        '2',
+        'support',
         Assets.assetsSvgTerms,
         (BuildContext ctx) {
-          ctx.push(LoyaltyProgramWinnerTwoScreen.route);
-        },
-      ),
-      (
-        '3',
-        Assets.assetsSvgTerms,
-        (BuildContext ctx) {
-          ctx.push(LoyaltyProgramSilverThreeScreen.route);
-        },
-      ),
-      (
-        '4',
-        Assets.assetsSvgTerms,
-        (BuildContext ctx) {
-          ctx.push(LoyaltyProgramGainerFourScreen.route);
+          ctx.push(SupportScreen.route);
         },
       ),
       (L10n.tr().foodPlan, Assets.assetsSvgFoodPlan, (BuildContext ctx) => ctx.push(HealthFocusScreen.route)),

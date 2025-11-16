@@ -229,8 +229,6 @@ class TransactionDto {
     id: id,
     type: type,
     amount: amount.toDouble(),
-    balanceBefore: balanceBefore.toDouble(),
-    balanceAfter: balanceAfter.toDouble(),
     currency: currency,
     source: source,
     note: note,

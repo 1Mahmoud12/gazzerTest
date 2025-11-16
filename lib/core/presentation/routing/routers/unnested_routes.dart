@@ -30,6 +30,7 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_progra
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_silver_three.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_winner_two.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/support_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
@@ -111,6 +112,12 @@ final List<RouteBase> unNestedRoutes = [
     path: LoyaltyProgramGainerFourScreen.route,
     builder: (context, state) {
       return const LoyaltyProgramGainerFourScreen();
+    },
+  ),
+  GoRoute(
+    path: SupportScreen.route,
+    builder: (context, state) {
+      return const SupportScreen();
     },
   ),
 ];

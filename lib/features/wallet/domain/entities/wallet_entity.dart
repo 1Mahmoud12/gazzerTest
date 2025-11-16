@@ -81,8 +81,6 @@ class TransactionEntity {
     required this.id,
     required this.type,
     required this.amount,
-    required this.balanceBefore,
-    required this.balanceAfter,
     required this.currency,
     required this.source,
     required this.note,
@@ -93,8 +91,6 @@ class TransactionEntity {
   final int id;
   final String type;
   final double amount;
-  final double balanceBefore;
-  final double balanceAfter;
   final String currency;
   final String source;
   final String? note;

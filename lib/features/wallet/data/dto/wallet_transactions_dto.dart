@@ -66,8 +66,6 @@ class TransactionDto {
     required this.clientId,
     required this.type,
     required this.amount,
-    required this.balanceBefore,
-    required this.balanceAfter,
     required this.currency,
     required this.source,
     required this.referenceId,
@@ -83,9 +81,7 @@ class TransactionDto {
   final int clientWalletId;
   final int clientId;
   final String type;
-  final String amount;
-  final String balanceBefore;
-  final String balanceAfter;
+  final num amount;
   final String currency;
   final String source;
   final int? referenceId;
@@ -102,9 +98,8 @@ class TransactionDto {
       clientWalletId: json['client_wallet_id'] as int? ?? 0,
       clientId: json['client_id'] as int? ?? 0,
       type: json['type'] as String? ?? '',
-      amount: json['amount'] as String? ?? '0',
-      balanceBefore: json['balance_before'] as String? ?? '0',
-      balanceAfter: json['balance_after'] as String? ?? '0',
+      amount: json['amount'] as num? ?? 0,
+
       currency: json['currency'] as String? ?? '',
       source: json['source'] as String? ?? '',
       referenceId: json['reference_id'] as int?,
@@ -120,9 +115,8 @@ class TransactionDto {
   TransactionEntity toEntity() => TransactionEntity(
     id: id,
     type: type,
-    amount: double.tryParse(amount) ?? 0.0,
-    balanceBefore: double.tryParse(balanceBefore) ?? 0.0,
-    balanceAfter: double.tryParse(balanceAfter) ?? 0.0,
+    amount: amount.toDouble(),
+
     currency: currency,
     source: source,
     note: note,

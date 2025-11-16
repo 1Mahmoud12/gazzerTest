@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
@@ -47,26 +48,36 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
     return transactions.map((transaction) {
       String title;
       String subtitle;
+      String iconAssets;
 
       switch (transaction.type.toLowerCase()) {
         case 'deposit':
           if (transaction.source == 'loyalty_points') {
             title = l10n.walletPointsConversion;
             subtitle = transaction.note ?? l10n.walletCardPayment;
+            iconAssets = Assets.convertPointsIc;
           } else {
             title = l10n.walletRecharge;
             subtitle = transaction.source == 'manual' ? l10n.walletCardPayment : transaction.source;
+            iconAssets = Assets.rechargeIc;
           }
+
           break;
         case 'withdrawal':
           title = l10n.walletRefund;
           subtitle = transaction.note ?? transaction.source;
+          iconAssets = Assets.paidIc;
+
           break;
         case 'adjustment':
           title = l10n.walletRefund;
           subtitle = transaction.note ?? transaction.source;
+          iconAssets = Assets.convertPointsIc;
+
           break;
         default:
+          iconAssets = Assets.rechargeIc;
+
           title = transaction.type;
           subtitle = transaction.note ?? transaction.source;
       }
@@ -74,13 +85,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
       final date = DateFormat('dd\\MM\\yyyy').format(transaction.createdAt);
       final time = transaction.createdAt.defaultTimeFormat;
 
-      return WalletHistoryEntry(
-        title: title,
-        subtitle: subtitle,
-        date: date,
-        time: time,
-        amount: transaction.amount.toInt(),
-      );
+      return WalletHistoryEntry(title: title, subtitle: subtitle, date: date, time: time, amount: transaction.amount.toInt(), iconAsset: iconAssets);
     }).toList();
   }
 
