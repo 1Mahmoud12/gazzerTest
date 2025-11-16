@@ -1465,7 +1465,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get remainingPaymentBy => 'اكمال عملية الدفع من خلال';
 
   @override
-  String get totalBeforeCode => 'الاجمالي قبل الضريبه';
+  String get totalBeforeCode => 'الاجمالي قبل الخصم';
 
   @override
   String get vodafoneCash => 'فودافون كاش';

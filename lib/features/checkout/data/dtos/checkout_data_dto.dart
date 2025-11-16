@@ -1,4 +1,5 @@
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
+import 'package:gazzer/features/loyaltyProgram/data/dto/loyalty_program_dto.dart';
 
 class CheckoutDataDTO {
   final WalletDTO wallet;
@@ -38,7 +39,7 @@ class LoyaltyPointsDTO {
   final int totalPoints;
   final int availablePoints;
   final int usedPoints;
-  final int conversionRate;
+  final ConversionRateDto conversionRate;
   final double estimatedValue;
 
   LoyaltyPointsDTO({
@@ -54,7 +55,7 @@ class LoyaltyPointsDTO {
       totalPoints: (json['total_points'] as num?)?.toInt() ?? 0,
       availablePoints: (json['available_points'] as num?)?.toInt() ?? 0,
       usedPoints: (json['used_points'] as num?)?.toInt() ?? 0,
-      conversionRate: (json['conversion_rate'] as num?)?.toInt() ?? 100,
+      conversionRate: ConversionRateDto.fromJson(json['conversion_rate'] ?? {}),
       estimatedValue: (json['estimated_value'] as num?)?.toDouble() ?? 0.0,
     );
   }

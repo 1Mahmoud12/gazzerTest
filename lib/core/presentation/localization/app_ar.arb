@@ -613,7 +613,7 @@
                         "remainingAmount":"المبلغ المتبقي",
                         "enterPhoneNumber":"ادخل رقم هاتفك",
                         "remainingPaymentBy":"اكمال عملية الدفع من خلال",
-                        "totalBeforeCode":"الاجمالي قبل الضريبه",
+                        "totalBeforeCode":"الاجمالي قبل الخصم",
                         "vodafoneCash": "فودافون كاش",
                           "eCash": "اتصالات كاش",
                           "orangeCash": "أورانج كاش",

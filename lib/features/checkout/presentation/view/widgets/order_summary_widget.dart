@@ -4,6 +4,8 @@ import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dashed_border.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
@@ -42,7 +44,8 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
               );
               if (isPercent) {
                 voucherDeduction = baseTotal * (voucherCubit.selectedDiscountAmount! / 100.0);
-                voucherFormatted = '- ${voucherCubit.selectedDiscountAmount!.toStringAsFixed(0)}%';
+                voucherFormatted =
+                    '- ${voucherCubit.selectedDiscountAmount!.toStringAsFixed(0)}% (${baseTotal * (voucherCubit.selectedDiscountAmount! / 100.0)}${L10n.tr().egp})';
               } else {
                 voucherDeduction = voucherCubit.selectedDiscountAmount!;
                 voucherFormatted = '- ${Helpers.getProperPrice(voucherCubit.selectedDiscountAmount!)}';
@@ -102,10 +105,40 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                     ),
                     const SizedBox(height: 8),
                   ],
-                  ItemSummary(
-                    title: L10n.tr().total,
-                    value: finalTotal,
-                    total: true,
+                  const DashedBorder(
+                    width: 10,
+                    gap: 8,
+                    color: Co.gryPrimary,
+                    thickness: 1.5,
+                  ),
+                  const VerticalSpacing(12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                L10n.tr().total,
+                                style: TStyle.blackSemi(20, font: FFamily.roboto),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                            ),
+                            const HorizontalSpacing(2),
+                            Text(
+                              ' (${L10n.tr().amountToPay}) ',
+                              style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(overflow: TextOverflow.ellipsis),
+                              maxLines: 1,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const HorizontalSpacing(12),
+                      Text(Helpers.getProperPrice(finalTotal), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
+                    ],
                   ),
                 ],
               ),
