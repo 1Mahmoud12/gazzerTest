@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:gazzer/main.dart';
+
 final textRegex = RegExp(r'Text\(\"([a-zA-Z_][a-zA-Z0-9_\s]*)\"');
 final textSpanRegex = RegExp(r'text: \"([a-zA-Z_][a-zA-Z0-9_\s]*)\"');
 
@@ -21,7 +23,7 @@ void main() async {
   final sourceDir = Directory('lib');
 
   if (!sourceDir.existsSync()) {
-    print('Error: lib/ directory not found.');
+    logger.e('Error: lib/ directory not found.');
     return;
   }
 
@@ -53,10 +55,10 @@ void main() async {
       // Write the modified content back to the file if there were changes
       if (hasChanges) {
         await entity.writeAsString(content);
-        print('Updated: ${entity.path}');
+        logger.d('Updated: ${entity.path}');
       }
     }
   }
 
-  print('✅ Replaced $replaced text strings with L10n.tr() calls.');
+  logger.d('✅ Replaced $replaced text strings with L10n.tr() calls.');
 }

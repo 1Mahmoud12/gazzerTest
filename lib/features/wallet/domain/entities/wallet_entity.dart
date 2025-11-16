@@ -1,3 +1,5 @@
+import 'package:gazzer/features/loyaltyProgram/data/dto/loyalty_program_dto.dart';
+
 class WalletEntity {
   const WalletEntity({
     required this.wallet,
@@ -37,7 +39,7 @@ class WalletLoyaltyPointsEntity {
   final int totalPoints;
   final int availablePoints;
   final int usedPoints;
-  final int conversionRate;
+  final ConversionRateDto? conversionRate;
   final double estimatedValue;
   final DateTime? expiresAt;
   final int pointsNearingExpiry;

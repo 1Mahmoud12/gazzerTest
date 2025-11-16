@@ -8,9 +8,11 @@ import 'package:gazzer/core/presentation/pkgs/paymob/paymob_webhook_service.dart
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/success_dialog.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/add_balance_cubit.dart';
@@ -84,11 +86,14 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
               final status = response['data']?['payment_status'];
               closeDialog();
               if (status == 'completed') {
-                Alerts.showToast(
-                  message,
-                  error: false,
+                final addedAmount = double.tryParse(_amountController.text) ?? 0;
+                await showSuccessDialog(
+                  AppNavigator.mainKey.currentContext!,
+                  title: '${L10n.tr(context).youJustCashedIn} ${Helpers.getProperPrice(addedAmount)}',
+                  subTitle: L10n.tr(context).keepCollecting,
+                  iconAsset: Assets.successfullyAddPoundsIc,
                 );
-                AppNavigator.mainKey.currentContext!.read<WalletCubit>().load(forceRefresh: true);
+                context.read<WalletCubit>().load(forceRefresh: true);
                 _amountController.clear();
               } else {
                 Alerts.showToast(

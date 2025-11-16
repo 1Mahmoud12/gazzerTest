@@ -7,6 +7,7 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/success_dialog.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/convert_points_cubit.dart';
@@ -30,7 +31,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
 
   int get _availablePoints => widget.loyaltyPoints?.availablePoints ?? 0;
 
-  int get _conversionRate => widget.loyaltyPoints?.conversionRate ?? 100;
+  int get _conversionRate => (widget.loyaltyPoints?.conversionRate?.points ?? 100).toInt();
 
   double get _estimatedValue => widget.loyaltyPoints?.estimatedValue ?? 0.0;
 
@@ -73,9 +74,14 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
     return BlocProvider(
       create: (_) => di<ConvertPointsCubit>(),
       child: BlocConsumer<ConvertPointsCubit, ConvertPointsState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is ConvertPointsSuccess) {
-            Alerts.showToast(state.message, error: false);
+            await showSuccessDialog(
+              context,
+              title: L10n.tr().youJustCashedPoints(_selectedPoints, _convertedAmount),
+              subTitle: L10n.tr().keepCollecting,
+              iconAsset: Assets.successfullyAddPointsIc,
+            );
             // Refresh wallet data after successful conversion
             context.read<WalletCubit>().load(forceRefresh: true);
             // Reset selected points

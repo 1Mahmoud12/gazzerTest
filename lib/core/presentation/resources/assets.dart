@@ -288,4 +288,7 @@ class Assets {
   static const String creditIc = "assets/svg/creditIc.svg";
   static const String cashedPng = "assets/png/cashedPng.png";
   static const String winnerPoints = "assets/png/winnerPoints.png";
+  static const String successfullyAddPoundsIc = "assets/svg/successfullyAddPoundsIc.svg";
+  static const String additionalSuccessfullyIc = "assets/svg/additionalSuccessfullyIc.svg";
+  static const String successfullyAddPointsIc = "assets/svg/successfullyAddPointsIc.svg";
 }

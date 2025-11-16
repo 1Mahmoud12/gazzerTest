@@ -51,7 +51,6 @@ class _LocalizationWidgetState extends State<LocalizationWidget> {
 /// It checks that the method returns the correct error message for empty input.
 ///
 void validatorsTest() {
-  print('validatorsTest called');
   // Test the notEmpty validator
   expect(Validators.notEmpty(''), AppLocalizationsEn().thisFieldIsRequired, reason: '[[ blank ]]');
   expect(Validators.notEmpty(null), AppLocalizationsEn().thisFieldIsRequired, reason: '[[ null ]]');
@@ -172,5 +171,4 @@ void validatorsTest() {
     AppLocalizationsEn().valueMustBeNum(5, 'test'),
     reason: '[[ 123456 ]]',
   );
-  print('validatorsTest completed');
 }

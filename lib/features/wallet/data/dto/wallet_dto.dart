@@ -1,3 +1,4 @@
+import 'package:gazzer/features/loyaltyProgram/data/dto/loyalty_program_dto.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 
 class WalletResponseDto {
@@ -90,7 +91,7 @@ class LoyaltyPointsDto {
   final int totalPoints;
   final int availablePoints;
   final int usedPoints;
-  final int conversionRate;
+  final ConversionRateDto? conversionRate;
   final num estimatedValue;
   final String? expiresAt;
   final int pointsNearingExpiry;
@@ -101,7 +102,8 @@ class LoyaltyPointsDto {
       totalPoints: json['total_points'] as int? ?? 0,
       availablePoints: json['available_points'] as int? ?? 0,
       usedPoints: json['used_points'] as int? ?? 0,
-      conversionRate: json['conversion_rate'] as int? ?? 0,
+      conversionRate: json['conversion_rate'] == null ? null : ConversionRateDto.fromJson(json['conversion_rate'] as Map<String, dynamic>),
+
       estimatedValue: json['estimated_value'] as num? ?? 0,
       expiresAt: json['expires_at'] as String?,
       pointsNearingExpiry: json['points_nearing_expiry'] as int? ?? 0,

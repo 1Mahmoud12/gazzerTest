@@ -1591,4 +1591,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cantConvertMoreThanAvailable => 'لا يمكنك تحويل نقاط أكثر من المتاحة';
+
+  @override
+  String get youJustCashedIn => 'لقد قمت بالاستبدال الآن';
+
+  @override
+  String get keepCollecting => 'هذه مجرد البداية، استمر في جمع النقاط واستبدالها';
+
+  @override
+  String youJustCashedPoints(int points, double currency) {
+    return 'لقد قمت باستبدال $points مقابل $currency جم ';
+  }
 }

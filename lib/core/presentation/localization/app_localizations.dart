@@ -3199,6 +3199,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You cannot convert more points than available'**
   String get cantConvertMoreThanAvailable;
+
+  /// No description provided for @youJustCashedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'You just cashed in'**
+  String get youJustCashedIn;
+
+  /// No description provided for @keepCollecting.
+  ///
+  /// In en, this message translates to:
+  /// **'This is just the beginning, keep collecting and cashing in'**
+  String get keepCollecting;
+
+  /// No description provided for @youJustCashedPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'You just cashed in {points} point for {currency} EGP'**
+  String youJustCashedPoints(int points, double currency);
 }
 
 class _AppLocalizationsDelegate

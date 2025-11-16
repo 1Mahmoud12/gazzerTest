@@ -1591,4 +1591,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cantConvertMoreThanAvailable => 'You cannot convert more points than available';
+
+  @override
+  String get youJustCashedIn => 'You just cashed in';
+
+  @override
+  String get keepCollecting => 'This is just the beginning, keep collecting and cashing in';
+
+  @override
+  String youJustCashedPoints(int points, double currency) {
+    return 'You just cashed in $points point for $currency EGP';
+  }
 }

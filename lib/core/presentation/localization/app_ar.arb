@@ -655,6 +655,17 @@
                                     }
                                   }
                                 },
+                                 "youJustCashedPoints": "لقد قمت باستبدال {points} مقابل {currency} جم ",
+                                                       "@youJustCashedPoints": {
+                                                         "placeholders": {
+                                                           "points": {
+                                                             "type": "int"
+                                                           },
+                                                           "currency": {
+                                                             "type": "double"
+                                                           }
+                                                         }
+                                                       },
                                 "heroBanner": "لقد وصلت إلى القمة — أنت من عملائنا المميزين!",
                                   "winnerBanner": "أنت من بين عملائنا الأفضل، استمتع بخصومات ومفاجآت خاصة.",
                                   "gainerBanner": "أنت تتقدم بسرعة! احصل على توصيل مجاني ومزايا حصرية مبكرة.",
@@ -663,6 +674,8 @@
                                                                                              "exclusiveDiscount": "خصم حصري",
                                                                                              "phoneMustStartWithZeroOrOne":"يجب ان يبدآ رقم الهاتف ب 0 او 01",
                                                                                               "cantConvertLessZanZero": "لا يمكنك تحويل نقاط أقل من الصفر",
-                                                                                               "cantConvertMoreThanAvailable": "لا يمكنك تحويل نقاط أكثر من المتاحة"
+                                                                                               "cantConvertMoreThanAvailable": "لا يمكنك تحويل نقاط أكثر من المتاحة",
+                                                                                               "youJustCashedIn": "لقد قمت بالاستبدال الآن",
+                                                                                                 "keepCollecting": "هذه مجرد البداية، استمر في جمع النقاط واستبدالها"
 
                     }

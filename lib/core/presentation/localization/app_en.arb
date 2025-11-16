@@ -663,6 +663,19 @@
    "exclusiveDiscount": "Exclusive Discount",
    "phoneMustStartWithZeroOrOne": "Egyptian number must start with 1 or 01",
     "cantConvertLessZanZero": "You cannot convert less than zero points",
-     "cantConvertMoreThanAvailable": "You cannot convert more points than available"
+     "cantConvertMoreThanAvailable": "You cannot convert more points than available",
+     "youJustCashedIn": "You just cashed in",
+       "keepCollecting": "This is just the beginning, keep collecting and cashing in",
+       "youJustCashedPoints": "You just cashed in {points} point for {currency} EGP",
+                       "@youJustCashedPoints": {
+                         "placeholders": {
+                           "points": {
+                             "type": "int"
+                           },
+                           "currency": {
+                             "type": "double"
+                           }
+                         }
+                       }
 
 }
