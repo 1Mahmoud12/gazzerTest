@@ -166,6 +166,7 @@ class PaymentMethodWidget extends StatelessWidget {
                       }
                     },
                     balance: walletBalance,
+                    remainingAmount: (cubit.totalOrder - walletBalance).clamp(0, double.infinity),
                     availablePoints: availablePoints,
                   ),
                   if (cubit.remainingPaymentMethod != null) ...[
@@ -175,7 +176,7 @@ class PaymentMethodWidget extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            '${L10n.tr().remainingPaymentBy} ${cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard ? L10n.tr().creditCard : L10n.tr().wallet}',
+                            '${L10n.tr().remainingPaymentBy} ${cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard ? L10n.tr().creditCard : L10n.tr().wallet} ${L10n.tr().and} ${L10n.tr().remainingAmount} ${Helpers.getProperPrice((cubit.totalOrder - walletBalance).clamp(0, double.infinity))}',
                             style: TStyle.greyRegular(16),
                           ),
                         ),
@@ -203,6 +204,7 @@ class _PaymentMethodItem extends StatelessWidget {
     this.balance,
     this.availablePoints,
     this.walletPhoneNumber,
+    this.remainingAmount,
   });
 
   final PaymentMethod method;
@@ -211,6 +213,7 @@ class _PaymentMethodItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
   final double? balance;
+  final double? remainingAmount;
   final int? availablePoints;
   final String? walletPhoneNumber;
 

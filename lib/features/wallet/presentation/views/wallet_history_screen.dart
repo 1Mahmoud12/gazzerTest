@@ -54,24 +54,24 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
         case 'deposit':
           if (transaction.source == 'loyalty_points') {
             title = l10n.walletPointsConversion;
-            subtitle = transaction.note ?? l10n.walletCardPayment;
+            subtitle = transaction.note ?? '';
             iconAssets = Assets.convertPointsIc;
           } else {
             title = l10n.walletRecharge;
-            subtitle = transaction.source == 'manual' ? l10n.walletCardPayment : transaction.source;
+            subtitle = transaction.note ?? '';
             iconAssets = Assets.rechargeIc;
           }
 
           break;
         case 'withdrawal':
           title = l10n.walletRefund;
-          subtitle = transaction.note ?? transaction.source;
+          subtitle = transaction.note ?? '';
           iconAssets = Assets.paidIc;
 
           break;
         case 'adjustment':
           title = l10n.walletRefund;
-          subtitle = transaction.note ?? transaction.source;
+          subtitle = transaction.note ?? '';
           iconAssets = Assets.convertPointsIc;
 
           break;
@@ -79,7 +79,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
           iconAssets = Assets.rechargeIc;
 
           title = transaction.type;
-          subtitle = transaction.note ?? transaction.source;
+          subtitle = transaction.note ?? '';
       }
 
       final date = DateFormat('dd\\MM\\yyyy').format(transaction.createdAt);
