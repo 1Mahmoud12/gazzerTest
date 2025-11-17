@@ -1602,4 +1602,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String youJustCashedPoints(int points, double currency) {
     return 'You just cashed in $points point for $currency EGP';
   }
+
+  @override
+  String nextTier(String name, String currency) {
+    return 'Spend $currency more to reach $name tier';
+  }
+
+  @override
+  String get viewWallet => 'View Wallet';
 }

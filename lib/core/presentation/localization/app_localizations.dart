@@ -3217,6 +3217,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You just cashed in {points} point for {currency} EGP'**
   String youJustCashedPoints(int points, double currency);
+
+  /// No description provided for @nextTier.
+  ///
+  /// In en, this message translates to:
+  /// **'Spend {currency} more to reach {name} tier'**
+  String nextTier(String name, String currency);
+
+  /// No description provided for @viewWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'View Wallet'**
+  String get viewWallet;
 }
 
 class _AppLocalizationsDelegate

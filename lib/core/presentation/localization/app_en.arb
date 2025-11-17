@@ -676,6 +676,17 @@
                              "type": "double"
                            }
                          }
-                       }
-
+                       },
+    "nextTier": "Spend {currency} more to reach {name} tier",
+                           "@nextTier": {
+                             "placeholders": {
+                               "name": {
+                                 "type": "String"
+                               },
+                               "currency": {
+                                 "type": "String"
+                               }
+                             }
+                           },
+    "viewWallet":"View Wallet"
 }

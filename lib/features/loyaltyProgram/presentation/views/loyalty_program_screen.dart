@@ -15,6 +15,8 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/our_ti
 import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/progress_loyalty_program.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/tier_visual_details.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/your_points_widget.dart';
+import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -88,6 +90,8 @@ class _LoyaltyProgramView extends StatelessWidget {
     final needed = (tierProgress?.nextTier?.spentNeeded ?? spent).toDouble();
     final progress = (tierProgress?.progressPercentage ?? 0).toDouble() / 100.0;
     final durationDays = (tierProgress?.daysPeriod ?? 0).toInt();
+    final nextTier = tierProgress?.nextTier == null ? null : tierProgress?.nextTier?.displayName ?? '';
+    final progressNextTier = tierProgress?.nextTier == null ? null : (tierProgress?.nextTier?.spentNeeded ?? 0).toDouble();
 
     final availablePoints = (points?.availablePoints ?? 0).toInt();
     final totalPoints = (points?.totalPoints ?? 0).toInt();
@@ -109,6 +113,8 @@ class _LoyaltyProgramView extends StatelessWidget {
       showBenefits: tierBenefits,
       spent: spent,
       requiredSpend: needed,
+      progressNextTier: progressNextTier,
+      nameNextTier: nextTier,
       progress: progress.clamp(0.0, 1.0),
       durationDays: durationDays,
       totalPoints: totalPoints,
@@ -172,6 +178,8 @@ class _ProgramContent extends StatelessWidget {
     this.expirationDate = '-',
     this.benefitsVisuals = const {},
     this.errorMessage,
+    this.nameNextTier,
+    this.progressNextTier,
   });
 
   final LoyaltyProgramEntity data;
@@ -179,7 +187,8 @@ class _ProgramContent extends StatelessWidget {
   final String bannerText;
   final bool isCached;
   final List<TierBenefits> showBenefits;
-
+  final String? nameNextTier;
+  final double? progressNextTier;
   final double spent;
   final double requiredSpend;
   final double progress;
@@ -220,12 +229,12 @@ class _ProgramContent extends StatelessWidget {
           maxProgramPoints: requiredSpend.toInt(),
           mainColor: visuals.mainColor,
           progress: progress.isFinite ? progress : 0,
+          nameNextTier: nameNextTier,
+          progressNextTier: progressNextTier,
         ),
         const SizedBox(height: 16),
         YourPointsWidget(
-          mainColor: visuals.mainColor,
-          firstColorText: visuals.primaryTextColor,
-          secondTextColor: visuals.secondaryTextColor,
+          visual: visuals,
           availablePoints: availablePoints,
           earningPoints: (earningRate?.pointsPerAmount ?? 0).toInt(),
           earningPerPound: (earningRate?.amountUnit ?? 0).toInt(),
@@ -240,6 +249,13 @@ class _ProgramContent extends StatelessWidget {
           tiers: showBenefits,
           currentTierName: data.currentTier?.name ?? '',
           tierVisuals: benefitsVisuals,
+        ),
+        const SizedBox(height: 16),
+        MainBtn(
+          onPressed: () {
+            context.push(WalletScreen.route);
+          },
+          child: Text(L10n.tr().viewWallet),
         ),
         const SizedBox(height: 32),
       ],

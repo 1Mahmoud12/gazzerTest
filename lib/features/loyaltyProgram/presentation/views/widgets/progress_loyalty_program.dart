@@ -12,6 +12,8 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
     required this.maxProgramPoints,
     required this.mainColor,
     required this.progress,
+    this.nameNextTier,
+    this.progressNextTier,
   });
 
   final num spentPoints;
@@ -20,6 +22,8 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
   final num maxProgramPoints;
   final Color mainColor;
   final double progress;
+  final String? nameNextTier;
+  final double? progressNextTier;
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +55,22 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                Helpers.getProperPrice(totalPoints),
-                style: TStyle.burbleSemi(16, font: FFamily.roboto),
-              ),
-              Text(
                 Helpers.getProperPrice(maxProgramPoints),
                 style: TStyle.burbleSemi(16, font: FFamily.roboto),
               ),
+              Text(
+                Helpers.getProperPrice(totalPoints),
+                style: TStyle.burbleSemi(16, font: FFamily.roboto),
+              ),
             ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            L10n.tr().nextTier(
+              nameNextTier ?? '',
+              Helpers.getProperPrice((progressNextTier ?? 0).toInt()),
+            ),
+            style: TStyle.blackRegular(16, font: FFamily.roboto).copyWith(color: Co.darkGrey),
           ),
         ],
       ),

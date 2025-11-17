@@ -10,11 +10,15 @@ class TierVisualDetails {
     required this.secondaryTextColor,
     required this.logo,
     required this.bannerKey,
+    required this.backgroundIconColor,
+    required this.iconColor,
   });
 
   final Color mainColor;
   final Color primaryTextColor;
   final Color secondaryTextColor;
+  final Color backgroundIconColor;
+  final Color iconColor;
   final String logo;
   final String bannerKey;
 }
@@ -25,6 +29,8 @@ class TierVisualResolver {
     primaryTextColor: Co.white,
     secondaryTextColor: Co.lightGrey,
     logo: Assets.heroIc,
+    iconColor: Co.white,
+    backgroundIconColor: Co.purple,
     bannerKey: 'heroBanner',
   );
 
@@ -34,13 +40,17 @@ class TierVisualResolver {
       primaryTextColor: Co.white,
       secondaryTextColor: Co.lightGrey,
       logo: Assets.heroIc,
+      iconColor: Co.purple,
       bannerKey: 'heroBanner',
+      backgroundIconColor: Co.white,
     ),
     'winner': const TierVisualDetails(
       mainColor: Co.purple600,
       primaryTextColor: Co.white,
       secondaryTextColor: Co.lightGrey,
       logo: Assets.winnerIc,
+      iconColor: Co.purple,
+      backgroundIconColor: Co.white,
       bannerKey: 'winnerBanner',
     ),
     'gainer': const TierVisualDetails(
@@ -48,6 +58,8 @@ class TierVisualResolver {
       primaryTextColor: Colors.black,
       secondaryTextColor: Co.darkGrey,
       logo: Assets.gainerIc,
+      iconColor: Co.purple,
+      backgroundIconColor: Co.white,
       bannerKey: 'gainerBanner',
     ),
     'saver': const TierVisualDetails(
@@ -55,6 +67,8 @@ class TierVisualResolver {
       primaryTextColor: Colors.black,
       secondaryTextColor: Co.darkGrey,
       logo: Assets.silverIc,
+      iconColor: Co.purple,
+      backgroundIconColor: Co.white,
       bannerKey: 'silverBanner',
     ),
     'silver': const TierVisualDetails(
@@ -62,6 +76,8 @@ class TierVisualResolver {
       primaryTextColor: Colors.black,
       secondaryTextColor: Co.darkGrey,
       logo: Assets.silverIc,
+      iconColor: Co.purple,
+      backgroundIconColor: Co.white,
       bannerKey: 'silverBanner',
     ),
   };
@@ -79,6 +95,8 @@ class TierVisualResolver {
       primaryTextColor: _isColorDark(fallbackColor) ? Co.white : Colors.black,
       secondaryTextColor: _isColorDark(fallbackColor) ? Co.lightGrey : Co.darkGrey,
       logo: Assets.heroIc,
+      iconColor: Co.purple,
+      backgroundIconColor: Co.white,
       bannerKey: 'heroBanner',
     );
   }

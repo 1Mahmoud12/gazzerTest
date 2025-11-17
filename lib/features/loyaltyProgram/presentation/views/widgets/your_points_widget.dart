@@ -5,13 +5,13 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/tier_visual_details.dart';
 
 class YourPointsWidget extends StatelessWidget {
   const YourPointsWidget({
     super.key,
-    required this.mainColor,
-    required this.firstColorText,
-    required this.secondTextColor,
+    required this.visual,
+
     required this.availablePoints,
     required this.earningPoints,
     required this.earningPerPound,
@@ -22,9 +22,7 @@ class YourPointsWidget extends StatelessWidget {
     required this.totalPoints,
   });
 
-  final Color mainColor;
-  final Color firstColorText;
-  final Color secondTextColor;
+  final TierVisualDetails visual;
   final int availablePoints;
   final int totalPoints;
   final int earningPoints;
@@ -38,7 +36,7 @@ class YourPointsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: mainColor,
+        color: visual.mainColor,
         borderRadius: BorderRadius.circular(24),
       ),
       padding: const EdgeInsets.all(16),
@@ -47,7 +45,7 @@ class YourPointsWidget extends StatelessWidget {
         children: [
           Text(
             L10n.tr().yourPoints,
-            style: TStyle.whiteRegular(20, font: FFamily.roboto).copyWith(color: firstColorText),
+            style: TStyle.whiteRegular(20, font: FFamily.roboto).copyWith(color: visual.primaryTextColor),
           ),
           const SizedBox(height: 16),
           Row(
@@ -59,11 +57,11 @@ class YourPointsWidget extends StatelessWidget {
                 children: [
                   Text(
                     availablePoints.toString(),
-                    style: TStyle.whiteSemi(24, font: FFamily.roboto).copyWith(color: firstColorText),
+                    style: TStyle.whiteSemi(24, font: FFamily.roboto).copyWith(color: visual.primaryTextColor),
                   ),
                   Text(
-                    '${L10n.tr().availablePoints} / ${Helpers.getProperPrice(totalPoints)}',
-                    style: TStyle.whiteSemi(20, font: FFamily.roboto).copyWith(color: secondTextColor),
+                    L10n.tr().availablePoints,
+                    style: TStyle.whiteSemi(20, font: FFamily.roboto).copyWith(color: visual.secondaryTextColor),
                   ),
                 ],
               ),
@@ -74,22 +72,28 @@ class YourPointsWidget extends StatelessWidget {
             icon: Assets.earningPointsIc,
             subTitle: '$earningPoints ${L10n.tr().pointsPer} ${Helpers.getProperPrice(earningPerPound)}',
             title: L10n.tr().earningRate,
-            firstTextColor: firstColorText,
-            secondTextColor: secondTextColor,
+            firstTextColor: visual.primaryTextColor,
+            secondTextColor: visual.secondaryTextColor,
+            iconColor: visual.bannerKey == 'heroBanner' ? visual.iconColor : visual.backgroundIconColor,
+            backgroundColor: visual.bannerKey == 'heroBanner' ? visual.backgroundIconColor : visual.iconColor,
           ),
           YourPointsItem(
             icon: Assets.conversionRateIc,
             subTitle: '$conversionRate ${L10n.tr().points} = ${Helpers.getProperPrice(conversionPound)}',
             title: L10n.tr().conversionRate,
-            firstTextColor: firstColorText,
-            secondTextColor: secondTextColor,
+            firstTextColor: visual.primaryTextColor,
+            secondTextColor: visual.secondaryTextColor,
+            iconColor: visual.bannerKey == 'heroBanner' ? visual.iconColor : visual.backgroundIconColor,
+            backgroundColor: visual.bannerKey == 'heroBanner' ? visual.backgroundIconColor : visual.iconColor,
           ),
           YourPointsItem(
             icon: Assets.expirationIc,
             subTitle: '$expirationPoints ${L10n.tr().validUntill} $expirationDate',
             title: L10n.tr().expiration,
-            firstTextColor: firstColorText,
-            secondTextColor: secondTextColor,
+            firstTextColor: visual.primaryTextColor,
+            secondTextColor: visual.secondaryTextColor,
+            iconColor: visual.bannerKey == 'heroBanner' ? visual.iconColor : visual.backgroundIconColor,
+            backgroundColor: visual.bannerKey == 'heroBanner' ? visual.backgroundIconColor : visual.iconColor,
           ),
         ],
       ),
@@ -105,6 +109,8 @@ class YourPointsItem extends StatelessWidget {
     required this.icon,
     required this.firstTextColor,
     required this.secondTextColor,
+    required this.iconColor,
+    required this.backgroundColor,
   });
 
   final String title;
@@ -112,6 +118,8 @@ class YourPointsItem extends StatelessWidget {
   final String icon;
   final Color firstTextColor;
   final Color secondTextColor;
+  final Color iconColor;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +127,19 @@ class YourPointsItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
-          SvgPicture.asset(icon),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              icon,
+              width: 20,
+              height: 20,
+              colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+            ),
+          ),
           const SizedBox(width: 24),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -25,10 +25,7 @@ import 'package:gazzer/features/intro/presentation/plan/views/health_focus_scree
 import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_gainer_three.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_silver_three.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_winner_two.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/support_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
@@ -90,30 +87,14 @@ final List<RouteBase> unNestedRoutes = [
       return const LoyaltyProgramHeroOneScreen();
     },
   ),
-  GoRoute(
-    path: LoyaltyProgramWinnerTwoScreen.route,
-    builder: (context, state) {
-      return const LoyaltyProgramWinnerTwoScreen();
-    },
-  ),
+
   GoRoute(
     path: WalletScreen.route,
     builder: (context, state) {
       return const WalletScreen();
     },
   ),
-  GoRoute(
-    path: LoyaltyProgramSilverThreeScreen.route,
-    builder: (context, state) {
-      return const LoyaltyProgramSilverThreeScreen();
-    },
-  ),
-  GoRoute(
-    path: LoyaltyProgramGainerFourScreen.route,
-    builder: (context, state) {
-      return const LoyaltyProgramGainerFourScreen();
-    },
-  ),
+
   GoRoute(
     path: SupportScreen.route,
     builder: (context, state) {

@@ -1602,4 +1602,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String youJustCashedPoints(int points, double currency) {
     return 'لقد قمت باستبدال $points مقابل $currency جم ';
   }
+
+  @override
+  String nextTier(String name, String currency) {
+    return 'انفق $currency اكثر لكي تصل الي المستوي $name';
+  }
+
+  @override
+  String get viewWallet => 'عرض المحفظة';
 }

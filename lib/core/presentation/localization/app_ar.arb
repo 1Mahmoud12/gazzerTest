@@ -676,6 +676,18 @@
                                                                                               "cantConvertLessZanZero": "لا يمكنك تحويل نقاط أقل من الصفر",
                                                                                                "cantConvertMoreThanAvailable": "لا يمكنك تحويل نقاط أكثر من المتاحة",
                                                                                                "youJustCashedIn": "لقد قمت بالاستبدال الآن",
-                                                                                                 "keepCollecting": "هذه مجرد البداية، استمر في جمع النقاط واستبدالها"
+                                                                                                 "keepCollecting": "هذه مجرد البداية، استمر في جمع النقاط واستبدالها",
 
+                                 "nextTier": "انفق {currency} اكثر لكي تصل الي المستوي {name}",
+                                                           "@nextTier": {
+                                                             "placeholders": {
+                                                               "name": {
+                                                                 "type": "String"
+                                                               },
+                                                               "currency": {
+                                                                 "type": "String"
+                                                               }
+                                                             }
+                                                           },
+                    "viewWallet":"عرض المحفظة"
                     }
