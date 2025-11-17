@@ -689,5 +689,7 @@
                                                                }
                                                              }
                                                            },
-                    "viewWallet":"عرض المحفظة"
+                    "viewWallet":"عرض المحفظة",
+                      "needToAddReviewFirst": "يجب عليك إضافة تقييم أولاً",
+                      "faqSatisfactionQuestion": "ما مدى رضاك عن إجابات الأسئلة الشائعة؟\nهل كانت مفيدة؟"
                     }

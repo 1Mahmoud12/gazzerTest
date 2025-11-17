@@ -3229,6 +3229,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Wallet'**
   String get viewWallet;
+
+  /// No description provided for @needToAddReviewFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to add a review first'**
+  String get needToAddReviewFirst;
+
+  /// No description provided for @faqSatisfactionQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How satisfied are you with the FAQ answers?\nWas that helpful?'**
+  String get faqSatisfactionQuestion;
 }
 
 class _AppLocalizationsDelegate

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
 class FaqQAArgs {
@@ -118,7 +120,7 @@ class _FeedbackBottomSheetState extends State<_FeedbackBottomSheet> {
             ),
           ),
           Text(
-            'How satisfied are you about FAQ answers\nWas that helpful ?',
+            L10n.tr().faqSatisfactionQuestion,
             textAlign: TextAlign.center,
             style: TStyle.robotBlackRegular(),
           ),
@@ -143,16 +145,25 @@ class _FeedbackBottomSheetState extends State<_FeedbackBottomSheet> {
               setState(() {
                 _rating = rating;
               });
-              // Close after rating with a slight delay
-              Future.delayed(const Duration(milliseconds: 300), () {
-                if (mounted) {
-                  Navigator.of(context).pop();
-                  // You can show a success toast here if needed
-                }
-              });
             },
           ),
           const VerticalSpacing(24),
+          MainBtn(
+            onPressed: () {
+              // Close after rating with a slight delay
+              if (_rating > 0) {
+                Future.delayed(const Duration(milliseconds: 300), () {
+                  if (mounted) {
+                    Navigator.of(context).pop();
+                    // You can show a success toast here if needed
+                  }
+                });
+              } else {
+                Alerts.showToast(L10n.tr().needToAddReviewFirst);
+              }
+            },
+            text: L10n.tr().submit,
+          ),
         ],
       ),
     );

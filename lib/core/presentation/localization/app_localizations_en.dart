@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1610,4 +1610,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewWallet => 'View Wallet';
+
+  @override
+  String get needToAddReviewFirst => 'You need to add a review first';
+
+  @override
+  String get faqSatisfactionQuestion => 'How satisfied are you with the FAQ answers?\nWas that helpful?';
 }
