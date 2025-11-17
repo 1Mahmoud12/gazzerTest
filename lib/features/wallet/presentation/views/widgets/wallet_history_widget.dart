@@ -26,19 +26,19 @@ class WalletHistoryWidget extends StatelessWidget {
         case 'deposit':
           if (transaction.source == 'loyalty_points') {
             title = l10n.walletPointsConversion;
-            subtitle = transaction.note ?? l10n.walletCardPayment;
+            subtitle = transaction.note ?? '';
           } else {
             title = l10n.walletRecharge;
-            subtitle = transaction.source == 'manual' ? l10n.walletCardPayment : transaction.source;
+            subtitle = transaction.note ?? '';
           }
           break;
         case 'withdrawal':
           title = l10n.walletRefund;
-          subtitle = transaction.note ?? transaction.source;
+          subtitle = transaction.note ?? '';
           break;
         default:
           title = transaction.type;
-          subtitle = transaction.note ?? transaction.source;
+          subtitle = transaction.note ?? '';
       }
 
       final date = DateFormat('dd\\MM\\yyyy').format(transaction.createdAt);

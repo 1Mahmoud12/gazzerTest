@@ -60,12 +60,12 @@ class WalletHistoryTile extends StatelessWidget {
               children: [
                 Text(entry.title, style: TStyle.robotBlackMedium()),
                 const SizedBox(height: 4),
-                if (entry.subtitle.isNotEmpty)
+                if (entry.subtitle.isNotEmpty && entry.subtitle != 'description')
                   Text(
                     entry.subtitle,
                     style: TStyle.robotBlackRegular(font: FFamily.roboto),
                   ),
-                if (entry.subtitle.isNotEmpty) const SizedBox(height: 4),
+                if (entry.subtitle.isNotEmpty && entry.subtitle != 'description') const SizedBox(height: 4),
                 Text(
                   entry.date,
                   style: TStyle.greyRegular(12, font: FFamily.roboto),
