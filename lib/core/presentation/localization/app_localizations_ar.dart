@@ -887,7 +887,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get walletCreditOrDebit => 'بطاقة ائتمان أو خصم';
 
   @override
-  String get walletApplePay => 'Apple Pay';
+  String get walletApplePay => 'ابل باي';
 
   @override
   String get walletEWallet => 'محفظة إلكترونية';
@@ -1593,7 +1593,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cantConvertMoreThanAvailable => 'لا يمكنك تحويل نقاط أكثر من المتاحة';
 
   @override
-  String get youJustCashedIn => 'لقد قمت بالاستبدال الآن';
+  String get youJustCashedIn => 'لقد قمت باضافة الآن';
+
+  @override
+  String get thisIsBeginning => 'هذه مجرد البداية،';
 
   @override
   String get keepCollecting => 'هذه مجرد البداية، استمر في جمع النقاط واستبدالها';

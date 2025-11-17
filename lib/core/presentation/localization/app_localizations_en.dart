@@ -1596,6 +1596,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get youJustCashedIn => 'You just cashed in';
 
   @override
+  String get thisIsBeginning => 'This is just the beginning,';
+
+  @override
   String get keepCollecting => 'This is just the beginning, keep collecting and cashing in';
 
   @override

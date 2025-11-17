@@ -383,7 +383,7 @@
   },
   "walletPleaseSelectPaymentMethod": "يرجى اختيار طريقة الدفع التي تريدها:",
   "walletCreditOrDebit": "بطاقة ائتمان أو خصم",
-  "walletApplePay": "Apple Pay",
+  "walletApplePay": "ابل باي",
   "walletEWallet": "محفظة إلكترونية",
   "walletEnterWalletNumber": "أدخل رقم المحفظة",
   "walletPayWithAnotherCard": "الدفع ببطاقة أخرى",
@@ -675,7 +675,8 @@
                                                                                              "phoneMustStartWithZeroOrOne":"يجب ان يبدآ رقم الهاتف ب 0 او 01",
                                                                                               "cantConvertLessZanZero": "لا يمكنك تحويل نقاط أقل من الصفر",
                                                                                                "cantConvertMoreThanAvailable": "لا يمكنك تحويل نقاط أكثر من المتاحة",
-                                                                                               "youJustCashedIn": "لقد قمت بالاستبدال الآن",
+                                                                                               "youJustCashedIn": "لقد قمت باضافة الآن",
+                                                                                                 "thisIsBeginning": "هذه مجرد البداية،",
                                                                                                  "keepCollecting": "هذه مجرد البداية، استمر في جمع النقاط واستبدالها",
 
                                  "nextTier": "انفق {currency} اكثر لكي تصل الي المستوي {name}",

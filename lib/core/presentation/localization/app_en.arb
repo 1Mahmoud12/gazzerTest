@@ -665,6 +665,7 @@
     "cantConvertLessZanZero": "You cannot convert less than zero points",
      "cantConvertMoreThanAvailable": "You cannot convert more points than available",
      "youJustCashedIn": "You just cashed in",
+       "thisIsBeginning": "This is just the beginning,",
        "keepCollecting": "This is just the beginning, keep collecting and cashing in",
        "youJustCashedPoints": "You just cashed in {points} point for {currency} EGP",
                        "@youJustCashedPoints": {

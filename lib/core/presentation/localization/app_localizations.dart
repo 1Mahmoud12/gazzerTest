@@ -3206,6 +3206,12 @@ abstract class AppLocalizations {
   /// **'You just cashed in'**
   String get youJustCashedIn;
 
+  /// No description provided for @thisIsBeginning.
+  ///
+  /// In en, this message translates to:
+  /// **'This is just the beginning,'**
+  String get thisIsBeginning;
+
   /// No description provided for @keepCollecting.
   ///
   /// In en, this message translates to:

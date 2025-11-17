@@ -90,7 +90,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                 await showSuccessDialog(
                   AppNavigator.mainKey.currentContext!,
                   title: '${L10n.tr(context).youJustCashedIn} ${Helpers.getProperPrice(addedAmount)}',
-                  subTitle: L10n.tr(context).keepCollecting,
+                  subTitle: L10n.tr(context).thisIsBeginning,
                   iconAsset: Assets.successfullyAddPoundsIc,
                 );
                 context.read<WalletCubit>().load(forceRefresh: true);

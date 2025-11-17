@@ -78,9 +78,12 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
     if (value == null || value.isEmpty) {
       return false;
     }
-    if (value.startsWith('01')) {
+    // If starts with '0' or '01', length should be 11
+    if (value.startsWith('0')) {
       return value.length == 11;
-    } else if (value.startsWith('1')) {
+    }
+    // If starts with '1' (but not '01'), length should be 10
+    if (value.startsWith('1')) {
       return value.length == 10;
     }
     return false;
@@ -406,35 +409,39 @@ class _EWalletSection extends StatelessWidget {
     final l10n = L10n.tr();
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: MainTextField(
-        controller: controller,
-        hintText: l10n.walletEnterWalletNumber,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: TextInputType.number,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return l10n.thisFieldIsRequired;
-          }
-          // Check if starts with '1' or '01'
-          if (!value.startsWith('1') && !value.startsWith('01')) {
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: MainTextField(
+          controller: controller,
+          hintText: l10n.walletEnterWalletNumber,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          keyboardType: TextInputType.number,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return l10n.thisFieldIsRequired;
+            }
+            // Check if starts with '0' or '01' (both start with '0')
+            if (value.startsWith('0')) {
+              if (value.length != 11) {
+                return l10n.phoneMustBeElevenDigits;
+              }
+              return null;
+            }
+            // Check if starts with '1' (but not '01')
+            if (value.startsWith('1')) {
+              if (value.length != 10) {
+                return l10n.phoneMustBeTenDigits;
+              }
+              return null;
+            }
+            // If doesn't start with '0' or '1', show error
             return l10n.phoneMustStartWithZeroOrOne;
-          }
-          // Validate length based on prefix
-          if (value.startsWith('01')) {
-            if (value.length != 11) {
-              return l10n.phoneMustBeElevenDigits;
-            }
-          } else if (value.startsWith('1')) {
-            if (value.length != 10) {
-              return l10n.phoneMustBeTenDigits;
-            }
-          }
-          return null;
-        },
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(11),
-        ],
+          },
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(11),
+          ],
+        ),
       ),
     );
   }
