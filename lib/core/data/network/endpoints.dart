@@ -121,6 +121,7 @@ class Endpoints {
   static const getCheckoutData = "wallet";
   static const getVoucher = "vouchers/list";
   static const checkVoucher = "vouchers/validate";
+  static const convertVoucher = "vouchers/convert";
   static const convertPoints = "loyalty/convert-points";
   static const addNewCard = "wallet/cards";
   static const ordersCheckout = "orders/checkout";
@@ -129,6 +130,8 @@ class Endpoints {
   static const wallet = "wallet";
   static const walletTransactions = "wallet/transactions";
   static const addBalance = "wallet/add-balance";
+
+  static String voucherStores(int amount) => "vouchers/stores/$amount";
 
   /// ** Loyalty Program
   static const loyaltyProgram = "loyalty/program";

@@ -327,7 +327,7 @@
   "walletConvertPointsToMoney": "حوّل النقاط إلى نقود",
   "walletConvertLoyaltyPoints": "حوّل نقاط الولاء",
   "walletConvertPointsToVoucher": "حوّل النقاط إلى قسيمة",
-  "walletVoucherOffer": "{discount} جنيه خصم مقابل\\n{points} {pointsLabel}",
+  "walletVoucherOffer": "{discount} جنيه خصم مقابل {points} {pointsLabel}",
   "@walletVoucherOffer": {
     "placeholders": {
       "discount": {
@@ -692,5 +692,8 @@
                     "viewWallet":"عرض المحفظة",
                       "needToAddReviewFirst": "يجب عليك إضافة تقييم أولاً",
                       "faqSatisfactionQuestion": "ما مدى رضاك عن إجابات الأسئلة الشائعة؟\nهل كانت مفيدة؟",
-  "vendors": "المورّدون"
+  "vendors": "المورّدون",
+  "selected": "المحدد",
+  "remaining": "المتبقي",
+  "available": "المتاح"
                     }

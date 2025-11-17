@@ -80,6 +80,7 @@ import 'package:gazzer/features/wallet/data/wallet_repo_impl.dart';
 import 'package:gazzer/features/wallet/domain/wallet_repo.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/add_balance_cubit.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/convert_points_cubit.dart';
+import 'package:gazzer/features/wallet/presentation/cubit/voucher_vendors_cubit.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/wallet_cubit.dart';
 import 'package:gazzer/features/wallet/presentation/cubit/wallet_transactions_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -227,6 +228,7 @@ void _registerCubits() {
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));
   di.registerFactory(() => ConvertPointsCubit(di.get()));
+  di.registerFactory(() => VoucherVendorsCubit(di.get()));
   di.registerFactory(() => AddBalanceCubit(di.get()));
   di.registerFactory(() => WalletTransactionsCubit(di.get()));
 }

@@ -29,12 +29,14 @@ class WalletDataDto {
     required this.loyaltyPoints,
     required this.paymentCards,
     required this.recentTransactions,
+    required this.availableVoucherAmounts,
   });
 
   final WalletInfoDto? wallet;
   final LoyaltyPointsDto? loyaltyPoints;
   final List<PaymentCardDto> paymentCards;
   final List<TransactionDto> recentTransactions;
+  final List<VoucherAmountDto> availableVoucherAmounts;
 
   factory WalletDataDto.fromJson(Map<String, dynamic> json) {
     return WalletDataDto(
@@ -43,6 +45,9 @@ class WalletDataDto {
       paymentCards: (json['payment_cards'] as List<dynamic>?)?.map((e) => PaymentCardDto.fromJson(e as Map<String, dynamic>)).toList() ?? const [],
       recentTransactions:
           (json['recent_transactions'] as List<dynamic>?)?.map((e) => TransactionDto.fromJson(e as Map<String, dynamic>)).toList() ?? const [],
+      availableVoucherAmounts:
+          (json['available_voucher_amounts'] as List<dynamic>?)?.map((e) => VoucherAmountDto.fromJson(e as Map<String, dynamic>)).toList() ??
+          const [],
     );
   }
 
@@ -51,6 +56,7 @@ class WalletDataDto {
     loyaltyPoints: loyaltyPoints?.toEntity(),
     paymentCards: paymentCards.map((e) => e.toEntity()).toList(),
     recentTransactions: recentTransactions.map((e) => e.toEntity()).toList(),
+    availableVoucherAmounts: availableVoucherAmounts.map((e) => e.toEntity()).toList(),
   );
 }
 
@@ -233,5 +239,31 @@ class TransactionDto {
     source: source,
     note: note,
     createdAt: DateTime.tryParse(createdAt) ?? DateTime.now(),
+  );
+}
+
+class VoucherAmountDto {
+  VoucherAmountDto({
+    required this.amount,
+    required this.pointsNeeded,
+    required this.validUntil,
+  });
+
+  final int amount;
+  final int pointsNeeded;
+  final String validUntil;
+
+  factory VoucherAmountDto.fromJson(Map<String, dynamic> json) {
+    return VoucherAmountDto(
+      amount: json['amount'] as int? ?? 0,
+      pointsNeeded: json['points_needed'] as int? ?? 0,
+      validUntil: json['valid_until'] as String? ?? '',
+    );
+  }
+
+  VoucherAmountEntity toEntity() => VoucherAmountEntity(
+    amount: amount,
+    pointsNeeded: pointsNeeded,
+    validUntil: validUntil,
   );
 }

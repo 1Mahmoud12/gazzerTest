@@ -45,7 +45,7 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
               if (isPercent) {
                 voucherDeduction = baseTotal * (voucherCubit.selectedDiscountAmount! / 100.0);
                 voucherFormatted =
-                    '- ${voucherCubit.selectedDiscountAmount!.toStringAsFixed(0)}% (${baseTotal * (voucherCubit.selectedDiscountAmount! / 100.0)}${L10n.tr().egp})';
+                    '- ${voucherCubit.selectedDiscountAmount!.toStringAsFixed(0)}% (${(baseTotal * (voucherCubit.selectedDiscountAmount! / 100.0)).toStringAsFixed(2)}${L10n.tr().egp})';
               } else {
                 voucherDeduction = voucherCubit.selectedDiscountAmount!;
                 voucherFormatted = '- ${Helpers.getProperPrice(voucherCubit.selectedDiscountAmount!)}';

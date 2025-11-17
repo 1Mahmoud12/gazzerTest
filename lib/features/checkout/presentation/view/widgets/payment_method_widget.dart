@@ -14,6 +14,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.da
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_alert_widget.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentMethodWidget extends StatelessWidget {
   const PaymentMethodWidget({super.key});
@@ -142,19 +144,20 @@ class PaymentMethodWidget extends StatelessWidget {
                         }
                         if (cubit.remainingPaymentMethod == PaymentMethod.wallet) {
                           String providerName = '';
-                          await _showWalletNumberSheet(
-                            context,
-                          );
+                          // await _showWalletNumberSheet(
+                          //   context,
+                          // );
 
                           if (context.mounted) {
                             final number = await _showWalletNumberSheet(
                               context,
                             );
                             if (number != null && number.isNotEmpty) {
+                              cubit.setRemainingPaymentMethod(PaymentMethod.wallet);
                               cubit.selectPaymentMethod(PaymentMethod.gazzerWallet, removeRemainingMethod: false);
 
                               cubit.setWalletInfo(
-                                providerName: providerName,
+                                providerName: 'e_wallet',
                                 phoneNumber: number,
                               );
                             }
@@ -275,10 +278,14 @@ class _PaymentMethodItem extends StatelessWidget {
                         ),
                         if (method == PaymentMethod.gazzerWallet && (availablePoints ?? 0) > 0)
                           InkWell(
-                            onTap: () => _showConvertPointsSheet(
-                              context,
-                              availablePoints!,
-                            ),
+                            onTap: () async {
+                              await context.push(LoyaltyProgramHeroOneScreen.route);
+                              if (context.mounted) {
+                                animationDialogLoading();
+                                context.read<CheckoutCubit>().loadCheckoutData();
+                                closeDialog();
+                              }
+                            },
 
                             child: Row(
                               children: [
@@ -305,86 +312,6 @@ class _PaymentMethodItem extends StatelessWidget {
       ),
     );
   }
-}
-
-void _showConvertPointsSheet(BuildContext context, int availablePoints) {
-  final controller = TextEditingController(text: availablePoints.toString());
-  final formKey = GlobalKey<FormState>();
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (ctx) {
-      return Padding(
-        padding: EdgeInsets.only(
-          left: 16,
-          right: 16,
-          bottom: MediaQuery.of(ctx).viewInsets.bottom + 16,
-          top: 16,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(L10n.tr().convertPoints, style: TStyle.blackBold(16)),
-            const SizedBox(height: 8),
-            Directionality(
-              textDirection: TextDirection.ltr,
-              child: Form(
-                key: formKey,
-                child: MainTextField(
-                  controller: controller,
-                  keyboardType: TextInputType.number,
-                  hintText: L10n.tr().enterPoints,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return L10n.tr().enterPoints;
-                    }
-                    final points = int.tryParse(value);
-                    if (points == null || points <= 0) {
-                      return L10n.tr().invalidPoints;
-                    }
-                    if (points > availablePoints) {
-                      return L10n.tr().insufficientPoints;
-                    }
-                    return null;
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: MainBtn(
-                onPressed: () async {
-                  if (!formKey.currentState!.validate()) return;
-                  final text = controller.text.trim();
-                  final points = int.tryParse(text) ?? 0;
-                  if (points <= 0) {
-                    voucherAlert(title: L10n.tr().invalidPoints, context: ctx);
-                    return;
-                  }
-                  if (points > availablePoints) {
-                    voucherAlert(
-                      title: L10n.tr().insufficientPoints,
-                      context: ctx,
-                    );
-                    return;
-                  }
-                  animationDialogLoading(context);
-
-                  await context.read<CheckoutCubit>().convertPoints(points);
-                  if (ctx.mounted) closeDialog(context);
-                  if (ctx.mounted) Navigator.of(ctx).pop();
-                },
-                text: L10n.tr().convert,
-              ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
 }
 
 Future<void> _showInsufficientWalletSheet(

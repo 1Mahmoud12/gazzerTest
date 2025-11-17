@@ -4,11 +4,13 @@ import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/wallet/data/dto/add_balance_response_dto.dart';
+import 'package:gazzer/features/wallet/data/dto/voucher_store_dto.dart';
 import 'package:gazzer/features/wallet/data/dto/wallet_dto.dart';
 import 'package:gazzer/features/wallet/data/dto/wallet_transactions_dto.dart';
 import 'package:gazzer/features/wallet/data/requests/add_balance_request.dart';
 import 'package:gazzer/features/wallet/data/requests/convert_points_request.dart';
 import 'package:gazzer/features/wallet/domain/entities/add_balance_entity.dart';
+import 'package:gazzer/features/wallet/domain/entities/voucher_store_entity.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_transactions_entity.dart';
 import 'package:gazzer/features/wallet/domain/wallet_repo.dart';
@@ -178,6 +180,30 @@ class WalletRepoImpl extends WalletRepo {
           paymentStatus: dto.paymentStatus,
           iframeUrl: dto.iframeUrl,
         );
+      },
+    );
+  }
+
+  @override
+  Future<Result<List<VoucherStoreEntity>>> getVoucherStores(int amount) {
+    return super.call(
+      apiCall: () => _apiClient.get(endpoint: Endpoints.voucherStores(amount)),
+      parser: (response) {
+        final List<dynamic> data = response.data['data'] ?? [];
+        return data.map((json) => VoucherStoreDto.fromJson(json as Map<String, dynamic>).toEntity()).toList();
+      },
+    );
+  }
+
+  @override
+  Future<Result<String>> convertVoucher(String voucherCode) {
+    return super.call(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.convertVoucher,
+        requestBody: {'voucher_code': voucherCode},
+      ),
+      parser: (response) {
+        return response.data['message'] as String? ?? 'Voucher converted successfully';
       },
     );
   }

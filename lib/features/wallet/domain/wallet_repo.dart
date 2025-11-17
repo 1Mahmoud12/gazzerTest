@@ -1,6 +1,7 @@
 import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/wallet/domain/entities/add_balance_entity.dart';
+import 'package:gazzer/features/wallet/domain/entities/voucher_store_entity.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_transactions_entity.dart';
 
@@ -28,4 +29,8 @@ abstract class WalletRepo extends BaseApiRepo {
     String? phone,
     int? cardId,
   });
+
+  Future<Result<List<VoucherStoreEntity>>> getVoucherStores(int amount);
+
+  Future<Result<String>> convertVoucher(String voucherCode);
 }

@@ -823,7 +823,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String walletVoucherOffer(int discount, int points, String pointsLabel) {
-    return '$discount EGP off Using\\n$points $pointsLabel';
+    return '$discount EGP off Using $points $pointsLabel';
   }
 
   @override
@@ -1619,4 +1619,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vendors => 'Vendors';
+
+  @override
+  String get selected => 'Selected';
+
+  @override
+  String get remaining => 'Remaining';
+
+  @override
+  String get available => 'Available';
 }

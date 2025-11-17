@@ -823,7 +823,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String walletVoucherOffer(int discount, int points, String pointsLabel) {
-    return '$discount جنيه خصم مقابل\\n$points $pointsLabel';
+    return '$discount جنيه خصم مقابل $points $pointsLabel';
   }
 
   @override
@@ -1619,4 +1619,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get vendors => 'المورّدون';
+
+  @override
+  String get selected => 'المحدد';
+
+  @override
+  String get remaining => 'المتبقي';
+
+  @override
+  String get available => 'المتاح';
 }

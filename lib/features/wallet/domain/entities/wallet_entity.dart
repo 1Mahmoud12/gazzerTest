@@ -6,12 +6,14 @@ class WalletEntity {
     required this.loyaltyPoints,
     required this.paymentCards,
     required this.recentTransactions,
+    required this.availableVoucherAmounts,
   });
 
   final WalletInfoEntity? wallet;
   final WalletLoyaltyPointsEntity? loyaltyPoints;
   final List<PaymentCardEntity> paymentCards;
   final List<TransactionEntity> recentTransactions;
+  final List<VoucherAmountEntity> availableVoucherAmounts;
 }
 
 class WalletInfoEntity {
@@ -96,4 +98,16 @@ class TransactionEntity {
   final String? note;
   final DateTime createdAt;
   final Map<String, dynamic>? metadata;
+}
+
+class VoucherAmountEntity {
+  const VoucherAmountEntity({
+    required this.amount,
+    required this.pointsNeeded,
+    required this.validUntil,
+  });
+
+  final int amount;
+  final int pointsNeeded;
+  final String validUntil;
 }

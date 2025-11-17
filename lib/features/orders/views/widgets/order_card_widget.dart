@@ -47,7 +47,11 @@ class OrderCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: VendorWidget(vendors: order.vendors, selectedVendorId: order.primaryVendor.id, orderId: '1246327'),
+                      child: VendorWidget(
+                        vendors: order.vendors,
+                        selectedVendorId: order.primaryVendor.id,
+                        orderId: order.orderId,
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,

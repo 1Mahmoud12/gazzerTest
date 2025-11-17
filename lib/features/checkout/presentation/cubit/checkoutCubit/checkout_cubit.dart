@@ -203,6 +203,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
           return 'pay_by_card';
         case PaymentMethod.wallet:
           final providerName = getWalletProviderName();
+
           if (providerName != null && providerName.isNotEmpty) {
             return providerName; // Returns vodafone_cash, etisalat_cash, or orange_cash
           }
@@ -219,6 +220,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     }
 
     // Add secondary payment method if needed (max 2 methods total)
+    logger.d(_remainingPaymentMethod);
     if (methods.length < 2) {
       final effectiveSecondary = _remainingPaymentMethod;
       if (effectiveSecondary != null) {
@@ -241,7 +243,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     final rootContext = AppNavigator.mainKey.currentContext;
     animationDialogLoading(rootContext);
     final res = await _checkoutRepo.submitCheckout(params: params);
-    closeDialog(rootContext);
+    closeDialog();
     switch (res) {
       case Ok<CheckoutResponseDTO>(:final value):
         // If iframe URL is provided, navigate to payment screen

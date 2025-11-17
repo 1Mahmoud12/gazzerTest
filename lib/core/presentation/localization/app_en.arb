@@ -323,7 +323,7 @@
   "walletConvertPointsToMoney": "Convert Points to Money",
   "walletConvertLoyaltyPoints": "Convert Loyalty Points",
   "walletConvertPointsToVoucher": "Convert Points to Voucher",
-  "walletVoucherOffer": "{discount} EGP off Using\\n{points} {pointsLabel}",
+  "walletVoucherOffer": "{discount} EGP off Using {points} {pointsLabel}",
   "@walletVoucherOffer": {
     "placeholders": {
       "discount": {
@@ -690,7 +690,10 @@
                            },
     "viewWallet":"View Wallet",
     "needToAddReviewFirst": "You need to add a review first",
-      "faqSatisfactionQuestion": "How satisfied are you with the FAQ answers?\nWas that helpful?",
-        "vendors": "Vendors"
+    "faqSatisfactionQuestion": "How satisfied are you with the FAQ answers?\nWas that helpful?",
+    "vendors": "Vendors",
+    "selected": "Selected",
+    "remaining": "Remaining",
+    "available": "Available"
 
 }

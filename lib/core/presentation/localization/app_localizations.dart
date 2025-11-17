@@ -1697,7 +1697,7 @@ abstract class AppLocalizations {
   /// No description provided for @walletVoucherOffer.
   ///
   /// In en, this message translates to:
-  /// **'{discount} EGP off Using\\n{points} {pointsLabel}'**
+  /// **'{discount} EGP off Using {points} {pointsLabel}'**
   String walletVoucherOffer(int discount, int points, String pointsLabel);
 
   /// No description provided for @walletValidUntil.
@@ -3247,6 +3247,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vendors'**
   String get vendors;
+
+  /// No description provided for @selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected'**
+  String get selected;
+
+  /// No description provided for @remaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get remaining;
+
+  /// No description provided for @available.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get available;
 }
 
 class _AppLocalizationsDelegate

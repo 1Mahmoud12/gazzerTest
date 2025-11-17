@@ -57,7 +57,9 @@ class _WalletScreenState extends State<WalletScreen> {
                         loyaltyPoints: state is WalletLoaded ? state.data.loyaltyPoints : null,
                       ),
                       const VerticalSpacing(24),
-                      const ConvertPointsToVoucherWidget(),
+                      ConvertPointsToVoucherWidget(
+                        availablePoints: state is WalletLoaded ? (state.data.loyaltyPoints?.availablePoints ?? 0).toDouble() : 0,
+                      ),
                       const VerticalSpacing(24),
                       WalletHistoryWidget(
                         transactions: state is WalletLoaded ? state.data.recentTransactions : const [],
