@@ -3241,6 +3241,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'How satisfied are you with the FAQ answers?\nWas that helpful?'**
   String get faqSatisfactionQuestion;
+
+  /// No description provided for @vendors.
+  ///
+  /// In en, this message translates to:
+  /// **'Vendors'**
+  String get vendors;
 }
 
 class _AppLocalizationsDelegate

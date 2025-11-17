@@ -10,6 +10,10 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
+import 'package:gazzer/features/orders/domain/entities/order_item_entity.dart';
+import 'package:gazzer/features/orders/domain/entities/order_status.dart';
+import 'package:gazzer/features/orders/domain/entities/order_vendor_entity.dart';
+import 'package:gazzer/features/orders/views/widgets/order_card_widget.dart';
 
 part 'widgets/history_orders_widget.dart';
 part 'widgets/recent_orders.dart';
@@ -47,7 +51,12 @@ class _OrdersScreenState extends State<OrdersScreen> {
       onPopInvokedWithResult: (didPop, result) {
         exitApp++;
         //Utils.showToast(title: 'swipe twice to exit', state: UtilState.success);
-        Alerts.showToast(L10n.tr().swipeTwiceToExit, error: false, isInfo: true, toastGravity: ToastGravity.CENTER);
+        Alerts.showToast(
+          L10n.tr().swipeTwiceToExit,
+          error: false,
+          isInfo: true,
+          toastGravity: ToastGravity.CENTER,
+        );
         Future.delayed(const Duration(seconds: 5), () {
           exitApp = 0;
           setState(() {});
@@ -57,13 +66,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
         }
       },
       child: Scaffold(
-        appBar: const MainAppBar(showCart: false),
-        body: Center(
-          child: Text(
-            L10n.tr().noData,
-            style: TStyle.primaryBold(16),
-          ),
+        appBar: MainAppBar(
+          showCart: false,
+          title: L10n.tr().orders,
         ),
+        body: _buildOrdersList(),
         //  Padding(
         //   padding: const EdgeInsets.symmetric(horizontal: 24),
         //   child: Column(
@@ -84,6 +91,99 @@ class _OrdersScreenState extends State<OrdersScreen> {
         //   ),
         // ),
       ),
+    );
+  }
+
+  Widget _buildOrdersList() {
+    // Sample data - replace with actual data from backend
+    final sampleOrders = [
+      OrderItemEntity(
+        orderId: '123456',
+        vendors: [
+          OrderVendorEntity(
+            id: 1,
+            name: 'HEARTATTACK',
+            logo: null,
+          ),
+          OrderVendorEntity(
+            id: 1,
+            name: 'HEARTATTACK',
+            logo: null,
+          ),
+          OrderVendorEntity(
+            id: 1,
+            name: 'HEARTATTACK',
+            logo: null,
+          ),
+        ],
+        price: 234,
+        itemsCount: 20,
+        orderDate: DateTime.now(),
+        status: OrderStatus.delivered,
+        rating: 5.0,
+        canRate: false,
+      ),
+      OrderItemEntity(
+        orderId: '123457',
+        vendors: [
+          OrderVendorEntity(
+            id: 2,
+            name: 'HEARTATTACK',
+            logo: null,
+          ),
+        ],
+        price: 234,
+        itemsCount: 20,
+        orderDate: DateTime.now(),
+        status: OrderStatus.delivered,
+        canRate: true,
+      ),
+      OrderItemEntity(
+        orderId: '123458',
+        vendors: [
+          OrderVendorEntity(
+            id: 3,
+            name: 'HEARTATTACK',
+            logo: null,
+          ),
+        ],
+        price: 234,
+        itemsCount: 20,
+        orderDate: DateTime.now(),
+        status: OrderStatus.cancelled,
+      ),
+    ];
+
+    if (sampleOrders.isEmpty) {
+      return Center(
+        child: Text(
+          L10n.tr().noData,
+          style: TStyle.primaryBold(16),
+        ),
+      );
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: sampleOrders.length,
+      itemBuilder: (context, index) {
+        final order = sampleOrders[index];
+        return OrderCardWidget(
+          order: order,
+          onReorder: () {
+            // Handle reorder
+          },
+          onViewDetails: () {
+            // Handle view details
+          },
+          onRatingChanged: (rating) {
+            // Handle rating submission
+            setState(() {
+              // Update order rating
+            });
+          },
+        );
+      },
     );
   }
 }
