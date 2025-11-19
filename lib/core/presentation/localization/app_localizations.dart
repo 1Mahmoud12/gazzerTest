@@ -3277,6 +3277,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'and'**
   String get and;
+
+  /// No description provided for @viewReceipt.
+  ///
+  /// In en, this message translates to:
+  /// **'View Receipt'**
+  String get viewReceipt;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @getHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Help'**
+  String get getHelp;
+
+  /// No description provided for @makeAdditonMoreThan10Pounds.
+  ///
+  /// In en, this message translates to:
+  /// **'The added amount must be more than 10 pounds'**
+  String get makeAdditonMoreThan10Pounds;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
 }
 
 class _AppLocalizationsDelegate

@@ -1634,4 +1634,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get and => 'and';
+
+  @override
+  String get viewReceipt => 'View Receipt';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get getHelp => 'Get Help';
+
+  @override
+  String get makeAdditonMoreThan10Pounds => 'The added amount must be more than 10 pounds';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get price => 'Price';
 }

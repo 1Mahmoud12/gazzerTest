@@ -126,6 +126,9 @@ class Endpoints {
   static const addNewCard = "wallet/cards";
   static const ordersCheckout = "orders/checkout";
 
+  /// ** Orders
+  static const clientOrders = "orders/client-orders";
+
   /// ** Wallet
   static const wallet = "wallet";
   static const walletTransactions = "wallet/transactions";

@@ -51,6 +51,9 @@ import 'package:gazzer/features/home/top_vendors/presentation/cubit/top_vendors_
 import 'package:gazzer/features/loyaltyProgram/data/loyalty_program_repo_impl.dart';
 import 'package:gazzer/features/loyaltyProgram/domain/loyalty_program_repo.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/cubit/loyalty_program_cubit.dart';
+import 'package:gazzer/features/orders/data/orders_repo_impl.dart';
+import 'package:gazzer/features/orders/domain/orders_repo.dart';
+import 'package:gazzer/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:gazzer/features/profile/data/profile_repo_imp.dart';
 import 'package:gazzer/features/profile/domain/profile_repo.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
@@ -170,6 +173,9 @@ void _registerRepos() {
   di.registerLazySingleton<WalletRepo>(
     () => WalletRepoImpl(di.get(), di.get()),
   );
+  di.registerLazySingleton<OrdersRepo>(
+    () => OrdersRepoImpl(di.get(), di.get()),
+  );
 }
 
 void _registerBuses() {
@@ -231,4 +237,5 @@ void _registerCubits() {
   di.registerFactory(() => VoucherVendorsCubit(di.get()));
   di.registerFactory(() => AddBalanceCubit(di.get()));
   di.registerFactory(() => WalletTransactionsCubit(di.get()));
+  di.registerFactory(() => OrdersCubit(di.get()));
 }

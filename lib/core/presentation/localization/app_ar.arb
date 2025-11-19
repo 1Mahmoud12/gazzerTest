@@ -697,5 +697,11 @@
   "selected": "المحدد",
   "remaining": "المتبقي",
   "available": "المتاح",
-  "and":"و"
+  "and":"و",
+   "viewReceipt":"عرض الفاتوره",
+      "paymentMethod":"طريقة الدفع",
+  "getHelp":"احصل علي مساعده",
+    "makeAdditonMoreThan10Pounds": "يجب أن يكون مبلغ الإضافة أكثر من 10 جنيهات",
+  "today":"اليوم","price":"السعر"
+
                     }

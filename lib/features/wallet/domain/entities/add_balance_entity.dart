@@ -13,3 +13,4 @@ class AddBalanceResponse {
     this.iframeUrl,
   });
 }
+

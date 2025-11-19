@@ -79,13 +79,13 @@ class _MainBtnState extends State<MainBtn> {
                     color: widget.borderColor!,
                     width: widget.borderThickness,
                   ),
-            color: widget.bgColor,
+            color: widget.bgColor ?? Co.purple,
             borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
-            gradient: widget.bgColor != null
-                ? null
-                : value
-                ? Grad().hoverGradient
-                : Grad().radialGradient,
+            // gradient: widget.bgColor != null
+            //     ? null
+            //     : value
+            //     ? Grad().hoverGradient
+            //     : Grad().radialGradient,
             boxShadow: [
               if (value) const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0)),
             ],
@@ -93,7 +93,7 @@ class _MainBtnState extends State<MainBtn> {
           child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
-              gradient: widget.bgColor != null || value ? null : Grad().linearGradient,
+              //gradient: widget.bgColor != null || value ? null : Grad().linearGradient,
             ),
             child: child!,
           ),

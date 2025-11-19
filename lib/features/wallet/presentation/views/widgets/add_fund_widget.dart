@@ -151,10 +151,22 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                             ),
                             style: TStyle.blackMedium(16, font: FFamily.roboto),
                             hintText: L10n.tr().walletEnterAmount,
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return L10n.tr().walletEnterAmount;
+                              }
+                              if (value.length < 2) {
+                                return L10n.tr().makeAdditonMoreThan10Pounds;
+                              }
+                              return null;
+                            },
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
                                 RegExp(r'^\d*\.?\d{0,2}$'),
                               ),
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(6),
                             ],
                           ),
                         ),

@@ -13,7 +13,7 @@ class _HistoryOrdersWidget extends StatelessWidget {
           child: ListView.separated(
             itemCount: 5,
             padding: AppConst.defaultPadding,
-            separatorBuilder: (context, index) => Divider(color: Co.secondary, height: 25),
+            separatorBuilder: (context, index) => const Divider(color: Co.secondary, height: 25),
             itemBuilder: (context, index) {
               final prod = Fakers.plates[index];
               return Row(

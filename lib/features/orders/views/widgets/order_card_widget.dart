@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -29,131 +30,138 @@ class OrderCardWidget extends StatelessWidget {
     final isToday =
         order.orderDate.day == DateTime.now().day && order.orderDate.month == DateTime.now().month && order.orderDate.year == DateTime.now().year;
 
-    return Container(
-      margin: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Co.bg,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Co.lightGrey.withOpacityNew(0.3)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: VendorWidget(
-                        vendors: order.vendors,
-                        selectedVendorId: order.primaryVendor.id,
-                        orderId: order.orderId,
+    return InkWell(
+      onTap: () {
+        onViewDetails?.call();
+      },
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      child: Container(
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Co.bg,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Co.lightGrey.withOpacityNew(0.3)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: VendorWidget(
+                          vendors: order.vendors,
+                          selectedVendorId: order.primaryVendor.id,
+                          orderId: order.orderId,
+                        ),
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: order.status.badgeColor,
-                            borderRadius: BorderRadius.circular(20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: order.status.badgeColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              order.status.label,
+                              style: TStyle.blackBold(12).copyWith(
+                                color: _getStatusTextColor(order.status),
+                              ),
+                            ),
                           ),
+                          const VerticalSpacing(6),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              isToday ? '${L10n.tr().today} ${dateFormat.format(order.orderDate)}' : dateFormat.format(order.orderDate),
+                              style: TStyle.blackRegular(12),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  const VerticalSpacing(12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              L10n.tr().price,
+                              style: TStyle.robotBlackRegular(),
+                            ),
+                            Text(
+                              Helpers.getProperPrice(order.price),
+                              style: TStyle.robotBlackMedium(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              L10n.tr().items,
+                              style: TStyle.robotBlackRegular(),
+                            ),
+                            Text(
+                              '${order.itemsCount}',
+                              style: TStyle.robotBlackMedium(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: MainBtn(
+                          bgColor: Colors.transparent,
+                          borderColor: Colors.transparent,
+                          onPressed: () {},
                           child: Text(
-                            order.status.label,
-                            style: TStyle.blackBold(12).copyWith(
-                              color: _getStatusTextColor(order.status),
+                            'View Details',
+                            style: TStyle.primaryBold(12).copyWith(
+                              decoration: TextDecoration.underline,
+                              color: Co.purple,
                             ),
                           ),
                         ),
-                        const VerticalSpacing(4),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            isToday ? 'Today ${dateFormat.format(order.orderDate)}' : dateFormat.format(order.orderDate),
-                            style: TStyle.blackRegular(12),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-
-                const VerticalSpacing(12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            'price',
-                            style: TStyle.robotBlackRegular(),
-                          ),
-                          Text(
-                            Helpers.getProperPrice(order.price),
-                            style: TStyle.robotBlackMedium(),
-                          ),
-                        ],
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Items',
-                            style: TStyle.robotBlackRegular(),
-                          ),
-                          Text(
-                            '${order.itemsCount}',
-                            style: TStyle.robotBlackMedium(),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: MainBtn(
-                        bgColor: Colors.transparent,
-                        borderColor: Colors.transparent,
-                        onPressed: () {},
-                        child: Text(
-                          'View Details',
-                          style: TStyle.primaryBold(12).copyWith(
-                            decoration: TextDecoration.underline,
-                            color: Co.purple,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const VerticalSpacing(12),
-                if (order.status == OrderStatus.delivered)
-                  SizedBox(
-                    width: double.infinity,
-                    child: MainBtn(
-                      onPressed: onReorder ?? () {},
-                      text: 'Reorder',
-                      bgColor: Co.purple,
-                      radius: 30,
-                      textStyle: TStyle.whiteBold(14),
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                    ),
+                    ],
                   ),
-              ],
+                  const VerticalSpacing(12),
+                  if (order.status == OrderStatus.delivered)
+                    SizedBox(
+                      width: double.infinity,
+                      child: MainBtn(
+                        onPressed: onReorder ?? () {},
+                        text: 'Reorder',
+                        bgColor: Co.purple,
+                        radius: 30,
+                        textStyle: TStyle.whiteBold(14),
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-          if (order.status == OrderStatus.delivered) ...[
-            const VerticalSpacing(12),
-            if (order.rating != null)
-              _RatingDisplay(rating: order.rating!)
-            else if (order.canRate)
-              _RatingInput(onRatingChanged: onRatingChanged ?? (_) {}),
+            if (order.status == OrderStatus.delivered) ...[
+              const VerticalSpacing(12),
+              if (order.rating != null)
+                _RatingDisplay(rating: order.rating!)
+              else if (order.canRate)
+                _RatingInput(onRatingChanged: onRatingChanged ?? (_) {}),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

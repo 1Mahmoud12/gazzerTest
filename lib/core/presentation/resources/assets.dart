@@ -294,4 +294,9 @@ class Assets {
   static const String convertPointsIc = "assets/svg/convertPointsIc.svg";
   static const String rechargeIc = "assets/svg/rechargeIc.svg";
   static const String paidIc = "assets/svg/paidIc.svg";
+
+  // Order Details
+  static const String locationIc = "assets/svg/locationIc.svg";
+  static const String cartItemIc = "assets/svg/cartItemIc.svg";
+  static const String customerSupportIc = "assets/svg/customerSupportIc.svg";
 }

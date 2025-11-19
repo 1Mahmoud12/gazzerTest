@@ -695,6 +695,13 @@
     "vendors": "Vendors",
     "selected": "Selected",
     "remaining": "Remaining",
-    "available": "Available","and":"and"
+    "available": "Available",
+    "and":"and",
+    "viewReceipt":"View Receipt",
+    "paymentMethod":"Payment Method",
+    "getHelp":"Get Help",
+  "makeAdditonMoreThan10Pounds": "The added amount must be more than 10 pounds",
+  "today":"Today","price":"Price"
+
 
 }

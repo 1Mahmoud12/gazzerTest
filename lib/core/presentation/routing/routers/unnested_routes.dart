@@ -26,6 +26,7 @@ import 'package:gazzer/features/intro/presentation/plan/views/nuttration_support
 import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen.dart';
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
+import 'package:gazzer/features/orders/views/order_details_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/support_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
@@ -99,6 +100,14 @@ final List<RouteBase> unNestedRoutes = [
     path: SupportScreen.route,
     builder: (context, state) {
       return const SupportScreen();
+    },
+  ),
+  GoRoute(
+    path: OrderDetailsScreen.route,
+    builder: (context, state) {
+      return OrderDetailsScreen(
+        orderId: state.extra as int,
+      );
     },
   ),
 ];

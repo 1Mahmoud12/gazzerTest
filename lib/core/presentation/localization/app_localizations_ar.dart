@@ -1634,4 +1634,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get and => 'و';
+
+  @override
+  String get viewReceipt => 'عرض الفاتوره';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get getHelp => 'احصل علي مساعده';
+
+  @override
+  String get makeAdditonMoreThan10Pounds => 'يجب أن يكون مبلغ الإضافة أكثر من 10 جنيهات';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get price => 'السعر';
 }
