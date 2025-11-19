@@ -1,3 +1,4 @@
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/features/orders/domain/entities/delivery_address_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_item_entity.dart';
@@ -249,13 +250,16 @@ class OrderDetailDto {
       if (summary.paymentMethod != null) {
         switch (summary.paymentMethod!.toLowerCase()) {
           case 'pay_by_card':
-            summaryPaymentMethod = 'Card';
+            summaryPaymentMethod = L10n.tr().creditCard;
             break;
           case 'pay_by_gazzer_wallet':
-            summaryPaymentMethod = 'Gazzer Wallet';
+            summaryPaymentMethod = L10n.tr().gazzarWallet;
             break;
           case 'e_wallet':
-            summaryPaymentMethod = 'E-Wallet';
+            summaryPaymentMethod = L10n.tr().walletEWallet;
+            break;
+          case 'cash_on_delivery':
+            summaryPaymentMethod = L10n.tr().cashOnDelivery;
             break;
           default:
             summaryPaymentMethod = summary.paymentMethod!;
