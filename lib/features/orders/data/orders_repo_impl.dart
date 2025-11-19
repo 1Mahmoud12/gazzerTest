@@ -114,4 +114,37 @@ class OrdersRepoImpl extends OrdersRepo {
       return null;
     }
   }
+
+  @override
+  Future<Result<String>> reorder(int orderId, {bool? continueWithExisting}) {
+    return super.call(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.reorder(orderId),
+        requestBody: continueWithExisting != null ? {'continue_with_existing': continueWithExisting} : {},
+      ),
+      parser: (response) {
+        return response.data['message'] as String? ?? 'Order reordered successfully';
+      },
+    );
+  }
+
+  @override
+  Future<Result<String>> submitOrderReview({
+    required int orderId,
+    required List<StoreReview> storeReviews,
+    required DeliveryManReview deliveryManReview,
+  }) {
+    return super.call(
+      apiCall: () => _apiClient.post(
+        endpoint: Endpoints.submitOrderReview(orderId),
+        requestBody: {
+          'store_reviews': storeReviews.map((review) => review.toJson()).toList(),
+          'delivery_man_review': deliveryManReview.toJson(),
+        },
+      ),
+      parser: (response) {
+        return response.data['message'] as String? ?? 'Review submitted successfully';
+      },
+    );
+  }
 }

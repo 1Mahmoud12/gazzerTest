@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1686,4 +1686,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewDetails => 'View Details';
+
+  @override
+  String get cartHasExistingItems => 'Cart Has Existing Items';
+
+  @override
+  String youHaveExistingItemsInCart(int count) {
+    return 'You have $count item(s) in your cart. Do you want to keep these items and add the reordered items to your cart, or would you prefer to clear your cart and add only the reordered items?';
+  }
+
+  @override
+  String get clearAndReorder => 'Clear and Reorder';
+
+  @override
+  String get keepAndReorder => 'Keep and Reorder';
+
+  @override
+  String get deliveryMan => 'Delivery Man';
 }

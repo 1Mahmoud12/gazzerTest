@@ -71,14 +71,15 @@ class OrdersListWidget extends StatelessWidget {
               }
 
               final order = orders[index];
+
               return OrderCardWidget(
                 order: order,
-                onReorder: () {
-                  // Handle reorder
-                },
                 onViewDetails: () async {
                   final orderId = int.tryParse(order.orderId) ?? 0;
-                  await context.push(OrderDetailsScreen.route, extra: orderId);
+                  await context.push(
+                    OrderDetailsScreen.route,
+                    extra: orderId,
+                  );
                   // Reload orders from current page when coming back
                   if (context.mounted) {
                     await context.read<OrdersCubit>().reloadCurrentPage();

@@ -711,21 +711,22 @@
                            }
                          }
                        },
+                       
   "promoCodeName":"اسم كود الخصم",
    "take": "استغرق",
     "orderId": "رقم الطلب",
     "orderDetails": "تفاصيل الطلب",
     "addons": "الإضافات",
-    "you_rate_stars": "لقد قيّمتنا {rating}/5 نجوم",
-      "@you_rate_stars": {
+    "cartHasExistingItems": "سلة التسوق تحتوي على عناصر",
+    "youHaveExistingItemsInCart": "لديك {count} عنصر(عناصر) في سلة التسوق الخاصة بك. هل تريد الاحتفاظ بهذه العناصر وإضافة العناصر المعاد طلبها إلى سلة التسوق، أم تفضل مسح سلة التسوق وإضافة العناصر المعاد طلبها فقط؟",
+      "@youHaveExistingItemsInCart": {
         "placeholders": {
-          "rating": {
-            "type": "double"
+          "count": {
+            "type": "int"
           }
         }
       },
-     "reOrder": "إعادة الطلب",
-       "viewDetails": "عرض التفاصيل",
-       "rateUs": "قيّمنا"
-
-                    }
+      "clearAndReorder": "مسح وإعادة الطلب",
+      "keepAndReorder": "الاحتفاظ وإعادة الطلب",
+      "deliveryMan":"عامل التوصيل"
+}

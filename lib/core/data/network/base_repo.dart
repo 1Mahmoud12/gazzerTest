@@ -70,6 +70,12 @@ abstract class BaseApiRepo {
                 e: ErrorType.badResponse,
               );
             }
+            if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['has_existing_items'] != null) {
+              return ReorderError.fromJson(
+                responseData,
+                e: ErrorType.badResponse,
+              );
+            }
             // Try to parse the backend error message for all bad responses
             return BadResponse.fromJson(
               responseData,

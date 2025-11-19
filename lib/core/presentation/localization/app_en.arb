@@ -725,5 +725,17 @@
       },
       "rateUs": "Rate Us",
      "reOrder": "Re-order",
-      "viewDetails": "View Details"
+      "viewDetails": "View Details",
+      "cartHasExistingItems": "Cart Has Existing Items",
+      "youHaveExistingItemsInCart": "You have {count} item(s) in your cart. Do you want to keep these items and add the reordered items to your cart, or would you prefer to clear your cart and add only the reordered items?",
+      "@youHaveExistingItemsInCart": {
+        "placeholders": {
+          "count": {
+            "type": "int"
+          }
+        }
+      },
+      "clearAndReorder": "Clear and Reorder",
+      "keepAndReorder": "Keep and Reorder",
+      "deliveryMan":"Delivery Man"
 }

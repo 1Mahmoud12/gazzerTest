@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1675,15 +1675,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String you_rate_stars(double rating) {
-    return 'لقد قيّمتنا $rating/5 نجوم';
+    return 'You rate $rating/5 stars';
   }
 
   @override
-  String get rateUs => 'قيّمنا';
+  String get rateUs => 'Rate Us';
 
   @override
-  String get reOrder => 'إعادة الطلب';
+  String get reOrder => 'Re-order';
 
   @override
-  String get viewDetails => 'عرض التفاصيل';
+  String get viewDetails => 'View Details';
+
+  @override
+  String get cartHasExistingItems => 'سلة التسوق تحتوي على عناصر';
+
+  @override
+  String youHaveExistingItemsInCart(int count) {
+    return 'لديك $count عنصر(عناصر) في سلة التسوق الخاصة بك. هل تريد الاحتفاظ بهذه العناصر وإضافة العناصر المعاد طلبها إلى سلة التسوق، أم تفضل مسح سلة التسوق وإضافة العناصر المعاد طلبها فقط؟';
+  }
+
+  @override
+  String get clearAndReorder => 'مسح وإعادة الطلب';
+
+  @override
+  String get keepAndReorder => 'الاحتفاظ وإعادة الطلب';
+
+  @override
+  String get deliveryMan => 'عامل التوصيل';
 }

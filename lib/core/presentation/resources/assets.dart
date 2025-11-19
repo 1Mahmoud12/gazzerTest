@@ -299,4 +299,6 @@ class Assets {
   static const String locationIc = "assets/svg/locationIc.svg";
   static const String cartItemIc = "assets/svg/cartItemIc.svg";
   static const String customerSupportIc = "assets/svg/customerSupportIc.svg";
+  static const String starRateIc = "assets/svg/starRateIc.svg";
+  static const String starNotRateIc = "assets/svg/starNotRateIc.svg";
 }

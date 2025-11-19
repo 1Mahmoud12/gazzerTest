@@ -3373,6 +3373,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Details'**
   String get viewDetails;
+
+  /// No description provided for @cartHasExistingItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart Has Existing Items'**
+  String get cartHasExistingItems;
+
+  /// No description provided for @youHaveExistingItemsInCart.
+  ///
+  /// In en, this message translates to:
+  /// **'You have {count} item(s) in your cart. Do you want to keep these items and add the reordered items to your cart, or would you prefer to clear your cart and add only the reordered items?'**
+  String youHaveExistingItemsInCart(int count);
+
+  /// No description provided for @clearAndReorder.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear and Reorder'**
+  String get clearAndReorder;
+
+  /// No description provided for @keepAndReorder.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep and Reorder'**
+  String get keepAndReorder;
+
+  /// No description provided for @deliveryMan.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Man'**
+  String get deliveryMan;
 }
 
 class _AppLocalizationsDelegate

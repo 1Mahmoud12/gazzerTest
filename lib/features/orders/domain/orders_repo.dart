@@ -16,4 +16,39 @@ abstract class OrdersRepo extends BaseApiRepo {
   Future<Result<OrderDetailEntity>> getOrderDetail(int orderId);
 
   Future<OrderDetailEntity?> getCachedOrderDetail(int orderId);
+
+  Future<Result<String>> reorder(int orderId, {bool? continueWithExisting});
+
+  Future<Result<String>> submitOrderReview({
+    required int orderId,
+    required List<StoreReview> storeReviews,
+    required DeliveryManReview deliveryManReview,
+  });
+}
+
+class StoreReview {
+  final int orderStoreId;
+  final double rating;
+
+  StoreReview({
+    required this.orderStoreId,
+    required this.rating,
+  });
+
+  Map<String, dynamic> toJson() => {
+    'order_store_id': orderStoreId,
+    'rating': rating,
+    'comment': '',
+  };
+}
+
+class DeliveryManReview {
+  final double rating;
+
+  DeliveryManReview({required this.rating});
+
+  Map<String, dynamic> toJson() => {
+    'rating': rating,
+    'comment': '',
+  };
 }
