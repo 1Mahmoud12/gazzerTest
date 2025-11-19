@@ -1,5 +1,6 @@
 import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_item_entity.dart';
 
 abstract class OrdersRepo extends BaseApiRepo {
@@ -11,4 +12,8 @@ abstract class OrdersRepo extends BaseApiRepo {
   });
 
   Future<List<OrderItemEntity>?> getCachedClientOrders();
+
+  Future<Result<OrderDetailEntity>> getOrderDetail(int orderId);
+
+  Future<OrderDetailEntity?> getCachedOrderDetail(int orderId);
 }

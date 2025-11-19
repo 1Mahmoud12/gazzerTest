@@ -1,0 +1,244 @@
+import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
+
+/// Order summary section displaying pricing breakdown
+class OrderSummarySection extends StatelessWidget {
+  const OrderSummarySection({super.key, required this.orderDetail});
+
+  final OrderDetailEntity orderDetail;
+
+  static const double _padding = 16.0;
+  static const double _borderRadius = 12.0;
+  static const double _itemSpacing = 8.0;
+  static const double _finalSpacing = 12.0;
+
+  @override
+  Widget build(BuildContext context) {
+    final finalTotal = _calculateFinalTotal();
+    final voucherFormatted = _getVoucherFormatted();
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              L10n.tr().orderSummary,
+              style: TStyle.robotBlackTitle(),
+            ),
+            Text(
+              L10n.tr().viewReceipt,
+              style: TStyle.robotBlackRegular().copyWith(
+                color: Co.purple,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ],
+        ),
+        const VerticalSpacing(10),
+        Container(
+          padding: const EdgeInsets.all(_padding),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(_borderRadius),
+            color: Co.purple100,
+          ),
+          child: Column(
+            children: [
+              if (orderDetail.subTotal != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().grossAmount,
+                  value: orderDetail.subTotal,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              if (orderDetail.discount != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().promoCodeName,
+                  value: orderDetail.voucherCode,
+                  isDiscount: true,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              if (orderDetail.discount != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().discount,
+                  value: orderDetail.discount,
+                  isDiscount: true,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              if (orderDetail.deliveryFee != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().deliveryFee,
+                  value: orderDetail.deliveryFee,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              if (orderDetail.serviceFee != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().serviceFee,
+                  value: orderDetail.serviceFee,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              if (voucherFormatted != null) ...[
+                ...[
+                  OrderSummaryItem(
+                    title: L10n.tr().totalBeforeCode,
+                    value: orderDetail.total,
+                  ),
+                  const SizedBox(height: _itemSpacing),
+                ],
+                ...[
+                  OrderSummaryItem(
+                    title: L10n.tr().promoCode,
+                    value: orderDetail.voucherDiscountAmount ?? 0.0,
+                    isDiscount: true,
+                    formattedValue: voucherFormatted,
+                  ),
+                  const SizedBox(height: _itemSpacing),
+                ],
+              ],
+              const DashedBorder(
+                width: 10,
+                gap: 8,
+                color: Co.gryPrimary,
+                thickness: 1.5,
+              ),
+              const VerticalSpacing(_finalSpacing),
+              FinalTotalRow(total: finalTotal),
+              OrderSummaryItem(
+                title: L10n.tr().paymentMethod,
+                value: orderDetail.paymentMethod,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  double _calculateFinalTotal() {
+    final baseTotal = orderDetail.total;
+    final voucherDeduction = _getVoucherDeduction();
+    return (baseTotal - voucherDeduction).clamp(0.0, double.infinity);
+  }
+
+  double _getVoucherDeduction() {
+    if (orderDetail.voucherCode == null ||
+        orderDetail.voucherDiscountType == null ||
+        orderDetail.voucherDiscountAmount == null ||
+        orderDetail.voucherDiscountAmount! <= 0) {
+      return 0.0;
+    }
+
+    final isPercent = orderDetail.voucherDiscountType!.toLowerCase().contains(
+      'percent',
+    );
+    if (isPercent) {
+      return orderDetail.total * (orderDetail.voucherDiscountAmount! / 100.0);
+    } else {
+      return orderDetail.voucherDiscountAmount!;
+    }
+  }
+
+  String? _getVoucherFormatted() {
+    if (orderDetail.voucherCode == null ||
+        orderDetail.voucherDiscountType == null ||
+        orderDetail.voucherDiscountAmount == null ||
+        orderDetail.voucherDiscountAmount! <= 0) {
+      return null;
+    }
+
+    final isPercent = orderDetail.voucherDiscountType!.toLowerCase().contains(
+      'percent',
+    );
+    if (isPercent) {
+      final deduction = orderDetail.total * (orderDetail.voucherDiscountAmount! / 100.0);
+      return '- ${orderDetail.voucherDiscountAmount!.toStringAsFixed(0)}% (${deduction.toStringAsFixed(2)}${L10n.tr().egp})';
+    } else {
+      return '- ${Helpers.getProperPrice(orderDetail.voucherDiscountAmount!)}';
+    }
+  }
+}
+
+class OrderSummaryItem extends StatelessWidget {
+  const OrderSummaryItem({
+    super.key,
+    required this.title,
+    required this.value,
+    this.isDiscount = false,
+    this.formattedValue,
+  });
+
+  final String title;
+  final dynamic value;
+  final bool isDiscount;
+  final String? formattedValue;
+
+  @override
+  Widget build(BuildContext context) {
+    final valueText = value is String ? value : formattedValue ?? '${isDiscount && value != 0 ? '-' : ''} ${Helpers.getProperPrice(value)}';
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TStyle.blackSemi(16, font: FFamily.roboto),
+        ),
+        Text(
+          valueText,
+          style: TStyle.blackSemi(18, font: FFamily.roboto),
+        ),
+      ],
+    );
+  }
+}
+
+class FinalTotalRow extends StatelessWidget {
+  const FinalTotalRow({super.key, required this.total});
+
+  final double total;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Flexible(
+                child: Text(
+                  L10n.tr().total,
+                  style: TStyle.blackSemi(20, font: FFamily.roboto),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+              const HorizontalSpacing(2),
+              Text(
+                ' (${L10n.tr().amountToPay}) ',
+                style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(
+                  overflow: TextOverflow.ellipsis,
+                ),
+                maxLines: 1,
+              ),
+            ],
+          ),
+        ),
+        const HorizontalSpacing(12),
+        Text(
+          Helpers.getProperPrice(total),
+          style: TStyle.burbleSemi(20, font: FFamily.roboto),
+        ),
+      ],
+    );
+  }
+}

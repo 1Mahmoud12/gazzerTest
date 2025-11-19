@@ -3313,6 +3313,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Price'**
   String get price;
+
+  /// No description provided for @youHaveEarnedPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'You have earned {points} points'**
+  String youHaveEarnedPoints(int points);
+
+  /// No description provided for @promoCodeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Promo Code Name'**
+  String get promoCodeName;
+
+  /// No description provided for @take.
+  ///
+  /// In en, this message translates to:
+  /// **'Take'**
+  String get take;
+
+  /// No description provided for @orderId.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID'**
+  String get orderId;
+
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get orderDetails;
+
+  /// No description provided for @addons.
+  ///
+  /// In en, this message translates to:
+  /// **'Add-ons'**
+  String get addons;
 }
 
 class _AppLocalizationsDelegate

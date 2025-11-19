@@ -701,7 +701,18 @@
     "paymentMethod":"Payment Method",
     "getHelp":"Get Help",
   "makeAdditonMoreThan10Pounds": "The added amount must be more than 10 pounds",
-  "today":"Today","price":"Price"
-
-
+  "today":"Today","price":"Price",
+"youHaveEarnedPoints": "You have earned {points} points",
+                       "@youHaveEarnedPoints": {
+                         "placeholders": {
+                           "points": {
+                             "type": "int"
+                           }
+                         }
+                       },
+  "promoCodeName":"Promo Code Name",
+   "take": "Take",
+    "orderId": "Order ID",
+    "orderDetails": "Order Details",
+    "addons": "Add-ons"
 }

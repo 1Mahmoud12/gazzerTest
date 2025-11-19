@@ -18,6 +18,7 @@ class OrderDetailEntity {
   final String? voucherCode;
   final String? voucherDiscountType; // 'fixed' or 'percentage'
   final double? voucherDiscountAmount;
+  final int loyaltyPointsEarned;
 
   const OrderDetailEntity({
     required this.orderId,
@@ -35,5 +36,6 @@ class OrderDetailEntity {
     this.voucherCode,
     this.voucherDiscountType,
     this.voucherDiscountAmount,
+    this.loyaltyPointsEarned = 0,
   });
 }

@@ -702,6 +702,19 @@
       "paymentMethod":"طريقة الدفع",
   "getHelp":"احصل علي مساعده",
     "makeAdditonMoreThan10Pounds": "يجب أن يكون مبلغ الإضافة أكثر من 10 جنيهات",
-  "today":"اليوم","price":"السعر"
+  "today":"اليوم","price":"السعر",
+  "youHaveEarnedPoints": " لقذ اكتسبت{points} نقطه",
+                       "@youHaveEarnedPoints": {
+                         "placeholders": {
+                           "points": {
+                             "type": "int"
+                           }
+                         }
+                       },
+  "promoCodeName":"اسم كود الخصم",
+   "take": "استغرق",
+    "orderId": "رقم الطلب",
+    "orderDetails": "تفاصيل الطلب",
+    "addons": "الإضافات"
 
                     }

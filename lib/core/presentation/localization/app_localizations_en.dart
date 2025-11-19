@@ -1652,4 +1652,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get price => 'Price';
+
+  @override
+  String youHaveEarnedPoints(int points) {
+    return 'You have earned $points points';
+  }
+
+  @override
+  String get promoCodeName => 'Promo Code Name';
+
+  @override
+  String get take => 'Take';
+
+  @override
+  String get orderId => 'Order ID';
+
+  @override
+  String get orderDetails => 'Order Details';
+
+  @override
+  String get addons => 'Add-ons';
 }

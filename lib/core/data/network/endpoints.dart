@@ -129,6 +129,8 @@ class Endpoints {
   /// ** Orders
   static const clientOrders = "orders/client-orders";
 
+  static String orderDetail(int id) => "orders/order/$id";
+
   /// ** Wallet
   static const wallet = "wallet";
   static const walletTransactions = "wallet/transactions";

@@ -1652,4 +1652,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get price => 'السعر';
+
+  @override
+  String youHaveEarnedPoints(int points) {
+    return ' لقذ اكتسبت$points نقطه';
+  }
+
+  @override
+  String get promoCodeName => 'اسم كود الخصم';
+
+  @override
+  String get take => 'استغرق';
+
+  @override
+  String get orderId => 'رقم الطلب';
+
+  @override
+  String get orderDetails => 'تفاصيل الطلب';
+
+  @override
+  String get addons => 'الإضافات';
 }
