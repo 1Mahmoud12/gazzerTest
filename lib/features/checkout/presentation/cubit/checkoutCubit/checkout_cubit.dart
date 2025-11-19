@@ -283,7 +283,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
               );
               rootContext!.read<CartCubit>().loadCart();
 
-              rootContext.go('/orders');
+              rootContext.go('/orders', extra: true);
             } else {
               logger.d('Payment webhook Failure');
 
@@ -296,9 +296,9 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
           // Payment method doesn't require iframe (e.g., cash on delivery)
           if (context.mounted) {
             Alerts.showToast(L10n.tr().order_placed_successfully, error: false);
-            logger.d('Response Failure');
+
             context.read<CartCubit>().loadCart();
-            context.go('/orders');
+            context.go('/orders', extra: true);
           }
         }
       case Err(:final error):

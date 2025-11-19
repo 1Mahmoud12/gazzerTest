@@ -3,6 +3,7 @@ import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart'
 import 'package:gazzer/features/orders/domain/entities/order_detail_item_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_vendor_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_status.dart';
+import 'package:gazzer/features/orders/domain/entities/order_summary_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_vendor_entity.dart';
 
 class OrderDetailDto {
@@ -23,6 +24,7 @@ class OrderDetailDto {
   int? loyaltyPointsEarned;
   DeliveryAddressDetailDto? deliveryAddress;
   List<StoreDetailDto>? stores;
+  OrderSummaryDto? orderSummary;
   String? createdAt;
   String? updatedAt;
 
@@ -44,6 +46,7 @@ class OrderDetailDto {
     this.loyaltyPointsEarned,
     this.deliveryAddress,
     this.stores,
+    this.orderSummary,
     this.createdAt,
     this.updatedAt,
   });
@@ -69,6 +72,7 @@ class OrderDetailDto {
       loyaltyPointsEarned: json['loyalty_points_earned'] as int?,
       deliveryAddress: json['delivery_address'] != null ? DeliveryAddressDetailDto.fromJson(json['delivery_address'] as Map<String, dynamic>) : null,
       stores: json['stores'] != null ? (json['stores'] as List).map((e) => StoreDetailDto.fromJson(e as Map<String, dynamic>)).toList() : null,
+      orderSummary: json['order_summary'] != null ? OrderSummaryDto.fromJson(json['order_summary'] as Map<String, dynamic>) : null,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
     );
@@ -236,6 +240,43 @@ class OrderDetailDto {
             mobileNumber: '',
           );
 
+    // Map order summary
+    OrderSummaryEntity? orderSummaryEntity;
+    final summary = orderSummary;
+    if (summary != null) {
+      // Get payment method from orderSummary if available, otherwise use parsed paymentMethod
+      String summaryPaymentMethod = paymentMethod;
+      if (summary.paymentMethod != null) {
+        switch (summary.paymentMethod!.toLowerCase()) {
+          case 'pay_by_card':
+            summaryPaymentMethod = 'Card';
+            break;
+          case 'pay_by_gazzer_wallet':
+            summaryPaymentMethod = 'Gazzer Wallet';
+            break;
+          case 'e_wallet':
+            summaryPaymentMethod = 'E-Wallet';
+            break;
+          default:
+            summaryPaymentMethod = summary.paymentMethod!;
+        }
+      }
+
+      orderSummaryEntity = OrderSummaryEntity(
+        subTotal: summary.subTotal ?? 0.0,
+        itemDiscount: summary.itemDiscount ?? 0.0,
+        vatAmount: summary.vatAmount ?? 0.0,
+        serviceFees: summary.serviceFees ?? 0.0,
+        coupon: summary.coupon ?? '',
+        couponDiscount: summary.couponDiscount ?? 0.0,
+        deliveryFees: summary.deliveryFees ?? 0.0,
+        deliveryFeesDiscount: summary.deliveryFeesDiscount ?? 0.0,
+        totalPaidAmount: summary.totalPaidAmount ?? 0.0,
+        paymentMethod: summaryPaymentMethod,
+        pointsEarned: summary.pointsEarned ?? 0,
+      );
+    }
+
     return OrderDetailEntity(
       orderId: id ?? 0,
       orderDate: orderDate,
@@ -253,6 +294,7 @@ class OrderDetailDto {
       voucherDiscountType: voucherDiscountType,
       voucherDiscountAmount: voucherDiscountAmount,
       loyaltyPointsEarned: loyaltyPointsEarned ?? 0,
+      orderSummary: orderSummaryEntity,
     );
   }
 }
@@ -438,6 +480,70 @@ class OrderItemDetailDto {
       quantity: json['quantity'] as int?,
       price: json['price']?.toString(),
       orderable: json['orderable'] as Map<String, dynamic>?,
+    );
+  }
+}
+
+class OrderSummaryDto {
+  double? subTotal;
+  double? itemDiscount;
+  double? vatAmount;
+  double? serviceFees;
+  String? coupon;
+  double? couponDiscount;
+  double? deliveryFees;
+  double? deliveryFeesDiscount;
+  double? totalPaidAmount;
+  String? paymentMethod;
+  int? pointsEarned;
+
+  OrderSummaryDto({
+    this.subTotal,
+    this.itemDiscount,
+    this.vatAmount,
+    this.serviceFees,
+    this.coupon,
+    this.couponDiscount,
+    this.deliveryFees,
+    this.deliveryFeesDiscount,
+    this.totalPaidAmount,
+    this.paymentMethod,
+    this.pointsEarned,
+  });
+
+  factory OrderSummaryDto.fromJson(Map<String, dynamic> json) {
+    return OrderSummaryDto(
+      subTotal: (json['sub_total'] as num?)?.toDouble(),
+      itemDiscount: (json['item_discount'] as num?)?.toDouble(),
+      vatAmount: (json['vat_amount'] as num?)?.toDouble(),
+      serviceFees: (json['service_fees'] as num?)?.toDouble(),
+      coupon: json['coupon'],
+      couponDiscount: (json['coupon_discount'] as num?)?.toDouble(),
+      deliveryFees: (json['delivery_fees'] as num?)?.toDouble(),
+      deliveryFeesDiscount: (json['delivery_fees_discount'] as num?)?.toDouble(),
+      totalPaidAmount: (json['total_paid_amount'] as num?)?.toDouble(),
+      paymentMethod: json['payment_method'] as String?,
+      pointsEarned: json['points_earned'] as int?,
+    );
+  }
+}
+
+class CouponDto {
+  String? code;
+  String? discountType;
+  double? discountValue;
+
+  CouponDto({
+    this.code,
+    this.discountType,
+    this.discountValue,
+  });
+
+  factory CouponDto.fromJson(Map<String, dynamic> json) {
+    return CouponDto(
+      code: json['code'] as String?,
+      discountType: json['discount_type'] as String?,
+      discountValue: (json['discount_value'] as num?)?.toDouble(),
     );
   }
 }

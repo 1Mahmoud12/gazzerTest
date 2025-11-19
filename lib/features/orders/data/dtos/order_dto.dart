@@ -16,6 +16,8 @@ class OrderDto {
   List<StoreDto>? stores;
   String? createdAt;
   String? updatedAt;
+  num? averageRate;
+  bool? isHasReview;
 
   OrderDto({
     this.id,
@@ -31,6 +33,8 @@ class OrderDto {
     this.stores,
     this.createdAt,
     this.updatedAt,
+    this.averageRate,
+    this.isHasReview,
   });
 
   factory OrderDto.fromJson(Map<String, dynamic> json) {
@@ -43,6 +47,9 @@ class OrderDto {
       nowOrLater: json['now_or_later'] as String?,
       shouldArriveAt: json['should_arrive_at'] as String?,
       orderStatus: json['order_status'] as String?,
+      averageRate: json['average_rate'] as num?,
+      isHasReview: json['is_has_review'] as bool?,
+
       paymentMethods: json['payment_methods'] != null
           ? (json['payment_methods'] as List).map((e) => PaymentMethodDto.fromJson(e as Map<String, dynamic>)).toList()
           : null,
@@ -110,7 +117,8 @@ class OrderDto {
       itemsCount: itemsCount,
       orderDate: orderDate,
       status: status,
-      canRate: status == OrderStatus.delivered,
+      canRate: isHasReview ?? false,
+      rating: averageRate ?? 0.0,
     );
   }
 }

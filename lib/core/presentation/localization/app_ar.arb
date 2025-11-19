@@ -728,5 +728,7 @@
       },
       "clearAndReorder": "مسح وإعادة الطلب",
       "keepAndReorder": "الاحتفاظ وإعادة الطلب",
-      "deliveryMan":"عامل التوصيل"
+      "deliveryMan":"عامل التوصيل",
+      "viewDetails":"عرض التفاصيل",
+      "comingSoon":"هذه الميزه سيتم توفيرها قريبا"
 }

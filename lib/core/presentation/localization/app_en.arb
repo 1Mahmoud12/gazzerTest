@@ -737,5 +737,6 @@
       },
       "clearAndReorder": "Clear and Reorder",
       "keepAndReorder": "Keep and Reorder",
-      "deliveryMan":"Delivery Man"
+      "deliveryMan":"Delivery Man",
+      "comingSoon":"Coming Soon"
 }

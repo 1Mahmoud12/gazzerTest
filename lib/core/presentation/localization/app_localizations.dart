@@ -3403,6 +3403,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delivery Man'**
   String get deliveryMan;
+
+  /// No description provided for @comingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon'**
+  String get comingSoon;
 }
 
 class _AppLocalizationsDelegate

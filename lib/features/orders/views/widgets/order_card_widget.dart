@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
@@ -152,11 +154,11 @@ class OrderCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-            if (order.status != OrderStatus.delivered) ...[
+            if (order.status == OrderStatus.delivered) ...[
               const VerticalSpacing(12),
               if (order.rating != null)
-                _RatingDisplay(rating: order.rating!)
-              else if (!order.canRate)
+                _RatingDisplay(rating: order.rating!.toDouble())
+              else if (order.canRate)
                 _RatingInput(
                   orderId: int.tryParse(order.orderId) ?? 0,
                   vendors: order.vendors,
@@ -253,10 +255,12 @@ class _RatingInput extends StatelessWidget {
               style: TStyle.blackRegular(12),
             ),
             const Spacer(),
-            Icon(
-              Icons.star_border,
-              color: Co.secondary,
-              size: 24,
+            ...List.generate(
+              5,
+              (index) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: SvgPicture.asset(Assets.starNotRateIc),
+              ),
             ),
           ],
         ),
@@ -318,7 +322,7 @@ class _ReorderButton extends StatelessWidget {
                       context.read<ReorderCubit>().reorder(orderId);
                     },
               text: L10n.tr().reOrder,
-              bgColor: isLoading ? Co.purple.withOpacity(0.5) : Co.purple,
+              bgColor: isLoading ? Co.purple.withOpacityNew(0.5) : Co.purple,
               radius: 30,
               textStyle: TStyle.whiteBold(14),
               padding: const EdgeInsets.symmetric(vertical: 5),

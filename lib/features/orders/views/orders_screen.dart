@@ -8,8 +8,14 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_b
 import 'package:gazzer/features/orders/views/widgets/orders_content_widget.dart';
 
 class OrdersScreen extends StatefulWidget {
-  const OrdersScreen({super.key});
+  const OrdersScreen({
+    super.key,
+    this.shouldRefreshAndOpenFirstOrder = false,
+  });
   static const route = '/orders';
+
+  final bool shouldRefreshAndOpenFirstOrder;
+
   @override
   State<OrdersScreen> createState() => _OrdersScreenState();
 }
@@ -59,7 +65,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
           showCart: false,
           title: L10n.tr().orders,
         ),
-        body: const OrdersContentWidget(),
+        body: OrdersContentWidget(
+          shouldRefreshAndOpenFirstOrder: widget.shouldRefreshAndOpenFirstOrder,
+        ),
         //  Padding(
         //   padding: const EdgeInsets.symmetric(horizontal: 24),
         //   child: Column(

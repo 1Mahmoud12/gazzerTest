@@ -8,7 +8,8 @@ class OrderItemEntity {
   final int itemsCount;
   final DateTime orderDate;
   final OrderStatus status;
-  final double? rating; // null if not rated
+  final num? rating; // null if not rated
+  final bool? isRating; // null if not rated
   final bool canRate; // true if delivered and not yet rated
 
   const OrderItemEntity({
@@ -19,6 +20,7 @@ class OrderItemEntity {
     required this.orderDate,
     required this.status,
     this.rating,
+    this.isRating,
     this.canRate = false,
   });
 

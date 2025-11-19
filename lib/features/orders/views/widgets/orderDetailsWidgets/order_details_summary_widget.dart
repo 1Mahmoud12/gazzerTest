@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
+import 'package:gazzer/features/orders/domain/entities/order_summary_entity.dart';
 
 /// Order summary section displaying pricing breakdown
 class OrderSummarySection extends StatelessWidget {
@@ -18,8 +19,9 @@ class OrderSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final finalTotal = _calculateFinalTotal();
-    final voucherFormatted = _getVoucherFormatted();
+    final summary = orderDetail.orderSummary;
+    final finalTotal = summary != null ? summary.totalPaidAmount : _calculateFinalTotal();
+    final voucherFormatted = _getVoucherFormatted(summary);
 
     return Column(
       children: [
@@ -48,60 +50,73 @@ class OrderSummarySection extends StatelessWidget {
           ),
           child: Column(
             children: [
-              if (orderDetail.subTotal != 0) ...[
+              // Sub Total
+              if ((summary?.subTotal ?? orderDetail.subTotal) != 0) ...[
                 OrderSummaryItem(
                   title: L10n.tr().grossAmount,
-                  value: orderDetail.subTotal,
+                  value: summary?.subTotal ?? orderDetail.subTotal,
                 ),
                 const SizedBox(height: _itemSpacing),
               ],
-              if (orderDetail.discount != 0) ...[
-                OrderSummaryItem(
-                  title: L10n.tr().promoCodeName,
-                  value: orderDetail.voucherCode,
-                  isDiscount: true,
-                ),
-                const SizedBox(height: _itemSpacing),
-              ],
-              if (orderDetail.discount != 0) ...[
+              // Item Discount
+              if ((summary?.itemDiscount ?? 0.0) != 0) ...[
                 OrderSummaryItem(
                   title: L10n.tr().discount,
-                  value: orderDetail.discount,
+                  value: summary!.itemDiscount,
                   isDiscount: true,
                 ),
                 const SizedBox(height: _itemSpacing),
               ],
-              if (orderDetail.deliveryFee != 0) ...[
+              // VAT Amount
+              if ((summary?.vatAmount ?? 0.0) != 0) ...[
                 OrderSummaryItem(
-                  title: L10n.tr().deliveryFee,
-                  value: orderDetail.deliveryFee,
+                  title: 'VAT',
+                  value: summary!.vatAmount,
                 ),
                 const SizedBox(height: _itemSpacing),
               ],
-              if (orderDetail.serviceFee != 0) ...[
+              // Service Fees
+              if ((summary?.serviceFees ?? orderDetail.serviceFee) != 0) ...[
                 OrderSummaryItem(
                   title: L10n.tr().serviceFee,
-                  value: orderDetail.serviceFee,
+                  value: summary?.serviceFees ?? orderDetail.serviceFee,
                 ),
                 const SizedBox(height: _itemSpacing),
               ],
-              if (voucherFormatted != null) ...[
-                ...[
-                  OrderSummaryItem(
-                    title: L10n.tr().totalBeforeCode,
-                    value: orderDetail.total,
-                  ),
-                  const SizedBox(height: _itemSpacing),
-                ],
-                ...[
-                  OrderSummaryItem(
-                    title: L10n.tr().promoCode,
-                    value: orderDetail.voucherDiscountAmount ?? 0.0,
-                    isDiscount: true,
-                    formattedValue: voucherFormatted,
-                  ),
-                  const SizedBox(height: _itemSpacing),
-                ],
+              // Coupon Code (if exists)
+              if (summary?.coupon != null && summary!.coupon!.isNotEmpty) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().promoCodeName,
+                  value: summary.coupon!,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              // Coupon Discount
+              if ((summary?.couponDiscount ?? 0.0) != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().promoCode,
+                  value: summary!.couponDiscount,
+                  isDiscount: true,
+                  formattedValue: voucherFormatted,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              // Delivery Fees
+              if ((summary?.deliveryFees ?? orderDetail.deliveryFee) != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().deliveryFee,
+                  value: summary?.deliveryFees ?? orderDetail.deliveryFee,
+                ),
+                const SizedBox(height: _itemSpacing),
+              ],
+              // Delivery Fees Discount
+              if ((summary?.deliveryFeesDiscount ?? 0.0) != 0) ...[
+                OrderSummaryItem(
+                  title: L10n.tr().deliveryFeeDiscount,
+                  value: summary!.deliveryFeesDiscount,
+                  isDiscount: true,
+                ),
+                const SizedBox(height: _itemSpacing),
               ],
               const DashedBorder(
                 width: 10,
@@ -113,7 +128,7 @@ class OrderSummarySection extends StatelessWidget {
               FinalTotalRow(total: finalTotal),
               OrderSummaryItem(
                 title: L10n.tr().paymentMethod,
-                value: orderDetail.paymentMethod,
+                value: summary?.paymentMethod ?? orderDetail.paymentMethod,
               ),
             ],
           ),
@@ -146,7 +161,13 @@ class OrderSummarySection extends StatelessWidget {
     }
   }
 
-  String? _getVoucherFormatted() {
+  String? _getVoucherFormatted(OrderSummaryEntity? summary) {
+    // Use summary coupon if available
+    if (summary?.coupon != null && summary!.couponDiscount > 0) {
+      return '- ${Helpers.getProperPrice(summary.couponDiscount)}';
+    }
+
+    // Fallback to orderDetail voucher
     if (orderDetail.voucherCode == null ||
         orderDetail.voucherDiscountType == null ||
         orderDetail.voucherDiscountAmount == null ||
@@ -154,15 +175,7 @@ class OrderSummarySection extends StatelessWidget {
       return null;
     }
 
-    final isPercent = orderDetail.voucherDiscountType!.toLowerCase().contains(
-      'percent',
-    );
-    if (isPercent) {
-      final deduction = orderDetail.total * (orderDetail.voucherDiscountAmount! / 100.0);
-      return '- ${orderDetail.voucherDiscountAmount!.toStringAsFixed(0)}% (${deduction.toStringAsFixed(2)}${L10n.tr().egp})';
-    } else {
-      return '- ${Helpers.getProperPrice(orderDetail.voucherDiscountAmount!)}';
-    }
+    return '- ${Helpers.getProperPrice(orderDetail.voucherDiscountAmount!)}';
   }
 }
 

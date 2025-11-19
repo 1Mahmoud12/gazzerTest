@@ -36,7 +36,7 @@ class StoreReview {
   });
 
   Map<String, dynamic> toJson() => {
-    'order_store_id': orderStoreId,
+    'store_id': orderStoreId,
     'rating': rating,
     'comment': '',
   };

@@ -1,6 +1,7 @@
 import 'delivery_address_entity.dart';
 import 'order_detail_vendor_entity.dart';
 import 'order_status.dart';
+import 'order_summary_entity.dart';
 
 class OrderDetailEntity {
   final int orderId;
@@ -19,6 +20,7 @@ class OrderDetailEntity {
   final String? voucherDiscountType; // 'fixed' or 'percentage'
   final double? voucherDiscountAmount;
   final int loyaltyPointsEarned;
+  final OrderSummaryEntity? orderSummary;
 
   const OrderDetailEntity({
     required this.orderId,
@@ -37,5 +39,6 @@ class OrderDetailEntity {
     this.voucherDiscountType,
     this.voucherDiscountAmount,
     this.loyaltyPointsEarned = 0,
+    this.orderSummary,
   });
 }

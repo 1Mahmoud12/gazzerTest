@@ -61,7 +61,9 @@ ShellRoute get nestedRoutes => ShellRoute(
     ///
     GoRoute(
       path: OrdersScreen.route,
-      builder: (context, state) => const OrdersScreen(),
+      builder: (context, state) => OrdersScreen(
+        shouldRefreshAndOpenFirstOrder: state.extra as bool? ?? false,
+      ),
       routes: [
         // ShellRoute(routes: []),
       ],

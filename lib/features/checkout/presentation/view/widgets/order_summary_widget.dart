@@ -67,7 +67,7 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                 children: [
                   if (state.summary.subTotal != 0)
                     ItemSummary(
-                      title: L10n.tr().subTotal,
+                      title: L10n.tr().grossAmount,
                       value: state.summary.subTotal,
                     ),
                   const SizedBox(height: 8),

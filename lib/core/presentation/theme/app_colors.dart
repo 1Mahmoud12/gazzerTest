@@ -34,7 +34,7 @@ class Co {
   static const w100 = Color(0xFFF1EFEF);
   static const darkGrey = Color(0xFF5D5D5D);
   static const white = Color(0xFFFFFFFF);
-  static const dark = Color(0xFF000000);
+  static const dark = Color(0xFF2B2B2B);
   static const gryPrimary = Color(0xFF9F93C3);
 
   // for decorations

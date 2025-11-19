@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 
@@ -65,6 +66,7 @@ class PaymentMethodBottomSheet extends StatefulWidget {
 class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
   PaymentMethodType? _selectedMethod;
   PaymentCardEntity? _selectedCard;
+  static const int _newCardId = -1; // Special ID for "Add New Card" option
   final TextEditingController _walletNumberController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -98,6 +100,10 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
     if (_selectedMethod == PaymentMethodType.creditDebit) {
       // For credit/debit, card selection is optional (can add new card)
       // No validation needed
+    } else if (_selectedMethod == PaymentMethodType.applePay) {
+      // Validate phone number for eWallet
+      Alerts.showToast(L10n.tr().comingSoon, error: false);
+      return;
     } else if (_selectedMethod == PaymentMethodType.eWallet) {
       // Validate phone number for eWallet
       if (!_formKey.currentState!.validate()) {
@@ -112,7 +118,7 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
     // Create result and return
     final result = ResultPayment(
       paymentMethodType: _selectedMethod!,
-      paymentCard: _selectedCard,
+      paymentCard: _selectedCard?.id == -1 ? null : _selectedCard,
       walletNumber: _selectedMethod == PaymentMethodType.eWallet ? _walletNumberController.text.trim() : null,
     );
 
@@ -194,7 +200,15 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
                         },
                         onAddNewCard: () {
                           setState(() {
-                            _selectedCard = null;
+                            _selectedCard = const PaymentCardEntity(
+                              id: _newCardId,
+                              last4Digits: '0000',
+                              cardBrand: 'new',
+                              cardholderName: 'New Card',
+                              expiryMonth: 1,
+                              expiryYear: 2025,
+                              isDefault: false,
+                            );
                           });
                         },
                       )
@@ -323,9 +337,14 @@ class _CreditDebitSection extends StatelessWidget {
   final Function(PaymentCardEntity) onCardSelected;
   final VoidCallback onAddNewCard;
 
+  static const int _newCardId = -1;
+
+  bool _isNewCardSelected() => selectedCard?.id == _newCardId;
+
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.tr();
+
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .2,
       child: SingleChildScrollView(
@@ -335,7 +354,7 @@ class _CreditDebitSection extends StatelessWidget {
             if (paymentCards.isNotEmpty) ...[
               const SizedBox(height: 16),
               ...paymentCards.map((card) {
-                final isSelected = selectedCard?.id == card.id;
+                final cardIsSelected = selectedCard?.id == card.id && selectedCard?.id != _newCardId;
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: InkWell(
@@ -350,14 +369,14 @@ class _CreditDebitSection extends StatelessWidget {
                         color: Co.bg,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: isSelected ? Co.purple : Co.lightGrey,
-                          width: isSelected ? 2 : 1,
+                          color: cardIsSelected ? Co.purple : Co.lightGrey,
+                          width: cardIsSelected ? 2 : 1,
                         ),
                       ),
                       child: Row(
                         children: [
                           GradientRadioBtn(
-                            isSelected: isSelected,
+                            isSelected: cardIsSelected,
                             onPressed: () => onCardSelected(card),
                             size: 8,
                           ),
@@ -378,17 +397,44 @@ class _CreditDebitSection extends StatelessWidget {
               }),
             ],
             const SizedBox(height: 8),
-            InkWell(
-              onTap: onAddNewCard,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  l10n.walletPayWithAnotherCard,
-                  style: TStyle.robotBlackMedium(font: FFamily.roboto).copyWith(
-                    color: Co.purple,
+            Builder(
+              builder: (context) {
+                final newCardIsSelected = _isNewCardSelected();
+                return InkWell(
+                  onTap: onAddNewCard,
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Co.bg,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: newCardIsSelected ? Co.purple : Co.lightGrey,
+                        width: newCardIsSelected ? 2 : 1,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        GradientRadioBtn(
+                          isSelected: newCardIsSelected,
+                          onPressed: onAddNewCard,
+                          size: 8,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          l10n.walletPayWithAnotherCard,
+                          style: TStyle.robotBlackMedium(font: FFamily.roboto).copyWith(
+                            color: Co.purple,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),
