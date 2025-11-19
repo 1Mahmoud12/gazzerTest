@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_summary_entity.dart';
@@ -32,11 +33,16 @@ class OrderSummarySection extends StatelessWidget {
               L10n.tr().orderSummary,
               style: TStyle.robotBlackTitle(),
             ),
-            Text(
-              L10n.tr().viewReceipt,
-              style: TStyle.robotBlackRegular().copyWith(
-                color: Co.purple,
-                decoration: TextDecoration.underline,
+            InkWell(
+              onTap: () => Alerts.showToast(L10n.tr().comingSoon, error: false),
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              child: Text(
+                L10n.tr().viewReceipt,
+                style: TStyle.robotBlackRegular().copyWith(
+                  color: Co.purple,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
           ],
