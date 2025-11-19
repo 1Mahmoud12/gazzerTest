@@ -2,20 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/features/orders/views/widgets/orders_content_widget.dart';
-
-part 'widgets/history_orders_widget.dart';
-part 'widgets/recent_orders.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -84,7 +74,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
         //         prefix: const Icon(Icons.search, color: Co.purple, size: 24),
         //       ),
 
-        //       const _RecentOrders(),
         //       const Expanded(child: _HistoryOrdersWidget()),
         //     ],
         //   ),

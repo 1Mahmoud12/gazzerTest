@@ -127,7 +127,7 @@ class OrderCardWidget extends StatelessWidget {
                           borderColor: Colors.transparent,
                           onPressed: () {},
                           child: Text(
-                            'View Details',
+                            L10n.tr().viewDetails,
                             style: TStyle.primaryBold(12).copyWith(
                               decoration: TextDecoration.underline,
                               color: Co.purple,
@@ -143,7 +143,7 @@ class OrderCardWidget extends StatelessWidget {
                       width: double.infinity,
                       child: MainBtn(
                         onPressed: onReorder ?? () {},
-                        text: 'Reorder',
+                        text: L10n.tr().reOrder,
                         bgColor: Co.purple,
                         radius: 30,
                         textStyle: TStyle.whiteBold(14),
@@ -195,7 +195,7 @@ class _RatingDisplay extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Text(
-        'You Rate ${rating.toInt()}/5 stars',
+        L10n.tr().you_rate_stars(rating),
         style: TStyle.robotBlackMedium(),
         textAlign: TextAlign.center,
       ),
@@ -227,7 +227,7 @@ class _RatingInputState extends State<_RatingInput> {
       child: Row(
         children: [
           Text(
-            'Rate',
+            L10n.tr().rateUs,
             style: TStyle.blackRegular(12),
           ),
           const Spacer(),

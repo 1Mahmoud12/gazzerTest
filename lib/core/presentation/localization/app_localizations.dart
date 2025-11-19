@@ -3349,6 +3349,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add-ons'**
   String get addons;
+
+  /// No description provided for @you_rate_stars.
+  ///
+  /// In en, this message translates to:
+  /// **'You rate {rating}/5 stars'**
+  String you_rate_stars(double rating);
+
+  /// No description provided for @rateUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Us'**
+  String get rateUs;
+
+  /// No description provided for @reOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-order'**
+  String get reOrder;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
 }
 
 class _AppLocalizationsDelegate

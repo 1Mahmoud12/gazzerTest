@@ -714,5 +714,16 @@
    "take": "Take",
     "orderId": "Order ID",
     "orderDetails": "Order Details",
-    "addons": "Add-ons"
+    "addons": "Add-ons",
+     "you_rate_stars": "You rate {rating}/5 stars",
+      "@you_rate_stars": {
+        "placeholders": {
+          "rating": {
+            "type": "double"
+          }
+        }
+      },
+      "rateUs": "Rate Us",
+     "reOrder": "Re-order",
+      "viewDetails": "View Details"
 }

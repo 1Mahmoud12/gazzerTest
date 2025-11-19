@@ -715,6 +715,17 @@
    "take": "استغرق",
     "orderId": "رقم الطلب",
     "orderDetails": "تفاصيل الطلب",
-    "addons": "الإضافات"
+    "addons": "الإضافات",
+    "you_rate_stars": "لقد قيّمتنا {rating}/5 نجوم",
+      "@you_rate_stars": {
+        "placeholders": {
+          "rating": {
+            "type": "double"
+          }
+        }
+      },
+     "reOrder": "إعادة الطلب",
+       "viewDetails": "عرض التفاصيل",
+       "rateUs": "قيّمنا"
 
                     }

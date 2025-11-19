@@ -73,7 +73,7 @@ class _SingleVendorView extends StatelessWidget {
                 style: TStyle.blackBold(14),
               ),
               Text(
-                '${L10n.tr().orders} $orderId',
+                '${L10n.tr().orderId}: #$orderId',
                 style: TStyle.blackRegular(12),
               ),
             ],
@@ -150,7 +150,7 @@ class _VendorDropdownState extends State<_VendorDropdown> {
             ],
           ),
           Text(
-            '${L10n.tr().orders} ${widget.orderId}',
+            '${L10n.tr().orderId}: #${widget.orderId}',
             style: TStyle.blackRegular(12),
           ),
         ],

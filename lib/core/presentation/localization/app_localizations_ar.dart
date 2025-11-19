@@ -1672,4 +1672,18 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addons => 'الإضافات';
+
+  @override
+  String you_rate_stars(double rating) {
+    return 'لقد قيّمتنا $rating/5 نجوم';
+  }
+
+  @override
+  String get rateUs => 'قيّمنا';
+
+  @override
+  String get reOrder => 'إعادة الطلب';
+
+  @override
+  String get viewDetails => 'عرض التفاصيل';
 }

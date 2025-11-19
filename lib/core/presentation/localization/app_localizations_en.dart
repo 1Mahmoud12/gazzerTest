@@ -1672,4 +1672,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addons => 'Add-ons';
+
+  @override
+  String you_rate_stars(double rating) {
+    return 'You rate $rating/5 stars';
+  }
+
+  @override
+  String get rateUs => 'Rate Us';
+
+  @override
+  String get reOrder => 'Re-order';
+
+  @override
+  String get viewDetails => 'View Details';
 }
