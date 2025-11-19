@@ -81,4 +81,70 @@ class OrdersCubit extends Cubit<OrdersState> {
     }
     return Future.value();
   }
+
+  /// Reload orders from the current page without resetting pagination
+  Future<void> reloadCurrentPage() async {
+    final currentState = state;
+    if (currentState is! OrdersLoaded) {
+      return;
+    }
+
+    final targetPage = currentState.currentPage;
+    final currentOrders = List<OrderItemEntity>.from(currentState.orders);
+
+    // Keep current orders visible while reloading in background
+    // Don't emit loading state to avoid screen disappearing
+
+    // Reload from page 1 up to current page
+    final newOrders = <OrderItemEntity>[];
+    int newCurrentPage = 1;
+    bool newHasMore = true;
+
+    // Load all pages up to the target page
+    for (int page = 1; page <= targetPage; page++) {
+      final result = await _repo.getClientOrders(
+        page: page,
+        perPage: _perPage,
+      );
+
+      switch (result) {
+        case Ok<List<OrderItemEntity>>(:final value):
+          if (page == 1) {
+            newOrders.clear();
+            newOrders.addAll(value);
+          } else {
+            newOrders.addAll(value);
+          }
+
+          newHasMore = value.length >= _perPage;
+          newCurrentPage = page + 1;
+
+          if (page == targetPage) {
+            // We've loaded up to the target page
+            _allOrders = newOrders;
+            _currentPage = newCurrentPage;
+            _hasMore = newHasMore;
+
+            // Replace with new data
+            emit(
+              OrdersLoaded(
+                orders: List.from(_allOrders),
+                hasMore: _hasMore,
+                currentPage: targetPage,
+              ),
+            );
+            return;
+          }
+        case Err<List<OrderItemEntity>>(:final error):
+          // On error, keep current orders and show error toast (handled by listener)
+          emit(
+            OrdersError(
+              message: error.message,
+              orders: currentOrders,
+            ),
+          );
+          return;
+      }
+    }
+  }
 }

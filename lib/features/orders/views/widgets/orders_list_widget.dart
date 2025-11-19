@@ -51,37 +51,46 @@ class OrdersListWidget extends StatelessWidget {
             ? state.hasMore
             : false;
         final isLoadingMore = state is OrdersLoading;
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          physics: const BouncingScrollPhysics(),
-
-          itemCount: orders.length + (hasMore ? 1 : 0),
-          itemBuilder: (context, index) {
-            // Loading more indicator as last item
-            if (index == orders.length) {
-              // Trigger load more
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                context.read<OrdersCubit>().loadMore();
-              });
-              return _LoadingMoreItem(isLoading: isLoadingMore);
-            }
-
-            final order = orders[index];
-            return OrderCardWidget(
-              order: order,
-              onReorder: () {
-                // Handle reorder
-              },
-              onViewDetails: () {
-                final orderId = int.tryParse(order.orderId) ?? 0;
-                context.push(OrderDetailsScreen.route, extra: orderId);
-              },
-              onRatingChanged: (rating) {
-                // Handle rating submission
-                // TODO: Implement rating API call
-              },
-            );
+        return RefreshIndicator(
+          onRefresh: () async {
+            await context.read<OrdersCubit>().loadOrders(refresh: true);
           },
+          child: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            physics: const AlwaysScrollableScrollPhysics(),
+
+            itemCount: orders.length + (hasMore ? 1 : 0),
+            itemBuilder: (context, index) {
+              // Loading more indicator as last item
+              if (index == orders.length) {
+                // Trigger load more
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  context.read<OrdersCubit>().loadMore();
+                });
+                return _LoadingMoreItem(isLoading: isLoadingMore);
+              }
+
+              final order = orders[index];
+              return OrderCardWidget(
+                order: order,
+                onReorder: () {
+                  // Handle reorder
+                },
+                onViewDetails: () async {
+                  final orderId = int.tryParse(order.orderId) ?? 0;
+                  await context.push(OrderDetailsScreen.route, extra: orderId);
+                  // Reload orders from current page when coming back
+                  if (context.mounted) {
+                    await context.read<OrdersCubit>().reloadCurrentPage();
+                  }
+                },
+                onRatingChanged: (rating) {
+                  // Handle rating submission
+                  // TODO: Implement rating API call
+                },
+              );
+            },
+          ),
         );
       },
     );

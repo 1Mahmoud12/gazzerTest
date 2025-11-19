@@ -5,7 +5,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
@@ -41,12 +41,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     super.initState();
   }
 
-  void _expandFirstVendor(OrderDetailEntity orderDetail) {
-    if (orderDetail.vendors.isNotEmpty && _expandedVendors.isEmpty) {
-      _expandedVendors[0] = true;
-    }
-  }
-
   void _toggleVendor(int index) {
     setState(() {
       _expandedVendors[index] = !(_expandedVendors[index] ?? false);
@@ -60,21 +54,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   String _formatOrderDate(DateTime date) {
     final dateFormat = DateFormat(OrderDetailsConstants.dateFormat);
-    return _isToday(date) ? 'Today ${dateFormat.format(date)}' : dateFormat.format(date);
+    return _isToday(date) ? '${L10n.tr().today} ${dateFormat.format(date)}' : dateFormat.format(date);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => OrderDetailCubit(di.get(), widget.orderId)..loadOrderDetail(),
-      child: BlocConsumer<OrderDetailCubit, OrderDetailState>(
-        listener: (context, state) {
-          if (state is OrderDetailError) {
-            Alerts.showToast(state.message, error: true);
-          } else if (state is OrderDetailLoaded) {
-            _expandFirstVendor(state.orderDetail);
-          }
-        },
+      child: BlocBuilder<OrderDetailCubit, OrderDetailState>(
         builder: (context, state) {
           if (state is OrderDetailLoading && state.orderDetail == null) {
             return Scaffold(
@@ -97,6 +84,21 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               ? state.orderDetail
               : null;
 
+          if (state is OrderDetailError) {
+            return Scaffold(
+              backgroundColor: Co.bg,
+              appBar: MainAppBar(
+                showCart: false,
+                title: L10n.tr().orderDetails,
+              ),
+              body: FailureComponent(
+                message: state.message,
+                onRetry: () {
+                  context.read<OrderDetailCubit>().loadOrderDetail();
+                },
+              ),
+            );
+          }
           if (orderDetail == null) {
             return Scaffold(
               backgroundColor: Co.bg,
@@ -119,58 +121,80 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               showCart: false,
               title: L10n.tr().orderDetails,
             ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  OrderDetailsHeaderSection(
-                    orderId: orderDetail.orderId,
-                    orderDate: orderDetail.orderDate,
-                    status: orderDetail.status,
-                    deliveryTimeMinutes: orderDetail.deliveryTimeMinutes,
-                    onFormatDate: _formatOrderDate,
-                  ),
-                  const SizedBox(height: OrderDetailsConstants.defaultSpacing),
-                  DeliveryAddressCard(address: orderDetail.deliveryAddress),
-                  const SizedBox(height: OrderDetailsConstants.defaultSpacing),
-                  ..._buildVendorSections(orderDetail),
-                  const SizedBox(height: OrderDetailsConstants.defaultSpacing),
-                  OrderSummarySection(orderDetail: orderDetail),
-                  const SizedBox(height: OrderDetailsConstants.defaultSpacing),
-                  if (state is OrderDetailLoaded && orderDetail.loyaltyPointsEarned > 0) ...[
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      decoration: BoxDecoration(
-                        color: Co.earnedMoney,
-                        borderRadius: BorderRadius.circular(40),
+            body: RefreshIndicator(
+              onRefresh: () async {
+                await context.read<OrderDetailCubit>().loadOrderDetail(
+                  refresh: true,
+                );
+              },
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OrderDetailsHeaderSection(
+                      orderId: orderDetail.orderId,
+                      orderDate: orderDetail.orderDate,
+                      status: orderDetail.status,
+                      deliveryTimeMinutes: orderDetail.deliveryTimeMinutes,
+                      onFormatDate: _formatOrderDate,
+                    ),
+                    const SizedBox(
+                      height: OrderDetailsConstants.defaultSpacing,
+                    ),
+                    DeliveryAddressCard(address: orderDetail.deliveryAddress),
+                    const SizedBox(
+                      height: OrderDetailsConstants.defaultSpacing,
+                    ),
+                    ..._buildVendorSections(orderDetail),
+                    const SizedBox(
+                      height: OrderDetailsConstants.defaultSpacing,
+                    ),
+                    OrderSummarySection(orderDetail: orderDetail),
+                    const SizedBox(
+                      height: OrderDetailsConstants.defaultSpacing,
+                    ),
+                    if (state is OrderDetailLoaded && orderDetail.loyaltyPointsEarned > 0) ...[
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Co.earnedMoney,
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        alignment: AlignmentDirectional.center,
+                        child: Text(
+                          L10n.tr().youHaveEarnedPoints(
+                            orderDetail.loyaltyPointsEarned,
+                          ),
+                          style: TStyle.robotBlackMedium(),
+                        ),
                       ),
-                      alignment: AlignmentDirectional.center,
-                      child: Text(
-                        L10n.tr().youHaveEarnedPoints(orderDetail.loyaltyPointsEarned),
-                        style: TStyle.robotBlackMedium(),
+                    ],
+                    const SizedBox(
+                      height: OrderDetailsConstants.defaultSpacing,
+                    ),
+                    MainBtn(
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SvgPicture.asset(Assets.customerSupportIc),
+                          const HorizontalSpacing(10),
+                          Text(
+                            L10n.tr().getHelp,
+                            style: TStyle.robotBlackMedium().copyWith(
+                              color: Co.white,
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                    const SizedBox(
+                      height: OrderDetailsConstants.defaultSpacing,
                     ),
                   ],
-                  const SizedBox(height: OrderDetailsConstants.defaultSpacing),
-                  MainBtn(
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(Assets.customerSupportIc),
-                        const HorizontalSpacing(10),
-                        Text(
-                          L10n.tr().getHelp,
-                          style: TStyle.robotBlackMedium().copyWith(
-                            color: Co.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: OrderDetailsConstants.defaultSpacing),
-                ],
+                ),
               ),
             ),
           );

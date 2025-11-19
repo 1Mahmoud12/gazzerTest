@@ -122,17 +122,14 @@ class OrderCardWidget extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: MainBtn(
-                          bgColor: Colors.transparent,
-                          borderColor: Colors.transparent,
-                          onPressed: () {},
-                          child: Text(
-                            L10n.tr().viewDetails,
-                            style: TStyle.primaryBold(12).copyWith(
-                              decoration: TextDecoration.underline,
-                              color: Co.purple,
-                            ),
+                        child: Text(
+                          L10n.tr().viewDetails,
+                          style: TStyle.robotBlackRegular().copyWith(
+                            decoration: TextDecoration.underline,
+                            color: Co.purple,
+                            fontWeight: FontWeight.w500,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ],
