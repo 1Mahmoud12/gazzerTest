@@ -755,5 +755,15 @@
       "wasThisHelpful": "Was this helpful?",
       "yes": "Yes",
       "no": "No",
-      "gazzerSupport": "Gazzer Support"
+      "gazzerSupport": "Gazzer Support",
+        "noMessagesYet": "No messages yet",
+        "guzzerSupport": "Guzzer Support",
+        "online": "Online",
+        "typeMessage": "Type a message",
+        "selectImageSource": "Select image source",
+        "gallery": "Gallery",
+        "camera": "Camera",
+        "yesterday": "Yesterday",
+          "welcomeMessage": "Hello! How can I help you today?"
+
 }

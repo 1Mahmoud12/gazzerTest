@@ -1758,4 +1758,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get gazzerSupport => 'دعم جازر';
+
+  @override
+  String get noMessagesYet => 'لا توجد رسائل بعد';
+
+  @override
+  String get guzzerSupport => 'دعم جزر';
+
+  @override
+  String get online => 'متصل الآن';
+
+  @override
+  String get typeMessage => 'اكتب رسالة';
+
+  @override
+  String get selectImageSource => 'اختر مصدر الصورة';
+
+  @override
+  String get gallery => 'المعرض';
+
+  @override
+  String get camera => 'الكاميرا';
+
+  @override
+  String get yesterday => 'أمس';
+
+  @override
+  String get welcomeMessage => 'مرحبًا! كيف يمكنني مساعدتك اليوم؟';
 }

@@ -756,5 +756,14 @@
       "wasThisHelpful": "هل كان هذا مفيداً؟",
       "yes": "نعم",
       "no": "لا",
-      "gazzerSupport": "دعم جازر"
+      "gazzerSupport": "دعم جازر",
+      "welcomeMessage": "مرحبًا! كيف يمكنني مساعدتك اليوم؟",
+        "noMessagesYet": "لا توجد رسائل بعد",
+        "guzzerSupport": "دعم جزر",
+        "online": "متصل الآن",
+        "typeMessage": "اكتب رسالة",
+        "selectImageSource": "اختر مصدر الصورة",
+        "gallery": "المعرض",
+        "camera": "الكاميرا",
+        "yesterday": "أمس"
 }

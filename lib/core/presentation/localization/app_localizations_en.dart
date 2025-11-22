@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1758,4 +1758,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gazzerSupport => 'Gazzer Support';
+
+  @override
+  String get noMessagesYet => 'No messages yet';
+
+  @override
+  String get guzzerSupport => 'Guzzer Support';
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String get typeMessage => 'Type a message';
+
+  @override
+  String get selectImageSource => 'Select image source';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get welcomeMessage => 'Hello! How can I help you today?';
 }

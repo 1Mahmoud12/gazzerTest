@@ -3511,6 +3511,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gazzer Support'**
   String get gazzerSupport;
+
+  /// No description provided for @noMessagesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages yet'**
+  String get noMessagesYet;
+
+  /// No description provided for @guzzerSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Guzzer Support'**
+  String get guzzerSupport;
+
+  /// No description provided for @online.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get online;
+
+  /// No description provided for @typeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message'**
+  String get typeMessage;
+
+  /// No description provided for @selectImageSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Select image source'**
+  String get selectImageSource;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @welcomeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello! How can I help you today?'**
+  String get welcomeMessage;
 }
 
 class _AppLocalizationsDelegate

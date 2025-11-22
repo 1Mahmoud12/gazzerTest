@@ -97,6 +97,7 @@ dependencies:
 
   #handle image
   cached_network_image: ^3.4.1
+  image_picker: ^1.1.2
 
   #Location
   google_maps_flutter: ^2.13.1
