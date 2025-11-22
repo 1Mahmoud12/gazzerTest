@@ -15,7 +15,7 @@ platform :android do
       app: "1:493725024975:android:c53ac88e28f20f7916adba", # Replace with your Firebase App ID.
       android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
       android_artifact_type: "APK",
-      release_notes: "US_Creating the Loyalty Program \n US_Wallet Page (Recharge, Convert to Voucher, and Wallet History) \n Bug_The Mobile number field should accept a value with a leading 0. \n Bug_Country Code for the mobile number need to be on the left side in the OTP verification screen. \n Bug_Alert The Message for an invalid mobile number should be shown before creating the password. \n Bug_Some Item Cards didn't load in the View all Daily offers screen. \n Bug_The discount value should also appear if the coupon was a percentage of the total amount. \n Bug_The item discount value appeared if the value equals 0. \n Bug_Convert Button should redirect the user to the Wallet page. \n  Bug_Cannot Complete the payment with Wallet and E-Wallet. \n Bug_Payment with a saved Credit Card will require a different amount. \n Bug_A validation on the saved Cards should be done. \n Bug_If the card payment faild with Gazzer wallet the amount will be deducted from the wallet.",
+      release_notes: "US_My Orders and Reorder Management \n US_View Order Details",
       groups: "gazar", # Add tester group aliases.
       firebase_cli_token: ENV['FIREBASE_TOKEN'] # Path to your service account key.
     )

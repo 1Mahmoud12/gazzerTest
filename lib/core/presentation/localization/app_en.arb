@@ -738,5 +738,22 @@
       "clearAndReorder": "Clear and Reorder",
       "keepAndReorder": "Keep and Reorder",
       "deliveryMan":"Delivery Man",
-      "comingSoon":"Coming Soon"
+      "comingSoon":"Coming Soon",
+      "orderIssue": "Order Issue",
+      "missingOrIncorrectItems": "Missing or incorrect items",
+      "wholeOrderIsWrong": "Whole order is wrong",
+      "qualityIssue": "Quality issue",
+      "issueWithDeliveryMan": "Issue with Delivery man",
+      "paymentAndRefund": "Payment and refund",
+      "selectMissingIncorrectItems": "Please select your missing or incorrect item and we will check it :",
+      "addYourNotes": "Add your notes",
+      "typeYourMessage": "type your message..",
+      "check": "Check",
+      "weHaveChecked": "We have checked",
+      "orderIssueOutsideRefundWindow": "We are sorry to hear about this issue with this order. It looks like you placed the order some time ago and it's now outside the eligible refund window.",
+      "contactUsAsSoonAsPossible": "In the future, If you have an issue, Please contact us as soon as possible",
+      "wasThisHelpful": "Was this helpful?",
+      "yes": "Yes",
+      "no": "No",
+      "gazzerSupport": "Gazzer Support"
 }

@@ -28,6 +28,10 @@ import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tut
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
 import 'package:gazzer/features/orders/views/order_details_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/gazzer_support_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/missing_items_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/order_issue_response_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/order_issue_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/support_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
@@ -100,6 +104,34 @@ final List<RouteBase> unNestedRoutes = [
     path: SupportScreen.route,
     builder: (context, state) {
       return const SupportScreen();
+    },
+  ),
+  GoRoute(
+    path: OrderIssueScreen.route,
+    builder: (context, state) {
+      return OrderIssueScreen(
+        orderId: state.extra as int?,
+      );
+    },
+  ),
+  GoRoute(
+    path: MissingItemsScreen.route,
+    builder: (context, state) {
+      return MissingItemsScreen(
+        orderId: state.extra as int,
+      );
+    },
+  ),
+  GoRoute(
+    path: OrderIssueResponseScreen.route,
+    builder: (context, state) {
+      return const OrderIssueResponseScreen();
+    },
+  ),
+  GoRoute(
+    path: GazzerSupportScreen.route,
+    builder: (context, state) {
+      return const GazzerSupportScreen();
     },
   ),
   GoRoute(

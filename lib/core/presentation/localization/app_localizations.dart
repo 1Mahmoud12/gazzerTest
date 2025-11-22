@@ -3409,6 +3409,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Coming Soon'**
   String get comingSoon;
+
+  /// No description provided for @orderIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Issue'**
+  String get orderIssue;
+
+  /// No description provided for @missingOrIncorrectItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing or incorrect items'**
+  String get missingOrIncorrectItems;
+
+  /// No description provided for @wholeOrderIsWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Whole order is wrong'**
+  String get wholeOrderIsWrong;
+
+  /// No description provided for @qualityIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality issue'**
+  String get qualityIssue;
+
+  /// No description provided for @issueWithDeliveryMan.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue with Delivery man'**
+  String get issueWithDeliveryMan;
+
+  /// No description provided for @paymentAndRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment and refund'**
+  String get paymentAndRefund;
+
+  /// No description provided for @selectMissingIncorrectItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select your missing or incorrect item and we will check it :'**
+  String get selectMissingIncorrectItems;
+
+  /// No description provided for @addYourNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your notes'**
+  String get addYourNotes;
+
+  /// No description provided for @typeYourMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'type your message..'**
+  String get typeYourMessage;
+
+  /// No description provided for @check.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get check;
+
+  /// No description provided for @weHaveChecked.
+  ///
+  /// In en, this message translates to:
+  /// **'We have checked'**
+  String get weHaveChecked;
+
+  /// No description provided for @orderIssueOutsideRefundWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'We are sorry to hear about this issue with this order. It looks like you placed the order some time ago and it\'s now outside the eligible refund window.'**
+  String get orderIssueOutsideRefundWindow;
+
+  /// No description provided for @contactUsAsSoonAsPossible.
+  ///
+  /// In en, this message translates to:
+  /// **'In the future, If you have an issue, Please contact us as soon as possible'**
+  String get contactUsAsSoonAsPossible;
+
+  /// No description provided for @wasThisHelpful.
+  ///
+  /// In en, this message translates to:
+  /// **'Was this helpful?'**
+  String get wasThisHelpful;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @gazzerSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Gazzer Support'**
+  String get gazzerSupport;
 }
 
 class _AppLocalizationsDelegate

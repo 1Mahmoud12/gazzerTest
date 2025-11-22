@@ -4,18 +4,18 @@
 
 
         <testcase name="0: cd .. &amp;&amp; flutter clean" classname="fastlane.lanes"
-            time="19.181323">
+            time="13.000876">
 
         </testcase>
 
 
         <testcase name="1: cd .. &amp;&amp; flutter build apk --release" classname="fastlane.lanes"
-            time="346.546454">
+            time="168.946515">
 
         </testcase>
 
 
-        <testcase name="2: firebase_app_distribution" classname="fastlane.lanes" time="135.207907">
+        <testcase name="2: firebase_app_distribution" classname="fastlane.lanes" time="105.033702">
 
         </testcase>
 

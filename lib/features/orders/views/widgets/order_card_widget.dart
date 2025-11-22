@@ -156,9 +156,9 @@ class OrderCardWidget extends StatelessWidget {
             ),
             if (order.status == OrderStatus.delivered) ...[
               const VerticalSpacing(12),
-              if (order.rating != null)
+              if (order.canRate)
                 _RatingDisplay(rating: order.rating!.toDouble())
-              else if (order.canRate)
+              else
                 _RatingInput(
                   orderId: int.tryParse(order.orderId) ?? 0,
                   vendors: order.vendors,

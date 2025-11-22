@@ -1706,4 +1706,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comingSoon => 'Coming Soon';
+
+  @override
+  String get orderIssue => 'Order Issue';
+
+  @override
+  String get missingOrIncorrectItems => 'Missing or incorrect items';
+
+  @override
+  String get wholeOrderIsWrong => 'Whole order is wrong';
+
+  @override
+  String get qualityIssue => 'Quality issue';
+
+  @override
+  String get issueWithDeliveryMan => 'Issue with Delivery man';
+
+  @override
+  String get paymentAndRefund => 'Payment and refund';
+
+  @override
+  String get selectMissingIncorrectItems => 'Please select your missing or incorrect item and we will check it :';
+
+  @override
+  String get addYourNotes => 'Add your notes';
+
+  @override
+  String get typeYourMessage => 'type your message..';
+
+  @override
+  String get check => 'Check';
+
+  @override
+  String get weHaveChecked => 'We have checked';
+
+  @override
+  String get orderIssueOutsideRefundWindow =>
+      'We are sorry to hear about this issue with this order. It looks like you placed the order some time ago and it\'s now outside the eligible refund window.';
+
+  @override
+  String get contactUsAsSoonAsPossible => 'In the future, If you have an issue, Please contact us as soon as possible';
+
+  @override
+  String get wasThisHelpful => 'Was this helpful?';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get gazzerSupport => 'Gazzer Support';
 }

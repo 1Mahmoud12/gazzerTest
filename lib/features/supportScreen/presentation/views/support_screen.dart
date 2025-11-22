@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
 import 'faq_list_screen.dart';
+import 'order_issue_screen.dart';
+import 'widgets/support_option_tile.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
@@ -17,9 +19,10 @@ class SupportScreen extends StatefulWidget {
 class _SupportScreenState extends State<SupportScreen> {
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.tr();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Support'),
+        title: Text(l10n.support),
         centerTitle: true,
       ),
       body: Padding(
@@ -27,17 +30,14 @@ class _SupportScreenState extends State<SupportScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _SupportOptionTile(
-              title: 'Order Issue',
+            SupportOptionTile(
+              title: l10n.orderIssue,
               onTap: () {
-                // TODO: Implement order-issue flow screen when available.
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Order Issue flow coming soon')),
-                );
+                context.navigateToPage(const OrderIssueScreen());
               },
             ),
             const VerticalSpacing(12),
-            _SupportOptionTile(
+            SupportOptionTile(
               title: 'General Issue - Inquiry',
               onTap: () {
                 context.navigateToPage(
@@ -47,39 +47,6 @@ class _SupportScreenState extends State<SupportScreen> {
                 );
               },
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SupportOptionTile extends StatelessWidget {
-  const _SupportOptionTile({required this.title, required this.onTap});
-
-  final String title;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-        decoration: BoxDecoration(
-          color: Co.purple100,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                title,
-                style: TStyle.blackMedium(16),
-              ),
-            ),
-            const Icon(Icons.chevron_right, color: Co.purple),
           ],
         ),
       ),

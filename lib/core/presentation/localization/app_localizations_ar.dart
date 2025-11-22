@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1675,11 +1675,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String you_rate_stars(double rating) {
-    return 'You rate $rating/5 stars';
+    return 'لقد قيمتنا $rating/5 نجوم';
   }
 
   @override
-  String get rateUs => 'Rate Us';
+  String get rateUs => 'قيمنا';
 
   @override
   String get reOrder => 'Re-order';
@@ -1706,4 +1706,56 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get comingSoon => 'هذه الميزه سيتم توفيرها قريبا';
+
+  @override
+  String get orderIssue => 'مشكلة الطلب';
+
+  @override
+  String get missingOrIncorrectItems => 'عناصر مفقودة أو غير صحيحة';
+
+  @override
+  String get wholeOrderIsWrong => 'الطلب بالكامل خاطئ';
+
+  @override
+  String get qualityIssue => 'مشكلة الجودة';
+
+  @override
+  String get issueWithDeliveryMan => 'مشكلة مع عامل التوصيل';
+
+  @override
+  String get paymentAndRefund => 'الدفع والاسترداد';
+
+  @override
+  String get selectMissingIncorrectItems => 'يرجى تحديد العناصر المفقودة أو غير الصحيحة وسنتحقق منها :';
+
+  @override
+  String get addYourNotes => 'أضف ملاحظاتك';
+
+  @override
+  String get typeYourMessage => 'اكتب رسالتك..';
+
+  @override
+  String get check => 'تحقق';
+
+  @override
+  String get weHaveChecked => 'لقد تحققنا';
+
+  @override
+  String get orderIssueOutsideRefundWindow =>
+      'نأسف لسماع هذه المشكلة مع هذا الطلب. يبدو أنك قمت بتقديم الطلب منذ بعض الوقت وهو الآن خارج نافذة الاسترداد المؤهلة.';
+
+  @override
+  String get contactUsAsSoonAsPossible => 'في المستقبل، إذا كان لديك مشكلة، يرجى الاتصال بنا في أقرب وقت ممكن';
+
+  @override
+  String get wasThisHelpful => 'هل كان هذا مفيداً؟';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get gazzerSupport => 'دعم جازر';
 }

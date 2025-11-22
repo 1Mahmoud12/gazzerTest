@@ -32,6 +32,7 @@ class CustomNetworkImage extends StatelessWidget {
     Widget child;
     final errorShown = SizedBox(
       width: width ?? 42,
+      height: height ?? 42,
       child:
           errorWidget ??
           ColoredBox(

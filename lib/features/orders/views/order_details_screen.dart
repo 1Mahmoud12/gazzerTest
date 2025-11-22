@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
@@ -16,6 +17,7 @@ import 'package:gazzer/features/orders/views/widgets/orderDetailsWidgets/order_d
 import 'package:gazzer/features/orders/views/widgets/orderDetailsWidgets/order_details_header_widget.dart';
 import 'package:gazzer/features/orders/views/widgets/orderDetailsWidgets/order_details_summary_widget.dart';
 import 'package:gazzer/features/orders/views/widgets/orderDetailsWidgets/order_details_vendor_section_widget.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/order_issue_screen.dart';
 import 'package:intl/intl.dart';
 
 /// Screen displaying detailed information about a specific order
@@ -175,7 +177,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       height: OrderDetailsConstants.defaultSpacing,
                     ),
                     MainBtn(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.navigateToPage(
+                          OrderIssueScreen(orderId: orderDetail.orderId),
+                        );
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

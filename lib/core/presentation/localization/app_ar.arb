@@ -730,5 +730,31 @@
       "keepAndReorder": "الاحتفاظ وإعادة الطلب",
       "deliveryMan":"عامل التوصيل",
       "viewDetails":"عرض التفاصيل",
-      "comingSoon":"هذه الميزه سيتم توفيرها قريبا"
+      "comingSoon":"هذه الميزه سيتم توفيرها قريبا",
+      "rateUs":"قيمنا",
+       "you_rate_stars": "لقد قيمتنا {rating}/5 نجوم",
+            "@you_rate_stars": {
+              "placeholders": {
+                "rating": {
+                  "type": "double"
+                }
+              }
+            },
+      "orderIssue": "مشكلة الطلب",
+      "missingOrIncorrectItems": "عناصر مفقودة أو غير صحيحة",
+      "wholeOrderIsWrong": "الطلب بالكامل خاطئ",
+      "qualityIssue": "مشكلة الجودة",
+      "issueWithDeliveryMan": "مشكلة مع عامل التوصيل",
+      "paymentAndRefund": "الدفع والاسترداد",
+      "selectMissingIncorrectItems": "يرجى تحديد العناصر المفقودة أو غير الصحيحة وسنتحقق منها :",
+      "addYourNotes": "أضف ملاحظاتك",
+      "typeYourMessage": "اكتب رسالتك..",
+      "check": "تحقق",
+      "weHaveChecked": "لقد تحققنا",
+      "orderIssueOutsideRefundWindow": "نأسف لسماع هذه المشكلة مع هذا الطلب. يبدو أنك قمت بتقديم الطلب منذ بعض الوقت وهو الآن خارج نافذة الاسترداد المؤهلة.",
+      "contactUsAsSoonAsPossible": "في المستقبل، إذا كان لديك مشكلة، يرجى الاتصال بنا في أقرب وقت ممكن",
+      "wasThisHelpful": "هل كان هذا مفيداً؟",
+      "yes": "نعم",
+      "no": "لا",
+      "gazzerSupport": "دعم جازر"
 }
