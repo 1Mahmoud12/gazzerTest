@@ -12,9 +12,11 @@ class OrdersContentWidget extends StatefulWidget {
   const OrdersContentWidget({
     super.key,
     this.shouldRefreshAndOpenFirstOrder = false,
+    this.showGetHelpInsteadOfReorder = false,
   });
 
   final bool shouldRefreshAndOpenFirstOrder;
+  final bool showGetHelpInsteadOfReorder;
 
   @override
   State<OrdersContentWidget> createState() => _OrdersContentWidgetState();
@@ -52,6 +54,7 @@ class _OrdersContentWidgetState extends State<OrdersContentWidget> {
         },
         child: OrdersContentWidgetChild(
           shouldRefreshAndOpenFirstOrder: widget.shouldRefreshAndOpenFirstOrder,
+          showGetHelpInsteadOfReorder: widget.showGetHelpInsteadOfReorder,
         ),
       ),
     );
@@ -62,9 +65,11 @@ class OrdersContentWidgetChild extends StatefulWidget {
   const OrdersContentWidgetChild({
     super.key,
     required this.shouldRefreshAndOpenFirstOrder,
+    required this.showGetHelpInsteadOfReorder,
   });
 
   final bool shouldRefreshAndOpenFirstOrder;
+  final bool showGetHelpInsteadOfReorder;
 
   @override
   State<OrdersContentWidgetChild> createState() => _OrdersContentWidgetChildState();
@@ -87,6 +92,8 @@ class _OrdersContentWidgetChildState extends State<OrdersContentWidgetChild> {
 
   @override
   Widget build(BuildContext context) {
-    return const OrdersListWidget();
+    return OrdersListWidget(
+      showGetHelpInsteadOfReorder: widget.showGetHelpInsteadOfReorder,
+    );
   }
 }

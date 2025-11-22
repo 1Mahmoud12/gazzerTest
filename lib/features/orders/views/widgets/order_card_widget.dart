@@ -19,6 +19,7 @@ import 'package:gazzer/features/orders/presentation/cubit/reorder_state.dart';
 import 'package:gazzer/features/orders/views/widgets/order_rating_dialog.dart';
 import 'package:gazzer/features/orders/views/widgets/reorder_existing_items_dialog.dart';
 import 'package:gazzer/features/orders/views/widgets/vendor_widget.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/order_issue_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
@@ -28,11 +29,13 @@ class OrderCardWidget extends StatelessWidget {
     required this.order,
     this.onViewDetails,
     this.onRatingChanged,
+    this.showGetHelpInsteadOfReorder = false,
   });
 
   final OrderItemEntity order;
   final VoidCallback? onViewDetails;
   final Function(double)? onRatingChanged;
+  final bool showGetHelpInsteadOfReorder;
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +152,10 @@ class OrderCardWidget extends StatelessWidget {
                   ),
                   if (order.status == OrderStatus.delivered) ...[
                     const VerticalSpacing(12),
-                    _ReorderButton(order: order),
+                    _ReorderButton(
+                      order: order,
+                      showGetHelp: showGetHelpInsteadOfReorder,
+                    ),
                   ],
                 ],
               ),
@@ -270,14 +276,49 @@ class _RatingInput extends StatelessWidget {
 }
 
 class _ReorderButton extends StatelessWidget {
-  const _ReorderButton({required this.order});
+  const _ReorderButton({
+    required this.order,
+    this.showGetHelp = false,
+  });
 
   final OrderItemEntity order;
+  final bool showGetHelp;
 
   @override
   Widget build(BuildContext context) {
     final orderId = int.tryParse(order.orderId) ?? 0;
 
+    // Show Get Help button instead of Reorder
+    if (showGetHelp) {
+      return SizedBox(
+        width: double.infinity,
+        child: MainBtn(
+          onPressed: () {
+            context.push(
+              OrderIssueScreen.route,
+              extra: orderId,
+            );
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(Assets.customerSupportIc),
+              const HorizontalSpacing(10),
+              Text(
+                L10n.tr().getHelp,
+                style: TStyle.whiteBold(14),
+              ),
+            ],
+          ),
+          bgColor: Co.purple,
+          radius: 30,
+          padding: const EdgeInsets.symmetric(vertical: 5),
+        ),
+      );
+    }
+
+    // Original Reorder button functionality
     return BlocProvider(
       create: (context) => ReorderCubit(di.get()),
       child: BlocConsumer<ReorderCubit, ReorderState>(

@@ -11,7 +11,12 @@ import 'package:gazzer/features/orders/views/widgets/order_card_widget.dart';
 import 'package:go_router/go_router.dart';
 
 class OrdersListWidget extends StatelessWidget {
-  const OrdersListWidget({super.key});
+  const OrdersListWidget({
+    super.key,
+    this.showGetHelpInsteadOfReorder = false,
+  });
+
+  final bool showGetHelpInsteadOfReorder;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +79,7 @@ class OrdersListWidget extends StatelessWidget {
 
               return OrderCardWidget(
                 order: order,
+                showGetHelpInsteadOfReorder: showGetHelpInsteadOfReorder,
                 onViewDetails: () async {
                   final orderId = int.tryParse(order.orderId) ?? 0;
                   await context.push(

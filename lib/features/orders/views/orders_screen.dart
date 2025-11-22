@@ -11,10 +11,12 @@ class OrdersScreen extends StatefulWidget {
   const OrdersScreen({
     super.key,
     this.shouldRefreshAndOpenFirstOrder = false,
+    this.showGetHelpInsteadOfReorder = false,
   });
   static const route = '/orders';
 
   final bool shouldRefreshAndOpenFirstOrder;
+  final bool showGetHelpInsteadOfReorder;
 
   @override
   State<OrdersScreen> createState() => _OrdersScreenState();
@@ -67,6 +69,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
         ),
         body: OrdersContentWidget(
           shouldRefreshAndOpenFirstOrder: widget.shouldRefreshAndOpenFirstOrder,
+          showGetHelpInsteadOfReorder: widget.showGetHelpInsteadOfReorder,
         ),
         //  Padding(
         //   padding: const EdgeInsets.symmetric(horizontal: 24),

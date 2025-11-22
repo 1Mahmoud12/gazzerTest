@@ -61,9 +61,22 @@ ShellRoute get nestedRoutes => ShellRoute(
     ///
     GoRoute(
       path: OrdersScreen.route,
-      builder: (context, state) => OrdersScreen(
-        shouldRefreshAndOpenFirstOrder: state.extra as bool? ?? false,
-      ),
+      builder: (context, state) {
+        // Handle both bool (legacy) and Map<String, dynamic> (new) extras
+        if (state.extra is Map<String, dynamic>) {
+          final extra = state.extra as Map<String, dynamic>;
+          return OrdersScreen(
+            shouldRefreshAndOpenFirstOrder: extra['shouldRefreshAndOpenFirstOrder'] as bool? ?? false,
+            showGetHelpInsteadOfReorder: extra['showGetHelpInsteadOfReorder'] as bool? ?? false,
+          );
+        } else if (state.extra is bool) {
+          return OrdersScreen(
+            shouldRefreshAndOpenFirstOrder: state.extra as bool,
+          );
+        } else {
+          return const OrdersScreen();
+        }
+      },
       routes: [
         // ShellRoute(routes: []),
       ],

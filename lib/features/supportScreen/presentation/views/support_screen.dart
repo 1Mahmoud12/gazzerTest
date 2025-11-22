@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:go_router/go_router.dart';
 
 import 'faq_list_screen.dart';
-import 'order_issue_screen.dart';
 import 'widgets/support_option_tile.dart';
 
 class SupportScreen extends StatefulWidget {
@@ -33,7 +33,13 @@ class _SupportScreenState extends State<SupportScreen> {
             SupportOptionTile(
               title: l10n.orderIssue,
               onTap: () {
-                context.navigateToPage(const OrderIssueScreen());
+                context.go(
+                  '/orders',
+                  extra: {
+                    'showGetHelpInsteadOfReorder': true,
+                  },
+                );
+                //context.navigateToPage(const OrderIssueScreen());
               },
             ),
             const VerticalSpacing(12),
