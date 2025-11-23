@@ -1785,4 +1785,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeMessage => 'Hello! How can I help you today?';
+
+  @override
+  String get generalIssues => 'General Issues';
 }

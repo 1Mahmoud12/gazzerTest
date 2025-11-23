@@ -764,6 +764,7 @@
         "gallery": "Gallery",
         "camera": "Camera",
         "yesterday": "Yesterday",
-          "welcomeMessage": "Hello! How can I help you today?"
+       "welcomeMessage": "Hello! How can I help you today?",
+       "generalIssues": "General Issues"
 
 }

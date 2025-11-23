@@ -6,4 +6,6 @@ abstract class FaqRepo extends BaseApiRepo {
   FaqRepo(super.crashlyticsRepo);
 
   Future<Result<List<FaqCategoryEntity>>> getFaqCategories(String type);
+
+  Future<List<FaqCategoryEntity>?> getCachedFaqCategories(String type);
 }

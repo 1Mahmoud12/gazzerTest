@@ -765,5 +765,7 @@
         "selectImageSource": "اختر مصدر الصورة",
         "gallery": "المعرض",
         "camera": "الكاميرا",
-        "yesterday": "أمس"
+        "yesterday": "أمس",
+        "generalIssues": "مشكلات عامة"
+
 }

@@ -3565,6 +3565,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hello! How can I help you today?'**
   String get welcomeMessage;
+
+  /// No description provided for @generalIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'General Issues'**
+  String get generalIssues;
 }
 
 class _AppLocalizationsDelegate
