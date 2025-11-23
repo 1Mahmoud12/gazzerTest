@@ -143,4 +143,7 @@ class Endpoints {
 
   /// ** Loyalty Program
   static const loyaltyProgram = "loyalty/program";
+
+  /// ** Support / FAQ
+  static const faqCategories = "support/faqs/categories";
 }

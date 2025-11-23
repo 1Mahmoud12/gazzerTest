@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 
 class LoadingFullScreen extends StatefulWidget {
   const LoadingFullScreen({super.key, required this.isLoading, required this.child});
@@ -45,7 +45,7 @@ class _LoadingFullScreenState extends State<LoadingFullScreen> {
               child: ColoredBox(
                 color: Colors.black45,
 
-                child: Center(child: AdaptiveProgressIndicator()),
+                child: Center(child: LoadingWidget()),
               ),
             ),
           ),
