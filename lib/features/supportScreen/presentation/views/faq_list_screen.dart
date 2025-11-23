@@ -50,17 +50,29 @@ class FaqListScreen extends StatelessWidget {
             return FaqNode(
               title: category.questions.first.question,
               answer: category.questions.first.answer,
+              questionId: category.questions.first.id,
+              categoryId: category.id,
             );
           } else {
             // Multiple questions: create parent node with question children
             return FaqNode(
               title: category.name,
-              children: category.questions.map((q) => FaqNode(title: q.question, answer: q.answer)).toList(),
+              categoryId: category.id,
+              children: category.questions
+                  .map(
+                    (q) => FaqNode(
+                      title: q.question,
+                      answer: q.answer,
+                      questionId: q.id,
+                      categoryId: category.id,
+                    ),
+                  )
+                  .toList(),
             );
           }
         } else {
           // Empty category
-          return FaqNode(title: category.name);
+          return FaqNode(title: category.name, categoryId: category.id);
         }
       }
     }).toList();
@@ -88,7 +100,12 @@ class FaqListScreen extends StatelessWidget {
       // Direct question: open answer screen
       context.navigateToPage(
         FaqQuestionAnswerScreen(
-          args: FaqQAArgs(title: node.title, answer: node.answer ?? ''),
+          args: FaqQAArgs(
+            title: node.title,
+            answer: node.answer ?? '',
+            faqQuestionId: node.questionId ?? 0,
+            faqCategoryId: node.categoryId,
+          ),
         ),
       );
     } else if (node.children.isNotEmpty) {
@@ -109,7 +126,12 @@ class FaqListScreen extends StatelessWidget {
     if (node.isLeaf) {
       context.navigateToPage(
         FaqQuestionAnswerScreen(
-          args: FaqQAArgs(title: node.title, answer: node.answer ?? ''),
+          args: FaqQAArgs(
+            title: node.title,
+            answer: node.answer ?? '',
+            faqQuestionId: node.questionId ?? 0,
+            faqCategoryId: node.categoryId,
+          ),
         ),
       );
     } else {
@@ -157,6 +179,8 @@ class FaqListScreen extends StatelessWidget {
               args: FaqQAArgs(
                 title: category.questions.first.question,
                 answer: category.questions.first.answer,
+                faqQuestionId: category.questions.first.id,
+                faqCategoryId: category.id,
               ),
             ),
           );
@@ -166,7 +190,16 @@ class FaqListScreen extends StatelessWidget {
             FaqListScreen(
               args: FaqListArgs(
                 title: category.name,
-                nodes: category.questions.map((q) => FaqNode(title: q.question, answer: q.answer)).toList(),
+                nodes: category.questions
+                    .map(
+                      (q) => FaqNode(
+                        title: q.question,
+                        answer: q.answer,
+                        questionId: q.id,
+                        categoryId: category.id,
+                      ),
+                    )
+                    .toList(),
                 showCategoriesOnly: false,
               ),
             ),
@@ -252,11 +285,19 @@ class FaqListScreen extends StatelessWidget {
 }
 
 class FaqNode {
-  const FaqNode({required this.title, this.answer, this.children = const []});
+  const FaqNode({
+    required this.title,
+    this.answer,
+    this.children = const [],
+    this.questionId,
+    this.categoryId,
+  });
 
   final String title;
   final String? answer;
   final List<FaqNode> children;
+  final int? questionId;
+  final int? categoryId;
 
   bool get isLeaf => answer != null;
 }

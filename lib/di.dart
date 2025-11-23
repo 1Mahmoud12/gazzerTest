@@ -63,9 +63,12 @@ import 'package:gazzer/features/search/data/search_repo_imp.dart';
 import 'package:gazzer/features/search/domain/search_repo.dart';
 import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
+import 'package:gazzer/features/supportScreen/data/faq_rating_repo_imp.dart';
 import 'package:gazzer/features/supportScreen/data/faq_repo_imp.dart';
+import 'package:gazzer/features/supportScreen/domain/faq_rating_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/faq_repo.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_cubit.dart';
+import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_cubit.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
@@ -184,6 +187,9 @@ void _registerRepos() {
   di.registerLazySingleton<FaqRepo>(
     () => FaqRepoImp(di.get(), di.get()),
   );
+  di.registerLazySingleton<FaqRatingRepo>(
+    () => FaqRatingRepoImp(di.get(), di.get()),
+  );
 }
 
 void _registerBuses() {
@@ -248,5 +254,6 @@ void _registerCubits() {
   di.registerFactory(() => OrdersCubit(di.get()));
   di.registerFactory(() => ReorderCubit(di.get()));
   di.registerFactory(() => FaqCubit(di.get()));
+  di.registerFactory(() => FaqRatingCubit(di.get()));
   di.registerFactory(() => OrderReviewCubit(di.get()));
 }

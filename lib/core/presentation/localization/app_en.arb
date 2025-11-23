@@ -765,6 +765,8 @@
         "camera": "Camera",
         "yesterday": "Yesterday",
        "welcomeMessage": "Hello! How can I help you today?",
-       "generalIssues": "General Issues"
+       "generalIssues": "General Issues",
+       "optionalFeedback": "Optional Feedback"
+
 
 }

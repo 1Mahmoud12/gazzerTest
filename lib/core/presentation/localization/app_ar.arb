@@ -766,6 +766,7 @@
         "gallery": "المعرض",
         "camera": "الكاميرا",
         "yesterday": "أمس",
-        "generalIssues": "مشكلات عامة"
+        "generalIssues": "مشكلات عامة",
+          "optionalFeedback": "ملاحظات اختيارية"
 
 }

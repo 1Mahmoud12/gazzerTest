@@ -3,13 +3,20 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
-import 'widgets/feedback_bottom_sheet.dart';
+import 'widgets/faq_rating_bottom_sheet.dart';
 
 class FaqQAArgs {
-  const FaqQAArgs({required this.title, required this.answer});
+  const FaqQAArgs({
+    required this.title,
+    required this.answer,
+    required this.faqQuestionId,
+    this.faqCategoryId,
+  });
 
   final String title;
   final String answer;
+  final int faqQuestionId;
+  final int? faqCategoryId;
 }
 
 class FaqQuestionAnswerScreen extends StatelessWidget {
@@ -39,17 +46,26 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
             ),
             const VerticalSpacing(16),
             Center(
-              child: Text(L10n.tr().wasThisHelpful, style: TStyle.blackBold(14).copyWith(color: Co.purple)),
+              child: Text(
+                L10n.tr().wasThisHelpful,
+                style: TStyle.blackBold(14).copyWith(color: Co.purple),
+              ),
             ),
             const VerticalSpacing(12),
             Row(
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => showFeedbackBottomSheet(context),
+                    onPressed: () => showFaqRatingBottomSheet(
+                      context,
+                      faqQuestionId: args.faqQuestionId,
+                      faqCategoryId: args.faqCategoryId,
+                    ),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(L10n.tr().yes),
@@ -58,10 +74,16 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
                 const HorizontalSpacing(12),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => showFeedbackBottomSheet(context),
+                    onPressed: () => showFaqRatingBottomSheet(
+                      context,
+                      faqQuestionId: args.faqQuestionId,
+                      faqCategoryId: args.faqCategoryId,
+                    ),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(L10n.tr().no),

@@ -146,4 +146,5 @@ class Endpoints {
 
   /// ** Support / FAQ
   static const faqCategories = "support/faqs/categories";
+  static const faqRating = "support/ratings";
 }

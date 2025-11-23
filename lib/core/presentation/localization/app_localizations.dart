@@ -3571,6 +3571,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'General Issues'**
   String get generalIssues;
+
+  /// No description provided for @optionalFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional Feedback'**
+  String get optionalFeedback;
 }
 
 class _AppLocalizationsDelegate
