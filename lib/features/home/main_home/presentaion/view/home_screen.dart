@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,6 +13,7 @@ import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
+import 'package:gazzer/core/presentation/pkgs/notification/notification.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
@@ -73,6 +75,51 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
+
+  @override
+  void didChangeDependencies() async {
+    if (currentIndex == 0) {
+      await initNotification();
+      await selectTokens();
+      currentIndex++;
+    }
+    super.didChangeDependencies();
+  }
+
+  Future<void> initNotification() async {
+    await Future.delayed(Duration.zero, () async {
+      //setup notification callback here
+      await NotificationUtility.setUpNotificationService(context);
+    });
+
+    await AwesomeNotifications().setListeners(
+      onActionReceivedMethod: NotificationUtility.onActionReceivedMethod,
+      onNotificationCreatedMethod: NotificationUtility.onNotificationCreatedMethod,
+      onNotificationDisplayedMethod: NotificationUtility.onNotificationDisplayedMethod,
+      onDismissActionReceivedMethod: NotificationUtility.onDismissActionReceivedMethod,
+    );
+
+    notificationTerminatedBackground();
+  }
+
+  void notificationTerminatedBackground() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      debugPrint('Global Message ${AppConst.messageGlobal?.data}');
+      if (AppConst.messageGlobal?.data != null) {
+        debugPrint('Global Message Enter${AppConst.messageGlobal?.data}');
+
+        Future.delayed(const Duration(milliseconds: 1000), () async {
+          NotificationUtility.onTapNotificationScreenNavigateCallback(
+            AppConst.messageGlobal!.data['type'] ?? '',
+            AppConst.messageGlobal!.data,
+          );
+          AppConst.messageGlobal = null;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -90,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    selectTokens();
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {

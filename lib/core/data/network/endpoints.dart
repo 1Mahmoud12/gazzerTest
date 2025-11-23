@@ -147,4 +147,8 @@ class Endpoints {
   /// ** Support / FAQ
   static const faqCategories = "support/faqs/categories";
   static const faqRating = "support/ratings";
+
+  /// ** Support / Chat
+  static String getChatMessages(int chatId) => "support/chats/$chatId";
+  static const sendChatMessage = "support/chats";
 }

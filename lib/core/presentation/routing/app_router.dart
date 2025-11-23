@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: AppNavigator.mainKey,
-  initialLocation: SplashScreen.route,
+  initialLocation: AppNavigator.initialRoute,
   observers: [MyRouteObserver()],
   routes: [
     nestedRoutes,

@@ -12,6 +12,8 @@ class StorageKeys {
   static String readNotifications = "readNotifications";
   static String favoriteIDs = "readNotifications";
   static String cart = "cart";
+  static String deviceId = "device_id";
+  static String fcmToken = "fcm_token";
   // static String branchId = "branchId";
 }
 

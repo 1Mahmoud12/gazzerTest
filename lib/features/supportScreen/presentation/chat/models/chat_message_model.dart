@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:gazzer/features/supportScreen/domain/entities/chat_entity.dart';
 
 enum MessageSender {
   user,
   support,
+  system,
 }
 
 enum MessageStatus {
@@ -32,13 +34,40 @@ class ChatMessageModel extends Equatable {
     required this.timestamp,
   });
 
+  factory ChatMessageModel.fromEntity(ChatMessageEntity entity) {
+    MessageSender sender;
+    if (entity.isFromUser) {
+      sender = MessageSender.user;
+    } else if (entity.isFromSystem) {
+      sender = MessageSender.system;
+    } else {
+      sender = MessageSender.support;
+    }
+
+    MessageStatus status;
+    if (entity.isRead ?? false) {
+      status = MessageStatus.read;
+    } else {
+      status = MessageStatus.delivered;
+    }
+
+    return ChatMessageModel(
+      id: entity.id,
+      text: entity.text,
+      imageUrl: entity.imageUrl,
+      sender: sender,
+      status: status,
+      timestamp: entity.timestamp,
+    );
+  }
+
   bool get hasImage => imageUrl != null || localImagePath != null;
 
   bool get hasText => text != null && text!.isNotEmpty;
 
   bool get isFromUser => sender == MessageSender.user;
 
-  bool get isFromSupport => sender == MessageSender.support;
+  bool get isFromSupport => sender == MessageSender.support || sender == MessageSender.system;
 
   bool get isSending => status == MessageStatus.sending;
 

@@ -53,13 +53,10 @@ class _ChatInputFieldState extends State<ChatInputField> {
     if (widget.isSending) return;
 
     final text = _controller.text.trim();
-    if (text.isNotEmpty || widget.imagePreviewPath != null) {
-      widget.onSendMessage(text);
-      _controller.clear();
-      setState(() {
-        _hasText = false;
-      });
-    }
+    if (text.isEmpty && widget.imagePreviewPath == null) return;
+
+    widget.onSendMessage(text);
+    _controller.clear();
   }
 
   void _showImageSourceDialog() {

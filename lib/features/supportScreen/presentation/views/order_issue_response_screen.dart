@@ -8,8 +8,9 @@ import 'gazzer_support_screen.dart';
 import 'widgets/feedback_bottom_sheet.dart';
 
 class OrderIssueResponseScreen extends StatelessWidget {
-  const OrderIssueResponseScreen({super.key});
+  const OrderIssueResponseScreen({super.key, this.orderId});
 
+  final int? orderId;
   static const route = '/order-issue-response';
 
   @override
@@ -65,7 +66,11 @@ class OrderIssueResponseScreen extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      context.navigateToPage(const GazzerSupportScreen());
+                      context.navigateToPage(
+                        GazzerSupportScreen(
+                          orderId: orderId,
+                        ),
+                      );
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),

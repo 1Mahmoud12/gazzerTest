@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 
 class AppConst {
@@ -18,4 +19,12 @@ class AppConst {
 
   // Support contact
   static const String supportPhoneNumber = '+20123456789'; // TODO: Update with actual number
+
+  static String notificationChannelKey = 'channel_id1';
+  static String fcmToken = 'fcmToken';
+  static String deviceId = 'deviceId';
+  static FirebaseMessaging messaging = FirebaseMessaging.instance;
+  static Map jsonServerKey = {};
+
+  static RemoteMessage? messageGlobal;
 }

@@ -63,8 +63,10 @@ import 'package:gazzer/features/search/data/search_repo_imp.dart';
 import 'package:gazzer/features/search/domain/search_repo.dart';
 import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
+import 'package:gazzer/features/supportScreen/data/chat_repo_imp.dart';
 import 'package:gazzer/features/supportScreen/data/faq_rating_repo_imp.dart';
 import 'package:gazzer/features/supportScreen/data/faq_repo_imp.dart';
+import 'package:gazzer/features/supportScreen/domain/chat_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/faq_rating_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/faq_repo.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_cubit.dart';
@@ -189,6 +191,9 @@ void _registerRepos() {
   );
   di.registerLazySingleton<FaqRatingRepo>(
     () => FaqRatingRepoImp(di.get(), di.get()),
+  );
+  di.registerLazySingleton<ChatRepo>(
+    () => ChatRepoImp(di.get(), di.get()),
   );
 }
 

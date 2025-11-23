@@ -131,7 +131,9 @@ final List<RouteBase> unNestedRoutes = [
   GoRoute(
     path: GazzerSupportScreen.route,
     builder: (context, state) {
-      return const GazzerSupportScreen();
+      return GazzerSupportScreen(
+        orderId: state.extra as int?,
+      );
     },
   ),
   GoRoute(

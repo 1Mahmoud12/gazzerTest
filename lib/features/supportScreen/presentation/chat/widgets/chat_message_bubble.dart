@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/features/supportScreen/presentation/chat/models/chat_message_model.dart';
 import 'package:intl/intl.dart';
 
@@ -53,22 +54,9 @@ class ChatMessageBubble extends StatelessWidget {
                               width: double.infinity,
                               fit: BoxFit.cover,
                             )
-                          : Image.network(
+                          : CustomNetworkImage(
                               message.imageUrl!,
-                              width: double.infinity,
                               fit: BoxFit.cover,
-                              loadingBuilder: (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Container(
-                                  height: 150,
-                                  alignment: Alignment.center,
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                        : null,
-                                  ),
-                                );
-                              },
                             ),
                     ),
                     if (message.hasText) const SizedBox(height: 8),

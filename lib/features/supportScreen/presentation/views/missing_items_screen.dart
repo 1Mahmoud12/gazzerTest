@@ -60,7 +60,7 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
     // final notes = _notesController.text.trim();
 
     // Navigate to response screen
-    context.navigateToPage(const OrderIssueResponseScreen());
+    context.navigateToPage(OrderIssueResponseScreen(orderId: widget.orderId));
   }
 
   @override

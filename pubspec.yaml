@@ -117,6 +117,12 @@ dependencies:
 
   ## Animation
   flutter_animate: ^4.5.2
+
+  #Notification
+  googleapis_auth: ^2.0.0
+  awesome_notifications: ^0.10.1
+  device_info_plus: ^12.2.0
+  uuid: ^4.5.2
 dependency_overrides:
   analyzer: 8.1.0
   package_info_plus: ^9.0.0
