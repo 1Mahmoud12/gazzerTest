@@ -20,6 +20,7 @@ void showFaqRatingBottomSheet(
   BuildContext context, {
   required int faqQuestionId,
   int? faqCategoryId,
+  int? orderId,
 }) {
   showModalBottomSheet(
     context: context,

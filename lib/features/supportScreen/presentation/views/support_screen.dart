@@ -8,6 +8,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_states.dart';
+import 'package:go_router/go_router.dart';
 
 import 'faq_list_screen.dart';
 import 'widgets/support_option_tile.dart';
@@ -84,8 +85,9 @@ class _SupportScreenState extends State<SupportScreen> {
                         SupportOptionTile(
                           title: l10n.orderIssue,
                           onTap: () {
-                            _pendingType = 'order_issue';
-                            context.read<FaqCubit>().getFaqCategories('order_issue');
+                            //  _pendingType = 'order_issue';
+                            //   context.read<FaqCubit>().getFaqCategories('order_issue');
+                            context.go('/orders', extra: {"showGetHelpInsteadOfReorder": true});
                           },
                         ),
                         const VerticalSpacing(12),
