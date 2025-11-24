@@ -773,7 +773,9 @@
   "youMustCheckOneAtLeast": "You must select at least one option",
   "errorTakingPhoto": "Error taking photo",
   "takePhotoOfItem": "Take photo of item",
-  "tapToTakePhoto": "Tap to take photo"
+  "tapToTakePhoto": "Tap to take photo",
+    "phoneMustMatchEgyptPrefix": "Phone number must start with 1 followed by 0, 1, 2, or 5"
+
 
 
 }

@@ -1809,4 +1809,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tapToTakePhoto => 'اضغط لالتقاط صورة';
+
+  @override
+  String get phoneMustMatchEgyptPrefix => 'يجب أن يبدأ رقم الهاتف بالرقم 1 متبوعًا بـ 0 أو 1 أو 2 أو 5';
 }

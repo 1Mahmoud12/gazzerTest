@@ -3613,6 +3613,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tap to take photo'**
   String get tapToTakePhoto;
+
+  /// No description provided for @phoneMustMatchEgyptPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must start with 1 followed by 0, 1, 2, or 5'**
+  String get phoneMustMatchEgyptPrefix;
 }
 
 class _AppLocalizationsDelegate

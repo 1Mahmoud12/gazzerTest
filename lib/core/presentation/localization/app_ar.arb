@@ -773,6 +773,8 @@
   "errorTakingPhoto": "خطأ في التقاط الصورة",
   "takePhotoOfItem": "التقاط صورة للعنصر",
   "tapToTakePhoto": "اضغط لالتقاط صورة",
-          "optionalFeedback": "ملاحظات اختيارية"
+          "optionalFeedback": "ملاحظات اختيارية",
+            "phoneMustMatchEgyptPrefix": "يجب أن يبدأ رقم الهاتف بالرقم 1 متبوعًا بـ 0 أو 1 أو 2 أو 5"
+
 
 }
