@@ -11,6 +11,7 @@ import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_params.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_response_dto.dart';
+import 'package:gazzer/features/checkout/data/dtos/order_summary_dto.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/main.dart';
@@ -66,6 +67,11 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
   List<CardEntity> get cards => _cards;
   bool get isCreatingCard => _isCreatingCard;
+
+  // Order summary
+  OrderSummaryDTO? _orderSummary;
+
+  OrderSummaryDTO? get orderSummary => _orderSummary;
 
   @override
   void emit(CheckoutStates state) {
@@ -148,6 +154,24 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   void applyVoucher(String? code) {
     _voucherCode = (code == null || code.trim().isEmpty) ? null : code.trim();
     emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
+    // Load order summary with voucher (don't show loading dialog here to avoid build errors)
+    loadOrderSummary(voucher: _voucherCode);
+  }
+
+  Future<void> loadOrderSummary({String? voucher}) async {
+    emit(OrderSummaryLoading());
+    final result = await _checkoutRepo.getOrderSummary(voucher: voucher);
+
+    switch (result) {
+      case Ok<OrderSummaryDTO>(:final value):
+        _orderSummary = value;
+        totalOrder = value.total;
+        emit(OrderSummaryLoaded(orderSummary: value));
+        break;
+      case Err<OrderSummaryDTO>(:final error):
+        emit(OrderSummaryError(message: error.message));
+        break;
+    }
   }
 
   /// Set remaining payment method (selected from bottom sheet: credit card or wallet)

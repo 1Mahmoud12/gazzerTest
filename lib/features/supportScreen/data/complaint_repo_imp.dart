@@ -71,7 +71,7 @@ class ComplaintRepoImp extends ComplaintRepo {
           // Add multiple attachments as array
           if (request.attachments != null && request.attachments!.isNotEmpty) {
             for (int i = 0; i < request.attachments!.length; i++) {
-              formDataMap['attachments[$i]'] = await MultipartFile.fromFile(
+              formDataMap['attachment[$i]'] = await MultipartFile.fromFile(
                 request.attachments![i].path,
               );
             }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:gazzer/features/checkout/data/dtos/order_summary_dto.dart';
 
 sealed class CheckoutStates extends Equatable {
   const CheckoutStates();
@@ -106,4 +107,24 @@ class CardChange extends CheckoutStates {
 
   @override
   List<Object?> get props => [timestamp];
+}
+
+class OrderSummaryLoading extends CheckoutStates {}
+
+class OrderSummaryLoaded extends CheckoutStates {
+  const OrderSummaryLoaded({required this.orderSummary});
+
+  final OrderSummaryDTO orderSummary;
+
+  @override
+  List<Object?> get props => [orderSummary];
+}
+
+class OrderSummaryError extends CheckoutStates {
+  const OrderSummaryError({required this.message});
+
+  final String message;
+
+  @override
+  List<Object?> get props => [message];
 }

@@ -7,9 +7,7 @@ import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_states.dart';
 
 class VouchersCubit extends Cubit<VouchersStates> {
-  VouchersCubit(this._checkoutRepo) : super(VouchersInitial()) {
-    loadVouchers();
-  }
+  VouchersCubit(this._checkoutRepo) : super(VouchersInitial());
 
   final CheckoutRepo _checkoutRepo;
 

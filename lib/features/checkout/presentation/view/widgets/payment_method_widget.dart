@@ -17,7 +17,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.da
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_alert_widget.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
+import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class PaymentMethodWidget extends StatelessWidget {
@@ -331,7 +331,7 @@ class _PaymentMethodItem extends StatelessWidget {
                             child: InkWell(
                               onTap: () async {
                                 await context.push(
-                                  LoyaltyProgramHeroOneScreen.route,
+                                  WalletScreen.route,
                                 );
                                 if (context.mounted) {
                                   animationDialogLoading();

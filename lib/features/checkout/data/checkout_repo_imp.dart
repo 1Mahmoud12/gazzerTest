@@ -4,6 +4,7 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_params.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_response_dto.dart';
+import 'package:gazzer/features/checkout/data/dtos/order_summary_dto.dart';
 import 'package:gazzer/features/checkout/domain/checkout_repo.dart';
 
 class CheckoutRepoImp extends CheckoutRepo {
@@ -99,6 +100,17 @@ class CheckoutRepoImp extends CheckoutRepo {
         requestBody: params.toJson(),
       ),
       parser: (response) => CheckoutResponseDTO.fromJson(response.data),
+    );
+  }
+
+  @override
+  Future<Result<OrderSummaryDTO>> getOrderSummary({String? voucher}) {
+    return super.call(
+      apiCall: () => _apiClient.get(
+        endpoint: Endpoints.orderSummary,
+        queryParameters: voucher != null ? {'voucher': voucher} : null,
+      ),
+      parser: (response) => OrderSummaryDTO.fromJson(response.data['data'] as Map<String, dynamic>),
     );
   }
 }

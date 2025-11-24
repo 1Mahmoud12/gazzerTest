@@ -24,12 +24,17 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> with AutomaticK
   @override
   void initState() {
     super.initState();
-    context.read<CheckoutCubit>().loadCheckoutData();
-    context.read<CartCubit>().loadCart();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<CheckoutCubit>().loadCheckoutData();
+      context.read<CartCubit>().loadCart();
+      context.read<CheckoutCubit>().loadOrderSummary();
 
-    context.read<CheckoutCubit>().applyVoucher(null);
-    context.read<CheckoutCubit>().selectCard(null);
-    context.read<CheckoutCubit>().selectPaymentMethod(PaymentMethod.cashOnDelivery);
+      context.read<CheckoutCubit>().applyVoucher(null);
+      context.read<CheckoutCubit>().selectCard(null);
+      context.read<CheckoutCubit>().selectPaymentMethod(
+        PaymentMethod.cashOnDelivery,
+      );
+    });
   }
 
   @override

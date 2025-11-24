@@ -30,6 +30,12 @@ class _VoucherWidgetState extends State<VoucherWidget> {
   void initState() {
     super.initState();
     _voucherController = TextEditingController();
+    // Load vouchers after the first frame to avoid build errors
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<VouchersCubit>().loadVouchers();
+      }
+    });
   }
 
   @override
