@@ -72,7 +72,9 @@ class RequestDeleteAccountSuccess extends ProfileStates {
 }
 
 class RequestDeleteAccountError extends ProfileErrorStates {
-  RequestDeleteAccountError(super.message);
+  final int? remainingSeconds;
+
+  RequestDeleteAccountError(super.message, [this.remainingSeconds]);
 }
 
 class RequestDeleteAccountRateLimitError extends ProfileErrorStates {

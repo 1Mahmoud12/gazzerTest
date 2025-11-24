@@ -108,6 +108,20 @@ class ProfileCubit extends Cubit<ProfileStates> {
               remainingSeconds,
             ),
           );
+        } else if (err.error is BadResponse) {
+          // Check if BadResponse has remaining_seconds
+          final badResponse = err.error as BadResponse;
+          if (badResponse.remainingSeconds != null) {
+            final remainingSeconds = badResponse.remainingSeconds!.ceil();
+            emit(
+              RequestDeleteAccountRateLimitError(
+                badResponse.message,
+                remainingSeconds,
+              ),
+            );
+          } else {
+            emit(RequestDeleteAccountError(badResponse.message));
+          }
         } else {
           emit(RequestDeleteAccountError(err.error.message));
         }

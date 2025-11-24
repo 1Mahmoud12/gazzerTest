@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/orders/presentation/cubit/orders_cubit.dart';
@@ -29,7 +30,7 @@ class _OrdersContentWidgetState extends State<OrdersContentWidget> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => OrdersCubit(di.get()),
-      child: BlocListener<OrdersCubit, OrdersState>(
+      child: BlocConsumer<OrdersCubit, OrdersState>(
         listener: (context, state) {
           if (state is OrdersError) {
             Alerts.showToast(state.message, error: true);
@@ -52,10 +53,17 @@ class _OrdersContentWidgetState extends State<OrdersContentWidget> {
             }
           }
         },
-        child: OrdersContentWidgetChild(
-          shouldRefreshAndOpenFirstOrder: widget.shouldRefreshAndOpenFirstOrder,
-          showGetHelpInsteadOfReorder: widget.showGetHelpInsteadOfReorder,
-        ),
+        builder: (context, state) => state is OrdersError
+            ? FailureComponent(
+                message: state.message,
+                onRetry: () {
+                  context.read<OrdersCubit>().loadOrders(refresh: true);
+                },
+              )
+            : OrdersContentWidgetChild(
+                shouldRefreshAndOpenFirstOrder: widget.shouldRefreshAndOpenFirstOrder,
+                showGetHelpInsteadOfReorder: widget.showGetHelpInsteadOfReorder,
+              ),
       ),
     );
   }

@@ -29,12 +29,12 @@ class LoyaltyProgramRepoImpl extends LoyaltyProgramRepo {
       },
     );
 
-    if (result is Err<LoyaltyProgramEntity?>) {
-      final cached = await getCachedLoyaltyProgram();
-      if (cached != null) {
-        return Result.ok(cached);
-      }
-    }
+    // if (result is Err<LoyaltyProgramEntity?>) {
+    //   final cached = await getCachedLoyaltyProgram();
+    //   if (cached != null) {
+    //     return Result.ok(cached);
+    //   }
+    // }
 
     return result;
   }

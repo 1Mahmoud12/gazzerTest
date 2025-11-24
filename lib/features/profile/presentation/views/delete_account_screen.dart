@@ -30,7 +30,10 @@ class DeleteAccountRoute extends GoRouteData with _$DeleteAccountRoute {
   final ProfileCubit $extra;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return BlocProvider.value(value: $extra, child: const DeleteAccountScreen());
+    return BlocProvider.value(
+      value: $extra,
+      child: const DeleteAccountScreen(),
+    );
   }
 }
 
@@ -69,6 +72,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
       listener: (context, state) {
         if (state is RequestDeleteAccountSuccess) {
           if (ModalRoute.of(context)?.isCurrent != true) return;
+          // Don't close existing modal - just open the success modal
+          // The existing modal (if any) will be replaced by the new one
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
@@ -89,7 +94,57 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             },
           );
         } else if (state is RequestDeleteAccountError) {
-          Alerts.showToast(state.message);
+          // Check if error has remaining_seconds
+          if (state.remainingSeconds != null) {
+            // Show support call option when rate limited
+            Navigator.pop(context);
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              useSafeArea: true,
+              builder: (context) {
+                return BlocProvider.value(
+                  value: cubit,
+                  child: DeleteAccountSheet(
+                    req: DeleteAccountReq(
+                      otpCode: '',
+                      sessionId: '',
+                      reasonId: reasonId,
+                      reasonText: reasonController.text.trim(),
+                    ),
+                    initialRemainingSeconds: state.remainingSeconds,
+                  ),
+                );
+              },
+            );
+          } else {
+            Alerts.showToast(state.message);
+          }
+        } else if (state is RequestDeleteAccountRateLimitError) {
+          // Show support call option when rate limited
+          Navigator.pop(context);
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            useSafeArea: true,
+            builder: (context) {
+              return BlocProvider.value(
+                value: cubit,
+                child: DeleteAccountSheet(
+                  req: DeleteAccountReq(
+                    otpCode: '',
+                    sessionId: '',
+                    reasonId: reasonId,
+                    reasonText: reasonController.text.trim(),
+                  ),
+                  initialRemainingSeconds: state.remainingSeconds,
+                ),
+              );
+            },
+          );
+          //Alerts.showToast(state.message);
         }
       },
       buildWhen: (previous, current) => current is RequestDeleteAccountLoading || previous is RequestDeleteAccountLoading,
@@ -178,7 +233,10 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             return RadioListTile(
                               value: items[index].id,
 
-                              subtitle: Text(items[index].description, style: TStyle.greySemi(12)),
+                              subtitle: Text(
+                                items[index].description,
+                                style: TStyle.greySemi(12),
+                              ),
                               title: Text(
                                 items[index].title,
                                 style: TStyle.blackBold(14),
@@ -220,7 +278,13 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                           bgColor: Colors.transparent,
                           controller: reasonController,
                           hintText: L10n.tr().reason,
-                          validator: (v) => reasonId != -1 ? null : Validators.valueAtLeastNum(v, L10n.tr().reason, 10),
+                          validator: (v) => reasonId != -1
+                              ? null
+                              : Validators.valueAtLeastNum(
+                                  v,
+                                  L10n.tr().reason,
+                                  10,
+                                ),
                         ),
                       ),
                     ),

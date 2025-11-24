@@ -17,11 +17,15 @@ class BaseError {
 class BadResponse extends BaseError {
   late bool isSingle;
   List<String>? _errors;
+  final double? remainingSeconds;
+
   @override
   BadResponse.fromJson(
     Map<String, dynamic> json, {
     super.e = ErrorType.badResponse,
-  }) {
+  }) : remainingSeconds = (json['data'] is Map && json['data']?['remaining_seconds'] != null)
+           ? (json['data']?['remaining_seconds'] as num?)?.toDouble()
+           : null {
     if (json['errors'] is Map) {
       final errors = json['errors'] as Map<String, dynamic>;
       final List<String> errosList = [];

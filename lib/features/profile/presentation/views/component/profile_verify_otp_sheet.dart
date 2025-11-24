@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
@@ -38,6 +39,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
   late String sessionId;
   final counter = 30;
   final isResendingOtp = ValueNotifier<bool>(false);
+  final showSupport = ValueNotifier<bool>(false);
 
   Future<void> resend() async {
     isResendingOtp.value = true;
@@ -75,6 +77,8 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
   @override
   void dispose() {
     otpCont.dispose();
+    showSupport.dispose();
+
     super.dispose();
   }
 
@@ -84,6 +88,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
       listener: (context, state) {
         // Handle rate limit error when resending OTP
         if (state is UpdateProfileRateLimitError) {
+          if (state.remainingSeconds != 0) showSupport.value = true;
           _setTimer(counter: state.remainingSeconds);
           Alerts.showToast(state.message);
         }
@@ -186,7 +191,45 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                           ],
                         ),
                       ),
-                      const VerticalSpacing(20),
+
+                      ValueListenableBuilder(
+                        valueListenable: showSupport,
+                        builder: (context, value, child) => AnimatedScale(
+                          scale: value ? 1 : 0,
+                          duration: const Duration(milliseconds: 200),
+                          child: child,
+                        ),
+                        child: Column(
+                          children: [
+                            const VerticalSpacing(10),
+                            const Divider(),
+                            Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () => Helpers.callSupport(context),
+                                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                                  child: Row(
+                                    spacing: 12,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.phone,
+                                        size: 32,
+                                        color: Co.purple,
+                                      ),
+                                      Text(
+                                        L10n.tr().callSupport,
+                                        style: TStyle.primarySemi(16),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const VerticalSpacing(10),
                       BlocConsumer<ProfileCubit, ProfileStates>(
                         listener: (context, state) {
                           if (state is VerifyOTPSuccess) {

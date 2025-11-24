@@ -7,6 +7,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
@@ -19,8 +20,13 @@ import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
 import 'package:go_router/go_router.dart';
 
 class DeleteAccountSheet extends StatefulWidget {
-  const DeleteAccountSheet({super.key, required this.req});
+  const DeleteAccountSheet({
+    super.key,
+    required this.req,
+    this.initialRemainingSeconds,
+  });
   final DeleteAccountReq req;
+  final int? initialRemainingSeconds;
   @override
   State<DeleteAccountSheet> createState() => _DeleteAccountSheetState();
 }
@@ -32,6 +38,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
   late final ValueNotifier<int> seconds;
   late DeleteAccountReq req;
   final counter = 30;
+  final showSupport = ValueNotifier<bool>(false);
 
   void _setTimer({int? counter}) {
     final initialValue = counter ?? this.counter;
@@ -48,9 +55,13 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
   @override
   void initState() {
     req = widget.req.copyWith();
-    seconds = ValueNotifier<int>(counter);
+    final initialCounter = widget.initialRemainingSeconds ?? counter;
+    seconds = ValueNotifier<int>(initialCounter);
+    if (widget.initialRemainingSeconds != null) {
+      showSupport.value = true;
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _setTimer();
+      _setTimer(counter: initialCounter);
     });
     super.initState();
   }
@@ -58,6 +69,9 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
   @override
   void dispose() {
     otpCont.dispose();
+    seconds.dispose();
+    showSupport.dispose();
+    timer.cancel();
     super.dispose();
   }
 
@@ -142,6 +156,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                                 );
                               } else if (state is RequestDeleteAccountRateLimitError) {
                                 // Handle rate limit error with remaining seconds
+                                showSupport.value = true;
                                 _setTimer(counter: state.remainingSeconds);
                                 Alerts.showToast(state.message);
                               }
@@ -186,7 +201,42 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                         ],
                       ),
                     ),
-
+                    ValueListenableBuilder(
+                      valueListenable: showSupport,
+                      builder: (context, value, child) => AnimatedScale(
+                        scale: value ? 1 : 0,
+                        duration: const Duration(milliseconds: 200),
+                        child: child,
+                      ),
+                      child: Column(
+                        children: [
+                          const Divider(),
+                          Row(
+                            children: [
+                              TextButton(
+                                onPressed: () => Helpers.callSupport(context),
+                                style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                                child: Row(
+                                  spacing: 12,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(
+                                      Icons.phone,
+                                      size: 32,
+                                      color: Co.purple,
+                                    ),
+                                    Text(
+                                      L10n.tr().callSupport,
+                                      style: TStyle.primarySemi(16),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                     const VerticalSpacing(20),
                     OptionBtn(
                       isLoading: state is DeleteAccountLoading,
@@ -196,7 +246,6 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                             L10n.tr().valueMustBeNum(6, L10n.tr().code),
                           );
                         }
-                        print("OTP is ${otpCont.text}");
                         final newReq = req.copyWith(
                           otpCode: otpCont.text.trim(),
                         );

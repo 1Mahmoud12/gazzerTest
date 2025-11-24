@@ -27,7 +27,7 @@ class _ProfileHeaderWidget extends StatelessWidget {
                 Assets.assetsSvgCup,
                 height: 22,
                 width: 22,
-                colorFilter: ColorFilter.mode(Co.dark, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(Co.dark, BlendMode.srcIn),
               ),
             ),
           ],
