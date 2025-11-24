@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -95,7 +96,7 @@ class GlobalIncrementWidget extends StatelessWidget {
                 )
               : Icon(
                   Icons.add,
-                  color: canAdd ? Co.secondary : Co.secondary.withOpacity(0.3),
+                  color: canAdd ? Co.secondary : Co.secondary.withOpacityNew(0.3),
                   size: iconSize,
                 ),
         ),

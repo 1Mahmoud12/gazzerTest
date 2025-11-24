@@ -66,79 +66,97 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
               child: Column(
                 children: [
                   if (state.summary.subTotal != 0)
-                    ItemSummary(
-                      title: L10n.tr().grossAmount,
-                      value: state.summary.subTotal,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: ItemSummary(
+                        title: L10n.tr().grossAmount,
+                        value: state.summary.subTotal,
+                      ),
                     ),
-                  const SizedBox(height: 8),
                   if (state.summary.discount != 0)
-                    ItemSummary(
-                      title: L10n.tr().discount,
-                      value: state.summary.discount,
-                      discount: true,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: ItemSummary(
+                        title: L10n.tr().discount,
+                        value: state.summary.discount,
+                        discount: true,
+                      ),
                     ),
-                  const SizedBox(height: 8),
                   if (state.summary.deliveryFee != 0)
-                    ItemSummary(
-                      title: L10n.tr().deliveryFee,
-                      value: state.summary.deliveryFee,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: ItemSummary(
+                        title: L10n.tr().deliveryFee,
+                        value: state.summary.deliveryFee,
+                      ),
                     ),
-                  const SizedBox(height: 8),
                   if (state.summary.serviceFee != 0)
-                    ItemSummary(
-                      title: L10n.tr().serviceFee,
-                      value: state.summary.serviceFee,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: ItemSummary(
+                        title: L10n.tr().serviceFee,
+                        value: state.summary.serviceFee,
+                      ),
                     ),
-                  const SizedBox(height: 8),
 
                   if (voucherFormatted != null) ...[
-                    ItemSummary(
-                      title: L10n.tr().totalBeforeCode,
-                      value: state.summary.total,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: ItemSummary(
+                        title: L10n.tr().totalBeforeCode,
+                        value: state.summary.total,
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    ItemSummary(
-                      title: L10n.tr().promoCode,
-                      value: voucherDeduction,
-                      discount: true,
-                      formattedValue: voucherFormatted,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: ItemSummary(
+                        title: L10n.tr().promoCode,
+                        value: voucherDeduction,
+                        discount: true,
+                        formattedValue: voucherFormatted,
+                      ),
                     ),
-                    const SizedBox(height: 8),
                   ],
-                  const DashedBorder(
-                    width: 10,
-                    gap: 8,
-                    color: Co.gryPrimary,
-                    thickness: 1.5,
+
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 6.0),
+                    child: DashedBorder(
+                      width: 10,
+                      gap: 8,
+                      color: Co.gryPrimary,
+                      thickness: 1.5,
+                    ),
                   ),
-                  const VerticalSpacing(12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                L10n.tr().total,
-                                style: TStyle.blackSemi(20, font: FFamily.roboto),
-                                overflow: TextOverflow.ellipsis,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  L10n.tr().total,
+                                  style: TStyle.blackSemi(20, font: FFamily.roboto),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                              const HorizontalSpacing(2),
+                              Text(
+                                ' (${L10n.tr().amountToPay}) ',
+                                style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(overflow: TextOverflow.ellipsis),
                                 maxLines: 1,
                               ),
-                            ),
-                            const HorizontalSpacing(2),
-                            Text(
-                              ' (${L10n.tr().amountToPay}) ',
-                              style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(overflow: TextOverflow.ellipsis),
-                              maxLines: 1,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      const HorizontalSpacing(12),
-                      Text(Helpers.getProperPrice(finalTotal), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
-                    ],
+                        const HorizontalSpacing(12),
+                        Text(Helpers.getProperPrice(finalTotal), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
+                      ],
+                    ),
                   ),
                 ],
               ),

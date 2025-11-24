@@ -8,7 +8,6 @@ import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
-import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/cubit/splash_states.dart';
 import 'package:go_router/go_router.dart';
@@ -98,10 +97,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               BlocConsumer<SplashCubit, SplashStates>(
                 listener: (context, state) {
                   if (state is UnAuth) {
-                    if (state.haveSeenTour) {
+                    if (!state.haveSeenTour) {
                       context.go(LoginScreen.route);
                     } else {
-                      const IntroVideoTutorialRoute(videoLink: '').go(context);
+                      context.go(HomeScreen.route);
+                      //  const IntroVideoTutorialRoute(videoLink: '').go(context);
                     }
                   } else if (state is RefreshTokenSuccess) {
                     cubit.getClientData();

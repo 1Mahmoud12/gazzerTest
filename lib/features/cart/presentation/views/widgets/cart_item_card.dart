@@ -170,6 +170,7 @@ class CartItemCard extends StatelessWidget {
                                         initVal: item.quantity,
                                         isRemoving: state is UpdateItemLoading && state.isRemoving,
                                         isAdding: state is UpdateItemLoading && state.isAdding,
+                                        isIncrementDisabled: state is UpdateItemError && state.cartId == item.cartId && state.isMaxQuantityReached,
                                         onChanged: (isAdding) {
                                           cubit.updateItemQuantity(
                                             item.cartId,

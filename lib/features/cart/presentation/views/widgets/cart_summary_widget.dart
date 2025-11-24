@@ -48,121 +48,135 @@ class CartSummaryWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (state.summary.subTotal > 0)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(L10n.tr().grossAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                              const HorizontalSpacing(6),
-                              Text(
-                                Helpers.getProperPrice(state.summary.subTotal),
-                                style: TStyle.blackSemi(18, font: FFamily.roboto),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(L10n.tr().grossAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                                const HorizontalSpacing(6),
+                                Text(
+                                  Helpers.getProperPrice(state.summary.subTotal),
+                                  style: TStyle.blackSemi(18, font: FFamily.roboto),
+                                ),
+                              ],
+                            ),
                           ),
 
-                        const VerticalSpacing(12),
                         if (state.summary.discount > 0)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(L10n.tr().itemsDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                              const HorizontalSpacing(12),
-                              Text(
-                                '-${Helpers.getProperPrice(state.summary.discount)}',
-                                style: TStyle.blackSemi(18, font: FFamily.roboto),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(L10n.tr().itemsDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                                const HorizontalSpacing(12),
+                                Text(
+                                  '-${Helpers.getProperPrice(state.summary.discount)}',
+                                  style: TStyle.blackSemi(18, font: FFamily.roboto),
+                                ),
+                              ],
+                            ),
                           ),
-                        const VerticalSpacing(12),
                         if (state.summary.tax > 0)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(L10n.tr().vatAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                              const HorizontalSpacing(12),
-                              Text(
-                                Helpers.getProperPrice(state.summary.tax),
-                                style: TStyle.blackSemi(18, font: FFamily.roboto),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(L10n.tr().vatAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                                const HorizontalSpacing(12),
+                                Text(
+                                  Helpers.getProperPrice(state.summary.tax),
+                                  style: TStyle.blackSemi(18, font: FFamily.roboto),
+                                ),
+                              ],
+                            ),
                           ),
-                        const VerticalSpacing(12),
 
                         if (state.summary.serviceFee > 0)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(L10n.tr().serviceFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                              const HorizontalSpacing(6),
-                              Text(
-                                Helpers.getProperPrice(state.summary.serviceFee),
-                                style: TStyle.blackSemi(18, font: FFamily.roboto),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(L10n.tr().serviceFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                                const HorizontalSpacing(6),
+                                Text(
+                                  Helpers.getProperPrice(state.summary.serviceFee),
+                                  style: TStyle.blackSemi(18, font: FFamily.roboto),
+                                ),
+                              ],
+                            ),
                           ),
-                        const VerticalSpacing(12),
 
                         if (state.summary.deliveryFee > 0)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(L10n.tr().deliveryFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                              const HorizontalSpacing(6),
-                              Text(
-                                Helpers.getProperPrice(state.summary.deliveryFee),
-                                style: TStyle.blackSemi(18, font: FFamily.roboto),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(L10n.tr().deliveryFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                                const HorizontalSpacing(6),
+                                Text(
+                                  Helpers.getProperPrice(state.summary.deliveryFee),
+                                  style: TStyle.blackSemi(18, font: FFamily.roboto),
+                                ),
+                              ],
+                            ),
                           ),
-                        const VerticalSpacing(12),
 
                         if (state.summary.deliveryFeeDiscount > 0)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(L10n.tr().deliveryFeeDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
-                              const HorizontalSpacing(6),
-                              Text(
-                                Helpers.getProperPrice(state.summary.deliveryFeeDiscount),
-                                style: TStyle.blackSemi(18, font: FFamily.roboto),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(L10n.tr().deliveryFeeDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+                                const HorizontalSpacing(6),
+                                Text(
+                                  Helpers.getProperPrice(state.summary.deliveryFeeDiscount),
+                                  style: TStyle.blackSemi(18, font: FFamily.roboto),
+                                ),
+                              ],
+                            ),
                           ),
-                        const VerticalSpacing(12),
                         const DashedBorder(
                           width: 10,
                           gap: 8,
                           color: Co.gryPrimary,
                           thickness: 1.5,
                         ),
-                        const VerticalSpacing(12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                      L10n.tr().total,
-                                      style: TStyle.blackSemi(20, font: FFamily.roboto),
-                                      overflow: TextOverflow.ellipsis,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        L10n.tr().total,
+                                        style: TStyle.blackSemi(20, font: FFamily.roboto),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    const HorizontalSpacing(2),
+                                    Text(
+                                      ' (${L10n.tr().amountToPay}) ',
+                                      style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(overflow: TextOverflow.ellipsis),
                                       maxLines: 1,
                                     ),
-                                  ),
-                                  const HorizontalSpacing(2),
-                                  Text(
-                                    ' (${L10n.tr().amountToPay}) ',
-                                    style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(overflow: TextOverflow.ellipsis),
-                                    maxLines: 1,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            const HorizontalSpacing(12),
-                            Text(Helpers.getProperPrice(state.summary.total), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
-                          ],
+                              const HorizontalSpacing(12),
+                              Text(Helpers.getProperPrice(state.summary.total), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
+                            ],
+                          ),
                         ),
                       ],
                     ),

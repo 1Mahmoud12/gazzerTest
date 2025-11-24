@@ -210,6 +210,8 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
           return null; // Don't send if no provider selected
         case PaymentMethod.gazzerWallet:
           return 'pay_by_gazzer_wallet';
+        case PaymentMethod.applePay:
+          return 'apple_pay';
       }
     }
 

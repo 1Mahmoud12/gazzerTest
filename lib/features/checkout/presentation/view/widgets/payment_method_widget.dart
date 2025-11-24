@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,6 +10,7 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_radio_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
@@ -53,6 +56,14 @@ class PaymentMethodWidget extends StatelessWidget {
                     isSelected: selectedMethod == PaymentMethod.cashOnDelivery,
                     onTap: () => cubit.selectPaymentMethod(PaymentMethod.cashOnDelivery),
                   ),
+                  if (!Platform.isAndroid)
+                    _PaymentMethodItem(
+                      method: PaymentMethod.applePay,
+                      title: L10n.tr().walletApplePay,
+                      icon: Assets.applePayIc,
+                      isSelected: selectedMethod == PaymentMethod.applePay,
+                      onTap: () => Alerts.showToast(L10n.tr().comingSoon, error: false),
+                    ),
                   const SizedBox(height: 12),
                   if (cubit.timeSlots == null)
                     _PaymentMethodItem(
@@ -93,27 +104,39 @@ class PaymentMethodWidget extends StatelessWidget {
                     ),
                   if (selectedMethod == PaymentMethod.creditDebitCard) ...[
                     const SizedBox(height: 12),
-                    ...cards.map(
-                      (card) => Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: _CardItem(
-                          card: card,
-                          isSelected: (cubit.selectedCard == null) ? card.isDefault : cubit.selectedCard == card,
-                          onTap: () {
-                            cubit.selectCard(card);
-                          },
+                    if (cards.isNotEmpty)
+                      ...cards.map(
+                        (card) => Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: _CardItem(
+                            card: card,
+                            isSelected: (cubit.selectedCard == null) ? card.isDefault : cubit.selectedCard == card && cubit.selectedCard?.id != -1,
+                            onTap: () {
+                              cubit.selectCard(card);
+                            },
+                          ),
                         ),
                       ),
+                    const SizedBox(height: 8),
+                    Builder(
+                      builder: (context) {
+                        return _CardItem(
+                          onTap: () async {
+                            cubit.selectCard(null);
+                          },
+
+                          card: CardEntity(
+                            id: -1,
+                            cardNumber: L10n.tr().walletPayWithAnotherCard,
+                            cardHolderName: '',
+                            expiryMonth: 1,
+                            expiryYear: 2025,
+                            isDefault: false,
+                          ),
+                          isSelected: cubit.selectedCard == null,
+                        );
+                      },
                     ),
-                    // const SizedBox(height: 12),
-                    // _AddCardItem(
-                    //   onTap: () async {
-                    //     await context.push(CardDetailsScreen.route);
-                    //     if (context.mounted) {
-                    //       context.read<CheckoutCubit>().loadCheckoutData();
-                    //     }
-                    //   },
-                    // ),
                   ],
                   if (cubit.timeSlots == null) const SizedBox(height: 12),
 
@@ -143,11 +166,6 @@ class PaymentMethodWidget extends StatelessWidget {
                           cubit.setWalletInfo(providerName: '', phoneNumber: '');
                         }
                         if (cubit.remainingPaymentMethod == PaymentMethod.wallet) {
-                          String providerName = '';
-                          // await _showWalletNumberSheet(
-                          //   context,
-                          // );
-
                           if (context.mounted) {
                             final number = await _showWalletNumberSheet(
                               context,
@@ -279,29 +297,38 @@ class _PaymentMethodItem extends StatelessWidget {
                             style: TStyle.greyRegular(12),
                           ),
                         ),
-                        if (method == PaymentMethod.gazzerWallet && (availablePoints ?? 0) > 0)
-                          InkWell(
-                            onTap: () async {
-                              await context.push(LoyaltyProgramHeroOneScreen.route);
-                              if (context.mounted) {
-                                animationDialogLoading();
-                                context.read<CheckoutCubit>().loadCheckoutData();
-                                closeDialog();
-                              }
-                            },
+                        const HorizontalSpacing(4),
+                        if (method == PaymentMethod.gazzerWallet)
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Co.purple,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.all(6),
+                            child: InkWell(
+                              onTap: () async {
+                                await context.push(LoyaltyProgramHeroOneScreen.route);
+                                if (context.mounted) {
+                                  animationDialogLoading();
+                                  context.read<CheckoutCubit>().loadCheckoutData();
+                                  closeDialog();
+                                }
+                              },
 
-                            child: Row(
-                              children: [
-                                Text(
-                                  L10n.tr().convert,
-                                  style: TStyle.primaryBold(12),
-                                ),
-                                //const HorizontalSpacing(2),
-                                const Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 12,
-                                ),
-                              ],
+                              child: Row(
+                                children: [
+                                  Text(
+                                    L10n.tr().goToWallet,
+                                    style: TStyle.whiteBold(12),
+                                  ),
+                                  //const HorizontalSpacing(2),
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 12,
+                                    color: Co.white,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                       ],
@@ -565,46 +592,6 @@ class _CardItem extends StatelessWidget {
                   style: TStyle.primaryBold(10),
                 ),
               ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _AddCardItem extends StatelessWidget {
-  const _AddCardItem({required this.onTap});
-
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Co.purple.withOpacityNew(0.3),
-            width: 1,
-            style: BorderStyle.solid,
-          ),
-          color: Co.purple.withOpacityNew(0.05),
-        ),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.add_circle_outline,
-              color: Co.purple,
-              size: 20,
-            ),
-            const SizedBox(width: 12),
-            Text(
-              L10n.tr().addCard,
-              style: TStyle.primaryBold(16),
-            ),
           ],
         ),
       ),

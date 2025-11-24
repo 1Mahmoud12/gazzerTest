@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -214,17 +216,19 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
                       )
                     : null,
               ),
-              const SizedBox(height: 12),
-              _PaymentMethodOption(
-                icon: Assets.applePayIc,
-                title: l10n.walletApplePay,
-                isSelected: _selectedMethod == PaymentMethodType.applePay,
-                onTap: () {
-                  setState(() {
-                    _selectedMethod = PaymentMethodType.applePay;
-                  });
-                },
-              ),
+              if (!Platform.isAndroid) ...[
+                const SizedBox(height: 12),
+                _PaymentMethodOption(
+                  icon: Assets.applePayIc,
+                  title: l10n.walletApplePay,
+                  isSelected: _selectedMethod == PaymentMethodType.applePay,
+                  onTap: () {
+                    setState(() {
+                      _selectedMethod = PaymentMethodType.applePay;
+                    });
+                  },
+                ),
+              ],
               const SizedBox(height: 12),
               _PaymentMethodOption(
                 icon: Assets.eWalletIc,

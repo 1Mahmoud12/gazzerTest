@@ -64,27 +64,27 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                           style: TStyle.blackBold(14),
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          _voucherController.clear();
-                          cubit.toggleTextField();
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              L10n.tr().addVoucher,
-                              style: TStyle.blackBold(14),
-                            ),
-                            const SizedBox(
-                              width: 3,
-                            ),
-                            const Icon(
-                              Icons.add,
-                              size: 16,
-                            ),
-                          ],
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     _voucherController.clear();
+                      //     cubit.toggleTextField();
+                      //   },
+                      //   child: Row(
+                      //     children: [
+                      //       Text(
+                      //         L10n.tr().addVoucher,
+                      //         style: TStyle.blackBold(14),
+                      //       ),
+                      //       const SizedBox(
+                      //         width: 3,
+                      //       ),
+                      //       const Icon(
+                      //         Icons.add,
+                      //         size: 16,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ],
                   ),
                   if (!cubit.isTextFieldEnabled) ...[

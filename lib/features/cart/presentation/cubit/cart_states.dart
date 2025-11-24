@@ -103,6 +103,7 @@ class UpdateItemError extends UpdateItemStates implements BaseErrorState {
   @override
   final String message;
   final bool needsNewPouchApproval;
+  final bool isMaxQuantityReached;
   UpdateItemError({
     required this.message,
     required super.cartId,
@@ -111,5 +112,6 @@ class UpdateItemError extends UpdateItemStates implements BaseErrorState {
     super.isDeleting,
     super.isEditNote,
     this.needsNewPouchApproval = false,
+    this.isMaxQuantityReached = false,
   });
 }

@@ -3619,6 +3619,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Phone number must start with 1 followed by 0, 1, 2, or 5'**
   String get phoneMustMatchEgyptPrefix;
+
+  /// No description provided for @goToWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Wallet'**
+  String get goToWallet;
 }
 
 class _AppLocalizationsDelegate

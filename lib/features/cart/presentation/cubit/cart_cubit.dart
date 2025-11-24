@@ -403,6 +403,12 @@ class CartCubit extends Cubit<CartStates> {
             ),
           );
         } else if (context.mounted) {
+          // Check if error is about maximum quantity reached
+          final isMaxQuantityError =
+              error.message.toLowerCase().contains('maximum quantity') ||
+              error.message.toLowerCase().contains('max_quantity') ||
+              error.message.toLowerCase().contains('available:');
+
           // Show error message in alert/toast for other errors
           Alerts.showToast(error.message);
           emit(
@@ -411,6 +417,7 @@ class CartCubit extends Cubit<CartStates> {
               cartId: id,
               isAdding: isAdding,
               isRemoving: !isAdding,
+              isMaxQuantityReached: isMaxQuantityError,
             ),
           );
         }

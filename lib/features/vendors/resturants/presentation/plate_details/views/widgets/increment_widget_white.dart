@@ -12,11 +12,13 @@ class IncrementWidgetWhite extends StatelessWidget {
     required this.onChanged,
     required this.isAdding,
     required this.isRemoving,
+    this.isIncrementDisabled = false,
   });
   final int initVal;
   final Function(bool isAdding) onChanged;
   final bool isAdding;
   final bool isRemoving;
+  final bool isIncrementDisabled;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -37,7 +39,7 @@ class IncrementWidgetWhite extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {
-              if (isAdding || isRemoving) return;
+              if (isAdding || isRemoving || isIncrementDisabled) return;
               SystemSound.play(SystemSoundType.click);
               onChanged(true);
             },
@@ -50,7 +52,11 @@ class IncrementWidgetWhite extends StatelessWidget {
             ),
             icon: isAdding
                 ? const AdaptiveProgressIndicator(size: 22)
-                : const Icon(Icons.add, color: Co.secondary, size: 22),
+                : Icon(
+                    Icons.add,
+                    color: isIncrementDisabled ? Co.secondary.withOpacity(0.4) : Co.secondary,
+                    size: 22,
+                  ),
           ),
         ),
         ConstrainedBox(
