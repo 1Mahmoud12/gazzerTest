@@ -47,7 +47,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
   void didUpdateWidget(ConvertPointsWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.loyaltyPoints?.conversionRate != widget.loyaltyPoints?.conversionRate) {
-      _selectedPoints = _conversionRate;
+      _selectedPoints = _conversionRate > _availablePoints ? _availablePoints : _conversionRate;
     }
   }
 
@@ -259,6 +259,7 @@ class _PointsSelector extends StatelessWidget {
           Expanded(
             child: _RoundIconButton(
               icon: Icons.remove,
+              color: onDecrement == null ? Co.grey.withOpacityNew(.5) : null,
               onTap: () {
                 if (onDecrement == null) {
                   Alerts.showToast(L10n.tr().cantConvertLessZanZero);
@@ -277,6 +278,8 @@ class _PointsSelector extends StatelessWidget {
           Expanded(
             child: _RoundIconButton(
               icon: Icons.add,
+              color: onIncrement == null ? Co.grey.withOpacityNew(.5) : null,
+
               onTap: () {
                 if (onIncrement == null) {
                   Alerts.showToast(L10n.tr().cantConvertMoreThanAvailable);
@@ -328,9 +331,10 @@ class _AmountPreview extends StatelessWidget {
 }
 
 class _RoundIconButton extends StatelessWidget {
-  const _RoundIconButton({required this.icon, required this.onTap});
+  const _RoundIconButton({required this.icon, required this.onTap, this.color});
 
   final IconData icon;
+  final Color? color;
   final VoidCallback onTap;
 
   @override
@@ -342,12 +346,12 @@ class _RoundIconButton extends StatelessWidget {
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Co.grey.withOpacityNew(0.5)),
+          border: Border.all(color: color ?? Co.grey.withOpacityNew(0.5)),
         ),
         child: FittedBox(
           fit: BoxFit.scaleDown,
           alignment: Alignment.center,
-          child: Icon(icon, color: Co.dark, size: 18),
+          child: Icon(icon, color: color ?? Co.dark, size: 18),
         ),
       ),
     );

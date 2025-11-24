@@ -1,7 +1,13 @@
+import 'dart:io';
+
+import 'package:gazzer/core/presentation/resources/app_const.dart';
+
 class RegisterRequest {
   final String name;
   final String? email;
   final String phone;
+  final String? fcmToken;
+  final String? deviceId;
   final String countryIso;
   final String password;
   final String passwordConfirmation;
@@ -10,6 +16,8 @@ class RegisterRequest {
     required this.name,
     required this.phone,
     this.email,
+    this.fcmToken,
+    this.deviceId,
     this.countryIso = "EG",
     required this.password,
     required this.passwordConfirmation,
@@ -23,6 +31,10 @@ class RegisterRequest {
       'country_iso': countryIso,
       'password': password,
       'password_confirmation': passwordConfirmation,
+      if (fcmToken != null) 'fcm_token': AppConst.fcmToken,
+      if (deviceId != null) 'device_id': AppConst.deviceId,
+      'device_type': Platform.isAndroid ? 'android' : 'ios',
+      'app_version': '1.0.0',
     };
   }
 
@@ -34,6 +46,8 @@ class RegisterRequest {
       countryIso: countryIso ?? this.countryIso,
       password: password ?? this.password,
       passwordConfirmation: passwordConfirmation ?? this.passwordConfirmation,
+      fcmToken: fcmToken,
+      deviceId: deviceId,
     );
   }
 }

@@ -34,7 +34,9 @@ class LoyaltyProgramScreen extends StatelessWidget {
           title: L10n.tr().loyaltyProgram,
           titleStyle: TStyle.burbleMed(22, font: FFamily.roboto),
         ),
-        body: Center(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty)),
+        body: Center(
+          child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty),
+        ),
       );
     }
 
@@ -78,16 +80,32 @@ class _LoyaltyProgramView extends StatelessWidget {
                 showBenefits: const [],
               ),
             ),
-            LoyaltyProgramLoaded(:final data, :final isCached) => _buildLoaded(context, data, isCached),
+            LoyaltyProgramLoaded(:final data, :final isCached) => _buildLoaded(
+              context,
+              data,
+              isCached,
+            ),
             LoyaltyProgramError(:final message, :final cachedData) =>
-              cachedData != null ? _buildLoaded(context, cachedData, true, errorMessage: message) : _ErrorView(message: state.message),
+              cachedData != null
+                  ? _buildLoaded(
+                      context,
+                      cachedData,
+                      true,
+                      errorMessage: message,
+                    )
+                  : _ErrorView(message: state.message),
           };
         },
       ),
     );
   }
 
-  Widget _buildLoaded(BuildContext context, LoyaltyProgramEntity data, bool isCached, {String? errorMessage}) {
+  Widget _buildLoaded(
+    BuildContext context,
+    LoyaltyProgramEntity data,
+    bool isCached, {
+    String? errorMessage,
+  }) {
     final visuals = TierVisualResolver.resolve(data.currentTier);
     final bannerText = _bannerTextForVisual(context, visuals.bannerKey);
     final tierBenefits = data.tierBenefits;
@@ -197,60 +215,65 @@ class _ProgramContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentTierName = data.currentTier?.displayName ?? data.currentTier?.name ?? '—';
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-      children: [
-        Text(
-          bannerText,
-          style: TStyle.blackMedium(16, font: FFamily.roboto),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 16),
-        NameLogoLoyaltyProgram(
-          mainColor: visuals.mainColor,
-          logo: visuals.logo,
-          nameProgram: currentTierName,
-          firstTextColor: visuals.primaryTextColor,
-          secondTextColor: visuals.secondaryTextColor,
-        ),
-        const SizedBox(height: 16),
-        ProgressLoyaltyPrograms(
-          spentPoints: spent.toInt(),
-          spendDuration: durationDays,
-          totalPoints: spent.toInt(),
-          maxProgramPoints: requiredSpend.toInt(),
-          mainColor: visuals.mainColor,
-          progress: progress.isFinite ? progress : 0,
-          nameNextTier: nameNextTier,
-          progressNextTier: progressNextTier,
-        ),
-        const SizedBox(height: 16),
-        YourPointsWidget(
-          visual: visuals,
-          availablePoints: availablePoints,
-          earningPoints: (earningRate?.pointsPerAmount ?? 0).toInt(),
-          earningPerPound: (earningRate?.amountUnit ?? 0).toInt(),
-          conversionRate: (conversionRate?.points ?? 0).toInt(),
-          conversionPound: (conversionRate?.egp ?? 0).toInt(),
-          expirationPoints: nearingExpiry,
-          expirationDate: expirationDate,
-          totalPoints: totalPoints,
-        ),
-        const SizedBox(height: 16),
-        OurTierBenefitsWidget(
-          tiers: showBenefits,
-          currentTierName: data.currentTier?.name ?? '',
-          tierVisuals: benefitsVisuals,
-        ),
-        const SizedBox(height: 16),
-        MainBtn(
-          onPressed: () {
-            context.push(WalletScreen.route);
-          },
-          child: Text(L10n.tr().viewWallet),
-        ),
-        const SizedBox(height: 32),
-      ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        await context.read<LoyaltyProgramCubit>().load(forceRefresh: true);
+      },
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+        children: [
+          Text(
+            bannerText,
+            style: TStyle.blackMedium(16, font: FFamily.roboto),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          NameLogoLoyaltyProgram(
+            mainColor: visuals.mainColor,
+            logo: visuals.logo,
+            nameProgram: currentTierName,
+            firstTextColor: visuals.primaryTextColor,
+            secondTextColor: visuals.secondaryTextColor,
+          ),
+          const SizedBox(height: 16),
+          ProgressLoyaltyPrograms(
+            spentPoints: spent.toInt(),
+            spendDuration: durationDays,
+            totalPoints: spent.toInt(),
+            maxProgramPoints: requiredSpend.toInt(),
+            mainColor: visuals.mainColor,
+            progress: progress.isFinite ? progress : 0,
+            nameNextTier: nameNextTier,
+            progressNextTier: progressNextTier,
+          ),
+          const SizedBox(height: 16),
+          YourPointsWidget(
+            visual: visuals,
+            availablePoints: availablePoints,
+            earningPoints: (earningRate?.pointsPerAmount ?? 0).toInt(),
+            earningPerPound: (earningRate?.amountUnit ?? 0).toInt(),
+            conversionRate: (conversionRate?.points ?? 0).toInt(),
+            conversionPound: (conversionRate?.egp ?? 0).toInt(),
+            expirationPoints: nearingExpiry,
+            expirationDate: expirationDate,
+            totalPoints: totalPoints,
+          ),
+          const SizedBox(height: 16),
+          OurTierBenefitsWidget(
+            tiers: showBenefits,
+            currentTierName: data.currentTier?.name ?? '',
+            tierVisuals: benefitsVisuals,
+          ),
+          const SizedBox(height: 16),
+          MainBtn(
+            onPressed: () {
+              context.push(WalletScreen.route);
+            },
+            child: Text(L10n.tr().viewWallet),
+          ),
+          const SizedBox(height: 32),
+        ],
+      ),
     );
   }
 }
@@ -268,7 +291,11 @@ class _ErrorView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline, size: 48, color: Co.red.withOpacityNew(0.6)),
+            Icon(
+              Icons.error_outline,
+              size: 48,
+              color: Co.red.withOpacityNew(0.6),
+            ),
             const SizedBox(height: 16),
             Text(
               message.isEmpty ? L10n.tr().somethingWentWrong : message,
@@ -283,14 +310,25 @@ class _ErrorView extends StatelessWidget {
 }
 
 final _placeholderEntity = const LoyaltyProgramEntity(
-  currentTier: LoyaltyTier(name: 'hero', displayName: 'Hero', icon: null, color: null, subtitle: null),
+  currentTier: LoyaltyTier(
+    name: 'hero',
+    displayName: 'Hero',
+    icon: null,
+    color: null,
+    subtitle: null,
+  ),
   tierProgress: TierProgress(
     currentTier: 'hero',
     totalSpent: 0,
     orderCount: 0,
     spentInLastDays: 0,
     daysPeriod: 90,
-    nextTier: NextTier(name: 'winner', displayName: 'Winner', spentNeeded: 2500, ordersNeeded: 5),
+    nextTier: NextTier(
+      name: 'winner',
+      displayName: 'Winner',
+      spentNeeded: 2500,
+      ordersNeeded: 5,
+    ),
     progressPercentage: 0,
   ),
   points: LoyaltyPoints(

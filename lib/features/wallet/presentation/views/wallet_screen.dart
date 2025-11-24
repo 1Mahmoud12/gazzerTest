@@ -41,30 +41,37 @@ class _WalletScreenState extends State<WalletScreen> {
               )
             : BlocBuilder<WalletCubit, WalletState>(
                 builder: (context, state) {
-                  return ListView(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 24,
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      await context.read<WalletCubit>().load(
+                        forceRefresh: true,
+                      );
+                    },
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 24,
+                      ),
+                      children: [
+                        BalanceWidget(
+                          balance: state is WalletLoaded ? state.data.wallet?.balance : null,
+                        ),
+                        const VerticalSpacing(24),
+                        const AddFundWidget(),
+                        const VerticalSpacing(24),
+                        ConvertPointsWidget(
+                          loyaltyPoints: state is WalletLoaded ? state.data.loyaltyPoints : null,
+                        ),
+                        const VerticalSpacing(24),
+                        ConvertPointsToVoucherWidget(
+                          availablePoints: state is WalletLoaded ? (state.data.loyaltyPoints?.availablePoints ?? 0).toDouble() : 0,
+                        ),
+                        const VerticalSpacing(24),
+                        WalletHistoryWidget(
+                          transactions: state is WalletLoaded ? state.data.recentTransactions : const [],
+                        ),
+                      ],
                     ),
-                    children: [
-                      BalanceWidget(
-                        balance: state is WalletLoaded ? state.data.wallet?.balance : null,
-                      ),
-                      const VerticalSpacing(24),
-                      const AddFundWidget(),
-                      const VerticalSpacing(24),
-                      ConvertPointsWidget(
-                        loyaltyPoints: state is WalletLoaded ? state.data.loyaltyPoints : null,
-                      ),
-                      const VerticalSpacing(24),
-                      ConvertPointsToVoucherWidget(
-                        availablePoints: state is WalletLoaded ? (state.data.loyaltyPoints?.availablePoints ?? 0).toDouble() : 0,
-                      ),
-                      const VerticalSpacing(24),
-                      WalletHistoryWidget(
-                        transactions: state is WalletLoaded ? state.data.recentTransactions : const [],
-                      ),
-                    ],
                   );
                 },
               ),

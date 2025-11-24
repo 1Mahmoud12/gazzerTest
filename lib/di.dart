@@ -67,10 +67,12 @@ import 'package:gazzer/features/supportScreen/data/chat_repo_imp.dart';
 import 'package:gazzer/features/supportScreen/data/complaint_repo_imp.dart';
 import 'package:gazzer/features/supportScreen/data/faq_rating_repo_imp.dart';
 import 'package:gazzer/features/supportScreen/data/faq_repo_imp.dart';
+import 'package:gazzer/features/supportScreen/data/working_hours_repo_imp.dart';
 import 'package:gazzer/features/supportScreen/domain/chat_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/complaint_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/faq_rating_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/faq_repo.dart';
+import 'package:gazzer/features/supportScreen/domain/working_hours_repo.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_cubit.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -199,6 +201,10 @@ void _registerRepos() {
   );
   di.registerLazySingleton<ComplaintRepo>(
     () => ComplaintRepoImp(di.get(), di.get()),
+  );
+
+  di.registerLazySingleton<WorkingHoursRepo>(
+    () => WorkingHoursRepoImp(di.get(), di.get()),
   );
 }
 

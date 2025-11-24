@@ -154,4 +154,7 @@ class Endpoints {
 
   /// ** Support / Complaints
   static const submitComplaint = "support/complaints";
+
+  /// ** Support / Working Hours
+  static const workingHours = "support/working-hours";
 }

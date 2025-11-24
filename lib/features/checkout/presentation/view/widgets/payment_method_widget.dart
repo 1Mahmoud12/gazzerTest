@@ -70,7 +70,9 @@ class PaymentMethodWidget extends StatelessWidget {
                       method: PaymentMethod.wallet,
                       title: L10n.tr().wallet,
                       icon: Assets.wallet,
-                      isSelected: selectedMethod == PaymentMethod.wallet,
+                      isSelected:
+                          selectedMethod == PaymentMethod.wallet ||
+                          (selectedMethod == PaymentMethod.gazzerWallet && cubit.remainingPaymentMethod == PaymentMethod.wallet),
                       walletPhoneNumber: cubit.walletPhoneNumber,
                       onTap: () async {
                         String number = '';
@@ -97,12 +99,15 @@ class PaymentMethodWidget extends StatelessWidget {
                       method: PaymentMethod.creditDebitCard,
                       title: L10n.tr().creditCard,
                       icon: Assets.creditCard,
-                      isSelected: selectedMethod == PaymentMethod.creditDebitCard,
+                      isSelected:
+                          selectedMethod == PaymentMethod.creditDebitCard ||
+                          (selectedMethod == PaymentMethod.gazzerWallet && cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard),
                       onTap: () => cubit.selectPaymentMethod(
                         PaymentMethod.creditDebitCard,
                       ),
                     ),
-                  if (selectedMethod == PaymentMethod.creditDebitCard) ...[
+                  if (selectedMethod == PaymentMethod.creditDebitCard ||
+                      (selectedMethod == PaymentMethod.gazzerWallet && cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard)) ...[
                     const SizedBox(height: 12),
                     if (cards.isNotEmpty)
                       ...cards.map(
@@ -147,7 +152,11 @@ class PaymentMethodWidget extends StatelessWidget {
                     isSelected: selectedMethod == PaymentMethod.gazzerWallet,
                     onTap: () async {
                       if (cubit.timeSlots != null && cubit.walletBalance < cubit.totalOrder) {
-                        voucherAlert(title: L10n.tr().insufficientWalletBalance, context: context, asDialog: false);
+                        voucherAlert(
+                          title: L10n.tr().insufficientWalletBalance,
+                          context: context,
+                          asDialog: false,
+                        );
                         return;
                       }
                       if (cubit.walletBalance > cubit.totalOrder) {
@@ -162,8 +171,14 @@ class PaymentMethodWidget extends StatelessWidget {
                           },
                         );
                         if (cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard) {
-                          cubit.selectPaymentMethod(PaymentMethod.gazzerWallet, removeRemainingMethod: false);
-                          cubit.setWalletInfo(providerName: '', phoneNumber: '');
+                          cubit.selectPaymentMethod(
+                            PaymentMethod.gazzerWallet,
+                            removeRemainingMethod: false,
+                          );
+                          cubit.setWalletInfo(
+                            providerName: '',
+                            phoneNumber: '',
+                          );
                         }
                         if (cubit.remainingPaymentMethod == PaymentMethod.wallet) {
                           if (context.mounted) {
@@ -171,8 +186,13 @@ class PaymentMethodWidget extends StatelessWidget {
                               context,
                             );
                             if (number != null && number.isNotEmpty) {
-                              cubit.setRemainingPaymentMethod(PaymentMethod.wallet);
-                              cubit.selectPaymentMethod(PaymentMethod.gazzerWallet, removeRemainingMethod: false);
+                              cubit.setRemainingPaymentMethod(
+                                PaymentMethod.wallet,
+                              );
+                              cubit.selectPaymentMethod(
+                                PaymentMethod.gazzerWallet,
+                                removeRemainingMethod: false,
+                              );
 
                               cubit.setWalletInfo(
                                 providerName: 'e_wallet',
@@ -184,7 +204,10 @@ class PaymentMethodWidget extends StatelessWidget {
                       }
                     },
                     balance: walletBalance,
-                    remainingAmount: (cubit.totalOrder - walletBalance).clamp(0, double.infinity),
+                    remainingAmount: (cubit.totalOrder - walletBalance).clamp(
+                      0,
+                      double.infinity,
+                    ),
                     availablePoints: availablePoints,
                   ),
                   if (cubit.remainingPaymentMethod != null) ...[
@@ -307,7 +330,9 @@ class _PaymentMethodItem extends StatelessWidget {
                             padding: const EdgeInsets.all(6),
                             child: InkWell(
                               onTap: () async {
-                                await context.push(LoyaltyProgramHeroOneScreen.route);
+                                await context.push(
+                                  LoyaltyProgramHeroOneScreen.route,
+                                );
                                 if (context.mounted) {
                                   animationDialogLoading();
                                   context.read<CheckoutCubit>().loadCheckoutData();

@@ -51,16 +51,31 @@ class ComplaintRepoImp extends ComplaintRepo {
 
     return super.call(
       apiCall: () async {
-        if (request.attachment != null) {
+        final hasAttachments = (request.attachments != null && request.attachments!.isNotEmpty) || request.attachment != null;
+
+        if (hasAttachments) {
           // Send with file upload
           final formDataMap = <String, dynamic>{
             'order_id': request.orderId,
             'type': request.type.value,
             if (request.note != null && request.note!.trim().isNotEmpty) 'note': request.note!.trim(),
-            'attachment': await MultipartFile.fromFile(
-              request.attachment!.path,
-            ),
           };
+
+          // Add single attachment (for backward compatibility)
+          if (request.attachment != null) {
+            formDataMap['attachment'] = await MultipartFile.fromFile(
+              request.attachment!.path,
+            );
+          }
+
+          // Add multiple attachments as array
+          if (request.attachments != null && request.attachments!.isNotEmpty) {
+            for (int i = 0; i < request.attachments!.length; i++) {
+              formDataMap['attachments[$i]'] = await MultipartFile.fromFile(
+                request.attachments![i].path,
+              );
+            }
+          }
 
           // Add order_item_ids array
           for (int i = 0; i < request.orderItemIds.length; i++) {

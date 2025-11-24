@@ -67,7 +67,5 @@ class MockLoginRepoImp extends _i1.Mock implements _i2.LoginRepoImp {
           as _i3.Future<_i4.Result<T>>);
 
   @override
-  _i7.BaseError? isTokenExpired(Object? error) =>
-      (super.noSuchMethod(Invocation.method(#isTokenExpired, [error]))
-          as _i7.BaseError?);
+  _i7.BaseError? isTokenExpired(Object? error) => (super.noSuchMethod(Invocation.method(#isTokenExpired, [error])) as _i7.BaseError?);
 }

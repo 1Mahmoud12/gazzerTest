@@ -49,14 +49,14 @@ class _MainDrawerState extends State<MainDrawer> {
         },
       ),
       (
-        'loyalty',
+        L10n.tr().loyaltyProgram,
         Assets.assetsSvgTerms,
         (BuildContext ctx) {
           ctx.push(LoyaltyProgramHeroOneScreen.route);
         },
       ),
       (
-        'support',
+        L10n.tr().support,
         Assets.assetsSvgTerms,
         (BuildContext ctx) {
           ctx.push(SupportScreen.route);

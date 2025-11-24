@@ -77,7 +77,7 @@ class WalletHistoryTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${entry.amount >= 0 ? '+' : '-'} ${entry.amount.abs()} ${L10n.tr().egp}',
+                '${(entry.amount < 0 || entry.title == L10n.tr().walletRefund) ? '-' : '+'} ${entry.amount.abs()} ${L10n.tr().egp}',
                 style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
               ),
               const SizedBox(height: 4),

@@ -13,7 +13,7 @@ import 'package:gazzer/features/orders/domain/entities/order_detail_item_entity.
 import 'package:gazzer/features/orders/presentation/cubit/order_detail_cubit.dart';
 import 'package:gazzer/features/orders/presentation/cubit/order_detail_state.dart';
 import 'package:gazzer/features/supportScreen/data/requests/complaint_request.dart';
-import 'package:gazzer/features/supportScreen/domain/entities/complaint_type.dart';
+import 'package:gazzer/features/supportScreen/domain/entities/enums_support.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/complaint_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/complaint_states.dart';
 

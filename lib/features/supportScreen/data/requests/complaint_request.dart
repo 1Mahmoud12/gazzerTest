@@ -8,6 +8,7 @@ class ComplaintRequest {
   final String? note;
   final ComplaintType type;
   final File? attachment;
+  final List<File>? attachments;
 
   ComplaintRequest({
     required this.orderId,
@@ -15,6 +16,7 @@ class ComplaintRequest {
     this.note,
     required this.type,
     this.attachment,
+    this.attachments,
   });
 
   bool get isValid => orderItemIds.isNotEmpty;

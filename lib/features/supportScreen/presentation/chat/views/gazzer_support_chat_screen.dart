@@ -13,7 +13,6 @@ import 'package:gazzer/features/supportScreen/presentation/chat/models/chat_mess
 import 'package:gazzer/features/supportScreen/presentation/chat/widgets/chat_app_bar.dart';
 import 'package:gazzer/features/supportScreen/presentation/chat/widgets/chat_input_field.dart';
 import 'package:gazzer/features/supportScreen/presentation/chat/widgets/chat_message_bubble.dart';
-import 'package:gazzer/main.dart';
 
 class GazzerSupportChatScreen extends StatefulWidget {
   const GazzerSupportChatScreen({
@@ -69,7 +68,6 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
 
   void _handleNotification(RemoteMessage message) {
     final data = message.data;
-    logger.d('message $data');
     final notificationType = (data['type'] ?? '').toString().toLowerCase();
 
     // Check if it's a support notification

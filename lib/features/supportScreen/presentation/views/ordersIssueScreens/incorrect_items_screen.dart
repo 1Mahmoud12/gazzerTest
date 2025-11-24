@@ -123,8 +123,8 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
     // Submit complaint with all selected items
     final selectedItemIds = _selectedItemIds.toList();
 
-    // Get first item's photo (API only accepts one attachment)
-    final firstItemData = _itemComplaintData[selectedItemIds.first];
+    // Get all photos from selected items
+    final attachments = selectedItemIds.map((id) => _itemComplaintData[id]?.photo).whereType<File>().toList();
 
     // Combine notes from all selected items
     final notesList = selectedItemIds.map((id) => _itemComplaintData[id]?.note).whereType<String>().where((note) => note.isNotEmpty).toList();
@@ -135,7 +135,7 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
       orderItemIds: selectedItemIds,
       note: combinedNote,
       type: ComplaintType.damagedItems,
-      attachment: firstItemData?.photo,
+      attachments: attachments.isNotEmpty ? attachments : null,
     );
 
     context.read<ComplaintCubit>().submitComplaint(request);

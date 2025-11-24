@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -75,51 +74,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentIndex = 0;
-
-  @override
-  void didChangeDependencies() async {
-    if (currentIndex == 0) {
-      await initNotification();
-      await selectTokens();
-      currentIndex++;
-    }
-    super.didChangeDependencies();
-  }
-
-  Future<void> initNotification() async {
-    await Future.delayed(Duration.zero, () async {
-      //setup notification callback here
-      await NotificationUtility.setUpNotificationService(context);
-    });
-
-    await AwesomeNotifications().setListeners(
-      onActionReceivedMethod: NotificationUtility.onActionReceivedMethod,
-      onNotificationCreatedMethod: NotificationUtility.onNotificationCreatedMethod,
-      onNotificationDisplayedMethod: NotificationUtility.onNotificationDisplayedMethod,
-      onDismissActionReceivedMethod: NotificationUtility.onDismissActionReceivedMethod,
-    );
-
-    notificationTerminatedBackground();
-  }
-
-  void notificationTerminatedBackground() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      debugPrint('Global Message ${AppConst.messageGlobal?.data}');
-      if (AppConst.messageGlobal?.data != null) {
-        debugPrint('Global Message Enter${AppConst.messageGlobal?.data}');
-
-        Future.delayed(const Duration(milliseconds: 1000), () async {
-          NotificationUtility.onTapNotificationScreenNavigateCallback(
-            AppConst.messageGlobal!.data['type'] ?? '',
-            AppConst.messageGlobal!.data,
-          );
-          AppConst.messageGlobal = null;
-        });
-      }
-    });
-  }
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {

@@ -3625,6 +3625,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go to Wallet'**
   String get goToWallet;
+
+  /// No description provided for @offline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get offline;
 }
 
 class _AppLocalizationsDelegate

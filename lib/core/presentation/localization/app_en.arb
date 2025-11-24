@@ -776,6 +776,7 @@
   "tapToTakePhoto": "Tap to take photo",
     "phoneMustMatchEgyptPrefix": "Phone number must start with 1 followed by 0, 1, 2, or 5",
 
-"goToWallet":"Go to Wallet"
+"goToWallet":"Go to Wallet",
+"offline": "Offline"
 
 }
