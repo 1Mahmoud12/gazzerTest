@@ -127,17 +127,38 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   void increment() {
-    emit(state.copyWith(qntity: state.quantity + 1, hasUserInteracted: true));
+    emit(
+      state.copyWith(
+        qntity: state.quantity + 1,
+        hasUserInteracted: true,
+        message: '',
+        status: ApiStatus.initial,
+      ),
+    );
   }
 
   void decrement() {
     if (state.quantity > 1) {
-      emit(state.copyWith(qntity: state.quantity - 1, hasUserInteracted: true));
+      emit(
+        state.copyWith(
+          qntity: state.quantity - 1,
+          hasUserInteracted: true,
+          message: '',
+          status: ApiStatus.initial,
+        ),
+      );
     }
   }
 
   void setNote(String note) {
-    emit(state.copyWith(note: note, hasUserInteracted: true));
+    emit(
+      state.copyWith(
+        note: note,
+        hasUserInteracted: true,
+        message: '',
+        status: ApiStatus.initial,
+      ),
+    );
   }
 
   // Ordered-with helpers
@@ -147,7 +168,13 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     } else {
       _orderedWith[id] = quantity;
     }
-    emit(state.copyWith(hasUserInteracted: true));
+    emit(
+      state.copyWith(
+        hasUserInteracted: true,
+        message: '',
+        status: ApiStatus.initial,
+      ),
+    );
   }
 
   int getOrderedWithQuantity(int id) => _orderedWith[id] ?? 0;
@@ -247,7 +274,14 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     log('newMap: $newMap');
     log('============================');
 
-    emit(state.copyWith(selectedOptions: newMap, hasUserInteracted: true));
+    emit(
+      state.copyWith(
+        selectedOptions: newMap,
+        hasUserInteracted: true,
+        message: '',
+        status: ApiStatus.initial,
+      ),
+    );
   }
 
   // Determine option group's type (radio/checkbox) from optionKey path
@@ -604,6 +638,14 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
             await _addCartToRemote(context, req.copyWith(exceedPouch: true));
           }
+          emit(
+            state.copyWith(
+              status: ApiStatus.error,
+              message: '',
+              hasUserInteracted: false,
+            ),
+          );
+          return;
         }
         // Only emit error if user didn't confirm or it's not a pouch approval error
         emit(
@@ -645,8 +687,17 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
             if (context.mounted) {
               await _updateCart(context, req.copyWith(exceedPouch: true));
             }
+
             return; // Exit early - recursive call handled state
           }
+          emit(
+            state.copyWith(
+              status: ApiStatus.error,
+              message: '',
+              hasUserInteracted: false,
+            ),
+          );
+          return;
         }
         // Only emit error if user didn't confirm or it's not a pouch approval error
         emit(
@@ -675,6 +726,78 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       }
     }
 
+    // Validate that all selected options with children have their children selected
+    final incompleteSelection = _validateNestedSelections();
+    if (incompleteSelection != null) {
+      return incompleteSelection;
+    }
+
+    return null;
+  }
+
+  /// Validates that all selected options with children have at least one child selected
+  /// Returns error message if validation fails, null if valid
+  String? _validateNestedSelections() {
+    // Check all selected options recursively
+    for (var option in options) {
+      final selectedValueIds = state.selectedOptions[option.id];
+      if (selectedValueIds != null && selectedValueIds.isNotEmpty) {
+        for (var valueId in selectedValueIds) {
+          final subAddon = _findSubAddonById(option, valueId);
+          if (subAddon != null && subAddon.subAddons.isNotEmpty) {
+            // This selected value has children - check if at least one child is selected
+            final childPath = '${option.id}_$valueId';
+            final childSelections = state.selectedOptions[childPath];
+            if (childSelections == null || childSelections.isEmpty) {
+              return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(
+                subAddon.name,
+              );
+            }
+            // Recursively validate children
+            final childError = _validateSubAddonSelections(
+              subAddon,
+              childPath,
+            );
+            if (childError != null) return childError;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  /// Recursively validates that all selected sub-addons with children have their children selected
+  String? _validateSubAddonSelections(
+    SubAddonEntity parentSubAddon,
+    String parentPath,
+  ) {
+    final childSelections = state.selectedOptions[parentPath];
+    if (childSelections == null || childSelections.isEmpty) {
+      return null; // No children selected, but this is handled by caller
+    }
+
+    for (var childId in childSelections) {
+      final childSubAddon = _findSubAddonInList(
+        parentSubAddon.subAddons,
+        childId,
+      );
+      if (childSubAddon != null && childSubAddon.subAddons.isNotEmpty) {
+        // This child has its own children - check if at least one is selected
+        final grandChildPath = '${parentPath}_$childId';
+        final grandChildSelections = state.selectedOptions[grandChildPath];
+        if (grandChildSelections == null || grandChildSelections.isEmpty) {
+          return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(
+            childSubAddon.name,
+          );
+        }
+        // Recursively validate deeper levels
+        final deeperError = _validateSubAddonSelections(
+          childSubAddon,
+          grandChildPath,
+        );
+        if (deeperError != null) return deeperError;
+      }
+    }
     return null;
   }
 

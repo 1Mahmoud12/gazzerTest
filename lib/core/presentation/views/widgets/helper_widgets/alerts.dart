@@ -55,6 +55,7 @@ class Alerts {
     bool error = true,
     bool isInfo = false,
   }) {
+    if (message.isEmpty) return;
     Fluttertoast.showToast(
       msg: message,
       toastLength: length ?? (message.length > 35 ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT),

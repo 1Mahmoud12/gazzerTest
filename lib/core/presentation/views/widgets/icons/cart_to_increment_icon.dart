@@ -277,12 +277,14 @@ class CartToIncrementIcon extends StatelessWidget {
   ) {
     switch (product) {
       case PlateEntity():
-        PlateDetailsRoute(id: product.id, $extra: cartItem).push(context);
+        PlateDetailsRoute(
+          id: product.id /*$extra: cartItem*/,
+        ).push(context);
         break;
       case ProductEntity():
         ProductDetailsRoute(
           productId: product.id,
-          $extra: cartItem,
+          //  $extra: cartItem,
         ).push(context);
         break;
       case OrderedWithEntity():
