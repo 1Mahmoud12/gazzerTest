@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/views/components/loading_full_screen.da
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/supportScreen/domain/entities/enums_support.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_states.dart';
 import 'package:go_router/go_router.dart';
@@ -25,9 +26,13 @@ class SupportScreen extends StatefulWidget {
 class _SupportScreenState extends State<SupportScreen> {
   String? _pendingType;
 
-  void _handleFaqSuccess(BuildContext context, FaqSuccessState state, String type) {
+  void _handleFaqSuccess(
+    BuildContext context,
+    FaqSuccessState state,
+    String type,
+  ) {
     final l10n = L10n.tr();
-    if (type == 'order_issue') {
+    if (type == CategoryType.orderIssue.value) {
       // For order-issue, show categories only
       context.navigateToPage(
         FaqListScreen(
@@ -84,18 +89,25 @@ class _SupportScreenState extends State<SupportScreen> {
                       children: [
                         SupportOptionTile(
                           title: l10n.orderIssue,
-                          onTap: () {
-                            //  _pendingType = 'order_issue';
-                            //   context.read<FaqCubit>().getFaqCategories('order_issue');
-                            context.go('/orders', extra: {"showGetHelpInsteadOfReorder": true});
+                          onTap: () async {
+                            // _pendingType = 'order_issue';
+                            // await context.read<FaqCubit>().getFaqCategories(
+                            //   'order_issue',
+                            // );
+                            context.go(
+                              '/orders',
+                              extra: {"showGetHelpInsteadOfReorder": true},
+                            );
                           },
                         ),
                         const VerticalSpacing(12),
                         SupportOptionTile(
-                          title: 'General Issue - Inquiry',
+                          title: L10n.tr().generalIssues,
                           onTap: () {
-                            _pendingType = 'general';
-                            context.read<FaqCubit>().getFaqCategories('general');
+                            _pendingType = CategoryType.general.value;
+                            context.read<FaqCubit>().getFaqCategories(
+                              CategoryType.general.value,
+                            );
                           },
                         ),
                       ],

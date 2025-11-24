@@ -1790,5 +1790,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get generalIssues => 'General Issues';
 
   @override
+  String get generalIssueInquiry => 'General Issue - Inquiry';
+
+  @override
   String get optionalFeedback => 'Optional Feedback';
+
+  @override
+  String get mustChooseOrderFirst => 'You must choose an order first';
+
+  @override
+  String get youMustCheckOneAtLeast => 'You must select at least one option';
 }

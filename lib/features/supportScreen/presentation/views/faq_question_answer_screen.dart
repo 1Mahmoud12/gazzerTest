@@ -56,11 +56,16 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => showFaqRatingBottomSheet(
-                      context,
-                      faqQuestionId: args.faqQuestionId,
-                      faqCategoryId: args.faqCategoryId,
-                    ),
+                    onPressed: () {
+                      // Yes - show rating
+                      showFaqRatingBottomSheet(
+                        context,
+                        faqQuestionId: args.faqQuestionId,
+                        faqCategoryId: args.faqCategoryId,
+                      );
+                      // Return true to indicate "yes" was selected
+                      Navigator.of(context).pop(true);
+                    },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
                       shape: RoundedRectangleBorder(
@@ -74,11 +79,10 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
                 const HorizontalSpacing(12),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => showFaqRatingBottomSheet(
-                      context,
-                      faqQuestionId: args.faqQuestionId,
-                      faqCategoryId: args.faqCategoryId,
-                    ),
+                    onPressed: () {
+                      // No - return false to open chat
+                      Navigator.of(context).pop(false);
+                    },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
                       shape: RoundedRectangleBorder(

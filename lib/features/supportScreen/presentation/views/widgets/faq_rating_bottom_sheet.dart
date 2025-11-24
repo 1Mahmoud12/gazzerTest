@@ -18,7 +18,7 @@ import 'package:go_router/go_router.dart';
 /// Shows a rating bottom sheet for FAQ questions
 void showFaqRatingBottomSheet(
   BuildContext context, {
-  required int faqQuestionId,
+  int? faqQuestionId,
   int? faqCategoryId,
   int? orderId,
 }) {
@@ -41,11 +41,11 @@ void showFaqRatingBottomSheet(
 class FaqRatingBottomSheet extends StatefulWidget {
   const FaqRatingBottomSheet({
     super.key,
-    required this.faqQuestionId,
+    this.faqQuestionId,
     this.faqCategoryId,
   });
 
-  final int faqQuestionId;
+  final int? faqQuestionId;
   final int? faqCategoryId;
 
   @override

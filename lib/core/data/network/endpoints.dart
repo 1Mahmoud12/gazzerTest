@@ -151,4 +151,7 @@ class Endpoints {
   /// ** Support / Chat
   static String getChatMessages(int chatId) => "support/chats/$chatId";
   static const sendChatMessage = "support/chats";
+
+  /// ** Support / Complaints
+  static const submitComplaint = "support/complaints";
 }

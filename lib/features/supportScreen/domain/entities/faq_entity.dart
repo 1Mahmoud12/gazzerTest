@@ -5,6 +5,7 @@ class FaqCategoryEntity extends Equatable {
   final String name;
   final String? description;
   final String type;
+  final String? typeOrderIssue;
   final int? parentId;
   final int order;
   final bool isActive;
@@ -17,6 +18,7 @@ class FaqCategoryEntity extends Equatable {
     required this.id,
     required this.name,
     this.description,
+    this.typeOrderIssue,
     required this.type,
     this.parentId,
     required this.order,

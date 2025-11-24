@@ -1790,5 +1790,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get generalIssues => 'مشكلات عامة';
 
   @override
+  String get generalIssueInquiry => 'استفسار - مشكلة عامة';
+
+  @override
   String get optionalFeedback => 'ملاحظات اختيارية';
+
+  @override
+  String get mustChooseOrderFirst => 'You must choose an order first';
+
+  @override
+  String get youMustCheckOneAtLeast => 'يجب اختيار خيار واحد على الأقل';
 }

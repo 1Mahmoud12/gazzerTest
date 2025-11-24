@@ -3572,11 +3572,29 @@ abstract class AppLocalizations {
   /// **'General Issues'**
   String get generalIssues;
 
+  /// No description provided for @generalIssueInquiry.
+  ///
+  /// In en, this message translates to:
+  /// **'General Issue - Inquiry'**
+  String get generalIssueInquiry;
+
   /// No description provided for @optionalFeedback.
   ///
   /// In en, this message translates to:
   /// **'Optional Feedback'**
   String get optionalFeedback;
+
+  /// No description provided for @mustChooseOrderFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'You must choose an order first'**
+  String get mustChooseOrderFirst;
+
+  /// No description provided for @youMustCheckOneAtLeast.
+  ///
+  /// In en, this message translates to:
+  /// **'You must select at least one option'**
+  String get youMustCheckOneAtLeast;
 }
 
 class _AppLocalizationsDelegate

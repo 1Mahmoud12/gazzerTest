@@ -4,6 +4,7 @@ class FaqCategoryDTO {
   final int id;
   final String name;
   final String? description;
+  final String? typeOrderIssue;
   final String type;
   final int? parentId;
   final int order;
@@ -18,6 +19,7 @@ class FaqCategoryDTO {
     required this.name,
     this.description,
     required this.type,
+    this.typeOrderIssue,
     this.parentId,
     required this.order,
     required this.isActive,
@@ -33,6 +35,7 @@ class FaqCategoryDTO {
       name: json['name'] as String,
       description: json['description'] as String?,
       type: json['type'] as String,
+      typeOrderIssue: json['order_issue_type'] as String?,
       parentId: json['parent_id'] as int?,
       order: json['order'] as int,
       isActive: json['is_active'] as bool,
@@ -50,6 +53,7 @@ class FaqCategoryDTO {
       description: description,
       type: type,
       parentId: parentId,
+      typeOrderIssue: typeOrderIssue,
       order: order,
       isActive: isActive,
       hasChildren: hasChildren,

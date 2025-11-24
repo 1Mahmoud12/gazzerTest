@@ -299,6 +299,9 @@ class _ReorderButton extends StatelessWidget {
               extra: orderId,
             );
           },
+          bgColor: Co.purple,
+          radius: 30,
+          padding: const EdgeInsets.symmetric(vertical: 5),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -311,9 +314,6 @@ class _ReorderButton extends StatelessWidget {
               ),
             ],
           ),
-          bgColor: Co.purple,
-          radius: 30,
-          padding: const EdgeInsets.symmetric(vertical: 5),
         ),
       );
     }

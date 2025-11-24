@@ -22,7 +22,6 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
-import 'package:gazzer/main.dart';
 
 class DailyOffersScreen extends StatefulWidget {
   const DailyOffersScreen({super.key});
@@ -149,7 +148,6 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                         (item.appPrice ?? item.price ?? '0').toString(),
                                       ) ??
                                       0;
-                                  logger.d(item.offer!.toJson());
                                   return VerticalProductCard(
                                     key: ValueKey('item_${item.id}'),
                                     product: ProductEntity(

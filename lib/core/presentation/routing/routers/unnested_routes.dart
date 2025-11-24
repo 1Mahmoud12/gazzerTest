@@ -29,9 +29,10 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_progra
 import 'package:gazzer/features/orders/views/order_details_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/gazzer_support_screen.dart';
-import 'package:gazzer/features/supportScreen/presentation/views/missing_items_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_response_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/ordersIssueScreens/incorrect_items_screen.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/ordersIssueScreens/missing_items_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/support_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
@@ -118,6 +119,21 @@ final List<RouteBase> unNestedRoutes = [
     path: MissingItemsScreen.route,
     builder: (context, state) {
       return MissingItemsScreen(
+        orderId: state.extra as int,
+      );
+    },
+  ),
+  GoRoute(
+    path: IncorrectItemsScreen.route,
+    builder: (context, state) {
+      if (state.extra is Map<String, dynamic>) {
+        final extra = state.extra as Map<String, dynamic>;
+        return IncorrectItemsScreen(
+          orderId: extra['orderId'] as int,
+          faqCategoryId: extra['faqCategoryId'] as int?,
+        );
+      }
+      return IncorrectItemsScreen(
         orderId: state.extra as int,
       );
     },

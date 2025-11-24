@@ -767,6 +767,9 @@
         "camera": "الكاميرا",
         "yesterday": "أمس",
         "generalIssues": "مشكلات عامة",
+          "generalIssueInquiry": "استفسار - مشكلة عامة",
+  "youMustCheckOneAtLeast": "يجب اختيار خيار واحد على الأقل",  "mustChooseOrderFirst": "You must choose an order first",
+
           "optionalFeedback": "ملاحظات اختيارية"
 
 }

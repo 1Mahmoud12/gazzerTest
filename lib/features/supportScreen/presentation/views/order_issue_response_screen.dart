@@ -3,14 +3,15 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/features/supportScreen/presentation/views/widgets/faq_rating_bottom_sheet.dart';
 
 import 'gazzer_support_screen.dart';
-import 'widgets/feedback_bottom_sheet.dart';
 
 class OrderIssueResponseScreen extends StatelessWidget {
-  const OrderIssueResponseScreen({super.key, this.orderId});
+  const OrderIssueResponseScreen({super.key, this.orderId, this.faqCategoryId});
 
   final int? orderId;
+  final int? faqCategoryId;
   static const route = '/order-issue-response';
 
   @override
@@ -51,7 +52,7 @@ class OrderIssueResponseScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => showFeedbackBottomSheet(context),
+                    onPressed: () => showFaqRatingBottomSheet(context, orderId: orderId, faqCategoryId: faqCategoryId),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
                       shape: RoundedRectangleBorder(

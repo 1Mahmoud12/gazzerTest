@@ -205,6 +205,7 @@ class Item {
       offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
       isFavorite: json["is_favorite"],
       image: json["plate_image"],
+
       // Use plate_image for plates
       storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
     );

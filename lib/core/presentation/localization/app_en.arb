@@ -766,7 +766,11 @@
         "yesterday": "Yesterday",
        "welcomeMessage": "Hello! How can I help you today?",
        "generalIssues": "General Issues",
-       "optionalFeedback": "Optional Feedback"
+         "generalIssueInquiry": "General Issue - Inquiry",
+       "optionalFeedback": "Optional Feedback",
+         "mustChooseOrderFirst": "You must choose an order first",
+
+  "youMustCheckOneAtLeast": "You must select at least one option"
 
 
 }
