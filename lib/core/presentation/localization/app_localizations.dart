@@ -3595,6 +3595,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You must select at least one option'**
   String get youMustCheckOneAtLeast;
+
+  /// No description provided for @errorTakingPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Error taking photo'**
+  String get errorTakingPhoto;
+
+  /// No description provided for @takePhotoOfItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Take photo of item'**
+  String get takePhotoOfItem;
+
+  /// No description provided for @tapToTakePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to take photo'**
+  String get tapToTakePhoto;
 }
 
 class _AppLocalizationsDelegate

@@ -1800,4 +1800,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get youMustCheckOneAtLeast => 'يجب اختيار خيار واحد على الأقل';
+
+  @override
+  String get errorTakingPhoto => 'خطأ في التقاط الصورة';
+
+  @override
+  String get takePhotoOfItem => 'التقاط صورة للعنصر';
+
+  @override
+  String get tapToTakePhoto => 'اضغط لالتقاط صورة';
 }

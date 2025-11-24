@@ -1800,4 +1800,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get youMustCheckOneAtLeast => 'You must select at least one option';
+
+  @override
+  String get errorTakingPhoto => 'Error taking photo';
+
+  @override
+  String get takePhotoOfItem => 'Take photo of item';
+
+  @override
+  String get tapToTakePhoto => 'Tap to take photo';
 }

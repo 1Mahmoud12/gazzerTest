@@ -770,7 +770,10 @@
        "optionalFeedback": "Optional Feedback",
          "mustChooseOrderFirst": "You must choose an order first",
 
-  "youMustCheckOneAtLeast": "You must select at least one option"
+  "youMustCheckOneAtLeast": "You must select at least one option",
+  "errorTakingPhoto": "Error taking photo",
+  "takePhotoOfItem": "Take photo of item",
+  "tapToTakePhoto": "Tap to take photo"
 
 
 }
