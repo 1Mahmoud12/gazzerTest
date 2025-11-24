@@ -7,7 +7,6 @@ import 'package:gazzer/core/presentation/views/components/failure_component.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -60,11 +59,11 @@ class SinglePlateScreen extends StatelessWidget {
           );
         } else if (detailsState is PlateDetailsLoaded) {
           // Find cart item from current cart state using findCartItem
-          final cartCubit = context.read<CartCubit>();
-          final cartItemInCart = findCartItem(cartCubit, detailsState.plate);
+          // final cartCubit = context.read<CartCubit>();
+          //final cartItemInCart = findCartItem(cartCubit, detailsState.plate);
 
           // Use cart item from cart state, fallback to itemToEdit from route
-          final cartItemToUse = cartItemInCart ?? itemToEdit;
+          final cartItemToUse = itemToEdit;
 
           return BlocProvider(
             create: (context) => di<AddToCartCubit>(

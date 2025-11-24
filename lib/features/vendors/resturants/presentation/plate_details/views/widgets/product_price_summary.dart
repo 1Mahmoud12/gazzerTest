@@ -19,22 +19,30 @@ class ProductPriceSummary extends StatelessWidget {
     required this.onsubmit,
     required this.quantity,
     required this.isLoading,
+    this.isUpdatingCart = false,
   });
   final Function(bool isAdding) onChangeQuantity;
   final double price;
   final int quantity;
   final Future Function() onsubmit;
   final bool isLoading;
+  final bool isUpdatingCart;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(topLeft: Radius.circular(36), topRight: Radius.circular(36)),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(36),
+          topRight: Radius.circular(36),
+        ),
         gradient: Grad().radialGradient,
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(topLeft: Radius.circular(36), topRight: Radius.circular(36)),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(36),
+            topRight: Radius.circular(36),
+          ),
           gradient: Grad().linearGradient,
         ),
         child: SafeArea(
@@ -63,7 +71,9 @@ class ProductPriceSummary extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: AppConst.defaultInnerBorderRadius,
                           border: GradientBoxBorder(
-                            gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
+                            gradient: Grad().shadowGrad().copyWith(
+                              colors: [Co.white.withAlpha(0), Co.white],
+                            ),
                             width: 2,
                           ),
                         ),
@@ -72,16 +82,22 @@ class ProductPriceSummary extends StatelessWidget {
                           child: MainBtn(
                             onPressed: () async {
                               if (Session().client == null) {
-                                return Alerts.showToast(L10n.tr().pleaseLoginToUseCart, isInfo: true);
+                                return Alerts.showToast(
+                                  L10n.tr().pleaseLoginToUseCart,
+                                  isInfo: true,
+                                );
                               }
                               await onsubmit();
                             },
                             isLoading: isLoading,
-                            text: context.read<AddToCartCubit>().cartItem?.cartId != null ? L10n.tr().updateCart : L10n.tr().addToCart,
+                            text: _getButtonText(context),
                             textStyle: TStyle.secondaryBold(12),
                             bgColor: Colors.transparent,
                             height: 0,
-                            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 6,
+                              horizontal: 16,
+                            ),
                           ),
                         ),
                       ),
@@ -94,7 +110,10 @@ class ProductPriceSummary extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: Text(L10n.tr().selectedType, style: TStyle.secondaryBold(13)),
+                        child: Text(
+                          L10n.tr().selectedType,
+                          style: TStyle.secondaryBold(13),
+                        ),
                       ),
                     ),
                     const HorizontalSpacing(12),
@@ -104,9 +123,15 @@ class ProductPriceSummary extends StatelessWidget {
 
                         child: Row(
                           children: [
-                            Text("${L10n.tr().total}:", style: TStyle.secondaryBold(13)),
+                            Text(
+                              "${L10n.tr().total}:",
+                              style: TStyle.secondaryBold(13),
+                            ),
                             const HorizontalSpacing(12),
-                            Text(Helpers.getProperPrice(price), style: TStyle.secondaryBold(13)),
+                            Text(
+                              Helpers.getProperPrice(price),
+                              style: TStyle.secondaryBold(13),
+                            ),
                           ],
                         ),
                       ),
@@ -119,5 +144,22 @@ class ProductPriceSummary extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getButtonText(BuildContext context) {
+    if (isUpdatingCart) {
+      return L10n.tr().updateCart;
+    }
+
+    try {
+      final cubit = context.read<AddToCartCubit>();
+      if (cubit.cartItem?.cartId != null) {
+        return L10n.tr().updateCart;
+      }
+    } catch (_) {
+      // Provider not available; default to add to cart
+    }
+
+    return L10n.tr().addToCart;
   }
 }

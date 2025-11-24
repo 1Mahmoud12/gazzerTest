@@ -31,6 +31,7 @@ class CartToIncrementIcon extends StatelessWidget {
     required this.iconSize,
     required this.isDarkContainer,
     this.isCartIcon = true,
+    this.ignorePointer = false,
   });
 
   final GenericItemEntity product;
@@ -38,26 +39,30 @@ class CartToIncrementIcon extends StatelessWidget {
   final double iconSize;
   final bool isDarkContainer;
   final bool isCartIcon;
+  final bool ignorePointer;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartCubit, CartStates>(
-      listener: (context, state) {
-        // Show alert when there's an error updating the cart
-        if (state is UpdateItemError) {
-          final cubit = context.read<CartCubit>();
-          final cartItem = findCartItem(cubit, product);
-          if (state.needsNewPouchApproval) {
-            return;
+    return IgnorePointer(
+      ignoring: ignorePointer,
+      child: BlocConsumer<CartCubit, CartStates>(
+        listener: (context, state) {
+          // Show alert when there's an error updating the cart
+          if (state is UpdateItemError) {
+            final cubit = context.read<CartCubit>();
+            final cartItem = findCartItem(cubit, product);
+            if (state.needsNewPouchApproval) {
+              return;
+            }
+            // Check if error is for this product (either by cartId or product id)
+            if (state.cartId == cartItem?.cartId || state.cartId == product.id) {
+              Alerts.showToast(state.message);
+            }
           }
-          // Check if error is for this product (either by cartId or product id)
-          if (state.cartId == cartItem?.cartId || state.cartId == product.id) {
-            Alerts.showToast(state.message);
-          }
-        }
-      },
-      buildWhen: _shouldRebuild,
-      builder: (context, state) => _buildCartWidget(context, state),
+        },
+        buildWhen: _shouldRebuild,
+        builder: (context, state) => _buildCartWidget(context, state),
+      ),
     );
   }
 

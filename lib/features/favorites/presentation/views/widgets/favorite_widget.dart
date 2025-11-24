@@ -93,7 +93,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
     return StreamBuilder(
       stream: bus.getStream<ToggleFavoriteStates>(),
       builder: (context, snapshot) {
-        if (snapshot.data is ToggleFavoriteLoading && snapshot.data!.id == widget.fovorable.id && snapshot.data!.type == widget.fovorable.favoriteType.toView) {
+        if (snapshot.data is ToggleFavoriteLoading &&
+            snapshot.data!.id == widget.fovorable.id &&
+            snapshot.data!.type == widget.fovorable.favoriteType.toView) {
           return Padding(
             padding: EdgeInsets.all(widget.padding),
             child: AdaptiveProgressIndicator(size: widget.size, color: widget.color),
@@ -121,7 +123,8 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
             scale: animation,
             child: ValueListenableBuilder(
               valueListenable: isFav,
-              builder: (context, value, child) => Icon(value ? Icons.favorite : Icons.favorite_border_rounded, color: Co.secondary, size: widget.size),
+              builder: (context, value, child) =>
+                  Icon(value ? Icons.favorite : Icons.favorite_border_rounded, color: Co.secondary, size: widget.size),
             ),
           ),
         );
@@ -139,23 +142,28 @@ class DecoratedFavoriteWidget extends StatelessWidget {
     this.size = 32,
     this.padding = 8,
     this.isDarkContainer = true,
+    this.ignorePointer = false,
     this.borderRadius,
     required this.fovorable,
   });
   final double size;
   final double padding;
   final bool isDarkContainer;
+  final bool ignorePointer;
   final BorderRadiusGeometry? borderRadius;
   final Favorable fovorable;
 
   @override
   Widget build(BuildContext context) {
-    return SwitchingDecoratedwidget(
-      isDarkContainer: isDarkContainer,
-      borderRadius: borderRadius,
-      child: isDarkContainer
-          ? FavoriteWidget(key: ValueKey(fovorable.id), size: size, padding: padding, fovorable: fovorable, color: Co.bg)
-          : FavoriteWidget(key: ValueKey(fovorable.id), size: size, padding: padding, fovorable: fovorable),
+    return IgnorePointer(
+      ignoring: ignorePointer,
+      child: SwitchingDecoratedwidget(
+        isDarkContainer: isDarkContainer,
+        borderRadius: borderRadius,
+        child: isDarkContainer
+            ? FavoriteWidget(key: ValueKey(fovorable.id), size: size, padding: padding, fovorable: fovorable, color: Co.bg)
+            : FavoriteWidget(key: ValueKey(fovorable.id), size: size, padding: padding, fovorable: fovorable),
+      ),
     );
     // if (isDarkContainer) {
     //   return Skeleton.shade(

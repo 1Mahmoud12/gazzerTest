@@ -213,6 +213,7 @@ class PharmacyVendorCard extends StatelessWidget {
 
             // Favorite Button
             DecoratedFavoriteWidget(
+              ignorePointer: true,
               fovorable: ProductEntity(
                 id: id,
                 name: name,

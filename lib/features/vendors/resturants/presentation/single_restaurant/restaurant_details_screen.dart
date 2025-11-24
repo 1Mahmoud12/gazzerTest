@@ -9,6 +9,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
+import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 
 part 'restaurant_details_screen.g.dart';
@@ -37,8 +38,11 @@ class RestaurantDetailsScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is SingleRestaurantLoaded) {
           if (state.isSingle && state.categoriesWithPlates.isNotEmpty && state.categoriesWithPlates.first.$2.isNotEmpty) {
+            logger.d('restaurant Single');
             SingleCatRestaurantRoute($extra: state).pushReplacement(context);
           } else {
+            logger.d('restaurant Multi');
+
             MultiCatRestaurantsRoute($extra: state).pushReplacement(context);
           }
         }

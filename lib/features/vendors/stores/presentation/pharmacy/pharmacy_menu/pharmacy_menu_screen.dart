@@ -160,7 +160,7 @@ class PharmacyMenuScreen extends StatelessWidget {
                       width: (MediaQuery.sizeOf(context).width / 3) - 10,
                       height: 170,
                       child: PharmacyCategoryCard(
-                        id: category['id'],
+                        id: -category['id'],
                         name: category['name'],
                         imageUrl: category['image'],
                         rating: category['rating'],
@@ -168,7 +168,7 @@ class PharmacyMenuScreen extends StatelessWidget {
                         onTap: () {
                           context.navigateToPage(
                             PharmacySubcategoryScreen(
-                              categoryId: category['id'],
+                              categoryId: -category['id'],
                               categoryName: category['name'],
                             ),
                           );
@@ -244,63 +244,63 @@ class PharmacyMenuScreen extends StatelessWidget {
   List<Map<String, dynamic>> _getStaticCategories() {
     return [
       {
-        'id': 1,
+        'id': -1,
         'name': 'Medications',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 2,
+        'id': -2,
         'name': 'Skin Care',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 3,
+        'id': -3,
         'name': 'Hair Care',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 4,
+        'id': -4,
         'name': 'Vitamins & Dietary',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 5,
+        'id': -5,
         'name': 'Beauty Products',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 6,
+        'id': -6,
         'name': 'Lose Weight',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 7,
+        'id': -7,
         'name': 'Personal Care',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 8,
+        'id': -8,
         'name': 'Mother And Child',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
         'reviews': 100,
       },
       {
-        'id': 9,
+        'id': -9,
         'name': 'Medical Supplies',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
@@ -313,7 +313,7 @@ class PharmacyMenuScreen extends StatelessWidget {
     return [
       {
         'product': const ProductEntity(
-          id: 1,
+          id: -1,
           name: 'Hair Straightening Cream',
           description: 'Professional hair care product',
           price: 110.0,
@@ -327,7 +327,7 @@ class PharmacyMenuScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 2,
+          id: -2,
           name: 'Skin Serum',
           description: 'Anti-aging serum',
           price: 95.0,
@@ -341,7 +341,7 @@ class PharmacyMenuScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 3,
+          id: -3,
           name: 'Vitamin C Tablets',
           description: 'Immune system support',
           price: 45.0,
@@ -355,7 +355,7 @@ class PharmacyMenuScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 4,
+          id: -4,
           name: 'Pain Relief Gel',
           description: 'Fast acting pain relief',
           price: 65.0,
@@ -369,7 +369,7 @@ class PharmacyMenuScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 5,
+          id: -5,
           name: 'Face Moisturizer',
           description: 'Hydrating face cream',
           price: 120.0,

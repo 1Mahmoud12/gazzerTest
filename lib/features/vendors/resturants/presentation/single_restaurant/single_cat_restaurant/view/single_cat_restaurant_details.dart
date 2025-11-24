@@ -76,6 +76,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
 
   final noteNotifier = ValueNotifier<String?>(null);
   final priceNQntyNLoading = ValueNotifier<(double, int, bool)>((0, 1, false));
+  final isUpdatingCartNotifier = ValueNotifier<bool>(false);
   Function(bool isAdding) onChangeQuantity = (isAdding) {};
   Future Function() onsubmit = () async {};
   Function(String) onNoteChange = (p0) {};
@@ -98,6 +99,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
     canLeaveItem.dispose();
     noteNotifier.dispose();
     priceNQntyNLoading.dispose();
+    isUpdatingCartNotifier.dispose();
     super.dispose();
   }
 
@@ -207,11 +209,14 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                       BlocBuilder<SingleCatRestaurantCubit, SingleCatRestaurantStates>(
                         buildWhen: (previous, current) => current is PlateDetailsStates,
                         builder: (context, state) {
-                          if (state is! PlateDetailsStates) return const SizedBox.shrink();
-                          if (state is PlateDetailsLoading)
+                          if (state is! PlateDetailsStates) {
+                            return const SizedBox.shrink();
+                          }
+                          if (state is PlateDetailsLoading) {
                             return const Center(
                               child: AdaptiveProgressIndicator(),
                             );
+                          }
                           return Column(
                             children: [
                               _FoodDetailsWidget(product: state.plate),
@@ -234,6 +239,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                     });
                                     WidgetsBinding.instance.addPostFrameCallback((_) {
                                       canLeaveItem.value = addCubit.cartItem == null;
+                                      isUpdatingCartNotifier.value = addCubit.cartItem?.cartId != null;
                                       priceNQntyNLoading.value = (
                                         0,
                                         0,
@@ -249,6 +255,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                       listener: (context, cartState) {
                                         noteNotifier.value = cartState.note;
                                         canLeaveItem.value = !cartState.hasUserInteracted;
+                                        isUpdatingCartNotifier.value = addCubit.cartItem?.cartId != null;
                                         priceNQntyNLoading.value = (
                                           cartState.totalPrice,
                                           cartState.quantity,
@@ -345,13 +352,19 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
             : Skeleton.shade(
                 child: ValueListenableBuilder(
                   valueListenable: priceNQntyNLoading,
-                  builder: (context, value, child) => ProductPriceSummary(
-                    isLoading: value.$3,
-                    price: value.$1,
-                    quantity: value.$2,
-                    onChangeQuantity: onChangeQuantity,
-                    onsubmit: onsubmit,
-                  ),
+                  builder: (context, value, child) {
+                    return ValueListenableBuilder(
+                      valueListenable: isUpdatingCartNotifier,
+                      builder: (context, isUpdating, _) => ProductPriceSummary(
+                        isLoading: value.$3,
+                        price: value.$1,
+                        quantity: value.$2,
+                        onChangeQuantity: onChangeQuantity,
+                        onsubmit: onsubmit,
+                        isUpdatingCart: isUpdating,
+                      ),
+                    );
+                  },
                 ),
               ),
       ),

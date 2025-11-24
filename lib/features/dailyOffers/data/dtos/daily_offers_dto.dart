@@ -158,6 +158,7 @@ class Item {
     required this.name,
     required this.price,
     required this.appPrice,
+    required this.rate,
     required this.quantityInStock,
     required this.color,
     required this.offer,
@@ -170,6 +171,7 @@ class Item {
   final String? name;
   final String? price;
   final String? appPrice;
+  final String? rate;
   final num? quantityInStock;
   final String? color;
   final Offer? offer;
@@ -183,6 +185,7 @@ class Item {
       name: json["name"],
       price: json["price"],
       appPrice: json["app_price"],
+      rate: json["rate"],
       quantityInStock: json["quantity_in_stock"],
       color: json["color"],
       offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
@@ -202,6 +205,7 @@ class Item {
       appPrice: json["app_price"],
       quantityInStock: json["quantity_in_stock"],
       color: json["color"],
+      rate: json["rate"],
       offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
       isFavorite: json["is_favorite"],
       image: json["plate_image"],
@@ -221,6 +225,7 @@ class Item {
       name: json["name"],
       price: json["price"],
       appPrice: json["app_price"],
+      rate: json["rate"],
       quantityInStock: json["quantity_in_stock"],
       color: json["color"],
       offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
@@ -235,6 +240,7 @@ class Item {
     "name": name,
     "price": price,
     "app_price": appPrice,
+    "rate": rate,
     "quantity_in_stock": quantityInStock,
     "color": color,
     "offer": offer?.toJson(),

@@ -194,6 +194,7 @@ class _TopSection extends StatelessWidget {
                     children: [
                       // Cart Icon
                       CartToIncrementIcon(
+                        ignorePointer: true,
                         product: product,
                         iconSize: 18,
                         isDarkContainer: false,
@@ -203,6 +204,7 @@ class _TopSection extends StatelessWidget {
 
                       // Favorite Icon
                       DecoratedFavoriteWidget(
+                        ignorePointer: true,
                         fovorable: product,
                         isDarkContainer: false,
                         size: 16,

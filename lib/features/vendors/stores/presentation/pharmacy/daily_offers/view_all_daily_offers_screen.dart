@@ -81,7 +81,7 @@ class ViewAllDailyOffersScreen extends StatelessWidget {
     return [
       {
         'product': const ProductEntity(
-          id: 1,
+          id: -1,
           name: 'Medical Product',
           description: 'High quality medical product',
           price: 110.0,
@@ -95,7 +95,7 @@ class ViewAllDailyOffersScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 2,
+          id: -2,
           name: 'Medical Product',
           description: 'Premium medical product',
           price: 110.0,
@@ -109,7 +109,7 @@ class ViewAllDailyOffersScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 3,
+          id: -3,
           name: 'Medical Product',
           description: 'Essential medical product',
           price: 110.0,
@@ -123,7 +123,7 @@ class ViewAllDailyOffersScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 4,
+          id: -4,
           name: 'serum vitamin c',
           description: 'Vitamin C serum for skin care',
           price: 110.0,
@@ -136,7 +136,7 @@ class ViewAllDailyOffersScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 5,
+          id: -5,
           name: 'serum vitamin c',
           description: 'Vitamin C serum for skin care',
           price: 110.0,
@@ -149,7 +149,7 @@ class ViewAllDailyOffersScreen extends StatelessWidget {
       },
       {
         'product': const ProductEntity(
-          id: 6,
+          id: -6,
           name: 'Medical Product',
           description: 'High quality medical product',
           price: 110.0,

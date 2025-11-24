@@ -8,7 +8,6 @@ import 'package:gazzer/core/presentation/views/components/failure_component.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -62,8 +61,8 @@ class ProductDetailsScreen extends StatelessWidget {
           );
         }
         if (state is ProductDetailsLoaded) {
-          final cartItemInCart = findCartItem(context.read<CartCubit>(), state.product);
-          final cartItemToUse = cartItemInCart ?? cartItem;
+          //final cartItemInCart = findCartItem(context.read<CartCubit>(), state.product);
+          final cartItemToUse = cartItem;
           return BlocProvider(
             // TODO : will store item have options or not ?????? ask backend
             create: (context) => di<AddToCartCubit>(param1: (state.product, <ItemOptionEntity>[]), param2: cartItemToUse),

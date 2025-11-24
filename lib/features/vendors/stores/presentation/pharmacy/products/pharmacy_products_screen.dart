@@ -3,10 +3,10 @@ import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_header.dart';
 import 'package:go_router/go_router.dart';
 
@@ -157,9 +157,10 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
                         return VerticalProductCard(
                           product: product,
                           canAdd: true,
-
+                          ignorePointer: true,
                           onTap: () {
-                            PlateDetailsRoute(id: product.id).push(context);
+                            Alerts.showToast(L10n.tr().comingSoon);
+                            //     PlateDetailsRoute(id: product.id).push(context);
                           },
                         );
                       },

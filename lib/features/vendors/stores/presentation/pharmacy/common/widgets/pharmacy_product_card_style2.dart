@@ -117,6 +117,7 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                         child: Column(
                           children: [
                             DecoratedFavoriteWidget(
+                              ignorePointer: true,
                               fovorable: product,
                               isDarkContainer: false,
                               size: iconSize,
@@ -142,6 +143,7 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                         child: Column(
                           children: [
                             CartToIncrementIcon(
+                              ignorePointer: true,
                               isHorizonal: false,
                               product: product,
                               iconSize: iconSize * 1.1,

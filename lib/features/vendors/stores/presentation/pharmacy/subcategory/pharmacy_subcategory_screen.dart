@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
@@ -104,10 +105,10 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(90),
               border: Border.all(
-                color: Co.buttonGradient.withOpacity(.3),
+                color: Co.buttonGradient.withOpacityNew(.3),
                 width: 2,
               ),
-              color: selected == index ? Co.buttonGradient.withOpacity(.1) : Colors.transparent,
+              color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -149,13 +150,13 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                 // Vendors List
                 ...vendors.map((vendor) {
                   final isFavorite = _favoriteVendorIds.contains(
-                    vendor['id'],
+                    -vendor['id'],
                   );
 
                   return Padding(
                     padding: AppConst.defaultHrPadding,
                     child: PharmacyVendorCard(
-                      id: vendor['id'],
+                      id: -vendor['id'],
                       name: vendor['name'],
                       logoUrl: vendor['logo'],
                       rating: vendor['rating'],
@@ -168,7 +169,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                       onTap: () {
                         context.navigateToPage(
                           PharmacyStoreScreen(
-                            vendorId: vendor['id'],
+                            vendorId: -vendor['id'],
                             name: vendor['name'],
                             logoUrl: vendor['logo'],
                           ),
@@ -177,15 +178,15 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                       onFavoriteTap: () {
                         setState(() {
                           if (isFavorite) {
-                            _favoriteVendorIds.remove(vendor['id']);
+                            _favoriteVendorIds.remove(-vendor['id']);
                           } else {
-                            _favoriteVendorIds.add(vendor['id']);
+                            _favoriteVendorIds.add(-vendor['id']);
                           }
                         });
                       },
                     ),
                   );
-                }).toList(),
+                }),
               ],
             ),
           );
@@ -230,7 +231,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
     // In production, this would filter vendors based on subcategory
     return [
       {
-        'id': subcategoryIndex * 10 + 1,
+        'id': -subcategoryIndex * 10 + 1,
         'name': 'Green Leaf Pharmacy',
         'logo': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
@@ -241,7 +242,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
         'isClosed': false,
       },
       {
-        'id': subcategoryIndex * 10 + 2,
+        'id': -subcategoryIndex * 10 + 2,
         'name': 'Green Leaf Pharmacy',
         'logo': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
@@ -252,7 +253,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
         'isClosed': false,
       },
       {
-        'id': subcategoryIndex * 10 + 3,
+        'id': -subcategoryIndex * 10 + 3,
         'name': 'Green Leaf Pharmacy',
         'logo': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
@@ -263,7 +264,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
         'isClosed': true,
       },
       {
-        'id': subcategoryIndex * 10 + 4,
+        'id': -subcategoryIndex * 10 + 4,
         'name': 'Green Leaf Pharmacy',
         'logo': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,
@@ -274,7 +275,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
         'isClosed': false,
       },
       {
-        'id': subcategoryIndex * 10 + 5,
+        'id': -subcategoryIndex * 10 + 5,
         'name': 'Green Leaf Pharmacy',
         'logo': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
         'rating': 4.5,

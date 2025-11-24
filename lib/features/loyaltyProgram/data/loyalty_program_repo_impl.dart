@@ -22,7 +22,9 @@ class LoyaltyProgramRepoImpl extends LoyaltyProgramRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.loyaltyProgram),
       parser: (response) {
         _saveToCache(response.data);
-        final dto = LoyaltyProgramResponseDto.fromJson(response.data as Map<String, dynamic>);
+        final dto = LoyaltyProgramResponseDto.fromJson(
+          response.data as Map<String, dynamic>,
+        );
         return dto.toEntity();
       },
     );
@@ -41,7 +43,10 @@ class LoyaltyProgramRepoImpl extends LoyaltyProgramRepo {
     try {
       final sp = await SharedPreferences.getInstance();
       await sp.setString(_kLoyaltyProgramCache, jsonEncode(responseData));
-      await sp.setInt(_kLoyaltyProgramTs, DateTime.now().millisecondsSinceEpoch);
+      await sp.setInt(
+        _kLoyaltyProgramTs,
+        DateTime.now().millisecondsSinceEpoch,
+      );
     } catch (_) {
       // ignore cache failures
     }

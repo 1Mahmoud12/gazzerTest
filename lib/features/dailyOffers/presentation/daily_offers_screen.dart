@@ -156,7 +156,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                       description: '',
                                       price: price,
                                       image: item.image ?? '',
-                                      rate: 0,
+                                      rate: (num.tryParse(item.rate ?? '0') ?? 0).toDouble(),
                                       reviewCount: 0,
                                       outOfStock: false,
                                       offer: item.offer == null

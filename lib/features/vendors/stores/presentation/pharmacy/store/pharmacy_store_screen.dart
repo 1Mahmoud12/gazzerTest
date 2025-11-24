@@ -48,7 +48,7 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
 
     // Create a mock vendor entity for VendorInfoCard
     final mockVendor = StoreEntity(
-      id: widget.vendorId,
+      id: -widget.vendorId,
       name: widget.name,
       totalOrders: 120,
       image: widget.logoUrl,
@@ -60,7 +60,7 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
       zoneName: 'ZAMALEK',
       deliveryTime: '20-30',
       deliveryFee: 15.0,
-      parentId: 1,
+      parentId: -1,
       isFavorite: false,
       isOpen: true,
       outOfStock: false,
@@ -162,7 +162,7 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
                       onTap: () {
                         context.navigateToPage(
                           PharmacyProductsScreen(
-                            categoryId: category['id'],
+                            categoryId: -category['id'],
                             categoryName: category['name'],
                           ),
                         );
@@ -224,7 +224,7 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
                           child: false
                               ? DailyOfferStyleTwo(
                                   product: const ProductEntity(
-                                    id: 1,
+                                    id: -1,
                                     name: 'Medical Product Bundle',
                                     description: 'Complete medical product set with nasal spray, dropper, and medication',
                                     price: 110.0,
@@ -240,7 +240,7 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
                                 )
                               : DailyOfferStyleOne(
                                   product: const ProductEntity(
-                                    id: 1,
+                                    id: -1,
                                     name: 'Medical Product Bundle',
                                     description: 'Complete medical product set with nasal spray, dropper, and medication',
                                     price: 110.0,
@@ -281,17 +281,17 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
   List<Map<String, dynamic>> _getStoreCategories() {
     return [
       {
-        'id': 2,
+        'id': -2,
         'name': 'Medications',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
       },
       {
-        'id': 3,
+        'id': -3,
         'name': 'Skin Care',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
       },
       {
-        'id': 4,
+        'id': -4,
         'name': 'Hair Care',
         'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
       },

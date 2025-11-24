@@ -22,6 +22,7 @@ class _FoodImagesGalleryState extends State<_FoodImagesGallery> {
   @override
   Widget build(BuildContext context) {
     final smallImagesWidth = 75.0;
+    print(selected.image);
     return AspectRatio(
       aspectRatio: 1,
       child: Stack(
@@ -44,7 +45,9 @@ class _FoodImagesGalleryState extends State<_FoodImagesGallery> {
                   opacity: animation,
                   child: child,
                 ),
-                child: Image.network(key: ValueKey(selected.id), selected.image, fit: BoxFit.cover),
+                child: CircleGradientBorderedImage(
+                  image: selected.image,
+                ),
               ),
             ),
           ),

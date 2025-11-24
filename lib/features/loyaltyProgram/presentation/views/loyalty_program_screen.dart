@@ -4,6 +4,7 @@ import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/component/un_auth_component.dart';
@@ -58,6 +59,14 @@ class _LoyaltyProgramView extends StatelessWidget {
       ),
       body: BlocBuilder<LoyaltyProgramCubit, LoyaltyProgramState>(
         builder: (context, state) {
+          if (state is LoyaltyProgramError) {
+            return FailureComponent(
+              message: state.message,
+              onRetry: () {
+                context.read<LoyaltyProgramCubit>().load();
+              },
+            );
+          }
           return switch (state) {
             LoyaltyProgramInitial() || LoyaltyProgramLoading() => Skeletonizer(
               enabled: true,
@@ -71,7 +80,7 @@ class _LoyaltyProgramView extends StatelessWidget {
             ),
             LoyaltyProgramLoaded(:final data, :final isCached) => _buildLoaded(context, data, isCached),
             LoyaltyProgramError(:final message, :final cachedData) =>
-              cachedData != null ? _buildLoaded(context, cachedData, true, errorMessage: message) : _ErrorView(message: message),
+              cachedData != null ? _buildLoaded(context, cachedData, true, errorMessage: message) : _ErrorView(message: state.message),
           };
         },
       ),
@@ -126,23 +135,6 @@ class _LoyaltyProgramView extends StatelessWidget {
       benefitsVisuals: benefitsVisuals,
       errorMessage: errorMessage,
     );
-
-    if (errorMessage != null && errorMessage.isNotEmpty) {
-      return Column(
-        children: [
-          Container(
-            width: double.infinity,
-            color: Co.red.withOpacityNew(0.1),
-            padding: const EdgeInsets.all(12),
-            child: Text(
-              errorMessage,
-              style: TStyle.errorRegular(14, font: FFamily.roboto),
-            ),
-          ),
-          Expanded(child: bannerWidget),
-        ],
-      );
-    }
 
     return bannerWidget;
   }

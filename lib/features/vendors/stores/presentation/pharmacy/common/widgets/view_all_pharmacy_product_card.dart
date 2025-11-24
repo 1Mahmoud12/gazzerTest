@@ -112,6 +112,7 @@ class ViewAllPharmacyProductCard extends StatelessWidget {
                       Column(
                         children: [
                           DecoratedFavoriteWidget(
+                            ignorePointer: true,
                             fovorable: product,
                             isDarkContainer: false,
                             size: smallIconSize,
@@ -134,6 +135,7 @@ class ViewAllPharmacyProductCard extends StatelessWidget {
                       Column(
                         children: [
                           CartToIncrementIcon(
+                            ignorePointer: true,
                             isHorizonal: false,
                             product: product,
                             iconSize: iconSize,
