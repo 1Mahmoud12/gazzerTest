@@ -8,7 +8,6 @@ class OrderSummaryDTO {
   final double discount;
   final double total;
   final List<VehicleBoxTypeDTO> vehicleBoxTypes;
-  final VehicleBoxTypesSummaryDTO vehicleBoxTypesSummary;
   final bool needsNewPouchApproval;
   final OrderSummaryVoucherDTO? voucher;
   final String? voucherDiscount;
@@ -23,7 +22,6 @@ class OrderSummaryDTO {
     required this.discount,
     required this.total,
     required this.vehicleBoxTypes,
-    required this.vehicleBoxTypesSummary,
     required this.needsNewPouchApproval,
     this.voucher,
     this.voucherDiscount,
@@ -46,9 +44,7 @@ class OrderSummaryDTO {
               )
               .toList() ??
           [],
-      vehicleBoxTypesSummary: VehicleBoxTypesSummaryDTO.fromJson(
-        json['vehicle_box_types_summary'] as Map<String, dynamic>,
-      ),
+
       needsNewPouchApproval: json['needs_new_pouch_approval'] as bool? ?? false,
       voucher: json['voucher'] != null
           ? OrderSummaryVoucherDTO.fromJson(
@@ -250,35 +246,6 @@ class VehicleBoxItemDTO {
       dimensions: json['dimensions'] as Map<String, dynamic>,
       volume: (json['volume'] as num).toDouble(),
       weightDetails: json['weight_details'] as Map<String, dynamic>,
-    );
-  }
-}
-
-class VehicleBoxTypesSummaryDTO {
-  final int totalVehicleBoxTypes;
-  final double totalCapacity;
-  final double totalLoad;
-  final int totalFillPercentage;
-  final double totalLoadPercentageExact;
-  final Map<String, dynamic> volume;
-
-  VehicleBoxTypesSummaryDTO({
-    required this.totalVehicleBoxTypes,
-    required this.totalCapacity,
-    required this.totalLoad,
-    required this.totalFillPercentage,
-    required this.totalLoadPercentageExact,
-    required this.volume,
-  });
-
-  factory VehicleBoxTypesSummaryDTO.fromJson(Map<String, dynamic> json) {
-    return VehicleBoxTypesSummaryDTO(
-      totalVehicleBoxTypes: json['total_vehicle_box_types'] as int,
-      totalCapacity: (json['total_capacity'] as num).toDouble(),
-      totalLoad: (json['total_load'] as num).toDouble(),
-      totalFillPercentage: json['total_fill_percentage'] as int,
-      totalLoadPercentageExact: (json['total_load_percentage_exact'] as num).toDouble(),
-      volume: json['volume'] as Map<String, dynamic>,
     );
   }
 }

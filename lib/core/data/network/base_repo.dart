@@ -64,7 +64,10 @@ abstract class BaseApiRepo {
                 e: ErrorType.badResponse,
               );
             }
-            if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['needs_new_pouch_approval'] != null) {
+            if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) &&
+                data is Map &&
+                data['needs_new_pouch_approval'] != null &&
+                data['has_existing_items'] == null) {
               return CartError.fromJson(
                 responseData,
                 e: ErrorType.badResponse,
