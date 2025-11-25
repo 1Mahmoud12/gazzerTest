@@ -776,5 +776,8 @@
           "optionalFeedback": "ملاحظات اختيارية",
             "phoneMustMatchEgyptPrefix": "يجب أن يبدأ رقم الهاتف بالرقم 1 متبوعًا بـ 0 أو 1 أو 2 أو 5",
             "goToWallet":"اذهب الي المحفظه",
-"offline": "غير متصل"
+"offline": "غير متصل",
+ "cartHasExistingItems": "عربة التسوق تحتوي على عناصر حالية",
+  "keep": "احتفاظ",
+  "clear": "مسح"
 }

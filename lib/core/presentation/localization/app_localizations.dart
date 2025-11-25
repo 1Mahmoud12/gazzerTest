@@ -3620,6 +3620,12 @@ abstract class AppLocalizations {
   /// **'Phone number must start with 1 followed by 0, 1, 2, or 5'**
   String get phoneMustMatchEgyptPrefix;
 
+  /// No description provided for @keep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep'**
+  String get keep;
+
   /// No description provided for @goToWallet.
   ///
   /// In en, this message translates to:

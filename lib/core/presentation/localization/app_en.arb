@@ -775,7 +775,9 @@
   "takePhotoOfItem": "Take photo of item",
   "tapToTakePhoto": "Tap to take photo",
     "phoneMustMatchEgyptPrefix": "Phone number must start with 1 followed by 0, 1, 2, or 5",
-
+ "cartHasExistingItems": "Cart Has Existing Items",
+  "keep": "Keep",
+  "clear": "Clear",
 "goToWallet":"Go to Wallet",
 "offline": "Offline"
 

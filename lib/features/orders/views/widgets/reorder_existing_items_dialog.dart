@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
@@ -25,14 +26,13 @@ Future<bool?> showReorderExistingItemsDialog({
           children: [
             const VerticalSpacing(20),
             Text(
-              'Cart Has Existing Items',
+              L10n.tr().cartHasExistingItems,
               style: TStyle.burbleBold(18),
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing(10),
             Text(
-              message ??
-                  'You have $existingItemsCount item(s) in your cart. Do you want to keep these items and add the reordered items to your cart, or would you prefer to clear your cart and add only the reordered items?',
+              message ?? '',
               style: TStyle.blackRegular(16),
               textAlign: TextAlign.center,
             ),
@@ -43,7 +43,7 @@ Future<bool?> showReorderExistingItemsDialog({
                 children: [
                   Expanded(
                     child: MainBtn(
-                      text: 'Clear and Reorder',
+                      text: L10n.tr().clear,
                       bgColor: Colors.transparent,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
                       textStyle: TStyle.burbleRegular(14).copyWith(
@@ -58,7 +58,7 @@ Future<bool?> showReorderExistingItemsDialog({
                   const HorizontalSpacing(20),
                   Expanded(
                     child: MainBtn(
-                      text: 'Keep and Reorder',
+                      text: L10n.tr().keep,
                       bgColor: Colors.transparent,
                       borderThickness: 2,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),

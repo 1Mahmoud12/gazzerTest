@@ -22,6 +22,7 @@ class ReorderCubit extends Cubit<ReorderState> {
         emit(ReorderSuccess(message: value));
       case Err<String>(:final error):
         // Check if this is a ReorderError with existing items
+      //logger.d('Errors ==>${error.runtimeType}');
         if (error is error_models.ReorderError && error.hasExistingItems) {
           emit(
             ReorderHasExistingItems(
