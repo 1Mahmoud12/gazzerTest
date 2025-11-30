@@ -1,4 +1,7 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
+import 'package:gazzer/features/vendors/common/data/offer_dto.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
 
@@ -11,41 +14,12 @@ class DailyOffersDto {
 
   final String? status;
   final String? message;
-  final DailyOffersDtoData? data;
+  final DailyOfferDataModel? data;
 
   factory DailyOffersDto.fromJson(Map<String, dynamic> json) {
     return DailyOffersDto(
       status: json["status"],
       message: json["message"],
-      data: json["data"] == null ? null : DailyOffersDtoData.fromJson(json["data"]),
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-    "status": status,
-    "message": message,
-    "data": data?.toJson(),
-  };
-}
-
-class DailyOffersDtoData {
-  DailyOffersDtoData({
-    required this.status,
-    required this.message,
-    required this.pagination,
-    required this.data,
-  });
-
-  final String? status;
-  final String? message;
-  final List<dynamic> pagination;
-  final DailyOfferDataModel? data;
-
-  factory DailyOffersDtoData.fromJson(Map<String, dynamic> json) {
-    return DailyOffersDtoData(
-      status: json["status"],
-      message: json["message"],
-      pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
       data: json["data"] == null ? null : DailyOfferDataModel.fromJson(json["data"]),
     );
   }
@@ -53,7 +27,6 @@ class DailyOffersDtoData {
   Map<String, dynamic> toJson() => {
     "status": status,
     "message": message,
-    "pagination": pagination.map((x) => x).toList(),
     "data": data?.toJson(),
   };
 }
@@ -91,163 +64,102 @@ class DailyOfferDataModel {
 }
 
 class ItemsWithOffer {
-  ItemsWithOffer({
-    required this.id,
-    required this.expiredAt,
-    required this.discount,
-    required this.discountType,
-    required this.maxDiscount,
-    required this.itemType,
-    required this.item,
+  ItemsWithOffer._({
+    this.id,
+    this.expiredAt,
+    this.discount,
+    this.discountType,
+    this.maxDiscount,
+    this.item,
   });
 
   final int? id;
-  final DateTime? expiredAt;
+  final String? expiredAt;
   final num? discount;
   final String? discountType;
   final num? maxDiscount;
-  final String? itemType;
-  final Item? item;
+  late final ItemType itemType;
+  GenericItemDTO? item;
 
   factory ItemsWithOffer.fromJson(Map<String, dynamic> json) {
-    ItemType parsedItemType = ItemType.fromString(
-      json["item_type"] ?? 'Unknown',
-    );
-    Item? parsedItem;
+    // Extract values first
+    final id = json["id"];
+    final expiredAt = json["expired_at"];
+    final discount = json["discount"];
+    final discountType = json["discount_type"];
+    final maxDiscount = json["max_discount"];
 
+    // Parse item type
+    final parsedItemType = ItemType.fromString(json["item_type"] ?? 'Unknown');
+
+    // Parse item based on type
+    GenericItemDTO? parsedItem;
     if (json["item"] != null) {
-      if (parsedItemType == ItemType.plate) {
-        // For plates, parse via PlateDTO
-        final plateDto = PlateDTO.fromJson(json["item"]);
-        parsedItem = Item.fromPlateDTO(json["item"], plateDto);
-      } else if (parsedItemType == ItemType.product || parsedItemType == ItemType.storeItem) {
-        // For products/store items, parse via ProductDTO
-        final productDto = ProductDTO.fromJson(json["item"]);
-        parsedItem = Item.fromProductDTO(json["item"], productDto);
-      } else {
-        // Fallback to basic Item parsing
-        parsedItem = Item.fromJson(json["item"]);
+      try {
+        if (parsedItemType == ItemType.plate) {
+          parsedItem = PlateDTO.fromJson(json["item"]);
+        } else if (parsedItemType == ItemType.product || parsedItemType == ItemType.storeItem) {
+          parsedItem = ProductDTO.fromJson(json["item"]);
+        } else {
+          // Fallback to ProductDTO if type is unknown or unexpected
+          parsedItem = ProductDTO.fromJson(json["item"]);
+        }
+      } catch (e, stackTrace) {
+        print('Error parsing item for type ${parsedItemType.value}: $e');
+        print('Stack trace: $stackTrace');
+        parsedItem = null; // Ensure item is null on parsing failure
       }
     }
 
-    return ItemsWithOffer(
-      id: json["id"],
-      expiredAt: DateTime.tryParse(json["expired_at"] ?? ""),
-      discount: json["discount"],
-      discountType: json["discount_type"],
-      maxDiscount: json["max_discount"],
-      itemType: json["item_type"],
+    // Create the object
+    final itemsWithOffer = ItemsWithOffer._(
+      id: id,
+      expiredAt: expiredAt,
+      discount: discount,
+      discountType: discountType,
+      maxDiscount: maxDiscount,
       item: parsedItem,
     );
+    itemsWithOffer.itemType = parsedItemType; // Set the late final field
+    return itemsWithOffer;
   }
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "expired_at": expiredAt?.toIso8601String(),
+    "expired_at": expiredAt,
     "discount": discount,
     "discount_type": discountType,
     "max_discount": maxDiscount,
-    "item_type": itemType,
-    "item": item?.toJson(),
+    "item_type": itemType.value,
+    "item": item?.toEntity(),
   };
-}
 
-class Item {
-  Item({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.appPrice,
-    required this.rate,
-    required this.quantityInStock,
-    required this.color,
-    required this.offer,
-    required this.isFavorite,
-    required this.image,
-    required this.storeInfo,
-  });
+  /// Converts ItemsWithOffer to GenericItemEntity with the offer from wrapper
+  GenericItemEntity? toEntity() {
+    if (item == null) return null;
 
-  final int? id;
-  final String? name;
-  final String? price;
-  final String? appPrice;
-  final String? rate;
-  final num? quantityInStock;
-  final String? color;
-  final Offer? offer;
-  final num? isFavorite;
-  final String? image;
-  final StoreInfo? storeInfo;
+    try {
+      // Create an OfferDTO from the wrapper's offer data
+      final offerDTO = OfferDTO(
+        id: id,
+        expiredAt: expiredAt,
+        discount: discount?.toDouble(),
+        discountType: discountType,
+        maxDiscount: maxDiscount?.toInt(),
+      );
 
-  factory Item.fromJson(Map<String, dynamic> json) {
-    return Item(
-      id: json["id"],
-      name: json["name"],
-      price: json["price"],
-      appPrice: json["app_price"],
-      rate: json["rate"],
-      quantityInStock: json["quantity_in_stock"],
-      color: json["color"],
-      offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
-      isFavorite: json["is_favorite"],
-      image: json["image"],
-      storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
-    );
+      // Set the offer on the item (override any existing offer with wrapper's offer)
+      item!.offer = offerDTO;
+
+      // Convert the item to entity (which will now have the proper offer)
+      final entity = item!.toEntity();
+      return entity;
+    } catch (e, stackTrace) {
+      print('ItemsWithOffer.toEntity error for id=$id: $e');
+      print('Stack trace: $stackTrace');
+      return null;
+    }
   }
-
-  // Helper factory for plate items (uses plate_* fields)
-  factory Item.fromPlateDTO(Map<String, dynamic> json, PlateDTO plateDto) {
-    return Item(
-      id: json["id"],
-      name: json["plate_name"],
-      // Use plate_name for plates
-      price: json["price"],
-      appPrice: json["app_price"],
-      quantityInStock: json["quantity_in_stock"],
-      color: json["color"],
-      rate: json["rate"],
-      offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
-      isFavorite: json["is_favorite"],
-      image: json["plate_image"],
-
-      // Use plate_image for plates
-      storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
-    );
-  }
-
-  // Helper factory for product items (uses standard fields, no plate_* fields)
-  factory Item.fromProductDTO(
-    Map<String, dynamic> json,
-    ProductDTO productDto,
-  ) {
-    return Item(
-      id: json["id"],
-      name: json["name"],
-      price: json["price"],
-      appPrice: json["app_price"],
-      rate: json["rate"],
-      quantityInStock: json["quantity_in_stock"],
-      color: json["color"],
-      offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
-      isFavorite: json["is_favorite"],
-      image: json["image"],
-      storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "price": price,
-    "app_price": appPrice,
-    "rate": rate,
-    "quantity_in_stock": quantityInStock,
-    "color": color,
-    "offer": offer?.toJson(),
-    "is_favorite": isFavorite,
-    "image": image,
-    "store_info": storeInfo?.toJson(),
-  };
 }
 
 class Offer {
@@ -281,44 +193,6 @@ class Offer {
     "discount": discount,
     "discount_type": discountType,
     "max_discount": maxDiscount,
-  };
-}
-
-class StoreInfo {
-  StoreInfo({
-    required this.storeCategoryType,
-    required this.storeCategoryId,
-    required this.storeId,
-    required this.storeName,
-    required this.storeImage,
-    required this.isOpen,
-  });
-
-  final String? storeCategoryType;
-  final int? storeCategoryId;
-  final int? storeId;
-  final String? storeName;
-  final String? storeImage;
-  final num? isOpen;
-
-  factory StoreInfo.fromJson(Map<String, dynamic> json) {
-    return StoreInfo(
-      storeCategoryType: json["store_category_type"],
-      storeCategoryId: json["store_category_id"],
-      storeId: json["store_id"],
-      storeName: json["store_name"],
-      storeImage: json["store_image"],
-      isOpen: json["is_open"],
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-    "store_category_type": storeCategoryType,
-    "store_category_id": storeCategoryId,
-    "store_id": storeId,
-    "store_name": storeName,
-    "store_image": storeImage,
-    "is_open": isOpen,
   };
 }
 

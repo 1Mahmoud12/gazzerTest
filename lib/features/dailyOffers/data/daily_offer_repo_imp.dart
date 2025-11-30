@@ -33,7 +33,7 @@ class DailyOfferRepoImp extends DailyOfferRepo {
         }
 
         final dto = DailyOffersDto.fromJson(response.data);
-        return dto.data?.data;
+        return dto.data;
       },
     );
 
@@ -59,7 +59,7 @@ class DailyOfferRepoImp extends DailyOfferRepo {
 
       final map = jsonDecode(raw) as Map<String, dynamic>;
       final dto = DailyOffersDto.fromJson(map);
-      return dto.data?.data;
+      return dto.data;
     } catch (e) {
       return null;
     }

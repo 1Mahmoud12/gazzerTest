@@ -46,52 +46,27 @@ class _VoucherWidgetState extends State<VoucherWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Co.buttonGradient.withOpacityNew(.35)),
-      ),
-      child: Column(
-        children: [
-          BlocBuilder<VouchersCubit, VouchersStates>(
-            builder: (context, state) {
-              final cubit = context.read<VouchersCubit>();
-
-              return Column(
+    return BlocBuilder<VouchersCubit, VouchersStates>(
+      builder: (context, state) {
+        final cubit = context.read<VouchersCubit>();
+        if (cubit.vouchers.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        return Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Co.buttonGradient.withOpacityNew(.35)),
+          ),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () => cubit.loadVouchers(),
-                        child: Text(
-                          L10n.tr().havePromoCode,
-                          style: TStyle.blackBold(14),
-                        ),
-                      ),
-                      // InkWell(
-                      //   onTap: () {
-                      //     _voucherController.clear();
-                      //     cubit.toggleTextField();
-                      //   },
-                      //   child: Row(
-                      //     children: [
-                      //       Text(
-                      //         L10n.tr().addVoucher,
-                      //         style: TStyle.blackBold(14),
-                      //       ),
-                      //       const SizedBox(
-                      //         width: 3,
-                      //       ),
-                      //       const Icon(
-                      //         Icons.add,
-                      //         size: 16,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                    ],
+                  Text(
+                    L10n.tr().havePromoCode,
+                    style: TStyle.blackBold(14),
+                    textAlign: TextAlign.start,
                   ),
                   if (!cubit.isTextFieldEnabled) ...[
                     const VerticalSpacing(10),
@@ -106,10 +81,10 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                             BlocListener<VouchersCubit, VouchersStates>(
                               listener: (context, state) {
                                 if (state is VoucherApplied) {
-                                  Alerts.showToast(
-                                    '${L10n.tr().voucherApplied} ${state.discountAmount} ${state.discountType.contains('percent') ? '%' : ''} ${L10n.tr().discount}',
-                                    error: false,
-                                  );
+                                  // Alerts.showToast(
+                                  //   '${L10n.tr().voucherApplied} ${state.discountAmount} ${state.discountType.contains('percent') ? '%' : ''} ${L10n.tr().discount}',
+                                  //   error: false,
+                                  // );
                                 } else if (state is VoucherError) {
                                   voucherAlert(
                                     title: state.message,
@@ -285,11 +260,11 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                     ),
                   ],
                 ],
-              );
-            },
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

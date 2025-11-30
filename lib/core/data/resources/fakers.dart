@@ -480,6 +480,10 @@ class Fakers {
       type: CartItemType.product,
       quantity: 1,
       prod: cartable,
+      itemPrice: 0,
+      options: [],
+      orderedWith: [],
+      notes: null,
     ),
   ];
   static const cartable = CartableEntity(

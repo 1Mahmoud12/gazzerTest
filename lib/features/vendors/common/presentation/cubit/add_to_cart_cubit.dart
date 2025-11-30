@@ -127,6 +127,22 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   void increment() {
+    // Check if item is ProductEntity and has quantityInStock limit
+    if (item is ProductEntity) {
+      final product = item as ProductEntity;
+      if (product.quantityInStock != null && state.quantity >= product.quantityInStock!) {
+        // Already at or above max quantity, show toast
+        emit(
+          state.copyWith(
+            message: L10n.tr().maximumQuantityReachedForItem,
+            status: ApiStatus.error,
+            hasUserInteracted: true,
+          ),
+        );
+        return;
+      }
+    }
+
     emit(
       state.copyWith(
         qntity: state.quantity + 1,

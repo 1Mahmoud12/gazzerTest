@@ -5,6 +5,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dashed_border.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
@@ -22,10 +23,15 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CheckoutCubit, CheckoutStates>(
+    return BlocConsumer<CheckoutCubit, CheckoutStates>(
       buildWhen: (previous, current) {
         // Rebuild on order summary states, but skip CardChange to prevent infinite loop
         return current is OrderSummaryLoading || current is OrderSummaryLoaded || current is OrderSummaryError;
+      },
+      listener: (context, state) {
+        if (state is OrderSummaryError) {
+          Alerts.showToast(state.message);
+        }
       },
       builder: (context, state) {
         final cubit = context.read<CheckoutCubit>();
@@ -104,7 +110,7 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                   ),
                 ),
 
-              if (orderSummary.voucher != null && voucherFormatted != null) ...[
+              if (orderSummary.voucher != null) ...[
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: ItemSummary(

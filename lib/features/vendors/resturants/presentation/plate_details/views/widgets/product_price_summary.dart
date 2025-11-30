@@ -20,6 +20,7 @@ class ProductPriceSummary extends StatelessWidget {
     required this.quantity,
     required this.isLoading,
     this.isUpdatingCart = false,
+    this.maxQuantity,
   });
   final Function(bool isAdding) onChangeQuantity;
   final double price;
@@ -27,6 +28,7 @@ class ProductPriceSummary extends StatelessWidget {
   final Future Function() onsubmit;
   final bool isLoading;
   final bool isUpdatingCart;
+  final int? maxQuantity;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -64,6 +66,7 @@ class ProductPriceSummary extends StatelessWidget {
                       child: IncrementWidget(
                         initVal: quantity,
                         onChanged: onChangeQuantity,
+                        isIncrementDisabled: maxQuantity != null && quantity >= maxQuantity!,
                       ),
                     ),
                     Expanded(

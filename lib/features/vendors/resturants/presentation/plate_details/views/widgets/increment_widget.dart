@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 
 class IncrementWidget extends StatelessWidget {
   const IncrementWidget({
     super.key,
     this.initVal = 1,
     required this.onChanged,
+    this.isIncrementDisabled = false,
   });
   final int initVal;
   final Function(bool isAdding) onChanged;
+  final bool isIncrementDisabled;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +30,14 @@ class IncrementWidget extends StatelessWidget {
             border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
           ),
           child: IconButton(
-            onPressed: () {
-              SystemSound.play(SystemSoundType.click);
-              onChanged(true);
-            },
+            onPressed: isIncrementDisabled
+                ? () {
+                    Alerts.showToast(L10n.tr().maximumQuantityReached);
+                  }
+                : () {
+                    SystemSound.play(SystemSoundType.click);
+                    onChanged(true);
+                  },
             style: IconButton.styleFrom(
               padding: const EdgeInsets.all(5),
               elevation: 0,
@@ -37,7 +45,11 @@ class IncrementWidget extends StatelessWidget {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
             ),
-            icon: const Icon(Icons.add, color: Co.secondary, size: 22),
+            icon: Icon(
+              Icons.add,
+              color: isIncrementDisabled ? Co.secondary.withOpacity(0.4) : Co.secondary,
+              size: 22,
+            ),
           ),
         ),
         if (initVal != 0)

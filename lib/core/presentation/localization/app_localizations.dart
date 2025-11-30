@@ -2636,6 +2636,12 @@ abstract class AppLocalizations {
   /// **'You have reached the maximum quantity available for this product'**
   String get max_quantity_reached_for_product;
 
+  /// No description provided for @maximumQuantityReachedForItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum quantity reached for this Item.'**
+  String get maximumQuantityReachedForItem;
+
   /// No description provided for @reviews.
   ///
   /// In en, this message translates to:
@@ -3637,6 +3643,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Offline'**
   String get offline;
+
+  /// No description provided for @maximumQuantityReached.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum quantity reached for this item.'**
+  String get maximumQuantityReached;
+
+  /// No description provided for @trackOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Order'**
+  String get trackOrder;
 }
 
 class _AppLocalizationsDelegate

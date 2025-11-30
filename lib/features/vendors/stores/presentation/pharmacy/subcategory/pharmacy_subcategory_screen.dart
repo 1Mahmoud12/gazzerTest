@@ -170,8 +170,6 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                         context.navigateToPage(
                           PharmacyStoreScreen(
                             vendorId: -vendor['id'],
-                            name: vendor['name'],
-                            logoUrl: vendor['logo'],
                           ),
                         );
                       },

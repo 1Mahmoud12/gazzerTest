@@ -46,14 +46,18 @@ class SectionItemDTO extends ProductItemDTO {
 
     itemType = ItemType.fromString(json['item_type'] ?? 'Unknown');
     if (json['item'] != null) {
-      if (itemType == ItemType.plate) {
-        item = PlateDTO.fromJson(json['item']);
-      } else if (itemType == ItemType.product) {
-        item = ProductDTO.fromJson(json['item']);
-      } else if (itemType == ItemType.storeItem) {
-        item = ProductDTO.fromJson(json['item']);
-      } else {
-        item = ProductDTO.fromJson(json['item']);
+      try {
+        if (itemType == ItemType.plate) {
+          item = PlateDTO.fromJson(json['item']);
+        } else if (itemType == ItemType.product || itemType == ItemType.storeItem) {
+          item = ProductDTO.fromJson(json['item']);
+        } else {
+          // Try to parse as ProductDTO as fallback
+          item = ProductDTO.fromJson(json['item']);
+        }
+      } catch (e) {
+        // If parsing fails, item remains null
+        item = null;
       }
     }
     // if (json['item'] != null) {

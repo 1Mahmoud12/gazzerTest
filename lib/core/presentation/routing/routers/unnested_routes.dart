@@ -40,6 +40,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/single_cat_restaurant_details.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -61,6 +62,7 @@ final List<RouteBase> unNestedRoutes = [
   $multiCatRestaurantsRoute,
   // stores
   $storeDetailsRoute,
+  $pharmacyStoreScreenRoute,
 
   /// scattered;
   $deleteAccountRoute,

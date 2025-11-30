@@ -15,7 +15,6 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_cubit.dart';
 import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_states.dart';
 import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
-import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/offer_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
@@ -93,7 +92,6 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                     final data = state.dailyOfferDataModel;
                     final items = data?.itemsWithOffers ?? const [];
                     final stores = data?.storesWithOffers ?? const [];
-
                     if (items.isEmpty && stores.isEmpty) {
                       return Center(
                         child: Text(
@@ -138,45 +136,11 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                               ),
                               delegate: SliverChildBuilderDelegate(
                                 (context, index) {
-                                  final it = items[index];
-                                  final item = it.item;
-                                  if (item == null) {
-                                    return const SizedBox.shrink();
-                                  }
-                                  final price =
-                                      double.tryParse(
-                                        (item.appPrice ?? item.price ?? '0').toString(),
-                                      ) ??
-                                      0;
+                                  final item = items[index];
+                                  if (item.item == null) return const SizedBox.shrink();
                                   return VerticalProductCard(
                                     key: ValueKey('item_${item.id}'),
-                                    product: ProductEntity(
-                                      id: item.id!,
-                                      name: item.name ?? '',
-                                      description: '',
-                                      price: price,
-                                      image: item.image ?? '',
-                                      rate: (num.tryParse(item.rate ?? '0') ?? 0).toDouble(),
-                                      reviewCount: 0,
-                                      outOfStock: false,
-                                      offer: item.offer == null
-                                          ? null
-                                          : OfferEntity(
-                                              id: item.offer!.id!,
-                                              discount: item.offer!.discount!.toDouble(),
-                                              discountType: DiscountType.fromString(
-                                                item.offer!.discountType ?? '',
-                                              ),
-                                            ),
-                                      store: item.storeInfo?.storeId == null
-                                          ? null
-                                          : SimpleStoreEntity(
-                                              id: item.storeInfo!.storeId!,
-                                              name: item.storeInfo!.storeName!,
-                                              image: item.storeInfo!.storeImage!,
-                                              type: item.storeInfo!.storeCategoryType!,
-                                            ),
-                                    ),
+                                    product: item.item!.toEntity(),
                                     canAdd: false,
                                   );
                                 },

@@ -14,6 +14,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/plate_details/vi
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 
 class VerticalProductCard extends StatelessWidget {
   const VerticalProductCard({
@@ -130,9 +131,9 @@ class VerticalProductCard extends StatelessWidget {
                                       StoreDetailsRoute(
                                         storeId: product.store!.id,
                                       ).push(context);
-                                    } else {
-                                      StoreDetailsRoute(
-                                        storeId: product.store!.id,
+                                    } else if (product.store!.type == VendorType.pharmacy.value) {
+                                      PharmacyStoreScreenRoute(
+                                        id: product.store!.id,
                                       ).push(context);
                                     }
                                   },

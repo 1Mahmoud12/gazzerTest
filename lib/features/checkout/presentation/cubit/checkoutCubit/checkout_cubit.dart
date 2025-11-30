@@ -79,17 +79,6 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     super.emit(state);
   }
 
-  Future<void> convertPoints(int points) async {
-    final res = await _checkoutRepo.convertPoints(points);
-    switch (res) {
-      case Ok<String>(:final value):
-        Alerts.showToast(value, error: false);
-        await loadCheckoutData();
-      case Err(:final error):
-        Alerts.showToast(error.message);
-    }
-  }
-
   /// Loads checkout data (wallet, loyalty points, payment cards)
   Future<void> loadCheckoutData() async {
     emit(CheckoutDataLoading());

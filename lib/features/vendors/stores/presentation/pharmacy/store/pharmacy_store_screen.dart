@@ -23,35 +23,48 @@ import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widg
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/prescription_upload_button.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/daily_offers/view_all_daily_offers_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/products/pharmacy_products_screen.dart';
+import 'package:go_router/go_router.dart';
+
+part 'pharmacy_store_screen.g.dart';
+
+@TypedGoRoute<PharmacyStoreScreenRoute>(path: PharmacyStoreScreen.route)
+@immutable
+class PharmacyStoreScreenRoute extends GoRouteData with _$PharmacyStoreScreenRoute {
+  const PharmacyStoreScreenRoute({required this.id});
+
+  final int id;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PharmacyStoreScreen(vendorId: id);
+  }
+}
 
 /// Pharmacy store screen showing products by category
-class PharmacyStoreScreen extends StatefulWidget {
+class PharmacyStoreScreen extends StatelessWidget {
   const PharmacyStoreScreen({
     super.key,
     required this.vendorId,
-    required this.name,
-    required this.logoUrl,
   });
 
+  static const route = '/pharmacy-store';
+
   final int vendorId;
-  final String name;
-  final String logoUrl;
 
-  @override
-  State<PharmacyStoreScreen> createState() => _PharmacyStoreScreenState();
-}
+  final String name = 'Pharmacy';
 
-class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
+  final String logoUrl = '';
+
   @override
   Widget build(BuildContext context) {
     final categories = _getStoreCategories();
 
     // Create a mock vendor entity for VendorInfoCard
     final mockVendor = StoreEntity(
-      id: -widget.vendorId,
-      name: widget.name,
+      id: -vendorId,
+      name: name,
       totalOrders: 120,
-      image: widget.logoUrl,
+      image: logoUrl,
       estimatedDeliveryTime: 20,
       storeCategoryType: VendorType.pharmacy.value,
       rate: 4.5,
@@ -277,7 +290,6 @@ class _PharmacyStoreScreenState extends State<PharmacyStoreScreen> {
   }
 
   // ==================== Static Data ====================
-
   List<Map<String, dynamic>> _getStoreCategories() {
     return [
       {

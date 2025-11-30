@@ -559,6 +559,7 @@
   "dailyDeal": "عرض اليوم",
 
 "max_quantity_reached_for_product": "لقد وصلت إلى أقصى كمية متاحة لهذا المنتج",
+"maximumQuantityReachedForItem": "تم الوصول إلى الحد الأقصى للكمية لهذا العنصر.",
 "reviews": "المراجعات",
 "typeYouReviewHere": "اكتب مراجعتك هنا",
 "totalOrders": "مجموع الاوردرات",
@@ -779,5 +780,8 @@
 "offline": "غير متصل",
  "cartHasExistingItems": "عربة التسوق تحتوي على عناصر حالية",
   "keep": "احتفاظ",
-  "clear": "مسح"
+  "clear": "مسح",
+"maximumQuantityReached": "تم الوصول إلى الحد الأقصى للكمية لهذا المنتج.",
+"trackOrder": "تتبع الطلب"
+
 }

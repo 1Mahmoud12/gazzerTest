@@ -117,27 +117,11 @@ class _HomeBestPopularStoresWidget extends StatelessWidget {
                     entity: store,
                     onPressed: () {
                       if (store!.storeCategoryType == VendorType.restaurant.value) {
-                        context.navigateToPage(
-                          BlocProvider(
-                            create: (context) => di<SingleRestaurantCubit>(
-                              param1: store.id,
-                            ),
-                            child: RestaurantDetailsScreen(
-                              id: store.id,
-                            ),
-                          ),
-                        );
-                      } else {
-                        context.navigateToPage(
-                          BlocProvider(
-                            create: (context) => di<StoreDetailsCubit>(
-                              param1: store.id,
-                            ),
-                            child: StoreDetailsScreen(
-                              storeId: store.id,
-                            ),
-                          ),
-                        );
+                        RestaurantDetailsRoute(id: store.id).push(context);
+                      } else if (store.storeCategoryType == VendorType.grocery.value) {
+                        StoreDetailsRoute(storeId: store.id).push(context);
+                      } else if (store.storeCategoryType == VendorType.pharmacy.value) {
+                        PharmacyStoreScreenRoute(id: store.id).push(context);
                       }
                     },
                   );

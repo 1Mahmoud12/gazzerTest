@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -19,7 +20,6 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/your_p
 import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class LoyaltyProgramScreen extends StatelessWidget {
   const LoyaltyProgramScreen({super.key});
@@ -70,16 +70,7 @@ class _LoyaltyProgramView extends StatelessWidget {
             );
           }
           return switch (state) {
-            LoyaltyProgramInitial() || LoyaltyProgramLoading() => Skeletonizer(
-              enabled: true,
-              child: _ProgramContent(
-                data: _placeholderEntity,
-                visuals: TierVisualResolver.resolve(null),
-                bannerText: L10n.tr().heroBanner,
-                isCached: false,
-                showBenefits: const [],
-              ),
-            ),
+            LoyaltyProgramInitial() || LoyaltyProgramLoading() => const Center(child: LoadingWidget()),
             LoyaltyProgramLoaded(:final data, :final isCached) => _buildLoaded(
               context,
               data,

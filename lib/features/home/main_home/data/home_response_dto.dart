@@ -3,6 +3,7 @@ import 'package:gazzer/features/home/main_home/data/dtos/best_popular_dto.dart';
 import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
 import 'package:gazzer/features/home/main_home/data/section_dto.dart';
 import 'package:gazzer/features/home/main_home/presentaion/data/home_response_model.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class HomeResponseDTO {
@@ -88,11 +89,11 @@ class HomeResponseDTO {
     return HomeDataModel(
       categories: categories?.$1?.map((e) => e.toEntity()).toList() ?? [],
       categoriesBanner: categories?.$2?.toEntity(),
-      dailyOffers: dailyOffers?.$1?.map((e) => e?.toEntity()).toList() ?? [],
+      dailyOffers: dailyOffers?.$1?.map((e) => e?.toEntity()).whereType<GenericItemEntity>().toList() ?? [],
       dailyOffersBanner: dailyOffers?.$2?.toEntity(),
-      suggested: suggested?.$1?.map((e) => e?.toEntity()).toList() ?? [],
+      suggested: suggested?.$1?.map((e) => e?.toEntity()).whereType<GenericItemEntity>().toList() ?? [],
       suggestedBanner: suggested?.$2?.toEntity(),
-      topItems: topItems?.$1?.map((e) => e?.toEntity()).toList() ?? [],
+      topItems: topItems?.$1?.map((e) => e?.toEntity()).whereType<GenericItemEntity>().toList() ?? [],
       topItemsBanner: topItems?.$2?.toEntity(),
       topVendors: topVendors?.$1?.map((e) => e?.toEntity()).toList() ?? [],
       topVendorsBanner: topVendors?.$2?.toEntity(),

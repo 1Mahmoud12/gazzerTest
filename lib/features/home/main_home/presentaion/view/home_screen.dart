@@ -50,6 +50,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/pharmacy_menu_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;

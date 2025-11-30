@@ -43,7 +43,12 @@ class ProductDetailsRoute extends GoRouteData with _$ProductDetailsRoute {
 
 class ProductDetailsScreen extends StatelessWidget {
   static const route = '/product-details';
-  const ProductDetailsScreen({super.key, required this.productId, required this.cartItem});
+
+  const ProductDetailsScreen({
+    super.key,
+    required this.productId,
+    required this.cartItem,
+  });
   final int productId;
   final CartItemEntity? cartItem;
 
@@ -53,7 +58,11 @@ class ProductDetailsScreen extends StatelessWidget {
       builder: (context, state) {
         if (state is ProductDetailsError) {
           return Scaffold(
-            appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
+            appBar: MainAppBar(
+              showCart: true,
+              onShare: () {},
+              showNotification: false,
+            ),
             body: FailureComponent(
               message: state.message,
               onRetry: () => context.read<ProductDetailsCubit>().loadProductDetails(),
@@ -61,20 +70,29 @@ class ProductDetailsScreen extends StatelessWidget {
           );
         }
         if (state is ProductDetailsLoaded) {
-          //final cartItemInCart = findCartItem(context.read<CartCubit>(), state.product);
           final cartItemToUse = cartItem;
           return BlocProvider(
             // TODO : will store item have options or not ?????? ask backend
-            create: (context) => di<AddToCartCubit>(param1: (state.product, <ItemOptionEntity>[]), param2: cartItemToUse),
+            create: (context) => di<AddToCartCubit>(
+              param1: (state.product, <ItemOptionEntity>[]),
+              param2: cartItemToUse,
+            ),
             child: Builder(
               builder: (context) {
                 return Scaffold(
-                  appBar: MainAppBar(showCart: true, onShare: () {}, showBadge: true),
+                  appBar: MainAppBar(
+                    showCart: true,
+                    onShare: () {},
+                    showBadge: true,
+                  ),
                   body: ListView(
                     children: [
                       Padding(
                         padding: AppConst.defaultHrPadding,
-                        child: Text(state.product.name, style: TStyle.primaryBold(20)),
+                        child: Text(
+                          state.product.name,
+                          style: TStyle.primaryBold(20),
+                        ),
                       ),
                       ProductDetailsWidget(
                         product: state.product,
@@ -112,14 +130,16 @@ class ProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                   bottomNavigationBar: BlocConsumer<AddToCartCubit, AddToCartStates>(
-                    listener: (context, state) {
-                      if (state.status == ApiStatus.success) {
+                    listener: (context, cartState) {
+                      if (cartState.status == ApiStatus.success) {
                         // Reload CartCubit to reflect the updated cart state
                         context.read<CartCubit>().loadCart();
-                        Alerts.showToast(state.message, error: false);
-                        context.pop(true); // ** to declare that the cart has changed
-                      } else if (state.status == ApiStatus.error) {
-                        Alerts.showToast(state.message);
+                        Alerts.showToast(cartState.message, error: false);
+                        context.pop(
+                          true,
+                        ); // ** to declare that the cart has changed
+                      } else if (cartState.status == ApiStatus.error) {
+                        Alerts.showToast(cartState.message);
                       }
                     },
                     builder: (context, cartState) {
@@ -150,6 +170,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           isLoading: cartState.status == ApiStatus.loading,
                           price: cartState.totalPrice,
                           quantity: cartState.quantity,
+                          maxQuantity: state.product.quantityInStock,
                           onChangeQuantity: (isAdding) {
                             if (isAdding) {
                               cubit.increment();
@@ -170,7 +191,11 @@ class ProductDetailsScreen extends StatelessWidget {
           );
         }
         return Scaffold(
-          appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
+          appBar: MainAppBar(
+            showCart: true,
+            onShare: () {},
+            showNotification: false,
+          ),
           body: const Center(child: AdaptiveProgressIndicator()),
         );
       },

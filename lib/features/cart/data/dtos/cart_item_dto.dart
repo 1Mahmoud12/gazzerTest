@@ -12,6 +12,7 @@ class CartItemDTO {
   String? cartableType;
   GenericItemDTO? cartable;
   int? quantity;
+  num? itemPrice;
   int? quantityInStock;
   List<CartOptionDTO>? optionValues;
   List<CartOrderedWithDTO>? orderedWith;
@@ -34,6 +35,7 @@ class CartItemDTO {
       });
     }
     notes = json['notes'];
+    itemPrice = json['item_price'];
     if (json['cartable'] != null) {
       quantityInStock = json['cartable']['quantity_in_stock'];
       if (isPlate) {
@@ -54,6 +56,7 @@ class CartItemDTO {
       options: optionValues?.map((option) => option.toEntity()).toList() ?? [],
       orderedWith: orderedWith?.map((ow) => ow.toEntity()).toList() ?? [],
       notes: notes,
+      itemPrice: itemPrice ?? 0,
     );
   }
 }

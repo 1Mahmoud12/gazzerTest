@@ -2,6 +2,7 @@ part of 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.
 
 class ProductEntity extends GenericItemEntity {
   final Color? color;
+  final int? quantityInStock;
 
   ///
 
@@ -25,9 +26,10 @@ class ProductEntity extends GenericItemEntity {
     ///
     this.color,
     super.offer,
+    this.quantityInStock,
   });
 
   @override
   // TODO: implement props
-  List<Object?> get props => [...super.props, color];
+  List<Object?> get props => [...super.props, color, quantityInStock];
 }

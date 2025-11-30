@@ -50,6 +50,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   bool _shouldShowBottomNav() {
     final fullPath = widget.state.fullPath ?? '';
+    //logger.d('full path: $fullPath');
     if (fullPath == '/' || fullPath == '/favorites' || fullPath == '/orders' || fullPath == '/profile') {
       return true;
     }

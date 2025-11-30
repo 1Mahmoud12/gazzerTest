@@ -54,7 +54,7 @@ class OrderCardWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Co.bg,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Co.lightGrey.withOpacityNew(0.3)),
+          border: Border.all(color: Co.lightGrey),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,6 +155,20 @@ class OrderCardWidget extends StatelessWidget {
                     _ReorderButton(
                       order: order,
                       showGetHelp: showGetHelpInsteadOfReorder,
+                    ),
+                  ],
+                  if (order.status != OrderStatus.delivered && order.status != OrderStatus.cancelled) ...[
+                    const VerticalSpacing(12),
+                    MainBtn(
+                      onPressed: () {
+                        onViewDetails?.call();
+                      },
+                      width: double.infinity,
+                      text: L10n.tr().trackOrder,
+                      bgColor: Co.purple,
+                      radius: 30,
+                      textStyle: TStyle.whiteBold(14),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                     ),
                   ],
                 ],

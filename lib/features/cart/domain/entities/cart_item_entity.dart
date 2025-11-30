@@ -10,13 +10,14 @@ class CartItemEntity extends Equatable {
   final CartItemType type;
   final CartableEntity prod;
   final int quantity;
+  final num itemPrice;
   final int? quantityInStock;
   final List<CartOptionEntity> options;
   final List<CartOrderedWithEntity> orderedWith;
   final String? notes;
 
   double get totalPrice {
-    final basePrice = prod.price * quantity;
+    final basePrice = itemPrice * quantity;
     final orderedWithTotal = orderedWith.fold<double>(
       0.0,
       (sum, item) => sum + item.totalPrice,
@@ -30,6 +31,7 @@ class CartItemEntity extends Equatable {
     required this.type,
     required this.quantity,
     required this.prod,
+    required this.itemPrice,
     this.quantityInStock,
     this.notes,
     this.options = const [],
@@ -51,6 +53,7 @@ class CartItemEntity extends Equatable {
       options: [],
       orderedWith: [],
       notes: null,
+      itemPrice: 0,
     );
   }
 
@@ -63,6 +66,7 @@ class CartItemEntity extends Equatable {
     List<CartOptionEntity>? options,
     List<CartOrderedWithEntity>? orderedWith,
     CartableEntity? prod,
+    double? itemPrice,
   }) {
     return CartItemEntity(
       cartId: id ?? this.cartId,
@@ -77,6 +81,7 @@ class CartItemEntity extends Equatable {
             this.options,
           ), // Create a new list to ensure state change detection
       orderedWith: orderedWith ?? List.from(this.orderedWith),
+      itemPrice: itemPrice ?? this.itemPrice,
     );
   }
 

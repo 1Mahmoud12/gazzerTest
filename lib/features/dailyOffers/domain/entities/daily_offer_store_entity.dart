@@ -1,4 +1,4 @@
-import 'package:gazzer/features/dailyOffers/data/dtos/daily_offers_dto.dart';
+import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
 
 /// Minimal store entity derived from DailyOffers DTO (StoreInfo)
 class DailyOfferStoreEntity {

@@ -557,6 +557,7 @@
   "secs": "Secs",
   "dailyDeal": "Daily Deal",
   "max_quantity_reached_for_product": "You have reached the maximum quantity available for this product",
+  "maximumQuantityReachedForItem": "Maximum quantity reached for this Item.",
   "reviews": "Reviews",
   "typeYouReviewHere": "Type your review here",
   "totalOrders": "Total Order",
@@ -779,6 +780,7 @@
   "keep": "Keep",
   "clear": "Clear",
 "goToWallet":"Go to Wallet",
-"offline": "Offline"
+"offline": "Offline",
+"maximumQuantityReached": "Maximum quantity reached for this item.","trackOrder": "Track Order"
 
 }

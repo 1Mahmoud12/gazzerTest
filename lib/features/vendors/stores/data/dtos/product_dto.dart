@@ -35,6 +35,9 @@ class ProductDTO extends GenericItemDTO {
     badge = json['badge'];
     image = json['image'];
     rateCount = int.tryParse(json['rate_count'].toString());
+    if (json['quantity_in_stock'] != null) {
+      quantityInStock = json['quantity_in_stock'] is int ? json['quantity_in_stock'] as int : int.tryParse(json['quantity_in_stock'].toString());
+    }
     if (json['tags'] != null) {
       tags = [];
       json['tags'].forEach((tag) {
@@ -65,6 +68,7 @@ class ProductDTO extends GenericItemDTO {
       image: image ?? '',
       reviewCount: rateCount ?? 0,
       outOfStock: false,
+      quantityInStock: quantityInStock,
 
       // priceBeforeDiscount: double.tryParse(appPrice.toString()) ?? 0,
     );

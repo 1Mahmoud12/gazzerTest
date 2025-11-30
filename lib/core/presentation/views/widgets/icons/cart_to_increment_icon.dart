@@ -139,13 +139,12 @@ class CartToIncrementIcon extends StatelessWidget {
     bool isAdding,
     bool hasReachedMaxStock,
   ) {
-    // Navigate to details if product has options (customization required)
-    if (product.hasOptions) {
-      _navigateToProductDetails(context, cartItem);
-      return;
-    }
-
     if (isAdding) {
+      // Navigate to details if product has options (customization required)
+      if (product.hasOptions) {
+        _navigateToProductDetails(context, cartItem);
+        return;
+      }
       _handleAddQuantity(context, cartItem, hasReachedMaxStock);
     } else {
       _handleReduceQuantity(context, cartItem);
