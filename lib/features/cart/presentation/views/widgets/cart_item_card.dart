@@ -83,6 +83,7 @@ class CartItemCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 6,
                           children: [
                             Expanded(
@@ -92,9 +93,24 @@ class CartItemCard extends StatelessWidget {
                                 maxLines: 2,
                               ),
                             ),
-                            Text(
-                              item.prod.price.toString(),
-                              style: TStyle.blackBold(12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                // Show discounted price (or regular price if no discount)
+                                Text(
+                                  item.prod.price.toStringAsFixed(2),
+                                  style: TStyle.primaryBold(12),
+                                ),
+                                // Show original price with strikethrough if there's a discount
+                                if (item.prod.priceBeforeDiscount != null && item.prod.priceBeforeDiscount != item.prod.price)
+                                  Text(
+                                    item.prod.priceBeforeDiscount!.toStringAsFixed(2),
+                                    style: TStyle.blackBold(8).copyWith(
+                                      decoration: TextDecoration.lineThrough,
+                                      color: Co.grey,
+                                    ),
+                                  ),
+                              ],
                             ),
                             Text(L10n.tr().egp, style: TStyle.blackBold(12)),
                           ],
@@ -226,7 +242,7 @@ class CartItemCard extends StatelessWidget {
                                 spacing: horzSpacing,
                                 children: [
                                   Text(
-                                    item.totalPrice.toString(),
+                                    item.totalPrice.toStringAsFixed(2),
                                     style: TStyle.primaryBold(12),
                                   ),
                                   Text(

@@ -11,19 +11,11 @@ class CartItemEntity extends Equatable {
   final CartableEntity prod;
   final int quantity;
   final num itemPrice;
+  final num totalPrice;
   final int? quantityInStock;
   final List<CartOptionEntity> options;
   final List<CartOrderedWithEntity> orderedWith;
   final String? notes;
-
-  double get totalPrice {
-    final basePrice = itemPrice * quantity;
-    final orderedWithTotal = orderedWith.fold<double>(
-      0.0,
-      (sum, item) => sum + item.totalPrice,
-    );
-    return basePrice + orderedWithTotal; // TODO: include options pricing
-  }
 
   // double get _basePRice => options.any((e)=>e.)
   const CartItemEntity({
@@ -32,6 +24,7 @@ class CartItemEntity extends Equatable {
     required this.quantity,
     required this.prod,
     required this.itemPrice,
+    required this.totalPrice,
     this.quantityInStock,
     this.notes,
     this.options = const [],
@@ -54,6 +47,7 @@ class CartItemEntity extends Equatable {
       orderedWith: [],
       notes: null,
       itemPrice: 0,
+      totalPrice: 0,
     );
   }
 
@@ -66,7 +60,8 @@ class CartItemEntity extends Equatable {
     List<CartOptionEntity>? options,
     List<CartOrderedWithEntity>? orderedWith,
     CartableEntity? prod,
-    double? itemPrice,
+    num? itemPrice,
+    num? totalPrice,
   }) {
     return CartItemEntity(
       cartId: id ?? this.cartId,
@@ -82,6 +77,7 @@ class CartItemEntity extends Equatable {
           ), // Create a new list to ensure state change detection
       orderedWith: orderedWith ?? List.from(this.orderedWith),
       itemPrice: itemPrice ?? this.itemPrice,
+      totalPrice: totalPrice ?? this.totalPrice,
     );
   }
 
@@ -95,5 +91,7 @@ class CartItemEntity extends Equatable {
     options,
     orderedWith,
     prod,
+    itemPrice,
+    totalPrice,
   ];
 }

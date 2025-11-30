@@ -75,7 +75,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
   final canLeaveItem = ValueNotifier(true);
 
   final noteNotifier = ValueNotifier<String?>(null);
-  final priceNQntyNLoading = ValueNotifier<(double, int, bool)>((0, 1, false));
+  final priceNQntyNLoading = ValueNotifier<(num, int, bool)>((0, 1, false));
   final isUpdatingCartNotifier = ValueNotifier<bool>(false);
   Function(bool isAdding) onChangeQuantity = (isAdding) {};
   Future Function() onsubmit = () async {};

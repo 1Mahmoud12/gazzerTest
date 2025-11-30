@@ -13,6 +13,7 @@ class CartItemDTO {
   GenericItemDTO? cartable;
   int? quantity;
   num? itemPrice;
+  num? totalPrice;
   int? quantityInStock;
   List<CartOptionDTO>? optionValues;
   List<CartOrderedWithDTO>? orderedWith;
@@ -36,6 +37,7 @@ class CartItemDTO {
     }
     notes = json['notes'];
     itemPrice = json['item_price'];
+    totalPrice = json['total_price'];
     if (json['cartable'] != null) {
       quantityInStock = json['cartable']['quantity_in_stock'];
       if (isPlate) {
@@ -57,6 +59,7 @@ class CartItemDTO {
       orderedWith: orderedWith?.map((ow) => ow.toEntity()).toList() ?? [],
       notes: notes,
       itemPrice: itemPrice ?? 0,
+      totalPrice: totalPrice ?? 0,
     );
   }
 }
@@ -144,12 +147,15 @@ class CartOrderedWithDTO {
 
 extension GenericItemDTOExtension on GenericItemDTO {
   CartableEntity toCartable() {
+    // Convert to entity first to get the price with offer applied
+    final entity = toEntity();
     return CartableEntity(
       id: id ?? 0,
       name: name ?? '',
       image: image ?? '',
-      price: price ?? 0.0,
-      priceBeforeDiscount: null,
+      price: entity.price,
+      // This already accounts for offer discount
+      priceBeforeDiscount: entity.priceBeforeDiscount,
     );
   }
 }

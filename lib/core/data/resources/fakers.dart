@@ -484,6 +484,7 @@ class Fakers {
       options: [],
       orderedWith: [],
       notes: null,
+      totalPrice: 0,
     ),
   ];
   static const cartable = CartableEntity(

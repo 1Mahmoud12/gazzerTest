@@ -4,7 +4,7 @@ import 'package:gazzer/core/presentation/extensions/enum.dart';
 class AddToCartStates extends Equatable {
   final int quantity;
   final String? note;
-  final double totalPrice;
+  final num totalPrice;
   final Map<String, Set<String>> selectedOptions;
   final String message;
   final bool hasUserInteracted;

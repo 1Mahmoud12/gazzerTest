@@ -23,7 +23,7 @@ class ProductPriceSummary extends StatelessWidget {
     this.maxQuantity,
   });
   final Function(bool isAdding) onChangeQuantity;
-  final double price;
+  final num price;
   final int quantity;
   final Future Function() onsubmit;
   final bool isLoading;
