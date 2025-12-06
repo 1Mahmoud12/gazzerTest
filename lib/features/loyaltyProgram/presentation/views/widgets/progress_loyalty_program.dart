@@ -12,18 +12,68 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
     required this.maxProgramPoints,
     required this.mainColor,
     required this.progress,
+    required this.minOrderCount,
+    required this.minProgress,
+    required this.maxProgress,
     this.nameNextTier,
+    this.nameCurrentTier,
     this.progressNextTier,
   });
 
   final num spentPoints;
   final int spendDuration;
+  final int minOrderCount;
   final num totalPoints;
   final num maxProgramPoints;
+  final num minProgress;
+  final num maxProgress;
   final Color mainColor;
   final double progress;
   final String? nameNextTier;
+  final String? nameCurrentTier;
   final double? progressNextTier;
+
+  String _buildNextTierMessage(
+    BuildContext context,
+    String name,
+    int count,
+    num currency,
+  ) {
+    final hasCurrency = currency > 0;
+    final hasCount = count > 0;
+    final currencyStr = Helpers.getProperPrice(currency.toInt());
+    final isArabic = L10n.isAr(context);
+
+    if (!hasCurrency && !hasCount) {
+      // Only show the tier name - reach the tier
+      if (isArabic) {
+        return 'لكي تصل الي المستوي $name';
+      } else {
+        return 'Reach $name tier';
+      }
+    }
+
+    if (!hasCurrency) {
+      // Only show count, no currency
+      if (isArabic) {
+        return 'اطلب $count طلب اكثر لكي تصل الي المستوي $name';
+      } else {
+        return '$count orders more to reach $name tier';
+      }
+    }
+
+    if (!hasCount) {
+      // Only show currency, no count
+      if (isArabic) {
+        return 'انفق $currencyStr لكي تصل الي المستوي $name';
+      } else {
+        return 'Spend $currencyStr to reach $name tier';
+      }
+    }
+
+    // Both currency and count are present
+    return L10n.tr().nextTier(name, count, currencyStr);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +90,10 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
               Helpers.getProperPrice(spentPoints),
               spendDuration,
             ),
-            style: TStyle.blackRegular(16, font: FFamily.roboto).copyWith(color: Co.darkGrey),
+            style: TStyle.blackRegular(
+              16,
+              font: FFamily.roboto,
+            ).copyWith(color: Co.darkGrey),
           ),
           const SizedBox(height: 16),
           LinearProgressIndicator(
@@ -55,22 +108,30 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                Helpers.getProperPrice(maxProgramPoints),
+                Helpers.getProperPrice(minProgress),
                 style: TStyle.burbleSemi(16, font: FFamily.roboto),
               ),
               Text(
-                Helpers.getProperPrice(totalPoints),
+                Helpers.getProperPrice(maxProgress),
                 style: TStyle.burbleSemi(16, font: FFamily.roboto),
               ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
-            L10n.tr().nextTier(
-              nameNextTier ?? '',
-              Helpers.getProperPrice((progressNextTier ?? 0).toInt()),
-            ),
-            style: TStyle.blackRegular(16, font: FFamily.roboto).copyWith(color: Co.darkGrey),
+            (nameCurrentTier == 'HERO')
+                ? L10n.tr().reachForMaxTier
+                : _buildNextTierMessage(
+                    context,
+                    nameNextTier ?? '',
+                    minOrderCount,
+                    progressNextTier ?? 0,
+                  ),
+            style: TStyle.blackRegular(
+              16,
+              font: FFamily.roboto,
+            ).copyWith(color: Co.darkGrey),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

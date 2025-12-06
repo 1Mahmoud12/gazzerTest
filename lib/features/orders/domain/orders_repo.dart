@@ -17,7 +17,7 @@ abstract class OrdersRepo extends BaseApiRepo {
 
   Future<OrderDetailEntity?> getCachedOrderDetail(int orderId);
 
-  Future<Result<String>> reorder(int orderId, {bool? continueWithExisting});
+  Future<Result<String>> reorder(int orderId, {bool? continueWithExisting, bool? addNewPouch});
 
   Future<Result<String>> submitOrderReview({
     required int orderId,

@@ -116,11 +116,18 @@ class OrdersRepoImpl extends OrdersRepo {
   }
 
   @override
-  Future<Result<String>> reorder(int orderId, {bool? continueWithExisting}) {
+  Future<Result<String>> reorder(int orderId, {bool? continueWithExisting, bool? addNewPouch}) {
+    final requestBody = <String, dynamic>{};
+    if (continueWithExisting != null) {
+      requestBody['continue_with_existing'] = continueWithExisting;
+    }
+    if (addNewPouch != null) {
+      requestBody['add_new_pouch'] = addNewPouch;
+    }
     return super.call(
       apiCall: () => _apiClient.post(
         endpoint: Endpoints.reorder(orderId),
-        requestBody: continueWithExisting != null ? {'continue_with_existing': continueWithExisting} : {},
+        requestBody: requestBody,
       ),
       parser: (response) {
         return response.data['message'] as String? ?? 'Order reordered successfully';

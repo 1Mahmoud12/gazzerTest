@@ -1610,8 +1610,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String nextTier(String name, String currency) {
-    return 'Spend $currency more to reach $name tier';
+  String nextTier(String name, int count, String currency) {
+    return 'Spend $currency or $count orders more to reach $name tier';
   }
 
   @override
@@ -1830,4 +1830,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get trackOrder => 'Track Order';
+
+  @override
+  String get paid => 'Paid';
+
+  @override
+  String get rateYourOrder => 'Rate Your order';
+
+  @override
+  String get reachForMaxTier => 'Congratulations, you have reached the Maximum level. Enjoy all our benefits.';
 }

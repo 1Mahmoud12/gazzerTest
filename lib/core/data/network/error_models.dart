@@ -73,14 +73,14 @@ class CartError extends BadResponse {
 
 class ReorderError extends BadResponse {
   final bool hasExistingItems;
-  final int existingItemsCount;
+  final bool addNewPouchApproval;
   final String? detailedMessage;
 
   ReorderError.fromJson(
     super.json, {
     super.e = ErrorType.badResponse,
   }) : hasExistingItems = (json['data']?['has_existing_items'] as bool?) ?? false,
-       existingItemsCount = (json['data']?['existing_items_count'] as int?) ?? 0,
-       detailedMessage = json['data']?['message'] as String?,
+       addNewPouchApproval = (json['data']?['add_new_pouch_approval'] as bool?) ?? false,
+       detailedMessage = json['message'] as String?,
        super.fromJson();
 }

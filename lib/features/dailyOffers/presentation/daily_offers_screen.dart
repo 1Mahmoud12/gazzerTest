@@ -192,6 +192,8 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                     offer: OfferEntity(
                                       id: s.offer?.id ?? 0,
                                       discount: (s.offer?.discount ?? 0).toDouble(),
+                                      maxDiscount: s.offer?.maxDiscount ?? 0,
+
                                       discountType: DiscountType.fromString(
                                         s.offer?.discountType ?? '',
                                       ),

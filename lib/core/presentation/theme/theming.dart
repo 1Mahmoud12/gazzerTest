@@ -46,5 +46,8 @@ class AppTheme {
       minWidth: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius)),
     ),
+    dialogTheme: const DialogThemeData(
+      backgroundColor: Color(0xffF0F0F0),
+    ),
   );
 }

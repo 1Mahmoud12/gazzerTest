@@ -105,7 +105,7 @@ class CartItemCard extends StatelessWidget {
                                 if (item.prod.priceBeforeDiscount != null && item.prod.priceBeforeDiscount != item.prod.price)
                                   Text(
                                     item.prod.priceBeforeDiscount!.toStringAsFixed(2),
-                                    style: TStyle.blackBold(8).copyWith(
+                                    style: TStyle.blackBold(12).copyWith(
                                       decoration: TextDecoration.lineThrough,
                                       color: Co.grey,
                                     ),
@@ -186,7 +186,7 @@ class CartItemCard extends StatelessWidget {
                                         initVal: item.quantity,
                                         isRemoving: state is UpdateItemLoading && state.isRemoving,
                                         isAdding: state is UpdateItemLoading && state.isAdding,
-                                        isIncrementDisabled: state is UpdateItemError && state.cartId == item.cartId && state.isMaxQuantityReached,
+                                        quantityInStock: item.quantityInStock,
                                         onChanged: (isAdding) {
                                           cubit.updateItemQuantity(
                                             item.cartId,
@@ -194,6 +194,24 @@ class CartItemCard extends StatelessWidget {
                                             isAdding,
                                             context,
                                           );
+                                        },
+                                        onRemoving: () async {
+                                          final confirmed = await showDialog<bool>(
+                                            context: context,
+                                            builder: (context) {
+                                              return Dialogs.confirmDialog(
+                                                title: L10n.tr().warning,
+                                                message: L10n.tr().areYouSureYouWantToDeleteThisItem,
+                                                okBgColor: Co.red,
+                                                context: context,
+                                              );
+                                            },
+                                          );
+                                          if (confirmed == true) {
+                                            cubit.removeItemFromCart(
+                                              item.cartId,
+                                            );
+                                          }
                                         },
                                       ),
                                       IconButton(

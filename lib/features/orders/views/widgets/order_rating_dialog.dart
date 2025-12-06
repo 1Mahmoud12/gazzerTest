@@ -76,8 +76,8 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    L10n.tr().rateUs,
-                    style: TStyle.burbleBold(20),
+                    L10n.tr().rateYourOrder,
+                    style: TStyle.robotBlackMedium(),
                   ),
                   const VerticalSpacing(16),
                   Flexible(
@@ -117,8 +117,10 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                       Expanded(
                         child: MainBtn(
                           text: L10n.tr().submit,
-                          bgColor: _canSubmit && !isLoading ? Co.purple : Co.purple.withOpacity(0.5),
-                          textStyle: TStyle.whiteBold(14),
+                          bgColor: _canSubmit && !isLoading ? Co.purple : Co.purple100,
+                          textStyle: _canSubmit && !isLoading
+                              ? TStyle.robotBlackRegular().copyWith(color: Co.white)
+                              : TStyle.robotBlackMedium().copyWith(color: Co.black),
                           onPressed: _canSubmit && !isLoading
                               ? () {
                                   final storeReviews = widget.vendors
@@ -186,7 +188,7 @@ class _VendorRatingItem extends StatelessWidget {
               direction: Axis.horizontal,
               allowHalfRating: false,
               itemCount: 5,
-              itemSize: 32,
+              itemSize: 24,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
               itemBuilder: (context, index) {
                 final isRated = index < rating;
@@ -195,6 +197,7 @@ class _VendorRatingItem extends StatelessWidget {
                 );
               },
               unratedColor: Co.secondary,
+
               onRatingUpdate: onRatingChanged,
             ),
           ],
@@ -215,30 +218,42 @@ class _DeliveryManRatingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
-        Text(
-          L10n.tr().deliveryMan,
-          style: TStyle.blackBold(16),
+        ClipOval(
+          child: SvgPicture.asset(
+            Assets.assetsDeliveryLogo,
+            width: 60,
+            height: 60,
+          ),
         ),
-        const VerticalSpacing(8),
-        RatingBar.builder(
-          initialRating: rating,
-          minRating: 1,
-          direction: Axis.horizontal,
-          allowHalfRating: false,
-          itemCount: 5,
-          itemSize: 32,
-          itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-          itemBuilder: (context, index) {
-            final isRated = index < rating;
-            return SvgPicture.asset(
-              isRated ? Assets.starRateIc : Assets.starNotRateIc,
-            );
-          },
-          unratedColor: Co.secondary,
-          onRatingUpdate: onRatingChanged,
+        const HorizontalSpacing(8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              L10n.tr().deliveryMan,
+              style: TStyle.robotBlackRegular(),
+            ),
+            const VerticalSpacing(8),
+            RatingBar.builder(
+              initialRating: rating,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: false,
+              itemCount: 5,
+              itemSize: 24,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+              itemBuilder: (context, index) {
+                final isRated = index < rating;
+                return SvgPicture.asset(
+                  isRated ? Assets.starRateIc : Assets.starNotRateIc,
+                );
+              },
+              unratedColor: Co.secondary,
+              onRatingUpdate: onRatingChanged,
+            ),
+          ],
         ),
       ],
     );

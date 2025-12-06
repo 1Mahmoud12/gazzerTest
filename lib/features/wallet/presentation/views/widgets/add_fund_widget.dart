@@ -46,6 +46,8 @@ class _AddFundWidgetContent extends StatefulWidget {
 
 class _AddFundWidgetState extends State<_AddFundWidgetContent> {
   final TextEditingController _amountController = TextEditingController();
+  final FocusNode _amountFocusNode = FocusNode();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -93,14 +95,27 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                   subTitle: L10n.tr(context).thisIsBeginning,
                   iconAsset: Assets.successfullyAddPoundsIc,
                 );
+                // After payment, refresh wallet data
                 context.read<WalletCubit>().load(forceRefresh: true);
-                _amountController.clear();
               } else {
                 Alerts.showToast(
                   message,
                 );
               }
-              // After payment, refresh wallet data
+              // Clear the controller and reset form validation
+              _amountController.clear();
+              _amountFocusNode.unfocus();
+              // Reset form validation state after clearing controller
+              // Using addPostFrameCallback ensures controller is cleared before form reset
+              if (mounted) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (mounted) {
+                    // Reset form which will clear validation errors
+                    // Since controller is already cleared, reset will keep it empty
+                    _formKey.currentState?.reset();
+                  }
+                });
+              }
             }
           } else if (state is AddBalanceError) {
             Alerts.showToast(state.message);
@@ -140,85 +155,96 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                       ],
                     ),
                     const VerticalSpacing(16),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: MainTextField(
-                            controller: _amountController,
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
-                            ),
-                            style: TStyle.blackMedium(16, font: FFamily.roboto),
-                            hintText: L10n.tr().walletEnterAmount,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return L10n.tr().walletEnterAmount;
-                              }
-                              if (value.length < 2) {
-                                return L10n.tr().makeAdditonMoreThan10Pounds;
-                              }
-                              return null;
-                            },
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp(r'^\d*\.?\d{0,2}$'),
+                    Form(
+                      key: _formKey,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: MainTextField(
+                              controller: _amountController,
+                              keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true,
                               ),
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(6),
-                            ],
+                              focusNode: _amountFocusNode,
+                              style: TStyle.blackMedium(
+                                16,
+                                font: FFamily.roboto,
+                              ),
+                              hintText: L10n.tr().walletEnterAmount,
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              onChange: (value) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return L10n.tr().walletEnterAmount;
+                                }
+                                if (value.length < 2) {
+                                  return L10n.tr().makeAdditonMoreThan10Pounds;
+                                }
+                                return null;
+                              },
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d*\.?\d{0,2}$'),
+                                ),
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(6),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: MainBtn(
-                            onPressed: isLoading
-                                ? () {}
-                                : () async {
-                                    final amount =
-                                        double.tryParse(
-                                          _amountController.text,
-                                        ) ??
-                                        0.0;
-                                    if (amount <= 0) {
-                                      Alerts.showToast(
-                                        L10n.tr().walletEnterAmount,
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: MainBtn(
+                              onPressed: isLoading
+                                  ? () {}
+                                  : () async {
+                                      final amount =
+                                          double.tryParse(
+                                            _amountController.text,
+                                          ) ??
+                                          0.0;
+                                      if (amount <= 10) {
+                                        Alerts.showToast(
+                                          L10n.tr().walletEnterAmount,
+                                        );
+                                        return;
+                                      }
+                                      await PaymentMethodBottomSheet.show(
+                                        context: context,
+                                        amount: amount,
+                                        paymentCards: widget.paymentCards,
+                                        onPaymentResult: (result) {
+                                          if (result != null) {
+                                            context.read<AddBalanceCubit>().addBalance(
+                                              amount: amount,
+                                              description: 'description',
+                                              paymentMethodType: result.paymentMethodType,
+                                              phone: result.walletNumber,
+                                              cardId: result.paymentCard?.id,
+                                            );
+                                          }
+                                        },
                                       );
-                                      return;
-                                    }
-                                    await PaymentMethodBottomSheet.show(
-                                      context: context,
-                                      amount: amount,
-                                      paymentCards: widget.paymentCards,
-                                      onPaymentResult: (result) {
-                                        if (result != null) {
-                                          context.read<AddBalanceCubit>().addBalance(
-                                            amount: amount,
-                                            description: 'description',
-                                            paymentMethodType: result.paymentMethodType,
-                                            phone: result.walletNumber,
-                                            cardId: result.paymentCard?.id,
-                                          );
-                                        }
-                                      },
-                                    );
-                                  },
-                            isEnabled: !isLoading,
-                            width: 100,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8,
-                              horizontal: 2,
-                            ),
-                            bgColor: Co.purple,
-                            text: L10n.tr().walletRechargeNow,
-                            textStyle: TStyle.whiteBold(
-                              16,
-                              font: FFamily.roboto,
+                                    },
+                              isEnabled: !isLoading || ((int.tryParse(_amountController.text) ?? 0) < 10),
+                              width: 100,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 6,
+                                horizontal: 2,
+                              ),
+                              bgColor: (int.tryParse(_amountController.text) ?? 0) < 10 ? Co.purple200 : Co.purple,
+                              text: L10n.tr().walletRechargeNow,
+                              textStyle: TStyle.whiteBold(
+                                16,
+                                font: FFamily.roboto,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

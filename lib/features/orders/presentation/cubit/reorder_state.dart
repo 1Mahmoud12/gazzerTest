@@ -41,14 +41,16 @@ class ReorderErrorState extends ReorderState {
 class ReorderHasExistingItems extends ReorderState {
   const ReorderHasExistingItems({
     required this.message,
-    required this.existingItemsCount,
+    required this.addNewPouchApproval,
+    required this.hasExistingItem,
     this.detailedMessage,
   });
 
   final String message;
-  final int existingItemsCount;
+  final bool addNewPouchApproval;
+  final bool hasExistingItem;
   final String? detailedMessage;
 
   @override
-  List<Object?> get props => [message, existingItemsCount, detailedMessage];
+  List<Object?> get props => [message, addNewPouchApproval, hasExistingItem, detailedMessage];
 }

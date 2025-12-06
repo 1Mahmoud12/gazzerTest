@@ -1610,8 +1610,8 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String nextTier(String name, String currency) {
-    return 'انفق $currency اكثر لكي تصل الي المستوي $name';
+  String nextTier(String name, int count, String currency) {
+    return 'انفق $currency او $count طلب اكثر لكي تصل الي المستوي $name';
   }
 
   @override
@@ -1685,7 +1685,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rateUs => 'قيمنا';
 
   @override
-  String get reOrder => 'Re-order';
+  String get reOrder => 'إعاده الطلب';
 
   @override
   String get viewDetails => 'عرض التفاصيل';
@@ -1830,4 +1830,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get trackOrder => 'تتبع الطلب';
+
+  @override
+  String get paid => 'تم دفع';
+
+  @override
+  String get rateYourOrder => 'قيم طلبك';
+
+  @override
+  String get reachForMaxTier => 'مبروك, لقد وصلت إلي أقصي مستوي. استمتع بكل المزايا';
 }

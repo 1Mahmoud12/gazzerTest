@@ -92,11 +92,13 @@ class LoyaltyPointsDto {
     required this.expiresAt,
     required this.pointsNearingExpiry,
     required this.expirationDetails,
+    required this.conversionRateBerTransaction,
   });
 
   final int totalPoints;
   final int availablePoints;
   final int usedPoints;
+  final int conversionRateBerTransaction;
   final ConversionRateDto? conversionRate;
   final num estimatedValue;
   final String? expiresAt;
@@ -108,6 +110,7 @@ class LoyaltyPointsDto {
       totalPoints: json['total_points'] as int? ?? 0,
       availablePoints: json['available_points'] as int? ?? 0,
       usedPoints: json['used_points'] as int? ?? 0,
+      conversionRateBerTransaction: json['conversion_rate_per_transaction'] as int? ?? 0,
       conversionRate: json['conversion_rate'] == null ? null : ConversionRateDto.fromJson(json['conversion_rate'] as Map<String, dynamic>),
 
       estimatedValue: json['estimated_value'] as num? ?? 0,
@@ -122,6 +125,7 @@ class LoyaltyPointsDto {
     totalPoints: totalPoints,
     availablePoints: availablePoints,
     usedPoints: usedPoints,
+    conversionRateBerTransaction: conversionRateBerTransaction,
     conversionRate: conversionRate,
     estimatedValue: estimatedValue.toDouble(),
     expiresAt: expiresAt != null ? DateTime.tryParse(expiresAt!) : null,

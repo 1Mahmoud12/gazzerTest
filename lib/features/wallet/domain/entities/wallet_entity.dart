@@ -36,11 +36,13 @@ class WalletLoyaltyPointsEntity {
     required this.expiresAt,
     required this.pointsNearingExpiry,
     required this.expirationDetails,
+    required this.conversionRateBerTransaction,
   });
 
   final int totalPoints;
   final int availablePoints;
   final int usedPoints;
+  final int conversionRateBerTransaction;
   final ConversionRateDto? conversionRate;
   final double estimatedValue;
   final DateTime? expiresAt;

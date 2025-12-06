@@ -89,14 +89,14 @@ class OrderSummarySection extends StatelessWidget {
                 ),
                 const SizedBox(height: _itemSpacing),
               ],
-              // Coupon Code (if exists)
-              if (summary?.coupon != null && summary!.coupon!.isNotEmpty) ...[
-                OrderSummaryItem(
-                  title: L10n.tr().promoCodeName,
-                  value: summary.coupon!,
-                ),
-                const SizedBox(height: _itemSpacing),
-              ],
+              // // Coupon Code (if exists)
+              // if (summary?.coupon != null && summary!.coupon!.isNotEmpty) ...[
+              //   OrderSummaryItem(
+              //     title: L10n.tr().promoCodeName,
+              //     value: summary.coupon!,
+              //   ),
+              //   const SizedBox(height: _itemSpacing),
+              // ],
               // Coupon Discount
               if ((summary?.couponDiscount ?? 0.0) != 0) ...[
                 OrderSummaryItem(

@@ -102,9 +102,14 @@ class PaymentMethodWidget extends StatelessWidget {
                       isSelected:
                           selectedMethod == PaymentMethod.creditDebitCard ||
                           (selectedMethod == PaymentMethod.gazzerWallet && cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard),
-                      onTap: () => cubit.selectPaymentMethod(
-                        PaymentMethod.creditDebitCard,
-                      ),
+                      onTap: () {
+                        cubit.selectPaymentMethod(
+                          PaymentMethod.creditDebitCard,
+                        );
+                        if (cards.isNotEmpty) {
+                          cubit.selectCard(cards.first);
+                        }
+                      },
                     ),
                   if (selectedMethod == PaymentMethod.creditDebitCard ||
                       (selectedMethod == PaymentMethod.gazzerWallet && cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard)) ...[
@@ -179,6 +184,9 @@ class PaymentMethodWidget extends StatelessWidget {
                             providerName: '',
                             phoneNumber: '',
                           );
+                          if (cards.isNotEmpty) {
+                            cubit.selectCard(cards.first);
+                          }
                         }
                         if (cubit.remainingPaymentMethod == PaymentMethod.wallet) {
                           if (context.mounted) {

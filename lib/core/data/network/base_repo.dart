@@ -73,7 +73,7 @@ abstract class BaseApiRepo {
                 e: ErrorType.badResponse,
               );
             }
-            if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['has_existing_items'] != null) {
+            if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['add_new_pouch_approval'] != null) {
               return ReorderError.fromJson(
                 responseData,
                 e: ErrorType.badResponse,

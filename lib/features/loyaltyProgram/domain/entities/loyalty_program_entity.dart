@@ -19,6 +19,9 @@ class LoyaltyTier {
     required this.icon,
     required this.color,
     required this.subtitle,
+    required this.minOrderCount,
+    required this.minProgress,
+    required this.maxProgress,
   });
 
   final String? name;
@@ -26,6 +29,9 @@ class LoyaltyTier {
   final String? icon;
   final String? color;
   final String? subtitle;
+  final int? minOrderCount;
+  final num? minProgress;
+  final num? maxProgress;
 }
 
 class TierProgress {

@@ -64,13 +64,13 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
 
           break;
         case 'withdrawal':
-          title = l10n.walletRefund;
+          title = l10n.paid;
           subtitle = transaction.note ?? '';
           iconAssets = Assets.paidIc;
 
           break;
         case 'adjustment':
-          title = l10n.walletRefund;
+          title = l10n.paid;
           subtitle = transaction.note ?? '';
           iconAssets = Assets.convertPointsIc;
 

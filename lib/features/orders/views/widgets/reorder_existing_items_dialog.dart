@@ -9,7 +9,8 @@ import 'package:go_router/go_router.dart';
 
 Future<bool?> showReorderExistingItemsDialog({
   required BuildContext context,
-  required int existingItemsCount,
+  required bool existingItemsCount,
+  required bool addNewPouchApproval,
   String? message,
 }) {
   return showModalBottomSheet(

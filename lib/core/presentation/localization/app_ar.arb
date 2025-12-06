@@ -680,12 +680,12 @@
                                                                                                  "thisIsBeginning": "هذه مجرد البداية،",
                                                                                                  "keepCollecting": "هذه مجرد البداية، استمر في جمع النقاط واستبدالها",
 
-                                 "nextTier": "انفق {currency} اكثر لكي تصل الي المستوي {name}",
+                                 "nextTier": "انفق {currency} او {count} طلب اكثر لكي تصل الي المستوي {name}",
                                                            "@nextTier": {
                                                              "placeholders": {
                                                                "name": {
                                                                  "type": "String"
-                                                               },
+                                                               },"count":{"type":"int"},
                                                                "currency": {
                                                                  "type": "String"
                                                                }
@@ -782,6 +782,9 @@
   "keep": "احتفاظ",
   "clear": "مسح",
 "maximumQuantityReached": "تم الوصول إلى الحد الأقصى للكمية لهذا المنتج.",
-"trackOrder": "تتبع الطلب"
+"trackOrder": "تتبع الطلب","paid":"تم دفع",
+"rateYourOrder":"قيم طلبك",
+"reOrder":"إعاده الطلب",
+"reachForMaxTier":"مبروك, لقد وصلت إلي أقصي مستوي. استمتع بكل المزايا"
 
 }

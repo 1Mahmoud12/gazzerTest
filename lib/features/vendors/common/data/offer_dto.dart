@@ -24,6 +24,7 @@ class OfferDTO {
       id: id ?? 0,
       expiredAt: expiredAt ?? '',
       discount: discount ?? 0,
+      maxDiscount: maxDiscount ?? 0,
       discountType: DiscountType.fromString(discountType ?? ''),
     );
   }

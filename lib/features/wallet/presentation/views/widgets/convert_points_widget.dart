@@ -31,7 +31,9 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
 
   int get _availablePoints => widget.loyaltyPoints?.availablePoints ?? 0;
 
-  int get _conversionRate => (widget.loyaltyPoints?.conversionRate?.points ?? 100).toInt();
+  int get _conversionRate => (widget.loyaltyPoints?.conversionRate?.points ?? 0).toInt();
+
+  int get _conversionRateBerTransaction => (widget.loyaltyPoints?.conversionRateBerTransaction ?? 0).toInt();
 
   double get _estimatedValue => widget.loyaltyPoints?.estimatedValue ?? 0.0;
 
@@ -40,20 +42,20 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
   @override
   void initState() {
     super.initState();
-    _selectedPoints = _conversionRate;
+    _selectedPoints = 0;
   }
 
   @override
   void didUpdateWidget(ConvertPointsWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.loyaltyPoints?.conversionRate != widget.loyaltyPoints?.conversionRate) {
-      _selectedPoints = _conversionRate > _availablePoints ? _availablePoints : _conversionRate;
+      _selectedPoints = 0;
     }
   }
 
   void _increment() {
     setState(() {
-      _selectedPoints = (_selectedPoints + _conversionRate).clamp(
+      _selectedPoints = (_selectedPoints + _conversionRateBerTransaction).clamp(
         0,
         _availablePoints,
       );
@@ -62,7 +64,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
 
   void _decrement() {
     setState(() {
-      _selectedPoints = (_selectedPoints - _conversionRate).clamp(
+      _selectedPoints = (_selectedPoints - _conversionRateBerTransaction).clamp(
         0,
         _availablePoints,
       );
@@ -78,7 +80,10 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
           if (state is ConvertPointsSuccess) {
             await showSuccessDialog(
               context,
-              title: L10n.tr().youJustCashedPoints(_selectedPoints, _convertedAmount),
+              title: L10n.tr().youJustCashedPoints(
+                _selectedPoints,
+                _convertedAmount,
+              ),
               subTitle: L10n.tr().keepCollecting,
               iconAsset: Assets.successfullyAddPointsIc,
             );
@@ -157,13 +162,20 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                     const SizedBox(height: 24),
                     LayoutBuilder(
                       builder: (context, constraints) {
-                        final bool isVertical = constraints.maxWidth < 350;
+                        final bool isVertical = constraints.maxWidth < 300;
                         final isLoading = convertState is ConvertPointsLoading;
+
+                        // Check if increment is allowed: available points must be >= conversionRateBerTransaction
+                        // and adding it won't exceed available points
+                        final canIncrement =
+                            !isLoading &&
+                            _availablePoints >= _conversionRateBerTransaction &&
+                            (_selectedPoints + _conversionRateBerTransaction) <= _availablePoints;
 
                         final controls = _PointsSelector(
                           value: _selectedPoints,
                           onDecrement: isLoading || _selectedPoints <= 0 ? null : _decrement,
-                          onIncrement: isLoading || _selectedPoints >= _availablePoints ? null : _increment,
+                          onIncrement: canIncrement ? _increment : null,
                         );
 
                         final amountPreview = _AmountPreview(
@@ -343,7 +355,7 @@ class _RoundIconButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        padding: const EdgeInsets.all(6),
+        padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: color ?? Co.grey.withOpacityNew(0.5)),

@@ -145,13 +145,13 @@ class _VendorDropdownState extends State<_VendorDropdown> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(L10n.tr().vendors, style: TStyle.blackRegular(14)),
+              Text(L10n.tr().vendors, style: TStyle.robotBlackMedium()),
               const Icon(Icons.keyboard_arrow_down, color: Co.black),
             ],
           ),
           Text(
             '${L10n.tr().orderId}: #${widget.orderId}',
-            style: TStyle.blackRegular(12),
+            style: TStyle.robotBlackRegular().copyWith(fontSize: 14),
           ),
         ],
       ),

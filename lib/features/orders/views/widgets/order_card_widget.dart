@@ -74,7 +74,7 @@ class OrderCardWidget extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -140,10 +140,10 @@ class OrderCardWidget extends StatelessWidget {
                       Expanded(
                         child: Text(
                           L10n.tr().viewDetails,
-                          style: TStyle.robotBlackRegular().copyWith(
+                          style: TStyle.robotBlackMedium().copyWith(
                             decoration: TextDecoration.underline,
                             color: Co.purple,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -348,18 +348,44 @@ class _ReorderButton extends StatelessWidget {
               context.push(CartScreen.route);
             }
           } else if (reorderState is ReorderHasExistingItems) {
-            // Show dialog asking user if they want to keep or clear existing items
-            final keepExisting = await showReorderExistingItemsDialog(
-              context: context,
-              existingItemsCount: reorderState.existingItemsCount,
-              message: reorderState.detailedMessage,
-            );
-
-            if (context.mounted && keepExisting != null) {
-              // User chose: true = keep existing items, false = clear existing items
-              context.read<ReorderCubit>().continueReorder(
-                keepExisting,
+            // Check if hasExistingItem is true (not null/false)
+            if (reorderState.hasExistingItem) {
+              // Type 1: Has existing items - show dialog for existing items
+              final keepExisting = await showReorderExistingItemsDialog(
+                context: context,
+                existingItemsCount: reorderState.hasExistingItem,
+                addNewPouchApproval: reorderState.addNewPouchApproval,
+                message: reorderState.detailedMessage,
               );
+
+              if (context.mounted && keepExisting != null) {
+                // User chose: true = keep existing items, false = clear existing items
+                context.read<ReorderCubit>().continueReorder(
+                  keepExisting,
+                );
+              }
+            } else {
+              // Type 2: hasExistingItem is false/null - check on addNewPouch
+              if (!reorderState.addNewPouchApproval) {
+                // addNewPouch is false/null - show error
+                Alerts.showToast(reorderState.message, error: true);
+              } else {
+                // addNewPouch is true - show dialog and send as key with re-order API
+                final keepExisting = await showReorderExistingItemsDialog(
+                  context: context,
+                  existingItemsCount: reorderState.hasExistingItem,
+                  addNewPouchApproval: reorderState.addNewPouchApproval,
+                  message: reorderState.detailedMessage,
+                );
+
+                if (context.mounted && keepExisting != null) {
+                  // Send both keepExisting and addNewPouch as keys with re-order API
+                  context.read<ReorderCubit>().continueReorder(
+                    keepExisting,
+                    addNewPouch: reorderState.addNewPouchApproval,
+                  );
+                }
+              }
             }
           } else if (reorderState is ReorderErrorState) {
             Alerts.showToast(reorderState.message, error: true);

@@ -11,23 +11,24 @@ class ReorderCubit extends Cubit<ReorderState> {
   final OrdersRepo _repo;
   int? _currentOrderId;
 
-  Future<void> reorder(int orderId, {bool? continueWithExisting}) async {
+  Future<void> reorder(int orderId, {bool? continueWithExisting, bool? addNewPouch}) async {
     _currentOrderId = orderId;
     emit(ReorderLoading(orderId: orderId));
     animationDialogLoading();
-    final result = await _repo.reorder(orderId, continueWithExisting: continueWithExisting);
+    final result = await _repo.reorder(orderId, continueWithExisting: continueWithExisting, addNewPouch: addNewPouch);
     closeDialog();
     switch (result) {
       case Ok<String>(:final value):
         emit(ReorderSuccess(message: value));
       case Err<String>(:final error):
         // Check if this is a ReorderError with existing items
-      //logger.d('Errors ==>${error.runtimeType}');
-        if (error is error_models.ReorderError && error.hasExistingItems) {
+        //logger.d('Errors ==>${error.runtimeType}');
+        if (error is error_models.ReorderError && (error.hasExistingItems || error.addNewPouchApproval)) {
           emit(
             ReorderHasExistingItems(
               message: error.message,
-              existingItemsCount: error.existingItemsCount,
+              hasExistingItem: error.hasExistingItems,
+              addNewPouchApproval: error.addNewPouchApproval,
               detailedMessage: error.detailedMessage,
             ),
           );
@@ -37,9 +38,9 @@ class ReorderCubit extends Cubit<ReorderState> {
     }
   }
 
-  Future<void> continueReorder(bool keepExistingItems) async {
+  Future<void> continueReorder(bool keepExistingItems, {bool? addNewPouch}) async {
     if (_currentOrderId != null) {
-      await reorder(_currentOrderId!, continueWithExisting: keepExistingItems);
+      await reorder(_currentOrderId!, continueWithExisting: keepExistingItems, addNewPouch: addNewPouch);
     }
   }
 }

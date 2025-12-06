@@ -88,12 +88,15 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     List<ItemOptionEntity> options,
   ) {
     final map = <String, Set<String>>{};
-
     for (var option in options) {
       // Find all default values (isDefault = true)
       final defaultValues = option.subAddons.where((addon) => addon.isDefault).toList();
 
-      if (defaultValues.isNotEmpty) {
+      // Only apply defaults if this option has NO selection yet
+      // (for new items there is none; for existing cart items we don't want to
+      //  override a user's previous non‑default choice)
+      final currentSelections = map[option.id] ?? <String>{};
+      if (defaultValues.isNotEmpty && currentSelections.isEmpty) {
         map[option.id] = defaultValues.map((v) => v.id).toSet();
 
         // Process nested defaults
@@ -210,6 +213,14 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
     for (var option in options) {
       final currentSelections = newMap[option.id] ?? <String>{};
+
+      // If there is already any selection for this option (even if it's not the
+      // default one), DO NOT add defaults. This prevents re‑selecting default
+      // items when user opens an existing cart item and changes options.
+      if (currentSelections.isNotEmpty) {
+        continue;
+      }
+
       final defaultValues = option.subAddons.where((v) => v.isDefault).toList();
 
       for (var defaultValue in defaultValues) {

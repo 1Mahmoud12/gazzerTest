@@ -59,6 +59,9 @@ class LoyaltyTierDto {
     required this.icon,
     required this.color,
     required this.subtitle,
+    required this.minOrderCount,
+    required this.minProgress,
+    required this.maxProgress,
   });
 
   final String? name;
@@ -66,6 +69,9 @@ class LoyaltyTierDto {
   final String? icon;
   final String? color;
   final String? subtitle;
+  final int minOrderCount;
+  final num? minProgress;
+  final num? maxProgress;
 
   factory LoyaltyTierDto.fromJson(Map<String, dynamic> json) {
     return LoyaltyTierDto(
@@ -74,6 +80,9 @@ class LoyaltyTierDto {
       icon: json['icon'] as String?,
       color: json['color'] as String?,
       subtitle: json['subtitle'] as String?,
+      minOrderCount: json['min_order_count'] ?? 0,
+      minProgress: json['from_amount'] ?? 0,
+      maxProgress: json['to_amount'] ?? 0,
     );
   }
 
@@ -83,6 +92,9 @@ class LoyaltyTierDto {
     icon: icon,
     color: color,
     subtitle: subtitle,
+    minOrderCount: minOrderCount,
+    minProgress: minProgress,
+    maxProgress: maxProgress,
   );
 }
 

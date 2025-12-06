@@ -110,6 +110,7 @@ class _LoyaltyProgramView extends StatelessWidget {
     final durationDays = (tierProgress?.daysPeriod ?? 0).toInt();
     final nextTier = tierProgress?.nextTier == null ? null : tierProgress?.nextTier?.displayName ?? '';
     final progressNextTier = tierProgress?.nextTier == null ? null : (tierProgress?.nextTier?.spentNeeded ?? 0).toDouble();
+    final minOrderCount = (data.tierProgress?.nextTier?.ordersNeeded ?? 0).toInt();
 
     final availablePoints = (points?.availablePoints ?? 0).toInt();
     final totalPoints = (points?.totalPoints ?? 0).toInt();
@@ -118,6 +119,8 @@ class _LoyaltyProgramView extends StatelessWidget {
     final expiration = points?.expiresAt;
     final expirationFormatted = expiration == null ? '-' : DateFormat('dd-MM-yyyy').format(expiration);
     final nearingExpiry = (points?.pointsNearingExpiry ?? 0).toInt();
+    final minProgress = (data.currentTier?.minProgress ?? 0);
+    final maxProgress = (data.currentTier?.maxProgress ?? 0);
 
     final benefitsVisuals = {
       for (final tier in tierBenefits) (tier.tier?.name ?? tier.tier?.displayName ?? '').toLowerCase(): TierVisualResolver.resolve(tier.tier),
@@ -134,6 +137,7 @@ class _LoyaltyProgramView extends StatelessWidget {
       progressNextTier: progressNextTier,
       nameNextTier: nextTier,
       progress: progress.clamp(0.0, 1.0),
+      orderCount: minOrderCount,
       durationDays: durationDays,
       totalPoints: totalPoints,
       availablePoints: availablePoints,
@@ -143,6 +147,8 @@ class _LoyaltyProgramView extends StatelessWidget {
       expirationDate: expirationFormatted,
       benefitsVisuals: benefitsVisuals,
       errorMessage: errorMessage,
+      minProgress: minProgress,
+      maxProgress: maxProgress,
     );
 
     return bannerWidget;
@@ -167,9 +173,12 @@ class _ProgramContent extends StatelessWidget {
     required this.bannerText,
     required this.isCached,
     required this.showBenefits,
+    required this.minProgress,
+    required this.maxProgress,
     this.spent = 0,
     this.requiredSpend = 0,
     this.progress = 0,
+    this.orderCount = 0,
     this.durationDays = 0,
     this.totalPoints = 0,
     this.availablePoints = 0,
@@ -193,9 +202,12 @@ class _ProgramContent extends StatelessWidget {
   final double spent;
   final double requiredSpend;
   final double progress;
+  final int orderCount;
   final int durationDays;
   final int totalPoints;
   final int availablePoints;
+  final num minProgress;
+  final num maxProgress;
   final EarningRate? earningRate;
   final ConversionRate? conversionRate;
   final int nearingExpiry;
@@ -235,7 +247,11 @@ class _ProgramContent extends StatelessWidget {
             mainColor: visuals.mainColor,
             progress: progress.isFinite ? progress : 0,
             nameNextTier: nameNextTier,
+            nameCurrentTier: data.currentTier?.name,
             progressNextTier: progressNextTier,
+            minOrderCount: orderCount,
+            minProgress: minProgress,
+            maxProgress: maxProgress,
           ),
           const SizedBox(height: 16),
           YourPointsWidget(
@@ -307,6 +323,9 @@ final _placeholderEntity = const LoyaltyProgramEntity(
     icon: null,
     color: null,
     subtitle: null,
+    minOrderCount: 0,
+    minProgress: 0,
+    maxProgress: 0,
   ),
   tierProgress: TierProgress(
     currentTier: 'hero',

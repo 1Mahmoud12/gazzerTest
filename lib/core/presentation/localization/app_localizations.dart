@@ -3233,8 +3233,8 @@ abstract class AppLocalizations {
   /// No description provided for @nextTier.
   ///
   /// In en, this message translates to:
-  /// **'Spend {currency} more to reach {name} tier'**
-  String nextTier(String name, String currency);
+  /// **'Spend {currency} or {count} orders more to reach {name} tier'**
+  String nextTier(String name, int count, String currency);
 
   /// No description provided for @viewWallet.
   ///
@@ -3655,6 +3655,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Track Order'**
   String get trackOrder;
+
+  /// No description provided for @paid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get paid;
+
+  /// No description provided for @rateYourOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Your order'**
+  String get rateYourOrder;
+
+  /// No description provided for @reachForMaxTier.
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations, you have reached the Maximum level. Enjoy all our benefits.'**
+  String get reachForMaxTier;
 }
 
 class _AppLocalizationsDelegate

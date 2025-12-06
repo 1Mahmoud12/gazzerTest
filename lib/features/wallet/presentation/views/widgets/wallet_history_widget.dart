@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
@@ -21,22 +22,36 @@ class WalletHistoryWidget extends StatelessWidget {
     return transactions.map((transaction) {
       String title;
       String subtitle;
+      String iconAssets;
 
       switch (transaction.type.toLowerCase()) {
         case 'deposit':
           if (transaction.source == 'loyalty_points') {
             title = l10n.walletPointsConversion;
             subtitle = transaction.note ?? '';
+            iconAssets = Assets.convertPointsIc;
           } else {
             title = l10n.walletRecharge;
             subtitle = transaction.note ?? '';
+            iconAssets = Assets.rechargeIc;
           }
+
           break;
         case 'withdrawal':
-          title = l10n.walletRefund;
+          title = l10n.paid;
           subtitle = transaction.note ?? '';
+          iconAssets = Assets.paidIc;
+
+          break;
+        case 'adjustment':
+          title = l10n.paid;
+          subtitle = transaction.note ?? '';
+          iconAssets = Assets.convertPointsIc;
+
           break;
         default:
+          iconAssets = Assets.rechargeIc;
+
           title = transaction.type;
           subtitle = transaction.note ?? '';
       }
@@ -50,6 +65,7 @@ class WalletHistoryWidget extends StatelessWidget {
         date: date,
         time: time,
         amount: transaction.amount.toInt(),
+        iconAsset: iconAssets,
       );
     }).toList();
   }

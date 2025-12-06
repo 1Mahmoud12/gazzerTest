@@ -679,11 +679,13 @@
                            }
                          }
                        },
-    "nextTier": "Spend {currency} more to reach {name} tier",
+    "nextTier": "Spend {currency} or {count} orders more to reach {name} tier",
                            "@nextTier": {
                              "placeholders": {
                                "name": {
                                  "type": "String"
+                               }, "count": {
+                                 "type": "int"
                                },
                                "currency": {
                                  "type": "String"
@@ -781,6 +783,8 @@
   "clear": "Clear",
 "goToWallet":"Go to Wallet",
 "offline": "Offline",
-"maximumQuantityReached": "Maximum quantity reached for this item.","trackOrder": "Track Order"
+"maximumQuantityReached": "Maximum quantity reached for this item.","trackOrder": "Track Order",
+"paid":"Paid",
+"rateYourOrder":"Rate Your order","reachForMaxTier":"Congratulations, you have reached the Maximum level. Enjoy all our benefits."
 
 }

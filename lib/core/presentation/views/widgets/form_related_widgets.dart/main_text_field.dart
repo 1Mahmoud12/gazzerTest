@@ -39,6 +39,7 @@ class MainTextField extends StatefulWidget {
     this.maxLines,
     this.isOutLinedBorder = true,
     this.autofocus = false,
+    this.focusNode,
     this.showMaxLegnth = false,
     this.prefixOnTap,
     this.prefixColor,
@@ -86,6 +87,7 @@ class MainTextField extends StatefulWidget {
   final int max;
   final TextInputAction action;
   final AutovalidateMode? autovalidateMode;
+  final FocusNode? focusNode;
   final bool autofocus;
   final bool showMaxLegnth;
   @override
@@ -130,7 +132,7 @@ class _MainTextFieldState extends State<MainTextField> {
             onFieldSubmitted: widget.onSubmitting,
             obscureText: value,
             maxLength: widget.max,
-
+            focusNode: widget.focusNode,
             onTapOutside: (event) {
               FocusScope.of(context).unfocus();
             },
