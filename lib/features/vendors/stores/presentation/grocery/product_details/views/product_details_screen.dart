@@ -71,6 +71,7 @@ class ProductDetailsScreen extends StatelessWidget {
         }
         if (state is ProductDetailsLoaded) {
           final cartItemToUse = cartItem;
+
           return BlocProvider(
             // TODO : will store item have options or not ?????? ask backend
             create: (context) => di<AddToCartCubit>(
@@ -129,62 +130,65 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  bottomNavigationBar: BlocConsumer<AddToCartCubit, AddToCartStates>(
-                    listener: (context, cartState) {
-                      if (cartState.status == ApiStatus.success) {
-                        // Reload CartCubit to reflect the updated cart state
-                        context.read<CartCubit>().loadCart();
-                        Alerts.showToast(cartState.message, error: false);
-                        context.pop(
-                          true,
-                        ); // ** to declare that the cart has changed
-                      } else if (cartState.status == ApiStatus.error) {
-                        Alerts.showToast(cartState.message);
-                      }
-                    },
-                    builder: (context, cartState) {
-                      final cubit = context.read<AddToCartCubit>();
-                      return PopScope(
-                        canPop: Session().client == null || !cartState.hasUserInteracted,
-                        onPopInvokedWithResult: (didPop, result) {
-                          if (!didPop) {
-                            if (!didPop) {
-                              showDialog<bool>(
-                                context: context,
-                                builder: (context) => Dialogs.confirmDialog(
-                                  title: L10n.tr().alert,
-                                  context: context,
-                                  okBgColor: Colors.redAccent,
-                                  message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
-                                ),
-                              ).then((confirmed) {
-                                if (confirmed == true) {
-                                  cubit.userRequestClose();
-                                  if (context.mounted) context.pop();
-                                }
-                              });
-                            }
-                          }
-                        },
-                        child: ProductPriceSummary(
-                          isLoading: cartState.status == ApiStatus.loading,
-                          price: cartState.totalPrice,
-                          quantity: cartState.quantity,
-                          maxQuantity: state.product.quantityInStock,
-                          onChangeQuantity: (isAdding) {
-                            if (isAdding) {
-                              cubit.increment();
-                            } else {
-                              cubit.decrement();
+                  bottomNavigationBar: state.product.quantityInStock == 0
+                      ? const SizedBox()
+                      : BlocConsumer<AddToCartCubit, AddToCartStates>(
+                          listener: (context, cartState) {
+                            if (cartState.status == ApiStatus.success) {
+                              // Reload CartCubit to reflect the updated cart state
+                              context.read<CartCubit>().loadCart();
+                              Alerts.showToast(cartState.message, error: false);
+                              context.pop(
+                                true,
+                              ); // ** to declare that the cart has changed
+                            } else if (cartState.status == ApiStatus.error) {
+                              Alerts.showToast(cartState.message);
                             }
                           },
-                          onsubmit: () async {
-                            cubit.addToCart(context);
+                          builder: (context, cartState) {
+                            final cubit = context.read<AddToCartCubit>();
+                            if (cartState.quantity == 0) return const SizedBox.shrink();
+                            return PopScope(
+                              canPop: Session().client == null || !cartState.hasUserInteracted,
+                              onPopInvokedWithResult: (didPop, result) {
+                                if (!didPop) {
+                                  if (!didPop) {
+                                    showDialog<bool>(
+                                      context: context,
+                                      builder: (context) => Dialogs.confirmDialog(
+                                        title: L10n.tr().alert,
+                                        context: context,
+                                        okBgColor: Colors.redAccent,
+                                        message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
+                                      ),
+                                    ).then((confirmed) {
+                                      if (confirmed == true) {
+                                        cubit.userRequestClose();
+                                        if (context.mounted) context.pop();
+                                      }
+                                    });
+                                  }
+                                }
+                              },
+                              child: ProductPriceSummary(
+                                isLoading: cartState.status == ApiStatus.loading,
+                                price: cartState.totalPrice,
+                                quantity: cartState.quantity,
+                                maxQuantity: state.product.quantityInStock,
+                                onChangeQuantity: (isAdding) {
+                                  if (isAdding) {
+                                    cubit.increment();
+                                  } else {
+                                    cubit.decrement();
+                                  }
+                                },
+                                onsubmit: () async {
+                                  cubit.addToCart(context);
+                                },
+                              ),
+                            );
                           },
                         ),
-                      );
-                    },
-                  ),
                 );
               },
             ),

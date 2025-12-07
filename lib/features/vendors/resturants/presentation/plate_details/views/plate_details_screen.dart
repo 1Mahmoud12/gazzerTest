@@ -64,7 +64,6 @@ class SinglePlateScreen extends StatelessWidget {
 
           // Use cart item from cart state, fallback to itemToEdit from route
           final cartItemToUse = itemToEdit;
-
           return BlocProvider(
             create: (context) => di<AddToCartCubit>(
               param1: (detailsState.plate, detailsState.options),
