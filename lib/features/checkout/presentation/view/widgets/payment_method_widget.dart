@@ -56,7 +56,8 @@ class PaymentMethodWidget extends StatelessWidget {
                     isSelected: selectedMethod == PaymentMethod.cashOnDelivery,
                     onTap: () => cubit.selectPaymentMethod(PaymentMethod.cashOnDelivery),
                   ),
-                  if (!Platform.isAndroid)
+                  if (!Platform.isAndroid) ...[
+                    const SizedBox(height: 12),
                     _PaymentMethodItem(
                       method: PaymentMethod.applePay,
                       title: L10n.tr().walletApplePay,
@@ -64,6 +65,7 @@ class PaymentMethodWidget extends StatelessWidget {
                       isSelected: selectedMethod == PaymentMethod.applePay,
                       onTap: () => Alerts.showToast(L10n.tr().comingSoon, error: false),
                     ),
+                  ],
                   const SizedBox(height: 12),
                   if (cubit.timeSlots == null)
                     _PaymentMethodItem(
