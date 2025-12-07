@@ -13,7 +13,9 @@ import CoreTelephony
     GMSServices.provideAPIKey("AIzaSyCaCSJ0BZItSyXqBv8vpD1N4WBffJeKhLQ")
     GeneratedPluginRegistrant.register(with: self)
 
-    let controller = window ?.rootViewController as !FlutterViewController
+      guard let controller = window ?.rootViewController as ?FlutterViewController else {
+          return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+      }
     let deviceStateChannel = FlutterMethodChannel(name: CHANNEL, binaryMessenger: controller.binaryMessenger)
 
     deviceStateChannel.setMethodCallHandler {
@@ -24,7 +26,7 @@ import CoreTelephony
         result(false)
 
       case "hasSimCard":
-        let hasSim = self ?.hasSimCard() ?? true
+          let hasSim = self ?.hasSimCard() ?? true
         result(hasSim)
 
       default:
@@ -32,7 +34,6 @@ import CoreTelephony
       }
     }
 
-    GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
@@ -40,7 +41,7 @@ import CoreTelephony
     // Example implementation – you can customize as needed
     // iOS doesn’t expose direct API to check for SIM card presence,
     // but you can check carrier info:
-    if let carrier = CTTelephonyNetworkInfo().serviceSubscriberCellularProviders ?.first ?.value {
+      if let carrier = CTTelephonyNetworkInfo().serviceSubscriberCellularProviders ?.first ?.value {
       return carrier.mobileNetworkCode != nil && carrier.mobileNetworkCode != ""
     }
     return false

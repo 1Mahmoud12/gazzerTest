@@ -31,6 +31,11 @@ rm -rf .symlinks
 pod install
 open .
 cd ..
+```
+
+```shell
+flutter clean 
+flutter pub get
 flutter build appbundle
-open build/app/outputs/bundle/release/
+open build/app/outputs/bundle/release
 ```

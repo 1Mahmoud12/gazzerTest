@@ -14,6 +14,7 @@ import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/orders/domain/entities/order_item_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_status.dart';
 import 'package:gazzer/features/orders/domain/entities/order_vendor_entity.dart';
+import 'package:gazzer/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:gazzer/features/orders/presentation/cubit/reorder_cubit.dart';
 import 'package:gazzer/features/orders/presentation/cubit/reorder_state.dart';
 import 'package:gazzer/features/orders/views/widgets/order_rating_dialog.dart';
@@ -253,6 +254,8 @@ class _RatingInput extends StatelessWidget {
             vendors: vendors,
           ),
         );
+        await context.read<OrdersCubit>().loadOrders(refresh: true);
+
         if (result == true && onRatingChanged != null) {
           // Call callback after successful rating
           onRatingChanged!(5.0); // Default rating after submission
