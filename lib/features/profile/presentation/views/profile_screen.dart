@@ -142,10 +142,7 @@ class ProfileContentBody extends StatelessWidget {
                 ],
                 _SettingsPreferenceComponent(cubit.client),
                 const VerticalSpacing(12),
-                _PrivacySecurityItem(),
-                const VerticalSpacing(12),
-                _GetSupportItem(),
-                const VerticalSpacing(12),
+
                 if (cubit.client != null) ...[_SignOutButton(cubit: cubit), const VerticalSpacing(12), _DeleteAccountItem(cubit: cubit)],
               ],
             ),

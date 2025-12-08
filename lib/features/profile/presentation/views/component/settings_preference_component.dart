@@ -19,6 +19,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
         initiallyExpanded: true,
         icon: Assets.settingIc,
         title: '${L10n.tr().settings} & ${L10n.tr().preferences}',
+        titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
         body: Column(
           spacing: 6,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,6 +43,11 @@ class _SettingsPreferenceComponent extends StatelessWidget {
                 const ThemeBtn(startPadding: startPadding),
               ],
             ),
+            const VerticalSpacing(6),
+            const _PrivacySecurityItem(),
+            const VerticalSpacing(12),
+            const _GetSupportItem(),
+            const VerticalSpacing(12),
 
             ///
             // _ItitleWithSvg(svg: Assets.assetsSvgPrivacy, title: '${L10n.tr().privacy} & ${L10n.tr().security}'),
@@ -94,7 +100,7 @@ class _ItitleWithSvg extends StatelessWidget {
       spacing: 16,
       children: [
         SvgPicture.asset(svg, height: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
-        Text(title, style: TStyle.primarySemi(16)),
+        Text(title, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
       ],
     );
   }

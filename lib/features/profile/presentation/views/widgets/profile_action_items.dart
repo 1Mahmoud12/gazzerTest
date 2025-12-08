@@ -13,21 +13,18 @@ class _PrivacySecurityItem extends StatelessWidget {
         Alerts.showToast('Privacy & Security');
       },
       borderRadius: BorderRadius.circular(12),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(
-          children: [
-            SvgPicture.asset(Assets.privacyIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
-            const HorizontalSpacing(16),
-            Expanded(
-              child: Text('${L10n.tr().privacy} & ${L10n.tr().security}', style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
-            ),
-            RotatedBox(
-              quarterTurns: L10n.isAr(context) ? 3 : 1,
-              child: SvgPicture.asset(Assets.arrowUp, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
-            ),
-          ],
-        ),
+      child: Row(
+        children: [
+          SvgPicture.asset(Assets.privacyIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
+          const HorizontalSpacing(16),
+          Expanded(
+            child: Text('${L10n.tr().privacy} & ${L10n.tr().security}', style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+          ),
+          RotatedBox(
+            quarterTurns: L10n.isAr(context) ? 3 : 1,
+            child: SvgPicture.asset(Assets.arrowUp, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
+          ),
+        ],
       ),
     );
   }
@@ -44,21 +41,18 @@ class _GetSupportItem extends StatelessWidget {
         context.push('/support-screen');
       },
       borderRadius: BorderRadius.circular(12),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(
-          children: [
-            SvgPicture.asset(Assets.getSupportIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
-            const HorizontalSpacing(16),
-            Expanded(
-              child: Text(L10n.tr().getSupport, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
-            ),
-            RotatedBox(
-              quarterTurns: L10n.isAr(context) ? 3 : 1,
-              child: SvgPicture.asset(Assets.arrowUp, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
-            ),
-          ],
-        ),
+      child: Row(
+        children: [
+          SvgPicture.asset(Assets.getSupportIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
+          const HorizontalSpacing(16),
+          Expanded(
+            child: Text(L10n.tr().getSupport, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+          ),
+          RotatedBox(
+            quarterTurns: L10n.isAr(context) ? 3 : 1,
+            child: SvgPicture.asset(Assets.arrowUp, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
+          ),
+        ],
       ),
     );
   }
