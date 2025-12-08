@@ -59,7 +59,6 @@ class _MainDrawerState extends State<MainDrawer> {
             builder: (context, state) => LoadingFullScreen(
               isLoading: state is ProfileLoadingStates,
               child: Scaffold(
-                backgroundColor: Colors.white,
                 appBar: MainAppBar(title: L10n.tr().myProfile),
                 body: SafeArea(
                   child: BlocConsumer<AppSettingsCubit, AppSettingsState>(

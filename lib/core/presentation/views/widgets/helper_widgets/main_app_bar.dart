@@ -33,47 +33,35 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AppBar(
-          actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
-          backgroundColor: backgroundColor,
-          title: title == null ? null : Text(title!, style: TStyle.robotBlackTitle()),
-
-          leadingWidth: Navigator.canPop(context) ? 65 : 0,
-          actions: [
-            if (showCart) MainCartWidget(size: 20, padding: 8, navigate: !isCartScreen, showBadge: showBadge),
-            if (showNotification)
-              IconButton(
-                onPressed: () {},
-                // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-                icon: SvgPicture.asset(
-                  Assets.assetsSvgNotification,
-                  height: 21,
-                  width: 21,
-                  colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
-                ),
-              ),
-            if (showLanguage)
-              IconButton(
-                onPressed: () {},
-                // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-                icon: SvgPicture.asset(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
-              ),
-            if (onShare != null)
-              IconButton(
-                onPressed: onShare,
-                // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-                icon: const Icon(Icons.share, color: Co.purple, size: 24),
-              ),
-          ],
-        ),
-        //   const CartCapacityProgressBar(height: 5.0),
+    return AppBar(
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
+      backgroundColor: backgroundColor,
+      title: title == null ? null : Text(title!, style: TStyle.robotBlackTitle()),
+      leadingWidth: Navigator.canPop(context) ? 65 : 0,
+      actions: [
+        if (showCart) MainCartWidget(size: 20, padding: 8, navigate: !isCartScreen, showBadge: showBadge),
+        if (showNotification)
+          IconButton(
+            onPressed: () {},
+            // style: IconButton.styleFrom(backgroundColor: Colors.black12),
+            icon: SvgPicture.asset(Assets.assetsSvgNotification, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
+          ),
+        if (showLanguage)
+          IconButton(
+            onPressed: () {},
+            // style: IconButton.styleFrom(backgroundColor: Colors.black12),
+            icon: SvgPicture.asset(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
+          ),
+        if (onShare != null)
+          IconButton(
+            onPressed: onShare,
+            // style: IconButton.styleFrom(backgroundColor: Colors.black12),
+            icon: const Icon(Icons.share, color: Co.purple, size: 24),
+          ),
       ],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 6.0);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

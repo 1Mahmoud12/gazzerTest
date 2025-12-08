@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
@@ -92,4 +93,10 @@ final storesRoutes = [$storeMenuSwitcherRoute, $storesOfCategoryRoute];
 
 final pharmacyRoutes = [GoRoute(path: PharmacyMenuRoute.route, builder: (context, state) => const PharmacyMenuScreen())];
 
-List<RouteBase> get drowerRoutes => [GoRoute(path: ProfileScreen.route, builder: (context, state) => const ProfileScreen())];
+List<RouteBase> get drowerRoutes => [
+  GoRoute(
+    path: MainDrawer.route,
+    builder: (context, state) => const MainDrawer(),
+    routes: [GoRoute(path: 'profile', builder: (context, state) => const ProfileScreen())],
+  ),
+];

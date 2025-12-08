@@ -14,7 +14,6 @@ import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/voucher
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
-import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
@@ -29,7 +28,6 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_progra
 import 'package:gazzer/features/orders/views/order_details_screen.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
-import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/gazzer_support_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_response_screen.dart';
@@ -104,21 +102,6 @@ final List<RouteBase> unNestedRoutes = [
     builder: (context, state) {
       return const WalletScreen();
     },
-  ),
-
-  GoRoute(
-    path: MainDrawer.route,
-    builder: (context, state) {
-      return const MainDrawer();
-    },
-    routes: [
-      GoRoute(
-        path: 'profile',
-        builder: (context, state) {
-          return const ProfileScreen();
-        },
-      ),
-    ],
   ),
 
   GoRoute(

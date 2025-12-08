@@ -36,7 +36,7 @@ class _MainLayoutState extends State<MainLayout> {
   late final ValueNotifier<int> route;
   late int currentRoute;
 
-  final routes = {0: HomeScreen.route, 1: FavoritesScreen.route, 2: OrdersScreen.route};
+  final routes = {0: HomeScreen.route, 1: FavoritesScreen.route, 2: OrdersScreen.route, 3: MainDrawer.route};
 
   String _getBaseRoute() {
     final baseRoute = widget.state.fullPath?.split('/')[1];
@@ -51,7 +51,7 @@ class _MainLayoutState extends State<MainLayout> {
   bool _shouldShowBottomNav() {
     final fullPath = widget.state.fullPath ?? '';
     // logger.d('full path: $fullPath');
-    if (fullPath == '/' || fullPath == '/favorites' || fullPath == '/orders' || fullPath == '/profile') {
+    if (fullPath == '/' || fullPath == '/favorites' || fullPath == '/orders' || fullPath == '/profile' || fullPath == '/menu') {
       return true;
     }
 
@@ -110,12 +110,7 @@ class _MainLayoutState extends State<MainLayout> {
                     builder: (context, state) => MainBnb(
                       initialIndex: value,
                       onItemSelected: (index) {
-                        if (index == 3) {
-                          context.push(MainDrawer.route);
-                          return;
-                        }
                         if (index == value) return;
-
                         route.value = index;
                         context.go(routes[index]!);
                       },
