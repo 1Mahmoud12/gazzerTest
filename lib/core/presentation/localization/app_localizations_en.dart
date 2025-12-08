@@ -1839,4 +1839,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reachForMaxTier => 'Congratulations, you have reached the Maximum level. Enjoy all our benefits.';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get shareLink => 'Share Link';
+
+  @override
+  String get shareApplicationLink => 'Share Application Link';
+
+  @override
+  String get copyCode => 'Copy Code';
+
+  @override
+  String get yourCode => 'Your Code';
+
+  @override
+  String get inviteAndEarn => 'Invite & Earn';
 }

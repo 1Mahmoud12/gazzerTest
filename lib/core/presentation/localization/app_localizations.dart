@@ -3673,6 +3673,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Congratulations, you have reached the Maximum level. Enjoy all our benefits.'**
   String get reachForMaxTier;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @shareLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Link'**
+  String get shareLink;
+
+  /// No description provided for @shareApplicationLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Application Link'**
+  String get shareApplicationLink;
+
+  /// No description provided for @copyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Code'**
+  String get copyCode;
+
+  /// No description provided for @yourCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Code'**
+  String get yourCode;
+
+  /// No description provided for @inviteAndEarn.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite & Earn'**
+  String get inviteAndEarn;
 }
 
 class _AppLocalizationsDelegate

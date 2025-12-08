@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
@@ -20,6 +20,7 @@ import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
@@ -30,11 +31,14 @@ import 'package:gazzer/features/profile/presentation/views/delete_account_screen
 import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/language_drop_list.dart';
+import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 part 'component/account_information_component.dart';
+part 'component/invite_earn_component.dart';
 part 'component/profile_addresses_component.dart';
+part 'component/profile_navigation_component.dart';
 part 'component/settings_preference_component.dart';
 part 'widgets/profile_header_widget.dart';
 part 'widgets/theme_button.dart';
@@ -64,10 +68,7 @@ class ProfileScreen extends StatelessWidget {
                     useSafeArea: true,
                     builder: (context) => BlocProvider.value(
                       value: cubit,
-                      child: ProfileVerifyOtpScreen(
-                        sessionId: state.sessionId,
-                        req: state.req,
-                      ),
+                      child: ProfileVerifyOtpScreen(sessionId: state.sessionId, req: state.req),
                     ),
                   );
                 }
@@ -77,10 +78,7 @@ class ProfileScreen extends StatelessWidget {
             builder: (context, state) => LoadingFullScreen(
               isLoading: state is ProfileLoadingStates,
               child: Scaffold(
-                appBar: const MainAppBar(
-                  showLanguage: false,
-                  showCart: false,
-                ),
+                appBar: const MainAppBar(showLanguage: false, showCart: false),
                 body: SafeArea(
                   child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
                     listenWhen: (previous, current) => previous.lang != current.lang,
@@ -89,20 +87,7 @@ class ProfileScreen extends StatelessWidget {
                     },
                     buildWhen: (previous, current) => previous.lang != current.lang || previous.isDarkMode != current.isDarkMode,
                     builder: (context, state) {
-                      return ListView(
-                        padding: AppConst.defaultPadding,
-                        children: [
-                          if (cubit.client != null) ...[
-                            _ProfileHeaderWidget(cubit.client!),
-                            const VerticalSpacing(32),
-                            _AccountInformationComponent(cubit.client!),
-                            const VerticalSpacing(32),
-                            _ProfileAddressesComponent(),
-                            const VerticalSpacing(32),
-                          ],
-                          _SettingsPreferenceComponent(cubit.client),
-                        ],
-                      );
+                      return ProfileContentBody(cubit: cubit);
                     },
                   ),
                 ),
@@ -111,6 +96,37 @@ class ProfileScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+// Reusable profile content widget
+class ProfileContentBody extends StatelessWidget {
+  const ProfileContentBody({super.key, required this.cubit, this.customHeader});
+
+  final ProfileCubit cubit;
+  final Widget? customHeader;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: AppConst.defaultPadding,
+      children: [
+        if (cubit.client != null) ...[
+          customHeader ?? _ProfileHeaderWidget(cubit.client!),
+          const VerticalSpacing(32),
+
+          _AccountInformationComponent(cubit.client!),
+          const VerticalSpacing(32),
+          _ProfileAddressesComponent(),
+          const VerticalSpacing(32),
+          _ProfileNavigationComponent(),
+          const VerticalSpacing(32),
+          _InviteEarnComponent(),
+          const VerticalSpacing(32),
+        ],
+        _SettingsPreferenceComponent(cubit.client),
+      ],
     );
   }
 }

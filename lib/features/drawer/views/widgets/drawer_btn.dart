@@ -17,7 +17,6 @@ class DrawerBtn extends StatelessWidget {
       decoration: BoxDecoration(gradient: Grad().bglightLinear, borderRadius: AppConst.defaultBorderRadius),
       child: InkWell(
         onTap: () {
-          Scaffold.of(context).closeEndDrawer();
           SystemSound.play(SystemSoundType.click);
           onTap(context);
         },

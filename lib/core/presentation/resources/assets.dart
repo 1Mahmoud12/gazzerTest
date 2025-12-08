@@ -305,4 +305,24 @@ class Assets {
   //Customer Support
   static const String addImageIc = "assets/svg/addImageIc.svg";
   static const String sendMessageIc = "assets/svg/sendMessageIc.svg";
+
+  // Profile
+  static const String arrowUp = "assets/svg/arrowUp.svg";
+  static const String fullNameIc = "assets/svg/fullNameIc.svg";
+  static const String emailIc = "assets/svg/emailIc.svg";
+  static const String phoneIc = "assets/svg/phoneIc.svg";
+  static const String addressIc = "assets/svg/addressIc.svg";
+  static const String deleteIc = "assets/svg/deleteIc.svg";
+  static const String loyaltyIc = "assets/svg/loyaltyIc.svg";
+  static const String savedCardsIc = "assets/svg/savedCardsIc.svg";
+  static const String inviteIc = "assets/svg/inviteIc.svg";
+  static const String settingIc = "assets/svg/settingIc.svg";
+  static const String languageIc = "assets/svg/languageIc.svg";
+  static const String appearanceIc = "assets/svg/appearanceIc.svg";
+  static const String privacyIc = "assets/svg/privacyIc.svg";
+  static const String getSupportIc = "assets/svg/getSupportIc.svg";
+  static const String signOutIc = "assets/svg/signOutIc.svg";
+  static const String lightIc = "assets/svg/lightIc.svg";
+  static const String darkIc = "assets/svg/darkIc.svg";
+  static const String photoAddressMapIc = "assets/png/photoAddressMapIc.png";
 }

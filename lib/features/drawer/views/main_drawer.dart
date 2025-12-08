@@ -1,167 +1,165 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/components/loading_full_screen.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/icons/main_switcher.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
-import 'package:gazzer/features/drawer/views/widgets/drawer_btn.dart';
-import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
-import 'package:gazzer/features/intro/presentation/plan/views/health_focus_screen.dart';
-import 'package:gazzer/features/intro/presentation/tutorial/view/video_tutorial_screen.dart';
-import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
+import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
+import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
+import 'package:gazzer/features/profile/presentation/views/component/profile_verify_otp_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
-import 'package:gazzer/features/supportScreen/presentation/views/support_screen.dart';
-import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
-import 'package:go_router/go_router.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({super.key});
+
+  static const String route = '/menu';
 
   @override
   State<MainDrawer> createState() => _MainDrawerState();
 }
 
 class _MainDrawerState extends State<MainDrawer> {
-  late final List<(String, Object, Function)> drawerBtns;
-
-  @override
-  void initState() {
-    drawerBtns = [
-      (L10n.tr().myCart, Assets.assetsSvgCart, (BuildContext ctx) => ctx.push(CartScreen.route)),
-      (
-        L10n.tr().themeMode,
-        Switch(value: true, onChanged: (v) {}).withScale(scale: 0.8, alignment: Alignment.centerRight),
-        (BuildContext ctx) {},
-      ),
-
-      (
-        L10n.tr().wallet,
-        Assets.wallet,
-        (BuildContext ctx) {
-          ctx.push(WalletScreen.route);
-        },
-      ),
-      (
-        L10n.tr().loyaltyProgram,
-        Assets.assetsSvgTerms,
-        (BuildContext ctx) {
-          ctx.push(LoyaltyProgramHeroOneScreen.route);
-        },
-      ),
-      (
-        L10n.tr().support,
-        Assets.assetsSvgTerms,
-        (BuildContext ctx) {
-          ctx.push(SupportScreen.route);
-        },
-      ),
-      (L10n.tr().foodPlan, Assets.assetsSvgFoodPlan, (BuildContext ctx) => ctx.push(HealthFocusScreen.route)),
-      (
-        L10n.tr().videoTutorials,
-        Assets.assetsSvgVideo,
-        (BuildContext ctx) => ctx.push(VideoTutorialScreen.route),
-      ),
-      (L10n.tr().rewards, Assets.assetsSvgRewards, (BuildContext ctx) {}),
-      (
-        L10n.tr().favorites,
-        Assets.assetsSvgFavoritesOutlined,
-        (BuildContext ctx) {
-          ctx.pushReplacement(FavoritesScreen.route);
-        },
-      ),
-      (L10n.tr().myOrders, Assets.assetsSvgHistory, (BuildContext ctx) {}),
-      (L10n.tr().language, Assets.assetsSvgLanguage, (BuildContext ctx) {}),
-      (L10n.tr().gazzerChat, Assets.assetsSvgChat, (BuildContext ctx) {}),
-      (
-        L10n.tr().myProfile,
-        Assets.assetsSvgCommunity,
-        (BuildContext ctx) {
-          ctx.push(ProfileScreen.route);
-        },
-      ),
-      (L10n.tr().paymentSetting, Assets.assetsSvgPaymentSettings, (BuildContext ctx) {}),
-      (L10n.tr().termsAndConditions, Assets.assetsSvgTerms, (BuildContext ctx) {}),
-    ];
-    super.initState();
-  }
+  bool _isProfileExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.only(
-          topLeft: Radius.circular(L10n.isAr(context) ? 0 : 44),
-          bottomLeft: Radius.circular(L10n.isAr(context) ? 0 : 44),
-          topRight: Radius.circular(L10n.isAr(context) ? 44 : 0),
-          bottomRight: Radius.circular(L10n.isAr(context) ? 44 : 0),
-        ),
-      ),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: Grad().bglightLinear.copyWith(
-            colors: [Co.buttonGradient.withAlpha(180), Colors.black.withAlpha(0)],
-          ),
-        ),
-        child: Column(
-          children: [
-            DrawerHeader(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GradientText(text: L10n.tr().gazzerApp, style: TStyle.primaryBold(24)),
-                  SvgPicture.asset(
-                    Assets.assetsSvgDrawerIcon,
-                    width: 20,
-                    height: 20,
-                    colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
+    return BlocProvider(
+      create: (context) => di<ProfileCubit>(),
+      child: Builder(
+        builder: (context) {
+          final cubit = context.read<ProfileCubit>();
+          return BlocConsumer<ProfileCubit, ProfileStates>(
+            listener: (context, state) async {
+              if (state is ProfileErrorStates) {
+                Alerts.showToast(state.message);
+              } else if (state is UpdateSuccessWithClient) {
+                Alerts.showToast(state.message, error: false);
+              } else if (state is UpdateSuccessWithSession) {
+                if (ModalRoute.of(context)?.isCurrent == true) {
+                  await showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    useSafeArea: true,
+                    builder: (context) => BlocProvider.value(
+                      value: cubit,
+                      child: ProfileVerifyOtpScreen(sessionId: state.sessionId, req: state.req),
+                    ),
+                  );
+                }
+              }
+            },
+            builder: (context, state) => LoadingFullScreen(
+              isLoading: state is ProfileLoadingStates,
+              child: Scaffold(
+                backgroundColor: Colors.white,
+                appBar: MainAppBar(title: L10n.tr().myProfile),
+                body: SafeArea(
+                  child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
+                    listenWhen: (previous, current) => previous.lang != current.lang,
+                    listener: (context, state) {
+                      di<AddressesBus>().refreshAddresses();
+                    },
+                    buildWhen: (previous, current) => previous.lang != current.lang || previous.isDarkMode != current.isDarkMode,
+                    builder: (context, state) {
+                      return ProfileContentBody(
+                        cubit: cubit,
+                        customHeader: cubit.client != null ? ProfileHeaderContent(client: cubit.client!) : null,
+                      );
+                    },
                   ),
-                ],
+                ),
               ),
             ),
-            const VerticalSpacing(4),
-            Expanded(
-              child: ListView.separated(
-                itemCount: drawerBtns.length,
-                padding: EdgeInsets.fromLTRB(16, 0, 16, MediaQuery.paddingOf(context).bottom + 24),
-                separatorBuilder: (context, index) => const VerticalSpacing(12),
-                itemBuilder: (context, index) {
-                  final (title, svgImg, onTap) = drawerBtns[index];
-                  return DrawerBtn(
-                    title: title,
-                    svgImg: svgImg is String ? svgImg : null,
-                    icon: svgImg is! String ? (svgImg as Widget) : null,
-                    onTap: (ctx) => onTap(ctx),
-                  );
-                },
+          );
+        },
+      ),
+    );
+  }
+}
+
+// Custom profile header content widget for expanded state
+class ProfileHeaderContent extends StatelessWidget {
+  const ProfileHeaderContent({super.key, required this.client});
+
+  final ClientEntity client;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          spacing: 32,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(L10n.tr().goldenAccountUser, style: TStyle.primaryBold(13, font: FFamily.inter)),
+            CircleAvatar(
+              radius: 18,
+              backgroundColor: Co.secondary,
+              child: SvgPicture.asset(Assets.assetsSvgCup, height: 22, width: 22, colorFilter: const ColorFilter.mode(Co.dark, BlendMode.srcIn)),
+            ),
+          ],
+        ),
+        const VerticalSpacing(24),
+        Row(
+          spacing: 20,
+          children: [
+            Badge(
+              label: IconButton(
+                onPressed: () {},
+                style: IconButton.styleFrom(
+                  padding: const EdgeInsets.all(4),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: Size.zero,
+                  backgroundColor: Co.purple,
+                ),
+                icon: SvgPicture.asset(Assets.assetsSvgEdit, height: 18, width: 18),
+              ),
+              alignment: const Alignment(0.65, 0.65),
+              backgroundColor: Colors.transparent,
+              child: CircleAvatar(
+                radius: 40,
+                backgroundColor: Co.white,
+                child: Padding(
+                  padding: const EdgeInsetsGeometry.all(2),
+                  child: ClipOval(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: CustomNetworkImage(
+                        client.image ??
+                            'https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp',
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsGeometry.only(bottom: MediaQuery.paddingOf(context).bottom),
-              child: FutureBuilder(
-                future: ShorebirdUpdater().readCurrentPatch(),
-                builder: (context, snapshot) {
-                  final info = di<PackageInfo>();
-                  return Text(
-                    'V${info.version}+${info.buildNumber} (${snapshot.data?.number ?? 0})',
-                    style: TStyle.blackSemi(12),
-                  );
-                },
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(client.clientName, style: TStyle.robotBlackMedium()),
+                  if (client.email != null)
+                    Text(client.email ?? L10n.tr().notSetYet, style: TStyle.robotBlackMedium().copyWith(color: Colors.black87)),
+                  const SizedBox.shrink(),
+                  Text('${L10n.tr().memberSince} ${client.formatedCreatedAt}', style: TStyle.robotBlackMedium()),
+                ],
               ),
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 }

@@ -785,6 +785,11 @@
 "trackOrder": "تتبع الطلب","paid":"تم دفع",
 "rateYourOrder":"قيم طلبك",
 "reOrder":"إعاده الطلب",
-"reachForMaxTier":"مبروك, لقد وصلت إلي أقصي مستوي. استمتع بكل المزايا"
-
+"reachForMaxTier":"مبروك, لقد وصلت إلي أقصي مستوي. استمتع بكل المزايا",
+"delete":"حذف",
+ "shareLink": "مشاركة الرابط",
+  "shareApplicationLink": "مشاركة رابط التطبيق",
+  "copyCode": "نسخ الكود",
+  "yourCode": "الكود الخاص بك",
+  "inviteAndEarn": "ادعُ واربح"
 }

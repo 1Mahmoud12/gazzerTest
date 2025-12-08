@@ -785,6 +785,11 @@
 "offline": "Offline",
 "maximumQuantityReached": "Maximum quantity reached for this item.","trackOrder": "Track Order",
 "paid":"Paid",
-"rateYourOrder":"Rate Your order","reachForMaxTier":"Congratulations, you have reached the Maximum level. Enjoy all our benefits."
-
+"rateYourOrder":"Rate Your order","reachForMaxTier":"Congratulations, you have reached the Maximum level. Enjoy all our benefits.",
+"delete":"Delete",
+  "shareLink": "Share Link",
+  "shareApplicationLink": "Share Application Link",
+  "copyCode": "Copy Code",
+  "yourCode": "Your Code",
+  "inviteAndEarn": "Invite & Earn"
 }

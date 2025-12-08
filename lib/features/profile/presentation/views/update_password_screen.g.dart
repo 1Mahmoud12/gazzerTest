@@ -8,33 +8,25 @@ part of 'update_password_screen.dart';
 
 List<RouteBase> get $appRoutes => [$upodatePasswordRoute];
 
-RouteBase get $upodatePasswordRoute => GoRouteData.$route(
-  path: '/profile/update-password',
-
-  factory: _$UpodatePasswordRoute._fromState,
-);
+RouteBase get $upodatePasswordRoute => GoRouteData.$route(path: '/profile/update-password', factory: _$UpodatePasswordRoute._fromState);
 
 mixin _$UpodatePasswordRoute on GoRouteData {
-  static UpodatePasswordRoute _fromState(GoRouterState state) =>
-      UpodatePasswordRoute($extra: state.extra as ProfileCubit);
+  static UpodatePasswordRoute _fromState(GoRouterState state) => UpodatePasswordRoute($extra: state.extra as ProfileCubit);
 
   UpodatePasswordRoute get _self => this as UpodatePasswordRoute;
 
   @override
-  String get location => GoRouteData.$location('/profile/update-password');
+  String get location => GoRouteData.$location('/menu/profile/update-password');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
   @override
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: _self.$extra);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location, extra: _self.$extra);
 
   @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: _self.$extra);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location, extra: _self.$extra);
 
   @override
-  void replace(BuildContext context) =>
-      context.replace(location, extra: _self.$extra);
+  void replace(BuildContext context) => context.replace(location, extra: _self.$extra);
 }

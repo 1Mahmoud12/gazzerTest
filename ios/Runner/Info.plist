@@ -74,6 +74,13 @@
         </array>
         <key>NSPhotoLibraryUsageDescription</key>
         <string>This app requires access to make phone calls to contact support.</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>We need access to your location to provide location-based features in the app.</string>
 
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>We need access to your location to provide continuous location-based services.</string>
+
+        <key>NSLocationAlwaysUsageDescription</key>
+        <string>We need access to your location to enable background location features.</string>
 	</dict>
 </plist>

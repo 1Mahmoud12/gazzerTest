@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/cart_capacity_progress_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -40,25 +39,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         AppBar(
           actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
           backgroundColor: backgroundColor,
-          title: title == null ? null : Text(title!, style: titleStyle),
-          leading: Navigator.canPop(context)
-              ? IconButton(
-                  onPressed: () => Navigator.maybePop(context),
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: bacButtonColor ?? Co.purple,
-                  ),
-                )
-              : null,
-          leadingWidth: 65,
+          title: title == null ? null : Text(title!, style: TStyle.robotBlackTitle()),
+
+          leadingWidth: Navigator.canPop(context) ? 65 : 0,
           actions: [
-            if (showCart)
-              MainCartWidget(
-                size: 20,
-                padding: 8,
-                navigate: !isCartScreen,
-                showBadge: showBadge,
-              ),
+            if (showCart) MainCartWidget(size: 20, padding: 8, navigate: !isCartScreen, showBadge: showBadge),
             if (showNotification)
               IconButton(
                 onPressed: () {},
@@ -74,12 +59,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               IconButton(
                 onPressed: () {},
                 // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-                icon: SvgPicture.asset(
-                  Assets.assetsSvgLanguage,
-                  height: 21,
-                  width: 21,
-                  colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
-                ),
+                icon: SvgPicture.asset(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
               ),
             if (onShare != null)
               IconButton(
@@ -89,7 +69,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
           ],
         ),
-        const CartCapacityProgressBar(height: 5.0),
+        //   const CartCapacityProgressBar(height: 5.0),
       ],
     );
   }

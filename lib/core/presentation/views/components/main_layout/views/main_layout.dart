@@ -111,9 +111,7 @@ class _MainLayoutState extends State<MainLayout> {
                       initialIndex: value,
                       onItemSelected: (index) {
                         if (index == 3) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            Scaffold.of(context).openEndDrawer();
-                          });
+                          context.push(MainDrawer.route);
                           return;
                         }
                         if (index == value) return;
@@ -126,8 +124,6 @@ class _MainLayoutState extends State<MainLayout> {
                 : null,
             drawerEnableOpenDragGesture: false,
             drawerDragStartBehavior: DragStartBehavior.down,
-            endDrawerEnableOpenDragGesture: false,
-            endDrawer: const MainDrawer(),
           ),
         ),
       ),
