@@ -7,7 +7,6 @@ import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
-import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
 import 'package:gazzer/features/search/presentaion/view/search_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/cubit/restaurants_menu_cubit.dart';
@@ -27,20 +26,14 @@ ShellRoute get nestedRoutes => ShellRoute(
   routes: [
     GoRoute(
       path: HomeScreen.route,
-      builder: (context, state) => BlocProvider(
-        create: (context) => di<HomeCubit>(),
-        child: const HomeScreen(),
-      ),
+      builder: (context, state) => BlocProvider(create: (context) => di<HomeCubit>(), child: const HomeScreen()),
     ),
 
     /// *** home screen nested
     /// restauratns
     GoRoute(
       path: RestaurantsMenuScreen.route,
-      builder: (context, state) => BlocProvider(
-        create: (context) => di<RestaurantsMenuCubit>(),
-        child: const RestaurantsMenuScreen(),
-      ),
+      builder: (context, state) => BlocProvider(create: (context) => di<RestaurantsMenuCubit>(), child: const RestaurantsMenuScreen()),
     ),
     $restaurantsOfCategoryRoute,
     $restaurantCategoryRoute,
@@ -50,13 +43,7 @@ ShellRoute get nestedRoutes => ShellRoute(
     $storeMenuSwitcherRoute,
 
     ///
-    GoRoute(
-      path: FavoritesScreen.route,
-      builder: (context, state) => const FavoritesScreen(),
-      routes: [
-        // ShellRoute(routes: []),
-      ],
-    ),
+    GoRoute(path: FavoritesScreen.route, builder: (context, state) => const FavoritesScreen()),
 
     ///
     GoRoute(
@@ -64,30 +51,22 @@ ShellRoute get nestedRoutes => ShellRoute(
       builder: (context, state) {
         // Handle both bool (legacy) and Map<String, dynamic> (new) extras
         if (state.extra is Map<String, dynamic>) {
-          final extra = state.extra as Map<String, dynamic>;
+          final extra = state.extra! as Map<String, dynamic>;
           return OrdersScreen(
             shouldRefreshAndOpenFirstOrder: extra['shouldRefreshAndOpenFirstOrder'] as bool? ?? false,
             showGetHelpInsteadOfReorder: extra['showGetHelpInsteadOfReorder'] as bool? ?? false,
           );
         } else if (state.extra is bool) {
-          return OrdersScreen(
-            shouldRefreshAndOpenFirstOrder: state.extra as bool,
-          );
+          return OrdersScreen(shouldRefreshAndOpenFirstOrder: state.extra! as bool);
         } else {
           return const OrdersScreen();
         }
       },
-      routes: [
-        // ShellRoute(routes: []),
-      ],
     ),
 
     GoRoute(
       path: SearchScreen.route,
-      builder: (context, state) => BlocProvider(
-        create: (context) => di<SearchCubit>(),
-        child: const SearchScreen(),
-      ),
+      builder: (context, state) => BlocProvider(create: (context) => di<SearchCubit>(), child: const SearchScreen()),
     ),
 
     // home categories
@@ -109,23 +88,8 @@ ShellRoute get nestedRoutes => ShellRoute(
   ],
 );
 
-final storesRoutes = [
-  $storeMenuSwitcherRoute,
-  $storesOfCategoryRoute,
-];
+final storesRoutes = [$storeMenuSwitcherRoute, $storesOfCategoryRoute];
 
-final pharmacyRoutes = [
-  GoRoute(
-    path: PharmacyMenuRoute.route,
-    builder: (context, state) => const PharmacyMenuScreen(),
-  ),
-];
+final pharmacyRoutes = [GoRoute(path: PharmacyMenuRoute.route, builder: (context, state) => const PharmacyMenuScreen())];
 
-List<RouteBase> get drowerRoutes => [
-  GoRoute(
-    path: ProfileScreen.route,
-    builder: (context, state) => const ProfileScreen(),
-    routes: [],
-  ),
-  $upodatePasswordRoute,
-];
+List<RouteBase> get drowerRoutes => [GoRoute(path: ProfileScreen.route, builder: (context, state) => const ProfileScreen())];

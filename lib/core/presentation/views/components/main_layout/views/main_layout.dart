@@ -40,7 +40,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   String _getBaseRoute() {
     final baseRoute = widget.state.fullPath?.split('/')[1];
-    return "/$baseRoute";
+    return '/$baseRoute';
   }
 
   int _updateBNV(bool isInit) {
@@ -50,7 +50,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   bool _shouldShowBottomNav() {
     final fullPath = widget.state.fullPath ?? '';
-    //logger.d('full path: $fullPath');
+    // logger.d('full path: $fullPath');
     if (fullPath == '/' || fullPath == '/favorites' || fullPath == '/orders' || fullPath == '/profile') {
       return true;
     }

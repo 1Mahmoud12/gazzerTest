@@ -3709,6 +3709,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite & Earn'**
   String get inviteAndEarn;
+
+  /// No description provided for @dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// No description provided for @light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
+
+  /// No description provided for @getSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Support'**
+  String get getSupport;
 }
 
 class _AppLocalizationsDelegate

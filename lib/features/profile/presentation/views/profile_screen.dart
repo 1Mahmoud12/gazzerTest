@@ -13,13 +13,11 @@ import 'package:gazzer/core/presentation/views/components/loading_full_screen.da
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/icons/main_switcher.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
-import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
@@ -30,7 +28,7 @@ import 'package:gazzer/features/profile/presentation/views/component/udpate_acco
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
-import 'package:gazzer/features/profile/presentation/views/widgets/language_drop_list.dart';
+import 'package:gazzer/features/profile/presentation/views/widgets/language_custom_dropdown.dart';
 import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -40,6 +38,7 @@ part 'component/invite_earn_component.dart';
 part 'component/profile_addresses_component.dart';
 part 'component/profile_navigation_component.dart';
 part 'component/settings_preference_component.dart';
+part 'widgets/profile_action_items.dart';
 part 'widgets/profile_header_widget.dart';
 part 'widgets/theme_button.dart';
 
@@ -78,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
             builder: (context, state) => LoadingFullScreen(
               isLoading: state is ProfileLoadingStates,
               child: Scaffold(
-                appBar: const MainAppBar(showLanguage: false, showCart: false),
+                appBar: const MainAppBar(),
                 body: SafeArea(
                   child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
                     listenWhen: (previous, current) => previous.lang != current.lang,
@@ -109,24 +108,50 @@ class ProfileContentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: AppConst.defaultPadding,
-      children: [
-        if (cubit.client != null) ...[
-          customHeader ?? _ProfileHeaderWidget(cubit.client!),
-          const VerticalSpacing(32),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            color: Co.purple,
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              spacing: 32,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(L10n.tr().goldenAccountUser, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                SvgPicture.asset(Assets.heroIc),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                if (cubit.client != null) ...[
+                  customHeader ?? _ProfileHeaderWidget(cubit.client!),
+                  const VerticalSpacing(12),
 
-          _AccountInformationComponent(cubit.client!),
-          const VerticalSpacing(32),
-          _ProfileAddressesComponent(),
-          const VerticalSpacing(32),
-          _ProfileNavigationComponent(),
-          const VerticalSpacing(32),
-          _InviteEarnComponent(),
-          const VerticalSpacing(32),
+                  _AccountInformationComponent(cubit.client!),
+                  const VerticalSpacing(12),
+                  _ProfileAddressesComponent(),
+                  const VerticalSpacing(12),
+                  _ProfileNavigationComponent(),
+                  const VerticalSpacing(12),
+                  _InviteEarnComponent(),
+                  const VerticalSpacing(12),
+                ],
+                _SettingsPreferenceComponent(cubit.client),
+                const VerticalSpacing(12),
+                _PrivacySecurityItem(),
+                const VerticalSpacing(12),
+                _GetSupportItem(),
+                const VerticalSpacing(12),
+                if (cubit.client != null) ...[_SignOutButton(cubit: cubit), const VerticalSpacing(12), _DeleteAccountItem(cubit: cubit)],
+              ],
+            ),
+          ),
         ],
-        _SettingsPreferenceComponent(cubit.client),
-      ],
+      ),
     );
   }
 }

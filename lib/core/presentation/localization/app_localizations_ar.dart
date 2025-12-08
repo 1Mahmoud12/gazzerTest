@@ -1857,4 +1857,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get inviteAndEarn => 'ادعُ واربح';
+
+  @override
+  String get dark => 'داكن';
+
+  @override
+  String get light => 'فاتح';
+
+  @override
+  String get getSupport => 'احصل علي الدعم';
 }

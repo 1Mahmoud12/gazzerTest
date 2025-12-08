@@ -27,8 +27,10 @@ import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
 import 'package:gazzer/features/orders/views/order_details_screen.dart';
+import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/gazzer_support_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_response_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_screen.dart';
@@ -132,6 +134,23 @@ final List<RouteBase> unNestedRoutes = [
     },
   ),
   GoRoute(
+    path: UpodatePasswordScreen.fullRoute,
+    builder: (context, state) {
+      final cubit = state.extra as ProfileCubit?;
+      if (cubit != null) {
+        return BlocProvider.value(
+          value: cubit,
+          child: const UpodatePasswordScreen(),
+        );
+      }
+      // If no cubit provided, create a new one (fallback)
+      return BlocProvider(
+        create: (context) => di<ProfileCubit>(),
+        child: const UpodatePasswordScreen(),
+      );
+    },
+  ),
+  GoRoute(
     path: MissingItemsScreen.route,
     builder: (context, state) {
       return MissingItemsScreen(orderId: state.extra as int);
@@ -142,7 +161,10 @@ final List<RouteBase> unNestedRoutes = [
     builder: (context, state) {
       if (state.extra is Map<String, dynamic>) {
         final extra = state.extra as Map<String, dynamic>;
-        return IncorrectItemsScreen(orderId: extra['orderId'] as int, faqCategoryId: extra['faqCategoryId'] as int?);
+        return IncorrectItemsScreen(
+          orderId: extra['orderId'] as int,
+          faqCategoryId: extra['faqCategoryId'] as int?,
+        );
       }
       return IncorrectItemsScreen(orderId: state.extra as int);
     },
@@ -168,9 +190,15 @@ final List<RouteBase> unNestedRoutes = [
 ];
 
 final checkoutRoutes = [
-  GoRoute(path: CartScreen.route, builder: (context, state) => const CartScreen()),
+  GoRoute(
+    path: CartScreen.route,
+    builder: (context, state) => const CartScreen(),
+  ),
 
-  GoRoute(path: SelectAddressScreen.route, builder: (context, state) => const SelectAddressScreen()),
+  GoRoute(
+    path: SelectAddressScreen.route,
+    builder: (context, state) => const SelectAddressScreen(),
+  ),
   GoRoute(
     path: ConfirmOrderScreen.route,
     builder: (context, state) => MultiBlocProvider(
@@ -182,15 +210,33 @@ final checkoutRoutes = [
   //   path: CardDetailsScreen.route,
   //   builder: (context, state) => const CardDetailsScreen(),
   // ),
-  GoRoute(path: PostCheckoutScreen.route, builder: (context, state) => const PostCheckoutScreen()),
+  GoRoute(
+    path: PostCheckoutScreen.route,
+    builder: (context, state) => const PostCheckoutScreen(),
+  ),
 ];
 
 final planScreens = [
-  GoRoute(path: HealthFocusScreen.route, builder: (context, state) => const HealthFocusScreen()),
-  GoRoute(path: DiateryLifestyleScreen.route, builder: (context, state) => const DiateryLifestyleScreen()),
-  GoRoute(path: SupplementsScreen.route, builder: (context, state) => const SupplementsScreen()),
-  GoRoute(path: NuttrationSupportScreen.route, builder: (context, state) => const NuttrationSupportScreen()),
-  GoRoute(path: FrequancyCombosScreen.route, builder: (context, state) => const FrequancyCombosScreen()),
+  GoRoute(
+    path: HealthFocusScreen.route,
+    builder: (context, state) => const HealthFocusScreen(),
+  ),
+  GoRoute(
+    path: DiateryLifestyleScreen.route,
+    builder: (context, state) => const DiateryLifestyleScreen(),
+  ),
+  GoRoute(
+    path: SupplementsScreen.route,
+    builder: (context, state) => const SupplementsScreen(),
+  ),
+  GoRoute(
+    path: NuttrationSupportScreen.route,
+    builder: (context, state) => const NuttrationSupportScreen(),
+  ),
+  GoRoute(
+    path: FrequancyCombosScreen.route,
+    builder: (context, state) => const FrequancyCombosScreen(),
+  ),
 ];
 
 final authRoutes = [
@@ -201,14 +247,23 @@ final authRoutes = [
       child: const LoginScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
-          position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
+          position: Tween<Offset>(
+            begin: const Offset(1, 0),
+            end: Offset.zero,
+          ).animate(animation),
           child: child,
         );
       },
     ),
   ),
-  GoRoute(path: RegisterScreen.route, builder: (context, state) => const RegisterScreen()),
-  GoRoute(path: ResetPasswordScreen.route, builder: (context, state) => const ResetPasswordScreen()),
+  GoRoute(
+    path: RegisterScreen.route,
+    builder: (context, state) => const RegisterScreen(),
+  ),
+  GoRoute(
+    path: ResetPasswordScreen.route,
+    builder: (context, state) => const ResetPasswordScreen(),
+  ),
   $createPasswordRoute,
   $verifyOTPScreenRoute,
 ];

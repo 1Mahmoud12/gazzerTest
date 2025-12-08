@@ -1,4 +1,5 @@
 export 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
+export 'package:gazzer/core/presentation/views/widgets/helper_widgets/custom_dropdown.dart';
 export 'package:gazzer/core/presentation/views/widgets/helper_widgets/dashed_border.dart';
 export 'package:gazzer/core/presentation/views/widgets/helper_widgets/expandable_widget.dart';
 export 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_radio_btn.dart';

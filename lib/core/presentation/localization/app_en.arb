@@ -791,5 +791,8 @@
   "shareApplicationLink": "Share Application Link",
   "copyCode": "Copy Code",
   "yourCode": "Your Code",
-  "inviteAndEarn": "Invite & Earn"
+  "inviteAndEarn": "Invite & Earn",
+    "dark": "Dark",
+    "light": "Light",
+    "getSupport":"Get Support"
 }

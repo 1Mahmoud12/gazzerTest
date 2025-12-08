@@ -19,10 +19,10 @@ class LoginRepoImp extends LoginRepo {
       apiCall: () => _apiClient.post(
         endpoint: Endpoints.login,
         requestBody: {
-          "login": phone,
-          "password": password,
-          "fcm_token": AppConst.fcmToken,
-          "device_id": AppConst.deviceId,
+          'login': phone,
+          'password': password,
+          'fcm_token': AppConst.fcmToken,
+          'device_id': AppConst.deviceId,
           'device_type': Platform.isAndroid ? 'android' : 'ios',
           'app_version': '1.0.0',
         },

@@ -26,31 +26,22 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(UpdateProfileLoading());
     final res = await _repo.updateClient(req);
     switch (res) {
-      case Ok<(ClientResponse?, String?)> ok:
+      case final Ok<(ClientResponse?, String?)> ok:
         if (ok.value.$2 != null) {
           emit(UpdateSuccessWithSession(ok.value.$2!, req));
           return true;
         } else {
           client = ok.value.$1?.client.toClientEntity();
           Session().setClient = client;
-          emit(
-            UpdateSuccessWithClient(
-              ok.value.$1?.message ?? L10n.tr().profileUpdatedSuccessfully,
-            ),
-          );
+          emit(UpdateSuccessWithClient(ok.value.$1?.message ?? L10n.tr().profileUpdatedSuccessfully));
           return true;
         }
-      case Err err:
+      case final Err err:
         // Check if it's an OTP rate limit error
         if (err.error is OtpRateLimitError) {
           final rateLimitError = err.error as OtpRateLimitError;
           final remainingSeconds = rateLimitError.remainingSeconds.ceil();
-          emit(
-            UpdateProfileRateLimitError(
-              rateLimitError.message,
-              remainingSeconds,
-            ),
-          );
+          emit(UpdateProfileRateLimitError(rateLimitError.message, remainingSeconds));
           return false;
         } else {
           emit(UpdateProfileError(err.error.message));
@@ -63,17 +54,13 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(VerifyOTPLoading());
     final res = await _repo.verifyOtp(req);
     switch (res) {
-      case Ok<ClientResponse> ok:
+      case final Ok<ClientResponse> ok:
         TokenService.setToken(ok.value.accessToken);
         client = ok.value.client.toClientEntity();
         Session().setClient = client;
-        emit(
-          VerifyOTPSuccess(
-            ok.value.message ?? L10n.tr().profileUpdatedSuccessfully,
-          ),
-        );
+        emit(VerifyOTPSuccess(ok.value.message ?? L10n.tr().profileUpdatedSuccessfully));
         break;
-      case Err err:
+      case final Err err:
         emit(VerifyOTPError(err.error.message));
     }
   }
@@ -82,10 +69,10 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(ChangePasswordLoading());
     final res = await _repo.changePassword(req);
     switch (res) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         emit(ChangePasswordSuccess(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(ChangePasswordError(err.error.message));
     }
   }
@@ -94,31 +81,21 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(RequestDeleteAccountLoading());
     final req = await _repo.requestDeleteAccount();
     switch (req) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         emit(RequestDeleteAccountSuccess(ok.value));
         break;
-      case Err err:
+      case final Err err:
         // Check if it's an OTP rate limit error
         if (err.error is OtpRateLimitError) {
           final rateLimitError = err.error as OtpRateLimitError;
           final remainingSeconds = rateLimitError.remainingSeconds.ceil();
-          emit(
-            RequestDeleteAccountRateLimitError(
-              rateLimitError.message,
-              remainingSeconds,
-            ),
-          );
+          emit(RequestDeleteAccountRateLimitError(rateLimitError.message, remainingSeconds));
         } else if (err.error is BadResponse) {
           // Check if BadResponse has remaining_seconds
           final badResponse = err.error as BadResponse;
           if (badResponse.remainingSeconds != null) {
             final remainingSeconds = badResponse.remainingSeconds!.ceil();
-            emit(
-              RequestDeleteAccountRateLimitError(
-                badResponse.message,
-                remainingSeconds,
-              ),
-            );
+            emit(RequestDeleteAccountRateLimitError(badResponse.message, remainingSeconds));
           } else {
             emit(RequestDeleteAccountError(badResponse.message));
           }
@@ -132,10 +109,10 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(FetchDeleteAccountReasonsLoading());
     final req = await _repo.getDeleteAccountReasons();
     switch (req) {
-      case Ok<List<DeleteAccountReasonDTO>> ok:
+      case final Ok<List<DeleteAccountReasonDTO>> ok:
         emit(FetchDeleteAccountReasonsSuccess(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(FetchDeleteAccountReasonsError(err.error.message));
     }
   }
@@ -144,12 +121,12 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(DeleteAccountLoading());
     final res = await _repo.confirmDeleteAccount(req);
     switch (res) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         Session().setClient = null;
         TokenService.deleteToken();
         emit(DeleteAccountSuccess(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(DeleteAccountError(err.error.message));
     }
   }
@@ -158,13 +135,13 @@ class ProfileCubit extends Cubit<ProfileStates> {
     emit(LogoutLoading());
     final res = await _repo.logout();
     switch (res) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         client = null;
         Session().setClient = null;
         TokenService.deleteToken();
         emit(LogoutSuccess(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(LogoutError(err.error.message));
     }
   }

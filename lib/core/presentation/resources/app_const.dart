@@ -3,19 +3,16 @@ import 'package:flutter/widgets.dart';
 
 class AppConst {
   AppConst._();
-  static final floatingCartWidth = 64.0;
-  static final defaultStoreRadius = 12.0;
-  static final defaultStoreBorderRadius = BorderRadius.circular(
-    defaultStoreRadius,
-  );
-  static final defaultRadius = 16.0;
-  static final defaultInnerRadius = 32.0;
+
+  static const floatingCartWidth = 64.0;
+  static const defaultStoreRadius = 12.0;
+  static final defaultStoreBorderRadius = BorderRadius.circular(defaultStoreRadius);
+  static const defaultRadius = 16.0;
+  static const defaultInnerRadius = 32.0;
   static final defaultBorderRadius = BorderRadius.circular(defaultRadius);
-  static final defaultInnerBorderRadius = BorderRadius.circular(
-    defaultInnerRadius,
-  );
-  static final defaultPadding = const EdgeInsets.all(16.0);
-  static final defaultHrPadding = const EdgeInsets.symmetric(horizontal: 16.0);
+  static final defaultInnerBorderRadius = BorderRadius.circular(defaultInnerRadius);
+  static const defaultPadding = EdgeInsets.all(16.0);
+  static const defaultHrPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
   // Support contact
   static const String supportPhoneNumber = '+20123456789'; // TODO: Update with actual number

@@ -7,27 +7,6 @@ class _ProfileHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Center(
-        //   child: GradientTextWzShadow(
-        //     text: L10n.tr().userProfile,
-        //     style: TStyle.primaryBold(20),
-        //     shadow: const BoxShadow(color: Colors.black26, blurRadius: 4, spreadRadius: 2, offset: Offset(0, 2)),
-        //   ),
-        // ),
-        // const VerticalSpacing(8),
-        Row(
-          spacing: 32,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(L10n.tr().goldenAccountUser, style: TStyle.primaryBold(13, font: FFamily.inter)),
-            CircleAvatar(
-              radius: 18,
-              backgroundColor: Co.secondary,
-              child: SvgPicture.asset(Assets.assetsSvgCup, height: 22, width: 22, colorFilter: const ColorFilter.mode(Co.dark, BlendMode.srcIn)),
-            ),
-          ],
-        ),
-        const VerticalSpacing(24),
         Row(
           spacing: 20,
           children: [

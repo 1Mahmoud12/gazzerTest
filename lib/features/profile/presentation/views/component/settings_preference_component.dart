@@ -24,100 +24,59 @@ class _SettingsPreferenceComponent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ///
-            _ItitleWithSvg(svg: Assets.assetsSvgLanguage, title: L10n.tr().language),
-            const LanguageDropList(startPadding: startPadding),
-            const VerticalSpacing(16),
-
-            ///
-            _ItitleWithSvg(svg: Assets.assetsSvgAppearance, title: L10n.tr().appearance),
-            const ThemeBtn(startPadding: startPadding),
-            const VerticalSpacing(16),
-
-            ///
-            _ItitleWithSvg(svg: Assets.assetsSvgPrivacy, title: '${L10n.tr().privacy} & ${L10n.tr().security}'),
             Row(
               children: [
-                const HorizontalSpacing(startPadding - 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      child: Text(L10n.tr().privacySettings, style: TStyle.blackRegular(14)),
-                    ),
-                    if (client != null)
-                      TextButton(
-                        onPressed: () {
-                          final cubit = context.read<ProfileCubit>();
-                          UpodatePasswordRoute($extra: cubit).push(context);
-                        },
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                          minimumSize: Size.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        child: Text(L10n.tr().changePassword, style: TStyle.blackRegular(14)),
-                      ),
-                  ],
-                ),
+                _ItitleWithSvg(svg: Assets.languageIc, title: L10n.tr().language),
+                const SizedBox(width: 20),
+                const Expanded(child: LanguageCustomDropdown(startPadding: 0)),
               ],
             ),
-            const VerticalSpacing(16),
+            const VerticalSpacing(6),
 
             ///
-            if (client != null)
-              BlocBuilder<ProfileCubit, ProfileStates>(
-                buildWhen: (previous, current) => previous is LogoutLoading && current is LogoutLoading,
-                builder: (context, state) => MainBtn(
-                  onPressed: () {
-                    context.read<ProfileCubit>().logout();
-                  },
-                  isLoading: state is LogoutLoading,
-                  bgColor: Co.secondary,
-                  radius: 16,
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                  child: Row(
-                    spacing: 16,
-                    children: [
-                      const Icon(Icons.logout_outlined, size: 20, color: Co.purple),
-                      Expanded(
-                        child: Text(
-                          L10n.tr().signOut,
-                          style: TStyle.primaryBold(14, font: FFamily.inter),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            else
-              MainBtn(
-                onPressed: () {
-                  context.push(LoginScreen.route);
-                },
-                bgColor: Co.secondary,
-                radius: 16,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                child: Row(
-                  spacing: 16,
-                  children: [
-                    const Icon(Icons.login_outlined, size: 20, color: Co.purple),
-                    Expanded(
-                      child: Text(
-                        L10n.tr().login,
-                        style: TStyle.primaryBold(14, font: FFamily.inter),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            Row(
+              children: [
+                _ItitleWithSvg(svg: Assets.appearanceIc, title: L10n.tr().appearance),
+                const SizedBox(width: 20),
+                const Spacer(),
+                const ThemeBtn(startPadding: startPadding),
+              ],
+            ),
+
+            ///
+            // _ItitleWithSvg(svg: Assets.assetsSvgPrivacy, title: '${L10n.tr().privacy} & ${L10n.tr().security}'),
+            // Row(
+            //   children: [
+            //     const HorizontalSpacing(startPadding - 12),
+            //     Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         TextButton(
+            //           onPressed: () {},
+            //           style: TextButton.styleFrom(
+            //             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            //             minimumSize: Size.zero,
+            //             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            //           ),
+            //           child: Text(L10n.tr().privacySettings, style: TStyle.blackRegular(14)),
+            //         ),
+            //         if (client != null)
+            //           TextButton(
+            //             onPressed: () {
+            //               final cubit = context.read<ProfileCubit>();
+            //               UpodatePasswordRoute($extra: cubit).push(context);
+            //             },
+            //             style: TextButton.styleFrom(
+            //               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            //               minimumSize: Size.zero,
+            //               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            //             ),
+            //             child: Text(L10n.tr().changePassword, style: TStyle.blackRegular(14)),
+            //           ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

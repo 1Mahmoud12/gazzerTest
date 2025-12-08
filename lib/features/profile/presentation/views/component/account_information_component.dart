@@ -5,7 +5,6 @@ class _AccountInformationComponent extends StatelessWidget {
   final ClientEntity client;
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ProfileCubit>();
     return ExpandableWidget(
       title: L10n.tr().accountInformation,
       initiallyExpanded: true,
@@ -23,13 +22,15 @@ class _AccountInformationComponent extends StatelessWidget {
                   onPressed: () async {
                     final res = await showModalBottomSheet<UpdateProfileReq>(
                       context: context,
-                      backgroundColor: Co.secText,
+                      //backgroundColor: Co.secText,
                       isScrollControlled: true,
                       builder: (context) {
                         return const UdpateAccountSheet();
                       },
                     );
-                    if (res != null && context.mounted) context.read<ProfileCubit>().updateProfile(res);
+                    if (res != null && context.mounted) {
+                      context.read<ProfileCubit>().updateProfile(res);
+                    }
                   },
                   bgColor: Co.purple,
                   radius: 24,
@@ -44,12 +45,13 @@ class _AccountInformationComponent extends StatelessWidget {
               Expanded(
                 child: MainBtn(
                   onPressed: () async {
-                    DeleteAccountRoute($extra: cubit).push(context);
+                    final cubit = context.read<ProfileCubit>();
+                    UpodatePasswordRoute($extra: cubit).push(context);
                   },
                   bgColor: Colors.transparent,
                   borderColor: Co.purple,
                   radius: 24,
-                  child: Text(L10n.tr().deleteAccount, style: TStyle.robotBlackRegular(), textAlign: TextAlign.center),
+                  child: Text(L10n.tr().changePassword, style: TStyle.robotBlackRegular(), textAlign: TextAlign.center),
                 ),
               ),
             ],

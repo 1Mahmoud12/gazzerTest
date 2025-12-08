@@ -11,7 +11,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/profile/data/models/change_password_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
-import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'update_password_screen.g.dart';
@@ -29,8 +28,9 @@ class UpodatePasswordRoute extends GoRouteData with _$UpodatePasswordRoute {
 
 class UpodatePasswordScreen extends StatefulWidget {
   const UpodatePasswordScreen({super.key});
-  static const endpoint = 'update-password';
-  static const fullRoute = '${ProfileScreen.route}/$endpoint';
+
+  static const endpoint = '/update-password';
+  static const fullRoute = endpoint;
 
   @override
   State<UpodatePasswordScreen> createState() => _UpodatePasswordScreenState();
@@ -57,11 +57,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
       // backgroundColor: Co.secText,
       body: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Co.purple.withAlpha(50), Colors.transparent],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          ),
+          gradient: LinearGradient(colors: [Co.purple.withAlpha(50), Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
         ),
         child: Form(
           key: _formKey,
@@ -81,7 +77,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                       bgColor: Co.secText,
                       isPassword: true,
                       validator: Validators.notEmpty,
-                      autofillHints: [AutofillHints.password],
+                      autofillHints: const [AutofillHints.password],
                     ),
                     const VerticalSpacing(16),
                     Text(L10n.tr().newPassword, style: TStyle.blackSemi(14)),
@@ -94,7 +90,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                       bgColor: Co.secText,
                       isPassword: true,
                       validator: Validators.passwordValidation,
-                      autofillHints: [AutofillHints.newPassword],
+                      autofillHints: const [AutofillHints.newPassword],
                     ),
                     const VerticalSpacing(16),
                     Text(L10n.tr().confirmPassword, style: TStyle.blackSemi(14)),
@@ -112,7 +108,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                         }
                         return null;
                       },
-                      autofillHints: [AutofillHints.newPassword],
+                      autofillHints: const [AutofillHints.newPassword],
                     ),
                   ],
                 ),
@@ -132,9 +128,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                   onPressed: () {
                     if (_formKey.currentState?.validate() != true) return;
                     TextInput.finishAutofillContext();
-                    context.read<ProfileCubit>().changePassword(
-                      ChangePasswordReq(currentPassword: currentPassword.text, newPassword: password.text),
-                    );
+                    context.read<ProfileCubit>().changePassword(ChangePasswordReq(currentPassword: currentPassword.text, newPassword: password.text));
                   },
                   textStyle: TStyle.mainwSemi(15),
                   child: Text(L10n.tr().continu, style: TStyle.whiteSemi(16)),

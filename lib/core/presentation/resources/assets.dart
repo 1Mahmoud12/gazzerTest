@@ -322,7 +322,7 @@ class Assets {
   static const String privacyIc = "assets/svg/privacyIc.svg";
   static const String getSupportIc = "assets/svg/getSupportIc.svg";
   static const String signOutIc = "assets/svg/signOutIc.svg";
-  static const String lightIc = "assets/svg/lightIc.svg";
-  static const String darkIc = "assets/svg/darkIc.svg";
+  static const String lightIc = "assets/png/lightIc.png";
+  static const String darkIc = "assets/png/darkIc.png";
   static const String photoAddressMapIc = "assets/png/photoAddressMapIc.png";
 }

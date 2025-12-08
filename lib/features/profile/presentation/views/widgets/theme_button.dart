@@ -5,28 +5,26 @@ class ThemeBtn extends StatelessWidget {
   final double startPadding;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        HorizontalSpacing(startPadding),
-        Text(L10n.tr().darkMode, style: TStyle.blackRegular(14)),
-        const Spacer(),
-        Theme(
-          data: Theme.of(context).copyWith(
-            switchTheme: SwitchThemeData(
-              thumbColor: const WidgetStateColor.fromMap({WidgetState.selected: Co.purple, WidgetState.any: Co.lightGrey}),
-              trackColor: WidgetStateColor.fromMap(
-                {WidgetState.selected: Co.purple.withAlpha(120), WidgetState.any: Co.grey.withAlpha(150)},
-              ),
-            ),
-          ),
-          child: Switch(
-            value: context.read<AppSettingsCubit>().state.isDarkMode,
-            onChanged: (v) {
-              context.read<AppSettingsCubit>().toggleDarkMode();
-            },
-          ).withScale(scale: 0.8, alignment: Alignment.centerRight),
+    final cubit = context.read<AppSettingsCubit>();
+    final isDarkMode = cubit.state.isDarkMode;
+
+    return InkWell(
+      onTap: () {
+        cubit.toggleDarkMode();
+      },
+      borderRadius: BorderRadius.circular(24),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24), color: Co.purple),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(isDarkMode ? Assets.darkIc : Assets.lightIc, height: 24, width: 24),
+            const HorizontalSpacing(8),
+            Text(isDarkMode ? L10n.tr().dark : L10n.tr().light, style: TStyle.whiteSemi(14)),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

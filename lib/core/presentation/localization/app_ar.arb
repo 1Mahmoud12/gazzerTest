@@ -791,5 +791,8 @@
   "shareApplicationLink": "مشاركة رابط التطبيق",
   "copyCode": "نسخ الكود",
   "yourCode": "الكود الخاص بك",
-  "inviteAndEarn": "ادعُ واربح"
+  "inviteAndEarn": "ادعُ واربح",
+    "dark": "داكن",
+    "light": "فاتح",
+    "getSupport":"احصل علي الدعم"
 }

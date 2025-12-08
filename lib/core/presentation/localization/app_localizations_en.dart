@@ -1857,4 +1857,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inviteAndEarn => 'Invite & Earn';
+
+  @override
+  String get dark => 'Dark';
+
+  @override
+  String get light => 'Light';
+
+  @override
+  String get getSupport => 'Get Support';
 }

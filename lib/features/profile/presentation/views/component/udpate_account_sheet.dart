@@ -52,11 +52,8 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
         spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            L10n.tr().accountInformation,
-            style: TStyle.primaryBold(16),
-          ),
-          Divider(height: 15, thickness: 1, color: Co.purple.withAlpha(90)),
+          Text(L10n.tr().editAccountInformation, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+          Divider(height: 8, thickness: 1, color: Co.purple.withAlpha(90)),
           Form(
             key: _formKey,
             child: Column(
@@ -67,15 +64,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 Row(
                   spacing: 14,
                   children: [
-                    SvgPicture.asset(
-                      Assets.assetsSvgUser,
-                      height: 25,
-                      width: 25,
-                      colorFilter: const ColorFilter.mode(
-                        Co.secondary,
-                        BlendMode.srcIn,
-                      ),
-                    ),
+                    SvgPicture.asset(Assets.fullNameIc),
                     Expanded(
                       child: Column(
                         spacing: 8,
@@ -83,30 +72,19 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              L10n.tr().fullName,
-                              style: TStyle.blackRegular(14),
-                            ),
+                            child: Text(L10n.tr().fullName, style: TStyle.robotBlackMedium()),
                           ),
                           MainTextField(
                             controller: _nameController,
                             hintText: L10n.tr().yourFullName,
-                            bgColor: Colors.white,
+                            bgColor: Co.white100,
                             showBorder: false,
 
                             validator: (v) {
                               return Validators.dashedCharactersOnly(v) ??
-                                  Validators.valueAtLeastNum(
-                                    v,
-                                    L10n.tr().fullName,
-                                    3,
-                                    msg: L10n.tr().fullNameShouldBeThreeLettersOrMore,
-                                  );
+                                  Validators.valueAtLeastNum(v, L10n.tr().fullName, 3, msg: L10n.tr().fullNameShouldBeThreeLettersOrMore);
                             },
-                            autofillHints: [
-                              AutofillHints.username,
-                              AutofillHints.name,
-                            ],
+                            autofillHints: const [AutofillHints.username, AutofillHints.name],
                           ),
                         ],
                       ),
@@ -116,11 +94,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 Row(
                   spacing: 14,
                   children: [
-                    const Icon(
-                      Icons.email_outlined,
-                      size: 25,
-                      color: Co.secondary,
-                    ),
+                    const Icon(Icons.email_outlined, size: 25, color: Co.secondary),
                     Expanded(
                       child: Column(
                         spacing: 8,
@@ -128,10 +102,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              L10n.tr().emailAddress,
-                              style: TStyle.blackRegular(14),
-                            ),
+                            child: Text(L10n.tr().emailAddress, style: TStyle.robotBlackMedium()),
                           ),
                           Directionality(
                             textDirection: TextDirection.ltr,
@@ -139,21 +110,14 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             child: MainTextField(
                               controller: _emailController,
                               hintText: L10n.tr().emailAddress,
-                              bgColor: Colors.white,
+                              bgColor: Co.white100,
                               showBorder: false,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.deny(
-                                  RegExp(r'\s'),
-                                ),
-                              ],
+                              inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'\s'))],
                               validator: (v) {
                                 if (v?.trim().isNotEmpty != true) return null;
                                 return Validators.emailValidator(v);
                               },
-                              autofillHints: [
-                                AutofillHints.username,
-                                AutofillHints.name,
-                              ],
+                              autofillHints: const [AutofillHints.username, AutofillHints.name],
                             ),
                           ),
                         ],
@@ -164,11 +128,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 Row(
                   spacing: 14,
                   children: [
-                    const Icon(
-                      Icons.phone_outlined,
-                      size: 25,
-                      color: Co.secondary,
-                    ),
+                    const Icon(Icons.phone_outlined, size: 25, color: Co.secondary),
                     Expanded(
                       child: Column(
                         spacing: 8,
@@ -176,10 +136,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              L10n.tr().mobileNumber,
-                              style: TStyle.blackRegular(14),
-                            ),
+                            child: Text(L10n.tr().mobileNumber, style: TStyle.robotBlackMedium()),
                           ),
                           Directionality(
                             textDirection: TextDirection.ltr,
@@ -188,9 +145,9 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                               hasLabel: false,
                               hasHint: true,
                               borderColor: Colors.red,
-                              bgColor: Co.white,
+                              bgColor: Co.white100,
                               showBorder: false,
-                              code: "EG",
+                              code: 'EG',
                               onChange: (phone) {
                                 // Check if exactly 10 digits
                                 if (phone.number.length > 11) {
@@ -241,36 +198,14 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 phone = phone.substring(1);
               }
 
-              final req = UpdateProfileReq(
-                name: _nameController.text.trim(),
-                email: _emailController.text.trim(),
-                phone: phone,
-              );
+              final req = UpdateProfileReq(name: _nameController.text.trim(), email: _emailController.text.trim(), phone: phone);
               context.pop(req);
             },
-            bgColor: Co.secondary,
-            radius: 16,
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-            child: Row(
-              spacing: 16,
-              children: [
-                SvgPicture.asset(
-                  Assets.assetsSvgEditSquare,
-                  height: 20,
-                  width: 20,
-                  colorFilter: const ColorFilter.mode(
-                    Co.purple,
-                    BlendMode.srcIn,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    L10n.tr().saveEdit.toUpperCase(),
-                    style: TStyle.primaryBold(14, font: FFamily.inter),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+            radius: 24,
+            child: Text(
+              L10n.tr().saveChanges,
+              style: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
+              textAlign: TextAlign.center,
             ),
           ),
         ],
