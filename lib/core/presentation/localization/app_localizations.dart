@@ -3727,6 +3727,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get Support'**
   String get getSupport;
+
+  /// No description provided for @welcomeToGazzer.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Gazzer'**
+  String get welcomeToGazzer;
+
+  /// No description provided for @createYourAccountOrLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account or log in'**
+  String get createYourAccountOrLogin;
+
+  /// No description provided for @continueAsAGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as a Guest'**
+  String get continueAsAGuest;
+
+  /// No description provided for @codeAppliedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Code applied successfully'**
+  String get codeAppliedSuccessfully;
+
+  /// No description provided for @referralCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral Code'**
+  String get referralCode;
+
+  /// No description provided for @optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optional;
+
+  /// No description provided for @applied.
+  ///
+  /// In en, this message translates to:
+  /// **'Applied'**
+  String get applied;
 }
 
 class _AppLocalizationsDelegate

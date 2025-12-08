@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
@@ -28,17 +28,16 @@ class ForgetPasswordBtn extends StatelessWidget {
           backgroundColor: Colors.transparent,
           builder: (context) {
             return ChangePhoneNumberSheet(
-              initialPhone: null,
               title: L10n.tr().enterYourMobileNumber,
               onConfirm: (val) async {
                 final res = await di<ForgotPasswordRepo>().forgotPassword(val);
                 switch (res) {
-                  case Ok<String> ok:
+                  case final Ok<String> ok:
                     isSentOtp = true;
                     phone = val;
                     Alerts.showToast(ok.value, error: false);
                     return true;
-                  case Err err:
+                  case final Err err:
                     Alerts.showToast(err.error.message);
                     return false;
                 }
@@ -49,17 +48,18 @@ class ForgetPasswordBtn extends StatelessWidget {
 
         ///
         if (isSentOtp && context.mounted) {
-          (
-            VerifyOTPScreenRoute(
-              initPhone: phone,
-              data: phone,
-              $extra: (di<ForgotPasswordRepo>(), (ctx) => ctx.pushReplacement(ResetPasswordScreen.route)),
-            ).push(context),
-          );
+          VerifyOTPScreenRoute(
+            initPhone: phone,
+            data: phone,
+            $extra: (di<ForgotPasswordRepo>(), (ctx) => ctx.pushReplacement(ResetPasswordScreen.route)),
+          ).push(context);
         }
       },
       style: TextButton.styleFrom(minimumSize: Size.zero),
-      child: Text(L10n.tr().forgotPassword, style: TStyle.primaryBold(12)),
+      child: Text(
+        L10n.tr().forgotPassword,
+        style: TStyle.robotBlackRegular14().copyWith(color: Co.purple, decoration: TextDecoration.underline),
+      ),
     );
   }
 }

@@ -11,6 +11,7 @@ class RegisterRequest {
   final String countryIso;
   final String password;
   final String passwordConfirmation;
+  final String? referralCode;
 
   RegisterRequest({
     required this.name,
@@ -21,6 +22,7 @@ class RegisterRequest {
     this.countryIso = "EG",
     required this.password,
     required this.passwordConfirmation,
+    this.referralCode,
   });
 
   Map<String, dynamic> toJson() {
@@ -31,6 +33,8 @@ class RegisterRequest {
       'country_iso': countryIso,
       'password': password,
       'password_confirmation': passwordConfirmation,
+      if (referralCode != null && referralCode!.isNotEmpty)
+        'referral_code': referralCode,
       if (fcmToken != null) 'fcm_token': AppConst.fcmToken,
       if (deviceId != null) 'device_id': AppConst.deviceId,
       'device_type': Platform.isAndroid ? 'android' : 'ios',
@@ -38,7 +42,14 @@ class RegisterRequest {
     };
   }
 
-  RegisterRequest copyWith({String? name, String? phone, String? email, String? countryIso, String? password, String? passwordConfirmation}) {
+  RegisterRequest copyWith({
+    String? name,
+    String? phone,
+    String? email,
+    String? countryIso,
+    String? password,
+    String? passwordConfirmation,
+  }) {
     return RegisterRequest(
       name: name ?? this.name,
       email: email ?? this.email,

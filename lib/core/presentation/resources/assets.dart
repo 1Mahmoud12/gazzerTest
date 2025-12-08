@@ -325,4 +325,7 @@ class Assets {
   static const String lightIc = "assets/png/lightIc.png";
   static const String darkIc = "assets/png/darkIc.png";
   static const String photoAddressMapIc = "assets/png/photoAddressMapIc.png";
+
+  // Login
+  static const String lockIc = "assets/svg/lockIc.svg";
 }

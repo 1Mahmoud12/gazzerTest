@@ -77,6 +77,8 @@ abstract class TStyle {
   static TextStyle blackMedium(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
 
+  static TextStyle robotBlackHead({double fontSize = 32, FFamily font = FFamily.roboto}) =>
+      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.dark);
   static TextStyle robotBlackTitle({double fontSize = 24, FFamily font = FFamily.roboto}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
 
@@ -87,6 +89,9 @@ abstract class TStyle {
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
 
   static TextStyle robotBlackRegular({double fontSize = 16, FFamily font = FFamily.roboto}) =>
+      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
+
+  static TextStyle robotBlackRegular14({double fontSize = 14, FFamily font = FFamily.roboto}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
 
   static TextStyle robotBlackSmall({double fontSize = 14, FFamily font = FFamily.roboto}) =>

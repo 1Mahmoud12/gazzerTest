@@ -794,5 +794,13 @@
   "inviteAndEarn": "ادعُ واربح",
     "dark": "داكن",
     "light": "فاتح",
-    "getSupport":"احصل علي الدعم"
+    "getSupport":"احصل علي الدعم",
+    "welcomeToGazzer": "مرحبًا بك في جزر",
+      "createYourAccountOrLogin": "أنشئ حسابك أو قم بتسجيل الدخول",
+        "continueAsAGuest": "المتابعة كضيف",
+         "codeAppliedSuccessfully": "تم تطبيق الكود بنجاح",
+          "referralCode": "كود الإحالة",
+          "optional": "اختياري",
+          "applied": "تم التطبيق"
+
 }

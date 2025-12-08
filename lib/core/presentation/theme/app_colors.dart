@@ -31,10 +31,11 @@ class Co {
   // others
   static const lightGrey = Color(0xFFD9D9D9);
   static const grey = Color(0xFF777777);
+  static const gr100 = Color(0xFF8D8D8D);
   static const w100 = Color(0xFFF1EFEF);
   static const darkGrey = Color(0xFF5D5D5D);
   static const white = Color(0xFFFFFFFF);
-  static const white100 = Color(0xFFF0F0F0);
+  static const w900 = Color(0xFFF0F0F0);
   static const dark = Color(0xFF2B2B2B);
   static const gryPrimary = Color(0xFF9F93C3);
 
@@ -56,4 +57,5 @@ class Co {
   static const purple200 = Color(0xFFBBA3F9);
   static const purple600 = Color(0xFF8C64E6);
   static const earnedMoney = Color(0xFFFFCF86);
+  static const borderColor = Color(0xFFE0E0E0);
 }

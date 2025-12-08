@@ -77,7 +77,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                           MainTextField(
                             controller: _nameController,
                             hintText: L10n.tr().yourFullName,
-                            bgColor: Co.white100,
+                            bgColor: Co.w900,
                             showBorder: false,
 
                             validator: (v) {
@@ -110,7 +110,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             child: MainTextField(
                               controller: _emailController,
                               hintText: L10n.tr().emailAddress,
-                              bgColor: Co.white100,
+                              bgColor: Co.w900,
                               showBorder: false,
                               inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'\s'))],
                               validator: (v) {
@@ -145,7 +145,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                               hasLabel: false,
                               hasHint: true,
                               borderColor: Colors.red,
-                              bgColor: Co.white100,
+                              bgColor: Co.w900,
                               showBorder: false,
                               code: 'EG',
                               onChange: (phone) {

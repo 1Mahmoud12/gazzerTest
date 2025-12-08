@@ -75,7 +75,7 @@ class _SignOutButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Icon at the top
-              SvgPicture.asset(Assets.signOutIc, height: 48, width: 48, colorFilter: const ColorFilter.mode(Co.logoutRed, BlendMode.srcIn)),
+              SvgPicture.asset(Assets.signOutIc, colorFilter: const ColorFilter.mode(Co.logoutRed, BlendMode.srcIn)),
               const VerticalSpacing(24),
               // Confirmation text
               Text(L10n.tr().areYouSureYouWantToLogout, style: TStyle.robotBlackMedium().copyWith(fontSize: 16), textAlign: TextAlign.center),
@@ -87,7 +87,6 @@ class _SignOutButton extends StatelessWidget {
                 },
                 bgColor: Co.purple,
                 radius: 24,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

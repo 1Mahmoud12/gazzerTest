@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
@@ -75,7 +74,7 @@ class _OptionBtnState extends State<OptionBtn> {
             color: value ? null : widget.bgColor ?? Colors.transparent,
             border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
           ),
-          child: child!,
+          child: child,
         ),
         child: FilledButton(
           onPressed: !widget.isEnabled
@@ -89,13 +88,8 @@ class _OptionBtnState extends State<OptionBtn> {
           },
           style: FilledButton.styleFrom(
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
-            ),
-            minimumSize: Size(
-              widget.width ?? (widget.padding != null ? 10 : widget.width ?? double.infinity),
-              widget.height ?? 54,
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius)),
+            minimumSize: Size(widget.width ?? (widget.padding != null ? 10 : widget.width ?? double.infinity), widget.height ?? 54),
             elevation: 0,
             padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             backgroundColor: Colors.transparent,

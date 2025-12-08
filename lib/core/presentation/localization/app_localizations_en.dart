@@ -1866,4 +1866,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getSupport => 'Get Support';
+
+  @override
+  String get welcomeToGazzer => 'Welcome to Gazzer';
+
+  @override
+  String get createYourAccountOrLogin => 'Create your account or log in';
+
+  @override
+  String get continueAsAGuest => 'Continue as a Guest';
+
+  @override
+  String get codeAppliedSuccessfully => 'Code applied successfully';
+
+  @override
+  String get referralCode => 'Referral Code';
+
+  @override
+  String get optional => 'Optional';
+
+  @override
+  String get applied => 'Applied';
 }

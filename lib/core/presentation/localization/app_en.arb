@@ -794,5 +794,13 @@
   "inviteAndEarn": "Invite & Earn",
     "dark": "Dark",
     "light": "Light",
-    "getSupport":"Get Support"
+    "getSupport":"Get Support",
+    "welcomeToGazzer": "Welcome to Gazzer",
+      "createYourAccountOrLogin": "Create your account or log in",
+        "continueAsAGuest": "Continue as a Guest",
+         "codeAppliedSuccessfully": "Code applied successfully",
+          "referralCode": "Referral Code",
+          "optional": "Optional",
+          "applied": "Applied"
+
 }

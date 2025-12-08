@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1866,4 +1866,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get getSupport => 'احصل علي الدعم';
+
+  @override
+  String get welcomeToGazzer => 'مرحبًا بك في جزر';
+
+  @override
+  String get createYourAccountOrLogin => 'أنشئ حسابك أو قم بتسجيل الدخول';
+
+  @override
+  String get continueAsAGuest => 'المتابعة كضيف';
+
+  @override
+  String get codeAppliedSuccessfully => 'تم تطبيق الكود بنجاح';
+
+  @override
+  String get referralCode => 'كود الإحالة';
+
+  @override
+  String get optional => 'اختياري';
+
+  @override
+  String get applied => 'تم التطبيق';
 }
