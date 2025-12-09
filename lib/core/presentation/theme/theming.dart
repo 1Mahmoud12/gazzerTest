@@ -42,5 +42,6 @@ class AppTheme {
     ),
     dialogTheme: const DialogThemeData(backgroundColor: Color(0xffF0F0F0)),
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Co.white),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(backgroundColor: Colors.transparent),
   );
 }

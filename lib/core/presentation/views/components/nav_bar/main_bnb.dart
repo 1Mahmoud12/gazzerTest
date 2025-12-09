@@ -1,11 +1,11 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/doubled_decorated_widget.dart';
 
 class MainBnb extends StatefulWidget {
   const MainBnb({super.key, this.initialIndex = 0, required this.onItemSelected});
@@ -32,72 +32,116 @@ class _MainBnbState extends State<MainBnb> {
     }
   }
 
+  void _onItemTapped(int index) {
+    SystemSound.play(SystemSoundType.click);
+    widget.onItemSelected(index);
+  }
+
+  // Map route index to visual bar index
+  // Routes: 0=Home, 1=Favorites, 2=Cart, 3=Orders, 4=Profile
+  // Visual bar: 0=Home, 1=Favorites, 2=Orders, 3=Profile (Cart is persistent button)
+  int _getBarIndex(int routeIndex) {
+    switch (routeIndex) {
+      case 0:
+        return 0; // Home
+      case 1:
+        return 1; // Favorites
+      case 2:
+        return -1; // Cart (persistent button, not in bar)
+      case 3:
+        return 2; // Orders
+      case 4:
+        return 3; // Profile
+      default:
+        return 0;
+    }
+  }
+
+  // Map visual bar index to route index
+  // Visual bar: 0=Home, 1=Favorites, 2=Orders, 3=Profile
+  // Routes: 0=Home, 1=Favorites, 2=Cart, 3=Orders, 4=Profile
+  int _getRouteIndex(int barIndex) {
+    switch (barIndex) {
+      case 0:
+        return 0; // Home
+      case 1:
+        return 1; // Favorites
+      case 2:
+        return 3; // Orders
+      case 3:
+        return 4; // Profile
+      default:
+        return 0;
+    }
+  }
+
+  Widget _buildTab(int index, bool isActive) {
+    final color = isActive ? Colors.white : Colors.white.withOpacityNew(0.5);
+    final String label;
+    final String iconAsset;
+
+    switch (index) {
+      case 0:
+        label = L10n.tr().home;
+        iconAsset = Assets.unSelectedHomeIc;
+        break;
+      case 1:
+        label = L10n.tr().favorites;
+        iconAsset = Assets.unSelectedFavoriteIc;
+        break;
+      case 2:
+        label = L10n.tr().orders;
+        iconAsset = Assets.unSelectedOrdersIc;
+        break;
+      case 3:
+        label = L10n.tr().menu;
+        iconAsset = Assets.unSelectedProfileIc;
+        break;
+      default:
+        label = '';
+        iconAsset = Assets.unSelectedHomeIc;
+    }
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(iconAsset, height: 24, width: 24, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
+        const SizedBox(height: 4),
+        Text(label, style: TStyle.robotBlackMedium().copyWith(color: color, fontSize: 10)),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final items = {
-      L10n.tr().home: Assets.assetsSvgHomeIcon,
-      L10n.tr().favorites: Assets.assetsSvgFavoriteIcon,
-      L10n.tr().orders: Assets.assetsSvgMenyIcon,
-      L10n.tr().menu: Assets.assetsSvgDrawerIcon,
-    };
+    final barIndex = _getBarIndex(selectedIndex);
+    final currentIndex = barIndex == -1 ? 0 : barIndex;
 
-    return DoubledDecoratedWidget(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(6, 6, 6, 2),
-        child: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final width = (constraints.maxWidth - 12) / items.length;
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(items.length, (index) {
-                  final color = Co.secondary.withAlpha(index == selectedIndex ? 255 : 180);
-                  return ElevatedButton(
-                    onPressed: () {
-                      SystemSound.play(SystemSoundType.click);
-                      widget.onItemSelected(index);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(6),
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      iconSize: 21,
-                      maximumSize: Size(width, 150),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      minimumSize: Size.zero,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Builder(
-                          builder: (context) {
-                            final child = CircleAvatar(
-                              radius: 20,
-                              backgroundColor: index == selectedIndex ? const Color(0xFFFFE6E6) : Colors.transparent,
-                              child: SvgPicture.asset(
-                                items.values.elementAt(index),
-                                height: 21,
-                                width: 21,
-                                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                              ),
-                            );
-                            if (index == items.length - 1) {
-                              return child.withHotspot(order: 5, title: "", text: L10n.tr().sideMenuSetting);
-                            }
-                            return child;
-                          },
-                        ),
-                        Text(items.keys.elementAt(index), style: TStyle.secondaryBold(12).copyWith(color: color)),
-                      ],
-                    ),
-                  );
-                }),
-              );
-            },
-          ),
-        ),
-      ),
+    return AnimatedBottomNavigationBar.builder(
+      itemCount: 4,
+      tabBuilder: (int index, bool isActive) {
+        return _buildTab(index, isActive);
+      },
+      activeIndex: currentIndex,
+      gapLocation: GapLocation.center,
+      leftCornerRadius: 12,
+      rightCornerRadius: 12,
+      backgroundColor: Co.purple,
+      splashColor: Co.purple,
+      splashRadius: 24,
+      notchSmoothness: NotchSmoothness.verySmoothEdge,
+      gapWidth: 70,
+      notchMargin: 20,
+      onTap: (index) {
+        // Map visual bar index to route index
+        // Visual: 0=Home, 1=Favorites, 2=Orders, 3=Profile (Cart is persistent button)
+        // Routes: 0=Home, 1=Favorites, 2=Cart, 3=Orders, 4=Profile
+        final actualIndex = _getRouteIndex(index);
+        _onItemTapped(actualIndex);
+      },
+      safeAreaValues: const SafeAreaValues(top: false, bottom: false),
+      height: 70,
     );
   }
 }

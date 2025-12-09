@@ -2,15 +2,21 @@ import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
-import 'package:gazzer/core/presentation/views/widgets/cart_capacity_progress_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
+import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
@@ -36,7 +42,7 @@ class _MainLayoutState extends State<MainLayout> {
   late final ValueNotifier<int> route;
   late int currentRoute;
 
-  final routes = {0: HomeScreen.route, 1: FavoritesScreen.route, 2: OrdersScreen.route, 3: MainDrawer.route};
+  final routes = {0: HomeScreen.route, 1: FavoritesScreen.route, 2: CartScreen.route, 3: OrdersScreen.route, 4: MainDrawer.route};
 
   String _getBaseRoute() {
     final baseRoute = widget.state.fullPath?.split('/')[1];
@@ -51,7 +57,12 @@ class _MainLayoutState extends State<MainLayout> {
   bool _shouldShowBottomNav() {
     final fullPath = widget.state.fullPath ?? '';
     // logger.d('full path: $fullPath');
-    if (fullPath == '/' || fullPath == '/favorites' || fullPath == '/orders' || fullPath == '/profile' || fullPath == '/menu') {
+    if (fullPath == '/' ||
+        fullPath == '/favorites' ||
+        fullPath == '/cart' ||
+        fullPath == '/orders' ||
+        fullPath == '/profile' ||
+        fullPath == '/menu') {
       return true;
     }
 
@@ -94,16 +105,8 @@ class _MainLayoutState extends State<MainLayout> {
         child: ValueListenableBuilder(
           valueListenable: route,
           builder: (context, value, child) => Scaffold(
-            body: Stack(
-              alignment: AlignmentDirectional.centerStart,
-              children: [
-                widget.child,
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height * .3,
-                  child: const RotatedBox(quarterTurns: 3, child: CartCapacityProgressBar(height: 6.0)),
-                ),
-              ],
-            ),
+            body: widget.child,
+
             bottomNavigationBar: _shouldShowBottomNav()
                 ? BlocBuilder<AppSettingsCubit, AppSettingsState>(
                     buildWhen: (previous, current) => previous.lang != current.lang,
@@ -117,6 +120,14 @@ class _MainLayoutState extends State<MainLayout> {
                     ),
                   )
                 : null,
+            floatingActionButton: _shouldShowBottomNav()
+                ? _CartFloatingActionButton(
+                    onPressed: () {
+                      context.go(CartScreen.route);
+                    },
+                  )
+                : null,
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             drawerEnableOpenDragGesture: false,
             drawerDragStartBehavior: DragStartBehavior.down,
           ),
@@ -137,7 +148,6 @@ class GuideProvider extends StatelessWidget {
     if (shouldProvide()) {
       return HotspotProvider(
         skrimColor: Colors.black54,
-        dismissibleSkrim: true,
         bodyWidth: 220,
         foregroundColor: Colors.green,
         duration: Durations.extralong4,
@@ -166,5 +176,76 @@ class GuideProvider extends StatelessWidget {
       );
     }
     return child;
+  }
+}
+
+class _CartFloatingActionButton extends StatelessWidget {
+  const _CartFloatingActionButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        SystemSound.play(SystemSoundType.click);
+        onPressed();
+      },
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      splashColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      foregroundColor: Colors.transparent,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Progress ring
+          BlocBuilder<CartCubit, CartStates>(
+            buildWhen: (previous, current) {
+              if (current is FullCartLoaded && previous is FullCartLoaded) {
+                return previous.pouchSummary?.totalFillPercentage != current.pouchSummary?.totalFillPercentage;
+              }
+              return current is FullCartLoaded;
+            },
+            builder: (context, state) {
+              double fillPercentage = 0.0;
+              Color progressColor = Colors.green;
+
+              if (state is FullCartLoaded && state.pouchSummary != null) {
+                final pouchSummary = state.pouchSummary!;
+                final totalCapacity = pouchSummary.totalCapacity?.toDouble() ?? 0.0;
+                final totalLoad = pouchSummary.totalLoad?.toDouble() ?? 0.0;
+
+                if (totalCapacity > 0) {
+                  fillPercentage = (totalLoad / totalCapacity) * 100;
+                  fillPercentage = fillPercentage.clamp(0.0, 100.0);
+                }
+
+                if (fillPercentage < 60) {
+                  progressColor = Co.purple;
+                } else if (fillPercentage < 85) {
+                  progressColor = Co.purple;
+                } else {
+                  progressColor = Co.purple;
+                }
+              }
+              return SizedBox(
+                width: 70,
+                height: 70,
+                child: CircularProgressIndicator(
+                  value: fillPercentage / 100,
+                  backgroundColor: Colors.grey.withOpacityNew(0.15),
+                  valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+                  strokeWidth: 4.0,
+                ),
+              );
+            },
+          ),
+          // Cart icon
+          SvgPicture.asset(Assets.cartIc, colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn)),
+        ],
+      ),
+    );
   }
 }

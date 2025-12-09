@@ -8,7 +8,6 @@ import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
-import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
@@ -173,11 +172,6 @@ final List<RouteBase> unNestedRoutes = [
 ];
 
 final checkoutRoutes = [
-  GoRoute(
-    path: CartScreen.route,
-    builder: (context, state) => const CartScreen(),
-  ),
-
   GoRoute(
     path: SelectAddressScreen.route,
     builder: (context, state) => const SelectAddressScreen(),

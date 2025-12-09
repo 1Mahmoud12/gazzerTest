@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
@@ -45,6 +46,9 @@ ShellRoute get nestedRoutes => ShellRoute(
 
     ///
     GoRoute(path: FavoritesScreen.route, builder: (context, state) => const FavoritesScreen()),
+
+    ///
+    GoRoute(path: CartScreen.route, builder: (context, state) => const CartScreen()),
 
     ///
     GoRoute(

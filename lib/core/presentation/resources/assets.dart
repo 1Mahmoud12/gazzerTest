@@ -328,4 +328,11 @@ class Assets {
 
   // Login
   static const String lockIc = "assets/svg/lockIc.svg";
+
+  // Navigation
+  static const String unSelectedHomeIc = "assets/svg/unSelectedHomeIc.svg";
+  static const String unSelectedFavoriteIc = "assets/svg/unSelectedFavoriteIc.svg";
+  static const String unSelectedProfileIc = "assets/svg/unSelectedProfileIc.svg";
+  static const String unSelectedOrdersIc = "assets/svg/unSelectedOrdersIc.svg";
+  static const String cartIc = "assets/svg/cartIc.svg";
 }

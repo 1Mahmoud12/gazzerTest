@@ -83,6 +83,7 @@ dependencies:
   pinput: ^5.0.2
   hotspot: ^0.1.3
   carousel_slider: ^5.1.1
+  animated_bottom_navigation_bar: ^1.4.0
 
   #others
   flutter_bloc: ^9.1.1 #state management
