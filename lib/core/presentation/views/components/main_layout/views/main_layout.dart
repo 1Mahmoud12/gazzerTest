@@ -237,7 +237,7 @@ class _CartFloatingActionButton extends StatelessWidget {
                   value: fillPercentage / 100,
                   backgroundColor: Colors.grey.withOpacityNew(0.15),
                   valueColor: AlwaysStoppedAnimation<Color>(progressColor),
-                  strokeWidth: 4.0,
+                  strokeWidth: 5.0,
                 ),
               );
             },

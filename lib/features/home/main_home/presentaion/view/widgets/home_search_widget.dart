@@ -11,7 +11,7 @@ class _HomeSearchWidget extends StatelessWidget {
         height: 80,
         hintText: L10n.tr().searchForStoresItemsAndCAtegories,
         bgColor: Colors.transparent,
-        prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+        prefix: const Icon(Icons.search, size: 24),
       ),
     );
   }

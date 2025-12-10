@@ -51,10 +51,11 @@ class _MainSearchWidgetState extends State<MainSearchWidget> {
               context.push(SearchScreen.route);
             },
       child: AbsorbPointer(
-        absorbing: widget.onChange != null ? false : true,
+        absorbing: widget.onChange != null,
         child: Hero(
           tag: Tags.searchBar,
           child: MainTextField(
+            enabled: widget.onChange != null,
             controller: controller,
             height: widget.height,
             borderRadius: widget.borderRadius,
@@ -62,6 +63,7 @@ class _MainSearchWidgetState extends State<MainSearchWidget> {
             hintText: widget.hintText,
             prefix: widget.prefix ?? const Icon(Icons.search, color: Co.purple, size: 32),
             onChange: widget.onChange,
+            padding: const EdgeInsets.symmetric(vertical: 16),
           ),
         ),
       ),

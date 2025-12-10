@@ -7,39 +7,20 @@ class _HomeCategoriesComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
     return SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          Padding(
-            padding: AppConst.defaultHrPadding,
-            child:
-                Text(
-                  L10n.tr().categories,
-                  style: TStyle.primaryBold(16),
-                ).withHotspot(
-                  order: 2,
-                  title: "",
-                  text: L10n.tr().chooseYourCategories,
-                ),
-          ),
-          const VerticalSpacing(12),
-          GridView.builder(
-            padding: AppConst.defaultHrPadding,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 100,
-              mainAxisSpacing: 18,
-              crossAxisSpacing: 18,
-              mainAxisExtent: 150,
-            ),
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return CategoryCard(category: items[index]);
-            },
-          ),
-          const VerticalSpacing(24),
-        ],
-      ),
+      delegate: SliverChildListDelegate([
+        Padding(
+          padding: AppConst.defaultHrPadding,
+          child: Text(L10n.tr().categories, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+        ),
+        const VerticalSpacing(12),
+        SingleChildScrollView(
+          padding: AppConst.defaultHrPadding,
+          scrollDirection: Axis.horizontal,
+          child: Row(children: List.generate(items.length, (index) => CategoryCard(category: items[index]))),
+        ),
+
+        const VerticalSpacing(24),
+      ]),
     );
   }
 }
@@ -49,69 +30,45 @@ class CategoryCard extends StatelessWidget {
   final MainCategoryEntity category;
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => Container(
-        // clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          border: GradientBoxBorder(
-            gradient: Grad().shadowGrad(false),
-            width: 1.5,
-          ),
-          borderRadius: BorderRadius.circular(constraints.maxWidth),
-          // shadows will enforce that the gradient has no opacity
-          gradient: Grad().bglightLinear.copyWith(
-            colors: [const Color(0xFFD0CADA), Co.bg],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.black26,
-              blurRadius: 4,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        height: constraints.minHeight,
-        width: constraints.maxWidth,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            padding: EdgeInsets.zero,
-            shadowColor: Colors.transparent,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(constraints.maxWidth),
-            ),
-          ),
-          clipBehavior: Clip.hardEdge,
-          onPressed: () {
-            if (category.type == VendorType.restaurant) {
-              context.push(RestaurantsMenuScreen.route);
-            } else if (category.type == VendorType.grocery) {
-              StoreMenuSwitcherRoute(id: category.id).push(context);
-            } else if (category.type == VendorType.pharmacy) {
-              context.push(PharmacyMenuRoute.route);
-            } else {
-              StoreMenuSwitcherRoute(id: category.id).push(context);
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Co.purple100),
+        borderRadius: BorderRadius.circular(24),
+        // shadows will enforce that the gradient has no opacity
+        // gradient: Grad().bglightLinear.copyWith(colors: [const Color(0xFFD0CADA), Co.bg], begin: Alignment.centerLeft, end: Alignment.centerRight),
+        //boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
+      ),
 
-              print("Unknown category type: ${category.type}");
-            }
-          },
-          child: Column(
-            spacing: 4,
-            children: [
-              CircleGradientBorderedImage(image: category.image),
-              Expanded(
-                child: Text(
-                  category.name,
-                  style: TStyle.blackSemi(11),
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.fade,
-                ),
-              ),
-            ],
-          ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          padding: EdgeInsets.zero,
+          shadowColor: Colors.transparent,
+          elevation: 0,
+          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(constraints.maxWidth)),
+        ),
+        clipBehavior: Clip.hardEdge,
+        onPressed: () {
+          if (category.type == VendorType.restaurant) {
+            context.push(RestaurantsMenuScreen.route);
+          } else if (category.type == VendorType.grocery) {
+            StoreMenuSwitcherRoute(id: category.id).push(context);
+          } else if (category.type == VendorType.pharmacy) {
+            context.push(PharmacyMenuRoute.route);
+          } else {
+            StoreMenuSwitcherRoute(id: category.id).push(context);
+
+            log('Unknown category type: ${category.type}');
+          }
+        },
+        child: Row(
+          spacing: 8,
+          children: [
+            SizedBox(width: 60, height: 60, child: CircleGradientBorderedImage(image: category.image)),
+            Text(category.name, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center, overflow: TextOverflow.fade),
+            const SizedBox.shrink(),
+          ],
         ),
       ),
     );
