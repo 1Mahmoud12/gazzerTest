@@ -61,7 +61,7 @@ class _AddressMapWidgetState extends State<AddressMapWidget> {
         }
       },
       child: Container(
-        constraints: const BoxConstraints(maxHeight: 100, minHeight: 80),
+        constraints: const BoxConstraints(maxHeight: 200, minHeight: 150),
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: AppConst.defaultBorderRadius,

@@ -31,3 +31,4 @@ mixin _$PharmacyStoreScreenRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+

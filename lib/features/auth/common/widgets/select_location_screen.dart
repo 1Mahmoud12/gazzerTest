@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -37,7 +40,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
   ValueNotifier<bool> isgetttingCurrent = ValueNotifier<bool>(false);
   Future<bool> enableService() async {
     LocationPermission permission;
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       // Alerts.locationDisabled();
       return false;
@@ -80,129 +83,98 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
         future: getCurrentPosition(false),
         builder: (context, location) {
           return Stack(
-            alignment: Alignment.center,
+            alignment: Alignment.bottomCenter,
             children: [
               if (location.connectionState == ConnectionState.waiting) ...[
                 const Align(
                   alignment: AlignmentDirectional.topStart,
                   child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
-                      child: BackButton(),
-                    ),
+                    child: Padding(padding: EdgeInsets.fromLTRB(12, 12, 12, 0), child: BackButton()),
                   ),
                 ),
                 const Center(child: AdaptiveProgressIndicator()),
               ] else ...[
-                DecoratedBox(
-                  position: DecorationPosition.foreground,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Co.purple.withAlpha(120), Colors.transparent],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      stops: [0.0, 0.2],
+                Stack(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  children: [
+                    GoogleMap(
+                      onMapCreated: (controller) {
+                        mapController = controller;
+                        initLocation.value = location.data ?? const LatLng(30.0444, 31.2357);
+                      },
+                      initialCameraPosition: CameraPosition(target: location.data ?? const LatLng(30.0444, 31.2357), zoom: 13),
+                      zoomControlsEnabled: false,
+                      compassEnabled: false,
+                      myLocationButtonEnabled: false,
+                      mapToolbarEnabled: false,
+                      onCameraMove: (position) => initLocation.value = position.target,
+                      onTap: (latlng) {},
                     ),
-                  ),
-                  child: GoogleMap(
-                    onMapCreated: (controller) {
-                      mapController = controller;
-                      initLocation.value = location.data ?? const LatLng(30.0444, 31.2357);
-                    },
-                    initialCameraPosition: CameraPosition(
-                      target: location.data ?? const LatLng(30.0444, 31.2357),
-                      zoom: 13,
-                    ),
-                    zoomControlsEnabled: false,
-                    myLocationEnabled: false,
-                    compassEnabled: false,
-                    trafficEnabled: false,
-                    indoorViewEnabled: false,
-                    myLocationButtonEnabled: false,
-                    fortyFiveDegreeImageryEnabled: false,
-                    mapToolbarEnabled: false,
-                    mapType: MapType.normal,
-                    onCameraMove: (position) => initLocation.value = position.target,
-                    onTap: (latlng) {},
-                  ),
-                ),
-                const SafeArea(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 60),
-                      child: Icon(
-                        Icons.location_pin,
-                        size: 60,
-                        color: Co.purple,
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const BackButton(),
-                          InkWell(
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: InkWell(
                             onTap: () async {
                               isgetttingCurrent.value = true;
                               final location = await getCurrentPosition(true);
                               if (location != null) {
-                                mapController?.animateCamera(
-                                  CameraUpdate.newCameraPosition(
-                                    CameraPosition(target: location, zoom: 17),
-                                  ),
-                                );
+                                mapController?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: location, zoom: 17)));
                               }
                               isgetttingCurrent.value = false;
                             },
                             child: ValueListenableBuilder<bool>(
                               valueListenable: isgetttingCurrent,
                               builder: (context, value, child) => CircleAvatar(
-                                backgroundColor: Colors.blueGrey,
+                                backgroundColor: Co.purple,
                                 radius: 25,
-                                child: value == true
-                                    ? const AdaptiveProgressIndicator()
-                                    : const Icon(
-                                        Icons.my_location_rounded,
-                                        color: Colors.white,
-                                        size: 35,
-                                      ),
+                                child: value == true ? const AdaptiveProgressIndicator() : SvgPicture.asset(Assets.currentPositionIc),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        const VerticalSpacing(150),
+                      ],
+                    ),
+                  ],
+                ),
+                SafeArea(
+                  child: Align(
+                    child: CircleAvatar(
+                      radius: 35,
+                      backgroundColor: Co.secondary.withOpacityNew(.74),
+                      child: Padding(padding: const EdgeInsets.all(16), child: SvgPicture.asset(Assets.pinIc)),
                     ),
                   ),
                 ),
-              ],
-              Positioned(
-                bottom: 103,
-                right: 0,
-                left: 0,
-                child: SafeArea(
-                  child: Hero(
-                    tag: Tags.btn,
-                    child: OptionBtn(
-                      margin: const EdgeInsets.symmetric(horizontal: 16),
-                      bgColor: Co.purple.withAlpha(20),
-                      height: 60,
-                      width: MediaQuery.sizeOf(context).width / 3,
-                      onPressed: () {
-                        widget.extra.onSubmit(context, initLocation.value!);
-                      },
-                      child: GradientText(
-                        text: L10n.tr().setYourLocation,
-                        style: TStyle.blackSemi(16),
-                        gradient: Grad().textGradient,
-                      ),
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: MainAppBar(title: L10n.tr().selectAddress, backgroundColor: Co.white),
                     ),
+                  ],
+                ),
+              ],
+              Container(
+                color: Co.white,
+                height: 150,
+                padding: const EdgeInsets.all(16),
+                alignment: Alignment.bottomCenter,
+                child: Hero(
+                  tag: Tags.btn,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const VerticalSpacing(10),
+                      MainBtn(
+                        onPressed: () {
+                          widget.extra.onSubmit(context, initLocation.value!);
+                        },
+                        child: Text(L10n.tr().confirm, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                      ),
+                    ],
                   ),
                 ),
               ),

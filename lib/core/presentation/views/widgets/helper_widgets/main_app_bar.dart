@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -38,6 +39,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       title: title == null ? null : Text(title!, style: TStyle.robotBlackTitle()),
       leadingWidth: Navigator.canPop(context) ? 65 : 0,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
       actions: [
         if (showCart) MainCartWidget(size: 20, padding: 8, navigate: !isCartScreen, showBadge: showBadge),
         if (showNotification)

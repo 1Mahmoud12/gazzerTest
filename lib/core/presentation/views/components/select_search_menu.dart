@@ -89,7 +89,6 @@ class _SelectSearchMenuState<T> extends State<SelectSearchMenu<T>> {
               final currentFocus = FocusScope.of(context).focusedChild;
               showDialog(
                 context: context,
-                barrierDismissible: true,
                 builder: (context) => _SelectMenu(
                   initialSelectedValues: widget.initValue == null ? null : widget.initValue!().map((e) => widget.mapper(e)!).toSet(),
                   items: widget.items?.map((e) => widget.mapper(e)!).toList(),
@@ -103,10 +102,10 @@ class _SelectSearchMenuState<T> extends State<SelectSearchMenu<T>> {
                   onSubmit: (v) {
                     if (widget.isSingle) {
                       controller.text = v.first.title;
-                      if (widget.onSubmit != null) widget.onSubmit!(v);
+                      if (widget.onSubmit != null) widget.onSubmit?.call(v);
                     } else {
                       controller.text = v.map((e) => e.title).join(', ');
-                      if (widget.onSubmit != null) widget.onSubmit!(v);
+                      if (widget.onSubmit != null) widget.onSubmit?.call(v);
                     }
                   },
                 ),
@@ -115,11 +114,7 @@ class _SelectSearchMenuState<T> extends State<SelectSearchMenu<T>> {
       child: MainTextField(
         controller: controller,
         hintText: widget.hintText,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: widget.items?.isNotEmpty == true ? Colors.black : Colors.grey,
-        ),
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: widget.items?.isNotEmpty == true ? Colors.black : Colors.grey),
         bgColor: Colors.white,
         showBorder: widget.showBorder,
         enabled: false,
@@ -134,10 +129,7 @@ class _SelectSearchMenuState<T> extends State<SelectSearchMenu<T>> {
               width: constrains.minHeight,
               child: widget.isLoading
                   ? AdaptiveProgressIndicator(size: 12, color: widget.primaryColor)
-                  : Icon(
-                      Icons.arrow_drop_down_outlined,
-                      color: widget.items?.isNotEmpty == true ? Colors.black : Colors.grey,
-                    ),
+                  : Icon(Icons.arrow_drop_down_outlined, color: widget.items?.isNotEmpty == true ? Colors.black : Colors.grey),
             );
           },
         ),
@@ -194,7 +186,7 @@ class __SelectMenuState extends State<_SelectMenu> {
   void initState() {
     items = List.of(widget.items ?? []);
     if (widget.initialSelectedValues != null) {
-      for (var item in widget.initialSelectedValues!) {
+      for (final item in widget.initialSelectedValues!) {
         _selectedIds.add(item.id);
         _selectedValues.add(item);
       }
@@ -250,7 +242,6 @@ class __SelectMenuState extends State<_SelectMenu> {
         constraints: const BoxConstraints(maxHeight: 450),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ColoredBox(
               color: Colors.white,
@@ -258,15 +249,15 @@ class __SelectMenuState extends State<_SelectMenu> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: widget.displaySearch
                     ? TextFormField(
-                        autofocus: false,
                         controller: searchText,
+                        enabled: false,
                         onChanged: (v) => _onSearch(v),
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(10),
                           isDense: true,
                           hintText: widget.hintText,
-                          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: const UnderlineInputBorder(),
+                          enabledBorder: const UnderlineInputBorder(),
                           hintStyle: const TextStyle(fontSize: 15, color: Colors.black),
                           // border: OutlineInputBorder(borderRadius: 0),
                           suffixIcon: InkWell(
@@ -316,12 +307,7 @@ class __SelectMenuState extends State<_SelectMenu> {
                         padding: const EdgeInsets.symmetric(horizontal: 6),
                         shrinkWrap: true,
                         itemCount: items.length,
-                        separatorBuilder: (context, index) => const Divider(
-                          height: 13,
-                          thickness: 1,
-                          endIndent: 25,
-                          indent: 25,
-                        ),
+                        separatorBuilder: (context, index) => const Divider(height: 13, thickness: 1, endIndent: 25, indent: 25),
                         itemBuilder: (context, index) {
                           final item = items[index];
                           final isChecked = _selectedIds.contains(item.id);
@@ -342,7 +328,6 @@ class __SelectMenuState extends State<_SelectMenu> {
                 bgColor: widget.primaryColor,
                 margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 text: widget.buttonTxt ?? L10n.tr().submit,
-                isEnabled: true,
                 onPressed: () {
                   if (_selectedValues.isEmpty) return;
                   _onSubmitTap();

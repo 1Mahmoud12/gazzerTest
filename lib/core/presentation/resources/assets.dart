@@ -335,4 +335,8 @@ class Assets {
   static const String unSelectedProfileIc = "assets/svg/unSelectedProfileIc.svg";
   static const String unSelectedOrdersIc = "assets/svg/unSelectedOrdersIc.svg";
   static const String cartIc = "assets/svg/cartIc.svg";
+
+  // Address
+  static const String currentPositionIc = "assets/svg/currentPositionIc.svg";
+  static const String pinIc = "assets/svg/pinIc.svg";
 }

@@ -23,7 +23,7 @@ class LabelItem extends StatelessWidget {
             children: [
               GradientRadioBtn(isSelected: isSelected, size: 8),
               const HorizontalSpacing(12),
-              Text(title, style: TStyle.blackBold(14)),
+              Text(title, style: TStyle.robotBlackMedium()),
             ],
           ),
         ),

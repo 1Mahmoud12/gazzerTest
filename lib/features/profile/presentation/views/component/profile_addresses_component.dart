@@ -28,6 +28,7 @@ class _ProfileAddressesComponent extends StatelessWidget {
                     : Scrollbar(
                         child: ListView.separated(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           itemCount: addresses.length,
                           separatorBuilder: (context, index) => const VerticalSpacing(16),

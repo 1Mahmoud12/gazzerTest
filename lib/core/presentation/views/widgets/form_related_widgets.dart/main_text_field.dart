@@ -147,13 +147,7 @@ class _MainTextFieldState extends State<MainTextField> {
               contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
               isDense: true,
               counterText: widget.showMaxLegnth ? null : '',
-              hint: widget.hintText == null
-                  ? null
-                  : Text(
-                      widget.hintText!,
-                      style: widget.style ?? TStyle.greyRegular(12),
-                      maxLines: 1,
-                    ),
+              hint: widget.hintText == null ? null : Text(widget.hintText!, style: widget.style ?? TStyle.greyRegular(12), maxLines: 1),
               helperMaxLines: 1,
               // helperMaxLines: 5,
               labelStyle: TStyle.greySemi(15),
@@ -180,24 +174,24 @@ class _MainTextFieldState extends State<MainTextField> {
               enabled: widget.enabled,
 
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.purple),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
                 borderSide: const BorderSide(color: Co.red),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.red),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.lightGrey),
               ),
               disabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: widget.disabledColor ?? Co.grey),
-                borderRadius: BorderRadius.circular((widget.borderRadius ?? 16)),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
               ),
             ),
           );
