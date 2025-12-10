@@ -36,6 +36,9 @@ import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus
 import 'package:gazzer/features/home/best_popular/data/repositories/best_popular_repository_impl.dart';
 import 'package:gazzer/features/home/best_popular/domain/repositories/best_popular_repository.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_cubit.dart';
+import 'package:gazzer/features/home/home_categories/categories_widget/data/categories_widget_repo_impl.dart';
+import 'package:gazzer/features/home/home_categories/categories_widget/domain/categories_widget_repo.dart';
+import 'package:gazzer/features/home/home_categories/categories_widget/presentation/cubit/categories_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/popular/data/top_items_repo_impl.dart';
 import 'package:gazzer/features/home/home_categories/popular/domain/top_items_repo.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_cubit.dart';
@@ -125,87 +128,43 @@ Future init() async {
 }
 
 Future _registerAsync() async {
-  di.registerSingletonAsync<SharedPreferences>(
-    () => SharedPreferences.getInstance(),
-  );
+  di.registerSingletonAsync<SharedPreferences>(() => SharedPreferences.getInstance());
   di.registerSingletonAsync<PackageInfo>(() => PackageInfo.fromPlatform());
 
   ///
-  await Future.wait([
-    di.getAsync<SharedPreferences>(),
-    di.getAsync<PackageInfo>(),
-  ]);
+  await Future.wait([di.getAsync<SharedPreferences>(), di.getAsync<PackageInfo>()]);
 }
 
 void _registerRepos() {
-  di.registerLazySingleton<AddressRepo>(
-    () => AddressRepoImp(di.get(), di.get()),
-  );
-  di.registerLazySingleton<RegisterRepo>(
-    () => RegisterRepoImp(di.get(), di.get()),
-  );
+  di.registerLazySingleton<AddressRepo>(() => AddressRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<RegisterRepo>(() => RegisterRepoImp(di.get(), di.get()));
   di.registerLazySingleton<LoginRepo>(() => LoginRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<ForgotPasswordRepo>(
-    () => ForgotPasswordImp(di.get(), di.get()),
-  );
+  di.registerLazySingleton<ForgotPasswordRepo>(() => ForgotPasswordImp(di.get(), di.get()));
   di.registerLazySingleton<HomeRepo>(() => HomeRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<RestaurantsRepo>(
-    () => RestaurantsRepoImp(di.get(), di.get()),
-  );
+  di.registerLazySingleton<RestaurantsRepo>(() => RestaurantsRepoImp(di.get(), di.get()));
   di.registerLazySingleton<PlatesRepo>(() => PlatesRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<ProfileRepo>(
-    () => ProfileRepoImp(di.get(), di.get()),
-  );
+  di.registerLazySingleton<ProfileRepo>(() => ProfileRepoImp(di.get(), di.get()));
   di.registerLazySingleton<BannerRepo>(() => BannerRepoImp(di.get(), di.get()));
   di.registerLazySingleton<StoresRepo>(() => StoresRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<FavoritesRepo>(
-    () => FavoritesRepoImp(di.get(), di.get()),
-  );
+  di.registerLazySingleton<FavoritesRepo>(() => FavoritesRepoImp(di.get(), di.get()));
   di.registerLazySingleton<CartRepo>(() => CartRepoImp(di.get(), di.get()));
   di.registerLazySingleton<SearchRepo>(() => SearchRepoImp(di.get(), di.get()));
-  di.registerLazySingleton<DailyOfferRepo>(
-    () => DailyOfferRepoImp(di.get(), di.get()),
-  );
-  di.registerLazySingleton<TopItemsRepo>(
-    () => TopItemsRepoImpl(di.get(), di.get()),
-  );
-  di.registerLazySingleton<TopVendorsRepo>(
-    () => TopVendorsRepoImp(di.get(), di.get()),
-  );
-  di.registerLazySingleton<SuggestsRepo>(
-    () => SuggestsRepoImpl(di.get(), di.get()),
-  );
-  di.registerLazySingleton<BestPopularRepository>(
-    () => BestPopularRepositoryImpl(di.get(), di.get()),
-  );
-  di.registerLazySingleton<CheckoutRepo>(
-    () => CheckoutRepoImp(di.get(), di.get()),
-  );
-  di.registerLazySingleton<LoyaltyProgramRepo>(
-    () => LoyaltyProgramRepoImpl(di.get(), di.get()),
-  );
-  di.registerLazySingleton<WalletRepo>(
-    () => WalletRepoImpl(di.get(), di.get()),
-  );
-  di.registerLazySingleton<OrdersRepo>(
-    () => OrdersRepoImpl(di.get(), di.get()),
-  );
-  di.registerLazySingleton<FaqRepo>(
-    () => FaqRepoImp(di.get(), di.get()),
-  );
-  di.registerLazySingleton<FaqRatingRepo>(
-    () => FaqRatingRepoImp(di.get(), di.get()),
-  );
-  di.registerLazySingleton<ChatRepo>(
-    () => ChatRepoImp(di.get(), di.get()),
-  );
-  di.registerLazySingleton<ComplaintRepo>(
-    () => ComplaintRepoImp(di.get(), di.get()),
-  );
+  di.registerLazySingleton<DailyOfferRepo>(() => DailyOfferRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<TopItemsRepo>(() => TopItemsRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<TopVendorsRepo>(() => TopVendorsRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<SuggestsRepo>(() => SuggestsRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<BestPopularRepository>(() => BestPopularRepositoryImpl(di.get(), di.get()));
+  di.registerLazySingleton<CategoriesWidgetRepo>(() => CategoriesWidgetRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<CheckoutRepo>(() => CheckoutRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<LoyaltyProgramRepo>(() => LoyaltyProgramRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<WalletRepo>(() => WalletRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<OrdersRepo>(() => OrdersRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<FaqRepo>(() => FaqRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<FaqRatingRepo>(() => FaqRatingRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<ChatRepo>(() => ChatRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<ComplaintRepo>(() => ComplaintRepoImp(di.get(), di.get()));
 
-  di.registerLazySingleton<WorkingHoursRepo>(
-    () => WorkingHoursRepoImp(di.get(), di.get()),
-  );
+  di.registerLazySingleton<WorkingHoursRepo>(() => WorkingHoursRepoImp(di.get(), di.get()));
 }
 
 void _registerBuses() {
@@ -221,33 +180,15 @@ void _registerCubits() {
   di.registerFactory(() => RestaurantsMenuCubit(di.get(), di.get()));
   di.registerFactory(() => SplashCubit(di.get(), di.get()));
   di.registerFactory(() => ProfileCubit(di.get()));
-  di.registerFactoryParam<RestaurantsOfCategoryCubit, int, Null>(
-    (id, _) => RestaurantsOfCategoryCubit(di.get(), id),
-  );
-  di.registerFactoryParam<SingleRestaurantCubit, int, Null>(
-    (id, _) => SingleRestaurantCubit(di.get(), id),
-  );
-  di.registerFactoryParam<StoresMenuCubit, int, Null>(
-    (id, _) => StoresMenuCubit(di.get(), id),
-  );
-  di.registerFactoryParam<SingleCatRestaurantCubit, int, int>(
-    (id, plateId) => SingleCatRestaurantCubit(di.get(), id, plateId),
-  );
-  di.registerFactoryParam<StoresOfCategoryCubit, int, int>(
-    (mainId, subCatId) => StoresOfCategoryCubit(di.get(), mainId, subCatId),
-  );
-  di.registerFactoryParam<StoreDetailsCubit, int, Null>(
-    (storeId, _) => StoreDetailsCubit(di.get(), storeId),
-  );
-  di.registerFactoryParam<PlateDetailsCubit, int, Null>(
-    (plateId, _) => PlateDetailsCubit(di.get(), plateId),
-  );
-  di.registerFactoryParam<ProductDetailsCubit, int, Null>(
-    (prodId, _) => ProductDetailsCubit(di.get(), prodId),
-  );
-  di.registerFactoryParam<AddEditAddressCubit, AddressEntity?, Null>(
-    (address, _) => AddEditAddressCubit(di.get(), oldAddress: address),
-  );
+  di.registerFactoryParam<RestaurantsOfCategoryCubit, int, Null>((id, _) => RestaurantsOfCategoryCubit(di.get(), id));
+  di.registerFactoryParam<SingleRestaurantCubit, int, Null>((id, _) => SingleRestaurantCubit(di.get(), id));
+  di.registerFactoryParam<StoresMenuCubit, int, Null>((id, _) => StoresMenuCubit(di.get(), id));
+  di.registerFactoryParam<SingleCatRestaurantCubit, int, int>((id, plateId) => SingleCatRestaurantCubit(di.get(), id, plateId));
+  di.registerFactoryParam<StoresOfCategoryCubit, int, int>((mainId, subCatId) => StoresOfCategoryCubit(di.get(), mainId, subCatId));
+  di.registerFactoryParam<StoreDetailsCubit, int, Null>((storeId, _) => StoreDetailsCubit(di.get(), storeId));
+  di.registerFactoryParam<PlateDetailsCubit, int, Null>((plateId, _) => PlateDetailsCubit(di.get(), plateId));
+  di.registerFactoryParam<ProductDetailsCubit, int, Null>((prodId, _) => ProductDetailsCubit(di.get(), prodId));
+  di.registerFactoryParam<AddEditAddressCubit, AddressEntity?, Null>((address, _) => AddEditAddressCubit(di.get(), oldAddress: address));
   di.registerFactoryParam<AddToCartCubit, (GenericItemEntity, List<ItemOptionEntity>), CartItemEntity?>(
     (item, cartItem) => AddToCartCubit(item.$1, item.$2, di.get(), di.get(), cartItem),
   );
@@ -260,6 +201,7 @@ void _registerCubits() {
   di.registerFactory(() => TopItemsCubit(di.get()));
   di.registerFactory(() => TopVendorsCubit(di.get()));
   di.registerFactory(() => SuggestsCubit(di.get()));
+  di.registerFactory(() => CategoriesWidgetCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));

@@ -25,10 +25,10 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeDataLoadingState());
     final result = await _repo.getHome();
     switch (result) {
-      case Ok<HomeDataModel> success:
+      case final Ok<HomeDataModel> success:
         emit(HomeDataSuccessState(homeResponse: success.value));
         break;
-      case Err error:
+      case final Err error:
         emit(HomeDataErrorState(error.error.message));
         break;
     }

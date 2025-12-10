@@ -17,6 +17,46 @@ class StorageKeys {
   // static String branchId = "branchId";
 }
 
+/// Centralized cache keys for API response caching
+class CacheKeys {
+  CacheKeys._();
+
+  // Categories Widget
+  static const String categoriesWidgetJson = 'categories_widget_json';
+  static const String categoriesWidgetTs = 'categories_widget_ts';
+
+  // Top Items
+  static const String topItemsJson = 'top_items_json';
+  static const String topItemsTs = 'top_items_ts';
+
+  // Suggests
+  static const String suggestsJson = 'suggests_json';
+  static const String suggestsTs = 'suggests_timestamp';
+
+  // Daily Offers
+  static const String dailyOffersJson = 'daily_offers_json';
+  static const String dailyOffersTs = 'daily_offers_ts';
+
+  // Loyalty Program
+  static const String loyaltyProgramCache = 'loyalty_program_json';
+  static const String loyaltyProgramTs = 'loyalty_program_timestamp';
+
+  // Orders
+  static const String ordersCache = 'client_orders_json';
+  static const String ordersTs = 'client_orders_timestamp';
+  static const String orderDetailCachePrefix = 'order_detail_';
+
+  // Wallet
+  static const String walletCache = 'wallet_json';
+  static const String walletTs = 'wallet_timestamp';
+  static const String walletTransactionsCache = 'wallet_transactions_json';
+  static const String walletTransactionsTs = 'wallet_transactions_timestamp';
+
+  // FAQ
+  static const String faqCategoriesJsonPrefix = 'faq_categories_json_';
+  static const String faqCategoriesTsPrefix = 'faq_categories_ts_';
+}
+
 class TokenService {
   TokenService._();
   static String? getToken() {

@@ -11,7 +11,9 @@ import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class PersistentCartButton extends StatelessWidget {
-  const PersistentCartButton({super.key});
+  final bool header;
+
+  const PersistentCartButton({super.key, this.header = false});
 
   void _navigateToCart(BuildContext context) {
     SystemSound.play(SystemSoundType.click);
@@ -77,12 +79,8 @@ class PersistentCartButton extends StatelessWidget {
             ),
             // Cart icon
             Container(
-              width: 55,
-              height: 55,
               decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-              child: Center(
-                child: SvgPicture.asset(Assets.cartIc, height: 28, width: 28, colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn)),
-              ),
+              child: Center(child: SvgPicture.asset(Assets.cartIc, colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn))),
             ),
           ],
         ),

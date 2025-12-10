@@ -39,6 +39,7 @@ import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/categories_widget.dart';
 import 'package:gazzer/features/home/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -154,14 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
 
                           ///
-                          _HomeCategoriesComponent(items: state.homeResponse?.categories ?? []),
-                          if (state.homeResponse?.categoriesBanner != null)
-                            SliverToBoxAdapter(
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 24),
-                                child: MainBannerWidget(banner: state.homeResponse!.categoriesBanner!),
-                              ),
-                            ),
+                          const CategoriesWidget(),
 
                           // ///
                           _DailyOffersWidget(items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[]),

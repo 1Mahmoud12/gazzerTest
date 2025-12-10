@@ -1,7 +1,7 @@
 part of '../home_screen.dart';
 
-class _HomeCategoriesComponent extends StatelessWidget {
-  const _HomeCategoriesComponent({required this.items});
+class HomeCategoriesComponent extends StatelessWidget {
+  const HomeCategoriesComponent({required this.items});
   final List<MainCategoryEntity> items;
   @override
   Widget build(BuildContext context) {
