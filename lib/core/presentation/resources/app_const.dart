@@ -12,6 +12,7 @@ class AppConst {
   static final defaultBorderRadius = BorderRadius.circular(defaultRadius);
   static final defaultInnerBorderRadius = BorderRadius.circular(defaultInnerRadius);
   static const defaultPadding = EdgeInsets.all(16.0);
+  static const smallPadding = EdgeInsets.all(8.0);
   static const defaultHrPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
   // Support contact

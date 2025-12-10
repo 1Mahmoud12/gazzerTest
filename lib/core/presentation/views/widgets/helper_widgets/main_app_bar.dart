@@ -37,7 +37,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
-      title: title == null ? null : Text(title!, style: TStyle.robotBlackTitle()),
+      title: title == null ? null : Text(title!, style: titleStyle ?? TStyle.robotBlackTitle()),
       leadingWidth: Navigator.canPop(context) ? 65 : 0,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

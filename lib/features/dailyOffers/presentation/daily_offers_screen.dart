@@ -11,6 +11,8 @@ import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
+import 'package:gazzer/core/presentation/views/widgets/switcher/custom_switcher.dart';
+import 'package:gazzer/core/presentation/views/widgets/switcher/switcher_item.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_cubit.dart';
 import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_states.dart';
@@ -53,10 +55,21 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
     });
   }
 
+  String selectedId = 'items';
+
+  void onChanged(String id) {
+    setState(() {
+      selectedId = id;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(title: L10n.tr().dailyOffersForYou),
+      appBar: MainAppBar(
+        title: L10n.tr().dailyOffersForYou,
+        titleStyle: TStyle.robotBlackTitle().copyWith(color: Co.purple),
+      ),
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,25 +103,39 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                     return CustomScrollView(
                       cacheExtent: 100,
                       slivers: [
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: AppConst.smallPadding,
+                            child: CustomSwitcher(
+                              items: [
+                                SwitcherItem(id: 'items', name: L10n.tr().items),
+                                SwitcherItem(id: 'vendors', name: L10n.tr().vendors),
+                              ],
+                              selectedId: selectedId,
+                              onChanged: onChanged,
+                            ),
+                          ),
+                        ),
                         if (items.isNotEmpty) ...[
                           const SliverToBoxAdapter(child: VerticalSpacing(16)),
 
-                          SliverPadding(
-                            padding: AppConst.defaultPadding,
-                            sliver: SliverGrid(
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 0.68,
-                                crossAxisSpacing: 4,
-                                mainAxisSpacing: 8,
+                          if (selectedId == 'items')
+                            SliverPadding(
+                              padding: AppConst.smallPadding,
+                              sliver: SliverGrid(
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.68,
+                                  crossAxisSpacing: 4,
+                                  mainAxisSpacing: 8,
+                                ),
+                                delegate: SliverChildBuilderDelegate((context, index) {
+                                  final item = items[index];
+                                  if (item.item == null || item.item!.store == null) return const SizedBox.shrink();
+                                  return VerticalProductCard(key: ValueKey('item_${item.id}'), product: item.item!.toEntity(), canAdd: false);
+                                }, childCount: items.length),
                               ),
-                              delegate: SliverChildBuilderDelegate((context, index) {
-                                final item = items[index];
-                                if (item.item == null || item.item!.store == null) return const SizedBox.shrink();
-                                return VerticalProductCard(key: ValueKey('item_${item.id}'), product: item.item!.toEntity(), canAdd: false);
-                              }, childCount: items.length),
                             ),
-                          ),
                         ],
                         if (stores.isNotEmpty) ...[
                           SliverPadding(
@@ -200,6 +227,10 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                             ),
                           ),
                           const SliverToBoxAdapter(child: VerticalSpacing(16)),
+                        ] else ...[
+                          SliverToBoxAdapter(
+                            child: Center(child: FailureComponent(message: L10n.tr().noData)),
+                          ),
                         ],
                       ],
                     );
