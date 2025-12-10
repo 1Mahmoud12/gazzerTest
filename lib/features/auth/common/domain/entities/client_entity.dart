@@ -14,6 +14,7 @@ class ClientEntity {
 
   final String? driver;
   final String? socialId;
+  final String? tierName;
 
   ClientEntity({
     required this.id,
@@ -25,6 +26,7 @@ class ClientEntity {
     this.image,
     this.email,
     this.createdAt,
+    this.tierName,
   });
 
   String get formatedCreatedAt {
@@ -45,6 +47,7 @@ class ClientEntity {
       clientStatusId: clientStatusId,
       driver: driver,
       socialId: socialId,
+      tierName: tierName,
     );
   }
 }

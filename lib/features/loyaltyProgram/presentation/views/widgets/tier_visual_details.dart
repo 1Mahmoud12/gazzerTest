@@ -23,6 +23,54 @@ class TierVisualDetails {
   final String bannerKey;
 }
 
+final Map<String, TierVisualDetails> allTiersDetails = {
+  'hero': const TierVisualDetails(
+    mainColor: Co.purple,
+    primaryTextColor: Co.white,
+    secondaryTextColor: Co.lightGrey,
+    logo: Assets.heroIc,
+    iconColor: Co.purple,
+    bannerKey: 'heroBanner',
+    backgroundIconColor: Co.white,
+  ),
+  'winner': const TierVisualDetails(
+    mainColor: Co.purple600,
+    primaryTextColor: Co.white,
+    secondaryTextColor: Co.lightGrey,
+    logo: Assets.winnerIc,
+    iconColor: Co.white,
+    backgroundIconColor: Co.purple,
+    bannerKey: 'winnerBanner',
+  ),
+  'gainer': const TierVisualDetails(
+    mainColor: Co.purple200,
+    primaryTextColor: Co.dark,
+    secondaryTextColor: Co.darkGrey,
+    logo: Assets.gainerIc,
+    iconColor: Co.white,
+    backgroundIconColor: Co.purple,
+    bannerKey: 'gainerBanner',
+  ),
+  'saver': const TierVisualDetails(
+    mainColor: Co.purple100,
+    primaryTextColor: Co.dark,
+    secondaryTextColor: Co.darkGrey,
+    logo: Assets.silverIc,
+    iconColor: Co.white,
+    backgroundIconColor: Co.purple,
+    bannerKey: 'silverBanner',
+  ),
+  'silver': const TierVisualDetails(
+    mainColor: Co.purple100,
+    primaryTextColor: Co.dark,
+    secondaryTextColor: Co.darkGrey,
+    logo: Assets.silverIc,
+    iconColor: Co.white,
+    backgroundIconColor: Co.purple,
+    bannerKey: 'silverBanner',
+  ),
+};
+
 class TierVisualResolver {
   static const _default = TierVisualDetails(
     mainColor: Co.purple,
@@ -34,58 +82,10 @@ class TierVisualResolver {
     bannerKey: 'heroBanner',
   );
 
-  static final Map<String, TierVisualDetails> _visuals = {
-    'hero': const TierVisualDetails(
-      mainColor: Co.purple,
-      primaryTextColor: Co.white,
-      secondaryTextColor: Co.lightGrey,
-      logo: Assets.heroIc,
-      iconColor: Co.purple,
-      bannerKey: 'heroBanner',
-      backgroundIconColor: Co.white,
-    ),
-    'winner': const TierVisualDetails(
-      mainColor: Co.purple600,
-      primaryTextColor: Co.white,
-      secondaryTextColor: Co.lightGrey,
-      logo: Assets.winnerIc,
-      iconColor: Co.white,
-      backgroundIconColor: Co.purple,
-      bannerKey: 'winnerBanner',
-    ),
-    'gainer': const TierVisualDetails(
-      mainColor: Co.purple200,
-      primaryTextColor: Co.dark,
-      secondaryTextColor: Co.darkGrey,
-      logo: Assets.gainerIc,
-      iconColor: Co.white,
-      backgroundIconColor: Co.purple,
-      bannerKey: 'gainerBanner',
-    ),
-    'saver': const TierVisualDetails(
-      mainColor: Co.purple100,
-      primaryTextColor: Co.dark,
-      secondaryTextColor: Co.darkGrey,
-      logo: Assets.silverIc,
-      iconColor: Co.white,
-      backgroundIconColor: Co.purple,
-      bannerKey: 'silverBanner',
-    ),
-    'silver': const TierVisualDetails(
-      mainColor: Co.purple100,
-      primaryTextColor: Co.dark,
-      secondaryTextColor: Co.darkGrey,
-      logo: Assets.silverIc,
-      iconColor: Co.white,
-      backgroundIconColor: Co.purple,
-      bannerKey: 'silverBanner',
-    ),
-  };
-
   static TierVisualDetails resolve(LoyaltyTier? tier) {
     if (tier == null) return _default;
     final key = tier.name?.toLowerCase() ?? '';
-    final visual = _visuals[key];
+    final visual = allTiersDetails[key];
     if (visual != null) return visual;
 
     // Use api color if provided, otherwise fallback to default

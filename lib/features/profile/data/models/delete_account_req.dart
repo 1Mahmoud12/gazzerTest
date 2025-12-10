@@ -4,12 +4,7 @@ class DeleteAccountReq {
   final int? reasonId;
   final String? reasonText;
 
-  DeleteAccountReq({
-    required this.otpCode,
-    required this.sessionId,
-    required this.reasonId,
-    required this.reasonText,
-  });
+  DeleteAccountReq({required this.otpCode, required this.sessionId, required this.reasonId, required this.reasonText});
 
   Map<String, dynamic> toJson() {
     return {
@@ -22,12 +17,7 @@ class DeleteAccountReq {
     };
   }
 
-  copyWith({
-    String? otpCode,
-    String? sessionId,
-    int? reasonId,
-    String? reasonText,
-  }) {
+  DeleteAccountReq copyWith({String? otpCode, String? sessionId, int? reasonId, String? reasonText}) {
     return DeleteAccountReq(
       otpCode: otpCode ?? this.otpCode,
       sessionId: sessionId ?? this.sessionId,

@@ -10,11 +10,7 @@ import 'package:gazzer/features/orders/views/widgets/orders_list_widget.dart';
 import 'package:go_router/go_router.dart';
 
 class OrdersContentWidget extends StatefulWidget {
-  const OrdersContentWidget({
-    super.key,
-    this.shouldRefreshAndOpenFirstOrder = false,
-    this.showGetHelpInsteadOfReorder = false,
-  });
+  const OrdersContentWidget({super.key, this.shouldRefreshAndOpenFirstOrder = false, this.showGetHelpInsteadOfReorder = false});
 
   final bool shouldRefreshAndOpenFirstOrder;
   final bool showGetHelpInsteadOfReorder;
@@ -33,7 +29,7 @@ class _OrdersContentWidgetState extends State<OrdersContentWidget> {
       child: BlocConsumer<OrdersCubit, OrdersState>(
         listener: (context, state) {
           if (state is OrdersError) {
-            Alerts.showToast(state.message, error: true);
+            Alerts.showToast(state.message);
           }
 
           // When orders are loaded and we need to open first order (only once)
@@ -70,11 +66,7 @@ class _OrdersContentWidgetState extends State<OrdersContentWidget> {
 }
 
 class OrdersContentWidgetChild extends StatefulWidget {
-  const OrdersContentWidgetChild({
-    super.key,
-    required this.shouldRefreshAndOpenFirstOrder,
-    required this.showGetHelpInsteadOfReorder,
-  });
+  const OrdersContentWidgetChild({super.key, required this.shouldRefreshAndOpenFirstOrder, required this.showGetHelpInsteadOfReorder});
 
   final bool shouldRefreshAndOpenFirstOrder;
   final bool showGetHelpInsteadOfReorder;
@@ -100,8 +92,6 @@ class _OrdersContentWidgetChildState extends State<OrdersContentWidgetChild> {
 
   @override
   Widget build(BuildContext context) {
-    return OrdersListWidget(
-      showGetHelpInsteadOfReorder: widget.showGetHelpInsteadOfReorder,
-    );
+    return OrdersListWidget(showGetHelpInsteadOfReorder: widget.showGetHelpInsteadOfReorder);
   }
 }

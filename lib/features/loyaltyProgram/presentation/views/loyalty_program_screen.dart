@@ -29,21 +29,15 @@ class LoyaltyProgramScreen extends StatelessWidget {
     if (Session().client == null) {
       return Scaffold(
         appBar: MainAppBar(
-          showCart: false,
           iconsColor: Co.secondary,
           title: L10n.tr().loyaltyProgram,
           titleStyle: TStyle.burbleMed(22, font: FFamily.roboto),
         ),
-        body: Center(
-          child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty),
-        ),
+        body: Center(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty)),
       );
     }
 
-    return BlocProvider(
-      create: (_) => di<LoyaltyProgramCubit>()..load(),
-      child: const _LoyaltyProgramView(),
-    );
+    return BlocProvider(create: (_) => di<LoyaltyProgramCubit>()..load(), child: const _LoyaltyProgramView());
   }
 }
 
@@ -54,7 +48,6 @@ class _LoyaltyProgramView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(
-        showCart: false,
         iconsColor: Co.secondary,
         title: L10n.tr().loyaltyProgram,
         titleStyle: TStyle.burbleMed(22, font: FFamily.roboto),
@@ -71,32 +64,16 @@ class _LoyaltyProgramView extends StatelessWidget {
           }
           return switch (state) {
             LoyaltyProgramInitial() || LoyaltyProgramLoading() => const Center(child: LoadingWidget()),
-            LoyaltyProgramLoaded(:final data, :final isCached) => _buildLoaded(
-              context,
-              data,
-              isCached,
-            ),
+            LoyaltyProgramLoaded(:final data, :final isCached) => _buildLoaded(context, data, isCached),
             LoyaltyProgramError(:final message, :final cachedData) =>
-              cachedData != null
-                  ? _buildLoaded(
-                      context,
-                      cachedData,
-                      true,
-                      errorMessage: message,
-                    )
-                  : _ErrorView(message: state.message),
+              cachedData != null ? _buildLoaded(context, cachedData, true, errorMessage: message) : _ErrorView(message: state.message),
           };
         },
       ),
     );
   }
 
-  Widget _buildLoaded(
-    BuildContext context,
-    LoyaltyProgramEntity data,
-    bool isCached, {
-    String? errorMessage,
-  }) {
+  Widget _buildLoaded(BuildContext context, LoyaltyProgramEntity data, bool isCached, {String? errorMessage}) {
     final visuals = TierVisualResolver.resolve(data.currentTier);
     final bannerText = _bannerTextForVisual(context, visuals.bannerKey);
     final tierBenefits = data.tierBenefits;
@@ -119,8 +96,8 @@ class _LoyaltyProgramView extends StatelessWidget {
     final expiration = points?.expiresAt;
     final expirationFormatted = expiration == null ? '-' : DateFormat('dd-MM-yyyy').format(expiration);
     final nearingExpiry = (points?.pointsNearingExpiry ?? 0).toInt();
-    final minProgress = (data.currentTier?.minProgress ?? 0);
-    final maxProgress = (data.currentTier?.maxProgress ?? 0);
+    final minProgress = data.currentTier?.minProgress ?? 0;
+    final maxProgress = data.currentTier?.maxProgress ?? 0;
 
     final benefitsVisuals = {
       for (final tier in tierBenefits) (tier.tier?.name ?? tier.tier?.displayName ?? '').toLowerCase(): TierVisualResolver.resolve(tier.tier),
@@ -266,11 +243,7 @@ class _ProgramContent extends StatelessWidget {
             totalPoints: totalPoints,
           ),
           const SizedBox(height: 16),
-          OurTierBenefitsWidget(
-            tiers: showBenefits,
-            currentTierName: data.currentTier?.name ?? '',
-            tierVisuals: benefitsVisuals,
-          ),
+          OurTierBenefitsWidget(tiers: showBenefits, currentTierName: data.currentTier?.name ?? '', tierVisuals: benefitsVisuals),
           const SizedBox(height: 16),
           MainBtn(
             onPressed: () {
@@ -298,11 +271,7 @@ class _ErrorView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.error_outline,
-              size: 48,
-              color: Co.red.withOpacityNew(0.6),
-            ),
+            Icon(Icons.error_outline, size: 48, color: Co.red.withOpacityNew(0.6)),
             const SizedBox(height: 16),
             Text(
               message.isEmpty ? L10n.tr().somethingWentWrong : message,
@@ -315,40 +284,3 @@ class _ErrorView extends StatelessWidget {
     );
   }
 }
-
-final _placeholderEntity = const LoyaltyProgramEntity(
-  currentTier: LoyaltyTier(
-    name: 'hero',
-    displayName: 'Hero',
-    icon: null,
-    color: null,
-    subtitle: null,
-    minOrderCount: 0,
-    minProgress: 0,
-    maxProgress: 0,
-  ),
-  tierProgress: TierProgress(
-    currentTier: 'hero',
-    totalSpent: 0,
-    orderCount: 0,
-    spentInLastDays: 0,
-    daysPeriod: 90,
-    nextTier: NextTier(
-      name: 'winner',
-      displayName: 'Winner',
-      spentNeeded: 2500,
-      ordersNeeded: 5,
-    ),
-    progressPercentage: 0,
-  ),
-  points: LoyaltyPoints(
-    availablePoints: 0,
-    totalPoints: 0,
-    usedPoints: 0,
-    earningRate: EarningRate(pointsPerAmount: 0, amountUnit: 0),
-    conversionRate: ConversionRate(points: 0, egp: 0),
-    expiresAt: null,
-    pointsNearingExpiry: 0,
-  ),
-  tierBenefits: [],
-);

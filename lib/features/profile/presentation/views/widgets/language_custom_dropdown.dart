@@ -6,8 +6,6 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
-import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
-import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class LanguageItem {
@@ -43,8 +41,9 @@ class LanguageCustomDropdown extends StatelessWidget {
           await cubit.changeLanguage(language.code);
           di<HomeCubit>().getHomeData();
           if (context.mounted) {
-            context.pushReplacement(HomeScreen.route);
-            context.push(ProfileScreen.route);
+            // Profile screen is nested under /menu/profile
+            context.go('/');
+            context.push('/menu');
           }
         }
       },

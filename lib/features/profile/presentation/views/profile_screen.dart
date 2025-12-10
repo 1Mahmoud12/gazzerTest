@@ -18,7 +18,9 @@ import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/tier_visual_details.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
@@ -111,18 +113,19 @@ class ProfileContentBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            color: Co.purple,
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Row(
-              spacing: 32,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(L10n.tr().goldenAccountUser, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
-                SvgPicture.asset(Assets.heroIc),
-              ],
+          if (cubit.client?.tierName != null)
+            Container(
+              color: allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.mainColor,
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Row(
+                spacing: 12,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(cubit.client!.tierName!, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                  SvgPicture.asset(allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.logo),
+                ],
+              ),
             ),
-          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -143,7 +146,34 @@ class ProfileContentBody extends StatelessWidget {
                 _SettingsPreferenceComponent(cubit.client),
                 const VerticalSpacing(12),
 
-                if (cubit.client != null) ...[_SignOutButton(cubit: cubit), const VerticalSpacing(12), _DeleteAccountItem(cubit: cubit)],
+                if (cubit.client != null) ...[
+                  _SignOutButton(cubit: cubit),
+                  const VerticalSpacing(12),
+                  _DeleteAccountItem(cubit: cubit),
+                ] else ...[
+                  MainBtn(
+                    onPressed: () {
+                      context.push(LoginScreen.route);
+                    },
+                    bgColor: Co.purple,
+                    radius: 16,
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                    child: Row(
+                      spacing: 16,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(Assets.signOutIc),
+
+                        Text(
+                          L10n.tr().login,
+                          style: TStyle.robotBlackRegular().copyWith(color: Co.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

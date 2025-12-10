@@ -21,21 +21,19 @@ class Fakers {
   Fakers._();
   static final _random = Random();
 
-  static const _placeHolderImg = "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png";
+  static const _placeHolderImg = 'https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png';
   static const _plateNetWorkImg =
-      "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
+      'https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=';
 
   static const _netWorkImage =
-      "https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp";
-  static final _netWorkPRoductImage =
-      "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=";
+      'https://cdni.iconscout.com/illustration/premium/thumb/female-user-image-illustration-download-in-svg-png-gif-file-formats--person-girl-business-pack-illustrations-6515859.png?f=webp';
 
   static const _catsImages = [
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
-    "https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png",
+    'https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png',
+    'https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png',
+    'https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png',
+    'https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png',
+    'https://gazzer-dev-do.mostafa.cloud/defaults/default_image.png',
   ];
 
   ///
@@ -85,27 +83,11 @@ class Fakers {
 
   static final fakeCats = List.generate(
     12,
-    (index) => MainCategoryEntity(
-      id: index,
-      name: "فئة $index",
-      image: _catsImages[_random.nextInt(_catsImages.length)],
-      type: VendorType.restaurant,
-    ),
+    (index) =>
+        MainCategoryEntity(id: index, name: 'فئة $index', image: _catsImages[_random.nextInt(_catsImages.length)], type: VendorType.restaurant),
   );
-  static const mainCategory = MainCategoryEntity(
-    id: 0,
-    name: "فئة 0",
-    image: _placeHolderImg,
-    type: VendorType.restaurant,
-  );
-  static const banners = [
-    BannerEntity(
-      id: 1,
-      image: _netWorkImage,
-      title: "خصم 20% على جميع الطلبات",
-      type: BannerType.image,
-    ),
-  ];
+  static const mainCategory = MainCategoryEntity(id: 0, name: 'فئة 0', image: _placeHolderImg, type: VendorType.restaurant);
+  static const banners = [BannerEntity(id: 1, image: _netWorkImage, title: 'خصم 20% على جميع الطلبات', type: BannerType.image)];
 
   ///
   ///
@@ -113,39 +95,11 @@ class Fakers {
   ///
   ///
   /// retaurants\
-  static const categoryOfPlate = CategoryOfPlateEntity(
-    id: 0,
-    name: "فئة 0",
-    image: _placeHolderImg,
-    parentId: 0,
-    style: CardStyle.typeOne,
-    layout: LayoutType.grid,
-  );
+  static const categoryOfPlate = CategoryOfPlateEntity(id: 0, name: 'فئة 0', image: _placeHolderImg, parentId: 0, layout: LayoutType.grid);
   static const categoriesOfPlate = [
-    CategoryOfPlateEntity(
-      id: 0,
-      name: "فئة 0",
-      image: _placeHolderImg,
-      parentId: 0,
-      style: CardStyle.typeOne,
-      layout: LayoutType.grid,
-    ),
-    CategoryOfPlateEntity(
-      id: 1,
-      name: "فئة 1",
-      image: _placeHolderImg,
-      parentId: 0,
-      style: CardStyle.typeOne,
-      layout: LayoutType.grid,
-    ),
-    CategoryOfPlateEntity(
-      id: 2,
-      name: "فئة 2",
-      image: _placeHolderImg,
-      parentId: 0,
-      style: CardStyle.typeOne,
-      layout: LayoutType.grid,
-    ),
+    CategoryOfPlateEntity(id: 0, name: 'فئة 0', image: _placeHolderImg, parentId: 0, layout: LayoutType.grid),
+    CategoryOfPlateEntity(id: 1, name: 'فئة 1', image: _placeHolderImg, parentId: 0, layout: LayoutType.grid),
+    CategoryOfPlateEntity(id: 2, name: 'فئة 2', image: _placeHolderImg, parentId: 0, layout: LayoutType.grid),
   ];
   static const restaurant = RestaurantEntity(
     mintsBeforClosingAlert: 0,
@@ -153,13 +107,13 @@ class Fakers {
     alwaysClosed: false,
     alwaysOpen: false,
     id: 1,
-    name: "طبق ",
+    name: 'طبق ',
     rate: 3,
     outOfStock: false,
     totalOrders: 0,
     reviewCount: 20,
     image:
-        "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+        'https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=',
     categoryOfPlate: categoriesOfPlate,
     zoneName: 'ZAMALEK',
     deliveryFees: 123,
@@ -190,10 +144,10 @@ class Fakers {
       alwaysOpen: false,
       id: 1,
       totalOrders: 0,
-      name: "طبق ",
+      name: 'طبق ',
       rate: 3,
       image:
-          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+          'https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=',
       categoryOfPlate: categoriesOfPlate,
       zoneName: 'ZAMALEK',
       deliveryFees: 123,
@@ -223,12 +177,12 @@ class Fakers {
       id: index,
       productId: 0,
 
-      name: "طبق ${index + 1}",
-      description: "وصف الطبق ${index + 1}",
+      name: 'طبق ${index + 1}',
+      description: 'وصف الطبق ${index + 1}',
       price: _random.nextDouble() * 100,
       rate: _random.nextDouble() * 5,
       image:
-          "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+          'https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=',
       categoryPlateId: 0,
       outOfStock: _random.nextBool(),
       badge: _random.nextBool() ? '30%' : null,
@@ -240,12 +194,12 @@ class Fakers {
     id: 0,
     productId: 0,
 
-    name: "طبق 1",
-    description: "وصف الطبق 1",
+    name: 'طبق 1',
+    description: 'وصف الطبق 1',
     price: 12,
     rate: 4,
     image:
-        "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=",
+        'https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=0&k=20&c=jATx1jeDBsUgT2zIla6eh-i1OUPvIfgkb0-4QnAruAY=',
     categoryPlateId: 0,
     outOfStock: false,
     badge: '30%',
@@ -253,20 +207,12 @@ class Fakers {
   );
   static final plateOrderedWith = List.generate(
     3,
-    (index) => OrderedWithEntity(
-      id: index,
-      name: 'Item index',
-      image: Fakers._netWorkImage,
-      price: 0,
-      rate: 3,
-      reviewCount: 0,
-      outOfStock: false,
-    ),
+    (index) => OrderedWithEntity(id: index, name: 'Item index', image: Fakers._netWorkImage, price: 0, rate: 3, reviewCount: 0, outOfStock: false),
   );
   static final plateOptions = List.generate(
     3,
     (index) => ItemOptionEntity(
-      id: "$index",
+      id: '$index',
       name: 'Option ${index + 1}',
       isRequired: _random.nextBool(),
       type: OptionType.radio,
@@ -274,7 +220,7 @@ class Fakers {
       subAddons: List.generate(
         3,
         (valueIndex) => SubAddonEntity(
-          id: "$valueIndex",
+          id: '$valueIndex',
           name: 'Value ${valueIndex + 1}',
           price: _random.nextDouble() * 10,
           isDefault: valueIndex == 0, // First value is default
@@ -299,7 +245,7 @@ class Fakers {
       alwaysOpen: false,
       id: 0,
       reviewCount: 20,
-      name: "طبق ",
+      name: 'طبق ',
       estimatedDeliveryTime: 10,
       rate: 3,
       image: _plateNetWorkImg,
@@ -323,7 +269,7 @@ class Fakers {
       alwaysOpen: false,
       id: 0,
       totalOrders: 0,
-      name: "طبق ",
+      name: 'طبق ',
       rate: 3,
       image: _plateNetWorkImg,
       tag: ['Free delivery'],
@@ -345,7 +291,7 @@ class Fakers {
     storeCategoryType: '',
     totalOrders: 0,
     id: 0,
-    name: "طبق ",
+    name: 'طبق ',
     estimatedDeliveryTime: 10,
     rate: 3,
     image: _plateNetWorkImg,
@@ -358,76 +304,31 @@ class Fakers {
     isOpen: true,
   );
   static const fakeProds = [
-    ProductEntity(
-      id: 0,
-      name: "منتج ",
-      description: "وصف ",
-      price: 0,
-      rate: 3.1,
-      image: Fakers._netWorkImage,
-      outOfStock: false,
-      reviewCount: 100,
-    ),
-    ProductEntity(
-      id: 0,
-      name: "منتج ",
-      description: "وصف ",
-      price: 0,
-      rate: 3.1,
-
-      image: Fakers._netWorkImage,
-      outOfStock: false,
-      reviewCount: 100,
-    ),
+    ProductEntity(id: 0, name: 'منتج ', description: 'وصف ', price: 0, rate: 3.1, image: Fakers._netWorkImage, outOfStock: false, reviewCount: 100),
+    ProductEntity(id: 0, name: 'منتج ', description: 'وصف ', price: 0, rate: 3.1, image: Fakers._netWorkImage, outOfStock: false, reviewCount: 100),
   ];
-  static const storeCat = StoreCategoryEntity(
-    id: 0,
-    name: "فئة المتجر",
-    image: _placeHolderImg,
-    parentId: 0,
-    style: CardStyle.typeOne,
-    layout: LayoutType.grid,
-  );
+  static const storeCat = StoreCategoryEntity(id: 0, name: 'فئة المتجر', image: _placeHolderImg, parentId: 0, layout: LayoutType.grid);
   static final storeCats = List.generate(
     5,
-    (index) => StoreCategoryEntity(
-      id: index,
-      name: "فئة المتجر ${index + 1}",
-      image: _placeHolderImg,
-      parentId: 0,
-      style: CardStyle.typeOne,
-      layout: LayoutType.grid,
-    ),
+    (index) => StoreCategoryEntity(id: index, name: 'فئة المتجر ${index + 1}', image: _placeHolderImg, parentId: 0, layout: LayoutType.grid),
   );
 
   /// favorties
   static const favorite = ProductEntity(
     id: 1,
-    name: "المفضل ",
-    description: "وصف المفضل ",
+    name: 'المفضل ',
+    description: 'وصف المفضل ',
     image: _placeHolderImg,
     rate: 5,
     price: 100,
     outOfStock: false,
     reviewCount: 50,
   );
-  static const favorites = {
-    0: favorite,
-    1: favorite,
-    2: favorite,
-    3: favorite,
-    4: favorite,
-  };
+  static const favorites = {0: favorite, 1: favorite, 2: favorite, 3: favorite, 4: favorite};
 
   ///
   ///
-  static final cartResponse = CartResponse(
-    addressId: null,
-    summary: cartSummary,
-    vendors: cartVendors,
-    pouchSummary: pouchSummary,
-    pouches: pouches,
-  );
+  static final cartResponse = CartResponse(summary: cartSummary, vendors: cartVendors, pouchSummary: pouchSummary, pouches: pouches);
   static List<ItemPouch> pouches = [
     ItemPouch(
       pouchId: -1,
@@ -459,40 +360,11 @@ class Fakers {
     totalLoadPercentageExact: 10,
   );
   static const cartVendors = [
-    CartVendorEntity(
-      id: -1,
-      name: 'name',
-      image: _netWorkImage,
-      type: VendorType.restaurant,
-      items: cartItems,
-    ),
-    CartVendorEntity(
-      id: -2,
-      name: 'name',
-      image: _netWorkImage,
-      type: VendorType.restaurant,
-      items: cartItems,
-    ),
+    CartVendorEntity(id: -1, name: 'name', image: _netWorkImage, type: VendorType.restaurant, items: cartItems),
+    CartVendorEntity(id: -2, name: 'name', image: _netWorkImage, type: VendorType.restaurant, items: cartItems),
   ];
-  static const cartItems = [
-    CartItemEntity(
-      cartId: -1,
-      type: CartItemType.product,
-      quantity: 1,
-      prod: cartable,
-      itemPrice: 0,
-      options: [],
-      orderedWith: [],
-      notes: null,
-      totalPrice: 0,
-    ),
-  ];
-  static const cartable = CartableEntity(
-    id: -1,
-    name: 'name',
-    price: 0.0,
-    image: _netWorkImage,
-  );
+  static const cartItems = [CartItemEntity(cartId: -1, type: CartItemType.product, quantity: 1, prod: cartable, itemPrice: 0, totalPrice: 0)];
+  static const cartable = CartableEntity(id: -1, name: 'name', price: 0.0, image: _netWorkImage);
   static const cartSummary = CartSummaryModel(
     subTotal: 0.0,
     deliveryFee: 0.0,
@@ -506,7 +378,7 @@ class Fakers {
 
   static const searchVendor = SearchVendorEntity(
     id: 1,
-    name: "البائع 1",
+    name: 'البائع 1',
     image: _placeHolderImg,
     rate: 4.5,
     items: [],

@@ -13,33 +13,29 @@ class UnAuthComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Row(),
-        Text(
-          msg,
-          style: TStyle.primarySemi(16),
-        ),
+        Text(msg, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
         const VerticalSpacing(24),
         MainBtn(
           onPressed: () {
             context.push(LoginScreen.route);
           },
-          bgColor: Co.secondary,
+          bgColor: Co.purple,
           radius: 16,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
           child: Row(
             spacing: 16,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.login_outlined, size: 20, color: Co.purple),
-              Expanded(
-                child: Text(
-                  L10n.tr().login,
-                  style: TStyle.primaryBold(14, font: FFamily.inter),
-                  textAlign: TextAlign.center,
-                ),
+              const Icon(Icons.login_outlined, size: 20, color: Co.white),
+
+              Text(
+                L10n.tr().login,
+                style: TStyle.robotBlackRegular().copyWith(color: Co.white),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

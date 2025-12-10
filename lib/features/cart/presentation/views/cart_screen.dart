@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/base_error_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -49,21 +48,11 @@ class _CartScreenState extends State<CartScreen> {
         }
       },
       child: Scaffold(
-        appBar: const MainAppBar(isCartScreen: true),
+        appBar: MainAppBar(title: L10n.tr().cart),
         body: Column(
           children: [
-            GradientText(
-              text: L10n.tr().cart,
-              style: TStyle.blackBold(24),
-              gradient: Grad().radialGradient.copyWith(
-                radius: 2,
-                center: Alignment.centerLeft,
-              ),
-            ),
             if (Session().client == null)
-              Expanded(
-                child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseCart),
-              )
+              Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseCart))
             else
               Expanded(
                 child: BlocBuilder<CartCubit, CartStates>(
@@ -73,10 +62,7 @@ class _CartScreenState extends State<CartScreen> {
                       return const SizedBox.shrink();
                     }
                     if (state is FullCartError) {
-                      return FailureComponent(
-                        message: state.message,
-                        onRetry: () => cubit.loadCart(),
-                      );
+                      return FailureComponent(message: state.message, onRetry: () => cubit.loadCart());
                     } else if (state is FullCartLoaded && state.vendors.isEmpty) {
                       return const EmptyCartWidget();
                     }
@@ -101,9 +87,7 @@ class _CartScreenState extends State<CartScreen> {
                             }
                             // if (index == state.vendors.length + 2) return const CartSummaryWidget();
 
-                            return VendorCartProductsItem(
-                              cartVendor: state.vendors[index],
-                            );
+                            return VendorCartProductsItem(cartVendor: state.vendors[index]);
                           },
                         ),
                       ),

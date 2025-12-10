@@ -23,7 +23,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
@@ -109,8 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: LayoutBuilder(
         builder: (context, constraints) => Scaffold(
-          extendBody: false,
-          extendBodyBehindAppBar: false,
           // floatingActionButtonLocation: CustomFloatingBtnPosition(
           //   HomeUtils.headerHeight(context) + 12,
           //   50 + AppConst.defaultHrPadding.right,
@@ -118,13 +115,9 @@ class _HomeScreenState extends State<HomeScreen> {
           // floatingActionButton: const CartFloatingBtn(),
           body: FloatingDraggableWidget(
             // dragLimit: DragLimit(bottom: MediaQuery.sizeOf(context).height - constraints.maxHeight),
-            floatingWidget: const MainCartWidget(
-              showBadge: true,
-            ).withHotspot(order: 3, title: "", text: L10n.tr().checkYourCart),
+            floatingWidget: const SizedBox(),
             floatingWidgetHeight: 50,
             floatingWidgetWidth: 50,
-            autoAlign: false,
-            autoAlignType: AlignmentType.both,
             speed: 1,
             dy: HomeUtils.headerHeight(context) + 12,
             dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
@@ -153,101 +146,71 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: CustomScrollView(
                         slivers: [
                           const SliverToBoxAdapter(
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 12),
-                              child: _HomeHeader(),
-                            ),
+                            child: Padding(padding: EdgeInsets.only(bottom: 12), child: _HomeHeader()),
                           ),
                           const SliverToBoxAdapter(
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 24),
-                              child: _HomeSearchWidget(),
-                            ),
+                            child: Padding(padding: EdgeInsets.only(bottom: 24), child: _HomeSearchWidget()),
                           ),
 
                           ///
-                          _HomeCategoriesComponent(
-                            items: state.homeResponse?.categories ?? [],
-                          ),
+                          _HomeCategoriesComponent(items: state.homeResponse?.categories ?? []),
                           if (state.homeResponse?.categoriesBanner != null)
                             SliverToBoxAdapter(
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 24),
-                                child: MainBannerWidget(
-                                  banner: state.homeResponse!.categoriesBanner!,
-                                ),
+                                child: MainBannerWidget(banner: state.homeResponse!.categoriesBanner!),
                               ),
                             ),
 
                           // ///
-                          _DailyOffersWidget(
-                            items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[],
-                          ),
+                          _DailyOffersWidget(items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[]),
                           if (state.homeResponse?.dailyOffersBanner != null)
                             SliverToBoxAdapter(
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 24),
 
-                                child: MainBannerWidget(
-                                  banner: state.homeResponse!.dailyOffersBanner!,
-                                ),
+                                child: MainBannerWidget(banner: state.homeResponse!.dailyOffersBanner!),
                               ),
                             ),
 
                           // /// const SummerSaleAddWidget(),
-                          _HomeSuggestedProductsWidget(
-                            items: state.homeResponse?.suggested ?? <GenericItemEntity>[],
-                          ),
+                          _HomeSuggestedProductsWidget(items: state.homeResponse?.suggested ?? <GenericItemEntity>[]),
                           if (state.homeResponse?.suggestedBanner != null)
                             SliverToBoxAdapter(
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 24),
 
-                                child: MainBannerWidget(
-                                  banner: state.homeResponse!.suggestedBanner!,
-                                ),
+                                child: MainBannerWidget(banner: state.homeResponse!.suggestedBanner!),
                               ),
                             ),
 
                           // ///
-                          _HomeTopVendorsWidget(
-                            vendors: state.homeResponse?.topVendors ?? <VendorEntity>[],
-                          ),
+                          _HomeTopVendorsWidget(vendors: state.homeResponse?.topVendors ?? <VendorEntity>[]),
                           if (state.homeResponse?.topVendorsBanner != null)
                             SliverToBoxAdapter(
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 24),
-                                child: MainBannerWidget(
-                                  banner: state.homeResponse!.topVendorsBanner!,
-                                ),
+                                child: MainBannerWidget(banner: state.homeResponse!.topVendorsBanner!),
                               ),
                             ),
 
                           // ///
-                          _HomeBestPopularStoresWidget(
-                            stores: state.homeResponse?.bestPopular ?? <StoreEntity>[],
-                          ),
+                          _HomeBestPopularStoresWidget(stores: state.homeResponse?.bestPopular ?? <StoreEntity>[]),
                           if (state.homeResponse?.bestPopularBanner != null)
                             SliverToBoxAdapter(
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 24),
-                                child: MainBannerWidget(
-                                  banner: state.homeResponse!.bestPopularBanner!,
-                                ),
+                                child: MainBannerWidget(banner: state.homeResponse!.bestPopularBanner!),
                               ),
                             ),
 
                           // ///
-                          _HomeBestPopular(
-                            items: state.homeResponse?.topItems ?? <GenericItemEntity>[],
-                          ),
+                          _HomeBestPopular(items: state.homeResponse?.topItems ?? <GenericItemEntity>[]),
                           if (state.homeResponse?.bestPopularBanner != null)
                             SliverToBoxAdapter(
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 24),
-                                child: MainBannerWidget(
-                                  banner: state.homeResponse!.bestPopularBanner!,
-                                ),
+                                child: MainBannerWidget(banner: state.homeResponse!.bestPopularBanner!),
                               ),
                             ),
                           // _HomeTopItems(

@@ -32,6 +32,7 @@ class ClientDTO {
   String? updatedAt;
   String? driver;
   String? socialId;
+  String? tierName;
 
   ClientDTO({
     this.id,
@@ -44,6 +45,7 @@ class ClientDTO {
     this.updatedAt,
     this.driver,
     this.socialId,
+    this.tierName,
   });
 
   ClientDTO.fromJson(Map<String, dynamic> json) {
@@ -57,6 +59,7 @@ class ClientDTO {
     driver = json['driver'];
     socialId = json['social_id'];
     email = json['email'];
+    tierName = json['loyalty_tier_name'];
   }
 
   ClientEntity toClientEntity() {
@@ -69,6 +72,7 @@ class ClientDTO {
       socialId: socialId,
       createdAt: createdAt,
       email: email,
+      tierName: tierName,
     );
   }
 }

@@ -66,20 +66,16 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         }
       },
       child: Scaffold(
-        appBar: const MainAppBar(showCart: false),
+        appBar: const MainAppBar(),
         body: Column(
           spacing: 12,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: MainSearchWidget(
-                hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-              ),
+              child: MainSearchWidget(hintText: L10n.tr().searchForStoresItemsAndCAtegories),
             ),
             if (Session().client == null)
-              Expanded(
-                child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites),
-              )
+              Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites))
             else
               Expanded(
                 child: StreamBuilder(
@@ -90,17 +86,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       return const Center(child: AdaptiveProgressIndicator());
                     }
                     if (snapshot.data is ClearFavorites) {
-                      return UnAuthComponent(
-                        msg: L10n.tr().pleaseLoginToUseFavorites,
-                      );
+                      return UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites);
                     }
                     if (snapshot.data?.favorites == null || snapshot.data!.favorites.isEmpty) {
-                      return Center(
-                        child: Text(
-                          L10n.tr().youHaveNoFavoritesYet,
-                          style: TStyle.primaryBold(20),
-                        ),
-                      );
+                      return Center(child: Text(L10n.tr().youHaveNoFavoritesYet, style: TStyle.primaryBold(20)));
                     }
                     return RefreshIndicator(
                       onRefresh: () async {
@@ -115,10 +104,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             spacing: 8,
                             children: [
-                              Text(
-                                snapshot.data!.favorites.keys.elementAt(index).trName,
-                                style: TStyle.primaryBold(20),
-                              ),
+                              Text(snapshot.data!.favorites.keys.elementAt(index).trName, style: TStyle.primaryBold(20)),
                               SizedBox(
                                 height: 200,
                                 child: ListView.separated(
@@ -132,23 +118,15 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                       onTap: () {
                                         switch (fav.favoriteType) {
                                           case FavoriteType.restaurant:
-                                            RestaurantDetailsRoute(
-                                              id: fav.id,
-                                            ).push(context);
+                                            RestaurantDetailsRoute(id: fav.id).push(context);
                                             break;
                                           case FavoriteType.store:
-                                            StoreDetailsRoute(
-                                              storeId: fav.id,
-                                            ).push(context);
+                                            StoreDetailsRoute(storeId: fav.id).push(context);
                                             break;
                                           case FavoriteType.plate:
-                                            PlateDetailsRoute(
-                                              id: fav.id,
-                                            ).push(context);
+                                            PlateDetailsRoute(id: fav.id).push(context);
                                           case FavoriteType.product:
-                                            ProductDetailsRoute(
-                                              productId: fav.id,
-                                            ).push(context);
+                                            ProductDetailsRoute(productId: fav.id).push(context);
                                             break;
                                           default:
                                             break;
