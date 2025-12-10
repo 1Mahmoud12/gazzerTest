@@ -1517,7 +1517,7 @@ abstract class AppLocalizations {
   /// No description provided for @viewAll.
   ///
   /// In en, this message translates to:
-  /// **'View All'**
+  /// **'See All'**
   String get viewAll;
 
   /// No description provided for @core_________________End.
@@ -1583,7 +1583,7 @@ abstract class AppLocalizations {
   /// No description provided for @dailyOffersForYou.
   ///
   /// In en, this message translates to:
-  /// **'Daily Offers For You'**
+  /// **'Daily Offers'**
   String get dailyOffersForYou;
 
   /// No description provided for @suggestedForYou.

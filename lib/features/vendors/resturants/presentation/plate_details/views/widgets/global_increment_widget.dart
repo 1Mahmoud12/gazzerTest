@@ -46,24 +46,17 @@ class GlobalIncrementWidget extends StatelessWidget {
             elevation: 0,
             minimumSize: Size.zero,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(
-              borderRadius: AppConst.defaultBorderRadius,
-            ),
+            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
           ),
-          icon: isRemoving
-              ? AdaptiveProgressIndicator(
-                  size: iconSize - 2,
-                  color: Co.secondary,
-                )
-              : Icon(Icons.remove, color: Co.secondary, size: iconSize),
+          icon: isRemoving ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary) : Icon(Icons.remove, color: Co.white, size: iconSize),
         ),
       ),
 
       ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 15),
         child: Text(
-          "$initVal",
-          style: TStyle.secondaryBold(14),
+          '$initVal',
+          style: TStyle.robotBlackSubTitle().copyWith(color: Co.secondary),
           textAlign: TextAlign.center,
         ),
       ),
@@ -85,20 +78,11 @@ class GlobalIncrementWidget extends StatelessWidget {
             elevation: 0,
             minimumSize: Size.zero,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(
-              borderRadius: AppConst.defaultBorderRadius,
-            ),
+            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
           ),
           icon: isAdding
-              ? AdaptiveProgressIndicator(
-                  size: iconSize - 2,
-                  color: Co.secondary,
-                )
-              : Icon(
-                  Icons.add,
-                  color: canAdd ? Co.secondary : Co.secondary.withOpacityNew(0.3),
-                  size: iconSize,
-                ),
+              ? AdaptiveProgressIndicator(size: iconSize - 2, color: Co.secondary)
+              : Icon(Icons.add, color: canAdd ? Co.white : Co.secondary.withOpacityNew(0.3), size: iconSize),
         ),
       ),
     ];
@@ -109,16 +93,9 @@ class GlobalIncrementWidget extends StatelessWidget {
               spacing: 2,
               //mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ...children,
-                const HorizontalSpacing(2),
-              ],
+              children: [...children, const HorizontalSpacing(2)],
             )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [...children],
-            ),
+          : Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, children: [...children]),
     );
   }
 }

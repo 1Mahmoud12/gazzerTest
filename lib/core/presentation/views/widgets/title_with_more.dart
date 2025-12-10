@@ -17,7 +17,6 @@ class TitleWithMore extends StatelessWidget {
     final isHovering = ValueNotifier<bool>(false);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (title != null && title!.isNotEmpty)
           Expanded(
@@ -42,7 +41,7 @@ class TitleWithMore extends StatelessWidget {
                 //     ? []
                 //     : [const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0))],
               ),
-              child: child!,
+              child: child,
             ),
             child: ElevatedButton(
               onPressed: onPressed ?? () {},

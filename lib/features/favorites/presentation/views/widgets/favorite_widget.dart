@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/switching_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
@@ -37,7 +40,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
   late StreamSubscription<ClearFavorites> clearListener;
   late final FavoriteBus bus;
 
-  _listen(ToggleFavoriteStates v) {
+  void _listen(ToggleFavoriteStates v) {
     if (!mounted) return;
     if (v.id != widget.fovorable.id || v.type != widget.fovorable.favoriteType.toView) return;
     if (v is AddedFavoriteSuccess || v is RemovedFavoriteSuccess) {
@@ -48,7 +51,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
         Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.fovorable.name), error: false);
       }
     } else if (v is ToggleFavoriteFailure) {
-      Alerts.showToast("${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}");
+      Alerts.showToast('${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}');
     }
   }
 
@@ -63,7 +66,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
     super.initState();
     lisnter = bus.subscribe<ToggleFavoriteStates>(_listen);
     clearListener = bus.subscribe<ClearFavorites>((_) {
-      print("cleared favorites listener");
+      log('cleared favorites listener');
       isFav.value = false;
     });
   }
@@ -123,8 +126,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
             scale: animation,
             child: ValueListenableBuilder(
               valueListenable: isFav,
-              builder: (context, value, child) =>
-                  Icon(value ? Icons.favorite : Icons.favorite_border_rounded, color: Co.secondary, size: widget.size),
+              builder: (context, value, child) => Container(
+                decoration: const BoxDecoration(color: Co.white, shape: BoxShape.circle),
+                padding: const EdgeInsets.all(6),
+                child: SvgPicture.asset(value ? Assets.newSelectedFavoriteIc : Assets.newUnSelectedFavoriteIc, width: 20, height: 20),
+              ),
             ),
           ),
         );

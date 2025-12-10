@@ -339,4 +339,11 @@ class Assets {
   // Address
   static const String currentPositionIc = "assets/svg/currentPositionIc.svg";
   static const String pinIc = "assets/svg/pinIc.svg";
+
+  //Favorite
+  static const String newUnSelectedFavoriteIc = "assets/svg/newUnSelectedFavoriteIc.svg";
+  static const String newSelectedFavoriteIc = "assets/svg/newSelectedFavoriteIc.svg";
+
+  // Daily `offer
+  static const String restaurantNameIc = "assets/svg/restaurantNameIc.svg";
 }

@@ -9,41 +9,29 @@ class _DailyOffersWidget extends StatelessWidget {
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            TitleWithMore(
-              title: L10n.tr().dailyOffersForYou,
-              titleStyle: TStyle.primaryBold(16),
-              onPressed: () {
-                context.push(DailyOffersScreen.route, extra: {'items': items});
-                // DailyOffersScreen().pu;
-              },
-            ),
-            const VerticalSpacing(12),
+        delegate: SliverChildListDelegate([
+          TitleWithMore(
+            title: L10n.tr().dailyOffersForYou,
+            titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+            onPressed: () {
+              context.push(DailyOffersScreen.route, extra: {'items': items});
+            },
+          ),
+          const VerticalSpacing(12),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
 
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.77,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                items.length > 10 ? 10 : items.length,
+                (index) => SizedBox(width: 220, child: VerticalProductCard(product: items[index]!, canAdd: false)),
               ),
-              itemCount: items.length > 4 ? 4 : items.length,
-              itemBuilder: (context, index) {
-                if (items[index] == null) return const SizedBox.shrink();
-                return VerticalProductCard(
-                  product: items[index]!,
-                  canAdd: false,
-                );
-              },
             ),
-            const VerticalSpacing(24),
-          ],
-        ),
+          ),
+
+          const VerticalSpacing(24),
+        ]),
       ),
     );
   }

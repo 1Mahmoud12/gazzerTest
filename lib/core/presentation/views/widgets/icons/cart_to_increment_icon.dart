@@ -97,11 +97,7 @@ class CartToIncrementIcon extends StatelessWidget {
 
   // ==================== Increment Widget (Item in Cart) ====================
 
-  Widget _buildIncrementWidget(
-    BuildContext context,
-    CartItemEntity cartItem,
-    UpdateItemStates? updateState,
-  ) {
+  Widget _buildIncrementWidget(BuildContext context, CartItemEntity cartItem, UpdateItemStates? updateState) {
     final isUpdating = _isItemBeingUpdated(cartItem, updateState);
     final hasReachedMaxStock = _hasReachedStockLimit(cartItem);
 
@@ -110,22 +106,14 @@ class CartToIncrementIcon extends StatelessWidget {
       isDarkContainer: isDarkContainer,
       isAdding: isUpdating && updateState!.isAdding,
       isRemoving: isUpdating && updateState!.isRemoving,
-      onChanged: (isAdding) => _handleQuantityChange(
-        context,
-        cartItem,
-        isAdding,
-        hasReachedMaxStock,
-      ),
+      onChanged: (isAdding) => _handleQuantityChange(context, cartItem, isAdding, hasReachedMaxStock),
       initVal: cartItem.quantity,
       isHorizonal: isHorizonal,
       canAdd: !hasReachedMaxStock,
     );
   }
 
-  bool _isItemBeingUpdated(
-    CartItemEntity cartItem,
-    UpdateItemStates? updateState,
-  ) {
+  bool _isItemBeingUpdated(CartItemEntity cartItem, UpdateItemStates? updateState) {
     return updateState != null && updateState.cartId == cartItem.cartId;
   }
 
@@ -133,12 +121,7 @@ class CartToIncrementIcon extends StatelessWidget {
     return cartItem.quantityInStock != null && cartItem.quantity >= cartItem.quantityInStock!;
   }
 
-  void _handleQuantityChange(
-    BuildContext context,
-    CartItemEntity cartItem,
-    bool isAdding,
-    bool hasReachedMaxStock,
-  ) {
+  void _handleQuantityChange(BuildContext context, CartItemEntity cartItem, bool isAdding, bool hasReachedMaxStock) {
     if (isAdding) {
       // Navigate to details if product has options (customization required)
       if (product.hasOptions) {
@@ -151,23 +134,14 @@ class CartToIncrementIcon extends StatelessWidget {
     }
   }
 
-  void _handleAddQuantity(
-    BuildContext context,
-    CartItemEntity cartItem,
-    bool hasReachedMaxStock,
-  ) {
+  void _handleAddQuantity(BuildContext context, CartItemEntity cartItem, bool hasReachedMaxStock) {
     // Prevent adding beyond stock limit
     if (hasReachedMaxStock) {
       Alerts.showToast(L10n.tr(context).max_quantity_reached_for_product);
       return;
     }
 
-    context.read<CartCubit>().updateItemQuantity(
-      cartItem.cartId,
-      cartItem.quantity + 1,
-      true,
-      context,
-    );
+    context.read<CartCubit>().updateItemQuantity(cartItem.cartId, cartItem.quantity + 1, true, context);
   }
 
   void _handleReduceQuantity(BuildContext context, CartItemEntity cartItem) {
@@ -178,21 +152,13 @@ class CartToIncrementIcon extends StatelessWidget {
       cubit.removeItemFromCart(cartItem.cartId);
     } else {
       // Decrease quantity
-      cubit.updateItemQuantity(
-        cartItem.cartId,
-        cartItem.quantity - 1,
-        false,
-        context,
-      );
+      cubit.updateItemQuantity(cartItem.cartId, cartItem.quantity - 1, false, context);
     }
   }
 
   // ==================== Add to Cart Widget (Item Not in Cart) ====================
 
-  Widget _buildAddToCartWidget(
-    BuildContext context,
-    UpdateItemStates? updateState,
-  ) {
+  Widget _buildAddToCartWidget(BuildContext context, UpdateItemStates? updateState) {
     final isAdding = _isItemBeingAdded(updateState);
 
     return isCartIcon ? _buildCartIconButton(context, isAdding) : _buildSimpleAddIcon(context, isAdding);
@@ -203,16 +169,14 @@ class CartToIncrementIcon extends StatelessWidget {
   }
 
   Widget _buildSimpleAddIcon(BuildContext context, bool isLoading) {
-    return AddIcon(
-      isLoading: isLoading,
-      onTap: () => _handleAddToCart(context),
-    );
+    return AddIcon(isLoading: isLoading, onTap: () => _handleAddToCart(context));
   }
 
   Widget _buildCartIconButton(BuildContext context, bool isLoading) {
     return SwitchingDecoratedwidget(
       isDarkContainer: isDarkContainer,
       borderRadius: BorderRadius.circular(100),
+
       child: isLoading ? _buildLoadingIndicator() : _buildCartButton(context),
     );
   }
@@ -220,29 +184,17 @@ class CartToIncrementIcon extends StatelessWidget {
   Widget _buildLoadingIndicator() {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: AdaptiveProgressIndicator(
-        size: 20,
-        color: isDarkContainer ? Co.secondary : Co.purple,
-      ),
+      child: AdaptiveProgressIndicator(size: 20, color: isDarkContainer ? Co.secondary : Co.purple),
     );
   }
 
   Widget _buildCartButton(BuildContext context) {
-    return IconButton(
-      onPressed: () => _handleAddToCart(context),
-      style: IconButton.styleFrom(
-        padding: const EdgeInsets.all(8),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: Size.zero,
-      ),
-      icon: SvgPicture.asset(
-        Assets.assetsSvgCart,
-        height: 20,
-        width: 20,
-        colorFilter: ColorFilter.mode(
-          isDarkContainer ? Co.secondary : Co.purple,
-          BlendMode.srcIn,
-        ),
+    return InkWell(
+      onTap: () => _handleAddToCart(context),
+
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SvgPicture.asset(Assets.cartIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn)),
       ),
     );
   }
@@ -257,28 +209,16 @@ class CartToIncrementIcon extends StatelessWidget {
     // Add item to cart with default options
     context.read<CartCubit>().addToCart(
       context,
-      CartableItemRequest(
-        id: product.id,
-        quantity: 1,
-        options: {},
-        type: getProductType(product),
-        note: null,
-        cartItemId: null,
-      ),
+      CartableItemRequest(id: product.id, quantity: 1, options: {}, type: getProductType(product), note: null, cartItemId: null),
     );
   }
 
   // ==================== Navigation ====================
 
-  void _navigateToProductDetails(
-    BuildContext context,
-    CartItemEntity? cartItem,
-  ) {
+  void _navigateToProductDetails(BuildContext context, CartItemEntity? cartItem) {
     switch (product) {
       case PlateEntity():
-        PlateDetailsRoute(
-          id: product.id /*$extra: cartItem*/,
-        ).push(context);
+        PlateDetailsRoute(id: product.id /*$extra: cartItem*/).push(context);
         break;
       case ProductEntity():
         ProductDetailsRoute(
@@ -296,9 +236,7 @@ class CartToIncrementIcon extends StatelessWidget {
 
 CartItemEntity? findCartItem(CartCubit cubit, GenericItemEntity product) {
   final allCartItems = cubit.vendors.expand((vendor) => vendor.items);
-  return allCartItems.firstWhereOrNull(
-    (item) => item.prod.id == product.id && item.type == getProductType(product),
-  );
+  return allCartItems.firstWhereOrNull((item) => item.prod.id == product.id && item.type == getProductType(product));
 }
 // ==================== Helper Methods ====================
 

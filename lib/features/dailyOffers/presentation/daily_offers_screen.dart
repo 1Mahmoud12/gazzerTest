@@ -14,7 +14,6 @@ import 'package:gazzer/core/presentation/views/widgets/products/vertical_product
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_cubit.dart';
 import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_states.dart';
-import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/offer_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
@@ -49,9 +48,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
     _debounceTimer = Timer(const Duration(milliseconds: 500), () {
       if (_currentSearch != value) {
         _currentSearch = value;
-        _cubit?.getAllOffers(
-          search: value.isEmpty ? null : value,
-        );
+        _cubit?.getAllOffers(search: value.isEmpty ? null : value);
       }
     });
   }
@@ -59,16 +56,12 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(showCart: false, iconsColor: Co.secondary),
-      extendBody: true,
-      extendBodyBehindAppBar: true,
+      appBar: MainAppBar(title: L10n.tr().dailyOffersForYou),
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HomeCategoriesHeader(
-            onChange: _onSearchChanged,
-          ),
-
+          //          HomeCategoriesHeader(onChange: _onSearchChanged),
           Expanded(
             child: BlocProvider(
               create: (context) {
@@ -83,9 +76,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                   if (state is DailyOfferErrorState) {
                     return FailureComponent(
                       message: state.error,
-                      onRetry: () => context.read<DailyOfferCubit>().getAllOffers(
-                        search: _currentSearch.isEmpty ? null : _currentSearch,
-                      ),
+                      onRetry: () => context.read<DailyOfferCubit>().getAllOffers(search: _currentSearch.isEmpty ? null : _currentSearch),
                     );
                   }
                   if (state is DailyOfferSuccessState) {
@@ -93,59 +84,29 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                     final items = data?.itemsWithOffers ?? const [];
                     final stores = data?.storesWithOffers ?? const [];
                     if (items.isEmpty && stores.isEmpty) {
-                      return Center(
-                        child: Text(
-                          _currentSearch.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
-                          style: TStyle.mainwSemi(14),
-                        ),
-                      );
+                      return Center(child: Text(_currentSearch.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults, style: TStyle.mainwSemi(14)));
                     }
 
                     return CustomScrollView(
                       cacheExtent: 100,
                       slivers: [
                         if (items.isNotEmpty) ...[
-                          const SliverToBoxAdapter(
-                            child: VerticalSpacing(16),
-                          ),
-                          SliverPadding(
-                            padding: AppConst.defaultHrPadding,
-                            sliver: SliverToBoxAdapter(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  GradientText(
-                                    text: L10n.tr().dailyOffersForYou,
-                                    style: TStyle.blackBold(16),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SliverToBoxAdapter(
-                            child: VerticalSpacing(16),
-                          ),
+                          const SliverToBoxAdapter(child: VerticalSpacing(16)),
+
                           SliverPadding(
                             padding: AppConst.defaultPadding,
                             sliver: SliverGrid(
                               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 0.84,
-                                crossAxisSpacing: 12,
-                                mainAxisSpacing: 12,
+                                childAspectRatio: 0.68,
+                                crossAxisSpacing: 4,
+                                mainAxisSpacing: 8,
                               ),
-                              delegate: SliverChildBuilderDelegate(
-                                (context, index) {
-                                  final item = items[index];
-                                  if (item.item == null) return const SizedBox.shrink();
-                                  return VerticalProductCard(
-                                    key: ValueKey('item_${item.id}'),
-                                    product: item.item!.toEntity(),
-                                    canAdd: false,
-                                  );
-                                },
-                                childCount: items.length,
-                              ),
+                              delegate: SliverChildBuilderDelegate((context, index) {
+                                final item = items[index];
+                                if (item.item == null || item.item!.store == null) return const SizedBox.shrink();
+                                return VerticalProductCard(key: ValueKey('item_${item.id}'), product: item.item!.toEntity(), canAdd: false);
+                              }, childCount: items.length),
                             ),
                           ),
                         ],
@@ -154,122 +115,91 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                             padding: AppConst.defaultPadding,
                             sliver: SliverToBoxAdapter(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  GradientText(
-                                    text: L10n.tr().storesOffersForYou,
-                                    style: TStyle.blackBold(16),
-                                  ),
-                                ],
+                                children: [GradientText(text: L10n.tr().storesOffersForYou, style: TStyle.blackBold(16))],
                               ),
                             ),
                           ),
-                          const SliverToBoxAdapter(
-                            child: VerticalSpacing(8),
-                          ),
+                          const SliverToBoxAdapter(child: VerticalSpacing(8)),
                           SliverPadding(
                             padding: AppConst.defaultPadding,
                             sliver: SliverGrid(
                               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 0.84,
-                                crossAxisSpacing: 12,
-                                mainAxisSpacing: 12,
+                                childAspectRatio: 0.65,
+                                crossAxisSpacing: 8,
+                                mainAxisSpacing: 8,
                               ),
-                              delegate: SliverChildBuilderDelegate(
-                                (context, index) {
-                                  final s = stores[index];
-                                  final entity = ProductEntity(
-                                    id: s.id ?? 0,
-                                    productId: s.id,
-                                    name: s.storeName ?? '',
-                                    description: '',
-                                    price: 0,
-                                    image: s.image ?? '',
-                                    rate: double.tryParse(s.rate ?? '0') ?? 0,
-                                    reviewCount: (s.rateCount ?? 0).toInt(),
-                                    outOfStock: false,
-                                    offer: OfferEntity(
-                                      id: s.offer?.id ?? 0,
-                                      discount: (s.offer?.discount ?? 0).toDouble(),
-                                      maxDiscount: s.offer?.maxDiscount ?? 0,
+                              delegate: SliverChildBuilderDelegate((context, index) {
+                                final s = stores[index];
+                                final entity = ProductEntity(
+                                  id: s.id ?? 0,
+                                  productId: s.id,
+                                  name: s.storeName ?? '',
+                                  description: '',
+                                  price: 0,
+                                  image: s.image ?? '',
+                                  rate: double.tryParse(s.rate ?? '0') ?? 0,
+                                  reviewCount: (s.rateCount ?? 0).toInt(),
+                                  outOfStock: false,
+                                  offer: OfferEntity(
+                                    id: s.offer?.id ?? 0,
+                                    discount: (s.offer?.discount ?? 0).toDouble(),
+                                    maxDiscount: s.offer?.maxDiscount ?? 0,
 
-                                      discountType: DiscountType.fromString(
-                                        s.offer?.discountType ?? '',
-                                      ),
-                                    ),
-                                  );
-                                  return VerticalProductCard(
-                                    key: ValueKey('store_${entity.id}'),
-                                    product: entity,
-                                    canAdd: false,
-                                    onTap: () {
-                                      log('id==> ${s.storeCategoryType}');
-                                      if (s.id == null) {
-                                        return;
-                                      }
+                                    discountType: DiscountType.fromString(s.offer?.discountType ?? ''),
+                                  ),
+                                );
+                                return VerticalProductCard(
+                                  key: ValueKey('store_${entity.id}'),
+                                  product: entity,
+                                  canAdd: false,
+                                  onTap: () {
+                                    log('id==> ${s.storeCategoryType}');
+                                    if (s.id == null) {
+                                      return;
+                                    }
 
-                                      if (s.storeCategoryType == VendorType.restaurant.value) {
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<SingleRestaurantCubit>(
-                                              param1: s.id,
-                                            ),
-                                            child: RestaurantDetailsScreen(
-                                              id: s.id!,
-                                            ),
-                                          ),
-                                        );
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<StoreDetailsCubit>(
-                                              param1: s.id,
-                                            ),
-                                            child: StoreDetailsScreen(
-                                              storeId: s.id!,
-                                            ),
-                                          ),
-                                        );
-                                        // RestaurantDetailsScreen(
-                                        //   id: s.id,
-                                        // ).push(context);
-                                      } else if (s.storeCategoryType == VendorType.grocery.value) {
-                                        // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<StoreDetailsCubit>(
-                                              param1: s.id,
-                                            ),
-                                            child: StoreDetailsScreen(
-                                              storeId: s.id!,
-                                            ),
-                                          ),
-                                        );
-                                        // StoreDetailsRoute(
-                                        //   storeId: s.id ?? -1,
-                                        // ).push(context);
-                                      } else {
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<StoreDetailsCubit>(
-                                              param1: s.id,
-                                            ),
-                                            child: StoreDetailsScreen(
-                                              storeId: s.id!,
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  );
-                                },
-                                childCount: stores.length,
-                              ),
+                                    if (s.storeCategoryType == VendorType.restaurant.value) {
+                                      context.navigateToPage(
+                                        BlocProvider(
+                                          create: (context) => di<SingleRestaurantCubit>(param1: s.id),
+                                          child: RestaurantDetailsScreen(id: s.id!),
+                                        ),
+                                      );
+                                      context.navigateToPage(
+                                        BlocProvider(
+                                          create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                          child: StoreDetailsScreen(storeId: s.id!),
+                                        ),
+                                      );
+                                      // RestaurantDetailsScreen(
+                                      //   id: s.id,
+                                      // ).push(context);
+                                    } else if (s.storeCategoryType == VendorType.grocery.value) {
+                                      // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
+                                      context.navigateToPage(
+                                        BlocProvider(
+                                          create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                          child: StoreDetailsScreen(storeId: s.id!),
+                                        ),
+                                      );
+                                      // StoreDetailsRoute(
+                                      //   storeId: s.id ?? -1,
+                                      // ).push(context);
+                                    } else {
+                                      context.navigateToPage(
+                                        BlocProvider(
+                                          create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                          child: StoreDetailsScreen(storeId: s.id!),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                );
+                              }, childCount: stores.length),
                             ),
                           ),
-                          const SliverToBoxAdapter(
-                            child: VerticalSpacing(16),
-                          ),
+                          const SliverToBoxAdapter(child: VerticalSpacing(16)),
                         ],
                       ],
                     );
