@@ -72,7 +72,10 @@ class _SuggestsContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(items.length > 10 ? 10 : items.length, (index) {
                 if (items[index].store == null) return const SizedBox.shrink();
-                return HorizontalProductCard(product: items[index]);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: HorizontalProductCard(product: items[index], width: MediaQuery.sizeOf(context).width * .48),
+                );
               }),
             ),
           ),

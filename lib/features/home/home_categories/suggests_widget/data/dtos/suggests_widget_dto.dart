@@ -43,7 +43,6 @@ class SuggestsWidgetDataDto {
 /// - 'recommendation_type' - Parsed but never used (stored in DTO but not passed to entity)
 /// - 'score' - Parsed but never used (stored in DTO but not passed to entity)
 /// - 'item_id' - Parsed but never used (stored in DTO but not passed to entity)
-/// ✅ Used: 'id', 'item_type', 'item'
 ///
 /// Banner level (not parsed in BannerDTO):
 /// - 'page' - Exists but not parsed

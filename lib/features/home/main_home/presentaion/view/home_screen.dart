@@ -23,7 +23,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
@@ -35,7 +34,6 @@ import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dar
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_cubit.dart';
 import 'package:gazzer/features/home/best_popular/presentation/views/best_popular_screen.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
-import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
@@ -69,7 +67,6 @@ part 'widgets/home_cuisines_widget.dart';
 part 'widgets/home_daily_offers_widget.dart';
 part 'widgets/home_header.dart';
 part 'widgets/home_search_widget.dart';
-part 'widgets/home_suggested_products_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

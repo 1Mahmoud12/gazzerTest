@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
 import 'package:gazzer/features/home/home_categories/suggested/data/dtos/suggests_dto.dart';
 import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_repo.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_cubit.dart';
@@ -28,51 +26,53 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
   List<SuggestEntity> _allItems = [];
   List<SuggestEntity> _filteredItems = [];
 
-  void _onSearchChanged(String value) {
-    if (!context.mounted) return;
-
-    setState(() {
-      _searchQuery = value;
-      if (value.isEmpty) {
-        _filteredItems = _allItems;
-      } else {
-        _filteredItems = _allItems.where((item) {
-          final itemData = item.item;
-          if (itemData == null) return false;
-
-          // Search in both plate and store_item fields
-          final plateName = itemData.plateName?.toLowerCase() ?? '';
-          final name = itemData.name?.toLowerCase() ?? '';
-          final plateDescription = itemData.plateDescription?.toLowerCase() ?? '';
-          final searchLower = value.toLowerCase();
-
-          return plateName.contains(searchLower) || name.contains(searchLower) || plateDescription.contains(searchLower);
-        }).toList();
-      }
-    });
-  }
+  // void _onSearchChanged(String value) {
+  //   if (!context.mounted) return;
+  //
+  //   setState(() {
+  //     _searchQuery = value;
+  //     if (value.isEmpty) {
+  //       _filteredItems = _allItems;
+  //     } else {
+  //       _filteredItems = _allItems.where((item) {
+  //         final itemData = item.item;
+  //         if (itemData == null) return false;
+  //
+  //         // Search in both plate and store_item fields
+  //         final plateName = itemData.plateName?.toLowerCase() ?? '';
+  //         final name = itemData.name?.toLowerCase() ?? '';
+  //         final plateDescription =
+  //             itemData.plateDescription?.toLowerCase() ?? '';
+  //         final searchLower = value.toLowerCase();
+  //
+  //         return plateName.contains(searchLower) ||
+  //             name.contains(searchLower) ||
+  //             plateDescription.contains(searchLower);
+  //       }).toList();
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SuggestsCubit(
-        di.get<SuggestsRepo>(),
-      )..getSuggests(),
+      create: (context) => SuggestsCubit(di.get<SuggestsRepo>())..getSuggests(),
       child: Scaffold(
-        appBar: const MainAppBar(showCart: false, iconsColor: Co.secondary),
-        extendBody: true,
-        extendBodyBehindAppBar: true,
+        appBar: MainAppBar(
+          title: L10n.tr().suggestedForYou,
+          titleStyle: TStyle.robotBlackTitle().copyWith(color: Co.purple),
+        ),
+        //extendBody: true,
+        //extendBodyBehindAppBar: true,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HomeCategoriesHeader(
-              onChange: _onSearchChanged,
-            ),
+            // HomeCategoriesHeader(onChange: _onSearchChanged),
             Expanded(
               child: BlocBuilder<SuggestsCubit, SuggestsStates>(
                 builder: (context, state) {
                   if (state is SuggestsLoadingState) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: AdaptiveProgressIndicator());
                   }
 
                   if (state is SuggestsErrorState) {
@@ -90,11 +90,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                       _allItems = state.data?.entities ?? [];
                       _filteredItems = _allItems;
                     }
-                    return _buildContent(
-                      context,
-                      _filteredItems,
-                      state.isFromCache,
-                    );
+                    return _buildContent(context, _filteredItems, state.isFromCache);
                   }
 
                   return FailureComponent(
@@ -112,41 +108,25 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
     );
   }
 
-  Widget _buildContent(
-    BuildContext context,
-    List<SuggestEntity> items,
-    bool isFromCache,
-  ) {
+  Widget _buildContent(BuildContext context, List<SuggestEntity> items, bool isFromCache) {
     if (items.isEmpty) {
-      return FailureComponent(
-        message: _searchQuery.isEmpty ? L10n.tr().noPersonalizedSuggestions : L10n.tr().noSearchResults,
-      );
+      return FailureComponent(message: _searchQuery.isEmpty ? L10n.tr().noPersonalizedSuggestions : L10n.tr().noSearchResults);
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: AppConst.defaultHrPadding,
-          child: GradientText(
-            text: L10n.tr().suggestedForYou,
-            style: TStyle.blackBold(16),
-          ),
-        ),
-        const VerticalSpacing(16),
         Expanded(
-          child: ListView.separated(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: AppConst.defaultHrPadding.left),
-            shrinkWrap: true,
-            itemCount: items.length,
-            separatorBuilder: (context, index) => const VerticalSpacing(12),
-            itemBuilder: (context, index) {
-              if (items[index].id == null) return const SizedBox.shrink();
-              return HorizontalProductCard(
-                product: _convertToProductEntity(items[index]),
-              );
-            },
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: List.generate(
+              items.length,
+              (index) => items[index].id == null
+                  ? const SizedBox.shrink()
+                  : HorizontalProductCard(product: _convertToProductEntity(items[index]), width: MediaQuery.sizeOf(context).width * .48),
+            ),
           ),
         ),
       ],
