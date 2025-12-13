@@ -3,33 +3,28 @@ part of '../profile_screen.dart';
 class _InviteEarnComponent extends StatelessWidget {
   const _InviteEarnComponent();
 
-  String _getReferralCode(ClientEntity? client) {
-    // Use client ID as referral code, or generate from phone number
-    if (client == null) return '';
-    return client.id.toString();
-  }
-
-  String _getAppLink() {
-    // TODO: Replace with actual app store links or deep link
-    return 'https://gazzer.app/download?ref=${_getReferralCode(Session().client)}';
-  }
-
   Future<void> _copyCode(BuildContext context, String code) async {
     await Clipboard.setData(ClipboardData(text: code));
+    Alerts.showToast(L10n.tr().codeAppliedSuccessfully, error: false);
   }
 
-  Future<void> _shareLink(BuildContext context) async {
-    final link = _getAppLink();
-    // Copy link to clipboard and show toast
+  Future<void> _shareLink(BuildContext context, String link) async {
     await Clipboard.setData(ClipboardData(text: link));
+    Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
   }
 
   @override
   Widget build(BuildContext context) {
     final client = Session().client;
-    if (client == null) return const SizedBox.shrink();
+    if (client == null || client.referral == null) {
+      return const SizedBox.shrink();
+    }
 
-    final referralCode = _getReferralCode(client);
+    final referral = client.referral!;
+    final referralCode = referral.code ?? '';
+    final shareLink = referral.shareLink ?? '';
+
+    if (referralCode.isEmpty) return const SizedBox.shrink();
 
     return ExpandableWidget(
       title: L10n.tr().inviteAndEarn,
@@ -38,7 +33,7 @@ class _InviteEarnComponent extends StatelessWidget {
         spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Earn 30 EGP when your friend places their first order.', style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
+          Text(client.referral?.shareMessage ?? '', style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
           const VerticalSpacing(8),
           // Referral Code Section
           Row(
@@ -68,7 +63,7 @@ class _InviteEarnComponent extends StatelessWidget {
             children: [
               Expanded(child: Text(L10n.tr().shareApplicationLink, style: TStyle.robotBlackMedium())),
               MainBtn(
-                onPressed: () => _shareLink(context),
+                onPressed: () => _shareLink(context, shareLink),
                 bgColor: Co.purple,
                 radius: 12,
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),

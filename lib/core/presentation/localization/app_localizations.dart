@@ -3769,6 +3769,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Applied'**
   String get applied;
+
+  /// No description provided for @link_copied_to_clipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Link copied to clipboard'**
+  String get link_copied_to_clipboard;
+
+  /// No description provided for @code_copied_to_clipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Code copied to clipboard'**
+  String get code_copied_to_clipboard;
+
+  /// No description provided for @please_enter_referral_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a referral code'**
+  String get please_enter_referral_code;
+
+  /// No description provided for @referral_code_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code is invalid.'**
+  String get referral_code_invalid;
 }
 
 class _AppLocalizationsDelegate

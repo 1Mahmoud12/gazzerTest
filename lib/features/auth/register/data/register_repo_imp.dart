@@ -17,18 +17,10 @@ class RegisterRepoImp extends RegisterRepo {
   // late String _sessionId;
 
   @override
-  Future<Result<CheckPhoneEmailData>> checkPhoneEmail(
-    String phone,
-    String? email,
-  ) {
+  Future<Result<CheckPhoneEmailData>> checkPhoneEmail(String phone, String? email) {
     return call<CheckPhoneEmailData>(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.checkPhoneEmail,
-        requestBody: {
-          'phone': phone,
-          if (email != null && email.isNotEmpty) 'email': email,
-        },
-      ),
+      apiCall: () =>
+          _apiClient.post(endpoint: Endpoints.checkPhoneEmail, requestBody: {'phone': phone, if (email != null && email.isNotEmpty) 'email': email}),
       parser: (result) {
         final dto = CheckPhoneEmailDto.fromJson(result.data);
         return dto.data ?? CheckPhoneEmailData(phoneFound: false, emailFound: false);
@@ -39,10 +31,7 @@ class RegisterRepoImp extends RegisterRepo {
   @override
   Future<Result<AuthResponse>> register(RegisterRequest req) {
     return call<AuthResponse>(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.register,
-        requestBody: req.toJson(),
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.register, requestBody: req.toJson()),
       parser: (result) {
         return AuthResponse.fromJson(result.data);
       },
@@ -52,10 +41,7 @@ class RegisterRepoImp extends RegisterRepo {
   @override
   Future<Result<String>> resendOtp(String sessionId) {
     return call<String>(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.resendOtp,
-        requestBody: {'session_id': sessionId},
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.resendOtp, requestBody: {'session_id': sessionId}),
       parser: (result) {
         return result.data['message']?.toString() ?? 'Success';
       },
@@ -69,12 +55,19 @@ class RegisterRepoImp extends RegisterRepo {
   @override
   Future<Result<String>> editPhoneNumber(String sessionId, String code) {
     return call<String>(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.editPhoneNum,
-        requestBody: {'phone': code, 'session_id': sessionId},
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.editPhoneNum, requestBody: {'phone': code, 'session_id': sessionId}),
       parser: (result) {
         return result.data['message']?.toString() ?? 'Success';
+      },
+    );
+  }
+
+  @override
+  Future<Result<String>> validateReferralCode(String referralCode) {
+    return call<String>(
+      apiCall: () => _apiClient.post(endpoint: Endpoints.validateReferralCode, requestBody: {'referral_code': referralCode}),
+      parser: (result) {
+        return result.data['message']?.toString() ?? 'Referral code is valid';
       },
     );
   }

@@ -1,6 +1,18 @@
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:intl/intl.dart';
 
+class ReferralEntity {
+  final String? code;
+  final String? shareLink;
+  final String? shareMessage;
+
+  ReferralEntity({
+    this.code,
+    this.shareLink,
+    this.shareMessage,
+  });
+}
+
 class ClientEntity {
   final int id;
   final String phoneNumber;
@@ -15,6 +27,7 @@ class ClientEntity {
   final String? driver;
   final String? socialId;
   final String? tierName;
+  final ReferralEntity? referral;
 
   ClientEntity({
     required this.id,
@@ -27,6 +40,7 @@ class ClientEntity {
     this.email,
     this.createdAt,
     this.tierName,
+    this.referral,
   });
 
   String get formatedCreatedAt {
@@ -48,6 +62,7 @@ class ClientEntity {
       driver: driver,
       socialId: socialId,
       tierName: tierName,
+      referral: referral,
     );
   }
 }

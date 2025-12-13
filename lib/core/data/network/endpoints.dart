@@ -10,6 +10,7 @@ class Endpoints {
   static const verifyOTP = 'clients/auth/register/verify-otp';
   static String editPhoneNum = 'clients/auth/register/edit-phone';
   static const resendOtp = 'clients/auth/register/resend-otp';
+  static const validateReferralCode = 'referrals/validate';
 
   // Login
   static const login = 'clients/auth/login';

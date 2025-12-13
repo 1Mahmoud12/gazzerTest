@@ -18,6 +18,7 @@ import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/auth/register/data/register_request.dart';
 import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 import 'package:gazzer/features/auth/register/presentation/view/create_password_screen.dart';
+import 'package:gazzer/features/auth/register/presentation/view/widgets/referral_code_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -29,18 +30,13 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-enum ReferralCodeState { initial, success, error }
-
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
-  final _referralCodeController = TextEditingController();
   final _isChecking = ValueNotifier<bool>(false);
-  final _isCheckingReferral = ValueNotifier<bool>(false);
-  ReferralCodeState _referralCodeState = ReferralCodeState.initial;
-  String? _referralCodeErrorMessage;
+  String? _validatedReferralCode;
   String countryCode = 'EG';
 
   @override
@@ -48,45 +44,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _nameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
-    _referralCodeController.dispose();
     _isChecking.dispose();
-    _isCheckingReferral.dispose();
     super.dispose();
-  }
-
-  Future<void> _applyReferralCode() async {
-    final code = _referralCodeController.text.trim();
-    if (code.isEmpty) {
-      setState(() {
-        _referralCodeState = ReferralCodeState.error;
-        _referralCodeErrorMessage = 'Please enter a referral code';
-      });
-      return;
-    }
-
-    _isCheckingReferral.value = true;
-    setState(() {
-      _referralCodeState = ReferralCodeState.initial;
-      _referralCodeErrorMessage = null;
-    });
-
-    // TODO: Replace with actual API call to validate referral code
-    await Future.delayed(const Duration(seconds: 1));
-
-    _isCheckingReferral.value = false;
-
-    // Simulate validation - replace with actual API call
-    if (code == '12345') {
-      setState(() {
-        _referralCodeState = ReferralCodeState.success;
-        _referralCodeErrorMessage = null;
-      });
-    } else {
-      setState(() {
-        _referralCodeState = ReferralCodeState.error;
-        _referralCodeErrorMessage = 'Referral code is invalid.';
-      });
-    }
   }
 
   Future<void> _checkAndProceed() async {
@@ -138,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               email: email,
               password: '',
               passwordConfirmation: '',
-              referralCode: _referralCodeState == ReferralCodeState.success ? _referralCodeController.text.trim() : null,
+              referralCode: _validatedReferralCode,
             ),
           );
         }
@@ -262,85 +221,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const VerticalSpacing(16),
-                  // Referral Code Section
-                  Text('${L10n.tr().referralCode} (${L10n.tr().optional})', style: TStyle.robotBlackRegular14()),
-                  const VerticalSpacing(8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: MainTextField(
-                          controller: _referralCodeController,
-                          hintText: L10n.tr().enterCode,
-                          bgColor: Colors.transparent,
-                          borderColor: _referralCodeState == ReferralCodeState.success
-                              ? Colors.green
-                              : _referralCodeState == ReferralCodeState.error
-                              ? Colors.red
-                              : Co.borderColor,
-                          enabled: _referralCodeState != ReferralCodeState.success,
-                          onChange: (value) {
-                            if (_referralCodeState != ReferralCodeState.initial) {
-                              setState(() {
-                                _referralCodeState = ReferralCodeState.initial;
-                                _referralCodeErrorMessage = null;
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                      const HorizontalSpacing(8),
-                      ValueListenableBuilder<bool>(
-                        valueListenable: _isCheckingReferral,
-                        builder: (context, isChecking, child) {
-                          final isApplied = _referralCodeState == ReferralCodeState.success;
-                          return MainBtn(
-                            onPressed: _referralCodeController.text.isEmpty ? () {} : _applyReferralCode,
-                            isEnabled: !isApplied && !isChecking,
-                            isLoading: isChecking,
-                            bgColor: _referralCodeController.text.isNotEmpty ? Co.purple : Co.purple100,
-                            radius: 24,
-                            width: MediaQuery.sizeOf(context).width * .3,
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            child: isApplied
-                                ? Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(L10n.tr().applied, style: TStyle.whiteSemi(14)),
-                                      const HorizontalSpacing(4),
-                                      const Icon(Icons.check, color: Colors.white, size: 16),
-                                    ],
-                                  )
-                                : Text(
-                                    L10n.tr().apply,
-                                    style: TStyle.robotBlackMedium().copyWith(color: Co.black),
-                                    textAlign: TextAlign.center,
-                                  ),
-                          );
-                        },
-                      ),
-                    ],
+                  ReferralCodeWidget(
+                    onValidationChanged: (code) {
+                      setState(() {
+                        _validatedReferralCode = code;
+                      });
+                    },
                   ),
-                  if (_referralCodeState == ReferralCodeState.success) ...[
-                    const VerticalSpacing(8),
-                    Row(
-                      children: [
-                        const Icon(Icons.check_circle, color: Colors.green, size: 16),
-                        const HorizontalSpacing(4),
-                        Text(L10n.tr().codeAppliedSuccessfully, style: TStyle.robotBlackRegular14().copyWith(color: Colors.green)),
-                      ],
-                    ),
-                  ] else if (_referralCodeState == ReferralCodeState.error && _referralCodeErrorMessage != null) ...[
-                    const VerticalSpacing(8),
-                    Row(
-                      children: [
-                        const Icon(Icons.warning_amber_rounded, color: Colors.red, size: 16),
-                        const HorizontalSpacing(4),
-                        Expanded(
-                          child: Text(_referralCodeErrorMessage!, style: TStyle.robotBlackRegular14().copyWith(color: Colors.red)),
-                        ),
-                      ],
-                    ),
-                  ],
                 ],
               ),
             ),

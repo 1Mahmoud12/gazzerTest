@@ -10,13 +10,12 @@ abstract class RegisterRepo extends BaseApiRepo implements VerifyRepo {
   RegisterRepo(super.crashlyticsRepo);
 
   // register
-  Future<Result<CheckPhoneEmailData>> checkPhoneEmail(
-    String phone,
-    String? email,
-  );
+  Future<Result<CheckPhoneEmailData>> checkPhoneEmail(String phone, String? email);
   Future<Result<AuthResponse>> register(RegisterRequest req);
   Future<Result<String>> verifyOTP(String sessionId, String code);
   Future<Result<String>> resendOtp(String sessionId);
   Future<Result<String>> editPhoneNumber(String sessionId, String code);
+
+  Future<Result<String>> validateReferralCode(String referralCode);
   void setAuthUser(ClientEntity client, String token);
 }
