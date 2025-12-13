@@ -346,4 +346,7 @@ class Assets {
 
   // Daily `offer
   static const String restaurantNameIc = "assets/svg/restaurantNameIc.svg";
+
+  // Daily `offer
+  static const String customShapeSuggestIc = "assets/png/customShapeSuggestIc.png";
 }

@@ -60,6 +60,7 @@ class Endpoints {
   static const topVendors = 'homepage/widget/top-vendors';
   static const topItems = 'homepage/widget/top-items';
   static const suggests = 'homepage/widget/suggests';
+  static const suggestsWidget = 'homepage/widget/suggests';
   static const bestPopularStores = 'homepage/widget/best-popular';
   static const categoriesWidget = 'homepage/widget/categories';
   static const dailyOffersWidget = 'homepage/widget/daily-offers';

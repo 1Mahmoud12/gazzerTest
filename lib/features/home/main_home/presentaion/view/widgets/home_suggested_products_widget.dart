@@ -21,7 +21,8 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(items.length > 4 ? 4 : items.length, (index) {
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(items.length > 10 ? 10 : items.length, (index) {
                 if (items[index] == null || items[index]!.store == null) return const SizedBox.shrink();
                 return HorizontalProductCard(product: items[index]!);
               }),

@@ -33,6 +33,10 @@ class CacheKeys {
   static const String suggestsJson = 'suggests_json';
   static const String suggestsTs = 'suggests_timestamp';
 
+  // Suggests Widget
+  static const String suggestsWidgetJson = 'suggests_widget_json';
+  static const String suggestsWidgetTs = 'suggests_widget_ts';
+
   // Daily Offers
   static const String dailyOffersJson = 'daily_offers_json';
   static const String dailyOffersTs = 'daily_offers_ts';

@@ -137,100 +137,102 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                               ),
                             ),
                         ],
-                        if (stores.isNotEmpty) ...[
-                          SliverPadding(
-                            padding: AppConst.defaultPadding,
-                            sliver: SliverToBoxAdapter(
-                              child: Row(
-                                children: [GradientText(text: L10n.tr().storesOffersForYou, style: TStyle.blackBold(16))],
+                        if (selectedId == 'vendors') ...[
+                          if (stores.isNotEmpty) ...[
+                            SliverPadding(
+                              padding: AppConst.defaultPadding,
+                              sliver: SliverToBoxAdapter(
+                                child: Row(
+                                  children: [GradientText(text: L10n.tr().storesOffersForYou, style: TStyle.blackBold(16))],
+                                ),
                               ),
                             ),
-                          ),
-                          const SliverToBoxAdapter(child: VerticalSpacing(8)),
-                          SliverPadding(
-                            padding: AppConst.defaultPadding,
-                            sliver: SliverGrid(
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 0.65,
-                                crossAxisSpacing: 8,
-                                mainAxisSpacing: 8,
+                            const SliverToBoxAdapter(child: VerticalSpacing(8)),
+                            SliverPadding(
+                              padding: AppConst.defaultPadding,
+                              sliver: SliverGrid(
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.65,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 8,
+                                ),
+                                delegate: SliverChildBuilderDelegate((context, index) {
+                                  final s = stores[index];
+                                  final entity = ProductEntity(
+                                    id: s.id ?? 0,
+                                    productId: s.id,
+                                    name: s.storeName ?? '',
+                                    description: '',
+                                    price: 0,
+                                    image: s.image ?? '',
+                                    rate: double.tryParse(s.rate ?? '0') ?? 0,
+                                    reviewCount: (s.rateCount ?? 0).toInt(),
+                                    outOfStock: false,
+                                    offer: OfferEntity(
+                                      id: s.offer?.id ?? 0,
+                                      discount: (s.offer?.discount ?? 0).toDouble(),
+                                      maxDiscount: s.offer?.maxDiscount ?? 0,
+
+                                      discountType: DiscountType.fromString(s.offer?.discountType ?? ''),
+                                    ),
+                                  );
+                                  return VerticalProductCard(
+                                    key: ValueKey('store_${entity.id}'),
+                                    product: entity,
+                                    canAdd: false,
+                                    onTap: () {
+                                      log('id==> ${s.storeCategoryType}');
+                                      if (s.id == null) {
+                                        return;
+                                      }
+
+                                      if (s.storeCategoryType == VendorType.restaurant.value) {
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<SingleRestaurantCubit>(param1: s.id),
+                                            child: RestaurantDetailsScreen(id: s.id!),
+                                          ),
+                                        );
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                            child: StoreDetailsScreen(storeId: s.id!),
+                                          ),
+                                        );
+                                        // RestaurantDetailsScreen(
+                                        //   id: s.id,
+                                        // ).push(context);
+                                      } else if (s.storeCategoryType == VendorType.grocery.value) {
+                                        // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                            child: StoreDetailsScreen(storeId: s.id!),
+                                          ),
+                                        );
+                                        // StoreDetailsRoute(
+                                        //   storeId: s.id ?? -1,
+                                        // ).push(context);
+                                      } else {
+                                        context.navigateToPage(
+                                          BlocProvider(
+                                            create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                            child: StoreDetailsScreen(storeId: s.id!),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  );
+                                }, childCount: stores.length),
                               ),
-                              delegate: SliverChildBuilderDelegate((context, index) {
-                                final s = stores[index];
-                                final entity = ProductEntity(
-                                  id: s.id ?? 0,
-                                  productId: s.id,
-                                  name: s.storeName ?? '',
-                                  description: '',
-                                  price: 0,
-                                  image: s.image ?? '',
-                                  rate: double.tryParse(s.rate ?? '0') ?? 0,
-                                  reviewCount: (s.rateCount ?? 0).toInt(),
-                                  outOfStock: false,
-                                  offer: OfferEntity(
-                                    id: s.offer?.id ?? 0,
-                                    discount: (s.offer?.discount ?? 0).toDouble(),
-                                    maxDiscount: s.offer?.maxDiscount ?? 0,
-
-                                    discountType: DiscountType.fromString(s.offer?.discountType ?? ''),
-                                  ),
-                                );
-                                return VerticalProductCard(
-                                  key: ValueKey('store_${entity.id}'),
-                                  product: entity,
-                                  canAdd: false,
-                                  onTap: () {
-                                    log('id==> ${s.storeCategoryType}');
-                                    if (s.id == null) {
-                                      return;
-                                    }
-
-                                    if (s.storeCategoryType == VendorType.restaurant.value) {
-                                      context.navigateToPage(
-                                        BlocProvider(
-                                          create: (context) => di<SingleRestaurantCubit>(param1: s.id),
-                                          child: RestaurantDetailsScreen(id: s.id!),
-                                        ),
-                                      );
-                                      context.navigateToPage(
-                                        BlocProvider(
-                                          create: (context) => di<StoreDetailsCubit>(param1: s.id),
-                                          child: StoreDetailsScreen(storeId: s.id!),
-                                        ),
-                                      );
-                                      // RestaurantDetailsScreen(
-                                      //   id: s.id,
-                                      // ).push(context);
-                                    } else if (s.storeCategoryType == VendorType.grocery.value) {
-                                      // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
-                                      context.navigateToPage(
-                                        BlocProvider(
-                                          create: (context) => di<StoreDetailsCubit>(param1: s.id),
-                                          child: StoreDetailsScreen(storeId: s.id!),
-                                        ),
-                                      );
-                                      // StoreDetailsRoute(
-                                      //   storeId: s.id ?? -1,
-                                      // ).push(context);
-                                    } else {
-                                      context.navigateToPage(
-                                        BlocProvider(
-                                          create: (context) => di<StoreDetailsCubit>(param1: s.id),
-                                          child: StoreDetailsScreen(storeId: s.id!),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                );
-                              }, childCount: stores.length),
                             ),
-                          ),
-                          const SliverToBoxAdapter(child: VerticalSpacing(16)),
-                        ] else ...[
-                          SliverToBoxAdapter(
-                            child: Center(child: FailureComponent(message: L10n.tr().noData)),
-                          ),
+                            const SliverToBoxAdapter(child: VerticalSpacing(16)),
+                          ] else ...[
+                            SliverToBoxAdapter(
+                              child: Center(child: FailureComponent(message: L10n.tr().noData)),
+                            ),
+                          ],
                         ],
                       ],
                     );

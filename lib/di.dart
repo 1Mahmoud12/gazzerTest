@@ -48,6 +48,9 @@ import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/
 import 'package:gazzer/features/home/home_categories/suggested/data/suggests_repo_impl.dart';
 import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_repo.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_cubit.dart';
+import 'package:gazzer/features/home/home_categories/suggests_widget/data/suggests_widget_repo_impl.dart';
+import 'package:gazzer/features/home/home_categories/suggests_widget/domain/suggests_widget_repo.dart';
+import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
@@ -159,6 +162,7 @@ void _registerRepos() {
   di.registerLazySingleton<BestPopularRepository>(() => BestPopularRepositoryImpl(di.get(), di.get()));
   di.registerLazySingleton<CategoriesWidgetRepo>(() => CategoriesWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<DailyOffersWidgetRepo>(() => DailyOffersWidgetRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<SuggestsWidgetRepo>(() => SuggestsWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<CheckoutRepo>(() => CheckoutRepoImp(di.get(), di.get()));
   di.registerLazySingleton<LoyaltyProgramRepo>(() => LoyaltyProgramRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<WalletRepo>(() => WalletRepoImpl(di.get(), di.get()));
@@ -207,6 +211,7 @@ void _registerCubits() {
   di.registerFactory(() => SuggestsCubit(di.get()));
   di.registerFactory(() => CategoriesWidgetCubit(di.get()));
   di.registerFactory(() => DailyOffersWidgetCubit(di.get()));
+  di.registerFactory(() => SuggestsWidgetCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));

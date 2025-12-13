@@ -7,9 +7,9 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/rating_widget.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
@@ -38,20 +38,18 @@ class HorizontalProductCard extends StatelessWidget {
               ProductDetailsRoute(productId: product.id, $extra: findCartItem(context.read<CartCubit>(), product)).push(context);
             }
           },
-          child: Column(
+          child: Stack(
+            clipBehavior: Clip.none,
             children: [
-              SizedBox(
-                height: 123,
-                width: 123,
-                child: CircleGradientBorderedImage(
-                  image: product.image,
-                  showBorder: false,
-                  shadow: const BoxShadow(color: Colors.black38, offset: Offset(0, 2), blurRadius: 2),
-                ),
-              ),
               Container(
+                width: 350,
+                margin: const EdgeInsets.only(top: 110.5),
                 padding: AppConst.defaultPadding,
-                decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(
+                  image: const DecorationImage(image: AssetImage(Assets.customShapeSuggestIc), fit: BoxFit.fill),
+
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,11 +122,22 @@ class HorizontalProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         FavoriteWidget(size: 40, fovorable: product, padding: 0),
-                        CartToIncrementIcon(product: product, isHorizonal: false, iconSize: 18, isDarkContainer: false, newUi: true),
+                        CartToIncrementIcon(product: product, isHorizonal: true, iconSize: 18, isDarkContainer: true, newUi: true),
                       ],
                     ),
-                    const VerticalSpacing(12),
+                    const VerticalSpacing(20),
                   ],
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [ClipOval(child: CustomNetworkImage(product.image, fit: BoxFit.cover, width: 123, height: 123))],
+                  ),
                 ),
               ),
             ],
