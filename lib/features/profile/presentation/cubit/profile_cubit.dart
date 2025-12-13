@@ -4,8 +4,10 @@ import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/features/auth/common/data/client_response.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/profile/data/models/change_password_req.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_reason_dto.dart';
 import 'package:gazzer/features/profile/data/models/delete_account_req.dart';
@@ -139,6 +141,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
         client = null;
         Session().setClient = null;
         TokenService.deleteToken();
+        AppNavigator.mainKey.currentContext?.read<CartCubit>().clearCart();
         emit(LogoutSuccess(ok.value));
         break;
       case final Err err:

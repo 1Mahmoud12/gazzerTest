@@ -15,10 +15,7 @@ class SwitchingDecoratedwidget extends StatelessWidget {
     if (isDarkContainer) {
       return Skeleton.shade(
         child: DoubledDecoratedWidget(
-          innerDecoration: BoxDecoration(
-            borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12),
-            gradient: Grad().linearGradient,
-          ),
+          innerDecoration: BoxDecoration(borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12), gradient: Grad().linearGradient),
           child: child,
         ),
       );
@@ -27,10 +24,7 @@ class SwitchingDecoratedwidget extends StatelessWidget {
       decoration: BoxDecoration(
         border: GradientBoxBorder(gradient: Grad().shadowGrad()),
         borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12),
-        gradient: Grad().bgLinear.copyWith(
-          stops: const [0.0, 1],
-          colors: [const Color(0x55402788), Colors.transparent],
-        ),
+        gradient: Grad().bgLinear.copyWith(stops: const [0.0, 1], colors: [const Color(0x55402788), Colors.transparent]),
       ),
       child: child,
     );

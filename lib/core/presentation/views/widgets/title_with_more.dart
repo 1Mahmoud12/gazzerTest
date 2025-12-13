@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class TitleWithMore extends StatelessWidget {
@@ -21,10 +21,10 @@ class TitleWithMore extends StatelessWidget {
         if (title != null && title!.isNotEmpty)
           Expanded(
             child: Skeleton.shade(
-              child: GradientText(
-                text: title!,
-                style: titleStyle ?? TStyle.robotBlackTitle(),
-                gradient: Grad().textGradient,
+              child: Text(
+                title!,
+                style: titleStyle ?? TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+
                 textAlign: TextAlign.start,
                 // maxLines: 1,
               ),

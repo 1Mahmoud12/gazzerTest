@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/switching_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
+import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -18,6 +21,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/global_increment_widget.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
+import 'package:go_router/go_router.dart';
 
 /// A widget that displays either an add-to-cart button or increment/decrement controls
 /// based on whether the item is already in the cart.
@@ -32,6 +36,7 @@ class CartToIncrementIcon extends StatelessWidget {
     required this.isDarkContainer,
     this.isCartIcon = true,
     this.ignorePointer = false,
+    this.newUi = false,
   });
 
   final GenericItemEntity product;
@@ -39,6 +44,7 @@ class CartToIncrementIcon extends StatelessWidget {
   final double iconSize;
   final bool isDarkContainer;
   final bool isCartIcon;
+  final bool newUi;
   final bool ignorePointer;
 
   @override
@@ -192,14 +198,25 @@ class CartToIncrementIcon extends StatelessWidget {
     return InkWell(
       onTap: () => _handleAddToCart(context),
 
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SvgPicture.asset(Assets.cartIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn)),
-      ),
+      child: newUi
+          ? Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(100)),
+              child: Text(L10n.tr().addToCart, style: TStyle.robotBlackRegular().copyWith(color: Co.white)),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(Assets.cartIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn)),
+            ),
     );
   }
 
   void _handleAddToCart(BuildContext context) {
+    if (Session().client == null) {
+      Alerts.showToast(L10n.tr().pleaseLoginToUseCart);
+      context.push(LoginScreen.route);
+      return;
+    }
     // Navigate to details if product has options (customization required)
     if (product.hasOptions) {
       _navigateToProductDetails(context, null);

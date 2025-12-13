@@ -13,7 +13,7 @@ class MainBannerWidget extends StatelessWidget {
   final BannerEntity banner;
   @override
   Widget build(BuildContext context) {
-    final bannerAspectRation = 16 / 9;
+    const bannerAspectRation = 16 / 9;
     return InkWell(
       onTap: () {
         // TODO  Implement banner tap action
@@ -24,10 +24,7 @@ class MainBannerWidget extends StatelessWidget {
           aspectRatio: bannerAspectRation,
           child: switch (banner.type) {
             BannerType.detailed => DetailedBannerWidget(banner: banner),
-            BannerType.image => CustomNetworkImage(
-              banner.image!,
-              fit: BoxFit.fill,
-            ),
+            BannerType.image => CustomNetworkImage(banner.image!, fit: BoxFit.fill),
             BannerType.sliderHorizontal => banner.images?.isNotEmpty != true ? const SizedBox.shrink() : HorizontalCarousal(images: banner.images!),
 
             /// ** the commented one the sliding overlaping carousal
@@ -46,10 +43,7 @@ class MainBannerWidget extends StatelessWidget {
             //     },
             //   ),
             BannerType.countdown => CountDownBanner(banner: banner),
-            BannerType.shaking => const ShakingBanner(
-              backGround: Assets.assetsPngShakingAddBg,
-              foreGround: Assets.assetsPngPizza,
-            ),
+            BannerType.shaking => const ShakingBanner(backGround: Assets.assetsPngShakingAddBg, foreGround: Assets.assetsPngPizza),
             BannerType.sliderVertical => LongitudinalCarousal(banner.images ?? []),
 
             _ => const SizedBox.shrink(),

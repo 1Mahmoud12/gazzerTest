@@ -39,6 +39,9 @@ import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popula
 import 'package:gazzer/features/home/home_categories/categories_widget/data/categories_widget_repo_impl.dart';
 import 'package:gazzer/features/home/home_categories/categories_widget/domain/categories_widget_repo.dart';
 import 'package:gazzer/features/home/home_categories/categories_widget/presentation/cubit/categories_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/daily_offers_widget/data/daily_offers_widget_repo_impl.dart';
+import 'package:gazzer/features/home/home_categories/daily_offers_widget/domain/daily_offers_widget_repo.dart';
+import 'package:gazzer/features/home/home_categories/daily_offers_widget/presentation/cubit/daily_offers_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/popular/data/top_items_repo_impl.dart';
 import 'package:gazzer/features/home/home_categories/popular/domain/top_items_repo.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_cubit.dart';
@@ -155,6 +158,7 @@ void _registerRepos() {
   di.registerLazySingleton<SuggestsRepo>(() => SuggestsRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<BestPopularRepository>(() => BestPopularRepositoryImpl(di.get(), di.get()));
   di.registerLazySingleton<CategoriesWidgetRepo>(() => CategoriesWidgetRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<DailyOffersWidgetRepo>(() => DailyOffersWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<CheckoutRepo>(() => CheckoutRepoImp(di.get(), di.get()));
   di.registerLazySingleton<LoyaltyProgramRepo>(() => LoyaltyProgramRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<WalletRepo>(() => WalletRepoImpl(di.get(), di.get()));
@@ -202,6 +206,7 @@ void _registerCubits() {
   di.registerFactory(() => TopVendorsCubit(di.get()));
   di.registerFactory(() => SuggestsCubit(di.get()));
   di.registerFactory(() => CategoriesWidgetCubit(di.get()));
+  di.registerFactory(() => DailyOffersWidgetCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));

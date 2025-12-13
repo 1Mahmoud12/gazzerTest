@@ -4,15 +4,7 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/double
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
 class AddIcon extends StatelessWidget {
-  const AddIcon({
-    super.key,
-    this.iconColor,
-    this.radius,
-    required this.onTap,
-    this.padding,
-    this.innterDecoration,
-    this.isLoading = false,
-  });
+  const AddIcon({super.key, this.iconColor, this.radius, required this.onTap, this.padding, this.innterDecoration, this.isLoading = false});
   final Color? iconColor;
   final double? radius;
   final Function() onTap;
@@ -23,19 +15,13 @@ class AddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return DoubledDecoratedWidget(
       innerDecoration: innterDecoration,
-      borderRadius: BorderRadiusDirectional.only(
-        topStart: Radius.circular(radius ?? 7),
-        bottomEnd: Radius.circular(radius ?? 7),
-      ),
+      borderRadius: BorderRadiusDirectional.only(topStart: Radius.circular(radius ?? 7), bottomEnd: Radius.circular(radius ?? 7)),
       child: InkWell(
         onTap: onTap,
         child: Padding(
           padding: padding ?? const EdgeInsets.all(4),
           child: isLoading
-              ? const AdaptiveProgressIndicator(
-                  size: 22,
-                  color: Co.secondary,
-                )
+              ? const AdaptiveProgressIndicator(size: 22, color: Co.secondary)
               : Icon(Icons.add, color: iconColor ?? Co.secondary, size: radius ?? 22),
         ),
       ),

@@ -62,6 +62,7 @@ class Endpoints {
   static const suggests = 'homepage/widget/suggests';
   static const bestPopularStores = 'homepage/widget/best-popular';
   static const categoriesWidget = 'homepage/widget/categories';
+  static const dailyOffersWidget = 'homepage/widget/daily-offers';
   // restaurants
   static const restaurantsMenuPage = 'pages/restaurants-page';
 

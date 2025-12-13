@@ -86,21 +86,11 @@ class CartCubit extends Cubit<CartStates> {
   // ==================== Initialization ====================
 
   void _initializeWithDefaultAddress() {
-    final defaultAddress = Session().addresses.firstWhereOrNull(
-      (address) => address.isDefault,
-    );
+    final defaultAddress = Session().addresses.firstWhereOrNull((address) => address.isDefault);
 
     if (defaultAddress != null) {
       address = defaultAddress;
-      emit(
-        FullCartLoaded(
-          vendors: _vendors,
-          summary: _summary,
-          address: address,
-          isCartValid: _validateCart(),
-          pouchSummary: _pouchSummary,
-        ),
-      );
+      emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart(), pouchSummary: _pouchSummary));
     }
   }
 
@@ -150,35 +140,15 @@ class CartCubit extends Cubit<CartStates> {
           if (confirmed == true && context.mounted) {
             await addToCart(context, req.copyWith(exceedPouch: true));
           }
-          emit(
-            UpdateItemError(
-              message: error.message,
-              cartId: req.id,
-              isAdding: true,
-              needsNewPouchApproval: true,
-            ),
-          );
+          emit(UpdateItemError(message: error.message, cartId: req.id, isAdding: true, needsNewPouchApproval: true));
         } else if (context.mounted) {
           // Show error message in alert/toast for other errors
           Alerts.showToast(error.message);
-          emit(
-            UpdateItemError(
-              message: error.message,
-              cartId: req.id,
-              isAdding: true,
-            ),
-          );
+          emit(UpdateItemError(message: error.message, cartId: req.id, isAdding: true));
         }
 
         // Emit FullCartLoaded to clear loading state (no cart changes)
-        emit(
-          FullCartLoaded(
-            vendors: _vendors,
-            summary: _summary,
-            address: address,
-            isCartValid: _validateCart(),
-          ),
-        );
+        emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart()));
         break;
     }
   }
@@ -191,12 +161,7 @@ class CartCubit extends Cubit<CartStates> {
   ///
   /// This method implements debouncing: if called multiple times within 500ms,
   /// only the final quantity will be sent to the server.
-  void updateItemQuantity(
-    int id,
-    int quantity,
-    bool isAdding,
-    BuildContext context,
-  ) {
+  void updateItemQuantity(int id, int quantity, bool isAdding, BuildContext context) {
     if (quantity < 1) return;
 
     // Cancel existing timer for this item
@@ -241,26 +206,13 @@ class CartCubit extends Cubit<CartStates> {
           // Create new vendor with updated item
           final updatedItems = List<CartItemEntity>.from(vendor.items);
           updatedItems[itemIndex] = updatedItem;
-          final updatedVendor = CartVendorEntity(
-            id: vendor.id,
-            name: vendor.name,
-            image: vendor.image,
-            type: vendor.type,
-            items: updatedItems,
-          );
+          final updatedVendor = CartVendorEntity(id: vendor.id, name: vendor.name, image: vendor.image, type: vendor.type, items: updatedItems);
 
           // Update the vendor in the list
           _vendors[vendorIndex] = updatedVendor;
 
           // Emit updated state without loading indicator
-          emit(
-            FullCartLoaded(
-              vendors: _vendors,
-              summary: _summary,
-              address: address,
-              isCartValid: _validateCart(),
-            ),
-          );
+          emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart()));
           return;
         }
       }
@@ -272,15 +224,7 @@ class CartCubit extends Cubit<CartStates> {
     final originalQuantity = _originalQuantities[id];
     if (originalQuantity == null) {
       // If no original quantity stored, just reload cart from current state
-      emit(
-        FullCartLoaded(
-          vendors: _vendors,
-          summary: _summary,
-          address: address,
-          isCartValid: _validateCart(),
-          pouchSummary: _pouchSummary,
-        ),
-      );
+      emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart(), pouchSummary: _pouchSummary));
       return;
     }
 
@@ -296,13 +240,7 @@ class CartCubit extends Cubit<CartStates> {
           // Create new vendor with reverted item
           final revertedItems = List<CartItemEntity>.from(vendor.items);
           revertedItems[itemIndex] = revertedItem;
-          final revertedVendor = CartVendorEntity(
-            id: vendor.id,
-            name: vendor.name,
-            image: vendor.image,
-            type: vendor.type,
-            items: revertedItems,
-          );
+          final revertedVendor = CartVendorEntity(id: vendor.id, name: vendor.name, image: vendor.image, type: vendor.type, items: revertedItems);
 
           // Update the vendor in the list
           _vendors[vendorIndex] = revertedVendor;
@@ -311,65 +249,29 @@ class CartCubit extends Cubit<CartStates> {
           _originalQuantities.remove(id);
 
           // Emit updated state to clear loading state
-          emit(
-            FullCartLoaded(
-              vendors: _vendors,
-              summary: _summary,
-              address: address,
-              isCartValid: _validateCart(),
-            ),
-          );
+          emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart()));
           return;
         }
       }
     }
 
     // If item not found in cart, just emit current state to clear loading
-    emit(
-      FullCartLoaded(
-        vendors: _vendors,
-        summary: _summary,
-        address: address,
-        isCartValid: _validateCart(),
-      ),
-    );
+    emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart()));
   }
 
   /// Executes the actual API call for quantity update.
-  Future<void> _executeQuantityUpdate(
-    int id,
-    int quantity,
-    bool isAdding,
-    BuildContext context, {
-    bool exceedPouch = false,
-  }) async {
+  Future<void> _executeQuantityUpdate(int id, int quantity, bool isAdding, BuildContext context, {bool exceedPouch = false}) async {
     // Show loading indicator only when API call starts
-    emit(
-      UpdateItemLoading(
-        cartId: id,
-        isAdding: isAdding,
-        isRemoving: !isAdding,
-      ),
-    );
+    emit(UpdateItemLoading(cartId: id, isAdding: isAdding, isRemoving: !isAdding));
 
-    final response = await _repo.updateItemQuantity(
-      id,
-      quantity,
-      exceedPouch: exceedPouch,
-    );
+    final response = await _repo.updateItemQuantity(id, quantity, exceedPouch: exceedPouch);
 
     switch (response) {
       case Ok<CartResponse>(:final value):
         // Clear the original quantity on success
         _originalQuantities.remove(id);
 
-        emit(
-          UpdateItemSuccess(
-            cartId: id,
-            isAdding: isAdding,
-            isRemoving: !isAdding,
-          ),
-        );
+        emit(UpdateItemSuccess(cartId: id, isAdding: isAdding, isRemoving: !isAdding));
         _updateCartWithNewResponse(value);
         break;
       case Err(:final error):
@@ -384,24 +286,10 @@ class CartCubit extends Cubit<CartStates> {
 
           if (confirmed == true) {
             if (context.mounted) {
-              _executeQuantityUpdate(
-                id,
-                quantity,
-                isAdding,
-                context,
-                exceedPouch: true,
-              );
+              _executeQuantityUpdate(id, quantity, isAdding, context, exceedPouch: true);
             }
           }
-          emit(
-            UpdateItemError(
-              message: error.message,
-              cartId: id,
-              isAdding: isAdding,
-              needsNewPouchApproval: true,
-              isRemoving: !isAdding,
-            ),
-          );
+          emit(UpdateItemError(message: error.message, cartId: id, isAdding: isAdding, needsNewPouchApproval: true, isRemoving: !isAdding));
         } else if (context.mounted) {
           // Check if error is about maximum quantity reached
           final isMaxQuantityError =
@@ -412,13 +300,7 @@ class CartCubit extends Cubit<CartStates> {
           // Show error message in alert/toast for other errors
           Alerts.showToast(error.message);
           emit(
-            UpdateItemError(
-              message: error.message,
-              cartId: id,
-              isAdding: isAdding,
-              isRemoving: !isAdding,
-              isMaxQuantityReached: isMaxQuantityError,
-            ),
+            UpdateItemError(message: error.message, cartId: id, isAdding: isAdding, isRemoving: !isAdding, isMaxQuantityReached: isMaxQuantityError),
           );
         }
 
@@ -444,14 +326,7 @@ class CartCubit extends Cubit<CartStates> {
         emit(UpdateItemError(message: error.message, cartId: cartId));
 
         // Emit FullCartLoaded to clear loading state
-        emit(
-          FullCartLoaded(
-            vendors: _vendors,
-            summary: _summary,
-            address: address,
-            isCartValid: _validateCart(),
-          ),
-        );
+        emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart()));
         break;
     }
   }
@@ -480,14 +355,7 @@ class CartCubit extends Cubit<CartStates> {
         emit(UpdateItemError(message: error.message, cartId: id));
 
         // Emit FullCartLoaded to clear loading state (item not removed)
-        emit(
-          FullCartLoaded(
-            vendors: _vendors,
-            summary: _summary,
-            address: address,
-            isCartValid: _validateCart(),
-          ),
-        );
+        emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart()));
         break;
     }
   }
@@ -502,15 +370,7 @@ class CartCubit extends Cubit<CartStates> {
     selectedTime = null;
     _timeSlots.clear();
 
-    emit(
-      FullCartLoaded(
-        vendors: _vendors,
-        summary: _summary,
-        address: address,
-        isCartValid: false,
-        pouchSummary: _pouchSummary,
-      ),
-    );
+    emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: false, pouchSummary: _pouchSummary));
   }
 
   // ==================== Address Management ====================
@@ -536,14 +396,7 @@ class CartCubit extends Cubit<CartStates> {
   /// Used for local address selection before checkout.
   void selectAddress(AddressEntity newAddress) {
     address = newAddress;
-    emit(
-      FullCartLoaded(
-        vendors: _vendors,
-        summary: _summary,
-        address: address,
-        isCartValid: _validateCart(),
-      ),
-    );
+    emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart()));
   }
 
   // ==================== Time Slot Management ====================
@@ -558,12 +411,7 @@ class CartCubit extends Cubit<CartStates> {
       case Ok<List<String>>(:final value):
         _timeSlots.clear();
         _timeSlots.addAll(value);
-        emit(
-          TimeSlotsLoaded(
-            timeSlots: _timeSlots,
-            selectedTime: selectedTime,
-          ),
-        );
+        emit(TimeSlotsLoaded(timeSlots: _timeSlots, selectedTime: selectedTime));
         break;
       case Err(:final error):
         emit(TimeSlotsError(message: error.message));
@@ -574,12 +422,7 @@ class CartCubit extends Cubit<CartStates> {
   /// Selects a delivery time slot.
   void selectTimeSlot(String? time) {
     selectedTime = time;
-    emit(
-      TimeSlotsLoaded(
-        timeSlots: _timeSlots,
-        selectedTime: selectedTime,
-      ),
-    );
+    emit(TimeSlotsLoaded(timeSlots: _timeSlots, selectedTime: selectedTime));
   }
 
   // ==================== Internal Helpers ====================
@@ -605,15 +448,7 @@ class CartCubit extends Cubit<CartStates> {
     address = _resolveDeliveryAddress(response.addressId);
 
     // Emit updated state
-    emit(
-      FullCartLoaded(
-        vendors: _vendors,
-        summary: _summary,
-        address: address,
-        isCartValid: _validateCart(),
-        pouchSummary: _pouchSummary,
-      ),
-    );
+    emit(FullCartLoaded(vendors: _vendors, summary: _summary, address: address, isCartValid: _validateCart(), pouchSummary: _pouchSummary));
   }
 
   /// Resolves the delivery address from the response or defaults to the user's default address.
@@ -621,14 +456,10 @@ class CartCubit extends Cubit<CartStates> {
     final userAddresses = Session().addresses;
 
     if (addressId != null) {
-      return userAddresses.firstWhereOrNull(
-        (address) => address.id == addressId,
-      );
+      return userAddresses.firstWhereOrNull((address) => address.id == addressId);
     }
 
-    return userAddresses.firstWhereOrNull(
-      (address) => address.isDefault,
-    );
+    return userAddresses.firstWhereOrNull((address) => address.isDefault);
   }
 
   /// Validates if the cart is ready for checkout.

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+
+import '../../../theme/text_style.dart';
 
 class AppRatingWidget extends StatelessWidget {
   final String initialRating;
@@ -11,24 +14,13 @@ class AppRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RatingBar.builder(
-      initialRating: double.tryParse(initialRating) ?? 0.0,
-      minRating: 1,
-      direction: Axis.horizontal,
-      allowHalfRating: false,
-      itemCount: 5,
-
-      itemSize: itemSize,
-      ignoreGestures: ignoreGesture,
-      itemBuilder: (context, index) {
-        final isRated = index < (double.tryParse(initialRating) ?? 0.0);
-        return Icon(isRated ? Icons.star : Icons.star_border, color: Co.secondary);
-      },
-      tapOnlyMode: true,
-      unratedColor: Co.secondary,
-      onRatingUpdate: (rating) {
-        if (onRate != null) onRate!(rating);
-      },
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
+        const HorizontalSpacing(4),
+        Text('${double.tryParse(initialRating) ?? 0.0}', style: TStyle.robotBlackRegular()),
+      ],
     );
   }
 }

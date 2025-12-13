@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -19,14 +18,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Detail
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 
 class VerticalProductCard extends StatelessWidget {
-  const VerticalProductCard({
-    super.key,
-    required this.product,
-    required this.canAdd,
-    this.fontFactor = 1.0,
-    this.onTap,
-    this.ignorePointer = false,
-  });
+  const VerticalProductCard({super.key, required this.product, required this.canAdd, this.fontFactor = 1.0, this.onTap, this.ignorePointer = false});
   final GenericItemEntity product;
   final bool canAdd;
   final bool ignorePointer;
@@ -48,15 +40,9 @@ class VerticalProductCard extends StatelessWidget {
           } else {
             // Navigate based on item type
             if (product is PlateEntity) {
-              PlateDetailsRoute(
-                id: product
-                    .id /*, $extra: findCartItem(context.read<CartCubit>(), product)*/,
-              ).push(context);
+              PlateDetailsRoute(id: product.id /*, $extra: findCartItem(context.read<CartCubit>(), product)*/).push(context);
             } else if (product is ProductEntity) {
-              ProductDetailsRoute(
-                productId: product
-                    .id /*, $extra: findCartItem(context.read<CartCubit>(), product)*/,
-              ).push(context);
+              ProductDetailsRoute(productId: product.id /*, $extra: findCartItem(context.read<CartCubit>(), product)*/).push(context);
             }
           }
         },
@@ -72,16 +58,8 @@ class VerticalProductCard extends StatelessWidget {
               Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadiusGeometry.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                    ),
-                    child: CustomNetworkImage(
-                      product.image,
-                      height: 130,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
+                    borderRadius: const BorderRadiusGeometry.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+                    child: CustomNetworkImage(product.image, height: 130, width: double.infinity, fit: BoxFit.fill),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -92,34 +70,21 @@ class VerticalProductCard extends StatelessWidget {
                           const SizedBox()
                         else
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Co.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                            decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(20)),
                             child: Text(
                               "${product.offer?.discount}${product.offer?.discountType == DiscountType.percentage ? "%" : ""}",
                               style: TStyle.robotBlackMedium(),
                             ),
                           ),
-                        FavoriteWidget(
-                          size: 40,
-                          fovorable: product,
-                          padding: 0,
-                        ),
+                        FavoriteWidget(size: 40, fovorable: product, padding: 0),
                       ],
                     ),
                   ),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16.0,
-                  horizontal: 8,
-                ),
+                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,9 +94,7 @@ class VerticalProductCard extends StatelessWidget {
                         Expanded(
                           child: Text(
                             product.name,
-                            style: TStyle.robotBlackMedium().copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -141,16 +104,9 @@ class VerticalProductCard extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SvgPicture.asset(
-                              Assets.starRateIc,
-                              width: 20,
-                              height: 20,
-                            ),
+                            SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
                             const HorizontalSpacing(4),
-                            Text(
-                              product.rate.toStringAsFixed(1),
-                              style: TStyle.robotBlackRegular(),
-                            ),
+                            Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
                           ],
                         ),
                       ],
@@ -173,21 +129,12 @@ class VerticalProductCard extends StatelessWidget {
                             return;
                           }
 
-                          if (product.store!.type ==
-                              VendorType.restaurant.value) {
-                            RestaurantDetailsRoute(
-                              id: product.store!.id,
-                            ).push(context);
-                          } else if (product.store!.type ==
-                              VendorType.grocery.value) {
-                            StoreDetailsRoute(
-                              storeId: product.store!.id,
-                            ).push(context);
-                          } else if (product.store!.type ==
-                              VendorType.pharmacy.value) {
-                            PharmacyStoreScreenRoute(
-                              id: product.store!.id,
-                            ).push(context);
+                          if (product.store!.type == VendorType.restaurant.value) {
+                            RestaurantDetailsRoute(id: product.store!.id).push(context);
+                          } else if (product.store!.type == VendorType.grocery.value) {
+                            StoreDetailsRoute(storeId: product.store!.id).push(context);
+                          } else if (product.store!.type == VendorType.pharmacy.value) {
+                            PharmacyStoreScreenRoute(id: product.store!.id).push(context);
                           }
                         },
                         child: Row(
@@ -195,17 +142,13 @@ class VerticalProductCard extends StatelessWidget {
                             SvgPicture.asset(Assets.restaurantNameIc),
                             const SizedBox(width: 8),
                             Expanded(
-                              child: Text(
-                                product.store?.name ?? '',
-                                style: TStyle.robotBlackMedium(),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
+                              child: Text(product.store?.name ?? '', style: TStyle.robotBlackMedium(), overflow: TextOverflow.ellipsis, maxLines: 1),
                             ),
                           ],
                         ),
                       ),
                     ],
+                    const VerticalSpacing(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -215,23 +158,13 @@ class VerticalProductCard extends StatelessWidget {
                             children: [
                               FittedBox(
                                 alignment: AlignmentDirectional.centerStart,
-                                child: Text(
-                                  Helpers.getProperPrice(product.price),
-                                  style: TStyle.robotBlackMedium().copyWith(
-                                    color: Co.purple,
-                                  ),
-                                ),
+                                child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                               ),
                               FittedBox(
                                 alignment: AlignmentDirectional.centerStart,
                                 child: Text(
-                                  Helpers.getProperPrice(
-                                    product.priceBeforeDiscount!,
-                                  ),
-                                  style: TStyle.robotBlackMedium().copyWith(
-                                    decoration: TextDecoration.lineThrough,
-                                    color: Co.greyText,
-                                  ),
+                                  Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                  style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
                                 ),
                               ),
                             ],
@@ -239,14 +172,8 @@ class VerticalProductCard extends StatelessWidget {
                         ),
 
                         const SizedBox(width: 8),
-                        if (Session().client != null &&
-                            !(key?.toString().contains('store') ?? false))
-                          CartToIncrementIcon(
-                            isHorizonal: true,
-                            product: product,
-                            iconSize: 25,
-                            isDarkContainer: true,
-                          ),
+                        if (!(key?.toString().contains('store') ?? false))
+                          CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
                       ],
                     ),
                   ],

@@ -61,6 +61,8 @@ dependencies:
 
   #UI
   flutter_svg: ^2.2.1
+  vector_graphics: ^1.1.19
+  vector_graphics_compiler: ^1.1.19
   animations: ^2.0.11
   smooth_page_indicator: ^1.2.1
   skeletonizer: ^2.1.0+1

@@ -20,7 +20,7 @@ abstract class Helpers {
   static String getProperPrice(num price, {bool showCurrency = true}) {
     final isInt = price % 1 == 0;
 
-    return (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2)) + (showCurrency ? (' ${L10n.tr().egp}') : '');
+    return (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2)) + (showCurrency ? ' ${L10n.tr().egp}' : '');
   }
 
   static String formatTimeSlot(String time) {
@@ -29,7 +29,7 @@ abstract class Helpers {
       final hours = int.parse(parts[0]);
       final suffix = hours >= 12 ? L10n.tr().pm : L10n.tr().am;
       final formattedHours = hours % 12 == 0 ? 12 : hours % 12; // Convert to 12-hour format
-      return '$formattedHours:${parts[1].replaceAll(RegExp(r'[a-zA-Z]'), '')} $suffix';
+      return '$formattedHours:${parts[1].replaceAll(RegExp('[a-zA-Z]'), '')} $suffix';
     } catch (e) {
       return time; // Return the original time if parsing fails
     }
@@ -52,10 +52,7 @@ abstract class Helpers {
   /// used mainly to form the delivery time range
   /// [edge] must be value between 0-1, [value] must be positive
   static String convertIntToRange(int value, double edge) {
-    assert(
-      value >= 0 && edge > 0 && edge < 1,
-      'Value must be positive and edge must be between 0 and 1',
-    );
+    assert(value >= 0 && edge > 0 && edge < 1, 'Value must be positive and edge must be between 0 and 1');
     return '${(value * (1 - edge)).floor()} - ${(value * 1.3).ceil()} ';
   }
 

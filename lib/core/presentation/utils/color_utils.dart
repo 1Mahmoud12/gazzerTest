@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/repos/crashlytics_repo.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/di.dart';
 
 class ColorUtils {
@@ -39,7 +40,7 @@ class ColorUtils {
   // }
 
   /// Safe conversion that returns a default color if parsing fails
-  static Color safeHexToColor(String? hexString, {Color defaultColor = Colors.grey}) {
+  static Color safeHexToColor(String? hexString, {Color defaultColor = Co.purple100}) {
     if (hexString == null || hexString.isEmpty) return defaultColor;
     try {
       final val = _hexToColor(hexString);

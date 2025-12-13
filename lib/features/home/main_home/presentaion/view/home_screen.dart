@@ -30,6 +30,7 @@ import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
+import 'package:gazzer/features/dailyOffers/presentation/cubit/daily_offer_cubit.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_cubit.dart';
 import 'package:gazzer/features/home/best_popular/presentation/views/best_popular_screen.dart';
@@ -40,6 +41,7 @@ import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/categories_widget.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/daily_offers_widget.dart';
 import 'package:gazzer/features/home/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -127,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainScreenWidget: RefreshIndicator(
               onRefresh: () async {
                 await context.read<HomeCubit>().getHomeData();
+                await context.read<DailyOfferCubit>().getAllOffers();
               },
               child: BlocBuilder<HomeCubit, HomeStates>(
                 builder: (context, state) {
@@ -158,15 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const CategoriesWidget(),
 
                           // ///
-                          _DailyOffersWidget(items: state.homeResponse?.dailyOffers ?? <GenericItemEntity>[]),
-                          if (state.homeResponse?.dailyOffersBanner != null)
-                            SliverToBoxAdapter(
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 24),
-
-                                child: MainBannerWidget(banner: state.homeResponse!.dailyOffersBanner!),
-                              ),
-                            ),
+                          const DailyOffersWidget(),
 
                           // /// const SummerSaleAddWidget(),
                           _HomeSuggestedProductsWidget(items: state.homeResponse?.suggested ?? <GenericItemEntity>[]),

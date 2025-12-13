@@ -37,6 +37,10 @@ class CacheKeys {
   static const String dailyOffersJson = 'daily_offers_json';
   static const String dailyOffersTs = 'daily_offers_ts';
 
+  // Daily Offers Widget
+  static const String dailyOffersWidgetJson = 'daily_offers_widget_json';
+  static const String dailyOffersWidgetTs = 'daily_offers_widget_ts';
+
   // Loyalty Program
   static const String loyaltyProgramCache = 'loyalty_program_json';
   static const String loyaltyProgramTs = 'loyalty_program_timestamp';

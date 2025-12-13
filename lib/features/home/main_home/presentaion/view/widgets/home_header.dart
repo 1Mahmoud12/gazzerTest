@@ -38,16 +38,13 @@ class _HomeHeader extends StatelessWidget {
                     child: Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: L10n.tr().deliverTo, style: TStyle.robotBlackRegular()),
-
                           if (address != null) ...[
+                            TextSpan(text: L10n.tr().deliverTo, style: TStyle.robotBlackRegular()),
+
                             TextSpan(text: ' ${address.label}\n', style: TStyle.robotBlackRegular()),
                             TextSpan(text: '${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackSmall()),
                           ] else
-                            TextSpan(
-                              text: L10n.tr().noAddressesSelected,
-                              style: TStyle.mainwSemi(13).copyWith(color: Co.purple.withAlpha(180)),
-                            ),
+                            TextSpan(text: L10n.tr().noAddressesSelected, style: TStyle.robotBlackSmall()),
                         ],
                       ),
                       maxLines: 2,

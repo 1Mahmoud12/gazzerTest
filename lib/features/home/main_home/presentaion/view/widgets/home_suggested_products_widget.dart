@@ -1,4 +1,4 @@
-part of "../home_screen.dart";
+part of '../home_screen.dart';
 
 class _HomeSuggestedProductsWidget extends StatelessWidget {
   const _HomeSuggestedProductsWidget({required this.items});
@@ -9,29 +9,26 @@ class _HomeSuggestedProductsWidget extends StatelessWidget {
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            TitleWithMore(
-              title: L10n.tr().suggestedForYou,
-              onPressed: () {
-                context.push(SuggestedScreen.route);
-              },
-            ),
-            const VerticalSpacing(12),
-            ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: items.length > 4 ? 4 : items.length,
-              separatorBuilder: (context, index) => const VerticalSpacing(12),
-              itemBuilder: (context, index) {
-                if (items[index] == null) return const SizedBox.shrink();
+        delegate: SliverChildListDelegate([
+          TitleWithMore(
+            title: L10n.tr().suggestedForYou,
+
+            onPressed: () {
+              context.push(SuggestedScreen.route);
+            },
+          ),
+          const VerticalSpacing(12),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(items.length > 4 ? 4 : items.length, (index) {
+                if (items[index] == null || items[index]!.store == null) return const SizedBox.shrink();
                 return HorizontalProductCard(product: items[index]!);
-              },
+              }),
             ),
-            const VerticalSpacing(24),
-          ],
-        ),
+          ),
+          const VerticalSpacing(24),
+        ]),
       ),
     );
   }

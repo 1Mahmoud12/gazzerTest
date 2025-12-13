@@ -25,10 +25,10 @@ class DailyOfferCubit extends Cubit<DailyOfferStates> {
     // Fetch data (with or without search)
     final res = await _repo.getAllDailyOffer(search: search);
     switch (res) {
-      case Ok<DailyOfferDataModel?> ok:
-        emit(DailyOfferSuccessState(ok.value, isFromCache: false));
+      case final Ok<DailyOfferDataModel?> ok:
+        emit(DailyOfferSuccessState(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(DailyOfferErrorState(err.error.message));
         break;
     }
