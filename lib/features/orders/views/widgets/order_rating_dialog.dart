@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/orders/domain/entities/order_vendor_entity.dart';
 import 'package:gazzer/features/orders/domain/orders_repo.dart';
@@ -18,11 +19,7 @@ import 'package:gazzer/features/orders/presentation/cubit/order_review_state.dar
 import 'package:go_router/go_router.dart';
 
 class OrderRatingDialog extends StatefulWidget {
-  const OrderRatingDialog({
-    super.key,
-    required this.orderId,
-    required this.vendors,
-  });
+  const OrderRatingDialog({super.key, required this.orderId, required this.vendors});
 
   final int orderId;
   final List<OrderVendorEntity> vendors;
@@ -65,9 +62,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
           final isLoading = state is OrderReviewLoading;
 
           return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Container(
               constraints: const BoxConstraints(maxHeight: 600),
               padding: const EdgeInsets.all(20),
@@ -75,10 +70,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    L10n.tr().rateYourOrder,
-                    style: TStyle.robotBlackMedium(),
-                  ),
+                  Text(L10n.tr().rateYourOrder, style: TStyle.robotBlackMedium()),
                   const VerticalSpacing(16),
                   Flexible(
                     child: SingleChildScrollView(
@@ -124,17 +116,10 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                           onPressed: _canSubmit && !isLoading
                               ? () {
                                   final storeReviews = widget.vendors
-                                      .map(
-                                        (vendor) => StoreReview(
-                                          orderStoreId: vendor.id,
-                                          rating: _vendorRatings[vendor.id] ?? 0.0,
-                                        ),
-                                      )
+                                      .map((vendor) => StoreReview(orderStoreId: vendor.id, rating: _vendorRatings[vendor.id] ?? 0.0))
                                       .toList();
 
-                                  final deliveryManReview = DeliveryManReview(
-                                    rating: _deliveryManRating,
-                                  );
+                                  final deliveryManReview = DeliveryManReview(rating: _deliveryManRating);
 
                                   context.read<OrderReviewCubit>().submitReview(
                                     orderId: widget.orderId,
@@ -158,11 +143,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
 }
 
 class _VendorRatingItem extends StatelessWidget {
-  const _VendorRatingItem({
-    required this.vendor,
-    required this.rating,
-    required this.onRatingChanged,
-  });
+  const _VendorRatingItem({required this.vendor, required this.rating, required this.onRatingChanged});
 
   final OrderVendorEntity vendor;
   final double rating;
@@ -177,10 +158,7 @@ class _VendorRatingItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              vendor.name,
-              style: TStyle.robotBlackRegular(),
-            ),
+            Text(vendor.name, style: TStyle.robotBlackRegular()),
             const VerticalSpacing(8),
             RatingBar.builder(
               initialRating: rating,
@@ -192,9 +170,7 @@ class _VendorRatingItem extends StatelessWidget {
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
               itemBuilder: (context, index) {
                 final isRated = index < rating;
-                return SvgPicture.asset(
-                  isRated ? Assets.starRateIc : Assets.starNotRateIc,
-                );
+                return SvgPicture.asset(isRated ? Assets.starRateIc : Assets.starNotRateIc);
               },
               unratedColor: Co.secondary,
 
@@ -208,10 +184,7 @@ class _VendorRatingItem extends StatelessWidget {
 }
 
 class _DeliveryManRatingItem extends StatelessWidget {
-  const _DeliveryManRatingItem({
-    required this.rating,
-    required this.onRatingChanged,
-  });
+  const _DeliveryManRatingItem({required this.rating, required this.onRatingChanged});
 
   final double rating;
   final ValueChanged<double> onRatingChanged;
@@ -220,21 +193,12 @@ class _DeliveryManRatingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ClipOval(
-          child: SvgPicture.asset(
-            Assets.assetsDeliveryLogo,
-            width: 60,
-            height: 60,
-          ),
-        ),
+        const ClipOval(child: VectorGraphicsWidget(Assets.assetsDeliveryLogo, width: 60, height: 60)),
         const HorizontalSpacing(8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              L10n.tr().deliveryMan,
-              style: TStyle.robotBlackRegular(),
-            ),
+            Text(L10n.tr().deliveryMan, style: TStyle.robotBlackRegular()),
             const VerticalSpacing(8),
             RatingBar.builder(
               initialRating: rating,
@@ -246,9 +210,7 @@ class _DeliveryManRatingItem extends StatelessWidget {
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
               itemBuilder: (context, index) {
                 final isRated = index < rating;
-                return SvgPicture.asset(
-                  isRated ? Assets.starRateIc : Assets.starNotRateIc,
-                );
+                return SvgPicture.asset(isRated ? Assets.starRateIc : Assets.starNotRateIc);
               },
               unratedColor: Co.secondary,
               onRatingUpdate: onRatingChanged,

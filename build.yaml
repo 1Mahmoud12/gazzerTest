@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      vector_graphics_codec:
+        enabled: true
+        options:
+          # Output directory for generated .vg files
+          # Keep .vg files in the same directory as .svg files
+          output_dir: "assets/svg"
+          # Automatically convert all .svg files
+          inputs:
+            - "assets/svg/**/*.svg"
+

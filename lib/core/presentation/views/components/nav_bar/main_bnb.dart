@@ -1,11 +1,11 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 
 class MainBnb extends StatefulWidget {
   const MainBnb({super.key, this.initialIndex = 0, required this.onItemSelected});
@@ -106,7 +106,7 @@ class _MainBnbState extends State<MainBnb> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(iconAsset, height: 24, width: 24, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
+        VectorGraphicsWidget(iconAsset, height: 24, width: 24, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
         const SizedBox(height: 4),
         Text(label, style: TStyle.robotBlackMedium().copyWith(color: color, fontSize: 10)),
       ],
