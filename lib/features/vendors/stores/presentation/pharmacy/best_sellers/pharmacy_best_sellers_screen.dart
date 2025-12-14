@@ -10,9 +10,7 @@ import 'package:go_router/go_router.dart';
 part 'pharmacy_best_sellers_screen.g.dart';
 
 /// Best sellers screen for pharmacy products
-@TypedGoRoute<PharmacyBestSellersRoute>(
-  path: PharmacyBestSellersRoute.route,
-)
+@TypedGoRoute<PharmacyBestSellersRoute>(path: PharmacyBestSellersRoute.route)
 class PharmacyBestSellersRoute extends GoRouteData {
   const PharmacyBestSellersRoute();
 
@@ -57,9 +55,7 @@ class PharmacyBestSellersScreen extends StatelessWidget {
                 // Title Section
                 Padding(
                   padding: AppConst.defaultHrPadding,
-                  child: const TitleWithMore(
-                    title: 'Best Sellers',
-                  ),
+                  child: const TitleWithMore(title: 'Best Sellers'),
                 ),
                 const VerticalSpacing(16),
                 // Products Grid
@@ -121,13 +117,15 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 5.0,
           reviewCount: 120,
           outOfStock: false,
-          hasOptions: false,
+          sold: 0,
         ),
         'vendorName': 'Al-Azab Pharmacy',
       },
       {
         'pharmacies': const ProductEntity(
           id: -2,
+          sold: 0,
+
           name: 'Skin Serum',
           description: 'Anti-aging serum',
           price: 95.0,
@@ -135,13 +133,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.8,
           reviewCount: 85,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Health Plus Pharmacy',
       },
       {
         'pharmacies': const ProductEntity(
           id: -3,
+          sold: 0,
+
           name: 'Vitamin C Tablets',
           description: 'Immune system support',
           price: 45.0,
@@ -149,13 +148,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.7,
           reviewCount: 200,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Care Pharmacy',
       },
       {
         'pharmacies': const ProductEntity(
           id: -4,
+          sold: 0,
+
           name: 'Pain Relief Gel',
           description: 'Fast acting pain relief',
           price: 65.0,
@@ -163,7 +163,6 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.9,
           reviewCount: 150,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Al-Azab Pharmacy',
       },
@@ -173,11 +172,12 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           name: 'Face Moisturizer',
           description: 'Hydrating face cream',
           price: 120.0,
+          sold: 0,
+
           image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 4.6,
           reviewCount: 95,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Beauty Pharmacy',
       },
@@ -190,14 +190,17 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 4.8,
           reviewCount: 180,
+          sold: 0,
+
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Natural Care Pharmacy',
       },
       {
         'pharmacies': const ProductEntity(
           id: -7,
+          sold: 0,
+
           name: 'Acne Treatment Gel',
           description: 'Clear skin solution',
           price: 75.0,
@@ -205,13 +208,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.5,
           reviewCount: 160,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Skin Care Plus',
       },
       {
         'pharmacies': const ProductEntity(
           id: -8,
+          sold: 0,
+
           name: 'Multivitamin Complex',
           description: 'Complete daily nutrition',
           price: 55.0,
@@ -219,13 +223,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.7,
           reviewCount: 220,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Health First Pharmacy',
       },
       {
         'pharmacies': const ProductEntity(
           id: -9,
+          sold: 0,
+
           name: 'Anti-Aging Night Cream',
           description: 'Rejuvenating night treatment',
           price: 140.0,
@@ -233,13 +238,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.9,
           reviewCount: 110,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Premium Beauty',
       },
       {
         'pharmacies': const ProductEntity(
           id: -10,
+          sold: 0,
+
           name: 'Hair Shampoo & Conditioner',
           description: 'Complete hair care set',
           price: 90.0,
@@ -247,13 +253,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.6,
           reviewCount: 175,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Hair Care Specialists',
       },
       {
         'pharmacies': const ProductEntity(
           id: -11,
+          sold: 0,
+
           name: 'Joint Pain Relief Cream',
           description: 'Targeted pain relief',
           price: 70.0,
@@ -261,13 +268,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.8,
           reviewCount: 145,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Pain Relief Center',
       },
       {
         'pharmacies': const ProductEntity(
           id: -12,
+          sold: 0,
+
           name: 'Vitamin D3 Supplements',
           description: 'Bone and immune health',
           price: 50.0,
@@ -275,13 +283,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.7,
           reviewCount: 195,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Wellness Pharmacy',
       },
       {
         'pharmacies': const ProductEntity(
           id: -13,
+          sold: 0,
+
           name: 'Dark Spot Corrector',
           description: 'Even skin tone treatment',
           price: 100.0,
@@ -289,13 +298,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.5,
           reviewCount: 130,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Skin Solutions',
       },
       {
         'pharmacies': const ProductEntity(
           id: -14,
+          sold: 0,
+
           name: 'Hair Loss Prevention Serum',
           description: 'Strengthen and prevent hair loss',
           price: 125.0,
@@ -303,13 +313,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.8,
           reviewCount: 165,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Hair Restoration Clinic',
       },
       {
         'pharmacies': const ProductEntity(
           id: -15,
+          sold: 0,
+
           name: 'Omega-3 Fish Oil',
           description: 'Heart and brain health',
           price: 60.0,
@@ -317,13 +328,14 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.6,
           reviewCount: 210,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Heart Health Pharmacy',
       },
       {
         'pharmacies': const ProductEntity(
           id: -16,
+          sold: 0,
+
           name: 'Sunscreen SPF 50',
           description: 'Broad spectrum protection',
           price: 80.0,
@@ -331,7 +343,6 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           rate: 4.7,
           reviewCount: 185,
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Sun Protection Plus',
       },

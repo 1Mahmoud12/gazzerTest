@@ -6,6 +6,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 class ProductDTO extends GenericItemDTO {
   String? color;
+  int? sold;
   // ItemUnitBrand? itemUnitBrand;
 
   /// missing
@@ -19,6 +20,7 @@ class ProductDTO extends GenericItemDTO {
     storeId = json['store_id'];
     productId = json['id'];
     name = json['name'];
+    sold = json['sold'];
     price = double.tryParse(json['app_price'].toString());
     rate = double.tryParse(json['rate'].toString());
     color = json['color'];
@@ -52,6 +54,7 @@ class ProductDTO extends GenericItemDTO {
       id: id!,
       productId: productId,
       name: name ?? '',
+      sold: sold ?? 0,
       price: double.tryParse(price.toString()) ?? 0,
       rate: double.tryParse(rate.toString()) ?? 0,
       color: ColorUtils.safeHexToColor(color),

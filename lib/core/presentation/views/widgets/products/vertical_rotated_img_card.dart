@@ -116,7 +116,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                           const VectorGraphicsWidget(Assets.soldCartIc),
                           const HorizontalSpacing(2),
                           Text(L10n.tr().sold, style: TStyle.robotBlackSmall()),
-                          Text(' +120', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+                          Text(' +${prod.sold}', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
                         ],
                       ),
                     ],

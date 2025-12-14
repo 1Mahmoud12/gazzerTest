@@ -47,10 +47,7 @@ class PharmacyVendorCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: isClosed ? Co.closed.withOpacity(0.2) : Co.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: isClosed ? Co.purple.withOpacity(0.1) : Co.purple.withOpacity(0.2),
-            width: 1,
-          ),
+          border: Border.all(color: isClosed ? Co.purple.withOpacity(0.1) : Co.purple.withOpacity(0.2), width: 1),
         ),
         child: Row(
           children: [
@@ -64,25 +61,16 @@ class PharmacyVendorCard extends StatelessWidget {
                     Container(
                       width: 50,
                       height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                       margin: const EdgeInsets.only(bottom: 20),
-                      child: CircleGradientBorderedImage(
-                        image: logoUrl,
-                        showBorder: false,
-                      ),
+                      child: CircleGradientBorderedImage(image: logoUrl, showBorder: false),
                     ),
                     if (discountPercentage != null)
                       Container(
                         margin: const EdgeInsets.only(top: 25),
                         padding: const EdgeInsets.all(12),
                         decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
-                        child: Text(
-                          '$discountPercentage%',
-                          style: TStyle.whiteBold(12),
-                          textAlign: TextAlign.center,
-                        ),
+                        child: Text('$discountPercentage%', style: TStyle.whiteBold(12), textAlign: TextAlign.center),
                       ),
                   ],
                 ),
@@ -94,16 +82,8 @@ class PharmacyVendorCard extends StatelessWidget {
                     height: 60,
                     alignment: AlignmentDirectional.center,
                     padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Co.secondary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: FittedBox(
-                      child: Text(
-                        L10n.tr().closed,
-                        style: TStyle.burbleBold(15),
-                      ),
-                    ),
+                    decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
+                    child: FittedBox(child: Text(L10n.tr().closed, style: TStyle.burbleBold(15))),
                   ),
               ],
             ),
@@ -131,32 +111,18 @@ class PharmacyVendorCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
 
                         children: [
-                          Text(
-                            'Top Rated',
-                            style: TStyle.mainwSemi(
-                              12,
-                            ).copyWith(color: Co.tertiary),
-                          ),
+                          Text('Top Rated', style: TStyle.mainwSemi(12).copyWith(color: Co.tertiary)),
                           const VerticalSpacing(4),
                           Row(
                             children: [
-                              const Icon(
-                                Icons.location_on,
-                                color: Co.purple,
-                                size: 16,
-                              ),
+                              const Icon(Icons.location_on, color: Co.purple, size: 16),
                               const SizedBox(width: 4),
                               SizedBox(
                                 width: 60,
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,
                                   alignment: AlignmentDirectional.centerStart,
-                                  child: Text(
-                                    location,
-                                    style: TStyle.greySemi(12),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                  child: Text(location, style: TStyle.greySemi(12), maxLines: 1, overflow: TextOverflow.ellipsis),
                                 ),
                               ),
                             ],
@@ -172,32 +138,18 @@ class PharmacyVendorCard extends StatelessWidget {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
-                                Icons.star,
-                                color: Co.tertiary,
-                                size: 18,
-                              ),
+                              const Icon(Icons.star, color: Co.tertiary, size: 18),
                               const SizedBox(width: 4),
-                              Text(
-                                '$rating ( $reviewCount )',
-                                style: TStyle.blackBold(12).copyWith(color: Co.tertiary),
-                              ),
+                              Text('$rating ( $reviewCount )', style: TStyle.blackBold(12).copyWith(color: Co.tertiary)),
                             ],
                           ),
                           VerticalSpacing(4),
                           // Delivery Time
                           Row(
                             children: [
-                              const Icon(
-                                Icons.access_time,
-                                color: Co.purple,
-                                size: 16,
-                              ),
+                              const Icon(Icons.access_time, color: Co.purple, size: 16),
                               const SizedBox(width: 4),
-                              Text(
-                                deliveryTime,
-                                style: TStyle.greySemi(12),
-                              ),
+                              Text(deliveryTime, style: TStyle.greySemi(12)),
                             ],
                           ),
                         ],
@@ -223,6 +175,7 @@ class PharmacyVendorCard extends StatelessWidget {
                 rate: 12,
                 reviewCount: reviewCount,
                 outOfStock: false,
+                sold: 0,
               ),
               isDarkContainer: false,
               size: 20,

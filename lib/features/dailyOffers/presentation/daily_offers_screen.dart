@@ -161,6 +161,8 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                   final s = stores[index];
                                   final entity = ProductEntity(
                                     id: s.id ?? 0,
+                                    sold: 0,
+
                                     productId: s.id,
                                     name: s.storeName ?? '',
                                     description: '',

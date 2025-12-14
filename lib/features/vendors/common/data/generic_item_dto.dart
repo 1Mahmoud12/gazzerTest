@@ -18,12 +18,7 @@ class SimpleStoreDTO {
   }
 
   SimpleStoreEntity toEntity() {
-    return SimpleStoreEntity(
-      id: id ?? 0,
-      name: name ?? '',
-      type: type ?? '',
-      image: image ?? '',
-    );
+    return SimpleStoreEntity(id: id ?? 0, name: name ?? '', type: type ?? '', image: image ?? '');
   }
 }
 
@@ -33,12 +28,7 @@ class SimpleStoreEntity {
   final String type;
   final String image;
 
-  SimpleStoreEntity({
-    required this.id,
-    required this.name,
-    required this.type,
-    required this.image,
-  });
+  SimpleStoreEntity({required this.id, required this.name, required this.type, required this.image});
 }
 
 abstract class GenericItemDTO {
@@ -47,6 +37,7 @@ abstract class GenericItemDTO {
   int? storeId;
   int? orderCount;
   int? caegoryId;
+  int? sold;
   String? name;
   String? image;
   String? description;
@@ -73,6 +64,7 @@ abstract class GenericItemDTO {
     this.image,
     this.description,
     this.price,
+    this.sold,
     this.quantityInStock,
     this.offer,
     this.orderCount,
@@ -84,6 +76,7 @@ abstract class GenericItemDTO {
     this.priceBeforeDiscount,
     this.hasOptions,
   });
-  GenericItemDTO.fromJson(Map<String, dynamic> json);
+
+  GenericItemDTO.fromJson();
   GenericItemEntity toEntity();
 }

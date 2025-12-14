@@ -2,6 +2,7 @@ part of 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.
 
 class PlateEntity extends GenericItemEntity {
   final int categoryPlateId;
+  final int sold;
 
   const PlateEntity({
     required super.id,
@@ -15,6 +16,7 @@ class PlateEntity extends GenericItemEntity {
     required this.categoryPlateId,
     required super.hasOptions,
     super.badge,
+    required this.sold,
     super.tags,
     super.offer,
     super.productId,
@@ -24,8 +26,5 @@ class PlateEntity extends GenericItemEntity {
   });
 
   @override
-  List<Object?> get props => [
-    ...super.props,
-    categoryPlateId,
-  ];
+  List<Object?> get props => [...super.props, categoryPlateId, sold];
 }

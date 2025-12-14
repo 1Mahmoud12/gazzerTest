@@ -136,10 +136,10 @@ final List<RouteBase> unNestedRoutes = [
     path: IncorrectItemsScreen.route,
     builder: (context, state) {
       if (state.extra is Map<String, dynamic>) {
-        final extra = state.extra as Map<String, dynamic>;
+        final extra = state.extra! as Map<String, dynamic>;
         return IncorrectItemsScreen(orderId: extra['orderId'] as int, faqCategoryId: extra['faqCategoryId'] as int?);
       }
-      return IncorrectItemsScreen(orderId: state.extra as int);
+      return IncorrectItemsScreen(orderId: state.extra! as int);
     },
   ),
   GoRoute(

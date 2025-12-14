@@ -42,10 +42,7 @@ class PharmacyStoreScreenRoute extends GoRouteData with _$PharmacyStoreScreenRou
 
 /// Pharmacy store screen showing products by category
 class PharmacyStoreScreen extends StatelessWidget {
-  const PharmacyStoreScreen({
-    super.key,
-    required this.vendorId,
-  });
+  const PharmacyStoreScreen({super.key, required this.vendorId});
 
   static const route = '/pharmacy-store';
 
@@ -115,16 +112,12 @@ class PharmacyStoreScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           L10n.tr().pharmacyStores,
-                          style: TStyle.blackBold(
-                            22,
-                          ).copyWith(color: Co.purple),
+                          style: TStyle.blackBold(22).copyWith(color: Co.purple),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(
-                        width: 16,
-                      ),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: PrescriptionUploadButton(
                           onTap: () {
@@ -146,70 +139,47 @@ class PharmacyStoreScreen extends StatelessWidget {
             spacing: 12,
             children: [
               const HorizontalSpacing(6),
-              Expanded(
-                child: MainSearchWidget(
-                  hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                ),
-              ),
+              Expanded(child: MainSearchWidget(hintText: L10n.tr().searchForStoresItemsAndCAtegories)),
               const MainCartWidget(),
               const HorizontalSpacing(6),
             ],
           ),
           const SizedBox(height: 16),
           // Banner Slider with Dots
-          const PharmacyBannerSlider(
-            height: 180,
-          ),
+          const PharmacyBannerSlider(height: 180),
 
           SizedBox(
             height: 60,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: List.generate(
-                  3,
-                  (index) {
-                    final selected = index == 0;
-                    final category = categories[index];
-                    return InkWell(
-                      onTap: () {
-                        context.navigateToPage(
-                          PharmacyProductsScreen(
-                            categoryId: -category['id'],
-                            categoryName: category['name'],
-                          ),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(90),
-                          border: Border.all(
-                            color: Co.buttonGradient.withOpacityNew(.3),
-                            width: 2,
-                          ),
-                          color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CircleGradientBorderedImage(
-                              image: category['image'],
-                              showBorder: false,
-                            ),
-                            Padding(
-                              padding: AppConst.defaultHrPadding,
-                              child: Text(
-                                category['name'],
-                                style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
-                              ),
-                            ),
-                          ],
-                        ),
+                children: List.generate(3, (index) {
+                  final selected = index == 0;
+                  final category = categories[index];
+                  return InkWell(
+                    onTap: () {
+                      context.navigateToPage(PharmacyProductsScreen(categoryId: -category['id'], categoryName: category['name']));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(90),
+                        border: Border.all(color: Co.buttonGradient.withOpacityNew(.3), width: 2),
+                        color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
                       ),
-                    );
-                  },
-                ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircleGradientBorderedImage(image: category['image'], showBorder: false),
+                          Padding(
+                            padding: AppConst.defaultHrPadding,
+                            child: Text(category['name'], style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
               ),
             ),
           ),
@@ -229,47 +199,48 @@ class PharmacyStoreScreen extends StatelessWidget {
                   alignment: WrapAlignment.spaceBetween,
                   spacing: 10,
                   children: [
-                    ...List.generate(
-                      4,
-                      (index) {
-                        return SizedBox(
-                          width: MediaQuery.sizeOf(context).width * .3,
-                          child: false
-                              ? DailyOfferStyleTwo(
-                                  product: const ProductEntity(
-                                    id: -1,
-                                    name: 'Medical Product Bundle',
-                                    description: 'Complete medical product set with nasal spray, dropper, and medication',
-                                    price: 110.0,
-                                    image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                                    rate: 4.5,
-                                    reviewCount: 100,
-                                    outOfStock: false,
-                                  ),
-                                  discountPercentage: 30,
-                                  onTap: () {
-                                    // TODO: Navigate to product details
-                                  },
-                                )
-                              : DailyOfferStyleOne(
-                                  product: const ProductEntity(
-                                    id: -1,
-                                    name: 'Medical Product Bundle',
-                                    description: 'Complete medical product set with nasal spray, dropper, and medication',
-                                    price: 110.0,
-                                    image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                                    rate: 4.5,
-                                    reviewCount: 100,
-                                    outOfStock: false,
-                                  ),
-                                  discountPercentage: 30,
-                                  onTap: () {
-                                    // TODO: Navigate to product details
-                                  },
+                    ...List.generate(4, (index) {
+                      return SizedBox(
+                        width: MediaQuery.sizeOf(context).width * .3,
+                        child: false
+                            ? DailyOfferStyleTwo(
+                                product: const ProductEntity(
+                                  id: -1,
+                                  sold: 0,
+
+                                  name: 'Medical Product Bundle',
+                                  description: 'Complete medical product set with nasal spray, dropper, and medication',
+                                  price: 110.0,
+                                  image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+                                  rate: 4.5,
+                                  reviewCount: 100,
+                                  outOfStock: false,
                                 ),
-                        );
-                      },
-                    ),
+                                discountPercentage: 30,
+                                onTap: () {
+                                  // TODO: Navigate to product details
+                                },
+                              )
+                            : DailyOfferStyleOne(
+                                product: const ProductEntity(
+                                  id: -1,
+                                  sold: 0,
+
+                                  name: 'Medical Product Bundle',
+                                  description: 'Complete medical product set with nasal spray, dropper, and medication',
+                                  price: 110.0,
+                                  image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+                                  rate: 4.5,
+                                  reviewCount: 100,
+                                  outOfStock: false,
+                                ),
+                                discountPercentage: 30,
+                                onTap: () {
+                                  // TODO: Navigate to product details
+                                },
+                              ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -292,21 +263,9 @@ class PharmacyStoreScreen extends StatelessWidget {
   // ==================== Static Data ====================
   List<Map<String, dynamic>> _getStoreCategories() {
     return [
-      {
-        'id': -2,
-        'name': 'Medications',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-      },
-      {
-        'id': -3,
-        'name': 'Skin Care',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-      },
-      {
-        'id': -4,
-        'name': 'Hair Care',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-      },
+      {'id': -2, 'name': 'Medications', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
+      {'id': -3, 'name': 'Skin Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
+      {'id': -4, 'name': 'Hair Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
     ];
   }
 }

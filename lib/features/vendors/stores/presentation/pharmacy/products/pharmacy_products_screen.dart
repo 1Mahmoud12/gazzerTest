@@ -12,11 +12,7 @@ import 'package:go_router/go_router.dart';
 
 /// Pharmacy products screen showing products by category
 class PharmacyProductsScreen extends StatefulWidget {
-  const PharmacyProductsScreen({
-    super.key,
-    required this.categoryId,
-    required this.categoryName,
-  });
+  const PharmacyProductsScreen({super.key, required this.categoryId, required this.categoryName});
 
   final int categoryId;
   final String categoryName;
@@ -55,10 +51,7 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
             padding: AppConst.defaultHrPadding,
             child: Align(
               alignment: isAr ? Alignment.centerRight : Alignment.centerLeft,
-              child: Text(
-                isAr ? '${widget.categoryName} الفئات' : '${widget.categoryName} Categories',
-                style: TStyle.burbleBold(20),
-              ),
+              child: Text(isAr ? '${widget.categoryName} الفئات' : '${widget.categoryName} Categories', style: TStyle.burbleBold(20)),
             ),
           ),
 
@@ -71,48 +64,36 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(
-                children: List.generate(
-                  categories.length,
-                  (index) {
-                    final selected = index == _selectedCategoryIndex;
-                    final category = categories[index];
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedCategoryIndex = index;
-                        });
-                      },
-                      child: Container(
-                        height: 50,
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(90),
-                          border: Border.all(
-                            color: Co.buttonGradient.withOpacityNew(.3),
-                            width: 2,
-                          ),
-                          color: selected ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CircleGradientBorderedImage(
-                              image: category['image'] ?? '',
-                              showBorder: false,
-                            ),
-                            Padding(
-                              padding: AppConst.defaultHrPadding,
-                              child: Text(
-                                category['name'] ?? '',
-                                style: selected ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
-                              ),
-                            ),
-                          ],
-                        ),
+                children: List.generate(categories.length, (index) {
+                  final selected = index == _selectedCategoryIndex;
+                  final category = categories[index];
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedCategoryIndex = index;
+                      });
+                    },
+                    child: Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(90),
+                        border: Border.all(color: Co.buttonGradient.withOpacityNew(.3), width: 2),
+                        color: selected ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
                       ),
-                    );
-                  },
-                ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircleGradientBorderedImage(image: category['image'] ?? '', showBorder: false),
+                          Padding(
+                            padding: AppConst.defaultHrPadding,
+                            child: Text(category['name'] ?? '', style: selected ? TStyle.burbleBold(15) : TStyle.blackSemi(13)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
               ),
             ),
           ),
@@ -139,11 +120,7 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
                 // Right Side - Products Grid
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 8,
-                      left: 8,
-                      bottom: 16,
-                    ),
+                    padding: const EdgeInsets.only(right: 8, left: 8, bottom: 16),
                     child: GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -177,35 +154,17 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
 
   List<Map<String, String>> _getCategories() {
     return [
-      {
-        'name': 'Medications',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-      },
-      {
-        'name': 'Skin Care',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-      },
-      {
-        'name': 'Hair Care',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-      },
+      {'name': 'Medications', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
+      {'name': 'Skin Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
+      {'name': 'Hair Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
     ];
   }
 
   List<Map<String, String>> _getSubCategories() {
     return [
-      {
-        'name': 'Body Care',
-        'image': 'https://images.unsplash.com/photo-1556228852-80c61c8b0add?w=100&h=100&fit=crop',
-      },
-      {
-        'name': 'Face Care',
-        'image': 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=100&h=100&fit=crop',
-      },
-      {
-        'name': 'Sun Protection',
-        'image': 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=100&h=100&fit=crop',
-      },
+      {'name': 'Body Care', 'image': 'https://images.unsplash.com/photo-1556228852-80c61c8b0add?w=100&h=100&fit=crop'},
+      {'name': 'Face Care', 'image': 'https://images.unsplash.com/photo-1612817288484-6f916006741a?w=100&h=100&fit=crop'},
+      {'name': 'Sun Protection', 'image': 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=100&h=100&fit=crop'},
     ];
   }
 
@@ -214,6 +173,8 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
       6,
       (index) => ProductEntity(
         id: index,
+        sold: 0,
+
         name: index == 0
             ? 'Micellar Water Skin Cleanser'
             : index == 1
@@ -237,12 +198,7 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
 }
 
 class _SubCategoriesList extends StatelessWidget {
-  const _SubCategoriesList({
-    required this.subCategories,
-    required this.selectedIndex,
-    required this.onSelect,
-    required this.isAr,
-  });
+  const _SubCategoriesList({required this.subCategories, required this.selectedIndex, required this.onSelect, required this.isAr});
 
   final List<Map<String, String>> subCategories;
   final int selectedIndex;
@@ -272,10 +228,7 @@ class _SubCategoriesList extends StatelessWidget {
                     height: 80,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: isSelected ? Co.buttonGradient : Co.grey.withOpacityNew(0.3),
-                        width: isSelected ? 3 : 2,
-                      ),
+                      border: Border.all(color: isSelected ? Co.buttonGradient : Co.grey.withOpacityNew(0.3), width: isSelected ? 3 : 2),
                     ),
                     child: ClipOval(
                       child: Image.network(
@@ -284,11 +237,7 @@ class _SubCategoriesList extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             color: Co.bg.withOpacityNew(0.5),
-                            child: Icon(
-                              Icons.category,
-                              color: Co.buttonGradient,
-                              size: 30,
-                            ),
+                            child: Icon(Icons.category, color: Co.buttonGradient, size: 30),
                           );
                         },
                       ),

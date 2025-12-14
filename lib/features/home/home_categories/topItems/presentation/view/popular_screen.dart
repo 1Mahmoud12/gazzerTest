@@ -152,6 +152,7 @@ class _PopularScreenState extends State<PopularScreen> {
         image: item.item?.plateImage ?? '',
         rate: double.tryParse(item.item?.rate ?? '0') ?? 0.0,
         reviewCount: item.item?.rateCount ?? 0,
+        sold: 0,
 
         outOfStock: false,
         categoryPlateId: -1,
@@ -168,6 +169,7 @@ class _PopularScreenState extends State<PopularScreen> {
       rate: double.tryParse(item.item?.rate ?? '0') ?? 0.0,
       reviewCount: item.item?.rateCount ?? 0,
       outOfStock: false,
+      sold: 0,
     );
   }
 }

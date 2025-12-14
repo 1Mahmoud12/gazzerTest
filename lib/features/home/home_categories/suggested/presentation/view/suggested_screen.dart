@@ -158,7 +158,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
     final itemData = item.item;
     if (itemData == null) {
       // Fallback to empty ProductEntity if item is null
-      return ProductEntity(id: item.id ?? 0, name: '', description: '', price: 0, image: '', rate: 0, reviewCount: 0, outOfStock: false);
+      return ProductEntity(id: item.id ?? 0, sold: 0, name: '', description: '', price: 0, image: '', rate: 0, reviewCount: 0, outOfStock: false);
     }
 
     final itemType = ItemType.fromString(item.itemType ?? '');
@@ -185,6 +185,8 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
     if (itemType == ItemType.plate) {
       // Convert to PlateEntity
       return PlateEntity(
+        sold: 0,
+
         id: itemData.id ?? item.id ?? 0,
         name: itemData.plateName ?? itemData.name ?? '',
         description: itemData.plateDescription ?? '',
@@ -203,6 +205,8 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
       return ProductEntity(
         id: itemData.id ?? item.id ?? 0,
         name: itemData.name ?? '',
+        sold: 0,
+
         description: itemData.plateDescription ?? '',
         price: price,
         image: itemData.image ?? itemData.plateImage ?? '',

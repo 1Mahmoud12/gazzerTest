@@ -41,14 +41,9 @@ class _FavoriteCardState extends State<FavoriteCard> {
       if (!mounted) return;
       if (v.id != widget.favorite.id || v.type != widget.favorite.favoriteType) return;
       if (v is RemovedFavoriteSuccess) {
-        Alerts.showToast(
-          L10n.tr().itemNameRemovedFromFavorites(widget.favorite.name),
-          error: false,
-        );
+        Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.favorite.name), error: false);
       } else if (v is ToggleFavoriteFailure) {
-        Alerts.showToast(
-          "${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}",
-        );
+        Alerts.showToast("${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}");
       }
     });
     getItemType();
@@ -88,6 +83,8 @@ class _FavoriteCardState extends State<FavoriteCard> {
         name: widget.favorite.name,
         description: widget.favorite.description,
         price: 2,
+        sold: 0,
+
         categoryPlateId: 2,
         image: widget.favorite.image,
         rate: widget.favorite.rate,
@@ -99,6 +96,8 @@ class _FavoriteCardState extends State<FavoriteCard> {
     /*if (type == CartItemType.product.value)*/ {
       itemEntity = ProductEntity(
         id: widget.favorite.id,
+        sold: 0,
+
         name: widget.favorite.name,
         description: widget.favorite.description,
         price: 2,
@@ -138,19 +137,10 @@ class _FavoriteCardState extends State<FavoriteCard> {
                         Row(
                           spacing: 6,
                           children: [
-                            SizedBox(
-                              height: 30,
-                              child: CircleGradientBorderedImage(
-                                image: widget.favorite.image,
-                              ),
-                            ),
+                            SizedBox(height: 30, child: CircleGradientBorderedImage(image: widget.favorite.image)),
                             Expanded(
                               child: Text(
-                                Helpers.shortIrretableStrings(
-                                      widget.favorite.name.split(' '),
-                                      24,
-                                    ) ??
-                                    '',
+                                Helpers.shortIrretableStrings(widget.favorite.name.split(' '), 24) ?? '',
                                 style: TStyle.primaryBold(12),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
@@ -163,35 +153,18 @@ class _FavoriteCardState extends State<FavoriteCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             if (widget.favorite.favorablePrice != null)
-                              Text(
-                                Helpers.getProperPrice(
-                                  widget.favorite.favorablePrice!,
-                                ),
-                                style: TStyle.tertiaryBold(12),
-                              )
+                              Text(Helpers.getProperPrice(widget.favorite.favorablePrice!), style: TStyle.tertiaryBold(12))
                             else
                               const SizedBox.shrink(),
                             Row(
                               children: [
-                                const Icon(
-                                  Icons.star,
-                                  color: Co.secondary,
-                                  size: 16,
-                                ),
-                                Text(
-                                  widget.favorite.rate.toStringAsFixed(1),
-                                  style: TStyle.secondarySemi(12),
-                                ),
+                                const Icon(Icons.star, color: Co.secondary, size: 16),
+                                Text(widget.favorite.rate.toStringAsFixed(1), style: TStyle.secondarySemi(12)),
                               ],
                             ),
                           ],
                         ),
-                        Expanded(
-                          child: Text(
-                            widget.favorite.description,
-                            style: TStyle.blackSemi(12),
-                          ),
-                        ),
+                        Expanded(child: Text(widget.favorite.description, style: TStyle.blackSemi(12))),
                         const VerticalSpacing(8),
                         if (_canAddToCart())
                           Align(
@@ -219,12 +192,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                 angle: -0.25,
                 child: ClipRRect(
                   borderRadius: AppConst.defaultBorderRadius,
-                  child: CustomNetworkImage(
-                    widget.favorite.image,
-                    fit: BoxFit.cover,
-                    width: 95,
-                    height: 50,
-                  ),
+                  child: CustomNetworkImage(widget.favorite.image, fit: BoxFit.cover, width: 95, height: 50),
                 ),
               ),
             ),
@@ -241,10 +209,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                         snapshot.data!.type == widget.favorite.favoriteType.toView) {
                       return const Padding(
                         padding: EdgeInsets.all(6),
-                        child: AdaptiveProgressIndicator(
-                          size: 20,
-                          color: Co.bg,
-                        ),
+                        child: AdaptiveProgressIndicator(size: 20, color: Co.bg),
                       );
                     }
                     return IconButton(
@@ -257,11 +222,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      icon: const Icon(
-                        CupertinoIcons.delete,
-                        color: Co.secondary,
-                        size: 18,
-                      ),
+                      icon: const Icon(CupertinoIcons.delete, color: Co.secondary, size: 18),
                     );
                   },
                 ),

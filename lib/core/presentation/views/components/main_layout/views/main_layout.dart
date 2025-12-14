@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
@@ -14,6 +13,7 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/nav_bar/main_bnb.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
@@ -106,7 +106,7 @@ class _MainLayoutState extends State<MainLayout> {
           valueListenable: route,
           builder: (context, value, child) => Scaffold(
             body: widget.child,
-
+            extendBody: true,
             bottomNavigationBar: _shouldShowBottomNav()
                 ? BlocBuilder<AppSettingsCubit, AppSettingsState>(
                     buildWhen: (previous, current) => previous.lang != current.lang,
@@ -120,6 +120,7 @@ class _MainLayoutState extends State<MainLayout> {
                     ),
                   )
                 : null,
+
             floatingActionButton: _shouldShowBottomNav()
                 ? _CartFloatingActionButton(
                     onPressed: () {
@@ -191,12 +192,13 @@ class _CartFloatingActionButton extends StatelessWidget {
         SystemSound.play(SystemSoundType.click);
         onPressed();
       },
-      backgroundColor: Colors.transparent,
+      backgroundColor: Co.white,
       elevation: 0,
       splashColor: Colors.transparent,
       hoverColor: Colors.transparent,
       focusColor: Colors.transparent,
       foregroundColor: Colors.transparent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(30)),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -222,10 +224,10 @@ class _CartFloatingActionButton extends StatelessWidget {
                   fillPercentage = fillPercentage.clamp(0.0, 100.0);
                 }
 
-                if (fillPercentage < 60) {
-                  progressColor = Co.purple;
-                } else if (fillPercentage < 85) {
-                  progressColor = Co.purple;
+                if (fillPercentage < 50) {
+                  progressColor = Co.purple200;
+                } else if (fillPercentage < 75) {
+                  progressColor = Co.purple600;
                 } else {
                   progressColor = Co.purple;
                 }
@@ -235,7 +237,7 @@ class _CartFloatingActionButton extends StatelessWidget {
                 height: 70,
                 child: CircularProgressIndicator(
                   value: fillPercentage / 100,
-                  backgroundColor: Colors.grey.withOpacityNew(0.15),
+                  backgroundColor: Colors.grey.withOpacityNew(.5),
                   valueColor: AlwaysStoppedAnimation<Color>(progressColor),
                   strokeWidth: 5.0,
                 ),
@@ -243,7 +245,7 @@ class _CartFloatingActionButton extends StatelessWidget {
             },
           ),
           // Cart icon
-          SvgPicture.asset(Assets.cartIc, colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn)),
+          const VectorGraphicsWidget(Assets.cartIc),
         ],
       ),
     );

@@ -20,9 +20,7 @@ import 'package:go_router/go_router.dart';
 part 'pharmacy_menu_screen.g.dart';
 
 /// Main pharmacy menu screen with static data
-@TypedGoRoute<PharmacyMenuRoute>(
-  path: PharmacyMenuRoute.route,
-)
+@TypedGoRoute<PharmacyMenuRoute>(path: PharmacyMenuRoute.route)
 class PharmacyMenuRoute extends GoRouteData {
   const PharmacyMenuRoute();
 
@@ -66,10 +64,7 @@ class PharmacyMenuScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Delivery Banner
-            DeliveryBanner(
-              message: 'Free delivery on orders over 300 EG',
-              backgroundColor: Co.buttonGradient.withOpacityNew(.1),
-            ),
+            DeliveryBanner(message: 'Free delivery on orders over 300 EG', backgroundColor: Co.buttonGradient.withOpacityNew(.1)),
 
             const SizedBox(height: 16),
 
@@ -77,9 +72,7 @@ class PharmacyMenuScreen extends StatelessWidget {
             DailyDealCard(
               imageUrl: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
               discountPercentage: 30,
-              endTime: DateTime.now().add(
-                const Duration(hours: 14, minutes: 20, seconds: 30),
-              ),
+              endTime: DateTime.now().add(const Duration(hours: 14, minutes: 20, seconds: 30)),
               onTap: () {
                 // TODO: Navigate to daily deal details
               },
@@ -116,9 +109,7 @@ class PharmacyMenuScreen extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          const SizedBox(
-            width: 16,
-          ),
+          const SizedBox(width: 16),
           Expanded(
             child: PrescriptionUploadButton(
               onTap: () {
@@ -152,31 +143,23 @@ class PharmacyMenuScreen extends StatelessWidget {
               child: Wrap(
                 runSpacing: 10,
                 spacing: 10,
-                children: List.generate(
-                  categories.length,
-                  (index) {
-                    final category = categories[index];
-                    return SizedBox(
-                      width: (MediaQuery.sizeOf(context).width / 3) - 10,
-                      height: 170,
-                      child: PharmacyCategoryCard(
-                        id: -category['id'],
-                        name: category['name'],
-                        imageUrl: category['image'],
-                        rating: category['rating'],
-                        reviewCount: category['reviews'],
-                        onTap: () {
-                          context.navigateToPage(
-                            PharmacySubcategoryScreen(
-                              categoryId: -category['id'],
-                              categoryName: category['name'],
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                ),
+                children: List.generate(categories.length, (index) {
+                  final category = categories[index];
+                  return SizedBox(
+                    width: (MediaQuery.sizeOf(context).width / 3) - 10,
+                    height: 170,
+                    child: PharmacyCategoryCard(
+                      id: -category['id'],
+                      name: category['name'],
+                      imageUrl: category['image'],
+                      rating: category['rating'],
+                      reviewCount: category['reviews'],
+                      onTap: () {
+                        context.navigateToPage(PharmacySubcategoryScreen(categoryId: -category['id'], categoryName: category['name']));
+                      },
+                    ),
+                  );
+                }),
               ),
             ),
           ],
@@ -206,32 +189,29 @@ class PharmacyMenuScreen extends StatelessWidget {
             padding: AppConst.defaultHrPadding,
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(
-                bestSellers.length,
-                (index) {
-                  final product = bestSellers[index];
-                  return index % 2 == 0
-                      ? PharmacyProductCardStyle2(
-                          product: product['product'],
-                          vendorName: product['vendorName'],
-                          width: MediaQuery.sizeOf(context).width * .8,
-                          height: MediaQuery.sizeOf(context).height * .25,
-                          onTap: () {
-                            // Handle tap
-                          },
-                        )
-                      : PharmacyProductCard(
-                          product: product['product'],
-                          vendorName: product['vendorName'],
-                          width: MediaQuery.sizeOf(context).width * .8,
-                          height: MediaQuery.sizeOf(context).height * .25,
+              children: List.generate(bestSellers.length, (index) {
+                final product = bestSellers[index];
+                return index % 2 == 0
+                    ? PharmacyProductCardStyle2(
+                        product: product['product'],
+                        vendorName: product['vendorName'],
+                        width: MediaQuery.sizeOf(context).width * .8,
+                        height: MediaQuery.sizeOf(context).height * .25,
+                        onTap: () {
+                          // Handle tap
+                        },
+                      )
+                    : PharmacyProductCard(
+                        product: product['product'],
+                        vendorName: product['vendorName'],
+                        width: MediaQuery.sizeOf(context).width * .8,
+                        height: MediaQuery.sizeOf(context).height * .25,
 
-                          onTap: () {
-                            // TODO: Navigate to product details
-                          },
-                        );
-                },
-              ),
+                        onTap: () {
+                          // TODO: Navigate to product details
+                        },
+                      );
+              }),
             ),
           ),
         ),
@@ -243,27 +223,9 @@ class PharmacyMenuScreen extends StatelessWidget {
 
   List<Map<String, dynamic>> _getStaticCategories() {
     return [
-      {
-        'id': -1,
-        'name': 'Medications',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        'rating': 4.5,
-        'reviews': 100,
-      },
-      {
-        'id': -2,
-        'name': 'Skin Care',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        'rating': 4.5,
-        'reviews': 100,
-      },
-      {
-        'id': -3,
-        'name': 'Hair Care',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        'rating': 4.5,
-        'reviews': 100,
-      },
+      {'id': -1, 'name': 'Medications', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', 'rating': 4.5, 'reviews': 100},
+      {'id': -2, 'name': 'Skin Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', 'rating': 4.5, 'reviews': 100},
+      {'id': -3, 'name': 'Hair Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', 'rating': 4.5, 'reviews': 100},
       {
         'id': -4,
         'name': 'Vitamins & Dietary',
@@ -271,27 +233,9 @@ class PharmacyMenuScreen extends StatelessWidget {
         'rating': 4.5,
         'reviews': 100,
       },
-      {
-        'id': -5,
-        'name': 'Beauty Products',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        'rating': 4.5,
-        'reviews': 100,
-      },
-      {
-        'id': -6,
-        'name': 'Lose Weight',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        'rating': 4.5,
-        'reviews': 100,
-      },
-      {
-        'id': -7,
-        'name': 'Personal Care',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        'rating': 4.5,
-        'reviews': 100,
-      },
+      {'id': -5, 'name': 'Beauty Products', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', 'rating': 4.5, 'reviews': 100},
+      {'id': -6, 'name': 'Lose Weight', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', 'rating': 4.5, 'reviews': 100},
+      {'id': -7, 'name': 'Personal Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg', 'rating': 4.5, 'reviews': 100},
       {
         'id': -8,
         'name': 'Mother And Child',
@@ -321,7 +265,7 @@ class PharmacyMenuScreen extends StatelessWidget {
           rate: 5.0,
           reviewCount: 120,
           outOfStock: false,
-          hasOptions: false,
+          sold: 0,
         ),
         'vendorName': 'Al-Azab Pharmacy',
       },
@@ -335,7 +279,7 @@ class PharmacyMenuScreen extends StatelessWidget {
           rate: 4.8,
           reviewCount: 85,
           outOfStock: false,
-          hasOptions: false,
+          sold: 0,
         ),
         'vendorName': 'Health Plus Pharmacy',
       },
@@ -349,7 +293,7 @@ class PharmacyMenuScreen extends StatelessWidget {
           rate: 4.7,
           reviewCount: 200,
           outOfStock: false,
-          hasOptions: false,
+          sold: 0,
         ),
         'vendorName': 'Care Pharmacy',
       },
@@ -363,7 +307,7 @@ class PharmacyMenuScreen extends StatelessWidget {
           rate: 4.9,
           reviewCount: 150,
           outOfStock: false,
-          hasOptions: false,
+          sold: 0,
         ),
         'vendorName': 'Al-Azab Pharmacy',
       },
@@ -376,8 +320,9 @@ class PharmacyMenuScreen extends StatelessWidget {
           image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 4.6,
           reviewCount: 95,
+          sold: 0,
+
           outOfStock: false,
-          hasOptions: false,
         ),
         'vendorName': 'Beauty Pharmacy',
       },

@@ -3,6 +3,7 @@ part of 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.
 class ProductEntity extends GenericItemEntity {
   final Color? color;
   final int? quantityInStock;
+  final int? sold;
 
   ///
 
@@ -16,6 +17,7 @@ class ProductEntity extends GenericItemEntity {
     required super.rate,
     required super.reviewCount,
     required super.outOfStock,
+    required this.sold,
     super.hasOptions = false, // ** as per backend developer, all store-items has no options.
     super.badge,
     super.tags,
@@ -31,5 +33,5 @@ class ProductEntity extends GenericItemEntity {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [...super.props, color, quantityInStock];
+  List<Object?> get props => [...super.props, color, sold, quantityInStock];
 }

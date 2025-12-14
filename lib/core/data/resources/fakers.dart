@@ -176,7 +176,7 @@ class Fakers {
       hasOptions: false,
       id: index,
       productId: 0,
-
+      sold: 0,
       name: 'طبق ${index + 1}',
       description: 'وصف الطبق ${index + 1}',
       price: _random.nextDouble() * 100,
@@ -193,6 +193,7 @@ class Fakers {
     hasOptions: false,
     id: 0,
     productId: 0,
+    sold: 0,
 
     name: 'طبق 1',
     description: 'وصف الطبق 1',
@@ -304,8 +305,28 @@ class Fakers {
     isOpen: true,
   );
   static const fakeProds = [
-    ProductEntity(id: 0, name: 'منتج ', description: 'وصف ', price: 0, rate: 3.1, image: Fakers._netWorkImage, outOfStock: false, reviewCount: 100),
-    ProductEntity(id: 0, name: 'منتج ', description: 'وصف ', price: 0, rate: 3.1, image: Fakers._netWorkImage, outOfStock: false, reviewCount: 100),
+    ProductEntity(
+      id: 0,
+      sold: 0,
+      name: 'منتج ',
+      description: 'وصف ',
+      price: 0,
+      rate: 3.1,
+      image: Fakers._netWorkImage,
+      outOfStock: false,
+      reviewCount: 100,
+    ),
+    ProductEntity(
+      id: 0,
+      sold: 0,
+      name: 'منتج ',
+      description: 'وصف ',
+      price: 0,
+      rate: 3.1,
+      image: Fakers._netWorkImage,
+      outOfStock: false,
+      reviewCount: 100,
+    ),
   ];
   static const storeCat = StoreCategoryEntity(id: 0, name: 'فئة المتجر', image: _placeHolderImg, parentId: 0, layout: LayoutType.grid);
   static final storeCats = List.generate(
@@ -316,6 +337,8 @@ class Fakers {
   /// favorties
   static const favorite = ProductEntity(
     id: 1,
+    sold: 0,
+
     name: 'المفضل ',
     description: 'وصف المفضل ',
     image: _placeHolderImg,

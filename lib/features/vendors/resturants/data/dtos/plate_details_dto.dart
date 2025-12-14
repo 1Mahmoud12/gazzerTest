@@ -77,6 +77,7 @@ class PlateDetailsDTO {
       badge: badge,
       outOfStock: false,
       hasOptions: hasOptions ?? false,
+      sold: 0,
     );
   }
 
