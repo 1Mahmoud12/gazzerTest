@@ -12,27 +12,17 @@ void animationDialogLoading([BuildContext? context]) {
     barrierColor: Colors.black26,
     barrierDismissible: false,
     useRootNavigator: true,
-    builder: (dialogContext) => const Dialog(
-      backgroundColor: Colors.transparent,
-      child: LoadingWidget(),
-    ),
+    builder: (dialogContext) => const Dialog(backgroundColor: Colors.transparent, child: LoadingWidget()),
   );
 }
 
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({
-    super.key,
-  });
+  const LoadingWidget({super.key, this.color});
 
+  final Color? color;
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 50,
-      width: 50,
-      child: SpinKitChasingDots(
-        color: Co.purple,
-      ),
-    );
+    return SizedBox(height: 50, width: 50, child: SpinKitChasingDots(color: color ?? Co.purple));
   }
 }
 

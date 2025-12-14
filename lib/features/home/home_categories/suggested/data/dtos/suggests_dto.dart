@@ -4,67 +4,85 @@ import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
 
 class SuggestsDto {
-  SuggestsDto({
-    this.status,
-    this.message,
-    this.data,
-  });
+  SuggestsDto({this.status, this.message, this.data, this.pagination});
 
   final String? status;
   final String? message;
   final SuggestsDtoData? data;
+  final PaginationInfo? pagination;
 
   factory SuggestsDto.fromJson(Map<String, dynamic> json) {
     return SuggestsDto(
-      status: json["status"],
-      message: json["message"],
-      data: json["data"] == null ? null : SuggestsDtoData.fromJson(json["data"]),
+      status: json['status'],
+      message: json['message'],
+      data: json['data'] == null ? null : SuggestsDtoData.fromJson(json['data']),
+      pagination: json['pagination'] == null ? null : PaginationInfo.fromJson(json['pagination']),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {'status': status, 'message': message, 'data': data?.toJson(), 'pagination': pagination?.toJson()};
+}
+
+class PaginationInfo {
+  final int currentPage;
+  final int totalPages;
+  final int totalRecords;
+  final int currentRecords;
+  final bool hasNext;
+  final bool hasPrevious;
+  final int perPage;
+
+  PaginationInfo({
+    required this.currentPage,
+    required this.totalPages,
+    required this.totalRecords,
+    required this.currentRecords,
+    required this.hasNext,
+    required this.hasPrevious,
+    required this.perPage,
+  });
+
+  factory PaginationInfo.fromJson(Map<String, dynamic> json) {
+    return PaginationInfo(
+      currentPage: json['current_page'] ?? 1,
+      totalPages: json['total_pages'] ?? 1,
+      totalRecords: json['total_records'] ?? 0,
+      currentRecords: json['current_records'] ?? 0,
+      hasNext: json['has_next'] ?? false,
+      hasPrevious: json['has_previous'] ?? false,
+      perPage: json['per_page'] ?? 10,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "message": message,
-    "data": data?.toJson(),
+    'current_page': currentPage,
+    'total_pages': totalPages,
+    'total_records': totalRecords,
+    'current_records': currentRecords,
+    'has_next': hasNext,
+    'has_previous': hasPrevious,
+    'per_page': perPage,
   };
 }
 
 class SuggestsDtoData {
-  SuggestsDtoData({
-    required this.entities,
-    this.banner,
-  });
+  SuggestsDtoData({required this.entities, this.banner});
 
   final List<SuggestEntity> entities;
   final dynamic banner;
 
   factory SuggestsDtoData.fromJson(Map<String, dynamic> json) {
     return SuggestsDtoData(
-      entities: json["entities"] == null
-          ? []
-          : List<SuggestEntity>.from(
-              json["entities"]!.map((x) => SuggestEntity.fromJson(x)),
-            ),
-      banner: json["banner"],
+      entities: json['entities'] == null ? [] : List<SuggestEntity>.from(json['entities']!.map((x) => SuggestEntity.fromJson(x))),
+      banner: json['banner'],
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    "entities": entities.map((x) => x.toJson()).toList(),
-    "banner": banner,
-  };
+  Map<String, dynamic> toJson() => {'entities': entities.map((x) => x.toJson()).toList(), 'banner': banner};
 }
 
 class SuggestEntity {
-  SuggestEntity({
-    this.id,
-    this.itemType,
-    this.itemId,
-    this.item,
-    this.storeInfo,
-    this.recommendationType,
-    this.score,
-  });
+  SuggestEntity({this.id, this.itemType, this.itemId, this.item, this.storeInfo, this.recommendationType, this.score});
 
   final int? id;
   final String? itemType;
@@ -75,45 +93,43 @@ class SuggestEntity {
   final int? score;
 
   factory SuggestEntity.fromJson(Map<String, dynamic> json) {
-    ItemType parsedItemType = ItemType.fromString(
-      json["item_type"] ?? 'Unknown',
-    );
+    final ItemType parsedItemType = ItemType.fromString(json['item_type'] ?? 'Unknown');
     SuggestItem? parsedItem;
 
-    if (json["item"] != null) {
+    if (json['item'] != null) {
       if (parsedItemType == ItemType.plate) {
         // For plates, use PlateDTO structure
-        final plateDto = PlateDTO.fromJson(json["item"]);
-        parsedItem = SuggestItem.fromPlateDTO(json["item"], plateDto);
+        final plateDto = PlateDTO.fromJson(json['item']);
+        parsedItem = SuggestItem.fromPlateDTO(json['item'], plateDto);
       } else if (parsedItemType == ItemType.product || parsedItemType == ItemType.storeItem) {
         // For products/store items, use ProductDTO structure
-        final productDto = ProductDTO.fromJson(json["item"]);
-        parsedItem = SuggestItem.fromProductDTO(json["item"], productDto);
+        final productDto = ProductDTO.fromJson(json['item']);
+        parsedItem = SuggestItem.fromProductDTO(json['item'], productDto);
       } else {
         // Fallback to basic SuggestItem parsing
-        parsedItem = SuggestItem.fromJson(json["item"]);
+        parsedItem = SuggestItem.fromJson(json['item']);
       }
     }
 
     return SuggestEntity(
-      id: json["id"],
-      itemType: json["item_type"],
-      itemId: json["item_id"],
+      id: json['id'],
+      itemType: json['item_type'],
+      itemId: json['item_id'],
       item: parsedItem,
-      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
-      recommendationType: json["recommendation_type"],
-      score: json["score"],
+      storeInfo: json['store_info'] == null ? null : SimpleStoreDTO.fromJson(json['store_info']),
+      recommendationType: json['recommendation_type'],
+      score: json['score'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "item_type": itemType,
-    "item_id": itemId,
-    "item": item?.toJson(),
-    "store_info": storeInfo?.toEntity(),
-    "recommendation_type": recommendationType,
-    "score": score,
+    'id': id,
+    'item_type': itemType,
+    'item_id': itemId,
+    'item': item?.toJson(),
+    'store_info': storeInfo?.toEntity(),
+    'recommendation_type': recommendationType,
+    'score': score,
   };
 }
 
@@ -170,132 +186,116 @@ class SuggestItem {
 
   factory SuggestItem.fromJson(Map<String, dynamic> json) {
     return SuggestItem(
-      id: json["id"],
-      storeId: json["store_id"],
-      plateName: json["plate_name"],
-      name: json["name"],
-      plateCategoryId: json["plate_category_id"],
-      plateDescription: json["plate_description"],
-      plateImage: json["plate_image"],
-      image: json["image"],
-      price: json["price"],
-      rate: json["rate"],
-      rateCount: json["rate_count"],
-      appPrice: json["app_price"],
-      itemType: json["item_type"],
-      orderedWith: json["ordered_with"] == null ? [] : List<dynamic>.from(json["ordered_with"]!.map((x) => x)),
-      isFavorite: json["is_favorite"],
-      isHaveCartTimes: json["is_have_cart_times"],
-      cartTimeQuantity: json["cart_time_quantity"],
-      hasOptions: json["has_options"],
-      quantityInStock: json["quantity_in_stock"],
-      color: json["color"],
-      offer: json["offer"] == null ? null : SuggestOffer.fromJson(json["offer"]),
-      itemUnitBrand: json["item_unit_brand"],
-      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
+      id: json['id'],
+      storeId: json['store_id'],
+      plateName: json['plate_name'],
+      name: json['name'],
+      plateCategoryId: json['plate_category_id'],
+      plateDescription: json['plate_description'],
+      plateImage: json['plate_image'],
+      image: json['image'],
+      price: json['price'],
+      rate: json['rate'],
+      rateCount: json['rate_count'],
+      appPrice: json['app_price'],
+      itemType: json['item_type'],
+      orderedWith: json['ordered_with'] == null ? [] : List<dynamic>.from(json['ordered_with']!.map((x) => x)),
+      isFavorite: json['is_favorite'],
+      isHaveCartTimes: json['is_have_cart_times'],
+      cartTimeQuantity: json['cart_time_quantity'],
+      hasOptions: json['has_options'],
+      quantityInStock: json['quantity_in_stock'],
+      color: json['color'],
+      offer: json['offer'] == null ? null : SuggestOffer.fromJson(json['offer']),
+      itemUnitBrand: json['item_unit_brand'],
+      storeInfo: json['store_info'] == null ? null : SimpleStoreDTO.fromJson(json['store_info']),
     );
   }
 
   // Helper factory for plate items (uses plate_* fields)
-  factory SuggestItem.fromPlateDTO(
-    Map<String, dynamic> json,
-    PlateDTO plateDto,
-  ) {
+  factory SuggestItem.fromPlateDTO(Map<String, dynamic> json, PlateDTO plateDto) {
     return SuggestItem(
-      id: json["id"],
-      storeId: json["store_id"],
-      plateName: json["plate_name"],
-      name: json["plate_name"],
+      id: json['id'],
+      storeId: json['store_id'],
+      plateName: json['plate_name'],
+      name: json['plate_name'],
       // For consistency, use plate_name as name
-      plateCategoryId: json["plate_category_id"],
-      plateDescription: json["plate_description"],
-      plateImage: json["plate_image"],
-      image: json["plate_image"],
-      price: json["price"],
-      rate: json["rate"],
-      rateCount: json["rate_count"],
-      appPrice: json["app_price"],
-      itemType: json["item_type"],
-      orderedWith: json["ordered_with"] == null ? [] : List<dynamic>.from(json["ordered_with"]!.map((x) => x)),
-      isFavorite: json["is_favorite"],
-      isHaveCartTimes: json["is_have_cart_times"],
-      cartTimeQuantity: json["cart_time_quantity"],
-      hasOptions: json["has_options"],
-      quantityInStock: json["quantity_in_stock"],
-      color: json["color"],
-      offer: json["offer"] == null ? null : SuggestOffer.fromJson(json["offer"]),
-      itemUnitBrand: json["item_unit_brand"],
-      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
+      plateCategoryId: json['plate_category_id'],
+      plateDescription: json['plate_description'],
+      plateImage: json['plate_image'],
+      image: json['plate_image'],
+      price: json['price'],
+      rate: json['rate'],
+      rateCount: json['rate_count'],
+      appPrice: json['app_price'],
+      itemType: json['item_type'],
+      orderedWith: json['ordered_with'] == null ? [] : List<dynamic>.from(json['ordered_with']!.map((x) => x)),
+      isFavorite: json['is_favorite'],
+      isHaveCartTimes: json['is_have_cart_times'],
+      cartTimeQuantity: json['cart_time_quantity'],
+      hasOptions: json['has_options'],
+      quantityInStock: json['quantity_in_stock'],
+      color: json['color'],
+      offer: json['offer'] == null ? null : SuggestOffer.fromJson(json['offer']),
+      itemUnitBrand: json['item_unit_brand'],
+      storeInfo: json['store_info'] == null ? null : SimpleStoreDTO.fromJson(json['store_info']),
     );
   }
 
   // Helper factory for product items (uses standard fields, no plate_* fields)
-  factory SuggestItem.fromProductDTO(
-    Map<String, dynamic> json,
-    ProductDTO productDto,
-  ) {
+  factory SuggestItem.fromProductDTO(Map<String, dynamic> json, ProductDTO productDto) {
     return SuggestItem(
-      id: json["id"],
-      storeId: json["store_id"],
-      plateName: null,
-      name: json["name"],
-      plateCategoryId: null,
-      plateDescription: null,
-      plateImage: null,
-      image: json["image"],
-      price: json["price"],
-      rate: json["rate"],
-      rateCount: json["rate_count"],
-      appPrice: json["app_price"],
-      itemType: json["item_type"],
+      id: json['id'],
+      storeId: json['store_id'],
+      name: json['name'],
+      image: json['image'],
+      price: json['price'],
+      rate: json['rate'],
+      rateCount: json['rate_count'],
+      appPrice: json['app_price'],
+      itemType: json['item_type'],
       orderedWith: [],
-      isFavorite: json["is_favorite"],
-      isHaveCartTimes: json["is_have_cart_times"],
-      cartTimeQuantity: json["cart_time_quantity"],
-      hasOptions: json["has_options"],
-      quantityInStock: json["quantity_in_stock"],
-      color: json["color"],
-      offer: json["offer"] == null ? null : SuggestOffer.fromJson(json["offer"]),
-      itemUnitBrand: json["item_unit_brand"],
-      storeInfo: json["store_info"] == null ? null : SimpleStoreDTO.fromJson(json["store_info"]),
+      isFavorite: json['is_favorite'],
+      isHaveCartTimes: json['is_have_cart_times'],
+      cartTimeQuantity: json['cart_time_quantity'],
+      hasOptions: json['has_options'],
+      quantityInStock: json['quantity_in_stock'],
+      color: json['color'],
+      offer: json['offer'] == null ? null : SuggestOffer.fromJson(json['offer']),
+      itemUnitBrand: json['item_unit_brand'],
+      storeInfo: json['store_info'] == null ? null : SimpleStoreDTO.fromJson(json['store_info']),
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "store_id": storeId,
-    "plate_name": plateName,
-    "name": name,
-    "plate_category_id": plateCategoryId,
-    "plate_description": plateDescription,
-    "plate_image": plateImage,
-    "image": image,
-    "price": price,
-    "rate": rate,
-    "rate_count": rateCount,
-    "app_price": appPrice,
-    "item_type": itemType,
-    "ordered_with": orderedWith?.map((x) => x).toList(),
-    "is_favorite": isFavorite,
-    "is_have_cart_times": isHaveCartTimes,
-    "cart_time_quantity": cartTimeQuantity,
-    "has_options": hasOptions,
-    "quantity_in_stock": quantityInStock,
-    "color": color,
-    "offer": offer?.toJson(),
-    "item_unit_brand": itemUnitBrand,
-    "store_info": storeInfo,
+    'id': id,
+    'store_id': storeId,
+    'plate_name': plateName,
+    'name': name,
+    'plate_category_id': plateCategoryId,
+    'plate_description': plateDescription,
+    'plate_image': plateImage,
+    'image': image,
+    'price': price,
+    'rate': rate,
+    'rate_count': rateCount,
+    'app_price': appPrice,
+    'item_type': itemType,
+    'ordered_with': orderedWith?.map((x) => x).toList(),
+    'is_favorite': isFavorite,
+    'is_have_cart_times': isHaveCartTimes,
+    'cart_time_quantity': cartTimeQuantity,
+    'has_options': hasOptions,
+    'quantity_in_stock': quantityInStock,
+    'color': color,
+    'offer': offer?.toJson(),
+    'item_unit_brand': itemUnitBrand,
+    'store_info': storeInfo,
   };
 }
 
 class SuggestOffer {
-  SuggestOffer({
-    this.id,
-    this.expiredAt,
-    this.discount,
-    this.discountType,
-    this.maxDiscount,
-  });
+  SuggestOffer({this.id, this.expiredAt, this.discount, this.discountType, this.maxDiscount});
 
   final int? id;
   final String? expiredAt;
@@ -305,20 +305,20 @@ class SuggestOffer {
 
   factory SuggestOffer.fromJson(Map<String, dynamic> json) {
     return SuggestOffer(
-      id: json["id"],
-      expiredAt: json["expired_at"],
-      discount: json["discount"],
-      discountType: json["discount_type"],
-      maxDiscount: json["max_discount"],
+      id: json['id'],
+      expiredAt: json['expired_at'],
+      discount: json['discount'],
+      discountType: json['discount_type'],
+      maxDiscount: json['max_discount'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "expired_at": expiredAt,
-    "discount": discount,
-    "discount_type": discountType,
-    "max_discount": maxDiscount,
+    'id': id,
+    'expired_at': expiredAt,
+    'discount': discount,
+    'discount_type': discountType,
+    'max_discount': maxDiscount,
   };
 }
 
@@ -347,27 +347,27 @@ class SuggestStoreInfo {
 
   factory SuggestStoreInfo.fromJson(Map<String, dynamic> json) {
     return SuggestStoreInfo(
-      storeCategoryType: json["store_category_type"],
-      storeCategoryId: json["store_category_id"],
-      storeId: json["store_id"],
-      storeName: json["store_name"],
-      storeImage: json["store_image"],
-      isOpen: json["is_open"],
-      orderCount: json["order_count"],
-      rating: json["rating"],
-      storeCategoryName: json["store_category_name"],
+      storeCategoryType: json['store_category_type'],
+      storeCategoryId: json['store_category_id'],
+      storeId: json['store_id'],
+      storeName: json['store_name'],
+      storeImage: json['store_image'],
+      isOpen: json['is_open'],
+      orderCount: json['order_count'],
+      rating: json['rating'],
+      storeCategoryName: json['store_category_name'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "store_category_type": storeCategoryType,
-    "store_category_id": storeCategoryId,
-    "store_id": storeId,
-    "store_name": storeName,
-    "store_image": storeImage,
-    "is_open": isOpen,
-    "order_count": orderCount,
-    "rating": rating,
-    "store_category_name": storeCategoryName,
+    'store_category_type': storeCategoryType,
+    'store_category_id': storeCategoryId,
+    'store_id': storeId,
+    'store_name': storeName,
+    'store_image': storeImage,
+    'is_open': isOpen,
+    'order_count': orderCount,
+    'rating': rating,
+    'store_category_name': storeCategoryName,
   };
 }

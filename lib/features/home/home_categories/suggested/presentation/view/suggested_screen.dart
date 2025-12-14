@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
@@ -11,6 +12,7 @@ import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_r
 import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_cubit.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/cubit/suggests_states.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/offer_entity.dart';
 
 class SuggestedScreen extends StatefulWidget {
   const SuggestedScreen({super.key});
@@ -22,41 +24,44 @@ class SuggestedScreen extends StatefulWidget {
 }
 
 class _SuggestedScreenState extends State<SuggestedScreen> {
-  String _searchQuery = '';
+  final ScrollController _scrollController = ScrollController();
+  final String _searchQuery = '';
   List<SuggestEntity> _allItems = [];
   List<SuggestEntity> _filteredItems = [];
+  SuggestsCubit? _cubit;
 
-  // void _onSearchChanged(String value) {
-  //   if (!context.mounted) return;
-  //
-  //   setState(() {
-  //     _searchQuery = value;
-  //     if (value.isEmpty) {
-  //       _filteredItems = _allItems;
-  //     } else {
-  //       _filteredItems = _allItems.where((item) {
-  //         final itemData = item.item;
-  //         if (itemData == null) return false;
-  //
-  //         // Search in both plate and store_item fields
-  //         final plateName = itemData.plateName?.toLowerCase() ?? '';
-  //         final name = itemData.name?.toLowerCase() ?? '';
-  //         final plateDescription =
-  //             itemData.plateDescription?.toLowerCase() ?? '';
-  //         final searchLower = value.toLowerCase();
-  //
-  //         return plateName.contains(searchLower) ||
-  //             name.contains(searchLower) ||
-  //             plateDescription.contains(searchLower);
-  //       }).toList();
-  //     }
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent * 0.8) {
+      final cubit = _cubit;
+      if (cubit != null) {
+        final currentState = cubit.state;
+        if (cubit.hasMore && currentState is! SuggestsLoadingMoreState) {
+          cubit.getSuggests(loadMore: true);
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SuggestsCubit(di.get<SuggestsRepo>())..getSuggests(),
+      create: (context) {
+        final cubit = SuggestsCubit(di.get<SuggestsRepo>())..getSuggests();
+        _cubit = cubit;
+        return cubit;
+      },
       child: Scaffold(
         appBar: MainAppBar(
           title: L10n.tr().suggestedForYou,
@@ -86,11 +91,16 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
 
                   if (state is SuggestsSuccessState) {
                     // Store all items for local filtering
-                    if (_allItems.isEmpty) {
-                      _allItems = state.data?.entities ?? [];
-                      _filteredItems = _allItems;
-                    }
-                    return _buildContent(context, _filteredItems, state.isFromCache);
+                    _allItems = state.data?.entities ?? [];
+                    _filteredItems = _allItems;
+                    return _buildContent(context, _filteredItems, state.isFromCache, state.pagination);
+                  }
+
+                  if (state is SuggestsLoadingMoreState) {
+                    // Show existing items while loading more
+                    _allItems = state.data?.entities ?? [];
+                    _filteredItems = _allItems;
+                    return _buildContent(context, _filteredItems, false, state.pagination, isLoadingMore: true);
                   }
 
                   return FailureComponent(
@@ -108,45 +118,101 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
     );
   }
 
-  Widget _buildContent(BuildContext context, List<SuggestEntity> items, bool isFromCache) {
-    if (items.isEmpty) {
+  Widget _buildContent(BuildContext context, List<SuggestEntity> items, bool isFromCache, PaginationInfo? pagination, {bool isLoadingMore = false}) {
+    if (items.isEmpty && !isLoadingMore) {
       return FailureComponent(message: _searchQuery.isEmpty ? L10n.tr().noPersonalizedSuggestions : L10n.tr().noSearchResults);
     }
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 8,
-            runSpacing: 8,
-            children: List.generate(
-              items.length,
-              (index) => items[index].id == null
-                  ? const SizedBox.shrink()
-                  : HorizontalProductCard(product: _convertToProductEntity(items[index]), width: MediaQuery.sizeOf(context).width * .48),
-            ),
+    return SingleChildScrollView(
+      controller: _scrollController,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: List.generate(
+                    items.length,
+                    (index) => items[index].id == null
+                        ? const SizedBox.shrink()
+                        : HorizontalProductCard(product: _convertToGenericItemEntity(items[index]), width: MediaQuery.sizeOf(context).width * .48),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+          if (isLoadingMore) const AdaptiveProgressIndicator(),
+          if (pagination != null && !pagination.hasNext && items.isNotEmpty) const Padding(padding: EdgeInsets.all(16.0), child: SizedBox.shrink()),
+        ],
+      ),
     );
   }
 
-  // Convert SuggestEntity to ProductEntity for VerticalRotatedImgCard
-  ProductEntity _convertToProductEntity(SuggestEntity item) {
-    final SuggestEntity itemData = item;
+  // Convert SuggestEntity to GenericItemEntity (handles both products and plates)
+  GenericItemEntity _convertToGenericItemEntity(SuggestEntity item) {
+    final itemData = item.item;
+    if (itemData == null) {
+      // Fallback to empty ProductEntity if item is null
+      return ProductEntity(id: item.id ?? 0, name: '', description: '', price: 0, image: '', rate: 0, reviewCount: 0, outOfStock: false);
+    }
 
-    return ProductEntity(
-      id: itemData.item?.id ?? 0,
-      name: itemData.item?.name ?? itemData.item?.name ?? '',
-      description: itemData.item?.plateDescription ?? '',
-      price: double.tryParse(itemData.item?.price ?? '0') ?? 0.0,
-      image: itemData.item?.plateImage ?? itemData.item?.image ?? '',
-      rate: double.tryParse(itemData.item?.rate ?? '0') ?? 0.0,
-      reviewCount: itemData.item?.rateCount ?? 0,
-      outOfStock: false,
-      store: itemData.item?.storeInfo?.toEntity(),
-    );
+    final itemType = ItemType.fromString(item.itemType ?? '');
+    final price = double.tryParse(itemData.appPrice ?? itemData.price ?? '0') ?? 0.0;
+    final rate = double.tryParse(itemData.rate ?? '0') ?? 0.0;
+    final reviewCount = itemData.rateCount ?? 0;
+    final store = itemData.storeInfo?.toEntity() ?? item.storeInfo?.toEntity();
+
+    // Convert offer if exists
+    OfferEntity? offer;
+    if (itemData.offer != null) {
+      final suggestOffer = itemData.offer!;
+      if (suggestOffer.discount != null && suggestOffer.discountType != null) {
+        offer = OfferEntity(
+          id: suggestOffer.id ?? 0,
+          expiredAt: suggestOffer.expiredAt,
+          discount: suggestOffer.discount!.toDouble(),
+          discountType: DiscountType.fromString(suggestOffer.discountType ?? ''),
+          maxDiscount: suggestOffer.maxDiscount ?? 0,
+        );
+      }
+    }
+
+    if (itemType == ItemType.plate) {
+      // Convert to PlateEntity
+      return PlateEntity(
+        id: itemData.id ?? item.id ?? 0,
+        name: itemData.plateName ?? itemData.name ?? '',
+        description: itemData.plateDescription ?? '',
+        image: itemData.plateImage ?? itemData.image ?? '',
+        price: price,
+        rate: rate,
+        reviewCount: reviewCount,
+        outOfStock: false,
+        categoryPlateId: itemData.plateCategoryId ?? 0,
+        hasOptions: itemData.hasOptions ?? false,
+        offer: offer,
+        store: store,
+      );
+    } else {
+      // Convert to ProductEntity
+      return ProductEntity(
+        id: itemData.id ?? item.id ?? 0,
+        name: itemData.name ?? '',
+        description: itemData.plateDescription ?? '',
+        price: price,
+        image: itemData.image ?? itemData.plateImage ?? '',
+        rate: rate,
+        reviewCount: reviewCount,
+        outOfStock: false,
+        hasOptions: itemData.hasOptions ?? false,
+        offer: offer,
+        store: store,
+        quantityInStock: itemData.quantityInStock,
+      );
+    }
   }
 }

@@ -16,17 +16,19 @@ class SuggestsRepoImpl extends SuggestsRepo {
   SuggestsRepoImpl(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<SuggestsDtoData?>> getSuggests() async {
+  Future<Result<SuggestsResponse>> getSuggests({int page = 1, int perPage = 10}) async {
     final result = await super.call(
       apiCall: () => _apiClient.get(
-        endpoint: Endpoints.suggests,
+        endpoint: '${Endpoints.suggests}?is_paginated=1&page=$page&per_page=$perPage',
       ),
       parser: (response) {
-        // Save to cache in background
-        _saveToCache(response.data);
+        // Save to cache in background only for first page
+        if (page == 1) {
+          _saveToCache(response.data);
+        }
 
         final dto = SuggestsDto.fromJson(response.data);
-        return dto.data;
+        return SuggestsResponse(data: dto.data, pagination: dto.pagination);
       },
     );
 
