@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/crashlytics_repo_imp.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/best_popular/data/dtos/best_popular_response_dto.dart';
 import 'package:gazzer/features/home/best_popular/data/repositories/best_popular_repository_impl.dart';
 import 'package:gazzer/features/home/best_popular/domain/repositories/best_popular_repository.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_states.dart';

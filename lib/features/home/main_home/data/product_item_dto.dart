@@ -1,3 +1,4 @@
+import 'package:gazzer/core/data/dto/store_info_dto.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';

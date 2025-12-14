@@ -1,3 +1,6 @@
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
+import 'package:gazzer/core/data/dto/store_info_dto.dart';
+
 class TopVendorsDto {
   TopVendorsDto({this.status, this.message, this.data, this.pagination});
 
@@ -14,48 +17,6 @@ class TopVendorsDto {
       pagination: json["pagination"] == null ? null : PaginationInfo.fromJson(json["pagination"]),
     );
   }
-}
-
-class PaginationInfo {
-  final int currentPage;
-  final int totalPages;
-  final int totalRecords;
-  final int currentRecords;
-  final bool hasNext;
-  final bool hasPrevious;
-  final int perPage;
-
-  PaginationInfo({
-    required this.currentPage,
-    required this.totalPages,
-    required this.totalRecords,
-    required this.currentRecords,
-    required this.hasNext,
-    required this.hasPrevious,
-    required this.perPage,
-  });
-
-  factory PaginationInfo.fromJson(Map<String, dynamic> json) {
-    return PaginationInfo(
-      currentPage: json['current_page'] ?? 1,
-      totalPages: json['total_pages'] ?? 1,
-      totalRecords: json['total_records'] ?? 0,
-      currentRecords: json['current_records'] ?? 0,
-      hasNext: json['has_next'] ?? false,
-      hasPrevious: json['has_previous'] ?? false,
-      perPage: json['per_page'] ?? 10,
-    );
-  }
-
-  Map<String, dynamic> toJson() => {
-    'current_page': currentPage,
-    'total_pages': totalPages,
-    'total_records': totalRecords,
-    'current_records': currentRecords,
-    'has_next': hasNext,
-    'has_previous': hasPrevious,
-    'per_page': perPage,
-  };
 }
 
 class TopVendorsData {
@@ -155,40 +116,3 @@ class Banner {
   }
 }
 
-class StoreInfo {
-  StoreInfo({
-    this.storeCategoryType,
-    this.storeCategoryId,
-    this.storeId,
-    this.storeName,
-    this.storeImage,
-    this.isOpen,
-    this.orderCount,
-    this.rating,
-    this.storeCategoryName,
-  });
-
-  final String? storeCategoryType;
-  final int? storeCategoryId;
-  final int? storeId;
-  final String? storeName;
-  final String? storeImage;
-  final int? isOpen;
-  final int? orderCount;
-  final String? rating;
-  final String? storeCategoryName;
-
-  factory StoreInfo.fromJson(Map<String, dynamic> json) {
-    return StoreInfo(
-      storeCategoryType: json["store_category_type"],
-      storeCategoryId: json["store_category_id"],
-      storeId: json["store_id"],
-      storeName: json["store_name"],
-      storeImage: json["store_image"],
-      isOpen: json["is_open"],
-      orderCount: json["order_count"],
-      rating: json["rating"],
-      storeCategoryName: json["store_category_name"],
-    );
-  }
-}

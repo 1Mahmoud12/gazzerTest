@@ -14,9 +14,9 @@ import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/home/home_categories/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/top_vendors_widget/presentation/cubit/top_vendors_widget_states.dart';
-import 'package:gazzer/features/home/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
@@ -31,24 +31,24 @@ class TopVendorsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TopVendorsWidgetCubit, TopVendorsWidgetState>(
       builder: (context, state) {
-          if (state is TopVendorsWidgetSuccessState) {
-            final vendors = state.vendors;
-            if (vendors.isEmpty) {
-              return const SliverToBoxAdapter(child: SizedBox.shrink());
-            }
-            return _TopVendorsContent(vendors: vendors, banner: state.banner);
-          } else if (state is TopVendorsWidgetLoadingState) {
-            return const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(24.0),
-                child: Center(child: AdaptiveProgressIndicator()),
-              ),
-            );
-          } else if (state is TopVendorsWidgetErrorState) {
+        if (state is TopVendorsWidgetSuccessState) {
+          final vendors = state.vendors;
+          if (vendors.isEmpty) {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
+          return _TopVendorsContent(vendors: vendors, banner: state.banner);
+        } else if (state is TopVendorsWidgetLoadingState) {
+          return const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Center(child: AdaptiveProgressIndicator()),
+            ),
+          );
+        } else if (state is TopVendorsWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        },
+        }
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
+      },
     );
   }
 }

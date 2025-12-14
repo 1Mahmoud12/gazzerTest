@@ -11,12 +11,6 @@
 
 ## Entity Level (TopItemEntity)
 
-All keys are parsed and used:
-
-- `id` ✓
-- `item_type` ✓
-- `item_id` ✓
-- `item` ✓
 
 ## Item Level (TopItemData)
 
@@ -28,30 +22,7 @@ The following keys exist in the API response but are NOT parsed in `TopItemData.
 - `quantity` - **NOT PARSED** (if exists in API - available quantity in stock)
 - `total_sold` - **NOT PARSED** (if exists in API - alternative to sold)
 
-Note: The `GenericItemEntity` has an `orderCount` field that is used in the UI (see
-`best_selling_card.dart` and `groc_prod_card.dart`), but `TopItemData` doesn't parse it from the API
-response.
 
-### Currently Parsed Keys (all used):
-
-- `id` ✓
-- `store_id` ✓
-- `plate_name` ✓
-- `plate_category_id` ✓
-- `plate_description` ✓
-- `plate_image` ✓
-- `price` ✓
-- `rate` ✓
-- `rate_count` ✓
-- `app_price` ✓
-- `item_type` ✓
-- `ordered_with` ✓
-- `offer` ✓
-- `is_favorite` ✓
-- `is_have_cart_times` ✓
-- `cart_time_quantity` ✓
-- `has_options` ✓
-- `store_info` ✓
 
 ## Store Info Level (SimpleStoreDTO)
 

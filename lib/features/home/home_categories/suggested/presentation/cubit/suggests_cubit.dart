@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/features/home/home_categories/suggested/data/dtos/suggests_dto.dart';
 import 'package:gazzer/features/home/home_categories/suggested/domain/suggests_repo.dart';

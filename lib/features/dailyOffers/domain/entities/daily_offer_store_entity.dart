@@ -1,4 +1,4 @@
-import 'package:gazzer/features/home/main_home/data/product_item_dto.dart';
+import 'package:gazzer/core/data/dto/store_info_dto.dart';
 
 /// Minimal store entity derived from DailyOffers DTO (StoreInfo)
 class DailyOfferStoreEntity {
@@ -8,13 +8,7 @@ class DailyOfferStoreEntity {
   final String type; // restaurant | grocery | pharmacy ...
   final bool isOpen;
 
-  const DailyOfferStoreEntity({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.type,
-    required this.isOpen,
-  });
+  const DailyOfferStoreEntity({required this.id, required this.name, required this.image, required this.type, required this.isOpen});
 
   factory DailyOfferStoreEntity.fromDto(StoreInfo dto) {
     return DailyOfferStoreEntity(

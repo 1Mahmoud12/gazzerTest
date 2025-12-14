@@ -5,8 +5,8 @@ import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
-import 'package:gazzer/features/home/top_vendors/data/dtos/top_vendors_dto.dart';
-import 'package:gazzer/features/home/top_vendors/domain/top_vendors_repo.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors/data/dtos/top_vendors_dto.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors/domain/top_vendors_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TopVendorsRepoImp extends TopVendorsRepo {

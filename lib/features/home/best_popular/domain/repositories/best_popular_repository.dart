@@ -1,6 +1,6 @@
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/data/network/base_repo.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/best_popular/data/dtos/best_popular_response_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class BestPopularResponse {

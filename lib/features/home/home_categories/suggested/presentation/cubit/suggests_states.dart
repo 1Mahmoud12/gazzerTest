@@ -1,3 +1,4 @@
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/features/home/home_categories/suggested/data/dtos/suggests_dto.dart';
 
 abstract class SuggestsStates {}

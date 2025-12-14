@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
-import 'package:gazzer/features/home/top_vendors/data/dtos/top_vendors_dto.dart';
-import 'package:gazzer/features/home/top_vendors/domain/top_vendors_repo.dart';
-import 'package:gazzer/features/home/top_vendors/presentation/cubit/top_vendors_states.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors/domain/top_vendors_repo.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors/presentation/cubit/top_vendors_states.dart';
 
 class TopVendorsCubit extends Cubit<TopVendorsStates> {
   final TopVendorsRepo _repo;
@@ -35,10 +35,7 @@ class TopVendorsCubit extends Cubit<TopVendorsStates> {
     }
 
     // Fetch data from API
-    final res = await _repo.getTopVendors(
-      page: _currentPage,
-      perPage: _perPage,
-    );
+    final res = await _repo.getTopVendors(page: _currentPage, perPage: _perPage);
     switch (res) {
       case Ok<TopVendorsResponse> ok:
         if (loadMore) {

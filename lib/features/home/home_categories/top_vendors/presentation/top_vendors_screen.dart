@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -10,9 +11,8 @@ import 'package:gazzer/core/presentation/views/components/failure_component.dart
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/home/top_vendors/data/dtos/top_vendors_dto.dart';
-import 'package:gazzer/features/home/top_vendors/presentation/cubit/top_vendors_cubit.dart';
-import 'package:gazzer/features/home/top_vendors/presentation/cubit/top_vendors_states.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors/presentation/cubit/top_vendors_cubit.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors/presentation/cubit/top_vendors_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';

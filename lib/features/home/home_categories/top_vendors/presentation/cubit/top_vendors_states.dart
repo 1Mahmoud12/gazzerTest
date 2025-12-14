@@ -1,5 +1,5 @@
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
-import 'package:gazzer/features/home/top_vendors/data/dtos/top_vendors_dto.dart';
 
 sealed class TopVendorsStates {}
 
