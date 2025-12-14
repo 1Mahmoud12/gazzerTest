@@ -10,10 +10,12 @@ import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/notification/notification.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/state_app_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
@@ -23,7 +25,13 @@ import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
+import 'package:gazzer/features/home/home_categories/best_popular_stores_widget/presentation/cubit/best_popular_stores_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/categories_widget/presentation/cubit/categories_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/daily_offers_widget/presentation/cubit/daily_offers_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
+import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
@@ -62,9 +70,25 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   @override
   bool get wantKeepAlive => true;
 
+  // Create cubits as instance variables so they persist and can be accessed
+  late final CategoriesWidgetCubit _categoriesCubit;
+  late final DailyOffersWidgetCubit _dailyOffersCubit;
+  late final SuggestsWidgetCubit _suggestsCubit;
+  late final TopVendorsWidgetCubit _topVendorsCubit;
+  late final BestPopularStoresWidgetCubit _bestPopularStoresCubit;
+  late final TopItemsWidgetCubit _topItemsCubit;
+
   @override
   void initState() {
     super.initState();
+    // Initialize cubits
+    _categoriesCubit = di<CategoriesWidgetCubit>()..getCategories();
+    _dailyOffersCubit = di<DailyOffersWidgetCubit>()..getDailyOffers();
+    _suggestsCubit = di<SuggestsWidgetCubit>()..getSuggests();
+    _topVendorsCubit = di<TopVendorsWidgetCubit>()..getTopVendors();
+    _bestPopularStoresCubit = di<BestPopularStoresWidgetCubit>()..getBestPopularStores();
+    _topItemsCubit = di<TopItemsWidgetCubit>()..getTopItems();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       //context.read<HomeCubit>().getHomeData();
       // AppNavigator().initContext = context;
@@ -73,6 +97,36 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
         di<SharedPreferences>().setBool(StorageKeys.haveSeenTour, true);
       }
     });
+
+    LifecycleEventHandler(
+      resumeCallBack: () async {
+        _refreshAllWidgets(isRefresh: false);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _categoriesCubit.close();
+    _dailyOffersCubit.close();
+    _suggestsCubit.close();
+    _topVendorsCubit.close();
+    _bestPopularStoresCubit.close();
+    _topItemsCubit.close();
+    super.dispose();
+  }
+
+  Future<void> _refreshAllWidgets({bool isRefresh = true}) async {
+    if (isRefresh) animationDialogLoading();
+    await Future.wait([
+      _categoriesCubit.getCategories(),
+      _dailyOffersCubit.getDailyOffers(),
+      _suggestsCubit.getSuggests(),
+      _topVendorsCubit.getTopVendors(),
+      _bestPopularStoresCubit.getBestPopularStores(),
+      _topItemsCubit.getTopItems(),
+    ]);
+    if (isRefresh) closeDialog();
   }
 
   int exitApp = 0;
@@ -111,45 +165,51 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
             dy: HomeUtils.headerHeight(context) + 12,
             dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
             disableBounceAnimation: true,
-            mainScreenWidget: BlocBuilder<HomeCubit, HomeStates>(
-              builder: (context, state) {
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    // Each widget handles its own data fetching via its BlocProvider
-                    // No need to manually refresh cubits that aren't in the widget tree
-                    // The widgets will refresh when they're rebuilt
-                  },
-                  child: const CustomScrollView(
-                    physics: BouncingScrollPhysics(),
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Padding(padding: EdgeInsets.only(bottom: 12), child: _HomeHeader()),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Padding(padding: EdgeInsets.only(bottom: 24), child: _HomeSearchWidget()),
-                      ),
+            mainScreenWidget: MultiBlocProvider(
+              providers: [
+                BlocProvider.value(value: _categoriesCubit),
+                BlocProvider.value(value: _dailyOffersCubit),
+                BlocProvider.value(value: _suggestsCubit),
+                BlocProvider.value(value: _topVendorsCubit),
+                BlocProvider.value(value: _bestPopularStoresCubit),
+                BlocProvider.value(value: _topItemsCubit),
+              ],
+              child: BlocBuilder<HomeCubit, HomeStates>(
+                builder: (context, state) {
+                  return RefreshIndicator(
+                    onRefresh: _refreshAllWidgets,
+                    child: const CustomScrollView(
+                      physics: BouncingScrollPhysics(),
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Padding(padding: EdgeInsets.only(bottom: 12), child: _HomeHeader()),
+                        ),
+                        SliverToBoxAdapter(
+                          child: Padding(padding: EdgeInsets.only(bottom: 24), child: _HomeSearchWidget()),
+                        ),
 
-                      ///
-                      CategoriesWidget(),
+                        ///
+                        CategoriesWidget(),
 
-                      ///
-                      DailyOffersWidget(),
+                        ///
+                        DailyOffersWidget(),
 
-                      ///
-                      SuggestsWidget(),
+                        ///
+                        SuggestsWidget(),
 
-                      // ///
-                      TopVendorsWidget(),
+                        // ///
+                        TopVendorsWidget(),
 
-                      // ///
-                      BestPopularStoresWidget(),
+                        // ///
+                        BestPopularStoresWidget(),
 
-                      // ///
-                      TopItemsWidget(),
-                    ],
-                  ),
-                );
-              },
+                        // ///
+                        TopItemsWidget(),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

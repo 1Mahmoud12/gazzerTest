@@ -9,7 +9,6 @@ import 'package:gazzer/core/presentation/views/components/banners/main_banner_wi
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/di.dart';
 import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_states.dart';
@@ -21,10 +20,8 @@ class SuggestsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di<SuggestsWidgetCubit>()..getSuggests(),
-      child: BlocBuilder<SuggestsWidgetCubit, SuggestsWidgetStates>(
-        builder: (context, state) {
+    return BlocBuilder<SuggestsWidgetCubit, SuggestsWidgetStates>(
+      builder: (context, state) {
           if (state is SuggestsWidgetSuccessState) {
             return _SuggestsContent(items: state.entities, banner: state.banner);
           } else if (state is SuggestsWidgetLoadingState) {
@@ -39,7 +36,6 @@ class SuggestsWidget extends StatelessWidget {
           }
           return const SliverToBoxAdapter(child: SizedBox.shrink());
         },
-      ),
     );
   }
 }

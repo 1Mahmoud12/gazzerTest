@@ -24,29 +24,26 @@ class BestPopularStoresWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di<BestPopularStoresWidgetCubit>()..getBestPopularStores(),
-      child: BlocBuilder<BestPopularStoresWidgetCubit, BestPopularStoresWidgetState>(
-        builder: (context, state) {
-          if (state is BestPopularStoresWidgetSuccessState) {
-            final stores = state.stores;
-            if (stores.isEmpty) {
-              return const SliverToBoxAdapter(child: SizedBox.shrink());
-            }
-            return _BestPopularStoresContent(stores: stores, banner: state.banner);
-          } else if (state is BestPopularStoresWidgetLoadingState) {
-            return const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(24.0),
-                child: Center(child: AdaptiveProgressIndicator()),
-              ),
-            );
-          } else if (state is BestPopularStoresWidgetErrorState) {
+    return BlocBuilder<BestPopularStoresWidgetCubit, BestPopularStoresWidgetState>(
+      builder: (context, state) {
+        if (state is BestPopularStoresWidgetSuccessState) {
+          final stores = state.stores;
+          if (stores.isEmpty) {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
+          return _BestPopularStoresContent(stores: stores, banner: state.banner);
+        } else if (state is BestPopularStoresWidgetLoadingState) {
+          return const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Center(child: AdaptiveProgressIndicator()),
+            ),
+          );
+        } else if (state is BestPopularStoresWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        },
-      ),
+        }
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
+      },
     );
   }
 }

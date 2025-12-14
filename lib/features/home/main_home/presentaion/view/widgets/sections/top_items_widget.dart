@@ -8,7 +8,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_p
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/di.dart';
 import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/home_categories/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/top_items_widget/presentation/cubit/top_items_widget_states.dart';
@@ -22,29 +21,26 @@ class TopItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di<TopItemsWidgetCubit>()..getTopItems(),
-      child: BlocBuilder<TopItemsWidgetCubit, TopItemsWidgetState>(
-        builder: (context, state) {
-          if (state is TopItemsWidgetSuccessState) {
-            final items = state.items;
-            if (items.isEmpty) {
-              return const SliverToBoxAdapter(child: SizedBox.shrink());
-            }
-            return _TopItemsContent(items: items, banner: state.banner);
-          } else if (state is TopItemsWidgetLoadingState) {
-            return const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(24.0),
-                child: Center(child: AdaptiveProgressIndicator()),
-              ),
-            );
-          } else if (state is TopItemsWidgetErrorState) {
+    return BlocBuilder<TopItemsWidgetCubit, TopItemsWidgetState>(
+      builder: (context, state) {
+        if (state is TopItemsWidgetSuccessState) {
+          final items = state.items;
+          if (items.isEmpty) {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
+          return _TopItemsContent(items: items, banner: state.banner);
+        } else if (state is TopItemsWidgetLoadingState) {
+          return const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Center(child: AdaptiveProgressIndicator()),
+            ),
+          );
+        } else if (state is TopItemsWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        },
-      ),
+        }
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
+      },
     );
   }
 }

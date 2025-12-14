@@ -9,7 +9,6 @@ import 'package:gazzer/core/presentation/views/components/banners/main_banner_wi
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/di.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/home/home_categories/daily_offers_widget/presentation/cubit/daily_offers_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/daily_offers_widget/presentation/cubit/daily_offers_widget_states.dart';
@@ -21,10 +20,8 @@ class DailyOffersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di<DailyOffersWidgetCubit>()..getDailyOffers(),
-      child: BlocBuilder<DailyOffersWidgetCubit, DailyOffersWidgetStates>(
-        builder: (context, state) {
+    return BlocBuilder<DailyOffersWidgetCubit, DailyOffersWidgetStates>(
+      builder: (context, state) {
           if (state is DailyOffersWidgetSuccessState) {
             return _DailyOffersContent(items: state.entities, banner: state.banner);
           } else if (state is DailyOffersWidgetLoadingState) {
@@ -39,7 +36,6 @@ class DailyOffersWidget extends StatelessWidget {
           }
           return const SliverToBoxAdapter(child: SizedBox.shrink());
         },
-      ),
     );
   }
 }

@@ -29,10 +29,8 @@ class TopVendorsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di<TopVendorsWidgetCubit>()..getTopVendors(),
-      child: BlocBuilder<TopVendorsWidgetCubit, TopVendorsWidgetState>(
-        builder: (context, state) {
+    return BlocBuilder<TopVendorsWidgetCubit, TopVendorsWidgetState>(
+      builder: (context, state) {
           if (state is TopVendorsWidgetSuccessState) {
             final vendors = state.vendors;
             if (vendors.isEmpty) {
@@ -51,7 +49,6 @@ class TopVendorsWidget extends StatelessWidget {
           }
           return const SliverToBoxAdapter(child: SizedBox.shrink());
         },
-      ),
     );
   }
 }

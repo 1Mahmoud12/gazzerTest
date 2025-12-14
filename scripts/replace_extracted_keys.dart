@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:gazzer/main.dart';
 
-final textRegex = RegExp(r'Text\(\"([a-zA-Z_][a-zA-Z0-9_\s]*)\"');
-final textSpanRegex = RegExp(r'text: \"([a-zA-Z_][a-zA-Z0-9_\s]*)\"');
+final textRegex = RegExp(r'Text\("([a-zA-Z_][a-zA-Z0-9_\s]*)"');
+final textSpanRegex = RegExp(r'text: "([a-zA-Z_][a-zA-Z0-9_\s]*)"');
 
 String toCamelCase(String text) {
   // Remove spaces and convert to camelCase
@@ -29,7 +29,7 @@ void main() async {
 
   int replaced = 0;
 
-  await for (var entity in sourceDir.list(recursive: true, followLinks: false)) {
+  await for (final entity in sourceDir.list(recursive: true, followLinks: false)) {
     if (entity is File && entity.path.endsWith('.dart')) {
       String content = await entity.readAsString();
       bool hasChanges = false;
