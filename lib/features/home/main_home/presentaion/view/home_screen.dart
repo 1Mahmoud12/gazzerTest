@@ -28,8 +28,8 @@ import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart
 import 'package:gazzer/features/home/home_categories/best_popular_stores_widget/presentation/cubit/best_popular_stores_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/categories_widget/presentation/cubit/categories_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/daily_offers_widget/presentation/cubit/daily_offers_widget_cubit.dart';
-import 'package:gazzer/features/home/home_categories/popular/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/topItems/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/home_categories/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';

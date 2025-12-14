@@ -4,36 +4,70 @@ class BestPopularResponseDto {
   final String status;
   final String message;
   final BestPopularDataDto data;
+  final PaginationInfo? pagination;
 
-  BestPopularResponseDto({
-    required this.status,
-    required this.message,
-    required this.data,
-  });
+  BestPopularResponseDto({required this.status, required this.message, required this.data, this.pagination});
 
   factory BestPopularResponseDto.fromJson(Map<String, dynamic> json) {
     return BestPopularResponseDto(
       status: json['status'],
       message: json['message'],
       data: BestPopularDataDto.fromJson(json['data']),
+      pagination: json['pagination'] == null ? null : PaginationInfo.fromJson(json['pagination']),
     );
   }
+}
+
+class PaginationInfo {
+  final int currentPage;
+  final int totalPages;
+  final int totalRecords;
+  final int currentRecords;
+  final bool hasNext;
+  final bool hasPrevious;
+  final int perPage;
+
+  PaginationInfo({
+    required this.currentPage,
+    required this.totalPages,
+    required this.totalRecords,
+    required this.currentRecords,
+    required this.hasNext,
+    required this.hasPrevious,
+    required this.perPage,
+  });
+
+  factory PaginationInfo.fromJson(Map<String, dynamic> json) {
+    return PaginationInfo(
+      currentPage: json['current_page'] ?? 1,
+      totalPages: json['total_pages'] ?? 1,
+      totalRecords: json['total_records'] ?? 0,
+      currentRecords: json['current_records'] ?? 0,
+      hasNext: json['has_next'] ?? false,
+      hasPrevious: json['has_previous'] ?? false,
+      perPage: json['per_page'] ?? 10,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'current_page': currentPage,
+    'total_pages': totalPages,
+    'total_records': totalRecords,
+    'current_records': currentRecords,
+    'has_next': hasNext,
+    'has_previous': hasPrevious,
+    'per_page': perPage,
+  };
 }
 
 class BestPopularDataDto {
   final List<BestPopularStoreDto> entities;
   final dynamic banner;
 
-  BestPopularDataDto({
-    required this.entities,
-    this.banner,
-  });
+  BestPopularDataDto({required this.entities, this.banner});
 
   factory BestPopularDataDto.fromJson(Map<String, dynamic> json) {
-    return BestPopularDataDto(
-      entities: (json['entities'] as List).map((e) => BestPopularStoreDto.fromJson(e)).toList(),
-      banner: json['banner'],
-    );
+    return BestPopularDataDto(entities: (json['entities'] as List).map((e) => BestPopularStoreDto.fromJson(e)).toList(), banner: json['banner']);
   }
 }
 
@@ -161,9 +195,6 @@ class ProvinceZoneDto {
   ProvinceZoneDto({required this.id, required this.zoneName});
 
   factory ProvinceZoneDto.fromJson(Map<String, dynamic> json) {
-    return ProvinceZoneDto(
-      id: json['id'],
-      zoneName: json['zone_name'],
-    );
+    return ProvinceZoneDto(id: json['id'], zoneName: json['zone_name']);
   }
 }

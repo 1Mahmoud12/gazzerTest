@@ -8,11 +8,10 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
-import 'package:gazzer/features/home/home_categories/common/home_categories_header.dart';
-import 'package:gazzer/features/home/home_categories/popular/data/dtos/top_items_dto.dart';
-import 'package:gazzer/features/home/home_categories/popular/domain/top_items_repo.dart';
-import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_cubit.dart';
-import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_states.dart';
+import 'package:gazzer/features/home/home_categories/topItems/data/dtos/top_items_dto.dart';
+import 'package:gazzer/features/home/home_categories/topItems/domain/top_items_repo.dart';
+import 'package:gazzer/features/home/home_categories/topItems/presentation/cubit/top_items_cubit.dart';
+import 'package:gazzer/features/home/home_categories/topItems/presentation/cubit/top_items_states.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
@@ -26,50 +25,47 @@ class PopularScreen extends StatefulWidget {
 }
 
 class _PopularScreenState extends State<PopularScreen> {
-  String _searchQuery = '';
+  final String _searchQuery = '';
   List<TopItemEntity> _allItems = [];
   List<TopItemEntity> _filteredItems = [];
 
-  void _onSearchChanged(String value) {
-    if (!context.mounted) return;
-
-    setState(() {
-      _searchQuery = value;
-      if (value.isEmpty) {
-        _filteredItems = _allItems;
-      } else {
-        _filteredItems = _allItems.where((item) {
-          final itemData = item.item;
-          if (itemData == null) return false;
-          return (itemData.plateName?.toLowerCase().contains(
-                    value.toLowerCase(),
-                  ) ??
-                  false) ||
-              (itemData.plateDescription?.toLowerCase().contains(
-                    value.toLowerCase(),
-                  ) ??
-                  false);
-        }).toList();
-      }
-    });
-  }
+  // void _onSearchChanged(String value) {
+  //   if (!context.mounted) return;
+  //
+  //   setState(() {
+  //     _searchQuery = value;
+  //     if (value.isEmpty) {
+  //       _filteredItems = _allItems;
+  //     } else {
+  //       _filteredItems = _allItems.where((item) {
+  //         final itemData = item.item;
+  //         if (itemData == null) return false;
+  //         return (itemData.plateName?.toLowerCase().contains(
+  //                   value.toLowerCase(),
+  //                 ) ??
+  //                 false) ||
+  //             (itemData.plateDescription?.toLowerCase().contains(
+  //                   value.toLowerCase(),
+  //                 ) ??
+  //                 false);
+  //       }).toList();
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TopItemsCubit(
-        di.get<TopItemsRepo>(),
-      )..getTopItems(),
+      create: (context) => TopItemsCubit(di.get<TopItemsRepo>())..getTopItems(),
       child: Scaffold(
-        appBar: const MainAppBar(showCart: false, iconsColor: Co.secondary),
-        extendBody: true,
-        extendBodyBehindAppBar: true,
+        appBar: MainAppBar(title: L10n.tr().bestPopular, iconsColor: Co.secondary),
+
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HomeCategoriesHeader(
-              onChange: _onSearchChanged,
-            ),
+            // HomeCategoriesHeader(
+            //   onChange: _onSearchChanged,
+            // ),
             Expanded(
               child: BlocBuilder<TopItemsCubit, TopItemsStates>(
                 builder: (context, state) {
@@ -93,11 +89,7 @@ class _PopularScreenState extends State<PopularScreen> {
                       _filteredItems = _allItems;
                     }
 
-                    return _buildContent(
-                      context,
-                      _filteredItems,
-                      state.isFromCache,
-                    );
+                    return _buildContent(context, _filteredItems, state.isFromCache);
                   }
 
                   return const Center(child: CircularProgressIndicator());
@@ -110,53 +102,35 @@ class _PopularScreenState extends State<PopularScreen> {
     );
   }
 
-  Widget _buildContent(
-    BuildContext context,
-    List<TopItemEntity> items,
-    bool isFromCache,
-  ) {
+  Widget _buildContent(BuildContext context, List<TopItemEntity> items, bool isFromCache) {
     if (items.isEmpty) {
-      return FailureComponent(
-        message: _searchQuery.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
-      );
+      return FailureComponent(message: _searchQuery.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: AppConst.defaultHrPadding,
-          child: GradientText(
-            text: L10n.tr().bestPopular,
-            style: TStyle.blackBold(16),
-          ),
-        ),
-        const VerticalSpacing(16),
+        // Padding(
+        //   padding: AppConst.defaultHrPadding,
+        //   child: GradientText(text: L10n.tr().bestPopular, style: TStyle.blackBold(16)),
+        // ),
+        // const VerticalSpacing(16),
         Expanded(
-          child: GridView.builder(
+          child: ListView.builder(
             padding: AppConst.defaultPadding,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: .8,
-            ),
+
             itemCount: items.length,
             itemBuilder: (context, index) {
               final TopItemEntity item = items[index];
-              ItemType type = ItemType.plate;
+              final ItemType type = ItemType.fromString(item.itemType ?? '');
 
               return VerticalRotatedImgCard(
                 prod: _convertToProductEntity(item, type),
                 onTap: () {
                   if (type == ItemType.plate) {
-                    PlateDetailsRoute(
-                      id: item.item?.id ?? 0,
-                    ).push(context);
+                    PlateDetailsRoute(id: item.item?.id ?? 0).push(context);
                   } else if (type == ItemType.product) {
-                    ProductDetailsRoute(
-                      productId: item.item?.id ?? 0,
-                    ).push(context);
+                    ProductDetailsRoute(productId: item.item?.id ?? 0).push(context);
                   }
                 },
               );

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/home_categories/popular/data/dtos/top_items_dto.dart';
-import 'package:gazzer/features/home/home_categories/popular/domain/top_items_repo.dart';
+import 'package:gazzer/features/home/home_categories/topItems/data/dtos/top_items_dto.dart';
+import 'package:gazzer/features/home/home_categories/topItems/domain/top_items_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _kTopItemsJson = 'top_items_json';
@@ -18,9 +18,7 @@ class TopItemsRepoImpl extends TopItemsRepo {
   @override
   Future<Result<TopItemsDtoData?>> getTopItems() async {
     final result = await super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.topItems,
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.topItems),
       parser: (response) {
         // Save to cache in background
         _saveToCache(response.data);

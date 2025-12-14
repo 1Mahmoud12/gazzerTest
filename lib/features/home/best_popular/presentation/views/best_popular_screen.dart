@@ -1,80 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/home/best_popular/data/dtos/best_popular_response_dto.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_cubit.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_states.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class BestPopularScreen extends StatelessWidget {
+class BestPopularScreen extends StatefulWidget {
   const BestPopularScreen({super.key});
 
   static const route = '/best-popular-stores';
 
   @override
+  State<BestPopularScreen> createState() => _BestPopularScreenState();
+}
+
+class _BestPopularScreenState extends State<BestPopularScreen> {
+  final ScrollController _scrollController = ScrollController();
+  BestPopularCubit? _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent * 0.8) {
+      final cubit = _cubit;
+      if (cubit != null) {
+        final currentState = cubit.state;
+        if (cubit.hasMore && currentState is! BestPopularLoadingMoreState) {
+          cubit.getBestPopularStores(loadMore: true);
+        }
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(
-        showCart: false,
-        iconsColor: Co.secondary,
-        title: L10n.tr().bestPopularStores,
-      ),
+      appBar: MainAppBar(showCart: false, iconsColor: Co.secondary, title: L10n.tr().bestPopularStores),
       body: BlocProvider(
-        create: (context) => di<BestPopularCubit>()..getBestPopularStores(),
+        create: (context) {
+          final cubit = di<BestPopularCubit>()..getBestPopularStores();
+          _cubit = cubit;
+          return cubit;
+        },
         child: BlocBuilder<BestPopularCubit, BestPopularStates>(
           builder: (context, state) {
             if (state is BestPopularLoadingState) {
               return _buildLoadingState();
             }
             if (state is BestPopularErrorState) {
-              return FailureComponent(
-                message: state.error,
-                onRetry: () => context.read<BestPopularCubit>().getBestPopularStores(),
-              );
+              return FailureComponent(message: state.error, onRetry: () => context.read<BestPopularCubit>().getBestPopularStores());
             }
             if (state is BestPopularSuccessState) {
               final stores = state.stores;
+              final pagination = state.pagination;
 
               if (stores.isEmpty) {
-                return Center(
-                  child: Text(
-                    L10n.tr().noData,
-                    style: TStyle.mainwSemi(14),
-                  ),
-                );
+                return Center(child: Text(L10n.tr().noData, style: TStyle.mainwSemi(14)));
               }
 
-              return GridView.builder(
-                padding: AppConst.defaultPadding,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.5,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 16,
-                ),
-                itemCount: stores.length,
-                itemBuilder: (context, index) {
-                  final store = stores[index];
-                  return GrocCardSwitcher<StoreEntity>(
-                    cardStyle: CardStyle.typeOne,
-                    width: double.infinity,
-                    entity: store,
-                    onPressed: () => _navigateToStore(context, store),
-                  );
-                },
-              );
+              return _buildStoresGrid(stores, pagination);
+            }
+
+            if (state is BestPopularLoadingMoreState) {
+              return _buildStoresGrid(state.stores, state.pagination, isLoadingMore: true);
             }
 
             return const SizedBox.shrink();
@@ -97,6 +110,61 @@ class BestPopularScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         return const _StoreCardSkeleton();
       },
+    );
+  }
+
+  Widget _buildStoresGrid(List<StoreEntity> stores, PaginationInfo? pagination, {bool isLoadingMore = false}) {
+    return SingleChildScrollView(
+      controller: _scrollController,
+      child: Column(
+        children: [
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: AppConst.defaultPadding,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.85,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 16,
+            ),
+            itemCount: stores.length,
+            itemBuilder: (context, index) {
+              final store = stores[index];
+              return InkWell(
+                onTap: () => _navigateToStore(context, store),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 4,
+                    children: [
+                      Expanded(
+                        child: CustomNetworkImage(store.image, fit: BoxFit.cover, width: double.infinity, height: 120, borderRaduis: 12),
+                      ),
+                      Text(store.name, style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center),
+                      Row(
+                        spacing: 4,
+                        children: [
+                          const VectorGraphicsWidget(
+                            Assets.clockIc,
+                            height: 24,
+                            width: 24,
+                            colorFilter: ColorFilter.mode(Co.purple, BlendMode.srcIn),
+                          ),
+                          Text('${store.estimatedDeliveryTime} ${L10n.tr().min}', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+          if (isLoadingMore) const Padding(padding: EdgeInsets.all(16.0), child: AdaptiveProgressIndicator()),
+          if (pagination != null && !pagination.hasNext && stores.isNotEmpty) const Padding(padding: EdgeInsets.all(16.0), child: SizedBox.shrink()),
+        ],
+      ),
     );
   }
 }
@@ -126,10 +194,7 @@ class _StoreCardSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeletonizer(
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-        ),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -152,19 +217,13 @@ class _StoreCardSkeleton extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 16,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
                     ),
                     const SizedBox(height: 4),
                     Container(
                       width: 80,
                       height: 12,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
                     ),
                   ],
                 ),

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/features/home/home_categories/popular/data/dtos/top_items_dto.dart';
-import 'package:gazzer/features/home/home_categories/popular/domain/top_items_repo.dart';
-import 'package:gazzer/features/home/home_categories/popular/presentation/cubit/top_items_states.dart';
+import 'package:gazzer/features/home/home_categories/topItems/data/dtos/top_items_dto.dart';
+import 'package:gazzer/features/home/home_categories/topItems/domain/top_items_repo.dart';
+import 'package:gazzer/features/home/home_categories/topItems/presentation/cubit/top_items_states.dart';
 
 class TopItemsCubit extends Cubit<TopItemsStates> {
   final TopItemsRepo _repo;

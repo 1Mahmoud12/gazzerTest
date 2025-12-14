@@ -348,5 +348,5 @@ class Assets {
   // Home Ic
   static const String restaurantNameIc = "assets/svg/restaurantNameIc.svg";
   static const String customShapeSuggestIc = "assets/png/customShapeSuggestIc.png";
-  static const String soldCartIc = "assets/png/soldCartIc.png";
+  static const String soldCartIc = "assets/svg/soldCartIc.svg";
 }

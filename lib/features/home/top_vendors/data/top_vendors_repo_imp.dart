@@ -15,13 +15,18 @@ class TopVendorsRepoImp extends TopVendorsRepo {
   TopVendorsRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<List<VendorEntity>>> getTopVendors() {
-    return super.call(
-      apiCall: () => _apiClient.get(endpoint: Endpoints.topVendors),
+  Future<Result<TopVendorsResponse>> getTopVendors({int page = 1, int perPage = 10}) async {
+    final result = await super.call(
+      apiCall: () => _apiClient.get(endpoint: '${Endpoints.topVendors}?is_paginated=1&page=$page&per_page=$perPage'),
       parser: (response) {
-        _saveToCache(response.data);
+        // Save to cache in background only for first page
+        if (page == 1) {
+          _saveToCache(response.data);
+        }
+
         final dto = TopVendorsDto.fromJson(response.data);
-        return dto.data?.entities
+        final vendors =
+            dto.data?.entities
                 .map(
                   (vendor) => VendorEntity(
                     id: vendor.id ?? 0,
@@ -29,14 +34,18 @@ class TopVendorsRepoImp extends TopVendorsRepo {
                     name: vendor.vendorName ?? '',
                     contactPerson: vendor.contactPerson,
                     secondContactPerson: vendor.secondContactPerson,
-                    image: vendor.image ?? '',
+                    // Use storeImage from storeInfo if available, otherwise fallback to image
+                    image: vendor.storeInfo?.storeImage ?? vendor.image ?? '',
                     type: vendor.storeInfo?.storeCategoryType ?? '',
                   ),
                 )
                 .toList() ??
             [];
+        return TopVendorsResponse(vendors: vendors, pagination: dto.pagination);
       },
     );
+
+    return result;
   }
 
   Future<void> _saveToCache(dynamic responseData) async {
@@ -68,7 +77,8 @@ class TopVendorsRepoImp extends TopVendorsRepo {
               name: vendor.vendorName ?? '',
               contactPerson: vendor.contactPerson,
               secondContactPerson: vendor.secondContactPerson,
-              image: vendor.image ?? '',
+              // Use storeImage from storeInfo if available, otherwise fallback to image
+              image: vendor.storeInfo?.storeImage ?? vendor.image ?? '',
               type: vendor.storeInfo?.storeCategoryType ?? '',
             ),
           )

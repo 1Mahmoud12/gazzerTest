@@ -15,15 +15,22 @@ class BestPopularRepositoryImpl extends BestPopularRepository {
   BestPopularRepositoryImpl(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<List<StoreEntity>>> getBestPopularStores() {
-    return super.call(
-      apiCall: () => _apiClient.get(endpoint: Endpoints.bestPopularStores),
+  Future<Result<BestPopularResponse>> getBestPopularStores({int page = 1, int perPage = 10}) async {
+    final result = await super.call(
+      apiCall: () => _apiClient.get(endpoint: '${Endpoints.bestPopularStores}?is_paginated=1&page=$page&per_page=$perPage'),
       parser: (response) {
-        _saveToCache(response.data);
+        // Save to cache in background only for first page
+        if (page == 1) {
+          _saveToCache(response.data);
+        }
+
         final dto = BestPopularResponseDto.fromJson(response.data);
-        return dto.data.entities.map((e) => e.toEntity()).toList();
+        final stores = dto.data.entities.map((e) => e.toEntity()).toList();
+        return BestPopularResponse(stores: stores, pagination: dto.pagination);
       },
     );
+
+    return result;
   }
 
   Future<void> _saveToCache(dynamic responseData) async {

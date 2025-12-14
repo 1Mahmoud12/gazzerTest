@@ -1,54 +1,79 @@
 class TopVendorsDto {
-  TopVendorsDto({
-    this.status,
-    this.message,
-    this.data,
-  });
+  TopVendorsDto({this.status, this.message, this.data, this.pagination});
 
   final String? status;
   final String? message;
   final TopVendorsData? data;
+  final PaginationInfo? pagination;
 
   factory TopVendorsDto.fromJson(Map<String, dynamic> json) {
     return TopVendorsDto(
       status: json["status"],
       message: json["message"],
       data: json["data"] == null ? null : TopVendorsData.fromJson(json["data"]),
+      pagination: json["pagination"] == null ? null : PaginationInfo.fromJson(json["pagination"]),
     );
   }
 }
 
-class TopVendorsData {
-  TopVendorsData({
-    required this.entities,
-    this.banner,
+class PaginationInfo {
+  final int currentPage;
+  final int totalPages;
+  final int totalRecords;
+  final int currentRecords;
+  final bool hasNext;
+  final bool hasPrevious;
+  final int perPage;
+
+  PaginationInfo({
+    required this.currentPage,
+    required this.totalPages,
+    required this.totalRecords,
+    required this.currentRecords,
+    required this.hasNext,
+    required this.hasPrevious,
+    required this.perPage,
   });
+
+  factory PaginationInfo.fromJson(Map<String, dynamic> json) {
+    return PaginationInfo(
+      currentPage: json['current_page'] ?? 1,
+      totalPages: json['total_pages'] ?? 1,
+      totalRecords: json['total_records'] ?? 0,
+      currentRecords: json['current_records'] ?? 0,
+      hasNext: json['has_next'] ?? false,
+      hasPrevious: json['has_previous'] ?? false,
+      perPage: json['per_page'] ?? 10,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'current_page': currentPage,
+    'total_pages': totalPages,
+    'total_records': totalRecords,
+    'current_records': currentRecords,
+    'has_next': hasNext,
+    'has_previous': hasPrevious,
+    'per_page': perPage,
+  };
+}
+
+class TopVendorsData {
+  TopVendorsData({required this.entities, this.banner});
 
   final List<TopVendor> entities;
   final Banner? banner;
 
   factory TopVendorsData.fromJson(Map<String, dynamic> json) {
     return TopVendorsData(
-      entities: json["entities"] == null
-          ? []
-          : List<TopVendor>.from(
-              json["entities"]!.map((x) => TopVendor.fromJson(x)),
-            ),
+      entities: json["entities"] == null ? [] : List<TopVendor>.from(json["entities"]!.map((x) => TopVendor.fromJson(x))),
       banner: json["banner"] == null ? null : Banner.fromJson(json["banner"]),
     );
   }
 }
 
 class TopVendor {
-  TopVendor({
-    this.id,
-    this.vendorName,
-    this.contactPerson,
-    this.secondContactPerson,
-    this.image,
-    this.type,
-    this.storeInfo,
-  });
+  TopVendor({this.id, this.vendorName, this.contactPerson, this.secondContactPerson, this.image, this.type, this.storeInfo});
 
   final int? id;
   final String? vendorName;
