@@ -1,3 +1,4 @@
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/data/offer_dto.dart';
@@ -10,17 +11,20 @@ class DailyOffersDto {
     required this.status,
     required this.message,
     required this.data,
+    this.pagination,
   });
 
   final String? status;
   final String? message;
   final DailyOfferDataModel? data;
+  final PaginationInfo? pagination;
 
   factory DailyOffersDto.fromJson(Map<String, dynamic> json) {
     return DailyOffersDto(
       status: json["status"],
       message: json["message"],
       data: json["data"] == null ? null : DailyOfferDataModel.fromJson(json["data"]),
+      pagination: json["pagination"] == null ? null : PaginationInfo.fromJson(json["pagination"]),
     );
   }
 
@@ -28,6 +32,7 @@ class DailyOffersDto {
     "status": status,
     "message": message,
     "data": data?.toJson(),
+    "pagination": pagination?.toJson(),
   };
 }
 

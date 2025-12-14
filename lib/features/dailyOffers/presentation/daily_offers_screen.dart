@@ -35,11 +35,33 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
   Timer? _debounceTimer;
   String _currentSearch = '';
   DailyOfferCubit? _cubit;
+  final ScrollController _scrollController = ScrollController();
+  String selectedId = 'items';
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
 
   @override
   void dispose() {
     _debounceTimer?.cancel();
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent * 0.8) {
+      final cubit = _cubit;
+      if (cubit != null) {
+        final currentState = cubit.state;
+        if (cubit.hasMore && currentState is! DailyOfferLoadingMoreState) {
+          final type = selectedId == 'items' ? 'items' : 'stores';
+          cubit.getAllOffers(search: _currentSearch.isEmpty ? null : _currentSearch, type: type, loadMore: true);
+        }
+      }
+    }
   }
 
   void _onSearchChanged(String value) {
@@ -50,17 +72,19 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
     _debounceTimer = Timer(const Duration(milliseconds: 500), () {
       if (_currentSearch != value) {
         _currentSearch = value;
-        _cubit?.getAllOffers(search: value.isEmpty ? null : value);
+        final type = selectedId == 'items' ? 'items' : 'stores';
+        _cubit?.getAllOffers(search: value.isEmpty ? null : value, type: type);
       }
     });
   }
-
-  String selectedId = 'items';
 
   void onChanged(String id) {
     setState(() {
       selectedId = id;
     });
+    // Fetch data with the new type
+    final type = id == 'items' ? 'items' : 'stores';
+    _cubit?.getAllOffers(search: _currentSearch.isEmpty ? null : _currentSearch, type: type);
   }
 
   @override
@@ -78,7 +102,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
           Expanded(
             child: BlocProvider(
               create: (context) {
-                _cubit = di<DailyOfferCubit>()..getAllOffers();
+                _cubit = di<DailyOfferCubit>()..getAllOffers(type: 'items');
                 return _cubit!;
               },
               child: BlocBuilder<DailyOfferCubit, DailyOfferStates>(
@@ -89,18 +113,26 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                   if (state is DailyOfferErrorState) {
                     return FailureComponent(
                       message: state.error,
-                      onRetry: () => context.read<DailyOfferCubit>().getAllOffers(search: _currentSearch.isEmpty ? null : _currentSearch),
+                      onRetry: () {
+                        final type = selectedId == 'items' ? 'items' : 'stores';
+                        context.read<DailyOfferCubit>().getAllOffers(search: _currentSearch.isEmpty ? null : _currentSearch, type: type);
+                      },
                     );
                   }
-                  if (state is DailyOfferSuccessState) {
-                    final data = state.dailyOfferDataModel;
+                  if (state is DailyOfferSuccessState || state is DailyOfferLoadingMoreState) {
+                    final data = state is DailyOfferSuccessState
+                        ? state.dailyOfferDataModel
+                        : (state as DailyOfferLoadingMoreState).dailyOfferDataModel;
+                    final pagination = state is DailyOfferSuccessState ? state.pagination : (state as DailyOfferLoadingMoreState).pagination;
+                    final isLoadingMore = state is DailyOfferLoadingMoreState;
                     final items = data?.itemsWithOffers ?? const [];
                     final stores = data?.storesWithOffers ?? const [];
-                    if (items.isEmpty && stores.isEmpty) {
+                    if (items.isEmpty && stores.isEmpty && !isLoadingMore) {
                       return Center(child: Text(_currentSearch.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults, style: TStyle.mainwSemi(14)));
                     }
 
                     return CustomScrollView(
+                      controller: _scrollController,
                       cacheExtent: 100,
                       slivers: [
                         SliverToBoxAdapter(
@@ -125,7 +157,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                               sliver: SliverGrid(
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  childAspectRatio: 0.68,
+                                  childAspectRatio: 0.63,
                                   crossAxisSpacing: 4,
                                   mainAxisSpacing: 8,
                                 ),
@@ -236,6 +268,14 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                             ),
                           ],
                         ],
+                        if (isLoadingMore)
+                          const SliverToBoxAdapter(
+                            child: Padding(padding: EdgeInsets.all(16.0), child: AdaptiveProgressIndicator()),
+                          ),
+                        if (pagination != null && !pagination.hasNext && (items.isNotEmpty || stores.isNotEmpty))
+                          const SliverToBoxAdapter(
+                            child: Padding(padding: EdgeInsets.all(16.0), child: SizedBox.shrink()),
+                          ),
                       ],
                     );
                   }

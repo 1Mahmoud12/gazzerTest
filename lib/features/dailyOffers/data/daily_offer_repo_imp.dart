@@ -16,24 +16,31 @@ class DailyOfferRepoImp extends DailyOfferRepo {
   DailyOfferRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<DailyOfferDataModel?>> getAllDailyOffer({
+  Future<Result<DailyOfferResponse>> getAllDailyOffer({
     String? search,
+    String? type,
+    int page = 1,
+    int perPage = 10,
   }) async {
     final result = await super.call(
       apiCall: () => _apiClient.get(
         endpoint: Endpoints.getAllOffers,
         queryParameters: {
           if (search != null && search.isNotEmpty) 'search': search,
+          if (type != null && type.isNotEmpty) 'type': type,
+          'is_paginated': '1',
+          'page': page.toString(),
+          'per_page': perPage.toString(),
         },
       ),
       parser: (response) {
-        // Save to cache in background only if no search
-        if (search == null || search.isEmpty) {
+        // Save to cache in background only if no search and first page
+        if ((search == null || search.isEmpty) && page == 1) {
           _saveToCache(response.data);
         }
 
         final dto = DailyOffersDto.fromJson(response.data);
-        return dto.data;
+        return DailyOfferResponse(data: dto.data, pagination: dto.pagination);
       },
     );
 

@@ -25,7 +25,7 @@ class BestPopularRepositoryImpl extends BestPopularRepository {
         }
 
         final dto = BestPopularResponseDto.fromJson(response.data);
-        final stores = dto.data.entities.map((e) => e.toEntity()).toList();
+        final stores = dto.data?.entities?.map((e) => e.toEntity()).toList() ?? [];
         return BestPopularResponse(stores: stores, pagination: dto.pagination);
       },
     );
@@ -52,7 +52,8 @@ class BestPopularRepositoryImpl extends BestPopularRepository {
 
       final map = jsonDecode(raw) as Map<String, dynamic>;
       final dto = BestPopularResponseDto.fromJson(map);
-      return dto.data.entities.map((e) => e.toEntity()).toList();
+      if (dto.data == null || dto.data!.entities == null) return null;
+      return dto.data!.entities!.map((e) => e.toEntity()).toList();
     } catch (e) {
       return null;
     }
