@@ -250,6 +250,7 @@ class Assets {
   static const String assetsSvgTripleStarts = "assets/svg/triple_starts.svg";
 
   static const String assetsSvgTruck = "assets/svg/truck.svg";
+  static const String clockIc = "assets/svg/clockIc.svg";
 
   static const String assetsSvgUser = "assets/svg/user.svg";
 
@@ -344,9 +345,8 @@ class Assets {
   static const String newUnSelectedFavoriteIc = "assets/svg/newUnSelectedFavoriteIc.svg";
   static const String newSelectedFavoriteIc = "assets/svg/newSelectedFavoriteIc.svg";
 
-  // Daily `offer
+  // Home Ic
   static const String restaurantNameIc = "assets/svg/restaurantNameIc.svg";
-
-  // Daily `offer
   static const String customShapeSuggestIc = "assets/png/customShapeSuggestIc.png";
+  static const String soldCartIc = "assets/png/soldCartIc.png";
 }

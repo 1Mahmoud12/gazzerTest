@@ -6,4 +6,6 @@ abstract class BestPopularRepository extends BaseApiRepo {
   BestPopularRepository(super.crashlyticsRepo);
 
   Future<Result<List<StoreEntity>>> getBestPopularStores();
+
+  Future<List<StoreEntity>?> getCachedBestPopularStores();
 }

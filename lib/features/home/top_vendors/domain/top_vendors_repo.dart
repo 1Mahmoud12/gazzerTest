@@ -6,4 +6,6 @@ abstract class TopVendorsRepo extends BaseApiRepo {
   TopVendorsRepo(super.crashlyticsRepo);
 
   Future<Result<List<VendorEntity>>> getTopVendors();
+
+  Future<List<VendorEntity>?> getCachedTopVendors();
 }

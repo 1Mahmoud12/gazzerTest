@@ -12,18 +12,22 @@ class BestPopularCubit extends Cubit<BestPopularStates> {
 
   BestPopularCubit({required BestPopularRepository repository}) : _repository = repository, super(BestPopularLoadingState());
 
-  static BestPopularCubit create() {
-    return BestPopularCubit(
-      repository: BestPopularRepositoryImpl(
-        ApiClient(),
-        CrashlyticsRepoImp(),
-      ),
-    );
+  static Future<BestPopularCubit> create() async {
+    return BestPopularCubit(repository: BestPopularRepositoryImpl(ApiClient(), CrashlyticsRepoImp()));
   }
 
   Future<void> getBestPopularStores() async {
     emit(BestPopularLoadingState());
 
+    // Check cache first
+    final cached = await _repository.getCachedBestPopularStores();
+    final hasCachedData = cached != null && cached.isNotEmpty;
+
+    if (hasCachedData) {
+      emit(BestPopularSuccessState(stores: cached));
+    }
+
+    // Fetch data from API
     final result = await _repository.getBestPopularStores();
 
     switch (result) {
@@ -31,7 +35,10 @@ class BestPopularCubit extends Cubit<BestPopularStates> {
         emit(BestPopularSuccessState(stores: ok.value));
         break;
       case Err<List<StoreEntity>> err:
-        emit(BestPopularErrorState(error: err.error.message));
+        // If we have cached data, don't show error, just keep showing cache
+        if (!hasCachedData) {
+          emit(BestPopularErrorState(error: err.error.message));
+        }
         break;
     }
   }

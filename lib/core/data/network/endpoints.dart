@@ -59,12 +59,15 @@ class Endpoints {
   static const homePage = 'homepage';
   static const getAllOffers = 'homepage/widget/stores-with-offers-and-items-offers';
   static const topVendors = 'homepage/widget/top-vendors';
+  static const topVendorsWidget = 'homepage/widget/top-vendors';
   static const topItems = 'homepage/widget/top-items';
   static const suggests = 'homepage/widget/suggests';
   static const suggestsWidget = 'homepage/widget/suggests';
   static const bestPopularStores = 'homepage/widget/best-popular';
+  static const bestPopularStoresWidget = 'homepage/widget/best-popular';
   static const categoriesWidget = 'homepage/widget/categories';
   static const dailyOffersWidget = 'homepage/widget/daily-offers';
+  static const topItemsWidget = 'homepage/widget/top-items';
   // restaurants
   static const restaurantsMenuPage = 'pages/restaurants-page';
 

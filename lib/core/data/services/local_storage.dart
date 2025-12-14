@@ -63,6 +63,26 @@ class CacheKeys {
   // FAQ
   static const String faqCategoriesJsonPrefix = 'faq_categories_json_';
   static const String faqCategoriesTsPrefix = 'faq_categories_ts_';
+
+  // Top Vendors Widget
+  static const String topVendorsWidgetJson = 'top_vendors_widget_json';
+  static const String topVendorsWidgetTs = 'top_vendors_widget_ts';
+
+  // Best Popular Stores Widget
+  static const String bestPopularStoresWidgetJson = 'best_popular_stores_widget_json';
+  static const String bestPopularStoresWidgetTs = 'best_popular_stores_widget_ts';
+
+  // Top Items Widget
+  static const String topItemsWidgetJson = 'top_items_widget_json';
+  static const String topItemsWidgetTs = 'top_items_widget_ts';
+
+  // Top Vendors (screen)
+  static const String topVendorsJson = 'top_vendors_json';
+  static const String topVendorsTs = 'top_vendors_ts';
+
+  // Best Popular (screen)
+  static const String bestPopularJson = 'best_popular_json';
+  static const String bestPopularTs = 'best_popular_ts';
 }
 
 class TokenService {

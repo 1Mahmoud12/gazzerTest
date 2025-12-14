@@ -23,10 +23,10 @@ class TopItemsCubit extends Cubit<TopItemsStates> {
     // Fetch data from API
     final res = await _repo.getTopItems();
     switch (res) {
-      case Ok<TopItemsDtoData?> ok:
-        emit(TopItemsSuccessState(ok.value, isFromCache: false));
+      case final Ok<TopItemsDtoData?> ok:
+        emit(TopItemsSuccessState(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(TopItemsErrorState(err.error.message));
         break;
     }

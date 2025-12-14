@@ -23,10 +23,10 @@ class SuggestsCubit extends Cubit<SuggestsStates> {
     // Fetch fresh data from API
     final res = await _repo.getSuggests();
     switch (res) {
-      case Ok<SuggestsDtoData?> ok:
-        emit(SuggestsSuccessState(ok.value, isFromCache: false));
+      case final Ok<SuggestsDtoData?> ok:
+        emit(SuggestsSuccessState(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(SuggestsErrorState(err.error.message));
         break;
     }

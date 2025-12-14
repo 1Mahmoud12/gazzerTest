@@ -12,7 +12,7 @@ import 'package:path/path.dart' as path;
 
 Future<void> main() async {
   final svgDir = Directory('assets/svg');
-
+  log(svgDir.path);
   if (!await svgDir.exists()) {
     log('Error: assets/svg directory not found');
     exit(1);

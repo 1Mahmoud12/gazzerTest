@@ -1899,4 +1899,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get referral_code_invalid => 'كود الإحالة غير صحيح';
+
+  @override
+  String get sold => 'تم البيع';
 }

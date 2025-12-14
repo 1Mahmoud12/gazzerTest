@@ -10,37 +10,39 @@ class _HomeBestPopular extends StatelessWidget {
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            TitleWithMore(
-              title: L10n.tr().bestPopular,
-              onPressed: () {
-                context.push(PopularScreen.route);
+        delegate: SliverChildListDelegate([
+          TitleWithMore(
+            title: L10n.tr().bestPopular,
+            onPressed: () {
+              context.push(PopularScreen.route);
+            },
+          ),
+          const VerticalSpacing(12),
+          SizedBox(
+            height: 150,
+            child: ListView.separated(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.horizontal,
+              itemCount: items.length,
+              separatorBuilder: (context, index) => const HorizontalSpacing(12),
+              itemBuilder: (context, index) {
+                final prod = items[index];
+                if (prod == null) return const SizedBox.shrink();
+                return VerticalRotatedImgCard(
+                  prod: prod,
+                  onTap: () {
+                    if (prod is PlateEntity) {
+                      PlateDetailsRoute(id: prod.id).push(context);
+                    } else if (prod is ProductEntity) {
+                      ProductDetailsRoute(productId: prod.id /*, $extra: findCartItem(context.read<CartCubit>(), product)*/).push(context);
+                    }
+                  },
+                );
               },
             ),
-            const VerticalSpacing(12),
-            SizedBox(
-              height: 240,
-              child: ListView.separated(
-                padding: EdgeInsets.zero,
-                scrollDirection: Axis.horizontal,
-                itemCount: items.length,
-                separatorBuilder: (context, index) => const HorizontalSpacing(12),
-                itemBuilder: (context, index) {
-                  final prod = items[index];
-                  if (prod == null) return const SizedBox.shrink();
-                  return VerticalRotatedImgCard(
-                    prod: prod,
-                    onTap: () {
-                      PlateDetailsRoute(id: prod.id).push(context);
-                    },
-                  );
-                },
-              ),
-            ),
-            const VerticalSpacing(24),
-          ],
-        ),
+          ),
+          const VerticalSpacing(24),
+        ]),
       ),
     );
   }

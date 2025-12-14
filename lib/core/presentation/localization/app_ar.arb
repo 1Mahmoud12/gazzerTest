@@ -805,6 +805,8 @@
      "link_copied_to_clipboard": "تم نسخ الرابط إلى الحافظة",
      "code_copied_to_clipboard": "تم نسخ الكود إلى الحافظة",
      "please_enter_referral_code": "يرجى إدخال كود الإحالة",
-     "referral_code_invalid": "كود الإحالة غير صحيح"
+     "referral_code_invalid": "كود الإحالة غير صحيح",
+       "sold": "تم البيع"
+
 
 }

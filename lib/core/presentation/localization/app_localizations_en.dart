@@ -1899,4 +1899,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get referral_code_invalid => 'Referral code is invalid.';
+
+  @override
+  String get sold => 'Sold';
 }

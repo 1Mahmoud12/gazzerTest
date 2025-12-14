@@ -37,11 +37,7 @@ class CustomNetworkImage extends StatelessWidget {
           errorWidget ??
           ColoredBox(
             color: Colors.grey.shade200,
-            child: const Icon(
-              Icons.broken_image,
-              color: Colors.grey,
-              size: 42,
-            ),
+            child: const Icon(Icons.broken_image, color: Colors.grey, size: 42),
           ),
     );
     if (imageUrl.endsWith('svg')) {

@@ -3793,6 +3793,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Referral code is invalid.'**
   String get referral_code_invalid;
+
+  /// No description provided for @sold.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold'**
+  String get sold;
 }
 
 class _AppLocalizationsDelegate

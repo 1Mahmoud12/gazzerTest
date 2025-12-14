@@ -29,7 +29,7 @@ This will:
 You can also convert individual files manually:
 
 ```bash
-dart run vector_graphics_compiler assets/svg/delivery_logo.svg -o assets/svg/delivery_logo.vg
+dart run vector_graphics_compiler assets/svg/soldCartIc.svg -o assets/svg/soldCartIc.vg
 ```
 
 ### 2. Update Imports

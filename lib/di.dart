@@ -36,6 +36,9 @@ import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus
 import 'package:gazzer/features/home/best_popular/data/repositories/best_popular_repository_impl.dart';
 import 'package:gazzer/features/home/best_popular/domain/repositories/best_popular_repository.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_cubit.dart';
+import 'package:gazzer/features/home/home_categories/best_popular_stores_widget/data/best_popular_stores_widget_repo_impl.dart';
+import 'package:gazzer/features/home/home_categories/best_popular_stores_widget/domain/best_popular_stores_widget_repo.dart';
+import 'package:gazzer/features/home/home_categories/best_popular_stores_widget/presentation/cubit/best_popular_stores_widget_cubit.dart';
 import 'package:gazzer/features/home/home_categories/categories_widget/data/categories_widget_repo_impl.dart';
 import 'package:gazzer/features/home/home_categories/categories_widget/domain/categories_widget_repo.dart';
 import 'package:gazzer/features/home/home_categories/categories_widget/presentation/cubit/categories_widget_cubit.dart';
@@ -51,6 +54,12 @@ import 'package:gazzer/features/home/home_categories/suggested/presentation/cubi
 import 'package:gazzer/features/home/home_categories/suggests_widget/data/suggests_widget_repo_impl.dart';
 import 'package:gazzer/features/home/home_categories/suggests_widget/domain/suggests_widget_repo.dart';
 import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/top_items_widget/data/top_items_widget_repo_impl.dart';
+import 'package:gazzer/features/home/home_categories/top_items_widget/domain/top_items_widget_repo.dart';
+import 'package:gazzer/features/home/home_categories/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors_widget/data/top_vendors_widget_repo_impl.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors_widget/domain/top_vendors_widget_repo.dart';
+import 'package:gazzer/features/home/home_categories/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
 import 'package:gazzer/features/home/main_home/data/home_repo_imp.dart';
 import 'package:gazzer/features/home/main_home/domain/home_repo.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
@@ -163,6 +172,9 @@ void _registerRepos() {
   di.registerLazySingleton<CategoriesWidgetRepo>(() => CategoriesWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<DailyOffersWidgetRepo>(() => DailyOffersWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<SuggestsWidgetRepo>(() => SuggestsWidgetRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<TopVendorsWidgetRepo>(() => TopVendorsWidgetRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<BestPopularStoresWidgetRepo>(() => BestPopularStoresWidgetRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<TopItemsWidgetRepo>(() => TopItemsWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<CheckoutRepo>(() => CheckoutRepoImp(di.get(), di.get()));
   di.registerLazySingleton<LoyaltyProgramRepo>(() => LoyaltyProgramRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<WalletRepo>(() => WalletRepoImpl(di.get(), di.get()));
@@ -212,6 +224,9 @@ void _registerCubits() {
   di.registerFactory(() => CategoriesWidgetCubit(di.get()));
   di.registerFactory(() => DailyOffersWidgetCubit(di.get()));
   di.registerFactory(() => SuggestsWidgetCubit(di.get()));
+  di.registerFactory(() => TopVendorsWidgetCubit(di.get()));
+  di.registerFactory(() => BestPopularStoresWidgetCubit(di.get()));
+  di.registerFactory(() => TopItemsWidgetCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));

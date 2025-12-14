@@ -805,6 +805,7 @@
     "link_copied_to_clipboard": "Link copied to clipboard",
       "code_copied_to_clipboard": "Code copied to clipboard",
       "please_enter_referral_code": "Please enter a referral code",
-      "referral_code_invalid": "Referral code is invalid."
+      "referral_code_invalid": "Referral code is invalid.",
+      "sold": "Sold"
 
 }
