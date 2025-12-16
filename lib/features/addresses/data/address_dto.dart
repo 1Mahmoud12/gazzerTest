@@ -7,13 +7,14 @@ class AddressDTO {
   double? lat;
   double? long;
   int? isDefault;
+  int? selectedLocation;
   ProvinceDTO? province;
   ProvinceZoneDTO? provinceZone;
   String? building;
   String? floor;
   String? apartment;
 
-  AddressDTO({this.id, this.name, this.address, this.lat, this.long, this.isDefault, this.province, this.provinceZone});
+  AddressDTO({this.id, this.name, this.address, this.lat, this.long, this.isDefault, this.selectedLocation, this.province, this.provinceZone});
 
   AddressDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,6 +28,7 @@ class AddressDTO {
     building = json['building'];
     floor = json['floor'];
     apartment = json['apartment'];
+    selectedLocation = json['selected_location'] ?? 0;
   }
 
   AddressEntity toEntity() {
@@ -42,6 +44,7 @@ class AddressDTO {
       zoneName: provinceZone!.zoneName!,
       building: building ?? '',
       apartment: apartment ?? '',
+      selectedLocation: selectedLocation == 1,
       floor: floor ?? '',
       landmark: address ?? '',
     );

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
@@ -21,7 +20,7 @@ class IncrementWidgetWhite extends StatelessWidget {
     this.onRemoving,
   });
   final int initVal;
-  final Function(bool isAdding) onChanged;
+  final Function({required bool isAdding}) onChanged;
   final Future<void> Function()? onRemoving;
   final bool isAdding;
   final bool isRemoving;
@@ -43,28 +42,21 @@ class IncrementWidgetWhite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            border: GradientBoxBorder(
-              gradient: Grad().shadowGrad().copyWith(
-                colors: [Colors.black26, Colors.black.withAlpha(0), Colors.black26],
-                stops: [0.0, 0.5, 1.0],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-              width: 2,
-            ),
-            borderRadius: AppConst.defaultBorderRadius,
-          ),
-          child: IconButton(
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: AppConst.defaultBorderRadius,
+        border: Border.all(color: Co.purple100),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
             onPressed: _canIncrement
                 ? () {
                     if (isAdding || isRemoving) return;
                     SystemSound.play(SystemSoundType.click);
-                    onChanged(true);
+                    onChanged(isAdding: true);
                   }
                 : () {
                     if (_hasReachedStockLimit) {
@@ -80,36 +72,18 @@ class IncrementWidgetWhite extends StatelessWidget {
             ),
             icon: isAdding
                 ? const AdaptiveProgressIndicator(size: 22)
-                : Icon(
-                    Icons.add,
-                    color: _canIncrement ? Co.secondary : Co.secondary.withOpacityNew(0.4),
-                    size: 22,
-                  ),
+                : Icon(Icons.add, color: _canIncrement ? Co.purple : Co.purple.withOpacityNew(0.4), size: 22),
           ),
-        ),
-        ConstrainedBox(
-          constraints: const BoxConstraints(minWidth: 30),
-          child: Text("$initVal", style: TStyle.secondaryBold(16), textAlign: TextAlign.center),
-        ),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            border: GradientBoxBorder(
-              gradient: Grad().shadowGrad().copyWith(
-                colors: [Colors.black26, Colors.black.withAlpha(0), Colors.black26],
-                stops: [0.0, 0.5, 1.0],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-              width: 2,
-            ),
-            borderRadius: AppConst.defaultBorderRadius,
+          ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 30),
+            child: Text('$initVal', style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
           ),
-          child: IconButton(
+          IconButton(
             onPressed: canDecrement
                 ? () {
                     if (isAdding || isRemoving) return;
                     SystemSound.play(SystemSoundType.click);
-                    onChanged(false);
+                    onChanged(isAdding: false);
                   }
                 : onRemoving != null
                 ? () async {
@@ -125,10 +99,10 @@ class IncrementWidgetWhite extends StatelessWidget {
             ),
             icon: isRemoving
                 ? const AdaptiveProgressIndicator(size: 22)
-                : Icon(Icons.remove, color: canDecrement ? Co.secondary : Co.secondary.withOpacityNew(.3), size: 22),
+                : Icon(Icons.remove, color: canDecrement ? Co.black : Co.black.withOpacityNew(.3), size: 22),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

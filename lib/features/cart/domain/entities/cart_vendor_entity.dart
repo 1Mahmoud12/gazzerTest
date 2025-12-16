@@ -6,6 +6,7 @@ class CartVendorEntity extends Equatable {
   final int id;
   final String name;
   final String image;
+  final bool isOpen;
   final VendorType type;
   final List<CartItemEntity> items;
 
@@ -15,8 +16,9 @@ class CartVendorEntity extends Equatable {
     required this.image,
     required this.type,
     this.items = const [],
+    required this.isOpen,
   });
 
   @override
-  List<Object?> get props => [id, name, image, type, items];
+  List<Object?> get props => [id, name, image, type, items, isOpen];
 }

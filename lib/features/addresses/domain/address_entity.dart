@@ -11,6 +11,7 @@ class AddressEntity extends Equatable {
   final double lat;
   final double lng;
   final bool isDefault;
+  final bool selectedLocation;
   final String floor;
   final String apartment;
   final String building;
@@ -28,6 +29,7 @@ class AddressEntity extends Equatable {
     required this.lat,
     required this.lng,
     required this.isDefault,
+    required this.selectedLocation,
     required this.floor,
     required this.apartment,
     required this.building,
@@ -45,6 +47,7 @@ class AddressEntity extends Equatable {
     lat,
     lng,
     isDefault,
+    selectedLocation,
     floor,
     apartment,
     building,

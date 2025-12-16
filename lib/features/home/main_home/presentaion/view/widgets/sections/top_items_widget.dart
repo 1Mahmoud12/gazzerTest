@@ -8,9 +8,9 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_p
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/features/home/home_categories/topItems/presentation/view/popular_screen.dart';
-import 'package:gazzer/features/home/home_categories/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
-import 'package:gazzer/features/home/home_categories/top_items_widget/presentation/cubit/top_items_widget_states.dart';
+import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popular_screen.dart';
+import 'package:gazzer/features/home/homeViewAll/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/top_items_widget/presentation/cubit/top_items_widget_states.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';

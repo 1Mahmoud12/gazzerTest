@@ -2711,7 +2711,7 @@ abstract class AppLocalizations {
   /// No description provided for @havePromoCode.
   ///
   /// In en, this message translates to:
-  /// **'Have a promo code?'**
+  /// **'Do You Have a Promo Code or Voucher?'**
   String get havePromoCode;
 
   /// No description provided for @addVoucher.
@@ -3799,6 +3799,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sold'**
   String get sold;
+
+  /// No description provided for @add_items_to_cart_to_continue_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Add items to cart to continue order'**
+  String get add_items_to_cart_to_continue_order;
+
+  /// No description provided for @start_ordering.
+  ///
+  /// In en, this message translates to:
+  /// **'Start ordering'**
+  String get start_ordering;
+
+  /// No description provided for @nothing_here_yet.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet'**
+  String get nothing_here_yet;
+
+  /// No description provided for @items_no_longer_available.
+  ///
+  /// In en, this message translates to:
+  /// **'Items are no longer available'**
+  String get items_no_longer_available;
+
+  /// No description provided for @remove_all.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove all'**
+  String get remove_all;
+
+  /// No description provided for @restaurant_not_available_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Restaurant Name isn’t available right now. Please remove their items to continue. You can find similar products below.'**
+  String get restaurant_not_available_message;
+
+  /// No description provided for @vendor_with_similar_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Vendor with similar products'**
+  String get vendor_with_similar_products;
+
+  /// No description provided for @add_your_notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your notes'**
+  String get add_your_notes;
+
+  /// No description provided for @order_notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Notes'**
+  String get order_notes;
+
+  /// No description provided for @select_voucher.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Voucher'**
+  String get select_voucher;
+
+  /// No description provided for @yourBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Your balance'**
+  String get yourBalance;
 }
 
 class _AppLocalizationsDelegate

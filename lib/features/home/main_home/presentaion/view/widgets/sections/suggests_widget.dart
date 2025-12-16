@@ -9,9 +9,9 @@ import 'package:gazzer/core/presentation/views/components/banners/main_banner_wi
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/horizontal_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
-import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
-import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
-import 'package:gazzer/features/home/home_categories/suggests_widget/presentation/cubit/suggests_widget_states.dart';
+import 'package:gazzer/features/home/homeViewAll/suggested/presentation/view/suggested_screen.dart';
+import 'package:gazzer/features/home/homeViewAll/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/suggests_widget/presentation/cubit/suggests_widget_states.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:go_router/go_router.dart';
 

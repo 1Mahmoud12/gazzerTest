@@ -206,7 +206,14 @@ class CartCubit extends Cubit<CartStates> {
           // Create new vendor with updated item
           final updatedItems = List<CartItemEntity>.from(vendor.items);
           updatedItems[itemIndex] = updatedItem;
-          final updatedVendor = CartVendorEntity(id: vendor.id, name: vendor.name, image: vendor.image, type: vendor.type, items: updatedItems);
+          final updatedVendor = CartVendorEntity(
+            id: vendor.id,
+            name: vendor.name,
+            isOpen: vendor.isOpen,
+            image: vendor.image,
+            type: vendor.type,
+            items: updatedItems,
+          );
 
           // Update the vendor in the list
           _vendors[vendorIndex] = updatedVendor;
@@ -240,7 +247,14 @@ class CartCubit extends Cubit<CartStates> {
           // Create new vendor with reverted item
           final revertedItems = List<CartItemEntity>.from(vendor.items);
           revertedItems[itemIndex] = revertedItem;
-          final revertedVendor = CartVendorEntity(id: vendor.id, name: vendor.name, image: vendor.image, type: vendor.type, items: revertedItems);
+          final revertedVendor = CartVendorEntity(
+            id: vendor.id,
+            name: vendor.name,
+            isOpen: vendor.isOpen,
+            image: vendor.image,
+            type: vendor.type,
+            items: revertedItems,
+          );
 
           // Update the vendor in the list
           _vendors[vendorIndex] = revertedVendor;

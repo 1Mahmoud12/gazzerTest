@@ -568,7 +568,7 @@
 "editItems":"Edit Items",
     "assignAdditionalDelivery":"Assign Additional Delivery",
     "cartCapacity":"Current Cart Capacity",
-    "havePromoCode": "Have a promo code?",
+    "havePromoCode": "Do You Have a Promo Code or Voucher?",
     "addVoucher": "Add Voucher",
     "enterCode": "Enter Code",
     "apply": "Apply",
@@ -806,6 +806,18 @@
       "code_copied_to_clipboard": "Code copied to clipboard",
       "please_enter_referral_code": "Please enter a referral code",
       "referral_code_invalid": "Referral code is invalid.",
-      "sold": "Sold"
+      "sold": "Sold",
+      "add_items_to_cart_to_continue_order": "Add items to cart to continue order",
+        "start_ordering": "Start ordering",
+        "nothing_here_yet": "Nothing here yet",
+         "items_no_longer_available": "Items are no longer available",
+          "remove_all": "Remove all",
+          "restaurant_not_available_message": "Restaurant Name isn’t available right now. Please remove their items to continue. You can find similar products below.",
+ "vendor_with_similar_products": "Vendor with similar products",
+  "add_your_notes": "Add your notes",
+  "order_notes": "Order Notes",
+  "select_voucher": "Select Voucher",
+    "yourBalance": "Your balance"
+
 
 }

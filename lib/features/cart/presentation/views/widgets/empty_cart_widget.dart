@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,55 +11,37 @@ class EmptyCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 24,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Row(),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: Grad().bglightLinear,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Image.asset(
-              Assets.assetsGifCart,
-              height: 175,
-              fit: BoxFit.contain,
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          children: [
+            DecoratedBox(
+              decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().bglightLinear),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Image.asset(Assets.nothingInCartIc, fit: BoxFit.contain),
+              ),
             ),
-          ),
+            const VerticalSpacing(16),
+
+            Text(L10n.tr().nothing_here_yet, style: TStyle.robotBlackTitle(), textAlign: TextAlign.center),
+            const VerticalSpacing(16),
+
+            Text(L10n.tr().add_items_to_cart_to_continue_order, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+            const VerticalSpacing(16),
+            MainBtn(
+              onPressed: () {
+                context.go(HomeScreen.route);
+              },
+
+              radius: 12,
+              text: L10n.tr().start_ordering,
+            ),
+            const VerticalSpacing(80),
+          ],
         ),
-        Text(
-          L10n.tr().yourCartIsEmpty,
-          style: TStyle.primaryBold(16),
-        ),
-        const SizedBox.shrink(),
-        MainBtn(
-          onPressed: () {
-            context.go(HomeScreen.route);
-          },
-          bgColor: Co.secondary,
-          width: 250,
-          radius: 12,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            spacing: 12,
-            children: [
-              SvgPicture.asset(
-                Assets.assetsSvgCart,
-                height: 24,
-                colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
-              ),
-              Text(
-                L10n.tr().startShopping,
-                style: TStyle.primaryBold(14),
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

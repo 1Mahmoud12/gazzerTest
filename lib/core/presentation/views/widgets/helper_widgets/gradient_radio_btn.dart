@@ -13,6 +13,7 @@ class GradientRadioBtn extends StatelessWidget {
         border: Border.all(color: Co.purple, width: 2),
         shape: BoxShape.circle,
       ),
+
       child: AnimatedOpacity(
         opacity: isSelected ? 1 : 0,
         duration: const Duration(milliseconds: 200),

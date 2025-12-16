@@ -14,9 +14,9 @@ import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/home/home_categories/top_vendors/presentation/top_vendors_screen.dart';
-import 'package:gazzer/features/home/home_categories/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
-import 'package:gazzer/features/home/home_categories/top_vendors_widget/presentation/cubit/top_vendors_widget_states.dart';
+import 'package:gazzer/features/home/homeViewAll/top_vendors/presentation/top_vendors_screen.dart';
+import 'package:gazzer/features/home/homeViewAll/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/top_vendors_widget/presentation/cubit/top_vendors_widget_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';

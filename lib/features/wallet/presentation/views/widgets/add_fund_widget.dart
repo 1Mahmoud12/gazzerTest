@@ -65,25 +65,16 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
             // Navigate to payment screen
             if (context.mounted) {
               final result =
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PaymentScreen(paymentUrl: state.iframeUrl),
-                    ),
-                  ) ??
+                  await Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentScreen(paymentUrl: state.iframeUrl))) ??
                   'error,${L10n.tr().payment_failed}';
               animationDialogLoading();
               if (!result.split(',').last.contains('http')) {
-                Alerts.showToast(
-                  L10n.tr().payment_failed,
-                );
+                Alerts.showToast(L10n.tr().payment_failed);
                 closeDialog();
 
                 return;
               }
-              final response = await PaymobWebhookService.fetchWebhookResponse(
-                result.split(',').last,
-              );
+              final response = await PaymobWebhookService.fetchWebhookResponse(result.split(',').last);
               final message = response['message'];
               final status = response['data']?['payment_status'];
               closeDialog();
@@ -98,9 +89,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                 // After payment, refresh wallet data
                 context.read<WalletCubit>().load(forceRefresh: true);
               } else {
-                Alerts.showToast(
-                  message,
-                );
+                Alerts.showToast(message);
               }
               // Clear the controller and reset form validation
               _amountController.clear();
@@ -126,10 +115,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                L10n.tr().walletAddFunds,
-                style: TStyle.robotBlackTitle(),
-              ),
+              Text(L10n.tr().walletAddFunds, style: TStyle.robotBlackTitle()),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -164,14 +150,9 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                             flex: 2,
                             child: MainTextField(
                               controller: _amountController,
-                              keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true,
-                              ),
+                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
                               focusNode: _amountFocusNode,
-                              style: TStyle.blackMedium(
-                                16,
-                                font: FFamily.roboto,
-                              ),
+                              style: TStyle.blackMedium(16, font: FFamily.roboto),
                               hintText: L10n.tr().walletEnterAmount,
                               autovalidateMode: AutovalidateMode.onUserInteraction,
                               onChange: (value) {
@@ -187,9 +168,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                                 return null;
                               },
                               inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                  RegExp(r'^\d*\.?\d{0,2}$'),
-                                ),
+                                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$')),
                                 FilteringTextInputFormatter.digitsOnly,
                                 LengthLimitingTextInputFormatter(6),
                               ],
@@ -201,15 +180,9 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                               onPressed: isLoading
                                   ? () {}
                                   : () async {
-                                      final amount =
-                                          double.tryParse(
-                                            _amountController.text,
-                                          ) ??
-                                          0.0;
-                                      if (amount <= 10) {
-                                        Alerts.showToast(
-                                          L10n.tr().walletEnterAmount,
-                                        );
+                                      final amount = double.tryParse(_amountController.text) ?? 0.0;
+                                      if (amount < 10) {
+                                        Alerts.showToast(L10n.tr().walletEnterAmount);
                                         return;
                                       }
                                       await PaymentMethodBottomSheet.show(
@@ -231,16 +204,10 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                                     },
                               isEnabled: !isLoading || ((int.tryParse(_amountController.text) ?? 0) < 10),
                               width: 100,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 6,
-                                horizontal: 2,
-                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
                               bgColor: (int.tryParse(_amountController.text) ?? 0) < 10 ? Co.purple200 : Co.purple,
                               text: L10n.tr().walletRechargeNow,
-                              textStyle: TStyle.whiteBold(
-                                16,
-                                font: FFamily.roboto,
-                              ),
+                              textStyle: TStyle.whiteBold(16, font: FFamily.roboto),
                             ),
                           ),
                         ],

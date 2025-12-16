@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/custom_dropdown.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/checkout/data/dtos/checkout_data_dto.dart';
@@ -30,12 +30,6 @@ class _VoucherWidgetState extends State<VoucherWidget> {
   void initState() {
     super.initState();
     _voucherController = TextEditingController();
-    // Load vouchers after the first frame to avoid build errors
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        context.read<VouchersCubit>().loadVouchers();
-      }
-    });
   }
 
   @override
@@ -54,20 +48,13 @@ class _VoucherWidgetState extends State<VoucherWidget> {
         }
         return Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Co.buttonGradient.withOpacityNew(.35)),
-          ),
+
           child: Column(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    L10n.tr().havePromoCode,
-                    style: TStyle.blackBold(14),
-                    textAlign: TextAlign.start,
-                  ),
+                  Text(L10n.tr().havePromoCode, style: TStyle.robotBlackRegular(), textAlign: TextAlign.start),
                   if (!cubit.isTextFieldEnabled) ...[
                     const VerticalSpacing(10),
                     BlocBuilder<CheckoutCubit, CheckoutStates>(
@@ -80,73 +67,61 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                           children: [
                             BlocListener<VouchersCubit, VouchersStates>(
                               listener: (context, state) {
-                                if (state is VoucherApplied) {
-                                  // Alerts.showToast(
-                                  //   '${L10n.tr().voucherApplied} ${state.discountAmount} ${state.discountType.contains('percent') ? '%' : ''} ${L10n.tr().discount}',
-                                  //   error: false,
-                                  // );
-                                } else if (state is VoucherError) {
-                                  voucherAlert(
-                                    title: state.message,
-                                    context: context,
-                                  );
+                                if (state is VoucherError) {
+                                  voucherAlert(title: state.message, context: context);
                                 }
                               },
                               child: Expanded(
-                                child: DropdownButtonFormField<String>(
-                                  value: hasVoucher ? appliedVoucher : cubit.selectedVoucherCode,
-                                  decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: AppConst.defaultBorderRadius,
-                                      borderSide: const BorderSide(
-                                        color: Co.purple,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: AppConst.defaultBorderRadius,
-                                      borderSide: const BorderSide(
-                                        color: Co.purple,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: AppConst.defaultBorderRadius,
-                                      borderSide: const BorderSide(
-                                        color: Co.purple,
-                                        width: 1,
-                                      ),
-                                    ),
-                                  ),
-                                  focusColor: Co.purple,
-                                  style: TStyle.primarySemi(14),
-                                  borderRadius: AppConst.defaultBorderRadius,
-                                  isExpanded: true,
-                                  iconEnabledColor: Co.purple,
-                                  hint: Text(L10n.tr().selectVoucher),
-                                  items: cubit.vouchers.map((
-                                    VoucherDTO voucher,
-                                  ) {
-                                    return DropdownMenuItem(
-                                      value: voucher.code,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(voucher.code),
-                                          if (cubit.selectedVoucherCode != voucher.code)
-                                            Text(
-                                              '${voucher.discountValue} ${voucher.discountType.contains('percent') ? '%' : L10n.tr().egp}',
-                                            ),
-                                        ],
-                                      ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    if (value != null) {
-                                      _voucherController.text = value;
-                                      cubit.applyLocalVoucher(value);
-                                      checkoutCubit.applyVoucher(value);
+                                child: Builder(
+                                  builder: (context) {
+                                    // Determine currently selected voucher entity
+                                    final vouchers = cubit.vouchers;
+                                    VoucherDTO selectedVoucher;
+                                    if (hasVoucher) {
+                                      selectedVoucher = vouchers.firstWhere(
+                                        (v) => v.code == appliedVoucher,
+                                        orElse: () => VoucherDTO(code: L10n.tr().select_voucher, discountType: '', discountValue: ''),
+                                      );
+                                    } else if (cubit.selectedVoucherCode != null) {
+                                      selectedVoucher = vouchers.firstWhere((v) => v.code == cubit.selectedVoucherCode, orElse: () => vouchers.first);
+                                    } else {
+                                      selectedVoucher = VoucherDTO(code: '', discountType: '', discountValue: '');
                                     }
+
+                                    return CustomDropdown<VoucherDTO>(
+                                      items: vouchers,
+                                      selectedItem: selectedVoucher,
+                                      onChanged: (voucher) {
+                                        final code = voucher.code;
+                                        if (code.isEmpty) return;
+                                        _voucherController.text = code;
+                                        cubit.applyLocalVoucher(code);
+                                        checkoutCubit.applyVoucher(code);
+                                      },
+                                      itemBuilder: (context, voucher) {
+                                        final code = voucher.code;
+                                        return Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(code),
+                                            if (cubit.selectedVoucherCode != code)
+                                              Text('${voucher.discountValue} ${voucher.discountType.contains('percent') ? '%' : L10n.tr().egp}'),
+                                          ],
+                                        );
+                                      },
+                                      selectedItemBuilder: (context, voucher) {
+                                        final code = voucher.code;
+                                        return Text(
+                                          code.isEmpty ? L10n.tr().selectVoucher : code,
+                                          style: TStyle.robotBlackRegular().copyWith(color: code.isEmpty ? Co.darkGrey : Co.black),
+                                        );
+                                      },
+                                      borderRadius: AppConst.defaultBorderRadius.topLeft.x,
+                                      borderColor: Co.lightGrey,
+                                      fillColor: Co.white,
+                                      buttonPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                                      menuMaxHeight: 300,
+                                    );
                                   },
                                 ),
                               ),
@@ -159,10 +134,10 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                   checkoutCubit.applyVoucher(null);
                                   cubit.clearVoucher();
                                 },
-                                child: const Icon(
-                                  Icons.delete,
-                                  size: 24,
-                                  color: Co.red,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                                  decoration: BoxDecoration(color: Co.clearRed, borderRadius: BorderRadius.circular(40)),
+                                  child: Text(L10n.tr().clear, style: TStyle.robotBlackRegular()),
                                 ),
                               ),
                             ],
@@ -186,7 +161,6 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                 key: formKey,
                                 child: MainTextField(
                                   controller: _voucherController,
-                                  showBorder: true,
                                   borderRadius: 16,
                                   hintText: L10n.tr().enterCode,
                                   validator: Validators.notEmpty,
@@ -203,19 +177,11 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                               child: BlocConsumer<VouchersCubit, VouchersStates>(
                                 listener: (context, state) {
                                   if (state is VoucherApplied) {
-                                    Alerts.showToast(
-                                      '${L10n.tr().voucherApplied} ${state.discountAmount}% ${L10n.tr().discount}',
-                                      error: false,
-                                    );
+                                    Alerts.showToast('${L10n.tr().voucherApplied} ${state.discountAmount}% ${L10n.tr().discount}', error: false);
 
-                                    checkoutCubit.applyVoucher(
-                                      state.voucherCode,
-                                    );
+                                    checkoutCubit.applyVoucher(state.voucherCode);
                                   } else if (state is VoucherError) {
-                                    voucherAlert(
-                                      title: state.message,
-                                      context: context,
-                                    );
+                                    voucherAlert(title: state.message, context: context);
                                   }
                                 },
                                 builder: (context, state) {
@@ -226,9 +192,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                         return;
                                       }
                                       if (_voucherController.text.trim().isNotEmpty) {
-                                        cubit.applyVoucher(
-                                          _voucherController.text,
-                                        );
+                                        cubit.applyVoucher(_voucherController.text);
                                       }
                                     },
                                     isLoading: isLoading,
@@ -247,11 +211,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                   checkoutCubit.applyVoucher(null);
                                   cubit.clearVoucher();
                                 },
-                                child: const Icon(
-                                  Icons.delete,
-                                  size: 24,
-                                  color: Co.red,
-                                ),
+                                child: const Icon(Icons.delete, size: 24, color: Co.red),
                               ),
                             ],
                           ],

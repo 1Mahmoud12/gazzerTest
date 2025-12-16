@@ -1902,4 +1902,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sold => 'تم البيع';
+
+  @override
+  String get add_items_to_cart_to_continue_order => 'أضف منتجات إلى السلة لمتابعة الطلب';
+
+  @override
+  String get start_ordering => 'ابدأ الطلب';
+
+  @override
+  String get nothing_here_yet => 'لا يوجد شيء هنا بعد';
+
+  @override
+  String get items_no_longer_available => 'المنتجات لم تعد متاحة';
+
+  @override
+  String get remove_all => 'إزالة الكل';
+
+  @override
+  String get restaurant_not_available_message => 'اسم المطعم غير متاح حالياً. يرجى إزالة منتجاته للمتابعة. يمكنك العثور على منتجات مشابهة أدناه.';
+
+  @override
+  String get vendor_with_similar_products => 'بائع بمنتجات مشابهة';
+
+  @override
+  String get add_your_notes => 'أضف ملاحظاتك';
+
+  @override
+  String get order_notes => 'ملاحظات الطلب';
+
+  @override
+  String get select_voucher => 'اختر القسيمة';
+
+  @override
+  String get yourBalance => 'رصيدك';
 }

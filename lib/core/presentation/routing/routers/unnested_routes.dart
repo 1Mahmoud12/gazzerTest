@@ -9,12 +9,11 @@ import 'package:gazzer/features/auth/register/presentation/view/create_password_
 import 'package:gazzer/features/auth/register/presentation/view/register_screen.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
-import 'package:gazzer/features/checkout/presentation/cubit/voucherCubit/vouchers_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
-import 'package:gazzer/features/home/home_categories/topItems/presentation/view/popular_screen.dart';
-import 'package:gazzer/features/home/home_categories/top_vendors/presentation/top_vendors_screen.dart';
+import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popular_screen.dart';
+import 'package:gazzer/features/home/homeViewAll/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:gazzer/features/intro/presentation/plan/views/diatery_lifestyle_screen.dart';
@@ -164,13 +163,7 @@ final List<RouteBase> unNestedRoutes = [
 
 final checkoutRoutes = [
   GoRoute(path: SelectAddressScreen.route, builder: (context, state) => const SelectAddressScreen()),
-  GoRoute(
-    path: ConfirmOrderScreen.route,
-    builder: (context, state) => MultiBlocProvider(
-      providers: [BlocProvider.value(value: di<VouchersCubit>())],
-      child: const ConfirmOrderScreen(),
-    ),
-  ),
+  GoRoute(path: ConfirmOrderScreen.route, builder: (context, state) => const ConfirmOrderScreen()),
   // GoRoute(
   //   path: CardDetailsScreen.route,
   //   builder: (context, state) => const CardDetailsScreen(),

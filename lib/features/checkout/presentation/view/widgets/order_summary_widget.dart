@@ -70,44 +70,29 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
 
         return Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Co.purple.withOpacityNew(0.1),
-          ),
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Co.purple.withOpacityNew(0.1)),
           child: Column(
             children: [
               if (orderSummary.subtotal != 0)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ItemSummary(
-                    title: L10n.tr().grossAmount,
-                    value: orderSummary.subtotal,
-                  ),
+                  child: ItemSummary(title: L10n.tr().grossAmount, value: orderSummary.subtotal),
                 ),
               if (orderSummary.discount != 0)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ItemSummary(
-                    title: L10n.tr().discount,
-                    value: orderSummary.discount,
-                    discount: true,
-                  ),
+                  child: ItemSummary(title: L10n.tr().discount, value: orderSummary.discount, discount: true),
                 ),
               if (orderSummary.deliveryFee != 0)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ItemSummary(
-                    title: L10n.tr().deliveryFee,
-                    value: orderSummary.deliveryFee,
-                  ),
+                  child: ItemSummary(title: L10n.tr().deliveryFee, value: orderSummary.deliveryFee),
                 ),
               if (orderSummary.serviceFee != 0)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ItemSummary(
-                    title: L10n.tr().serviceFee,
-                    value: orderSummary.serviceFee,
-                  ),
+                  child: ItemSummary(title: L10n.tr().serviceFee, value: orderSummary.serviceFee),
                 ),
 
               if (orderSummary.voucher != null) ...[
@@ -120,23 +105,13 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ItemSummary(
-                    title: L10n.tr().promoCode,
-                    value: 0,
-                    discount: true,
-                    formattedValue: voucherFormatted,
-                  ),
+                  child: ItemSummary(title: L10n.tr().promoCode, value: 0, discount: true, formattedValue: voucherFormatted),
                 ),
               ],
 
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 6.0),
-                child: DashedBorder(
-                  width: 10,
-                  gap: 8,
-                  color: Co.gryPrimary,
-                  thickness: 1.5,
-                ),
+                child: DashedBorder(width: 10, gap: 8, color: Co.gryPrimary, thickness: 1.5),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6.0),
@@ -158,20 +133,14 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                           const HorizontalSpacing(2),
                           Text(
                             ' (${L10n.tr().amountToPay}) ',
-                            style: TStyle.blackBold(
-                              12,
-                              font: FFamily.roboto,
-                            ).copyWith(overflow: TextOverflow.ellipsis),
+                            style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(overflow: TextOverflow.ellipsis),
                             maxLines: 1,
                           ),
                         ],
                       ),
                     ),
                     const HorizontalSpacing(12),
-                    Text(
-                      Helpers.getProperPrice(finalTotal),
-                      style: TStyle.burbleSemi(20, font: FFamily.roboto),
-                    ),
+                    Text(Helpers.getProperPrice(finalTotal), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
                   ],
                 ),
               ),
@@ -190,14 +159,7 @@ class ItemSummary extends StatelessWidget {
   final bool total;
   final String? formattedValue;
 
-  const ItemSummary({
-    super.key,
-    required this.title,
-    required this.value,
-    this.discount = false,
-    this.total = false,
-    this.formattedValue,
-  });
+  const ItemSummary({super.key, required this.title, required this.value, this.discount = false, this.total = false, this.formattedValue});
 
   @override
   Widget build(BuildContext context) {

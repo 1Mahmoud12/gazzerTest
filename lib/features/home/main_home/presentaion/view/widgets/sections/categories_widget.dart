@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
-import 'package:gazzer/features/home/home_categories/categories_widget/presentation/cubit/categories_widget_cubit.dart';
-import 'package:gazzer/features/home/home_categories/categories_widget/presentation/cubit/categories_widget_states.dart';
+import 'package:gazzer/features/home/homeViewAll/categories_widget/presentation/cubit/categories_widget_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/categories_widget/presentation/cubit/categories_widget_states.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 
 class CategoriesWidget extends StatelessWidget {

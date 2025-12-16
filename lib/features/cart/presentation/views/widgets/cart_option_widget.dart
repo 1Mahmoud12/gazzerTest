@@ -9,16 +9,14 @@ class CartOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        text: "${option.name}: \n",
-        style: TStyle.blackSemi(12),
-        children: List.generate(
-          option.values.length,
-          (index) {
-            return TextSpan(text: "  -${option.values[index].name}  ", style: TStyle.greySemi(12));
-          },
-        ),
+        text: '',
+        children: List.generate(option.values.length, (index) {
+          return TextSpan(
+            text: '- ${option.values[index].name}',
+            style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+          );
+        }),
       ),
-      textAlign: TextAlign.start,
     );
   }
 }

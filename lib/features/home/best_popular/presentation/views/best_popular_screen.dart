@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/dto/pagination_dto.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
-import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -132,7 +133,7 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
             itemBuilder: (context, index) {
               final store = stores[index];
               return InkWell(
-                onTap: () => _navigateToStore(context, store),
+                onTap: () => _navigateToVendor(context, store),
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Column(
@@ -169,12 +170,19 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
   }
 }
 
-void _navigateToStore(BuildContext context, StoreEntity store) {
-  if (store.storeCategoryType == 'Restaurant') {
+void _navigateToVendor(BuildContext context, StoreEntity store) {
+  if (store.storeCategoryType == VendorType.restaurant.value) {
     context.navigateToPage(
       BlocProvider(
         create: (context) => di<SingleRestaurantCubit>(param1: store.id),
         child: RestaurantDetailsScreen(id: store.id),
+      ),
+    );
+  } else if (store.storeCategoryType == VendorType.grocery.value) {
+    context.navigateToPage(
+      BlocProvider(
+        create: (context) => di<StoreDetailsCubit>(param1: store.id),
+        child: StoreDetailsScreen(storeId: store.id),
       ),
     );
   } else {

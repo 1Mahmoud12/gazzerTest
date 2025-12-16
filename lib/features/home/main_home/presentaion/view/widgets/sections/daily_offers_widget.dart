@@ -10,8 +10,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
-import 'package:gazzer/features/home/home_categories/daily_offers_widget/presentation/cubit/daily_offers_widget_cubit.dart';
-import 'package:gazzer/features/home/home_categories/daily_offers_widget/presentation/cubit/daily_offers_widget_states.dart';
+import 'package:gazzer/features/home/homeViewAll/daily_offers_widget/presentation/cubit/daily_offers_widget_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/daily_offers_widget/presentation/cubit/daily_offers_widget_states.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,20 +22,20 @@ class DailyOffersWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DailyOffersWidgetCubit, DailyOffersWidgetStates>(
       builder: (context, state) {
-          if (state is DailyOffersWidgetSuccessState) {
-            return _DailyOffersContent(items: state.entities, banner: state.banner);
-          } else if (state is DailyOffersWidgetLoadingState) {
-            return const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(24.0),
-                child: Center(child: AdaptiveProgressIndicator()),
-              ),
-            );
-          } else if (state is DailyOffersWidgetErrorState) {
-            return const SliverToBoxAdapter(child: SizedBox.shrink());
-          }
+        if (state is DailyOffersWidgetSuccessState) {
+          return _DailyOffersContent(items: state.entities, banner: state.banner);
+        } else if (state is DailyOffersWidgetLoadingState) {
+          return const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Center(child: AdaptiveProgressIndicator()),
+            ),
+          );
+        } else if (state is DailyOffersWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        },
+        }
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
+      },
     );
   }
 }

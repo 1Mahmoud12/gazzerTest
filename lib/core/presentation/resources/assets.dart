@@ -29,6 +29,7 @@ class Assets {
   static const String assetsGazzerLogo = "assets/gazzer_logo.png";
 
   static const String assetsGifCart = "assets/gif/cart.gif";
+  static const String nothingInCartIc = "assets/png/nothingInCartIc.png";
 
   static const String assetsGifDelivery = "assets/gif/delivery.gif";
 
@@ -258,6 +259,7 @@ class Assets {
   static const String cashOnDelivery = "assets/svg/cashOnDelivery.svg";
   static const String creditCard = "assets/svg/creditCard.svg";
   static const String wallet = "assets/svg/wallet.svg";
+  static const String gazzarWallet = "assets/svg/gazzarWallet.svg";
 
   static const String assetsSvgWork = "assets/svg/work.svg";
 

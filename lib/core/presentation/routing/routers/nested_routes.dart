@@ -4,7 +4,7 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
-import 'package:gazzer/features/home/home_categories/suggested/presentation/view/suggested_screen.dart';
+import 'package:gazzer/features/home/homeViewAll//suggested/presentation/view/suggested_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';

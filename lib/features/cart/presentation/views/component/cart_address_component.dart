@@ -10,8 +10,8 @@ import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
-import 'package:gazzer/features/cart/presentation/views/widgets/cart_address_widget.dart';
 import 'package:gazzer/features/profile/presentation/model/address_model.dart';
+import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
 import 'package:go_router/go_router.dart';
 
 class CartAddressComponent extends StatelessWidget {
@@ -24,10 +24,7 @@ class CartAddressComponent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            L10n.tr().deliveryAddress,
-            style: TStyle.primaryBold(16),
-          ),
+          Text(L10n.tr().deliveryAddress, style: TStyle.primaryBold(16)),
           const Divider(height: 9, thickness: 1),
           BlocBuilder<CartCubit, CartStates>(
             buildWhen: (previous, current) => current is FullCartStates,
@@ -48,25 +45,19 @@ class CartAddressComponent extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Center(
-                          child: Text(
-                            L10n.tr().noAddressesSelected,
-                            style: TStyle.greyBold(14),
-                          ),
-                        ),
+                        child: Center(child: Text(L10n.tr().noAddressesSelected, style: TStyle.greyBold(14))),
                       ),
                     ],
                   ),
                 );
               } else if (state is FullCartLoading) {
-                return const Center(child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: AdaptiveProgressIndicator(),
-                ));
+                return const Center(
+                  child: Padding(padding: EdgeInsets.symmetric(vertical: 12), child: AdaptiveProgressIndicator()),
+                );
               }
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: CartAddressWidget(address: AddressModel.fromEntity(state.address!)),
+                child: AddressCard(address: AddressModel.fromEntity(state.address!)),
               );
             },
           ),
@@ -77,10 +68,7 @@ class CartAddressComponent extends StatelessWidget {
                 if (address != null && context.mounted) context.read<CartCubit>().updateCartAddress(address);
               });
             },
-            bgColor: Co.secondary,
-            text: L10n.tr().selectAddress,
-            radius: 12,
-            textStyle: TStyle.primaryBold(14),
+            text: L10n.tr().addNewAddress,
           ),
         ],
       ),

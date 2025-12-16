@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
+;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1345,7 +1345,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cartCapacity => 'Current Cart Capacity';
 
   @override
-  String get havePromoCode => 'Have a promo code?';
+  String get havePromoCode => 'Do You Have a Promo Code or Voucher?';
 
   @override
   String get addVoucher => 'Add Voucher';
@@ -1902,4 +1902,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sold => 'Sold';
+
+  @override
+  String get add_items_to_cart_to_continue_order => 'Add items to cart to continue order';
+
+  @override
+  String get start_ordering => 'Start ordering';
+
+  @override
+  String get nothing_here_yet => 'Nothing here yet';
+
+  @override
+  String get items_no_longer_available => 'Items are no longer available';
+
+  @override
+  String get remove_all => 'Remove all';
+
+  @override
+  String get restaurant_not_available_message =>
+      'Restaurant Name isn’t available right now. Please remove their items to continue. You can find similar products below.';
+
+  @override
+  String get vendor_with_similar_products => 'Vendor with similar products';
+
+  @override
+  String get add_your_notes => 'Add your notes';
+
+  @override
+  String get order_notes => 'Order Notes';
+
+  @override
+  String get select_voucher => 'Select Voucher';
+
+  @override
+  String get yourBalance => 'Your balance';
 }

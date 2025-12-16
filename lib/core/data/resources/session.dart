@@ -31,15 +31,13 @@ class Session {
 
   AddressEntity? get defaultAddress => addresses.firstWhereOrNull((e) => e.isDefault);
 
+  AddressEntity? get selectedLocation => addresses.firstWhereOrNull((e) => e.isDefault);
+
   Future<void> loadUserData() async {
     /// cart
     /// favorite
     /// addresses
-    await Future.wait([
-      di<FavoriteBus>().getFavorites(),
-      di<AddressesBus>().refreshAddresses(),
-      di<CartCubit>().loadCart(),
-    ]);
+    await Future.wait([di<FavoriteBus>().getFavorites(), di<AddressesBus>().refreshAddresses(), di<CartCubit>().loadCart()]);
   }
 
   void clear() {

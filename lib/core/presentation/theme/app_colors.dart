@@ -32,6 +32,7 @@ class Co {
   static const lightGrey = Color(0xFFD9D9D9);
   static const grey = Color(0xFF777777);
   static const gr100 = Color(0xFF8D8D8D);
+  static const gr200 = Color(0xFFDADADA);
   static const w100 = Color(0xFFF1EFEF);
   static const darkGrey = Color(0xFF5D5D5D);
   static const white = Color(0xFFFFFFFF);
@@ -45,6 +46,7 @@ class Co {
   static const red = Color(0xFFFF0000);
   static const darkRed = Color(0xFFA90000);
   static const logoutRed = Color(0xFF920404);
+  static const clearRed = Color(0xFFFFCAD5);
   static const darkMain = Color(0xFF010014);
 
   /// pharmacy colors

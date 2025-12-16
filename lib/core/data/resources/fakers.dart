@@ -55,6 +55,7 @@ class Fakers {
       floor: '1',
       apartment: '2',
       building: 'building',
+      selectedLocation: true,
     ),
     AddressEntity(
       id: 0,
@@ -66,6 +67,7 @@ class Fakers {
       lat: 0.0,
       lng: 0.0,
       isDefault: false,
+      selectedLocation: true,
       floor: '1',
       apartment: '2',
       building: 'building',
@@ -383,8 +385,8 @@ class Fakers {
     totalLoadPercentageExact: 10,
   );
   static const cartVendors = [
-    CartVendorEntity(id: -1, name: 'name', image: _netWorkImage, type: VendorType.restaurant, items: cartItems),
-    CartVendorEntity(id: -2, name: 'name', image: _netWorkImage, type: VendorType.restaurant, items: cartItems),
+    CartVendorEntity(id: -1, name: 'name', image: _netWorkImage, isOpen: false, type: VendorType.restaurant, items: cartItems),
+    CartVendorEntity(id: -2, name: 'name', image: _netWorkImage, isOpen: false, type: VendorType.restaurant, items: cartItems),
   ];
   static const cartItems = [CartItemEntity(cartId: -1, type: CartItemType.product, quantity: 1, prod: cartable, itemPrice: 0, totalPrice: 0)];
   static const cartable = CartableEntity(id: -1, name: 'name', price: 0.0, image: _netWorkImage);

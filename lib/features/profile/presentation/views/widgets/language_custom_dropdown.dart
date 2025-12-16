@@ -66,7 +66,13 @@ class LanguageCustomDropdown extends StatelessWidget {
           children: [
             Image.asset(language.flagAsset, height: 24, width: 24),
             const HorizontalSpacing(8),
-            Text(language.name, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+            Flexible(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(language.name, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+              ),
+            ),
           ],
         );
       },

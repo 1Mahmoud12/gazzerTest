@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
@@ -18,7 +20,9 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.backgroundColor,
     this.titleStyle,
+    this.onBack,
     this.showBadge = false,
+    this.showLeading = true,
   });
   final bool showCart;
   final bool showLanguage;
@@ -28,17 +32,25 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final bool isCartScreen;
   final Function()? onShare;
+  final Function()? onBack;
   final String? title;
   final TextStyle? titleStyle;
   final bool showBadge;
+  final bool showLeading;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
-      title: title == null ? null : Text(title!, style: titleStyle ?? TStyle.robotBlackTitle()),
+      title: title == null ? null : Text(title!, style: titleStyle ?? TStyle.robotBlackTitle().copyWith(color: Co.purple)),
       leadingWidth: Navigator.canPop(context) ? 65 : 0,
+      leading: showLeading
+          ? IconButton(
+              onPressed: onBack ?? () => Navigator.pop(context),
+              icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back, color: Co.black),
+            )
+          : null,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
@@ -50,19 +62,24 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             onPressed: () {},
             // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-            icon: SvgPicture.asset(Assets.assetsSvgNotification, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
+            icon: VectorGraphicsWidget(
+              Assets.assetsSvgNotification,
+              height: 21,
+              width: 21,
+              colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+            ),
           ),
         if (showLanguage)
           IconButton(
             onPressed: () {},
             // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-            icon: SvgPicture.asset(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
+            icon: VectorGraphicsWidget(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
           ),
         if (onShare != null)
           IconButton(
             onPressed: onShare,
             // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-            icon: const Icon(Icons.share, color: Co.purple, size: 24),
+            icon: const Icon(Icons.share, color: Co.black, size: 24),
           ),
       ],
     );

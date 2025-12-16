@@ -107,7 +107,7 @@ class HorizontalProductCard extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(MediaQuery.sizeOf(context).width * .03),
                         decoration: const BoxDecoration(color: Co.purple, shape: BoxShape.circle),
                         child: Text(
                           '${Helpers.getProperPrice(product.price, showCurrency: false)}\n${L10n.tr().egp}',

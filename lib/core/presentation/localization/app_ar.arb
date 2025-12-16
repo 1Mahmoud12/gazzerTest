@@ -806,7 +806,19 @@
      "code_copied_to_clipboard": "تم نسخ الكود إلى الحافظة",
      "please_enter_referral_code": "يرجى إدخال كود الإحالة",
      "referral_code_invalid": "كود الإحالة غير صحيح",
-       "sold": "تم البيع"
+       "sold": "تم البيع",
+        "add_items_to_cart_to_continue_order": "أضف منتجات إلى السلة لمتابعة الطلب",
+         "start_ordering": "ابدأ الطلب",
+         "nothing_here_yet": "لا يوجد شيء هنا بعد",
+         "items_no_longer_available": "المنتجات لم تعد متاحة",
+           "remove_all": "إزالة الكل",
+           "restaurant_not_available_message": "اسم المطعم غير متاح حالياً. يرجى إزالة منتجاته للمتابعة. يمكنك العثور على منتجات مشابهة أدناه.",
+"vendor_with_similar_products": "بائع بمنتجات مشابهة",
+  "add_your_notes": "أضف ملاحظاتك",
+  "order_notes": "ملاحظات الطلب",
+  "select_voucher": "اختر القسيمة",
+    "yourBalance": "رصيدك"
+
 
 
 }

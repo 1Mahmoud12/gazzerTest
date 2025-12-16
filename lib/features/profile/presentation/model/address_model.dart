@@ -55,6 +55,7 @@ class AddressModel extends AddressEntity {
         landmark: entity.landmark,
         provinceName: entity.provinceName,
         zoneName: entity.zoneName,
+        selectedLocation: entity.selectedLocation,
       ) {
     labelSvg = labelType.label == null
         ? Assets.assetsSvgLocation

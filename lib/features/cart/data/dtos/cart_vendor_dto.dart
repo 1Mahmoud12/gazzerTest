@@ -7,12 +7,14 @@ class CartVendorDTO {
   String? storeName;
   String? storeImage;
   String? type;
+  bool? isOpen;
   List<CartItemDTO>? items;
 
   CartVendorDTO.fromJson(Map<String, dynamic> json) {
     storeId = json['store_id'];
     storeName = json['store_name'];
     storeImage = json['store_image'];
+    isOpen = json['is_open'] == 1;
     type = json['type'];
     if (json['items'] != null) {
       items = <CartItemDTO>[];
@@ -27,6 +29,7 @@ class CartVendorDTO {
       id: storeId ?? 0,
       name: storeName ?? '',
       image: storeImage ?? '',
+      isOpen: isOpen ?? true,
       type: VendorType.fromString(type.toString().toLowerCase()),
       items: items?.map((item) => item.toEntity()).toList() ?? [],
     );

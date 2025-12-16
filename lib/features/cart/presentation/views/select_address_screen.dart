@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
@@ -35,67 +31,54 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ClassicAppBar(),
-      body: SafeArea(
-        child: Padding(
-          padding: AppConst.defaultPadding,
-          child: Column(
-            children: [
-              Expanded(
-                child: StreamBuilder(
-                  stream: di<AddressesBus>().getStream<FetchAddressesEvents>(),
-                  builder: (context, snapshot) {
-                    final addresses = Session().addresses;
-                    if (addresses.isEmpty) {
-                      return Center(
-                        child: Text(
-                          L10n.tr().youHaveNoAddressesYet,
-                          style: TStyle.primaryBold(16),
-                        ),
-                      );
-                    }
-                    return ListView.separated(
-                      itemCount: Session().addresses.length,
-                      separatorBuilder: (context, index) => const VerticalSpacing(24),
-                      itemBuilder: (context, index) {
-                        final address = Session().addresses[index];
-                        return SelectAddressCard(
-                          address: address,
-                          onSelect: (address) {
-                            context.pop(address);
-                          },
-                        );
+      extendBody: true,
+      appBar: MainAppBar(title: L10n.tr().selectAddress),
+      body: Column(
+        children: [
+          Expanded(
+            child: StreamBuilder(
+              stream: di<AddressesBus>().getStream<FetchAddressesEvents>(),
+              builder: (context, snapshot) {
+                final addresses = Session().addresses;
+                if (addresses.isEmpty) {
+                  return Center(child: Text(L10n.tr().youHaveNoAddressesYet, style: TStyle.primaryBold(16)));
+                }
+                return ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: Session().addresses.length,
+                  separatorBuilder: (context, index) => const VerticalSpacing(24),
+                  itemBuilder: (context, index) {
+                    final address = Session().addresses[index];
+                    return SelectAddressCard(
+                      address: address,
+                      onSelect: (address) {
+                        context.pop(address);
                       },
                     );
+                    // return AddressCard(
+                    //   address: AddressModel.fromEntity(address),
+                    //   onSelect: (address) {
+                    //     context.pop(address);
+                    //   },
+                    // );
                   },
-                ),
-              ),
-              MainBtn(
-                onPressed: () {
-                  const AddEditAddressRoute($extra: null).push(context).then((_) {
-                    setState(() {});
-                  });
-                },
-                bgColor: Co.secondary,
-                radius: 12,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                child: Row(
-                  spacing: 16,
-                  children: [
-                    const Icon(Icons.add, size: 20, color: Co.purple),
-                    Expanded(
-                      child: Text(
-                        L10n.tr().addNewAddress,
-                        style: TStyle.primaryBold(14, font: FFamily.inter),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                );
+              },
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: MainBtn(
+              onPressed: () {
+                const AddEditAddressRoute($extra: null).push(context).then((_) {
+                  setState(() {});
+                });
+              },
+              text: L10n.tr().addNewAddress,
+            ),
+          ),
+          const VerticalSpacing(16),
+        ],
       ),
     );
   }

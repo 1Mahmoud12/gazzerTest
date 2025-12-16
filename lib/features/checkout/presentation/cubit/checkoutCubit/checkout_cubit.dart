@@ -18,16 +18,8 @@ import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 
 class CheckoutCubit extends Cubit<CheckoutStates> {
-  CheckoutCubit(
-    this._checkoutRepo,
-  ) : super(CheckoutInitial()) {
-    emit(
-      PaymentMethodLoaded(
-        selectedPaymentMethod: _selectedPaymentMethod,
-        walletBalance: _walletBalance,
-        availablePoints: _availablePoints,
-      ),
-    );
+  CheckoutCubit(this._checkoutRepo) : super(CheckoutInitial()) {
+    emit(PaymentMethodLoaded(selectedPaymentMethod: _selectedPaymentMethod, walletBalance: _walletBalance, availablePoints: _availablePoints));
     loadCheckoutData();
   }
 
@@ -49,6 +41,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
 
   String? get voucherCode => _voucherCode;
   String? timeSlots;
+  String? _orderNotes;
 
   PaymentMethod? get remainingPaymentMethod => _remainingPaymentMethod;
 
@@ -61,9 +54,14 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
   }
 
+  void setOrderNotes(String? value) {
+    _orderNotes = (value == null || value.trim().isEmpty) ? null : value.trim();
+    emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
+  }
+
   // Card management
   final List<CardEntity> _cards = [];
-  bool _isCreatingCard = false;
+  final bool _isCreatingCard = false;
 
   List<CardEntity> get cards => _cards;
   bool get isCreatingCard => _isCreatingCard;
@@ -92,37 +90,16 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
         _cards.clear();
         _cards.addAll(value.paymentCards.map((card) => card.toEntity()));
 
-        emit(
-          CheckoutDataLoaded(
-            walletBalance: _walletBalance,
-            availablePoints: _availablePoints,
-            paymentCards: _cards,
-          ),
-        );
-        emit(
-          PaymentMethodLoaded(
-            selectedPaymentMethod: _selectedPaymentMethod,
-            walletBalance: _walletBalance,
-            availablePoints: _availablePoints,
-          ),
-        );
+        emit(CheckoutDataLoaded(walletBalance: _walletBalance, availablePoints: _availablePoints, paymentCards: _cards));
+        emit(PaymentMethodLoaded(selectedPaymentMethod: _selectedPaymentMethod, walletBalance: _walletBalance, availablePoints: _availablePoints));
       case Err(:final error):
         Alerts.showToast(error.message);
-        emit(
-          PaymentMethodLoaded(
-            selectedPaymentMethod: _selectedPaymentMethod,
-            walletBalance: _walletBalance,
-            availablePoints: _availablePoints,
-          ),
-        );
+        emit(PaymentMethodLoaded(selectedPaymentMethod: _selectedPaymentMethod, walletBalance: _walletBalance, availablePoints: _availablePoints));
     }
   }
 
   /// Selects a payment method
-  void selectPaymentMethod(
-    PaymentMethod method, {
-    bool removeRemainingMethod = true,
-  }) {
+  void selectPaymentMethod(PaymentMethod method, {bool removeRemainingMethod = true}) {
     _selectedPaymentMethod = method;
     if (removeRemainingMethod) {
       _remainingPaymentMethod = null;
@@ -131,13 +108,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
       _walletPhoneNumber = '';
     }
     emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
-    emit(
-      PaymentMethodLoaded(
-        selectedPaymentMethod: _selectedPaymentMethod,
-        walletBalance: _walletBalance,
-        availablePoints: _availablePoints,
-      ),
-    );
+    emit(PaymentMethodLoaded(selectedPaymentMethod: _selectedPaymentMethod, walletBalance: _walletBalance, availablePoints: _availablePoints));
   }
 
   void applyVoucher(String? code) {
@@ -170,20 +141,11 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   }
 
   /// Set the selected mobile wallet provider and phone
-  void setWalletInfo({
-    required String providerName,
-    required String phoneNumber,
-  }) {
+  void setWalletInfo({required String providerName, required String phoneNumber}) {
     _walletProviderName = providerName;
     _walletPhoneNumber = phoneNumber;
     emit(CardChange(timestamp: DateTime.now().microsecondsSinceEpoch));
-    emit(
-      PaymentMethodLoaded(
-        selectedPaymentMethod: _selectedPaymentMethod,
-        walletBalance: _walletBalance,
-        availablePoints: _availablePoints,
-      ),
-    );
+    emit(PaymentMethodLoaded(selectedPaymentMethod: _selectedPaymentMethod, walletBalance: _walletBalance, availablePoints: _availablePoints));
   }
 
   /// If wallet is selected but balance < total, emit state to prompt user
@@ -198,11 +160,9 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   /// Places the order
   /// If wallet is selected and a secondaryMethod is provided, both will be sent
   /// Maximum 2 payment methods can be sent
-  Future<void> placeOrder(
-    BuildContext context, {
-    double? orderTotal,
-    String? notes,
-  }) async {
+  Future<void> placeOrder(BuildContext context, {double? orderTotal, String? notes}) async {
+    // Prefer explicit notes from caller, fallback to stored notes from cart screen
+    final effectiveNotes = notes ?? _orderNotes;
     final methods = <String>[];
     String? getWalletProviderName() {
       return _walletProviderName; // Already set via setWalletInfo()
@@ -251,7 +211,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
       voucher: _voucherCode,
       timeSlot: timeSlots,
       phoneNumber: _walletPhoneNumber,
-      notes: notes,
+      notes: effectiveNotes,
       idCard: _selectedCard?.id,
     );
 
@@ -266,45 +226,31 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
         if (value.iframeUrl != null && value.iframeUrl!.isNotEmpty) {
           if (context.mounted) {
             final String result =
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentScreen(paymentUrl: value.iframeUrl!),
-                  ),
-                ) ??
+                await Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentScreen(paymentUrl: value.iframeUrl!))) ??
                 'error,${L10n.tr().payment_failed}';
             logger.d(' result result : $result');
             animationDialogLoading(rootContext);
             if (!result.split(',').last.contains('http')) {
-              Alerts.showToast(
-                L10n.tr().payment_failed,
-              );
+              Alerts.showToast(L10n.tr().payment_failed);
               closeDialog(rootContext);
 
               return;
             }
-            final response = await PaymobWebhookService.fetchWebhookResponse(
-              result.split(',').last,
-            );
+            final response = await PaymobWebhookService.fetchWebhookResponse(result.split(',').last);
             logger.d('Response : custom $response');
             final message = response['message'];
             final status = response['data']?['payment_status'];
             closeDialog(rootContext);
             if (status == 'completed') {
               logger.d('Payment webhook response: $result');
-              Alerts.showToast(
-                message,
-                error: false,
-              );
+              Alerts.showToast(message, error: false);
               rootContext!.read<CartCubit>().loadCart();
 
               rootContext.go('/orders', extra: true);
             } else {
               logger.d('Payment webhook Failure');
 
-              Alerts.showToast(
-                message,
-              );
+              Alerts.showToast(message);
             }
           }
         } else {

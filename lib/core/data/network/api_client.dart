@@ -16,15 +16,15 @@ class ApiClient {
   final Dio _dio = Dio();
 
   /// Static for handling deep linking
-  static final mainDomain = "https://tkgazzer.com";
+  static const mainDomain = 'https://tkgazzer.com';
   // static final mainDomain = "https://gazzer-test-do.mostafa.cloud/"; // test domain
-  final String baseURL = "$mainDomain/api/";
+  final String baseURL = '$mainDomain/api/';
 
   /// Headers
-  final String _acceptLanguage = "Accept-Language";
-  final String _authorization = "authorization";
+  final String _acceptLanguage = 'Accept-Language';
+  final String _authorization = 'authorization';
   final timeOut = const Duration(seconds: 30);
-  var cancelToken = CancelToken();
+  CancelToken cancelToken = CancelToken();
 
   ApiClient._() {
     _dio.options = BaseOptions(
@@ -41,10 +41,9 @@ class ApiClient {
     );
 
     /// Adding interceptors for logging only in debug mode
-    if (kDebugMode)
-      _dio.interceptors.add(
-        PrettyDioLogger(requestHeader: true, requestBody: true),
-      );
+    if (kDebugMode) {
+      _dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
+    }
   }
 
   void changeLocale(String languageCode) => _dio.options.headers[_acceptLanguage] = languageCode;
@@ -52,7 +51,7 @@ class ApiClient {
   Map<String, dynamic> _getHeaders(Map<String, dynamic>? headers) {
     final custHeaders = <String, dynamic>{};
     final String? token = TokenService.getToken();
-    if (token != null) custHeaders.addAll({_authorization: "Bearer $token"});
+    if (token != null) custHeaders.addAll({_authorization: 'Bearer $token'});
     if (headers != null) custHeaders.addAll(headers);
     return custHeaders;
   }
@@ -77,11 +76,7 @@ class ApiClient {
       final response = await _dio.get(
         endpoint,
         queryParameters: queryParameters,
-        options: Options(
-          headers: _getHeaders(headers),
-          receiveTimeout: const Duration(seconds: 30),
-          sendTimeout: const Duration(seconds: 30),
-        ),
+        options: Options(headers: _getHeaders(headers), receiveTimeout: const Duration(seconds: 30), sendTimeout: const Duration(seconds: 30)),
         cancelToken: effectiveCancelToken,
       );
       // if (response.data['data'] == null) {
@@ -94,11 +89,7 @@ class ApiClient {
       // _unAuthenticated(message);
       if (!effectiveCancelToken.isCancelled) rethrow;
       // If cancelled due to timeout, surface a consistent error structure.
-      throw DioException(
-        requestOptions: e.requestOptions,
-        type: DioExceptionType.cancel,
-        message: 'Request timed out',
-      );
+      throw DioException(requestOptions: e.requestOptions, type: DioExceptionType.cancel, message: 'Request timed out');
     }
   }
 
@@ -120,10 +111,7 @@ class ApiClient {
     void Function(int, int)? onSendProgress,
     CancelToken? cancelToken,
   }) async {
-    assert(
-      requestBody is Map? || requestBody is FormData,
-      'requestBody must be a Map or FormData for file uploads',
-    );
+    assert(requestBody is Map? || requestBody is FormData, 'requestBody must be a Map or FormData for file uploads');
     final effectiveCancelToken = cancelToken ?? CancelToken();
     Timer(customRequestDuration ?? const Duration(seconds: 30), () {
       if (!effectiveCancelToken.isCancelled) {
@@ -148,22 +136,14 @@ class ApiClient {
     } on DioException catch (e) {
       _noInternetConnection(e.type);
       if (!effectiveCancelToken.isCancelled) rethrow;
-      throw DioException(
-        requestOptions: e.requestOptions,
-        type: DioExceptionType.cancel,
-        message: 'Request timed out',
-      );
+      throw DioException(requestOptions: e.requestOptions, type: DioExceptionType.cancel, message: 'Request timed out');
     }
   }
 
   /// [queryParameters] can be used to add query parameters to the request
   ///
   /// [headers] can be used to add custom headers to the request not including the authorization header
-  Future<Response> delete({
-    required String endpoint,
-    Map<String, dynamic>? queryParameters,
-    Map<String, dynamic>? headers,
-  }) async {
+  Future<Response> delete({required String endpoint, Map<String, dynamic>? queryParameters, Map<String, dynamic>? headers}) async {
     try {
       final response = await _dio.delete(
         endpoint,
