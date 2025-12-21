@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -9,7 +9,6 @@ import 'package:gazzer/core/presentation/views/components/banners/main_banner_wi
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/common/view/app_bar_row_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/cubit/restaurants_of_category_states.dart';
@@ -59,19 +58,14 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
             if (state is RestaurantsOfCategoryPageDataError) {
               return Column(
                 children: [
-                  const _TypeRelatedRestaurantsHeader(
-                    title: '',
-                  ),
+                  const _TypeRelatedRestaurantsHeader(title: ''),
                   Expanded(
-                    child: FailureComponent(
-                      message: L10n.tr().couldnotLoadDataPleaseTryAgain,
-                      onRetry: () => cubit.loadPageData(),
-                    ),
+                    child: FailureComponent(message: L10n.tr().couldnotLoadDataPleaseTryAgain, onRetry: () => cubit.loadPageData()),
                   ),
                 ],
               );
             }
-            final banner = (state.banners.isEmpty ? Fakers.banners : state.banners).first;
+            final List<BannerEntity>? banner = state.banners;
             final lists = state.lists;
             final restaurants = state.restaurants;
             return Skeletonizer(
@@ -81,31 +75,25 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                 children: [
                   _TypeRelatedRestaurantsHeader(title: state.name),
 
-                  MainBannerWidget(banner: banner),
-                  ...List.generate(
-                    lists.length,
-                    (index) {
-                      return RestaurantsListSwitche(
-                        style: lists[index].$2,
-                        cardImageToTextRatios: {},
-                        corners: {},
-                        items: lists[index].$3,
-                        onViewAllPressed: null,
-                        title: lists[index].$1,
-                        onSingleCardPressed: (item) {
-                          RestaurantDetailsRoute(id: item.id).push(context);
-                        },
-                      );
-                    },
-                  ),
+                  if (banner != null && banner.isNotEmpty) MainBannerWidget(banner: banner.first),
+                  ...List.generate(lists.length, (index) {
+                    return RestaurantsListSwitche(
+                      style: lists[index].$2,
+                      cardImageToTextRatios: const {},
+                      corners: const {},
+                      items: lists[index].$3,
+                      title: lists[index].$1,
+                      onSingleCardPressed: (item) {
+                        RestaurantDetailsRoute(id: item.id).push(context);
+                      },
+                    );
+                  }),
 
                   RestaurantsListSwitche(
-                    cardImageToTextRatios: {},
-                    corners: {},
-                    style: CardStyle.typeThree,
-                    title: null,
+                    cardImageToTextRatios: const {},
+                    corners: const {},
+                    style: CardStyle.typeTwo,
                     items: restaurants,
-                    onViewAllPressed: null,
                     onSingleCardPressed: (item) {
                       RestaurantDetailsRoute(id: item.id).push(context);
                     },

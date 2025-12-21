@@ -48,7 +48,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if ((state is SingleRestaurantLoaded && (state.categoriesWithPlates.isEmpty || state.categoriesWithPlates.first.$2.isEmpty))) {
+        if (state is SingleRestaurantLoaded && (state.categoriesWithPlates.isEmpty || state.categoriesWithPlates.first.$2.isEmpty)) {
           return const Scaffold(body: Center(child: AdaptiveProgressIndicator()));
         }
         if (state is SingleRestaurantError) {

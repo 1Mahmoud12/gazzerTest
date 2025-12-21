@@ -146,7 +146,7 @@ class PharmacyStoreScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // Banner Slider with Dots
-          const PharmacyBannerSlider(height: 180),
+          const BannerSlider(height: 180),
 
           SizedBox(
             height: 60,

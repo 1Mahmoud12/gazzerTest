@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/vertical_plate_card.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/vertical_restaurant_card.dart';
 
 class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
@@ -48,36 +46,39 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
                       : onViewAllPressed
                 : onViewAllPressed,
           ),
-          SizedBox(
-            height: cardHeight ?? 235,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.zero,
-              itemCount: items.length,
-              separatorBuilder: (context, index) => const HorizontalSpacing(12),
-              itemBuilder: (context, index) {
-                final item = items[index];
-                if (item is RestaurantEntity) {
-                  return VerticalRestaurantCard(
-                    imgToTextRatio: cardImageToTextRatio ?? 0.9,
-                    width: cardWidth ?? 140,
-                    item: item,
-                    corner: corner,
-                    onTap: (item) => onSingleCardPressed(items[index]),
-                  );
-                }
-                if (item is PlateEntity) {
-                  return VerticalPlateCard(
-                    imgToTextRatio: cardImageToTextRatio ?? 0.9,
-                    width: cardWidth ?? 140,
-                    item: item,
-                    corner: corner,
-                    onTap: (item) => onSingleCardPressed(items[index]),
-                  );
-                }
-                return const SizedBox();
-              },
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 0.75,
             ),
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              if (item is RestaurantEntity) {
+                return VerticalRestaurantCard(
+                  imgToTextRatio: cardImageToTextRatio ?? 0.9,
+                  width: double.infinity,
+                  item: item,
+                  corner: corner,
+                  onTap: (item) => onSingleCardPressed(items[index]),
+                );
+              }
+              // if (item is PlateEntity) {
+              //   return VerticalPlateCard(
+              //     imgToTextRatio: cardImageToTextRatio ?? 0.9,
+              //     width: cardWidth ?? 140,
+              //     item: item,
+              //     corner: corner,
+              //     onTap: (item) => onSingleCardPressed(items[index]),
+              //   );
+              // }
+              return const SizedBox();
+            },
           ),
         ],
       ),

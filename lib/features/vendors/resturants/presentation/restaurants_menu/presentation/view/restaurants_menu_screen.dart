@@ -8,10 +8,9 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/lists/rest_horz_scroll_horz_card_list_component.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/lists/restaurants_list_switche.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/scrollable_tabed_list.dart';
@@ -20,6 +19,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_banner_slider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 // part 'widgets/rest_cat_carousal.dart';
@@ -33,10 +33,12 @@ class RestaurantsMenuScreen extends StatefulWidget {
 
 class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
   late final RestaurantsMenuCubit cubit;
+  late final PageController _bannerPageController;
 
   @override
   void initState() {
     cubit = context.read<RestaurantsMenuCubit>();
+    _bannerPageController = PageController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       cubit.loadScreenData();
       // cubit.loadPlates();
@@ -46,13 +48,19 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
   }
 
   @override
+  void dispose() {
+    _bannerPageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.paddingOf(context).top;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: FloatingDraggableWidget(
-        floatingWidget: const MainCartWidget(),
+        floatingWidget: const SizedBox.shrink(),
         floatingWidgetHeight: 50,
         floatingWidgetWidth: 50,
         mainScreenWidget: BlocBuilder<RestaurantsMenuCubit, RestaurantsMenuStates>(
@@ -64,10 +72,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                 children: [
                   const RestCatHeaderWidget(),
                   Expanded(
-                    child: FailureComponent(
-                      message: L10n.tr().couldnotLoadDataPleaseTryAgain,
-                      onRetry: () => cubit.loadScreenData(),
-                    ),
+                    child: FailureComponent(message: L10n.tr().couldnotLoadDataPleaseTryAgain, onRetry: () => cubit.loadScreenData()),
                   ),
                 ],
               );
@@ -85,26 +90,20 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   ///
                   ///
                   preHerader: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const RestCatHeaderWidget(),
-                      Skeleton.shade(
-                        child: GradientText(text: L10n.tr().bestMenuOfRestaurants, style: TStyle.primaryBold(24)),
-                      ),
-                      Text(L10n.tr().chooseYourFavorite, style: TStyle.greyBold(14).copyWith(letterSpacing: 2)),
-
-                      VerticalSpacing(topPadding + 16),
-                      // const RestCatCarousal(),
-                      if (isLoading || state.banners.isNotEmpty)
-                        MainBannerWidget(
-                          banner: isLoading ? Fakers.banners.first : state.banners.first,
-                        ),
-                      const VerticalSpacing(24),
                       Padding(
                         padding: AppConst.defaultHrPadding,
-                        child: Text(L10n.tr().chooseYourFavoriteVendor, style: TStyle.blackBold(16)),
+                        child: MainSearchWidget(height: 80, hintText: L10n.tr().searchForStoresItemsAndCAtegories),
                       ),
+                      const VerticalSpacing(16),
+                      //const RestCatCarousal(),
+                      if (isLoading || state.banners.isNotEmpty)
+                        BannerSlider(
+                          images: isLoading ? Fakers.banners.map((e) => e.image ?? '').toList() : state.banners.map((e) => e.image ?? '').toList(),
+                        ),
+                      const VerticalSpacing(16),
                     ],
                   ),
                   itemsCount: (isLoading ? Fakers.categoriesOfPlate : state.categories).length,
@@ -113,15 +112,21 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
                   tabBuilder: (p0, index) {
                     final tab = isLoading ? ('test', 'Fakers._netWorkImage', index) : tabs[index];
-                    return Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleGradientBorderedImage(image: tab.$1),
-                        Padding(
-                          padding: AppConst.defaultHrPadding,
-                          child: Text(tab.$2, style: TStyle.blackSemi(13)),
-                        ),
-                      ],
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Co.purple100),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomNetworkImage(tab.$1, width: 50, height: 50, fit: BoxFit.cover, borderRaduis: 50),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                            child: Text(tab.$2, style: TStyle.blackSemi(13)),
+                          ),
+                        ],
+                      ),
                     );
                   },
 
@@ -134,13 +139,13 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                           title: cat.$1.name,
                           items: cat.$2.isNotEmpty ? cat.$2 : Fakers.restaurants,
                           onViewAllPressed: () => RestaurantsOfCategoryRoute(id: cat.$1.id).push(context),
-                          cardImageToTextRatios: {CardStyle.typeOne: 0.8},
-                          corners: {CardStyle.typeThree: Corner.topLeft},
+                          cardImageToTextRatios: const {CardStyle.typeOne: 0.8},
+                          corners: const {CardStyle.typeThree: Corner.topLeft},
                           onSingleCardPressed: (item) {
                             RestaurantDetailsRoute(id: item.id).push(context);
                           },
                           // TODO: Ask Product Owner about this
-                          style: index == state.categories.length - 1 ? CardStyle.typeThree : cat.$1.style,
+                          style: CardStyle.typeOne,
                         ),
                         if (index.isOdd && (index / 2).floor() < (state.banners.length - 1)) // skip first banner
                           MainBannerWidget(banner: state.banners[(index / 2).floor() + 1]),
@@ -156,7 +161,5 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
     );
   }
 
-  final widgetMatrix = {
-    (LayoutType.horizontal, CardStyle.typeOne): RestHorzScrollHorzCardListComponent,
-  };
+  final widgetMatrix = {(LayoutType.horizontal, CardStyle.typeOne): RestHorzScrollHorzCardListComponent};
 }

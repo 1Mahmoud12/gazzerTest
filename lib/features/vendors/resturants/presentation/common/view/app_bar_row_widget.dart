@@ -39,40 +39,22 @@ class AppBarRowWidget extends StatelessWidget {
       child: Row(
         spacing: 18,
         children: [
-          MainBackIcon(
-            color: bacButtonColor,
-          ),
+          MainBackIcon(color: bacButtonColor),
 
           const Spacer(),
-          if (showCart)
-            MainCartWidget(
-              size: 20,
-              padding: 8,
-              navigate: true,
-              showBadge: showBadge,
-            ),
+          if (showCart) MainCartWidget(size: 20, padding: 8, showBadge: showBadge),
 
           if (showNotification)
             IconButton(
               onPressed: () {},
               // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-              icon: SvgPicture.asset(
-                Assets.assetsSvgNotification,
-                height: 21,
-                width: 21,
-                colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
-              ),
+              icon: SvgPicture.asset(Assets.assetsSvgNotification, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
             ),
           if (showLanguage)
             IconButton(
               onPressed: () {},
               // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-              icon: SvgPicture.asset(
-                Assets.assetsSvgLanguage,
-                height: 21,
-                width: 21,
-                colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
-              ),
+              icon: SvgPicture.asset(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
             ),
           if (onShare != null)
             IconButton(

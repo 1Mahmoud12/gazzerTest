@@ -40,7 +40,6 @@ class RestaurantsListSwitche<T> extends StatelessWidget {
         return RestHorzScrollHorzCardListComponent<T>(
           title: title ?? '',
           items: items,
-          imgToTextRatio: 0.8,
           onViewAllPressed: onViewAllPressed,
           corner: corners[style],
           onSingleCardPressed: onSingleCardPressed,

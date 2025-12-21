@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
 import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
@@ -30,67 +28,45 @@ class VerticalRestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(item.image);
+    final closed = !item.isClosed;
     return SizedBox(
       width: width,
       height: height,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Co.buttonGradient.withAlpha(30), Colors.black.withAlpha(0)],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          ),
-          borderRadius: AppConst.defaultBorderRadius,
-        ),
-        child: ElevatedButton(
-          onPressed: item.isClosed
-              ? null
-              : onTap == null
-              ? null
-              : () => onTap!(item),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            disabledBackgroundColor: Colors.transparent,
-            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
-            padding: const EdgeInsetsGeometry.all(8),
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                flex: (imgToTextRatio * 10).toInt(),
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    CustomPaint(
-                      isComplex: true,
-                      foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
-                      child: ClipPath(
-                        clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
+      child: InkWell(
+        onTap: closed
+            ? null
+            : onTap == null
+            ? null
+            : () => onTap!(item),
+        // style: ElevatedButton.styleFrom(
+        //   backgroundColor: Colors.transparent,
+        //   shadowColor: Colors.transparent,
+        //   disabledBackgroundColor: Colors.transparent,
+        //   shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+        //   padding: const EdgeInsetsGeometry.all(8),
+        // ),
+        child: Stack(
+          children: [
+            Opacity(
+              opacity: closed ? 0.7 : 1,
+
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: AlignmentDirectional.topEnd,
+                    children: [
+                      CustomPaint(
+                        isComplex: true,
+                        foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
                         child: Stack(
                           children: [
-                            DecoratedBox(
-                              position: DecorationPosition.foreground,
-                              decoration: item.isClosed
-                                  ? BoxDecoration(
-                                      color: Colors.red.withAlpha(75),
-                                    )
-                                  : const BoxDecoration(),
-                              child: CustomNetworkImage(
-                                item.image,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                opacity: item.isClosed ? 0.4 : 1,
-                              ),
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                              child: CustomNetworkImage(item.image, fit: BoxFit.cover, width: double.infinity),
                             ),
-                            if (item.isClosed)
-                              CardBadge(
-                                text: L10n.tr().closed,
-                                alignment: AlignmentDirectional.topStart,
-                                fullWidth: true,
-                              )
-                            else if (item.badge != null)
+                            // if (closed)
+                            //   CardBadge(text: L10n.tr().closed, alignment: AlignmentDirectional.topStart, fullWidth: true)
+                            if (item.badge != null)
                               CardBadge(
                                 text: item.badge!,
                                 alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
@@ -98,17 +74,15 @@ class VerticalRestaurantCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: corner.alignment,
-                      child: DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
-                    ),
-                  ],
-                ),
+                      FavoriteWidget(size: 24, padding: 4, fovorable: item),
+                    ],
+                  ),
+                  CardRestInfoWidget(vendor: item),
+                ],
               ),
-              Expanded(flex: 10, child: CardRestInfoWidget(vendor: item)),
-            ],
-          ),
+            ),
+            if (closed) Center(child: Text(L10n.tr().closed, style: TStyle.robotBlackTitle())),
+          ],
         ),
       ),
     );

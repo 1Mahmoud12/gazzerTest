@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:easy_sticky_header/easy_sticky_header.dart';
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 class ScrollableTabedList extends StatefulWidget {
   const ScrollableTabedList({
@@ -28,17 +26,14 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
   late final StickyHeaderController _controller;
   late final TabController _tabController;
   final padding = ValueNotifier(0.0);
-  final headerHeight = 40.0;
+  final headerHeight = 80.0;
   double topPadding = 0;
 
   @override
   void initState() {
     super.initState();
     _controller = StickyHeaderController();
-    _tabController = TabController(
-      length: widget.itemsCount,
-      vsync: this,
-    );
+    _tabController = TabController(length: widget.itemsCount, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       topPadding = MediaQuery.paddingOf(context).top;
       _controller.addListener(_setHeaderPAdding);
@@ -76,10 +71,7 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
         child: ListView.builder(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
-          reverse: false,
-          physics: const AlwaysScrollableScrollPhysics(
-            parent: ClampingScrollPhysics(),
-          ),
+          physics: const AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics()),
           itemCount: widget.itemsCount + 2,
           itemBuilder: (context, index) {
             if (index < 1) {
@@ -115,38 +107,30 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
                         width: double.infinity,
                         height: headerHeight,
                         child: TabBar(
-                          dividerColor: Co.purple.withAlpha(50),
+                          dividerColor: Colors.transparent,
                           controller: _tabController,
                           isScrollable: true,
                           tabAlignment: TabAlignment.start,
                           indicatorPadding: const EdgeInsets.symmetric(horizontal: 4),
-                          indicator: const UnderlineTabIndicator(
-                            borderSide: BorderSide(
-                              color: Co.purple,
-                              width: 2.0,
-                            ),
-                          ),
-                          tabs: List.generate(
-                            widget.itemsCount,
-                            (index) {
-                              return ElevatedButton(
-                                onPressed: () {
-                                  // _tabController.animateTo(index);
-                                  _controller.animateTo(index + 2, offset: 0.5);
-                                },
+                          indicator: const UnderlineTabIndicator(borderSide: BorderSide(color: Colors.transparent, width: 2.0)),
+                          tabs: List.generate(widget.itemsCount, (index) {
+                            return InkWell(
+                              onTap: () {
+                                // _tabController.animateTo(index);
+                                _controller.animateTo(index + 2, offset: 0.5);
+                              },
 
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
-                                  minimumSize: Size.zero,
-                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                  shadowColor: Colors.transparent,
-                                  shape: RoundedRectangleBorder(borderRadius: AppConst.defaultInnerBorderRadius),
-                                  padding: EdgeInsets.zero,
-                                ),
-                                child: widget.tabBuilder(context, index),
-                              );
-                            },
-                          ),
+                              // style: ElevatedButton.styleFrom(
+                              //   backgroundColor: Colors.transparent,
+                              //   minimumSize: Size.zero,
+                              //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              //   shadowColor: Colors.transparent,
+                              //   shape: RoundedRectangleBorder(borderRadius: AppConst.defaultInnerBorderRadius),
+                              //   padding: EdgeInsets.zero,
+                              // ),
+                              child: widget.tabBuilder(context, index),
+                            );
+                          }),
                         ),
                       ),
                     ),

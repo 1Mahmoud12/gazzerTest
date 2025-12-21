@@ -4,7 +4,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.da
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/horizontal_plate_card.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/horizontal_restaurant_card.dart';
 
 class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
@@ -45,7 +44,7 @@ class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
             ),
 
           SizedBox(
-            height: 140,
+            height: MediaQuery.sizeOf(context).height * .27,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.zero,
@@ -57,21 +56,20 @@ class RestHorzScrollHorzCardListComponent<T> extends StatelessWidget {
                   return HorizontalRestaurantCard(
                     corner: corner ?? Corner.bottomRight,
                     imgToTextRatio: imgToTextRatio,
-                    width: 260,
+                    width: MediaQuery.sizeOf(context).width * .65,
                     item: item,
                     onTap: (item) => onSingleCardPressed(items[index]),
                   );
                 }
-                if (item is PlateEntity) {
-                  return HorizontalPlateCard(
-                    corner: Corner.bottomRight,
-                    item: item,
-                    height: 120,
-                    width: 300,
-                    imgToTextRatio: 1.05,
-                    onTap: (item) => onSingleCardPressed(items[index]),
-                  );
-                }
+                // if (item is PlateEntity) {
+                //   return HorizontalPlateCard(
+                //     item: item,
+                //     height: 120,
+                //     width: 300,
+                //     imgToTextRatio: 1.05,
+                //     onTap: (item) => onSingleCardPressed(items[index]),
+                //   );
+                // }
                 return const SizedBox();
               },
             ),

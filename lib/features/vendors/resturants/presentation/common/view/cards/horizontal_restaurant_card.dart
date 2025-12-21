@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/utils/conrer_indented_clipper.dart';
-import 'package:gazzer/core/presentation/utils/corner_indendet_shape.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/card_badge.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
@@ -33,81 +29,55 @@ class HorizontalRestaurantCard extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Co.buttonGradient.withAlpha(30), Colors.black.withAlpha(0)],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          ),
-          borderRadius: AppConst.defaultBorderRadius,
-        ),
-        child: ElevatedButton(
-          onPressed: !item.isOpen
-              ? null
-              : onTap == null
-              ? null
-              : () => onTap!(item),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            disabledBackgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
-            padding: const EdgeInsetsGeometry.all(8),
-          ),
-          child: Row(
-            spacing: 12,
-            children: [
-              Expanded(
-                flex: (imgToTextRatio * 10).toInt(),
-                child: Stack(
-                  alignment: Alignment.bottomRight,
+      child: InkWell(
+        onTap: !item.isOpen
+            ? null
+            : onTap == null
+            ? null
+            : () => onTap!(item),
+        // style: ElevatedButton.styleFrom(
+        //   backgroundColor: Colors.transparent,
+        //   disabledBackgroundColor: Colors.transparent,
+        //   shadowColor: Colors.transparent,
+        //   shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+        //   padding: const EdgeInsetsGeometry.all(8),
+        // ),
+        child: Column(
+          children: [
+            Stack(
+              alignment: AlignmentDirectional.topEnd,
+              children: [
+                Stack(
                   children: [
-                    CustomPaint(
-                      isComplex: true,
-                      foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: corner),
-                      child: ClipPath(
-                        clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: corner),
-                        child: Stack(
-                          children: [
-                            SizedBox.expand(
-                              child: DecoratedBox(
-                                position: DecorationPosition.foreground,
-                                decoration: !item.isOpen ? BoxDecoration(color: Colors.red.withAlpha(75)) : const BoxDecoration(),
-                                child: CustomNetworkImage(
-                                  item.image,
-                                  fit: BoxFit.cover,
-                                  opacity: !item.isOpen ? 0.4 : 1,
-                                ),
-                              ),
-                            ),
-
-                            if (!item.isOpen)
-                              CardBadge(
-                                text: L10n.tr().closed,
-                                alignment: AlignmentDirectional.topStart,
-                                fullWidth: true,
-                              )
-                            else if (item.badge != null)
-                              CardBadge(
-                                text: item.badge!,
-                                alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
-                              ),
-                          ],
-                        ),
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(topRight: Radius.circular(12), topLeft: Radius.circular(12)),
+                      child: CustomNetworkImage(
+                        item.image,
+                        fit: BoxFit.cover,
+                        height: MediaQuery.sizeOf(context).height * .15,
+                        width: double.infinity,
+                        opacity: !item.isOpen ? 0.4 : 1,
                       ),
                     ),
-                    Align(
-                      alignment: corner.alignment,
-                      child: DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
-                    ),
+
+                    if (!item.isOpen)
+                      CardBadge(text: L10n.tr().closed, alignment: AlignmentDirectional.topStart, fullWidth: true)
+                    else if (item.badge != null)
+                      CardBadge(
+                        text: item.badge!,
+                        alignment: corner == Corner.topRight ? AlignmentDirectional.topStart : AlignmentDirectional.topEnd,
+                      ),
                   ],
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: FavoriteWidget(size: 24, padding: 4, fovorable: item),
+                ),
+              ],
+            ),
 
-              Expanded(flex: 10, child: CardRestInfoWidget(vendor: item)),
-            ],
-          ),
+            CardRestInfoWidget(vendor: item),
+          ],
         ),
       ),
     );
