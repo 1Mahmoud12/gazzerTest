@@ -824,7 +824,10 @@
       "complete_with_apple_pay": "إكمال باستخدام Apple Pay",
       "complete_with_e_wallet": "إكمال باستخدام المحفظة الإلكترونية",
         "areYouSureYouWantToDeleteThisVendor": "هل أنت متأكد أنك تريد حذف هذا البائع؟",
-          "areYouSureYouWantToDeleteAllCart": "هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟"
+          "areYouSureYouWantToDeleteAllCart": "هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟",
+           "saved_cards": "البطاقات المحفوظة",
+            "no_saved_cards": "لا توجد بطاقات محفوظة",
+            "please_login_to_view_saved_cards": "يرجى تسجيل الدخول لعرض البطاقات المحفوظة"
 
 
 

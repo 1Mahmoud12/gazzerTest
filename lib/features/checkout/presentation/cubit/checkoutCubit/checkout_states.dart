@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:gazzer/features/checkout/data/dtos/order_summary_dto.dart';
+import 'package:gazzer/features/profile/presentation/views/saved_cards_screen.dart';
 
 sealed class CheckoutStates extends Equatable {
   const CheckoutStates();
@@ -53,6 +54,7 @@ class CardEntity {
     required this.expiryYear,
     required this.cardHolderName,
     this.isDefault = false,
+    this.cardBrand,
   });
 
   final int id;
@@ -60,6 +62,7 @@ class CardEntity {
   final int expiryMonth;
   final int expiryYear;
   final String cardHolderName;
+  final CardBrand? cardBrand;
   final bool isDefault;
 
   String get maskedCardNumber {

@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1956,4 +1956,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get areYouSureYouWantToDeleteAllCart => 'هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟';
+
+  @override
+  String get saved_cards => 'البطاقات المحفوظة';
+
+  @override
+  String get no_saved_cards => 'لا توجد بطاقات محفوظة';
+
+  @override
+  String get please_login_to_view_saved_cards => 'يرجى تسجيل الدخول لعرض البطاقات المحفوظة';
 }

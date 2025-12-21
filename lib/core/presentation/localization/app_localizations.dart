@@ -3907,6 +3907,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to remove all items from the cart?'**
   String get areYouSureYouWantToDeleteAllCart;
+
+  /// No description provided for @saved_cards.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved Cards'**
+  String get saved_cards;
+
+  /// No description provided for @no_saved_cards.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved cards'**
+  String get no_saved_cards;
+
+  /// No description provided for @please_login_to_view_saved_cards.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login to view saved cards'**
+  String get please_login_to_view_saved_cards;
 }
 
 class _AppLocalizationsDelegate

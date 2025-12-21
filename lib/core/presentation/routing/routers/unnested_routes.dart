@@ -26,6 +26,7 @@ import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_progra
 import 'package:gazzer/features/orders/views/order_details_screen.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/saved_cards_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/gazzer_support_screen.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_response_screen.dart';
@@ -99,6 +100,13 @@ final List<RouteBase> unNestedRoutes = [
     path: WalletScreen.route,
     builder: (context, state) {
       return const WalletScreen();
+    },
+  ),
+
+  GoRoute(
+    path: SavedCardsScreen.route,
+    builder: (context, state) {
+      return const SavedCardsScreen();
     },
   ),
 

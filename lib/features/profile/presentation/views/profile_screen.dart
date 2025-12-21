@@ -28,6 +28,7 @@ import 'package:gazzer/features/profile/presentation/model/address_model.dart';
 import 'package:gazzer/features/profile/presentation/views/component/profile_verify_otp_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/component/udpate_account_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
+import 'package:gazzer/features/profile/presentation/views/saved_cards_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/update_password_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/address_card.dart';
 import 'package:gazzer/features/profile/presentation/views/widgets/language_custom_dropdown.dart';
@@ -39,6 +40,7 @@ part 'component/account_information_component.dart';
 part 'component/invite_earn_component.dart';
 part 'component/profile_addresses_component.dart';
 part 'component/profile_navigation_component.dart';
+part 'component/saved_card_component.dart';
 part 'component/settings_preference_component.dart';
 part 'widgets/profile_action_items.dart';
 part 'widgets/profile_header_widget.dart';
@@ -139,6 +141,8 @@ class ProfileContentBody extends StatelessWidget {
                   _ProfileAddressesComponent(),
                   const VerticalSpacing(12),
                   _ProfileNavigationComponent(),
+                  const VerticalSpacing(12),
+                  _SavedCardComponent(),
                   const VerticalSpacing(12),
                   _InviteEarnComponent(),
                   const VerticalSpacing(12),

@@ -1,16 +1,14 @@
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/loyaltyProgram/data/dto/loyalty_program_dto.dart';
+import 'package:gazzer/features/profile/presentation/views/saved_cards_screen.dart';
+import 'package:gazzer/main.dart';
 
 class CheckoutDataDTO {
   final WalletDTO wallet;
   final LoyaltyPointsDTO loyaltyPoints;
   final List<PaymentCardDTO> paymentCards;
 
-  CheckoutDataDTO({
-    required this.wallet,
-    required this.loyaltyPoints,
-    required this.paymentCards,
-  });
+  CheckoutDataDTO({required this.wallet, required this.loyaltyPoints, required this.paymentCards});
 
   factory CheckoutDataDTO.fromJson(Map<String, dynamic> json) {
     return CheckoutDataDTO(
@@ -24,14 +22,10 @@ class CheckoutDataDTO {
 class WalletDTO {
   final double balance;
 
-  WalletDTO({
-    required this.balance,
-  });
+  WalletDTO({required this.balance});
 
   factory WalletDTO.fromJson(Map<String, dynamic> json) {
-    return WalletDTO(
-      balance: (json['balance'] as num?)?.toDouble() ?? 0.0,
-    );
+    return WalletDTO(balance: (json['balance'] as num?)?.toDouble() ?? 0.0);
   }
 }
 
@@ -64,7 +58,7 @@ class LoyaltyPointsDTO {
 class PaymentCardDTO {
   final int id;
   final String last4Digits;
-  final String cardBrand;
+  final CardBrand cardBrand;
   final String cardholderName;
   final String expiryMonth;
   final String expiryYear;
@@ -81,10 +75,13 @@ class PaymentCardDTO {
   });
 
   factory PaymentCardDTO.fromJson(Map<String, dynamic> json) {
+    logger.d(json['card_brand']);
     return PaymentCardDTO(
       id: (json['id'] as num?)?.toInt() ?? 0,
       last4Digits: json['last_4_digits'] as String? ?? '',
-      cardBrand: json['card_brand'] as String? ?? '',
+      cardBrand: (json['card_brand'] as String? ?? '').toLowerCase() == CardBrand.masterCard.name.toLowerCase()
+          ? CardBrand.masterCard
+          : CardBrand.visa,
       cardholderName: json['cardholder_name'] as String? ?? '',
       expiryMonth: json['expiry_month'] as String? ?? '',
       expiryYear: json['expiry_year'] as String? ?? '',
@@ -106,6 +103,7 @@ class PaymentCardDTO {
       expiryYear: parsedYear,
       cardHolderName: cardholderName,
       isDefault: isDefault,
+      cardBrand: cardBrand,
     );
   }
 }
@@ -115,11 +113,7 @@ class VoucherDTO {
   final String discountType;
   final String discountValue; // keep as string to avoid precision issues
 
-  VoucherDTO({
-    required this.code,
-    required this.discountType,
-    required this.discountValue,
-  });
+  VoucherDTO({required this.code, required this.discountType, required this.discountValue});
 
   factory VoucherDTO.fromJson(Map<String, dynamic> json) {
     return VoucherDTO(

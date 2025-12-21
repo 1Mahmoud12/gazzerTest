@@ -824,7 +824,10 @@
       "complete_with_apple_pay": "Complete with Apple Pay",
       "complete_with_e_wallet": "Complete with E-wallet",
         "areYouSureYouWantToDeleteThisVendor": "Are you sure you want to delete this vendor?",
-          "areYouSureYouWantToDeleteAllCart": "Are you sure you want to remove all items from the cart?"
+          "areYouSureYouWantToDeleteAllCart": "Are you sure you want to remove all items from the cart?",
+          "saved_cards": "Saved Cards",
+            "no_saved_cards": "No saved cards",
+            "please_login_to_view_saved_cards": "Please login to view saved cards"
 
 
 

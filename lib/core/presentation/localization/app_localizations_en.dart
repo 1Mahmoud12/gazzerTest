@@ -1957,4 +1957,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get areYouSureYouWantToDeleteAllCart => 'Are you sure you want to remove all items from the cart?';
+
+  @override
+  String get saved_cards => 'Saved Cards';
+
+  @override
+  String get no_saved_cards => 'No saved cards';
+
+  @override
+  String get please_login_to_view_saved_cards => 'Please login to view saved cards';
 }

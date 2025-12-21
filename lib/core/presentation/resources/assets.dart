@@ -345,6 +345,10 @@ class Assets {
   static const String currentPositionIc = "assets/svg/currentPositionIc.svg";
   static const String pinIc = "assets/svg/pinIc.svg";
 
+  // Saved Cards
+  static const String masterCardIc = "assets/svg/masterCardIc.svg";
+  static const String visaCardIc = "assets/svg/visaCardIc.svg";
+
   //Favorite
   static const String newUnSelectedFavoriteIc = "assets/svg/newUnSelectedFavoriteIc.svg";
   static const String newSelectedFavoriteIc = "assets/svg/newSelectedFavoriteIc.svg";
