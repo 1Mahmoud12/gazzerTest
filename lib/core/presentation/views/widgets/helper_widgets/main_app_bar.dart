@@ -40,12 +40,15 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canPop = Navigator.canPop(context);
+    final shouldShowLeading = showLeading && (canPop || onBack != null);
+
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
       title: title == null ? null : Text(title!, style: titleStyle ?? TStyle.robotBlackTitle().copyWith(color: Co.purple)),
-      leadingWidth: Navigator.canPop(context) ? 65 : 0,
-      leading: showLeading
+      leadingWidth: shouldShowLeading ? 65 : 0,
+      leading: shouldShowLeading
           ? IconButton(
               onPressed: onBack ?? () => Navigator.pop(context),
               icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back, color: Co.black),
