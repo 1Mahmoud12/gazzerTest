@@ -57,7 +57,6 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> with AutomaticK
                   return MainBtn(
                     onPressed: () {
                       cubit.placeOrder(context);
-                      // TODO: Navigate to success screen or show loading
                     },
                     text: L10n.tr().placeOrder,
                   );

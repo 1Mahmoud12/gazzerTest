@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1936,4 +1936,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourBalance => 'Your balance';
+
+  @override
+  String get choose_additional_payment_method => 'Please choose an additional payment method to complete the remaining amount.';
+
+  @override
+  String get wallet_insufficient_balance => 'Your Gazzer wallet balance is insufficient';
+
+  @override
+  String get complete_with_card => 'Complete with Credit or Debit';
+
+  @override
+  String get complete_with_apple_pay => 'Complete with Apple Pay';
+
+  @override
+  String get complete_with_e_wallet => 'Complete with E-wallet';
+
+  @override
+  String get areYouSureYouWantToDeleteThisVendor => 'Are you sure you want to delete this vendor?';
+
+  @override
+  String get areYouSureYouWantToDeleteAllCart => 'Are you sure you want to remove all items from the cart?';
 }

@@ -37,3 +37,7 @@ flutter pub get
 flutter build appbundle
 open build/app/outputs/bundle/release
 ```
+
+```bash
+dart run scripts/convert_svg_to_vg.dart
+```

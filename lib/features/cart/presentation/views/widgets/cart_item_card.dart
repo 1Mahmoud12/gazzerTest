@@ -57,160 +57,183 @@ class CartItemCard extends StatelessWidget {
           IgnorePointer(
             ignoring: item.quantityInStock == 0,
 
-            child: Opacity(
-              opacity: item.quantityInStock == 0 ? 0.5 : 1,
-              child: DecoratedBox(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Co.purple100.withOpacityNew(.5)),
-                child: Padding(
-                  padding: AppConst.defaultPadding,
-                  child: Row(
-                    spacing: 12,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: imageSize,
-                        width: imageSize,
-                        child: CustomNetworkImage(item.prod.image, borderRaduis: 12, height: imageSize, width: imageSize),
-                      ),
-                      Expanded(
-                        child: BlocBuilder<CartCubit, CartStates>(
-                          buildWhen: (previous, current) => current is UpdateItemStates && current.cartId == item.cartId,
-                          builder: (context, state) => ConstrainedBox(
-                            constraints: const BoxConstraints(minHeight: imageSize),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(item.prod.name, style: TStyle.blackBold(12), maxLines: 2),
-                                if (item.options.isNotEmpty)
-                                  ...List.generate(item.options.length, (index) => CartOptionWidget(option: item.options[index])),
-                                if (item.orderedWith.isNotEmpty)
-                                  ...List.generate(item.orderedWith.length, (index) => CartOrderedWithWidget(orderedWith: item.orderedWith[index])),
-                                if (item.notes?.trim().isEmpty == false)
+            child: InkWell(
+              onTap: item.quantityInStock == 0
+                  ? () async {
+                      final confirmed = await showDialog<bool>(
+                        context: context,
+                        builder: (context) {
+                          return Dialogs.confirmDialog(
+                            title: L10n.tr().warning,
+                            message: L10n.tr().areYouSureYouWantToDeleteThisItem,
+                            okBgColor: Co.red,
+                            context: context,
+                          );
+                        },
+                      );
+                      if (confirmed == true) {
+                        cubit.removeFromCartByType('item', item.cartId);
+                      }
+                    }
+                  : null,
+              child: Opacity(
+                opacity: item.quantityInStock == 0 ? 0.5 : 1,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Co.purple100.withOpacityNew(.5)),
+                  child: Padding(
+                    padding: AppConst.defaultPadding,
+                    child: Row(
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: imageSize,
+                          width: imageSize,
+                          child: CustomNetworkImage(item.prod.image, borderRaduis: 12, height: imageSize, width: imageSize),
+                        ),
+                        Expanded(
+                          child: BlocBuilder<CartCubit, CartStates>(
+                            buildWhen: (previous, current) => current is UpdateItemStates && current.cartId == item.cartId,
+                            builder: (context, state) => ConstrainedBox(
+                              constraints: const BoxConstraints(minHeight: imageSize),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(item.prod.name, style: TStyle.blackBold(12), maxLines: 2),
+                                  if (item.options.isNotEmpty)
+                                    ...List.generate(item.options.length, (index) => CartOptionWidget(option: item.options[index])),
+                                  if (item.orderedWith.isNotEmpty)
+                                    ...List.generate(item.orderedWith.length, (index) => CartOrderedWithWidget(orderedWith: item.orderedWith[index])),
+                                  if (item.notes?.trim().isEmpty == false)
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            '- ${item.notes!}',
+                                            style: TStyle.greyRegular(12),
+                                            maxLines: 2,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const HorizontalSpacing(10),
+                                        IconButton(
+                                          onPressed: () async {
+                                            if (state is UpdateItemLoading) return;
+                                            final note = await showModalBottomSheet<String>(
+                                              context: context,
+                                              isScrollControlled: true,
+                                              backgroundColor: Colors.transparent,
+                                              builder: (context) => CartEditNote(item: item),
+                                            );
+                                            if (note != null && note != item.notes) {
+                                              cubit.updateItemNote(item.cartId, note);
+                                            }
+                                          },
+                                          style: IconButton.styleFrom(
+                                            padding: const EdgeInsets.all(4),
+                                            minimumSize: Size.zero,
+                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                          ),
+                                          icon: state is UpdateItemStates && state.isEditNote
+                                              ? const AdaptiveProgressIndicator(size: 18)
+                                              : const Icon(Icons.edit_outlined, size: 18, color: Co.purple),
+                                        ),
+                                      ],
+                                    ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    spacing: 6,
                                     children: [
-                                      Expanded(
-                                        child: Text(
-                                          '- ${item.notes!}',
-                                          style: TStyle.greyRegular(12),
-                                          maxLines: 2,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.ellipsis,
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 4),
+                                        child: Row(
+                                          spacing: horzSpacing,
+                                          children: [
+                                            Text(
+                                              Helpers.getProperPrice(item.totalPrice),
+                                              style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      const HorizontalSpacing(10),
-                                      IconButton(
-                                        onPressed: () async {
-                                          if (state is UpdateItemLoading) return;
-                                          final note = await showModalBottomSheet<String>(
-                                            context: context,
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            builder: (context) => CartEditNote(item: item),
-                                          );
-                                          if (note != null && note != item.notes) {
-                                            cubit.updateItemNote(item.cartId, note);
-                                          }
-                                        },
-                                        style: IconButton.styleFrom(
-                                          padding: const EdgeInsets.all(4),
-                                          minimumSize: Size.zero,
-                                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+
+                                      Flexible(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            IncrementWidgetWhite(
+                                              initVal: item.quantity,
+                                              isRemoving: state is UpdateItemLoading && state.isRemoving,
+                                              isAdding: state is UpdateItemLoading && state.isAdding,
+                                              quantityInStock: item.quantityInStock,
+                                              onChanged: ({required isAdding}) {
+                                                cubit.updateItemQuantity(item.cartId, item.quantity + (isAdding ? 1 : -1), isAdding, context);
+                                              },
+                                              onRemoving: () async {
+                                                final confirmed = await showDialog<bool>(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Dialogs.confirmDialog(
+                                                      title: L10n.tr().warning,
+                                                      message: L10n.tr().areYouSureYouWantToDeleteThisItem,
+                                                      okBgColor: Co.red,
+                                                      context: context,
+                                                    );
+                                                  },
+                                                );
+                                                if (confirmed == true) {
+                                                  cubit.removeItemFromCart(item.cartId);
+                                                }
+                                              },
+                                            ),
+                                            // Row(
+                                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            //   children: [
+                                            //
+                                            //     IconButton(
+                                            //       onPressed: () async {
+                                            //         if (state is UpdateItemLoading) return;
+                                            //         final confirmed = await showDialog<bool>(
+                                            //           context: context,
+                                            //           builder: (context) {
+                                            //             return Dialogs.confirmDialog(
+                                            //               title: L10n.tr().warning,
+                                            //               message: L10n.tr().areYouSureYouWantToDeleteThisItem,
+                                            //               okBgColor: Co.red,
+                                            //               context: context,
+                                            //             );
+                                            //           },
+                                            //         );
+                                            //         if (confirmed == true) {
+                                            //           cubit.removeItemFromCart(item.cartId);
+                                            //         }
+                                            //       },
+                                            //       style: IconButton.styleFrom(
+                                            //         padding: const EdgeInsets.all(4),
+                                            //         minimumSize: Size.zero,
+                                            //         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                            //       ),
+                                            //       icon: state is UpdateItemLoading && state.isDeleting
+                                            //           ? const AdaptiveProgressIndicator(size: 18)
+                                            //           : const Icon(CupertinoIcons.delete, size: 18, color: Co.purple),
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                          ],
                                         ),
-                                        icon: state is UpdateItemStates && state.isEditNote
-                                            ? const AdaptiveProgressIndicator(size: 18)
-                                            : const Icon(Icons.edit_outlined, size: 18, color: Co.purple),
                                       ),
                                     ],
                                   ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  spacing: 6,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 4),
-                                      child: Row(
-                                        spacing: horzSpacing,
-                                        children: [
-                                          Text(Helpers.getProperPrice(item.totalPrice), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
-                                        ],
-                                      ),
-                                    ),
-
-                                    Flexible(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          IncrementWidgetWhite(
-                                            initVal: item.quantity,
-                                            isRemoving: state is UpdateItemLoading && state.isRemoving,
-                                            isAdding: state is UpdateItemLoading && state.isAdding,
-                                            quantityInStock: item.quantityInStock,
-                                            onChanged: ({required isAdding}) {
-                                              cubit.updateItemQuantity(item.cartId, item.quantity + (isAdding ? 1 : -1), isAdding, context);
-                                            },
-                                            onRemoving: () async {
-                                              final confirmed = await showDialog<bool>(
-                                                context: context,
-                                                builder: (context) {
-                                                  return Dialogs.confirmDialog(
-                                                    title: L10n.tr().warning,
-                                                    message: L10n.tr().areYouSureYouWantToDeleteThisItem,
-                                                    okBgColor: Co.red,
-                                                    context: context,
-                                                  );
-                                                },
-                                              );
-                                              if (confirmed == true) {
-                                                cubit.removeItemFromCart(item.cartId);
-                                              }
-                                            },
-                                          ),
-                                          // Row(
-                                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          //   children: [
-                                          //
-                                          //     IconButton(
-                                          //       onPressed: () async {
-                                          //         if (state is UpdateItemLoading) return;
-                                          //         final confirmed = await showDialog<bool>(
-                                          //           context: context,
-                                          //           builder: (context) {
-                                          //             return Dialogs.confirmDialog(
-                                          //               title: L10n.tr().warning,
-                                          //               message: L10n.tr().areYouSureYouWantToDeleteThisItem,
-                                          //               okBgColor: Co.red,
-                                          //               context: context,
-                                          //             );
-                                          //           },
-                                          //         );
-                                          //         if (confirmed == true) {
-                                          //           cubit.removeItemFromCart(item.cartId);
-                                          //         }
-                                          //       },
-                                          //       style: IconButton.styleFrom(
-                                          //         padding: const EdgeInsets.all(4),
-                                          //         minimumSize: Size.zero,
-                                          //         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                          //       ),
-                                          //       icon: state is UpdateItemLoading && state.isDeleting
-                                          //           ? const AdaptiveProgressIndicator(size: 18)
-                                          //           : const Icon(CupertinoIcons.delete, size: 18, color: Co.purple),
-                                          //     ),
-                                          //   ],
-                                          // ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

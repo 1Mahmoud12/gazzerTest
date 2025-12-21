@@ -817,7 +817,16 @@
   "add_your_notes": "أضف ملاحظاتك",
   "order_notes": "ملاحظات الطلب",
   "select_voucher": "اختر القسيمة",
-    "yourBalance": "رصيدك"
+    "yourBalance": "رصيدك",
+     "choose_additional_payment_method": "يرجى اختيار وسيلة دفع إضافية لإتمام المبلغ المتبقي.",
+      "wallet_insufficient_balance": "رصيد محفظة Gazzer غير كافٍ",
+      "complete_with_card": "إكمال باستخدام بطاقة ائتمان أو خصم",
+      "complete_with_apple_pay": "إكمال باستخدام Apple Pay",
+      "complete_with_e_wallet": "إكمال باستخدام المحفظة الإلكترونية",
+        "areYouSureYouWantToDeleteThisVendor": "هل أنت متأكد أنك تريد حذف هذا البائع؟",
+          "areYouSureYouWantToDeleteAllCart": "هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟"
+
+
 
 
 

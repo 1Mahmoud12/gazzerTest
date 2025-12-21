@@ -294,6 +294,8 @@ class Assets {
   static const String successfullyAddPoundsIc = "assets/svg/successfullyAddPoundsIc.svg";
   static const String additionalSuccessfullyIc = "assets/svg/additionalSuccessfullyIc.svg";
   static const String successfullyAddPointsIc = "assets/svg/successfullyAddPointsIc.svg";
+  static const String completePaymentIc = "assets/png/completePaymentIc.png";
+
   static const String convertPointsIc = "assets/svg/convertPointsIc.svg";
   static const String rechargeIc = "assets/svg/rechargeIc.svg";
   static const String paidIc = "assets/svg/paidIc.svg";

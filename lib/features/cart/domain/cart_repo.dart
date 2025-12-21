@@ -11,6 +11,8 @@ abstract class CartRepo extends BaseApiRepo {
   Future<Result<CartResponse>> updateCartItem(CartableItemRequest req);
   Future<Result<CartResponse>> removeCartItem(int id);
 
+  Future<Result<CartResponse>> removeFromCartByType(String type, int id);
+
   Future<Result<CartResponse>> updateItemQuantity(int id, int qnty, {bool exceedPouch = false});
   Future<Result<CartResponse>> updateItemNote(int id, String? note);
   Future<Result<CartResponse>> updateCartAddress(int addressId);

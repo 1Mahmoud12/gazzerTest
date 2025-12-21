@@ -1935,4 +1935,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get yourBalance => 'رصيدك';
+
+  @override
+  String get choose_additional_payment_method => 'يرجى اختيار وسيلة دفع إضافية لإتمام المبلغ المتبقي.';
+
+  @override
+  String get wallet_insufficient_balance => 'رصيد محفظة Gazzer غير كافٍ';
+
+  @override
+  String get complete_with_card => 'إكمال باستخدام بطاقة ائتمان أو خصم';
+
+  @override
+  String get complete_with_apple_pay => 'إكمال باستخدام Apple Pay';
+
+  @override
+  String get complete_with_e_wallet => 'إكمال باستخدام المحفظة الإلكترونية';
+
+  @override
+  String get areYouSureYouWantToDeleteThisVendor => 'هل أنت متأكد أنك تريد حذف هذا البائع؟';
+
+  @override
+  String get areYouSureYouWantToDeleteAllCart => 'هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟';
 }

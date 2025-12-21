@@ -40,6 +40,16 @@ class CartRepoImp extends CartRepo {
   }
 
   @override
+  Future<Result<CartResponse>> removeFromCartByType(String type, int id) {
+    return super.call(
+      apiCall: () async => _apiclient.post(endpoint: Endpoints.removeFromCart, requestBody: {'type': type, 'id': id}),
+      parser: (response) {
+        return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
+      },
+    );
+  }
+
+  @override
   Future<Result<CartResponse>> updateCartItem(CartableItemRequest req) {
     return super.call(
       apiCall: () async => _apiclient.post(endpoint: Endpoints.updateCartItem, requestBody: req.toJson()),

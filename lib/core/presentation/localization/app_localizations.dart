@@ -3865,6 +3865,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your balance'**
   String get yourBalance;
+
+  /// No description provided for @choose_additional_payment_method.
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose an additional payment method to complete the remaining amount.'**
+  String get choose_additional_payment_method;
+
+  /// No description provided for @wallet_insufficient_balance.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Gazzer wallet balance is insufficient'**
+  String get wallet_insufficient_balance;
+
+  /// No description provided for @complete_with_card.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete with Credit or Debit'**
+  String get complete_with_card;
+
+  /// No description provided for @complete_with_apple_pay.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete with Apple Pay'**
+  String get complete_with_apple_pay;
+
+  /// No description provided for @complete_with_e_wallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete with E-wallet'**
+  String get complete_with_e_wallet;
+
+  /// No description provided for @areYouSureYouWantToDeleteThisVendor.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this vendor?'**
+  String get areYouSureYouWantToDeleteThisVendor;
+
+  /// No description provided for @areYouSureYouWantToDeleteAllCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove all items from the cart?'**
+  String get areYouSureYouWantToDeleteAllCart;
 }
 
 class _AppLocalizationsDelegate

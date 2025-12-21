@@ -374,6 +374,25 @@ class CartCubit extends Cubit<CartStates> {
     }
   }
 
+  /// Removes items from cart by type (store, item, or all).
+  ///
+  /// [type] can be 'store', 'item', or 'all'
+  /// [id] is the vendor ID for 'store', cart item ID for 'item', or ignored for 'all'
+  Future<void> removeFromCartByType(String type, int id) async {
+    emit(FullCartLoading());
+
+    final response = await _repo.removeFromCartByType(type, id);
+
+    switch (response) {
+      case Ok<CartResponse>(:final value):
+        _updateCartWithNewResponse(value);
+        break;
+      case Err(:final error):
+        emit(FullCartError(message: error.message));
+        break;
+    }
+  }
+
   /// Clears all cart data.
   ///
   /// Called on logout or when explicitly clearing the cart.

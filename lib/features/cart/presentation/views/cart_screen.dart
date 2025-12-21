@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -104,94 +105,131 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                       onRefresh: () => cubit.loadCart(),
                       child: Skeletonizer(
                         enabled: state is FullCartLoading,
-                        child: ListView.separated(
-                          padding: const EdgeInsets.only(bottom: 24),
-                          itemCount: state.vendors.length + 7,
-                          separatorBuilder: (context, index) => const VerticalSpacing(24),
-                          // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
-                          itemBuilder: (context, index) {
-                            if (index == state.vendors.length) {
-                              return const CartAddressComponent();
-                            }
-                            if (index == state.vendors.length + 1) {
-                              return const SchedulingComponent();
-                            }
-                            if (index == state.vendors.length + 2) {
-                              return NotesCartWidget(notesController: _notesController);
-                            }
-                            if (index == state.vendors.length + 3) {
-                              if (Session().client == null) return null;
-                              // Provide VouchersCubit scope for VoucherWidget and load vouchers when cart screen opens
-                              return BlocProvider(create: (context) => di<VouchersCubit>()..loadVouchers(), child: const VoucherWidget());
-                            }
-                            if (index == state.vendors.length + 4) {
-                              return Session().client == null ? null : const OrderSummaryWidget();
-                            }
-                            if (index == state.vendors.length + 5) {
-                              return Row(
-                                spacing: 12,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Expanded(
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: AppConst.defaultInnerBorderRadius,
-                                        border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(2),
-                                        child: MainBtn(
-                                          onPressed: () {
-                                            context.go(HomeScreen.route);
-                                          },
-                                          text: L10n.tr().continueShopping,
-                                          padding: const EdgeInsets.symmetric(vertical: 6),
-                                          width: double.infinity,
-                                          height: 0,
-                                          borderColor: Co.purple,
-                                          textStyle: TStyle.blackRegular(16),
-                                          bgColor: Colors.transparent,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: AppConst.defaultInnerBorderRadius,
-                                        border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(2),
-                                        child: MainBtn(
-                                          onPressed: () {
-                                            if (!state.isCartValid) {
-                                              Alerts.showToast(L10n.tr().needToAddAddressFirst);
-                                              return;
-                                            }
-                                            context.push(ConfirmOrderScreen.route);
-                                          },
-                                          disabledColor: Co.grey.withAlpha(80),
-
-                                          text: L10n.tr().checkout,
-                                          textStyle: TStyle.whiteRegular(16),
-                                          width: double.infinity,
-                                          padding: const EdgeInsets.symmetric(vertical: 6),
-                                          bgColor: Co.purple,
-                                        ),
-                                      ),
-                                    ),
+                                  InkWell(
+                                    onTap: () async {
+                                      final confirmed = await showDialog<bool>(
+                                        context: context,
+                                        builder: (context) {
+                                          return Dialogs.confirmDialog(
+                                            title: L10n.tr().warning,
+                                            message: L10n.tr().areYouSureYouWantToDeleteAllCart,
+                                            okBgColor: Co.darkRed,
+                                            context: context,
+                                          );
+                                        },
+                                      );
+                                      if (confirmed == true) {
+                                        cubit.removeFromCartByType('all', 0);
+                                      }
+                                    },
+                                    child: Text(L10n.tr().remove_all, style: TStyle.robotBlackMedium().copyWith(color: Co.darkRed)),
                                   ),
                                 ],
-                              );
-                            }
-                            if (index == state.vendors.length + 6) {
-                              return Session().client == null ? null : const VerticalSpacing(70);
-                            }
-                            // if (index == state.vendors.length + 2) return const CartSummaryWidget();
+                              ),
+                            ),
+                            Expanded(
+                              child: ListView.separated(
+                                padding: const EdgeInsets.only(bottom: 24),
+                                itemCount: state.vendors.length + 7,
+                                separatorBuilder: (context, index) => const VerticalSpacing(24),
+                                // const Divider(indent: 16, color: Colors.black38, endIndent: 16, height: 33),
+                                itemBuilder: (context, index) {
+                                  if (index == state.vendors.length) {
+                                    return const CartAddressComponent();
+                                  }
+                                  if (index == state.vendors.length + 1) {
+                                    return const SchedulingComponent();
+                                  }
+                                  if (index == state.vendors.length + 2) {
+                                    return NotesCartWidget(notesController: _notesController);
+                                  }
+                                  if (index == state.vendors.length + 3) {
+                                    if (Session().client == null) return null;
+                                    // Provide VouchersCubit scope for VoucherWidget and load vouchers when cart screen opens
+                                    return BlocProvider(create: (context) => di<VouchersCubit>()..loadVouchers(), child: const VoucherWidget());
+                                  }
+                                  if (index == state.vendors.length + 4) {
+                                    return Session().client == null ? null : const OrderSummaryWidget();
+                                  }
+                                  if (index == state.vendors.length + 5) {
+                                    return Row(
+                                      spacing: 12,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                              borderRadius: AppConst.defaultInnerBorderRadius,
+                                              border: GradientBoxBorder(
+                                                gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(2),
+                                              child: MainBtn(
+                                                onPressed: () {
+                                                  context.go(HomeScreen.route);
+                                                },
+                                                text: L10n.tr().continueShopping,
+                                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                                width: double.infinity,
+                                                height: 0,
+                                                borderColor: Co.purple,
+                                                textStyle: TStyle.blackRegular(16),
+                                                bgColor: Colors.transparent,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                              borderRadius: AppConst.defaultInnerBorderRadius,
+                                              border: GradientBoxBorder(
+                                                gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(2),
+                                              child: MainBtn(
+                                                onPressed: () {
+                                                  if (!state.isCartValid) {
+                                                    Alerts.showToast(L10n.tr().needToAddAddressFirst);
+                                                    return;
+                                                  }
+                                                  context.push(ConfirmOrderScreen.route);
+                                                },
+                                                disabledColor: Co.grey.withAlpha(80),
 
-                            return VendorCartProductsItem(cartVendor: state.vendors[index]);
-                          },
+                                                text: L10n.tr().checkout,
+                                                textStyle: TStyle.whiteRegular(16),
+                                                width: double.infinity,
+                                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                                bgColor: Co.purple,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                  if (index == state.vendors.length + 6) {
+                                    return Session().client == null ? null : const VerticalSpacing(70);
+                                  }
+                                  // if (index == state.vendors.length + 2) return const CartSummaryWidget();
+
+                                  return VendorCartProductsItem(cartVendor: state.vendors[index]);
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     );
