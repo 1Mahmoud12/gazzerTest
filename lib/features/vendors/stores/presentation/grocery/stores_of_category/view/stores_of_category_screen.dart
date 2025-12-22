@@ -24,10 +24,7 @@ part 'stores_of_category_screen.g.dart';
 @TypedGoRoute<StoresOfCategoryRoute>(path: StoresOfCategoryScreen.routeUriId)
 @immutable
 class StoresOfCategoryRoute extends GoRouteData with _$StoresOfCategoryRoute {
-  const StoresOfCategoryRoute({
-    required this.mainCatId,
-    required this.subCatId,
-  });
+  const StoresOfCategoryRoute({required this.mainCatId, required this.subCatId});
   final int mainCatId;
   final int subCatId;
   @override
@@ -52,10 +49,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
       dx: mediaQuery.size.width - 80,
       dy: mediaQuery.padding.top + kToolbarHeight,
       mainScreenWidget: Scaffold(
-        appBar: const MainAppBar(
-          showCart: false,
-          showLanguage: false,
-        ),
+        appBar: const MainAppBar(),
         extendBody: true,
         extendBodyBehindAppBar: true,
         body: BlocBuilder<StoresOfCategoryCubit, StoresOfCategoryStates>(
@@ -78,27 +72,18 @@ class StoresOfCategoryScreen extends StatelessWidget {
                   GrocHeaderContainer(
                     child: SafeArea(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         spacing: 12,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
                             spacing: 12,
                             children: [
-                              Expanded(
-                                child: MainSearchWidget(
-                                  height: 60,
-                                  hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                                ),
-                              ),
+                              Expanded(child: MainSearchWidget(height: 60, hintText: L10n.tr().searchForStoresItemsAndCAtegories)),
                               HorizontalSpacing(AppConst.floatingCartWidth),
                             ],
                           ),
                           const SizedBox.shrink(),
-                          GradientText(
-                            text: state.subCategory.name,
-                            style: TStyle.blackBold(22),
-                          ),
+                          GradientText(text: state.subCategory.name, style: TStyle.blackBold(22)),
                         ],
                       ),
                     ),
@@ -128,9 +113,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
                         width: 140,
                         entity: state.stores[index],
                         onPressed: () {
-                          StoreDetailsRoute(
-                            storeId: state.stores[index].id,
-                          ).push(context);
+                          StoreDetailsRoute(storeId: state.stores[index].id).push(context);
                         },
                         // height: cardHeight,
                         cardStyle: CardStyle.typeOne,

@@ -65,7 +65,7 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                 ],
               );
             }
-            final List<BannerEntity>? banner = state.banners;
+            final List<BannerEntity> banner = state.banners;
             final lists = state.lists;
             final restaurants = state.restaurants;
             return Skeletonizer(
@@ -75,10 +75,10 @@ class RestaurantsOfCategoryScreen extends StatelessWidget {
                 children: [
                   _TypeRelatedRestaurantsHeader(title: state.name),
 
-                  if (banner != null && banner.isNotEmpty) MainBannerWidget(banner: banner.first),
+                  if (banner.isNotEmpty) MainBannerWidget(banner: banner.first),
                   ...List.generate(lists.length, (index) {
                     return RestaurantsListSwitche(
-                      style: lists[index].$2,
+                      style: CardStyle.typeOne,
                       cardImageToTextRatios: const {},
                       corners: const {},
                       items: lists[index].$3,

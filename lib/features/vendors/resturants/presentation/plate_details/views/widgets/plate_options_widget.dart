@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/decorations.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
@@ -37,36 +34,17 @@ class PlateOptionsWidget extends StatefulWidget {
 class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
-      ),
-      child: Padding(
-        padding: AppConst.defaultPadding,
-        child: Column(
-          spacing: 6,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.optionName,
-              style: TStyle.blackBold(
-                14,
-              ).copyWith(shadows: AppDec.blackTextShadow),
-            ),
-            const VerticalSpacing(12),
-            ..._buildValuesList(widget.values, 0, widget.optionId, widget.type),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        spacing: 6,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [..._buildValuesList(widget.values, 0, widget.optionId, widget.type)],
       ),
     );
   }
 
-  List<Widget> _buildValuesList(
-    List<SubAddonEntity> values,
-    int level, [
-    String parentPath = '',
-    OptionType? parentType,
-  ]) {
+  List<Widget> _buildValuesList(List<SubAddonEntity> values, int level, [String parentPath = '', OptionType? parentType]) {
     return values.map((value) {
       final currentPath = parentPath.isEmpty ? value.id : '${parentPath}_${value.id}';
 
@@ -102,42 +80,31 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
                 bottom: 8,
               ),
               child: AbsorbPointer(
-                absorbing: true,
                 child: Row(
                   children: [
                     if (currentType == OptionType.checkbox)
                       Transform.scale(
                         scale: 1.1,
                         child: Checkbox(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           value: isSelected,
                           visualDensity: VisualDensity.compact,
                           onChanged: (v) {},
+                          side: BorderSide(color: isSelected ? Co.purple : Co.lightGrey, width: 2),
                         ),
                       )
                     else if (currentType == OptionType.radio)
-                      GradientRadioBtn(
-                        isSelected: isSelected,
-                        size: 8,
-                      ),
+                      GradientRadioBtn(isSelected: isSelected, size: 8),
 
-                    const HorizontalSpacing(24),
+                    const HorizontalSpacing(16),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(value.name, style: TStyle.blackRegular(14)),
+                          Text(value.name, style: TStyle.robotBlackMedium()),
                           // Show price if not free, else show "مجاني" (free)
-                          Text(
-                            value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ',
-                            style: TStyle.blackRegular(12).copyWith(
-                              color: Colors.grey[600],
-                            ),
-                          ),
+                          Text(value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ', style: TStyle.robotBlackMedium()),
                         ],
                       ),
                     ),
@@ -155,19 +122,9 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${L10n.tr().choose} ${value.name}',
-                    style: TStyle.blackBold(12).copyWith(
-                      color: Colors.grey[600],
-                    ),
-                  ),
+                  Text('${L10n.tr().choose} ${value.name}', style: TStyle.blackBold(12).copyWith(color: Colors.grey[600])),
                   const VerticalSpacing(8),
-                  ..._buildValuesList(
-                    value.subAddons,
-                    level + 1,
-                    currentPath,
-                    value.type,
-                  ),
+                  ..._buildValuesList(value.subAddons, level + 1, currentPath, value.type),
                 ],
               ),
             ),

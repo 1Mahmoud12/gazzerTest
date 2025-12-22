@@ -11,14 +11,9 @@ class ProductImageWidget extends StatelessWidget {
   final PlateEntity plate;
   @override
   Widget build(BuildContext context) {
-    print('ProductImageWidget: $image');
     return DecoratedBox(
       decoration: BoxDecoration(
-        gradient: RadialGradient(
-          colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)],
-          radius: 0.5,
-          stops: const [0.5, 1.0],
-        ),
+        gradient: RadialGradient(colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)], radius: 0.5, stops: const [0.5, 1.0]),
       ),
       child: AspectRatio(
         aspectRatio: 1,

@@ -50,20 +50,12 @@ class StoreMenuScreen extends StatelessWidget {
                         spacing: 12,
                         children: [
                           const HorizontalSpacing(6),
-                          Expanded(
-                            child: MainSearchWidget(
-                              hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                            ),
-                          ),
-                          HorizontalSpacing(AppConst.floatingCartWidth),
+                          Expanded(child: MainSearchWidget(hintText: L10n.tr().searchForStoresItemsAndCAtegories)),
+                          const HorizontalSpacing(AppConst.floatingCartWidth),
                         ],
                       ),
                       const SizedBox.shrink(),
-                      GradientText(
-                        text: mainCat.name,
-                        style: TStyle.blackBold(22),
-                        textAlign: TextAlign.start,
-                      ),
+                      GradientText(text: mainCat.name, style: TStyle.blackBold(22), textAlign: TextAlign.start),
                     ],
                   ),
                 ),
@@ -80,10 +72,7 @@ class StoreMenuScreen extends StatelessWidget {
               CircleGradientBorderedImage(image: catWzPlates[index].$1.image),
               Padding(
                 padding: AppConst.defaultHrPadding,
-                child: Text(
-                  catWzPlates[index].$1.name,
-                  style: TStyle.blackSemi(13),
-                ),
+                child: Text(catWzPlates[index].$1.name, style: TStyle.blackSemi(13)),
               ),
             ],
           ),
@@ -97,10 +86,7 @@ class StoreMenuScreen extends StatelessWidget {
                 children: [
                   TitleWithMore(
                     title: category.name,
-                    onPressed: () => StoresOfCategoryRoute(
-                      mainCatId: mainCat.id,
-                      subCatId: category.id,
-                    ).push(context),
+                    onPressed: () => StoresOfCategoryRoute(mainCatId: mainCat.id, subCatId: category.id).push(context),
                   ),
                   SizedBox(
                     height: 360,
@@ -115,9 +101,7 @@ class StoreMenuScreen extends StatelessWidget {
                           width: 160,
                           entity: rest[i],
                           onPressed: () {
-                            StoreDetailsRoute(
-                              storeId: rest[i].id,
-                            ).push(context);
+                            StoreDetailsRoute(storeId: rest[i].id).push(context);
                           },
                         );
                       },
@@ -125,9 +109,7 @@ class StoreMenuScreen extends StatelessWidget {
                   ),
 
                   if (index.isOdd && (index / 2).floor() < (state.banners.length - 1)) // skip first banner
-                    MainBannerWidget(
-                      banner: state.banners[(index / 2).floor()],
-                    ),
+                    MainBannerWidget(banner: state.banners[(index / 2).floor()]),
                 ],
               ),
             );

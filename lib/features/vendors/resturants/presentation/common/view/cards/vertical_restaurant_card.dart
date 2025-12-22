@@ -28,7 +28,7 @@ class VerticalRestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final closed = !item.isClosed;
+    final closed = item.isClosed;
     return SizedBox(
       width: width,
       height: height,

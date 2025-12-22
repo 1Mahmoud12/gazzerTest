@@ -144,7 +144,6 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                           onSingleCardPressed: (item) {
                             RestaurantDetailsRoute(id: item.id).push(context);
                           },
-                          // TODO: Ask Product Owner about this
                           style: CardStyle.typeOne,
                         ),
                         if (index.isOdd && (index / 2).floor() < (state.banners.length - 1)) // skip first banner

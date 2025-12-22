@@ -91,11 +91,7 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                               Expanded(
                                 child: CircleGradientBorderedImage(
                                   image: p.image,
-                                  shadow: const BoxShadow(
-                                    color: Colors.black26,
-                                    blurRadius: 2,
-                                    offset: Offset(0, 2),
-                                  ),
+                                  shadow: const BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
                                   showBorder: false,
                                 ),
                               ),
@@ -111,21 +107,11 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: Text(
-                                        p.name,
-                                        style: TStyle.primaryBold(15),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                      child: Text(p.name, style: TStyle.primaryBold(15), maxLines: 1, overflow: TextOverflow.ellipsis),
                                     ),
                                   ],
                                 ),
-                                Text(
-                                  Helpers.getProperPrice(p.price),
-                                  style: TStyle.blackSemi(
-                                    12,
-                                  ).copyWith(shadows: AppDec.blackTextShadow),
-                                ),
+                                Text(Helpers.getProperPrice(p.price), style: TStyle.blackSemi(12).copyWith(shadows: AppDec.blackTextShadow)),
                               ],
                             ),
                           ),
@@ -149,10 +135,7 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                                 )
                               : AbsorbPointer(
                                   absorbing: widget.isDisabled,
-                                  child: AddIcon(
-                                    isLoading: false,
-                                    onTap: () => _updateQuantity(p.id, true),
-                                  ),
+                                  child: AddIcon(isLoading: false, onTap: () => _updateQuantity(p.id, true)),
                                 ),
                         ),
                       ),

@@ -1966,4 +1966,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_login_to_view_saved_cards => 'Please login to view saved cards';
+
+  @override
+  String get multi_select => 'Multi select';
+
+  @override
+  String get select_1 => 'Select 1';
+
+  @override
+  String get required => 'Required';
+
+  @override
+  String get notes => 'Notes';
 }

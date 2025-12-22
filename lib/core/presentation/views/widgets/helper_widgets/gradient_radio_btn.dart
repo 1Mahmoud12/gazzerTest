@@ -10,7 +10,7 @@ class GradientRadioBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: Co.purple, width: 2),
+        border: Border.all(color: isSelected ? Co.purple : Co.lightGrey, width: 2),
         shape: BoxShape.circle,
       ),
 

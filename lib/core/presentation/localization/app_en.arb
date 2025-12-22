@@ -827,7 +827,12 @@
           "areYouSureYouWantToDeleteAllCart": "Are you sure you want to remove all items from the cart?",
           "saved_cards": "Saved Cards",
             "no_saved_cards": "No saved cards",
-            "please_login_to_view_saved_cards": "Please login to view saved cards"
+            "please_login_to_view_saved_cards": "Please login to view saved cards",
+            "multi_select": "Multi select",
+              "select_1": "Select 1",
+              "required": "Required",
+              "optional": "Optional",
+              "notes": "Notes"
 
 
 

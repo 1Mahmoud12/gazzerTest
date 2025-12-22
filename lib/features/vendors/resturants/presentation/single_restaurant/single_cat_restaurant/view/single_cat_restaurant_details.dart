@@ -43,10 +43,7 @@ class SingleCatRestaurantRoute extends GoRouteData with _$SingleCatRestaurantRou
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => di<SingleCatRestaurantCubit>(
-        param1: $extra.restaurant.id,
-        param2: $extra.categoriesWithPlates.first.$2.first.id,
-      ),
+      create: (context) => di<SingleCatRestaurantCubit>(param1: $extra.restaurant.id, param2: $extra.categoriesWithPlates.first.$2.first.id),
       child: SingleCatRestaurantScreen(hasParentProvider: true, state: $extra),
     );
   }
@@ -56,11 +53,7 @@ class SingleCatRestaurantScreen extends StatefulWidget {
   static const route = '/single-cat-restaurant';
 
   /// [hasParentProvider] is used in loading state to hide both the ordered with section & product price summary
-  const SingleCatRestaurantScreen({
-    super.key,
-    required this.hasParentProvider,
-    required this.state,
-  });
+  const SingleCatRestaurantScreen({super.key, required this.hasParentProvider, required this.state});
   final bool hasParentProvider;
   final SingleRestaurantStates state;
 
@@ -134,21 +127,11 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
         child: child!,
       ),
       child: Scaffold(
-        appBar: MainAppBar(
-          showBadge: true,
-          showCart: true,
-          showNotification: false,
-          onShare: () {},
-        ),
+        appBar: MainAppBar(showBadge: true, showCart: true, showNotification: false, onShare: () {}),
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(
-                16,
-                0,
-                16,
-                MediaQuery.paddingOf(context).bottom + 16,
-              ),
+              padding: EdgeInsets.fromLTRB(16, 0, 16, MediaQuery.paddingOf(context).bottom + 16),
               child: Column(
                 spacing: 12,
                 children: [
@@ -163,9 +146,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                         categories: null,
                         onTimerFinish: (ctx) {
                           context.pop();
-                          RestaurantDetailsRoute(
-                            id: restaurant.id,
-                          ).pushReplacement(context);
+                          RestaurantDetailsRoute(id: restaurant.id).pushReplacement(context);
                         },
                       ),
                     ),
@@ -213,17 +194,13 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                             return const SizedBox.shrink();
                           }
                           if (state is PlateDetailsLoading) {
-                            return const Center(
-                              child: AdaptiveProgressIndicator(),
-                            );
+                            return const Center(child: AdaptiveProgressIndicator());
                           }
                           return Column(
                             children: [
                               _FoodDetailsWidget(product: state.plate),
                               BlocProvider(
-                                create: (context) => di<AddToCartCubit>(
-                                  param1: (state.plate, state.options),
-                                ),
+                                create: (context) => di<AddToCartCubit>(param1: (state.plate, state.options)),
                                 child: Builder(
                                   builder: (context) {
                                     final addCubit = context.read<AddToCartCubit>();
@@ -240,11 +217,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                     WidgetsBinding.instance.addPostFrameCallback((_) {
                                       canLeaveItem.value = addCubit.cartItem == null;
                                       isUpdatingCartNotifier.value = addCubit.cartItem?.cartId != null;
-                                      priceNQntyNLoading.value = (
-                                        0,
-                                        0,
-                                        false,
-                                      );
+                                      priceNQntyNLoading.value = (0, 0, false);
                                       priceNQntyNLoading.value = (
                                         addCubit.state.totalPrice,
                                         addCubit.state.quantity,
@@ -256,16 +229,9 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                         noteNotifier.value = cartState.note;
                                         canLeaveItem.value = !cartState.hasUserInteracted;
                                         isUpdatingCartNotifier.value = addCubit.cartItem?.cartId != null;
-                                        priceNQntyNLoading.value = (
-                                          cartState.totalPrice,
-                                          cartState.quantity,
-                                          cartState.status == ApiStatus.loading,
-                                        );
+                                        priceNQntyNLoading.value = (cartState.totalPrice, cartState.quantity, cartState.status == ApiStatus.loading);
                                         if (cartState.status == ApiStatus.success) {
-                                          Alerts.showToast(
-                                            cartState.message,
-                                            error: false,
-                                          );
+                                          Alerts.showToast(cartState.message, error: false);
                                           addCubit.resetState();
                                         } else if (cartState.status == ApiStatus.error) {
                                           Alerts.showToast(cartState.message);
@@ -274,9 +240,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                       builder: (context, cartState) {
                                         // Show all options directly (no dynamic visibility)
                                         return Column(
-                                          children: state.options.map((
-                                            option,
-                                          ) {
+                                          children: state.options.map((option) {
                                             return AbsorbPointer(
                                               absorbing: restaurant.isClosed,
                                               child: PlateOptionsWidget(
@@ -286,15 +250,8 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                                 type: option.type,
                                                 selectedId: cartState.selectedOptions[option.id] ?? {},
                                                 getSelectedOptions: (path) => cartState.selectedOptions[path] ?? {},
-                                                onValueSelected:
-                                                    ({
-                                                      required fullPath,
-                                                      required id,
-                                                    }) => addCubit.setOptionValue(
-                                                      id,
-                                                      fullPath,
-                                                      option.type,
-                                                    ),
+                                                onValueSelected: ({required fullPath, required id}) =>
+                                                    addCubit.setOptionValue(id, fullPath, option.type),
                                               ),
                                             );
                                           }).toList(),
@@ -330,10 +287,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                                   children: [
                                     ValueListenableBuilder(
                                       valueListenable: noteNotifier,
-                                      builder: (context, value, child) => AddSpecialNote(
-                                        onNoteChange: onNoteChange,
-                                        note: value,
-                                      ),
+                                      builder: (context, value, child) => AddSpecialNote(onNoteChange: onNoteChange, note: value),
                                     ),
                                   ],
                                 ),
@@ -359,7 +313,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                         isLoading: value.$3,
                         price: value.$1,
                         quantity: value.$2,
-                        onChangeQuantity: onChangeQuantity,
+                        onChangeQuantity: ({required isAdding}) => onChangeQuantity,
                         onsubmit: onsubmit,
                         isUpdatingCart: isUpdating,
                       ),

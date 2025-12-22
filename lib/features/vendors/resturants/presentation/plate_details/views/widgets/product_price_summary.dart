@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show MainBtn;
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/increment_widget.dart';
 
@@ -22,7 +21,8 @@ class ProductPriceSummary extends StatelessWidget {
     this.isUpdatingCart = false,
     this.maxQuantity,
   });
-  final Function(bool isAdding) onChangeQuantity;
+
+  final Function({required bool isAdding}) onChangeQuantity;
   final num price;
   final int quantity;
   final Future Function() onsubmit;
@@ -31,118 +31,52 @@ class ProductPriceSummary extends StatelessWidget {
   final int? maxQuantity;
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return Container(
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(36),
-          topRight: Radius.circular(36),
-        ),
-        gradient: Grad().radialGradient,
+        color: Colors.white,
+        boxShadow: [BoxShadow(color: Colors.black.withOpacityNew(0.1), blurRadius: 10, offset: const Offset(0, -2))],
       ),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(36),
-            topRight: Radius.circular(36),
-          ),
-          gradient: Grad().linearGradient,
-        ),
-        child: SafeArea(
-          top: false,
-          right: false,
-          left: false,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 12,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: IncrementWidget(
-                        initVal: quantity,
-                        onChanged: onChangeQuantity,
-                        isIncrementDisabled: maxQuantity != null && quantity >= maxQuantity!,
-                      ),
-                    ),
-                    Expanded(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          borderRadius: AppConst.defaultInnerBorderRadius,
-                          border: GradientBoxBorder(
-                            gradient: Grad().shadowGrad().copyWith(
-                              colors: [Co.white.withAlpha(0), Co.white],
-                            ),
-                            width: 2,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: MainBtn(
-                            onPressed: () async {
-                              if (Session().client == null) {
-                                return Alerts.showToast(
-                                  L10n.tr().pleaseLoginToUseCart,
-                                  isInfo: true,
-                                );
-                              }
-                              await onsubmit();
-                            },
-                            isLoading: isLoading,
-                            text: _getButtonText(context),
-                            textStyle: TStyle.secondaryBold(12),
-                            bgColor: Colors.transparent,
-                            height: 0,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 6,
-                              horizontal: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: IncrementWidget(
+                  initVal: quantity,
+                  onChanged: (isAdding) => onChangeQuantity,
+                  isIncrementDisabled: maxQuantity != null && quantity >= maxQuantity!,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: Text(
-                          L10n.tr().selectedType,
-                          style: TStyle.secondaryBold(13),
-                        ),
-                      ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                flex: 6,
+                child: MainBtn(
+                  onPressed: () async {
+                    if (Session().client == null) {
+                      return Alerts.showToast(L10n.tr().pleaseLoginToUseCart, isInfo: true);
+                    }
+                    await onsubmit();
+                  },
+                  isLoading: isLoading,
+                  textStyle: TStyle.whiteBold(16),
+                  bgColor: Co.purple,
+                  height: 56,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Text(_getButtonText(context), style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
+                        const Spacer(),
+                        Text(Helpers.getProperPrice(price), style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
+                      ],
                     ),
-                    const HorizontalSpacing(12),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-
-                        child: Row(
-                          children: [
-                            Text(
-                              "${L10n.tr().total}:",
-                              style: TStyle.secondaryBold(13),
-                            ),
-                            const HorizontalSpacing(12),
-                            Text(
-                              Helpers.getProperPrice(price),
-                              style: TStyle.secondaryBold(13),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -163,6 +97,6 @@ class ProductPriceSummary extends StatelessWidget {
       // Provider not available; default to add to cart
     }
 
-    return L10n.tr().addToCart;
+    return L10n.tr().addItems;
   }
 }

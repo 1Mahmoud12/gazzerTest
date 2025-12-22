@@ -27,7 +27,7 @@ class OrderedWithDTO {
     image = json['image'];
     brand = json['brand'] != null ? (id: json['brand']['id'], name: json['brand']['brand_name']?.toString()) : null;
     genericUnit = json['generic_unit'] != null ? (id: json['generic_unit']['id'], name: json['generic_unit']['generic_unit_name']?.toString()) : null;
-    price = json['price'];
+    price = '${json['price']}';
     // appPrice = json['app_price'];
     // barcode = json['barcode'];
   }

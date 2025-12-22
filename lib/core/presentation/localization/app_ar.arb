@@ -827,7 +827,13 @@
           "areYouSureYouWantToDeleteAllCart": "هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟",
            "saved_cards": "البطاقات المحفوظة",
             "no_saved_cards": "لا توجد بطاقات محفوظة",
-            "please_login_to_view_saved_cards": "يرجى تسجيل الدخول لعرض البطاقات المحفوظة"
+            "please_login_to_view_saved_cards": "يرجى تسجيل الدخول لعرض البطاقات المحفوظة",
+              "notes": "ملاحظات",
+              "multi_select": "اختيار متعدد",
+                "select_1": "اختر عنصرًا واحدًا",
+                "required": "إجباري",
+                "optional": "اختياري"
+
 
 
 

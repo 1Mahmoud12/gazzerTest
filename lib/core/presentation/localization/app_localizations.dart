@@ -3925,6 +3925,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please login to view saved cards'**
   String get please_login_to_view_saved_cards;
+
+  /// No description provided for @multi_select.
+  ///
+  /// In en, this message translates to:
+  /// **'Multi select'**
+  String get multi_select;
+
+  /// No description provided for @select_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Select 1'**
+  String get select_1;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notes;
 }
 
 class _AppLocalizationsDelegate

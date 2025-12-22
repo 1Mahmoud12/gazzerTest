@@ -1966,4 +1966,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_login_to_view_saved_cards => 'يرجى تسجيل الدخول لعرض البطاقات المحفوظة';
+
+  @override
+  String get multi_select => 'اختيار متعدد';
+
+  @override
+  String get select_1 => 'اختر عنصرًا واحدًا';
+
+  @override
+  String get required => 'إجباري';
+
+  @override
+  String get notes => 'ملاحظات';
 }

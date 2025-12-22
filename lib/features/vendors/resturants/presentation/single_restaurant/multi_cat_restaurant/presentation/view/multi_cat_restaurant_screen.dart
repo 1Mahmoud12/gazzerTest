@@ -21,6 +21,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/plate_details/vi
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/cubit/single_restaurant_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant_sub_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_banner_slider.dart';
 import 'package:go_router/go_router.dart';
 
 part 'component/best_selling_component.dart';
@@ -42,10 +43,8 @@ class MultiCatRestaurantsRoute extends GoRouteData with _$MultiCatRestaurantsRou
 
 class MultiCatRestaurantsScreen extends StatefulWidget {
   static const route = '/multi-cat-restaurant';
-  const MultiCatRestaurantsScreen({
-    super.key,
-    required this.state,
-  });
+
+  const MultiCatRestaurantsScreen({super.key, required this.state});
   final SingleRestaurantLoaded state;
   @override
   State<MultiCatRestaurantsScreen> createState() => _MultiCatRestaurantsScreenState();
@@ -76,19 +75,10 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
       body: ScrollableTabedList(
         preHerader: Column(
           children: [
-            MultiCatRestHeader(
-              restaurant: restaurant,
-              categires: categoriesWithPlates.map((e) => e.$1.name),
-            ),
-            _TopRatedComponent(
-              isCardDisabled: restaurant.isClosed,
-              toprated: toprated.take(5).toList(),
-            ),
-            if (bestSelling.isNotEmpty)
-              _BestSellingComponent(
-                isCardDisabled: restaurant.isClosed,
-                bestSelling: bestSelling,
-              ),
+            MultiCatRestHeader(restaurant: restaurant, categires: categoriesWithPlates.map((e) => e.$1.name)),
+            BannerSlider(images: banners.map((e) => e.image ?? '').toList()),
+            _TopRatedComponent(isCardDisabled: restaurant.isClosed, toprated: toprated.take(5).toList()),
+            if (bestSelling.isNotEmpty) _BestSellingComponent(isCardDisabled: restaurant.isClosed, bestSelling: bestSelling),
           ],
         ),
         itemsCount: categoriesWithPlates.length,
@@ -97,15 +87,10 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleGradientBorderedImage(
-                image: categoriesWithPlates[index].$1.image,
-              ),
+              CircleGradientBorderedImage(image: categoriesWithPlates[index].$1.image),
               Padding(
                 padding: AppConst.defaultHrPadding,
-                child: Text(
-                  categoriesWithPlates[index].$1.name,
-                  style: TStyle.blackSemi(13),
-                ),
+                child: Text(categoriesWithPlates[index].$1.name, style: TStyle.blackSemi(13)),
               ),
             ],
           );
@@ -122,11 +107,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
                 onViewAllPressed: cat.$2.length < 10
                     ? null
                     : () {
-                        RestaurantCategoryRoute(
-                          $extra: restaurant,
-                          subCatId: cat.$1.id,
-                          subcatName: cat.$1.name,
-                        ).push(context);
+                        RestaurantCategoryRoute($extra: restaurant, subCatId: cat.$1.id, subcatName: cat.$1.name).push(context);
                       },
                 cardImageToTextRatios: {CardStyle.typeOne: 0.8},
                 corners: {CardStyle.typeThree: Corner.topLeft},
