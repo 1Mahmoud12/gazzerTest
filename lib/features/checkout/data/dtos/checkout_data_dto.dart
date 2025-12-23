@@ -1,7 +1,6 @@
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 import 'package:gazzer/features/loyaltyProgram/data/dto/loyalty_program_dto.dart';
 import 'package:gazzer/features/profile/presentation/views/saved_cards_screen.dart';
-import 'package:gazzer/main.dart';
 
 class CheckoutDataDTO {
   final WalletDTO wallet;
@@ -75,7 +74,6 @@ class PaymentCardDTO {
   });
 
   factory PaymentCardDTO.fromJson(Map<String, dynamic> json) {
-    logger.d(json['card_brand']);
     return PaymentCardDTO(
       id: (json['id'] as num?)?.toInt() ?? 0,
       last4Digits: json['last_4_digits'] as String? ?? '',

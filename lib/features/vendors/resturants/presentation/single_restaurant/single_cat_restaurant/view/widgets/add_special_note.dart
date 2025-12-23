@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/resources.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/decorations.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:go_router/go_router.dart';
 
 class AddSpecialNote extends StatelessWidget {
   const AddSpecialNote({super.key, required this.onNoteChange, this.note});
@@ -15,133 +9,34 @@ class AddSpecialNote extends StatelessWidget {
   final String? note;
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          useSafeArea: true,
-          builder: (context) {
-            return _NoteSheet(note: note);
-          },
-        ).then((value) {
-          if (value != null && value is String) {
-            onNoteChange(value);
-          }
-        });
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFF4E2CB),
-        shape: RoundedRectangleBorder(
-          borderRadius: AppConst.defaultInnerBorderRadius,
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      ),
-      child: GradientTextWzShadow(
-        text: L10n.tr().addSpecialNote,
-        style: TStyle.blackBold(14),
-        shadow: AppDec.blackTextShadow.first,
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: _NotesSection(note: note, onNoteChange: onNoteChange),
     );
   }
 }
 
-class _NoteSheet extends StatefulWidget {
-  const _NoteSheet({this.note});
+// Notes Section
+class _NotesSection extends StatelessWidget {
+  const _NotesSection({required this.note, required this.onNoteChange});
+
   final String? note;
-
-  @override
-  State<_NoteSheet> createState() => _NoteSheetState();
-}
-
-class _NoteSheetState extends State<_NoteSheet> {
-  final TextEditingController controller = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  @override
-  void initState() {
-    controller.text = widget.note ?? '';
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _formKey.currentState?.dispose();
-    controller.dispose();
-    super.dispose();
-  }
+  final Function(String) onNoteChange;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                final note = controller.text.trim();
-                context.pop<String>(note);
-              },
-              child: Container(color: Colors.transparent), // Dismissible area
-            ),
-          ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: Co.secText,
-              borderRadius: AppConst.defaultBorderRadius,
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding: AppConst.defaultPadding,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 12,
-                  children: [
-                    Text(
-                      L10n.tr().addSpecialNote,
-                      style: TStyle.primaryBold(16),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Form(
-                        key: _formKey,
-                        child: MainTextField(
-                          controller: controller,
-                          hintText: L10n.tr().typeHere,
-                          bgColor: Colors.transparent,
-                          maxLines: 5,
-                          showBorder: true,
-                          max: 150,
-                          showMaxLegnth: true,
-                          validator: Validators.notEmpty,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          width: 150,
-                          child: OptionBtn(
-                            onPressed: () {
-                              if (_formKey.currentState?.validate() != true) return;
-                              final note = controller.text.trim();
-                              context.pop<String>(note);
-                            },
-                            text: L10n.tr().send,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(L10n.tr().notes, style: TStyle.blackBold(16)),
+        const SizedBox(height: 12),
+        MainTextField(
+          controller: TextEditingController(text: note),
+          maxLines: 3,
+          hintText: L10n.tr().addYourNotes,
+          onChange: onNoteChange,
+        ),
+      ],
     );
   }
 }

@@ -111,16 +111,16 @@ class VerticalProductCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    if (product.description != '') ...[
-                      const VerticalSpacing(10),
-                      Text(
-                        product.description,
-                        style: TStyle.robotBlackSmall(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
+                    // if (product.description != '') ...[
+                    //   const VerticalSpacing(10),
+                    //   Text(
+                    //     product.description,
+                    //     style: TStyle.robotBlackSmall(),
+                    //     maxLines: 1,
+                    //     overflow: TextOverflow.ellipsis,
+                    //     textAlign: TextAlign.start,
+                    //   ),
+                    // ],
                     if (product.store != null) ...[
                       const VerticalSpacing(10),
                       InkWell(

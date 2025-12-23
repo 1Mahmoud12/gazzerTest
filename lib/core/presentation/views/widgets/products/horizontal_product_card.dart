@@ -59,18 +59,22 @@ class HorizontalProductCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(product.name, style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700)),
-                            const VerticalSpacing(8),
-                            if (product.description.isNotEmpty) ...[
-                              Text(
-                                product.description,
-                                style: TStyle.robotBlackSmall(),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.start,
-                              ),
-                              const VerticalSpacing(8),
-                            ],
+                            Text(
+                              product.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
+                            ),
+                            // const VerticalSpacing(8),
+                            // Text(
+                            //   product.description == '' ? product.name : product.description,
+                            //   style: TStyle.robotBlackSmall(),
+                            //   maxLines: 1,
+                            //   overflow: TextOverflow.ellipsis,
+                            //   textAlign: TextAlign.start,
+                            // ),
+                            const VerticalSpacing(12),
+
                             if (product.store != null)
                               InkWell(
                                 onTap: () {
@@ -101,7 +105,7 @@ class HorizontalProductCard extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            const VerticalSpacing(8),
+                            const VerticalSpacing(12),
                             AppRatingWidget(product.rate.toStringAsFixed(1), itemSize: 16),
                           ],
                         ),
@@ -110,7 +114,7 @@ class HorizontalProductCard extends StatelessWidget {
                         padding: EdgeInsets.all(MediaQuery.sizeOf(context).width * .03),
                         decoration: const BoxDecoration(color: Co.purple, shape: BoxShape.circle),
                         child: Text(
-                          '${Helpers.getProperPrice(product.price, showCurrency: false)}\n${L10n.tr().egp}',
+                          '${Helpers.getProperPrice(product.price.toInt(), showCurrency: false)}\n${L10n.tr().egp}',
                           style: TStyle.robotBlackMedium().copyWith(color: Co.white),
                           textAlign: TextAlign.center,
                         ),

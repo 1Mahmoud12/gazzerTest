@@ -1,6 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -25,8 +25,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noResultsFoundTryAdjustingYourFilter => 'لم يتم العثور على نتائج، حاول تعديل عوامل التصفية الخاص بك';
 
   @override
-  String get unableToLoadResultsPleaseTryAgainLater =>
-      'تعذر تحميل النتائج، يرجى المحاولة مرة أخرى لاحقًا';
+  String get unableToLoadResultsPleaseTryAgainLater => 'تعذر تحميل النتائج، يرجى المحاولة مرة أخرى لاحقًا';
 
   @override
   String get rating => 'تقييم';

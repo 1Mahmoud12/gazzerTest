@@ -13,10 +13,7 @@ class PlatesRepoImp extends PlatesRepo {
   PlatesRepoImp(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<List<PlateEntity>>> getAllPlatesPaginated(
-    int page, [
-    int perPage = 10,
-  ]) {
+  Future<Result<List<PlateEntity>>> getAllPlatesPaginated(int page, [int perPage = 10]) {
     return super.call(
       apiCall: () => _apiClient.get(endpoint: Endpoints.allRestaurants(page, perPage)),
       parser: (response) {
@@ -47,14 +44,9 @@ class PlatesRepoImp extends PlatesRepo {
   }
 
   @override
-  Future<Result<List<PlateEntity>>> getPlatesByRestAnCatOfPlate(
-    int restId,
-    int catOfPlateId,
-  ) {
+  Future<Result<List<PlateEntity>>> getPlatesByRestAnCatOfPlate(int restId, int catOfPlateId) {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.platesOfRestaurantCategory(restId, catOfPlateId),
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.platesOfRestaurantCategory(restId, catOfPlateId)),
       parser: (response) {
         final data = <PlateEntity>[];
         for (var item in response.data['data']) {
@@ -78,17 +70,11 @@ class PlatesRepoImp extends PlatesRepo {
   }
 
   @override
-  Future<Result<List<OrderedWithEntity>>> getPlateOrderedWith(
-    int restId,
-    int plateId, {
-    CancelToken? cancelToken,
-  }) {
+  Future<Result<List<OrderedWithEntity>>> getPlateOrderedWith(int restId, int plateId, {CancelToken? cancelToken}) {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.orderWith(restId, plateId),
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.orderWith(restId, plateId)),
       parser: (response) {
-        return (response.data['data'] as List).map((e) => OrderedWithDTO.fromJson(e).toEntity()).toList();
+        return response.data['data'].isEmpty ? [] : (response.data['data'] as List).map((e) => OrderedWithDTO.fromJson(e).toEntity()).toList();
       },
     );
   }

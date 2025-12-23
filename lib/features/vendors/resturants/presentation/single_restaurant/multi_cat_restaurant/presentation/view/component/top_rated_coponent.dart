@@ -15,6 +15,7 @@ class _TopRatedComponent extends StatelessWidget {
         ),
         const VerticalSpacing(8),
         SingleChildScrollView(
+          padding: EdgeInsets.zero,
           scrollDirection: Axis.horizontal,
           child: Row(children: toprated.map((e) => _TopRatedCard(e)).toList()),
         ),

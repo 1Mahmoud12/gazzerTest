@@ -81,7 +81,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
           children: [
             MultiCatRestHeader(restaurant: restaurant, categires: categoriesWithPlates.map((e) => e.$1.name)),
             BannerSlider(images: banners.map((e) => e.image ?? '').toList()),
-            _TopRatedComponent(isCardDisabled: restaurant.isClosed, toprated: toprated.take(5).toList()),
+            if (toprated.isNotEmpty) _TopRatedComponent(isCardDisabled: restaurant.isClosed, toprated: toprated.toList()),
             if (bestSelling.isNotEmpty) _BestSellingComponent(isCardDisabled: restaurant.isClosed, bestSelling: bestSelling),
           ],
         ),
