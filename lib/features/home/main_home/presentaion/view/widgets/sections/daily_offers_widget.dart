@@ -68,7 +68,13 @@ class _DailyOffersContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(
                 items.length > 10 ? 10 : items.length,
-                (index) => SizedBox(width: 220, child: VerticalProductCard(product: items[index], canAdd: false)),
+                (index) => SizedBox(
+                  width: 220,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: VerticalProductCard(product: items[index], canAdd: false),
+                  ),
+                ),
               ),
             ),
           ),

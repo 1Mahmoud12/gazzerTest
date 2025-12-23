@@ -835,7 +835,9 @@
                 "optional": "اختياري",
                 "deliveryTime": "وقت التوصيل",
                   "open": "مفتوح",
-                    "review": "تقييم"
+                    "review": "تقييم",
+                      "viewVendor": "عرض المتجر"
+
 
 
 

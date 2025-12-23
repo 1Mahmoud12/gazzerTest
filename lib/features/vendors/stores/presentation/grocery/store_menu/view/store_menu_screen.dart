@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
+import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart' show CircleGradientBorderedImage;
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/common/view/app_bar_row_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_header_container.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/store_menu_states.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_banner_slider.dart';
 
 class StoreMenuScreen extends StatelessWidget {
   const StoreMenuScreen({super.key, required this.state});
@@ -28,6 +30,8 @@ class StoreMenuScreen extends StatelessWidget {
     final banners = state.banners;
     final mainCat = state.mainCategory;
     final catWzPlates = state.categoryWithStores;
+    final height = MediaQuery.paddingOf(context).top + (1.5 * kToolbarHeight);
+
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
@@ -37,30 +41,41 @@ class StoreMenuScreen extends StatelessWidget {
           preHerader: Column(
             spacing: 16,
             children: [
-              GrocHeaderContainer(
-                child: SafeArea(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 12,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const AppBarRowWidget(),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 12,
-                        children: [
-                          const HorizontalSpacing(6),
-                          Expanded(child: MainSearchWidget(hintText: L10n.tr().searchForStoresItemsAndCAtegories)),
-                          const HorizontalSpacing(AppConst.floatingCartWidth),
-                        ],
+              SizedBox(
+                height: height,
+                child: Stack(
+                  children: [
+                    OverflowBox(
+                      alignment: Alignment.centerRight,
+                      maxHeight: height,
+                      minHeight: height,
+                      maxWidth: 780,
+                      minWidth: 780,
+                      child: Hero(
+                        tag: Tags.spickyShape,
+                        child: ClipPath(
+                          clipper: AddShapeClipper(),
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: Grad().bgLinear.copyWith(colors: [Co.storeGradient, Co.bg.withAlpha(0)], stops: const [0.0, 1]),
+                            ),
+                          ),
+                        ),
                       ),
-                      const SizedBox.shrink(),
-                      GradientText(text: mainCat.name, style: TStyle.blackBold(22), textAlign: TextAlign.start),
-                    ],
-                  ),
+                    ),
+                    MainAppBar(title: L10n.tr().groceryStores),
+                  ],
                 ),
               ),
-              if (banners.isNotEmpty) MainBannerWidget(banner: banners.first),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: MainSearchWidget(
+                  hintText: L10n.tr().searchForStoresItemsAndCAtegories,
+                  bgColor: Colors.transparent,
+                  prefix: const Icon(Icons.search, size: 24),
+                ),
+              ),
+              if (banners.isNotEmpty) BannerSlider(images: banners.map((e) => e.image ?? '').toList()),
               const VerticalSpacing(8),
             ],
           ),

@@ -18,7 +18,7 @@ class VendorInfoWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(vendor.name, style: TStyle.robotBlackRegular(), maxLines: 2, overflow: TextOverflow.ellipsis),
+          Text(vendor.name, style: TStyle.robotBlackRegular(), maxLines: 1, overflow: TextOverflow.ellipsis),
 
           // if (vendor.tag?.isNotEmpty == true)
           //   Text(vendor.tag!.join(', '), style: TStyle.greyRegular(12), maxLines: 1, overflow: TextOverflow.ellipsis),

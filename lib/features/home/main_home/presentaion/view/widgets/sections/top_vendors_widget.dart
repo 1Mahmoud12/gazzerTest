@@ -74,7 +74,7 @@ class _TopVendorsContent extends StatelessWidget {
           ),
           const VerticalSpacing(12),
           SizedBox(
-            height: 100,
+            height: 140,
             child: ListView.separated(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,
@@ -112,8 +112,17 @@ class _TopVendorsContent extends StatelessWidget {
                   child: Column(
                     spacing: 8,
                     children: [
-                      Expanded(child: CustomNetworkImage(vendor.image, fit: BoxFit.cover, width: 90, height: 120, borderRaduis: 12)),
-                      Text(vendor.name, style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1),
+                      CustomNetworkImage(vendor.image, fit: BoxFit.cover, width: 120, height: 100, borderRaduis: 12),
+                      SizedBox(
+                        width: 100,
+                        child: Text(
+                          vendor.name,
+                          style: TStyle.robotBlackRegular(),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ],
                   ),
                 );

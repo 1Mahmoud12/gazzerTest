@@ -112,7 +112,7 @@ class CartToIncrementIcon extends StatelessWidget {
       isDarkContainer: isDarkContainer,
       isAdding: isUpdating && updateState!.isAdding,
       isRemoving: isUpdating && updateState!.isRemoving,
-      onChanged: (isAdding) => _handleQuantityChange(context, cartItem, isAdding, hasReachedMaxStock),
+      onChanged: ({required isAdding}) => _handleQuantityChange(context, cartItem, isAdding, hasReachedMaxStock),
       initVal: cartItem.quantity,
       isHorizonal: isHorizonal,
       canAdd: !hasReachedMaxStock,

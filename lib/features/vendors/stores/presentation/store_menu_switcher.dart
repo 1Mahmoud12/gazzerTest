@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/store_menu_states.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
@@ -37,7 +36,7 @@ class StoreMenuSwitcher extends StatelessWidget {
     final padding = MediaQuery.paddingOf(context);
     return LayoutBuilder(
       builder: (context, constraints) => FloatingDraggableWidget(
-        floatingWidget: const MainCartWidget(),
+        floatingWidget: const SizedBox.shrink(),
         floatingWidgetHeight: 50,
         floatingWidgetWidth: 50,
         dy: padding.top + 60,
@@ -48,8 +47,7 @@ class StoreMenuSwitcher extends StatelessWidget {
               if (state is ScreenDataLoading || state is StoresMenuInit || state is ScreenDataError) {
                 return Scaffold(
                   appBar: const MainAppBar(
-                    showNotification: false,
-                    showCart: false, // don't show cart : multiple hero
+                    // don't show cart : multiple hero
                   ),
                   body: state is ScreenDataError
                       ? FailureComponent(

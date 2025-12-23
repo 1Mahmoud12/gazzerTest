@@ -835,7 +835,9 @@
               "notes": "Notes",
               "deliveryTime": "Delivery Time",
                 "open": "Open",
-                  "review": "Review"
+                  "review": "Review",
+           "viewVendor": "View Vendor"
+
 
 
 

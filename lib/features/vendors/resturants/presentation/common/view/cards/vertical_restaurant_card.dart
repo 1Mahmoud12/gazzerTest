@@ -21,10 +21,10 @@ class VerticalRestaurantCard extends StatelessWidget {
   }) : corner = corner ?? Corner.bottomRight;
   final double width;
   final double? height;
-  final RestaurantEntity item;
+  final GenericVendorEntity item;
   final Corner corner;
   final double imgToTextRatio;
-  final Function(RestaurantEntity)? onTap;
+  final Function(GenericVendorEntity)? onTap;
 
   @override
   Widget build(BuildContext context) {

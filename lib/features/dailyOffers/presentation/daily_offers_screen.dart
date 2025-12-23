@@ -164,7 +164,10 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                 delegate: SliverChildBuilderDelegate((context, index) {
                                   final item = items[index];
                                   if (item.item == null || item.item!.store == null) return const SizedBox.shrink();
-                                  return VerticalProductCard(key: ValueKey('item_${item.id}'), product: item.item!.toEntity(), canAdd: false);
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: VerticalProductCard(key: ValueKey('item_${item.id}'), product: item.item!.toEntity(), canAdd: false),
+                                  );
                                 }, childCount: items.length),
                               ),
                             ),
@@ -211,52 +214,55 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                       discountType: DiscountType.fromString(s.offer?.discountType ?? ''),
                                     ),
                                   );
-                                  return VerticalProductCard(
-                                    key: ValueKey('store_${entity.id}'),
-                                    product: entity,
-                                    canAdd: false,
-                                    onTap: () {
-                                      log('id==> ${s.storeCategoryType}');
-                                      if (s.id == null) {
-                                        return;
-                                      }
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: VerticalProductCard(
+                                      key: ValueKey('store_${entity.id}'),
+                                      product: entity,
+                                      canAdd: false,
+                                      onTap: () {
+                                        log('id==> ${s.storeCategoryType}');
+                                        if (s.id == null) {
+                                          return;
+                                        }
 
-                                      if (s.storeCategoryType == VendorType.restaurant.value) {
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<SingleRestaurantCubit>(param1: s.id),
-                                            child: RestaurantDetailsScreen(id: s.id!),
-                                          ),
-                                        );
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<StoreDetailsCubit>(param1: s.id),
-                                            child: StoreDetailsScreen(storeId: s.id!),
-                                          ),
-                                        );
-                                        // RestaurantDetailsScreen(
-                                        //   id: s.id,
-                                        // ).push(context);
-                                      } else if (s.storeCategoryType == VendorType.grocery.value) {
-                                        // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<StoreDetailsCubit>(param1: s.id),
-                                            child: StoreDetailsScreen(storeId: s.id!),
-                                          ),
-                                        );
-                                        // StoreDetailsRoute(
-                                        //   storeId: s.id ?? -1,
-                                        // ).push(context);
-                                      } else {
-                                        context.navigateToPage(
-                                          BlocProvider(
-                                            create: (context) => di<StoreDetailsCubit>(param1: s.id),
-                                            child: StoreDetailsScreen(storeId: s.id!),
-                                          ),
-                                        );
-                                      }
-                                    },
+                                        if (s.storeCategoryType == VendorType.restaurant.value) {
+                                          context.navigateToPage(
+                                            BlocProvider(
+                                              create: (context) => di<SingleRestaurantCubit>(param1: s.id),
+                                              child: RestaurantDetailsScreen(id: s.id!),
+                                            ),
+                                          );
+                                          context.navigateToPage(
+                                            BlocProvider(
+                                              create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                              child: StoreDetailsScreen(storeId: s.id!),
+                                            ),
+                                          );
+                                          // RestaurantDetailsScreen(
+                                          //   id: s.id,
+                                          // ).push(context);
+                                        } else if (s.storeCategoryType == VendorType.grocery.value) {
+                                          // context.push(StoreDetailsScreen.route, extra: {'store_id': s.id});
+                                          context.navigateToPage(
+                                            BlocProvider(
+                                              create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                              child: StoreDetailsScreen(storeId: s.id!),
+                                            ),
+                                          );
+                                          // StoreDetailsRoute(
+                                          //   storeId: s.id ?? -1,
+                                          // ).push(context);
+                                        } else {
+                                          context.navigateToPage(
+                                            BlocProvider(
+                                              create: (context) => di<StoreDetailsCubit>(param1: s.id),
+                                              child: StoreDetailsScreen(storeId: s.id!),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
                                   );
                                 }, childCount: stores.length),
                               ),

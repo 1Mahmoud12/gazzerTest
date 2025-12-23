@@ -129,7 +129,7 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                                     isHorizonal: true,
                                     isAdding: false,
                                     isRemoving: false,
-                                    onChanged: (isAdding) => _updateQuantity(p.id, isAdding),
+                                    onChanged: ({required isAdding}) => _updateQuantity(p.id, isAdding),
                                     initVal: qty,
                                   ),
                                 )

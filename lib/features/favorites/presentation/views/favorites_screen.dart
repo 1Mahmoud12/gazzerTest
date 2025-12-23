@@ -1,25 +1,27 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
+import 'package:gazzer/core/presentation/views/widgets/switcher/custom_switcher.dart';
+import 'package:gazzer/core/presentation/views/widgets/switcher/switcher_item.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/component/un_auth_component.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_events.dart';
-import 'package:gazzer/features/favorites/presentation/views/widgets/favorites_card.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/vertical_restaurant_card.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -32,6 +34,7 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   final controller = TextEditingController();
   late final FavoriteBus bus;
+  String selectedId = 'items';
   @override
   void initState() {
     bus = di<FavoriteBus>();
@@ -54,91 +57,141 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        exitApp++;
-        //Utils.showToast(title: 'swipe twice to exit', state: UtilState.success);
-        Alerts.showToast(L10n.tr().swipeTwiceToExit, error: false, isInfo: true, toastGravity: ToastGravity.CENTER);
-        Future.delayed(const Duration(seconds: 5), () {
-          exitApp = 0;
-          setState(() {});
-        });
-        if (exitApp == 2) {
-          exit(0);
-        }
+        context.go(HomeScreen.route);
       },
       child: Scaffold(
-        appBar: const MainAppBar(),
+        appBar: MainAppBar(
+          title: L10n.tr().favorites,
+          onBack: () {
+            context.go(HomeScreen.route);
+          },
+        ),
         body: Column(
-          spacing: 12,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: MainSearchWidget(hintText: L10n.tr().searchForStoresItemsAndCAtegories),
-            ),
             if (Session().client == null)
               Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites))
             else
               Expanded(
-                child: StreamBuilder(
+                child: StreamBuilder<FavoriteEvents>(
                   stream: bus.getStream<FavoriteEvents>(),
                   builder: (context, snapshot) {
-                    // print("favs of restaurant  ${bus.favorites[FavoriteType.restaurant]}");
-                    if (snapshot.data is GetFavoriteLoading) {
+                    final event = snapshot.data;
+
+                    if (event is GetFavoriteLoading) {
                       return const Center(child: AdaptiveProgressIndicator());
                     }
-                    if (snapshot.data is ClearFavorites) {
+                    if (event is ClearFavorites) {
                       return UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites);
                     }
-                    if (snapshot.data?.favorites == null || snapshot.data!.favorites.isEmpty) {
+                    if (event == null || event.favorites.isEmpty) {
                       return Center(child: Text(L10n.tr().youHaveNoFavoritesYet, style: TStyle.primaryBold(20)));
                     }
+
+                    final allFavorites = event.favorites.values.expand((group) => group.values);
+                    final itemFavorites = allFavorites
+                        .where((fav) => fav.favoriteType == FavoriteType.plate || fav.favoriteType == FavoriteType.product)
+                        .toList();
+                    final vendorFavorites = allFavorites
+                        .where((fav) => fav.favoriteType == FavoriteType.restaurant || fav.favoriteType == FavoriteType.store)
+                        .toList();
+
+                    final currentList = selectedId == 'items' ? itemFavorites : vendorFavorites;
+
                     return RefreshIndicator(
                       onRefresh: () async {
                         bus.getFavorites();
                       },
-                      child: ListView.separated(
-                        itemCount: snapshot.data!.favorites.length,
-                        padding: AppConst.defaultPadding,
-                        separatorBuilder: (context, index) => const VerticalSpacing(24),
-                        itemBuilder: (context, index) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 8,
-                            children: [
-                              Text(snapshot.data!.favorites.keys.elementAt(index).trName, style: TStyle.primaryBold(20)),
-                              SizedBox(
-                                height: 200,
-                                child: ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: snapshot.data!.favorites.values.elementAt(index).length,
-                                  separatorBuilder: (context, index) => const HorizontalSpacing(16),
-                                  itemBuilder: (context, i) {
-                                    final fav = snapshot.data!.favorites.values.elementAt(index).values.elementAt(i);
-                                    return FavoriteCard(
-                                      favorite: fav,
-                                      onTap: () {
-                                        switch (fav.favoriteType) {
-                                          case FavoriteType.restaurant:
-                                            RestaurantDetailsRoute(id: fav.id).push(context);
-                                            break;
-                                          case FavoriteType.store:
-                                            StoreDetailsRoute(storeId: fav.id).push(context);
-                                            break;
-                                          case FavoriteType.plate:
-                                            PlateDetailsRoute(id: fav.id).push(context);
-                                          case FavoriteType.product:
-                                            ProductDetailsRoute(productId: fav.id).push(context);
-                                            break;
-                                          default:
-                                            break;
-                                        }
-                                      },
-                                    );
-                                  },
-                                ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: AppConst.defaultPadding,
+                              child: CustomSwitcher(
+                                items: [
+                                  SwitcherItem(id: 'items', name: L10n.tr().items),
+                                  SwitcherItem(id: 'vendors', name: L10n.tr().vendors),
+                                ],
+                                selectedId: selectedId,
+                                onChanged: (id) {
+                                  setState(() {
+                                    selectedId = id;
+                                  });
+                                },
                               ),
-                            ],
-                          );
-                        },
+                            ),
+                            const VerticalSpacing(8),
+                            if (currentList.isEmpty)
+                              Center(child: Text(L10n.tr().noData, style: TStyle.primaryBold(18)))
+                            else
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  return Padding(
+                                    padding: AppConst.defaultPadding,
+                                    child: Wrap(
+                                      runSpacing: 8,
+                                      spacing: 8,
+                                      alignment: WrapAlignment.spaceBetween,
+                                      children: List.generate(currentList.length, (index) {
+                                        final fav = currentList[index];
+                                        if (selectedId == 'items') {
+                                          return SizedBox(
+                                            width: constraints.maxWidth * .45,
+                                            child: VerticalProductCard(
+                                              product: fav as GenericItemEntity,
+                                              canAdd: false,
+                                              onTap: () {
+                                                switch (fav.favoriteType) {
+                                                  case FavoriteType.plate:
+                                                    PlateDetailsRoute(id: fav.id).push(context);
+                                                    break;
+                                                  case FavoriteType.product:
+                                                    ProductDetailsRoute(productId: fav.id).push(context);
+                                                    break;
+                                                  default:
+                                                    break;
+                                                }
+                                              },
+                                            ),
+                                          );
+                                        } else if (selectedId == 'vendors') {
+                                          final vendor = fav as GenericVendorEntity;
+                                          return SizedBox(
+                                            width: MediaQuery.of(context).size.width * .45,
+                                            child: VerticalRestaurantCard(
+                                              width: double.infinity,
+                                              item: vendor,
+                                              onTap: (vendor) {
+                                                switch (vendor.favoriteType) {
+                                                  case FavoriteType.restaurant:
+                                                    RestaurantDetailsRoute(id: vendor.id).push(context);
+                                                    break;
+                                                  case FavoriteType.store:
+                                                    StoreDetailsRoute(storeId: vendor.id).push(context);
+                                                    break;
+                                                  case FavoriteType.plate:
+                                                    PlateDetailsRoute(id: vendor.id).push(context);
+                                                    break;
+                                                  case FavoriteType.product:
+                                                    ProductDetailsRoute(productId: vendor.id).push(context);
+                                                    break;
+                                                  default:
+                                                    break;
+                                                }
+                                              },
+                                            ),
+                                          );
+                                        }
+
+                                        return const SizedBox.shrink();
+                                      }),
+                                    ),
+                                  );
+                                },
+                              ),
+                            const VerticalSpacing(16),
+                          ],
+                        ),
                       ),
                     );
                   },

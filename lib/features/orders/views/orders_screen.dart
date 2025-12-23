@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_app_b
 import 'package:gazzer/features/cart/presentation/views/component/un_auth_component.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/widgets/orders_content_widget.dart';
-import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -44,7 +43,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
       appBar: MainAppBar(
         title: L10n.tr().orders,
         onBack: () {
-          logger.d('asd');
           context.go(HomeScreen.route);
         },
       ),

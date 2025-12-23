@@ -46,39 +46,38 @@ class RestHorzScrollVertCardListComponent<T> extends StatelessWidget {
                       : onViewAllPressed
                 : onViewAllPressed,
           ),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: 0.75,
-            ),
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              if (item is RestaurantEntity) {
-                return VerticalRestaurantCard(
-                  imgToTextRatio: cardImageToTextRatio ?? 0.9,
-                  width: double.infinity,
-                  item: item,
-                  corner: corner,
-                  onTap: (item) => onSingleCardPressed(items[index]),
-                );
-              }
-              // if (item is PlateEntity) {
-              //   return VerticalPlateCard(
-              //     imgToTextRatio: cardImageToTextRatio ?? 0.9,
-              //     width: cardWidth ?? 140,
-              //     item: item,
-              //     corner: corner,
-              //     onTap: (item) => onSingleCardPressed(items[index]),
-              //   );
-              // }
-              return const SizedBox();
-            },
+          Row(
+            children: [
+              Expanded(
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  runSpacing: 12,
+
+                  children: List.generate(items.length, (index) {
+                    final item = items[index];
+                    if (item is RestaurantEntity) {
+                      return VerticalRestaurantCard(
+                        imgToTextRatio: cardImageToTextRatio ?? 0.9,
+                        width: MediaQuery.of(context).size.width * .44,
+                        item: item,
+                        corner: corner,
+                        onTap: (item) => onSingleCardPressed(items[index]),
+                      );
+                    }
+                    // if (item is PlateEntity) {
+                    //   return VerticalPlateCard(
+                    //     imgToTextRatio: cardImageToTextRatio ?? 0.9,
+                    //     width: cardWidth ?? 140,
+                    //     item: item,
+                    //     corner: corner,
+                    //     onTap: (item) => onSingleCardPressed(items[index]),
+                    //   );
+                    // }
+                    return const SizedBox();
+                  }),
+                ),
+              ),
+            ],
           ),
         ],
       ),

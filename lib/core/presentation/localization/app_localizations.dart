@@ -3967,6 +3967,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review'**
   String get review;
+
+  /// No description provided for @viewVendor.
+  ///
+  /// In en, this message translates to:
+  /// **'View Vendor'**
+  String get viewVendor;
 }
 
 class _AppLocalizationsDelegate

@@ -23,7 +23,7 @@ class ProductDTO extends GenericItemDTO {
     sold = json['sold'];
     price = double.tryParse(json['app_price'].toString());
     rate = double.tryParse(json['rate'].toString());
-    color = json['color'];
+
     offer = json['offer'] != null ? OfferDTO.fromJson(json['offer']) : null;
     itemUnitBrand = json['item_unit_brand'] != null ? ItemUnitBrandDTO.fromJson(json['item_unit_brand']) : null;
     if (json['store_info'] != null) {

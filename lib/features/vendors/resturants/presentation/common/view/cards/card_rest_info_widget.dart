@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -7,7 +8,8 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 
 class CardRestInfoWidget extends StatelessWidget {
   const CardRestInfoWidget({super.key, required this.vendor});
-  final RestaurantEntity vendor;
+
+  final GenericVendorEntity vendor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +40,7 @@ class CardRestInfoWidget extends StatelessWidget {
           ),
           // if (vendor.tag != null && vendor.tag!.isNotEmpty)
           //   Text(vendor.shortTag(25)!, style: TStyle.secondarySemi(12), maxLines: 1, overflow: TextOverflow.ellipsis),
-          const VerticalSpacing(4),
+          const VerticalSpacing(8),
           Row(
             children: [
               Expanded(
@@ -51,7 +53,7 @@ class CardRestInfoWidget extends StatelessWidget {
               ),
             ],
           ),
-          const VerticalSpacing(4),
+          const VerticalSpacing(8),
           Row(
             children: [
               Expanded(
@@ -60,10 +62,11 @@ class CardRestInfoWidget extends StatelessWidget {
                     const VectorGraphicsWidget(Assets.locationIc, width: 16, height: 16),
                     const HorizontalSpacing(2),
                     Expanded(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        alignment: AlignmentDirectional.centerStart,
-                        child: Text(vendor.zoneName, style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey)),
+                      child: Text(
+                        vendor.zoneName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey),
                       ),
                     ),
                   ],
@@ -76,12 +79,16 @@ class CardRestInfoWidget extends StatelessWidget {
                     children: [
                       const VectorGraphicsWidget(Assets.clockIc, width: 16, height: 16),
                       const HorizontalSpacing(2),
-                      Text(vendor.deliveryTime!, style: TStyle.greySemi(13)),
+                      Expanded(
+                        child: Text(vendor.deliveryTime!, maxLines: 1, overflow: TextOverflow.ellipsis, style: TStyle.greySemi(13)),
+                      ),
                     ],
                   ),
                 ),
             ],
           ),
+          const VerticalSpacing(8),
+          MainBtn(onPressed: () {}, text: L10n.tr().viewVendor, width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 4)),
         ],
       ),
     );

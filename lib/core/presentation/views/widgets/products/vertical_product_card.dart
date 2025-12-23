@@ -48,7 +48,6 @@ class VerticalProductCard extends StatelessWidget {
         },
 
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Co.lightGrey),
@@ -160,13 +159,14 @@ class VerticalProductCard extends StatelessWidget {
                                 alignment: AlignmentDirectional.centerStart,
                                 child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                               ),
-                              FittedBox(
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(
-                                  Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                  style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                              if (product.offer != null)
+                                FittedBox(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
+                                    Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                    style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                         ),

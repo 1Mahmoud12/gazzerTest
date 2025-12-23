@@ -34,7 +34,7 @@ class GrocCardOne extends StatelessWidget {
               borderRadius: AppConst.defaultStoreBorderRadius,
               child: Stack(
                 children: [
-                  CustomNetworkImage(vendor.image, fit: BoxFit.cover, width: 90, height: 90, borderRaduis: 12),
+                  CustomNetworkImage(vendor.image, fit: BoxFit.cover, width: 100, height: 100, borderRaduis: 12),
 
                   if (!vendor.isOpen)
                     CardBadge(text: L10n.tr().closed, fullWidth: true, alignment: AlignmentDirectional.topStart)

@@ -17,12 +17,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/global_increment_widget.dart';
 
 class OrderedWithCard extends StatelessWidget {
-  const OrderedWithCard({
-    super.key,
-    required this.product,
-    required this.type,
-    required this.isDisabled,
-  });
+  const OrderedWithCard({super.key, required this.product, required this.type, required this.isDisabled});
   final OrderedWithEntity product;
   final CartItemType type;
   final bool isDisabled;
@@ -48,11 +43,7 @@ class OrderedWithCard extends StatelessWidget {
                         Expanded(
                           child: CircleGradientBorderedImage(
                             image: product.image,
-                            shadow: const BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 2,
-                              offset: Offset(0, 2),
-                            ),
+                            shadow: const BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
                             showBorder: false,
                           ),
                         ),
@@ -67,35 +58,16 @@ class OrderedWithCard extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Expanded(
-                                child: Text(
-                                  product.name,
-                                  style: TStyle.primaryBold(15),
-                                ),
-                              ),
+                              Expanded(child: Text(product.name, style: TStyle.primaryBold(15))),
                               Row(
                                 children: [
-                                  const Icon(
-                                    Icons.star,
-                                    color: Co.secondary,
-                                    size: 16,
-                                  ),
-                                  Text(
-                                    product.rate.toStringAsFixed(1),
-                                    style: TStyle.mainwSemi(
-                                      12,
-                                    ).copyWith(color: Co.secondary),
-                                  ),
+                                  const Icon(Icons.star, color: Co.secondary, size: 16),
+                                  Text(product.rate.toStringAsFixed(1), style: TStyle.mainwSemi(12).copyWith(color: Co.secondary)),
                                 ],
                               ),
                             ],
                           ),
-                          Text(
-                            Helpers.getProperPrice(product.price),
-                            style: TStyle.blackSemi(
-                              12,
-                            ).copyWith(shadows: AppDec.blackTextShadow),
-                          ),
+                          Text(Helpers.getProperPrice(product.price), style: TStyle.blackSemi(12).copyWith(shadows: AppDec.blackTextShadow)),
                         ],
                       ),
                     ),
@@ -119,24 +91,14 @@ class OrderedWithCard extends StatelessWidget {
                             isHorizonal: true,
                             isAdding: isUpdating && updateState.isAdding,
                             isRemoving: isUpdating && updateState.isRemoving,
-                            onChanged: (isAdding) {
+                            onChanged: ({required isAdding}) {
                               if (isAdding) {
-                                cubit.updateItemQuantity(
-                                  cartItem.cartId,
-                                  cartItem.quantity + 1,
-                                  true,
-                                  context,
-                                );
+                                cubit.updateItemQuantity(cartItem.cartId, cartItem.quantity + 1, true, context);
                               } else {
                                 if (cartItem.quantity == 1) {
                                   cubit.removeItemFromCart(cartItem.cartId);
                                 } else {
-                                  cubit.updateItemQuantity(
-                                    cartItem.cartId,
-                                    cartItem.quantity - 1,
-                                    false,
-                                    context,
-                                  );
+                                  cubit.updateItemQuantity(cartItem.cartId, cartItem.quantity - 1, false, context);
                                 }
                               }
                             },
@@ -155,14 +117,7 @@ class OrderedWithCard extends StatelessWidget {
                               SystemSound.play(SystemSoundType.click);
                               cubit.addToCart(
                                 context,
-                                CartableItemRequest(
-                                  id: product.id,
-                                  quantity: 1,
-                                  options: {},
-                                  type: type,
-                                  note: null,
-                                  cartItemId: null,
-                                ),
+                                CartableItemRequest(id: product.id, quantity: 1, options: {}, type: type, note: null, cartItemId: null),
                               );
                             },
                           ),
