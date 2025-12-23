@@ -358,4 +358,9 @@ class Assets {
   static const String customShapeSuggestIc = "assets/png/customShapeSuggestIc.png";
   static const String soldCartIc = "assets/svg/soldCartIc.svg";
   static const String shareIc = "assets/svg/shareIc.svg";
+
+  // Resturant Header
+  static const String deliveryTimeIc = "assets/svg/deliveryTimeIc.svg";
+  static const String cacheRestaurantIc = "assets/svg/cachRestaurantIc.svg";
+  static const String cacheClockIc = "assets/svg/cacheClockIc.svg";
 }

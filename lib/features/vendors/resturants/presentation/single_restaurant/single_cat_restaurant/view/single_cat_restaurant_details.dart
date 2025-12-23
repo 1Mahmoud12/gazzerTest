@@ -127,7 +127,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
         child: child!,
       ),
       child: Scaffold(
-        appBar: MainAppBar(showBadge: true, showCart: true, showNotification: false, onShare: () {}),
+        appBar: MainAppBar(showBadge: true, showCart: true, onShare: () {}),
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(

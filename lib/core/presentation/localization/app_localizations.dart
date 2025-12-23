@@ -3949,6 +3949,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notes'**
   String get notes;
+
+  /// No description provided for @deliveryTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Time'**
+  String get deliveryTime;
+
+  /// No description provided for @open.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get open;
+
+  /// No description provided for @review.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get review;
 }
 
 class _AppLocalizationsDelegate

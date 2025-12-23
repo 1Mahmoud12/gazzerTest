@@ -7,13 +7,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/vendor_info_widget.dart';
 
 class GrocCardTwo extends StatelessWidget {
-  const GrocCardTwo({
-    super.key,
-    required this.width,
-    required this.vendor,
-    this.height,
-    this.onPressed,
-  });
+  const GrocCardTwo({super.key, required this.width, required this.vendor, this.height, this.onPressed});
   final double width;
   final double? height;
   final StoreEntity vendor;
@@ -30,7 +24,7 @@ class GrocCardTwo extends StatelessWidget {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
-          padding: const EdgeInsetsGeometry.all(0),
+          padding: EdgeInsetsGeometry.zero,
           disabledBackgroundColor: Colors.transparent,
         ),
         child: Column(
@@ -43,9 +37,7 @@ class GrocCardTwo extends StatelessWidget {
                     child: DecoratedBox(
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(color: Color(0x442A003C), offset: Offset(0, 4), blurRadius: 4),
-                        ],
+                        boxShadow: [BoxShadow(color: Color(0x442A003C), offset: Offset(0, 4), blurRadius: 4)],
                       ),
                       child: DecoratedBox(
                         decoration: !vendor.isOpen
@@ -72,16 +64,10 @@ class GrocCardTwo extends StatelessWidget {
                           height: !vendor.isOpen ? 55 : 24,
                           alignment: Alignment.center,
                           child: !vendor.isOpen
-                              ? Text(
-                                  L10n.tr().closed,
-                                  style: TStyle.blackSemi(12),
-                                )
+                              ? Text(L10n.tr().closed, style: TStyle.blackSemi(12))
                               : vendor.badge == null
                               ? null
-                              : Text(
-                                  vendor.badge!,
-                                  style: TStyle.primaryBold(12),
-                                ),
+                              : Text(vendor.badge!, style: TStyle.primaryBold(12)),
                         ),
                       ),
                     ),

@@ -6,38 +6,19 @@ class _TopRatedComponent extends StatelessWidget {
   final bool isCardDisabled;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 290,
-      child: Stack(
-        children: [
-          OverflowBox(
-            maxHeight: 340,
-            minHeight: 340,
-            alignment: Alignment.topCenter,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: CircularCarousalWidget(
-                itemsCount: toprated.length,
-                maxItemWidth: 120,
-                itemBuilder: (BuildContext context, int index) {
-                  return AbsorbPointer(absorbing: isCardDisabled, child: _TopRatedCard(toprated[index]));
-                },
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GradientText(text: L10n.tr().topRated, style: TStyle.blackBold(24)),
-                Text(L10n.tr().exploreTheBestMeals, style: TStyle.blackBold(14)),
-                const VerticalSpacing(40),
-              ],
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(L10n.tr().topRated, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+        ),
+        const VerticalSpacing(8),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: toprated.map((e) => _TopRatedCard(e)).toList()),
+        ),
+      ],
     );
   }
 }

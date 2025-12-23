@@ -1,10 +1,7 @@
 part of '../multi_cat_restaurant_screen.dart';
 
 class _BestSellingComponent extends StatelessWidget {
-  const _BestSellingComponent({
-    required this.bestSelling,
-    required this.isCardDisabled,
-  });
+  const _BestSellingComponent({required this.bestSelling, required this.isCardDisabled});
 
   final List<PlateEntity> bestSelling;
   final bool isCardDisabled;
@@ -18,38 +15,14 @@ class _BestSellingComponent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  L10n.tr().bestSellingItems,
-                  style: TStyle.blackBold(20),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  L10n.tr().exploreTheBestMeals,
-                  style: TStyle.greyRegular(14),
-                ),
-              ],
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(L10n.tr().bestSellingItems, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
           ),
-          const SizedBox(height: 12),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: bestSelling.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: AbsorbPointer(
-                    absorbing: isCardDisabled,
-                    child: _BestSellingCard(bestSelling[index]),
-                  ),
-                );
-              },
-            ),
+          const VerticalSpacing(8),
+
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(children: bestSelling.map((e) => _TopRatedCard(e)).toList()),
           ),
         ],
       ),

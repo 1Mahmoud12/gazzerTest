@@ -1978,4 +1978,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notes => 'Notes';
+
+  @override
+  String get deliveryTime => 'Delivery Time';
+
+  @override
+  String get open => 'Open';
+
+  @override
+  String get review => 'Review';
 }

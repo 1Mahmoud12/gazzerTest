@@ -1978,4 +1978,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notes => 'ملاحظات';
+
+  @override
+  String get deliveryTime => 'وقت التوصيل';
+
+  @override
+  String get open => 'مفتوح';
+
+  @override
+  String get review => 'تقييم';
 }

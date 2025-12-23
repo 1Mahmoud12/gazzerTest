@@ -832,7 +832,11 @@
               "multi_select": "اختيار متعدد",
                 "select_1": "اختر عنصرًا واحدًا",
                 "required": "إجباري",
-                "optional": "اختياري"
+                "optional": "اختياري",
+                "deliveryTime": "وقت التوصيل",
+                  "open": "مفتوح",
+                    "review": "تقييم"
+
 
 
 

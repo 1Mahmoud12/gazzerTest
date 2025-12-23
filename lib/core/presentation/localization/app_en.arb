@@ -832,7 +832,11 @@
               "select_1": "Select 1",
               "required": "Required",
               "optional": "Optional",
-              "notes": "Notes"
+              "notes": "Notes",
+              "deliveryTime": "Delivery Time",
+                "open": "Open",
+                  "review": "Review"
+
 
 
 
