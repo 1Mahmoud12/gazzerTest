@@ -42,7 +42,7 @@ class VendorInfoCard extends StatelessWidget {
         );
       });
     }
-    final imageSize = 60.0;
+    const imageSize = 60.0;
     return ClipRRect(
       borderRadius: AppConst.defaultBorderRadius,
       child: ColoredBox(
@@ -55,16 +55,10 @@ class VendorInfoCard extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: 4,
                     children: [
                       ClipOval(
-                        child: CustomNetworkImage(
-                          vendor.image,
-                          height: imageSize,
-                          width: imageSize,
-                          fit: BoxFit.cover,
-                        ),
+                        child: CustomNetworkImage(vendor.image, height: imageSize, width: imageSize, fit: BoxFit.cover),
                       ),
                       Expanded(
                         child: Column(
@@ -82,11 +76,7 @@ class VendorInfoCard extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             if (vendor.alwaysOpen)
-                              Text(
-                                L10n.tr().alwayeysOpen,
-                                style: TStyle.blackSemi(13),
-                                textAlign: TextAlign.center,
-                              )
+                              Text(L10n.tr().alwayeysOpen, style: TStyle.blackSemi(13), textAlign: TextAlign.center)
                             else if (vendor.alwaysClosed)
                               Text(
                                 L10n.tr().thisRestaurantIsCurrentlyUnavailable,
@@ -103,17 +93,11 @@ class VendorInfoCard extends StatelessWidget {
                                       child: Text.rich(
                                         TextSpan(
                                           children: [
-                                            TextSpan(text: "${L10n.tr().from}:  ", style: TStyle.primaryBold(12)),
+                                            TextSpan(text: '${L10n.tr().from}:  ', style: TStyle.primaryBold(12)),
                                             if (vendor.startTime != null)
-                                              TextSpan(
-                                                text: vendor.startTime!.defaultTimeFormat,
-                                                style: TStyle.greyRegular(12),
-                                              )
+                                              TextSpan(text: vendor.startTime!.defaultTimeFormat, style: TStyle.greyRegular(12))
                                             else
-                                              TextSpan(
-                                                text: L10n.tr().availabilityUnknown,
-                                                style: TStyle.greyRegular(12),
-                                              ),
+                                              TextSpan(text: L10n.tr().availabilityUnknown, style: TStyle.greyRegular(12)),
                                           ],
                                         ),
                                         textAlign: TextAlign.center,
@@ -127,17 +111,11 @@ class VendorInfoCard extends StatelessWidget {
                                       child: Text.rich(
                                         TextSpan(
                                           children: [
-                                            TextSpan(text: "${L10n.tr().to}:  ", style: TStyle.primaryBold(12)),
+                                            TextSpan(text: '${L10n.tr().to}:  ', style: TStyle.primaryBold(12)),
                                             if (vendor.endTime != null)
-                                              TextSpan(
-                                                text: vendor.endTime!.defaultTimeFormat,
-                                                style: TStyle.greyRegular(12),
-                                              )
+                                              TextSpan(text: vendor.endTime!.defaultTimeFormat, style: TStyle.greyRegular(12))
                                             else
-                                              TextSpan(
-                                                text: L10n.tr().availabilityUnknown,
-                                                style: TStyle.greyRegular(12),
-                                              ),
+                                              TextSpan(text: L10n.tr().availabilityUnknown, style: TStyle.greyRegular(12)),
                                           ],
                                         ),
                                         textAlign: TextAlign.center,
@@ -190,11 +168,7 @@ class VendorInfoCard extends StatelessWidget {
                             width: 24,
                             colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                           ),
-                          Text(
-                            vendor.zoneName.toUpperCase(),
-                            style: TStyle.greyRegular(13),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          Text(vendor.zoneName.toUpperCase(), style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
                         ],
                       )
                     else
@@ -209,11 +183,7 @@ class VendorInfoCard extends StatelessWidget {
                             width: 24,
                             colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                           ),
-                          Text(
-                            "${vendor.deliveryTime} ${L10n.tr().min}",
-                            style: TStyle.greyRegular(13),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          Text('${vendor.deliveryTime} ${L10n.tr().min}', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
                         ],
                       )
                     else
@@ -228,11 +198,7 @@ class VendorInfoCard extends StatelessWidget {
                             width: 24,
                             colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                           ),
-                          Text(
-                            Helpers.getProperPrice(vendor.deliveryFee!),
-                            style: TStyle.greyRegular(13),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          Text(Helpers.getProperPrice(vendor.deliveryFee!), style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
                         ],
                       )
                     else
@@ -240,13 +206,7 @@ class VendorInfoCard extends StatelessWidget {
                   ],
                 ),
               ),
-            if (!vendor.isOpen)
-              VendorClosingTimer(
-                endTime: vendor.endTime!,
-                name: vendor.name,
-                startTime: vendor.startTime,
-                onTimerFinish: (ctx) {},
-              ),
+            if (!vendor.isOpen) VendorClosingTimer(endTime: vendor.endTime!, name: vendor.name, startTime: vendor.startTime, onTimerFinish: (ctx) {}),
           ],
         ),
       ),

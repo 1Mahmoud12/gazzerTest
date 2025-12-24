@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
+import 'package:gazzer/features/share/data/share_models.dart';
+import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:intl/intl.dart';
 
@@ -43,7 +49,29 @@ class MultiCatRestHeader extends StatelessWidget {
                     const SizedBox(width: 8),
                     CircleAvatar(
                       backgroundColor: Co.lightGrey,
-                      child: InkWell(onTap: () {}, child: const VectorGraphicsWidget(Assets.shareIc)),
+                      child: InkWell(
+                        onTap: () async {
+                          animationDialogLoading();
+                          final result = await ShareService().generateShareLink(
+                            type: ShareEnumType.store.name,
+                            shareableType: ShareEnumType.store.name,
+                            shareableId: restaurant.id.toString(),
+                          );
+                          closeDialog();
+                          switch (result) {
+                            case Ok<ShareGenerateResponse>(value: final response):
+                              await Clipboard.setData(ClipboardData(text: response.shareLink));
+                              if (context.mounted) {
+                                Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
+                              }
+                            case Err<ShareGenerateResponse>(error: final error):
+                              if (context.mounted) {
+                                Alerts.showToast(error.message);
+                              }
+                          }
+                        },
+                        child: const VectorGraphicsWidget(Assets.shareIc),
+                      ),
                     ),
                   ],
                 ),

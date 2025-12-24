@@ -30,11 +30,7 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   Future<void> performSearch(SearchQuery query) async {
-    final newQuery = query.copyWith(
-      searchWord: controller.text,
-      currentPage: 1,
-      categoryId: query.categoryId ?? defaultCatId,
-    );
+    final newQuery = query.copyWith(searchWord: controller.text, currentPage: 1, categoryId: query.categoryId ?? defaultCatId);
     if (newQuery.searchWord.trim().length < 3) {
       emit(SearchSuccess(vendors: [], query: newQuery));
       return;
@@ -44,14 +40,14 @@ class SearchCubit extends Cubit<SearchState> {
     emit(SearchLoading(query: newQuery));
     final result = await _repo.search(newQuery, token);
     switch (result) {
-      case Ok<SearchResponse> ok:
+      case final Ok<SearchResponse> ok:
         currentPage = ok.value.currentPage;
         lastPage = ok.value.lastPage;
         _vendors.clear();
         _vendors.addAll(ok.value.vendors);
         emit(SearchSuccess(vendors: _vendors, query: newQuery));
         break;
-      case Err<SearchResponse> err:
+      case final Err<SearchResponse> err:
         if (err.error.e == ErrorType.cancel) {
           // Request was cancelled, do nothing
           return;
@@ -68,13 +64,13 @@ class SearchCubit extends Cubit<SearchState> {
     emit(LoadMoreResultsLoading(query: state.query, vendors: _vendors));
     final result = await _repo.search(newQueryy, token);
     switch (result) {
-      case Ok<SearchResponse> ok:
+      case final Ok<SearchResponse> ok:
         currentPage = ok.value.currentPage;
         lastPage = ok.value.lastPage;
         _vendors.addAll(ok.value.vendors);
         emit(LoadMoreResultsSuccess(vendors: _vendors, query: newQueryy));
         break;
-      case Err<SearchResponse> err:
+      case final Err<SearchResponse> err:
         emit(LoadMoreResultsError(message: err.error.message, query: newQueryy));
         break;
     }
@@ -84,11 +80,11 @@ class SearchCubit extends Cubit<SearchState> {
     emit(LoadCategoriesLoading());
     final result = await _repo.getCategories();
     switch (result) {
-      case Ok<List<MainCategoryEntity>> ok:
+      case final Ok<List<MainCategoryEntity>> ok:
         if (ok.value.isNotEmpty) defaultCatId = ok.value.first.id;
         emit(LoadCategoriesSuccess(categories: ok.value));
         break;
-      case Err<List<MainCategoryEntity>> err:
+      case final Err<List<MainCategoryEntity>> err:
         emit(LoadCategoriesError(message: err.error.message));
         break;
     }

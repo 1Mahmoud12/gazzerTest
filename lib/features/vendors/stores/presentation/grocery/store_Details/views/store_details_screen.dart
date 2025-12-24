@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
@@ -9,6 +12,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/share/data/share_models.dart';
+import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -46,7 +51,26 @@ class StoreDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(
-        onShare: () {},
+        onShare: () async {
+          animationDialogLoading();
+          final result = await ShareService().generateShareLink(
+            type: ShareEnumType.store.name,
+            shareableType: ShareEnumType.store.name,
+            shareableId: storeId.toString(),
+          );
+          closeDialog();
+          switch (result) {
+            case Ok<ShareGenerateResponse>(value: final response):
+              await Clipboard.setData(ClipboardData(text: response.shareLink));
+              if (context.mounted) {
+                Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
+              }
+            case Err<ShareGenerateResponse>(error: final error):
+              if (context.mounted) {
+                Alerts.showToast(error.message);
+              }
+          }
+        },
       ),
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -67,16 +91,12 @@ class StoreDetailsScreen extends StatelessWidget {
             children: [
               GrocHeaderContainer(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.paddingOf(context).top,
-                  ),
+                  padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
                   child: VendorInfoCard(
                     store,
                     categories: catWithSubCatProds.map((e) => e.$1.name),
                     onTimerFinish: (ctx) {
-                      StoreDetailsRoute(
-                        storeId: storeId,
-                      ).pushReplacement(ctx);
+                      StoreDetailsRoute(storeId: storeId).pushReplacement(ctx);
                     },
                   ),
                 ),
@@ -92,9 +112,7 @@ class StoreDetailsScreen extends StatelessWidget {
                         // Add best selling items as first tab if available
                         if (state.bestSellingItems.isNotEmpty) ('', L10n.tr().bestSellingItems),
                         // Add all category tabs
-                        ...catWithSubCatProds.map(
-                          (e) => (e.$1.image, e.$1.name),
-                        ),
+                        ...catWithSubCatProds.map((e) => (e.$1.image, e.$1.name)),
                       ],
                       maxHeight: constraints.maxHeight,
                       itemCount: catWithSubCatProds.length + (state.bestSellingItems.isNotEmpty ? 1 : 0),
@@ -103,9 +121,7 @@ class StoreDetailsScreen extends StatelessWidget {
                         if (state.bestSellingItems.isNotEmpty && index == 0) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: _BestSellingItemsWidget(
-                              items: state.bestSellingItems,
-                            ),
+                            child: _BestSellingItemsWidget(items: state.bestSellingItems),
                           );
                         }
 
@@ -114,13 +130,7 @@ class StoreDetailsScreen extends StatelessWidget {
                         final item = state.catsWthSubatsAndProds[categoryIndex];
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: _GridWidget(
-                            maincat: item.$1,
-                            onSinglceCardPressed: (item) {},
-                            subcats: item.$2,
-                            products: item.$3,
-                            vendor: store,
-                          ),
+                          child: _GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: item.$2, products: item.$3, vendor: store),
                         );
                       },
                     ),
@@ -136,9 +146,7 @@ class StoreDetailsScreen extends StatelessWidget {
 }
 
 class _BestSellingItemsWidget extends StatelessWidget {
-  const _BestSellingItemsWidget({
-    required this.items,
-  });
+  const _BestSellingItemsWidget({required this.items});
 
   final List<ProductEntity> items;
 
@@ -162,10 +170,7 @@ class _BestSellingItemsWidget extends StatelessWidget {
             mainAxisSpacing: 8,
           ),
           itemBuilder: (context, index) {
-            return GrocProdCard(
-              product: items[index],
-              shape: CardStyle.typeOne,
-            );
+            return GrocProdCard(product: items[index], shape: CardStyle.typeOne);
           },
         ),
       ],
@@ -174,13 +179,7 @@ class _BestSellingItemsWidget extends StatelessWidget {
 }
 
 class _GridWidget extends StatelessWidget {
-  const _GridWidget({
-    required this.maincat,
-    required this.onSinglceCardPressed,
-    required this.subcats,
-    required this.products,
-    required this.vendor,
-  });
+  const _GridWidget({required this.maincat, required this.onSinglceCardPressed, required this.subcats, required this.products, required this.vendor});
   final StoreCategoryEntity maincat;
   final Function(dynamic item) onSinglceCardPressed;
   final List<StoreCategoryEntity> subcats;
@@ -230,10 +229,7 @@ class _GridWidget extends StatelessWidget {
               );
             }
             if (index >= subcats.length) {
-              return GrocProdCard(
-                product: products[index - subcats.length],
-                shape: maincat.style,
-              );
+              return GrocProdCard(product: products[index - subcats.length], shape: maincat.style);
             }
             return const SizedBox();
           },

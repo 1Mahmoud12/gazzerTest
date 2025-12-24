@@ -13,6 +13,10 @@ class Endpoints {
   static const validateReferralCode = 'referrals/validate';
   static const getReferralByDevice = 'referrals/by-device';
 
+  /// ** Share
+  static const generateShareLink = 'share/generate';
+  static const openShareLink = 'share/open';
+
   // Login
   static const login = 'clients/auth/login';
 

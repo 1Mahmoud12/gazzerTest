@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
+import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,6 +15,7 @@ class DeepLinkService extends WidgetsBindingObserver {
   DeepLinkService._internal();
 
   final AppLinks _appLinks = AppLinks();
+  final ShareService _shareService = ShareService();
   StreamSubscription<Uri>? _linkSubscription;
   StreamSubscription<Uri>? _uriLinkSubscription;
   Uri? _pendingUri;
@@ -63,8 +65,13 @@ class DeepLinkService extends WidgetsBindingObserver {
     // 1. App just transitioned from background to resumed (not already resumed)
     // 2. We have a pending URI from a deep link
     // 3. We haven't already processed this pending URI
-    if (!wasResumed && _isAppResumed && _pendingUri != null && !_hasProcessedPendingUri) {
-      debugPrint('App resumed from background, processing pending deep link: $_pendingUri');
+    if (!wasResumed &&
+        _isAppResumed &&
+        _pendingUri != null &&
+        !_hasProcessedPendingUri) {
+      debugPrint(
+        'App resumed from background, processing pending deep link: $_pendingUri',
+      );
       final uri = _pendingUri!;
       _pendingUri = null;
       _hasProcessedPendingUri = true;
@@ -93,7 +100,9 @@ class DeepLinkService extends WidgetsBindingObserver {
 
     final context = AppNavigator.mainKey.currentContext;
     if (context == null) {
-      debugPrint('Context not available, storing URI and will retry when context is ready');
+      debugPrint(
+        'Context not available, storing URI and will retry when context is ready',
+      );
       _pendingUri = uri;
       // Retry after a delay
       Future.delayed(const Duration(milliseconds: 500), () {
@@ -124,7 +133,9 @@ class DeepLinkService extends WidgetsBindingObserver {
       String path;
       if (uri.scheme == 'gazzar' || uri.scheme == 'gazzer') {
         // Custom scheme: gazzar://invite?ref=CODE
-        path = uri.path.isEmpty ? uri.toString().replaceAll('${uri.scheme}://', '') : uri.path;
+        path = uri.path.isEmpty
+            ? uri.toString().replaceAll('${uri.scheme}://', '')
+            : uri.path;
       } else {
         // HTTP/HTTPS URL: https://tkgazzer.com/invite?ref=CODE
         path = uri.path;
@@ -136,7 +147,16 @@ class DeepLinkService extends WidgetsBindingObserver {
       debugPrint('Full URI: $uri');
 
       // Handle different deep link patterns
-      if (path.startsWith('invite') || path.startsWith('/invite')) {
+      if (path.startsWith('share') || path.startsWith('/share')) {
+        // Handle share links: /share?token=TOKEN&type=TYPE
+        final token = queryParams['token'];
+        if (token != null && token.isNotEmpty) {
+          logger.d('Opening share link with token: $token');
+          _shareService.handleShareLink(context, token);
+        } else {
+          context.go('/');
+        }
+      } else if (path.startsWith('invite') || path.startsWith('/invite')) {
         // Handle invite links: /invite?ref=CODE
         final refCode = queryParams['ref'];
         if (refCode != null) {

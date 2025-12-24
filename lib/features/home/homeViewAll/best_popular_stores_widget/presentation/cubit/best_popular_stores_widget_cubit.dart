@@ -24,10 +24,10 @@ class BestPopularStoresWidgetCubit extends Cubit<BestPopularStoresWidgetState> {
     // Fetch data from API
     final res = await _repo.getBestPopularStores();
     switch (res) {
-      case Ok<BestPopularStoresWidgetData> ok:
+      case final Ok<BestPopularStoresWidgetData> ok:
         emit(BestPopularStoresWidgetSuccessState(ok.value.stores, ok.value.banner));
         break;
-      case Err err:
+      case final Err err:
         // If we have cached data, don't show error, just keep showing cache
         if (!hasCachedData) {
           emit(BestPopularStoresWidgetErrorState(err.error.message));

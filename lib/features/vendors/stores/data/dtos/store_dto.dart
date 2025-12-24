@@ -59,7 +59,7 @@ class StoreDTO {
 
     if (json['tags'] != null) {
       tags = [];
-      for (var tag in json['tags']) {
+      for (final tag in json['tags']) {
         tags!.add(tag['name'] as String);
       }
     }
@@ -98,17 +98,9 @@ class StoreDTO {
       outOfStock: false,
       reviewCount: 20,
       zoneName: provinceZone ?? '',
-      deliveryFee: null,
-      badge: null,
-      tag: null,
-      rateCount: null,
       alwaysClosed: false,
 
       mintsBeforClosingAlert: closingAlertAppearBefore ?? 0,
-
-      /// not sure will be needed
-      priceRange: null,
-      subCategories: null,
     );
   }
 }

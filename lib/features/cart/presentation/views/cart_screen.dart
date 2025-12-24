@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/base_error_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -27,6 +30,8 @@ import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/order_summary_widget.dart';
 import 'package:gazzer/features/checkout/presentation/view/widgets/voucher_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:gazzer/features/share/data/share_models.dart';
+import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -79,7 +84,27 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
       child: Scaffold(
         appBar: MainAppBar(
           title: L10n.tr().cart,
-          onShare: () {},
+          onShare: () async {
+            animationDialogLoading();
+            final result = await ShareService().generateShareLink(
+              type: ShareEnumType.cart.name,
+              shareableType: ShareEnumType.cart.name,
+              shareableId: '',
+            );
+            closeDialog();
+            switch (result) {
+              case Ok<ShareGenerateResponse>(value: final response):
+                await Clipboard.setData(ClipboardData(text: response.shareLink));
+                if (context.mounted) {
+                  Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
+                }
+              case Err<ShareGenerateResponse>(error: final error):
+                if (context.mounted) {
+                  Alerts.showToast(error.message);
+                }
+            }
+          },
+
           onBack: () {
             context.go(HomeScreen.route);
           },

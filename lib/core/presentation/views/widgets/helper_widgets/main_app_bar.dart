@@ -82,7 +82,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             onPressed: onShare,
             // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-            icon: const Icon(Icons.share, color: Co.black, size: 24),
+            icon: const VectorGraphicsWidget(Assets.shareIc),
           ),
       ],
     );

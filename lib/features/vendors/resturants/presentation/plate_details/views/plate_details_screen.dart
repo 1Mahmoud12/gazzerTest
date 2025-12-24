@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -18,6 +20,8 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
+import 'package:gazzer/features/share/data/share_models.dart';
+import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
@@ -227,7 +231,29 @@ class SinglePlateScreen extends StatelessWidget {
                                     const SizedBox(width: 8),
                                     CircleAvatar(
                                       backgroundColor: Colors.white,
-                                      child: InkWell(onTap: () {}, child: const VectorGraphicsWidget(Assets.shareIc)),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          animationDialogLoading();
+                                          final result = await ShareService().generateShareLink(
+                                            type: ShareEnumType.restaurant_plates.name,
+                                            shareableType: ShareEnumType.restaurant_plates.name,
+                                            shareableId: detailsState.plate.id.toString(),
+                                          );
+                                          closeDialog();
+                                          switch (result) {
+                                            case Ok<ShareGenerateResponse>(value: final response):
+                                              await Clipboard.setData(ClipboardData(text: response.shareLink));
+                                              if (context.mounted) {
+                                                Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
+                                              }
+                                            case Err<ShareGenerateResponse>(error: final error):
+                                              if (context.mounted) {
+                                                Alerts.showToast(error.message);
+                                              }
+                                          }
+                                        },
+                                        child: const VectorGraphicsWidget(Assets.shareIc),
+                                      ),
                                     ),
                                   ],
                                 ),

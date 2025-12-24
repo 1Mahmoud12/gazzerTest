@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
@@ -12,6 +15,8 @@ import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
+import 'package:gazzer/features/share/data/share_models.dart';
+import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
@@ -54,7 +59,7 @@ class ProductDetailsScreen extends StatelessWidget {
       builder: (context, state) {
         if (state is ProductDetailsError) {
           return Scaffold(
-            appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
+            appBar: MainAppBar(showCart: true, onShare: () {}),
             body: FailureComponent(message: state.message, onRetry: () => context.read<ProductDetailsCubit>().loadProductDetails()),
           );
         }
@@ -67,7 +72,29 @@ class ProductDetailsScreen extends StatelessWidget {
             child: Builder(
               builder: (context) {
                 return Scaffold(
-                  appBar: MainAppBar(showCart: true, onShare: () {}, showBadge: true),
+                  appBar: MainAppBar(
+                    onShare: () async {
+                      animationDialogLoading();
+                      final result = await ShareService().generateShareLink(
+                        type: ShareEnumType.store_item.name,
+                        shareableType: ShareEnumType.store_item.name,
+                        shareableId: productId.toString(),
+                      );
+                      closeDialog();
+                      switch (result) {
+                        case Ok<ShareGenerateResponse>(value: final response):
+                          await Clipboard.setData(ClipboardData(text: response.shareLink));
+                          if (context.mounted) {
+                            Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
+                          }
+                        case Err<ShareGenerateResponse>(error: final error):
+                          if (context.mounted) {
+                            Alerts.showToast(error.message);
+                          }
+                      }
+                    },
+                    showBadge: true,
+                  ),
                   body: ListView(
                     children: [
                       Padding(
