@@ -19,7 +19,7 @@ class RegisterRequest {
     this.email,
     this.fcmToken,
     this.deviceId,
-    this.countryIso = "EG",
+    this.countryIso = 'EG',
     required this.password,
     required this.passwordConfirmation,
     this.referralCode,
@@ -33,8 +33,7 @@ class RegisterRequest {
       'country_iso': countryIso,
       'password': password,
       'password_confirmation': passwordConfirmation,
-      if (referralCode != null && referralCode!.isNotEmpty)
-        'referral_code': referralCode,
+      if (referralCode != null && referralCode!.isNotEmpty) 'referral_code': referralCode,
       if (fcmToken != null) 'fcm_token': AppConst.fcmToken,
       if (deviceId != null) 'device_id': AppConst.deviceId,
       'device_type': Platform.isAndroid ? 'android' : 'ios',
@@ -47,6 +46,7 @@ class RegisterRequest {
     String? phone,
     String? email,
     String? countryIso,
+    String? referralCode,
     String? password,
     String? passwordConfirmation,
   }) {
@@ -57,6 +57,7 @@ class RegisterRequest {
       countryIso: countryIso ?? this.countryIso,
       password: password ?? this.password,
       passwordConfirmation: passwordConfirmation ?? this.passwordConfirmation,
+      referralCode: referralCode ?? this.referralCode,
       fcmToken: fcmToken,
       deviceId: deviceId,
     );

@@ -1,6 +1,8 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/data/services/deep_link_service.dart';
+import 'package:gazzer/core/data/services/referral_service.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -27,9 +29,30 @@ class _GazzerAppState extends State<GazzerApp> {
     if (currentIndex == 0) {
       await initNotification();
       await selectTokens();
+
+      // Initialize deep link service
+      DeepLinkService().initialize();
+
+      // Check for referral code on first launch
+      _checkReferralCodeOnFirstLaunch();
+
       currentIndex++;
     }
     super.didChangeDependencies();
+  }
+
+  /// Check for referral code on first app launch
+  Future<void> _checkReferralCodeOnFirstLaunch() async {
+    // Wait a bit for the app to be fully initialized
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    final referralCode = await ReferralService().checkReferralCodeOnFirstLaunch();
+
+    if (referralCode != null && referralCode.isNotEmpty) {
+      // Wait a bit more to ensure router is ready
+      await Future.delayed(const Duration(milliseconds: 300));
+      ReferralService().navigateToRegisterWithReferralCode(referralCode);
+    }
   }
 
   Future<void> initNotification() async {
@@ -55,10 +78,7 @@ class _GazzerAppState extends State<GazzerApp> {
         debugPrint('Global Message Enter${AppConst.messageGlobal?.data}');
 
         Future.delayed(const Duration(milliseconds: 1000), () async {
-          NotificationUtility.onTapNotificationScreenNavigateCallback(
-            AppConst.messageGlobal!.data['type'] ?? '',
-            AppConst.messageGlobal!.data,
-          );
+          NotificationUtility.onTapNotificationScreenNavigateCallback(AppConst.messageGlobal!.data['type'] ?? '', AppConst.messageGlobal!.data);
           AppConst.messageGlobal = null;
         });
       }
@@ -66,18 +86,18 @@ class _GazzerAppState extends State<GazzerApp> {
   }
 
   @override
+  void dispose() {
+    DeepLinkService().dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => AppSettingsCubit(),
-        ),
-        BlocProvider(
-          create: (context) => di<CartCubit>()..loadCart(),
-        ),
-        BlocProvider(
-          create: (context) => di<CheckoutCubit>(),
-        ),
+        BlocProvider(create: (context) => AppSettingsCubit()),
+        BlocProvider(create: (context) => di<CartCubit>()..loadCart()),
+        BlocProvider(create: (context) => di<CheckoutCubit>()),
       ],
       child: Builder(
         builder: (context) {

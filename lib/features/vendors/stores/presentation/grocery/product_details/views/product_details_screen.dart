@@ -90,13 +90,8 @@ class ProductDetailsScreen extends StatelessWidget {
                               //onQuantityChanged: (id, qty) => context.read<AddToCartCubit>().setOrderedWithQuantity(id, qty),
                             ),
                             const VerticalSpacing(16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                BlocBuilder<AddToCartCubit, AddToCartStates>(
-                                  builder: (context, state) => AddSpecialNote(note: state.note, onNoteChange: context.read<AddToCartCubit>().setNote),
-                                ),
-                              ],
+                            BlocBuilder<AddToCartCubit, AddToCartStates>(
+                              builder: (context, state) => AddSpecialNote(note: state.note, onNoteChange: context.read<AddToCartCubit>().setNote),
                             ),
                             const VerticalSpacing(16),
                           ],

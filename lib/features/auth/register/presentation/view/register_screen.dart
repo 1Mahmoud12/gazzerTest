@@ -40,6 +40,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String countryCode = 'EG';
 
   @override
+  void initState() {
+    super.initState();
+    // Check for referral code from query parameters or extra data
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final state = GoRouterState.of(context);
+
+      // First check query parameters
+      String? refCode = state.uri.queryParameters['ref'];
+
+      // If not found in query params, check extra data
+      if ((refCode == null || refCode.isEmpty) && state.extra != null) {
+        if (state.extra is Map<String, dynamic>) {
+          final extra = state.extra! as Map<String, dynamic>;
+          refCode = extra['ref']?.toString();
+        }
+      }
+
+      if (refCode != null && refCode.isNotEmpty) {
+        // Pre-fill referral code if provided via deep link
+        setState(() {
+          _validatedReferralCode = refCode;
+        });
+        debugPrint('Referral code applied from deep link: $refCode');
+      }
+    });
+  }
+
+  @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
@@ -222,6 +250,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const VerticalSpacing(16),
                   ReferralCodeWidget(
+                    initialCode: _validatedReferralCode,
                     onValidationChanged: (code) {
                       setState(() {
                         _validatedReferralCode = code;

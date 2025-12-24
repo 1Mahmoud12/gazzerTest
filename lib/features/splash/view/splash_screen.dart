@@ -62,14 +62,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         backgroundColor: Co.dark,
         body: DecoratedBox(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.transparent, Co.purple],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+            gradient: LinearGradient(colors: [Colors.transparent, Co.purple], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             children: [
               const Spacer(flex: 3),
               ScaleTransition(
@@ -121,12 +116,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         height: 170,
                         child: Column(
                           spacing: 8,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              L10n.tr().errorFetchingUserData,
-                              style: TStyle.errorSemi(16),
-                            ),
+                            Text(L10n.tr().errorFetchingUserData, style: TStyle.errorSemi(16)),
                             const SizedBox.shrink(),
                             if (trialCount < 3)
                               OutlinedButton(
@@ -145,10 +136,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                 TokenService.deleteToken();
                                 context.go(LoginScreen.route);
                               },
-                              child: Text(
-                                L10n.tr().skip,
-                                style: TStyle.blackSemi(14),
-                              ),
+                              child: Text(L10n.tr().skip, style: TStyle.blackSemi(14)),
                             ),
                           ],
                         ),

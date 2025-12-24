@@ -8,15 +8,10 @@ part of 'create_password_screen.dart';
 
 List<RouteBase> get $appRoutes => [$createPasswordRoute];
 
-RouteBase get $createPasswordRoute => GoRouteData.$route(
-  path: '/create-password',
-
-  factory: _$CreatePasswordRoute._fromState,
-);
+RouteBase get $createPasswordRoute => GoRouteData.$route(path: '/create-password', factory: _$CreatePasswordRoute._fromState);
 
 mixin _$CreatePasswordRoute on GoRouteData {
-  static CreatePasswordRoute _fromState(GoRouterState state) =>
-      CreatePasswordRoute($extra: state.extra as RegisterRequest);
+  static CreatePasswordRoute _fromState(GoRouterState state) => CreatePasswordRoute($extra: state.extra! as RegisterRequest);
 
   CreatePasswordRoute get _self => this as CreatePasswordRoute;
 
@@ -27,14 +22,11 @@ mixin _$CreatePasswordRoute on GoRouteData {
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
   @override
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: _self.$extra);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location, extra: _self.$extra);
 
   @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: _self.$extra);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location, extra: _self.$extra);
 
   @override
-  void replace(BuildContext context) =>
-      context.replace(location, extra: _self.$extra);
+  void replace(BuildContext context) => context.replace(location, extra: _self.$extra);
 }

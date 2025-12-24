@@ -11,9 +11,10 @@ import 'package:gazzer/features/auth/register/domain/register_repo.dart';
 enum ReferralCodeState { initial, success, error }
 
 class ReferralCodeWidget extends StatefulWidget {
-  const ReferralCodeWidget({super.key, this.onValidationChanged});
+  const ReferralCodeWidget({super.key, this.onValidationChanged, this.initialCode});
 
   final ValueChanged<String?>? onValidationChanged;
+  final String? initialCode;
 
   @override
   State<ReferralCodeWidget> createState() => _ReferralCodeWidgetState();
@@ -24,8 +25,45 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
   final _isCheckingReferral = ValueNotifier<bool>(false);
   ReferralCodeState _referralCodeState = ReferralCodeState.initial;
   String? _referralCodeErrorMessage;
+  bool _hasInitialized = false;
 
   String? get validatedCode => _referralCodeState == ReferralCodeState.success ? _referralCodeController.text.trim() : null;
+
+  @override
+  void initState() {
+    super.initState();
+    // Pre-fill with initial code if provided
+    if (widget.initialCode != null && widget.initialCode!.isNotEmpty) {
+      // Automatically validate the initial code
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _referralCodeController.text = widget.initialCode!.toUpperCase();
+
+        if (mounted && !_hasInitialized) {
+          _hasInitialized = true;
+          _applyReferralCode();
+        }
+        setState(() {});
+      });
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant ReferralCodeWidget oldWidget) {
+    // Pre-fill with initial code if provided
+    if (widget.initialCode != null && widget.initialCode!.isNotEmpty) {
+      // Automatically validate the initial code
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _referralCodeController.text = widget.initialCode!.toUpperCase();
+
+        if (mounted && !_hasInitialized) {
+          _hasInitialized = true;
+          _applyReferralCode();
+        }
+        setState(() {});
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   void dispose() {

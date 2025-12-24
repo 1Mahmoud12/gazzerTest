@@ -21,6 +21,7 @@ import 'package:gazzer/features/auth/register/presentation/cubit/register_cubit.
 import 'package:gazzer/features/auth/register/presentation/cubit/register_states.dart';
 import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:gazzer/main.dart';
 import 'package:go_router/go_router.dart';
 
 part 'create_password_screen.g.dart';
@@ -85,41 +86,20 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 child: ListView(
                   padding: AppConst.defaultHrPadding,
                   children: [
-                    Center(
-                      child: SvgPicture.asset(
-                        Assets.assetsSvgCharacter,
-                        height: 130,
-                      ),
-                    ),
+                    Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
                     Row(
-                      children: [
-                        GradientText(
-                          text: L10n.tr().createPassword,
-                          style: TStyle.mainwBold(32),
-                          gradient: Grad().textGradient,
-                        ),
-                      ],
+                      children: [GradientText(text: L10n.tr().createPassword, style: TStyle.mainwBold(32), gradient: Grad().textGradient)],
                     ),
                     const VerticalSpacing(8),
                     Row(
-                      children: [
-                        Text(
-                          L10n.tr().createPasswordToVerify,
-                          maxLines: 2,
-                          style: TStyle.greySemi(16),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                      children: [Text(L10n.tr().createPasswordToVerify, maxLines: 2, style: TStyle.greySemi(16), textAlign: TextAlign.center)],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Directionality(
                           textDirection: TextDirection.ltr,
-                          child: Text(
-                            '(+20)-${req.phone}',
-                            style: TStyle.greySemi(14),
-                          ),
+                          child: Text('(+20)-${req.phone}', style: TStyle.greySemi(14)),
                         ),
                         TextButton(
                           onPressed: () async {
@@ -139,10 +119,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             );
                             setState(() {});
                           },
-                          child: Text(
-                            L10n.tr().wrongNumber,
-                            style: TStyle.primaryBold(14),
-                          ),
+                          child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
                         ),
                       ],
                     ),
@@ -162,14 +139,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                               bgColor: Colors.transparent,
                               isPassword: true,
                               validator: Validators.passwordValidation,
-                              autofillHints: [AutofillHints.newPassword],
+                              autofillHints: const [AutofillHints.newPassword],
                             ),
                           ),
                           const VerticalSpacing(32),
-                          Text(
-                            L10n.tr().confirmPassword,
-                            style: TStyle.blackBold(20),
-                          ),
+                          Text(L10n.tr().confirmPassword, style: TStyle.blackBold(20)),
                           const VerticalSpacing(8),
                           Directionality(
                             textDirection: TextDirection.ltr,
@@ -185,7 +159,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                 }
                                 return null;
                               },
-                              autofillHints: [AutofillHints.newPassword],
+                              autofillHints: const [AutofillHints.newPassword],
                             ),
                           ),
                         ],
@@ -217,20 +191,15 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           onPressed: () {
                             if (_formKey.currentState?.validate() == true) {
                               TextInput.finishAutofillContext();
-                              req = req.copyWith(
-                                password: password.text,
-                                passwordConfirmation: confirmPassword.text,
-                              );
+                              req = req.copyWith(password: password.text, passwordConfirmation: confirmPassword.text);
+                              logger.d(req.toJson());
                               context.read<RegisterCubit>().register(req);
                             }
                           },
                           isLoading: state is RegisterLoading,
                           textStyle: TStyle.mainwSemi(15),
                           bgColor: Colors.transparent,
-                          child: GradientText(
-                            text: L10n.tr().continu,
-                            style: TStyle.blackSemi(16),
-                          ),
+                          child: GradientText(text: L10n.tr().continu, style: TStyle.blackSemi(16)),
                         ),
                       ),
                     ),

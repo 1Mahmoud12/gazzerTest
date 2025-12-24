@@ -45,10 +45,18 @@
 				<array>
 					<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
 					<string>com.googleusercontent.apps.426479468960-o81gqb39gcnl6u9sapr0fudk6u3rsbun</string>
+					<!-- Custom URL Scheme for deep links -->
+					<string>gazzar</string>
 				</array>
 			</dict>
 		</array>
 		<!-- End of the Google Sign-in Section -->
+		
+		<!-- Universal Links Configuration -->
+		<key>com.apple.developer.associated-domains</key>
+		<array>
+			<string>applinks:tkgazzer.com</string>
+		</array>
 
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
