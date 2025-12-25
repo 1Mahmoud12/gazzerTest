@@ -836,7 +836,8 @@
               "deliveryTime": "Delivery Time",
                 "open": "Open",
                   "review": "Review",
-           "viewVendor": "View Vendor"
+           "viewVendor": "View Vendor",
+           "searchFor":"Search For"
 
 
 

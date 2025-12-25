@@ -1989,4 +1989,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get viewVendor => 'عرض المتجر';
+
+  @override
+  String get searchFor => 'ابحث عن';
 }

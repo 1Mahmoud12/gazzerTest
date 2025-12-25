@@ -60,8 +60,10 @@ class SearchQuery extends Equatable {
     this.categoryId,
   });
 
-  String toQuery() =>
-      '?is_paginated=1&page=$currentPage&search=$searchWord&per_page=$perPage&by_rate=${sortedByRate ? 1 : 0}&by_delivery_time=${sortByDeliveryTime ? 1 : 0}&alpha_order=${alpha.name}&category_id=$categoryId';
+  String toQuery() {
+    final categoryIdParam = (categoryId != null && categoryId != 0) ? '&category_id=$categoryId' : '';
+    return '?is_paginated=1&page=$currentPage&search=$searchWord&per_page=$perPage&by_rate=${sortedByRate ? 1 : 0}&by_delivery_time=${sortByDeliveryTime ? 1 : 0}&alpha_order=${alpha.name}$categoryIdParam';
+  }
 
   SearchQuery copyWith({
     String? searchWord,
@@ -85,13 +87,5 @@ class SearchQuery extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    searchWord,
-    perPage,
-    currentPage,
-    sortedByRate,
-    sortByDeliveryTime,
-    alpha,
-    categoryId,
-  ];
+  List<Object?> get props => [searchWord, perPage, currentPage, sortedByRate, sortByDeliveryTime, alpha, categoryId];
 }

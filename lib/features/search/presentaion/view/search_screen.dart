@@ -47,37 +47,53 @@ class _SearchScreenState extends State<SearchScreen> {
           child: BlocBuilder<SearchCubit, SearchState>(
             buildWhen: (previous, current) => current is LoadCategoriesState || previous is LoadCategoriesState,
             builder: (context, state) => Column(
-              spacing: 16,
+              spacing: 10,
               children: [
                 Row(
                   children: [
                     const MainBackIcon(),
-                    Expanded(
-                      child: Hero(
-                        tag: Tags.searchBar,
-                        child: MainTextField(
-                          controller: cubit.controller,
-                          height: 80,
-                          autofocus: true,
-                          borderRadius: 64,
-                          action: TextInputAction.done,
-                          hintText: L10n.tr().enterThreeLetterOrMore,
-                          bgColor: Colors.transparent,
-                          prefixOnTap: () {
-                            if (cubit.controller.text == cubit.state.query.searchWord) return;
-                            cubit.performSearch(cubit.state.query.copyWith(searchWord: cubit.controller.text));
-                          },
-                          prefix: const Icon(Icons.search, color: Co.purple, size: 24),
-                          onSubmitting: (p0) {
-                            if (p0 == cubit.state.query.searchWord) return;
-                            cubit.performSearch(cubit.state.query.copyWith(searchWord: p0));
-                          },
-                        ),
-                      ),
+                    BlocBuilder<SearchCubit, SearchState>(
+                      buildWhen: (previous, current) => current is SearchLoading,
+                      builder: (context, state) => (cubit.state.query.searchWord.isNotEmpty)
+                          ? RichText(
+                              text: TextSpan(
+                                text: L10n.tr().searchFor,
+                                style: TStyle.robotBlackRegular().copyWith(fontWeight: FontWeight.w500),
+                                children: [
+                                  TextSpan(
+                                    text: ' ${cubit.state.query.searchWord.trim()}',
+                                    style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : const SizedBox.shrink(),
                     ),
                   ],
                 ),
-
+                Hero(
+                  tag: Tags.searchBar,
+                  child: MainTextField(
+                    controller: cubit.controller,
+                    height: 80,
+                    autofocus: true,
+                    borderRadius: 64,
+                    action: TextInputAction.done,
+                    hintText: L10n.tr().enterThreeLetterOrMore,
+                    bgColor: Colors.transparent,
+                    prefixOnTap: () {
+                      if (cubit.controller.text == cubit.state.query.searchWord) {
+                        return;
+                      }
+                      cubit.performSearch(cubit.state.query.copyWith(searchWord: cubit.controller.text));
+                    },
+                    prefix: const Icon(Icons.search, size: 24),
+                    onSubmitting: (p0) {
+                      if (p0 == cubit.state.query.searchWord) return;
+                      cubit.performSearch(cubit.state.query.copyWith(searchWord: p0));
+                    },
+                  ),
+                ),
                 BlocBuilder<SearchCubit, SearchState>(
                   buildWhen: (previous, current) => current is LoadCategoriesState,
                   builder: (context, state) => Skeletonizer(
@@ -87,7 +103,11 @@ class _SearchScreenState extends State<SearchScreen> {
                         if (id == cubit.state.query.categoryId) return;
                         cubit.performSearch(cubit.state.query.copyWith(categoryId: id));
                       },
-                      initIndex: state is LoadCategoriesState ? state.categories.indexWhere((element) => element.id == cubit.state.query.categoryId) : null,
+                      initIndex: state is LoadCategoriesState
+                          ? (cubit.state.query.categoryId == null
+                                ? -1
+                                : state.categories.indexWhere((element) => element.id == cubit.state.query.categoryId))
+                          : -1,
                       categories: state is LoadCategoriesState ? state.categories : [],
                     ),
                   ),
@@ -110,7 +130,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       return Expanded(
                         child: Center(
                           child: Text(
-                            state.query.searchWord.trim().isEmpty ? L10n.tr().enterTheWordYouWantToSearchFor : L10n.tr().noResultsFoundTryAdjustingYourFilter,
+                            state.query.searchWord.trim().isEmpty
+                                ? L10n.tr().enterTheWordYouWantToSearchFor
+                                : L10n.tr().noResultsFoundTryAdjustingYourFilter,
                             style: TStyle.greyBold(16),
                             textAlign: TextAlign.center,
                           ),
@@ -122,7 +144,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         onNotification: (notification) {
                           if (state is LoadMoreResultsLoading) return true;
                           if (notification.metrics.pixels >= notification.metrics.maxScrollExtent * 0.9) {
-                            if (cubit.currentPage < cubit.lastPage) cubit.loadMoreResults();
+                            if (cubit.currentPage < cubit.lastPage) {
+                              cubit.loadMoreResults();
+                            }
                           }
                           return true;
                         },
@@ -143,11 +167,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     padding: const EdgeInsets.only(bottom: 12),
                                     child: state is! LoadMoreResultsLoading
                                         ? const SizedBox.shrink()
-                                        : LinearProgressIndicator(
-                                            borderRadius: AppConst.defaultInnerBorderRadius,
-                                            minHeight: 6,
-                                            color: Co.secondary,
-                                          ),
+                                        : LinearProgressIndicator(borderRadius: AppConst.defaultInnerBorderRadius, minHeight: 6, color: Co.secondary),
                                   );
                                 }
                                 return SearchVendorWidget(vendor: state.vendors[index]);

@@ -30,7 +30,10 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   Future<void> performSearch(SearchQuery query) async {
-    final newQuery = query.copyWith(searchWord: controller.text, currentPage: 1, categoryId: query.categoryId ?? defaultCatId);
+    // If categoryId is null or 0, keep it as-is (don't use defaultCatId)
+    // The toQuery() method will handle not sending category_id when it's null or 0
+    final categoryId = (query.categoryId == null || query.categoryId == 0) ? null : query.categoryId;
+    final newQuery = query.copyWith(searchWord: controller.text, currentPage: 1, categoryId: categoryId);
     if (newQuery.searchWord.trim().length < 3) {
       emit(SearchSuccess(vendors: [], query: newQuery));
       return;

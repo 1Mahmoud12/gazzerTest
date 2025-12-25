@@ -144,7 +144,7 @@ class _MainTextFieldState extends State<MainTextField> {
               errorStyle: TStyle.errorSemi(13),
               errorMaxLines: 5,
               hintMaxLines: 5,
-              contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+              contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
               isDense: true,
               counterText: widget.showMaxLegnth ? null : '',
               hint: widget.hintText == null ? null : Text(widget.hintText!, style: widget.style ?? TStyle.greyRegular(12), maxLines: 1),

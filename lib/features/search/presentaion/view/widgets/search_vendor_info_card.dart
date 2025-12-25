@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
 import 'package:gazzer/features/search/domain/search_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
@@ -32,68 +33,53 @@ class SearchVendorInfoCard extends StatelessWidget {
       child: Row(
         spacing: 12,
         children: [
-          CustomNetworkImage(
-            vendor.image,
-            height: 86,
-            width: 86,
-            fit: BoxFit.cover,
-            borderRaduis: 16,
-          ),
+          CustomNetworkImage(vendor.image, height: 75, width: 65, fit: BoxFit.cover, borderRaduis: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(vendor.name, style: TStyle.primaryBold(16)),
                 Row(
                   children: [
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            Helpers.shortIrretableStrings(vendor.tags ?? [], 25) ?? '',
-                            style: TStyle.secondarySemi(12),
-                          ),
-                          Row(
-                            spacing: 4,
-                            children: [
-                              const Icon(Icons.location_on, color: Co.purple, size: 18),
-                              Text(
-                                vendor.zoneName,
-                                style: TStyle.secondarySemi(12),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.star, color: Co.second2, size: 20),
-                        Icon(Icons.access_time_rounded, color: Co.purple, size: 18),
-                      ],
+                      child: Text(vendor.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
                     ),
                     const HorizontalSpacing(4),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        Row(
-                          spacing: 4,
-                          children: [
-                            Text(
-                              vendor.rate.toStringAsFixed(1),
-                              style: TStyle.secondarySemi(12),
-                            ),
-                            Text(
-                              "(${vendor.rateCount})",
-                              style: TStyle.greySemi(12),
-                            ),
-                          ],
-                        ),
+                        const VectorGraphicsWidget(Assets.starRateIc, width: 20, height: 20),
+                        const HorizontalSpacing(4),
                         Text(
-                          "${vendor.deliveryTime} ${L10n.tr().mins}",
-                          style: TStyle.secondarySemi(12),
+                          vendor.rate.toStringAsFixed(1),
+                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+
+                      spacing: 4,
+                      children: [
+                        const VectorGraphicsWidget(Assets.locationIc, width: 20, height: 20),
+                        const HorizontalSpacing(4),
+                        Text(
+                          vendor.zoneName,
+                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const VectorGraphicsWidget(Assets.clockIc, width: 20, height: 20),
+                        const HorizontalSpacing(4),
+                        Text(
+                          '${vendor.deliveryTime} ${L10n.tr().mins}',
+                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),

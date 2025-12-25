@@ -3973,6 +3973,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Vendor'**
   String get viewVendor;
+
+  /// No description provided for @searchFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Search For'**
+  String get searchFor;
 }
 
 class _AppLocalizationsDelegate

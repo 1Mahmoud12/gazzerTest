@@ -1990,4 +1990,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewVendor => 'View Vendor';
+
+  @override
+  String get searchFor => 'Search For';
 }
