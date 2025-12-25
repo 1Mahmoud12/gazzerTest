@@ -94,7 +94,7 @@ class _MainBnbState extends State<MainBnb> {
         iconAsset = Assets.unSelectedOrdersIc;
         break;
       case 3:
-        label = L10n.tr().menu;
+        label = L10n.tr().profile;
         iconAsset = Assets.unSelectedProfileIc;
         break;
       default:

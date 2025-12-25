@@ -23,6 +23,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onBack,
     this.showBadge = false,
     this.showLeading = true,
+    this.widgetAction,
   });
   final bool showCart;
   final bool showLanguage;
@@ -37,12 +38,15 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle? titleStyle;
   final bool showBadge;
   final bool showLeading;
+  final Widget? widgetAction;
 
   @override
   Widget build(BuildContext context) {
     final canPop = Navigator.canPop(context);
     final shouldShowLeading = showLeading && (canPop || onBack != null);
-
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
+    );
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
@@ -55,7 +59,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: Co.bg,
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
@@ -84,6 +88,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             // style: IconButton.styleFrom(backgroundColor: Colors.black12),
             icon: const VectorGraphicsWidget(Assets.shareIc),
           ),
+        if (widgetAction != null) widgetAction!,
       ],
     );
   }

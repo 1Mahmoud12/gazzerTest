@@ -16,34 +16,22 @@ import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_stat
 import 'package:go_router/go_router.dart';
 
 /// Shows a rating bottom sheet for FAQ questions
-void showFaqRatingBottomSheet(
-  BuildContext context, {
-  int? faqQuestionId,
-  int? faqCategoryId,
-  int? orderId,
-}) {
-  showModalBottomSheet(
+Future<void> showFaqRatingBottomSheet(BuildContext context, {int? faqQuestionId, int? faqCategoryId, int? orderId}) async {
+  await showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
     isScrollControlled: true,
     useSafeArea: true,
     builder: (context) => BlocProvider(
       create: (context) => di<FaqRatingCubit>(),
-      child: FaqRatingBottomSheet(
-        faqQuestionId: faqQuestionId,
-        faqCategoryId: faqCategoryId,
-      ),
+      child: FaqRatingBottomSheet(faqQuestionId: faqQuestionId, faqCategoryId: faqCategoryId),
     ),
   );
 }
 
 /// Bottom sheet widget for rating FAQ questions
 class FaqRatingBottomSheet extends StatefulWidget {
-  const FaqRatingBottomSheet({
-    super.key,
-    this.faqQuestionId,
-    this.faqCategoryId,
-  });
+  const FaqRatingBottomSheet({super.key, this.faqQuestionId, this.faqCategoryId});
 
   final int? faqQuestionId;
   final int? faqCategoryId;
@@ -109,30 +97,18 @@ class _FaqRatingBottomSheetState extends State<FaqRatingBottomSheet> {
                 width: 40,
                 height: 4,
                 margin: const EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                  color: Co.white.withOpacityNew(0.3),
-                  borderRadius: BorderRadius.circular(2),
-                ),
+                decoration: BoxDecoration(color: Co.white.withOpacityNew(0.3), borderRadius: BorderRadius.circular(2)),
               ),
-              Text(
-                L10n.tr().wasThisHelpful,
-                textAlign: TextAlign.center,
-                style: TStyle.robotBlackMedium().copyWith(fontSize: 18),
-              ),
+              Text(L10n.tr().wasThisHelpful, textAlign: TextAlign.center, style: TStyle.robotBlackMedium().copyWith(fontSize: 18)),
               const VerticalSpacing(24),
               RatingBar.builder(
                 initialRating: _rating,
                 minRating: 1,
-                direction: Axis.horizontal,
-                allowHalfRating: false,
-                itemCount: 5,
                 itemSize: 32,
                 itemPadding: const EdgeInsets.symmetric(horizontal: 4),
                 itemBuilder: (context, index) {
                   final isRated = index < _rating;
-                  return SvgPicture.asset(
-                    isRated ? Assets.starRateIc : Assets.starNotRateIc,
-                  );
+                  return SvgPicture.asset(isRated ? Assets.starRateIc : Assets.starNotRateIc);
                 },
                 unratedColor: Co.secondary,
                 onRatingUpdate: (rating) {
@@ -142,19 +118,10 @@ class _FaqRatingBottomSheetState extends State<FaqRatingBottomSheet> {
                 },
               ),
               const VerticalSpacing(24),
-              MainTextField(
-                controller: _feedbackController,
-                hintText: L10n.tr().optionalFeedback,
-                maxLines: 3,
-                showBorder: true,
-                borderRadius: 12,
-              ),
+              MainTextField(controller: _feedbackController, hintText: L10n.tr().optionalFeedback, maxLines: 3, borderRadius: 12),
               const VerticalSpacing(24),
-              MainBtn(
-                onPressed: isLoading ? () {} : _submitRating,
-                text: isLoading ? '${L10n.tr().submit}...' : L10n.tr().submit,
-                radius: 30,
-              ),
+              MainBtn(onPressed: isLoading ? () {} : _submitRating, text: isLoading ? '${L10n.tr().submit}...' : L10n.tr().submit, radius: 30),
+              VerticalSpacing(MediaQuery.of(context).viewInsets.bottom),
             ],
           ),
         );

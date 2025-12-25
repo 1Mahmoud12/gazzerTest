@@ -26,32 +26,20 @@ class SupportScreen extends StatefulWidget {
 class _SupportScreenState extends State<SupportScreen> {
   String? _pendingType;
 
-  void _handleFaqSuccess(
-    BuildContext context,
-    FaqSuccessState state,
-    String type,
-  ) {
+  void _handleFaqSuccess(BuildContext context, FaqSuccessState state, String type) {
     final l10n = L10n.tr();
     if (type == CategoryType.orderIssue.value) {
       // For order-issue, show categories only
       context.navigateToPage(
         FaqListScreen(
-          args: FaqListArgs(
-            title: l10n.orderIssue,
-            categories: state.categories,
-            showCategoriesOnly: true,
-          ),
+          args: FaqListArgs(title: l10n.orderIssue, categories: state.categories, showCategoriesOnly: true),
         ),
       );
     } else {
       // For general, handle navigation based on structure
       context.navigateToPage(
         FaqListScreen(
-          args: FaqListArgs(
-            title: l10n.generalIssues,
-            categories: state.categories,
-            showCategoriesOnly: false,
-          ),
+          args: FaqListArgs(title: l10n.generalIssues, categories: state.categories),
         ),
       );
     }
@@ -78,10 +66,8 @@ class _SupportScreenState extends State<SupportScreen> {
               return LoadingFullScreen(
                 isLoading: state is FaqLoadingState,
                 child: Scaffold(
-                  appBar: AppBar(
-                    title: Text(l10n.support),
-                    centerTitle: true,
-                  ),
+                  appBar: MainAppBar(title: l10n.support),
+
                   body: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -94,10 +80,7 @@ class _SupportScreenState extends State<SupportScreen> {
                             // await context.read<FaqCubit>().getFaqCategories(
                             //   'order_issue',
                             // );
-                            context.go(
-                              '/orders',
-                              extra: {"showGetHelpInsteadOfReorder": true},
-                            );
+                            context.go('/orders', extra: {'showGetHelpInsteadOfReorder': true});
                           },
                         ),
                         const VerticalSpacing(12),
@@ -105,9 +88,7 @@ class _SupportScreenState extends State<SupportScreen> {
                           title: L10n.tr().generalIssues,
                           onTap: () {
                             _pendingType = CategoryType.general.value;
-                            context.read<FaqCubit>().getFaqCategories(
-                              CategoryType.general.value,
-                            );
+                            context.read<FaqCubit>().getFaqCategories(CategoryType.general.value);
                           },
                         ),
                       ],

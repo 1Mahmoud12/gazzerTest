@@ -1999,4 +1999,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resend => 'Resend';
+
+  @override
+  String get shareCart => 'Share Cart';
+
+  @override
+  String get profile => 'Profile';
 }

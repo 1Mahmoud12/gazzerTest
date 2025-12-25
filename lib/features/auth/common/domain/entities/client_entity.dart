@@ -1,4 +1,5 @@
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:intl/intl.dart';
 
 class ReferralEntity {
@@ -6,11 +7,7 @@ class ReferralEntity {
   final String? shareLink;
   final String? shareMessage;
 
-  ReferralEntity({
-    this.code,
-    this.shareLink,
-    this.shareMessage,
-  });
+  ReferralEntity({this.code, this.shareLink, this.shareMessage});
 }
 
 class ClientEntity {
@@ -46,7 +43,7 @@ class ClientEntity {
   String get formatedCreatedAt {
     if (createdAt == null) return L10n.tr().notSetYet;
     final date = DateTime.parse(createdAt!);
-    final formateddate = DateFormat('MMMM, yyyy').format(date);
+    final formateddate = DateFormat('MMMM, yyyy', L10n.isAr(AppNavigator.mainKey.currentContext!) ? 'ar' : 'en').format(date);
     return formateddate;
   }
 

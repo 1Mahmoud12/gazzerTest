@@ -21,10 +21,10 @@ class FaqCubit extends Cubit<FaqStates> {
     // Fetch from API
     final result = await _repo.getFaqCategories(type);
     switch (result) {
-      case Ok<List<FaqCategoryEntity>> ok:
-        emit(FaqSuccessState(ok.value, isFromCache: false));
+      case final Ok<List<FaqCategoryEntity>> ok:
+        emit(FaqSuccessState(ok.value));
         break;
-      case Err<List<FaqCategoryEntity>> err:
+      case final Err<List<FaqCategoryEntity>> err:
         emit(FaqErrorState(err.error.message));
         break;
     }

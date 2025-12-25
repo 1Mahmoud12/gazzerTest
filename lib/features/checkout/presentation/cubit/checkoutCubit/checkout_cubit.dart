@@ -238,8 +238,10 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
             }
             final response = await PaymobWebhookService.fetchWebhookResponse(result.split(',').last);
             logger.d('Response : custom $response');
-            final message = response['message'];
-            final status = response['data']?['payment_status'];
+            final message = response['message'] ?? L10n.tr().payment_failed;
+            // Safely access payment_status - data might be a list or map
+            final data = response['data'];
+            final status = (data is Map<String, dynamic>) ? data['payment_status'] : null;
             closeDialog(rootContext);
             if (status == 'completed') {
               logger.d('Payment webhook response: $result');

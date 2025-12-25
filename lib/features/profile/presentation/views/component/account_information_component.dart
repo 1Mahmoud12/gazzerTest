@@ -14,7 +14,11 @@ class _AccountInformationComponent extends StatelessWidget {
         children: [
           ProfileInformationRow(icon: Assets.fullNameIc, title: L10n.tr().fullName, value: client.clientName),
           ProfileInformationRow(icon: Icons.email_outlined, title: L10n.tr().emailAddress, value: client.email ?? L10n.tr().notSetYet),
-          ProfileInformationRow(icon: Icons.phone_outlined, title: L10n.tr().mobileNumber, value: client.phoneNumber),
+          ProfileInformationRow(
+            icon: Icons.phone_outlined,
+            title: L10n.tr().mobileNumber,
+            value: '${L10n.isAr(context) ? '' : '(+20)'} ${client.phoneNumber} ${L10n.isAr(context) ? '(20+)' : ''}',
+          ),
           Row(
             children: [
               Expanded(

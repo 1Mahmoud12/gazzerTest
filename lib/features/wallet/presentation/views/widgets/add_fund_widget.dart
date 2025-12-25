@@ -75,8 +75,10 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                 return;
               }
               final response = await PaymobWebhookService.fetchWebhookResponse(result.split(',').last);
-              final message = response['message'];
-              final status = response['data']?['payment_status'];
+              final message = response['message'] ?? L10n.tr(context).payment_failed;
+              // Safely access payment_status - data might be a list or map
+              final data = response['data'];
+              final status = (data is Map<String, dynamic>) ? data['payment_status'] : null;
               closeDialog();
               if (status == 'completed') {
                 final addedAmount = double.tryParse(_amountController.text) ?? 0;

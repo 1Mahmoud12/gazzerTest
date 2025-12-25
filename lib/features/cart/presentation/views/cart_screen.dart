@@ -6,15 +6,14 @@ import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/base_error_state.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
@@ -84,27 +83,25 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
       child: Scaffold(
         appBar: MainAppBar(
           title: L10n.tr().cart,
-          onShare: () async {
-            animationDialogLoading();
-            final result = await ShareService().generateShareLink(
-              type: ShareEnumType.cart.name,
-              shareableType: ShareEnumType.cart.name,
-              shareableId: '',
-            );
-            closeDialog();
-            switch (result) {
-              case Ok<ShareGenerateResponse>(value: final response):
-                await Clipboard.setData(ClipboardData(text: response.shareLink));
-                if (context.mounted) {
-                  Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
-                }
-              case Err<ShareGenerateResponse>(error: final error):
-                if (context.mounted) {
-                  Alerts.showToast(error.message);
-                }
-            }
-          },
-
+          widgetAction: InkWell(
+            onTap: () async {
+              final confirmed = await showDialog<bool>(
+                context: context,
+                builder: (context) {
+                  return Dialogs.confirmDialog(
+                    title: L10n.tr().warning,
+                    message: L10n.tr().areYouSureYouWantToDeleteAllCart,
+                    okBgColor: Co.darkRed,
+                    context: context,
+                  );
+                },
+              );
+              if (confirmed == true) {
+                cubit.removeFromCartByType('all', 0);
+              }
+            },
+            child: Text(L10n.tr().remove_all, style: TStyle.robotBlackMedium().copyWith(color: Co.darkRed)),
+          ),
           onBack: () {
             context.go(HomeScreen.route);
           },
@@ -132,33 +129,6 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                         enabled: state is FullCartLoading,
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  InkWell(
-                                    onTap: () async {
-                                      final confirmed = await showDialog<bool>(
-                                        context: context,
-                                        builder: (context) {
-                                          return Dialogs.confirmDialog(
-                                            title: L10n.tr().warning,
-                                            message: L10n.tr().areYouSureYouWantToDeleteAllCart,
-                                            okBgColor: Co.darkRed,
-                                            context: context,
-                                          );
-                                        },
-                                      );
-                                      if (confirmed == true) {
-                                        cubit.removeFromCartByType('all', 0);
-                                      }
-                                    },
-                                    child: Text(L10n.tr().remove_all, style: TStyle.robotBlackMedium().copyWith(color: Co.darkRed)),
-                                  ),
-                                ],
-                              ),
-                            ),
                             Expanded(
                               child: ListView.separated(
                                 padding: const EdgeInsets.only(bottom: 24),
@@ -184,69 +154,80 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                     return Session().client == null ? null : const OrderSummaryWidget();
                                   }
                                   if (index == state.vendors.length + 5) {
-                                    return Row(
+                                    return Column(
                                       spacing: 12,
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Expanded(
-                                          child: DecoratedBox(
-                                            decoration: BoxDecoration(
-                                              borderRadius: AppConst.defaultInnerBorderRadius,
-                                              border: GradientBoxBorder(
-                                                gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(2),
-                                              child: MainBtn(
-                                                onPressed: () {
-                                                  context.go(HomeScreen.route);
-                                                },
-                                                text: L10n.tr().continueShopping,
-                                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                                width: double.infinity,
-                                                height: 0,
-                                                borderColor: Co.purple,
-                                                textStyle: TStyle.blackRegular(16),
-                                                bgColor: Colors.transparent,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: DecoratedBox(
-                                            decoration: BoxDecoration(
-                                              borderRadius: AppConst.defaultInnerBorderRadius,
-                                              border: GradientBoxBorder(
-                                                gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white]),
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(2),
-                                              child: MainBtn(
-                                                onPressed: () {
-                                                  if (!state.isCartValid) {
-                                                    Alerts.showToast(L10n.tr().needToAddAddressFirst);
-                                                    return;
-                                                  }
-                                                  context.push(ConfirmOrderScreen.route);
-                                                },
-                                                disabledColor: Co.grey.withAlpha(80),
+                                        MainBtn(
+                                          onPressed: () {
+                                            if (!state.isCartValid) {
+                                              Alerts.showToast(L10n.tr().needToAddAddressFirst);
+                                              return;
+                                            }
+                                            context.push(ConfirmOrderScreen.route);
+                                          },
+                                          disabledColor: Co.grey.withAlpha(80),
 
-                                                text: L10n.tr().checkout,
-                                                textStyle: TStyle.whiteRegular(16),
-                                                width: double.infinity,
-                                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                                bgColor: Co.purple,
-                                              ),
-                                            ),
+                                          text: L10n.tr().checkout,
+                                          textStyle: TStyle.whiteRegular(16),
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.symmetric(vertical: 6),
+                                          bgColor: Co.purple,
+                                        ),
+                                        MainBtn(
+                                          onPressed: () {
+                                            context.go(HomeScreen.route);
+                                          },
+                                          text: L10n.tr().continueShopping,
+                                          padding: const EdgeInsets.symmetric(vertical: 6),
+                                          width: double.infinity,
+                                          height: 0,
+                                          borderColor: Co.purple,
+                                          textStyle: TStyle.blackRegular(16),
+                                          bgColor: Colors.transparent,
+                                        ),
+                                        MainBtn(
+                                          onPressed: () async {
+                                            animationDialogLoading();
+                                            final result = await ShareService().generateShareLink(
+                                              type: ShareEnumType.cart.name,
+                                              shareableType: ShareEnumType.cart.name,
+                                              shareableId: '',
+                                            );
+                                            closeDialog();
+                                            switch (result) {
+                                              case Ok<ShareGenerateResponse>(value: final response):
+                                                await Clipboard.setData(ClipboardData(text: response.shareLink));
+                                                if (context.mounted) {
+                                                  Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
+                                                }
+                                              case Err<ShareGenerateResponse>(error: final error):
+                                                if (context.mounted) {
+                                                  Alerts.showToast(error.message);
+                                                }
+                                            }
+                                          },
+                                          padding: const EdgeInsets.symmetric(vertical: 6),
+                                          width: double.infinity,
+                                          height: 0,
+                                          borderColor: Co.purple,
+                                          textStyle: TStyle.blackRegular(16),
+                                          bgColor: Colors.transparent,
+                                          child: Row(
+                                            spacing: 8,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text(L10n.tr().shareCart, style: TStyle.robotBlackRegular().copyWith(color: Co.black)),
+
+                                              const VectorGraphicsWidget(Assets.shareIc, height: 21, width: 21),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     );
                                   }
                                   if (index == state.vendors.length + 6) {
-                                    return Session().client == null ? null : const VerticalSpacing(70);
+                                    return Session().client == null ? null : const VerticalSpacing(90);
                                   }
                                   // if (index == state.vendors.length + 2) return const CartSummaryWidget();
 

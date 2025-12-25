@@ -179,6 +179,7 @@ class ProfileContentBody extends StatelessWidget {
                     ),
                   ),
                 ],
+                const VerticalSpacing(40),
               ],
             ),
           ),

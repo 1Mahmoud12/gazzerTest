@@ -61,10 +61,7 @@ class _MainBtnState extends State<MainBtn> {
   Widget build(BuildContext context) {
     if (widget.isLoading) {
       return const Center(
-        child: Padding(
-          padding: EdgeInsets.all(2),
-          child: AdaptiveProgressIndicator(),
-        ),
+        child: Padding(padding: EdgeInsets.all(2), child: AdaptiveProgressIndicator()),
       );
     }
     return Padding(
@@ -73,12 +70,7 @@ class _MainBtnState extends State<MainBtn> {
         valueListenable: isHovering,
         builder: (context, value, child) => DecoratedBox(
           decoration: BoxDecoration(
-            border: widget.borderColor == null
-                ? null
-                : Border.all(
-                    color: widget.borderColor!,
-                    width: widget.borderThickness,
-                  ),
+            border: widget.borderColor == null ? null : Border.all(color: widget.borderColor!, width: widget.borderThickness),
             color: widget.bgColor ?? Co.purple,
             borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
             // gradient: widget.bgColor != null
@@ -86,9 +78,7 @@ class _MainBtnState extends State<MainBtn> {
             //     : value
             //     ? Grad().hoverGradient
             //     : Grad().radialGradient,
-            boxShadow: [
-              if (value) const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0)),
-            ],
+            boxShadow: [if (value) const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0))],
           ),
           child: DecoratedBox(
             decoration: BoxDecoration(
@@ -109,18 +99,13 @@ class _MainBtnState extends State<MainBtn> {
             isHovering.value = v;
           },
           style: FilledButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius)),
             padding: widget.padding ?? const EdgeInsets.all(6),
             elevation: 0,
             disabledBackgroundColor: widget.disabledColor,
             // minimumSize: Size(0, 0),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            minimumSize: Size(
-              widget.width ?? (widget.padding == null ? double.infinity : 0),
-              widget.padding != null ? 0 : widget.height ?? 50,
-            ),
+            minimumSize: Size(widget.width ?? (widget.padding == null ? double.infinity : 0), widget.padding != null ? 0 : widget.height ?? 50),
             backgroundColor: Colors.transparent,
           ),
 
@@ -140,14 +125,7 @@ class _MainBtnState extends State<MainBtn> {
                           decoration: BoxDecoration(
                             gradient: Grad().radialGradient,
                             shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Co.shadowColor.withAlpha(63),
-                                blurRadius: 4.1,
-                                spreadRadius: 1,
-                                offset: const Offset(0, 0),
-                              ),
-                            ],
+                            boxShadow: [BoxShadow(color: Co.shadowColor.withAlpha(63), blurRadius: 4.1, spreadRadius: 1, offset: const Offset(0, 0))],
                           ),
                           child: DecoratedBox(
                             decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().linearGradient),
@@ -163,7 +141,10 @@ class _MainBtnState extends State<MainBtn> {
                         child: FittedBox(
                           alignment: AlignmentDirectional.center,
                           fit: BoxFit.scaleDown,
-                          child: Text(widget.text ?? '', style: widget.textStyle ?? TStyle.whiteSemi(14)),
+                          child: Text(
+                            widget.text ?? '',
+                            style: widget.textStyle ?? TStyle.robotBlackRegular().copyWith(color: Co.white, fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
                     ],

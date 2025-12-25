@@ -839,7 +839,8 @@
            "viewVendor": "View Vendor",
            "searchFor":"Search For",
            "verifyYourNumber":"Verify Your Number",
-           "resend":"Resend"
+           "resend":"Resend","shareCart":"Share Cart",
+           "profile":"Profile"
 
 
 

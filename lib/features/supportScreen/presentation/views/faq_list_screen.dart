@@ -7,12 +7,7 @@ import 'package:gazzer/features/supportScreen/domain/entities/faq_entity.dart';
 import 'faq_question_answer_screen.dart';
 
 class FaqListArgs {
-  const FaqListArgs({
-    required this.title,
-    this.nodes,
-    this.categories,
-    this.showCategoriesOnly = false,
-  });
+  const FaqListArgs({required this.title, this.nodes, this.categories, this.showCategoriesOnly = false});
 
   final String title;
   final List<FaqNode>? nodes;
@@ -31,18 +26,12 @@ class FaqListScreen extends StatelessWidget {
     return categories.map((category) {
       if (showCategoriesOnly) {
         // For order-issue: show categories only
-        return FaqNode(
-          title: category.name,
-          children: _convertCategoriesToNodes(category.children, showCategoriesOnly),
-        );
+        return FaqNode(title: category.name, children: _convertCategoriesToNodes(category.children, showCategoriesOnly));
       } else {
         // For general: handle based on structure
         if (category.hasChildren && category.children.isNotEmpty) {
           // Has children: create node with children
-          return FaqNode(
-            title: category.name,
-            children: _convertCategoriesToNodes(category.children, showCategoriesOnly),
-          );
+          return FaqNode(title: category.name, children: _convertCategoriesToNodes(category.children, showCategoriesOnly));
         } else if (category.questions.isNotEmpty) {
           // Has questions: create nodes for questions
           if (category.questions.length == 1) {
@@ -59,14 +48,7 @@ class FaqListScreen extends StatelessWidget {
               title: category.name,
               categoryId: category.id,
               children: category.questions
-                  .map(
-                    (q) => FaqNode(
-                      title: q.question,
-                      answer: q.answer,
-                      questionId: q.id,
-                      categoryId: category.id,
-                    ),
-                  )
+                  .map((q) => FaqNode(title: q.question, answer: q.answer, questionId: q.id, categoryId: category.id))
                   .toList(),
             );
           }
@@ -100,23 +82,14 @@ class FaqListScreen extends StatelessWidget {
       // Direct question: open answer screen
       context.navigateToPage(
         FaqQuestionAnswerScreen(
-          args: FaqQAArgs(
-            title: node.title,
-            answer: node.answer ?? '',
-            faqQuestionId: node.questionId ?? 0,
-            faqCategoryId: node.categoryId,
-          ),
+          args: FaqQAArgs(title: node.title, answer: node.answer ?? '', faqQuestionId: node.questionId ?? 0, faqCategoryId: node.categoryId),
         ),
       );
     } else if (node.children.isNotEmpty) {
       // Has children: navigate to sub-list
       context.navigateToPage(
         FaqListScreen(
-          args: FaqListArgs(
-            title: node.title,
-            nodes: node.children,
-            showCategoriesOnly: false,
-          ),
+          args: FaqListArgs(title: node.title, nodes: node.children, showCategoriesOnly: false),
         ),
       );
     }
@@ -126,12 +99,7 @@ class FaqListScreen extends StatelessWidget {
     if (node.isLeaf) {
       context.navigateToPage(
         FaqQuestionAnswerScreen(
-          args: FaqQAArgs(
-            title: node.title,
-            answer: node.answer ?? '',
-            faqQuestionId: node.questionId ?? 0,
-            faqCategoryId: node.categoryId,
-          ),
+          args: FaqQAArgs(title: node.title, answer: node.answer ?? '', faqQuestionId: node.questionId ?? 0, faqCategoryId: node.categoryId),
         ),
       );
     } else {
@@ -149,11 +117,7 @@ class FaqListScreen extends StatelessWidget {
       if (category.children.isNotEmpty) {
         context.navigateToPage(
           FaqListScreen(
-            args: FaqListArgs(
-              title: category.name,
-              categories: category.children,
-              showCategoriesOnly: true,
-            ),
+            args: FaqListArgs(title: category.name, categories: category.children, showCategoriesOnly: true),
           ),
         );
       }
@@ -163,11 +127,7 @@ class FaqListScreen extends StatelessWidget {
         // Has children: navigate to children
         context.navigateToPage(
           FaqListScreen(
-            args: FaqListArgs(
-              title: category.name,
-              categories: category.children,
-              showCategoriesOnly: false,
-            ),
+            args: FaqListArgs(title: category.name, categories: category.children, showCategoriesOnly: false),
           ),
         );
       } else if (category.questions.isNotEmpty) {
@@ -191,14 +151,7 @@ class FaqListScreen extends StatelessWidget {
               args: FaqListArgs(
                 title: category.name,
                 nodes: category.questions
-                    .map(
-                      (q) => FaqNode(
-                        title: q.question,
-                        answer: q.answer,
-                        questionId: q.id,
-                        categoryId: category.id,
-                      ),
-                    )
+                    .map((q) => FaqNode(title: q.question, answer: q.answer, questionId: q.id, categoryId: category.id))
                     .toList(),
                 showCategoriesOnly: false,
               ),
@@ -214,10 +167,7 @@ class FaqListScreen extends StatelessWidget {
     // If we have categories directly, use them for better control
     if (args.categories != null && args.categories!.isNotEmpty) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(args.title),
-          centerTitle: true,
-        ),
+        appBar: MainAppBar(title: args.title),
         body: ListView.separated(
           padding: const EdgeInsets.all(16),
           itemCount: args.categories!.length,
@@ -229,10 +179,7 @@ class FaqListScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                decoration: BoxDecoration(
-                  color: Co.purple100,
-                  borderRadius: BorderRadius.circular(16),
-                ),
+                decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
                 child: Row(
                   children: [
                     Expanded(child: Text(category.name, style: TStyle.blackMedium(15))),
@@ -249,10 +196,7 @@ class FaqListScreen extends StatelessWidget {
     // Fallback to node-based display
     final items = _getItemsToDisplay();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(args.title),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(args.title), centerTitle: true),
       body: items.isEmpty
           ? const Center(child: Text('No items available'))
           : ListView.separated(
@@ -266,10 +210,7 @@ class FaqListScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: Co.purple100,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
                     child: Row(
                       children: [
                         Expanded(child: Text(node.title, style: TStyle.blackMedium(15))),
@@ -285,13 +226,7 @@ class FaqListScreen extends StatelessWidget {
 }
 
 class FaqNode {
-  const FaqNode({
-    required this.title,
-    this.answer,
-    this.children = const [],
-    this.questionId,
-    this.categoryId,
-  });
+  const FaqNode({required this.title, this.answer, this.children = const [], this.questionId, this.categoryId});
 
   final String title;
   final String? answer;

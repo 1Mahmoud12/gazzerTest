@@ -47,9 +47,9 @@ class _ProfileHeaderWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(client.clientName, style: TStyle.robotBlackMedium()),
-                  if (client.email != null)
-                    Text(client.email ?? L10n.tr().notSetYet, style: TStyle.robotBlackMedium().copyWith(color: Colors.black87)),
-                  const SizedBox.shrink(),
+                  // if (client.email != null)
+                  //   Text(client.email ?? L10n.tr().notSetYet, style: TStyle.robotBlackMedium().copyWith(color: Colors.black87)),
+                  // const SizedBox.shrink(),
                   Text('${L10n.tr().memberSince} ${client.formatedCreatedAt}', style: TStyle.robotBlackMedium()),
                 ],
               ),

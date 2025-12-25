@@ -1998,4 +1998,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get resend => 'Resend';
+
+  @override
+  String get shareCart => 'مشاركة السله';
+
+  @override
+  String get profile => 'الملف الشخصي';
 }
