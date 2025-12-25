@@ -53,7 +53,12 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di<ProfileCubit>(),
+      create: (context) {
+        final cubit = di<ProfileCubit>();
+        // Load profile data when screen is initialized
+        cubit.loadProfile();
+        return cubit;
+      },
       child: Builder(
         builder: (context) {
           final cubit = context.read<ProfileCubit>();

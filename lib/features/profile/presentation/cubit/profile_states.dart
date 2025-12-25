@@ -118,3 +118,14 @@ class LogoutSuccess extends ProfileStates {
 class LogoutError extends ProfileErrorStates {
   LogoutError(super.message);
 }
+
+/// load profile
+class LoadProfileLoading extends ProfileLoadingStates {}
+
+class LoadProfileSuccess extends ProfileStates {
+  LoadProfileSuccess();
+}
+
+class LoadProfileError extends ProfileErrorStates {
+  LoadProfileError(super.message);
+}

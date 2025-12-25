@@ -41,9 +41,8 @@ class LanguageCustomDropdown extends StatelessWidget {
           await cubit.changeLanguage(language.code);
           di<HomeCubit>().getHomeData();
           if (context.mounted) {
-            // Profile screen is nested under /menu/profile
-            context.go('/');
-            context.push('/menu');
+            // Navigate to profile screen - it will automatically load profile data
+            context.go('/menu/profile');
           }
         }
       },

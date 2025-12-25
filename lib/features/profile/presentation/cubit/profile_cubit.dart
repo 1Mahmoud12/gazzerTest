@@ -24,6 +24,21 @@ class ProfileCubit extends Cubit<ProfileStates> {
     client = Session().client?.clone();
   }
 
+  Future<void> loadProfile() async {
+    emit(LoadProfileLoading());
+    final res = await _repo.getClient();
+    switch (res) {
+      case final Ok<ClientEntity> ok:
+        client = ok.value;
+        Session().setClient = client;
+        emit(LoadProfileSuccess());
+        break;
+      case final Err err:
+        emit(LoadProfileError(err.error.message));
+        break;
+    }
+  }
+
   Future<bool> updateProfile(UpdateProfileReq req) async {
     emit(UpdateProfileLoading());
     final res = await _repo.updateClient(req);
