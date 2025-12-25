@@ -402,48 +402,6 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
   }
 }
 
-Future<void> _showInsufficientWalletSheet(
-  BuildContext context, {
-  required double remaining,
-  required void Function(PaymentMethod method) onSelect,
-}) async {
-  await showModalBottomSheet(
-    context: context,
-    builder: (ctx) {
-      return Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(L10n.tr().insufficientWalletBalance, style: TStyle.blackBold(16)),
-            const SizedBox(height: 8),
-            Text('${L10n.tr().remainingAmount}: ${Helpers.getProperPrice(remaining)}', style: TStyle.greyRegular(14)),
-            const SizedBox(height: 16),
-            MainBtn(
-              onPressed: () {
-                onSelect(PaymentMethod.creditDebitCard);
-                Navigator.of(ctx).pop();
-              },
-              text: L10n.tr().creditCard,
-            ),
-            const SizedBox(height: 8),
-            MainBtn(
-              onPressed: () {
-                onSelect(PaymentMethod.wallet);
-                Navigator.of(ctx).pop();
-              },
-              text: L10n.tr().wallet,
-              bgColor: Co.purple.withOpacityNew(0.1),
-              textStyle: TStyle.primaryBold(14),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-
 //enum _WalletProvider { vodafone, etisalat, orange }
 
 // Future<void> _showWalletProviderSheet(

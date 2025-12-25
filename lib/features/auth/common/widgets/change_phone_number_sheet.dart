@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -41,15 +41,9 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () => context.pop(),
-            ),
-          ),
+          Expanded(child: GestureDetector(onTap: () => context.pop())),
           Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
+            color: Co.bg,
             child: Padding(
               padding: const EdgeInsetsGeometry.symmetric(vertical: 48, horizontal: 24),
               child: SafeArea(
@@ -59,15 +53,9 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                   spacing: 16,
                   children: [
                     const SizedBox.shrink(),
-                    Text(
-                      widget.title ?? L10n.tr().editYourNumber,
-                      style: TStyle.primaryBold(16),
-                    ),
+                    Text(widget.title ?? L10n.tr().editYourNumber, style: TStyle.robotBlackTitle().copyWith(color: Co.purple)),
                     const SizedBox.shrink(),
-                    Text(
-                      L10n.tr().mobileNumber,
-                      style: TStyle.greyBold(16),
-                    ),
+                    Text(L10n.tr().mobileNumber, style: TStyle.robotBlackRegular14()),
                     Form(
                       key: _formKey,
                       child: PhoneTextField(
@@ -75,18 +63,48 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                         hasLabel: false,
                         hasHint: true,
                         code: countryCode,
+
+                        onChange: (phone) {
+                          // Check if exactly 10 digits
+                          if (phone.number.length > 11) {
+                            _phoneController.text = phone.number.substring(0, 11);
+                          }
+                        },
                         validator: (v, code) {
                           countryCode = code;
-                          if (code == 'EG') {
-                            return Validators.mobileEGValidator(v);
+                          if (v == null || v.isEmpty) {
+                            return L10n.tr().enterYourMobileNumber;
                           }
-                          return Validators.valueAtLeastNum(v, L10n.tr().mobileNumber, 6);
+
+                          final String phoneNumber = v.trim();
+                          // Check if all characters are digits
+                          if (!RegExp(r'^\d+$').hasMatch(phoneNumber)) {
+                            return L10n.tr().phoneMustContainOnlyDigits;
+                          }
+                          final bool startsWithZero = phoneNumber.startsWith('0');
+                          if (startsWithZero) {
+                            if (phoneNumber.length != 11) {
+                              return L10n.tr().phoneMustBeElevenDigits;
+                            }
+                          } else {
+                            if (phoneNumber.length != 10) {
+                              return L10n.tr().phoneMustBeTenDigits;
+                            }
+                          }
+                          final normalizedNumber = startsWithZero ? phoneNumber.substring(1) : phoneNumber;
+                          if (normalizedNumber.isEmpty || !normalizedNumber.startsWith('1')) {
+                            return L10n.tr().phoneMustMatchEgyptPrefix;
+                          }
+                          if (normalizedNumber.length < 2 || !['0', '1', '2', '5'].contains(normalizedNumber[1])) {
+                            return L10n.tr().phoneMustMatchEgyptPrefix;
+                          }
+                          return null;
                         },
                       ),
                     ),
                     ValueListenableBuilder(
                       valueListenable: isLoading,
-                      builder: (context, value, child) => OptionBtn(
+                      builder: (context, value, child) => MainBtn(
                         onPressed: () async {
                           if (widget.initialPhone == _phoneController.text.trim()) {
                             context.pop();
@@ -94,7 +112,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                           }
                           if (_formKey.currentState?.validate() != true) return;
                           isLoading.value = true;
-                          final phone = _phoneController.text.trim();
+                          final phone = _phoneController.text.trim().replaceFirst('0', '');
                           final res = await widget.onConfirm(phone);
                           if (context.mounted) {
                             isLoading.value = false;

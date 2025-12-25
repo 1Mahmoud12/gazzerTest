@@ -13,10 +13,12 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
 import 'package:gazzer/features/profile/presentation/views/component/profile_verify_otp_sheet.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({super.key});
@@ -59,7 +61,12 @@ class _MainDrawerState extends State<MainDrawer> {
             builder: (context, state) => LoadingFullScreen(
               isLoading: state is ProfileLoadingStates,
               child: Scaffold(
-                appBar: MainAppBar(title: L10n.tr().myProfile),
+                appBar: MainAppBar(
+                  title: L10n.tr().myProfile,
+                  onBack: () {
+                    context.go(HomeScreen.route);
+                  },
+                ),
                 body: SafeArea(
                   child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
                     listenWhen: (previous, current) => previous.lang != current.lang,

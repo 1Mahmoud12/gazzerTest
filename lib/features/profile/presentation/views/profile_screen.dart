@@ -19,6 +19,7 @@ import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/tier_visual_details.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
@@ -81,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
             builder: (context, state) => LoadingFullScreen(
               isLoading: state is ProfileLoadingStates,
               child: Scaffold(
-                appBar: const MainAppBar(),
+                appBar: MainAppBar(),
                 body: SafeArea(
                   child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
                     listenWhen: (previous, current) => previous.lang != current.lang,

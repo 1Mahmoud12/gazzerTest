@@ -84,6 +84,7 @@ class _SignOutButton extends StatelessWidget {
               MainBtn(
                 onPressed: () {
                   context.pop(true);
+                  context.go(HomeScreen.route);
                 },
                 bgColor: Co.purple,
                 radius: 24,
