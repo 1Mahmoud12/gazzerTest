@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/no_paste_formatter.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpWidget extends StatefulWidget {
-  const OtpWidget({super.key, required this.count, this.spacing, this.borderRadius, required this.controller, required this.width, required this.height});
+  const OtpWidget({
+    super.key,
+    required this.count,
+    this.spacing,
+    this.borderRadius,
+    required this.controller,
+    required this.width,
+    required this.height,
+  });
   final int count;
   final double? spacing;
   final double? borderRadius;
@@ -21,7 +27,7 @@ class OtpWidget extends StatefulWidget {
 }
 
 class _OtpWidgetState extends State<OtpWidget> {
-  late final PinTheme defaultPinTheme;
+  late PinTheme defaultPinTheme;
 
   @override
   void initState() {
@@ -31,8 +37,8 @@ class _OtpWidgetState extends State<OtpWidget> {
       margin: EdgeInsets.symmetric(horizontal: (widget.spacing ?? 32) * 0.5),
       textStyle: const TextStyle(fontSize: 20, color: Co.greyText, fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1),
-        borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
+        border: Border.all(color: Co.darkGrey, width: 1.5),
+        borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
       ),
     );
     super.initState();
@@ -48,24 +54,16 @@ class _OtpWidgetState extends State<OtpWidget> {
             return AdaptiveTextSelectionToolbar(
               anchors: editableTextState.contextMenuAnchors,
               //  empty list or exclude paste action
-              children: [],
+              children: const [],
             );
           },
           controller: widget.controller,
           length: widget.count,
-          closeKeyboardWhenCompleted: true,
           defaultPinTheme: defaultPinTheme,
           focusedPinTheme: defaultPinTheme,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            NoPasteFormatter(),
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly, NoPasteFormatter()],
           submittedPinTheme: defaultPinTheme,
-          validator: (v) => Validators.valueMustBeNum(v, widget.count, "Code"),
-          pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-
-          // onSubmitted: (value) {},
-          showCursor: true,
+          validator: (v) => Validators.valueMustBeNum(v, widget.count, 'Code'),
           // onCompleted: (pin) => print(pin),
         ),
       ),

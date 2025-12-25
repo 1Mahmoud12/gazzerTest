@@ -3979,6 +3979,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search For'**
   String get searchFor;
+
+  /// No description provided for @verifyYourNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Your Number'**
+  String get verifyYourNumber;
+
+  /// No description provided for @resend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resend;
 }
 
 class _AppLocalizationsDelegate

@@ -837,7 +837,9 @@
                 "open": "Open",
                   "review": "Review",
            "viewVendor": "View Vendor",
-           "searchFor":"Search For"
+           "searchFor":"Search For",
+           "verifyYourNumber":"Verify Your Number",
+           "resend":"Resend"
 
 
 

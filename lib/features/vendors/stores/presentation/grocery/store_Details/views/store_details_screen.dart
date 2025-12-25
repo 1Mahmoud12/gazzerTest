@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/di.dart';
-import 'package:gazzer/features/share/data/share_models.dart';
-import 'package:gazzer/features/share/presentation/share_service.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/common/view/unscollable_tabed_list.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/scrollable_tabed_list.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_prod_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_sub_cat_card.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_header_container.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/store_details_states.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/subcategory/subcategory_items_screen.dart';
@@ -50,28 +52,6 @@ class StoreDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(
-        onShare: () async {
-          animationDialogLoading();
-          final result = await ShareService().generateShareLink(
-            type: ShareEnumType.store.name,
-            shareableType: ShareEnumType.store.name,
-            shareableId: storeId.toString(),
-          );
-          closeDialog();
-          switch (result) {
-            case Ok<ShareGenerateResponse>(value: final response):
-              await Clipboard.setData(ClipboardData(text: response.shareLink));
-              if (context.mounted) {
-                Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
-              }
-            case Err<ShareGenerateResponse>(error: final error):
-              if (context.mounted) {
-                Alerts.showToast(error.message);
-              }
-          }
-        },
-      ),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: BlocBuilder<StoreDetailsCubit, StoreDetailsStates>(
@@ -86,58 +66,42 @@ class StoreDetailsScreen extends StatelessWidget {
           }
           final store = state.store;
           final catWithSubCatProds = state.catsWthSubatsAndProds;
-          return Column(
-            spacing: 12,
-            children: [
-              GrocHeaderContainer(
-                child: Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
-                  child: VendorInfoCard(
-                    store,
-                    categories: catWithSubCatProds.map((e) => e.$1.name),
-                    onTimerFinish: (ctx) {
-                      StoreDetailsRoute(storeId: storeId).pushReplacement(ctx);
-                    },
-                  ),
-                ),
-              ),
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) => RefreshIndicator(
-                    onRefresh: () async {
-                      return context.read<StoreDetailsCubit>().loadScreenData();
-                    },
-                    child: UnScollableLTabedList(
-                      tabs: [
-                        // Add best selling items as first tab if available
-                        if (state.bestSellingItems.isNotEmpty) ('', L10n.tr().bestSellingItems),
-                        // Add all category tabs
-                        ...catWithSubCatProds.map((e) => (e.$1.image, e.$1.name)),
-                      ],
-                      maxHeight: constraints.maxHeight,
-                      itemCount: catWithSubCatProds.length + (state.bestSellingItems.isNotEmpty ? 1 : 0),
-                      listItemBuilder: (context, index) {
-                        // Handle best selling items tab
-                        if (state.bestSellingItems.isNotEmpty && index == 0) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: _BestSellingItemsWidget(items: state.bestSellingItems),
-                          );
-                        }
-
-                        // Handle category tabs (adjust index if best selling items tab exists)
-                        final categoryIndex = state.bestSellingItems.isNotEmpty ? index - 1 : index;
-                        final item = state.catsWthSubatsAndProds[categoryIndex];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: _GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: item.$2, products: item.$3, vendor: store),
-                        );
-                      },
+          return ScrollableTabedList(
+            preHerader: Column(
+              spacing: 4,
+              children: [
+                MultiCatRestHeader(restaurant: store, categires: catWithSubCatProds.map((e) => e.$1.name)),
+                // Best Selling Items Widget - outside categories
+                if (state.bestSellingItems.isNotEmpty) _BestSellingItemsWidget(items: state.bestSellingItems),
+              ],
+            ),
+            itemsCount: catWithSubCatProds.length,
+            tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
+            tabBuilder: (context, index) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // CircleGradientBorderedImage(
+                  //   image: catWithSubCatProds[index].$1.image,
+                  // ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: Co.lightGrey),
                     ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Text(catWithSubCatProds[index].$1.name, style: TStyle.blackSemi(13)),
                   ),
-                ),
-              ),
-            ],
+                ],
+              );
+            },
+            listItemBuilder: (context, index) {
+              final item = state.catsWthSubatsAndProds[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: _GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: item.$2, products: item.$3, vendor: store),
+              );
+            },
           );
         },
       ),
@@ -153,27 +117,159 @@ class _BestSellingItemsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: AppConst.defaultHrPadding,
-          child: TitleWithMore(title: L10n.tr().bestSellingItems),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(L10n.tr().bestSellingItems, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
         ),
-        GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: AppConst.defaultPadding,
-          itemCount: items.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 0.59,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-          ),
-          itemBuilder: (context, index) {
-            return GrocProdCard(product: items[index], shape: CardStyle.typeOne);
-          },
+        const VerticalSpacing(8),
+        SingleChildScrollView(
+          padding: EdgeInsets.zero,
+          scrollDirection: Axis.horizontal,
+          child: Row(children: items.map((e) => _BestSellingItemCard(e)).toList()),
         ),
       ],
+    );
+  }
+}
+
+class _BestSellingItemCard extends StatelessWidget {
+  const _BestSellingItemCard(this.product);
+
+  final ProductEntity product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.sizeOf(context).width * .8,
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Co.lightGrey),
+      ),
+      child: InkWell(
+        onTap: () {
+          ProductDetailsRoute(productId: product.id).push(context);
+        },
+        child: Row(
+          children: [
+            // Left side - Image with favorite icon
+            Stack(
+              children: [
+                CustomNetworkImage(product.image, fit: BoxFit.cover, width: 100, height: 100, borderRaduis: 20),
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 16,
+                    child: FavoriteWidget(padding: 2, fovorable: product),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 10),
+            // Right side - Details
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Product name
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            if (product.offer != null) ...[
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(50)),
+                                child: Text(
+                                  '${product.offer!.discount}${product.offer!.discountType == DiscountType.percentage ? '%' : ''}',
+                                  style: TStyle.robotBlackMedium(),
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            // Rating and Review count
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const VectorGraphicsWidget(Assets.starRateIc),
+                                const SizedBox(width: 4),
+                                Text(product.rate.toStringAsFixed(1), style: TStyle.blackBold(14)),
+                                if (product.reviewCount > 0) ...[
+                                  const SizedBox(width: 4),
+                                  Text('(+${product.reviewCount})', style: TStyle.greyRegular(12)),
+                                ],
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            if (product.sold != null && product.sold! > 0)
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const VectorGraphicsWidget(Assets.soldCartIc),
+                                  const HorizontalSpacing(2),
+                                  Text(L10n.tr().sold, style: TStyle.robotBlackSmall()),
+                                  Text(' +${product.sold}', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+                                ],
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(Helpers.getProperPrice(product.price), style: TStyle.primaryBold(16)),
+                              if (product.priceBeforeDiscount != null)
+                                Text(
+                                  Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                  style: TStyle.greyRegular(12).copyWith(decoration: TextDecoration.lineThrough),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      // Add to cart button
+                      CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -188,6 +284,7 @@ class _GridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 8,
       children: [
         Padding(
           padding: AppConst.defaultHrPadding,
@@ -196,11 +293,11 @@ class _GridWidget extends StatelessWidget {
         GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          padding: AppConst.defaultPadding,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           itemCount: subcats.length + products.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            childAspectRatio: 0.59,
+            childAspectRatio: 0.45,
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
           ),

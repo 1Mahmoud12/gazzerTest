@@ -1993,4 +1993,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchFor => 'Search For';
+
+  @override
+  String get verifyYourNumber => 'Verify Your Number';
+
+  @override
+  String get resend => 'Resend';
 }

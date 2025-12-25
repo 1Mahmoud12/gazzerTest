@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
@@ -26,58 +28,26 @@ class GrocProdCard extends StatelessWidget {
         children: [
           Expanded(
             child: Stack(
+              alignment: Alignment.topCenter,
               children: [
-                DecoratedBox(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x88FF9F08),
-                        offset: Offset(0, 0),
-                        blurRadius: 80,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: const Color(0x20504164),
-                      borderRadius: CardStyle.getShapeRadius(shape),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsetsGeometry.all(8),
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: ClipRRect(
-                          borderRadius: CardStyle.getShapeRadius(shape),
-                          child: CustomNetworkImage(
-                            product.image,
-                            fit: BoxFit.cover,
+                CustomNetworkImage(product.image, fit: BoxFit.cover, height: 120, width: double.infinity, borderRaduis: 20),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (product.offer == null)
+                        const SizedBox()
+                      else
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                          decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(20)),
+                          child: Text(
+                            "${product.offer?.discount}${product.offer?.discountType == DiscountType.percentage ? "%" : ""}",
+                            style: TStyle.robotBlackMedium(),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    spacing: 6,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      DecoratedFavoriteWidget(
-                        fovorable: product,
-                        isDarkContainer: false,
-                        size: 18,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      CartToIncrementIcon(
-                        isHorizonal: false,
-                        product: product,
-                        iconSize: 20,
-                        isDarkContainer: false,
-                      ),
+                      FavoriteWidget(size: 40, fovorable: product, padding: 0),
                     ],
                   ),
                 ),
@@ -85,75 +55,77 @@ class GrocProdCard extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: AppConst.defaultHrPadding,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.name,
-                    style: TStyle.primaryBold(12, font: FFamily.inter),
-                  ),
-                  if (product.orderCount != null)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            alignment: AlignmentDirectional.centerStart,
-                            child: Text(
-                              '${L10n.tr().totalUnitSolid}: ',
-                              style: TStyle.primaryBold(10, font: FFamily.inter),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        const HorizontalSpacing(5),
-                        Text(
-                          '${product.orderCount ?? 0}',
-                          style: TStyle.primaryBold(12, font: FFamily.inter),
-                        ),
-                      ],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const VerticalSpacing(4),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        product.name,
+                        style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
 
-                  Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Row(
-                      spacing: 16,
+                    const SizedBox(width: 4),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        GradientTextWzShadow(
-                          text: product.price.toStringAsFixed(2),
-                          shadow: AppDec.blackTextShadow.first,
-                          style: TStyle.blackBold(12, font: FFamily.inter),
-                        ),
-                        GradientTextWzShadow(
-                          text: L10n.tr().egp,
-                          shadow: AppDec.blackTextShadow.first,
-                          style: TStyle.blackBold(12, font: FFamily.inter),
-                        ),
+                        SvgPicture.asset(Assets.starRateIc, width: 16, height: 16),
+                        const HorizontalSpacing(4),
+                        Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
                       ],
                     ),
-                  ),
-                  Row(
-                    children: [
-                      const Icon(Icons.favorite, color: Co.secondary, size: 18),
-                      const Spacer(),
-                      Text(
-                        product.rate.toStringAsFixed(1),
-                        style: TStyle.secondaryBold(12),
+                  ],
+                ),
+
+                const VerticalSpacing(4),
+                Text(
+                  product.description == '' ? product.name : product.description,
+                  style: TStyle.robotBlackSmall(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                ),
+                const VerticalSpacing(4),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: Wrap(
+                        runSpacing: 4,
+                        alignment: WrapAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              FittedBox(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                              ),
+                              if (product.offer != null)
+                                FittedBox(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
+                                    Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                    style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
+
+                          //CartToIncrementIcon(isHorizonal: false, product: product, iconSize: 20, isDarkContainer: false),
+                        ],
                       ),
-                      Text(
-                        " ( ${product.reviewCount.toInt()} )",
-                        style: TStyle.blackBold(12),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

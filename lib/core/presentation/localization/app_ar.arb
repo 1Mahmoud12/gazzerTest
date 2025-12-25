@@ -837,7 +837,9 @@
                   "open": "مفتوح",
                     "review": "تقييم",
                       "viewVendor": "عرض المتجر",
-                      "searchFor":"ابحث عن"
+                      "searchFor":"ابحث عن",
+                      "verifyYourNumber":"التحقق من رقم هاتفك",
+                      "Resend":"اعادة ارسال"
 
 
 

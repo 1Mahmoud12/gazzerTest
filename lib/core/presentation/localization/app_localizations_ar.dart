@@ -1992,4 +1992,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get searchFor => 'ابحث عن';
+
+  @override
+  String get verifyYourNumber => 'التحقق من رقم هاتفك';
+
+  @override
+  String get resend => 'Resend';
 }

@@ -19,7 +19,8 @@ import 'package:intl/intl.dart';
 
 class MultiCatRestHeader extends StatelessWidget {
   const MultiCatRestHeader({super.key, required this.restaurant, required this.categires});
-  final RestaurantEntity restaurant;
+
+  final GenericVendorEntity restaurant;
   final Iterable<String>? categires;
   @override
   Widget build(BuildContext context) {
@@ -122,7 +123,9 @@ class MultiCatRestHeader extends StatelessWidget {
         ),
         if (restaurant.description.isNotEmpty) ...[
           const SizedBox(height: 12),
-          Text(restaurant.description, style: TStyle.robotBlackSubTitle(), textAlign: TextAlign.start),
+          Row(
+            children: [Text(restaurant.description, style: TStyle.robotBlackSubTitle(), textAlign: TextAlign.start)],
+          ),
         ],
         // Rating and Review
         const VerticalSpacing(12),
