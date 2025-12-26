@@ -61,7 +61,7 @@ class _MainSearchWidgetState extends State<MainSearchWidget> {
             borderRadius: widget.borderRadius,
             bgColor: widget.bgColor ?? Colors.transparent,
             hintText: widget.hintText,
-            prefix: widget.prefix ?? const Icon(Icons.search, color: Co.purple, size: 32),
+            prefix: widget.prefix ?? const Icon(Icons.search, color: Co.black, size: 24),
             onChange: widget.onChange,
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),

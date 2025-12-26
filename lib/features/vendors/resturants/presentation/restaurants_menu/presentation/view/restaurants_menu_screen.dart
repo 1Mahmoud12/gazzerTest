@@ -55,8 +55,6 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final topPadding = MediaQuery.paddingOf(context).top;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: FloatingDraggableWidget(
@@ -70,7 +68,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
             if (state is ScreenDataError) {
               return Column(
                 children: [
-                  const RestCatHeaderWidget(),
+                  MenuCategoriesHeaderWidget(title: L10n.tr().bestMenuOfRestaurants, colors: [Co.buttonGradient.withAlpha(200), Co.bg.withAlpha(0)]),
                   Expanded(
                     child: FailureComponent(message: L10n.tr().couldnotLoadDataPleaseTryAgain, onRetry: () => cubit.loadScreenData()),
                   ),
@@ -92,7 +90,10 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                   preHerader: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const RestCatHeaderWidget(),
+                      MenuCategoriesHeaderWidget(
+                        title: L10n.tr().bestMenuOfRestaurants,
+                        colors: [Co.buttonGradient.withAlpha(200), Co.bg.withAlpha(0)],
+                      ),
                       Padding(
                         padding: AppConst.defaultHrPadding,
                         child: MainSearchWidget(height: 80, hintText: L10n.tr().searchForStoresItemsAndCAtegories),

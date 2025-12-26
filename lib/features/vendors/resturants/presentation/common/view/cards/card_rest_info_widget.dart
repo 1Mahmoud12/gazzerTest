@@ -88,7 +88,13 @@ class CardRestInfoWidget extends StatelessWidget {
             ],
           ),
           const VerticalSpacing(8),
-          MainBtn(onPressed: () {}, text: L10n.tr().viewVendor, width: double.infinity, padding: const EdgeInsets.symmetric(vertical: 4)),
+          MainBtn(
+            onPressed: () {},
+            isEnabled: false,
+            text: L10n.tr().viewVendor,
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 4),
+          ),
         ],
       ),
     );

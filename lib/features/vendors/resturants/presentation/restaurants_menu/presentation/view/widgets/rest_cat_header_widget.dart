@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
-import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_clipper.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
-class RestCatHeaderWidget extends StatelessWidget {
-  const RestCatHeaderWidget({super.key});
+class MenuCategoriesHeaderWidget extends StatelessWidget {
+  final String title;
+  final List<Color> colors;
+
+  const MenuCategoriesHeaderWidget({super.key, required this.title, required this.colors});
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.paddingOf(context).top + (2 * kToolbarHeight);
+    final height = MediaQuery.paddingOf(context).top + (1.5 * kToolbarHeight);
     return LayoutBuilder(
       builder: (context, constraints) => SizedBox(
         height: height,
@@ -30,13 +31,13 @@ class RestCatHeaderWidget extends StatelessWidget {
                   clipper: AddShapeClipper(),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      gradient: Grad().bgLinear.copyWith(colors: [Co.buttonGradient.withAlpha(200), Co.bg.withAlpha(0)], stops: const [0.0, 1]),
+                      gradient: Grad().bgLinear.copyWith(colors: colors, stops: const [0.0, 1]),
                     ),
                   ),
                 ),
               ),
             ),
-            MainAppBar(title: L10n.tr().bestMenuOfRestaurants),
+            MainAppBar(title: title),
           ],
         ),
       ),

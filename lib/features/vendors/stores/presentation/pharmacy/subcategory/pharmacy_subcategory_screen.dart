@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_header.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/subcategory/widgets/pharmacy_scrollable_tab_list.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/subcategory/widgets/pharmacy_vendor_card.dart';
@@ -13,14 +13,9 @@ import 'package:go_router/go_router.dart';
 part 'pharmacy_subcategory_screen.g.dart';
 
 /// Pharmacy subcategory screen showing vendors for a specific category
-@TypedGoRoute<PharmacySubcategoryRoute>(
-  path: PharmacySubcategoryRoute.route,
-)
+@TypedGoRoute<PharmacySubcategoryRoute>(path: PharmacySubcategoryRoute.route)
 class PharmacySubcategoryRoute extends GoRouteData {
-  const PharmacySubcategoryRoute({
-    required this.categoryId,
-    required this.categoryName,
-  });
+  const PharmacySubcategoryRoute({required this.categoryId, required this.categoryName});
 
   final int categoryId;
   final String categoryName;
@@ -29,19 +24,12 @@ class PharmacySubcategoryRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PharmacySubcategoryScreen(
-      categoryId: categoryId,
-      categoryName: categoryName,
-    );
+    return PharmacySubcategoryScreen(categoryId: categoryId, categoryName: categoryName);
   }
 }
 
 class PharmacySubcategoryScreen extends StatefulWidget {
-  const PharmacySubcategoryScreen({
-    super.key,
-    required this.categoryId,
-    required this.categoryName,
-  });
+  const PharmacySubcategoryScreen({super.key, required this.categoryId, required this.categoryName});
 
   final int categoryId;
   final String categoryName;
@@ -66,17 +54,9 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Pharmacy Header
-            PharmacyHeader(
-              onBackTap: () => context.pop(),
-              onSearch: () {
-                // TODO: Navigate to pharmacy search
-              },
-              onNotificationTap: () {
-                // TODO: Navigate to notifications
-              },
-              onLanguageTap: () {
-                // TODO: Toggle language
-              },
+            MenuCategoriesHeaderWidget(
+              title: L10n.tr().pharmacyStores,
+              colors: [const Color(0xff4A2197), const Color(0xff4AFF5C).withOpacityNew(.8)],
             ),
 
             const SizedBox(height: 16),
@@ -84,48 +64,26 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
             // Category Title
             Padding(
               padding: AppConst.defaultHrPadding,
-              child: Text(
-                '${widget.categoryName} Pharmacies',
-                style: TStyle.primaryBold(22),
-              ),
+              child: Text('${widget.categoryName} Pharmacies', style: TStyle.primaryBold(22)),
             ),
 
             const SizedBox(height: 16),
           ],
         ),
         tabContainerBuilder: (child) {
-          return Container(
-            color: Co.white,
-            child: child,
-          );
+          return Container(color: Co.white, child: child);
         },
         tabBuilder: (context, index, selected) {
           final subcategory = subcategories[index];
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(90),
-              border: Border.all(
-                color: Co.buttonGradient.withOpacityNew(.3),
-                width: 2,
-              ),
-              color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
+              border: Border.all(color: Co.purple100, width: 2),
+              color: selected == index ? Co.purple : Co.white,
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircleGradientBorderedImage(
-                  image: subcategory['image'],
-                  showBorder: false,
-                ),
-                Padding(
-                  padding: AppConst.defaultHrPadding,
-                  child: Text(
-                    subcategory['name'],
-                    style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13),
-                  ),
-                ),
-              ],
-            ),
+            padding: const EdgeInsets.all(8),
+
+            child: Text(subcategory['name'], style: TStyle.robotBlackMedium().copyWith(color: selected == index ? Co.white : Co.black)),
           );
         },
         listItemBuilder: (context, index) {
@@ -139,19 +97,14 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                 // Pharmacies Title
                 Padding(
                   padding: AppConst.defaultHrPadding,
-                  child: Text(
-                    subcategories[index]['name'],
-                    style: TStyle.primaryBold(18),
-                  ),
+                  child: Text(subcategories[index]['name'], style: TStyle.primaryBold(18)),
                 ),
 
                 const SizedBox(height: 12),
 
                 // Vendors List
                 ...vendors.map((vendor) {
-                  final isFavorite = _favoriteVendorIds.contains(
-                    -vendor['id'],
-                  );
+                  final isFavorite = _favoriteVendorIds.contains(-vendor['id']);
 
                   return Padding(
                     padding: AppConst.defaultHrPadding,
@@ -167,11 +120,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                       isClosed: vendor['isClosed'],
                       isFavorite: isFavorite,
                       onTap: () {
-                        context.navigateToPage(
-                          PharmacyStoreScreen(
-                            vendorId: -vendor['id'],
-                          ),
-                        );
+                        context.navigateToPage(PharmacyStoreScreen(vendorId: -vendor['id']));
                       },
                       onFavoriteTap: () {
                         setState(() {
@@ -200,27 +149,15 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
     if (widget.categoryId == 1) {
       // Medications subcategories
       return [
-        {
-          'name': 'Medications',
-          'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        },
-        {
-          'name': 'Skin Care',
-          'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        },
-        {
-          'name': 'Hair Care',
-          'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-        },
+        {'name': 'Medications', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
+        {'name': 'Skin Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
+        {'name': 'Hair Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
       ];
     }
 
     // Default subcategories
     return [
-      {
-        'name': 'All',
-        'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-      },
+      {'name': 'All', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
     ];
   }
 

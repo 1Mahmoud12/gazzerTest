@@ -79,7 +79,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
                             spacing: 12,
                             children: [
                               Expanded(child: MainSearchWidget(height: 60, hintText: L10n.tr().searchForStoresItemsAndCAtegories)),
-                              HorizontalSpacing(AppConst.floatingCartWidth),
+                              const HorizontalSpacing(AppConst.floatingCartWidth),
                             ],
                           ),
                           const SizedBox.shrink(),

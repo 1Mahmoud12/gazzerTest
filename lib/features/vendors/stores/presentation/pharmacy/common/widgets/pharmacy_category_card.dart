@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
@@ -29,43 +30,23 @@ class PharmacyCategoryCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.06),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacityNew(0.06), blurRadius: 8, offset: const Offset(0, 2))],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Category Image
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Co.purple.withOpacity(.6),
-                      blurRadius: 4,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+            Container(
+              margin: const EdgeInsets.all(2),
 
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return CustomNetworkImage(
-                        'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                        width: constraints.maxWidth,
-                        height: 90,
-                        fit: BoxFit.cover,
-                      );
-                    },
-                  ),
+              child: const ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+
+                child: CustomNetworkImage(
+                  'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+                  width: 107,
+                  height: 100,
+
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -73,61 +54,17 @@ class PharmacyCategoryCard extends StatelessWidget {
             // Category Info
             Padding(
               padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Category Name
-                  Text(
-                    name,
-                    style: TStyle.burbleBold(14),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 12),
-
-                  // Rating
-                  _buildRating(),
-                ],
+              child: Text(
+                name,
+                style: TStyle.robotBlackRegular().copyWith(fontWeight: FontWeight.w500),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildRating() {
-    // Row(
-    //   children: [
-    //     const Icon(Icons.favorite, color: Co.secondary, size: 18),
-    //     const Spacer(),
-    //     Text(
-    //       product.rate.toStringAsFixed(1),
-    //       style: TStyle.secondaryBold(12),
-    //     ),
-    //     Text(
-    //       " ( ${product.reviewCount.toInt()} )",
-    //       style: TStyle.blackBold(12),
-    //     ),
-    //     const Spacer(),
-    //   ],
-    // ),
-    return Row(
-      children: [
-        const Icon(Icons.star, color: Co.secondary, size: 18),
-
-        const Spacer(),
-        const SizedBox(width: 4),
-        Text(
-          rating.toStringAsFixed(1),
-          style: TStyle.secondaryBold(12),
-        ),
-        const SizedBox(width: 4),
-        Text(
-          '($reviewCount)',
-          style: TStyle.greyBold(11),
-        ),
-      ],
     );
   }
 }

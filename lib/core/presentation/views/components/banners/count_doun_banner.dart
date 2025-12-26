@@ -29,7 +29,7 @@ class _CountDownBannerState extends State<CountDownBanner> with SingleTickerProv
     super.initState();
   }
 
-  _animate() {
+  void _animate() {
     _controller.forward().then((_) {
       _controller.animateBack(0, duration: animationduration);
     });
@@ -49,12 +49,7 @@ class _CountDownBannerState extends State<CountDownBanner> with SingleTickerProv
       child: Stack(
         children: [
           SizedBox.expand(
-            child: CustomNetworkImage(
-              widget.banner.backgroundImage ?? '',
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-            ),
+            child: CustomNetworkImage(widget.banner.backgroundImage ?? '', fit: BoxFit.cover, height: double.infinity, width: double.infinity),
           ),
           Align(
             alignment: Alignment(widget.banner.offset?.dx ?? -0.95, widget.banner.offset?.dy ?? -1),
@@ -66,10 +61,7 @@ class _CountDownBannerState extends State<CountDownBanner> with SingleTickerProv
           ),
           Align(
             alignment: const Alignment(0.6, -0.3),
-            child: SlideTimer(
-              duration: const Duration(seconds: 1),
-              startTime: DateTime.now().add(const Duration(hours: 1)),
-            ),
+            child: SlideTimer(duration: const Duration(seconds: 1), startTime: DateTime.now().add(const Duration(hours: 1))),
           ),
         ],
       ),

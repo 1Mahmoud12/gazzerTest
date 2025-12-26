@@ -9,6 +9,7 @@ import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
@@ -18,10 +19,19 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Detail
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 
 class VerticalProductCard extends StatelessWidget {
-  const VerticalProductCard({super.key, required this.product, required this.canAdd, this.fontFactor = 1.0, this.onTap, this.ignorePointer = false});
+  const VerticalProductCard({
+    super.key,
+    required this.product,
+    required this.canAdd,
+    this.fontFactor = 1.0,
+    this.onTap,
+    this.ignorePointer = false,
+    this.pharmacy = false,
+  });
   final GenericItemEntity product;
   final bool canAdd;
   final bool ignorePointer;
+  final bool pharmacy;
   final double fontFactor;
   final Function? onTap;
   @override
@@ -138,7 +148,7 @@ class VerticalProductCard extends StatelessWidget {
                         },
                         child: Row(
                           children: [
-                            SvgPicture.asset(Assets.restaurantNameIc),
+                            VectorGraphicsWidget(pharmacy ? Assets.pharmacyStoreIc : Assets.restaurantNameIc),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(product.store?.name ?? '', style: TStyle.robotBlackMedium(), overflow: TextOverflow.ellipsis, maxLines: 1),

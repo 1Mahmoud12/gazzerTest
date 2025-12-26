@@ -363,4 +363,7 @@ class Assets {
   static const String deliveryTimeIc = "assets/svg/deliveryTimeIc.svg";
   static const String cacheRestaurantIc = "assets/svg/cachRestaurantIc.svg";
   static const String cacheClockIc = "assets/svg/cacheClockIc.svg";
+
+  //Pharmacy Header
+  static const String pharmacyStoreIc = "assets/svg/pharmacyStoreIc.svg";
 }

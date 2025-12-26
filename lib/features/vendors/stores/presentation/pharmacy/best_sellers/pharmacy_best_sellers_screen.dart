@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
+import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_header.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_product_card_style2.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
 import 'package:go_router/go_router.dart';
 
 part 'pharmacy_best_sellers_screen.g.dart';
@@ -30,72 +34,54 @@ class PharmacyBestSellersScreen extends StatelessWidget {
     final bestSellers = _getAllBestSellers();
 
     return Scaffold(
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.zero,
         children: [
-          // Pharmacy Header
-          PharmacyHeader(
-            onBackTap: () => context.pop(),
-            onSearch: () {
-              // TODO: Navigate to pharmacy search
-            },
-            onNotificationTap: () {
-              // TODO: Navigate to notifications
-            },
-            onLanguageTap: () {
-              // TODO: Toggle language
-            },
+          MenuCategoriesHeaderWidget(title: L10n.tr().bestSellers, colors: [const Color(0xff4A2197), const Color(0xff4AFF5C).withOpacityNew(.8)]),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: MainSearchWidget(hintText: L10n.tr().searchFor),
           ),
-
+          // Pharmacy Header
+          // PharmacyHeader(
+          //   onBackTap: () => context.pop(),
+          //   onSearch: () {
+          //     // TODO: Navigate to pharmacy search
+          //   },
+          //   onNotificationTap: () {
+          //     // TODO: Navigate to notifications
+          //   },
+          //   onLanguageTap: () {
+          //     // TODO: Toggle language
+          //   },
+          // ),
+          const VerticalSpacing(12),
           // Main Content
           Expanded(
-            child: ListView(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              padding: EdgeInsets.zero,
-              children: [
-                // Title Section
-                Padding(
-                  padding: AppConst.defaultHrPadding,
-                  child: const TitleWithMore(title: 'Best Sellers'),
-                ),
-                const VerticalSpacing(16),
-                // Products Grid
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Wrap(
-                        runSpacing: 10,
-                        spacing: 5,
-                        runAlignment: WrapAlignment.spaceAround,
-                        alignment: WrapAlignment.spaceEvenly,
-                        children: List.generate(bestSellers.length, (index) {
-                          final product = bestSellers[index];
-                          return index % 2 == 0
-                              ? PharmacyProductCardStyle2(
-                                  product: product['pharmacies'],
-                                  vendorName: product['vendorName'],
-                                  height: MediaQuery.sizeOf(context).height * .19,
-                                  width: MediaQuery.sizeOf(context).width * .46,
-                                  onTap: () {
-                                    // Handle tap
-                                  },
-                                )
-                              : PharmacyProductCardStyle2(
-                                  product: product['pharmacies'],
-                                  vendorName: product['vendorName'],
-
-                                  height: MediaQuery.sizeOf(context).height * .19,
-                                  width: MediaQuery.sizeOf(context).width * .46,
-                                  onTap: () {
-                                    // Handle tap
-                                  },
-                                );
-                        }),
-                      ),
+            child: Padding(
+              padding: AppConst.defaultHrPadding,
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: List.generate(bestSellers.length, (index) {
+                  final product = bestSellers[index];
+                  final screenWidth = MediaQuery.sizeOf(context).width;
+                  final padding = AppConst.defaultHrPadding.horizontal;
+                  final availableWidth = screenWidth - padding;
+                  final cardWidth = (availableWidth - 12) / 2;
+                  return SizedBox(
+                    width: cardWidth,
+                    child: VerticalProductCard(
+                      product: product['pharmacies'],
+                      pharmacy: true,
+                      canAdd: true,
+                      onTap: () {
+                        // TODO: Navigate to product details
+                      },
                     ),
-                  ],
-                ),
-              ],
+                  );
+                }),
+              ),
             ),
           ),
         ],
@@ -108,46 +94,47 @@ class PharmacyBestSellersScreen extends StatelessWidget {
   List<Map<String, dynamic>> _getAllBestSellers() {
     return [
       {
-        'pharmacies': const ProductEntity(
+        'pharmacies': ProductEntity(
           id: -1,
           name: 'Hair Straightening Cream',
-          description: 'Professional hair care pharmacies',
+          description: 'Professional hair care product',
           price: 110.0,
           image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
           rate: 5.0,
           reviewCount: 120,
           outOfStock: false,
           sold: 0,
+          store: SimpleStoreEntity(id: 1, name: 'Al-Azab Pharmacy', type: VendorType.pharmacy.value, image: ''),
         ),
         'vendorName': 'Al-Azab Pharmacy',
       },
       {
-        'pharmacies': const ProductEntity(
-          id: -2,
-          sold: 0,
-
-          name: 'Skin Serum',
-          description: 'Anti-aging serum',
-          price: 95.0,
+        'pharmacies': ProductEntity(
+          id: -1,
+          name: 'Hair Straightening Cream',
+          description: 'Professional hair care product',
+          price: 110.0,
           image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-          rate: 4.8,
-          reviewCount: 85,
+          rate: 5.0,
+          reviewCount: 120,
           outOfStock: false,
+          sold: 0,
+          store: SimpleStoreEntity(id: 1, name: 'Al-Azab Pharmacy', type: VendorType.pharmacy.value, image: ''),
         ),
         'vendorName': 'Health Plus Pharmacy',
       },
       {
-        'pharmacies': const ProductEntity(
-          id: -3,
-          sold: 0,
-
-          name: 'Vitamin C Tablets',
-          description: 'Immune system support',
-          price: 45.0,
+        'pharmacies': ProductEntity(
+          id: -1,
+          name: 'Hair Straightening Cream',
+          description: 'Professional hair care product',
+          price: 110.0,
           image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-          rate: 4.7,
-          reviewCount: 200,
+          rate: 5.0,
+          reviewCount: 120,
           outOfStock: false,
+          sold: 0,
+          store: SimpleStoreEntity(id: 1, name: 'Al-Azab Pharmacy', type: VendorType.pharmacy.value, image: ''),
         ),
         'vendorName': 'Care Pharmacy',
       },

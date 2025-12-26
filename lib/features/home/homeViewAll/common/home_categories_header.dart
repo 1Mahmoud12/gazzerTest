@@ -41,10 +41,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                   width: width * 1.2,
                   height: width,
                   decoration: BoxDecoration(
-                    gradient: Grad().bglightLinear.copyWith(
-                      begin: Alignment.centerRight,
-                      colors: [Co.buttonGradient.withAlpha(100), Colors.black],
-                    ),
+                    gradient: Grad().bglightLinear.copyWith(begin: Alignment.centerRight, colors: [Co.buttonGradient.withAlpha(100), Colors.black]),
                   ),
                   // foregroundDecoration: BoxDecoration(gradient: Grad().linearGradient),
                 ),
@@ -54,12 +51,7 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
           Align(
             alignment: const Alignment(0, -1),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                16,
-                MediaQuery.paddingOf(context).top,
-                16,
-                0,
-              ),
+              padding: EdgeInsets.fromLTRB(16, MediaQuery.paddingOf(context).top, 16, 0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 12,
@@ -70,13 +62,8 @@ class _HomeCategoriesHeaderState extends State<HomeCategoriesHeader> {
                       controller: controller,
                       height: 80,
                       hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                      borderRadius: 64,
                       bgColor: Colors.transparent,
-                      prefix: const Icon(
-                        Icons.search,
-                        color: Co.purple,
-                        size: 24,
-                      ),
+                      prefix: const Icon(Icons.search, color: Co.purple, size: 24),
                     ),
                   ),
                   const MainCartWidget(),

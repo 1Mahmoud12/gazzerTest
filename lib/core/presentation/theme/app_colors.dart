@@ -61,4 +61,5 @@ class Co {
   static const purple600 = Color(0xFF8C64E6);
   static const earnedMoney = Color(0xFFFFCF86);
   static const borderColor = Color(0xFFE0E0E0);
+  static Color closedColor = const Color(0xFF1D1D1D);
 }
