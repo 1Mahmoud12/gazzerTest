@@ -16,7 +16,7 @@ class HorizontalCarousal extends StatefulWidget {
 }
 
 class _HorizontalCarousalState extends State<HorizontalCarousal> {
-  final PageController controller = PageController(viewportFraction: 1);
+  final PageController controller = PageController();
   late final Timer timer;
   int index = 0;
 
@@ -55,13 +55,7 @@ class _HorizontalCarousalState extends State<HorizontalCarousal> {
           PageTransitionSwitcher(
             duration: Durations.long4,
             transitionBuilder: (child, primaryAnimation, secondaryAnimation) => FadeTransition(opacity: primaryAnimation, child: child),
-            child: CustomNetworkImage(
-              key: ValueKey(index),
-              widget.images[index],
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-            ),
+            child: CustomNetworkImage(key: ValueKey(index), widget.images[index], fit: BoxFit.cover, height: double.infinity, width: double.infinity),
           ),
           SizedBox(
             height: double.infinity,
@@ -69,8 +63,6 @@ class _HorizontalCarousalState extends State<HorizontalCarousal> {
             child: PageView.builder(
               controller: controller,
               itemCount: widget.images.length,
-              scrollDirection: Axis.horizontal,
-              padEnds: true,
               onPageChanged: (value) => setState(() => index = value),
               itemBuilder: (context, index) => const ColoredBox(color: Colors.transparent),
             ),
@@ -93,18 +85,8 @@ class _HorizontalCarousalState extends State<HorizontalCarousal> {
               controller: controller, // PageController
               count: widget.images.length,
               effect: CustomizableEffect(
-                dotDecoration: DotDecoration(
-                  height: 7,
-                  width: 7,
-                  color: Co.darkPurple,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                activeDotDecoration: DotDecoration(
-                  height: 7,
-                  width: 27,
-                  color: Co.darkPurple,
-                  borderRadius: BorderRadius.circular(100),
-                ),
+                dotDecoration: DotDecoration(height: 7, width: 7, color: Co.darkPurple, borderRadius: BorderRadius.circular(100)),
+                activeDotDecoration: DotDecoration(height: 7, width: 27, color: Co.darkPurple, borderRadius: BorderRadius.circular(100)),
               ),
             ),
           ),
