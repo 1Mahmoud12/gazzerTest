@@ -45,7 +45,7 @@ class MultiCatRestHeader extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundColor: Co.lightGrey,
-                      child: FavoriteWidget(size: 24, color: Colors.transparent, padding: 4, fovorable: restaurant),
+                      child: FavoriteWidget(size: 24, backgroundColor: Colors.transparent, padding: 4, fovorable: restaurant),
                     ),
                     const SizedBox(width: 8),
                     CircleAvatar(
@@ -142,18 +142,18 @@ class MultiCatRestHeader extends StatelessWidget {
         // Rating and Review
         const VerticalSpacing(12),
         // Categories/Cuisine Types
-        if (categires != null && categires!.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              categires!.join(', '),
-              style: TStyle.greyRegular(14),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        const SizedBox(height: 12),
+        // if (categires != null && categires!.isNotEmpty)
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 16),
+        //     child: Text(
+        //       categires!.join(', '),
+        //       style: TStyle.greyRegular(14),
+        //       textAlign: TextAlign.center,
+        //       maxLines: 2,
+        //       overflow: TextOverflow.ellipsis,
+        //     ),
+        //   ),
+        // const SizedBox(height: 12),
         // Info Bar
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -174,7 +174,7 @@ class MultiCatRestHeader extends StatelessWidget {
               _InfoItem(
                 title: L10n.tr().deliveryFee,
                 icon: const VectorGraphicsWidget(Assets.cacheRestaurantIc),
-                text: restaurant.deliveryFee != null ? Helpers.getProperPrice(restaurant.deliveryFee!) : '0 EGP',
+                text: restaurant.deliveryFee != null ? Helpers.getProperPrice(restaurant.deliveryFee!) : Helpers.getProperPrice(0),
               ),
               // Divider
               Container(width: 2, height: 40, color: Co.darkGrey),

@@ -844,7 +844,10 @@
                       "profile":"الملف الشخصي",
                       "closedUntil": "مغلق حتى",
                         "openUntil": "مفتوح حتى",
-                        "todayDeals": "عروض اليوم"
+                        "todayDeals": "عروض اليوم",
+                        "save":"وفر",
+                          "relatedProducts": "منتجات ذات صلة"
+
 
 
 

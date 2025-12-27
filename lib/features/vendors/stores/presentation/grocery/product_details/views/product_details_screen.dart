@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus.dart';
-import 'package:gazzer/features/share/data/share_models.dart';
-import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_states.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/components/ordered_with_component.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/product_price_summary.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/single_cat_restaurant/view/widgets/add_special_note.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/cubit/product_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/cubit/product_details_states.dart';
@@ -72,117 +65,146 @@ class ProductDetailsScreen extends StatelessWidget {
             child: Builder(
               builder: (context) {
                 return Scaffold(
-                  appBar: MainAppBar(
-                    onShare: () async {
-                      animationDialogLoading();
-                      final result = await ShareService().generateShareLink(
-                        type: ShareEnumType.store_item.name,
-                        shareableType: ShareEnumType.store_item.name,
-                        shareableId: productId.toString(),
-                      );
-                      closeDialog();
-                      switch (result) {
-                        case Ok<ShareGenerateResponse>(value: final response):
-                          await Clipboard.setData(ClipboardData(text: response.shareLink));
-                          if (context.mounted) {
-                            Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
-                          }
-                        case Err<ShareGenerateResponse>(error: final error):
-                          if (context.mounted) {
-                            Alerts.showToast(error.message);
-                          }
-                      }
-                    },
-                    showBadge: true,
-                  ),
                   body: ListView(
                     children: [
+                      ProductDetailsWidget(product: state.product),
+                      const VerticalSpacing(12),
                       Padding(
                         padding: AppConst.defaultHrPadding,
-                        child: Text(state.product.name, style: TStyle.primaryBold(20)),
+                        child: Text(state.product.name, style: TStyle.robotBlackSubTitle()),
                       ),
-                      ProductDetailsWidget(product: state.product),
-                      const VerticalSpacing(16),
+
+                      if (state.product.description != '') ...[
+                        const VerticalSpacing(12),
+                        Padding(
+                          padding: AppConst.defaultHrPadding,
+                          child: Text(state.product.description, style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
+                        ),
+                      ],
+                      const VerticalSpacing(12),
 
                       Padding(
                         padding: AppConst.defaultHrPadding,
-                        child: Column(
+                        child: Row(
                           children: [
-                            OrderedWithComponent(
-                              products: state.orderedWith,
-                              type: CartItemType.product,
-                              title: L10n.tr().youMayAlsoLike,
-                              isDisabled: false,
-                              //initialQuantities: context.read<AddToCartCubit>().orderedWithSelections,
-                              //onQuantityChanged: (id, qty) => context.read<AddToCartCubit>().setOrderedWithQuantity(id, qty),
+                            Expanded(
+                              child: Wrap(
+                                //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                runAlignment: WrapAlignment.spaceBetween,
+                                alignment: WrapAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      FittedBox(
+                                        alignment: AlignmentDirectional.centerStart,
+                                        child: Text(
+                                          Helpers.getProperPrice(state.product.price),
+                                          style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                                        ),
+                                      ),
+                                      if (state.product.offer != null)
+                                        FittedBox(
+                                          alignment: AlignmentDirectional.centerStart,
+                                          child: Text(
+                                            Helpers.getProperPrice(state.product.priceBeforeDiscount!),
+                                            style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+
+                                  const SizedBox(width: 8),
+                                  if (!(key?.toString().contains('store') ?? false))
+                                    CartToIncrementIcon(isHorizonal: true, product: state.product, iconSize: 25, isDarkContainer: true),
+                                ],
+                              ),
                             ),
-                            const VerticalSpacing(16),
-                            BlocBuilder<AddToCartCubit, AddToCartStates>(
-                              builder: (context, state) => AddSpecialNote(note: state.note, onNoteChange: context.read<AddToCartCubit>().setNote),
-                            ),
-                            const VerticalSpacing(16),
                           ],
                         ),
                       ),
+                      Column(
+                        children: [
+                          const VerticalSpacing(12),
+                          BlocBuilder<AddToCartCubit, AddToCartStates>(
+                            builder: (context, state) => Padding(
+                              padding: AppConst.defaultHrPadding,
+                              child: AddSpecialNote(note: state.note, onNoteChange: context.read<AddToCartCubit>().setNote),
+                            ),
+                          ),
+                          const VerticalSpacing(12),
+
+                          OrderedWithComponent(
+                            products: state.orderedWith,
+                            type: CartItemType.product,
+                            title: L10n.tr().relatedProducts,
+                            isDisabled: false,
+                            //initialQuantities: context.read<AddToCartCubit>().orderedWithSelections,
+                            //onQuantityChanged: (id, qty) => context.read<AddToCartCubit>().setOrderedWithQuantity(id, qty),
+                          ),
+
+                          const VerticalSpacing(12),
+                        ],
+                      ),
                     ],
                   ),
-                  bottomNavigationBar: state.product.quantityInStock == 0
-                      ? const SizedBox()
-                      : BlocConsumer<AddToCartCubit, AddToCartStates>(
-                          listener: (context, cartState) {
-                            if (cartState.status == ApiStatus.success) {
-                              // Reload CartCubit to reflect the updated cart state
-                              context.read<CartCubit>().loadCart();
-                              Alerts.showToast(cartState.message, error: false);
-                              context.pop(true); // ** to declare that the cart has changed
-                            } else if (cartState.status == ApiStatus.error) {
-                              Alerts.showToast(cartState.message);
-                            }
-                          },
-                          builder: (context, cartState) {
-                            final cubit = context.read<AddToCartCubit>();
-                            if (cartState.quantity == 0) return const SizedBox.shrink();
-                            return PopScope(
-                              canPop: Session().client == null || !cartState.hasUserInteracted,
-                              onPopInvokedWithResult: (didPop, result) {
-                                if (!didPop) {
-                                  if (!didPop) {
-                                    showDialog<bool>(
-                                      context: context,
-                                      builder: (context) => Dialogs.confirmDialog(
-                                        title: L10n.tr().alert,
-                                        context: context,
-                                        okBgColor: Colors.redAccent,
-                                        message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
-                                      ),
-                                    ).then((confirmed) {
-                                      if (confirmed == true) {
-                                        cubit.userRequestClose();
-                                        if (context.mounted) context.pop();
-                                      }
-                                    });
-                                  }
-                                }
-                              },
-                              child: ProductPriceSummary(
-                                isLoading: cartState.status == ApiStatus.loading,
-                                price: cartState.totalPrice,
-                                quantity: cartState.quantity,
-                                maxQuantity: state.product.quantityInStock,
-                                onChangeQuantity: ({required isAdding}) {
-                                  if (isAdding) {
-                                    cubit.increment();
-                                  } else {
-                                    cubit.decrement();
-                                  }
-                                },
-                                onsubmit: () async {
-                                  cubit.addToCart(context);
-                                },
-                              ),
-                            );
-                          },
-                        ),
+                  // bottomNavigationBar: state.product.quantityInStock == 0
+                  //     ? const SizedBox()
+                  //     : BlocConsumer<AddToCartCubit, AddToCartStates>(
+                  //         listener: (context, cartState) {
+                  //           if (cartState.status == ApiStatus.success) {
+                  //             // Reload CartCubit to reflect the updated cart state
+                  //             context.read<CartCubit>().loadCart();
+                  //             Alerts.showToast(cartState.message, error: false);
+                  //             context.pop(true); // ** to declare that the cart has changed
+                  //           } else if (cartState.status == ApiStatus.error) {
+                  //             Alerts.showToast(cartState.message);
+                  //           }
+                  //         },
+                  //         builder: (context, cartState) {
+                  //           final cubit = context.read<AddToCartCubit>();
+                  //           if (cartState.quantity == 0) return const SizedBox.shrink();
+                  //           return PopScope(
+                  //             canPop: Session().client == null || !cartState.hasUserInteracted,
+                  //             onPopInvokedWithResult: (didPop, result) {
+                  //               if (!didPop) {
+                  //                 if (!didPop) {
+                  //                   showDialog<bool>(
+                  //                     context: context,
+                  //                     builder: (context) => Dialogs.confirmDialog(
+                  //                       title: L10n.tr().alert,
+                  //                       context: context,
+                  //                       okBgColor: Colors.redAccent,
+                  //                       message: L10n.tr().yourChoicesWillBeClearedBecauseYouDidntAddToCart,
+                  //                     ),
+                  //                   ).then((confirmed) {
+                  //                     if (confirmed == true) {
+                  //                       cubit.userRequestClose();
+                  //                       if (context.mounted) context.pop();
+                  //                     }
+                  //                   });
+                  //                 }
+                  //               }
+                  //             },
+                  //             child: ProductPriceSummary(
+                  //               isLoading: cartState.status == ApiStatus.loading,
+                  //               price: cartState.totalPrice,
+                  //               quantity: cartState.quantity,
+                  //               maxQuantity: state.product.quantityInStock,
+                  //               onChangeQuantity: ({required isAdding}) {
+                  //                 if (isAdding) {
+                  //                   cubit.increment();
+                  //                 } else {
+                  //                   cubit.decrement();
+                  //                 }
+                  //               },
+                  //               onsubmit: () async {
+                  //                 cubit.addToCart(context);
+                  //               },
+                  //             ),
+                  //           );
+                  //         },
+                  //       ),
                 );
               },
             ),

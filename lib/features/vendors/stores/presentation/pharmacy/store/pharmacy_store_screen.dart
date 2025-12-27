@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/utils/navigate.dart';
-import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
+import 'package:gazzer/di.dart';
+import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/common/domain/offer_entity.dart';
 import 'package:gazzer/features/vendors/common/presentation/grid_categories_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_offer_style_one.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/daily_offers/view_all_daily_offers_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/store_details_states.dart';
 import 'package:go_router/go_router.dart';
 
 part 'pharmacy_store_screen.g.dart';
@@ -26,7 +32,10 @@ class PharmacyStoreScreenRoute extends GoRouteData with _$PharmacyStoreScreenRou
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PharmacyStoreScreen(vendorId: id);
+    return BlocProvider(
+      create: (context) => di<StoreDetailsCubit>(param1: id),
+      child: PharmacyStoreScreen(vendorId: id),
+    );
   }
 }
 
@@ -38,257 +47,227 @@ class PharmacyStoreScreen extends StatelessWidget {
 
   final int vendorId;
 
-  final String name = 'Pharmacy';
-
-  final String logoUrl = '';
-
   @override
   Widget build(BuildContext context) {
-    // Create a mock vendor entity for VendorInfoCard
-    final mockVendor = StoreEntity(
-      id: -vendorId,
-      name: name,
-      description:
-          'Description: A juicy, flame-grilled beef patty served with fresh toppings and a toasted bun.Ingredients: 100% Angus beef patty, lettuce, tomato, pickles, onions, house sauce, sesame bun.',
-      totalOrders: 120,
-      image: logoUrl,
-      estimatedDeliveryTime: 20,
-      storeCategoryType: VendorType.pharmacy.value,
-      rate: 4.5,
-      rateCount: 120,
-      hasOptions: false,
-      zoneName: 'ZAMALEK',
-      deliveryTime: '20-30',
-      deliveryFee: 15.0,
-      parentId: -1,
-      isFavorite: false,
-      isOpen: true,
-      outOfStock: false,
-      reviewCount: 120,
-      alwaysOpen: false,
-      alwaysClosed: false,
-      startTime: DateTime.now().subtract(const Duration(hours: 2)),
-      endTime: DateTime.now().add(const Duration(hours: 10)),
-      mintsBeforClosingAlert: 30,
-    );
-
-    final catWithSubCatProds = _getCategoriesWithSubcatsAndProducts();
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: ScrollableTabedList(
-        preHerader: Column(
-          spacing: 4,
-          children: [
-            MultiCatRestHeader(restaurant: mockVendor, categires: catWithSubCatProds.map((e) => e.$1.name)),
-            // Today's Deals Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TitleWithMore(
-                title: L10n.tr().todayDeals,
-                titleStyle: TStyle.blackBold(20),
-                onPressed: () {
-                  context.navigateToPage(const ViewAllDailyOffersScreen());
-                },
-              ),
+      body: BlocBuilder<StoreDetailsCubit, StoreDetailsStates>(
+        builder: (context, state) {
+          if (state is StoreDetailsError) {
+            return FailureComponent(
+              message: L10n.tr().couldnotLoadDataPleaseTryAgain,
+              onRetry: () => context.read<StoreDetailsCubit>().loadScreenData(),
+            );
+          } else if (state is StoreDetailsLoading) {
+            return const Center(child: AdaptiveProgressIndicator());
+          }
+          final store = state.store;
+          final catWithSubCatProds = state.catsWthSubatsAndProds;
+          return ScrollableTabedList(
+            preHerader: Column(
+              spacing: 4,
+              children: [
+                MultiCatRestHeader(restaurant: store, categires: catWithSubCatProds.map((e) => e.$1.name)),
+                // Best Selling Items Widget - outside categories
+                if (state.bestSellingItems.isNotEmpty) _BestSellingItemsWidget(items: state.bestSellingItems),
+              ],
             ),
-            const SizedBox(height: 12),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
+            itemsCount: catWithSubCatProds.length,
+            tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
+            tabBuilder: (context, index) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  ...List.generate(4, (index) {
-                    return DailyOfferStyleOne(
-                      product: ProductEntity(
-                        id: -1,
-                        sold: 0,
-                        name: 'Medical Product Bundle',
-                        description: 'Complete medical product set with nasal spray, dropper, and medication',
-                        price: 110.0,
-                        image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                        rate: 4.5,
-                        reviewCount: 100,
-                        outOfStock: false,
-                        offer: OfferEntity(
-                          id: -1,
-                          maxDiscount: 900,
-                          expiredAt: DateTime.now().add(const Duration(days: 30)).timeZoneName,
-                          discount: 30,
-                          discountType: DiscountType.percentage,
-                        ),
-                      ),
-                      onTap: () {
-                        // TODO: Navigate to product details
-                      },
-                    );
-                  }),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: Co.lightGrey),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Text(catWithSubCatProds[index].$1.name, style: TStyle.blackSemi(13)),
+                  ),
                 ],
-              ),
-            ),
-            const SizedBox(height: 16),
-          ],
-        ),
-        itemsCount: catWithSubCatProds.length,
-        tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
-        tabBuilder: (context, index) {
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: Co.lightGrey),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Text(catWithSubCatProds[index].$1.name, style: TStyle.blackSemi(13)),
-              ),
-            ],
-          );
-        },
-        listItemBuilder: (context, index) {
-          final item = catWithSubCatProds[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: const [], products: item.$3, vendor: mockVendor),
+              );
+            },
+            listItemBuilder: (context, index) {
+              final item = state.catsWthSubatsAndProds[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: item.$2, products: item.$3, vendor: store),
+              );
+            },
           );
         },
       ),
     );
   }
+}
 
-  // ==================== Static Data ====================
-  List<(StoreCategoryEntity, List<StoreCategoryEntity>, List<ProductEntity>)> _getCategoriesWithSubcatsAndProducts() {
-    return [
-      (
-        // Main category: Medications
-        const StoreCategoryEntity(id: -1, name: 'Medications', image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'),
-        // Subcategories
-        [
-          const StoreCategoryEntity(
-            id: -11,
-            name: 'Pain Relief',
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            parentId: -1,
-            products: [],
-          ),
-          const StoreCategoryEntity(
-            id: -11,
-            name: 'Pain Relief',
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            parentId: -1,
-            products: [],
-          ),
-          const StoreCategoryEntity(
-            id: -11,
-            name: 'Pain Relief',
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            parentId: -1,
-            products: [],
-          ),
-          const StoreCategoryEntity(
-            id: -12,
-            name: 'Antibiotics',
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            parentId: -1,
-            products: [],
-          ),
-        ],
-        // Products
-        [
-          const ProductEntity(
-            id: -101,
-            name: 'Pain Relief Gel',
-            description: 'Fast acting pain relief',
-            price: 65.0,
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            rate: 4.9,
-            reviewCount: 150,
-            outOfStock: false,
-            sold: 0,
-          ),
-          const ProductEntity(
-            id: -101,
-            name: 'Pain Relief Gel',
-            description: 'Fast acting pain relief',
-            price: 65.0,
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            rate: 4.9,
-            reviewCount: 150,
-            outOfStock: false,
-            sold: 0,
-          ),
-          const ProductEntity(
-            id: -101,
-            name: 'Pain Relief Gel',
-            description: 'Fast acting pain relief',
-            price: 65.0,
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            rate: 4.9,
-            reviewCount: 150,
-            outOfStock: false,
-            sold: 0,
-          ),
-          const ProductEntity(
-            id: -102,
-            name: 'Antibiotic Cream',
-            description: 'Topical antibiotic treatment',
-            price: 45.0,
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            rate: 4.7,
-            reviewCount: 200,
-            outOfStock: false,
-            sold: 0,
-          ),
-        ],
+class _BestSellingItemsWidget extends StatelessWidget {
+  const _BestSellingItemsWidget({required this.items});
+
+  final List<ProductEntity> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(L10n.tr().bestSellingItems, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+        ),
+        const VerticalSpacing(8),
+        SingleChildScrollView(
+          padding: EdgeInsets.zero,
+          scrollDirection: Axis.horizontal,
+          child: Row(children: items.map((e) => _BestSellingItemCard(e)).toList()),
+        ),
+      ],
+    );
+  }
+}
+
+class _BestSellingItemCard extends StatelessWidget {
+  const _BestSellingItemCard(this.product);
+
+  final ProductEntity product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.sizeOf(context).width * .8,
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Co.lightGrey),
       ),
-      (
-        // Main category: Skin Care
-        const StoreCategoryEntity(id: -2, name: 'Skin Care', image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'),
-        // Subcategories
-        [
-          const StoreCategoryEntity(
-            id: -21,
-            name: 'Face Care',
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            parentId: -2,
-            products: [],
+      child: InkWell(
+        onTap: () {
+          ProductDetailsRoute(productId: product.id).push(context);
+        },
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              // Left side - Image with favorite icon
+              Stack(
+                children: [
+                  CustomNetworkImage(product.image, fit: BoxFit.cover, width: 100, height: double.infinity, borderRaduis: 20),
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 16,
+                      child: FavoriteWidget(padding: 2, fovorable: product),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 10),
+              // Right side - Details
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Product name
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              if (product.offer != null) ...[
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(50)),
+                                  child: Text(
+                                    '${product.offer!.discount}${product.offer!.discountType == DiscountType.percentage ? '%' : ''}',
+                                    style: TStyle.robotBlackMedium(),
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              // Rating and Review count
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const VectorGraphicsWidget(Assets.starRateIc),
+                                  const SizedBox(width: 4),
+                                  Text(product.rate.toStringAsFixed(1), style: TStyle.blackBold(14)),
+                                  if (product.reviewCount > 0) ...[
+                                    const SizedBox(width: 4),
+                                    Text('(+${product.reviewCount})', style: TStyle.greyRegular(12)),
+                                  ],
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              if (product.sold != null && product.sold! > 0)
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const VectorGraphicsWidget(Assets.soldCartIc),
+                                    const HorizontalSpacing(2),
+                                    Text(L10n.tr().sold, style: TStyle.robotBlackSmall()),
+                                    Text(' +${product.sold}', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(Helpers.getProperPrice(product.price), style: TStyle.primaryBold(16)),
+                                if (product.priceBeforeDiscount != null)
+                                  Text(
+                                    Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                    style: TStyle.greyRegular(12).copyWith(decoration: TextDecoration.lineThrough),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        // Add to cart button
+                        CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const StoreCategoryEntity(
-            id: -22,
-            name: 'Body Care',
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            parentId: -2,
-            products: [],
-          ),
-        ],
-        // Products
-        [
-          const ProductEntity(
-            id: -201,
-            name: 'Face Moisturizer',
-            description: 'Hydrating face cream',
-            price: 120.0,
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            rate: 4.6,
-            reviewCount: 95,
-            outOfStock: false,
-            sold: 0,
-          ),
-          const ProductEntity(
-            id: -202,
-            name: 'Skin Serum',
-            description: 'Anti-aging serum',
-            price: 95.0,
-            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            rate: 4.8,
-            reviewCount: 85,
-            outOfStock: false,
-            sold: 0,
-          ),
-        ],
+        ),
       ),
-    ];
+    );
   }
 }

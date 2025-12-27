@@ -2014,4 +2014,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get todayDeals => 'Today\'s Deals';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get relatedProducts => 'Related Products';
 }

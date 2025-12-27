@@ -58,7 +58,7 @@ class _DailyOffersContent extends StatelessWidget {
             title: L10n.tr().dailyOffersForYou,
             titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
             onPressed: () {
-              context.push(DailyOffersScreen.route, extra: {'items': items});
+              context.push(DailyOffersScreen.route);
             },
           ),
           const VerticalSpacing(12),

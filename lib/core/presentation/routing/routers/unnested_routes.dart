@@ -11,7 +11,6 @@ import 'package:gazzer/features/auth/verify/presentation/verify_otp_screen.dart'
 import 'package:gazzer/features/cart/presentation/views/select_address_screen.dart';
 import 'package:gazzer/features/checkout/presentation/view/confirm_order.dart';
 import 'package:gazzer/features/checkout/presentation/view/post_checkout_screen.dart';
-import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/homeViewAll/top_vendors/presentation/top_vendors_screen.dart';
 import 'package:gazzer/features/intro/presentation/congrats_screen.dart';
@@ -70,12 +69,6 @@ final List<RouteBase> unNestedRoutes = [
   $selectLocationRoute,
 
   // home categories
-  GoRoute(
-    path: DailyOffersScreen.route,
-    builder: (context, state) {
-      return const DailyOffersScreen();
-    },
-  ),
   GoRoute(
     path: TopVendorsScreen.route,
     builder: (context, state) {

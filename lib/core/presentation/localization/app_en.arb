@@ -843,7 +843,9 @@
            "profile":"Profile",
              "closedUntil": "Closed until",
              "openUntil": "Open until",
-             "todayDeals": "Today's Deals"
+             "todayDeals": "Today's Deals","save":"Save",
+               "relatedProducts": "Related Products"
+
 
 
 

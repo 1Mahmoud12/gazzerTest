@@ -4021,6 +4021,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Today\'s Deals'**
   String get todayDeals;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @relatedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Products'**
+  String get relatedProducts;
 }
 
 class _AppLocalizationsDelegate

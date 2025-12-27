@@ -7,14 +7,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 /// Style 2 pharmacy product card with circular image and side details
 class PharmacyProductCardStyle2 extends StatelessWidget {
-  const PharmacyProductCardStyle2({
-    super.key,
-    required this.product,
-    required this.vendorName,
-    this.width,
-    this.height,
-    this.onTap,
-  });
+  const PharmacyProductCardStyle2({super.key, required this.product, required this.vendorName, this.width, this.height, this.onTap});
 
   final ProductEntity product;
   final String vendorName;
@@ -61,10 +54,7 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                         bottomLeft: Radius.circular(80),
                         bottomRight: Radius.circular(80),
                       ),
-                      border: Border.all(
-                        color: Co.buttonGradient.withOpacity(.35),
-                        width: 2,
-                      ),
+                      border: Border.all(color: Co.buttonGradient.withOpacity(.35), width: 2),
                     ),
                   ),
                   Positioned.fill(
@@ -125,16 +115,9 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                             ),
                             SizedBox(height: spacing * 1.5),
 
-                            Text(
-                              'EG',
-                              style: TStyle.blackBold(fontSize),
-                            ),
+                            Text('EG', style: TStyle.blackBold(fontSize)),
                             SizedBox(height: spacing * 1.5),
-                            Icon(
-                              Icons.star,
-                              color: Co.secondary,
-                              size: iconSize,
-                            ),
+                            Icon(Icons.star, color: Co.secondary, size: iconSize),
                           ],
                         ),
                       ),
@@ -142,26 +125,12 @@ class PharmacyProductCardStyle2 extends StatelessWidget {
                       Flexible(
                         child: Column(
                           children: [
-                            CartToIncrementIcon(
-                              ignorePointer: true,
-                              isHorizonal: false,
-                              product: product,
-                              iconSize: iconSize * 1.1,
-                              isDarkContainer: false,
-                            ),
+                            CartToIncrementIcon(isHorizonal: false, product: product, iconSize: iconSize * 1.1, isDarkContainer: false),
                             SizedBox(height: spacing * 1.5),
 
-                            Text(
-                              product.price.toStringAsFixed(0),
-                              style: TStyle.blackBold(fontSize),
-                            ),
+                            Text(product.price.toStringAsFixed(0), style: TStyle.blackBold(fontSize)),
                             SizedBox(height: spacing * 1.5),
-                            Text(
-                              product.rate.toStringAsFixed(2),
-                              style: TStyle.blackBold(
-                                fontSize * 0.875,
-                              ).copyWith(color: Co.secondary),
-                            ),
+                            Text(product.rate.toStringAsFixed(2), style: TStyle.blackBold(fontSize * 0.875).copyWith(color: Co.secondary)),
                           ],
                         ),
                       ),

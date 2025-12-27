@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
+import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/homeViewAll//suggested/presentation/view/suggested_screen.dart';
@@ -80,6 +81,12 @@ ShellRoute get nestedRoutes => ShellRoute(
       path: SuggestedScreen.route,
       builder: (context, state) {
         return const SuggestedScreen();
+      },
+    ),
+    GoRoute(
+      path: DailyOffersScreen.route,
+      builder: (context, state) {
+        return const DailyOffersScreen();
       },
     ),
 

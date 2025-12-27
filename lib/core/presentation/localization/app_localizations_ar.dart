@@ -2013,4 +2013,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get todayDeals => 'عروض اليوم';
+
+  @override
+  String get save => 'وفر';
+
+  @override
+  String get relatedProducts => 'منتجات ذات صلة';
 }

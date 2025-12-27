@@ -93,7 +93,7 @@ class VerticalProductCard extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +109,7 @@ class VerticalProductCard extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(width: 20),
+                        const SizedBox(width: 10),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -159,31 +159,37 @@ class VerticalProductCard extends StatelessWidget {
                     ],
                     const VerticalSpacing(10),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Wrap(
+                            //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            runAlignment: WrapAlignment.spaceBetween,
+                            alignment: WrapAlignment.spaceBetween,
                             children: [
-                              FittedBox(
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
-                              ),
-                              if (product.offer != null)
-                                FittedBox(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  child: Text(
-                                    Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                    style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  FittedBox(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                                   ),
-                                ),
+                                  if (product.offer != null)
+                                    FittedBox(
+                                      alignment: AlignmentDirectional.centerStart,
+                                      child: Text(
+                                        Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                        style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                      ),
+                                    ),
+                                ],
+                              ),
+
+                              const SizedBox(width: 8),
+                              if (!(key?.toString().contains('store') ?? false))
+                                CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
                             ],
                           ),
                         ),
-
-                        const SizedBox(width: 8),
-                        if (!(key?.toString().contains('store') ?? false))
-                          CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
                       ],
                     ),
                   ],

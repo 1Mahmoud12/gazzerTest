@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/widgets/global_increment_widget.dart';
 
 class OrderedWithComponent extends StatefulWidget {
   const OrderedWithComponent({
@@ -41,20 +41,6 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
     _quantities = Map<int, int>.from(widget.initialQuantities ?? {});
   }
 
-  void _updateQuantity(int id, bool isIncrement) {
-    if (widget.isDisabled) return;
-    final current = _quantities[id] ?? 0;
-    final next = isIncrement ? current + 1 : (current - 1).clamp(0, 999999);
-    setState(() {
-      if (next <= 0) {
-        _quantities.remove(id);
-      } else {
-        _quantities[id] = next;
-      }
-    });
-    widget.onQuantityChanged?.call(id, next <= 0 ? 0 : next);
-  }
-
   @override
   Widget build(BuildContext context) {
     if (widget.products.isEmpty) return const SizedBox.shrink();
@@ -64,86 +50,85 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
       spacing: 8,
       children: [
         const VerticalSpacing(16),
-        GradientText(text: widget.title, style: TStyle.blackBold(18)),
+        Padding(
+          padding: AppConst.defaultHrPadding,
+          child: Text(widget.title, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+        ),
 
-        SizedBox(
-          height: 190,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.products.length,
-            separatorBuilder: (context, index) => const HorizontalSpacing(12),
-            itemBuilder: (context, index) {
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+
+          child: Row(
+            children: List.generate(widget.products.length, (index) {
               final p = widget.products[index];
-              final qty = _quantities[p.id] ?? 0;
-              return SizedBox(
-                width: 150,
-                child: CustomPaint(
-                  painter: ProductShapePaint(),
-                  child: Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            spacing: 12,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              return Container(
+                width: MediaQuery.sizeOf(context).width / 3,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        CustomNetworkImage(p.image, width: double.infinity, height: 120, borderRaduis: 20),
+                        FavoriteWidget(size: 24, fovorable: p),
+                      ],
+                    ),
+                    const VerticalSpacing(8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(p.name, style: TStyle.primaryBold(15), maxLines: 1, overflow: TextOverflow.ellipsis),
+                        ),
+                        const SizedBox(width: 10),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
+                            const HorizontalSpacing(4),
+                            Text(p.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const VerticalSpacing(8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Wrap(
+                            //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            runAlignment: WrapAlignment.spaceBetween,
+                            alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
-                              Expanded(
-                                child: CircleGradientBorderedImage(
-                                  image: p.image,
-                                  shadow: const BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
-                                  showBorder: false,
-                                ),
+                              Column(
+                                children: [
+                                  FittedBox(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Text(Helpers.getProperPrice(p.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                  ),
+                                  if (p.offer != null)
+                                    FittedBox(
+                                      alignment: AlignmentDirectional.centerStart,
+                                      child: Text(
+                                        Helpers.getProperPrice(p.priceBeforeDiscount!),
+                                        style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                      ),
+                                    ),
+                                ],
                               ),
-                              FavoriteWidget(size: 24, fovorable: p),
+
+                              const SizedBox(width: 8),
+                              CartToIncrementIcon(isHorizonal: true, product: p, iconSize: 25, isDarkContainer: true),
                             ],
                           ),
-                          const VerticalSpacing(8),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(p.name, style: TStyle.primaryBold(15), maxLines: 1, overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ],
-                                ),
-                                Text(Helpers.getProperPrice(p.price), style: TStyle.blackSemi(12).copyWith(shadows: AppDec.blackTextShadow)),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional.bottomEnd,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 4, bottom: 4),
-                          child: qty > 0
-                              ? AbsorbPointer(
-                                  absorbing: widget.isDisabled,
-                                  child: GlobalIncrementWidget(
-                                    isDarkContainer: true,
-                                    isHorizonal: true,
-                                    isAdding: false,
-                                    isRemoving: false,
-                                    onChanged: ({required isAdding}) => _updateQuantity(p.id, isAdding),
-                                    initVal: qty,
-                                  ),
-                                )
-                              : AbsorbPointer(
-                                  absorbing: widget.isDisabled,
-                                  child: AddIcon(isLoading: false, onTap: () => _updateQuantity(p.id, true)),
-                                ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
               );
-            },
+            }),
           ),
         ),
       ],

@@ -8,14 +8,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 /// Reusable circular product card for pharmacy best sellers
 class PharmacyProductCard extends StatelessWidget {
-  const PharmacyProductCard({
-    super.key,
-    required this.product,
-    required this.vendorName,
-    this.width,
-    this.height,
-    this.onTap,
-  });
+  const PharmacyProductCard({super.key, required this.product, required this.vendorName, this.width, this.height, this.onTap});
 
   final ProductEntity product;
   final String vendorName;
@@ -49,18 +42,10 @@ class PharmacyProductCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Co.buttonGradient.withOpacity(.1), // Light purple background
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(
-              L10n.isAr(context) ? smallBorderRadius : largeBorderRadius,
-            ),
-            bottomLeft: Radius.circular(
-              L10n.isAr(context) ? smallBorderRadius : largeBorderRadius,
-            ),
-            topRight: Radius.circular(
-              L10n.isAr(context) ? largeBorderRadius : smallBorderRadius,
-            ),
-            bottomRight: Radius.circular(
-              L10n.isAr(context) ? largeBorderRadius : smallBorderRadius,
-            ),
+            topLeft: Radius.circular(L10n.isAr(context) ? smallBorderRadius : largeBorderRadius),
+            bottomLeft: Radius.circular(L10n.isAr(context) ? smallBorderRadius : largeBorderRadius),
+            topRight: Radius.circular(L10n.isAr(context) ? largeBorderRadius : smallBorderRadius),
+            bottomRight: Radius.circular(L10n.isAr(context) ? largeBorderRadius : smallBorderRadius),
           ),
         ),
         child: Row(
@@ -79,10 +64,7 @@ class PharmacyProductCard extends StatelessWidget {
                     height: circleSize,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Co.buttonGradient.withOpacity(.35),
-                        width: 3,
-                      ),
+                      border: Border.all(color: Co.buttonGradient.withOpacity(.35), width: 3),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -103,9 +85,7 @@ class PharmacyProductCard extends StatelessWidget {
 
                         // Product Name
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: padding * 2,
-                          ),
+                          padding: EdgeInsets.symmetric(horizontal: padding * 2),
                           child: Text(
                             product.name,
                             style: TStyle.burbleBold(fontSize),
@@ -142,43 +122,22 @@ class PharmacyProductCard extends StatelessWidget {
                           ),
                           SizedBox(height: spacing * 1.5),
 
-                          Text(
-                            'EG',
-                            style: TStyle.blackBold(fontSize),
-                          ),
+                          Text('EG', style: TStyle.blackBold(fontSize)),
                           SizedBox(height: spacing * 1.5),
-                          Icon(
-                            Icons.star,
-                            color: Co.secondary,
-                            size: iconSize,
-                          ),
+                          Icon(Icons.star, color: Co.secondary, size: iconSize),
                         ],
                       ),
                       const SizedBox(width: 10),
                       Column(
                         children: [
                           FittedBox(
-                            child: CartToIncrementIcon(
-                              ignorePointer: true,
-                              isHorizonal: false,
-                              product: product,
-                              iconSize: iconSize * 1.1,
-                              isDarkContainer: false,
-                            ),
+                            child: CartToIncrementIcon(isHorizonal: false, product: product, iconSize: iconSize * 1.1, isDarkContainer: false),
                           ),
                           SizedBox(height: spacing * 1.5),
 
-                          Text(
-                            product.price.toStringAsFixed(0),
-                            style: TStyle.blackBold(fontSize),
-                          ),
+                          Text(product.price.toStringAsFixed(0), style: TStyle.blackBold(fontSize)),
                           SizedBox(height: spacing * 1.5),
-                          Text(
-                            product.rate.toStringAsFixed(2),
-                            style: TStyle.blackBold(
-                              fontSize * 0.875,
-                            ).copyWith(color: Co.secondary),
-                          ),
+                          Text(product.rate.toStringAsFixed(2), style: TStyle.blackBold(fontSize * 0.875).copyWith(color: Co.secondary)),
                         ],
                       ),
                     ],

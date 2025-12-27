@@ -71,13 +71,14 @@ class GlobalIncrementWidget extends StatelessWidget {
                 border: Border.all(color: Co.purple100),
               ),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 spacing: 4,
                 //mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [...children],
               ),
             )
-          : Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.center, children: [...children]),
+          : Column(mainAxisSize: MainAxisSize.min, children: [...children]),
     );
   }
 }

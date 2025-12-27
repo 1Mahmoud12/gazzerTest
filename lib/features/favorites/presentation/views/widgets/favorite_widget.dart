@@ -22,11 +22,12 @@ import 'package:go_router/go_router.dart';
 
 class FavoriteWidget<T> extends StatefulWidget {
   /// [fovorable] can be either a [GenericVendorEntity] (restaurant / store) or [GenericItemEntity] (plate / product/ ordered with)
-  const FavoriteWidget({super.key, this.size = 32, this.padding = 8, required this.fovorable, this.color});
+  const FavoriteWidget({super.key, this.size = 32, this.padding = 8, required this.fovorable, this.color, this.backgroundColor});
   final Favorable fovorable;
   final double size;
   final double padding;
   final Color? color;
+  final Color? backgroundColor;
   @override
   State<FavoriteWidget> createState() => _FavoriteWidgetState();
 }
@@ -127,7 +128,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> with SingleTickerProvid
             child: ValueListenableBuilder(
               valueListenable: isFav,
               builder: (context, value, child) => Container(
-                decoration: const BoxDecoration(color: Co.white, shape: BoxShape.circle),
+                decoration: BoxDecoration(color: widget.backgroundColor ?? Co.white, shape: BoxShape.circle),
                 padding: const EdgeInsets.all(6),
                 child: SvgPicture.asset(value ? Assets.newSelectedFavoriteIc : Assets.newUnSelectedFavoriteIc, width: 20, height: 20),
               ),
