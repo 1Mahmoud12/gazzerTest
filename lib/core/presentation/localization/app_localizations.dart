@@ -4033,6 +4033,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Related Products'**
   String get relatedProducts;
+
+  /// No description provided for @walletAdjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet Adjustment'**
+  String get walletAdjustment;
+
+  /// No description provided for @selectAnotherAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Select another address'**
+  String get selectAnotherAddress;
 }
 
 class _AppLocalizationsDelegate

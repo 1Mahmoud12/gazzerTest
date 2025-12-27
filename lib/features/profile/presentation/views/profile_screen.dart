@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:gazzer/core/presentation/views/components/loading_full_screen.da
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/image_source_picker_bottom_sheet.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
@@ -139,9 +142,8 @@ class ProfileContentBody extends StatelessWidget {
             child: Column(
               children: [
                 if (cubit.client != null) ...[
-                  customHeader ?? _ProfileHeaderWidget(cubit.client!),
+                  _ProfileHeaderWidget(cubit.client!),
                   const VerticalSpacing(12),
-
                   _AccountInformationComponent(cubit.client!),
                   const VerticalSpacing(12),
                   _ProfileAddressesComponent(),

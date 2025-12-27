@@ -2020,4 +2020,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get relatedProducts => 'Related Products';
+
+  @override
+  String get walletAdjustment => 'Wallet Adjustment';
+
+  @override
+  String get selectAnotherAddress => 'Select another address';
 }

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/pkgs/intl_phone/intl_phone.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:intl_phone_number_field/models/country_code_model.dart';
 import 'package:intl_phone_number_field/models/country_config.dart';
@@ -94,11 +92,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
   @override
   Widget build(BuildContext context) {
     return InternationalPhoneNumberInput(
-      height: (widget.height ?? 60),
+      height: widget.height ?? 60,
       controller: _controller,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-      ],
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       initCountry: country,
       betweenPadding: 10,
       showBorder: widget.showBorder,
@@ -128,7 +124,6 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         backgroundColor: widget.bgColor ?? const Color(0xFFffffff),
         searchBoxBackgroundColor: Co.grey.withAlpha(20),
         searchBoxIconColor: const Color(0xFF444448),
-        countryItemHeight: 55,
         topBarColor: Colors.black45,
         selectedItemColor: Co.purple.withAlpha(20),
         // selectedIcon:
@@ -139,10 +134,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         searchBoxHintStyle: TStyle.greyRegular(14),
       ),
       countryConfig: CountryConfig(
-        flagSize: 30,
         decoration: BoxDecoration(
           color: widget.bgColor,
-          border: !widget.showBorder ? null : GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
+          border: !widget.showBorder ? null : Border.all(color: Co.lightGrey),
           borderRadius: AppConst.defaultBorderRadius,
         ),
         textStyle: TStyle.greyRegular(14),
@@ -164,27 +158,17 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
       phoneConfig: PhoneConfig(
         focusedColor: widget.borderColor ?? Colors.black54,
         enabledColor: widget.borderColor ?? Colors.black54,
-        errorColor: const Color(0xFFFF5494),
         labelStyle: TStyle.greyRegular(14),
-        labelText: widget.hasLabel ? "Phone Number" : null,
+        labelText: widget.hasLabel ? 'Phone Number' : null,
         floatingLabelStyle: TStyle.greyRegular(14),
-        focusNode: null,
         radius: 16,
         hintText: !widget.hasHint
             ? null
             : countryCode == 'EG'
             ? '1xxxxxxxxx'
             : 'xxxxxx',
-        borderWidth: 2,
         backgroundColor: widget.bgColor,
-        decoration: null,
-        popUpErrorText: true,
-        autoFocus: false,
         showCursor: true,
-        textInputAction: TextInputAction.done,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        errorTextMaxLength: 2,
-        errorPadding: const EdgeInsets.only(top: 14),
         errorStyle: TStyle.errorSemi(13),
         textStyle: TStyle.greySemi(14),
         hintStyle: TStyle.greySemi(14),
@@ -195,9 +179,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
 
 class GeneralUtil {
   static List<CountryCodeModel> loadJson() {
-    List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(
-      countries.map((model) => CountryCodeModel.fromJson(model)),
-    );
+    final List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(countries.map((model) => CountryCodeModel.fromJson(model)));
 
     return listCountryCodeModel;
   }

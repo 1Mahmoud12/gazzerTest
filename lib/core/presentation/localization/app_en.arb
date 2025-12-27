@@ -844,7 +844,11 @@
              "closedUntil": "Closed until",
              "openUntil": "Open until",
              "todayDeals": "Today's Deals","save":"Save",
-               "relatedProducts": "Related Products"
+               "relatedProducts": "Related Products",
+                 "walletAdjustment": "Wallet Adjustment",
+  "selectAnotherAddress": "Select another address"
+
+
 
 
 

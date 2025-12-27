@@ -135,6 +135,8 @@ class Endpoints {
   static const convertVoucher = 'vouchers/convert';
   static const convertPoints = 'loyalty/convert-points';
   static const addNewCard = 'wallet/cards';
+
+  static String deleteCard(int id) => 'wallet/cards/$id';
   static const ordersCheckout = 'orders/checkout';
 
   /// ** Orders

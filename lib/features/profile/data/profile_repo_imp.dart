@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
@@ -18,7 +19,30 @@ class ProfileRepoImp extends ProfileRepo {
   @override
   Future<Result<(ClientResponse?, String?)>> updateClient(UpdateProfileReq req) {
     return super.call(
-      apiCall: () => _apiClient.post(endpoint: Endpoints.updateProfile, requestBody: req.toJson()),
+      apiCall: () async {
+        if (req.avatar != null) {
+          // Send with file upload using FormData
+          final formData = FormData.fromMap({
+            'name': req.name,
+            'phone': req.phone,
+            if (req.email != null) 'email': req.email,
+            'avatar': await MultipartFile.fromFile(
+              req.avatar!.path,
+            ),
+          });
+
+          return _apiClient.post(
+            endpoint: Endpoints.updateProfile,
+            requestBody: formData,
+          );
+        } else {
+          // Send without file
+          return _apiClient.post(
+            endpoint: Endpoints.updateProfile,
+            requestBody: req.toJson(),
+          );
+        }
+      },
       parser: (response) {
         final Map<String, dynamic> data = response.data['data'];
         if (data.containsKey('session_id')) {

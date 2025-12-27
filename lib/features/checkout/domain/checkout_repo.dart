@@ -22,6 +22,8 @@ abstract class CheckoutRepo extends BaseApiRepo {
     required bool isDefault,
   });
 
+  Future<Result<String>> deleteCard(int cardId);
+
   Future<Result<String>> convertPoints(int points);
 
   Future<Result<CheckoutResponseDTO>> submitCheckout({required CheckoutParams params});

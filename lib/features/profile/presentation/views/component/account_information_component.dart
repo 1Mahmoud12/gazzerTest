@@ -38,10 +38,12 @@ class _AccountInformationComponent extends StatelessWidget {
                   },
                   bgColor: Co.purple,
                   radius: 24,
-                  child: Text(
-                    L10n.tr().editAccountInformation,
-                    style: TStyle.robotBlackRegular().copyWith(color: Co.white),
-                    textAlign: TextAlign.center,
+                  child: FittedBox(
+                    child: Text(
+                      L10n.tr().editAccountInformation,
+                      style: TStyle.robotBlackRegular().copyWith(color: Co.white),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),

@@ -136,7 +136,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                         final fav = currentList[index];
                                         if (selectedId == 'items') {
                                           return SizedBox(
-                                            width: constraints.maxWidth * .45,
+                                            width: (constraints.maxWidth / 2) - 24,
                                             child: VerticalProductCard(
                                               product: fav as GenericItemEntity,
                                               canAdd: false,
@@ -157,7 +157,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                         } else if (selectedId == 'vendors') {
                                           final vendor = fav as GenericVendorEntity;
                                           return SizedBox(
-                                            width: MediaQuery.of(context).size.width * .45,
+                                            width: (constraints.maxWidth / 2) - 24,
                                             child: VerticalRestaurantCard(
                                               width: double.infinity,
                                               item: vendor,

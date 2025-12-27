@@ -846,7 +846,9 @@
                         "openUntil": "مفتوح حتى",
                         "todayDeals": "عروض اليوم",
                         "save":"وفر",
-                          "relatedProducts": "منتجات ذات صلة"
+                          "relatedProducts": "منتجات ذات صلة",
+                            "walletAdjustment": "تعديل المحفظة",
+                              "selectAnotherAddress": "اختيار عنوان آخر"
 
 
 

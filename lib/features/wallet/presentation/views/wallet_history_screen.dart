@@ -41,9 +41,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
     }
   }
 
-  List<WalletHistoryEntry> _convertTransactionsToEntries(
-    List<TransactionEntity> transactions,
-  ) {
+  List<WalletHistoryEntry> _convertTransactionsToEntries(List<TransactionEntity> transactions) {
     final l10n = L10n.tr();
     return transactions.map((transaction) {
       String title;
@@ -115,9 +113,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
     return BlocProvider(
       create: (_) => di<WalletTransactionsCubit>()..load(),
       child: Scaffold(
-        appBar: MainAppBar(
-          title: L10n.tr().walletHistoryTitle,
-        ),
+        appBar: MainAppBar(title: L10n.tr().walletHistoryTitle),
         body: BlocBuilder<WalletTransactionsCubit, WalletTransactionsState>(
           builder: (context, state) {
             final l10n = L10n.tr();
@@ -125,7 +121,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
               (WalletHistoryFilter.all, l10n.walletFilterAll),
               (WalletHistoryFilter.deposit, l10n.walletFilterAdded),
               (WalletHistoryFilter.withdrawal, l10n.walletFilterSpent),
-              (WalletHistoryFilter.adjustment, l10n.walletFilterFromPoints),
+              (WalletHistoryFilter.adjustment, l10n.walletAdjustment),
             ];
 
             List<TransactionEntity> transactionsList = [];
@@ -137,25 +133,16 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
               case WalletTransactionsLoading(:final isInitial):
                 isLoading = isInitial;
                 break;
-              case WalletTransactionsLoadingMore(
-                :final transactions,
-                :final pagination,
-              ):
+              case WalletTransactionsLoadingMore(:final transactions, :final pagination):
                 isLoadingMore = true;
                 transactionsList = transactions;
                 paginationValue = pagination;
                 break;
-              case WalletTransactionsLoaded(
-                :final transactions,
-                :final pagination,
-              ):
+              case WalletTransactionsLoaded(:final transactions, :final pagination):
                 transactionsList = transactions;
                 paginationValue = pagination;
                 break;
-              case WalletTransactionsError(
-                :final cachedTransactions,
-                :final cachedPagination,
-              ):
+              case WalletTransactionsError(:final cachedTransactions, :final cachedPagination):
                 transactionsList = cachedTransactions ?? [];
                 paginationValue = cachedPagination;
                 break;
@@ -165,102 +152,78 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
 
             final entries = _convertTransactionsToEntries(transactionsList);
 
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: filters.map((filter) {
-                        final isSelected = selectedFilter == filter.$1;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
 
-                        return Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 12),
-                          child: ChoiceChip(
-                            label: Text(
-                              filter.$2,
-                              style: TStyle.robotBlackRegular().copyWith(
-                                color: isSelected ? Co.white : Co.black,
-                              ),
-                            ),
-                            selected: isSelected,
-                            onSelected: (_) {
-                              setState(() {
-                                selectedFilter = filter.$1;
-                              });
-                              context.read<WalletTransactionsCubit>().filterByType(
-                                _getTypeFromFilter(filter.$1),
-                              );
-                            },
-                            checkmarkColor: isSelected ? Co.white : Co.purple,
-                            selectedColor: Co.purple,
-                            backgroundColor: Co.bg,
-                            labelStyle:
-                                TStyle.robotBlackRegular(
-                                  font: FFamily.roboto,
-                                ).copyWith(
-                                  color: isSelected ? Co.white : Co.dark,
-                                ),
-                            shape: StadiumBorder(
-                              side: BorderSide(
-                                color: isSelected ? Co.purple : Co.lightGrey,
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
+                  child: Row(
+                    children: filters.map((filter) {
+                      final isSelected = selectedFilter == filter.$1;
+
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 12),
+                        child: ChoiceChip(
+                          label: Text(filter.$2, style: TStyle.robotBlackRegular().copyWith(color: isSelected ? Co.white : Co.black)),
+                          selected: isSelected,
+                          onSelected: (_) {
+                            setState(() {
+                              selectedFilter = filter.$1;
+                            });
+                            context.read<WalletTransactionsCubit>().filterByType(_getTypeFromFilter(filter.$1));
+                          },
+                          checkmarkColor: isSelected ? Co.white : Co.purple,
+                          selectedColor: Co.purple,
+                          backgroundColor: Co.bg,
+                          labelStyle: TStyle.robotBlackRegular().copyWith(color: isSelected ? Co.white : Co.dark),
+                          shape: StadiumBorder(side: BorderSide(color: isSelected ? Co.purple : Co.lightGrey)),
+                        ),
+                      );
+                    }).toList(),
                   ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: isLoading && entries.isEmpty
-                        ? const Center(child: AdaptiveProgressIndicator())
-                        : entries.isEmpty
-                        ? Center(
-                            child: Text(
-                              l10n.walletHistorySubtitle,
-                              textAlign: TextAlign.center,
-                              style:
-                                  TStyle.robotBlackRegular(
-                                    font: FFamily.roboto,
-                                  ).copyWith(
-                                    color: Co.grey,
-                                  ),
-                            ),
-                          )
-                        : NotificationListener<ScrollNotification>(
-                            onNotification: (notification) {
-                              if (notification is ScrollUpdateNotification) {
-                                if (notification.metrics.pixels >= notification.metrics.maxScrollExtent * 0.9) {
-                                  if (paginationValue?.hasMorePages == true && !isLoadingMore) {
-                                    context.read<WalletTransactionsCubit>().loadMore();
-                                  }
+                ),
+                Expanded(
+                  child: isLoading && entries.isEmpty
+                      ? const Center(child: AdaptiveProgressIndicator())
+                      : entries.isEmpty
+                      ? Center(
+                          child: Text(
+                            l10n.walletHistorySubtitle,
+                            textAlign: TextAlign.center,
+                            style: TStyle.robotBlackRegular().copyWith(color: Co.grey),
+                          ),
+                        )
+                      : NotificationListener<ScrollNotification>(
+                          onNotification: (notification) {
+                            if (notification is ScrollUpdateNotification) {
+                              if (notification.metrics.pixels >= notification.metrics.maxScrollExtent * 0.9) {
+                                if (paginationValue?.hasMorePages == true && !isLoadingMore) {
+                                  context.read<WalletTransactionsCubit>().loadMore();
                                 }
                               }
-                              return false;
+                            }
+                            return false;
+                          },
+                          child: ListView.separated(
+                            controller: _scrollController,
+                            itemCount: entries.length + (isLoadingMore ? 1 : 0),
+                            separatorBuilder: (_, __) => const SizedBox(height: 12),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+
+                            itemBuilder: (context, index) {
+                              if (index == entries.length) {
+                                return const Center(
+                                  child: Padding(padding: EdgeInsets.all(16.0), child: AdaptiveProgressIndicator()),
+                                );
+                              }
+                              return WalletHistoryTile(entry: entries[index]);
                             },
-                            child: ListView.separated(
-                              controller: _scrollController,
-                              itemCount: entries.length + (isLoadingMore ? 1 : 0),
-                              separatorBuilder: (_, __) => const SizedBox(height: 12),
-                              itemBuilder: (context, index) {
-                                if (index == entries.length) {
-                                  return const Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: AdaptiveProgressIndicator(),
-                                    ),
-                                  );
-                                }
-                                return WalletHistoryTile(entry: entries[index]);
-                              },
-                            ),
                           ),
-                  ),
-                ],
-              ),
+                        ),
+                ),
+              ],
             );
           },
         ),

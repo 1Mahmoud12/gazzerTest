@@ -2019,4 +2019,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get relatedProducts => 'منتجات ذات صلة';
+
+  @override
+  String get walletAdjustment => 'تعديل المحفظة';
+
+  @override
+  String get selectAnotherAddress => 'اختيار عنوان آخر';
 }

@@ -366,4 +366,6 @@ class Assets {
 
   //Pharmacy Header
   static const String pharmacyStoreIc = "assets/svg/pharmacyStoreIc.svg";
+  static const String galleryIc = "assets/svg/galleryIc.svg";
+  static const String cameraIc = "assets/svg/cameraIc.svg";
 }

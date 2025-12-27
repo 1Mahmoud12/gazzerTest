@@ -57,7 +57,7 @@ class CartAddressComponent extends StatelessWidget {
               }
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: AddressCard(address: AddressModel.fromEntity(state.address!)),
+                child: AddressCard(address: AddressModel.fromEntity(state.address!), defaultButton: false),
               );
             },
           ),
@@ -68,7 +68,7 @@ class CartAddressComponent extends StatelessWidget {
                 if (address != null && context.mounted) context.read<CartCubit>().updateCartAddress(address);
               });
             },
-            text: L10n.tr().addNewAddress,
+            text: L10n.tr().selectAnotherAddress,
           ),
         ],
       ),

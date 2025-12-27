@@ -1,0 +1,16 @@
+  $selectLocationRoute,
+
+  // home categories
+  GoRoute(
+    path: DailyOffersScreen.route,
+    builder: (context, state) {
+      return const DailyOffersScreen();
+    },
+  ),
+  GoRoute(
+    path: TopVendorsScreen.route,
+    builder: (context, state) {
+      return const TopVendorsScreen();
+    },
+  ),
+

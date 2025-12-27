@@ -174,24 +174,24 @@ class _MainTextFieldState extends State<MainTextField> {
               enabled: widget.enabled,
 
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.purple),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: const BorderSide(color: Co.red),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.red),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.lightGrey),
               ),
               disabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: widget.disabledColor ?? Co.grey),
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
               ),
             ),
           );

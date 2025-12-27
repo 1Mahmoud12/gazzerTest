@@ -4,9 +4,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
-import 'package:gazzer/core/presentation/pkgs/gradient_border/input_borders/gradient_outline_input_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_gradient.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:intl_phone_number_field/models/country_code_model.dart';
 import 'package:intl_phone_number_field/models/country_config.dart';
 import 'package:intl_phone_number_field/models/dialog_config.dart';
@@ -48,7 +47,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   }) : dialogConfig = dialogConfig ?? DialogConfig(),
        controller = controller ?? TextEditingController(),
        countryConfig = countryConfig ?? CountryConfig(),
-       initCountry = initCountry ?? CountryCodeModel(name: "United States", dial_code: "+1", code: "US"),
+       initCountry = initCountry ?? CountryCodeModel(name: 'United States', dial_code: '+1', code: 'US'),
        phoneConfig = phoneConfig ?? PhoneConfig();
 
   @override
@@ -161,7 +160,6 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
           flex: 18,
           child: TextFormField(
             controller: widget.controller,
-            maxLines: 1,
             minLines: 1,
             // expands: expands,
             autofocus: widget.phoneConfig.autoFocus,
@@ -186,20 +184,37 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
               fillColor: widget.phoneConfig.backgroundColor,
               hintStyle: widget.phoneConfig.hintStyle,
               hintText: widget.phoneConfig.hintText,
-              border: !widget.showBorder ? null : GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 2),
+              border: !widget.showBorder
+                  ? null
+                  : OutlineInputBorder(
+                      borderSide: const BorderSide(color: Co.lightGrey),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
               enabledBorder: !widget.showBorder
                   ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
-                  : GradientOutlineInputBorder(gradient: Grad().shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
+                  : OutlineInputBorder(
+                      borderSide: const BorderSide(color: Co.lightGrey),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
               focusedBorder: !widget.showBorder
                   ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
-                  : GradientOutlineInputBorder(gradient: Grad().shadowGrad(), width: 2, borderRadius: AppConst.defaultInnerBorderRadius),
+                  : OutlineInputBorder(
+                      borderSide: const BorderSide(color: Co.lightGrey),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
 
               focusedErrorBorder: !widget.showBorder
                   ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
-                  : GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
+                  : OutlineInputBorder(
+                      borderSide: const BorderSide(color: Co.dark),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
               errorBorder: !widget.showBorder
                   ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
-                  : GradientOutlineInputBorder(gradient: Grad().errorGradient, width: 1, borderRadius: AppConst.defaultBorderRadius),
+                  : OutlineInputBorder(
+                      borderSide: const BorderSide(color: Co.red),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
               labelText: widget.phoneConfig.labelText,
               labelStyle: widget.phoneConfig.labelStyle,
               errorMaxLines: 4,
@@ -228,7 +243,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
         try {
           return CountryCodeModel.fromJson(model);
         } catch (e, stackTrace) {
-          log("Json Converter Failed: ", error: e, stackTrace: stackTrace);
+          log('Json Converter Failed: ', error: e, stackTrace: stackTrace);
         }
       }),
     );
@@ -239,8 +254,12 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
 class IntPhoneNumber {
   String code, dialCode, number;
   IntPhoneNumber({required this.code, required this.dialCode, required this.number});
-  String get fullNumber => "$dialCode $number";
-  String get rawNumber => number.replaceAll(" ", "");
-  String get rawDialCode => dialCode.replaceAll("+", "");
-  String get rawFullNumber => fullNumber.replaceAll(" ", "").replaceAll("+", "");
+
+  String get fullNumber => '$dialCode $number';
+
+  String get rawNumber => number.replaceAll(' ', '');
+
+  String get rawDialCode => dialCode.replaceAll('+', '');
+
+  String get rawFullNumber => fullNumber.replaceAll(' ', '').replaceAll('+', '');
 }
