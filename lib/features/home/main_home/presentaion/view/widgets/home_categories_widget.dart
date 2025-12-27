@@ -55,7 +55,7 @@ class CategoryCard extends StatelessWidget {
           } else if (category.type == VendorType.grocery) {
             StoreMenuSwitcherRoute(id: category.id).push(context);
           } else if (category.type == VendorType.pharmacy) {
-            context.push(PharmacyMenuRoute.route);
+            PharmacyMenuRoute(id: category.id).push(context);
           } else {
             StoreMenuSwitcherRoute(id: category.id).push(context);
 

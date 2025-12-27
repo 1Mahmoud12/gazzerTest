@@ -16,6 +16,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant_sub_category_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/pharmacy_menu_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
@@ -95,7 +96,18 @@ ShellRoute get nestedRoutes => ShellRoute(
 
 final storesRoutes = [$storeMenuSwitcherRoute, $storesOfCategoryRoute];
 
-final pharmacyRoutes = [GoRoute(path: PharmacyMenuRoute.route, builder: (context, state) => const PharmacyMenuScreen())];
+final pharmacyRoutes = [
+  GoRoute(
+    path: PharmacyMenuRoute.route,
+    builder: (context, state) {
+      final id = int.tryParse(state.uri.queryParameters['id'] ?? '') ?? 0;
+      return BlocProvider(
+        create: (context) => di<StoresMenuCubit>(param1: id),
+        child: const PharmacyMenuScreen(),
+      );
+    },
+  ),
+];
 
 List<RouteBase> get drowerRoutes => [
   GoRoute(
