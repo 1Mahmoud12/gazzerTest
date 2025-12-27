@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 /// Daily offer style one widget - Product card with discount and multiple product images
 class DailyOfferStyleOne extends StatelessWidget {
-  const DailyOfferStyleOne({
-    super.key,
-    required this.product,
-    this.discountPercentage = 30,
-    this.onTap,
-  });
+  const DailyOfferStyleOne({super.key, required this.product, this.discountPercentage = 30, this.onTap, this.width});
 
   final ProductEntity product;
   final int discountPercentage;
   final VoidCallback? onTap;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +27,26 @@ class DailyOfferStyleOne extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
+        width: width ?? MediaQuery.sizeOf(context).width * .85,
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Co.lightGrey),
         ),
-        child: Column(
-          children: [
-            // Top Section - Product Images and Icons
-            _TopSection(
-              product: product,
-              discountPercentage: discountPercentage,
-              isAr: isAr,
-            ),
+        child: IntrinsicHeight(
+          child: Row(
+            spacing: 8,
+            children: [
+              // Top Section - Product Images and Icons
+              _TopSection(product: product, discountPercentage: discountPercentage, isAr: isAr),
 
-            // Bottom Section - Product Details
-            _BottomSection(
-              product: product,
-              isAr: isAr,
-            ),
-          ],
+              // Bottom Section - Product Details
+              Expanded(
+                child: _BottomSection(product: product, isAr: isAr),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -53,11 +54,7 @@ class DailyOfferStyleOne extends StatelessWidget {
 }
 
 class _TopSection extends StatelessWidget {
-  const _TopSection({
-    required this.product,
-    required this.discountPercentage,
-    required this.isAr,
-  });
+  const _TopSection({required this.product, required this.discountPercentage, required this.isAr});
 
   final ProductEntity product;
   final int discountPercentage;
@@ -65,159 +62,17 @@ class _TopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => Container(
-        height: 140,
-        width: constraints.maxWidth,
-        decoration: BoxDecoration(
-          color: Co.bg.withOpacityNew(0.5),
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
+    return Stack(
+      children: [
+        const CustomNetworkImage(
+          height: 110,
+          width: 100,
+          borderRaduis: 20,
+          'https://cdn.thewirecutter.com/wp-content/media/2024/12/ROUNDUP-KOREAN-SKINCARE-2048px-9736-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp',
+          fit: BoxFit.fill,
         ),
-        child: Stack(
-          children: [
-            // Product Images Stack
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: Co.buttonGradient.withOpacityNew(.35),
-                        width: 2,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(20),
-                      child: Stack(
-                        children: [
-                          CustomNetworkImage(
-                            height: 140,
-                            width: constraints.maxWidth,
-
-                            'https://cdn.thewirecutter.com/wp-content/media/2024/12/ROUNDUP-KOREAN-SKINCARE-2048px-9736-2x1-1.jpg?width=2048&quality=75&crop=2:1&auto=webp',
-                            fit: BoxFit.fill,
-                          ),
-                          if (product.outOfStock)
-                            Positioned.fill(
-                              child: Container(
-                                height: 140,
-                                width: constraints.maxWidth,
-                                decoration: BoxDecoration(
-                                  color: Co.closed.withOpacityNew(.4),
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: Co.buttonGradient.withOpacityNew(.35),
-                                    width: 2,
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            // Discount Tag
-            if (discountPercentage > 0)
-              Positioned(
-                top: 0,
-                left: isAr ? null : 0,
-                right: isAr ? 0 : null,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Co.buttonGradient,
-                    borderRadius: isAr
-                        ? const BorderRadius.only(
-                            topRight: Radius.circular(6),
-                            bottomLeft: Radius.circular(6),
-                          )
-                        : const BorderRadius.only(
-                            topLeft: Radius.circular(6),
-                            bottomRight: Radius.circular(6),
-                          ),
-                  ),
-                  child: Text(
-                    '$discountPercentage%',
-                    style: TStyle.burbleBold(14).copyWith(
-                      color: Co.secondary,
-                    ),
-                  ),
-                ),
-              ),
-            // Interactive Icons
-            Positioned(
-              bottom: 0,
-              right: isAr ? null : 0,
-              left: isAr ? 0 : null,
-              child: ClipRRect(
-                borderRadius: isAr
-                    ? const BorderRadiusGeometry.only(
-                        topRight: Radius.circular(20),
-                      )
-                    : const BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(20),
-                      ),
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Co.white,
-                    border: Border(
-                      top: BorderSide(
-                        color: Co.buttonGradient.withOpacityNew(.35),
-                        width: 2,
-                      ),
-                      left: isAr
-                          ? const BorderSide(color: Colors.white, width: 2)
-                          : BorderSide(
-                              color: Co.buttonGradient.withOpacityNew(.35),
-                              width: 2,
-                            ),
-                      bottom: const BorderSide(color: Colors.white, width: 2),
-                      right: isAr
-                          ? BorderSide(
-                              color: Co.buttonGradient.withOpacityNew(.35),
-                              width: 2,
-                            )
-                          : const BorderSide(color: Colors.white, width: 2),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Cart Icon
-                      CartToIncrementIcon(
-                        ignorePointer: true,
-                        product: product,
-                        iconSize: 18,
-                        isDarkContainer: false,
-                        isHorizonal: true,
-                      ),
-                      const SizedBox(width: 8),
-
-                      // Favorite Icon
-                      DecoratedFavoriteWidget(
-                        ignorePointer: true,
-                        fovorable: product,
-                        isDarkContainer: false,
-                        size: 16,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+        FavoriteWidget(fovorable: product),
+      ],
     );
   }
 }
@@ -243,100 +98,93 @@ class _TopSection extends StatelessWidget {
 // }
 
 class _BottomSection extends StatelessWidget {
-  const _BottomSection({
-    required this.product,
-    required this.isAr,
-  });
+  const _BottomSection({required this.product, required this.isAr});
 
   final ProductEntity product;
   final bool isAr;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadiusGeometry.circular(12),
-        gradient: LinearGradient(
-          colors: [
-            Colors.black.withOpacityNew(0),
-            Co.buttonGradient.withOpacityNew(.4),
-          ],
-          end: AlignmentDirectional.bottomCenter,
-          begin: AlignmentDirectional.topCenter,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Product Category
-          Text(
-            isAr ? 'منتج طبي' : 'Medical Product',
-            style: TStyle.burbleRegular(12).copyWith(
-              color: Co.buttonGradient,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Product Category
+        Row(
+          children: [
+            Expanded(
+              child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
             ),
-          ),
-
-          const SizedBox(height: 8),
-
-          // Delivery Info
-          Text(
-            isAr ? 'توصيل مجاني' : 'Free Delivery',
-            style: TStyle.greyRegular(12).copyWith(
-              color: Co.tertiary,
-            ),
-          ),
-
-          const SizedBox(height: 8),
-
-          // Rating
-          Row(
-            children: [
-              const Icon(
-                Icons.star,
-                color: Co.tertiary,
-                size: 12,
-              ),
-              const Spacer(),
-              const SizedBox(width: 4),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${product.rate.toStringAsFixed(1)} ',
-                    style: TStyle.greyBold(12).copyWith(
-                      color: Co.tertiary,
-                    ),
-                  ),
-                  Text(
-                    ' (${product.reviewCount})',
-                    style: TStyle.greyBold(12),
-                  ),
-                ],
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 12),
-
-          // Price
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                isAr ? 'السعر' : 'PRICE',
-                style: TStyle.greyRegular(12).copyWith(
-                  color: Co.grey,
+            if (product.offer != null) ...[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.circular(50)),
+                child: Text(
+                  '${product.offer!.discount.toInt()}${product.offer!.discountType == DiscountType.percentage ? ' %' : ''}',
+                  style: TStyle.robotBlackMedium(),
                 ),
               ),
-              Text(
-                isAr ? '100 جنيه' : '100 EGP',
-                style: TStyle.blackBold(16).copyWith(),
-              ),
             ],
-          ),
-        ],
-      ),
+          ],
+        ),
+
+        const SizedBox(height: 6),
+
+        // Delivery Info
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                product.description,
+                style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ), // Rating
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const VectorGraphicsWidget(Assets.starRateIc),
+                const HorizontalSpacing(4),
+                Text(product.rate.toString(), style: TStyle.robotBlackSmall()),
+                const HorizontalSpacing(2),
+                Text('(+${product.reviewCount})', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+              ],
+            ),
+          ],
+        ),
+
+        const SizedBox(height: 6),
+
+        // Price
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FittedBox(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                  ),
+                  if (product.offer != null)
+                    FittedBox(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        Helpers.getProperPrice(product.priceBeforeDiscount!),
+                        style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+
+            const SizedBox(width: 8),
+            if (!(key?.toString().contains('store') ?? false))
+              CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
+          ],
+        ),
+      ],
     );
   }
 }

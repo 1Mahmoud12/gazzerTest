@@ -123,8 +123,20 @@ class MultiCatRestHeader extends StatelessWidget {
         ),
         if (restaurant.description.isNotEmpty) ...[
           const SizedBox(height: 12),
-          Row(
-            children: [Text(restaurant.description, style: TStyle.robotBlackSubTitle(), textAlign: TextAlign.start)],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    restaurant.description,
+                    style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
         // Rating and Review
@@ -168,16 +180,18 @@ class MultiCatRestHeader extends StatelessWidget {
               Container(width: 2, height: 40, color: Co.darkGrey),
               // Open Hours
               _InfoItem(
-                title: (restaurant.isOpen ? L10n.tr().closed : L10n.tr().open),
+                title: (restaurant.isOpen ? L10n.tr().closedUntil : L10n.tr().openUntil),
                 icon: const VectorGraphicsWidget(Assets.cacheClockIc),
                 text: restaurant.alwaysOpen
                     ? '24 h'
-                    : (restaurant.isOpen ? DateFormat('hh:ss a').format(restaurant.endTime!) : DateFormat('hh:ss a').format(restaurant.startTime!)),
+                    : (restaurant.isOpen
+                          ? DateFormat('hh:ss a', L10n.isAr(context) ? 'ar' : 'en').format(restaurant.endTime!)
+                          : DateFormat('hh:ss a', L10n.isAr(context) ? 'ar' : 'en').format(restaurant.startTime!)),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 12),
       ],
     );
   }

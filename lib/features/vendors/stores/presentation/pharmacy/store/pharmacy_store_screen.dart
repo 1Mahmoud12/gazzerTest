@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
-import 'package:gazzer/features/vendors/common/presentation/vendor_info_card.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/common/view/app_bar_row_widget.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/widgets/gradient_wave_container.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/all_reviews/all_reviews_screen.dart';
+import 'package:gazzer/features/vendors/common/domain/offer_entity.dart';
+import 'package:gazzer/features/vendors/common/presentation/grid_categories_widget.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/common/view/scrollable_tabed_list.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_offer_style_one.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_offer_style_two.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_banner_slider.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_reviews_section.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/prescription_upload_button.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/daily_offers/view_all_daily_offers_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/products/pharmacy_products_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'pharmacy_store_screen.g.dart';
@@ -54,12 +44,12 @@ class PharmacyStoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categories = _getStoreCategories();
-
     // Create a mock vendor entity for VendorInfoCard
     final mockVendor = StoreEntity(
       id: -vendorId,
       name: name,
+      description:
+          'Description: A juicy, flame-grilled beef patty served with fresh toppings and a toasted bun.Ingredients: 100% Angus beef patty, lettuce, tomato, pickles, onions, house sauce, sesame bun.',
       totalOrders: 120,
       image: logoUrl,
       estimatedDeliveryTime: 20,
@@ -82,190 +72,223 @@ class PharmacyStoreScreen extends StatelessWidget {
       mintsBeforClosingAlert: 30,
     );
 
+    final catWithSubCatProds = _getCategoriesWithSubcatsAndProducts();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: ListView(
-        children: [
-          GradientWaveContainer(
-            height: 350,
-            child: Column(
-              children: [
-                const AppBarRowWidget(),
-
-                // Vendor info card
-                VendorInfoCard(
-                  mockVendor,
-                  categories: categories.map((c) => c['name'] as String),
-                  onTimerFinish: (ctx) {
-                    // Handle timer finish
-                  },
-                ),
-
-                const VerticalSpacing(16),
-
-                Padding(
-                  padding: AppConst.defaultHrPadding,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          L10n.tr().pharmacyStores,
-                          style: TStyle.blackBold(22).copyWith(color: Co.purple),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: PrescriptionUploadButton(
-                          onTap: () {
-                            // TODO: Navigate to prescription upload
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+      body: ScrollableTabedList(
+        preHerader: Column(
+          spacing: 4,
+          children: [
+            MultiCatRestHeader(restaurant: mockVendor, categires: catWithSubCatProds.map((e) => e.$1.name)),
+            // Today's Deals Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: TitleWithMore(
+                title: L10n.tr().todayDeals,
+                titleStyle: TStyle.blackBold(20),
+                onPressed: () {
+                  context.navigateToPage(const ViewAllDailyOffersScreen());
+                },
+              ),
             ),
-          ),
-
-          const SizedBox(height: 16),
-          // Search Button
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 12,
-            children: [
-              const HorizontalSpacing(6),
-              Expanded(child: MainSearchWidget(hintText: L10n.tr().searchForStoresItemsAndCAtegories)),
-              const MainCartWidget(),
-              const HorizontalSpacing(6),
-            ],
-          ),
-          const SizedBox(height: 16),
-          // Banner Slider with Dots
-          const BannerSlider(height: 180),
-
-          SizedBox(
-            height: 60,
-            child: SingleChildScrollView(
+            const SizedBox(height: 12),
+            SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
-                children: List.generate(3, (index) {
-                  final selected = index == 0;
-                  final category = categories[index];
-                  return InkWell(
-                    onTap: () {
-                      context.navigateToPage(PharmacyProductsScreen(categoryId: -category['id'], categoryName: category['name']));
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(90),
-                        border: Border.all(color: Co.buttonGradient.withOpacityNew(.3), width: 2),
-                        color: selected == index ? Co.buttonGradient.withOpacityNew(.1) : Colors.transparent,
+                children: [
+                  ...List.generate(4, (index) {
+                    return DailyOfferStyleOne(
+                      product: ProductEntity(
+                        id: -1,
+                        sold: 0,
+                        name: 'Medical Product Bundle',
+                        description: 'Complete medical product set with nasal spray, dropper, and medication',
+                        price: 110.0,
+                        image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+                        rate: 4.5,
+                        reviewCount: 100,
+                        outOfStock: false,
+                        offer: OfferEntity(
+                          id: -1,
+                          maxDiscount: 900,
+                          expiredAt: DateTime.now().add(const Duration(days: 30)).timeZoneName,
+                          discount: 30,
+                          discountType: DiscountType.percentage,
+                        ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CircleGradientBorderedImage(image: category['image'], showBorder: false),
-                          Padding(
-                            padding: AppConst.defaultHrPadding,
-                            child: Text(category['name'], style: selected == index ? TStyle.burbleBold(15) : TStyle.blackSemi(13)),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
+                      onTap: () {
+                        // TODO: Navigate to product details
+                      },
+                    );
+                  }),
+                ],
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          TitleWithMore(
-            title: L10n.tr().dailyOffersForYou,
-            titleStyle: TStyle.blackBold(20),
-            onPressed: () {
-              context.navigateToPage(const ViewAllDailyOffersScreen());
-            },
-          ),
-          const SizedBox(height: 16),
-          Row(
+            const SizedBox(height: 16),
+          ],
+        ),
+        itemsCount: catWithSubCatProds.length,
+        tabContainerBuilder: (child) => ColoredBox(color: Co.bg, child: child),
+        tabBuilder: (context, index) {
+          return Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: Wrap(
-                  alignment: WrapAlignment.spaceBetween,
-                  spacing: 10,
-                  children: [
-                    ...List.generate(4, (index) {
-                      return SizedBox(
-                        width: MediaQuery.sizeOf(context).width * .3,
-                        child: false
-                            ? DailyOfferStyleTwo(
-                                product: const ProductEntity(
-                                  id: -1,
-                                  sold: 0,
-
-                                  name: 'Medical Product Bundle',
-                                  description: 'Complete medical product set with nasal spray, dropper, and medication',
-                                  price: 110.0,
-                                  image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                                  rate: 4.5,
-                                  reviewCount: 100,
-                                  outOfStock: false,
-                                ),
-                                discountPercentage: 30,
-                                onTap: () {
-                                  // TODO: Navigate to product details
-                                },
-                              )
-                            : DailyOfferStyleOne(
-                                product: const ProductEntity(
-                                  id: -1,
-                                  sold: 0,
-
-                                  name: 'Medical Product Bundle',
-                                  description: 'Complete medical product set with nasal spray, dropper, and medication',
-                                  price: 110.0,
-                                  image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-                                  rate: 4.5,
-                                  reviewCount: 100,
-                                  outOfStock: false,
-                                ),
-                                discountPercentage: 30,
-                                onTap: () {
-                                  // TODO: Navigate to product details
-                                },
-                              ),
-                      );
-                    }),
-                  ],
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(color: Co.lightGrey),
                 ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Text(catWithSubCatProds[index].$1.name, style: TStyle.blackSemi(13)),
               ),
             ],
-          ),
-          const SizedBox(height: 16),
-
-          // Reviews Section
-          PharmacyReviewsSection(
-            onViewAll: () {
-              context.navigateToPage(const AllReviewsScreen());
-            },
-          ),
-          const SizedBox(height: 16),
-        ],
+          );
+        },
+        listItemBuilder: (context, index) {
+          final item = catWithSubCatProds[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: const [], products: item.$3, vendor: mockVendor),
+          );
+        },
       ),
     );
   }
 
   // ==================== Static Data ====================
-  List<Map<String, dynamic>> _getStoreCategories() {
+  List<(StoreCategoryEntity, List<StoreCategoryEntity>, List<ProductEntity>)> _getCategoriesWithSubcatsAndProducts() {
     return [
-      {'id': -2, 'name': 'Medications', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
-      {'id': -3, 'name': 'Skin Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
-      {'id': -4, 'name': 'Hair Care', 'image': 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'},
+      (
+        // Main category: Medications
+        const StoreCategoryEntity(id: -1, name: 'Medications', image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'),
+        // Subcategories
+        [
+          const StoreCategoryEntity(
+            id: -11,
+            name: 'Pain Relief',
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            parentId: -1,
+            products: [],
+          ),
+          const StoreCategoryEntity(
+            id: -11,
+            name: 'Pain Relief',
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            parentId: -1,
+            products: [],
+          ),
+          const StoreCategoryEntity(
+            id: -11,
+            name: 'Pain Relief',
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            parentId: -1,
+            products: [],
+          ),
+          const StoreCategoryEntity(
+            id: -12,
+            name: 'Antibiotics',
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            parentId: -1,
+            products: [],
+          ),
+        ],
+        // Products
+        [
+          const ProductEntity(
+            id: -101,
+            name: 'Pain Relief Gel',
+            description: 'Fast acting pain relief',
+            price: 65.0,
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            rate: 4.9,
+            reviewCount: 150,
+            outOfStock: false,
+            sold: 0,
+          ),
+          const ProductEntity(
+            id: -101,
+            name: 'Pain Relief Gel',
+            description: 'Fast acting pain relief',
+            price: 65.0,
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            rate: 4.9,
+            reviewCount: 150,
+            outOfStock: false,
+            sold: 0,
+          ),
+          const ProductEntity(
+            id: -101,
+            name: 'Pain Relief Gel',
+            description: 'Fast acting pain relief',
+            price: 65.0,
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            rate: 4.9,
+            reviewCount: 150,
+            outOfStock: false,
+            sold: 0,
+          ),
+          const ProductEntity(
+            id: -102,
+            name: 'Antibiotic Cream',
+            description: 'Topical antibiotic treatment',
+            price: 45.0,
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            rate: 4.7,
+            reviewCount: 200,
+            outOfStock: false,
+            sold: 0,
+          ),
+        ],
+      ),
+      (
+        // Main category: Skin Care
+        const StoreCategoryEntity(id: -2, name: 'Skin Care', image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg'),
+        // Subcategories
+        [
+          const StoreCategoryEntity(
+            id: -21,
+            name: 'Face Care',
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            parentId: -2,
+            products: [],
+          ),
+          const StoreCategoryEntity(
+            id: -22,
+            name: 'Body Care',
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            parentId: -2,
+            products: [],
+          ),
+        ],
+        // Products
+        [
+          const ProductEntity(
+            id: -201,
+            name: 'Face Moisturizer',
+            description: 'Hydrating face cream',
+            price: 120.0,
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            rate: 4.6,
+            reviewCount: 95,
+            outOfStock: false,
+            sold: 0,
+          ),
+          const ProductEntity(
+            id: -202,
+            name: 'Skin Serum',
+            description: 'Anti-aging serum',
+            price: 95.0,
+            image: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
+            rate: 4.8,
+            reviewCount: 85,
+            outOfStock: false,
+            sold: 0,
+          ),
+        ],
+      ),
     ];
   }
 }

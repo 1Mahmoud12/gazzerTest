@@ -18,117 +18,119 @@ class GrocProdCard extends StatelessWidget {
   final CardStyle shape;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: AppConst.defaultBorderRadius,
-      onTap: () {
-        ProductDetailsRoute(productId: product.id).push(context);
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                CustomNetworkImage(product.image, fit: BoxFit.cover, height: 120, width: double.infinity, borderRaduis: 20),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (product.offer == null)
-                        const SizedBox()
-                      else
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                          decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(20)),
-                          child: Text(
-                            "${product.offer?.discount}${product.offer?.discountType == DiscountType.percentage ? "%" : ""}",
-                            style: TStyle.robotBlackMedium(),
-                          ),
-                        ),
-                      FavoriteWidget(size: 40, fovorable: product, padding: 0),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const VerticalSpacing(4),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        product.name,
-                        style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-
-                    const SizedBox(width: 4),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width / 3,
+      child: InkWell(
+        borderRadius: AppConst.defaultBorderRadius,
+        onTap: () {
+          ProductDetailsRoute(productId: product.id).push(context);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  CustomNetworkImage(product.image, fit: BoxFit.contain, height: 120, width: double.infinity, borderRaduis: 20),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SvgPicture.asset(Assets.starRateIc, width: 16, height: 16),
-                        const HorizontalSpacing(4),
-                        Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                        if (product.offer == null)
+                          const SizedBox()
+                        else
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                            decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(20)),
+                            child: Text(
+                              "${product.offer?.discount}${product.offer?.discountType == DiscountType.percentage ? "%" : ""}",
+                              style: TStyle.robotBlackMedium(),
+                            ),
+                          ),
+                        FavoriteWidget(size: 40, fovorable: product, padding: 0),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const VerticalSpacing(4),
 
-                const VerticalSpacing(4),
-                Text(
-                  product.description == '' ? product.name : product.description,
-                  style: TStyle.robotBlackSmall(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.start,
-                ),
-                const VerticalSpacing(4),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          product.name,
+                          style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
 
-                Row(
-                  children: [
-                    Expanded(
-                      child: Wrap(
-                        runSpacing: 4,
-                        alignment: WrapAlignment.spaceBetween,
+                      const SizedBox(width: 4),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              FittedBox(
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
-                              ),
-                              if (product.offer != null)
-                                FittedBox(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  child: Text(
-                                    Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                    style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
-                                  ),
-                                ),
-                            ],
-                          ),
-                          CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
-
-                          //CartToIncrementIcon(isHorizonal: false, product: product, iconSize: 20, isDarkContainer: false),
+                          SvgPicture.asset(Assets.starRateIc, width: 16, height: 16),
+                          const HorizontalSpacing(4),
+                          Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                    ],
+                  ),
+
+                  const VerticalSpacing(4),
+                  Text(
+                    product.description == '' ? product.name : product.description,
+                    style: TStyle.robotBlackSmall(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.start,
+                  ),
+                  const VerticalSpacing(4),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Wrap(
+                          runSpacing: 4,
+                          alignment: WrapAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                FittedBox(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                ),
+                                if (product.offer != null)
+                                  FittedBox(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Text(
+                                      Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                      style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
+
+                            //CartToIncrementIcon(isHorizonal: false, product: product, iconSize: 20, isDarkContainer: false),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

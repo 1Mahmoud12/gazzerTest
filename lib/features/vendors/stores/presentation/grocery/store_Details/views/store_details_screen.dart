@@ -2,31 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
-import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
-import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
-import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/common/presentation/grid_categories_widget.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/scrollable_tabed_list.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/widgets/header_widget.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_prod_card.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_sub_cat_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/sotre_details_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/cubit/store_details_states.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/subcategory/subcategory_items_screen.dart';
 import 'package:go_router/go_router.dart';
 
 part 'store_details_screen.g.dart';
@@ -99,7 +91,7 @@ class StoreDetailsScreen extends StatelessWidget {
               final item = state.catsWthSubatsAndProds[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: _GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: item.$2, products: item.$3, vendor: store),
+                child: GridWidget(maincat: item.$1, onSinglceCardPressed: (item) {}, subcats: item.$2, products: item.$3, vendor: store),
               );
             },
           );
@@ -270,68 +262,6 @@ class _BestSellingItemCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _GridWidget extends StatelessWidget {
-  const _GridWidget({required this.maincat, required this.onSinglceCardPressed, required this.subcats, required this.products, required this.vendor});
-  final StoreCategoryEntity maincat;
-  final Function(dynamic item) onSinglceCardPressed;
-  final List<StoreCategoryEntity> subcats;
-  final List<ProductEntity> products;
-  final GenericVendorEntity vendor;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      spacing: 8,
-      children: [
-        Padding(
-          padding: AppConst.defaultHrPadding,
-          child: TitleWithMore(title: maincat.name),
-        ),
-        GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: subcats.length + products.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 0.45,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-          ),
-          itemBuilder: (context, index) {
-            if (index < subcats.length) {
-              return GrocSubCatCard(
-                subCat: subcats[index],
-                shape: maincat.style,
-                onTap: () {
-                  // Check if subcategory has items
-                  // For now, we'll show the alert as requested
-                  if (subcats[index].products?.isEmpty ?? false) {
-                    Alerts.showToast(L10n.tr().noItemsAvailableInThisCategory);
-                    return;
-                  }
-
-                  context.navigateToPage(
-                    SubcategoryItemsScreen(
-                      items: subcats[index].products ?? [],
-                      subcategoryName: subcats[index].name,
-                      vendor: vendor,
-                      maincat: maincat.style,
-                    ),
-                  );
-                },
-              );
-            }
-            if (index >= subcats.length) {
-              return GrocProdCard(product: products[index - subcats.length], shape: maincat.style);
-            }
-            return const SizedBox();
-          },
-        ),
-      ],
     );
   }
 }

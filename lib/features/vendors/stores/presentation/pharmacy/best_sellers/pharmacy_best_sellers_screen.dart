@@ -57,31 +57,29 @@ class PharmacyBestSellersScreen extends StatelessWidget {
           // ),
           const VerticalSpacing(12),
           // Main Content
-          Expanded(
-            child: Padding(
-              padding: AppConst.defaultHrPadding,
-              child: Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: List.generate(bestSellers.length, (index) {
-                  final product = bestSellers[index];
-                  final screenWidth = MediaQuery.sizeOf(context).width;
-                  final padding = AppConst.defaultHrPadding.horizontal;
-                  final availableWidth = screenWidth - padding;
-                  final cardWidth = (availableWidth - 12) / 2;
-                  return SizedBox(
-                    width: cardWidth,
-                    child: VerticalProductCard(
-                      product: product['pharmacies'],
-                      pharmacy: true,
-                      canAdd: true,
-                      onTap: () {
-                        // TODO: Navigate to product details
-                      },
-                    ),
-                  );
-                }),
-              ),
+          Padding(
+            padding: AppConst.defaultHrPadding,
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: List.generate(bestSellers.length, (index) {
+                final product = bestSellers[index];
+                final screenWidth = MediaQuery.sizeOf(context).width;
+                final padding = AppConst.defaultHrPadding.horizontal;
+                final availableWidth = screenWidth - padding;
+                final cardWidth = (availableWidth - 12) / 2;
+                return SizedBox(
+                  width: cardWidth,
+                  child: VerticalProductCard(
+                    product: product['pharmacies'],
+                    pharmacy: true,
+                    canAdd: true,
+                    onTap: () {
+                      // TODO: Navigate to product details
+                    },
+                  ),
+                );
+              }),
             ),
           ),
         ],

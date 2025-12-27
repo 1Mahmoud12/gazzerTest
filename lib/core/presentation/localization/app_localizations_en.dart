@@ -2005,4 +2005,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get closedUntil => 'Closed until';
+
+  @override
+  String get openUntil => 'Open until';
+
+  @override
+  String get todayDeals => 'Today\'s Deals';
 }

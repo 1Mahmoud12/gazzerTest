@@ -4003,6 +4003,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @closedUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed until'**
+  String get closedUntil;
+
+  /// No description provided for @openUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Open until'**
+  String get openUntil;
+
+  /// No description provided for @todayDeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Deals'**
+  String get todayDeals;
 }
 
 class _AppLocalizationsDelegate

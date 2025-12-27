@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_offer_style_one.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/daily_offer_style_two.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_header.dart';
-import 'package:go_router/go_router.dart';
 
 /// View all daily offers screen
 class ViewAllDailyOffersScreen extends StatelessWidget {
@@ -21,47 +18,21 @@ class ViewAllDailyOffersScreen extends StatelessWidget {
         child: Column(
           children: [
             // Pharmacy Header with gradient and wave
-            PharmacyHeader(
-              height: 200,
-              onBackTap: () => context.pop(),
-              onSearch: () {
-                // TODO: Navigate to search
-              },
-            ),
+            MenuCategoriesHeaderWidget(title: L10n.tr().todayDeals, colors: [const Color(0xff4A2197), const Color(0xff4AFF5C).withOpacityNew(.8)]),
 
-            // Title
-            Padding(
-              padding: AppConst.defaultHrPadding,
-              child: Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: Text(L10n.tr().dailyOffersForYou, style: TStyle.blackBold(20)),
-              ),
-            ),
             Wrap(
-              spacing: 16,
+              runSpacing: 16,
 
               children: List.generate(products.length, (index) {
                 final product = products[index];
-                final isStyleTwo = index % 2 == 0;
-
                 // Alternate between DailyOfferStyleTwo and DailyOfferStyleOne
-                return SizedBox(
-                  width: MediaQuery.sizeOf(context).width * .45,
-                  child: (isStyleTwo)
-                      ? DailyOfferStyleTwo(
-                          product: product['product'] as ProductEntity,
-                          discountPercentage: product['discount'] as int,
-                          onTap: () {
-                            // TODO: Navigate to product details
-                          },
-                        )
-                      : DailyOfferStyleOne(
-                          product: product['product'] as ProductEntity,
-                          discountPercentage: product['discount'] as int,
-                          onTap: () {
-                            // TODO: Navigate to product details
-                          },
-                        ),
+                return DailyOfferStyleOne(
+                  width: double.infinity,
+                  product: product['product'] as ProductEntity,
+                  discountPercentage: product['discount'] as int,
+                  onTap: () {
+                    // TODO: Navigate to product details
+                  },
                 );
               }),
             ),

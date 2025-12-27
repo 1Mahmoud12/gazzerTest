@@ -840,7 +840,10 @@
            "searchFor":"Search For",
            "verifyYourNumber":"Verify Your Number",
            "resend":"Resend","shareCart":"Share Cart",
-           "profile":"Profile"
+           "profile":"Profile",
+             "closedUntil": "Closed until",
+             "openUntil": "Open until",
+             "todayDeals": "Today's Deals"
 
 
 

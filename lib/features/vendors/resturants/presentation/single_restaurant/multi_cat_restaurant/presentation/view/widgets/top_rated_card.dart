@@ -63,7 +63,7 @@ class _TopRatedCard extends StatelessWidget {
                             if (product.offer != null) ...[
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(50)),
+                                decoration: BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.circular(50)),
                                 child: Text(
                                   '${product.offer!.discount}${product.offer!.discountType == DiscountType.percentage ? '%' : ''}',
                                   style: TStyle.robotBlackMedium(),

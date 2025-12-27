@@ -841,7 +841,10 @@
                       "verifyYourNumber":"التحقق من رقم هاتفك",
                       "Resend":"اعادة ارسال",
                       "shareCart":"مشاركة السله",
-                      "profile":"الملف الشخصي"
+                      "profile":"الملف الشخصي",
+                      "closedUntil": "مغلق حتى",
+                        "openUntil": "مفتوح حتى",
+                        "todayDeals": "عروض اليوم"
 
 
 
