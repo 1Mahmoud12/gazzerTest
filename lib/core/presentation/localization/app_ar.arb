@@ -848,7 +848,15 @@
                         "save":"وفر",
                           "relatedProducts": "منتجات ذات صلة",
                             "walletAdjustment": "تعديل المحفظة",
-                              "selectAnotherAddress": "اختيار عنوان آخر"
+                              "selectAnotherAddress": "اختيار عنوان آخر",
+                              "time":"الوقت",
+            "estimated_delivery_time": "الوقت المتوقع للتوصيل",
+              "your_active_orders": "طلباتك النشطة",
+              "your_delivery_man": "مندوب التوصيل الخاص بك",
+              "road_distance": "المسافة على الطريق",
+                "delivery_arrival_time": "وقت وصول الطلب",
+                "view_delivery_man_on_map": "عرض مندوب التوصيل على الخريطة",
+                "your_order_is_being": "طلبك قيد التجهيز"
 
 
 

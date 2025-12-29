@@ -38,7 +38,7 @@ dependencies:
   fluttertoast: ^8.2.14
   flutter_localizations:
     sdk: flutter
-
+  flutter_screenutil: ^5.9.3
   # core
   firebase_core: ^4.1.0
   firebase_messaging: ^16.0.1

@@ -137,22 +137,17 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 4,
                     children: [
                       Expanded(
                         child: CustomNetworkImage(store.image, fit: BoxFit.cover, width: double.infinity, height: 120, borderRaduis: 12),
                       ),
-                      Text(store.name, style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 2, textAlign: TextAlign.center),
+                      Text(store.name, style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1, textAlign: TextAlign.center),
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         spacing: 4,
                         children: [
-                          const VectorGraphicsWidget(
-                            Assets.clockIc,
-                            height: 24,
-                            width: 24,
-                            colorFilter: ColorFilter.mode(Co.purple, BlendMode.srcIn),
-                          ),
+                          const VectorGraphicsWidget(Assets.clockIc, height: 24, width: 24),
                           Text('${store.estimatedDeliveryTime} ${L10n.tr().min}', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
                         ],
                       ),

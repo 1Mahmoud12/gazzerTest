@@ -1,6 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gazzer/core/data/services/deep_link_service.dart';
 import 'package:gazzer/core/data/services/referral_service.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
@@ -102,13 +103,17 @@ class _GazzerAppState extends State<GazzerApp> {
       child: Builder(
         builder: (context) {
           return BlocBuilder<AppSettingsCubit, AppSettingsState>(
-            builder: (context, state) => MaterialApp.router(
-              routerConfig: router,
-              theme: AppTheme.lightTheme,
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: L10n.localizationDelegates,
-              supportedLocales: L10n.supportedLocales,
-              locale: Locale(state.lang),
+            builder: (context, state) => ScreenUtilInit(
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) => MaterialApp.router(
+                routerConfig: router,
+                theme: AppTheme.lightTheme,
+                debugShowCheckedModeBanner: false,
+                localizationsDelegates: L10n.localizationDelegates,
+                supportedLocales: L10n.supportedLocales,
+                locale: Locale(state.lang),
+              ),
             ),
           );
         },

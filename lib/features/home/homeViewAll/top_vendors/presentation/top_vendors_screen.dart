@@ -155,7 +155,6 @@ class _VendorCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 4,
             children: [
               Expanded(

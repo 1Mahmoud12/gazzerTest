@@ -2026,4 +2026,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectAnotherAddress => 'Select another address';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get estimated_delivery_time => 'Estimated Delivery Time';
+
+  @override
+  String get your_active_orders => 'Your Active Orders';
+
+  @override
+  String get your_delivery_man => 'Your delivery man';
+
+  @override
+  String get road_distance => 'Road Distance';
+
+  @override
+  String get delivery_arrival_time => 'Delivery Arrival Time';
+
+  @override
+  String get view_delivery_man_on_map => 'View Delivery Man on Map';
+
+  @override
+  String get your_order_is_being => 'Your order is being prepared';
 }

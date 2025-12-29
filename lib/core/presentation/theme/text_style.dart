@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
 enum FFamily { inter, playfair, poppins, roboto }
@@ -78,25 +79,25 @@ abstract class TStyle {
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
 
   static TextStyle robotBlackHead({double fontSize = 32, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: bold, color: Co.dark);
   static TextStyle robotBlackTitle({double fontSize = 24, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: medium, color: Co.dark);
 
   static TextStyle robotBlackSubTitle({double fontSize = 20, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: medium, color: Co.dark);
 
   static TextStyle robotBlackMedium({double fontSize = 16, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: medium, color: Co.dark);
 
   static TextStyle robotBlackRegular({double fontSize = 16, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: regular, color: Co.dark);
 
   static TextStyle robotBlackRegular14({double fontSize = 14, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: regular, color: Co.dark);
 
   static TextStyle robotBlackSmall({double fontSize = 14, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: regular, color: Co.dark);
 
   static TextStyle robotBlackThin({double fontSize = 12, FFamily font = FFamily.roboto}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
+      TextStyle(fontFamily: font.name, fontSize: fontSize.sp, fontWeight: regular, color: Co.dark);
 }

@@ -846,7 +846,14 @@
              "todayDeals": "Today's Deals","save":"Save",
                "relatedProducts": "Related Products",
                  "walletAdjustment": "Wallet Adjustment",
-  "selectAnotherAddress": "Select another address"
+  "selectAnotherAddress": "Select another address",
+  "time":"Time",  "estimated_delivery_time": "Estimated Delivery Time",
+                  "your_active_orders": "Your Active Orders",
+                  "your_delivery_man": "Your delivery man",
+                  "road_distance": "Road Distance",
+                  "delivery_arrival_time": "Delivery Arrival Time",
+                    "view_delivery_man_on_map": "View Delivery Man on Map",
+                    "your_order_is_being": "Your order is being prepared"
 
 
 

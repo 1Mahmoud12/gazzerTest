@@ -38,6 +38,7 @@ import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/active_orders_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/best_popular_stores_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/categories_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/daily_offers_widget.dart';
@@ -192,6 +193,9 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
                         ///
                         CategoriesWidget(),
+
+                        ///
+                        ActiveOrdersWidget(),
 
                         ///
                         DailyOffersWidget(),

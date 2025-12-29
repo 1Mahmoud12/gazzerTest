@@ -4045,6 +4045,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select another address'**
   String get selectAnotherAddress;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// No description provided for @estimated_delivery_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated Delivery Time'**
+  String get estimated_delivery_time;
+
+  /// No description provided for @your_active_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Active Orders'**
+  String get your_active_orders;
+
+  /// No description provided for @your_delivery_man.
+  ///
+  /// In en, this message translates to:
+  /// **'Your delivery man'**
+  String get your_delivery_man;
+
+  /// No description provided for @road_distance.
+  ///
+  /// In en, this message translates to:
+  /// **'Road Distance'**
+  String get road_distance;
+
+  /// No description provided for @delivery_arrival_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Arrival Time'**
+  String get delivery_arrival_time;
+
+  /// No description provided for @view_delivery_man_on_map.
+  ///
+  /// In en, this message translates to:
+  /// **'View Delivery Man on Map'**
+  String get view_delivery_man_on_map;
+
+  /// No description provided for @your_order_is_being.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order is being prepared'**
+  String get your_order_is_being;
 }
 
 class _AppLocalizationsDelegate

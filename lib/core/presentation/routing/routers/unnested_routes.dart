@@ -23,6 +23,7 @@ import 'package:gazzer/features/intro/presentation/plan/views/supplements_screen
 import 'package:gazzer/features/intro/presentation/tutorial/view/intro_video_tutorial_screen.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
 import 'package:gazzer/features/orders/views/order_details_screen.dart';
+import 'package:gazzer/features/orders/views/track_order_screen.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/views/delete_account_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/saved_cards_screen.dart';
@@ -42,6 +43,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Detail
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 import 'package:gazzer/features/wallet/presentation/views/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final List<RouteBase> unNestedRoutes = [
   ...authRoutes,
@@ -158,6 +160,23 @@ final List<RouteBase> unNestedRoutes = [
     path: OrderDetailsScreen.route,
     builder: (context, state) {
       return OrderDetailsScreen(orderId: state.extra as int);
+    },
+  ),
+  GoRoute(
+    path: TrackOrderScreen.route,
+    builder: (context, state) {
+      if (state.extra is Map<String, dynamic>) {
+        final extra = state.extra! as Map<String, dynamic>;
+        return TrackOrderScreen(
+          orderId: extra['orderId'] as int,
+          deliveryTimeMinutes: extra['deliveryTimeMinutes'] as int?,
+          userLocation: extra['userLocation'] as LatLng?,
+          deliveryLocation: extra['deliveryLocation'] as LatLng?,
+          roadDistance: extra['roadDistance'] as double?,
+          deliveryManName: extra['deliveryManName'] as String?,
+        );
+      }
+      return TrackOrderScreen(orderId: state.extra as int? ?? 0);
     },
   ),
 ];

@@ -2025,4 +2025,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get selectAnotherAddress => 'اختيار عنوان آخر';
+
+  @override
+  String get time => 'الوقت';
+
+  @override
+  String get estimated_delivery_time => 'الوقت المتوقع للتوصيل';
+
+  @override
+  String get your_active_orders => 'طلباتك النشطة';
+
+  @override
+  String get your_delivery_man => 'مندوب التوصيل الخاص بك';
+
+  @override
+  String get road_distance => 'المسافة على الطريق';
+
+  @override
+  String get delivery_arrival_time => 'وقت وصول الطلب';
+
+  @override
+  String get view_delivery_man_on_map => 'عرض مندوب التوصيل على الخريطة';
+
+  @override
+  String get your_order_is_being => 'طلبك قيد التجهيز';
 }
