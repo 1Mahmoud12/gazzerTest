@@ -234,6 +234,17 @@ flutter:
           style: italic
         - asset: assets/fonts/Roboto/Roboto-Black.ttf
           weight: 900
+    - family: Alexandria
+      fonts:
+        - asset: assets/fonts/alexandria/Alexandria-Black.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Bold.ttf
+        - asset: assets/fonts/alexandria/Alexandria-ExtraBold.ttf
+        - asset: assets/fonts/alexandria/Alexandria-ExtraLight.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Light.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Medium.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Regular.ttf
+        - asset: assets/fonts/alexandria/Alexandria-SemiBold.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Thin.ttf
 flutter_assets:
   assets_path:
     - assets/

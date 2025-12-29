@@ -85,7 +85,7 @@ class _MainBtnState extends State<MainBtn> {
               borderRadius: BorderRadius.circular(widget.radius ?? AppConst.defaultInnerRadius),
               //gradient: widget.bgColor != null || value ? null : Grad().linearGradient,
             ),
-            child: child!,
+            child: child,
           ),
         ),
         child: FilledButton(
@@ -132,7 +132,7 @@ class _MainBtnState extends State<MainBtn> {
                             child: Padding(
                               padding: const EdgeInsetsGeometry.all(12),
                               child: widget.icon is IconData
-                                  ? Icon(widget.icon!, size: (widget.height ?? 24) * 0.6, color: Co.white)
+                                  ? Icon(widget.icon, size: (widget.height ?? 24) * 0.6, color: Co.white)
                                   : SvgPicture.asset(widget.icon!, height: widget.height ?? 24),
                             ),
                           ),

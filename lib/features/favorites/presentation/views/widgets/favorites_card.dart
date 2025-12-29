@@ -43,7 +43,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
       if (v is RemovedFavoriteSuccess) {
         Alerts.showToast(L10n.tr().itemNameRemovedFromFavorites(widget.favorite.name), error: false);
       } else if (v is ToggleFavoriteFailure) {
-        Alerts.showToast("${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}");
+        Alerts.showToast('${L10n.tr().couldnotUpdateFavorites}. ${L10n.tr().pleaseCheckYourConnection}');
       }
     });
     getItemType();

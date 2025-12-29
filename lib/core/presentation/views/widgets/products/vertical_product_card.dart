@@ -101,12 +101,7 @@ class VerticalProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(
-                            product.name,
-                            style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
                         ),
 
                         const SizedBox(width: 10),
