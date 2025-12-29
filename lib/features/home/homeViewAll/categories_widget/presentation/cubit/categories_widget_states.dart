@@ -1,4 +1,5 @@
-import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
+import 'package:gazzer/core/data/dto/banner_dto.dart';
+import 'package:gazzer/features/home/homeViewAll/categories_widget/data/dtos/categories_widget_dto.dart';
 
 abstract class CategoriesWidgetStates {}
 
@@ -7,10 +8,11 @@ class CategoriesWidgetInitialState extends CategoriesWidgetStates {}
 class CategoriesWidgetLoadingState extends CategoriesWidgetStates {}
 
 class CategoriesWidgetSuccessState extends CategoriesWidgetStates {
-  final List<MainCategoryEntity> categories;
+  final List<CategoryEntityDto> categories;
+  final BannerDTO? banner;
   final bool isFromCache;
 
-  CategoriesWidgetSuccessState(this.categories, {this.isFromCache = false});
+  CategoriesWidgetSuccessState(this.categories, this.banner, {this.isFromCache = false});
 }
 
 class CategoriesWidgetErrorState extends CategoriesWidgetStates {

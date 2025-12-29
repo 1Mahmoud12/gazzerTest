@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/presentation/utils/add_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:lottie/lottie.dart';
 
 class SpikyShapeWidget extends StatelessWidget {
-  const SpikyShapeWidget({
-    super.key,
-    required this.color,
-    this.image,
-    required this.rtChild,
-    this.ltChild,
-    this.heroTag,
-  }) : assert(image != null || ltChild != null, 'Image or ltChild must not be null');
+  const SpikyShapeWidget({super.key, required this.color, this.image, required this.rtChild, this.ltChild, this.heroTag})
+    : assert(image != null || ltChild != null, 'Image or ltChild must not be null');
   final Color color;
   final String? image;
   final Widget rtChild;
@@ -21,7 +16,7 @@ class SpikyShapeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fraction = 1.08;
+    const fraction = 1.08;
     return LayoutBuilder(
       builder: (context, constraints) {
         return FractionallySizedBox(
@@ -48,7 +43,7 @@ class SpikyShapeWidget extends StatelessWidget {
                                   : CustomNetworkImage(image!, height: 150, fit: BoxFit.fitHeight),
                             ),
                           ),
-
+                      const HorizontalSpacing(12),
                       Expanded(flex: 3, child: rtChild),
                     ],
                   ),
@@ -63,15 +58,8 @@ class SpikyShapeWidget extends StatelessWidget {
 }
 
 class HomeDoubleAddWidget extends StatelessWidget {
-  const HomeDoubleAddWidget({
-    super.key,
-    required this.fgColor,
-    required this.bgColor,
-    this.image,
-    required this.rtChild,
-    this.ltChild,
-    this.rtFlex,
-  }) : assert(image != null || ltChild != null, 'Either image or lfChild must be provided');
+  const HomeDoubleAddWidget({super.key, required this.fgColor, required this.bgColor, this.image, required this.rtChild, this.ltChild, this.rtFlex})
+    : assert(image != null || ltChild != null, 'Either image or lfChild must be provided');
 
   final Color fgColor;
   final Color bgColor;

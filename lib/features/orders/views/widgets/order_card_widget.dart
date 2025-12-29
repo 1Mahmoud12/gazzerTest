@@ -362,7 +362,7 @@ class ActiveOrderCardWidget extends StatelessWidget {
     }
     // For orders with time < 5, show "5 - 10 Min"
     if (estimatedTimeMinutes! < 5) {
-      return '${L10n.tr().time}: 5 - 10 ${L10n.tr().min}';
+      return '${L10n.tr().time}: $estimatedTimeMinutes ${L10n.tr().min}';
     }
     // For orders with time >= 5, show "20 - 30 Min" or similar
     final minTime = estimatedTimeMinutes!;

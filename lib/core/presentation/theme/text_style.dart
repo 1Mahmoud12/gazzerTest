@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 
-enum FFamily { inter, playfair, poppins, roboto }
+enum FFamily { inter, playfair, poppins, roboto, Alexandria }
 
 abstract class TStyle {
   static const regular = FontWeight.w400;

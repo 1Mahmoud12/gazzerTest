@@ -141,6 +141,7 @@ class Endpoints {
 
   /// ** Orders
   static const clientOrders = 'orders/client-orders';
+  static const activeOrders = 'orders/active-orders';
 
   static String orderDetail(int id) => 'orders/order/$id';
 

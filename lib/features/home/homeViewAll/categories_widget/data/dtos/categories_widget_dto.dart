@@ -1,5 +1,4 @@
-import 'package:gazzer/core/presentation/extensions/enum.dart';
-import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
+import 'package:gazzer/core/data/dto/banner_dto.dart';
 
 class CategoriesWidgetDto {
   final String status;
@@ -19,16 +18,18 @@ class CategoriesWidgetDto {
 
 class CategoriesWidgetData {
   final List<CategoryEntityDto> entities;
+  final BannerDTO? banner;
 
-  CategoriesWidgetData({required this.entities});
+  CategoriesWidgetData({required this.entities, this.banner});
 
   factory CategoriesWidgetData.fromJson(Map<String, dynamic> json) {
     return CategoriesWidgetData(
       entities: (json['entities'] as List<dynamic>?)?.map((e) => CategoryEntityDto.fromJson(e as Map<String, dynamic>)).toList() ?? [],
+      banner: json['banner'] != null ? BannerDTO.fromJson(json['banner'] as Map<String, dynamic>) : null,
     );
   }
 
-  List<MainCategoryEntity> toEntities() {
+  List<CategoryEntityDto> toEntities() {
     return entities.map((e) => e.toEntity()).toList();
   }
 }
@@ -45,7 +46,7 @@ class CategoryEntityDto {
     return CategoryEntityDto(id: json['id'] ?? 0, name: json['name'] ?? '', type: json['type'] ?? '', image: json['image'] ?? '');
   }
 
-  MainCategoryEntity toEntity() {
-    return MainCategoryEntity(id: id, name: name, image: image, type: VendorType.fromString(type));
+  CategoryEntityDto toEntity() {
+    return CategoryEntityDto(id: id, name: name, image: image, type: type);
   }
 }

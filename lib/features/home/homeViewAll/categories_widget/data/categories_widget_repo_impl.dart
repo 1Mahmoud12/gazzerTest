@@ -6,7 +6,6 @@ import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/data/dtos/categories_widget_dto.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/domain/categories_widget_repo.dart';
-import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoriesWidgetRepoImpl extends CategoriesWidgetRepo {
@@ -15,7 +14,7 @@ class CategoriesWidgetRepoImpl extends CategoriesWidgetRepo {
   CategoriesWidgetRepoImpl(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<List<MainCategoryEntity>>> getCategories() async {
+  Future<Result<CategoriesWidgetData>> getCategories() async {
     final result = await super.call(
       apiCall: () => _apiClient.get(endpoint: Endpoints.categoriesWidget),
       parser: (response) {
@@ -23,7 +22,12 @@ class CategoriesWidgetRepoImpl extends CategoriesWidgetRepo {
         _saveToCache(response.data);
 
         final dto = CategoriesWidgetDto.fromJson(response.data);
-        return dto.data?.toEntities() ?? [];
+        if (dto.data == null) {
+          return CategoriesWidgetData(entities: []);
+        }
+        final entities = dto.data!.toEntities();
+        final banner = dto.data!.banner;
+        return CategoriesWidgetData(entities: entities, banner: banner);
       },
     );
 
@@ -41,7 +45,7 @@ class CategoriesWidgetRepoImpl extends CategoriesWidgetRepo {
   }
 
   @override
-  Future<List<MainCategoryEntity>?> getCachedCategories() async {
+  Future<CategoriesWidgetData?> getCachedCategories() async {
     try {
       final sp = await SharedPreferences.getInstance();
       final raw = sp.getString(CacheKeys.categoriesWidgetJson);
@@ -49,7 +53,10 @@ class CategoriesWidgetRepoImpl extends CategoriesWidgetRepo {
 
       final map = jsonDecode(raw) as Map<String, dynamic>;
       final dto = CategoriesWidgetDto.fromJson(map);
-      return dto.data?.toEntities();
+      if (dto.data == null) return null;
+      final entities = dto.data!.toEntities();
+      final banner = dto.data!.banner;
+      return CategoriesWidgetData(entities: entities, banner: banner);
     } catch (e) {
       return null;
     }

@@ -13,7 +13,7 @@ class CategoriesWidget extends StatelessWidget {
     return BlocBuilder<CategoriesWidgetCubit, CategoriesWidgetStates>(
       builder: (context, categoriesState) {
         if (categoriesState is CategoriesWidgetSuccessState) {
-          return HomeCategoriesComponent(items: categoriesState.categories);
+          return HomeCategoriesComponent(items: categoriesState.categories, banner: categoriesState.banner);
         } else if (categoriesState is CategoriesWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
