@@ -694,7 +694,7 @@
                     "viewWallet":"عرض المحفظة",
                       "needToAddReviewFirst": "يجب عليك إضافة تقييم أولاً",
                       "faqSatisfactionQuestion": "ما مدى رضاك عن إجابات الأسئلة الشائعة؟\nهل كانت مفيدة؟",
-  "vendors": "المورّدون",
+  "vendors": "المتاجر",
   "selected": "المحدد",
   "remaining": "المتبقي",
   "available": "المتاح",
@@ -856,7 +856,8 @@
               "road_distance": "المسافة على الطريق",
                 "delivery_arrival_time": "وقت وصول الطلب",
                 "view_delivery_man_on_map": "عرض مندوب التوصيل على الخريطة",
-                "your_order_is_being": "طلبك قيد التجهيز"
+                "your_order_is_being": "طلبك قيد التجهيز",
+                "bestPopularItems":"العناصر الأكثر طلبًا"
 
 
 

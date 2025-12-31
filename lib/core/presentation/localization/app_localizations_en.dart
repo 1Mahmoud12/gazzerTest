@@ -2050,4 +2050,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get your_order_is_being => 'Your order is being prepared';
+
+  @override
+  String get bestPopularItems => 'Best Popular Items';
 }

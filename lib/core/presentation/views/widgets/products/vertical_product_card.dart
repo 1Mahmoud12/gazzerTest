@@ -160,13 +160,18 @@ class VerticalProductCard extends StatelessWidget {
                             //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             runAlignment: WrapAlignment.spaceBetween,
                             alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.end,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   FittedBox(
                                     alignment: AlignmentDirectional.centerStart,
-                                    child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                    child: Text(
+                                      product.offer != null ? Helpers.getProperPrice(product.price) : '',
+                                      style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                                    ),
                                   ),
                                   if (product.offer != null)
                                     FittedBox(
@@ -175,11 +180,16 @@ class VerticalProductCard extends StatelessWidget {
                                         Helpers.getProperPrice(product.priceBeforeDiscount!),
                                         style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
                                       ),
+                                    )
+                                  else
+                                    FittedBox(
+                                      alignment: AlignmentDirectional.centerStart,
+                                      child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                                     ),
                                 ],
                               ),
 
-                              const SizedBox(width: 8),
+                              const SizedBox(width: 4),
                               if (!(key?.toString().contains('store') ?? false))
                                 CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
                             ],

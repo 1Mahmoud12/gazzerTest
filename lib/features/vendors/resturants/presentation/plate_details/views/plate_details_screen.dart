@@ -136,7 +136,7 @@ class SinglePlateScreen extends StatelessWidget {
                             ListView(
                               padding: EdgeInsets.zero,
                               children: [
-                                IgnorePointer(child: VerticalSpacing(MediaQuery.of(context).size.height * 0.24)),
+                                IgnorePointer(child: VerticalSpacing(MediaQuery.of(context).size.height * 0.27)),
                                 Container(
                                   decoration: const BoxDecoration(
                                     color: Co.bg,
@@ -148,8 +148,7 @@ class SinglePlateScreen extends StatelessWidget {
                                     children: [
                                       ProductSummaryWidget(plate: detailsState.plate),
                                       const VerticalSpacing(16),
-                                      _VendorInfo(plate: detailsState.plate),
-                                      const VerticalSpacing(24),
+                                      if (detailsState.plate.store != null) ...[_VendorInfo(plate: detailsState.plate), const VerticalSpacing(24)],
                                       BlocConsumer<AddToCartCubit, AddToCartStates>(
                                         listener: (context, state) {
                                           canPop.value = !state.hasUserInteracted;
@@ -308,10 +307,10 @@ class _ProductImageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomNetworkImage(image, fit: BoxFit.cover, width: double.infinity, height: MediaQuery.of(context).size.height * 0.25),
+        CustomNetworkImage(image, fit: BoxFit.fill, width: double.infinity, height: MediaQuery.of(context).size.height * 0.3),
         if (plate.offer != null)
           Positioned(
-            bottom: 16,
+            bottom: 40,
             right: 16,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -336,7 +335,7 @@ class _VendorInfo extends StatelessWidget {
       children: [
         const VectorGraphicsWidget(Assets.restaurantNameIc),
         const SizedBox(width: 12),
-        Expanded(child: Text(plate.store?.name ?? 'Restaurant', style: TStyle.blackBold(16))),
+        Expanded(child: Text(plate.store!.name, style: TStyle.blackBold(16))),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -408,9 +407,13 @@ class _CollapsibleOptionState extends State<_CollapsibleOption> {
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 4,
                         children: [
-                          Text(widget.optionName, style: TStyle.blackBold(14)),
-                          Text(widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select, style: TStyle.greyRegular(12)),
+                          Text(widget.optionName, style: TStyle.robotBlackRegular()),
+                          Text(
+                            widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select,
+                            style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey),
+                          ),
                         ],
                       ),
                     ),

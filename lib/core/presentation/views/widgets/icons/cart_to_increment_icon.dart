@@ -8,7 +8,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/switching_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
@@ -174,12 +173,7 @@ class CartToIncrementIcon extends StatelessWidget {
   }
 
   Widget _buildCartIconButton(BuildContext context, bool isLoading) {
-    return SwitchingDecoratedwidget(
-      isDarkContainer: isDarkContainer,
-      borderRadius: BorderRadius.circular(100),
-
-      child: isLoading ? _buildLoadingIndicator() : _buildCartButton(context),
-    );
+    return isLoading ? _buildLoadingIndicator() : _buildCartButton(context);
   }
 
   Widget _buildLoadingIndicator() {
@@ -195,11 +189,13 @@ class CartToIncrementIcon extends StatelessWidget {
 
       child: newUi
           ? Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(100)),
               child: Text(L10n.tr().addToCart, style: TStyle.robotBlackRegular().copyWith(color: Co.white)),
             )
-          : Padding(
+          : Container(
+              decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(100)),
+
               padding: const EdgeInsets.all(8.0),
               child: SvgPicture.asset(Assets.cartIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn)),
             ),

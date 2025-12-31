@@ -4093,6 +4093,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your order is being prepared'**
   String get your_order_is_being;
+
+  /// No description provided for @bestPopularItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Popular Items'**
+  String get bestPopularItems;
 }
 
 class _AppLocalizationsDelegate

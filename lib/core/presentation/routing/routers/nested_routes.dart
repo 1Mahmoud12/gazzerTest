@@ -6,6 +6,7 @@ import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dar
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/homeViewAll//suggested/presentation/view/suggested_screen.dart';
+import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
@@ -87,6 +88,12 @@ ShellRoute get nestedRoutes => ShellRoute(
       path: DailyOffersScreen.route,
       builder: (context, state) {
         return const DailyOffersScreen();
+      },
+    ),
+    GoRoute(
+      path: PopularScreen.route,
+      builder: (context, state) {
+        return const PopularScreen();
       },
     ),
 

@@ -140,7 +140,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
                     items.length,
                     (index) => items[index].id == null
                         ? const SizedBox.shrink()
-                        : HorizontalProductCard(product: _convertToGenericItemEntity(items[index]), width: MediaQuery.sizeOf(context).width * .48),
+                        : HorizontalProductCard(product: _convertToGenericItemEntity(items[index]), width: MediaQuery.sizeOf(context).width * .65),
                   ),
                 ),
               ),

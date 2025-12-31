@@ -98,9 +98,10 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                       child: Wrap(
                         spacing: 12,
                         runSpacing: 12,
+                        alignment: WrapAlignment.spaceBetween,
                         children: categories.map((category) {
                           return SizedBox(
-                            width: (MediaQuery.sizeOf(context).width - AppConst.defaultPadding.horizontal * 2 - 12) / 2,
+                            width: ((MediaQuery.sizeOf(context).width) / 2) - 24,
                             child: _CategoryGridCard(category: category),
                           );
                         }).toList(),
@@ -167,7 +168,7 @@ class _CategoryGridCard extends StatelessWidget {
           children: [
             SizedBox(width: 80, height: 80, child: CircleGradientBorderedImage(image: category.image)),
             const VerticalSpacing(8),
-            Text(category.name, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis),
+            Text(category.name, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
           ],
         ),
       ),

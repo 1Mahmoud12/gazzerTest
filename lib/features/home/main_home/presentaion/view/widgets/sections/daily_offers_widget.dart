@@ -69,7 +69,7 @@ class _DailyOffersContent extends StatelessWidget {
               children: List.generate(
                 items.length > 10 ? 10 : items.length,
                 (index) => SizedBox(
-                  width: 220,
+                  width: MediaQuery.sizeOf(context).width * .55,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: VerticalProductCard(product: items[index], canAdd: false),

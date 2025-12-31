@@ -15,7 +15,7 @@ class IncrementWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(6),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: AppConst.defaultInnerBorderRadius,
         border: Border.all(color: Co.black.withOpacityNew(0.2)),
@@ -38,7 +38,7 @@ class IncrementWidget extends StatelessWidget {
           if (initVal != 0)
             ConstrainedBox(
               constraints: const BoxConstraints(minWidth: 40),
-              child: Text('$initVal', style: TStyle.robotBlackTitle(), textAlign: TextAlign.center),
+              child: Text('$initVal', style: TStyle.robotBlackSubTitle(), textAlign: TextAlign.center),
             ),
           if (initVal != 0)
             Container(

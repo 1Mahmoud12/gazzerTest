@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
+import 'package:gazzer/main.dart';
 
 class CardRestInfoWidget extends StatelessWidget {
   const CardRestInfoWidget({super.key, required this.vendor});
@@ -13,7 +18,7 @@ class CardRestInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       decoration: BoxDecoration(
         border: Border.all(color: Co.purple100),
         borderRadius: const BorderRadius.only(bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)),
@@ -59,14 +64,14 @@ class CardRestInfoWidget extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    const VectorGraphicsWidget(Assets.locationIc, width: 16, height: 16),
+                    const VectorGraphicsWidget(Assets.locationIc, width: 16, height: 16, colorFilter: ColorFilter.mode(Co.black, BlendMode.srcIn)),
                     const HorizontalSpacing(2),
                     Expanded(
                       child: Text(
                         vendor.zoneName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey),
+                        style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
                       ),
                     ),
                   ],
@@ -77,10 +82,15 @@ class CardRestInfoWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const VectorGraphicsWidget(Assets.clockIc, width: 16, height: 16),
+                      const VectorGraphicsWidget(Assets.clockIc, width: 16, height: 16, colorFilter: ColorFilter.mode(Co.black, BlendMode.srcIn)),
                       const HorizontalSpacing(2),
                       Expanded(
-                        child: Text(vendor.deliveryTime!, maxLines: 1, overflow: TextOverflow.ellipsis, style: TStyle.greySemi(13)),
+                        child: Text(
+                          '${vendor.deliveryTime!} ${L10n.tr().min}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TStyle.robotBlackRegular14(),
+                        ),
                       ),
                     ],
                   ),
@@ -89,8 +99,17 @@ class CardRestInfoWidget extends StatelessWidget {
           ),
           const VerticalSpacing(8),
           MainBtn(
-            onPressed: () {},
-            isEnabled: false,
+            onPressed: () {
+              logger.d(vendor.storeCategoryType);
+              if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.pharmacy.name) {
+                PharmacyStoreScreenRoute(id: vendor.id).push(context);
+              } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.grocery.name) {
+                StoreDetailsRoute(storeId: vendor.id).push(context);
+              } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.restaurant.name) {
+                RestaurantDetailsRoute(id: vendor.id).push(context);
+              }
+            },
+            // isEnabled: false,
             text: L10n.tr().viewVendor,
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 4),

@@ -15,16 +15,10 @@ class PlateDetailsCubit extends Cubit<PlateDetailsStates> {
     emit(PlateDetailsLoading());
     final result = await _repo.getPlateDetails(plateId);
     switch (result) {
-      case Ok<PlateDetailsResponse> ok:
-        emit(
-          PlateDetailsLoaded(
-            plate: ok.value.plate,
-            options: ok.value.options,
-            orderedWith: ok.value.orderedWith,
-          ),
-        );
+      case final Ok<PlateDetailsResponse> ok:
+        emit(PlateDetailsLoaded(plate: ok.value.plate, options: ok.value.options, orderedWith: ok.value.orderedWith));
         break;
-      case Err err:
+      case final Err err:
         emit(PlateDetailsError(message: err.error.message));
         break;
     }

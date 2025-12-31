@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -61,24 +60,22 @@ class GlobalIncrementWidget extends StatelessWidget {
             : Icon(Icons.add, color: canAdd ? Co.purple : Co.secondary.withOpacityNew(0.3), size: iconSize),
       ),
     ];
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: isHorizonal
-          ? Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                borderRadius: AppConst.defaultBorderRadius,
-                border: Border.all(color: Co.purple100),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 4,
-                //mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [...children],
-              ),
-            )
-          : Column(mainAxisSize: MainAxisSize.min, children: [...children]),
-    );
+    return isHorizonal
+        ? Container(
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.only(top: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Co.purple100, width: 1.5),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 4,
+              //mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [...children],
+            ),
+          )
+        : Column(mainAxisSize: MainAxisSize.min, children: [...children]);
   }
 }

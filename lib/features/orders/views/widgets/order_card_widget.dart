@@ -107,11 +107,7 @@ class OrderCardWidget extends StatelessWidget {
                       Expanded(
                         child: Text(
                           L10n.tr().viewDetails,
-                          style: TStyle.robotBlackMedium().copyWith(
-                            decoration: TextDecoration.underline,
-                            color: Co.purple,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.underline, color: Co.purple),
                           textAlign: TextAlign.center,
                         ),
                       ),

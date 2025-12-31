@@ -18,9 +18,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/common/view/cards/vertical_restaurant_card.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
-import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/product_details/views/product_details_screen.dart';
-import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -134,6 +132,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                       alignment: WrapAlignment.spaceBetween,
                                       children: List.generate(currentList.length, (index) {
                                         final fav = currentList[index];
+
                                         if (selectedId == 'items') {
                                           return SizedBox(
                                             width: (constraints.maxWidth / 2) - 24,
@@ -161,24 +160,35 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                             child: VerticalRestaurantCard(
                                               width: double.infinity,
                                               item: vendor,
-                                              onTap: (vendor) {
-                                                switch (vendor.favoriteType) {
-                                                  case FavoriteType.restaurant:
-                                                    RestaurantDetailsRoute(id: vendor.id).push(context);
-                                                    break;
-                                                  case FavoriteType.store:
-                                                    StoreDetailsRoute(storeId: vendor.id).push(context);
-                                                    break;
-                                                  case FavoriteType.plate:
-                                                    PlateDetailsRoute(id: vendor.id).push(context);
-                                                    break;
-                                                  case FavoriteType.product:
-                                                    ProductDetailsRoute(productId: vendor.id).push(context);
-                                                    break;
-                                                  default:
-                                                    break;
-                                                }
-                                              },
+                                              // onTap: (vendor) {
+                                              //   // Check favoriteType and storeCategoryType to determine navigation
+                                              //   if (vendor.favoriteType ==
+                                              //       FavoriteType.restaurant) {
+                                              //     // If it's a restaurant type, navigate to restaurant details
+                                              //     RestaurantDetailsRoute(
+                                              //       id: vendor.id,
+                                              //     ).push(context);
+                                              //   } else if (vendor
+                                              //           .favoriteType ==
+                                              //       FavoriteType.store) {
+                                              //     // If it's a store type, check storeCategoryType
+                                              //     if (vendor
+                                              //             .storeCategoryType ==
+                                              //         VendorType
+                                              //             .restaurant
+                                              //             .value) {
+                                              //       // Store with restaurant category type -> restaurant details
+                                              //       RestaurantDetailsRoute(
+                                              //         id: vendor.id,
+                                              //       ).push(context);
+                                              //     } else {
+                                              //       // Other store types -> store details
+                                              //       StoreDetailsRoute(
+                                              //         storeId: vendor.id,
+                                              //       ).push(context);
+                                              //     }
+                                              //   }
+                                              // },
                                             ),
                                           );
                                         }

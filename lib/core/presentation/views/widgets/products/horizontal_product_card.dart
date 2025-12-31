@@ -42,8 +42,8 @@ class HorizontalProductCard extends StatelessWidget {
           children: [
             Container(
               width: width,
-              margin: const EdgeInsets.only(top: 110.5),
-              padding: AppConst.defaultPadding,
+              margin: const EdgeInsets.only(top: 130),
+              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 image: const DecorationImage(image: AssetImage(Assets.customShapeSuggestIc), fit: BoxFit.fill),
 
@@ -59,12 +59,7 @@ class HorizontalProductCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              product.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
-                            ),
+                            Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TStyle.robotBlackMedium()),
                             // const VerticalSpacing(8),
                             // Text(
                             //   product.description == '' ? product.name : product.description,
@@ -125,7 +120,7 @@ class HorizontalProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FavoriteWidget(size: 40, fovorable: product, padding: 0),
-                      CartToIncrementIcon(product: product, isHorizonal: true, iconSize: 18, isDarkContainer: true, newUi: true),
+                      CartToIncrementIcon(product: product, isHorizonal: true, iconSize: 25, isDarkContainer: true, newUi: true),
                     ],
                   ),
                   const VerticalSpacing(20),
@@ -139,7 +134,7 @@ class HorizontalProductCard extends StatelessWidget {
               child: Center(
                 child: Stack(
                   alignment: Alignment.center,
-                  children: [ClipOval(child: CustomNetworkImage(product.image, fit: BoxFit.cover, width: 123, height: 123))],
+                  children: [ClipOval(child: CustomNetworkImage(product.image, fit: BoxFit.cover, width: 150, height: 150))],
                 ),
               ),
             ),

@@ -8,7 +8,7 @@ import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 class AllCategoriesCubit extends Cubit<AllCategoriesStates> {
   final AllCategoriesRepo _repo;
   int _currentPage = 1;
-  final int _perPage = 10;
+  final int _perPage = 20;
   PaginationInfo? _pagination;
   List<MainCategoryEntity> _allCategories = [];
 

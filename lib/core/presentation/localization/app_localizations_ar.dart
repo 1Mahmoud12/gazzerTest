@@ -1624,7 +1624,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get faqSatisfactionQuestion => 'ما مدى رضاك عن إجابات الأسئلة الشائعة؟\nهل كانت مفيدة؟';
 
   @override
-  String get vendors => 'المورّدون';
+  String get vendors => 'المتاجر';
 
   @override
   String get selected => 'المحدد';
@@ -2049,4 +2049,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get your_order_is_being => 'طلبك قيد التجهيز';
+
+  @override
+  String get bestPopularItems => 'العناصر الأكثر طلبًا';
 }

@@ -22,20 +22,20 @@ class SuggestsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SuggestsWidgetCubit, SuggestsWidgetStates>(
       builder: (context, state) {
-          if (state is SuggestsWidgetSuccessState) {
-            return _SuggestsContent(items: state.entities, banner: state.banner);
-          } else if (state is SuggestsWidgetLoadingState) {
-            return const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(24.0),
-                child: Center(child: AdaptiveProgressIndicator()),
-              ),
-            );
-          } else if (state is SuggestsWidgetErrorState) {
-            return const SliverToBoxAdapter(child: SizedBox.shrink());
-          }
+        if (state is SuggestsWidgetSuccessState) {
+          return _SuggestsContent(items: state.entities, banner: state.banner);
+        } else if (state is SuggestsWidgetLoadingState) {
+          return const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Center(child: AdaptiveProgressIndicator()),
+            ),
+          );
+        } else if (state is SuggestsWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        },
+        }
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
+      },
     );
   }
 }
@@ -70,7 +70,7 @@ class _SuggestsContent extends StatelessWidget {
                 if (items[index].store == null) return const SizedBox.shrink();
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: HorizontalProductCard(product: items[index], width: MediaQuery.sizeOf(context).width * .48),
+                  child: HorizontalProductCard(product: items[index], width: MediaQuery.sizeOf(context).width * .65),
                 );
               }),
             ),

@@ -34,6 +34,8 @@ class RestaurantEntity extends GenericVendorEntity {
     super.description,
     required super.outOfStock,
     required super.reviewCount,
+    super.estimatedDeliveryTime,
+    super.storeCategoryType,
   });
 
   @override

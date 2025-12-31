@@ -41,7 +41,7 @@ class StoreDTO {
   });
 
   StoreDTO.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'] ?? json['store_id'];
     storeName = json['store_name'];
     image = json['image'];
     storeCategoryId = json['store_category_id'];
@@ -66,6 +66,7 @@ class StoreDTO {
     if (json['province_zone'] is Map) {
       provinceZone = json['province_zone']['zone_name'];
     }
+    storeCategoryType = json['store_category_type']?.toString();
   }
 
   DateTime? _formDateTimeFromString(String time) {

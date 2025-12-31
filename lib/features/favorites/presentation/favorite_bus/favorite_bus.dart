@@ -38,14 +38,14 @@ class FavoriteBus extends AppBus {
     fire(const GetFavoriteLoading());
     final result = await _favoriteRepo.getFavorites();
     switch (result) {
-      case Ok<List<Favorable>> ok:
+      case final Ok<List<Favorable>> ok:
         _favorites.clear();
         for (final fav in ok.value) {
           _addToFavorites(fav);
         }
         fire(GetFavoriteSuccess(favorites: favorites));
         break;
-      case Err error:
+      case final Err error:
         fire(GetFavoriteFailure(message: error.error.message, favorites: favorites));
     }
   }
@@ -59,34 +59,15 @@ class FavoriteBus extends AppBus {
   }
 
   Future<void> _addFavorite(Favorable favorite) async {
-    fire(
-      ToggleFavoriteLoading(
-        id: favorite.id,
-        type: favorite.favoriteType.toView,
-        favorites: favorites,
-      ),
-    );
+    fire(ToggleFavoriteLoading(id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
     final result = await _favoriteRepo.addFavorite(favorite.id, favorite.favoriteType);
     switch (result) {
       case Ok<String> _:
         _addToFavorites(favorite);
-        fire(
-          AddedFavoriteSuccess(
-            id: favorite.id,
-            type: (favorite.favoriteType.toView),
-            favorites: favorites,
-          ),
-        );
+        fire(AddedFavoriteSuccess(id: favorite.id, type: (favorite.favoriteType.toView), favorites: favorites));
         break;
-      case Err error:
-        fire(
-          ToggleFavoriteFailure(
-            message: error.error.message,
-            id: favorite.id,
-            type: (favorite.favoriteType.toView),
-            favorites: favorites,
-          ),
-        );
+      case final Err error:
+        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: (favorite.favoriteType.toView), favorites: favorites));
     }
   }
 
@@ -98,7 +79,7 @@ class FavoriteBus extends AppBus {
         _removeFromFavorites(favorite);
         fire(RemovedFavoriteSuccess(id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
         break;
-      case Err error:
+      case final Err error:
         fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
     }
   }
@@ -130,4 +111,5 @@ class FavoriteBus extends AppBus {
     fire(const ClearFavorites());
   }
 }
+
 /*  */

@@ -81,7 +81,7 @@ class _TopVendorsContent extends StatelessWidget {
               itemCount: vendors.length > 10 ? 10 : vendors.length,
               separatorBuilder: (context, index) => const HorizontalSpacing(12),
               itemBuilder: (context, index) {
-                final vendor = vendors[index];
+                final VendorEntity vendor = vendors[index];
                 return InkWell(
                   onTap: () {
                     if (vendor.type == VendorType.restaurant.value) {

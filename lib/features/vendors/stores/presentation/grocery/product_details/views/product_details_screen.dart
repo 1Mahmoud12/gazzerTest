@@ -68,12 +68,12 @@ class ProductDetailsScreen extends StatelessWidget {
                   body: ListView(
                     children: [
                       ProductDetailsWidget(product: state.product),
+
                       const VerticalSpacing(12),
                       Padding(
                         padding: AppConst.defaultHrPadding,
                         child: Text(state.product.name, style: TStyle.robotBlackSubTitle()),
                       ),
-
                       if (state.product.description != '') ...[
                         const VerticalSpacing(12),
                         Padding(
