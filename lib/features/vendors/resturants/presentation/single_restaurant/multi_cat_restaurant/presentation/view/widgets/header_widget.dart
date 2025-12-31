@@ -7,6 +7,7 @@ import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -15,6 +16,7 @@ import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_wi
 import 'package:gazzer/features/share/data/share_models.dart';
 import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/common/presentation/views/store_reviews_screen.dart';
 import 'package:intl/intl.dart';
 
 class MultiCatRestHeader extends StatelessWidget {
@@ -112,7 +114,7 @@ class MultiCatRestHeader extends StatelessWidget {
                   const SizedBox(width: 12),
                   InkWell(
                     onTap: () {
-                      // Navigate to reviews
+                      context.navigateToPage(StoreReviewsScreen(storeType: restaurant.storeCategoryType ?? '', storeId: restaurant.id));
                     },
                     child: Text(L10n.tr().review, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                   ),

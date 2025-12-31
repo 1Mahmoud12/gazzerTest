@@ -4111,6 +4111,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quantity'**
   String get quantity;
+
+  /// No description provided for @ratings_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Ratings & Reviews'**
+  String get ratings_reviews;
+
+  /// No description provided for @star.
+  ///
+  /// In en, this message translates to:
+  /// **'Star'**
+  String get star;
+
+  /// No description provided for @recommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get recommended;
 }
 
 class _AppLocalizationsDelegate

@@ -2058,4 +2058,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get quantity => 'الكمية';
+
+  @override
+  String get ratings_reviews => 'التقييمات والمراجعات';
+
+  @override
+  String get star => 'نجمة';
+
+  @override
+  String get recommended => 'موصي به';
 }

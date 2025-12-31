@@ -859,7 +859,14 @@
                 "your_order_is_being": "طلبك قيد التجهيز",
                 "bestPopularItems":"العناصر الأكثر طلبًا"
 ,  "addNotes": "إضافة ملاحظات",
-  "quantity": "الكمية"
+  "quantity": "الكمية",
+
+    "ratings_reviews": "التقييمات والمراجعات",
+    "star": "نجمة",
+
+
+  "recommended": "موصي به"
+
 
 
 

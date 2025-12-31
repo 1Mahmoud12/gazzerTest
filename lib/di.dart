@@ -99,8 +99,10 @@ import 'package:gazzer/features/supportScreen/domain/faq_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/working_hours_repo.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_cubit.dart';
+import 'package:gazzer/features/vendors/common/data/reviews_repo_impl.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/reviews_repo.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/data/repo_imp/plates_repo_imp.dart';
 import 'package:gazzer/features/vendors/resturants/data/repo_imp/restaurants_repo_imp.dart';
@@ -193,6 +195,7 @@ void _registerRepos() {
 
   di.registerLazySingleton<WorkingHoursRepo>(() => WorkingHoursRepoImp(di.get(), di.get()));
   di.registerLazySingleton<ShareRepo>(() => ShareRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<ReviewsRepo>(() => ReviewsRepoImpl(di.get(), di.get()));
 }
 
 void _registerBuses() {

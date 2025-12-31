@@ -2059,4 +2059,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quantity => 'Quantity';
+
+  @override
+  String get ratings_reviews => 'Ratings & Reviews';
+
+  @override
+  String get star => 'Star';
+
+  @override
+  String get recommended => 'Recommended';
 }

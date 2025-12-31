@@ -856,7 +856,11 @@
                     "your_order_is_being": "Your order is being prepared",
                     "bestPopularItems":"Best Popular Items",
                       "addNotes": "Add Notes",
-                      "quantity":"Quantity"
+                      "quantity":"Quantity",
+                      "ratings_reviews": "Ratings & Reviews",
+                        "star": "Star",
+                          "recommended": "Recommended"
+
 
 
 

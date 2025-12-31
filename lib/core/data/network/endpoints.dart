@@ -167,6 +167,14 @@ class Endpoints {
   static String getChatMessages(int chatId) => 'support/chats/$chatId';
   static const sendChatMessage = 'support/chats';
 
+  /// ** Store Reviews
+  static String getStoreReviews(String storeType, int storeId) {
+    if (storeType.toLowerCase() == 'restaurant') {
+      return 'restaurants/$storeId';
+    }
+    return 'stores/$storeId';
+  }
+
   /// ** Support / Complaints
   static const submitComplaint = 'support/complaints';
 
