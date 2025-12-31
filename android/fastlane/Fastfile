@@ -15,7 +15,7 @@ platform :android do
       app: "1:493725024975:android:c53ac88e28f20f7916adba", # Replace with your Firebase App ID.
       android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
       android_artifact_type: "APK",
-      release_notes: "Bugs 1428, ",
+      release_notes: "Enhancement Ui",
       groups: "gazar", # Add tester group aliases.
       firebase_cli_token: ENV['FIREBASE_TOKEN'] # Path to your service account key.
     )

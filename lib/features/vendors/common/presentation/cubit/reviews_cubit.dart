@@ -9,10 +9,16 @@ class ReviewsCubit extends Cubit<ReviewsState> {
 
   final ReviewsRepo _repo;
 
-  Future<void> loadReviews({required String storeType, required int storeId}) async {
+  Future<void> loadReviews({
+    required String storeType,
+    required int storeId,
+  }) async {
     emit(const ReviewsLoading());
 
-    final result = await _repo.getStoreReviews(storeType: storeType, storeId: storeId);
+    final result = await _repo.getStoreReviews(
+      storeType: storeType,
+      storeId: storeId,
+    );
 
     switch (result) {
       case Ok<StoreReviewsEntity>(:final value):

@@ -935,7 +935,7 @@ abstract class AppLocalizations {
   /// No description provided for @editAccountInformation.
   ///
   /// In en, this message translates to:
-  /// **'Edit Account Information'**
+  /// **'Edit Information'**
   String get editAccountInformation;
 
   /// No description provided for @deleteAccount.
@@ -3139,6 +3139,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exclusive Offers'**
   String get exclusiveOffers;
+
+  /// No description provided for @tierSaver.
+  ///
+  /// In en, this message translates to:
+  /// **'Saver'**
+  String get tierSaver;
+
+  /// No description provided for @tierGainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Gainer'**
+  String get tierGainer;
+
+  /// No description provided for @tierWinner.
+  ///
+  /// In en, this message translates to:
+  /// **'Winner'**
+  String get tierWinner;
+
+  /// No description provided for @tierHero.
+  ///
+  /// In en, this message translates to:
+  /// **'Hero'**
+  String get tierHero;
 
   /// No description provided for @loyaltySpendSummary.
   ///

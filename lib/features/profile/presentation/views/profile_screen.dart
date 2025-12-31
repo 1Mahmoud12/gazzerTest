@@ -23,7 +23,10 @@ import 'package:gazzer/features/addresses/presentation/views/add_edit_address_sc
 import 'package:gazzer/features/auth/common/domain/entities/client_entity.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:gazzer/features/loyaltyProgram/domain/enums/loyalty_tier_name.dart';
+import 'package:gazzer/features/loyaltyProgram/domain/enums/loyalty_tier_name_extension.dart';
 import 'package:gazzer/features/loyaltyProgram/presentation/views/loyalty_program_hero_one.dart';
+import 'package:gazzer/features/loyaltyProgram/presentation/views/widgets/tier_visual_details.dart';
 import 'package:gazzer/features/profile/data/models/update_profile_req.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
@@ -124,18 +127,21 @@ class ProfileContentBody extends StatelessWidget {
       child: Column(
         children: [
           // if (cubit.client?.tierName != null)
-          //   Container(
-          //     color: allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.mainColor,
-          //     padding: const EdgeInsets.symmetric(vertical: 4),
-          //     child: Row(
-          //       spacing: 12,
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Text(cubit.client!.tierName!, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
-          //         SvgPicture.asset(allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.logo),
-          //       ],
-          //     ),
-          //   ),
+          Container(
+            color: allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.mainColor,
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              spacing: 12,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  LoyaltyTierName.fromString(cubit.client!.tierName!).getDisplayName(context),
+                  style: TStyle.robotBlackMedium().copyWith(color: Co.white),
+                ),
+                SvgPicture.asset(allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.logo),
+              ],
+            ),
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(

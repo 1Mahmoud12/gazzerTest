@@ -186,7 +186,7 @@
   "goldenAccountUser": "Golden Account User",
   "memberSince": "Member Since",
   "accountInformation": "Account Information",
-  "editAccountInformation": "Edit Account Information",
+  "editAccountInformation": "Edit Information",
   "deleteAccount": "Delete Account",
   "addresses": "Addresses",
   "defaultt": "Default",
@@ -644,6 +644,10 @@
                   "birthdayVouchers": "Birthday Vouchers",
                 "exclusiveDeals": "Exclusive Deals",
                 "exclusiveOffers": "Exclusive Offers",
+                "tierSaver": "Saver",
+                "tierGainer": "Gainer",
+                "tierWinner": "Winner",
+                "tierHero": "Hero",
                 "loyaltySpendSummary": "You've spent {amount} in the last {days} days",
                 "@loyaltySpendSummary": {
                   "placeholders": {
