@@ -306,8 +306,8 @@ class Assets {
   static const String customerSupportIc = "assets/svg/customerSupportIc.svg";
   static const String starRateIc = "assets/svg/starRateIc.svg";
   static const String starNotRateIc = "assets/svg/starNotRateIc.svg";
-  static const String deliveryPinIc = "assets/svg/deliveryPinIc.svg";
-  static const String userPinIc = "assets/svg/userPinIc.svg";
+  static const String deliveryPinIc = "assets/png/deliveryPinIc.png";
+  static const String userPinIc = "assets/png/userPinIc.png";
 
   //Customer Support
   static const String addImageIc = "assets/svg/addImageIc.svg";

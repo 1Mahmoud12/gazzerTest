@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -46,7 +44,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
 
   // Static default coordinates (Cairo, Egypt area)
   static const LatLng _defaultUserLocation = LatLng(30.0444, 31.2357); // Cairo Downtown
-  static const LatLng _defaultDeliveryLocation = LatLng(30.0811, 31.2487); // Abd al Moniem Riad Square area
+  static const LatLng _defaultDeliveryLocation = LatLng(30.0811, 31.21007); // Abd al Moniem Riad Square area
 
   // Static data
   static const int _defaultEstimatedTime = 8; // minutes
@@ -79,16 +77,38 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
   }
 
   Future<void> _setupMarkersAndPolyline() async {
-    // Create custom markers from SVG assets
-    final userPinIcon = await _createCustomMarker(Assets.userPinIc);
-    final deliveryPinIcon = await _createCustomMarker(Assets.deliveryPinIc);
+    // Create custom markers - simplified approach using asset images
+    BitmapDescriptor? userPinIcon;
+    BitmapDescriptor? deliveryPinIcon;
+
+    try {
+      // Try to load custom marker icons from assets
+      // Note: For SVG assets, you may need to convert them to PNG first
+      userPinIcon = await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(size: Size(100, 100)),
+        Assets.userPinIc, // Try PNG version
+      );
+    } catch (e) {
+      debugPrint('Could not load user pin icon: $e');
+      userPinIcon = BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet);
+    }
+
+    try {
+      deliveryPinIcon = await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(size: Size(100, 100)),
+        Assets.deliveryPinIc, // Try PNG version
+      );
+    } catch (e) {
+      debugPrint('Could not load delivery pin icon: $e');
+      deliveryPinIcon = BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange);
+    }
 
     // Add user location marker with custom pin
     _markers.add(
       Marker(
         markerId: const MarkerId('user'),
         position: _userLocation,
-        icon: userPinIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
+        icon: userPinIcon,
         infoWindow: const InfoWindow(title: 'Your Location'),
       ),
     );
@@ -98,70 +118,76 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
       Marker(
         markerId: const MarkerId('delivery'),
         position: _deliveryLocation,
-        icon: deliveryPinIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+        icon: deliveryPinIcon,
         infoWindow: InfoWindow(title: L10n.tr().deliveryMan),
       ),
     );
 
-    // Create polyline between the two points
+    // Fetch route from Google Directions API to follow roads
+    final routePoints = await _getRoutePoints(_userLocation, _deliveryLocation);
+
+    // Create polyline with route points (follows roads)
     _polylines.add(
       Polyline(
         polylineId: const PolylineId('route'),
-        points: [_userLocation, _deliveryLocation],
+        points: routePoints,
         color: Co.purple,
-        width: 4,
-        patterns: [PatternItem.dot, PatternItem.gap(10)],
+        width: 5,
+        geodesic: true,
+        startCap: Cap.roundCap,
+        endCap: Cap.roundCap,
       ),
     );
   }
 
-  /// Helper function to convert SVG asset to BitmapDescriptor for custom marker
-  Future<BitmapDescriptor?> _createCustomMarker(String assetPath) async {
+  /// Fetch route points from Google Directions API
+  Future<List<LatLng>> _getRoutePoints(LatLng origin, LatLng destination) async {
     try {
-      // Create a widget to render
-      final widget = VectorGraphicsWidget(assetPath, width: 48, height: 48);
+      // TODO: Replace with your Google Maps API key
+      const apiKey = 'AIzaSyCaCSJ0BZItSyXqBv8vpD1N4WBffJeKhLQ';
 
-      // Use a GlobalKey to capture the rendered widget
-      final key = GlobalKey();
-      final repaintBoundary = RepaintBoundary(key: key, child: widget);
+      final url =
+          'https://maps.googleapis.com/maps/api/directions/json?'
+          'origin=${origin.latitude},${origin.longitude}'
+          '&destination=${destination.latitude},${destination.longitude}'
+          '&key=$apiKey';
 
-      // Create an offscreen widget tree
-      final offscreenWidget = Directionality(textDirection: TextDirection.ltr, child: repaintBoundary);
+      // For now, return a straight line as fallback
+      // You'll need to add http package and implement the actual API call
+      debugPrint('TODO: Implement Google Directions API call to: $url');
 
-      // Build the widget tree
-      final buildOwner = BuildOwner();
-      final pipelineOwner = PipelineOwner();
-      final rootElement = offscreenWidget.createElement();
-      rootElement.mount(null, null);
-      buildOwner.buildScope(rootElement);
-      pipelineOwner.rootNode = rootElement.renderObject as RenderObject;
-      pipelineOwner.flushLayout();
-      pipelineOwner.flushCompositingBits();
-      pipelineOwner.flushPaint();
-
-      // Wait a bit for rendering to complete
-      await Future.delayed(const Duration(milliseconds: 50));
-
-      // Get the render object and convert to image
-      final renderObject = key.currentContext?.findRenderObject();
-      if (renderObject is RenderRepaintBoundary) {
-        final image = await renderObject.toImage(pixelRatio: 2.0);
-        final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-
-        rootElement.unmount();
-        image.dispose();
-
-        if (byteData != null) {
-          return BitmapDescriptor.fromBytes(byteData.buffer.asUint8List());
-        }
-      }
-
-      rootElement.unmount();
-      return null;
+      // Temporary: Create a curved line by adding intermediate points
+      return _createCurvedRoute(origin, destination);
     } catch (e) {
-      debugPrint('Error creating custom marker: $e');
-      return null;
+      debugPrint('Error fetching route: $e');
+      return [origin, destination]; // Fallback to straight line
     }
+  }
+
+  /// Creates a simple curved route with intermediate points
+  /// This is a temporary solution until Google Directions API is integrated
+  List<LatLng> _createCurvedRoute(LatLng start, LatLng end) {
+    final points = <LatLng>[];
+    const steps = 20; // Number of intermediate points
+
+    for (int i = 0; i <= steps; i++) {
+      final t = i / steps;
+
+      // Linear interpolation for lat/lng
+      final lat = start.latitude + (end.latitude - start.latitude) * t;
+      final lng = start.longitude + (end.longitude - start.longitude) * t;
+
+      // Add slight curve offset (perpendicular to the line)
+      const curveFactor = 0.002; // Adjust for more/less curve
+      final offset = curveFactor * (4 * t * (1 - t)); // Parabolic curve
+
+      final latOffset = -(end.longitude - start.longitude) * offset;
+      final lngOffset = (end.latitude - start.latitude) * offset;
+
+      points.add(LatLng(lat + latOffset, lng + lngOffset));
+    }
+
+    return points;
   }
 
   Future<void> _animateToFitMarkers() async {
@@ -284,20 +310,20 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                         ),
                       ),
                       // Chat button (yellow)
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: const BoxDecoration(color: Colors.amber, shape: BoxShape.circle),
-                        child: IconButton(
-                          icon: const VectorGraphicsWidget(Assets.assetsSvgMessage),
-                          onPressed: () {
-                            // TODO: Implement chat functionality
-                            Alerts.showToast('Chat with delivery man', error: false);
-                          },
-                          padding: EdgeInsets.zero,
-                        ),
-                      ),
-                      const HorizontalSpacing(12),
+                      // Container(
+                      //   width: 40,
+                      //   height: 40,
+                      //   decoration: const BoxDecoration(color: Colors.amber, shape: BoxShape.circle),
+                      //   child: IconButton(
+                      //     icon: const VectorGraphicsWidget(Assets.assetsSvgMessage),
+                      //     onPressed: () {
+                      //       // TODO: Implement chat functionality
+                      //       Alerts.showToast('Chat with delivery man', error: false);
+                      //     },
+                      //     padding: EdgeInsets.zero,
+                      //   ),
+                      // ),
+                      // const HorizontalSpacing(12),
                       // Phone button (purple)
                       Container(
                         width: 40,
