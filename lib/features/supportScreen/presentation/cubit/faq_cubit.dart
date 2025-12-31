@@ -9,7 +9,7 @@ class FaqCubit extends Cubit<FaqStates> {
 
   FaqCubit(this._repo) : super(FaqInitialState());
 
-  Future<void> getFaqCategories(String type) async {
+  Future<void> getFaqCategories(String type, {int? orderId}) async {
     emit(FaqLoadingState());
 
     // Try to load from cache first
@@ -19,7 +19,7 @@ class FaqCubit extends Cubit<FaqStates> {
     }
 
     // Fetch from API
-    final result = await _repo.getFaqCategories(type);
+    final result = await _repo.getFaqCategories(type, orderId: orderId);
     switch (result) {
       case final Ok<List<FaqCategoryEntity>> ok:
         emit(FaqSuccessState(ok.value));

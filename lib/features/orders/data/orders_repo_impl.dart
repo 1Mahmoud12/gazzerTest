@@ -167,12 +167,15 @@ class OrdersRepoImpl extends OrdersRepo {
   Future<Result<String>> submitOrderReview({
     required int orderId,
     required List<StoreReview> storeReviews,
-    required DeliveryManReview deliveryManReview,
+    required List<DeliveryManReview> deliveryManReviews,
   }) {
     return super.call(
       apiCall: () => _apiClient.post(
         endpoint: Endpoints.submitOrderReview(orderId),
-        requestBody: {'store_reviews': storeReviews.map((review) => review.toJson()).toList(), 'delivery_man_review': deliveryManReview.toJson()},
+        requestBody: {
+          'store_reviews': storeReviews.map((review) => review.toJson()).toList(),
+          'delivery_man_reviews': deliveryManReviews.map((review) => review.toJson()).toList(),
+        },
       ),
       parser: (response) {
         return response.data['message'] as String? ?? 'Review submitted successfully';

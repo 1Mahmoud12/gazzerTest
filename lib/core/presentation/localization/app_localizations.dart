@@ -4099,6 +4099,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Best Popular Items'**
   String get bestPopularItems;
+
+  /// No description provided for @addNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Notes'**
+  String get addNotes;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
 }
 
 class _AppLocalizationsDelegate

@@ -11,6 +11,7 @@ class OrderItemEntity {
   final num? rating; // null if not rated
   final bool? isRating; // null if not rated
   final bool canRate; // true if delivered and not yet rated
+  final int? deliveryManId;
 
   const OrderItemEntity({
     required this.orderId,
@@ -22,6 +23,7 @@ class OrderItemEntity {
     this.rating,
     this.isRating,
     this.canRate = false,
+    this.deliveryManId,
   });
 
   bool get hasMultipleVendors => vendors.length > 1;

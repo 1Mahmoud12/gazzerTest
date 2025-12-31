@@ -854,7 +854,11 @@
                   "delivery_arrival_time": "Delivery Arrival Time",
                     "view_delivery_man_on_map": "View Delivery Man on Map",
                     "your_order_is_being": "Your order is being prepared",
-                    "bestPopularItems":"Best Popular Items"
+                    "bestPopularItems":"Best Popular Items",
+                      "addNotes": "Add Notes",
+                      "quantity":"Quantity"
+
+
 
 
 

@@ -2052,4 +2052,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bestPopularItems => 'العناصر الأكثر طلبًا';
+
+  @override
+  String get addNotes => 'إضافة ملاحظات';
+
+  @override
+  String get quantity => 'الكمية';
 }

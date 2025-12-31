@@ -2,7 +2,7 @@
 class Assets {
   Assets._();
 
-  static const String assetsDeliveryLogo = "assets/svg/delivery_logo.svg";
+  static const String assetsDeliveryLogo = "assets/png/deliveryLogo.png";
 
   static const String assetsFontsInter = "assets/fonts/Inter.ttf";
 

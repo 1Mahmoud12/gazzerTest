@@ -19,7 +19,12 @@ class _HomeHeader extends StatelessWidget {
                 child: const Padding(padding: EdgeInsets.all(6), child: VectorGraphicsWidget(Assets.assetsSvgNotification)),
               ),
               VectorGraphicsWidget(Assets.assetsSvgCharacter, width: width * 0.1, height: width * 0.1),
-              const VectorGraphicsWidget(Assets.cartIc),
+              InkWell(
+                onTap: () {
+                  context.go('/cart');
+                },
+                child: const VectorGraphicsWidget(Assets.cartIc),
+              ),
             ],
           ),
         ),

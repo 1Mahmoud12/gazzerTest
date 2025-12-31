@@ -16,24 +16,21 @@ class FaqRepoImp extends FaqRepo {
 
   FaqRepoImp(this._apiClient, super.crashlyticsRepo);
 
-  String _getCacheKey(String type) => '${_kFaqCategoriesJsonPrefix}$type';
+  String _getCacheKey(String type) => '$_kFaqCategoriesJsonPrefix$type';
 
-  String _getTimestampKey(String type) => '${_kFaqCategoriesTsPrefix}$type';
+  String _getTimestampKey(String type) => '$_kFaqCategoriesTsPrefix$type';
 
   @override
-  Future<Result<List<FaqCategoryEntity>>> getFaqCategories(String type) {
+  Future<Result<List<FaqCategoryEntity>>> getFaqCategories(String type, {int? orderId}) {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.faqCategories,
-        queryParameters: {'type': type},
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.faqCategories, queryParameters: {'type': type, 'order_id': orderId}),
       parser: (response) {
         // Save to cache in background
         _saveToCache(response.data, type);
 
         final categories = <FaqCategoryEntity>[];
         final data = response.data['data'] as List<dynamic>;
-        for (var item in data) {
+        for (final item in data) {
           categories.add(FaqCategoryDTO.fromJson(item as Map<String, dynamic>).toEntity());
         }
         return categories;
@@ -52,7 +49,7 @@ class FaqRepoImp extends FaqRepo {
   }
 
   @override
-  Future<List<FaqCategoryEntity>?> getCachedFaqCategories(String type) async {
+  Future<List<FaqCategoryEntity>?> getCachedFaqCategories(String type, {int? orderId}) async {
     try {
       final sp = await SharedPreferences.getInstance();
       final raw = sp.getString(_getCacheKey(type));
@@ -63,7 +60,7 @@ class FaqRepoImp extends FaqRepo {
       if (data == null) return null;
 
       final categories = <FaqCategoryEntity>[];
-      for (var item in data) {
+      for (final item in data) {
         categories.add(FaqCategoryDTO.fromJson(item as Map<String, dynamic>).toEntity());
       }
       return categories;

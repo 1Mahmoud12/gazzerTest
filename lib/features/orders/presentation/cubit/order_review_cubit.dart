@@ -12,14 +12,14 @@ class OrderReviewCubit extends Cubit<OrderReviewState> {
   Future<void> submitReview({
     required int orderId,
     required List<StoreReview> storeReviews,
-    required DeliveryManReview deliveryManReview,
+    required List<DeliveryManReview> deliveryManReviews,
   }) async {
     emit(const OrderReviewLoading());
     animationDialogLoading();
     final result = await _repo.submitOrderReview(
       orderId: orderId,
       storeReviews: storeReviews,
-      deliveryManReview: deliveryManReview,
+      deliveryManReviews: deliveryManReviews,
     );
     closeDialog();
     switch (result) {

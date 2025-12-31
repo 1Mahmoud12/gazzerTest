@@ -139,7 +139,12 @@ class OrderCardWidget extends StatelessWidget {
               if (order.canRate)
                 _RatingDisplay(rating: order.rating!.toDouble())
               else
-                _RatingInput(orderId: int.tryParse(order.orderId) ?? 0, vendors: order.vendors, onRatingChanged: onRatingChanged ?? (_) {}),
+                _RatingInput(
+                  orderId: int.tryParse(order.orderId) ?? 0,
+                  vendors: order.vendors,
+                  deliveryManId: order.deliveryManId ?? 0,
+                  onRatingChanged: onRatingChanged ?? (_) {},
+                ),
             ],
           ],
         ),
@@ -181,10 +186,11 @@ class _RatingDisplay extends StatelessWidget {
 }
 
 class _RatingInput extends StatelessWidget {
-  const _RatingInput({required this.orderId, required this.vendors, this.onRatingChanged});
+  const _RatingInput({required this.orderId, required this.vendors, required this.deliveryManId, this.onRatingChanged});
 
   final int orderId;
   final List<OrderVendorEntity> vendors;
+  final int deliveryManId;
   final Function(double)? onRatingChanged;
 
   @override
@@ -193,7 +199,7 @@ class _RatingInput extends StatelessWidget {
       onTap: () async {
         final result = await showDialog<bool>(
           context: context,
-          builder: (context) => OrderRatingDialog(orderId: orderId, vendors: vendors),
+          builder: (context) => OrderRatingDialog(orderId: orderId, vendors: vendors, deliveryManId: deliveryManId),
         );
         await context.read<OrdersCubit>().loadOrders(refresh: true);
 
@@ -211,7 +217,7 @@ class _RatingInput extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: [
-            Text(L10n.tr().rateUs, style: TStyle.blackRegular(12)),
+            Text(L10n.tr().rateUs, style: TStyle.robotBlackRegular14()),
             const Spacer(),
             ...List.generate(
               5,

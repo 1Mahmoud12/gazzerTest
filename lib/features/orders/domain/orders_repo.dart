@@ -27,33 +27,42 @@ abstract class OrdersRepo extends BaseApiRepo {
   Future<Result<String>> submitOrderReview({
     required int orderId,
     required List<StoreReview> storeReviews,
-    required DeliveryManReview deliveryManReview,
+    required List<DeliveryManReview> deliveryManReviews,
   });
 }
 
 class StoreReview {
   final int orderStoreId;
   final double rating;
+  final String comment;
 
   StoreReview({
     required this.orderStoreId,
     required this.rating,
+    this.comment = '',
   });
 
   Map<String, dynamic> toJson() => {
     'store_id': orderStoreId,
     'rating': rating,
-    'comment': '',
+    'comment': comment,
   };
 }
 
 class DeliveryManReview {
+  final int deliveryManId;
   final double rating;
+  final String comment;
 
-  DeliveryManReview({required this.rating});
+  DeliveryManReview({
+    required this.deliveryManId,
+    required this.rating,
+    this.comment = '',
+  });
 
   Map<String, dynamic> toJson() => {
+    'delivery_man_id': deliveryManId,
     'rating': rating,
-    'comment': '',
+    'comment': comment,
   };
 }

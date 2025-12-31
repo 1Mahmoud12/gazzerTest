@@ -2053,4 +2053,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bestPopularItems => 'Best Popular Items';
+
+  @override
+  String get addNotes => 'Add Notes';
+
+  @override
+  String get quantity => 'Quantity';
 }

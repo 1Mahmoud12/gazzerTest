@@ -24,16 +24,18 @@ class IncrementWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            onTap: isIncrementDisabled
-                ? () {
-                    Alerts.showToast(L10n.tr().maximumQuantityReached);
-                  }
-                : () {
-                    SystemSound.play(SystemSoundType.click);
-                    onChanged(true);
-                  },
-            child: Icon(Icons.add, color: isIncrementDisabled ? Co.black.withOpacityNew(0.4) : Co.black, size: 22),
+          Expanded(
+            child: InkWell(
+              onTap: isIncrementDisabled
+                  ? () {
+                      Alerts.showToast(L10n.tr().maximumQuantityReached);
+                    }
+                  : () {
+                      SystemSound.play(SystemSoundType.click);
+                      onChanged(true);
+                    },
+              child: Icon(Icons.add, color: isIncrementDisabled ? Co.black.withOpacityNew(0.4) : Co.black, size: 22),
+            ),
           ),
           if (initVal != 0)
             ConstrainedBox(
@@ -41,9 +43,7 @@ class IncrementWidget extends StatelessWidget {
               child: Text('$initVal', style: TStyle.robotBlackSubTitle(), textAlign: TextAlign.center),
             ),
           if (initVal != 0)
-            Container(
-              padding: const EdgeInsets.all(5),
-
+            Expanded(
               child: InkWell(
                 onTap: () {
                   SystemSound.play(SystemSoundType.click);

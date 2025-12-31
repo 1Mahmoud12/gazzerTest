@@ -19,7 +19,6 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
-import 'package:gazzer/main.dart';
 
 class BestPopularStoresWidget extends StatelessWidget {
   const BestPopularStoresWidget({super.key});
@@ -80,7 +79,6 @@ class _BestPopularStoresContent extends StatelessWidget {
               separatorBuilder: (context, index) => const HorizontalSpacing(12),
               itemBuilder: (context, index) {
                 final store = stores[index];
-                logger.d(store.id);
                 return GrocCardSwitcher(
                   cardStyle: CardStyle.typeOne,
                   width: 100,

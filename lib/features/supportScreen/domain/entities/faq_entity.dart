@@ -7,7 +7,7 @@ class FaqCategoryEntity extends Equatable {
   final String type;
   final String? typeOrderIssue;
   final int? parentId;
-  final int order;
+  final int? order;
   final bool isActive;
   final bool hasChildren;
   final bool hasQuestions;
@@ -30,19 +30,7 @@ class FaqCategoryEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-    id,
-    name,
-    description,
-    type,
-    parentId,
-    order,
-    isActive,
-    hasChildren,
-    hasQuestions,
-    children,
-    questions,
-  ];
+  List<Object?> get props => [id, name, description, type, parentId, order, isActive, hasChildren, hasQuestions, children, questions];
 }
 
 class FaqQuestionEntity extends Equatable {
@@ -63,12 +51,5 @@ class FaqQuestionEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-    id,
-    question,
-    answer,
-    categoryId,
-    order,
-    isActive,
-  ];
+  List<Object?> get props => [id, question, answer, categoryId, order, isActive];
 }
