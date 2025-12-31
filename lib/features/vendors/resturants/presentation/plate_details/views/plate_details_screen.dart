@@ -206,7 +206,7 @@ class SinglePlateScreen extends StatelessWidget {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: kToolbarHeight),
+                          padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
                           child: Padding(
                             padding: const EdgeInsets.all(8),
                             child: Row(
