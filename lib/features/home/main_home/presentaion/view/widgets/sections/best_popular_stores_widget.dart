@@ -58,7 +58,6 @@ class _BestPopularStoresContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d(stores);
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(

@@ -81,13 +81,19 @@ class ProfileInformationRow extends StatelessWidget {
       spacing: 16,
       children: [
         if (icon is IconData) Icon(icon, size: 32, color: Co.secondary) else SvgPicture.asset(icon, height: 32, width: 32),
-        Column(
-          spacing: 2,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title, style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey)),
-            Text(value, style: TStyle.robotBlackRegular()),
-          ],
+        Expanded(
+          child: Column(
+            spacing: 2,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey)),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(value, style: TStyle.robotBlackRegular()),
+              ),
+            ],
+          ),
         ),
       ],
     );

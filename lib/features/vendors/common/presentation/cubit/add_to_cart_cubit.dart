@@ -34,25 +34,20 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   final Map<int, int> _orderedWith = {};
   final Map<int, double> _orderedWithPrices = {};
 
-  AddToCartCubit(
-    this.item,
-    this.options,
-    this._repo,
-    this._bus, [
-    this.cartItem,
-  ]) : basePrice = _calculateBasePrice(options, item.price),
-       super(
-         AddToCartStates(
-           message: '',
-           status: ApiStatus.initial,
-           hasUserInteracted: false,
-           hasAddedToCArt: false,
-           note: cartItem?.notes,
-           quantity: cartItem?.quantity ?? 1,
-           totalPrice: cartItem?.totalPrice ?? _calculateInitialPrice(options, item.price),
-           selectedOptions: _initializeDefaultSelections(options),
-         ),
-       ) {
+  AddToCartCubit(this.item, this.options, this._repo, this._bus, [this.cartItem])
+    : basePrice = _calculateBasePrice(options, item.price),
+      super(
+        AddToCartStates(
+          message: '',
+          status: ApiStatus.initial,
+          hasUserInteracted: false,
+          hasAddedToCArt: false,
+          note: cartItem?.notes,
+          quantity: cartItem?.quantity ?? 1,
+          totalPrice: cartItem?.totalPrice ?? _calculateInitialPrice(options, item.price),
+          selectedOptions: _initializeDefaultSelections(options),
+        ),
+      ) {
     emit(state);
     if (cartItem != null) {
       _hydrateFromExistingCartItem(cartItem!);
@@ -60,21 +55,15 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   // Calculate base price - always use item base price
-  static double _calculateBasePrice(
-    List<ItemOptionEntity> options,
-    double itemPrice,
-  ) {
+  static double _calculateBasePrice(List<ItemOptionEntity> options, double itemPrice) {
     return itemPrice;
   }
 
   // Calculate initial total price: base + default selected addons
-  static double _calculateInitialPrice(
-    List<ItemOptionEntity> options,
-    double itemPrice,
-  ) {
+  static double _calculateInitialPrice(List<ItemOptionEntity> options, double itemPrice) {
     double total = itemPrice;
-    for (var option in options) {
-      for (var addon in option.subAddons) {
+    for (final option in options) {
+      for (final addon in option.subAddons) {
         if (addon.isDefault && !addon.isFree) {
           total += addon.price;
         }
@@ -84,11 +73,9 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   // Initialize default selections - select all items with isDefault = true
-  static Map<String, Set<String>> _initializeDefaultSelections(
-    List<ItemOptionEntity> options,
-  ) {
+  static Map<String, Set<String>> _initializeDefaultSelections(List<ItemOptionEntity> options) {
     final map = <String, Set<String>>{};
-    for (var option in options) {
+    for (final option in options) {
       // Find all default values (isDefault = true)
       final defaultValues = option.subAddons.where((addon) => addon.isDefault).toList();
 
@@ -108,12 +95,8 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   // Helper method to process nested default selections
-  static void _processNestedDefaults(
-    List<SubAddonEntity> subAddons,
-    String parentPath,
-    Map<String, Set<String>> map,
-  ) {
-    for (var subAddon in subAddons) {
+  static void _processNestedDefaults(List<SubAddonEntity> subAddons, String parentPath, Map<String, Set<String>> map) {
+    for (final subAddon in subAddons) {
       if (subAddon.type != null) {
         // This is an option group, find its defaults
         final optionPath = '${parentPath}_${subAddon.id}';
@@ -135,49 +118,22 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       final product = item as ProductEntity;
       if (product.quantityInStock != null && state.quantity >= product.quantityInStock!) {
         // Already at or above max quantity, show toast
-        emit(
-          state.copyWith(
-            message: L10n.tr().maximumQuantityReachedForItem,
-            status: ApiStatus.error,
-            hasUserInteracted: true,
-          ),
-        );
+        emit(state.copyWith(message: L10n.tr().maximumQuantityReachedForItem, status: ApiStatus.error, hasUserInteracted: true));
         return;
       }
     }
 
-    emit(
-      state.copyWith(
-        qntity: state.quantity + 1,
-        hasUserInteracted: true,
-        message: '',
-        status: ApiStatus.initial,
-      ),
-    );
+    emit(state.copyWith(qntity: state.quantity + 1, hasUserInteracted: true, message: '', status: ApiStatus.initial));
   }
 
   void decrement() {
     if (state.quantity > 1) {
-      emit(
-        state.copyWith(
-          qntity: state.quantity - 1,
-          hasUserInteracted: true,
-          message: '',
-          status: ApiStatus.initial,
-        ),
-      );
+      emit(state.copyWith(qntity: state.quantity - 1, hasUserInteracted: true, message: '', status: ApiStatus.initial));
     }
   }
 
   void setNote(String note) {
-    emit(
-      state.copyWith(
-        note: note,
-        hasUserInteracted: true,
-        message: '',
-        status: ApiStatus.initial,
-      ),
-    );
+    emit(state.copyWith(note: note, hasUserInteracted: true, message: '', status: ApiStatus.initial));
   }
 
   // Ordered-with helpers
@@ -187,13 +143,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     } else {
       _orderedWith[id] = quantity;
     }
-    emit(
-      state.copyWith(
-        hasUserInteracted: true,
-        message: '',
-        status: ApiStatus.initial,
-      ),
-    );
+    emit(state.copyWith(hasUserInteracted: true, message: '', status: ApiStatus.initial));
   }
 
   int getOrderedWithQuantity(int id) => _orderedWith[id] ?? 0;
@@ -211,7 +161,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     final newMap = Map<String, Set<String>>.from(state.selectedOptions);
     bool hasChanges = false;
 
-    for (var option in options) {
+    for (final option in options) {
       final currentSelections = newMap[option.id] ?? <String>{};
 
       // If there is already any selection for this option (even if it's not the
@@ -223,7 +173,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
       final defaultValues = option.subAddons.where((v) => v.isDefault).toList();
 
-      for (var defaultValue in defaultValues) {
+      for (final defaultValue in defaultValues) {
         if (!currentSelections.contains(defaultValue.id)) {
           if (!newMap.containsKey(option.id)) {
             newMap[option.id] = <String>{};
@@ -272,7 +222,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       // Radio: clear previous selection and set new one
       if (newMap.containsKey(optionKey)) {
         // Clear sub-addons of previously selected values
-        for (var oldValueId in newMap[optionKey]!) {
+        for (final oldValueId in newMap[optionKey]!) {
           _clearChildSelections(newMap, '${optionKey}_$oldValueId');
         }
       }
@@ -301,14 +251,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     log('newMap: $newMap');
     log('============================');
 
-    emit(
-      state.copyWith(
-        selectedOptions: newMap,
-        hasUserInteracted: true,
-        message: '',
-        status: ApiStatus.initial,
-      ),
-    );
+    emit(state.copyWith(selectedOptions: newMap, hasUserInteracted: true, message: '', status: ApiStatus.initial));
   }
 
   // Determine option group's type (radio/checkbox) from optionKey path
@@ -339,22 +282,19 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   // Clear all selections under a given path (recursive)
-  void _clearChildSelections(
-    Map<String, Set<String>> selections,
-    String parentPath,
-  ) {
+  void _clearChildSelections(Map<String, Set<String>> selections, String parentPath) {
     final keysToRemove = <String>[];
     // Remove the immediate group key itself
     if (selections.containsKey(parentPath)) {
       keysToRemove.add(parentPath);
     }
     // Remove all nested children under this path
-    for (var key in selections.keys) {
+    for (final key in selections.keys) {
       if (key.startsWith('${parentPath}_')) {
         keysToRemove.add(key);
       }
     }
-    for (var key in keysToRemove) {
+    for (final key in keysToRemove) {
       selections.remove(key);
     }
   }
@@ -375,28 +315,19 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       for (final val in opt.values) {
         final idPath = _findIdPath(topOption, val.id);
         if (idPath == null || idPath.isEmpty) {
-          hydratedSelections[topOption.id] = {
-            ...(hydratedSelections[topOption.id] ?? <String>{}),
-            val.id,
-          };
+          hydratedSelections[topOption.id] = {...(hydratedSelections[topOption.id] ?? <String>{}), val.id};
           continue;
         }
 
         // Top-level selection
         final firstSeg = idPath.first;
-        hydratedSelections[topOption.id] = {
-          ...(hydratedSelections[topOption.id] ?? <String>{}),
-          firstSeg,
-        };
+        hydratedSelections[topOption.id] = {...(hydratedSelections[topOption.id] ?? <String>{}), firstSeg};
 
         // Nested selections for each level
         for (int i = 0; i < idPath.length - 1; i++) {
           final parentKey = [topOption.id, ...idPath.take(i + 1)].join('_');
           final childId = idPath[i + 1];
-          hydratedSelections[parentKey] = {
-            ...(hydratedSelections[parentKey] ?? <String>{}),
-            childId,
-          };
+          hydratedSelections[parentKey] = {...(hydratedSelections[parentKey] ?? <String>{}), childId};
         }
       }
     }
@@ -445,7 +376,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     log('All selections: ${state.selectedOptions}');
 
     // Calculate price for all selected options (top-level and nested)
-    for (var entry in state.selectedOptions.entries) {
+    for (final entry in state.selectedOptions.entries) {
       final path = entry.key;
       final selectedValueIds = entry.value;
       log('Processing path: $path with values: $selectedValueIds');
@@ -462,13 +393,11 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
         // For checkbox type, add all selected items (checkbox = multiple selection)
         final valuesToProcess = groupType == OptionType.radio ? selectedValueIds.take(1) : selectedValueIds;
 
-        for (var valueId in valuesToProcess) {
+        for (final valueId in valuesToProcess) {
           // Find the specific sub-addon that matches this valueId
           final subAddon = _findSubAddonById(option, valueId);
           if (subAddon != null && !subAddon.isFree) {
-            log(
-              'Adding ${subAddon.name}: +${subAddon.price} (${groupType == OptionType.radio ? 'radio' : 'checkbox'})',
-            );
+            log('Adding ${subAddon.name}: +${subAddon.price} (${groupType == OptionType.radio ? 'radio' : 'checkbox'})');
             total += subAddon.price;
           }
         }
@@ -519,7 +448,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
   // Find sub-addon by ID recursively
   SubAddonEntity? _findSubAddonById(ItemOptionEntity option, String id) {
-    for (var addon in option.subAddons) {
+    for (final addon in option.subAddons) {
       if (addon.id == id) return addon;
 
       // Search in nested sub-addons
@@ -530,11 +459,8 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   // Helper to search in a list of sub-addons
-  SubAddonEntity? _findSubAddonInList(
-    List<SubAddonEntity> subAddons,
-    String id,
-  ) {
-    for (var addon in subAddons) {
+  SubAddonEntity? _findSubAddonInList(List<SubAddonEntity> subAddons, String id) {
+    for (final addon in subAddons) {
       if (addon.id == id) return addon;
 
       // Search deeper
@@ -555,14 +481,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     final convertedOptions = _convertToIntBasedMap(state.selectedOptions);
 
     // Build ordered_with payload: [{ id, quantity }]
-    final orderedWithPayload = _orderedWith.entries
-        .map(
-          (e) => {
-            'id': e.key,
-            'quantity': e.value,
-          },
-        )
-        .toList();
+    final orderedWithPayload = _orderedWith.entries.map((e) => {'id': e.key, 'quantity': e.value}).toList();
 
     final req = CartableItemRequest(
       cartItemId: cartItem?.cartId,
@@ -582,12 +501,10 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   // Convert String-based path map to int-based flat map for API
-  Map<int, Set<String>> _convertToIntBasedMap(
-    Map<String, Set<String>> selections,
-  ) {
+  Map<int, Set<String>> _convertToIntBasedMap(Map<String, Set<String>> selections) {
     final result = <int, Set<String>>{};
 
-    for (var entry in selections.entries) {
+    for (final entry in selections.entries) {
       try {
         // Extract the option ID from the path (first segment before '_')
         final pathParts = entry.key.split('_');
@@ -598,7 +515,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
         if (optionId == null) continue;
 
         final valueIds = <String>{};
-        for (var valueIdStr in entry.value) {
+        for (final valueIdStr in entry.value) {
           valueIds.add(valueIdStr);
         }
 
@@ -617,9 +534,7 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   // - option_id is derived from the LAST segment of the option path (works for nested groups)
   // - value_ids are kept as strings to support ULID/UUID
 
-  List<Map<String, dynamic>> _buildOptionsPayload(
-    Map<String, Set<String>> selections,
-  ) {
+  List<Map<String, dynamic>> _buildOptionsPayload(Map<String, Set<String>> selections) {
     final List<Map<String, dynamic>> payload = [];
 
     for (final entry in selections.entries) {
@@ -627,31 +542,19 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
       final optionIdStr = segments.isNotEmpty ? segments.last : entry.key;
       final optionIdInt = int.tryParse(optionIdStr);
 
-      payload.add({
-        'option_id': optionIdInt ?? optionIdStr,
-        'value_ids': entry.value.toList(),
-      });
+      payload.add({'option_id': optionIdInt ?? optionIdStr, 'value_ids': entry.value.toList()});
     }
 
     return payload;
   }
 
-  Future<void> _addCartToRemote(
-    BuildContext context,
-    CartableItemRequest req,
-  ) async {
+  Future<void> _addCartToRemote(BuildContext context, CartableItemRequest req) async {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.addToCartItem(req);
     switch (response) {
       case Ok<CartResponse> res:
         _bus.cartResponseToValues(res.value);
-        emit(
-          state.copyWith(
-            status: ApiStatus.success,
-            message: res.value.message,
-            hasUserInteracted: false,
-          ),
-        );
+        emit(state.copyWith(status: ApiStatus.success, message: res.value.message, hasUserInteracted: false));
       case Err err:
         if (context.mounted && err.error is CartError && (err.error as CartError).needsNewPouchApproval) {
           final confirmed = await warningAlert(
@@ -665,42 +568,21 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
             await _addCartToRemote(context, req.copyWith(exceedPouch: true));
           }
-          emit(
-            state.copyWith(
-              status: ApiStatus.error,
-              message: '',
-              hasUserInteracted: false,
-            ),
-          );
+          emit(state.copyWith(status: ApiStatus.error, message: '', hasUserInteracted: false));
           return;
         }
         // Only emit error if user didn't confirm or it's not a pouch approval error
-        emit(
-          state.copyWith(
-            status: ApiStatus.error,
-            message: err.error.message,
-            hasUserInteracted: false,
-          ),
-        );
+        emit(state.copyWith(status: ApiStatus.error, message: err.error.message, hasUserInteracted: false));
     }
   }
 
-  Future<void> _updateCart(
-    BuildContext context,
-    CartableItemRequest req,
-  ) async {
+  Future<void> _updateCart(BuildContext context, CartableItemRequest req) async {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.updateCartItem(req);
     switch (response) {
       case Ok<CartResponse> res:
         _bus.cartResponseToValues(res.value);
-        emit(
-          state.copyWith(
-            status: ApiStatus.success,
-            message: res.value.message,
-            hasUserInteracted: false,
-          ),
-        );
+        emit(state.copyWith(status: ApiStatus.success, message: res.value.message, hasUserInteracted: false));
       case Err err:
         if (context.mounted && err.error is CartError && (err.error as CartError).needsNewPouchApproval) {
           final confirmed = await warningAlert(
@@ -717,23 +599,11 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
 
             return; // Exit early - recursive call handled state
           }
-          emit(
-            state.copyWith(
-              status: ApiStatus.error,
-              message: '',
-              hasUserInteracted: false,
-            ),
-          );
+          emit(state.copyWith(status: ApiStatus.error, message: '', hasUserInteracted: false));
           return;
         }
         // Only emit error if user didn't confirm or it's not a pouch approval error
-        emit(
-          state.copyWith(
-            status: ApiStatus.error,
-            message: err.error.message,
-            hasUserInteracted: false,
-          ),
-        );
+        emit(state.copyWith(status: ApiStatus.error, message: err.error.message, hasUserInteracted: false));
     }
   }
 
@@ -742,13 +612,11 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     if (state.quantity < 1) return L10n.tr().quantityValidation;
 
     // Validate only top-level required options
-    for (var option in options) {
+    for (final option in options) {
       if (option.isRequired) {
         final selectedValueIds = state.selectedOptions[option.id];
         if (selectedValueIds == null || selectedValueIds.isEmpty) {
-          return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(
-            option.name,
-          );
+          return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(option.name);
         }
       }
     }
@@ -766,25 +634,20 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   /// Returns error message if validation fails, null if valid
   String? _validateNestedSelections() {
     // Check all selected options recursively
-    for (var option in options) {
+    for (final option in options) {
       final selectedValueIds = state.selectedOptions[option.id];
       if (selectedValueIds != null && selectedValueIds.isNotEmpty) {
-        for (var valueId in selectedValueIds) {
+        for (final valueId in selectedValueIds) {
           final subAddon = _findSubAddonById(option, valueId);
           if (subAddon != null && subAddon.subAddons.isNotEmpty) {
             // This selected value has children - check if at least one child is selected
             final childPath = '${option.id}_$valueId';
             final childSelections = state.selectedOptions[childPath];
             if (childSelections == null || childSelections.isEmpty) {
-              return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(
-                subAddon.name,
-              );
+              return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(subAddon.name);
             }
             // Recursively validate children
-            final childError = _validateSubAddonSelections(
-              subAddon,
-              childPath,
-            );
+            final childError = _validateSubAddonSelections(subAddon, childPath);
             if (childError != null) return childError;
           }
         }
@@ -794,34 +657,23 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
   }
 
   /// Recursively validates that all selected sub-addons with children have their children selected
-  String? _validateSubAddonSelections(
-    SubAddonEntity parentSubAddon,
-    String parentPath,
-  ) {
+  String? _validateSubAddonSelections(SubAddonEntity parentSubAddon, String parentPath) {
     final childSelections = state.selectedOptions[parentPath];
     if (childSelections == null || childSelections.isEmpty) {
       return null; // No children selected, but this is handled by caller
     }
 
-    for (var childId in childSelections) {
-      final childSubAddon = _findSubAddonInList(
-        parentSubAddon.subAddons,
-        childId,
-      );
+    for (final childId in childSelections) {
+      final childSubAddon = _findSubAddonInList(parentSubAddon.subAddons, childId);
       if (childSubAddon != null && childSubAddon.subAddons.isNotEmpty) {
         // This child has its own children - check if at least one is selected
         final grandChildPath = '${parentPath}_$childId';
         final grandChildSelections = state.selectedOptions[grandChildPath];
         if (grandChildSelections == null || grandChildSelections.isEmpty) {
-          return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(
-            childSubAddon.name,
-          );
+          return L10n.tr().pleaseSelectAtLeastOneValueOptionForName(childSubAddon.name);
         }
         // Recursively validate deeper levels
-        final deeperError = _validateSubAddonSelections(
-          childSubAddon,
-          grandChildPath,
-        );
+        final deeperError = _validateSubAddonSelections(childSubAddon, grandChildPath);
         if (deeperError != null) return deeperError;
       }
     }

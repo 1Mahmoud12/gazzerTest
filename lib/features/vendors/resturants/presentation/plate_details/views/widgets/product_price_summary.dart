@@ -46,7 +46,7 @@ class ProductPriceSummary extends StatelessWidget {
                 flex: 3,
                 child: IncrementWidget(
                   initVal: quantity,
-                  onChanged: (isAdding) => onChangeQuantity,
+                  onChanged: (isAdding) => onChangeQuantity(isAdding: isAdding),
                   isIncrementDisabled: maxQuantity != null && quantity >= maxQuantity!,
                 ),
               ),

@@ -311,7 +311,10 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                           if (!restaurant.isClosed)
                             ValueListenableBuilder(
                               valueListenable: noteNotifier,
-                              builder: (context, value, child) => AddSpecialNote(onNoteChange: onNoteChange, note: value),
+                              builder: (context, value, child) => Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: AddSpecialNote(onNoteChange: onNoteChange, note: value),
+                              ),
                             ),
                         ],
                       );
@@ -333,7 +336,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                         isLoading: value.$3,
                         price: value.$1,
                         quantity: value.$2,
-                        onChangeQuantity: ({required isAdding}) => onChangeQuantity,
+                        onChangeQuantity: ({required isAdding}) => onChangeQuantity(isAdding),
                         onsubmit: onsubmit,
                         isUpdatingCart: isUpdating,
                       ),
