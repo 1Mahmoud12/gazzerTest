@@ -371,4 +371,9 @@ class Assets {
   static const String pharmacyStoreIc = "assets/svg/pharmacyStoreIc.svg";
   static const String galleryIc = "assets/svg/galleryIc.svg";
   static const String cameraIc = "assets/svg/cameraIc.svg";
+
+  // Splash
+  static const String capGazzerIc = "assets/svg/capGazzerIc.svg";
+  static const String bodyGazzerIc = "assets/svg/bodyGazzerIc.svg";
+  static const String gazzerTextIc = "assets/svg/gazzerTextIc.svg";
 }

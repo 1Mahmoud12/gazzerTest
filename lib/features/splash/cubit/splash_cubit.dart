@@ -34,11 +34,11 @@ class SplashCubit extends Cubit<SplashStates> {
     emit(RefreshTokenLoading());
     final res = await _repo.refreshToken();
     switch (res) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         await _prefs.setString(StorageKeys.token, ok.value);
         emit(RefreshTokenSuccess());
         break;
-      case Err<String> err:
+      case final Err<String> err:
         emit(RefreshTokenError(err.error.message));
         return;
     }
@@ -62,11 +62,11 @@ class SplashCubit extends Cubit<SplashStates> {
     emit(GetClientLoading());
     final res = await _repo.getClient();
     switch (res) {
-      case Ok<ClientEntity> ok:
+      case final Ok<ClientEntity> ok:
         Session().setClient = ok.value;
         emit(GetClientSuccess(ok.value));
         break;
-      case Err<ClientEntity> err:
+      case final Err<ClientEntity> err:
         emit(GetClientError(err.error.message));
         return;
     }

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -144,6 +145,9 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
+    );
     super.build(context); // Required for AutomaticKeepAliveClientMixin
     selectTokens();
     return PopScope(
