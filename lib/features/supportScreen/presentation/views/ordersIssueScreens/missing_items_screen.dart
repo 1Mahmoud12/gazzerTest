@@ -11,7 +11,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
-import 'package:gazzer/features/orders/domain/entities/order_detail_item_entity.dart';
 import 'package:gazzer/features/orders/presentation/cubit/order_detail_cubit.dart';
 import 'package:gazzer/features/orders/presentation/cubit/order_detail_state.dart';
 import 'package:gazzer/features/supportScreen/data/requests/complaint_request.dart';
@@ -19,6 +18,7 @@ import 'package:gazzer/features/supportScreen/domain/entities/enums_support.dart
 import 'package:gazzer/features/supportScreen/presentation/cubit/complaint_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/complaint_states.dart';
 
+import '../gazzer_support_screen.dart';
 import '../order_issue_response_screen.dart';
 import '../widgets/missing_item_tile.dart';
 
@@ -74,9 +74,30 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
     return _selectedItemsWithQuantity.containsKey(itemId) && _selectedItemsWithQuantity[itemId]! > 0;
   }
 
-  void _onCheckPressed(BuildContext context, List<OrderDetailItemEntity> allItems) {
+  void _onCheckPressed(BuildContext context, OrderDetailEntity orderDetail) {
     if (_selectedItemsWithQuantity.isEmpty) {
       Alerts.showToast(L10n.tr().youMustCheckOneAtLeast);
+      return;
+    }
+
+    // Check if order is more than 24 hours old
+    final now = DateTime.now();
+    final orderDate = orderDetail.orderDate;
+    final hoursSinceOrder = now.difference(orderDate).inHours;
+
+    // Calculate total value of selected items
+    final allItems = orderDetail.vendors.expand((vendor) => vendor.items).toList();
+    double selectedItemsTotal = 0.0;
+    for (final entry in _selectedItemsWithQuantity.entries) {
+      final itemId = entry.key;
+      final quantity = entry.value;
+      final item = allItems.firstWhere((item) => item.id == itemId);
+      selectedItemsTotal += item.price * quantity;
+    }
+    // Check if selected items total is less than delivery fee
+    if ((hoursSinceOrder > 24) && (selectedItemsTotal < orderDetail.deliveryFee)) {
+      // Navigate to support screen
+      context.navigateToPage(GazzerSupportScreen(orderId: widget.orderId));
       return;
     }
 
@@ -146,9 +167,6 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
                 );
               }
 
-              // Collect all items from all vendors
-              final allItems = orderDetail.vendors.expand((vendor) => vendor.items).toList();
-
               return Scaffold(
                 appBar: MainAppBar(title: l10n.missingOrIncorrectItems),
                 body: Column(
@@ -173,7 +191,7 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
                     SafeArea(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
-                        child: MainBtn(onPressed: () => _onCheckPressed(context, allItems), text: l10n.check, width: double.infinity),
+                        child: MainBtn(onPressed: () => _onCheckPressed(context, orderDetail), text: l10n.check, width: double.infinity),
                       ),
                     ),
                   ],
