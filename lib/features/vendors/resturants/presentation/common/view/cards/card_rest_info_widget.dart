@@ -27,21 +27,28 @@ class CardRestInfoWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(vendor.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
-              ),
-              Row(
-                spacing: 4,
-                children: [
-                  const VectorGraphicsWidget(Assets.starRateIc),
+          InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () {
+              navigateToVendor(context);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(vendor.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                ),
+                Row(
+                  spacing: 4,
+                  children: [
+                    const VectorGraphicsWidget(Assets.starRateIc),
 
-                  Text(vendor.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
-                ],
-              ),
-            ],
+                    Text(vendor.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                  ],
+                ),
+              ],
+            ),
           ),
           // if (vendor.tag != null && vendor.tag!.isNotEmpty)
           //   Text(vendor.shortTag(25)!, style: TStyle.secondarySemi(12), maxLines: 1, overflow: TextOverflow.ellipsis),
@@ -100,14 +107,7 @@ class CardRestInfoWidget extends StatelessWidget {
           const VerticalSpacing(8),
           MainBtn(
             onPressed: () {
-              logger.d(vendor.storeCategoryType);
-              if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.pharmacy.name) {
-                PharmacyStoreScreenRoute(id: vendor.id).push(context);
-              } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.grocery.name) {
-                StoreDetailsRoute(storeId: vendor.id).push(context);
-              } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.restaurant.name) {
-                RestaurantDetailsRoute(id: vendor.id).push(context);
-              }
+              navigateToVendor(context);
             },
             // isEnabled: false,
             text: L10n.tr().viewVendor,
@@ -117,5 +117,16 @@ class CardRestInfoWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void navigateToVendor(BuildContext context) {
+    logger.d(vendor.storeCategoryType);
+    if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.pharmacy.name) {
+      PharmacyStoreScreenRoute(id: vendor.id).push(context);
+    } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.grocery.name) {
+      StoreDetailsRoute(storeId: vendor.id).push(context);
+    } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.restaurant.name) {
+      RestaurantDetailsRoute(id: vendor.id).push(context);
+    }
   }
 }

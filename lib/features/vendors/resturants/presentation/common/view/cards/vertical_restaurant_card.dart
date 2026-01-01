@@ -73,7 +73,7 @@ class VerticalRestaurantCard extends StatelessWidget {
                         onTap: () {
                           // Consume tap event to prevent propagation to parent InkWell
                         },
-                        child: FavoriteWidget(size: 24, padding: 8, fovorable: item),
+                        child: FavoriteWidget(size: 24, fovorable: item),
                       ),
                     ],
                   ),

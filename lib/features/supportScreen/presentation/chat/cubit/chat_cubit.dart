@@ -22,11 +22,7 @@ class ChatCubit extends Cubit<ChatStates> {
       loadChatMessages();
     } else {
       // No chat_id - show empty state where user can start a new chat
-      _currentLoadedState = ChatLoadedState(
-        messages: [],
-        chatId: null,
-        orderId: orderId,
-      );
+      _currentLoadedState = ChatLoadedState(messages: [], chatId: null, orderId: orderId);
       emit(_currentLoadedState!);
     }
   }
@@ -107,10 +103,7 @@ class ChatCubit extends Cubit<ChatStates> {
     );
 
     final updatedMessages = [..._currentLoadedState!.messages, tempMessage];
-    _currentLoadedState = _currentLoadedState!.copyWith(
-      messages: updatedMessages,
-      isSending: true,
-    );
+    _currentLoadedState = _currentLoadedState!.copyWith(messages: updatedMessages, isSending: true);
     emit(_currentLoadedState!);
 
     // Prepare file if exists
@@ -168,33 +161,19 @@ class ChatCubit extends Cubit<ChatStates> {
         break;
       case Err<SendMessageResponse> err:
         // Update message status to failed
-        final failedMessages = updatedMessages
-            .map(
-              (m) => m.id == tempMessage.id ? m.copyWith(status: MessageStatus.failed) : m,
-            )
-            .toList();
+        final failedMessages = updatedMessages.map((m) => m.id == tempMessage.id ? m.copyWith(status: MessageStatus.failed) : m).toList();
 
-        _currentLoadedState = _currentLoadedState!.copyWith(
-          messages: failedMessages,
-          isSending: false,
-        );
+        _currentLoadedState = _currentLoadedState!.copyWith(messages: failedMessages, isSending: false);
         emit(_currentLoadedState!);
         Alerts.showToast(err.error.message);
         break;
     }
   }
 
-  Future<void> pickImageFromGallery() async {
+  Future<void> pickImageFromGalleryOrCamera({required File image}) async {
     try {
-      final XFile? image = await _imagePicker.pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 80,
-      );
-
-      if (image != null && _currentLoadedState != null) {
-        _currentLoadedState = _currentLoadedState!.copyWith(
-          imagePreviewPath: image.path,
-        );
+      if (_currentLoadedState != null) {
+        _currentLoadedState = _currentLoadedState!.copyWith(imagePreviewPath: image.path);
         emit(_currentLoadedState!);
       }
     } catch (e) {
@@ -202,29 +181,9 @@ class ChatCubit extends Cubit<ChatStates> {
     }
   }
 
-  Future<void> pickImageFromCamera() async {
-    try {
-      final XFile? image = await _imagePicker.pickImage(
-        source: ImageSource.camera,
-        imageQuality: 80,
-      );
-
-      if (image != null && _currentLoadedState != null) {
-        _currentLoadedState = _currentLoadedState!.copyWith(
-          imagePreviewPath: image.path,
-        );
-        emit(_currentLoadedState!);
-      }
-    } catch (e) {
-      Alerts.showToast('Error taking photo');
-    }
-  }
-
   void removeImagePreview() {
     if (_currentLoadedState != null) {
-      _currentLoadedState = _currentLoadedState!.copyWith(
-        clearImagePreview: true,
-      );
+      _currentLoadedState = _currentLoadedState!.copyWith(clearImagePreview: true);
       emit(_currentLoadedState!);
     }
   }

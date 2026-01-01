@@ -6,13 +6,11 @@ import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/image_source_picker_bottom_sheet.dart';
 
 class ChatInputField extends StatefulWidget {
   final Function(String) onSendMessage;
-  final VoidCallback onPickImage;
-  final VoidCallback onPickCamera;
+  final Function({required File image}) onPickImageOrCamera;
   final bool isSending;
   final String? imagePreviewPath;
   final VoidCallback onRemoveImage;
@@ -20,8 +18,7 @@ class ChatInputField extends StatefulWidget {
   const ChatInputField({
     super.key,
     required this.onSendMessage,
-    required this.onPickImage,
-    required this.onPickCamera,
+    required this.onPickImageOrCamera,
     required this.isSending,
     this.imagePreviewPath,
     required this.onRemoveImage,
@@ -61,54 +58,8 @@ class _ChatInputFieldState extends State<ChatInputField> {
     _controller.clear();
   }
 
-  void _showImageSourceDialog() {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(L10n.tr().selectImageSource, style: TStyle.robotBlackRegular()),
-              const SizedBox(height: 20),
-              InkWell(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const VectorGraphicsWidget(Assets.galleryIc),
-                    const HorizontalSpacing(16),
-                    Text(L10n.tr().gallery, style: TStyle.blackRegular(16)),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  widget.onPickImage();
-                },
-              ),
-              InkWell(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const VectorGraphicsWidget(Assets.cameraIc),
-                    const HorizontalSpacing(16),
-                    Text(L10n.tr().gallery, style: TStyle.robotBlackRegular()),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  // You can add camera functionality here
-                  widget.onPickCamera();
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  Future<File?> _showImageSourceDialog() async {
+    return ImageSourcePickerBottomSheet.show(context: context);
   }
 
   @override
@@ -154,7 +105,14 @@ class _ChatInputFieldState extends State<ChatInputField> {
                 children: [
                   // Add Image Button
                   GestureDetector(
-                    onTap: widget.isSending ? null : _showImageSourceDialog,
+                    onTap: widget.isSending
+                        ? null
+                        : () async {
+                            final result = await _showImageSourceDialog();
+                            if (result != null) {
+                              widget.onPickImageOrCamera(image: result);
+                            }
+                          },
                     child: Container(
                       width: 44,
                       height: 44,
