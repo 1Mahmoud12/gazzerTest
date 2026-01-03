@@ -67,14 +67,14 @@ class CategoryCard extends StatelessWidget {
         ),
         clipBehavior: Clip.hardEdge,
         onPressed: () {
-          if (category.type == VendorType.restaurant) {
+          if (category.type.toLowerCase() == VendorType.restaurant.name) {
             context.push(RestaurantsMenuScreen.route);
-          } else if (category.type == VendorType.grocery) {
+          } else if (category.type.toLowerCase() == VendorType.grocery.name) {
             StoreMenuSwitcherRoute(id: category.id).push(context);
-          } else if (category.type == VendorType.pharmacy) {
+          } else if (category.type.toLowerCase() == VendorType.pharmacy.name) {
             PharmacyMenuRoute(id: category.id).push(context);
           } else {
-            StoreMenuSwitcherRoute(id: category.id).push(context);
+            //StoreMenuSwitcherRoute(id: category.id).push(context);
 
             log('Unknown category type: ${category.type}');
           }

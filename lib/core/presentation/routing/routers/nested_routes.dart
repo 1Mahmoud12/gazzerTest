@@ -9,6 +9,7 @@ import 'package:gazzer/features/home/homeViewAll//suggested/presentation/view/su
 import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/all_categories_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
@@ -49,6 +50,9 @@ ShellRoute get nestedRoutes => ShellRoute(
 
     ///
     GoRoute(path: FavoritesScreen.route, builder: (context, state) => const FavoritesScreen()),
+
+    ///
+    GoRoute(path: AllCategoriesScreen.route, builder: (context, state) => const AllCategoriesScreen()),
 
     ///
     GoRoute(path: CartScreen.route, builder: (context, state) => const CartScreen()),

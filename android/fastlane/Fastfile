@@ -7,7 +7,7 @@ platform :android do
   lane :beta do
 
    # Navigate to Flutter root and build
-       #sh "cd .. && flutter clean"
+       sh "cd .. && flutter pub get"
        sh "cd .. && flutter build apk --release"
 
     # Distribute the app to Firebase App Distribution

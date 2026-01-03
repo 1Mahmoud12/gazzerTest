@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/circle_gradient_image.dart';
 import 'package:gazzer/di.dart';
@@ -160,7 +161,7 @@ class _CategoryGridCard extends StatelessWidget {
           } else if (category.type == VendorType.pharmacy) {
             PharmacyMenuRoute(id: category.id).push(context);
           } else {
-            StoreMenuSwitcherRoute(id: category.id).push(context);
+            Alerts.showToast(L10n.tr().notSetYet);
           }
         },
         child: Column(

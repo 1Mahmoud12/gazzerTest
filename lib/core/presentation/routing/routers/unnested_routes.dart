@@ -90,6 +90,7 @@ final List<RouteBase> unNestedRoutes = [
     builder: (context, state) {
       return const AllCategoriesScreen();
     },
+    routes: [],
   ),
   GoRoute(
     path: LoyaltyProgramHeroOneScreen.route,

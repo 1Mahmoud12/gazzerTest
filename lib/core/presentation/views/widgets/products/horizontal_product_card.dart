@@ -21,9 +21,10 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Detail
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 
 class HorizontalProductCard extends StatelessWidget {
-  const HorizontalProductCard({super.key, required this.product, required this.width});
+  const HorizontalProductCard({super.key, required this.product, required this.width, this.newUi});
   final GenericItemEntity product;
   final double width;
+  final bool? newUi;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -120,10 +121,9 @@ class HorizontalProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FavoriteWidget(size: 40, fovorable: product, padding: 0),
-                      CartToIncrementIcon(product: product, isHorizonal: true, iconSize: 25, isDarkContainer: true, newUi: true),
+                      CartToIncrementIcon(product: product, isHorizonal: true, iconSize: 25, isDarkContainer: true, newUi: newUi ?? true),
                     ],
                   ),
-                  const VerticalSpacing(20),
                 ],
               ),
             ),

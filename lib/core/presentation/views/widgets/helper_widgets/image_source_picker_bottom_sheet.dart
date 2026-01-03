@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -112,7 +113,7 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const VectorGraphicsWidget(Assets.cameraIc),
+                          SvgPicture.asset(Assets.cameraIc),
                           const HorizontalSpacing(16),
                           Text(L10n.tr().camera, style: TStyle.robotBlackMedium()),
                         ],

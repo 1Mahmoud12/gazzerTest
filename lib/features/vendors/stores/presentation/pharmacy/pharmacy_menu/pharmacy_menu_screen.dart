@@ -101,8 +101,7 @@ class PharmacyMenuScreen extends StatelessWidget {
                     const SizedBox(height: 12),
 
                     // Best Sellers Section
-                    _buildBestSellersSection(context),
-
+                    // _buildBestSellersSection(context),
                     const SizedBox(height: 80),
                   ],
                 ),
@@ -115,10 +114,10 @@ class PharmacyMenuScreen extends StatelessWidget {
   }
 
   Widget _buildCategoriesSection(BuildContext context, List<(StoreCategoryEntity, List<StoreEntity>)> categories) {
-    // if (categories.isEmpty) {
-    //   // Fallback to static data if no categories from API
-    //   return _buildCategoriesSectionWithStaticData(context);
-    // }
+    if (categories.isEmpty) {
+      // Fallback to static data if no categories from API
+      return const SizedBox.shrink();
+    }
 
     return Column(
       children: [
