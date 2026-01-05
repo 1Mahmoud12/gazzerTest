@@ -119,6 +119,7 @@ class OrderDto {
       status: status,
       canRate: isHasReview ?? false,
       rating: averageRate ?? 0.0,
+      deliveryManId: deliveryManId,
     );
   }
 }

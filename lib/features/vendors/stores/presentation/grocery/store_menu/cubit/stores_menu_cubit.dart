@@ -11,21 +11,33 @@ class StoresMenuCubit extends Cubit<StoresMenuStates> {
     loadScreenData();
   }
 
-  Future<void> loadScreenData() async {
-    emit(ScreenDataLoading());
+  Future<void> loadScreenData({bool forceRefresh = false}) async {
+    if (!forceRefresh) {
+      emit(ScreenDataLoading());
+      // Check cache first
+      final cached = await storeRepo.getCachedStoresMenuPage(mainId);
+      final hasCachedData = cached != null && cached.categoryWzStores.isNotEmpty;
+
+      if (hasCachedData) {
+        emit(ScreenDataLoaded(mainCategory: cached.mainCategory, banners: cached.banners, categoryWithStores: cached.categoryWzStores));
+      }
+    } else {
+      emit(ScreenDataLoading());
+    }
+
+    // Fetch data from API
     final result = await storeRepo.loadStoresMenuPage(mainId);
     switch (result) {
-      case Ok<StoresMenuResponse> data:
-        emit(
-          ScreenDataLoaded(
-            mainCategory: data.value.mainCategory,
-            banners: data.value.banners,
-            categoryWithStores: data.value.categoryWzStores,
-          ),
-        );
+      case final Ok<StoresMenuResponse> data:
+        emit(ScreenDataLoaded(mainCategory: data.value.mainCategory, banners: data.value.banners, categoryWithStores: data.value.categoryWzStores));
         break;
-      case Err error:
-        emit(ScreenDataError(error: error.error.message));
+      case final Err error:
+        // If we have cached data, don't show error, just keep showing cache
+        final cached = await storeRepo.getCachedStoresMenuPage(mainId);
+        if (cached == null || cached.categoryWzStores.isEmpty) {
+          emit(ScreenDataError(error: error.error.message));
+        }
+        break;
     }
   }
 

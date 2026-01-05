@@ -16,14 +16,16 @@ class Validators {
     if (input == null || input.trim().isEmpty) {
       return L10n.tr().thisFieldIsRequired;
     }
-    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input) || input.length > 50 ? L10n.tr().invalidEmail : null;
+    return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[^\s@]+\.[a-zA-Z]+").hasMatch(input) || input.length > 50
+        ? L10n.tr().invalidEmail
+        : null;
   }
 
   static String? mobileEGValidator(String? input) {
     if (input == null || input.trim().isEmpty) {
       return L10n.tr().thisFieldIsRequired;
     }
-    return !RegExp(r"^1(0|1|2|5)[0-9]{8}$").hasMatch(input) ? L10n.tr().invalidPhoneNumber : null;
+    return !RegExp(r'^1([0125])[0-9]{8}$').hasMatch(input) ? L10n.tr().invalidPhoneNumber : null;
   }
 
   static String? passwordValidation(String? value) {
@@ -31,18 +33,18 @@ class Validators {
       return L10n.tr().thisFieldIsRequired;
     }
     final hasMinimumLength = value!.length >= 8;
-    final hasUpperCase = RegExp(r'[A-Z]').hasMatch(value);
-    final hasLowerCase = RegExp(r'[a-z]').hasMatch(value);
-    final hasDigits = RegExp(r'[0-9]').hasMatch(value);
+    final hasUpperCase = RegExp('[A-Z]').hasMatch(value);
+    final hasLowerCase = RegExp('[a-z]').hasMatch(value);
+    final hasDigits = RegExp('[0-9]').hasMatch(value);
     final hasSpecialCharacters = RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
     if (![hasMinimumLength, hasUpperCase, hasLowerCase, hasDigits, hasSpecialCharacters].contains(false)) return null;
     final msg = StringBuffer(L10n.tr().passwordMustConain);
 
-    if (!hasMinimumLength) msg.write(" ${L10n.tr().atLEastEightCharacters}, ");
-    if (!hasUpperCase) msg.write(" ${L10n.tr().oneUppercaseLetter}, ");
-    if (!hasLowerCase) msg.write(" ${L10n.tr().oneLowercaseLetter}, ");
-    if (!hasDigits) msg.write(" ${L10n.tr().oneDigit}, ");
-    if (!hasSpecialCharacters) msg.write(" ${L10n.tr().oneSpecialCharacter}, ");
+    if (!hasMinimumLength) msg.write(' ${L10n.tr().atLEastEightCharacters}, ');
+    if (!hasUpperCase) msg.write(' ${L10n.tr().oneUppercaseLetter}, ');
+    if (!hasLowerCase) msg.write(' ${L10n.tr().oneLowercaseLetter}, ');
+    if (!hasDigits) msg.write(' ${L10n.tr().oneDigit}, ');
+    if (!hasSpecialCharacters) msg.write(' ${L10n.tr().oneSpecialCharacter}, ');
     var result = msg.toString();
     result = '${result.substring(0, msg.length - 2)}.'; // replace last comma with a period
     return result;

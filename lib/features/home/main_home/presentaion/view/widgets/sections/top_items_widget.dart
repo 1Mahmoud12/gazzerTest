@@ -58,7 +58,7 @@ class _TopItemsContent extends StatelessWidget {
       sliver: SliverList(
         delegate: SliverChildListDelegate([
           TitleWithMore(
-            title: L10n.tr().bestPopular,
+            title: L10n.tr().bestPopularItems,
             onPressed: () {
               context.push(PopularScreen.route);
             },

@@ -446,7 +446,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get accountInformation => 'معلومات الحساب';
 
   @override
-  String get editAccountInformation => 'تعديل معلومات الحساب';
+  String get editAccountInformation => 'تعديل الحساب';
 
   @override
   String get deleteAccount => 'حذف الحساب';
@@ -1596,6 +1596,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get exclusiveOffers => 'عروض مميزة';
 
   @override
+  String get tierSaver => 'المدخر';
+
+  @override
+  String get tierGainer => 'المكتسب';
+
+  @override
+  String get tierWinner => 'الفائز';
+
+  @override
+  String get tierHero => 'البطل';
+
+  @override
   String loyaltySpendSummary(String amount, int days) {
     return 'لقد أنفقت $amount خلال آخر $days يومًا';
   }
@@ -1664,7 +1676,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'ما مدى رضاك عن إجابات الأسئلة الشائعة؟\nهل كانت مفيدة؟';
 
   @override
-  String get vendors => 'المورّدون';
+  String get vendors => 'المتاجر';
 
   @override
   String get selected => 'المحدد';
@@ -2065,6 +2077,60 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get todayDeals => 'عروض اليوم';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get relatedProducts => 'Related Products';
+
+  @override
+  String get walletAdjustment => 'Wallet Adjustment';
+
+  @override
+  String get selectAnotherAddress => 'Select another address';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get estimated_delivery_time => 'Estimated Delivery Time';
+
+  @override
+  String get your_active_orders => 'Your Active Orders';
+
+  @override
+  String get your_delivery_man => 'Your delivery man';
+
+  @override
+  String get road_distance => 'Road Distance';
+
+  @override
+  String get delivery_arrival_time => 'Delivery Arrival Time';
+
+  @override
+  String get view_delivery_man_on_map => 'View Delivery Man on Map';
+
+  @override
+  String get your_order_is_being => 'Your order is being prepared';
+
+  @override
+  String get bestPopularItems => 'Best Popular Items';
+
+  @override
+  String get addNotes => 'Add Notes';
+
+  @override
+  String get quantity => 'Quantity';
+
+  @override
+  String get ratings_reviews => 'Ratings & Reviews';
+
+  @override
+  String get star => 'Star';
+
+  @override
+  String get recommended => 'Recommended';
 
   @override
   String get notifications => 'الإشعارات';

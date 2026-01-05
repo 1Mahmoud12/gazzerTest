@@ -27,6 +27,7 @@ class RestaurantDTO {
   int? rateCount;
   String? badge;
   String? priceRange;
+  String? storeCategoryType;
 
   RestaurantDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -53,6 +54,7 @@ class RestaurantDTO {
     if (json['province_zone'] is Map) {
       provinceZone = json['province_zone']['zone_name'];
     }
+    storeCategoryType = json['store_category_type']?.toString();
   }
 
   DateTime? _formDateTimeFromString(String time) {
@@ -94,6 +96,8 @@ class RestaurantDTO {
       rateCount: rateCount ?? 0,
       alwaysClosed: false, // TODO: Determine if this is needed
       priceRange: priceRange ?? '\$10 - \$20',
+      estimatedDeliveryTime: estimatedDeliveryTime,
+      storeCategoryType: storeCategoryType,
     );
   }
 }

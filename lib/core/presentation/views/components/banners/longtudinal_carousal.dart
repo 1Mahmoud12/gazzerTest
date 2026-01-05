@@ -13,30 +13,16 @@ class LongitudinalCarousal extends StatelessWidget {
       options: CarouselOptions(
         height: 260,
         viewportFraction: 0.35,
-        initialPage: 0,
-        enableInfiniteScroll: true,
-        // pauseAutoPlayOnManualNavigate: false,
-        // pauseAutoPlayOnTouch: false,
-        reverse: false,
         autoPlay: true,
-        autoPlayInterval: Duration(seconds: 3),
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
-        autoPlayCurve: Curves.fastOutSlowIn,
+        autoPlayInterval: const Duration(seconds: 3),
         onPageChanged: (a, s) {},
-        scrollDirection: Axis.horizontal,
         onScrolled: (value) {},
       ),
       itemCount: images.length,
       itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),
-          child: AspectRatio(
-            aspectRatio: 2.5,
-            child: CustomNetworkImage(
-              images[itemIndex],
-              fit: BoxFit.cover,
-            ),
-          ),
+          child: AspectRatio(aspectRatio: 2.5, child: CustomNetworkImage(images[itemIndex], fit: BoxFit.cover)),
         );
       },
     );

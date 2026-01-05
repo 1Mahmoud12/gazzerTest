@@ -26,11 +26,7 @@ class ReferralDTO {
   String? shareLink;
   String? shareMessage;
 
-  ReferralDTO({
-    this.code,
-    this.shareLink,
-    this.shareMessage,
-  });
+  ReferralDTO({this.code, this.shareLink, this.shareMessage});
 
   ReferralDTO.fromJson(Map<String, dynamic> json) {
     code = json['code'];
@@ -39,11 +35,7 @@ class ReferralDTO {
   }
 
   ReferralEntity toReferralEntity() {
-    return ReferralEntity(
-      code: code,
-      shareLink: shareLink,
-      shareMessage: shareMessage,
-    );
+    return ReferralEntity(code: code, shareLink: shareLink, shareMessage: shareMessage);
   }
 }
 
@@ -59,6 +51,7 @@ class ClientDTO {
   String? driver;
   String? socialId;
   String? tierName;
+  String? image;
   ReferralDTO? referral;
 
   ClientDTO({
@@ -74,6 +67,7 @@ class ClientDTO {
     this.socialId,
     this.tierName,
     this.referral,
+    this.image,
   });
 
   ClientDTO.fromJson(Map<String, dynamic> json) {
@@ -84,6 +78,7 @@ class ClientDTO {
     clientStatusId = json['client_status_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    image = json['avatar'];
     driver = json['driver'];
     socialId = json['social_id'];
     email = json['email'];
@@ -100,6 +95,7 @@ class ClientDTO {
       driver: driver,
       socialId: socialId,
       createdAt: createdAt,
+      image: image,
       email: email,
       tierName: tierName,
       referral: referral?.toReferralEntity(),

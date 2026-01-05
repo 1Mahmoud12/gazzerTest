@@ -186,7 +186,7 @@
   "goldenAccountUser": "مستخدم حساب جولدن",
   "memberSince": "عضو منذ",
   "accountInformation": "معلومات الحساب",
-  "editAccountInformation": "تعديل معلومات الحساب",
+  "editAccountInformation": "تعديل الحساب",
   "deleteAccount": "حذف الحساب",
   "addresses": "العناوين",
   "defaultt": "افتراضي",
@@ -645,6 +645,10 @@
                                 "birthdayVouchers": "قسائم عيد الميلاد",
                                 "exclusiveDeals": "عروض حصرية",
                                 "exclusiveOffers": "عروض مميزة",
+                                "tierSaver": "المدخر",
+                                "tierGainer": "المكتسب",
+                                "tierWinner": "الفائز",
+                                "tierHero": "البطل",
                                 "loyaltySpendSummary": "لقد أنفقت {amount} خلال آخر {days} يومًا",
                                 "@loyaltySpendSummary": {
                                   "placeholders": {
@@ -694,7 +698,7 @@
                     "viewWallet":"عرض المحفظة",
                       "needToAddReviewFirst": "يجب عليك إضافة تقييم أولاً",
                       "faqSatisfactionQuestion": "ما مدى رضاك عن إجابات الأسئلة الشائعة؟\nهل كانت مفيدة؟",
-  "vendors": "المورّدون",
+  "vendors": "المتاجر",
   "selected": "المحدد",
   "remaining": "المتبقي",
   "available": "المتاح",

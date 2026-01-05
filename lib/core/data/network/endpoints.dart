@@ -135,10 +135,13 @@ class Endpoints {
   static const convertVoucher = 'vouchers/convert';
   static const convertPoints = 'loyalty/convert-points';
   static const addNewCard = 'wallet/cards';
+
+  static String deleteCard(int id) => 'wallet/cards/$id';
   static const ordersCheckout = 'orders/checkout';
 
   /// ** Orders
   static const clientOrders = 'orders/client-orders';
+  static const activeOrders = 'orders/active-orders';
 
   static String orderDetail(int id) => 'orders/order/$id';
 
@@ -163,6 +166,14 @@ class Endpoints {
   /// ** Support / Chat
   static String getChatMessages(int chatId) => 'support/chats/$chatId';
   static const sendChatMessage = 'support/chats';
+
+  /// ** Store Reviews
+  static String getStoreReviews(String storeType, int storeId) {
+    if (storeType.toLowerCase() == 'restaurant') {
+      return 'restaurants/$storeId';
+    }
+    return 'stores/$storeId';
+  }
 
   /// ** Support / Complaints
   static const submitComplaint = 'support/complaints';

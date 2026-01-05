@@ -99,6 +99,7 @@ sealed class GenericVendorEntity extends Favorable {
     parentId,
     zoneName,
     estimatedDeliveryTime,
+    storeCategoryType,
     totalOrders,
     subCategories,
     mintsBeforClosingAlert,

@@ -83,6 +83,11 @@ class CacheKeys {
   // Best Popular (screen)
   static const String bestPopularJson = 'best_popular_json';
   static const String bestPopularTs = 'best_popular_ts';
+
+  // Stores Menu (parameterized by mainId)
+  static String storesMenuJson(int mainId) => 'stores_menu_json_$mainId';
+
+  static String storesMenuTs(int mainId) => 'stores_menu_ts_$mainId';
 }
 
 class TokenService {

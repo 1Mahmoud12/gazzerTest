@@ -935,7 +935,7 @@ abstract class AppLocalizations {
   /// No description provided for @editAccountInformation.
   ///
   /// In en, this message translates to:
-  /// **'Edit Account Information'**
+  /// **'Edit Information'**
   String get editAccountInformation;
 
   /// No description provided for @deleteAccount.
@@ -3140,6 +3140,30 @@ abstract class AppLocalizations {
   /// **'Exclusive Offers'**
   String get exclusiveOffers;
 
+  /// No description provided for @tierSaver.
+  ///
+  /// In en, this message translates to:
+  /// **'Saver'**
+  String get tierSaver;
+
+  /// No description provided for @tierGainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Gainer'**
+  String get tierGainer;
+
+  /// No description provided for @tierWinner.
+  ///
+  /// In en, this message translates to:
+  /// **'Winner'**
+  String get tierWinner;
+
+  /// No description provided for @tierHero.
+  ///
+  /// In en, this message translates to:
+  /// **'Hero'**
+  String get tierHero;
+
   /// No description provided for @loyaltySpendSummary.
   ///
   /// In en, this message translates to:
@@ -4021,6 +4045,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Today\'s Deals'**
   String get todayDeals;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @relatedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Products'**
+  String get relatedProducts;
+
+  /// No description provided for @walletAdjustment.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet Adjustment'**
+  String get walletAdjustment;
+
+  /// No description provided for @selectAnotherAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Select another address'**
+  String get selectAnotherAddress;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// No description provided for @estimated_delivery_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated Delivery Time'**
+  String get estimated_delivery_time;
+
+  /// No description provided for @your_active_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Active Orders'**
+  String get your_active_orders;
+
+  /// No description provided for @your_delivery_man.
+  ///
+  /// In en, this message translates to:
+  /// **'Your delivery man'**
+  String get your_delivery_man;
+
+  /// No description provided for @road_distance.
+  ///
+  /// In en, this message translates to:
+  /// **'Road Distance'**
+  String get road_distance;
+
+  /// No description provided for @delivery_arrival_time.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Arrival Time'**
+  String get delivery_arrival_time;
+
+  /// No description provided for @view_delivery_man_on_map.
+  ///
+  /// In en, this message translates to:
+  /// **'View Delivery Man on Map'**
+  String get view_delivery_man_on_map;
+
+  /// No description provided for @your_order_is_being.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order is being prepared'**
+  String get your_order_is_being;
+
+  /// No description provided for @bestPopularItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Popular Items'**
+  String get bestPopularItems;
+
+  /// No description provided for @addNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Notes'**
+  String get addNotes;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
+
+  /// No description provided for @ratings_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Ratings & Reviews'**
+  String get ratings_reviews;
+
+  /// No description provided for @star.
+  ///
+  /// In en, this message translates to:
+  /// **'Star'**
+  String get star;
+
+  /// No description provided for @recommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get recommended;
 
   /// No description provided for @notifications.
   ///

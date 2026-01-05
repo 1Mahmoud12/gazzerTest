@@ -21,10 +21,7 @@ abstract class BaseApiRepo {
   /// [BadResponse] can be generated from either the [apiCall] or the [parser] function.
   ///
   /// The error is also sent to crashlytics for further analysis.
-  Future<Result<T>> call<T>({
-    required Future<Response> Function() apiCall,
-    required T Function(Response response) parser,
-  }) async {
+  Future<Result<T>> call<T>({required Future<Response> Function() apiCall, required T Function(Response response) parser}) async {
     try {
       final result = await apiCall();
       return Result.ok(parser(result));
@@ -59,68 +56,38 @@ abstract class BaseApiRepo {
             final data = responseData['data'];
 
             if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['remaining_seconds'] != null) {
-              return OtpRateLimitError.fromJson(
-                responseData,
-                e: ErrorType.badResponse,
-              );
+              return OtpRateLimitError.fromJson(responseData);
             }
             if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) &&
                 data is Map &&
                 data['needs_new_pouch_approval'] != null &&
                 data['has_existing_items'] == null) {
-              return CartError.fromJson(
-                responseData,
-                e: ErrorType.badResponse,
-              );
+              return CartError.fromJson(responseData);
             }
             if ((error.response?.statusCode == 400 || error.response?.statusCode == 409) && data is Map && data['add_new_pouch_approval'] != null) {
-              return ReorderError.fromJson(
-                responseData,
-                e: ErrorType.badResponse,
-              );
+              return ReorderError.fromJson(responseData);
             }
             // Try to parse the backend error message for all bad responses
-            return BadResponse.fromJson(
-              responseData,
-              e: ErrorType.badResponse,
-            );
+            return BadResponse.fromJson(responseData);
           }
 
           // If response data is not available or not a Map, return generic error
-          return BaseError(
-            message: L10n.tr().somethingWentWrong,
-            e: ErrorType.badResponse,
-          );
+          return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.badResponse);
         case DioExceptionType.receiveTimeout:
         case DioExceptionType.connectionTimeout:
-          return BaseError(
-            message: L10n.tr().requestTimeOut,
-            e: ErrorType.noInternetConnection,
-          );
+          return BaseError(message: L10n.tr().requestTimeOut, e: ErrorType.noInternetConnection);
         case DioExceptionType.connectionError:
         case DioExceptionType.sendTimeout:
-          return BaseError(
-            message: L10n.tr().weakOrNoInternetConnection,
-            e: ErrorType.noInternetConnection,
-          );
+          return BaseError(message: L10n.tr().weakOrNoInternetConnection, e: ErrorType.noInternetConnection);
 
         case DioExceptionType.cancel:
-          return BaseError(
-            message: L10n.tr().requestToServerWasCancelled,
-            e: ErrorType.cancel,
-          );
+          return BaseError(message: L10n.tr().requestToServerWasCancelled, e: ErrorType.cancel);
 
         case DioExceptionType.unknown:
-          return BaseError(
-            message: L10n.tr().unknownErorOccurred,
-            e: ErrorType.unknownError,
-          );
+          return BaseError(message: L10n.tr().unknownErorOccurred, e: ErrorType.unknownError);
 
         default:
-          return BaseError(
-            message: L10n.tr().somethingWentWrong,
-            e: ErrorType.unknownError,
-          );
+          return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
       }
     } catch (e, stack) {
       // exception here can occurs from many reasons, like:
@@ -130,21 +97,11 @@ abstract class BaseApiRepo {
       //   and throws an exception
       try {
         // if the exception is due to parsin, it will succeed here
-        _crashlyticsRepo.sendToCrashlytics(
-          error,
-          stack,
-          reason: 'Parsing errors',
-        );
-        return BaseError(
-          message: L10n.tr().somethingWentWrong,
-          e: ErrorType.unknownError,
-        );
+        _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing errors');
+        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
       } catch (e) {
         // if the exception is due to sending to crashlytics, or translation, it will fail here
-        return BaseError(
-          message: L10n.tr().somethingWentWrong,
-          e: ErrorType.unknownError,
-        );
+        return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.unknownError);
       }
     }
   }
@@ -153,10 +110,7 @@ abstract class BaseApiRepo {
   //  TODO: should implenet logic te refresh token in this case??
   BaseError? isTokenExpired(Object error) {
     if (error is DioException && error.response?.statusCode == 498) {
-      return BaseError(
-        message: "Token has been expired",
-        e: ErrorType.expireTokenError,
-      );
+      return BaseError(message: "Token has been expired", e: ErrorType.expireTokenError);
     }
     return null;
   }
@@ -165,15 +119,9 @@ abstract class BaseApiRepo {
     /// if the error is not a DioException, it means it is an Exception due to parsing the response
     _crashlyticsRepo.sendToCrashlytics(error, stack, reason: 'Parsing data');
     try {
-      return BaseError(
-        message: L10n.tr().somethingWentWrong,
-        e: ErrorType.parseError,
-      );
+      return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.parseError);
     } catch (e) {
-      return BaseError(
-        message: "Something went wrong",
-        e: ErrorType.parseError,
-      );
+      return BaseError(message: "Something went wrong", e: ErrorType.parseError);
     }
   }
 }

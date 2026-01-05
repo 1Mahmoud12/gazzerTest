@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/network/endpoints.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/features/orders/data/dtos/active_orders_dto.dart';
 import 'package:gazzer/features/orders/data/dtos/order_detail_response_dto.dart';
 import 'package:gazzer/features/orders/data/dtos/orders_response_dto.dart';
+import 'package:gazzer/features/orders/domain/entities/active_order_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart';
 import 'package:gazzer/features/orders/domain/entities/order_item_entity.dart';
 import 'package:gazzer/features/orders/domain/orders_repo.dart';
@@ -13,6 +15,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 const _kOrdersCache = 'client_orders_json';
 const _kOrdersTs = 'client_orders_timestamp';
 const _kOrderDetailCachePrefix = 'order_detail_';
+const _kActiveOrdersCache = 'active_orders_json';
+const _kActiveOrdersTs = 'active_orders_timestamp';
 
 class OrdersRepoImpl extends OrdersRepo {
   final ApiClient _apiClient;
@@ -20,19 +24,9 @@ class OrdersRepoImpl extends OrdersRepo {
   OrdersRepoImpl(this._apiClient, super.crashlyticsRepo);
 
   @override
-  Future<Result<List<OrderItemEntity>>> getClientOrders({
-    int page = 1,
-    int perPage = 10,
-  }) {
+  Future<Result<List<OrderItemEntity>>> getClientOrders({int page = 1, int perPage = 10}) {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.clientOrders,
-        queryParameters: {
-          'is_paginated': 1,
-          'page': page,
-          'per_page': perPage,
-        },
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.clientOrders, queryParameters: {'is_paginated': 1, 'page': page, 'per_page': perPage}),
       parser: (response) {
         // Save to cache for first page only
         if (page == 1) {
@@ -73,9 +67,7 @@ class OrdersRepoImpl extends OrdersRepo {
   @override
   Future<Result<OrderDetailEntity>> getOrderDetail(int orderId) {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.orderDetail(orderId),
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.orderDetail(orderId)),
       parser: (response) {
         // Save to cache
         _saveOrderDetailToCache(orderId, response.data);
@@ -116,6 +108,45 @@ class OrdersRepoImpl extends OrdersRepo {
   }
 
   @override
+  Future<Result<List<ActiveOrderEntity>>> getActiveOrders() {
+    return super.call(
+      apiCall: () => _apiClient.get(endpoint: Endpoints.activeOrders),
+      parser: (response) {
+        // Save to cache
+        _saveActiveOrdersToCache(response.data);
+
+        final responseDto = ActiveOrdersResponseDto.fromJson(response.data);
+        return responseDto.toEntities();
+      },
+    );
+  }
+
+  Future<void> _saveActiveOrdersToCache(dynamic responseData) async {
+    try {
+      final sp = await SharedPreferences.getInstance();
+      await sp.setString(_kActiveOrdersCache, jsonEncode(responseData));
+      await sp.setInt(_kActiveOrdersTs, DateTime.now().millisecondsSinceEpoch);
+    } catch (_) {
+      // ignore cache failures
+    }
+  }
+
+  @override
+  Future<List<ActiveOrderEntity>?> getCachedActiveOrders() async {
+    try {
+      final sp = await SharedPreferences.getInstance();
+      final raw = sp.getString(_kActiveOrdersCache);
+      if (raw == null) return null;
+
+      final map = jsonDecode(raw) as Map<String, dynamic>;
+      final responseDto = ActiveOrdersResponseDto.fromJson(map);
+      return responseDto.toEntities();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
   Future<Result<String>> reorder(int orderId, {bool? continueWithExisting, bool? addNewPouch}) {
     final requestBody = <String, dynamic>{};
     if (continueWithExisting != null) {
@@ -125,10 +156,7 @@ class OrdersRepoImpl extends OrdersRepo {
       requestBody['add_new_pouch'] = addNewPouch;
     }
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.reorder(orderId),
-        requestBody: requestBody,
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.reorder(orderId), requestBody: requestBody),
       parser: (response) {
         return response.data['message'] as String? ?? 'Order reordered successfully';
       },
@@ -139,14 +167,14 @@ class OrdersRepoImpl extends OrdersRepo {
   Future<Result<String>> submitOrderReview({
     required int orderId,
     required List<StoreReview> storeReviews,
-    required DeliveryManReview deliveryManReview,
+    required List<DeliveryManReview> deliveryManReviews,
   }) {
     return super.call(
       apiCall: () => _apiClient.post(
         endpoint: Endpoints.submitOrderReview(orderId),
         requestBody: {
           'store_reviews': storeReviews.map((review) => review.toJson()).toList(),
-          'delivery_man_review': deliveryManReview.toJson(),
+          'delivery_man_reviews': deliveryManReviews.map((review) => review.toJson()).toList(),
         },
       ),
       parser: (response) {

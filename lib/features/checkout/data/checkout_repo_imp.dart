@@ -78,6 +78,14 @@ class CheckoutRepoImp extends CheckoutRepo {
   }
 
   @override
+  Future<Result<String>> deleteCard(int cardId) {
+    return super.call(
+      apiCall: () => _apiClient.delete(endpoint: Endpoints.deleteCard(cardId)),
+      parser: (response) => response.data['message']?.toString() ?? 'Card deleted successfully',
+    );
+  }
+
+  @override
   Future<Result<String>> convertPoints(int points) {
     return super.call(
       apiCall: () => _apiClient.post(

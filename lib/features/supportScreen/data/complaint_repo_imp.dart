@@ -82,6 +82,13 @@ class ComplaintRepoImp extends ComplaintRepo {
             formDataMap['order_item_ids[$i]'] = request.orderItemIds[i];
           }
 
+          // Add order_item_count array if provided
+          if (request.orderItemCounts != null && request.orderItemCounts!.isNotEmpty) {
+            for (int i = 0; i < request.orderItemCounts!.length; i++) {
+              formDataMap['order_item_count[$i]'] = request.orderItemCounts![i];
+            }
+          }
+
           final formData = FormData.fromMap(formDataMap);
 
           return _apiClient.post(
@@ -99,6 +106,13 @@ class ComplaintRepoImp extends ComplaintRepo {
           // Add order_item_ids array
           for (int i = 0; i < request.orderItemIds.length; i++) {
             requestBody['order_item_ids[$i]'] = request.orderItemIds[i];
+          }
+
+          // Add order_item_count array if provided
+          if (request.orderItemCounts != null && request.orderItemCounts!.isNotEmpty) {
+            for (int i = 0; i < request.orderItemCounts!.length; i++) {
+              requestBody['order_item_count[$i]'] = request.orderItemCounts![i];
+            }
           }
 
           return _apiClient.post(

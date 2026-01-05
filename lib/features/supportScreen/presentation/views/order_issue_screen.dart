@@ -20,10 +20,7 @@ import 'ordersIssueScreens/missing_items_screen.dart';
 import 'widgets/order_issue_option_tile.dart';
 
 class OrderIssueScreen extends StatefulWidget {
-  const OrderIssueScreen({
-    super.key,
-    this.orderId,
-  });
+  const OrderIssueScreen({super.key, this.orderId});
 
   final int? orderId;
 
@@ -42,7 +39,7 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
     cubit = di<FaqCubit>();
     // Load FAQ categories when screen opens
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      cubit.getFaqCategories(CategoryType.orderIssue.value);
+      cubit.getFaqCategories(CategoryType.orderIssue.value, orderId: widget.orderId);
     });
   }
 
@@ -50,35 +47,21 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
     if (category.typeOrderIssue == OrderIssueType.missing.name) {
       // Navigate to missing items screen
       if (widget.orderId != null) {
-        context.navigateToPage(
-          MissingItemsScreen(
-            orderId: widget.orderId!,
-            faqCategoryId: category.id,
-          ),
-        );
+        context.navigateToPage(MissingItemsScreen(orderId: widget.orderId!, faqCategoryId: category.id));
       } else {
         Alerts.showToast(L10n.tr().mustChooseOrderFirst);
       }
     } else if (category.typeOrderIssue == OrderIssueType.incorrect.name) {
       // Navigate to missing items screen
       if (widget.orderId != null) {
-        context.navigateToPage(
-          IncorrectItemsScreen(
-            orderId: widget.orderId!,
-            faqCategoryId: category.id,
-          ),
-        );
+        context.navigateToPage(IncorrectItemsScreen(orderId: widget.orderId!, faqCategoryId: category.id));
       } else {
         Alerts.showToast(L10n.tr().mustChooseOrderFirst);
       }
     } else if (category.typeOrderIssue == OrderIssueType.chat.name) {
       // Navigate to missing items screen
       if (widget.orderId != null) {
-        context.navigateToPage(
-          GazzerSupportChatScreen(
-            orderId: widget.orderId,
-          ),
-        );
+        context.navigateToPage(GazzerSupportChatScreen(orderId: widget.orderId));
       } else {
         Alerts.showToast('Order ID is required');
       }
@@ -88,31 +71,19 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
         // Has children: navigate to sub-list
         context.navigateToPage(
           FaqListScreen(
-            args: FaqListArgs(
-              title: category.name,
-              categories: category.children,
-              showCategoriesOnly: true,
-            ),
+            args: FaqListArgs(title: category.name, categories: category.children, showCategoriesOnly: true),
           ),
         );
       } else if (category.questions.isNotEmpty) {
         // Has questions
         if (category.questions.length == 1) {
           // Single question: open directly
-          _showQuestionAndHandleResult(
-            context,
-            category.questions.first,
-            category.id,
-          );
+          _showQuestionAndHandleResult(context, category.questions.first, category.id);
         } else {
           // Multiple questions: show list
           context.navigateToPage(
             FaqListScreen(
-              args: FaqListArgs(
-                title: category.name,
-                categories: [category],
-                showCategoriesOnly: false,
-              ),
+              args: FaqListArgs(title: category.name, categories: [category]),
             ),
           );
         }
@@ -120,20 +91,11 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
     }
   }
 
-  Future<void> _showQuestionAndHandleResult(
-    BuildContext context,
-    question,
-    int categoryId,
-  ) async {
+  Future<void> _showQuestionAndHandleResult(BuildContext context, question, int categoryId) async {
     final result =
         await context.navigateToPage(
               FaqQuestionAnswerScreen(
-                args: FaqQAArgs(
-                  title: question.question,
-                  answer: question.answer,
-                  faqQuestionId: question.id,
-                  faqCategoryId: categoryId,
-                ),
+                args: FaqQAArgs(title: question.question, answer: question.answer, faqQuestionId: question.id, faqCategoryId: categoryId),
               ),
             )
             as bool?;
@@ -141,11 +103,7 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
     // Handle yes/no result
     if (result == false && widget.orderId != null) {
       // No - open chat
-      context.navigateToPage(
-        GazzerSupportChatScreen(
-          orderId: widget.orderId,
-        ),
-      );
+      context.navigateToPage(GazzerSupportChatScreen(orderId: widget.orderId));
     }
   }
 
@@ -164,10 +122,8 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
           return LoadingFullScreen(
             isLoading: state is FaqLoadingState,
             child: Scaffold(
-              appBar: AppBar(
-                title: Text(l10n.orderIssue),
-                centerTitle: true,
-              ),
+              appBar: MainAppBar(title: l10n.orderIssue),
+
               body: state is FaqSuccessState && state.categories.isNotEmpty
                   ? Padding(
                       padding: const EdgeInsets.all(16),
@@ -176,10 +132,7 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
                         separatorBuilder: (_, __) => const VerticalSpacing(12),
                         itemBuilder: (context, index) {
                           final FaqCategoryEntity category = state.categories[index];
-                          return OrderIssueOptionTile(
-                            title: category.name,
-                            onTap: () => _handleCategoryTap(context, category),
-                          );
+                          return OrderIssueOptionTile(title: category.name, onTap: () => _handleCategoryTap(context, category));
                         },
                       ),
                     )
@@ -187,9 +140,7 @@ class _OrderIssueScreenState extends State<OrderIssueScreen> {
                   ? FailureComponent(
                       message: state.error,
                       onRetry: () {
-                        cubit.getFaqCategories(
-                          'order_issue',
-                        );
+                        cubit.getFaqCategories('order_issue');
                       },
                     )
                   : const SizedBox.shrink(),

@@ -24,46 +24,29 @@ class CartBus extends AppBus {
     fire(GetCartLoading());
     final response = await _repo.getCart();
     switch (response) {
-      case Ok<CartResponse> res:
+      case final Ok<CartResponse> res:
         _vendors.clear();
         _vendors.addAll(res.value.vendors);
         _cartITems();
         cartResponseToValues(res.value);
-      case Err err:
+      case final Err err:
         fire(GetCartError(err.error.message));
     }
     return response;
   }
 
   Future<void> addToCart(CartableItemRequest req) async {
-    fire(
-      FastItemActionsLoading(
-        items: _cartITems(),
-        prodId: req.id,
-        state: const ItemFastActionState(isAdding: true),
-      ),
-    );
+    fire(FastItemActionsLoading(items: _cartITems(), prodId: req.id, state: const ItemFastActionState(isAdding: true)));
     final response = await _repo.addToCartItem(req);
     switch (response) {
-      case Ok<CartResponse> res:
+      case final Ok<CartResponse> res:
         cartResponseToValues(res.value);
-        fire(
-          FastItemActionsLoaded(
-            items: _cartITems(),
-            prodId: req.id,
-          ),
-        );
+        fire(FastItemActionsLoaded(items: _cartITems(), prodId: req.id));
         return;
-      case Err err:
+      case final Err err:
         // Alerts.showToast("${err.error.message}.");
 
-        fire(
-          FastItemActionsError(
-            err.error.message,
-            prodId: req.id,
-            items: _cartITems(),
-          ),
-        );
+        fire(FastItemActionsError(err.error.message, prodId: req.id, items: _cartITems()));
         return;
     }
   }
@@ -71,9 +54,7 @@ class CartBus extends AppBus {
   List<CartItemEntity> _cartITems() {
     _cartIds.clear();
     _cartItems.clear();
-    _cartItems.addAll(
-      _vendors.map((e) => e.items).expand((element) => element).toList(),
-    );
+    _cartItems.addAll(_vendors.map((e) => e.items).expand((element) => element).toList());
     for (final item in _cartItems) {
       _cartIds[item.type] ??= {};
       _cartIds[item.type]!.add(item.prod.id);
@@ -87,66 +68,33 @@ class CartBus extends AppBus {
         items: _cartITems(),
         prodId: id,
 
-        state: ItemFastActionState(
-          isIncreasing: isAdding,
-          isDecreasing: !isAdding,
-        ),
+        state: ItemFastActionState(isIncreasing: isAdding, isDecreasing: !isAdding),
       ),
     );
     final response = await _repo.updateItemQuantity(id, qnty);
     switch (response) {
-      case Ok<CartResponse> res:
+      case final Ok<CartResponse> res:
         cartResponseToValues(res.value);
-        fire(
-          FastItemActionsLoaded(
-            items: _cartITems(),
-            prodId: id,
-          ),
-        );
+        fire(FastItemActionsLoaded(items: _cartITems(), prodId: id));
         return;
-      case Err err:
+      case final Err err:
         // Alerts.showToast("${err.error.message}.");
-        fire(
-          FastItemActionsError(
-            err.error.message,
-            prodId: id,
-
-            items: _cartITems(),
-          ),
-        );
+        fire(FastItemActionsError(err.error.message, prodId: id, items: _cartITems()));
         return;
     }
   }
 
   Future<void> removeItemFromCart(int id) async {
-    fire(
-      FastItemActionsLoading(
-        items: _cartITems(),
-        prodId: id,
-
-        state: const ItemFastActionState(isDecreasing: true),
-      ),
-    );
+    fire(FastItemActionsLoading(items: _cartITems(), prodId: id, state: const ItemFastActionState(isDecreasing: true)));
     final response = await _repo.removeCartItem(id);
     switch (response) {
-      case Ok<CartResponse> res:
+      case final Ok<CartResponse> res:
         cartResponseToValues(res.value);
-        fire(
-          FastItemActionsLoaded(
-            items: _cartITems(),
-            prodId: id,
-          ),
-        );
+        fire(FastItemActionsLoaded(items: _cartITems(), prodId: id));
         return;
-      case Err err:
+      case final Err err:
         // Alerts.showToast("${err.error.message}.");
-        fire(
-          FastItemActionsError(
-            err.error.message,
-            prodId: id,
-            items: _cartITems(),
-          ),
-        );
+        fire(FastItemActionsError(err.error.message, prodId: id, items: _cartITems()));
         return;
     }
   }

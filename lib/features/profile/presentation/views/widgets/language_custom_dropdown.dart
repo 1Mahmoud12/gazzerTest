@@ -42,7 +42,7 @@ class LanguageCustomDropdown extends StatelessWidget {
           di<HomeCubit>().getHomeData();
           if (context.mounted) {
             // Navigate to profile screen - it will automatically load profile data
-            context.go('/menu/profile');
+            context.go('/');
           }
         }
       },

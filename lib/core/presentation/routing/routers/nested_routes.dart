@@ -2,11 +2,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/views/components/main_layout/views/main_layout.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/cart_screen.dart';
+import 'package:gazzer/features/dailyOffers/presentation/daily_offers_screen.dart';
 import 'package:gazzer/features/drawer/views/main_drawer.dart';
 import 'package:gazzer/features/favorites/presentation/views/favorites_screen.dart';
 import 'package:gazzer/features/home/homeViewAll//suggested/presentation/view/suggested_screen.dart';
+import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/all_categories_screen.dart';
 import 'package:gazzer/features/orders/views/orders_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 import 'package:gazzer/features/search/presentaion/cubit/search_cubit.dart';
@@ -16,6 +19,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_of_category/presentation/view/restaurants_of_category_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/multi_cat_restaurant_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/multi_cat_restaurant/presentation/view/rest_category/restaurant_sub_category_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/pharmacy_menu_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
@@ -46,6 +50,9 @@ ShellRoute get nestedRoutes => ShellRoute(
 
     ///
     GoRoute(path: FavoritesScreen.route, builder: (context, state) => const FavoritesScreen()),
+
+    ///
+    GoRoute(path: AllCategoriesScreen.route, builder: (context, state) => const AllCategoriesScreen()),
 
     ///
     GoRoute(path: CartScreen.route, builder: (context, state) => const CartScreen()),
@@ -81,6 +88,18 @@ ShellRoute get nestedRoutes => ShellRoute(
         return const SuggestedScreen();
       },
     ),
+    GoRoute(
+      path: DailyOffersScreen.route,
+      builder: (context, state) {
+        return const DailyOffersScreen();
+      },
+    ),
+    GoRoute(
+      path: PopularScreen.route,
+      builder: (context, state) {
+        return const PopularScreen();
+      },
+    ),
 
     /// stores related
     ...storesRoutes,
@@ -95,7 +114,18 @@ ShellRoute get nestedRoutes => ShellRoute(
 
 final storesRoutes = [$storeMenuSwitcherRoute, $storesOfCategoryRoute];
 
-final pharmacyRoutes = [GoRoute(path: PharmacyMenuRoute.route, builder: (context, state) => const PharmacyMenuScreen())];
+final pharmacyRoutes = [
+  GoRoute(
+    path: PharmacyMenuRoute.route,
+    builder: (context, state) {
+      final id = int.tryParse(state.uri.queryParameters['id'] ?? '') ?? 0;
+      return BlocProvider(
+        create: (context) => di<StoresMenuCubit>(param1: id),
+        child: const PharmacyMenuScreen(),
+      );
+    },
+  ),
+];
 
 List<RouteBase> get drowerRoutes => [
   GoRoute(

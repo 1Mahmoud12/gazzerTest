@@ -2,9 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gazzer/core/data/dto/banner_dto.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
@@ -17,6 +19,7 @@ import 'package:gazzer/core/presentation/pkgs/notification/notification.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/state_app_widget.dart';
+import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
@@ -27,17 +30,20 @@ import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.da
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
+import 'package:gazzer/features/home/homeViewAll/active_orders_widget/presentation/cubit/active_orders_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/best_popular_stores_widget/presentation/cubit/best_popular_stores_widget_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/categories_widget/data/dtos/categories_widget_dto.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/presentation/cubit/categories_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/daily_offers_widget/presentation/cubit/daily_offers_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/suggests_widget/presentation/cubit/suggests_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popular_screen.dart';
 import 'package:gazzer/features/home/homeViewAll/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
-import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/all_categories_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/active_orders_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/best_popular_stores_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/categories_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/daily_offers_widget.dart';
@@ -81,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
   late final TopVendorsWidgetCubit _topVendorsCubit;
   late final BestPopularStoresWidgetCubit _bestPopularStoresCubit;
   late final TopItemsWidgetCubit _topItemsCubit;
+  late final ActiveOrdersWidgetCubit _activeOrdersCubit;
 
   @override
   void initState() {
@@ -93,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen>
     _bestPopularStoresCubit = di<BestPopularStoresWidgetCubit>()
       ..getBestPopularStores();
     _topItemsCubit = di<TopItemsWidgetCubit>()..getTopItems();
+    _activeOrdersCubit = di<ActiveOrdersWidgetCubit>()..getActiveOrders();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       //context.read<HomeCubit>().getHomeData();
@@ -118,6 +126,7 @@ class _HomeScreenState extends State<HomeScreen>
     _topVendorsCubit.close();
     _bestPopularStoresCubit.close();
     _topItemsCubit.close();
+    _activeOrdersCubit.close();
     super.dispose();
   }
 
@@ -127,6 +136,7 @@ class _HomeScreenState extends State<HomeScreen>
       _categoriesCubit.getCategories(),
       _dailyOffersCubit.getDailyOffers(),
       _suggestsCubit.getSuggests(),
+      _activeOrdersCubit.getActiveOrders(),
       _topVendorsCubit.getTopVendors(),
       _bestPopularStoresCubit.getBestPopularStores(),
       _topItemsCubit.getTopItems(),
@@ -138,6 +148,9 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
+    );
     super.build(context); // Required for AutomaticKeepAliveClientMixin
     selectTokens();
     return PopScope(
@@ -185,6 +198,7 @@ class _HomeScreenState extends State<HomeScreen>
                 BlocProvider.value(value: _topVendorsCubit),
                 BlocProvider.value(value: _bestPopularStoresCubit),
                 BlocProvider.value(value: _topItemsCubit),
+                BlocProvider.value(value: _activeOrdersCubit),
               ],
               child: BlocBuilder<HomeCubit, HomeStates>(
                 builder: (context, state) {
@@ -208,6 +222,9 @@ class _HomeScreenState extends State<HomeScreen>
 
                         ///
                         CategoriesWidget(),
+
+                        ///
+                        ActiveOrdersWidget(),
 
                         ///
                         DailyOffersWidget(),

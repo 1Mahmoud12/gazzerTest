@@ -448,7 +448,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountInformation => 'Account Information';
 
   @override
-  String get editAccountInformation => 'Edit Account Information';
+  String get editAccountInformation => 'Edit Information';
 
   @override
   String get deleteAccount => 'Delete Account';
@@ -1601,6 +1601,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exclusiveOffers => 'Exclusive Offers';
 
   @override
+  String get tierSaver => 'Saver';
+
+  @override
+  String get tierGainer => 'Gainer';
+
+  @override
+  String get tierWinner => 'Winner';
+
+  @override
+  String get tierHero => 'Hero';
+
+  @override
   String loyaltySpendSummary(String amount, int days) {
     return 'You\'ve spent $amount in the last $days days';
   }
@@ -2075,6 +2087,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get todayDeals => 'Today\'s Deals';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get relatedProducts => 'Related Products';
+
+  @override
+  String get walletAdjustment => 'Wallet Adjustment';
+
+  @override
+  String get selectAnotherAddress => 'Select another address';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get estimated_delivery_time => 'Estimated Delivery Time';
+
+  @override
+  String get your_active_orders => 'Your Active Orders';
+
+  @override
+  String get your_delivery_man => 'Your delivery man';
+
+  @override
+  String get road_distance => 'Road Distance';
+
+  @override
+  String get delivery_arrival_time => 'Delivery Arrival Time';
+
+  @override
+  String get view_delivery_man_on_map => 'View Delivery Man on Map';
+
+  @override
+  String get your_order_is_being => 'Your order is being prepared';
+
+  @override
+  String get bestPopularItems => 'Best Popular Items';
+
+  @override
+  String get addNotes => 'Add Notes';
+
+  @override
+  String get quantity => 'Quantity';
+
+  @override
+  String get ratings_reviews => 'Ratings & Reviews';
+
+  @override
+  String get star => 'Star';
+
+  @override
+  String get recommended => 'Recommended';
 
   @override
   String get notifications => 'Notifications';

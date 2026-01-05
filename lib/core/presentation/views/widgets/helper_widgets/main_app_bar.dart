@@ -24,6 +24,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBadge = false,
     this.showLeading = true,
     this.widgetAction,
+    this.toolbarHeight = kToolbarHeight,
   });
   final bool showCart;
   final bool showLanguage;
@@ -38,6 +39,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle? titleStyle;
   final bool showBadge;
   final bool showLeading;
+  final double toolbarHeight;
   final Widget? widgetAction;
 
   @override
@@ -50,7 +52,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
-      title: title == null ? null : Text(title!, style: titleStyle ?? TStyle.robotBlackTitle().copyWith(color: Co.purple)),
+      title: title == null ? null : Text(title!, style: titleStyle ?? TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
       leadingWidth: shouldShowLeading ? 65 : 0,
       leading: shouldShowLeading
           ? IconButton(
@@ -94,5 +96,5 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(toolbarHeight);
 }

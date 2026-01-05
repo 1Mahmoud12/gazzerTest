@@ -20,7 +20,7 @@ abstract class Helpers {
   static String getProperPrice(num price, {bool showCurrency = true}) {
     final isInt = price % 1 == 0;
 
-    return (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(2)) + (showCurrency ? ' ${L10n.tr().egp}' : '');
+    return (isInt ? price.toStringAsFixed(0) : price.toStringAsFixed(1)) + (showCurrency ? ' ${L10n.tr().egp}' : '');
   }
 
   static String formatTimeSlot(String time) {

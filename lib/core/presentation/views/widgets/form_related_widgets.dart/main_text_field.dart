@@ -124,7 +124,7 @@ class _MainTextFieldState extends State<MainTextField> {
             cursorColor: Co.purple,
             controller: widget.controller,
             enabled: widget.enabled,
-            style: widget.style ?? TStyle.greySemi(14),
+            style: widget.style ?? TStyle.robotBlackRegular14(),
             validator: widget.validator,
             onChanged: widget.onChange,
             autofillHints: widget.autofillHints,
@@ -141,16 +141,18 @@ class _MainTextFieldState extends State<MainTextField> {
             keyboardType: widget.keyboardType ?? TextInputType.emailAddress,
             autovalidateMode: widget.autovalidateMode,
             decoration: InputDecoration(
-              errorStyle: TStyle.errorSemi(13),
+              errorStyle: TStyle.robotBlackSmall().copyWith(color: Co.red),
               errorMaxLines: 5,
               hintMaxLines: 5,
               contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
               isDense: true,
               counterText: widget.showMaxLegnth ? null : '',
-              hint: widget.hintText == null ? null : Text(widget.hintText!, style: widget.style ?? TStyle.greyRegular(12), maxLines: 1),
+              hint: widget.hintText == null
+                  ? null
+                  : Text(widget.hintText!, style: widget.style ?? TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey), maxLines: 1),
               helperMaxLines: 1,
               // helperMaxLines: 5,
-              labelStyle: TStyle.greySemi(15),
+              labelStyle: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
 
               labelText: widget.label,
               prefixIcon: widget.prefix == null
@@ -174,24 +176,24 @@ class _MainTextFieldState extends State<MainTextField> {
               enabled: widget.enabled,
 
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.purple),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: const BorderSide(color: Co.red),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.red),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.lightGrey),
               ),
               disabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: widget.disabledColor ?? Co.grey),
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 16),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
               ),
             ),
           );

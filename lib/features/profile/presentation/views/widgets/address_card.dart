@@ -16,8 +16,9 @@ import 'package:gazzer/features/addresses/presentation/views/add_edit_address_sc
 import 'package:gazzer/features/profile/presentation/model/address_model.dart';
 
 class AddressCard extends StatelessWidget {
-  const AddressCard({super.key, required this.address, this.onSelect});
+  const AddressCard({super.key, required this.address, this.onSelect, this.defaultButton = true});
   final AddressModel address;
+  final bool defaultButton;
   final Function(AddressModel)? onSelect;
   @override
   Widget build(BuildContext context) {
@@ -46,25 +47,26 @@ class AddressCard extends StatelessWidget {
                       VectorGraphicsWidget(address.labelSvg, width: 20, height: 20, colorFilter: const ColorFilter.mode(Co.black, BlendMode.srcIn)),
                       const HorizontalSpacing(8),
                       Expanded(child: Text(address.labelType.label ?? address.label, style: TStyle.robotBlackMedium(), maxLines: 2)),
-                      if (address.isDefault)
-                        InkWell(
-                          onTap: snapshot.data is SetDefaultLoading ? null : () => bus.setDefault(address.id),
+                      if (defaultButton)
+                        if (address.isDefault)
+                          InkWell(
+                            onTap: snapshot.data is SetDefaultLoading ? null : () => bus.setDefault(address.id),
 
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(borderRadius: AppConst.defaultInnerBorderRadius, color: Co.purple),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                              child: snapshot.data is SetDefaultLoading && (snapshot.data! as SetDefaultLoading).id == address.id
-                                  ? const AdaptiveProgressIndicator(size: 12)
-                                  : Text(L10n.tr().defaultt, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(borderRadius: AppConst.defaultInnerBorderRadius, color: Co.purple),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                child: snapshot.data is SetDefaultLoading && (snapshot.data! as SetDefaultLoading).id == address.id
+                                    ? const AdaptiveProgressIndicator(size: 12)
+                                    : Text(L10n.tr().defaultt, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                              ),
                             ),
+                          )
+                        else
+                          InkWell(
+                            onTap: snapshot.data is SetDefaultLoading ? null : () => bus.setDefault(address.id),
+                            child: Text(L10n.tr().setAsDefault, style: TStyle.robotBlackThin().copyWith(color: Co.purple)),
                           ),
-                        )
-                      else
-                        InkWell(
-                          onTap: snapshot.data is SetDefaultLoading ? null : () => bus.setDefault(address.id),
-                          child: Text(L10n.tr().setAsDefault, style: TStyle.robotBlackThin().copyWith(color: Co.purple)),
-                        ),
                     ],
                   ),
                   const VerticalSpacing(12),

@@ -22,7 +22,7 @@ enum BannerType {
   const BannerType(this.value);
 
   static BannerType fromString(String value) {
-    return BannerType.values.firstWhere((e) => e.value == value, orElse: () => BannerType.unknown);
+    return BannerType.values.firstWhere((e) => e.value == value, orElse: () => BannerType.image);
   }
 }
 

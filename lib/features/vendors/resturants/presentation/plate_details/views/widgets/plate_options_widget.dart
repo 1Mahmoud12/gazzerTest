@@ -74,8 +74,8 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
             },
             child: Padding(
               padding: EdgeInsets.only(
-                left: 16 + (level * 20), // Indent based on level
-                right: 16,
+                left: 0 + (level * 10), // Indent based on level
+                right: 0 + (level * 10),
                 top: 8,
                 bottom: 8,
               ),
@@ -102,9 +102,9 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(value.name, style: TStyle.robotBlackMedium()),
+                          Text(value.name, style: TStyle.robotBlackRegular()),
                           // Show price if not free, else show "مجاني" (free)
-                          Text(value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ', style: TStyle.robotBlackMedium()),
+                          Text(value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ', style: TStyle.robotBlackRegular14()),
                         ],
                       ),
                     ),
@@ -122,7 +122,7 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${L10n.tr().choose} ${value.name}', style: TStyle.blackBold(12).copyWith(color: Colors.grey[600])),
+                  Text('${L10n.tr().choose} ${value.name}', style: TStyle.robotBlackThin().copyWith(color: Colors.grey[600])),
                   const VerticalSpacing(8),
                   ..._buildValuesList(value.subAddons, level + 1, currentPath, value.type),
                 ],

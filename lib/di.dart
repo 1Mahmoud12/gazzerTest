@@ -36,11 +36,15 @@ import 'package:gazzer/features/favorites/presentation/favorite_bus/favorite_bus
 import 'package:gazzer/features/home/best_popular/data/repositories/best_popular_repository_impl.dart';
 import 'package:gazzer/features/home/best_popular/domain/repositories/best_popular_repository.dart';
 import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popular_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/active_orders_widget/presentation/cubit/active_orders_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/best_popular_stores_widget/data/best_popular_stores_widget_repo_impl.dart';
 import 'package:gazzer/features/home/homeViewAll/best_popular_stores_widget/domain/best_popular_stores_widget_repo.dart';
 import 'package:gazzer/features/home/homeViewAll/best_popular_stores_widget/presentation/cubit/best_popular_stores_widget_cubit.dart';
+import 'package:gazzer/features/home/homeViewAll/categories_widget/data/all_categories_repo_impl.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/data/categories_widget_repo_impl.dart';
+import 'package:gazzer/features/home/homeViewAll/categories_widget/domain/all_categories_repo.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/domain/categories_widget_repo.dart';
+import 'package:gazzer/features/home/homeViewAll/categories_widget/presentation/cubit/all_categories_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/presentation/cubit/categories_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/daily_offers_widget/data/daily_offers_widget_repo_impl.dart';
 import 'package:gazzer/features/home/homeViewAll/daily_offers_widget/domain/daily_offers_widget_repo.dart';
@@ -95,8 +99,10 @@ import 'package:gazzer/features/supportScreen/domain/faq_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/working_hours_repo.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_cubit.dart';
+import 'package:gazzer/features/vendors/common/data/reviews_repo_impl.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/reviews_repo.dart';
 import 'package:gazzer/features/vendors/common/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:gazzer/features/vendors/resturants/data/repo_imp/plates_repo_imp.dart';
 import 'package:gazzer/features/vendors/resturants/data/repo_imp/restaurants_repo_imp.dart';
@@ -172,6 +178,7 @@ void _registerRepos() {
   di.registerLazySingleton<SuggestsRepo>(() => SuggestsRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<BestPopularRepository>(() => BestPopularRepositoryImpl(di.get(), di.get()));
   di.registerLazySingleton<CategoriesWidgetRepo>(() => CategoriesWidgetRepoImpl(di.get(), di.get()));
+  di.registerLazySingleton<AllCategoriesRepo>(() => AllCategoriesRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<DailyOffersWidgetRepo>(() => DailyOffersWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<SuggestsWidgetRepo>(() => SuggestsWidgetRepoImpl(di.get(), di.get()));
   di.registerLazySingleton<TopVendorsWidgetRepo>(() => TopVendorsWidgetRepoImpl(di.get(), di.get()));
@@ -188,6 +195,7 @@ void _registerRepos() {
 
   di.registerLazySingleton<WorkingHoursRepo>(() => WorkingHoursRepoImp(di.get(), di.get()));
   di.registerLazySingleton<ShareRepo>(() => ShareRepoImp(di.get(), di.get()));
+  di.registerLazySingleton<ReviewsRepo>(() => ReviewsRepoImpl(di.get(), di.get()));
 }
 
 void _registerBuses() {
@@ -225,11 +233,13 @@ void _registerCubits() {
   di.registerFactory(() => TopVendorsCubit(di.get()));
   di.registerFactory(() => SuggestsCubit(di.get()));
   di.registerFactory(() => CategoriesWidgetCubit(di.get()));
+  di.registerFactory(() => AllCategoriesCubit(di.get()));
   di.registerFactory(() => DailyOffersWidgetCubit(di.get()));
   di.registerFactory(() => SuggestsWidgetCubit(di.get()));
   di.registerFactory(() => TopVendorsWidgetCubit(di.get()));
   di.registerFactory(() => BestPopularStoresWidgetCubit(di.get()));
   di.registerFactory(() => TopItemsWidgetCubit(di.get()));
+  di.registerFactory(() => ActiveOrdersWidgetCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));

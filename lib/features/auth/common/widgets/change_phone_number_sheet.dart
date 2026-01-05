@@ -112,7 +112,9 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                           }
                           if (_formKey.currentState?.validate() != true) return;
                           isLoading.value = true;
-                          final phone = _phoneController.text.trim().replaceFirst('0', '');
+                          final phone = _phoneController.text.trim()[0] == '0'
+                              ? _phoneController.text.trim().substring(1)
+                              : _phoneController.text.trim();
                           final res = await widget.onConfirm(phone);
                           if (context.mounted) {
                             isLoading.value = false;

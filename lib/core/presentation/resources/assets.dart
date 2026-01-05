@@ -2,7 +2,7 @@
 class Assets {
   Assets._();
 
-  static const String assetsDeliveryLogo = "assets/svg/delivery_logo.svg";
+  static const String assetsDeliveryLogo = "assets/png/deliveryLogo.png";
 
   static const String assetsFontsInter = "assets/fonts/Inter.ttf";
 
@@ -335,6 +335,8 @@ class Assets {
   static const String customerSupportIc = "assets/svg/customerSupportIc.svg";
   static const String starRateIc = "assets/svg/starRateIc.svg";
   static const String starNotRateIc = "assets/svg/starNotRateIc.svg";
+  static const String deliveryPinIc = "assets/png/deliveryPinIc.png";
+  static const String userPinIc = "assets/png/userPinIc.png";
 
   //Customer Support
   static const String addImageIc = "assets/svg/addImageIc.svg";
@@ -377,6 +379,7 @@ class Assets {
       "assets/svg/unSelectedProfileIc.svg";
   static const String unSelectedOrdersIc = "assets/svg/unSelectedOrdersIc.svg";
   static const String cartIc = "assets/svg/cartIc.svg";
+  static const String trackMapIc = "assets/png/trackMapIc.png";
 
   // Address
   static const String currentPositionIc = "assets/svg/currentPositionIc.svg";
@@ -406,4 +409,11 @@ class Assets {
 
   //Pharmacy Header
   static const String pharmacyStoreIc = "assets/svg/pharmacyStoreIc.svg";
+  static const String galleryIc = "assets/svg/galleryIc.svg";
+  static const String cameraIc = "assets/svg/cameraIc.svg";
+
+  // Splash
+  static const String capGazzerIc = "assets/svg/capGazzerIc.svg";
+  static const String bodyGazzerIc = "assets/svg/bodyGazzerIc.svg";
+  static const String gazzerTextIc = "assets/svg/gazzerTextIc.svg";
 }

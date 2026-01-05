@@ -154,76 +154,79 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                     return Session().client == null ? null : const OrderSummaryWidget();
                                   }
                                   if (index == state.vendors.length + 5) {
-                                    return Column(
-                                      spacing: 12,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        MainBtn(
-                                          onPressed: () {
-                                            if (!state.isCartValid) {
-                                              Alerts.showToast(L10n.tr().needToAddAddressFirst);
-                                              return;
-                                            }
-                                            context.push(ConfirmOrderScreen.route);
-                                          },
-                                          disabledColor: Co.grey.withAlpha(80),
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                      child: Column(
+                                        spacing: 12,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          MainBtn(
+                                            onPressed: () {
+                                              if (!state.isCartValid) {
+                                                Alerts.showToast(L10n.tr().needToAddAddressFirst);
+                                                return;
+                                              }
+                                              context.push(ConfirmOrderScreen.route);
+                                            },
+                                            disabledColor: Co.grey.withAlpha(80),
 
-                                          text: L10n.tr().checkout,
-                                          textStyle: TStyle.whiteRegular(16),
-                                          width: double.infinity,
-                                          padding: const EdgeInsets.symmetric(vertical: 6),
-                                          bgColor: Co.purple,
-                                        ),
-                                        MainBtn(
-                                          onPressed: () {
-                                            context.go(HomeScreen.route);
-                                          },
-                                          text: L10n.tr().continueShopping,
-                                          padding: const EdgeInsets.symmetric(vertical: 6),
-                                          width: double.infinity,
-                                          height: 0,
-                                          borderColor: Co.purple,
-                                          textStyle: TStyle.blackRegular(16),
-                                          bgColor: Colors.transparent,
-                                        ),
-                                        MainBtn(
-                                          onPressed: () async {
-                                            animationDialogLoading();
-                                            final result = await ShareService().generateShareLink(
-                                              type: ShareEnumType.cart.name,
-                                              shareableType: ShareEnumType.cart.name,
-                                              shareableId: '',
-                                            );
-                                            closeDialog();
-                                            switch (result) {
-                                              case Ok<ShareGenerateResponse>(value: final response):
-                                                await Clipboard.setData(ClipboardData(text: response.shareLink));
-                                                if (context.mounted) {
-                                                  Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
-                                                }
-                                              case Err<ShareGenerateResponse>(error: final error):
-                                                if (context.mounted) {
-                                                  Alerts.showToast(error.message);
-                                                }
-                                            }
-                                          },
-                                          padding: const EdgeInsets.symmetric(vertical: 6),
-                                          width: double.infinity,
-                                          height: 0,
-                                          borderColor: Co.purple,
-                                          textStyle: TStyle.blackRegular(16),
-                                          bgColor: Colors.transparent,
-                                          child: Row(
-                                            spacing: 8,
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Text(L10n.tr().shareCart, style: TStyle.robotBlackRegular().copyWith(color: Co.black)),
-
-                                              const VectorGraphicsWidget(Assets.shareIc, height: 21, width: 21),
-                                            ],
+                                            text: L10n.tr().checkout,
+                                            textStyle: TStyle.whiteRegular(16),
+                                            width: double.infinity,
+                                            padding: const EdgeInsets.symmetric(vertical: 6),
+                                            bgColor: Co.purple,
                                           ),
-                                        ),
-                                      ],
+                                          MainBtn(
+                                            onPressed: () {
+                                              context.go(HomeScreen.route);
+                                            },
+                                            text: L10n.tr().continueShopping,
+                                            padding: const EdgeInsets.symmetric(vertical: 6),
+                                            width: double.infinity,
+                                            height: 0,
+                                            borderColor: Co.purple,
+                                            textStyle: TStyle.blackRegular(16),
+                                            bgColor: Colors.transparent,
+                                          ),
+                                          MainBtn(
+                                            onPressed: () async {
+                                              animationDialogLoading();
+                                              final result = await ShareService().generateShareLink(
+                                                type: ShareEnumType.cart.name,
+                                                shareableType: ShareEnumType.cart.name,
+                                                shareableId: '',
+                                              );
+                                              closeDialog();
+                                              switch (result) {
+                                                case Ok<ShareGenerateResponse>(value: final response):
+                                                  await Clipboard.setData(ClipboardData(text: response.shareLink));
+                                                  if (context.mounted) {
+                                                    Alerts.showToast(L10n.tr().link_copied_to_clipboard, error: false);
+                                                  }
+                                                case Err<ShareGenerateResponse>(error: final error):
+                                                  if (context.mounted) {
+                                                    Alerts.showToast(error.message);
+                                                  }
+                                              }
+                                            },
+                                            padding: const EdgeInsets.symmetric(vertical: 6),
+                                            width: double.infinity,
+                                            height: 0,
+                                            borderColor: Co.purple,
+                                            textStyle: TStyle.blackRegular(16),
+                                            bgColor: Colors.transparent,
+                                            child: Row(
+                                              spacing: 8,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(L10n.tr().shareCart, style: TStyle.robotBlackRegular().copyWith(color: Co.black)),
+
+                                                const VectorGraphicsWidget(Assets.shareIc, height: 21, width: 21),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     );
                                   }
                                   if (index == state.vendors.length + 6) {

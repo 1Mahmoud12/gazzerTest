@@ -64,20 +64,6 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
     }
   }
 
-  void _onSearchChanged(String value) {
-    // Cancel previous timer
-    _debounceTimer?.cancel();
-
-    // Create new timer for debouncing
-    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
-      if (_currentSearch != value) {
-        _currentSearch = value;
-        final type = selectedId == 'items' ? 'items' : 'stores';
-        _cubit?.getAllOffers(search: value.isEmpty ? null : value, type: type);
-      }
-    });
-  }
-
   void onChanged(String id) {
     setState(() {
       selectedId = id;
@@ -154,21 +140,23 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                           if (selectedId == 'items')
                             SliverPadding(
                               padding: AppConst.smallPadding,
-                              sliver: SliverGrid(
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 0.63,
-                                  crossAxisSpacing: 4,
-                                  mainAxisSpacing: 8,
+                              sliver: SliverToBoxAdapter(
+                                child: Wrap(
+                                  runAlignment: WrapAlignment.spaceBetween,
+                                  alignment: WrapAlignment.spaceBetween,
+                                  runSpacing: 8,
+                                  children: List.generate(items.length, (index) {
+                                    final item = items[index];
+                                    if (item.item == null || item.item!.store == null) {
+                                      return const SizedBox.shrink();
+                                    }
+                                    return Container(
+                                      width: (MediaQuery.sizeOf(context).width / 2) - 8,
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                      child: VerticalProductCard(key: ValueKey('item_${item.id}'), product: item.item!.toEntity(), canAdd: false),
+                                    );
+                                  }),
                                 ),
-                                delegate: SliverChildBuilderDelegate((context, index) {
-                                  final item = items[index];
-                                  if (item.item == null || item.item!.store == null) return const SizedBox.shrink();
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: VerticalProductCard(key: ValueKey('item_${item.id}'), product: item.item!.toEntity(), canAdd: false),
-                                  );
-                                }, childCount: items.length),
                               ),
                             ),
                         ],

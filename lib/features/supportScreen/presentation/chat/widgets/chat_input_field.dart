@@ -6,11 +6,11 @@ import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/image_source_picker_bottom_sheet.dart';
 
 class ChatInputField extends StatefulWidget {
   final Function(String) onSendMessage;
-  final VoidCallback onPickImage;
-  final VoidCallback onPickCamera;
+  final Function({required File image}) onPickImageOrCamera;
   final bool isSending;
   final String? imagePreviewPath;
   final VoidCallback onRemoveImage;
@@ -18,8 +18,7 @@ class ChatInputField extends StatefulWidget {
   const ChatInputField({
     super.key,
     required this.onSendMessage,
-    required this.onPickImage,
-    required this.onPickCamera,
+    required this.onPickImageOrCamera,
     required this.isSending,
     this.imagePreviewPath,
     required this.onRemoveImage,
@@ -59,45 +58,8 @@ class _ChatInputFieldState extends State<ChatInputField> {
     _controller.clear();
   }
 
-  void _showImageSourceDialog() {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                L10n.tr().selectImageSource,
-                style: TStyle.blackBold(18),
-              ),
-              const SizedBox(height: 20),
-              ListTile(
-                leading: const Icon(Icons.photo_library, color: Co.purple),
-                title: Text(L10n.tr().gallery, style: TStyle.blackRegular(16)),
-                onTap: () {
-                  Navigator.pop(context);
-                  widget.onPickImage();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.camera_alt, color: Co.purple),
-                title: Text(L10n.tr().camera, style: TStyle.blackRegular(16)),
-                onTap: () {
-                  Navigator.pop(context);
-                  // You can add camera functionality here
-                  widget.onPickCamera();
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  Future<File?> _showImageSourceDialog() async {
+    return ImageSourcePickerBottomSheet.show(context: context);
   }
 
   @override
@@ -105,13 +67,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacityNew(0.05),
-            offset: const Offset(0, -2),
-            blurRadius: 8,
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black.withOpacityNew(0.05), offset: const Offset(0, -2), blurRadius: 8)],
       ),
       child: SafeArea(
         child: Column(
@@ -125,12 +81,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.file(
-                        File(widget.imagePreviewPath!),
-                        height: 160,
-                        width: double.infinity,
-                        fit: BoxFit.fill,
-                      ),
+                      child: Image.file(File(widget.imagePreviewPath!), height: 160, width: double.infinity, fit: BoxFit.fill),
                     ),
                     Positioned(
                       top: 4,
@@ -139,15 +90,8 @@ class _ChatInputFieldState extends State<ChatInputField> {
                         onTap: widget.onRemoveImage,
                         child: Container(
                           padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: Colors.black54,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                            size: 16,
-                          ),
+                          decoration: const BoxDecoration(color: Colors.black54, shape: BoxShape.circle),
+                          child: const Icon(Icons.close, color: Colors.white, size: 16),
                         ),
                       ),
                     ),
@@ -161,18 +105,20 @@ class _ChatInputFieldState extends State<ChatInputField> {
                 children: [
                   // Add Image Button
                   GestureDetector(
-                    onTap: widget.isSending ? null : _showImageSourceDialog,
+                    onTap: widget.isSending
+                        ? null
+                        : () async {
+                            final result = await _showImageSourceDialog();
+                            if (result != null) {
+                              widget.onPickImageOrCamera(image: result);
+                            }
+                          },
                     child: Container(
                       width: 44,
                       height: 44,
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: widget.isSending ? Colors.grey : Co.purple,
-                        shape: BoxShape.circle,
-                      ),
-                      child: SvgPicture.asset(
-                        Assets.addImageIc,
-                      ),
+                      decoration: BoxDecoration(color: widget.isSending ? Colors.grey : Co.purple, shape: BoxShape.circle),
+                      child: SvgPicture.asset(Assets.addImageIc),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -180,10 +126,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF5F5F5),
-                        borderRadius: BorderRadius.circular(24),
-                      ),
+                      decoration: BoxDecoration(color: const Color(0xFFF5F5F5), borderRadius: BorderRadius.circular(24)),
                       child: TextField(
                         controller: _controller,
                         enabled: !widget.isSending,
@@ -191,9 +134,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                         textInputAction: TextInputAction.newline,
                         decoration: InputDecoration(
                           hintText: L10n.tr().typeMessage,
-                          hintStyle: TStyle.blackRegular(14).copyWith(
-                            color: Colors.black38,
-                          ),
+                          hintStyle: TStyle.blackRegular(14).copyWith(color: Colors.black38),
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.symmetric(vertical: 12),
                         ),
@@ -217,10 +158,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                           ? const SizedBox(
                               width: 20,
                               height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                              ),
+                              child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
                             )
                           : SvgPicture.asset(
                               Assets.sendMessageIc,

@@ -7,10 +7,10 @@ class FaqCategoryDTO {
   final String? typeOrderIssue;
   final String type;
   final int? parentId;
-  final int order;
-  final bool isActive;
-  final bool hasChildren;
-  final bool hasQuestions;
+  final int? order;
+  final bool? isActive;
+  final bool? hasChildren;
+  final bool? hasQuestions;
   final List<FaqCategoryDTO> children;
   final List<FaqQuestionDTO> questions;
 
@@ -37,10 +37,10 @@ class FaqCategoryDTO {
       type: json['type'] as String,
       typeOrderIssue: json['order_issue_type'] as String?,
       parentId: json['parent_id'] as int?,
-      order: json['order'] as int,
-      isActive: json['is_active'] as bool,
-      hasChildren: json['has_children'] as bool,
-      hasQuestions: json['has_questions'] as bool,
+      order: json['order'] as int?,
+      isActive: json['is_active'] as bool?,
+      hasChildren: json['has_children'] as bool?,
+      hasQuestions: json['has_questions'] as bool?,
       children: (json['children'] as List<dynamic>?)?.map((child) => FaqCategoryDTO.fromJson(child as Map<String, dynamic>)).toList() ?? [],
       questions: (json['questions'] as List<dynamic>?)?.map((question) => FaqQuestionDTO.fromJson(question as Map<String, dynamic>)).toList() ?? [],
     );
@@ -55,9 +55,9 @@ class FaqCategoryDTO {
       parentId: parentId,
       typeOrderIssue: typeOrderIssue,
       order: order,
-      isActive: isActive,
-      hasChildren: hasChildren,
-      hasQuestions: hasQuestions,
+      isActive: isActive ?? false,
+      hasChildren: hasChildren ?? false,
+      hasQuestions: hasQuestions ?? false,
       children: children.map((child) => child.toEntity()).toList(),
       questions: questions.map((question) => question.toEntity()).toList(),
     );
@@ -69,8 +69,8 @@ class FaqQuestionDTO {
   final String question;
   final String answer;
   final int categoryId;
-  final int order;
-  final bool isActive;
+  final int? order;
+  final bool? isActive;
 
   FaqQuestionDTO({
     required this.id,
@@ -87,19 +87,12 @@ class FaqQuestionDTO {
       question: json['question'] as String,
       answer: json['answer'] as String,
       categoryId: json['category_id'] as int,
-      order: json['order'] as int,
-      isActive: json['is_active'] as bool,
+      order: json['order'] as int?,
+      isActive: json['is_active'] as bool?,
     );
   }
 
   FaqQuestionEntity toEntity() {
-    return FaqQuestionEntity(
-      id: id,
-      question: question,
-      answer: answer,
-      categoryId: categoryId,
-      order: order,
-      isActive: isActive,
-    );
+    return FaqQuestionEntity(id: id, question: question, answer: answer, categoryId: categoryId, order: order ?? -1, isActive: isActive ?? false);
   }
 }

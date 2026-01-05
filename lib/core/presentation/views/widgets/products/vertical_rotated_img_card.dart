@@ -14,6 +14,7 @@ import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_wi
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
+import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 
 import 'circle_gradient_image.dart';
 
@@ -46,6 +47,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 4,
                 children: [
                   Row(
@@ -80,9 +82,9 @@ class VerticalRotatedImgCard extends StatelessWidget {
                             if (prod.store!.type == VendorType.restaurant.value) {
                               RestaurantDetailsRoute(id: prod.store!.id).push(context);
                             } else if (prod.store!.type == VendorType.grocery.value) {
-                              StoreDetailsRoute(storeId: prod.store?.id ?? -1).push(context);
-                            } else {
-                              StoreDetailsRoute(storeId: prod.store?.id ?? -1).push(context);
+                              StoreDetailsRoute(storeId: prod.store!.id).push(context);
+                            } else if (prod.store!.type == VendorType.pharmacy.value) {
+                              PharmacyStoreScreenRoute(id: prod.store!.id).push(context);
                             }
                           },
                           child: Row(

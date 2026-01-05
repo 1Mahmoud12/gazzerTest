@@ -10,6 +10,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/cart/presentation/views/component/un_auth_component.dart';
+import 'package:gazzer/features/checkout/presentation/cubit/cardsCubit/cards_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
 
@@ -140,9 +141,12 @@ class _CardItem extends StatelessWidget {
                       },
                     );
                     if (confirmed == true) {
-                      // TODO: Implement delete card functionality when API is available
-                      // For now, just show a message
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(L10n.tr().comingSoon)));
+                      final cardsCubit = di<CardsCubit>();
+                      await cardsCubit.deleteCard(card.id);
+                      // Reload checkout data to refresh the cards list
+                      if (context.mounted) {
+                        context.read<CheckoutCubit>().loadCheckoutData();
+                      }
                     }
                   },
                   child: Row(

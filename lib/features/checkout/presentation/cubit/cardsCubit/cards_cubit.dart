@@ -33,4 +33,17 @@ class CardsCubit extends Cubit<CardsStates> {
         emit(CardAddedError(message: error.message));
     }
   }
+
+  Future<void> deleteCard(int cardId) async {
+    emit(CardsLoading());
+    final result = await _repo.deleteCard(cardId);
+    switch (result) {
+      case Ok<String>(:final value):
+        Alerts.showToast(value, error: false);
+        emit(CardDeletedSuccess(message: value));
+      case Err(:final error):
+        Alerts.showToast(error.message);
+        emit(CardDeletedError(message: error.message));
+    }
+  }
 }

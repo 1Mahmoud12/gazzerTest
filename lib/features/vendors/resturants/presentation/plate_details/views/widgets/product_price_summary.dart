@@ -46,7 +46,7 @@ class ProductPriceSummary extends StatelessWidget {
                 flex: 3,
                 child: IncrementWidget(
                   initVal: quantity,
-                  onChanged: (isAdding) => onChangeQuantity,
+                  onChanged: (isAdding) => onChangeQuantity(isAdding: isAdding),
                   isIncrementDisabled: maxQuantity != null && quantity >= maxQuantity!,
                 ),
               ),
@@ -61,16 +61,14 @@ class ProductPriceSummary extends StatelessWidget {
                     await onsubmit();
                   },
                   isLoading: isLoading,
-                  textStyle: TStyle.whiteBold(16),
-                  bgColor: Co.purple,
-                  height: 56,
+
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: [
-                        Text(_getButtonText(context), style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
+                        Text(_getButtonText(context), style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
                         const Spacer(),
-                        Text(Helpers.getProperPrice(price), style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
+                        Text(Helpers.getProperPrice(price), style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
                       ],
                     ),
                   ),

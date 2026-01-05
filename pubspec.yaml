@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.4.13+22
+version: 1.4.16+25
 
 environment:
   sdk: ^3.8.0
@@ -38,7 +38,7 @@ dependencies:
   fluttertoast: ^8.2.14
   flutter_localizations:
     sdk: flutter
-
+  flutter_screenutil: ^5.9.3
   # core
   firebase_core: ^4.1.0
   firebase_messaging: ^16.0.1
@@ -128,6 +128,8 @@ dependencies:
   awesome_notifications: ^0.10.1
   device_info_plus: ^12.2.0
   uuid: ^4.5.2
+  device_preview: ^1.3.1
+
 dependency_overrides:
   analyzer: 8.1.0
   package_info_plus: ^9.0.0
@@ -232,6 +234,17 @@ flutter:
           style: italic
         - asset: assets/fonts/Roboto/Roboto-Black.ttf
           weight: 900
+    - family: Alexandria
+      fonts:
+        - asset: assets/fonts/alexandria/Alexandria-Black.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Bold.ttf
+        - asset: assets/fonts/alexandria/Alexandria-ExtraBold.ttf
+        - asset: assets/fonts/alexandria/Alexandria-ExtraLight.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Light.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Medium.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Regular.ttf
+        - asset: assets/fonts/alexandria/Alexandria-SemiBold.ttf
+        - asset: assets/fonts/alexandria/Alexandria-Thin.ttf
 flutter_assets:
   assets_path:
     - assets/

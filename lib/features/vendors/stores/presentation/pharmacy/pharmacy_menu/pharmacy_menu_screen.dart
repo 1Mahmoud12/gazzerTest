@@ -1,37 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/domain/entities/banner_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
+import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/main_search_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_product_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
+import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_sub_category_entity.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/widgets/rest_cat_header_widget.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/store_menu_states.dart';
+import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/all_categories/pharmacy_all_categories_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/best_sellers/pharmacy_best_sellers_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_category_card.dart';
-import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/prescription_upload_button.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/subcategory/pharmacy_subcategory_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 part 'pharmacy_menu_screen.g.dart';
 
-/// Main pharmacy menu screen with static data
+/// Main pharmacy menu screen
 @TypedGoRoute<PharmacyMenuRoute>(path: PharmacyMenuRoute.route)
-class PharmacyMenuRoute extends GoRouteData {
-  const PharmacyMenuRoute();
+@immutable
+class PharmacyMenuRoute extends GoRouteData with _$PharmacyMenuRoute {
+  const PharmacyMenuRoute({required this.id});
+
+  final int id;
 
   static const route = '/pharmacy-menu';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const PharmacyMenuScreen();
+    return BlocProvider(
+      create: (context) => di<StoresMenuCubit>(param1: id),
+      child: const PharmacyMenuScreen(),
+    );
   }
 }
 
@@ -43,97 +54,111 @@ class PharmacyMenuScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.transparent,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Pharmacy Header
-            MenuCategoriesHeaderWidget(
-              title: L10n.tr().pharmacyStores,
-              colors: [const Color(0xff4A2197), const Color(0xff4AFF5C).withOpacityNew(.8)],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: MainSearchWidget(hintText: L10n.tr().searchFor),
-            ),
-            // PharmacyHeader(
-            //   onBackTap: () => context.pop(),
-            //   onSearch: () {
-            //     // TODO: Navigate to pharmacy search
-            //   },
-            //   onNotificationTap: () {
-            //     // TODO: Navigate to notifications
-            //   },
-            //   onLanguageTap: () {
-            //     // TODO: Toggle language
-            //   },
-            // ),
+      body: BlocBuilder<StoresMenuCubit, StoresMenuStates>(
+        builder: (context, state) {
+          if (state is ScreenDataError) {
+            return FailureComponent(
+              message: L10n.tr().couldnotLoadDataPleaseTryAgain,
+              onRetry: () => context.read<StoresMenuCubit>().loadScreenData(),
+            );
+          }
 
-            // Main Content
-            const SizedBox(height: 8),
+          final banners = state.banners;
+          final categories = state.categoryWithStores;
 
-            // Pharmacy Title and Upload Button
-            //   _buildTitleSection(context),
-            //const SizedBox(height: 16),
-
-            // Delivery Banner
-            //   DeliveryBanner(message: 'Free delivery on orders over 300 EG', backgroundColor: Co.buttonGradient.withOpacityNew(.1)),
-            //const SizedBox(height: 16),
-
-            // Daily Deal Card
-            // DailyDealCard(
-            //   imageUrl: 'https://m.media-amazon.com/images/I/51+DNJFjyGL._AC_SY879_.jpg',
-            //   discountPercentage: 30,
-            //   endTime: DateTime.now().add(const Duration(hours: 14, minutes: 20, seconds: 30)),
-            //   onTap: () {
-            //     // TODO: Navigate to daily deal details
-            //   },
-            // ),
-            const MainBannerWidget(banner: BannerEntity(id: 1, type: BannerType.countdown)),
-            const SizedBox(height: 24),
-
-            // Categories Section
-            _buildCategoriesSection(context),
-
-            const SizedBox(height: 24),
-
-            // Best Sellers Section
-            _buildBestSellersSection(context),
-
-            const SizedBox(height: 80),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTitleSection(BuildContext context) {
-    return Padding(
-      padding: AppConst.defaultHrPadding,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Text(
-              L10n.tr().pharmacyStores,
-              style: TStyle.blackBold(22).copyWith(color: Co.purple),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: PrescriptionUploadButton(
-              onTap: () {
-                // TODO: Navigate to prescription upload
+          return Skeletonizer(
+            enabled: state is ScreenDataLoading || state is StoresMenuInit,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await context.read<StoresMenuCubit>().loadScreenData();
               },
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Pharmacy Header
+                    MenuCategoriesHeaderWidget(
+                      title: L10n.tr().pharmacyStores,
+                      colors: [const Color(0xff4A2197), const Color(0xff4AFF5C).withOpacityNew(.8)],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: MainSearchWidget(hintText: L10n.tr().searchFor),
+                    ),
+
+                    // Main Content
+                    const SizedBox(height: 12),
+
+                    // Banner
+                    if (banners.isNotEmpty) MainBannerWidget(banner: banners.first),
+
+                    if (categories.isEmpty) ...[
+                      const SizedBox(height: 12),
+
+                      // Categories Section
+                      _buildCategoriesSection(context, categories),
+                    ],
+
+                    const SizedBox(height: 12),
+
+                    // Best Sellers Section
+                    // _buildBestSellersSection(context),
+                    const SizedBox(height: 80),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
 
-  Widget _buildCategoriesSection(BuildContext context) {
+  Widget _buildCategoriesSection(BuildContext context, List<(StoreCategoryEntity, List<StoreEntity>)> categories) {
+    if (categories.isEmpty) {
+      // Fallback to static data if no categories from API
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      children: [
+        Padding(
+          padding: AppConst.defaultHrPadding,
+          child: TitleWithMore(
+            title: L10n.tr().categories,
+            onPressed: () {
+              context.navigateToPage(const PharmacyAllCategoriesScreen());
+            },
+          ),
+        ),
+        const SizedBox(height: 16),
+        SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            spacing: 10,
+            children: List.generate(categories.length, (index) {
+              final category = categories[index].$1;
+              return SizedBox(
+                height: 170,
+                child: PharmacyCategoryCard(
+                  id: category.id,
+                  name: category.name,
+                  imageUrl: category.image,
+                  rating: 4.5,
+                  reviewCount: 100,
+                  onTap: () {
+                    context.navigateToPage(PharmacySubcategoryScreen(categoryId: category.id, categoryName: category.name));
+                  },
+                ),
+              );
+            }),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCategoriesSectionWithStaticData(BuildContext context) {
     final categories = _getStaticCategories();
 
     return Column(

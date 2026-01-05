@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
@@ -8,10 +8,10 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
-import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/switching_decorated_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/add_icon.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/cart/data/requests/cart_item_request.dart';
 import 'package:gazzer/features/cart/domain/entities/cart_item_entity.dart';
@@ -35,7 +35,6 @@ class CartToIncrementIcon extends StatelessWidget {
     required this.iconSize,
     required this.isDarkContainer,
     this.isCartIcon = true,
-    this.ignorePointer = false,
     this.newUi = false,
   });
 
@@ -45,30 +44,26 @@ class CartToIncrementIcon extends StatelessWidget {
   final bool isDarkContainer;
   final bool isCartIcon;
   final bool newUi;
-  final bool ignorePointer;
 
   @override
   Widget build(BuildContext context) {
-    return IgnorePointer(
-      ignoring: ignorePointer,
-      child: BlocConsumer<CartCubit, CartStates>(
-        listener: (context, state) {
-          // Show alert when there's an error updating the cart
-          if (state is UpdateItemError) {
-            final cubit = context.read<CartCubit>();
-            final cartItem = findCartItem(cubit, product);
-            if (state.needsNewPouchApproval) {
-              return;
-            }
-            // Check if error is for this product (either by cartId or product id)
-            if (state.cartId == cartItem?.cartId || state.cartId == product.id) {
-              Alerts.showToast(state.message);
-            }
+    return BlocConsumer<CartCubit, CartStates>(
+      listener: (context, state) {
+        // Show alert when there's an error updating the cart
+        if (state is UpdateItemError) {
+          final cubit = context.read<CartCubit>();
+          final cartItem = findCartItem(cubit, product);
+          if (state.needsNewPouchApproval) {
+            return;
           }
-        },
-        buildWhen: _shouldRebuild,
-        builder: (context, state) => _buildCartWidget(context, state),
-      ),
+          // Check if error is for this product (either by cartId or product id)
+          if (state.cartId == cartItem?.cartId || state.cartId == product.id) {
+            Alerts.showToast(state.message);
+          }
+        }
+      },
+      buildWhen: _shouldRebuild,
+      builder: (context, state) => SizedBox(height: 40.h, child: _buildCartWidget(context, state)),
     );
   }
 
@@ -179,12 +174,7 @@ class CartToIncrementIcon extends StatelessWidget {
   }
 
   Widget _buildCartIconButton(BuildContext context, bool isLoading) {
-    return SwitchingDecoratedwidget(
-      isDarkContainer: isDarkContainer,
-      borderRadius: BorderRadius.circular(100),
-
-      child: isLoading ? _buildLoadingIndicator() : _buildCartButton(context),
-    );
+    return isLoading ? _buildLoadingIndicator() : _buildCartButton(context);
   }
 
   Widget _buildLoadingIndicator() {
@@ -197,16 +187,25 @@ class CartToIncrementIcon extends StatelessWidget {
   Widget _buildCartButton(BuildContext context) {
     return InkWell(
       onTap: () => _handleAddToCart(context),
-
       child: newUi
-          ? Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(100)),
-              child: Text(L10n.tr().addToCart, style: TStyle.robotBlackRegular().copyWith(color: Co.white)),
+          ? FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: AlignmentDirectional.bottomEnd,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(100)),
+                child: Text(L10n.tr().addToCart, style: TStyle.robotBlackRegular().copyWith(color: Co.white)),
+              ),
             )
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(Assets.cartIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn)),
+          : FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: AlignmentDirectional.bottomEnd,
+              child: Container(
+                decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(100)),
+                padding: const EdgeInsets.all(8.0),
+
+                child: const VectorGraphicsWidget(Assets.cartIc, height: 20, width: 20, colorFilter: ColorFilter.mode(Co.white, BlendMode.srcIn)),
+              ),
             ),
     );
   }

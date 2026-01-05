@@ -1,4 +1,5 @@
 import 'package:gazzer/core/presentation/extensions/enum.dart';
+import 'package:gazzer/features/vendors/common/data/generic_item_dto.dart';
 import 'package:gazzer/features/vendors/common/data/offer_dto.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
@@ -25,6 +26,7 @@ class PlateDetailsDTO {
   List<String>? tags;
   OfferDTO? offer;
   String? badge;
+  SimpleStoreDTO? simpleStoreEntity;
 
   PlateDetailsDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -58,6 +60,7 @@ class PlateDetailsDTO {
       }
     }
     offer = json['offer'] != null ? OfferDTO.fromJson(json['offer']) : null;
+    simpleStoreEntity = json['store_info'] != null ? SimpleStoreDTO.fromJson(json['store_info']) : null;
   }
 
   PlateEntity toEntity() {
@@ -78,6 +81,7 @@ class PlateDetailsDTO {
       outOfStock: false,
       hasOptions: hasOptions ?? false,
       sold: 0,
+      store: simpleStoreEntity?.toEntity(),
     );
   }
 

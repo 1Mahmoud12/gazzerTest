@@ -7,6 +7,7 @@ import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -15,6 +16,7 @@ import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_wi
 import 'package:gazzer/features/share/data/share_models.dart';
 import 'package:gazzer/features/share/presentation/share_service.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
+import 'package:gazzer/features/vendors/common/presentation/views/store_reviews_screen.dart';
 import 'package:intl/intl.dart';
 
 class MultiCatRestHeader extends StatelessWidget {
@@ -45,7 +47,7 @@ class MultiCatRestHeader extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundColor: Co.lightGrey,
-                      child: FavoriteWidget(size: 24, color: Colors.transparent, padding: 4, fovorable: restaurant),
+                      child: FavoriteWidget(size: 24, backgroundColor: Colors.transparent, padding: 4, fovorable: restaurant),
                     ),
                     const SizedBox(width: 8),
                     CircleAvatar(
@@ -112,7 +114,7 @@ class MultiCatRestHeader extends StatelessWidget {
                   const SizedBox(width: 12),
                   InkWell(
                     onTap: () {
-                      // Navigate to reviews
+                      context.navigateToPage(StoreReviewsScreen(storeType: restaurant.storeCategoryType ?? '', storeId: restaurant.id));
                     },
                     child: Text(L10n.tr().review, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                   ),
@@ -142,18 +144,18 @@ class MultiCatRestHeader extends StatelessWidget {
         // Rating and Review
         const VerticalSpacing(12),
         // Categories/Cuisine Types
-        if (categires != null && categires!.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              categires!.join(', '),
-              style: TStyle.greyRegular(14),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        const SizedBox(height: 12),
+        // if (categires != null && categires!.isNotEmpty)
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 16),
+        //     child: Text(
+        //       categires!.join(', '),
+        //       style: TStyle.greyRegular(14),
+        //       textAlign: TextAlign.center,
+        //       maxLines: 2,
+        //       overflow: TextOverflow.ellipsis,
+        //     ),
+        //   ),
+        // const SizedBox(height: 12),
         // Info Bar
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -174,7 +176,7 @@ class MultiCatRestHeader extends StatelessWidget {
               _InfoItem(
                 title: L10n.tr().deliveryFee,
                 icon: const VectorGraphicsWidget(Assets.cacheRestaurantIc),
-                text: restaurant.deliveryFee != null ? Helpers.getProperPrice(restaurant.deliveryFee!) : '0 EGP',
+                text: restaurant.deliveryFee != null ? Helpers.getProperPrice(restaurant.deliveryFee!) : Helpers.getProperPrice(0),
               ),
               // Divider
               Container(width: 2, height: 40, color: Co.darkGrey),

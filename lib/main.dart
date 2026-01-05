@@ -6,6 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gazzer/core/presentation/pkgs/notification/notification.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
@@ -22,6 +23,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Helpers.customTryCatch(
+    () async => await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ),
+  );
+  await ScreenUtil.ensureScreenSize();
+
   await Helpers.customTryCatch(
     () async => await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

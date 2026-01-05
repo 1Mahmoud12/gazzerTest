@@ -1,16 +1,32 @@
 part of '../home_screen.dart';
 
 class HomeCategoriesComponent extends StatelessWidget {
-  const HomeCategoriesComponent({super.key, required this.items});
-  final List<MainCategoryEntity> items;
+  const HomeCategoriesComponent({super.key, required this.items, this.banner});
+
+  final List<CategoryEntityDto> items;
+  final BannerDTO? banner;
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
     return SliverList(
       delegate: SliverChildListDelegate([
+        // Banner above the section
+        if (banner != null) ...[
+          Padding(
+            padding: AppConst.defaultHrPadding,
+            child: MainBannerWidget(banner: banner!.toEntity()),
+          ),
+          const VerticalSpacing(24),
+        ],
         Padding(
-          padding: AppConst.defaultHrPadding,
-          child: Text(L10n.tr().categories, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TitleWithMore(
+            title: L10n.tr().categories,
+            titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+            onPressed: () {
+              context.push(AllCategoriesScreen.route);
+            },
+          ),
         ),
         const VerticalSpacing(12),
         SingleChildScrollView(
@@ -27,7 +43,8 @@ class HomeCategoriesComponent extends StatelessWidget {
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.category});
-  final MainCategoryEntity category;
+
+  final CategoryEntityDto category;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,14 +67,14 @@ class CategoryCard extends StatelessWidget {
         ),
         clipBehavior: Clip.hardEdge,
         onPressed: () {
-          if (category.type == VendorType.restaurant) {
+          if (category.type.toLowerCase() == VendorType.restaurant.name) {
             context.push(RestaurantsMenuScreen.route);
-          } else if (category.type == VendorType.grocery) {
+          } else if (category.type.toLowerCase() == VendorType.grocery.name) {
             StoreMenuSwitcherRoute(id: category.id).push(context);
-          } else if (category.type == VendorType.pharmacy) {
-            context.push(PharmacyMenuRoute.route);
+          } else if (category.type.toLowerCase() == VendorType.pharmacy.name) {
+            PharmacyMenuRoute(id: category.id).push(context);
           } else {
-            StoreMenuSwitcherRoute(id: category.id).push(context);
+            //StoreMenuSwitcherRoute(id: category.id).push(context);
 
             log('Unknown category type: ${category.type}');
           }

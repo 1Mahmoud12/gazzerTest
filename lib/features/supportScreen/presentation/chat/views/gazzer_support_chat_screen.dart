@@ -15,11 +15,7 @@ import 'package:gazzer/features/supportScreen/presentation/chat/widgets/chat_inp
 import 'package:gazzer/features/supportScreen/presentation/chat/widgets/chat_message_bubble.dart';
 
 class GazzerSupportChatScreen extends StatefulWidget {
-  const GazzerSupportChatScreen({
-    super.key,
-    this.chatId,
-    this.orderId,
-  });
+  const GazzerSupportChatScreen({super.key, this.chatId, this.orderId});
 
   static const route = '/gazzer-support-chat';
 
@@ -59,9 +55,7 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
 
   void _setupNotificationListener() {
     // Listen for foreground notifications
-    _notificationSubscription = FirebaseMessaging.onMessage.listen((
-      RemoteMessage message,
-    ) {
+    _notificationSubscription = FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       _handleNotification(message);
     });
   }
@@ -113,11 +107,7 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
       if (!_scrollController.hasClients) return;
 
       if (animated) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
+        _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
       } else {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       }
@@ -127,11 +117,7 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
   @override
   Widget build(BuildContext context) {
     // Create cubit and store reference
-    final chatCubit = _chatCubit ??= ChatCubit(
-      di<ChatRepo>(),
-      chatId: widget.chatId,
-      orderId: widget.orderId,
-    );
+    final chatCubit = _chatCubit ??= ChatCubit(di<ChatRepo>(), chatId: widget.chatId, orderId: widget.orderId);
 
     return BlocProvider.value(
       value: chatCubit,
@@ -160,10 +146,7 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
           builder: (context, state) {
             if (state is ChatErrorState) {
               return Center(
-                child: Text(
-                  state.error,
-                  style: const TextStyle(color: Colors.red),
-                ),
+                child: Text(state.error, style: const TextStyle(color: Colors.red)),
               );
             }
 
@@ -186,18 +169,11 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.chat_bubble_outline,
-                                size: 64,
-                                color: Colors.grey.shade400,
-                              ),
+                              Icon(Icons.chat_bubble_outline, size: 64, color: Colors.grey.shade400),
                               const SizedBox(height: 16),
                               Text(
                                 hasNoChat ? 'Start a conversation by sending a message' : L10n.tr().noMessagesYet,
-                                style: TextStyle(
-                                  color: Colors.grey.shade500,
-                                  fontSize: 16,
-                                ),
+                                style: TextStyle(color: Colors.grey.shade500, fontSize: 16),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -212,9 +188,7 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
                             if (index == 0 && isLoadingMore) {
                               return const Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
+                                child: Center(child: CircularProgressIndicator()),
                               );
                             }
                             final messageIndex = isLoadingMore ? index - 1 : index;
@@ -228,12 +202,10 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
                   onSendMessage: (text) {
                     context.read<ChatCubit>().sendMessage(text);
                   },
-                  onPickImage: () {
-                    context.read<ChatCubit>().pickImageFromGallery();
+                  onPickImageOrCamera: ({required image}) {
+                    context.read<ChatCubit>().pickImageFromGalleryOrCamera(image: image);
                   },
-                  onPickCamera: () {
-                    context.read<ChatCubit>().pickImageFromCamera();
-                  },
+
                   isSending: isSending,
                   imagePreviewPath: imagePreviewPath,
                   onRemoveImage: () {

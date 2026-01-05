@@ -14,6 +14,7 @@ import 'package:gazzer/features/home/best_popular/presentation/cubit/best_popula
 import 'package:gazzer/features/home/best_popular/presentation/views/best_popular_screen.dart';
 import 'package:gazzer/features/home/homeViewAll/best_popular_stores_widget/presentation/cubit/best_popular_stores_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/best_popular_stores_widget/presentation/cubit/best_popular_stores_widget_states.dart';
+import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/single_restaurant/restaurant_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_switcher.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
@@ -27,7 +28,7 @@ class BestPopularStoresWidget extends StatelessWidget {
     return BlocBuilder<BestPopularStoresWidgetCubit, BestPopularStoresWidgetState>(
       builder: (context, state) {
         if (state is BestPopularStoresWidgetSuccessState) {
-          final stores = state.stores;
+          final List<GenericVendorEntity> stores = state.stores;
           if (stores.isEmpty) {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
@@ -51,7 +52,7 @@ class BestPopularStoresWidget extends StatelessWidget {
 class _BestPopularStoresContent extends StatelessWidget {
   const _BestPopularStoresContent({required this.stores, this.banner});
 
-  final List stores;
+  final List<GenericVendorEntity> stores;
   final BannerEntity? banner;
 
   @override

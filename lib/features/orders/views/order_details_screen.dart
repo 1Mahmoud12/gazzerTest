@@ -22,10 +22,7 @@ import 'package:intl/intl.dart';
 
 /// Screen displaying detailed information about a specific order
 class OrderDetailsScreen extends StatefulWidget {
-  const OrderDetailsScreen({
-    super.key,
-    required this.orderId,
-  });
+  const OrderDetailsScreen({super.key, required this.orderId});
 
   final int orderId;
 
@@ -68,13 +65,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           if (state is OrderDetailLoading && state.orderDetail == null) {
             return Scaffold(
               backgroundColor: Co.bg,
-              appBar: MainAppBar(
-                showCart: false,
-                title: L10n.tr().orderDetails,
-              ),
-              body: const Center(
-                child: LoadingWidget(),
-              ),
+              appBar: MainAppBar(title: L10n.tr().orderDetails),
+              body: const Center(child: LoadingWidget()),
             );
           }
 
@@ -89,10 +81,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           if (state is OrderDetailError) {
             return Scaffold(
               backgroundColor: Co.bg,
-              appBar: MainAppBar(
-                showCart: false,
-                title: L10n.tr().orderDetails,
-              ),
+              appBar: MainAppBar(title: L10n.tr().orderDetails),
               body: FailureComponent(
                 message: state.message,
                 onRetry: () {
@@ -104,30 +93,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           if (orderDetail == null) {
             return Scaffold(
               backgroundColor: Co.bg,
-              appBar: MainAppBar(
-                showCart: false,
-                title: L10n.tr().orderDetails,
-              ),
-              body: Center(
-                child: Text(
-                  L10n.tr().noData,
-                  style: TStyle.primaryBold(16),
-                ),
-              ),
+              appBar: MainAppBar(title: L10n.tr().orderDetails),
+              body: Center(child: Text(L10n.tr().noData, style: TStyle.primaryBold(16))),
             );
           }
 
           return Scaffold(
             backgroundColor: Co.bg,
-            appBar: MainAppBar(
-              showCart: false,
-              title: L10n.tr().orderDetails,
-            ),
+            appBar: MainAppBar(title: L10n.tr().orderDetails),
             body: RefreshIndicator(
               onRefresh: () async {
-                await context.read<OrderDetailCubit>().loadOrderDetail(
-                  refresh: true,
-                );
+                await context.read<OrderDetailCubit>().loadOrderDetail(refresh: true);
               },
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -142,63 +118,53 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       deliveryTimeMinutes: orderDetail.deliveryTimeMinutes,
                       onFormatDate: _formatOrderDate,
                     ),
-                    const SizedBox(
-                      height: OrderDetailsConstants.defaultSpacing,
+                    const SizedBox(height: OrderDetailsConstants.defaultSpacing),
+                    RichText(
+                      text: TextSpan(
+                        text: L10n.tr().estimated_delivery_time,
+                        style: TStyle.robotBlackMedium(),
+                        children: [
+                          TextSpan(
+                            text: ': ',
+                            style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                          ),
+                          TextSpan(
+                            text: '20-30',
+                            style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(height: OrderDetailsConstants.defaultSpacing),
                     DeliveryAddressCard(address: orderDetail.deliveryAddress),
-                    const SizedBox(
-                      height: OrderDetailsConstants.defaultSpacing,
-                    ),
+                    const SizedBox(height: OrderDetailsConstants.defaultSpacing),
                     ..._buildVendorSections(orderDetail),
-                    const SizedBox(
-                      height: OrderDetailsConstants.defaultSpacing,
-                    ),
+                    const SizedBox(height: OrderDetailsConstants.defaultSpacing),
                     OrderSummarySection(orderDetail: orderDetail),
-                    const SizedBox(
-                      height: OrderDetailsConstants.defaultSpacing,
-                    ),
+                    const SizedBox(height: OrderDetailsConstants.defaultSpacing),
                     if (state is OrderDetailLoaded && orderDetail.loyaltyPointsEarned > 0) ...[
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Co.earnedMoney,
-                          borderRadius: BorderRadius.circular(40),
-                        ),
+                        decoration: BoxDecoration(color: Co.earnedMoney, borderRadius: BorderRadius.circular(40)),
                         alignment: AlignmentDirectional.center,
-                        child: Text(
-                          L10n.tr().youHaveEarnedPoints(
-                            orderDetail.loyaltyPointsEarned,
-                          ),
-                          style: TStyle.robotBlackMedium(),
-                        ),
+                        child: Text(L10n.tr().youHaveEarnedPoints(orderDetail.loyaltyPointsEarned), style: TStyle.robotBlackMedium()),
                       ),
                     ],
-                    const SizedBox(
-                      height: OrderDetailsConstants.defaultSpacing,
-                    ),
+                    const SizedBox(height: OrderDetailsConstants.defaultSpacing),
                     MainBtn(
                       onPressed: () {
-                        context.navigateToPage(
-                          OrderIssueScreen(orderId: orderDetail.orderId),
-                        );
+                        context.navigateToPage(OrderIssueScreen(orderId: orderDetail.orderId));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SvgPicture.asset(Assets.customerSupportIc),
                           const HorizontalSpacing(10),
-                          Text(
-                            L10n.tr().getHelp,
-                            style: TStyle.robotBlackMedium().copyWith(
-                              color: Co.white,
-                            ),
-                          ),
+                          Text(L10n.tr().getHelp, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: OrderDetailsConstants.defaultSpacing,
-                    ),
+                    const SizedBox(height: OrderDetailsConstants.defaultSpacing),
                   ],
                 ),
               ),
@@ -216,14 +182,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       final isExpanded = _expandedVendors[index] ?? false;
 
       return Padding(
-        padding: const EdgeInsets.only(
-          bottom: OrderDetailsConstants.mediumSpacing,
-        ),
-        child: VendorSection(
-          vendorDetail: vendorDetail,
-          isExpanded: isExpanded,
-          onToggle: () => _toggleVendor(index),
-        ),
+        padding: const EdgeInsets.only(bottom: OrderDetailsConstants.mediumSpacing),
+        child: VendorSection(vendorDetail: vendorDetail, isExpanded: isExpanded, onToggle: () => _toggleVendor(index)),
       );
     }).toList();
   }

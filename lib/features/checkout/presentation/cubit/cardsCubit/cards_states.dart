@@ -28,3 +28,21 @@ class CardAddedError extends CardsStates {
   @override
   List<Object?> get props => [message];
 }
+
+class CardDeletedSuccess extends CardsStates {
+  const CardDeletedSuccess({required this.message});
+
+  final String message;
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class CardDeletedError extends CardsStates {
+  const CardDeletedError({required this.message});
+
+  final String message;
+
+  @override
+  List<Object?> get props => [message];
+}

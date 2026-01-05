@@ -9,6 +9,8 @@ abstract class StoresRepo extends BaseApiRepo {
   StoresRepo(super.crashlyticsRepo);
 
   Future<Result<StoresMenuResponse>> loadStoresMenuPage(int mainId);
+
+  Future<StoresMenuResponse?> getCachedStoresMenuPage(int mainId);
   Future<Result<StoresOfCategoryResponse>> loadStoresOfCategoryPage(int mainId, int subId);
   Future<Result<StoreDetailsResponse>> loadStoreDetails(int storeId);
 

@@ -32,7 +32,7 @@ class CartRepoImp extends CartRepo {
   @override
   Future<Result<CartResponse>> removeCartItem(int id) {
     return super.call(
-      apiCall: () async => _apiclient.post(endpoint: Endpoints.removeFromCart, requestBody: {'cart_item_id': id}),
+      apiCall: () async => _apiclient.post(endpoint: Endpoints.removeFromCart, requestBody: {'id': id}),
       parser: (response) {
         return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
       },
@@ -62,10 +62,7 @@ class CartRepoImp extends CartRepo {
   @override
   Future<Result<CartResponse>> updateItemNote(int id, String? note) {
     return super.call(
-      apiCall: () async => _apiclient.post(
-        endpoint: Endpoints.updatecartItemNote(id),
-        requestBody: {'notes': note},
-      ),
+      apiCall: () async => _apiclient.post(endpoint: Endpoints.updatecartItemNote(id), requestBody: {'notes': note}),
       parser: (response) {
         return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
       },
@@ -88,10 +85,7 @@ class CartRepoImp extends CartRepo {
   @override
   Future<Result<CartResponse>> updateCartAddress(int addressId) {
     return super.call(
-      apiCall: () async => _apiclient.post(
-        endpoint: Endpoints.updateCartAddress,
-        requestBody: {'client_address_id': addressId},
-      ),
+      apiCall: () async => _apiclient.post(endpoint: Endpoints.updateCartAddress, requestBody: {'client_address_id': addressId}),
       parser: (response) {
         return CartResponse.fromJson(response.data['data'], msg: response.data['message']);
       },

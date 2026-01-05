@@ -93,7 +93,7 @@ class VerticalProductCard extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,15 +101,10 @@ class VerticalProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(
-                            product.name,
-                            style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
                         ),
 
-                        const SizedBox(width: 20),
+                        const SizedBox(width: 10),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -159,31 +154,47 @@ class VerticalProductCard extends StatelessWidget {
                     ],
                     const VerticalSpacing(10),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Wrap(
+                            //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            runAlignment: WrapAlignment.spaceBetween,
+                            alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.end,
                             children: [
-                              FittedBox(
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
-                              ),
-                              if (product.offer != null)
-                                FittedBox(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  child: Text(
-                                    Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                    style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  FittedBox(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Text(
+                                      product.offer != null ? Helpers.getProperPrice(product.price) : '',
+                                      style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                                    ),
                                   ),
-                                ),
+                                  if (product.offer != null)
+                                    FittedBox(
+                                      alignment: AlignmentDirectional.centerStart,
+                                      child: Text(
+                                        Helpers.getProperPrice(product.priceBeforeDiscount!),
+                                        style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                      ),
+                                    )
+                                  else
+                                    FittedBox(
+                                      alignment: AlignmentDirectional.centerStart,
+                                      child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                    ),
+                                ],
+                              ),
+
+                              const SizedBox(width: 4),
+                              if (!(key?.toString().contains('store') ?? false))
+                                CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
                             ],
                           ),
                         ),
-
-                        const SizedBox(width: 8),
-                        if (!(key?.toString().contains('store') ?? false))
-                          CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
                       ],
                     ),
                   ],

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
@@ -59,35 +60,44 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        backgroundColor: Co.dark,
-        body: DecoratedBox(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [Colors.transparent, Co.purple], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-          ),
+        appBar: AppBar(toolbarHeight: 0),
+        backgroundColor: Co.purple,
+        body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(flex: 3),
-              ScaleTransition(
-                scale: Tween<double>(begin: 0.4, end: 1.0).animate(contoller),
-                child: RotationTransition(
-                  turns: Tween<double>(begin: 0.0, end: 0.37).animate(contoller),
-                  child: Row(
-                    spacing: 12,
-                    mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                children: [
+                  Stack(
+                    alignment: AlignmentDirectional.topCenter,
                     children: [
-                      SvgPicture.asset(Assets.assetsSvgSplashIcon, height: 90, width: 90),
-                      SizeTransition(
-                        axis: Axis.horizontal,
-                        axisAlignment: 1,
-                        sizeFactor: textController,
-                        child: FadeTransition(
-                          opacity: textController,
-                          child: Text('HELLO', style: TStyle.whiteBold(92).copyWith(color: Co.bg)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 39.0, left: 10),
+                        child: const VectorGraphicsWidget(Assets.bodyGazzerIc).animate().slide(
+                          begin: const Offset(1, 0),
+                          end: Offset.zero,
+                          duration: const Duration(milliseconds: 1500),
+                          curve: Curves.easeOutBack,
                         ),
+                      ),
+
+                      const VectorGraphicsWidget(Assets.capGazzerIc).animate().slide(
+                        begin: const Offset(-1, 0),
+                        end: Offset.zero,
+                        duration: const Duration(milliseconds: 1500),
+                        curve: Curves.easeOutBack,
                       ),
                     ],
                   ),
-                ),
+
+                  const VectorGraphicsWidget(Assets.gazzerTextIc).animate().slide(
+                    delay: Durations.extralong4,
+                    begin: const Offset(0, 10),
+                    end: Offset.zero,
+                    duration: Durations.long4,
+                    curve: Curves.easeOut,
+                  ),
+                ],
               ),
               BlocConsumer<SplashCubit, SplashStates>(
                 listener: (context, state) {
@@ -145,7 +155,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   );
                 },
               ),
-              const Spacer(flex: 2),
             ],
           ),
         ),

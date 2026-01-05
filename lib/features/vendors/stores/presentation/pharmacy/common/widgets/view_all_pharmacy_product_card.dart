@@ -7,13 +7,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 /// Reusable circular product card for pharmacy best sellers
 class ViewAllPharmacyProductCard extends StatelessWidget {
-  const ViewAllPharmacyProductCard({
-    super.key,
-    required this.product,
-    required this.vendorName,
-    this.width,
-    this.onTap,
-  });
+  const ViewAllPharmacyProductCard({super.key, required this.product, required this.vendorName, this.width, this.onTap});
 
   final ProductEntity product;
   final String vendorName;
@@ -59,10 +53,7 @@ class ViewAllPharmacyProductCard extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Co.buttonGradient.withOpacity(.35),
-                        width: 3,
-                      ),
+                      border: Border.all(color: Co.buttonGradient.withOpacity(.35), width: 3),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -120,40 +111,19 @@ class ViewAllPharmacyProductCard extends StatelessWidget {
                           ),
                           SizedBox(height: spacing),
 
-                          Text(
-                            'EG',
-                            style: TStyle.blackBold(smallFontSize),
-                          ),
+                          Text('EG', style: TStyle.blackBold(smallFontSize)),
                           SizedBox(height: spacing),
-                          Icon(
-                            Icons.star,
-                            color: Co.secondary,
-                            size: iconSize,
-                          ),
+                          Icon(Icons.star, color: Co.secondary, size: iconSize),
                         ],
                       ),
                       Column(
                         children: [
-                          CartToIncrementIcon(
-                            ignorePointer: true,
-                            isHorizonal: false,
-                            product: product,
-                            iconSize: iconSize,
-                            isDarkContainer: false,
-                          ),
+                          CartToIncrementIcon(isHorizonal: false, product: product, iconSize: iconSize, isDarkContainer: false),
                           SizedBox(height: spacing),
 
-                          Text(
-                            product.price.toStringAsFixed(0),
-                            style: TStyle.blackBold(smallFontSize),
-                          ),
+                          Text(product.price.toStringAsFixed(0), style: TStyle.blackBold(smallFontSize)),
                           SizedBox(height: spacing),
-                          Text(
-                            product.rate.toStringAsFixed(2),
-                            style: TStyle.blackBold(
-                              smallFontSize,
-                            ).copyWith(color: Co.secondary),
-                          ),
+                          Text(product.rate.toStringAsFixed(2), style: TStyle.blackBold(smallFontSize).copyWith(color: Co.secondary)),
                         ],
                       ),
                     ],
@@ -161,13 +131,7 @@ class ViewAllPharmacyProductCard extends StatelessWidget {
 
                   const Spacer(),
 
-                  Text(
-                    vendorName,
-                    style: TStyle.greyRegular(fontSize),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  Text(vendorName, style: TStyle.greyRegular(fontSize), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
                   SizedBox(height: spacing),
                 ],
               ),
