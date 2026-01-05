@@ -214,7 +214,10 @@ class _ReviewCard extends StatelessWidget {
                     height: 50,
                     color: Co.secondary,
                     child: Center(
-                      child: Text(review.clientName.isNotEmpty ? review.clientName.substring(0, 1).toUpperCase() : 'C', style: TStyle.blackBold(20)),
+                      child: Text(
+                        review.clientName.isNotEmpty ? review.clientName.substring(0, 1).toUpperCase() : 'C',
+                        style: TStyle.robotBlackSubTitle(),
+                      ),
                     ),
                   ),
           ),

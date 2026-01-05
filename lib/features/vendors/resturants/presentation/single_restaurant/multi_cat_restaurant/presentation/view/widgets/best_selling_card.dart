@@ -15,13 +15,7 @@ class _BestSellingCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacityNew(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black.withOpacityNew(0.1), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: InkWell(
         onTap: () {
@@ -32,11 +26,7 @@ class _BestSellingCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: CustomNetworkImage(
-                product.image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+              child: CustomNetworkImage(product.image, fit: BoxFit.cover, width: double.infinity),
             ),
             Expanded(
               flex: 2,
@@ -48,7 +38,7 @@ class _BestSellingCard extends StatelessWidget {
                   children: [
                     Text(
                       product.name,
-                      style: TStyle.blackBold(12),
+                      style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -62,45 +52,30 @@ class _BestSellingCard extends StatelessWidget {
                               alignment: AlignmentDirectional.centerStart,
                               child: Text(
                                 '${L10n.tr().totalUnitSolid}: ',
-                                style: TStyle.primaryBold(10, font: FFamily.inter),
+                                style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
                           const HorizontalSpacing(5),
-                          Text(
-                            '${product.orderCount ?? 0}',
-                            style: TStyle.primaryBold(12, font: FFamily.inter),
-                          ),
+                          Text('${product.orderCount ?? 0}', style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
                         ],
                       ),
 
-                    Text(
-                      product.description,
-                      style: TStyle.greyRegular(10),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    Text(product.description, style: TStyle.greyRegular(10), maxLines: 1, overflow: TextOverflow.ellipsis),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          Helpers.getProperPrice(product.price),
-                          style: TStyle.primaryBold(12),
-                        ),
+                        Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(
-                              Icons.star,
-                              color: Co.second2,
-                              size: 12,
-                            ),
+                            const Icon(Icons.star, color: Co.second2, size: 12),
                             const SizedBox(width: 2),
                             Text(
                               product.rate.toStringAsFixed(1),
-                              style: TStyle.secondaryBold(10),
+                              style: TStyle.robotBlackThin().copyWith(color: Co.secondary, fontWeight: TStyle.bold),
                             ),
                           ],
                         ),

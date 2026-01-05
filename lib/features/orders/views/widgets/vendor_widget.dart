@@ -6,13 +6,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/features/orders/domain/entities/order_vendor_entity.dart';
 
 class VendorWidget extends StatelessWidget {
-  const VendorWidget({
-    super.key,
-    required this.vendors,
-    this.onVendorChanged,
-    this.selectedVendorId,
-    required this.orderId,
-  });
+  const VendorWidget({super.key, required this.vendors, this.onVendorChanged, this.selectedVendorId, required this.orderId});
 
   final List<OrderVendorEntity> vendors;
   final Function(OrderVendorEntity)? onVendorChanged;
@@ -22,10 +16,7 @@ class VendorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (vendors.length == 1) {
-      return _SingleVendorView(
-        vendor: vendors.first,
-        orderId: orderId,
-      );
+      return _SingleVendorView(vendor: vendors.first, orderId: orderId);
     }
 
     return _VendorDropdown(
@@ -48,34 +39,20 @@ class _SingleVendorView extends StatelessWidget {
     return Row(
       children: [
         if (vendor.logo != null)
-          SizedBox(
-            width: 56,
-            height: 56,
-
-            child: CustomNetworkImage(vendor.logo!),
-          )
+          SizedBox(width: 56, height: 56, child: CustomNetworkImage(vendor.logo!))
         else
           Container(
             width: 40,
             height: 40,
-            decoration: BoxDecoration(
-              color: Co.secondary,
-              borderRadius: BorderRadius.circular(8),
-            ),
+            decoration: BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.circular(8)),
           ),
         const HorizontalSpacing(12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                vendor.name,
-                style: TStyle.blackBold(14),
-              ),
-              Text(
-                '${L10n.tr().orderId}: #$orderId',
-                style: TStyle.blackRegular(12),
-              ),
+              Text(vendor.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+              Text('${L10n.tr().orderId}: #$orderId', style: TStyle.blackRegular(12)),
             ],
           ),
         ),
@@ -85,12 +62,7 @@ class _SingleVendorView extends StatelessWidget {
 }
 
 class _VendorDropdown extends StatefulWidget {
-  const _VendorDropdown({
-    required this.vendors,
-    required this.selectedVendorId,
-    this.onVendorChanged,
-    required this.orderId,
-  });
+  const _VendorDropdown({required this.vendors, required this.selectedVendorId, this.onVendorChanged, required this.orderId});
 
   final List<OrderVendorEntity> vendors;
   final int selectedVendorId;
@@ -107,10 +79,7 @@ class _VendorDropdownState extends State<_VendorDropdown> {
   @override
   void initState() {
     super.initState();
-    selectedVendor = widget.vendors.firstWhere(
-      (v) => v.id == widget.selectedVendorId,
-      orElse: () => widget.vendors.first,
-    );
+    selectedVendor = widget.vendors.firstWhere((v) => v.id == widget.selectedVendorId, orElse: () => widget.vendors.first);
   }
 
   @override
@@ -127,17 +96,12 @@ class _VendorDropdownState extends State<_VendorDropdown> {
         return widget.vendors.map((vendor) {
           return PopupMenuItem<OrderVendorEntity>(
             value: vendor,
-            child: _VendorTile(
-              vendor: vendor,
-              orderId: widget.orderId,
-            ),
+            child: _VendorTile(vendor: vendor, orderId: widget.orderId),
           );
         }).toList();
       },
       position: PopupMenuPosition.under,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       color: Co.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,10 +113,7 @@ class _VendorDropdownState extends State<_VendorDropdown> {
               const Icon(Icons.keyboard_arrow_down, color: Co.black),
             ],
           ),
-          Text(
-            '${L10n.tr().orderId}: #${widget.orderId}',
-            style: TStyle.robotBlackRegular().copyWith(fontSize: 14),
-          ),
+          Text('${L10n.tr().orderId}: #${widget.orderId}', style: TStyle.robotBlackRegular().copyWith(fontSize: 14)),
         ],
       ),
     );
@@ -160,10 +121,7 @@ class _VendorDropdownState extends State<_VendorDropdown> {
 }
 
 class _VendorTile extends StatelessWidget {
-  const _VendorTile({
-    required this.vendor,
-    required this.orderId,
-  });
+  const _VendorTile({required this.vendor, required this.orderId});
 
   final OrderVendorEntity vendor;
   final String orderId;
@@ -185,12 +143,7 @@ class _VendorTile extends StatelessWidget {
           const HorizontalSpacing(12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                vendor.name,
-                style: TStyle.blackBold(14),
-              ),
-            ],
+            children: [Text(vendor.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold))],
           ),
         ],
       ),

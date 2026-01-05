@@ -77,7 +77,12 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(p.name, style: TStyle.primaryBold(15), maxLines: 1, overflow: TextOverflow.ellipsis),
+                          child: Text(
+                            p.name,
+                            style: TStyle.robotBlackRegular().copyWith(color: Co.purple),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         const SizedBox(width: 10),
                         Row(

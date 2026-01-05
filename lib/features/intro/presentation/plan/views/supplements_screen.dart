@@ -52,7 +52,7 @@ class _SupplementsScreenState extends State<SupplementsScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GradientText(
                 text: "Do you take medications or health supplements regularly?",
-                style: TStyle.blackBold(20),
+                style: TStyle.robotBlackSubTitle(),
                 gradient: Grad().textGradient,
               ),
             ),

@@ -30,7 +30,8 @@ class StackedImagesWidget extends StatelessWidget {
             }),
           ),
         ),
-        if (images.length > 4) Text("+${images.length - 4} ${L10n.tr().items}", style: TStyle.blackBold(12)),
+        if (images.length > 4)
+          Text("+${images.length - 4} ${L10n.tr().items}", style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
       ],
     );
   }

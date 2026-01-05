@@ -15,25 +15,6 @@ abstract class TStyle {
   static const medium = FontWeight.w500;
   static const bolder = FontWeight.w900;
 
-  //
-  static TextStyle primarySemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.purple);
-
-  static TextStyle primaryBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.purple);
-
-  static TextStyle secondarySemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.secondary);
-
-  static TextStyle secondaryBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.secondary);
-
-  static TextStyle tertiaryRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.tertiary);
-
-  static TextStyle tertiaryBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.tertiary);
-
   static TextStyle burbleRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.lightPurple);
 
@@ -87,9 +68,6 @@ abstract class TStyle {
 
   static TextStyle blackBold(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.dark);
-
-  static TextStyle blackMedium(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.dark);
 
   static FFamily _getFontFamily({FFamily? font, BuildContext? context}) {
     if (font != null) return font;

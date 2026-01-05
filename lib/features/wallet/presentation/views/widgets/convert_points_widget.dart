@@ -15,10 +15,7 @@ import 'package:gazzer/features/wallet/presentation/cubit/convert_points_state.d
 import 'package:gazzer/features/wallet/presentation/cubit/wallet_cubit.dart';
 
 class ConvertPointsWidget extends StatefulWidget {
-  const ConvertPointsWidget({
-    super.key,
-    this.loyaltyPoints,
-  });
+  const ConvertPointsWidget({super.key, this.loyaltyPoints});
 
   final WalletLoyaltyPointsEntity? loyaltyPoints;
 
@@ -55,19 +52,13 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
 
   void _increment() {
     setState(() {
-      _selectedPoints = (_selectedPoints + _conversionRateBerTransaction).clamp(
-        0,
-        _availablePoints,
-      );
+      _selectedPoints = (_selectedPoints + _conversionRateBerTransaction).clamp(0, _availablePoints);
     });
   }
 
   void _decrement() {
     setState(() {
-      _selectedPoints = (_selectedPoints - _conversionRateBerTransaction).clamp(
-        0,
-        _availablePoints,
-      );
+      _selectedPoints = (_selectedPoints - _conversionRateBerTransaction).clamp(0, _availablePoints);
     });
   }
 
@@ -80,10 +71,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
           if (state is ConvertPointsSuccess) {
             await showSuccessDialog(
               context,
-              title: L10n.tr().youJustCashedPoints(
-                _selectedPoints,
-                _convertedAmount,
-              ),
+              title: L10n.tr().youJustCashedPoints(_selectedPoints, _convertedAmount),
               subTitle: L10n.tr().keepCollecting,
               iconAsset: Assets.successfullyAddPointsIc,
             );
@@ -101,10 +89,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                L10n.tr().walletConvertPointsToMoney,
-                style: TStyle.robotBlackTitle(),
-              ),
+              Text(L10n.tr().walletConvertPointsToMoney, style: TStyle.robotBlackTitle()),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -120,40 +105,17 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
-                          child: Text(
-                            L10n.tr().walletConvertLoyaltyPoints,
-                            style: TStyle.robotBlackSubTitle(
-                              font: FFamily.roboto,
-                            ),
-                          ),
+                          child: Text(L10n.tr().walletConvertLoyaltyPoints, style: TStyle.robotBlackSubTitle(font: FFamily.roboto)),
                         ),
                         const HorizontalSpacing(12),
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 10,
-                          ),
-                          decoration: const BoxDecoration(
-                            color: Co.secondary,
-                            shape: BoxShape.circle,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                          decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                '$_availablePoints',
-                                style: TStyle.whiteBold(
-                                  16,
-                                  font: FFamily.roboto,
-                                ),
-                              ),
-                              Text(
-                                L10n.tr().points,
-                                style: TStyle.whiteSemi(
-                                  12,
-                                  font: FFamily.roboto,
-                                ),
-                              ),
+                              Text('$_availablePoints', style: TStyle.whiteBold(16, font: FFamily.roboto)),
+                              Text(L10n.tr().points, style: TStyle.whiteSemi(12, font: FFamily.roboto)),
                             ],
                           ),
                         ),
@@ -178,16 +140,11 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                           onIncrement: canIncrement ? _increment : null,
                         );
 
-                        final amountPreview = _AmountPreview(
-                          amount: _convertedAmount,
-                          estimatedValue: _estimatedValue,
-                        );
+                        final amountPreview = _AmountPreview(amount: _convertedAmount, estimatedValue: _estimatedValue);
 
                         final convertButton = MainBtn(
                           onPressed: () {
-                            context.read<ConvertPointsCubit>().convertPoints(
-                              _selectedPoints,
-                            );
+                            context.read<ConvertPointsCubit>().convertPoints(_selectedPoints);
                           },
                           isEnabled: !isLoading && _selectedPoints > 0,
                           isLoading: isLoading,
@@ -245,11 +202,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
 }
 
 class _PointsSelector extends StatelessWidget {
-  const _PointsSelector({
-    required this.value,
-    required this.onIncrement,
-    required this.onDecrement,
-  });
+  const _PointsSelector({required this.value, required this.onIncrement, required this.onDecrement});
 
   final int value;
   final VoidCallback? onIncrement;
@@ -282,10 +235,7 @@ class _PointsSelector extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Text(
-            '$value',
-            style: TStyle.blackBold(18, font: FFamily.roboto),
-          ),
+          Text('$value', style: TStyle.robotBlackMedium()),
           const SizedBox(width: 12),
           Expanded(
             child: _RoundIconButton(
@@ -308,10 +258,7 @@ class _PointsSelector extends StatelessWidget {
 }
 
 class _AmountPreview extends StatelessWidget {
-  const _AmountPreview({
-    required this.amount,
-    required this.estimatedValue,
-  });
+  const _AmountPreview({required this.amount, required this.estimatedValue});
 
   final double amount;
   final double estimatedValue;
@@ -328,14 +275,8 @@ class _AmountPreview extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            amount.toStringAsFixed(2),
-            style: TStyle.blackBold(18, font: FFamily.roboto),
-          ),
-          Text(
-            L10n.tr().egp,
-            style: TStyle.blackMedium(16, font: FFamily.roboto),
-          ),
+          Text(amount.toStringAsFixed(2), style: TStyle.robotBlackMedium()),
+          Text(L10n.tr().egp, style: TStyle.robotBlackMedium()),
         ],
       ),
     );

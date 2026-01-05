@@ -24,7 +24,7 @@ class CartAddressComponent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(L10n.tr().deliveryAddress, style: TStyle.primaryBold(16)),
+          Text(L10n.tr().deliveryAddress, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
           const Divider(height: 9, thickness: 1),
           BlocBuilder<CartCubit, CartStates>(
             buildWhen: (previous, current) => current is FullCartStates,

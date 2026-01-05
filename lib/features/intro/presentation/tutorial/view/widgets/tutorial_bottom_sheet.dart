@@ -75,7 +75,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                   spacing: 12,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    GradientText(text: L10n.tr().selectLanguage, style: TStyle.blackBold(24), gradient: Grad().textGradient),
+                    GradientText(text: L10n.tr().selectLanguage, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
                     const SizedBox(height: 40, width: double.infinity),
                     PlanAnimatedBtn(
                       onPressed: () => changeLanguage('en'),
@@ -88,7 +88,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(Assets.assetsPngFlagEn, height: 24, width: 24),
-                            Text(L10n.tr().english, style: TStyle.primarySemi(16)),
+                            Text(L10n.tr().english, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                           ],
                         ),
                       ),
@@ -104,7 +104,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(Assets.assetsPngFlagEg, height: 24, width: 24),
-                            Text("العربية", style: TStyle.primarySemi(16)),
+                            Text("العربية", style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                           ],
                         ),
                       ),

@@ -35,7 +35,7 @@ class LanguageDropList extends StatelessWidget {
               ),
             ),
             focusColor: Co.purple,
-            style: TStyle.primarySemi(14),
+            style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
             borderRadius: AppConst.defaultBorderRadius,
             isExpanded: true,
             iconEnabledColor: Co.purple,

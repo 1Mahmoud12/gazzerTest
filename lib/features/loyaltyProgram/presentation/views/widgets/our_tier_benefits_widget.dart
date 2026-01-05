@@ -75,7 +75,7 @@ class _OurTierBenefitsWidgetState extends State<OurTierBenefitsWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(L10n.tr().ourTierBenefits, style: TStyle.blackMedium(22, font: FFamily.roboto)),
+        Text(L10n.tr().ourTierBenefits, style: TStyle.robotBlackMedium()),
         const SizedBox(height: 16),
         SingleChildScrollView(
           controller: _scrollController,

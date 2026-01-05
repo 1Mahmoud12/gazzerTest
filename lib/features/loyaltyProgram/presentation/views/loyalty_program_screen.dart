@@ -202,11 +202,7 @@ class _ProgramContent extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
         children: [
-          Text(
-            bannerText,
-            style: TStyle.blackMedium(16, font: FFamily.roboto),
-            textAlign: TextAlign.center,
-          ),
+          Text(bannerText, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
           const SizedBox(height: 16),
           NameLogoLoyaltyProgram(
             mainColor: visuals.mainColor,

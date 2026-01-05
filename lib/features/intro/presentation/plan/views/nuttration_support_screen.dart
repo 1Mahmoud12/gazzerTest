@@ -56,7 +56,7 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GradientText(
                 text: "What types of nutrition support would you like?",
-                style: TStyle.blackBold(20),
+                style: TStyle.robotBlackSubTitle(),
                 gradient: Grad().textGradient,
               ),
             ),
@@ -71,7 +71,7 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
                       isAnimating.value = false;
                       context.push(FrequancyCombosScreen.route).then((v) => isAnimating.value = true);
                     },
-                    textStyle: TStyle.primarySemi(15),
+                    textStyle: TStyle.robotBlackRegular().copyWith(color: Co.purple),
                     isAnimating: isAnimating,
                     animDuration: animDuration,
                     text: focusData[index],

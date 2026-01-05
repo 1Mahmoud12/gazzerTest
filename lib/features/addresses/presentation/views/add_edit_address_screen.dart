@@ -165,7 +165,10 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(title: cubit.oldAddress == null ? L10n.tr().addAddress : L10n.tr().editAddress, titleStyle: TStyle.primaryBold(20)),
+      appBar: MainAppBar(
+        title: cubit.oldAddress == null ? L10n.tr().addAddress : L10n.tr().editAddress,
+        titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+      ),
       body: SingleChildScrollView(
         padding: AppConst.defaultPadding,
         child: Form(

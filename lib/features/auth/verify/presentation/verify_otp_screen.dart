@@ -173,7 +173,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
             //             },
             //           );
             //         },
-            //         child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
+            //         child: Text(L10n.tr().wrongNumber, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
             //       ),
             //   ],
             // ),
@@ -246,7 +246,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.phone, size: 32, color: Co.purple),
-                            Text(L10n.tr().callSupport, style: TStyle.primarySemi(16)),
+                            Text(L10n.tr().callSupport, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                           ],
                         ),
                       ),

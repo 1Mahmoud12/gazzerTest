@@ -112,7 +112,7 @@ class _PopularScreenState extends State<PopularScreen> {
       children: [
         // Padding(
         //   padding: AppConst.defaultHrPadding,
-        //   child: GradientText(text: L10n.tr().bestPopular, style: TStyle.blackBold(16)),
+        //   child: GradientText(text: L10n.tr().bestPopular, style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold)),
         // ),
         // const VerticalSpacing(16),
         Expanded(

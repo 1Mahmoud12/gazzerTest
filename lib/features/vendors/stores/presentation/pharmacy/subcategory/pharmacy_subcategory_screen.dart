@@ -64,7 +64,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
             // Category Title
             Padding(
               padding: AppConst.defaultHrPadding,
-              child: Text('${widget.categoryName} Pharmacies', style: TStyle.primaryBold(22)),
+              child: Text('${widget.categoryName} Pharmacies', style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
             ),
 
             const SizedBox(height: 16),
@@ -97,7 +97,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
                 // Pharmacies Title
                 Padding(
                   padding: AppConst.defaultHrPadding,
-                  child: Text(subcategories[index]['name'], style: TStyle.primaryBold(18)),
+                  child: Text(subcategories[index]['name'], style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                 ),
 
                 const SizedBox(height: 12),

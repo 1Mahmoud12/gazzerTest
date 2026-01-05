@@ -51,7 +51,7 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GradientText(
                 text: "Do You Follow Any Specific Dietary Lifestyle?",
-                style: TStyle.blackBold(20),
+                style: TStyle.robotBlackSubTitle(),
                 gradient: Grad().textGradient,
               ),
             ),

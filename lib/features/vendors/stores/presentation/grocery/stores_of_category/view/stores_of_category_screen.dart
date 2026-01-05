@@ -83,7 +83,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
                             ],
                           ),
                           const SizedBox.shrink(),
-                          GradientText(text: state.subCategory.name, style: TStyle.blackBold(22)),
+                          GradientText(text: state.subCategory.name, style: TStyle.robotBlackSubTitle()),
                         ],
                       ),
                     ),

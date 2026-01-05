@@ -36,7 +36,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                 spacing: 8,
                 children: [
                   const Icon(Icons.access_time_outlined, color: Co.secondary),
-                  Text(L10n.tr().scheduling, style: TStyle.primaryBold(16)),
+                  Text(L10n.tr().scheduling, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
                   BlocBuilder<CartCubit, CartStates>(
                     buildWhen: (previous, current) => current is TimeSlotsStates,
                     builder: (context, state) => AnimatedOpacity(
@@ -97,7 +97,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
-                          child: Text(Helpers.formatTimeSlot(state.timeSlots[index]), style: TStyle.primaryBold(14)),
+                          child: Text(Helpers.formatTimeSlot(state.timeSlots[index]), style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                         );
                       },
                     ),

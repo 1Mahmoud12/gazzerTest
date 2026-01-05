@@ -49,24 +49,15 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
         body: Column(
           spacing: 12,
           children: [
-            Hero(
-              tag: Tags.character,
-              child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            ),
-            GradientText(
-              text: L10n.tr().howToLogin,
-              style: TStyle.blackBold(24),
-              gradient: Grad().textGradient,
-            ),
+            Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+            GradientText(text: L10n.tr().howToLogin, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
             const SizedBox(height: 40, width: double.infinity),
             Hero(
               tag: Tags.btn,
               child: PlanAnimatedBtn(
                 onPressed: () {
                   isAnimating.value = false;
-                  const LoadingScreenRoute(
-                    navigateToRoute: HomeScreen.route,
-                  ).go(context);
+                  const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                 },
                 text: L10n.tr().guestMode,
                 isAnimating: isAnimating,

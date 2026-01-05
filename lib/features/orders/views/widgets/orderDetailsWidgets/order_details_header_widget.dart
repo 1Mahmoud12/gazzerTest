@@ -26,16 +26,10 @@ class OrderDetailsHeaderSection extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: OrderInfoColumn(
-            orderId: orderId,
-            formattedDate: onFormatDate(orderDate),
-          ),
+          child: OrderInfoColumn(orderId: orderId, formattedDate: onFormatDate(orderDate)),
         ),
         Expanded(
-          child: StatusColumn(
-            status: status,
-            deliveryTimeMinutes: deliveryTimeMinutes,
-          ),
+          child: StatusColumn(status: status, deliveryTimeMinutes: deliveryTimeMinutes),
         ),
       ],
     );
@@ -43,11 +37,7 @@ class OrderDetailsHeaderSection extends StatelessWidget {
 }
 
 class OrderInfoColumn extends StatelessWidget {
-  const OrderInfoColumn({
-    super.key,
-    required this.orderId,
-    required this.formattedDate,
-  });
+  const OrderInfoColumn({super.key, required this.orderId, required this.formattedDate});
 
   final int orderId;
   final String formattedDate;
@@ -57,26 +47,16 @@ class OrderInfoColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '${L10n.tr().orderId}: #$orderId',
-          style: TStyle.blackBold(16),
-        ),
+        Text('${L10n.tr().orderId}: #$orderId', style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
         const SizedBox(height: OrderDetailsConstants.smallSpacing),
-        Text(
-          formattedDate,
-          style: TStyle.blackRegular(14).copyWith(color: Co.grey),
-        ),
+        Text(formattedDate, style: TStyle.blackRegular(14).copyWith(color: Co.grey)),
       ],
     );
   }
 }
 
 class StatusColumn extends StatelessWidget {
-  const StatusColumn({
-    super.key,
-    required this.status,
-    this.deliveryTimeMinutes,
-  });
+  const StatusColumn({super.key, required this.status, this.deliveryTimeMinutes});
 
   final OrderStatus status;
   final int? deliveryTimeMinutes;
@@ -105,20 +85,9 @@ class StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 6,
-      ),
-      decoration: BoxDecoration(
-        color: status.badgeColor,
-        borderRadius: BorderRadius.circular(
-          OrderDetailsConstants.badgeBorderRadius,
-        ),
-      ),
-      child: Text(
-        status.label,
-        style: TStyle.blackBold(12),
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(color: status.badgeColor, borderRadius: BorderRadius.circular(OrderDetailsConstants.badgeBorderRadius)),
+      child: Text(status.label, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
     );
   }
 }
@@ -130,9 +99,6 @@ class DeliveryTimeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      '${L10n.tr().take} $minutes ${L10n.tr().min}',
-      style: TStyle.blackRegular(12).copyWith(color: Co.grey),
-    );
+    return Text('${L10n.tr().take} $minutes ${L10n.tr().min}', style: TStyle.blackRegular(12).copyWith(color: Co.grey));
   }
 }

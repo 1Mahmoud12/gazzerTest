@@ -49,11 +49,7 @@ class _HealthFocusScreenState extends State<HealthFocusScreen> {
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: GradientText(
-                text: L10n.tr().whatIsYourPrimaryHealthFocus,
-                style: TStyle.blackBold(20),
-                gradient: Grad().textGradient,
-              ),
+              child: GradientText(text: L10n.tr().whatIsYourPrimaryHealthFocus, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
             ),
             const VerticalSpacing(24),
             Column(

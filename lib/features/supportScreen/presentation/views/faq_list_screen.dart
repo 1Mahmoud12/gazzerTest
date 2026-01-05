@@ -182,7 +182,7 @@ class FaqListScreen extends StatelessWidget {
                 decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
                 child: Row(
                   children: [
-                    Expanded(child: Text(category.name, style: TStyle.blackMedium(15))),
+                    Expanded(child: Text(category.name, style: TStyle.robotBlackRegular14())),
                     const Icon(Icons.chevron_right, color: Co.purple),
                   ],
                 ),
@@ -213,7 +213,7 @@ class FaqListScreen extends StatelessWidget {
                     decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
                     child: Row(
                       children: [
-                        Expanded(child: Text(node.title, style: TStyle.blackMedium(15))),
+                        Expanded(child: Text(node.title, style: TStyle.robotBlackRegular())),
                         const Icon(Icons.chevron_right, color: Co.purple),
                       ],
                     ),

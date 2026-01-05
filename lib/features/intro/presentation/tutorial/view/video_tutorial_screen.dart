@@ -25,7 +25,11 @@ class VideoTutorialScreen extends StatelessWidget {
           const TutorialHeader(),
           Padding(
             padding: AppConst.defaultHrPadding,
-            child: GradientText(text: L10n.tr().dailyOffersForYou, style: TStyle.blackBold(16), gradient: Grad().textGradient),
+            child: GradientText(
+              text: L10n.tr().dailyOffersForYou,
+              style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+              gradient: Grad().textGradient,
+            ),
           ),
           Expanded(
             child: GridView.builder(
@@ -45,7 +49,11 @@ class VideoTutorialScreen extends StatelessWidget {
           ),
           Padding(
             padding: AppConst.defaultHrPadding,
-            child: GradientText(text: L10n.tr().dailyOffersForYou, style: TStyle.blackBold(16), gradient: Grad().textGradient),
+            child: GradientText(
+              text: L10n.tr().dailyOffersForYou,
+              style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+              gradient: Grad().textGradient,
+            ),
           ),
           Expanded(
             child: GridView.builder(

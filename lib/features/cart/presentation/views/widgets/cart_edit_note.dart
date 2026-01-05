@@ -54,7 +54,7 @@ class _CartEditNoteState extends State<CartEditNote> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(L10n.tr().editNote, style: TStyle.primaryBold(16)),
+                  Text(L10n.tr().editNote, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
                   const VerticalSpacing(0),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,12 +70,7 @@ class _CartEditNoteState extends State<CartEditNote> {
                       ),
                     ],
                   ),
-                  MainTextField(
-                    controller: controller,
-                    bgColor: Colors.transparent,
-                    maxLines: 3,
-                    hintText: L10n.tr().editNote,
-                  ),
+                  MainTextField(controller: controller, bgColor: Colors.transparent, maxLines: 3, hintText: L10n.tr().editNote),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

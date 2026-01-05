@@ -58,12 +58,8 @@ class LoadingScreen extends StatelessWidget {
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             const HorizontalSpacing(double.infinity),
-            GradientText(text: L10n.tr().loading, style: TStyle.blackBold(24), gradient: Grad().radialGradient),
-            StaggeredDotsWave(
-              colors: [Co.tertiary, Co.purple, Co.greyText, Co.secondary, Co.secondary],
-              size: 100,
-              dotsNumber: 5,
-            ),
+            GradientText(text: L10n.tr().loading, style: TStyle.robotBlackSubTitle(), gradient: Grad().radialGradient),
+            StaggeredDotsWave(colors: [Co.tertiary, Co.purple, Co.greyText, Co.secondary, Co.secondary], size: 100, dotsNumber: 5),
           ],
         ),
       ),

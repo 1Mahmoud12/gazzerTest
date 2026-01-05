@@ -213,7 +213,7 @@ class _BestSellingItemCard extends StatelessWidget {
                                 children: [
                                   const VectorGraphicsWidget(Assets.starRateIc),
                                   const SizedBox(width: 4),
-                                  Text(product.rate.toStringAsFixed(1), style: TStyle.blackBold(14)),
+                                  Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                                   if (product.reviewCount > 0) ...[
                                     const SizedBox(width: 4),
                                     Text('(+${product.reviewCount})', style: TStyle.greyRegular(12)),
@@ -247,7 +247,7 @@ class _BestSellingItemCard extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(Helpers.getProperPrice(product.price), style: TStyle.primaryBold(16)),
+                                Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
                                 if (product.priceBeforeDiscount != null)
                                   Text(
                                     Helpers.getProperPrice(product.priceBeforeDiscount!),

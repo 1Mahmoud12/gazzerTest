@@ -23,29 +23,16 @@ class NameLogoLoyaltyProgram extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: mainColor,
-        borderRadius: BorderRadius.circular(24),
-      ),
+      decoration: BoxDecoration(color: mainColor, borderRadius: BorderRadius.circular(24)),
       child: Row(
         children: [
-          SvgPicture.asset(
-            logo,
-            width: 64,
-            height: 64,
-          ),
+          SvgPicture.asset(logo, width: 64, height: 64),
           const SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                L10n.tr().yourLoyaltyJourney,
-                style: TStyle.blackMedium(16).copyWith(color: firstTextColor),
-              ),
-              Text(
-                '${L10n.tr().level}: $nameProgram',
-                style: TStyle.blackMedium(16).copyWith(color: secondTextColor),
-              ),
+              Text(L10n.tr().yourLoyaltyJourney, style: TStyle.robotBlackMedium().copyWith(color: firstTextColor)),
+              Text('${L10n.tr().level}: $nameProgram', style: TStyle.robotBlackMedium().copyWith(color: secondTextColor)),
             ],
           ),
         ],

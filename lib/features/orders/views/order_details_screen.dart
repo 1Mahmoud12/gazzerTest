@@ -94,7 +94,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             return Scaffold(
               backgroundColor: Co.bg,
               appBar: MainAppBar(title: L10n.tr().orderDetails),
-              body: Center(child: Text(L10n.tr().noData, style: TStyle.primaryBold(16))),
+              body: Center(
+                child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+              ),
             );
           }
 

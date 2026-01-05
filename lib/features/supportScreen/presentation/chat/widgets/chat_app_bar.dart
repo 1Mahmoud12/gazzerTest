@@ -33,10 +33,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 50,
               height: 50,
               padding: const EdgeInsets.all(8),
-              child: SvgPicture.asset(
-                Assets.assetsSvgCharacter,
-                fit: BoxFit.contain,
-              ),
+              child: SvgPicture.asset(Assets.assetsSvgCharacter, fit: BoxFit.contain),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -44,10 +41,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    L10n.tr().guzzerSupport,
-                    style: TStyle.blackBold(16),
-                  ),
+                  Text(L10n.tr().guzzerSupport, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
                   const SizedBox(height: 2),
                   BlocBuilder<WorkingHoursCubit, WorkingHoursState>(
                     builder: (context, state) {
@@ -62,17 +56,12 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                           Container(
                             width: 8,
                             height: 8,
-                            decoration: BoxDecoration(
-                              color: isOnline ? Colors.green : Colors.grey,
-                              shape: BoxShape.circle,
-                            ),
+                            decoration: BoxDecoration(color: isOnline ? Colors.green : Colors.grey, shape: BoxShape.circle),
                           ),
                           const SizedBox(width: 6),
                           Text(
                             isOnline ? L10n.tr().online : L10n.tr().offline,
-                            style: TStyle.robotBlackMedium().copyWith(
-                              color: isOnline ? Colors.green : Colors.grey,
-                            ),
+                            style: TStyle.robotBlackMedium().copyWith(color: isOnline ? Colors.green : Colors.grey),
                           ),
                         ],
                       );

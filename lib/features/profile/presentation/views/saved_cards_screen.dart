@@ -124,7 +124,7 @@ class _CardItem extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-                    child: Text(L10n.tr().defaultCard, style: TStyle.primaryBold(10)),
+                    child: Text(L10n.tr().defaultCard, style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
                   ),
                 const HorizontalSpacing(8),
                 InkWell(

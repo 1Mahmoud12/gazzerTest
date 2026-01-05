@@ -51,7 +51,7 @@ class CardRestInfoWidget extends StatelessWidget {
             ),
           ),
           // if (vendor.tag != null && vendor.tag!.isNotEmpty)
-          //   Text(vendor.shortTag(25)!, style: TStyle.secondarySemi(12), maxLines: 1, overflow: TextOverflow.ellipsis),
+          //   Text(vendor.shortTag(25)!, style: TStyle.robotBlackSmall().copyWith(color: Co.secondary), maxLines: 1, overflow: TextOverflow.ellipsis),
           const VerticalSpacing(8),
           Row(
             children: [

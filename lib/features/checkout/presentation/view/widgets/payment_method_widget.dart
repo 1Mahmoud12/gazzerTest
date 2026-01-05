@@ -417,7 +417,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
 //           mainAxisSize: MainAxisSize.min,
 //           crossAxisAlignment: CrossAxisAlignment.start,
 //           children: [
-//             Text(L10n.tr().choosePaymentMethod, style: TStyle.blackBold(16)),
+//             Text(L10n.tr().choosePaymentMethod, style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold)),
 //             const SizedBox(height: 12),
 //             MainBtn(
 //               onPressed: () {
@@ -462,7 +462,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
 //           mainAxisSize: MainAxisSize.min,
 //           crossAxisAlignment: CrossAxisAlignment.start,
 //           children: [
-//             Text(L10n.tr().enterPhoneNumber, style: TStyle.blackBold(16)),
+//             Text(L10n.tr().enterPhoneNumber, style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold)),
 //             const SizedBox(height: 8),
 //
 //             Align(
@@ -515,7 +515,7 @@ class _CardItem extends StatelessWidget {
                 children: [
                   Directionality(
                     textDirection: TextDirection.ltr,
-                    child: Text(card.cardNumber, style: TStyle.blackBold(16)),
+                    child: Text(card.cardNumber, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
                   ),
                   // const SizedBox(height: 4),
                   // Text(
@@ -529,7 +529,7 @@ class _CardItem extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-                child: Text(L10n.tr().defaultCard, style: TStyle.primaryBold(10)),
+                child: Text(L10n.tr().defaultCard, style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
               ),
           ],
         ),

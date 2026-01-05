@@ -13,9 +13,7 @@ class CartAddressWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: AppConst.defaultBorderRadius,
-      ),
+      decoration: BoxDecoration(borderRadius: AppConst.defaultBorderRadius),
       child: Padding(
         padding: AppConst.defaultPadding,
         child: Row(
@@ -24,12 +22,7 @@ class CartAddressWidget extends StatelessWidget {
             CircleAvatar(
               radius: 23,
               backgroundColor: Co.secondary,
-              child: SvgPicture.asset(
-                address.labelSvg,
-                width: 20,
-                height: 20,
-                colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
-              ),
+              child: SvgPicture.asset(address.labelSvg, width: 20, height: 20, colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn)),
             ),
             const HorizontalSpacing(20),
 
@@ -37,11 +30,7 @@ class CartAddressWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    address.labelType.label ?? address.label,
-                    style: TStyle.primarySemi(16),
-                    maxLines: 2,
-                  ),
+                  Text(address.labelType.label ?? address.label, style: TStyle.robotBlackMedium().copyWith(color: Co.purple), maxLines: 2),
                   RichText(
                     text: TextSpan(
                       children: [

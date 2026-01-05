@@ -18,13 +18,7 @@ class VoucherVendorsScreen extends StatefulWidget {
   final int id;
   final double availablePoints;
 
-  const VoucherVendorsScreen({
-    super.key,
-    required this.title,
-    required this.id,
-    required this.availablePoints,
-    required this.pointsNeed,
-  });
+  const VoucherVendorsScreen({super.key, required this.title, required this.id, required this.availablePoints, required this.pointsNeed});
 
   static const route = '/voucher-vendors';
 
@@ -79,9 +73,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
         }
       },
       child: Scaffold(
-        appBar: MainAppBar(
-          title: widget.title,
-        ),
+        appBar: MainAppBar(title: widget.title),
         body: BlocConsumer<VoucherVendorsCubit, VoucherVendorsState>(
           listener: (context, state) {
             if (state is VoucherVendorsError) {
@@ -110,11 +102,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      state.message,
-                      style: TStyle.blackRegular(16),
-                      textAlign: TextAlign.center,
-                    ),
+                    Text(state.message, style: TStyle.blackRegular(16), textAlign: TextAlign.center),
                     const VerticalSpacing(16),
                     MainBtn(
                       onPressed: () => context.read<VoucherVendorsCubit>().loadVoucherStores(widget.id),
@@ -139,12 +127,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                   : (state as VoucherVendorsConvertSuccess).stores;
 
               if (stores.isEmpty) {
-                return Center(
-                  child: Text(
-                    L10n.tr().noData,
-                    style: TStyle.blackRegular(16),
-                  ),
-                );
+                return Center(child: Text(L10n.tr().noData, style: TStyle.blackRegular(16)));
               }
 
               final isConverting = state is VoucherVendorsConverting;
@@ -166,19 +149,14 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              '${L10n.tr().available}: ${widget.availablePoints.toInt()} ${L10n.tr().points}',
-                              style: TStyle.blackRegular(14),
-                            ),
+                            Text('${L10n.tr().available}: ${widget.availablePoints.toInt()} ${L10n.tr().points}', style: TStyle.blackRegular(14)),
                             const SizedBox(height: 4),
-                            Text(
-                              '${L10n.tr().selected}: $_totalPointsUsed ${L10n.tr().points}',
-                              style: TStyle.blackRegular(14),
-                            ),
+                            Text('${L10n.tr().selected}: $_totalPointsUsed ${L10n.tr().points}', style: TStyle.blackRegular(14)),
                             const SizedBox(height: 4),
                             Text(
                               '${L10n.tr().remaining}: ${_remainingPoints.toInt()} ${L10n.tr().points}',
-                              style: TStyle.blackBold(14).copyWith(
+                              style: TStyle.robotBlackRegular14().copyWith(
+                                fontWeight: TStyle.bold,
                                 color: _remainingPoints < 0 ? Colors.red : Co.purple,
                               ),
                             ),
@@ -186,18 +164,9 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                         ),
                         if (_selectedStores.isNotEmpty)
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Co.purple,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              '${_selectedStores.length} ${L10n.tr().selected}',
-                              style: TStyle.whiteBold(12),
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(20)),
+                            child: Text('${_selectedStores.length} ${L10n.tr().selected}', style: TStyle.whiteBold(12)),
                           ),
                       ],
                     ),
@@ -226,13 +195,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Co.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Co.lightGrey.withOpacityNew(0.3),
-                            blurRadius: 10,
-                            offset: const Offset(0, -5),
-                          ),
-                        ],
+                        boxShadow: [BoxShadow(color: Co.lightGrey.withOpacityNew(0.3), blurRadius: 10, offset: const Offset(0, -5))],
                       ),
                       child: SafeArea(
                         child: MainBtn(
@@ -264,13 +227,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
 }
 
 class _VendorTile extends StatelessWidget {
-  const _VendorTile({
-    required this.store,
-    required this.isSelected,
-    required this.canSelect,
-    required this.pointsNeed,
-    required this.onTap,
-  });
+  const _VendorTile({required this.store, required this.isSelected, required this.canSelect, required this.pointsNeed, required this.onTap});
 
   final VoucherStoreEntity store;
   final bool isSelected;
@@ -322,15 +279,8 @@ class _VendorTile extends StatelessWidget {
                 errorWidget: Container(
                   height: 60,
                   width: 60,
-                  decoration: BoxDecoration(
-                    color: Co.secondary,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Icon(
-                    Icons.store,
-                    color: Co.white,
-                    size: 30,
-                  ),
+                  decoration: BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.circular(16)),
+                  child: const Icon(Icons.store, color: Co.white, size: 30),
                 ),
               ),
               const SizedBox(width: 16),
@@ -338,20 +288,11 @@ class _VendorTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      L10n.isAr(context) ? store.storeNameAr : store.storeName,
-                      style: TStyle.robotBlackMedium(),
-                    ),
+                    Text(L10n.isAr(context) ? store.storeNameAr : store.storeName, style: TStyle.robotBlackMedium()),
                     const SizedBox(height: 4),
-                    Text(
-                      '$discountText ${L10n.tr().discount}',
-                      style: textTheme.bodySmall?.copyWith(color: Co.darkGrey),
-                    ),
+                    Text('$discountText ${L10n.tr().discount}', style: textTheme.bodySmall?.copyWith(color: Co.darkGrey)),
                     const SizedBox(height: 4),
-                    Text(
-                      L10n.tr().walletValidUntil(store.validUntil),
-                      style: textTheme.bodySmall?.copyWith(color: Co.grey),
-                    ),
+                    Text(L10n.tr().walletValidUntil(store.validUntil), style: textTheme.bodySmall?.copyWith(color: Co.grey)),
                   ],
                 ),
               ),

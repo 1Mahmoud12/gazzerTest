@@ -25,7 +25,7 @@ class _NotesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(L10n.tr().notes, style: TStyle.blackBold(16)),
+        Text(L10n.tr().notes, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
         const SizedBox(height: 12),
         MainTextField(
           controller: TextEditingController(text: note),

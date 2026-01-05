@@ -35,7 +35,7 @@ class _SlideTimerState extends State<SlideTimer> {
 
   @override
   void initState() {
-    style = widget.textStyle ?? TStyle.blackBold(18, font: FFamily.playfair);
+    style = widget.textStyle ?? TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold);
     _calculate();
     timer = Timer.periodic(widget.duration, (timer) {
       setState(() => _calculate());
@@ -63,20 +63,11 @@ class _SlideTimerState extends State<SlideTimer> {
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
                 transitionBuilder: (child, animation) {
-                  final inAnimation = Tween<Offset>(
-                    begin: const Offset(0, -1),
-                    end: const Offset(0, 0),
-                  ).animate(animation);
-                  final outAnimation = Tween<Offset>(
-                    begin: const Offset(0, 1),
-                    end: const Offset(0, 0),
-                  ).animate(animation);
+                  final inAnimation = Tween<Offset>(begin: const Offset(0, -1), end: const Offset(0, 0)).animate(animation);
+                  final outAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(animation);
                   return FadeTransition(
                     opacity: animation,
-                    child: SlideTransition(
-                      position: child.key == ValueKey(hours) ? inAnimation : outAnimation,
-                      child: child,
-                    ),
+                    child: SlideTransition(position: child.key == ValueKey(hours) ? inAnimation : outAnimation, child: child),
                   );
                 },
 
@@ -93,20 +84,11 @@ class _SlideTimerState extends State<SlideTimer> {
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
                 transitionBuilder: (child, animation) {
-                  final inAnimation = Tween<Offset>(
-                    begin: const Offset(0, -1),
-                    end: const Offset(0, 0),
-                  ).animate(animation);
-                  final outAnimation = Tween<Offset>(
-                    begin: const Offset(0, 1),
-                    end: const Offset(0, 0),
-                  ).animate(animation);
+                  final inAnimation = Tween<Offset>(begin: const Offset(0, -1), end: const Offset(0, 0)).animate(animation);
+                  final outAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(animation);
                   return FadeTransition(
                     opacity: animation,
-                    child: SlideTransition(
-                      position: child.key == ValueKey(minutes) ? inAnimation : outAnimation,
-                      child: child,
-                    ),
+                    child: SlideTransition(position: child.key == ValueKey(minutes) ? inAnimation : outAnimation, child: child),
                   );
                 },
 
@@ -123,20 +105,11 @@ class _SlideTimerState extends State<SlideTimer> {
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
                 transitionBuilder: (child, animation) {
-                  final inAnimation = Tween<Offset>(
-                    begin: const Offset(0, -1),
-                    end: const Offset(0, 0),
-                  ).animate(animation);
-                  final outAnimation = Tween<Offset>(
-                    begin: const Offset(0, 1),
-                    end: const Offset(0, 0),
-                  ).animate(animation);
+                  final inAnimation = Tween<Offset>(begin: const Offset(0, -1), end: const Offset(0, 0)).animate(animation);
+                  final outAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(animation);
                   return FadeTransition(
                     opacity: animation,
-                    child: SlideTransition(
-                      position: child.key == ValueKey(seconds) ? inAnimation : outAnimation,
-                      child: child,
-                    ),
+                    child: SlideTransition(position: child.key == ValueKey(seconds) ? inAnimation : outAnimation, child: child),
                   );
                 },
 

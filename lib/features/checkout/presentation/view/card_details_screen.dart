@@ -121,7 +121,7 @@
 //           appBar: AppBar(
 //             title: GradientText(
 //               text: L10n.tr().createYourCard,
-//               style: TStyle.blackBold(18),
+//               style: TStyle.robotBlackMedium().copyWith(fontWeight:TStyle.bold),
 //             ),
 //           ),
 //           body: ListView(
@@ -144,7 +144,7 @@
 //                     child: Column(
 //                       crossAxisAlignment: CrossAxisAlignment.start,
 //                       children: [
-//                         Text(L10n.tr().cardNumber, style: TStyle.blackBold(14)),
+//                         Text(L10n.tr().cardNumber, style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold)),
 //                         const VerticalSpacing(8),
 //                         MainTextField(
 //                           controller: _cardNumberController,
@@ -165,7 +165,7 @@
 //                                 children: [
 //                                   Text(
 //                                     L10n.tr().expiryMonth,
-//                                     style: TStyle.blackBold(14),
+//                                     style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
 //                                   ),
 //                                   const VerticalSpacing(8),
 //                                   MainTextField(
@@ -188,7 +188,7 @@
 //                                 children: [
 //                                   Text(
 //                                     L10n.tr().expiryYear,
-//                                     style: TStyle.blackBold(14),
+//                                     style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
 //                                   ),
 //                                   const VerticalSpacing(8),
 //                                   MainTextField(
@@ -209,7 +209,7 @@
 //                         const VerticalSpacing(16),
 //                         Text(
 //                           L10n.tr().cardHolderName,
-//                           style: TStyle.blackBold(14),
+//                           style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
 //                         ),
 //                         const VerticalSpacing(8),
 //                         MainTextField(
@@ -242,7 +242,7 @@
 //                             Expanded(
 //                               child: Text(
 //                                 L10n.tr().setAsDefaultCard,
-//                                 style: TStyle.blackBold(14),
+//                                 style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
 //                               ),
 //                             ),
 //                           ],

@@ -10,15 +10,9 @@ class ProductSummaryWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          plate.name,
-          style: TStyle.blackBold(20),
-        ),
+        Text(plate.name, style: TStyle.robotBlackSubTitle()),
         const SizedBox(height: 8),
-        Text(
-          plate.description,
-          style: TStyle.greyRegular(14),
-        ),
+        Text(plate.description, style: TStyle.greyRegular(14)),
       ],
     );
   }

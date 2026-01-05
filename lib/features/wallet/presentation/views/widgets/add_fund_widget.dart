@@ -134,11 +134,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                         SvgPicture.asset(Assets.visaIc),
                         const SizedBox(width: 12),
                         Flexible(
-                          child: Text(
-                            L10n.tr().walletRechargeViaCard,
-                            style: TStyle.blackMedium(16, font: FFamily.roboto),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          child: Text(L10n.tr().walletRechargeViaCard, style: TStyle.robotBlackMedium(), overflow: TextOverflow.ellipsis),
                         ),
                       ],
                     ),
@@ -154,7 +150,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                               controller: _amountController,
                               keyboardType: const TextInputType.numberWithOptions(decimal: true),
                               focusNode: _amountFocusNode,
-                              style: TStyle.blackMedium(16, font: FFamily.roboto),
+                              style: TStyle.robotBlackMedium(),
                               hintText: L10n.tr().walletEnterAmount,
                               autovalidateMode: AutovalidateMode.onUserInteraction,
                               onChange: (value) {

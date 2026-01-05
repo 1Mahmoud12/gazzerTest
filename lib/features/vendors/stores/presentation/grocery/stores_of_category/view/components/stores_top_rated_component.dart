@@ -32,15 +32,8 @@ class _StoresTopRatedComponentState extends State<StoresTopRatedComponent> {
       label: Badge(
         alignment: const Alignment(-0.6, 0),
         backgroundColor: Colors.transparent,
-        label: GradientText(
-          text: L10n.tr().exploreBest,
-          style: TStyle.blackBold(32),
-        ),
-        child: SvgPicture.asset(
-          Assets.assetsSvgBadge,
-          width: 520,
-          fit: BoxFit.cover,
-        ),
+        label: GradientText(text: L10n.tr().exploreBest, style: TStyle.robotBlackHead()),
+        child: SvgPicture.asset(Assets.assetsSvgBadge, width: 520, fit: BoxFit.cover),
       ),
       child: SizedBox(
         height: 600,

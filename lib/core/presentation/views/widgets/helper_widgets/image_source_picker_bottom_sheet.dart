@@ -128,7 +128,11 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
             Container(
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
               child: ListTile(
-                title: Text(L10n.tr().cancel, textAlign: TextAlign.center, style: TStyle.primaryBold(16)),
+                title: Text(
+                  L10n.tr().cancel,
+                  textAlign: TextAlign.center,
+                  style: TStyle.robotBlackRegular().copyWith(color: Co.purple),
+                ),
                 onTap: () {
                   Navigator.pop(context);
                 },

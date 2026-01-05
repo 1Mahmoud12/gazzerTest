@@ -4,7 +4,8 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart'
+    show GradientText, HorizontalSpacing, OptionBtn, VerticalSpacing;
 import 'package:go_router/go_router.dart';
 
 part 'congrats_screen.g.dart';
@@ -72,11 +73,7 @@ class _CongratsScreenState extends State<CongratsScreen> {
                   spacing: 12,
                   children: [
                     const HorizontalSpacing(double.infinity),
-                    GradientText(
-                      text: "${L10n.tr().congratulations}!",
-                      style: TStyle.blackBold(32),
-                      gradient: Grad().radialGradient,
-                    ),
+                    GradientText(text: "${L10n.tr().congratulations}!", style: TStyle.robotBlackHead(), gradient: Grad().radialGradient),
                     GradientText(text: L10n.tr().youMadeIt, style: TStyle.mainwBold(16), gradient: Grad().radialGradient),
                     const VerticalSpacing(12),
                     OptionBtn(
@@ -97,13 +94,8 @@ class _CongratsScreenState extends State<CongratsScreen> {
                 confettiController: controller,
                 blastDirectionality: BlastDirectionality.explosive, // don't specify a direction, blast randomly
                 shouldLoop: true, // start again as soon as the animation is finished
-                colors: const [
-                  Colors.green,
-                  Colors.blue,
-                  Colors.pink,
-                  Colors.yellow,
-                  Colors.purple,
-                ], // manually specify the colors to be used
+                colors: const [Colors.green, Colors.blue, Colors.pink, Colors.yellow, Colors.purple],
+                // manually specify the colors to be used
                 numberOfParticles: 12,
                 gravity: 0.08,
                 maxBlastForce: 10,

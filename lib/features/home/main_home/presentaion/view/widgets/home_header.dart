@@ -161,7 +161,7 @@ Widget _buildSheetHeader(BuildContext context, LatLng? selectedLocation) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(L10n.tr().chooseDeliveryLocation, style: TStyle.primarySemi(18)),
+      Text(L10n.tr().chooseDeliveryLocation, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
       IconButton(icon: const Icon(Icons.close), onPressed: () => _handleSheetClose(context, selectedLocation)),
     ],
   );
@@ -171,7 +171,7 @@ Widget _buildSavedAddressesSection(BuildContext context, List<AddressEntity> add
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(L10n.tr().savedAddresses, style: TStyle.primarySemi(16)),
+      Text(L10n.tr().savedAddresses, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
       const VerticalSpacing(12),
       Flexible(
         child: ListView.separated(
@@ -200,7 +200,7 @@ Widget _buildAddressItem(BuildContext context, AddressEntity address, AddressesB
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(address.label, style: TStyle.primarySemi(14)),
+                Text(address.label, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
                 Text('${address.zoneName}, ${address.provinceName}', style: TStyle.greyRegular(12)),
               ],
@@ -210,7 +210,7 @@ Widget _buildAddressItem(BuildContext context, AddressEntity address, AddressesB
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-              child: Text(L10n.tr().defaultt, style: TStyle.secondarySemi(12)),
+              child: Text(L10n.tr().defaultt, style: TStyle.robotBlackSmall().copyWith(color: Co.secondary)),
             ),
         ],
       ),
@@ -235,7 +235,7 @@ Widget _buildCurrentLocationOption(BuildContext context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L10n.tr().deliverToCurrentLocation, style: TStyle.primarySemi(14)),
+                Text(L10n.tr().deliverToCurrentLocation, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
                 Text(L10n.tr().outsideDeliveryZone, style: TStyle.greyRegular(12)),
               ],
@@ -265,7 +265,7 @@ Widget _buildMapLocationOption(BuildContext context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L10n.tr().deliverToDifferentLocation, style: TStyle.primarySemi(14)),
+                Text(L10n.tr().deliverToDifferentLocation, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
                 Text(L10n.tr().chooseLocationOnMap, style: TStyle.greyRegular(12)),
               ],

@@ -232,11 +232,7 @@ class FinalTotalRow extends StatelessWidget {
                 ),
               ),
               const HorizontalSpacing(2),
-              Text(
-                ' (${L10n.tr().amountToPay}) ',
-                style: TStyle.blackBold(12, font: FFamily.roboto).copyWith(overflow: TextOverflow.ellipsis),
-                maxLines: 1,
-              ),
+              Text(' (${L10n.tr().amountToPay}) ', style: TStyle.robotBlackThin().copyWith(overflow: TextOverflow.ellipsis), maxLines: 1),
             ],
           ),
         ),

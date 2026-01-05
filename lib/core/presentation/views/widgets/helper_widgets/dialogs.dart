@@ -28,16 +28,11 @@ class Dialogs {
               const VerticalSpacing(20),
               Text(
                 title,
-                style: TStyle.blackBold(18),
+                style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold),
                 textAlign: TextAlign.center,
               ),
               const VerticalSpacing(10),
-              if (message != null)
-                Text(
-                  message,
-                  style: TStyle.blackRegular(16),
-                  textAlign: TextAlign.center,
-                ),
+              if (message != null) Text(message, style: TStyle.blackRegular(16), textAlign: TextAlign.center),
               // const VericalSpacing(20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -196,7 +191,7 @@ class Dialogs {
             mainAxisSize: MainAxisSize.min,
             children: [
               const VerticalSpacing(20),
-              Text(title, style: TStyle.blackBold(18)),
+              Text(title, style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold)),
               const VerticalSpacing(10),
               if (message != null) Text(message, style: TStyle.blackRegular(16)),
               const VerticalSpacing(20),

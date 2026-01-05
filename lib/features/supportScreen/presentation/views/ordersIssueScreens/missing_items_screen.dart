@@ -181,7 +181,7 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
                             const VerticalSpacing(16),
                             ..._buildItemSections(orderDetail),
                             const VerticalSpacing(16),
-                            Text(l10n.addYourNotes, style: TStyle.blackMedium(14)),
+                            Text(l10n.addYourNotes, style: TStyle.robotBlackRegular14()),
                             const VerticalSpacing(8),
                             MainTextField(controller: _notesController, hintText: l10n.typeYourMessage, maxLines: 5),
                           ],
@@ -224,12 +224,14 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
                     child: Center(
                       child: Text(
                         vendorDetail.vendor.name.isNotEmpty ? vendorDetail.vendor.name.substring(0, 1).toUpperCase() : 'V',
-                        style: TStyle.blackBold(16),
+                        style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
                       ),
                     ),
                   ),
                 const HorizontalSpacing(12),
-                Expanded(child: Text(vendorDetail.vendor.name, style: TStyle.blackBold(16))),
+                Expanded(
+                  child: Text(vendorDetail.vendor.name, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+                ),
               ],
             ),
           ),

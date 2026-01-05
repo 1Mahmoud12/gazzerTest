@@ -20,7 +20,14 @@ class ImageWithAlignedBtn extends StatelessWidget {
           Image.asset(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
           Align(
             alignment: align,
-            child: MainBtn(onPressed: () {}, width: 115, height: 35, text: L10n.tr().orderNow, bgColor: Co.secondary, textStyle: TStyle.primaryBold(14)),
+            child: MainBtn(
+              onPressed: () {},
+              width: 115,
+              height: 35,
+              text: L10n.tr().orderNow,
+              bgColor: Co.secondary,
+              textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+            ),
           ),
         ],
       ),

@@ -16,13 +16,7 @@ import 'package:gazzer/features/cart/presentation/bus/cart_bus.dart';
 import 'package:gazzer/features/cart/presentation/bus/cart_events.dart';
 
 class SmartCartWidget extends StatefulWidget {
-  const SmartCartWidget({
-    super.key,
-    required this.id,
-    required this.type,
-    required this.outOfStock,
-    this.onDoubleTap,
-  });
+  const SmartCartWidget({super.key, required this.id, required this.type, required this.outOfStock, this.onDoubleTap});
 
   final int id;
   final CartItemType type;
@@ -47,10 +41,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
     cartBus = di<CartBus>();
 
     // Initialize animation
-    controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-    );
+    controller = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
     animation = Tween<double>(begin: 1, end: 1.25).animate(controller);
 
     // Set initial quantity
@@ -66,9 +57,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
     });
 
     // Listen to loading events to update quantity when loading completes
-    loadingListener = cartBus.getStream<FastItemActionsLoading>().listen((
-      event,
-    ) {
+    loadingListener = cartBus.getStream<FastItemActionsLoading>().listen((event) {
       if (mounted && (event.prodId == widget.id)) {
         // Update quantity when loading completes
         quantity.value = _getQuantity();
@@ -87,19 +76,12 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
 
   /// Get current quantity from cart
   int _getQuantity() {
-    return cartBus.cartItems
-            .firstWhereOrNull(
-              (item) => (item.prod.id == widget.id && item.type == widget.type),
-            )
-            ?.quantity ??
-        0;
+    return cartBus.cartItems.firstWhereOrNull((item) => (item.prod.id == widget.id && item.type == widget.type))?.quantity ?? 0;
   }
 
   /// Get cart item entity
   CartItemEntity? _getCartItem() {
-    return cartBus.cartItems.firstWhereOrNull(
-      (item) => item.prod.id == widget.id && item.type == widget.type,
-    );
+    return cartBus.cartItems.firstWhereOrNull((item) => item.prod.id == widget.id && item.type == widget.type);
   }
 
   /// Pulse animation for cart actions
@@ -114,14 +96,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
 
   /// Add item to cart with quantity 1
   void _addToCart() {
-    final req = CartableItemRequest(
-      cartItemId: null,
-      id: widget.id,
-      quantity: 1,
-      note: null,
-      options: {},
-      type: widget.type,
-    );
+    final req = CartableItemRequest(cartItemId: null, id: widget.id, quantity: 1, note: null, options: {}, type: widget.type);
     cartBus.addToCart(req);
     _pulseAnimate();
   }
@@ -161,13 +136,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
   Widget build(BuildContext context) {
     return widget.outOfStock
         ? Center(
-            child: SizedBox(
-              height: 30,
-              child: Text(
-                L10n.tr().outOfStock,
-                style: TStyle.errorSemi(12),
-              ),
-            ),
+            child: SizedBox(height: 30, child: Text(L10n.tr().outOfStock, style: TStyle.errorSemi(12))),
           )
         : ValueListenableBuilder<int>(
             valueListenable: quantity,
@@ -198,11 +167,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
         innerDecoration: BoxDecoration(
           borderRadius: AppConst.defaultBorderRadius,
           gradient: Grad().linearGradient,
-          border: GradientBoxBorder(
-            gradient: Grad().shadowGrad().copyWith(
-              colors: [Co.white.withAlpha(0), Co.white],
-            ),
-          ),
+          border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
         ),
         child: IconButton(
           onPressed: () {
@@ -214,9 +179,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
             elevation: 0,
             minimumSize: Size.zero,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(
-              borderRadius: AppConst.defaultBorderRadius,
-            ),
+            shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
           ),
           icon: const Icon(Icons.add, color: Co.secondary, size: 22),
         ),
@@ -235,11 +198,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
             innerDecoration: BoxDecoration(
               borderRadius: AppConst.defaultBorderRadius,
               gradient: Grad().linearGradient,
-              border: GradientBoxBorder(
-                gradient: Grad().shadowGrad().copyWith(
-                  colors: [Co.white.withAlpha(0), Co.white],
-                ),
-              ),
+              border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
             ),
             child: InkWell(
               onTap: () {
@@ -270,8 +229,8 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
           ConstrainedBox(
             constraints: const BoxConstraints(minWidth: 40),
             child: Text(
-              "$qty",
-              style: TStyle.secondaryBold(16),
+              '$qty',
+              style: TStyle.robotBlackMedium().copyWith(color: Co.secondary, fontWeight: TStyle.bold),
               textAlign: TextAlign.center,
             ),
           ),
@@ -279,11 +238,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
             innerDecoration: BoxDecoration(
               borderRadius: AppConst.defaultBorderRadius,
               gradient: Grad().linearGradient,
-              border: GradientBoxBorder(
-                gradient: Grad().shadowGrad().copyWith(
-                  colors: [Co.white.withAlpha(0), Co.white],
-                ),
-              ),
+              border: GradientBoxBorder(gradient: Grad().shadowGrad().copyWith(colors: [Co.white.withAlpha(0), Co.white])),
             ),
             child: InkWell(
               onTap: () {

@@ -101,7 +101,7 @@ class CartItemCard extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(item.prod.name, style: TStyle.blackBold(12), maxLines: 2),
+                                  Text(item.prod.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold), maxLines: 2),
                                   if (item.options.isNotEmpty)
                                     ...List.generate(item.options.length, (index) => CartOptionWidget(option: item.options[index])),
                                   if (item.orderedWith.isNotEmpty)

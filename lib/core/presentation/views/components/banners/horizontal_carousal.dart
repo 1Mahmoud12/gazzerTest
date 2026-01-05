@@ -75,7 +75,7 @@ class _HorizontalCarousalState extends State<HorizontalCarousal> {
               height: 32,
               width: 110,
               bgColor: Co.secondary,
-              textStyle: TStyle.primaryBold(14),
+              textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
               onPressed: () {},
             ),
           ),

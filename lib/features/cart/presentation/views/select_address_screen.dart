@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/di.dart';
@@ -41,7 +42,9 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
               builder: (context, snapshot) {
                 final addresses = Session().addresses;
                 if (addresses.isEmpty) {
-                  return Center(child: Text(L10n.tr().youHaveNoAddressesYet, style: TStyle.primaryBold(16)));
+                  return Center(
+                    child: Text(L10n.tr().youHaveNoAddressesYet, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                  );
                 }
                 return ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 16),

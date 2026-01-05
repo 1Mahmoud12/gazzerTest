@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
@@ -92,7 +93,7 @@ class _PlanAnimatedBtnState extends State<PlanAnimatedBtn> {
                   widget.child ??
                   Text(
                     widget.text ?? '',
-                    style: widget.textStyle ?? TStyle.primarySemi(16),
+                    style: widget.textStyle ?? TStyle.robotBlackMedium().copyWith(color: Co.purple),
                     textAlign: TextAlign.start,
                   ),
             ),

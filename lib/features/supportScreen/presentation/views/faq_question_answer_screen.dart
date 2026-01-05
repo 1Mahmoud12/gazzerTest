@@ -35,7 +35,10 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
             Text(args.answer, style: TStyle.blackRegular(14)),
             const VerticalSpacing(16),
             Center(
-              child: Text(L10n.tr().wasThisHelpful, style: TStyle.blackBold(14).copyWith(color: Co.purple)),
+              child: Text(
+                L10n.tr().wasThisHelpful,
+                style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.purple),
+              ),
             ),
             const VerticalSpacing(12),
             Row(

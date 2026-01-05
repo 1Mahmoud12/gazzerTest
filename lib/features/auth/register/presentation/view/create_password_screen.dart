@@ -113,7 +113,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   //         );
                   //         setState(() {});
                   //       },
-                  //       child: Text(L10n.tr().wrongNumber, style: TStyle.primaryBold(14)),
+                  //       child: Text(L10n.tr().wrongNumber, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                   //     ),
                   //   ],
                   // ),

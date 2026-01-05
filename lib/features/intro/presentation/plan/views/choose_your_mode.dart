@@ -40,20 +40,8 @@ class _ChooseYourModeState extends State<ChooseYourMode> {
 
   @override
   Widget build(BuildContext context) {
-    final moods = [
-      L10n.tr().happy,
-      L10n.tr().sad,
-      L10n.tr().excited,
-      L10n.tr().bored,
-      L10n.tr().angry,
-    ];
-    final emojis = [
-      "\u{1F60A}",
-      "\u{1F622}",
-      "\u{1F603}",
-      "\u{1F62B}",
-      "\u{1F621}",
-    ];
+    final moods = [L10n.tr().happy, L10n.tr().sad, L10n.tr().excited, L10n.tr().bored, L10n.tr().angry];
+    final emojis = ["\u{1F60A}", "\u{1F622}", "\u{1F603}", "\u{1F62B}", "\u{1F621}"];
     return ImageBackgroundWidget(
       image: Assets.assetsPngChooseMoodShape,
       child: Scaffold(
@@ -63,11 +51,7 @@ class _ChooseYourModeState extends State<ChooseYourMode> {
           padding: AppConst.defaultHrPadding,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(
-              text: L10n.tr().chooseYourMood + "\n",
-              style: TStyle.blackBold(20),
-              gradient: Grad().textGradient,
-            ),
+            GradientText(text: L10n.tr().chooseYourMood + "\n", style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
             const VerticalSpacing(24),
             Column(
               spacing: 16,
@@ -86,11 +70,8 @@ class _ChooseYourModeState extends State<ChooseYourMode> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            emojis.first,
-                            style: const TextStyle(fontSize: 28),
-                          ),
-                          Text(moods[0], style: TStyle.primarySemi(16)),
+                          Text(emojis.first, style: const TextStyle(fontSize: 28)),
+                          Text(moods[0], style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                         ],
                       ),
                     ),
@@ -110,11 +91,8 @@ class _ChooseYourModeState extends State<ChooseYourMode> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            emojis[index + 1],
-                            style: const TextStyle(fontSize: 28),
-                          ),
-                          Text(moods[index + 1], style: TStyle.primarySemi(16)),
+                          Text(emojis[index + 1], style: const TextStyle(fontSize: 28)),
+                          Text(moods[index + 1], style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                         ],
                       ),
                     ),

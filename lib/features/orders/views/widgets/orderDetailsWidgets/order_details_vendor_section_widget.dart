@@ -12,12 +12,7 @@ import 'package:gazzer/features/orders/views/widgets/orderDetailsWidgets/order_d
 
 /// Expandable section displaying vendor information and their order items
 class VendorSection extends StatelessWidget {
-  const VendorSection({
-    super.key,
-    required this.vendorDetail,
-    required this.isExpanded,
-    required this.onToggle,
-  });
+  const VendorSection({super.key, required this.vendorDetail, required this.isExpanded, required this.onToggle});
 
   final OrderDetailVendorEntity vendorDetail;
   final bool isExpanded;
@@ -35,24 +30,14 @@ class VendorSection extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Co.white,
-        borderRadius: BorderRadius.circular(
-          OrderDetailsConstants.cardBorderRadius,
-        ),
+        borderRadius: BorderRadius.circular(OrderDetailsConstants.cardBorderRadius),
         border: Border.all(color: Co.lightGrey),
       ),
       child: Column(
         children: [
-          VendorHeader(
-            vendor: vendorDetail.vendor,
-            itemsCount: vendorDetail.itemsCount,
-            isExpanded: isExpanded,
-            onTap: onToggle,
-          ),
+          VendorHeader(vendor: vendorDetail.vendor, itemsCount: vendorDetail.itemsCount, isExpanded: isExpanded, onTap: onToggle),
           if (isExpanded) const Divider(),
-          if (isExpanded)
-            VendorItemsList(
-              items: vendorDetail.items,
-            ),
+          if (isExpanded) VendorItemsList(items: vendorDetail.items),
         ],
       ),
     );
@@ -60,13 +45,7 @@ class VendorSection extends StatelessWidget {
 }
 
 class VendorHeader extends StatelessWidget {
-  const VendorHeader({
-    super.key,
-    required this.vendor,
-    required this.itemsCount,
-    required this.isExpanded,
-    required this.onTap,
-  });
+  const VendorHeader({super.key, required this.vendor, required this.itemsCount, required this.isExpanded, required this.onTap});
 
   final OrderVendorEntity vendor;
   final int itemsCount;
@@ -92,23 +71,14 @@ class VendorHeader extends StatelessWidget {
         padding: const EdgeInsets.all(VendorSection._headerPadding),
         child: Row(
           children: [
-            VendorLogo(
-              imageUrl: _getVendorImageUrl(),
-              fallbackInitial: _getVendorInitial(),
-            ),
+            VendorLogo(imageUrl: _getVendorImageUrl(), fallbackInitial: _getVendorInitial()),
             const SizedBox(width: VendorSection._iconSpacing),
             Expanded(
-              child: Text(
-                vendor.name,
-                style: TStyle.blackBold(14),
-              ),
+              child: Text(vendor.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
             ),
             ItemsCountIndicator(count: itemsCount),
             const SizedBox(width: VendorSection._iconSpacing),
-            Icon(
-              isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-              color: Colors.black,
-            ),
+            Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: Colors.black),
           ],
         ),
       ),
@@ -117,11 +87,7 @@ class VendorHeader extends StatelessWidget {
 }
 
 class VendorLogo extends StatelessWidget {
-  const VendorLogo({
-    super.key,
-    this.imageUrl,
-    required this.fallbackInitial,
-  });
+  const VendorLogo({super.key, this.imageUrl, required this.fallbackInitial});
 
   final String? imageUrl;
   final String fallbackInitial;
@@ -131,10 +97,7 @@ class VendorLogo extends StatelessWidget {
     return Container(
       width: OrderDetailsConstants.vendorLogoSize,
       height: OrderDetailsConstants.vendorLogoSize,
-      decoration: BoxDecoration(
-        color: Colors.orange.shade100,
-        borderRadius: BorderRadius.circular(VendorSection._logoBorderRadius),
-      ),
+      decoration: BoxDecoration(color: Colors.orange.shade100, borderRadius: BorderRadius.circular(VendorSection._logoBorderRadius)),
       child: imageUrl != null && imageUrl!.isNotEmpty
           ? ClipOval(
               child: CustomNetworkImage(
@@ -145,10 +108,7 @@ class VendorLogo extends StatelessWidget {
               ),
             )
           : Center(
-              child: Text(
-                fallbackInitial,
-                style: TStyle.blackBold(18),
-              ),
+              child: Text(fallbackInitial, style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold)),
             ),
     );
   }
@@ -166,10 +126,7 @@ class ItemsCountIndicator extends StatelessWidget {
       children: [
         SvgPicture.asset(Assets.cartItemIc),
         const SizedBox(width: VendorSection._cartIconSpacing),
-        Text(
-          '$count ${l10n.items}',
-          style: TStyle.robotBlackMedium(),
-        ),
+        Text('$count ${l10n.items}', style: TStyle.robotBlackMedium()),
       ],
     );
   }
@@ -183,19 +140,12 @@ class VendorItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        VendorSection._itemsListPadding,
-        0,
-        VendorSection._itemsListPadding,
-        VendorSection._itemsListPadding,
-      ),
+      padding: const EdgeInsets.fromLTRB(VendorSection._itemsListPadding, 0, VendorSection._itemsListPadding, VendorSection._itemsListPadding),
       child: Column(
         children: items
             .map<Widget>(
               (item) => Padding(
-                padding: const EdgeInsets.only(
-                  bottom: VendorSection._itemSpacing,
-                ),
+                padding: const EdgeInsets.only(bottom: VendorSection._itemSpacing),
                 child: OrderItemTile(item: item),
               ),
             )

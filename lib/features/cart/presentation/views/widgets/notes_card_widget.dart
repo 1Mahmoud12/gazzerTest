@@ -20,7 +20,7 @@ class NotesCartWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Order notes
-          Text(L10n.tr().order_notes, style: TStyle.blackBold(16)),
+          Text(L10n.tr().order_notes, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
           Container(
             decoration: BoxDecoration(color: Co.bg, borderRadius: AppConst.defaultBorderRadius),
             padding: const EdgeInsets.symmetric(vertical: 8),

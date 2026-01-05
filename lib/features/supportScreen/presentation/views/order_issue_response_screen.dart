@@ -18,33 +18,22 @@ class OrderIssueResponseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.tr();
     return Scaffold(
-      appBar: MainAppBar(
-        title: l10n.missingOrIncorrectItems,
-      ),
+      appBar: MainAppBar(title: l10n.missingOrIncorrectItems),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              l10n.weHaveChecked,
-              style: TStyle.robotBlackSubTitle(),
-            ),
+            Text(l10n.weHaveChecked, style: TStyle.robotBlackSubTitle()),
             const VerticalSpacing(16),
-            Text(
-              l10n.orderIssueOutsideRefundWindow,
-              style: TStyle.blackRegular(14),
-            ),
+            Text(l10n.orderIssueOutsideRefundWindow, style: TStyle.blackRegular(14)),
             const VerticalSpacing(12),
-            Text(
-              l10n.contactUsAsSoonAsPossible,
-              style: TStyle.blackRegular(14),
-            ),
+            Text(l10n.contactUsAsSoonAsPossible, style: TStyle.blackRegular(14)),
             const Spacer(),
             Center(
               child: Text(
                 l10n.wasThisHelpful,
-                style: TStyle.blackBold(14).copyWith(color: Co.purple),
+                style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.purple),
               ),
             ),
             const VerticalSpacing(12),
@@ -55,9 +44,7 @@ class OrderIssueResponseScreen extends StatelessWidget {
                     onPressed: () => showFaqRatingBottomSheet(context, orderId: orderId, faqCategoryId: faqCategoryId),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(l10n.yes),
@@ -67,17 +54,11 @@ class OrderIssueResponseScreen extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      context.navigateToPage(
-                        GazzerSupportScreen(
-                          orderId: orderId,
-                        ),
-                      );
+                      context.navigateToPage(GazzerSupportScreen(orderId: orderId));
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(l10n.no),

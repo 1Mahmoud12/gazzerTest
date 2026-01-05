@@ -141,7 +141,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                             Expanded(
                               child: Text(
                                 Helpers.shortIrretableStrings(widget.favorite.name.split(' '), 24) ?? '',
-                                style: TStyle.primaryBold(12),
+                                style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
@@ -153,13 +153,13 @@ class _FavoriteCardState extends State<FavoriteCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             if (widget.favorite.favorablePrice != null)
-                              Text(Helpers.getProperPrice(widget.favorite.favorablePrice!), style: TStyle.tertiaryBold(12))
+                              Text(Helpers.getProperPrice(widget.favorite.favorablePrice!), style: TStyle.robotBlackThin().copyWith(color: Co.purple))
                             else
                               const SizedBox.shrink(),
                             Row(
                               children: [
                                 const Icon(Icons.star, color: Co.secondary, size: 16),
-                                Text(widget.favorite.rate.toStringAsFixed(1), style: TStyle.secondarySemi(12)),
+                                Text(widget.favorite.rate.toStringAsFixed(1), style: TStyle.robotBlackSmall().copyWith(color: Co.secondary)),
                               ],
                             ),
                           ],

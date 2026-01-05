@@ -19,11 +19,7 @@ import 'package:gazzer/features/profile/presentation/cubit/profile_states.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileVerifyOtpScreen extends StatefulWidget {
-  const ProfileVerifyOtpScreen({
-    super.key,
-    required this.sessionId,
-    required this.req,
-  });
+  const ProfileVerifyOtpScreen({super.key, required this.sessionId, required this.req});
   final String sessionId;
   final UpdateProfileReq req;
   @override
@@ -101,15 +97,9 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Co.white,
-                  borderRadius: AppConst.defaultBorderRadius,
-                ),
+                decoration: BoxDecoration(color: Co.white, borderRadius: AppConst.defaultBorderRadius),
                 child: Padding(
-                  padding: const EdgeInsetsGeometry.symmetric(
-                    vertical: 32,
-                    horizontal: 24,
-                  ),
+                  padding: const EdgeInsetsGeometry.symmetric(vertical: 32, horizontal: 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -121,13 +111,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                         textAlign: TextAlign.start,
                       ),
                       const VerticalSpacing(24),
-                      OtpWidget(
-                        controller: otpCont,
-                        count: 6,
-                        width: 60,
-                        height: 50,
-                        spacing: 8,
-                      ),
+                      OtpWidget(controller: otpCont, count: 6, width: 60, height: 50, spacing: 8),
                       const VerticalSpacing(24),
                       SizedBox(
                         height: 50,
@@ -136,16 +120,9 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                             Expanded(
                               child: Row(
                                 children: [
-                                  const Icon(
-                                    Icons.timer,
-                                    color: Co.purple,
-                                    size: 25,
-                                  ),
+                                  const Icon(Icons.timer, color: Co.purple, size: 25),
                                   const HorizontalSpacing(8),
-                                  Text(
-                                    L10n.tr().resendCode,
-                                    style: TStyle.primaryBold(14),
-                                  ),
+                                  Text(L10n.tr().resendCode, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                                 ],
                               ),
                             ),
@@ -157,9 +134,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                                   return Text(
                                     "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
                                     textAlign: TextAlign.end,
-                                    style: TStyle.primarySemi(16).copyWith(
-                                      color: Co.tertiary,
-                                    ),
+                                    style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
                                   );
                                 }
 
@@ -167,22 +142,12 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                                   valueListenable: isResendingOtp,
                                   builder: (context, isResending, child) {
                                     if (isResending) {
-                                      return const Center(
-                                        child: SizedBox(
-                                          height: 50,
-                                          width: 50,
-                                          child: AdaptiveProgressIndicator(),
-                                        ),
-                                      );
+                                      return const Center(child: SizedBox(height: 50, width: 50, child: AdaptiveProgressIndicator()));
                                     }
 
                                     return InkWell(
                                       onTap: () => resend(),
-                                      child: const Icon(
-                                        Icons.refresh,
-                                        color: Co.purple,
-                                        size: 24,
-                                      ),
+                                      child: const Icon(Icons.refresh, color: Co.purple, size: 24),
                                     );
                                   },
                                 );
@@ -194,11 +159,8 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
 
                       ValueListenableBuilder(
                         valueListenable: showSupport,
-                        builder: (context, value, child) => AnimatedScale(
-                          scale: value ? 1 : 0,
-                          duration: const Duration(milliseconds: 200),
-                          child: child,
-                        ),
+                        builder: (context, value, child) =>
+                            AnimatedScale(scale: value ? 1 : 0, duration: const Duration(milliseconds: 200), child: child),
                         child: Column(
                           children: [
                             const VerticalSpacing(10),
@@ -212,15 +174,8 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                                     spacing: 12,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(
-                                        Icons.phone,
-                                        size: 32,
-                                        color: Co.purple,
-                                      ),
-                                      Text(
-                                        L10n.tr().callSupport,
-                                        style: TStyle.primarySemi(16),
-                                      ),
+                                      const Icon(Icons.phone, size: 32, color: Co.purple),
+                                      Text(L10n.tr().callSupport, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                                     ],
                                   ),
                                 ),
@@ -243,23 +198,13 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                           isLoading: state is VerifyOTPLoading,
                           onPressed: () async {
                             if (_formKey.currentState?.validate() != true) {
-                              return Alerts.showToast(
-                                L10n.tr().valueMustBeNum(6, L10n.tr().code),
-                              );
+                              return Alerts.showToast(L10n.tr().valueMustBeNum(6, L10n.tr().code));
                             }
-                            context.read<ProfileCubit>().verifyOtp(
-                              ProfileVerifyOtpReq(
-                                otpCode: otpCont.text,
-                                sessionId: sessionId,
-                              ),
-                            );
+                            context.read<ProfileCubit>().verifyOtp(ProfileVerifyOtpReq(otpCode: otpCont.text, sessionId: sessionId));
                           },
                           textStyle: TStyle.mainwSemi(15),
                           bgColor: Colors.transparent,
-                          child: Text(
-                            L10n.tr().continu,
-                            style: TStyle.primarySemi(16),
-                          ),
+                          child: Text(L10n.tr().continu, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                         ),
                       ),
                     ],

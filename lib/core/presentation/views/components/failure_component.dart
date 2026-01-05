@@ -18,9 +18,14 @@ class FailureComponent extends StatelessWidget {
         children: [
           const VerticalSpacing(8),
           Image.asset(Assets.assetsPngError, height: 200, fit: BoxFit.contain),
-          Text(L10n.tr().oops, style: TStyle.primaryBold(24)),
+          Text(L10n.tr().oops, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
           const Row(),
-          if (message != null) Text(message!, style: TStyle.blackBold(16), textAlign: TextAlign.center),
+          if (message != null)
+            Text(
+              message!,
+              style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+              textAlign: TextAlign.center,
+            ),
           if (onRetry != null)
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -31,7 +36,7 @@ class FailureComponent extends StatelessWidget {
                   radius: 16,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   text: L10n.tr().tryAgain,
-                  textStyle: TStyle.primaryBold(14),
+                  textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
                 ),
               ],
             ),

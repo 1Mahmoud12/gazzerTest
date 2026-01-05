@@ -18,9 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 /// Comprehensive Support Call Service
 /// Handles all call scenarios including SIM detection, permissions, and errors
 class SupportCallService {
-  static const MethodChannel _channel = MethodChannel(
-    'com.gazzer/device_state',
-  );
+  static const MethodChannel _channel = MethodChannel('com.gazzer/device_state');
 
   /// Main method to initiate a support call
   /// Returns true if call was initiated successfully, false otherwise
@@ -154,10 +152,7 @@ class SupportCallService {
   }
 
   /// Make the actual phone call
-  static Future<bool> _makeCall(
-    BuildContext context,
-    String phoneNumber,
-  ) async {
+  static Future<bool> _makeCall(BuildContext context, String phoneNumber) async {
     final Uri telUri = Uri(scheme: 'tel', path: phoneNumber);
 
     try {
@@ -167,10 +162,7 @@ class SupportCallService {
         Alerts.showToast(L10n.tr().callingSupport, isInfo: true);
 
         // Launch the phone dialer
-        final launched = await launchUrl(
-          telUri,
-          mode: LaunchMode.externalApplication,
-        );
+        final launched = await launchUrl(telUri, mode: LaunchMode.externalApplication);
 
         if (!launched && context.mounted) {
           Alerts.showToast(L10n.tr().unableToMakeCall);
@@ -224,10 +216,7 @@ class SupportCallService {
       context: context,
       builder: (context) => Dialog(
         child: Container(
-          decoration: BoxDecoration(
-            color: Co.white,
-            borderRadius: BorderRadius.circular(15),
-          ),
+          decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(15)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
@@ -236,45 +225,28 @@ class SupportCallService {
                 const VerticalSpacing(20),
                 Text(
                   L10n.tr().contactUs,
-                  style: TStyle.blackBold(18),
+                  style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold),
                   textAlign: TextAlign.center,
                 ),
                 const VerticalSpacing(10),
-                Text(
-                  L10n.tr().callSupport,
-                  style: TStyle.greyRegular(14),
-                  textAlign: TextAlign.center,
-                ),
+                Text(L10n.tr().callSupport, style: TStyle.greyRegular(14), textAlign: TextAlign.center),
                 const VerticalSpacing(10),
                 Container(
                   padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Co.purple.withAlpha(25),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                  decoration: BoxDecoration(color: Co.purple.withAlpha(25), borderRadius: BorderRadius.circular(8)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(Icons.phone, color: Co.purple, size: 20),
                       const HorizontalSpacing(8),
-                      Text(
-                        AppConst.supportPhoneNumber,
-                        style: TStyle.primaryBold(16),
-                      ),
+                      Text(AppConst.supportPhoneNumber, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
                     ],
                   ),
                 ),
                 const VerticalSpacing(10),
-                Text(
-                  L10n.tr().support,
-                  style: TStyle.greyRegular(12),
-                  textAlign: TextAlign.center,
-                ),
+                Text(L10n.tr().support, style: TStyle.greyRegular(12), textAlign: TextAlign.center),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Row(
                     children: [
                       Expanded(

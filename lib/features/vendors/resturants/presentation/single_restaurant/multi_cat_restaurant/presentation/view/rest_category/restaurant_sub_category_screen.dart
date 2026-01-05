@@ -4,6 +4,7 @@ import 'package:gazzer/core/data/resources/fakers.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/di.dart';
@@ -27,11 +28,7 @@ class RestaurantCategoryRoute extends GoRouteData with _$RestaurantCategoryRoute
   final String subcatName;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return RestaurantCategoryScreen(
-      vendor: $extra,
-      subCatId: subCatId,
-      subcatName: subcatName,
-    );
+    return RestaurantCategoryScreen(vendor: $extra, subCatId: subCatId, subcatName: subcatName);
   }
 }
 
@@ -49,14 +46,12 @@ class RestaurantCategoryScreen extends StatelessWidget {
       body: Column(
         children: [
           MultiCatRestHeader(restaurant: vendor, categires: null),
-          Text(subcatName, style: TStyle.primaryBold(16)),
+          Text(subcatName, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
           FutureBuilder(
             future: di<RestaurantsRepo>().getPlatesOfSpecificRestaurantCategory(vendor.id, subCatId),
             builder: (context, snapshot) {
               if (snapshot.hasError || snapshot.data is Err) {
-                return FailureComponent(
-                  message: L10n.tr().couldnotLoadDataPleaseTryAgain,
-                );
+                return FailureComponent(message: L10n.tr().couldnotLoadDataPleaseTryAgain);
               }
               final isLoading = snapshot.connectionState == ConnectionState.waiting;
               final items = isLoading ? Fakers.plates : (snapshot.data as Ok<List<PlateEntity>>).value;

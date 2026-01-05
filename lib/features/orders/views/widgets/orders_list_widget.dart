@@ -11,10 +11,7 @@ import 'package:gazzer/features/orders/views/widgets/order_card_widget.dart';
 import 'package:go_router/go_router.dart';
 
 class OrdersListWidget extends StatelessWidget {
-  const OrdersListWidget({
-    super.key,
-    this.showGetHelpInsteadOfReorder = false,
-  });
+  const OrdersListWidget({super.key, this.showGetHelpInsteadOfReorder = false});
 
   final bool showGetHelpInsteadOfReorder;
 
@@ -37,17 +34,12 @@ class OrdersListWidget extends StatelessWidget {
 
         if (orders.isEmpty && state is! OrdersLoading) {
           return Center(
-            child: Text(
-              L10n.tr().noData,
-              style: TStyle.primaryBold(16),
-            ),
+            child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
           );
         }
 
         if (orders.isEmpty && state is OrdersLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
         final hasMore = state is OrdersLoaded
@@ -82,10 +74,7 @@ class OrdersListWidget extends StatelessWidget {
                 showGetHelpInsteadOfReorder: showGetHelpInsteadOfReorder,
                 onViewDetails: () async {
                   final orderId = int.tryParse(order.orderId) ?? 0;
-                  await context.push(
-                    OrderDetailsScreen.route,
-                    extra: orderId,
-                  );
+                  await context.push(OrderDetailsScreen.route, extra: orderId);
                   // Reload orders from current page when coming back
                   if (context.mounted) {
                     await context.read<OrdersCubit>().reloadCurrentPage();
@@ -116,10 +105,7 @@ class _LoadingMoreItem extends StatelessWidget {
     }
 
     return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: LoadingWidget(),
-      ),
+      child: Padding(padding: EdgeInsets.all(16.0), child: LoadingWidget()),
     );
   }
 }

@@ -50,7 +50,7 @@ class PostCheckoutScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SvgPicture.asset(Assets.assetsSvgSuccess),
-                      GradientText(text: L10n.tr().orderPlacedSuccessfully, style: TStyle.blackBold(22)),
+                      GradientText(text: L10n.tr().orderPlacedSuccessfully, style: TStyle.robotBlackSubTitle()),
                       const VerticalSpacing(64),
                     ],
                   ),

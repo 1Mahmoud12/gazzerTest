@@ -23,10 +23,7 @@ class _IncorrectItemCard extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isSelected ? Co.purple : Colors.grey.shade300,
-          width: isSelected ? 2 : 1,
-        ),
+        border: Border.all(color: isSelected ? Co.purple : Colors.grey.shade300, width: isSelected ? 2 : 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,9 +34,7 @@ class _IncorrectItemCard extends StatelessWidget {
               Transform.scale(
                 scale: 1.1,
                 child: Checkbox(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   value: isSelected,
                   visualDensity: VisualDensity.compact,
@@ -48,34 +43,21 @@ class _IncorrectItemCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  item.name,
-                  style: TStyle.blackMedium(14),
-                ),
-              ),
+              Expanded(child: Text(item.name, style: TStyle.robotBlackRegular14())),
             ],
           ),
           // Show photo and note fields only if selected
           if (isSelected) ...[
             const VerticalSpacing(12),
             // Photo section
-            Text(
-              L10n.tr().takePhotoOfItem,
-              style: TStyle.blackMedium(12),
-            ),
+            Text(L10n.tr().takePhotoOfItem, style: TStyle.robotBlackThin()),
             const VerticalSpacing(8),
             if (itemData?.photo != null)
               Stack(
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.file(
-                      itemData!.photo!,
-                      height: 160,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
+                    child: Image.file(itemData!.photo!, height: 160, width: double.infinity, fit: BoxFit.fill),
                   ),
                   Positioned(
                     top: 4,
@@ -84,15 +66,8 @@ class _IncorrectItemCard extends StatelessWidget {
                       onTap: onRemovePhoto,
                       child: Container(
                         padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Colors.black54,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                          size: 16,
-                        ),
+                        decoration: const BoxDecoration(color: Colors.black54, shape: BoxShape.circle),
+                        child: const Icon(Icons.close, color: Colors.white, size: 16),
                       ),
                     ),
                   ),
@@ -112,34 +87,18 @@ class _IncorrectItemCard extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.camera_alt,
-                        color: Colors.grey.shade400,
-                        size: 32,
-                      ),
+                      Icon(Icons.camera_alt, color: Colors.grey.shade400, size: 32),
                       const SizedBox(height: 8),
-                      Text(
-                        L10n.tr().tapToTakePhoto,
-                        style: TStyle.blackRegular(12).copyWith(
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
+                      Text(L10n.tr().tapToTakePhoto, style: TStyle.blackRegular(12).copyWith(color: Colors.grey.shade600)),
                     ],
                   ),
                 ),
               ),
             const VerticalSpacing(12),
             // Note section
-            Text(
-              L10n.tr().addYourNotes,
-              style: TStyle.blackMedium(12),
-            ),
+            Text(L10n.tr().addYourNotes, style: TStyle.robotBlackThin()),
             const VerticalSpacing(8),
-            MainTextField(
-              controller: itemData?.noteController ?? TextEditingController(),
-              hintText: L10n.tr().typeYourMessage,
-              maxLines: 3,
-            ),
+            MainTextField(controller: itemData?.noteController ?? TextEditingController(), hintText: L10n.tr().typeYourMessage, maxLines: 3),
           ],
         ],
       ),

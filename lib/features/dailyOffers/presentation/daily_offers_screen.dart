@@ -166,7 +166,12 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                               padding: AppConst.defaultPadding,
                               sliver: SliverToBoxAdapter(
                                 child: Row(
-                                  children: [GradientText(text: L10n.tr().storesOffersForYou, style: TStyle.blackBold(16))],
+                                  children: [
+                                    GradientText(
+                                      text: L10n.tr().storesOffersForYou,
+                                      style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

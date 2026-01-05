@@ -14,7 +14,7 @@ class CardPlateInfoWidget extends StatelessWidget {
       children: [
         Text(
           plate.name,
-          style: TStyle.primaryBold(14),
+          style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -23,17 +23,17 @@ class CardPlateInfoWidget extends StatelessWidget {
           spacing: 4,
           children: [
             const Icon(Icons.star, color: Co.tertiary, size: 18),
-            HorizontalSpacing(8),
-            Text(plate.rate.toStringAsFixed(2), style: TStyle.blackBold(13).copyWith(color: Co.tertiary)),
-            Text("(${plate.reviewCount.toInt()})", style: TStyle.blackBold(12)),
+            const HorizontalSpacing(8),
+            Text(plate.rate.toStringAsFixed(2), style: TStyle.robotBlackRegular14().copyWith(color: Co.tertiary)),
+            Text('(${plate.reviewCount})', style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
           ],
         ),
 
         Row(
           spacing: 16,
           children: [
-            Text(plate.price.toStringAsFixed(2), style: TStyle.blackBold(12)),
-            Text('EGP', style: TStyle.blackBold(12)),
+            Text(plate.price.toStringAsFixed(2), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+            Text('EGP', style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
           ],
         ),
       ],

@@ -97,7 +97,13 @@ class _OptionBtnState extends State<OptionBtn> {
 
           child: Padding(
             padding: widget.padding ?? EdgeInsets.zero,
-            child: widget.child ?? Text(widget.text ?? '', style: widget.textStyle ?? TStyle.primarySemi(16), textAlign: widget.textAlign),
+            child:
+                widget.child ??
+                Text(
+                  widget.text ?? '',
+                  style: widget.textStyle ?? TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                  textAlign: widget.textAlign,
+                ),
           ),
         ),
       ),

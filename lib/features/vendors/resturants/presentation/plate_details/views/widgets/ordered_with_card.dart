@@ -58,7 +58,9 @@ class OrderedWithCard extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Expanded(child: Text(product.name, style: TStyle.primaryBold(15))),
+                              Expanded(
+                                child: Text(product.name, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                              ),
                               Row(
                                 children: [
                                   const Icon(Icons.star, color: Co.secondary, size: 16),

@@ -82,7 +82,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       return UnAuthComponent(msg: L10n.tr().pleaseLoginToUseFavorites);
                     }
                     if (event == null || event.favorites.isEmpty) {
-                      return Center(child: Text(L10n.tr().youHaveNoFavoritesYet, style: TStyle.primaryBold(20)));
+                      return Center(
+                        child: Text(L10n.tr().youHaveNoFavoritesYet, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+                      );
                     }
 
                     final allFavorites = event.favorites.values.expand((group) => group.values);
@@ -120,7 +122,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                             ),
                             const VerticalSpacing(8),
                             if (currentList.isEmpty)
-                              Center(child: Text(L10n.tr().noData, style: TStyle.primaryBold(18)))
+                              Center(
+                                child: Text(L10n.tr().noData, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                              )
                             else
                               LayoutBuilder(
                                 builder: (context, constraints) {

@@ -30,10 +30,7 @@ class DeleteAccountRoute extends GoRouteData with _$DeleteAccountRoute {
   final ProfileCubit $extra;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return BlocProvider.value(
-      value: $extra,
-      child: const DeleteAccountScreen(),
-    );
+    return BlocProvider.value(value: $extra, child: const DeleteAccountScreen());
   }
 }
 
@@ -83,12 +80,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               return BlocProvider.value(
                 value: cubit,
                 child: DeleteAccountSheet(
-                  req: DeleteAccountReq(
-                    otpCode: '',
-                    sessionId: state.sessionId,
-                    reasonId: reasonId,
-                    reasonText: reasonController.text.trim(),
-                  ),
+                  req: DeleteAccountReq(otpCode: '', sessionId: state.sessionId, reasonId: reasonId, reasonText: reasonController.text.trim()),
                 ),
               );
             },
@@ -107,12 +99,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                 return BlocProvider.value(
                   value: cubit,
                   child: DeleteAccountSheet(
-                    req: DeleteAccountReq(
-                      otpCode: '',
-                      sessionId: '',
-                      reasonId: reasonId,
-                      reasonText: reasonController.text.trim(),
-                    ),
+                    req: DeleteAccountReq(otpCode: '', sessionId: '', reasonId: reasonId, reasonText: reasonController.text.trim()),
                     initialRemainingSeconds: state.remainingSeconds,
                   ),
                 );
@@ -133,12 +120,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               return BlocProvider.value(
                 value: cubit,
                 child: DeleteAccountSheet(
-                  req: DeleteAccountReq(
-                    otpCode: '',
-                    sessionId: '',
-                    reasonId: reasonId,
-                    reasonText: reasonController.text.trim(),
-                  ),
+                  req: DeleteAccountReq(otpCode: '', sessionId: '', reasonId: reasonId, reasonText: reasonController.text.trim()),
                   initialRemainingSeconds: state.remainingSeconds,
                 ),
               );
@@ -165,10 +147,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                     alignment: AlignmentDirectional.bottomStart,
                     child: Padding(
                       padding: AppConst.defaultPadding,
-                      child: Text(
-                        L10n.tr().deleteAccount,
-                        style: TStyle.secondarySemi(20),
-                      ),
+                      child: Text(L10n.tr().deleteAccount, style: TStyle.robotBlackSubTitle().copyWith(color: Co.secondary)),
                     ),
                   ),
                 ),
@@ -181,16 +160,11 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                     Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(
-                            text: L10n.tr().whyAreYouDeletingYourAccount,
-                          ),
+                          TextSpan(text: L10n.tr().whyAreYouDeletingYourAccount),
                           const TextSpan(text: '\n'),
-                          TextSpan(
-                            text: L10n.tr().thisFeedbackHelpsUsImproveOurServices,
-                            style: TStyle.greySemi(12),
-                          ),
+                          TextSpan(text: L10n.tr().thisFeedbackHelpsUsImproveOurServices, style: TStyle.greySemi(12)),
                         ],
-                        style: TStyle.blackBold(14).copyWith(height: 1.7),
+                        style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, height: 1.7),
                       ),
                     ),
                   ],
@@ -201,10 +175,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   buildWhen: (previous, current) => current is FetchDeleteAccountReasonsLoading || previous is FetchDeleteAccountReasonsLoading,
                   builder: (context, state) {
                     if (state is FetchDeleteAccountReasonsError) {
-                      return FailureComponent(
-                        message: state.message,
-                        onRetry: () => cubit.getDeleteAccountReasons(),
-                      );
+                      return FailureComponent(message: state.message, onRetry: () => cubit.getDeleteAccountReasons());
                     } else {
                       final items = state is FetchDeleteAccountReasonsSuccess ? state.reasons : Fakers.reasons;
                       return Skeletonizer(
@@ -221,10 +192,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                                 groupValue: reasonId,
                                 splashRadius: AppConst.defaultRadius,
                                 contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  L10n.tr().otherReason,
-                                  style: TStyle.blackBold(14),
-                                ),
+                                title: Text(L10n.tr().otherReason, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                                 onChanged: (value) {
                                   setState(() => reasonId = value);
                                 },
@@ -233,14 +201,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             return RadioListTile(
                               value: items[index].id,
 
-                              subtitle: Text(
-                                items[index].description,
-                                style: TStyle.greySemi(12),
-                              ),
-                              title: Text(
-                                items[index].title,
-                                style: TStyle.blackBold(14),
-                              ),
+                              subtitle: Text(items[index].description, style: TStyle.greySemi(12)),
+                              title: Text(items[index].title, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                               splashRadius: AppConst.defaultRadius,
                               contentPadding: EdgeInsets.zero,
                               groupValue: reasonId,
@@ -278,13 +240,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                           bgColor: Colors.transparent,
                           controller: reasonController,
                           hintText: L10n.tr().reason,
-                          validator: (v) => reasonId != -1
-                              ? null
-                              : Validators.valueAtLeastNum(
-                                  v,
-                                  L10n.tr().reason,
-                                  10,
-                                ),
+                          validator: (v) => reasonId != -1 ? null : Validators.valueAtLeastNum(v, L10n.tr().reason, 10),
                         ),
                       ),
                     ),
@@ -305,17 +261,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             useSafeArea: true,
                             constraints: const BoxConstraints(minHeight: 250),
                             builder: (context) {
-                              return ConfirmSheet(
-                                btnText: L10n.tr().deleteAccount,
-                                msg: L10n.tr().confirmToDelete,
-                              );
+                              return ConfirmSheet(btnText: L10n.tr().deleteAccount, msg: L10n.tr().confirmToDelete);
                             },
                           );
                           if (res == true) cubit.requestDeleteAccount();
                         },
 
                         radius: AppConst.defaultRadius,
-                        textStyle: TStyle.secondarySemi(14),
+                        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.secondary),
                         text: L10n.tr().continu,
                       ),
                     ),

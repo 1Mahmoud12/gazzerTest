@@ -197,7 +197,7 @@ class PharmacyVendorCard extends StatelessWidget {
                         //           children: [
                         //             const Icon(Icons.star, color: Co.tertiary, size: 18),
                         //             const SizedBox(width: 4),
-                        //             Text('$rating ( $reviewCount )', style: TStyle.blackBold(12).copyWith(color: Co.tertiary)),
+                        //             Text('$rating ( $reviewCount )', style: TStyle.robotBlackThin().copyWith(color: Co.tertiary)),
                         //           ],
                         //         ),
                         //         const VerticalSpacing(4),

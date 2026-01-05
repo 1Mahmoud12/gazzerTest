@@ -66,7 +66,10 @@ class VendorInfoCard extends StatelessWidget {
                           children: [
                             FittedBox(
                               fit: BoxFit.scaleDown,
-                              child: GradientText(text: vendor.name, style: TStyle.blackBold(16)),
+                              child: GradientText(
+                                text: vendor.name,
+                                style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+                              ),
                             ),
                             if (categories?.isNotEmpty == true)
                               Text(
@@ -93,7 +96,10 @@ class VendorInfoCard extends StatelessWidget {
                                       child: Text.rich(
                                         TextSpan(
                                           children: [
-                                            TextSpan(text: '${L10n.tr().from}:  ', style: TStyle.primaryBold(12)),
+                                            TextSpan(
+                                              text: '${L10n.tr().from}:  ',
+                                              style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
+                                            ),
                                             if (vendor.startTime != null)
                                               TextSpan(text: vendor.startTime!.defaultTimeFormat, style: TStyle.greyRegular(12))
                                             else
@@ -111,7 +117,10 @@ class VendorInfoCard extends StatelessWidget {
                                       child: Text.rich(
                                         TextSpan(
                                           children: [
-                                            TextSpan(text: '${L10n.tr().to}:  ', style: TStyle.primaryBold(12)),
+                                            TextSpan(
+                                              text: '${L10n.tr().to}:  ',
+                                              style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
+                                            ),
                                             if (vendor.endTime != null)
                                               TextSpan(text: vendor.endTime!.defaultTimeFormat, style: TStyle.greyRegular(12))
                                             else
@@ -142,7 +151,7 @@ class VendorInfoCard extends StatelessWidget {
                             spacing: 6,
                             children: [
                               const Icon(Icons.star, color: Co.secondary, size: 20),
-                              Text(vendor.rate.toStringAsFixed(1), style: TStyle.primaryBold(13)),
+                              Text(vendor.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                             ],
                           ),
                         ],

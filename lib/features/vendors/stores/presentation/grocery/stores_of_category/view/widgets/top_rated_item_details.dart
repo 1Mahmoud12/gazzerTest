@@ -99,7 +99,7 @@ class TopRatedItemDetails extends StatelessWidget {
                         //         mainAxisAlignment: MainAxisAlignment.center,
                         //         children: [
                         //           const Icon(Icons.star, color: Co.secondary, size: 20),
-                        //           Text(item.rate.toStringAsFixed(2), style: TStyle.secondaryBold(12)),
+                        //           Text(item.rate.toStringAsFixed(2), style: TStyle.robotBlackSmall().copyWith(color: Co.secondary,fontWeight:bold)),
                         //         ],
                         //       ),
                         //     ),

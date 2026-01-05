@@ -110,7 +110,7 @@ class MultiCatRestHeader extends StatelessWidget {
                 children: [
                   const VectorGraphicsWidget(Assets.starRateIc),
                   const SizedBox(width: 4),
-                  Text(restaurant.rate.toStringAsFixed(1), style: TStyle.blackBold(16)),
+                  Text(restaurant.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
                   const SizedBox(width: 12),
                   InkWell(
                     onTap: () {

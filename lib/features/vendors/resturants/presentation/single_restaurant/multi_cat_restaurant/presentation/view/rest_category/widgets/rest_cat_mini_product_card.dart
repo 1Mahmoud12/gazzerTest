@@ -42,16 +42,13 @@ class RestCatMiniProductCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(prod.name, style: TStyle.blackBold(12)),
+                  Text(prod.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       DoubledDecoratedWidget(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          bottomRight: Radius.circular(12),
-                        ),
+                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
                         child: InkWell(
                           onTap: () {
                             SystemSound.play(SystemSoundType.click);
@@ -78,10 +75,13 @@ class RestCatMiniProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Icon(Icons.star, color: Co.secondary, size: 20),
-                      Text(prod.rate.toStringAsFixed(1), style: TStyle.blackBold(12).copyWith(color: Co.secondary)),
+                      Text(
+                        prod.rate.toStringAsFixed(1),
+                        style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.secondary).copyWith(color: Co.secondary),
+                      ),
                     ],
                   ),
-                  Text(Helpers.getProperPrice(prod.price), style: TStyle.blackBold(12)),
+                  Text(Helpers.getProperPrice(prod.price), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                 ],
               ),
             ),

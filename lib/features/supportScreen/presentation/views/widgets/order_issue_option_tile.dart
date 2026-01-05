@@ -3,11 +3,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 /// Tile widget for order issue screen options
 class OrderIssueOptionTile extends StatelessWidget {
-  const OrderIssueOptionTile({
-    super.key,
-    required this.title,
-    required this.onTap,
-  });
+  const OrderIssueOptionTile({super.key, required this.title, required this.onTap});
 
   final String title;
   final VoidCallback onTap;
@@ -19,18 +15,10 @@ class OrderIssueOptionTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-        decoration: BoxDecoration(
-          color: Co.purple100,
-          borderRadius: BorderRadius.circular(16),
-        ),
+        decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                title,
-                style: TStyle.blackMedium(16),
-              ),
-            ),
+            Expanded(child: Text(title, style: TStyle.robotBlackMedium())),
             const Icon(Icons.chevron_right, color: Co.purple),
           ],
         ),

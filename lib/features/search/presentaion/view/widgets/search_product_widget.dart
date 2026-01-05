@@ -50,7 +50,7 @@ class SearchProductWidget extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
-                  child: Text(product.badge ?? '', style: TStyle.primarySemi(12)),
+                  child: Text(product.badge ?? '', style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
                 ),
               ),
               child: ClipRRect(

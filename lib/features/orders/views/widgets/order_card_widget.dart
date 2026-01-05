@@ -69,7 +69,12 @@ class OrderCardWidget extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(color: order.status.badgeColor, borderRadius: BorderRadius.circular(20)),
-                            child: Text(order.status.label, style: TStyle.blackBold(12).copyWith(color: _getStatusTextColor(order.status))),
+                            child: Text(
+                              order.status.label,
+                              style: TStyle.robotBlackRegular14()
+                                  .copyWith(fontWeight: TStyle.bold, color: _getStatusTextColor(order.status))
+                                  .copyWith(color: _getStatusTextColor(order.status)),
+                            ),
                           ),
                           const VerticalSpacing(6),
                           Align(
@@ -420,7 +425,12 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(color: order.status.badgeColor, borderRadius: BorderRadius.circular(20)),
-                          child: Text(order.status.label, style: TStyle.blackBold(12).copyWith(color: _getStatusTextColor(order.status))),
+                          child: Text(
+                            order.status.label,
+                            style: TStyle.robotBlackRegular14()
+                                .copyWith(fontWeight: TStyle.bold, color: _getStatusTextColor(order.status))
+                                .copyWith(color: _getStatusTextColor(order.status)),
+                          ),
                         ),
                         const VerticalSpacing(6),
                         Text(timeEstimate, style: TStyle.blackRegular(12)),
@@ -548,7 +558,12 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(color: order.status.badgeColor, borderRadius: BorderRadius.circular(20)),
-                      child: Text(order.status.label, style: TStyle.blackBold(12).copyWith(color: _getStatusTextColor(order.status))),
+                      child: Text(
+                        order.status.label,
+                        style: TStyle.robotBlackRegular14()
+                            .copyWith(fontWeight: TStyle.bold, color: _getStatusTextColor(order.status))
+                            .copyWith(color: _getStatusTextColor(order.status)),
+                      ),
                     ),
                     const VerticalSpacing(6),
                     Text(timeEstimate, style: TStyle.blackRegular(12)),

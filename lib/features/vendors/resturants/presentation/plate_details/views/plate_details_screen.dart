@@ -315,7 +315,10 @@ class _ProductImageHeader extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
-              child: Text('${plate.offer!.discount} ${plate.offer!.discountType == DiscountType.percentage ? '%' : ''}', style: TStyle.blackBold(14)),
+              child: Text(
+                '${plate.offer!.discount} ${plate.offer!.discountType == DiscountType.percentage ? '%' : ''}',
+                style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold),
+              ),
             ),
           ),
       ],
@@ -335,7 +338,9 @@ class _VendorInfo extends StatelessWidget {
       children: [
         const VectorGraphicsWidget(Assets.restaurantNameIc),
         const SizedBox(width: 12),
-        Expanded(child: Text(plate.store!.name, style: TStyle.blackBold(16))),
+        Expanded(
+          child: Text(plate.store!.name, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -463,7 +468,7 @@ class _NotesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(L10n.tr().notes, style: TStyle.blackBold(16)),
+        Text(L10n.tr().notes, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
         const SizedBox(height: 12),
         MainTextField(
           controller: TextEditingController(text: note),

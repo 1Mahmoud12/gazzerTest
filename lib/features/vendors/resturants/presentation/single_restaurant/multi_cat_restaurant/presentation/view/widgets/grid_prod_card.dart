@@ -81,10 +81,13 @@ class SingleGridProduct extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Icon(Icons.star, color: Co.secondary, size: 18),
-                                    Text(prod.rate.toStringAsFixed(1), style: TStyle.secondaryBold(12)),
+                                    Text(
+                                      prod.rate.toStringAsFixed(1),
+                                      style: TStyle.robotBlackSmall().copyWith(color: Co.secondary, fontWeight: TStyle.bold),
+                                    ),
                                   ],
                                 ),
-                                Text(Helpers.getProperPrice(prod.price), style: TStyle.blackBold(12)),
+                                Text(Helpers.getProperPrice(prod.price), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                               ],
                             ),
                             DecoratedFavoriteWidget(

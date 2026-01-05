@@ -22,7 +22,11 @@ class _ProfileAddressesComponent extends StatelessWidget {
                     ? SizedBox(
                         height: 60,
                         child: Center(
-                          child: Text(L10n.tr().youHaveNoAddressesYet, style: TStyle.primarySemi(14), textAlign: TextAlign.center),
+                          child: Text(
+                            L10n.tr().youHaveNoAddressesYet,
+                            style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       )
                     : Scrollbar(

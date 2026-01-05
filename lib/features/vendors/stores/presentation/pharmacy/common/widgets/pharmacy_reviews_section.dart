@@ -7,10 +7,7 @@ import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 
 /// Pharmacy reviews section widget
 class PharmacyReviewsSection extends StatelessWidget {
-  const PharmacyReviewsSection({
-    super.key,
-    this.onViewAll,
-  });
+  const PharmacyReviewsSection({super.key, this.onViewAll});
 
   final VoidCallback? onViewAll;
 
@@ -24,25 +21,17 @@ class PharmacyReviewsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header Section
-          HeaderSection(
-            isAr: isAr,
-            onViewAll: onViewAll,
-          ),
+          HeaderSection(isAr: isAr, onViewAll: onViewAll),
 
           const VerticalSpacing(16),
 
           // Divider
-          Container(
-            height: 1,
-            color: Co.grey.withOpacityNew(0.3),
-          ),
+          Container(height: 1, color: Co.grey.withOpacityNew(0.3)),
 
           const VerticalSpacing(20),
 
           // Reviews List
-          ReviewsList(
-            isAr: isAr,
-          ),
+          ReviewsList(isAr: isAr),
         ],
       ),
     );
@@ -50,11 +39,7 @@ class PharmacyReviewsSection extends StatelessWidget {
 }
 
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({
-    super.key,
-    required this.isAr,
-    this.onViewAll,
-  });
+  const HeaderSection({super.key, required this.isAr, this.onViewAll});
 
   final bool isAr;
   final VoidCallback? onViewAll;
@@ -63,49 +48,27 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TitleWithMore(
-          title: L10n.tr().reviews,
-          titleStyle: TStyle.blackBold(20),
-          onPressed: onViewAll,
-        ),
+        TitleWithMore(title: L10n.tr().reviews, titleStyle: TStyle.robotBlackSubTitle(), onPressed: onViewAll),
         const VerticalSpacing(12),
         Row(
           children: [
             Expanded(
-              child: Text(
-                L10n.tr(context).typeYouReviewHere,
-                style: TStyle.burbleRegular(12),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
+              child: Text(L10n.tr(context).typeYouReviewHere, style: TStyle.burbleRegular(12), overflow: TextOverflow.ellipsis, maxLines: 1),
             ),
 
             const HorizontalSpacing(4),
             const Spacer(),
-            Text(
-              '4.6',
-              style: TStyle.blackRegular(14),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
+            Text('4.6', style: TStyle.blackRegular(14), overflow: TextOverflow.ellipsis, maxLines: 1),
             const HorizontalSpacing(4),
             ...List.generate(
               5,
               (index) => const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.0),
-                child: Icon(
-                  Icons.star,
-                  color: Co.tertiary,
-                ),
+                child: Icon(Icons.star, color: Co.tertiary),
               ),
             ),
             const HorizontalSpacing(4),
-            Text(
-              '(1120)',
-              style: TStyle.blackRegular(14),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
+            Text('(1120)', style: TStyle.blackRegular(14), overflow: TextOverflow.ellipsis, maxLines: 1),
           ],
         ),
       ],
@@ -114,10 +77,7 @@ class HeaderSection extends StatelessWidget {
 }
 
 class ReviewsList extends StatelessWidget {
-  const ReviewsList({
-    super.key,
-    required this.isAr,
-  });
+  const ReviewsList({super.key, required this.isAr});
 
   final bool isAr;
 
@@ -132,10 +92,7 @@ class ReviewsList extends StatelessWidget {
             .map(
               (review) => Padding(
                 padding: const EdgeInsets.only(bottom: 16),
-                child: ReviewItem(
-                  review: review,
-                  isAr: isAr,
-                ),
+                child: ReviewItem(review: review, isAr: isAr),
               ),
             )
             .toList(),
@@ -168,11 +125,7 @@ class ReviewsList extends StatelessWidget {
 }
 
 class ReviewItem extends StatelessWidget {
-  const ReviewItem({
-    super.key,
-    required this.review,
-    required this.isAr,
-  });
+  const ReviewItem({super.key, required this.review, required this.isAr});
 
   final Map<String, dynamic> review;
   final bool isAr;
@@ -188,10 +141,7 @@ class ReviewItem extends StatelessWidget {
           height: 40,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(
-              color: Co.buttonGradient.withOpacityNew(0.3),
-              width: 2,
-            ),
+            border: Border.all(color: Co.buttonGradient.withOpacityNew(0.3), width: 2),
           ),
           child: ClipOval(
             child: Image.network(
@@ -200,11 +150,7 @@ class ReviewItem extends StatelessWidget {
               errorBuilder: (context, error, stackTrace) {
                 return Container(
                   color: Co.buttonGradient.withOpacityNew(0.1),
-                  child: const Icon(
-                    Icons.person,
-                    color: Co.buttonGradient,
-                    size: 20,
-                  ),
+                  child: const Icon(Icons.person, color: Co.buttonGradient, size: 20),
                 );
               },
             ),
@@ -219,22 +165,12 @@ class ReviewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Name
-              Text(
-                review['name'],
-                style: TStyle.blackBold(14),
-              ),
+              Text(review['name'], style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
 
               const SizedBox(height: 4),
 
               // Review Text
-              Text(
-                review['text'],
-                style: TStyle.greyRegular(12).copyWith(
-                  height: 1.4,
-                ),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
+              Text(review['text'], style: TStyle.greyRegular(12).copyWith(height: 1.4), maxLines: 3, overflow: TextOverflow.ellipsis),
             ],
           ),
         ),

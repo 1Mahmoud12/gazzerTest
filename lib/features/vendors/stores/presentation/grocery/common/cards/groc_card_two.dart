@@ -67,7 +67,7 @@ class GrocCardTwo extends StatelessWidget {
                               ? Text(L10n.tr().closed, style: TStyle.blackSemi(12))
                               : vendor.badge == null
                               ? null
-                              : Text(vendor.badge!, style: TStyle.primaryBold(12)),
+                              : Text(vendor.badge!, style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
                         ),
                       ),
                     ),

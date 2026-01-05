@@ -18,17 +18,12 @@ class CardBadge extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: fullWidth ? MainAxisSize.max : MainAxisSize.min,
-          children: [
-            Text(text, style: textStyle ?? TStyle.primaryBold(12)),
-          ],
+          children: [Text(text, style: textStyle ?? TStyle.robotBlackSmall().copyWith(color: Co.purple))],
         ),
       ),
     );
     if (alignment != null) {
-      return Align(
-        alignment: AlignmentDirectional.topStart,
-        child: child,
-      );
+      return Align(alignment: AlignmentDirectional.topStart, child: child);
     }
     return child;
   }

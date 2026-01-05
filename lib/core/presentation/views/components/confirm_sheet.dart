@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,10 @@ class ConfirmSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: GradientText(text: msg, style: TStyle.primaryBold(24)),
+            child: GradientText(
+              text: msg,
+              style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+            ),
           ),
           OutlinedButton(
             onPressed: () {
@@ -27,7 +31,7 @@ class ConfirmSheet extends StatelessWidget {
               fixedSize: const Size(250, 60),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
-            child: Text(btnText, style: TStyle.primaryBold(14)),
+            child: Text(btnText, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
           ),
         ],
       ),

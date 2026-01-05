@@ -53,7 +53,7 @@
 //                           const VerticalSpacing(kToolbarHeight),
 //                           Padding(
 //                             padding: const EdgeInsetsGeometry.symmetric(vertical: 16),
-//                             child: Text(L10n.tr().chooseYourFavoriteVendor, style: TStyle.blackBold(16)),
+//                             child: Text(L10n.tr().chooseYourFavoriteVendor, style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold)),
 //                           ),
 //                         ],
 //                       ),
@@ -95,7 +95,7 @@
 //               //       const VerticalSpacing(kToolbarHeight),
 //               //       Padding(
 //               //         padding: const EdgeInsetsGeometry.symmetric(vertical: 16),
-//               //         child: Text(L10n.tr().chooseYourFavoriteVendor, style: TStyle.blackBold(16)),
+//               //         child: Text(L10n.tr().chooseYourFavoriteVendor, style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold)),
 //               //       ),
 //               //     ],
 //               //   ),
