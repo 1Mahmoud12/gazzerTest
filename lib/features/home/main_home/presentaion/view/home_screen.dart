@@ -44,6 +44,7 @@ import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/suggests_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/top_items_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/top_vendors_widget.dart';
+import 'package:gazzer/features/notifications/presintation/notifications.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/plate_details/views/plate_details_screen.dart';
 import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu/presentation/view/restaurants_menu_screen.dart';
@@ -68,7 +69,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -88,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
     _dailyOffersCubit = di<DailyOffersWidgetCubit>()..getDailyOffers();
     _suggestsCubit = di<SuggestsWidgetCubit>()..getSuggests();
     _topVendorsCubit = di<TopVendorsWidgetCubit>()..getTopVendors();
-    _bestPopularStoresCubit = di<BestPopularStoresWidgetCubit>()..getBestPopularStores();
+    _bestPopularStoresCubit = di<BestPopularStoresWidgetCubit>()
+      ..getBestPopularStores();
     _topItemsCubit = di<TopItemsWidgetCubit>()..getTopItems();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -142,7 +145,12 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       onPopInvokedWithResult: (didPop, result) {
         exitApp++;
         //Utils.showToast(title: 'swipe twice to exit', state: UtilState.success);
-        Alerts.showToast(L10n.tr().swipeTwiceToExit, error: false, isInfo: true, toastGravity: ToastGravity.CENTER);
+        Alerts.showToast(
+          L10n.tr().swipeTwiceToExit,
+          error: false,
+          isInfo: true,
+          toastGravity: ToastGravity.CENTER,
+        );
         Future.delayed(const Duration(seconds: 5), () {
           exitApp = 0;
           setState(() {});
@@ -165,7 +173,9 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
             floatingWidgetWidth: 50,
             speed: 1,
             dy: HomeUtils.headerHeight(context) + 12,
-            dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
+            dx: L10n.isAr(context)
+                ? AppConst.defaultHrPadding.right
+                : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
             disableBounceAnimation: true,
             mainScreenWidget: MultiBlocProvider(
               providers: [
@@ -184,10 +194,16 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
                       physics: BouncingScrollPhysics(),
                       slivers: [
                         SliverToBoxAdapter(
-                          child: Padding(padding: EdgeInsets.only(bottom: 12), child: _HomeHeader()),
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 12),
+                            child: _HomeHeader(),
+                          ),
                         ),
                         SliverToBoxAdapter(
-                          child: Padding(padding: EdgeInsets.only(bottom: 24), child: _HomeSearchWidget()),
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 24),
+                            child: _HomeSearchWidget(),
+                          ),
                         ),
 
                         ///

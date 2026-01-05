@@ -843,11 +843,17 @@
            "profile":"Profile",
              "closedUntil": "Closed until",
              "openUntil": "Open until",
-             "todayDeals": "Today's Deals"
+             "todayDeals": "Today's Deals",
 
 
 
-
+  "notifications": "Notifications",
+  "all": "All",
+  "orders": "Orders",
+  "offers": "Offers",
+  "system": "System",
+  "today": "Today",
+  "previous_notification": "Previous Notification"
 
 
 }

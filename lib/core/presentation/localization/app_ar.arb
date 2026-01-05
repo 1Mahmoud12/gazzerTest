@@ -844,10 +844,16 @@
                       "profile":"الملف الشخصي",
                       "closedUntil": "مغلق حتى",
                         "openUntil": "مفتوح حتى",
-                        "todayDeals": "عروض اليوم"
+                        "todayDeals": "عروض اليوم",
 
 
-
+ "notifications": "الإشعارات",
+    "all": "الكل",
+    "orders": "الطلبات",
+    "offers": "العروض",
+    "system": "النظام",
+    "today": "اليوم",
+    "previous_notification": "الإشعارات السابقة"
 
 
 

@@ -15,10 +15,20 @@ class _HomeHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                onTap: () {},
-                child: const Padding(padding: EdgeInsets.all(6), child: VectorGraphicsWidget(Assets.assetsSvgNotification)),
+                onTap: () {
+                  print('Notifications tapped');
+                  context.push(NotificationsView.route);
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(6),
+                  child: VectorGraphicsWidget(Assets.assetsSvgNotification),
+                ),
               ),
-              VectorGraphicsWidget(Assets.assetsSvgCharacter, width: width * 0.1, height: width * 0.1),
+              VectorGraphicsWidget(
+                Assets.assetsSvgCharacter,
+                width: width * 0.1,
+                height: width * 0.1,
+              ),
               const VectorGraphicsWidget(Assets.cartIc),
             ],
           ),
@@ -30,7 +40,15 @@ class _HomeHeader extends StatelessWidget {
             borderRadius: AppConst.defaultBorderRadius,
             child: Row(
               children: [
-                SvgPicture.asset(Assets.assetsSvgLocation, height: 32, width: 32).withHotspot(order: 4, title: '', text: L10n.tr().setYourLocation),
+                SvgPicture.asset(
+                  Assets.assetsSvgLocation,
+                  height: 32,
+                  width: 32,
+                ).withHotspot(
+                  order: 4,
+                  title: '',
+                  text: L10n.tr().setYourLocation,
+                ),
                 const HorizontalSpacing(8),
                 StreamBuilder(
                   stream: di<AddressesBus>().getStream<AddressesEvents>(),
@@ -42,15 +60,31 @@ class _HomeHeader extends StatelessWidget {
                         TextSpan(
                           children: [
                             if (address != null) ...[
-                              TextSpan(text: L10n.tr().deliverTo, style: TStyle.robotBlackRegular()),
-                              TextSpan(text: ' ${address.label} ', style: TStyle.robotBlackRegular()),
+                              TextSpan(
+                                text: L10n.tr().deliverTo,
+                                style: TStyle.robotBlackRegular(),
+                              ),
+                              TextSpan(
+                                text: ' ${address.label} ',
+                                style: TStyle.robotBlackRegular(),
+                              ),
                               const WidgetSpan(
-                                child: Icon(Icons.keyboard_arrow_down, color: Co.black),
+                                child: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Co.black,
+                                ),
                                 alignment: PlaceholderAlignment.middle,
                               ),
-                              TextSpan(text: '\n${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackSmall()),
+                              TextSpan(
+                                text:
+                                    '\n${address.zoneName}, ${address.provinceName}',
+                                style: TStyle.robotBlackSmall(),
+                              ),
                             ] else
-                              TextSpan(text: L10n.tr().noAddressesSelected, style: TStyle.robotBlackSmall()),
+                              TextSpan(
+                                text: L10n.tr().noAddressesSelected,
+                                style: TStyle.robotBlackSmall(),
+                              ),
                           ],
                         ),
                         maxLines: 2,
@@ -76,12 +110,19 @@ Future<void> _showAddressesSheet(BuildContext context) async {
   await showModalBottomSheet(
     context: context,
     useSafeArea: true,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
     builder: (context) {
       if (addresses.isEmpty) {
         return Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Center(child: Text(L10n.tr().noAddressesSelected, style: TStyle.mainwSemi(14))),
+          child: Center(
+            child: Text(
+              L10n.tr().noAddressesSelected,
+              style: TStyle.mainwSemi(14),
+            ),
+          ),
         );
       }
 
@@ -95,7 +136,10 @@ Future<void> _showAddressesSheet(BuildContext context) async {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Choose delivery location', style: TStyle.primarySemi(18)),
-                IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
               ],
             ),
             const VerticalSpacing(12),
@@ -107,14 +151,29 @@ Future<void> _showAddressesSheet(BuildContext context) async {
                 itemBuilder: (context, index) {
                   final address = addresses[index];
                   return ListTile(
-                    leading: const Icon(Icons.location_on_outlined, color: Co.purple),
+                    leading: const Icon(
+                      Icons.location_on_outlined,
+                      color: Co.purple,
+                    ),
                     title: Text(address.label, style: TStyle.primarySemi(14)),
-                    subtitle: Text('${address.zoneName}, ${address.provinceName}', style: TStyle.greyRegular(12)),
+                    subtitle: Text(
+                      '${address.zoneName}, ${address.provinceName}',
+                      style: TStyle.greyRegular(12),
+                    ),
                     trailing: address.isDefault
                         ? Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-                            child: Text(L10n.tr().defaultt, style: TStyle.secondarySemi(12)),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Co.purple.withOpacityNew(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              L10n.tr().defaultt,
+                              style: TStyle.secondarySemi(12),
+                            ),
                           )
                         : null,
                     onTap: () {
