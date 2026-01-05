@@ -166,6 +166,21 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                                 Alerts.showToast(L10n.tr().needToAddAddressFirst);
                                                 return;
                                               }
+                                              // Check for unavailable vendors
+                                              final unavailableVendors = state.vendors.where((vendor) => !vendor.isOpen).toList();
+                                              if (unavailableVendors.isNotEmpty) {
+                                                Alerts.showToast(L10n.tr().thisRestaurantIsCurrentlyUnavailable);
+                                                return;
+                                              }
+                                              // Check for out of stock items
+                                              final outOfStockItems = state.vendors
+                                                  .expand((vendor) => vendor.items)
+                                                  .where((item) => item.quantityInStock == 0)
+                                                  .toList();
+                                              if (outOfStockItems.isNotEmpty) {
+                                                Alerts.showToast(L10n.tr().items_no_longer_available);
+                                                return;
+                                              }
                                               context.push(ConfirmOrderScreen.route);
                                             },
                                             disabledColor: Co.grey.withAlpha(80),
