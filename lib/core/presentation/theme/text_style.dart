@@ -61,9 +61,6 @@ abstract class TStyle {
   static TextStyle errorSemi(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.red);
 
-  static TextStyle errorBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.red);
-
   static TextStyle greyRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
       TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.greyText);
 

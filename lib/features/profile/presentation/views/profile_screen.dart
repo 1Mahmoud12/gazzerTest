@@ -126,22 +126,22 @@ class ProfileContentBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          // if (cubit.client?.tierName != null)
-          Container(
-            color: allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.mainColor,
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Row(
-              spacing: 12,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  LoyaltyTierName.fromString(cubit.client!.tierName!).getDisplayName(context),
-                  style: TStyle.robotBlackMedium().copyWith(color: Co.white),
-                ),
-                SvgPicture.asset(allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.logo),
-              ],
+          if (cubit.client?.tierName != null)
+            Container(
+              color: allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.mainColor,
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Row(
+                spacing: 12,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    LoyaltyTierName.fromString(cubit.client!.tierName!).getDisplayName(context),
+                    style: TStyle.robotBlackMedium().copyWith(color: Co.white),
+                  ),
+                  SvgPicture.asset(allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.logo),
+                ],
+              ),
             ),
-          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
