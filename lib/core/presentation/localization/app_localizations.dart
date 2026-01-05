@@ -4213,6 +4213,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recommended'**
   String get recommended;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @offers.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers'**
+  String get offers;
+
+  /// No description provided for @system.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get system;
+
+  /// No description provided for @previous_notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous Notification'**
+  String get previous_notification;
 }
 
 class _AppLocalizationsDelegate

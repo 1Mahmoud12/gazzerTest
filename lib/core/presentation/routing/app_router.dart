@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/routing/router_observer.dart';
 import 'package:gazzer/core/presentation/routing/routers/nested_routes.dart';
 import 'package:gazzer/core/presentation/routing/routers/unnested_routes.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/notifications/presintation/notifications.dart';
 import 'package:gazzer/features/splash/cubit/splash_cubit.dart';
 import 'package:gazzer/features/splash/view/splash_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -17,11 +18,19 @@ final GoRouter router = GoRouter(
 
     GoRoute(
       path: SplashScreen.route,
-      builder: (context, state) => BlocProvider(create: (context) => di<SplashCubit>(), child: const SplashScreen()),
+      builder: (context, state) => BlocProvider(
+        create: (context) => di<SplashCubit>(),
+        child: const SplashScreen(),
+      ),
     ),
 
     ///
     ...unNestedRoutes,
+
+    GoRoute(
+      path: NotificationsView.route,
+      builder: (context, state) => const NotificationsView(),
+    ),
 
     ///
   ],

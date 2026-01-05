@@ -873,17 +873,14 @@
                       "quantity":"Quantity",
                       "ratings_reviews": "Ratings & Reviews",
                         "star": "Star",
-                          "recommended": "Recommended"
-
-
-
-
-
-
-
-
-
-
+                          "recommended": "Recommended",
+  "notifications": "Notifications",
+  "all": "All",
+  "orders": "Orders",
+  "offers": "Offers",
+  "system": "System",
+  "today": "Today",
+  "previous_notification": "Previous Notification"
 
 
 }

@@ -22,12 +22,17 @@ import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:go_router/go_router.dart';
 
+
 class LoginScreen extends StatefulWidget {
+  
   const LoginScreen({super.key});
   static const route = '/login';
   @override
   State<LoginScreen> createState() => _LoginScreenState();
+
+  
 }
+
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();

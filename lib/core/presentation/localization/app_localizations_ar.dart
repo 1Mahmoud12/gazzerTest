@@ -682,7 +682,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get earnYourFirst => 'احصل على أول';
 
   @override
-  String get orders => 'طلبات';
+  String get orders => 'الطلبات';
 
   @override
   String get earnYourFirst5Orders => 'احصل على أول 5 طلبات';
@@ -2057,56 +2057,71 @@ class AppLocalizationsAr extends AppLocalizations {
   String get todayDeals => 'عروض اليوم';
 
   @override
-  String get save => 'وفر';
+  String get save => 'Save';
 
   @override
-  String get relatedProducts => 'منتجات ذات صلة';
+  String get relatedProducts => 'Related Products';
 
   @override
-  String get walletAdjustment => 'تعديل المحفظة';
+  String get walletAdjustment => 'Wallet Adjustment';
 
   @override
-  String get selectAnotherAddress => 'اختيار عنوان آخر';
+  String get selectAnotherAddress => 'Select another address';
 
   @override
-  String get time => 'الوقت';
+  String get time => 'Time';
 
   @override
-  String get estimated_delivery_time => 'الوقت المتوقع للتوصيل';
+  String get estimated_delivery_time => 'Estimated Delivery Time';
 
   @override
-  String get your_active_orders => 'طلباتك النشطة';
+  String get your_active_orders => 'Your Active Orders';
 
   @override
-  String get your_delivery_man => 'مندوب التوصيل الخاص بك';
+  String get your_delivery_man => 'Your delivery man';
 
   @override
-  String get road_distance => 'المسافة على الطريق';
+  String get road_distance => 'Road Distance';
 
   @override
-  String get delivery_arrival_time => 'وقت وصول الطلب';
+  String get delivery_arrival_time => 'Delivery Arrival Time';
 
   @override
-  String get view_delivery_man_on_map => 'عرض مندوب التوصيل على الخريطة';
+  String get view_delivery_man_on_map => 'View Delivery Man on Map';
 
   @override
-  String get your_order_is_being => 'طلبك قيد التجهيز';
+  String get your_order_is_being => 'Your order is being prepared';
 
   @override
-  String get bestPopularItems => 'العناصر الأكثر طلبًا';
+  String get bestPopularItems => 'Best Popular Items';
 
   @override
-  String get addNotes => 'إضافة ملاحظات';
+  String get addNotes => 'Add Notes';
 
   @override
-  String get quantity => 'الكمية';
+  String get quantity => 'Quantity';
 
   @override
-  String get ratings_reviews => 'التقييمات والمراجعات';
+  String get ratings_reviews => 'Ratings & Reviews';
 
   @override
-  String get star => 'نجمة';
+  String get star => 'Star';
 
   @override
-  String get recommended => 'موصي به';
+  String get recommended => 'Recommended';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get offers => 'العروض';
+
+  @override
+  String get system => 'النظام';
+
+  @override
+  String get previous_notification => 'الإشعارات السابقة';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/resources/assets.dart';
 
 part 'enum_parser.dart';
 
@@ -214,5 +215,25 @@ enum OptionType {
       (e) => e.value == value,
       orElse: () => unknown,
     );
+  }
+}
+
+enum NotificationType {
+  all,
+  order,
+  offer,
+  system;
+
+  String get asset {
+    switch (this) {
+      case NotificationType.order:
+        return Assets.orderStatusIc;
+      case NotificationType.offer:
+        return Assets.percentIc;
+      case NotificationType.system:
+        return Assets.settingsIc;
+      case NotificationType.all:
+        return '';
+    }
   }
 }

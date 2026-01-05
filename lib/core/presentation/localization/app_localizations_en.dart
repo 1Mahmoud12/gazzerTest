@@ -2110,4 +2110,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommended => 'Recommended';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get offers => 'Offers';
+
+  @override
+  String get system => 'System';
+
+  @override
+  String get previous_notification => 'Previous Notification';
 }

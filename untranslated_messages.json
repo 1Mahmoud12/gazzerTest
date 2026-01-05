@@ -2,6 +2,24 @@
   "ar": [
     "youHaveNoFavoritesYet",
     "fullEmail",
-    "resend"
+    "resend",
+    "save",
+    "relatedProducts",
+    "walletAdjustment",
+    "selectAnotherAddress",
+    "time",
+    "estimated_delivery_time",
+    "your_active_orders",
+    "your_delivery_man",
+    "road_distance",
+    "delivery_arrival_time",
+    "view_delivery_man_on_map",
+    "your_order_is_being",
+    "bestPopularItems",
+    "addNotes",
+    "quantity",
+    "ratings_reviews",
+    "star",
+    "recommended"
   ]
 }
