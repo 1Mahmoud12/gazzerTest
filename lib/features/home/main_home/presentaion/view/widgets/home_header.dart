@@ -47,7 +47,9 @@ class _HomeHeaderState extends State<_HomeHeader> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.push(NotificationsView.route);
+                },
                 child: const Padding(padding: EdgeInsets.all(6), child: VectorGraphicsWidget(Assets.assetsSvgNotification)),
               ),
               VectorGraphicsWidget(Assets.assetsSvgCharacter, width: width * 0.1, height: width * 0.1),
