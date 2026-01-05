@@ -1,7 +1,39 @@
 part of '../home_screen.dart';
 
-class _HomeHeader extends StatelessWidget {
+class _HomeHeader extends StatefulWidget {
   const _HomeHeader();
+
+  @override
+  State<_HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends State<_HomeHeader> {
+  bool _hasCheckedLocation = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check for cached location after the first frame is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAndShowLocationSheet();
+    });
+  }
+
+  void _checkAndShowLocationSheet() {
+    if (_hasCheckedLocation) return;
+    _hasCheckedLocation = true;
+
+    // Check if there's no cached location
+    if (!HomeHeaderLogic.hasCachedLocation()) {
+      // No location found, show bottom sheet
+      Future.delayed(const Duration(milliseconds: 300), () {
+        if (mounted) {
+          _showAddressesSheet(context);
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = HomeUtils.headerWidth(context);
@@ -31,7 +63,9 @@ class _HomeHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: InkWell(
-            onTap: () => _showAddressesSheet(context),
+            onTap: () async {
+              await _showAddressesSheet(context);
+            },
             borderRadius: AppConst.defaultBorderRadius,
             child: Row(
               children: [
@@ -41,6 +75,8 @@ class _HomeHeader extends StatelessWidget {
                   stream: di<AddressesBus>().getStream<AddressesEvents>(),
                   builder: (context, snapshot) {
                     final address = Session().defaultAddress;
+                    final tmpLocation = Session().tmpLocation;
+                    final tmpLocationDescription = Session().tmpLocationDescription;
 
                     return Expanded(
                       child: Text.rich(
@@ -54,6 +90,13 @@ class _HomeHeader extends StatelessWidget {
                                 alignment: PlaceholderAlignment.middle,
                               ),
                               TextSpan(text: '\n${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackSmall()),
+                            ] else if (tmpLocation != null && tmpLocationDescription != null) ...[
+                              TextSpan(text: L10n.tr().deliverTo, style: TStyle.robotBlackRegular()),
+                              const WidgetSpan(
+                                child: Icon(Icons.keyboard_arrow_down, color: Co.black),
+                                alignment: PlaceholderAlignment.middle,
+                              ),
+                              TextSpan(text: '\n$tmpLocationDescription', style: TStyle.robotBlackSmall()),
                             ] else
                               TextSpan(text: L10n.tr().noAddressesSelected, style: TStyle.robotBlackSmall()),
                           ],
@@ -72,67 +115,194 @@ class _HomeHeader extends StatelessWidget {
       ],
     );
   }
+
+  Future<void> _showAddressesSheet(BuildContext context) async {
+    final addresses = Session().addresses;
+    final bus = di<AddressesBus>();
+    LatLng? selectedLocation;
+
+    await showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildSheetHeader(context, selectedLocation),
+                  const VerticalSpacing(16),
+                  if (addresses.isNotEmpty) _buildSavedAddressesSection(context, addresses, bus),
+                  _buildCurrentLocationOption(context),
+                  const VerticalSpacing(12),
+                  _buildMapLocationOption(context),
+                  const VerticalSpacing(120),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    // Refresh the header after sheet closes to show updated location
+    if (mounted) {
+      setState(() {});
+    }
+  }
 }
 
-Future<void> _showAddressesSheet(BuildContext context) async {
-  final addresses = Session().addresses;
-  final bus = di<AddressesBus>();
+Widget _buildSheetHeader(BuildContext context, LatLng? selectedLocation) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(L10n.tr().chooseDeliveryLocation, style: TStyle.primarySemi(18)),
+      IconButton(icon: const Icon(Icons.close), onPressed: () => _handleSheetClose(context, selectedLocation)),
+    ],
+  );
+}
 
-  await showModalBottomSheet(
-    context: context,
-    useSafeArea: true,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
-    builder: (context) {
-      if (addresses.isEmpty) {
-        return Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(child: Text(L10n.tr().noAddressesSelected, style: TStyle.mainwSemi(14))),
-        );
-      }
+Widget _buildSavedAddressesSection(BuildContext context, List<AddressEntity> addresses, AddressesBus bus) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(L10n.tr().savedAddresses, style: TStyle.primarySemi(16)),
+      const VerticalSpacing(12),
+      Flexible(
+        child: ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: addresses.length,
+          separatorBuilder: (_, __) => const Divider(height: 1),
+          itemBuilder: (context, index) => _buildAddressItem(context, addresses[index], bus),
+        ),
+      ),
+      const VerticalSpacing(16),
+    ],
+  );
+}
 
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+Widget _buildAddressItem(BuildContext context, AddressEntity address, AddressesBus bus) {
+  return InkWell(
+    onTap: () => _handleAddressSelection(context, address, bus),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        children: [
+          const Icon(Icons.location_on_outlined, color: Co.purple, size: 24),
+          const HorizontalSpacing(12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Choose delivery location', style: TStyle.primarySemi(18)),
-                IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.of(context).pop()),
+                Text(address.label, style: TStyle.primarySemi(14)),
+                const VerticalSpacing(4),
+                Text('${address.zoneName}, ${address.provinceName}', style: TStyle.greyRegular(12)),
               ],
             ),
-            const VerticalSpacing(12),
-            Flexible(
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: addresses.length,
-                separatorBuilder: (_, __) => const Divider(),
-                itemBuilder: (context, index) {
-                  final address = addresses[index];
-                  return ListTile(
-                    leading: const Icon(Icons.location_on_outlined, color: Co.purple),
-                    title: Text(address.label, style: TStyle.primarySemi(14)),
-                    subtitle: Text('${address.zoneName}, ${address.provinceName}', style: TStyle.greyRegular(12)),
-                    trailing: address.isDefault
-                        ? Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-                            child: Text(L10n.tr().defaultt, style: TStyle.secondarySemi(12)),
-                          )
-                        : null,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      bus.setDefault(address.id);
-                    },
-                  );
-                },
-              ),
+          ),
+          if (address.isDefault)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
+              child: Text(L10n.tr().defaultt, style: TStyle.secondarySemi(12)),
             ),
-          ],
-        ),
-      );
-    },
+        ],
+      ),
+    ),
   );
+}
+
+Widget _buildCurrentLocationOption(BuildContext context) {
+  return InkWell(
+    onTap: () => _handleCurrentLocationSelection(context),
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Co.purple100),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.navigation, color: Co.purple, size: 24),
+          const HorizontalSpacing(12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(L10n.tr().deliverToCurrentLocation, style: TStyle.primarySemi(14)),
+                const VerticalSpacing(4),
+                Text(L10n.tr().outsideDeliveryZone, style: TStyle.greyRegular(12)),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right, color: Co.grey),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildMapLocationOption(BuildContext context) {
+  return InkWell(
+    onTap: () => _handleMapLocationSelection(context),
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Co.purple100),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.location_on, color: Co.purple, size: 24),
+          const HorizontalSpacing(12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(L10n.tr().deliverToDifferentLocation, style: TStyle.primarySemi(14)),
+                const VerticalSpacing(4),
+                Text(L10n.tr().chooseLocationOnMap, style: TStyle.greyRegular(12)),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right, color: Co.grey),
+        ],
+      ),
+    ),
+  );
+}
+
+// UI handlers - delegate to business logic
+Future<void> _handleSheetClose(BuildContext context, LatLng? selectedLocation) async {
+  await HomeHeaderLogic.handleSheetClose(context, selectedLocation);
+  if (context.mounted) {
+    Navigator.of(context).pop();
+  }
+}
+
+Future<void> _handleAddressSelection(BuildContext context, AddressEntity address, AddressesBus bus) async {
+  final success = await HomeHeaderLogic.handleAddressSelection(context, address, bus);
+  if (success && context.mounted) {
+    Navigator.of(context).pop();
+  }
+}
+
+Future<void> _handleCurrentLocationSelection(BuildContext context) async {
+  final success = await HomeHeaderLogic.handleCurrentLocationSelection(context);
+  if (success && context.mounted) {
+    Navigator.of(context).pop();
+  }
+}
+
+Future<void> _handleMapLocationSelection(BuildContext context) async {
+  final success = await LocationUtils.handleMapLocationSelection(context);
+  if (success && context.mounted) {
+    Navigator.of(context).pop();
+  }
 }

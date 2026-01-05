@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
+import 'package:gazzer/core/presentation/utils/location_utils.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
@@ -35,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       if (mounted) textController.forward();
     });
     await Future.delayed(Durations.extralong4, action);
+    await LocationUtils.getLocationToCache();
   }
 
   @override

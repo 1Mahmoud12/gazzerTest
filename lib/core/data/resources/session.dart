@@ -27,6 +27,7 @@ class Session {
   }
 
   LatLng? tmpLocation;
+  String? tmpLocationDescription;
   final addresses = <AddressEntity>[];
 
   AddressEntity? get defaultAddress => addresses.firstWhereOrNull((e) => e.isDefault);
@@ -37,7 +38,28 @@ class Session {
     /// cart
     /// favorite
     /// addresses
-    await Future.wait([di<FavoriteBus>().getFavorites(), di<AddressesBus>().refreshAddresses(), di<CartCubit>().loadCart()]);
+    await Future.wait([
+      di<FavoriteBus>().getFavorites(),
+      di<AddressesBus>().refreshAddresses(),
+      di<CartCubit>().loadCart(),
+      _loadCachedLocation(),
+    ]);
+  }
+
+  Future<void> _loadCachedLocation() async {
+    try {
+      final prefs = di<SharedPreferences>();
+      final lat = prefs.getDouble('selected_lat');
+      final lng = prefs.getDouble('selected_lng');
+      final description = prefs.getString('selected_location_description');
+
+      if (lat != null && lng != null) {
+        tmpLocation = LatLng(lat, lng);
+        tmpLocationDescription = description;
+      }
+    } catch (e) {
+      // Ignore errors when loading cached location
+    }
   }
 
   void clear() {

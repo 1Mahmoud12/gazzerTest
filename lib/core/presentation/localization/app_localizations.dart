@@ -560,6 +560,66 @@ abstract class AppLocalizations {
   /// **'Address Label Hint'**
   String get addressLabelHint;
 
+  /// No description provided for @chooseDeliveryLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose delivery location'**
+  String get chooseDeliveryLocation;
+
+  /// No description provided for @savedAddresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved addresses'**
+  String get savedAddresses;
+
+  /// No description provided for @deliverToCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver to current location'**
+  String get deliverToCurrentLocation;
+
+  /// No description provided for @outsideDeliveryZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside Delivery Zone'**
+  String get outsideDeliveryZone;
+
+  /// No description provided for @deliverToDifferentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver to a different location'**
+  String get deliverToDifferentLocation;
+
+  /// No description provided for @chooseLocationOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose location on map'**
+  String get chooseLocationOnMap;
+
+  /// No description provided for @locationServicesDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Location services are disabled'**
+  String get locationServicesDisabled;
+
+  /// No description provided for @locationPermissionsDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permissions are denied'**
+  String get locationPermissionsDenied;
+
+  /// No description provided for @locationPermissionsPermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permissions are permanently denied'**
+  String get locationPermissionsPermanentlyDenied;
+
+  /// No description provided for @errorGettingCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Error getting current location'**
+  String get errorGettingCurrentLocation;
+
   /// No description provided for @address_________________Ebd.
   ///
   /// In en, this message translates to:

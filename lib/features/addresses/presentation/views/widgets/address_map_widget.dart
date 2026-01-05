@@ -78,14 +78,8 @@ class _AddressMapWidgetState extends State<AddressMapWidget> {
           border: Border.all(color: Colors.black45),
         ),
         child: selectedLocation == null
-            ? Center(
-                child: Text(
-                  L10n.tr().selectLocation,
-                  style: TStyle.blackBold(18),
-                ),
-              )
+            ? Center(child: Text(L10n.tr().selectLocation, style: TStyle.blackBold(18)))
             : AbsorbPointer(
-                absorbing: true,
                 child: GoogleMap(
                   onMapCreated: (controller) {
                     if (smallMapcont.isCompleted) return;

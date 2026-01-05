@@ -1,6 +1,6 @@
 class OrderSummaryDTO {
   final List<OrderSummaryStoreDTO> items;
-  final int clientAddressId;
+  final int? clientAddressId;
   final double subtotal;
   final double tax;
   final double deliveryFee;
@@ -30,7 +30,7 @@ class OrderSummaryDTO {
   factory OrderSummaryDTO.fromJson(Map<String, dynamic> json) {
     return OrderSummaryDTO(
       items: (json['items'] as List<dynamic>).map((e) => OrderSummaryStoreDTO.fromJson(e as Map<String, dynamic>)).toList(),
-      clientAddressId: json['client_address_id'] as int,
+      clientAddressId: json['client_address_id'] as int?,
       subtotal: (json['subtotal'] as num).toDouble(),
       tax: (json['tax'] as num).toDouble(),
       deliveryFee: (json['delivery_fee'] as num).toDouble(),
@@ -38,19 +38,10 @@ class OrderSummaryDTO {
       discount: (json['discount'] as num).toDouble(),
       total: (json['total'] as num).toDouble(),
       vehicleBoxTypes:
-          (json['vehicle_box_types'] as List<dynamic>?)
-              ?.map(
-                (e) => VehicleBoxTypeDTO.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+          (json['vehicle_box_types'] as List<dynamic>?)?.map((e) => VehicleBoxTypeDTO.fromJson(e as Map<String, dynamic>)).toList() ?? [],
 
       needsNewPouchApproval: json['needs_new_pouch_approval'] as bool? ?? false,
-      voucher: json['voucher'] != null
-          ? OrderSummaryVoucherDTO.fromJson(
-              json['voucher'] as Map<String, dynamic>,
-            )
-          : null,
+      voucher: json['voucher'] != null ? OrderSummaryVoucherDTO.fromJson(json['voucher'] as Map<String, dynamic>) : null,
       voucherDiscount: json['voucher_discount'].toString() as String?,
     );
   }
@@ -63,13 +54,7 @@ class OrderSummaryStoreDTO {
   final String type;
   final List<OrderSummaryItemDTO> items;
 
-  OrderSummaryStoreDTO({
-    required this.storeId,
-    required this.storeName,
-    required this.storeImage,
-    required this.type,
-    required this.items,
-  });
+  OrderSummaryStoreDTO({required this.storeId, required this.storeName, required this.storeImage, required this.type, required this.items});
 
   factory OrderSummaryStoreDTO.fromJson(Map<String, dynamic> json) {
     return OrderSummaryStoreDTO(
@@ -113,14 +98,7 @@ class OrderSummaryItemDTO {
       quantity: json['quantity'] as int,
       weight: (json['weight'] as num).toDouble(),
       optionValues:
-          (json['option_values'] as List<dynamic>?)
-              ?.map(
-                (e) => OrderSummaryOptionValueDTO.fromJson(
-                  e as Map<String, dynamic>,
-                ),
-              )
-              .toList() ??
-          [],
+          (json['option_values'] as List<dynamic>?)?.map((e) => OrderSummaryOptionValueDTO.fromJson(e as Map<String, dynamic>)).toList() ?? [],
       orderedWith: json['ordered_with'] as List<dynamic>? ?? [],
       itemPrice: (json['item_price'] as num).toDouble(),
       notes: json['notes'] as String?,
@@ -133,11 +111,7 @@ class OrderSummaryOptionValueDTO {
   final String optionName;
   final List<OrderSummaryValueDTO> values;
 
-  OrderSummaryOptionValueDTO({
-    required this.optionId,
-    required this.optionName,
-    required this.values,
-  });
+  OrderSummaryOptionValueDTO({required this.optionId, required this.optionName, required this.values});
 
   factory OrderSummaryOptionValueDTO.fromJson(Map<String, dynamic> json) {
     return OrderSummaryOptionValueDTO(
@@ -152,16 +126,10 @@ class OrderSummaryValueDTO {
   final String valueId;
   final String valueName;
 
-  OrderSummaryValueDTO({
-    required this.valueId,
-    required this.valueName,
-  });
+  OrderSummaryValueDTO({required this.valueId, required this.valueName});
 
   factory OrderSummaryValueDTO.fromJson(Map<String, dynamic> json) {
-    return OrderSummaryValueDTO(
-      valueId: json['value_id'] as String,
-      valueName: json['value_name'] as String,
-    );
+    return OrderSummaryValueDTO(valueId: json['value_id'] as String, valueName: json['value_name'] as String);
   }
 }
 
@@ -207,13 +175,7 @@ class VehicleBoxTypeDTO {
       maxDimensions: json['max_dimensions'] as Map<String, dynamic>,
       hasPartitions: json['has_partitions'] as bool,
       volume: json['volume'] as Map<String, dynamic>,
-      items:
-          (json['items'] as List<dynamic>?)
-              ?.map(
-                (e) => VehicleBoxItemDTO.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      items: (json['items'] as List<dynamic>?)?.map((e) => VehicleBoxItemDTO.fromJson(e as Map<String, dynamic>)).toList() ?? [],
     );
   }
 }
@@ -256,12 +218,7 @@ class OrderSummaryVoucherDTO {
   final String discountType;
   final String discountValue;
 
-  OrderSummaryVoucherDTO({
-    required this.id,
-    required this.code,
-    required this.discountType,
-    required this.discountValue,
-  });
+  OrderSummaryVoucherDTO({required this.id, required this.code, required this.discountType, required this.discountValue});
 
   factory OrderSummaryVoucherDTO.fromJson(Map<String, dynamic> json) {
     return OrderSummaryVoucherDTO(

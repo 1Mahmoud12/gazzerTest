@@ -18,6 +18,7 @@ import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
 import 'package:gazzer/core/presentation/pkgs/notification/notification.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/utils/location_utils.dart';
 import 'package:gazzer/core/presentation/utils/state_app_widget.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
@@ -28,6 +29,7 @@ import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
 import 'package:gazzer/features/home/homeViewAll/active_orders_widget/presentation/cubit/active_orders_widget_cubit.dart';
@@ -43,6 +45,7 @@ import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/all_categories_screen.dart';
+import 'package:gazzer/features/home/main_home/presentaion/view/widgets/home_header_logic.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/active_orders_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/best_popular_stores_widget.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/categories_widget.dart';
@@ -57,6 +60,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/product_deta
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/pharmacy_menu/pharmacy_menu_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/store_menu_switcher.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hotspot/hotspot.dart' show HotspotProvider;
 import 'package:shared_preferences/shared_preferences.dart';
 

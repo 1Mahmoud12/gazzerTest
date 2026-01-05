@@ -183,7 +183,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                                   ? () {}
                                   : () async {
                                       final amount = double.tryParse(_amountController.text) ?? 0.0;
-                                      if (amount < 10) {
+                                      if (amount <= 10) {
                                         Alerts.showToast(L10n.tr().walletEnterAmount);
                                         return;
                                       }

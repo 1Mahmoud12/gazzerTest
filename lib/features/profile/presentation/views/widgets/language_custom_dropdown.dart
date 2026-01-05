@@ -4,8 +4,6 @@ import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
-import 'package:gazzer/di.dart';
-import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 class LanguageItem {
@@ -39,7 +37,7 @@ class LanguageCustomDropdown extends StatelessWidget {
       onChanged: (language) async {
         if (language.code != currentLang) {
           await cubit.changeLanguage(language.code);
-          di<HomeCubit>().getHomeData();
+          //di<HomeCubit>().getHomeData();
           if (context.mounted) {
             // Navigate to profile screen - it will automatically load profile data
             context.go('/');
