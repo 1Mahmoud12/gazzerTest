@@ -103,7 +103,10 @@ class MultiCatRestHeader extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(restaurant.name, style: TStyle.robotBlackSubTitle()),
+              Flexible(
+                child: Text(restaurant.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TStyle.robotBlackSubTitle()),
+              ),
+              const SizedBox(width: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,

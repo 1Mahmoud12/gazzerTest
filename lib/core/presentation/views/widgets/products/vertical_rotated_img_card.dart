@@ -6,6 +6,7 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle;
 import 'package:gazzer/core/presentation/utils/helpers.dart';
+import 'package:gazzer/core/presentation/utils/logo_vendor.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/cart_to_increment_icon.dart';
@@ -88,20 +89,11 @@ class VerticalRotatedImgCard extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              SizedBox(
-                                width: 24,
-                                height: 24,
-                                child: CustomNetworkImage(
-                                  prod.store?.image ?? '',
-                                  borderRaduis: 24,
-                                  // shadow: const BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
-                                  // showBorder: false,
-                                ),
-                              ),
+                              ReturnLogoVendor(type: prod.store!.type),
                               const SizedBox(width: 8),
                               Flexible(
                                 child: Text(
-                                  prod.store?.name ?? 'brand',
+                                  prod.store?.name ?? '',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TStyle.robotBlackThin().copyWith(fontWeight: TStyle.semi),

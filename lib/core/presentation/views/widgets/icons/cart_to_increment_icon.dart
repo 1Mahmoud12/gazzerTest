@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
@@ -62,7 +63,10 @@ class CartToIncrementIcon extends StatelessWidget {
         }
       },
       buildWhen: _shouldRebuild,
-      builder: (context, state) => _buildCartWidget(context, state),
+      builder: (context, state) => Container(
+        constraints: BoxConstraints(maxHeight: 40.h),
+        child: _buildCartWidget(context, state),
+      ),
     );
   }
 

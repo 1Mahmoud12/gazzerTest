@@ -8,32 +8,23 @@ class Assets {
 
   static const String assetsFontsPlayfair = "assets/fonts/Playfair.ttf";
 
-  static const String assetsFontsPoppinsPoppinsBlack =
-      "assets/fonts/poppins/Poppins-Black.ttf";
+  static const String assetsFontsPoppinsPoppinsBlack = "assets/fonts/poppins/Poppins-Black.ttf";
 
-  static const String assetsFontsPoppinsPoppinsBlackItalic =
-      "assets/fonts/poppins/Poppins-BlackItalic.ttf";
+  static const String assetsFontsPoppinsPoppinsBlackItalic = "assets/fonts/poppins/Poppins-BlackItalic.ttf";
 
-  static const String assetsFontsPoppinsPoppinsBold =
-      "assets/fonts/poppins/Poppins-Bold.ttf";
+  static const String assetsFontsPoppinsPoppinsBold = "assets/fonts/poppins/Poppins-Bold.ttf";
 
-  static const String assetsFontsPoppinsPoppinsBoldItalic =
-      "assets/fonts/poppins/Poppins-BoldItalic.ttf";
+  static const String assetsFontsPoppinsPoppinsBoldItalic = "assets/fonts/poppins/Poppins-BoldItalic.ttf";
 
-  static const String assetsFontsPoppinsPoppinsMedium =
-      "assets/fonts/poppins/Poppins-Medium.ttf";
+  static const String assetsFontsPoppinsPoppinsMedium = "assets/fonts/poppins/Poppins-Medium.ttf";
 
-  static const String assetsFontsPoppinsPoppinsMediumItalic =
-      "assets/fonts/poppins/Poppins-MediumItalic.ttf";
+  static const String assetsFontsPoppinsPoppinsMediumItalic = "assets/fonts/poppins/Poppins-MediumItalic.ttf";
 
-  static const String assetsFontsPoppinsPoppinsRegular =
-      "assets/fonts/poppins/Poppins-Regular.ttf";
+  static const String assetsFontsPoppinsPoppinsRegular = "assets/fonts/poppins/Poppins-Regular.ttf";
 
-  static const String assetsFontsPoppinsPoppinsSemiBold =
-      "assets/fonts/poppins/Poppins-SemiBold.ttf";
+  static const String assetsFontsPoppinsPoppinsSemiBold = "assets/fonts/poppins/Poppins-SemiBold.ttf";
 
-  static const String assetsFontsPoppinsPoppinsSemiBoldItalic =
-      "assets/fonts/poppins/Poppins-SemiBoldItalic.ttf";
+  static const String assetsFontsPoppinsPoppinsSemiBoldItalic = "assets/fonts/poppins/Poppins-SemiBoldItalic.ttf";
 
   static const String assetsGazzerLogo = "assets/gazzer_logo.png";
 
@@ -46,8 +37,7 @@ class Assets {
 
   static const String assetsIosLauncher = "assets/ios_launcher.png";
 
-  static const String assetsLottieDeliveryBoy =
-      "assets/lottie/delivery_boy.json";
+  static const String assetsLottieDeliveryBoy = "assets/lottie/delivery_boy.json";
 
   static const String assetsNewLogo = "assets/new_logo.png";
 
@@ -59,8 +49,7 @@ class Assets {
 
   static const String assetsPngBakery = "assets/png/bakery.jpg";
 
-  static const String assetsPngChooseMoodShape =
-      "assets/png/choose_mood_shape.png";
+  static const String assetsPngChooseMoodShape = "assets/png/choose_mood_shape.png";
 
   static const String assetsPngCloudLogo = "assets/png/cloud_logo.png";
 
@@ -93,11 +82,9 @@ class Assets {
 
   static const String assetsPngFoodBg = "assets/png/food_bg.jpg";
 
-  static const String assetsPngFrequencyShape =
-      "assets/png/frequency_shape.png";
+  static const String assetsPngFrequencyShape = "assets/png/frequency_shape.png";
 
-  static const String assetsPngFruitsCar1Png =
-      "assets/png/fruits_car_1.png.png";
+  static const String assetsPngFruitsCar1Png = "assets/png/fruits_car_1.png.png";
 
   static const String assetsPngFruitsCar2 = "assets/png/fruits_car_2.png";
 
@@ -111,16 +98,13 @@ class Assets {
 
   static const String assetsPngGroceryAdd3 = "assets/png/grocery_add3.png";
 
-  static const String assetsPngGroceryAddBanner =
-      "assets/png/grocery_add_banner.png";
+  static const String assetsPngGroceryAddBanner = "assets/png/grocery_add_banner.png";
 
-  static const String assetsPngHealthFocusShape =
-      "assets/png/health_focus_Shape.png";
+  static const String assetsPngHealthFocusShape = "assets/png/health_focus_Shape.png";
 
   static const String assetsPngHomeAdd = "assets/png/home_add.png";
 
-  static const String assetsPngImpAnnounceAdd =
-      "assets/png/imp_announce_add.png";
+  static const String assetsPngImpAnnounceAdd = "assets/png/imp_announce_add.png";
 
   static const String assetsPngLanguageShape = "assets/png/language_shape.png";
 
@@ -134,8 +118,7 @@ class Assets {
 
   static const String assetsPngMoodShape = "assets/png/mood_shape.png";
 
-  static const String assetsPngNutrationShape =
-      "assets/png/nutration_shape.png";
+  static const String assetsPngNutrationShape = "assets/png/nutration_shape.png";
 
   static const String assetsPngOnboardBg = "assets/png/onboard_bg.png";
 
@@ -155,14 +138,11 @@ class Assets {
 
   static const String assetsPngSandwitch2 = "assets/png/sandwitch2.png";
 
-  static const String assetsPngSandwitchLayer3 =
-      "assets/png/sandwitch_layer_3.png";
+  static const String assetsPngSandwitchLayer3 = "assets/png/sandwitch_layer_3.png";
 
-  static const String assetsPngSandwitchLayers =
-      "assets/png/sandwitch_layers.png";
+  static const String assetsPngSandwitchLayers = "assets/png/sandwitch_layers.png";
 
-  static const String assetsPngSandwtichLayer2 =
-      "assets/png/sandwtich_layer_2.png";
+  static const String assetsPngSandwtichLayer2 = "assets/png/sandwtich_layer_2.png";
 
   static const String assetsPngSetPlanShape = "assets/png/set_plan_shape.png";
 
@@ -174,19 +154,15 @@ class Assets {
 
   static const String assetsPngShawerma = "assets/png/shawerma.png";
 
-  static const String assetsPngSpicyChickeAdd =
-      "assets/png/spicy_chicke_add.png";
+  static const String assetsPngSpicyChickeAdd = "assets/png/spicy_chicke_add.png";
 
   static const String assetsPngSplash = "assets/png/splash.png";
 
-  static const String assetsPngSupplementationShape =
-      "assets/png/supplementation_shape.png";
+  static const String assetsPngSupplementationShape = "assets/png/supplementation_shape.png";
 
-  static const String assetsPngVideoTutorialPlaceholder2 =
-      "assets/png/video_tutorial_placeholder_2.png";
+  static const String assetsPngVideoTutorialPlaceholder2 = "assets/png/video_tutorial_placeholder_2.png";
 
-  static const String assetsPngVideotutorialVideoPlaceholder =
-      "assets/png/videotutorial_video_placeholder.png";
+  static const String assetsPngVideotutorialVideoPlaceholder = "assets/png/videotutorial_video_placeholder.png";
 
   static const String assetsPngWave = "assets/png/wave.png";
 
@@ -218,8 +194,7 @@ class Assets {
 
   static const String assetsSvgFavoriteIcon = "assets/svg/favorite_icon.svg";
 
-  static const String assetsSvgFavoritesOutlined =
-      "assets/svg/favorites_outlined.svg";
+  static const String assetsSvgFavoritesOutlined = "assets/svg/favorites_outlined.svg";
 
   static const String assetsSvgFoodPlan = "assets/svg/food_plan.svg";
 
@@ -251,8 +226,7 @@ class Assets {
 
   static const String assetsSvgNotification = "assets/svg/notification.svg";
 
-  static const String assetsSvgPaymentSettings =
-      "assets/svg/payment_settings.svg";
+  static const String assetsSvgPaymentSettings = "assets/svg/payment_settings.svg";
 
   static const String assetsSvgPercentage = "assets/svg/percentage.svg";
 
@@ -317,12 +291,9 @@ class Assets {
   static const String creditIc = "assets/svg/creditIc.svg";
   static const String cashedPng = "assets/png/cashedPng.png";
   static const String winnerPoints = "assets/png/winnerPoints.png";
-  static const String successfullyAddPoundsIc =
-      "assets/svg/successfullyAddPoundsIc.svg";
-  static const String additionalSuccessfullyIc =
-      "assets/svg/additionalSuccessfullyIc.svg";
-  static const String successfullyAddPointsIc =
-      "assets/svg/successfullyAddPointsIc.svg";
+  static const String successfullyAddPoundsIc = "assets/svg/successfullyAddPoundsIc.svg";
+  static const String additionalSuccessfullyIc = "assets/svg/additionalSuccessfullyIc.svg";
+  static const String successfullyAddPointsIc = "assets/svg/successfullyAddPointsIc.svg";
   static const String completePaymentIc = "assets/png/completePaymentIc.png";
 
   static const String convertPointsIc = "assets/svg/convertPointsIc.svg";
@@ -373,10 +344,8 @@ class Assets {
 
   // Navigation
   static const String unSelectedHomeIc = "assets/svg/unSelectedHomeIc.svg";
-  static const String unSelectedFavoriteIc =
-      "assets/svg/unSelectedFavoriteIc.svg";
-  static const String unSelectedProfileIc =
-      "assets/svg/unSelectedProfileIc.svg";
+  static const String unSelectedFavoriteIc = "assets/svg/unSelectedFavoriteIc.svg";
+  static const String unSelectedProfileIc = "assets/svg/unSelectedProfileIc.svg";
   static const String unSelectedOrdersIc = "assets/svg/unSelectedOrdersIc.svg";
   static const String cartIc = "assets/svg/cartIc.svg";
   static const String trackMapIc = "assets/png/trackMapIc.png";
@@ -390,15 +359,15 @@ class Assets {
   static const String visaCardIc = "assets/svg/visaCardIc.svg";
 
   //Favorite
-  static const String newUnSelectedFavoriteIc =
-      "assets/svg/newUnSelectedFavoriteIc.svg";
-  static const String newSelectedFavoriteIc =
-      "assets/svg/newSelectedFavoriteIc.svg";
+  static const String newUnSelectedFavoriteIc = "assets/svg/newUnSelectedFavoriteIc.svg";
+  static const String newSelectedFavoriteIc = "assets/svg/newSelectedFavoriteIc.svg";
 
   // Home Ic
   static const String restaurantNameIc = "assets/svg/restaurantNameIc.svg";
-  static const String customShapeSuggestIc =
-      "assets/png/customShapeSuggestIc.png";
+  static const String groceryIc = "assets/svg/groceryIc.svg";
+  static const String pharmacyStoreIc = "assets/svg/pharmacyStoreIc.svg";
+
+  static const String customShapeSuggestIc = "assets/png/customShapeSuggestIc.png";
   static const String soldCartIc = "assets/svg/soldCartIc.svg";
   static const String shareIc = "assets/svg/shareIc.svg";
 
@@ -408,7 +377,6 @@ class Assets {
   static const String cacheClockIc = "assets/svg/cacheClockIc.svg";
 
   //Pharmacy Header
-  static const String pharmacyStoreIc = "assets/svg/pharmacyStoreIc.svg";
   static const String galleryIc = "assets/svg/galleryIc.svg";
   static const String cameraIc = "assets/svg/cameraIc.svg";
 
