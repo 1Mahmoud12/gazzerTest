@@ -186,7 +186,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                             disabledColor: Co.grey.withAlpha(80),
 
                                             text: L10n.tr().checkout,
-                                            textStyle: TStyle.whiteRegular(16),
+                                            textStyle: TStyle.robotBlackRegular().copyWith(color: Co.white),
                                             width: double.infinity,
                                             padding: const EdgeInsets.symmetric(vertical: 6),
                                             bgColor: Co.purple,
@@ -200,7 +200,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                             width: double.infinity,
                                             height: 0,
                                             borderColor: Co.purple,
-                                            textStyle: TStyle.blackRegular(16),
+                                            textStyle: TStyle.robotBlackMedium(),
                                             bgColor: Colors.transparent,
                                           ),
                                           MainBtn(
@@ -228,7 +228,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                             width: double.infinity,
                                             height: 0,
                                             borderColor: Co.purple,
-                                            textStyle: TStyle.blackRegular(16),
+                                            textStyle: TStyle.robotBlackMedium(),
                                             bgColor: Colors.transparent,
                                             child: Row(
                                               spacing: 8,

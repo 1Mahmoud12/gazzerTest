@@ -64,7 +64,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
             //             minimumSize: Size.zero,
             //             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             //           ),
-            //           child: Text(L10n.tr().privacySettings, style: TStyle.blackRegular(14)),
+            //           child: Text(L10n.tr().privacySettings, style: TStyle.robotBlackRegular()),
             //         ),
             //         if (client != null)
             //           TextButton(
@@ -77,7 +77,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
             //               minimumSize: Size.zero,
             //               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             //             ),
-            //             child: Text(L10n.tr().changePassword, style: TStyle.blackRegular(14)),
+            //             child: Text(L10n.tr().changePassword, style: TStyle.robotBlackRegular()),
             //           ),
             //       ],
             //     ),

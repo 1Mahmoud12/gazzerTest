@@ -4,11 +4,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 /// Search button for pharmacy store
 class PharmacySearchButton extends StatelessWidget {
-  const PharmacySearchButton({
-    super.key,
-    this.onTap,
-    this.hintText,
-  });
+  const PharmacySearchButton({super.key, this.onTap, this.hintText});
 
   final VoidCallback? onTap;
   final String? hintText;
@@ -22,30 +18,17 @@ class PharmacySearchButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Co.white.withOpacity(0.9),
           borderRadius: BorderRadius.circular(64),
-          border: Border.all(
-            color: Co.buttonGradient.withOpacity(0.3),
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Co.buttonGradient.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          border: Border.all(color: Co.buttonGradient.withOpacity(0.3), width: 2),
+          boxShadow: [BoxShadow(color: Co.buttonGradient.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))],
         ),
         child: Row(
           children: [
-            const Icon(
-              Icons.search,
-              color: Co.purple,
-              size: 24,
-            ),
+            const Icon(Icons.search, color: Co.purple, size: 24),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
                 hintText ?? L10n.tr().searchForStoresItemsAndCAtegories,
-                style: TStyle.greyRegular(14),
+                style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

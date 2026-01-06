@@ -93,7 +93,11 @@ class _SuccessDialogContent extends StatelessWidget {
                       Text(title, textAlign: TextAlign.center, style: TStyle.robotBlackSubTitle()),
                       const VerticalSpacing(12),
                       if (subTitle != null) ...[
-                        Text(subTitle!, textAlign: TextAlign.center, style: TStyle.greyRegular(16)),
+                        Text(
+                          subTitle!,
+                          textAlign: TextAlign.center,
+                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                        ),
                         const VerticalSpacing(20),
                       ],
                       if (additionalWidget != null) ...[additionalWidget!, const VerticalSpacing(12)],

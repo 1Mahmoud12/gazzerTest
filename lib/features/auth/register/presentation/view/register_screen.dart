@@ -273,7 +273,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     bgColor: Co.purple,
                     radius: 24,
-                    child: Text(L10n.tr().signUp, style: TStyle.whiteSemi(16)),
+                    child: Text(
+                      L10n.tr().signUp,
+                      style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                    ),
                   );
                 },
               ),
@@ -328,7 +331,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             // const VerticalSpacing(24),
-            // Center(child: Text(L10n.tr().or, style: TStyle.greyRegular(16))),
+            // Center(child: Text(L10n.tr().or, style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey))),
             // const VerticalSpacing(10),
             // const SocialAuthWidget(),
           ],

@@ -23,10 +23,7 @@ class WalletHistoryEntry {
 }
 
 class WalletHistoryTile extends StatelessWidget {
-  const WalletHistoryTile({
-    super.key,
-    required this.entry,
-  });
+  const WalletHistoryTile({super.key, required this.entry});
 
   final WalletHistoryEntry entry;
 
@@ -34,24 +31,13 @@ class WalletHistoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-      decoration: BoxDecoration(
-        color: Co.w100,
-        borderRadius: BorderRadius.circular(28),
-      ),
+      decoration: BoxDecoration(color: Co.w100, borderRadius: BorderRadius.circular(28)),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
-            decoration: const BoxDecoration(
-              color: Co.secondary,
-              shape: BoxShape.circle,
-            ),
-            child: SvgPicture.asset(
-              entry.iconAsset,
-              colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn),
-              height: 24,
-              width: 24,
-            ),
+            decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
+            child: SvgPicture.asset(entry.iconAsset, colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn), height: 24, width: 24),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -61,15 +47,9 @@ class WalletHistoryTile extends StatelessWidget {
                 Text(entry.title, style: TStyle.robotBlackMedium()),
                 const SizedBox(height: 4),
                 if (entry.subtitle.isNotEmpty && entry.subtitle != 'description')
-                  Text(
-                    entry.subtitle,
-                    style: TStyle.robotBlackRegular(font: FFamily.roboto),
-                  ),
+                  Text(entry.subtitle, style: TStyle.robotBlackRegular(font: FFamily.roboto)),
                 if (entry.subtitle.isNotEmpty && entry.subtitle != 'description') const SizedBox(height: 4),
-                Text(
-                  entry.date,
-                  style: TStyle.greyRegular(12, font: FFamily.roboto),
-                ),
+                Text(entry.date, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
               ],
             ),
           ),

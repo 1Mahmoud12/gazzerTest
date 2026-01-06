@@ -57,11 +57,11 @@ class PlansViewScreen extends StatelessWidget {
                             const TextSpan(text: '\n'),
                             TextSpan(
                               text: 'Daily Calorie Range: 1200–1500 kcal (adjusted based on user data)\nFeatures:',
-                              style: TStyle.blackRegular(12),
+                              style: TStyle.robotBlackThin(),
                             ),
                             const TextSpan(text: '\n'),
 
-                            ...List.generate(4, (i) => TextSpan(text: '\n•  Low-carb, high-protein meals', style: TStyle.blackRegular(12))),
+                            ...List.generate(4, (i) => TextSpan(text: '\n•  Low-carb, high-protein meals', style: TStyle.robotBlackThin())),
                           ],
                         ),
                         overflow: TextOverflow.fade,

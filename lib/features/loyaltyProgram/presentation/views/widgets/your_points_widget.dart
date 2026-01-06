@@ -35,18 +35,12 @@ class YourPointsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: visual.mainColor,
-        borderRadius: BorderRadius.circular(24),
-      ),
+      decoration: BoxDecoration(color: visual.mainColor, borderRadius: BorderRadius.circular(24)),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            L10n.tr().yourPoints,
-            style: TStyle.whiteRegular(20, font: FFamily.roboto).copyWith(color: visual.primaryTextColor),
-          ),
+          Text(L10n.tr().yourPoints, style: TStyle.robotBlackSubTitle().copyWith(color: visual.primaryTextColor)),
           const SizedBox(height: 16),
           Row(
             children: [
@@ -55,14 +49,8 @@ class YourPointsWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    availablePoints.toString(),
-                    style: TStyle.whiteSemi(24, font: FFamily.roboto).copyWith(color: visual.primaryTextColor),
-                  ),
-                  Text(
-                    L10n.tr().availablePoints,
-                    style: TStyle.whiteSemi(20, font: FFamily.roboto).copyWith(color: visual.secondaryTextColor),
-                  ),
+                  Text(availablePoints.toString(), style: TStyle.robotBlackSubTitle().copyWith(color: visual.primaryTextColor)),
+                  Text(L10n.tr().availablePoints, style: TStyle.robotBlackSubTitle().copyWith(color: visual.secondaryTextColor)),
                 ],
               ),
             ],
@@ -129,29 +117,18 @@ class YourPointsItem extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              shape: BoxShape.circle,
-            ),
-            child: SvgPicture.asset(
-              icon,
-              width: 20,
-              height: 20,
-              colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
-            ),
+            decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
+            child: SvgPicture.asset(icon, width: 20, height: 20, colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn)),
           ),
           const SizedBox(width: 24),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: TStyle.whiteSemi(16, font: FFamily.roboto).copyWith(color: firstTextColor),
-              ),
+              Text(title, style: TStyle.robotBlackMedium().copyWith(color: firstTextColor)),
               const VerticalSpacing(4),
               Text(
                 subTitle,
-                style: TStyle.burbleMed(14, font: FFamily.roboto).copyWith(color: secondTextColor),
+                style: TStyle.robotBlackRegular14().copyWith(color: Co.purple, fontWeight: TStyle.medium),
               ),
             ],
           ),

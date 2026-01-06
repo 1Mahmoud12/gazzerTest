@@ -134,11 +134,11 @@ class _ChatInputFieldState extends State<ChatInputField> {
                         textInputAction: TextInputAction.newline,
                         decoration: InputDecoration(
                           hintText: L10n.tr().typeMessage,
-                          hintStyle: TStyle.blackRegular(14).copyWith(color: Colors.black38),
+                          hintStyle: TStyle.robotBlackRegular().copyWith(color: Colors.black38),
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.symmetric(vertical: 12),
                         ),
-                        style: TStyle.blackRegular(14),
+                        style: TStyle.robotBlackRegular(),
                       ),
                     ),
                   ),

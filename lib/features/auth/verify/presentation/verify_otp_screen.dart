@@ -139,7 +139,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
             //       child: Text(
             //         "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
             //         maxLines: 3,
-            //         style: TStyle.greySemi(16),
+            //         style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey,fontWeight:TStyle.medium),
             //         textAlign: TextAlign.start,
             //       ),
             //     ),

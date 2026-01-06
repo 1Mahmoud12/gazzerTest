@@ -87,7 +87,7 @@ class StoreMenuScreen extends StatelessWidget {
               CircleGradientBorderedImage(image: catWzPlates[index].$1.image),
               Padding(
                 padding: AppConst.defaultHrPadding,
-                child: Text(catWzPlates[index].$1.name, style: TStyle.blackSemi(13)),
+                child: Text(catWzPlates[index].$1.name, style: TStyle.robotBlackSmall()),
               ),
             ],
           ),

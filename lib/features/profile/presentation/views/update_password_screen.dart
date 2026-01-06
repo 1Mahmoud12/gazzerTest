@@ -85,7 +85,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                   ),
 
                   const VerticalSpacing(16),
-                  Text(L10n.tr().newPassword, style: TStyle.blackSemi(14)),
+                  Text(L10n.tr().newPassword, style: TStyle.robotBlackRegular14()),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: password,
@@ -98,7 +98,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                     autofillHints: const [AutofillHints.newPassword],
                   ),
                   const VerticalSpacing(16),
-                  Text(L10n.tr().confirmPassword, style: TStyle.blackSemi(14)),
+                  Text(L10n.tr().confirmPassword, style: TStyle.robotBlackRegular14()),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: confirmPassword,

@@ -23,9 +23,13 @@ Future<bool?> showReorderExistingItemsDialog({
           mainAxisSize: MainAxisSize.min,
           children: [
             const VerticalSpacing(20),
-            Text(L10n.tr().warning, style: TStyle.burbleBold(18), textAlign: TextAlign.center),
+            Text(
+              L10n.tr().warning,
+              style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold, color: Co.purple),
+              textAlign: TextAlign.center,
+            ),
             const VerticalSpacing(10),
-            Text(message ?? '', style: TStyle.blackRegular(16), textAlign: TextAlign.center),
+            Text(message ?? '', style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
             const VerticalSpacing(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -36,7 +40,7 @@ Future<bool?> showReorderExistingItemsDialog({
                       text: L10n.tr().clear,
                       bgColor: Colors.transparent,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.burbleRegular(14).copyWith(color: Co.purple),
+                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
                       borderThickness: 2,
                       onPressed: () {
                         context.pop(false); // false = clear existing items
@@ -50,7 +54,7 @@ Future<bool?> showReorderExistingItemsDialog({
                       bgColor: Colors.transparent,
                       borderThickness: 2,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.burbleRegular(14).copyWith(color: Co.purple),
+                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
                       onPressed: () {
                         context.pop(true); // true = keep existing items
                       },

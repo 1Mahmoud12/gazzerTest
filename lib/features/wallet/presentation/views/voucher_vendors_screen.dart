@@ -102,7 +102,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.message, style: TStyle.blackRegular(16), textAlign: TextAlign.center),
+                    Text(state.message, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
                     const VerticalSpacing(16),
                     MainBtn(
                       onPressed: () => context.read<VoucherVendorsCubit>().loadVoucherStores(widget.id),
@@ -127,7 +127,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                   : (state as VoucherVendorsConvertSuccess).stores;
 
               if (stores.isEmpty) {
-                return Center(child: Text(L10n.tr().noData, style: TStyle.blackRegular(16)));
+                return Center(child: Text(L10n.tr().noData, style: TStyle.robotBlackMedium()));
               }
 
               final isConverting = state is VoucherVendorsConverting;
@@ -149,9 +149,9 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${L10n.tr().available}: ${widget.availablePoints.toInt()} ${L10n.tr().points}', style: TStyle.blackRegular(14)),
+                            Text('${L10n.tr().available}: ${widget.availablePoints.toInt()} ${L10n.tr().points}', style: TStyle.robotBlackRegular()),
                             const SizedBox(height: 4),
-                            Text('${L10n.tr().selected}: $_totalPointsUsed ${L10n.tr().points}', style: TStyle.blackRegular(14)),
+                            Text('${L10n.tr().selected}: $_totalPointsUsed ${L10n.tr().points}', style: TStyle.robotBlackRegular()),
                             const SizedBox(height: 4),
                             Text(
                               '${L10n.tr().remaining}: ${_remainingPoints.toInt()} ${L10n.tr().points}',
@@ -166,7 +166,10 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(20)),
-                            child: Text('${_selectedStores.length} ${L10n.tr().selected}', style: TStyle.whiteBold(12)),
+                            child: Text(
+                              '${_selectedStores.length} ${L10n.tr().selected}',
+                              style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+                            ),
                           ),
                       ],
                     ),

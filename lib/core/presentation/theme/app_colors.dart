@@ -11,7 +11,7 @@ class Co {
   static const tertiary = Color(0xFFB35000);
 
   // text colors
-  static const mainText = Color(0xFF000000);
+  static const mainText = dark;
   static const secText = Color(0xFFD7D7D7);
   static const greyText = Color(0xFF525252);
   static const black = Color(0xFF000000);

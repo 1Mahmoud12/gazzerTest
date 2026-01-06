@@ -32,7 +32,7 @@ class _WalletScreenState extends State<WalletScreen> {
         appBar: MainAppBar(
           iconsColor: Co.secondary,
           title: L10n.tr().wallet,
-          titleStyle: TStyle.burbleMed(22, font: FFamily.roboto),
+          titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple, fontWeight: TStyle.medium),
         ),
         body: Session().client == null
             ? Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty))

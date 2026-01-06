@@ -5,10 +5,7 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 class BalanceWidget extends StatelessWidget {
-  const BalanceWidget({
-    super.key,
-    this.balance,
-  });
+  const BalanceWidget({super.key, this.balance});
 
   final double? balance;
 
@@ -19,27 +16,21 @@ class BalanceWidget extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Co.purple,
-        borderRadius: BorderRadius.circular(12),
-      ),
+      decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(12)),
       child: Row(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  L10n.tr().walletKeepItUp,
-                  style: TStyle.whiteBold(22, font: FFamily.roboto),
-                ),
+                Text(L10n.tr().walletKeepItUp, style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
                 Text(
                   L10n.tr().walletNewAchievements,
-                  style: TStyle.whiteSemi(16, font: FFamily.roboto),
+                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
                 ),
                 Text(
                   L10n.tr().walletBalanceLabel(balanceText, L10n.tr().egp),
-                  style: TStyle.whiteSemi(16, font: FFamily.roboto),
+                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
                 ),
               ],
             ),
@@ -51,14 +42,11 @@ class BalanceWidget extends StatelessWidget {
             gapLength: 3,
             borderRadius: 90,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 8,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Text(
                 '$balanceText \n ${L10n.tr().egp}',
                 textAlign: TextAlign.center,
-                style: TStyle.whiteBold(22, font: FFamily.roboto),
+                style: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
               ),
             ),
           ),
@@ -88,17 +76,8 @@ class _DashedBorder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _DashedBorderPainter(
-        color: color,
-        strokeWidth: strokeWidth,
-        dashLength: dashLength,
-        gapLength: gapLength,
-        borderRadius: borderRadius,
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(strokeWidth),
-        child: child,
-      ),
+      painter: _DashedBorderPainter(color: color, strokeWidth: strokeWidth, dashLength: dashLength, gapLength: gapLength, borderRadius: borderRadius),
+      child: Padding(padding: EdgeInsets.all(strokeWidth), child: child),
     );
   }
 }
@@ -120,12 +99,7 @@ class _DashedBorderPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(
-      strokeWidth / 2,
-      strokeWidth / 2,
-      math.max(0, size.width - strokeWidth),
-      math.max(0, size.height - strokeWidth),
-    );
+    final rect = Rect.fromLTWH(strokeWidth / 2, strokeWidth / 2, math.max(0, size.width - strokeWidth), math.max(0, size.height - strokeWidth));
     final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
     final path = Path()..addRRect(rrect);
 
@@ -144,10 +118,7 @@ class _DashedBorderPainter extends CustomPainter {
       double distance = 0;
       while (distance < metric.length) {
         final double nextDash = math.min(dashLength, metric.length - distance);
-        dashed.addPath(
-          metric.extractPath(distance, distance + nextDash),
-          Offset.zero,
-        );
+        dashed.addPath(metric.extractPath(distance, distance + nextDash), Offset.zero);
         distance += nextDash + gapLength;
       }
     }

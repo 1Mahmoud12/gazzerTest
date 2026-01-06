@@ -53,12 +53,17 @@ class HeaderSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Text(L10n.tr(context).typeYouReviewHere, style: TStyle.burbleRegular(12), overflow: TextOverflow.ellipsis, maxLines: 1),
+              child: Text(
+                L10n.tr(context).typeYouReviewHere,
+                style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
             ),
 
             const HorizontalSpacing(4),
             const Spacer(),
-            Text('4.6', style: TStyle.blackRegular(14), overflow: TextOverflow.ellipsis, maxLines: 1),
+            Text('4.6', style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1),
             const HorizontalSpacing(4),
             ...List.generate(
               5,
@@ -68,7 +73,7 @@ class HeaderSection extends StatelessWidget {
               ),
             ),
             const HorizontalSpacing(4),
-            Text('(1120)', style: TStyle.blackRegular(14), overflow: TextOverflow.ellipsis, maxLines: 1),
+            Text('(1120)', style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1),
           ],
         ),
       ],
@@ -170,7 +175,12 @@ class ReviewItem extends StatelessWidget {
               const SizedBox(height: 4),
 
               // Review Text
-              Text(review['text'], style: TStyle.greyRegular(12).copyWith(height: 1.4), maxLines: 3, overflow: TextOverflow.ellipsis),
+              Text(
+                review['text'],
+                style: TStyle.robotBlackThin()..copyWith(height: 1.4, color: Co.darkGrey),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           ),
         ),

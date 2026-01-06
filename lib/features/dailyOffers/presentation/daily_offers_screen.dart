@@ -114,7 +114,12 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                     final items = data?.itemsWithOffers ?? const [];
                     final stores = data?.storesWithOffers ?? const [];
                     if (items.isEmpty && stores.isEmpty && !isLoadingMore) {
-                      return Center(child: Text(_currentSearch.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults, style: TStyle.mainwSemi(14)));
+                      return Center(
+                        child: Text(
+                          _currentSearch.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
+                          style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
+                        ),
+                      );
                     }
 
                     return CustomScrollView(

@@ -12,7 +12,7 @@ class ProductSummaryWidget extends StatelessWidget {
       children: [
         Text(plate.name, style: TStyle.robotBlackSubTitle()),
         const SizedBox(height: 8),
-        Text(plate.description, style: TStyle.greyRegular(14)),
+        Text(plate.description, style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey)),
       ],
     );
   }

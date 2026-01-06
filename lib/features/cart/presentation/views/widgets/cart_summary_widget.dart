@@ -47,9 +47,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().grossAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+//                                 Text(L10n.tr().grossAmount, style: TStyle.robotBlackMedium()),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.subTotal), style: TStyle.blackSemi(18, font: FFamily.roboto)),
+//                                 Text(Helpers.getProperPrice(state.summary.subTotal), style: TStyle.robotBlackMedium()),
 //                               ],
 //                             ),
 //                           ),
@@ -60,9 +60,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().itemsDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+//                                 Text(L10n.tr().itemsDiscount, style: TStyle.robotBlackMedium()),
 //                                 const HorizontalSpacing(12),
-//                                 Text('-${Helpers.getProperPrice(state.summary.discount)}', style: TStyle.blackSemi(18, font: FFamily.roboto)),
+//                                 Text('-${Helpers.getProperPrice(state.summary.discount)}', style: TStyle.robotBlackMedium()),
 //                               ],
 //                             ),
 //                           ),
@@ -72,9 +72,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().vatAmount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+//                                 Text(L10n.tr().vatAmount, style: TStyle.robotBlackMedium()),
 //                                 const HorizontalSpacing(12),
-//                                 Text(Helpers.getProperPrice(state.summary.tax), style: TStyle.blackSemi(18, font: FFamily.roboto)),
+//                                 Text(Helpers.getProperPrice(state.summary.tax), style: TStyle.robotBlackMedium()),
 //                               ],
 //                             ),
 //                           ),
@@ -85,9 +85,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().serviceFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+//                                 Text(L10n.tr().serviceFee, style: TStyle.robotBlackMedium()),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.serviceFee), style: TStyle.blackSemi(18, font: FFamily.roboto)),
+//                                 Text(Helpers.getProperPrice(state.summary.serviceFee), style: TStyle.robotBlackMedium()),
 //                               ],
 //                             ),
 //                           ),
@@ -98,9 +98,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().deliveryFee, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+//                                 Text(L10n.tr().deliveryFee, style: TStyle.robotBlackMedium()),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.deliveryFee), style: TStyle.blackSemi(18, font: FFamily.roboto)),
+//                                 Text(Helpers.getProperPrice(state.summary.deliveryFee), style: TStyle.robotBlackMedium()),
 //                               ],
 //                             ),
 //                           ),
@@ -111,9 +111,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().deliveryFeeDiscount, style: TStyle.blackSemi(16, font: FFamily.roboto)),
+//                                 Text(L10n.tr().deliveryFeeDiscount, style: TStyle.robotBlackMedium()),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.deliveryFeeDiscount), style: TStyle.blackSemi(18, font: FFamily.roboto)),
+//                                 Text(Helpers.getProperPrice(state.summary.deliveryFeeDiscount), style: TStyle.robotBlackMedium()),
 //                               ],
 //                             ),
 //                           ),
@@ -130,7 +130,7 @@
 //                                     Flexible(
 //                                       child: Text(
 //                                         L10n.tr().total,
-//                                         style: TStyle.blackSemi(20, font: FFamily.roboto),
+//                                         style: TStyle.robotBlackSubTitle()
 //                                         overflow: TextOverflow.ellipsis,
 //                                         maxLines: 1,
 //                                       ),
@@ -145,7 +145,7 @@
 //                                 ),
 //                               ),
 //                               const HorizontalSpacing(12),
-//                               Text(Helpers.getProperPrice(state.summary.total), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
+//                               Text(Helpers.getProperPrice(state.summary.total), style: TStyle.robotBlackSubTitle().copyWith(color:Co.purple,fontWeight: TStyle.semi,)),
 //                             ],
 //                           ),
 //                         ),
@@ -176,7 +176,7 @@
 //                             width: double.infinity,
 //                             height: 0,
 //                             borderColor: Co.purple,
-//                             textStyle: TStyle.blackRegular(16),
+//                             textStyle: TStyle.robotBlackMedium(),
 //                             bgColor: Colors.transparent,
 //                           ),
 //                         ),
@@ -201,7 +201,7 @@
 //                             disabledColor: Co.grey.withAlpha(80),
 //
 //                             text: L10n.tr().checkout,
-//                             textStyle: TStyle.whiteRegular(16),
+//                             textStyle: TStyle.robotBlackRegular().copyWith(color: Co.white),
 //                             width: double.infinity,
 //                             padding: const EdgeInsets.symmetric(vertical: 6),
 //                             bgColor: Co.purple,

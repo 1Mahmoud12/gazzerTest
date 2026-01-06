@@ -64,12 +64,15 @@ class OrderedWithCard extends StatelessWidget {
                               Row(
                                 children: [
                                   const Icon(Icons.star, color: Co.secondary, size: 16),
-                                  Text(product.rate.toStringAsFixed(1), style: TStyle.mainwSemi(12).copyWith(color: Co.secondary)),
+                                  Text(
+                                    product.rate.toStringAsFixed(1),
+                                    style: TStyle.robotBlackThin().copyWith(color: Co.secondary, fontWeight: TStyle.semi),
+                                  ),
                                 ],
                               ),
                             ],
                           ),
-                          Text(Helpers.getProperPrice(product.price), style: TStyle.blackSemi(12).copyWith(shadows: AppDec.blackTextShadow)),
+                          Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackThin().copyWith(shadows: AppDec.blackTextShadow)),
                         ],
                       ),
                     ),

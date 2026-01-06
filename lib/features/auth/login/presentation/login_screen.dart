@@ -22,17 +22,12 @@ import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart
 import 'package:gazzer/features/intro/presentation/loading_screen.dart';
 import 'package:go_router/go_router.dart';
 
-
 class LoginScreen extends StatefulWidget {
-  
   const LoginScreen({super.key});
   static const route = '/login';
   @override
   State<LoginScreen> createState() => _LoginScreenState();
-
-  
 }
-
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
@@ -78,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // const VerticalSpacing(16),
                   // Text(
                   //   L10n.tr().howToLogin,
-                  //   style: TStyle.blackSemi(16),
+                  //   style: TStyle.robotBlackMedium(),
                   // ),
                   const VerticalSpacing(32),
 
@@ -228,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             context.read<LoginCubit>().login(loginValue, _pasword.text.trim());
                           }
                         },
-                        textStyle: TStyle.mainwSemi(15),
+                        textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
 
                         child: Text(L10n.tr().login, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
                       ),
@@ -240,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       context.push(RegisterScreen.route);
                     },
-                    textStyle: TStyle.mainwSemi(15),
+                    textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
                     bgColor: Colors.transparent,
                     borderColor: Co.purple,
                     child: Text(L10n.tr().signUp, style: TStyle.robotBlackMedium()),
@@ -263,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (Navigator.canPop(context)) return context.pop();
                       const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                     },
-                    textStyle: TStyle.mainwSemi(15),
+                    textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
                     bgColor: Colors.transparent,
                     borderColor: Colors.transparent,
                     child: RichText(

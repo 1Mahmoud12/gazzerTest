@@ -10,7 +10,10 @@ class AppTheme {
     pageTransitionsTheme: PageTransitionsTheme(
       builders: {TargetPlatform.android: CustomPageTransitionBuilder(), TargetPlatform.iOS: CustomPageTransitionBuilder()},
     ),
-    textTheme: TextTheme(titleMedium: TStyle.whiteSemi(14), bodyMedium: TStyle.whiteSemi(13)),
+    textTheme: TextTheme(
+      titleMedium: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+      bodyMedium: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+    ),
     fontFamily: 'poppins',
     scaffoldBackgroundColor: Co.bg,
     switchTheme: const SwitchThemeData(

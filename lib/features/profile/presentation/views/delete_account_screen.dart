@@ -162,7 +162,10 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                         children: [
                           TextSpan(text: L10n.tr().whyAreYouDeletingYourAccount),
                           const TextSpan(text: '\n'),
-                          TextSpan(text: L10n.tr().thisFeedbackHelpsUsImproveOurServices, style: TStyle.greySemi(12)),
+                          TextSpan(
+                            text: L10n.tr().thisFeedbackHelpsUsImproveOurServices,
+                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                          ),
                         ],
                         style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, height: 1.7),
                       ),
@@ -201,7 +204,10 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             return RadioListTile(
                               value: items[index].id,
 
-                              subtitle: Text(items[index].description, style: TStyle.greySemi(12)),
+                              subtitle: Text(
+                                items[index].description,
+                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                              ),
                               title: Text(items[index].title, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                               splashRadius: AppConst.defaultRadius,
                               contentPadding: EdgeInsets.zero,

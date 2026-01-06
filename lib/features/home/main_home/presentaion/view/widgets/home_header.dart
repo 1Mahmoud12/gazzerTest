@@ -105,7 +105,7 @@ class _HomeHeaderState extends State<_HomeHeader> {
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TStyle.whiteSemi(14),
+                        style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
                       ),
                     );
                   },
@@ -204,7 +204,7 @@ Widget _buildAddressItem(BuildContext context, AddressEntity address, AddressesB
               children: [
                 Text(address.label, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
-                Text('${address.zoneName}, ${address.provinceName}', style: TStyle.greyRegular(12)),
+                Text('${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
               ],
             ),
           ),
@@ -239,7 +239,7 @@ Widget _buildCurrentLocationOption(BuildContext context) {
               children: [
                 Text(L10n.tr().deliverToCurrentLocation, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
-                Text(L10n.tr().outsideDeliveryZone, style: TStyle.greyRegular(12)),
+                Text(L10n.tr().outsideDeliveryZone, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
               ],
             ),
           ),
@@ -269,7 +269,7 @@ Widget _buildMapLocationOption(BuildContext context) {
               children: [
                 Text(L10n.tr().deliverToDifferentLocation, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
-                Text(L10n.tr().chooseLocationOnMap, style: TStyle.greyRegular(12)),
+                Text(L10n.tr().chooseLocationOnMap, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
               ],
             ),
           ),

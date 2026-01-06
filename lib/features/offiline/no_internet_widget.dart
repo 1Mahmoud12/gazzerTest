@@ -37,7 +37,7 @@
 //                       const VerticalSpacing(16),
 //                       // Text(L10n.tr().noInternetConnect, style: TStyle.blackBold(17)),
 //                       const VerticalSpacing(8),
-//                       Text(L10n.tr().pleaseCheckYourInternetConnection, style: TStyle.greySemi(15)),
+//                       Text(L10n.tr().pleaseCheckYourInternetConnection, style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey,fontWeight:TStyle.medium)),
 //                       const VerticalSpacing(16),
 //                       MainButton(
 //                         margin: AppConsts.defaultHorPadding,

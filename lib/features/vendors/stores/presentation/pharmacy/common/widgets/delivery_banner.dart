@@ -3,12 +3,7 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 /// Reusable banner for displaying delivery information
 class DeliveryBanner extends StatelessWidget {
-  const DeliveryBanner({
-    super.key,
-    required this.message,
-    this.icon = Icons.local_shipping_outlined,
-    this.backgroundColor = const Color(0xFFF5F5F5),
-  });
+  const DeliveryBanner({super.key, required this.message, this.icon = Icons.local_shipping_outlined, this.backgroundColor = const Color(0xFFF5F5F5)});
 
   final String message;
   final IconData icon;
@@ -19,18 +14,13 @@ class DeliveryBanner extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
+      decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(12)),
       child: Text(
         message,
-        style: TStyle.blackSemi(
-          20,
+        style: TStyle.robotBlackSubTitle().copyWith(
           shadows: [
             const Shadow(
               color: Color(0xADFF9900), // #FF9900AD
-              offset: Offset(0, 0),
               blurRadius: 5.2,
             ),
           ],

@@ -32,7 +32,7 @@ class Dialogs {
                 textAlign: TextAlign.center,
               ),
               const VerticalSpacing(10),
-              if (message != null) Text(message, style: TStyle.blackRegular(16), textAlign: TextAlign.center),
+              if (message != null) Text(message, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
               // const VericalSpacing(20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -42,7 +42,7 @@ class Dialogs {
                       child: MainBtn(
                         text: cancelBtn ?? L10n.tr().cancel,
                         bgColor: cancelBgColor ?? Co.greyText,
-                        textStyle: cancelColor == null ? null : TStyle.whiteSemi(16).copyWith(color: cancelColor),
+                        textStyle: cancelColor == null ? null : TStyle.robotBlackRegular14().copyWith(color: cancelColor, fontWeight: TStyle.medium),
                         onPressed: () {
                           context.pop(false);
                         },
@@ -53,7 +53,7 @@ class Dialogs {
                       child: MainBtn(
                         text: okBtn ?? L10n.tr().confirm,
                         bgColor: okBgColor ?? Co.purple,
-                        textStyle: okColor == null ? null : TStyle.whiteSemi(16).copyWith(color: okColor),
+                        textStyle: okColor == null ? null : TStyle.robotBlackRegular14().copyWith(color: okColor, fontWeight: TStyle.medium),
                         onPressed: () {
                           context.pop(true);
                         },
@@ -169,7 +169,7 @@ class Dialogs {
   // //                   const WidthSpacing(10),
   // //                   Expanded(
   // //                       child: Text((errorModel.errors!)[index],
-  // //                           style: TStyle.blackSemi(14))),
+  // //                           style: TStyle.robotBlackRegular14())),
   // //                 ],
   // //               );
   // //             },
@@ -193,14 +193,14 @@ class Dialogs {
               const VerticalSpacing(20),
               Text(title, style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold)),
               const VerticalSpacing(10),
-              if (message != null) Text(message, style: TStyle.blackRegular(16)),
+              if (message != null) Text(message, style: TStyle.robotBlackMedium()),
               const VerticalSpacing(20),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: MainBtn(
                   text: okBtn ?? L10n.tr().confirm,
                   bgColor: okBgColor ?? Co.purple,
-                  textStyle: okColor == null ? null : TStyle.whiteSemi(16).copyWith(color: okColor),
+                  textStyle: okColor == null ? null : TStyle.robotBlackRegular14().copyWith(color: okColor, fontWeight: TStyle.medium),
                   onPressed: onConfirm,
                 ),
               ),

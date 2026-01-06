@@ -18,7 +18,7 @@ class Alerts {
         dismissDirection: DismissDirection.up,
         duration: const Duration(seconds: 2),
         backgroundColor: Co.dark.withAlpha(175),
-        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: TStyle.whiteBold(16)),
+        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
       ),
     );
   }
@@ -32,7 +32,7 @@ class Alerts {
             onPressed: () {
               ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
             },
-            child: Text(L10n.tr().cancel, style: TStyle.whiteBold(16)),
+            child: Text(L10n.tr().cancel, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
           ),
         ],
 
@@ -43,18 +43,12 @@ class Alerts {
         // dismissDirection: DismissDirection.up,
         // duration: const Duration(seconds: 2),
         backgroundColor: Co.dark,
-        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: TStyle.whiteBold(16)),
+        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
       ),
     );
   }
 
-  static void showToast(
-    String message, {
-    Toast? length,
-    ToastGravity toastGravity = ToastGravity.BOTTOM,
-    bool error = true,
-    bool isInfo = false,
-  }) {
+  static void showToast(String message, {Toast? length, ToastGravity toastGravity = ToastGravity.BOTTOM, bool error = true, bool isInfo = false}) {
     if (message.isEmpty) return;
     Fluttertoast.showToast(
       msg: message,

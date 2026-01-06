@@ -418,7 +418,11 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                   },
                   bgColor: Co.purple,
                   isLoading: state is SaveAddressLoading,
-                  child: Text(L10n.tr().saveAddress, style: TStyle.whiteBold(14), textAlign: TextAlign.center),
+                  child: Text(
+                    L10n.tr().saveAddress,
+                    style: TStyle.robotBlackRegular14().copyWith(color: Co.white),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ],
@@ -479,7 +483,7 @@ class _QuickSelectButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey.shade300),
         ),
-        child: Center(child: Text(label, style: TStyle.blackRegular(14))),
+        child: Center(child: Text(label, style: TStyle.robotBlackRegular())),
       ),
     );
   }

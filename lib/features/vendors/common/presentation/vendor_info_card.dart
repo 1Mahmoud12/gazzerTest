@@ -74,16 +74,16 @@ class VendorInfoCard extends StatelessWidget {
                             if (categories?.isNotEmpty == true)
                               Text(
                                 Helpers.shortIrretableStrings(categories!, 38) ?? '',
-                                style: TStyle.greyRegular(12),
+                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             if (vendor.alwaysOpen)
-                              Text(L10n.tr().alwayeysOpen, style: TStyle.blackSemi(13), textAlign: TextAlign.center)
+                              Text(L10n.tr().alwayeysOpen, style: TStyle.robotBlackSmall(), textAlign: TextAlign.center)
                             else if (vendor.alwaysClosed)
                               Text(
                                 L10n.tr().thisRestaurantIsCurrentlyUnavailable,
-                                style: TStyle.blackRegular(11).copyWith(color: Co.darkRed),
+                                style: TStyle.robotBlackThin().copyWith(color: Co.darkRed),
                                 textAlign: TextAlign.center,
                               )
                             else
@@ -101,9 +101,15 @@ class VendorInfoCard extends StatelessWidget {
                                               style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
                                             ),
                                             if (vendor.startTime != null)
-                                              TextSpan(text: vendor.startTime!.defaultTimeFormat, style: TStyle.greyRegular(12))
+                                              TextSpan(
+                                                text: vendor.startTime!.defaultTimeFormat,
+                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                              )
                                             else
-                                              TextSpan(text: L10n.tr().availabilityUnknown, style: TStyle.greyRegular(12)),
+                                              TextSpan(
+                                                text: L10n.tr().availabilityUnknown,
+                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                              ),
                                           ],
                                         ),
                                         textAlign: TextAlign.center,
@@ -122,9 +128,15 @@ class VendorInfoCard extends StatelessWidget {
                                               style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
                                             ),
                                             if (vendor.endTime != null)
-                                              TextSpan(text: vendor.endTime!.defaultTimeFormat, style: TStyle.greyRegular(12))
+                                              TextSpan(
+                                                text: vendor.endTime!.defaultTimeFormat,
+                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                              )
                                             else
-                                              TextSpan(text: L10n.tr().availabilityUnknown, style: TStyle.greyRegular(12)),
+                                              TextSpan(
+                                                text: L10n.tr().availabilityUnknown,
+                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                              ),
                                           ],
                                         ),
                                         textAlign: TextAlign.center,
@@ -177,7 +189,11 @@ class VendorInfoCard extends StatelessWidget {
                             width: 24,
                             colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                           ),
-                          Text(vendor.zoneName.toUpperCase(), style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
+                          Text(
+                            vendor.zoneName.toUpperCase(),
+                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ],
                       )
                     else
@@ -192,7 +208,11 @@ class VendorInfoCard extends StatelessWidget {
                             width: 24,
                             colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                           ),
-                          Text('${vendor.deliveryTime} ${L10n.tr().min}', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
+                          Text(
+                            '${vendor.deliveryTime} ${L10n.tr().min}',
+                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ],
                       )
                     else
@@ -207,7 +227,11 @@ class VendorInfoCard extends StatelessWidget {
                             width: 24,
                             colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn),
                           ),
-                          Text(Helpers.getProperPrice(vendor.deliveryFee!), style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
+                          Text(
+                            Helpers.getProperPrice(vendor.deliveryFee!),
+                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ],
                       )
                     else

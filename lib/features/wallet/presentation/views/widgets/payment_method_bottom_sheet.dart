@@ -10,31 +10,18 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 
-enum PaymentMethodType {
-  creditDebit,
-  applePay,
-  eWallet,
-}
+enum PaymentMethodType { creditDebit, applePay, eWallet }
 
 class ResultPayment {
   final PaymentMethodType paymentMethodType;
   final PaymentCardEntity? paymentCard;
   final String? walletNumber;
 
-  ResultPayment({
-    required this.paymentMethodType,
-    this.paymentCard,
-    this.walletNumber,
-  });
+  ResultPayment({required this.paymentMethodType, this.paymentCard, this.walletNumber});
 }
 
 class PaymentMethodBottomSheet extends StatefulWidget {
-  const PaymentMethodBottomSheet({
-    super.key,
-    required this.amount,
-    required this.paymentCards,
-    required this.onPaymentResult,
-  });
+  const PaymentMethodBottomSheet({super.key, required this.amount, required this.paymentCards, required this.onPaymentResult});
 
   final double amount;
   final List<PaymentCardEntity> paymentCards;
@@ -52,11 +39,7 @@ class PaymentMethodBottomSheet extends StatefulWidget {
       // backgroundColor: Colors.transparent,
       // useSafeArea: true,
       builder: (context) => Dialog(
-        child: PaymentMethodBottomSheet(
-          amount: amount,
-          paymentCards: paymentCards,
-          onPaymentResult: onPaymentResult,
-        ),
+        child: PaymentMethodBottomSheet(amount: amount, paymentCards: paymentCards, onPaymentResult: onPaymentResult),
       ),
     );
   }
@@ -132,10 +115,7 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
   Widget build(BuildContext context) {
     final l10n = L10n.tr();
     return Container(
-      decoration: const BoxDecoration(
-        color: Co.bg,
-        borderRadius: BorderRadius.all(Radius.circular(28)),
-      ),
+      decoration: const BoxDecoration(color: Co.bg, borderRadius: BorderRadius.all(Radius.circular(28))),
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Form(
@@ -150,22 +130,12 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Co.purple,
-                      ),
-                      child: SvgPicture.asset(
-                        Assets.paymentIc,
-                        width: 60,
-                        height: 60,
-                      ),
+                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Co.purple),
+                      child: SvgPicture.asset(Assets.paymentIc, width: 60, height: 60),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      l10n.walletYouWillRecharge(
-                        widget.amount.toStringAsFixed(0),
-                        l10n.egp,
-                      ),
+                      l10n.walletYouWillRecharge(widget.amount.toStringAsFixed(0), l10n.egp),
                       style: TStyle.robotBlackMedium(),
                       textAlign: TextAlign.center,
                     ),
@@ -234,11 +204,7 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
                 icon: Assets.eWalletIc,
                 title: l10n.walletEWallet,
                 isSelected: _selectedMethod == PaymentMethodType.eWallet,
-                paymentMethodWidget: _selectedMethod == PaymentMethodType.eWallet
-                    ? _EWalletSection(
-                        controller: _walletNumberController,
-                      )
-                    : null,
+                paymentMethodWidget: _selectedMethod == PaymentMethodType.eWallet ? _EWalletSection(controller: _walletNumberController) : null,
                 onTap: () {
                   setState(() {
                     _selectedMethod = PaymentMethodType.eWallet;
@@ -254,7 +220,7 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
                   isEnabled: _selectedMethod != null,
                   bgColor: Co.purple,
                   text: l10n.walletPayNow,
-                  textStyle: TStyle.whiteBold(16, font: FFamily.roboto),
+                  textStyle: TStyle.robotBlackMedium().copyWith(color: Co.white),
                   width: double.infinity,
                   radius: 40,
                 ),
@@ -268,13 +234,7 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
 }
 
 class _PaymentMethodOption extends StatelessWidget {
-  const _PaymentMethodOption({
-    required this.icon,
-    required this.title,
-    required this.isSelected,
-    required this.onTap,
-    this.paymentMethodWidget,
-  });
+  const _PaymentMethodOption({required this.icon, required this.title, required this.isSelected, required this.onTap, this.paymentMethodWidget});
 
   final String icon;
   final String title;
@@ -292,32 +252,18 @@ class _PaymentMethodOption extends StatelessWidget {
         decoration: BoxDecoration(
           color: Co.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: isSelected ? Co.purple : Co.lightGrey,
-            width: isSelected ? 2 : 1,
-          ),
+          border: Border.all(color: isSelected ? Co.purple : Co.lightGrey, width: isSelected ? 2 : 1),
         ),
         child: Column(
           children: [
             Row(
               children: [
-                SvgPicture.asset(
-                  icon,
-                  width: 32,
-                  height: 32,
-                ),
+                SvgPicture.asset(icon, width: 32, height: 32),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    title,
-                    style: TStyle.robotBlackMedium(font: FFamily.roboto),
-                  ),
+                  child: Text(title, style: TStyle.robotBlackMedium(font: FFamily.roboto)),
                 ),
-                GradientRadioBtn(
-                  isSelected: isSelected,
-                  onPressed: onTap,
-                  size: 12,
-                ),
+                GradientRadioBtn(isSelected: isSelected, onPressed: onTap, size: 12),
               ],
             ),
             if (paymentMethodWidget != null) paymentMethodWidget!,
@@ -329,12 +275,7 @@ class _PaymentMethodOption extends StatelessWidget {
 }
 
 class _CreditDebitSection extends StatelessWidget {
-  const _CreditDebitSection({
-    required this.paymentCards,
-    required this.selectedCard,
-    required this.onCardSelected,
-    required this.onAddNewCard,
-  });
+  const _CreditDebitSection({required this.paymentCards, required this.selectedCard, required this.onCardSelected, required this.onAddNewCard});
 
   final List<PaymentCardEntity> paymentCards;
   final PaymentCardEntity? selectedCard;
@@ -365,33 +306,18 @@ class _CreditDebitSection extends StatelessWidget {
                     onTap: () => onCardSelected(card),
                     borderRadius: BorderRadius.circular(12),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 12,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                       decoration: BoxDecoration(
                         color: Co.bg,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: cardIsSelected ? Co.purple : Co.lightGrey,
-                          width: cardIsSelected ? 2 : 1,
-                        ),
+                        border: Border.all(color: cardIsSelected ? Co.purple : Co.lightGrey, width: cardIsSelected ? 2 : 1),
                       ),
                       child: Row(
                         children: [
-                          GradientRadioBtn(
-                            isSelected: cardIsSelected,
-                            onPressed: () => onCardSelected(card),
-                            size: 8,
-                          ),
+                          GradientRadioBtn(isSelected: cardIsSelected, onPressed: () => onCardSelected(card), size: 8),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(
-                              '**** **** **** ${card.last4Digits}',
-                              style: TStyle.robotBlackMedium(
-                                font: FFamily.roboto,
-                              ),
-                            ),
+                            child: Text('**** **** **** ${card.last4Digits}', style: TStyle.robotBlackMedium(font: FFamily.roboto)),
                           ),
                         ],
                       ),
@@ -408,31 +334,19 @@ class _CreditDebitSection extends StatelessWidget {
                   onTap: onAddNewCard,
                   borderRadius: BorderRadius.circular(12),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 12,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     decoration: BoxDecoration(
                       color: Co.bg,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: newCardIsSelected ? Co.purple : Co.lightGrey,
-                        width: newCardIsSelected ? 2 : 1,
-                      ),
+                      border: Border.all(color: newCardIsSelected ? Co.purple : Co.lightGrey, width: newCardIsSelected ? 2 : 1),
                     ),
                     child: Row(
                       children: [
-                        GradientRadioBtn(
-                          isSelected: newCardIsSelected,
-                          onPressed: onAddNewCard,
-                          size: 8,
-                        ),
+                        GradientRadioBtn(isSelected: newCardIsSelected, onPressed: onAddNewCard, size: 8),
                         const SizedBox(width: 8),
                         Text(
                           l10n.walletPayWithAnotherCard,
-                          style: TStyle.robotBlackMedium(font: FFamily.roboto).copyWith(
-                            color: Co.purple,
-                          ),
+                          style: TStyle.robotBlackMedium(font: FFamily.roboto).copyWith(color: Co.purple),
                         ),
                       ],
                     ),
@@ -448,9 +362,7 @@ class _CreditDebitSection extends StatelessWidget {
 }
 
 class _EWalletSection extends StatelessWidget {
-  const _EWalletSection({
-    required this.controller,
-  });
+  const _EWalletSection({required this.controller});
 
   final TextEditingController controller;
 
@@ -487,10 +399,7 @@ class _EWalletSection extends StatelessWidget {
             // If doesn't start with '0' or '1', show error
             return l10n.phoneMustStartWithZeroOrOne;
           },
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(11),
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(11)],
         ),
       ),
     );

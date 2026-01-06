@@ -164,7 +164,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                             ),
                           ],
                         ),
-                        Expanded(child: Text(widget.favorite.description, style: TStyle.blackSemi(12))),
+                        Expanded(child: Text(widget.favorite.description, style: TStyle.robotBlackThin())),
                         const VerticalSpacing(8),
                         if (_canAddToCart())
                           Align(

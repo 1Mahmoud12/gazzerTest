@@ -49,7 +49,7 @@ class OrderInfoColumn extends StatelessWidget {
       children: [
         Text('${L10n.tr().orderId}: #$orderId', style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
         const SizedBox(height: OrderDetailsConstants.smallSpacing),
-        Text(formattedDate, style: TStyle.blackRegular(14).copyWith(color: Co.grey)),
+        Text(formattedDate, style: TStyle.robotBlackRegular().copyWith(color: Co.grey)),
       ],
     );
   }
@@ -99,6 +99,6 @@ class DeliveryTimeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('${L10n.tr().take} $minutes ${L10n.tr().min}', style: TStyle.blackRegular(12).copyWith(color: Co.grey));
+    return Text('${L10n.tr().take} $minutes ${L10n.tr().min}', style: TStyle.robotBlackThin().copyWith(color: Co.grey));
   }
 }

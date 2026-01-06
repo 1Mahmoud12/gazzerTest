@@ -129,7 +129,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         child: Column(
                           spacing: 8,
                           children: [
-                            Text(L10n.tr().errorFetchingUserData, style: TStyle.errorSemi(16)),
+                            Text(L10n.tr().errorFetchingUserData, style: TStyle.robotBlackRegular().copyWith(color: Co.red)),
                             const SizedBox.shrink(),
                             if (trialCount < 3)
                               OutlinedButton(
@@ -138,7 +138,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                   spacing: 6,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(L10n.tr().retry, style: TStyle.whiteSemi(14)),
+                                    Text(
+                                      L10n.tr().retry,
+                                      style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                                    ),
                                     const Icon(Icons.refresh, color: Co.white, size: 24),
                                   ],
                                 ),
@@ -148,7 +151,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                 TokenService.deleteToken();
                                 context.go(LoginScreen.route);
                               },
-                              child: Text(L10n.tr().skip, style: TStyle.blackSemi(14)),
+                              child: Text(L10n.tr().skip, style: TStyle.robotBlackRegular14()),
                             ),
                           ],
                         ),

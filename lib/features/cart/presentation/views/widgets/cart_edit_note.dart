@@ -59,7 +59,7 @@ class _CartEditNoteState extends State<CartEditNote> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: Text(widget.item.prod.name, style: TStyle.blackRegular(16))),
+                      Expanded(child: Text(widget.item.prod.name, style: TStyle.robotBlackMedium())),
                       DecoratedBox(
                         position: DecorationPosition.foreground,
                         decoration: BoxDecoration(

@@ -112,7 +112,7 @@ class CartItemCard extends StatelessWidget {
                                         Expanded(
                                           child: Text(
                                             '- ${item.notes!}',
-                                            style: TStyle.greyRegular(12),
+                                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
                                             maxLines: 2,
                                             textAlign: TextAlign.start,
                                             overflow: TextOverflow.ellipsis,

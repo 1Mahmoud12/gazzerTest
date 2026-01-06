@@ -1,18 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 /// Reusable daily deal card with countdown timer for pharmacy promotions
 class DailyDealCard extends StatefulWidget {
-  const DailyDealCard({
-    super.key,
-    required this.imageUrl,
-    required this.discountPercentage,
-    required this.endTime,
-    this.onTap,
-  });
+  const DailyDealCard({super.key, required this.imageUrl, required this.discountPercentage, required this.endTime, this.onTap});
 
   final String imageUrl;
   final int discountPercentage;
@@ -74,13 +69,7 @@ class _DailyDealCardState extends State<DailyDealCard> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 10, offset: const Offset(0, 4))],
         ),
         child: Stack(
           children: [
@@ -90,15 +79,9 @@ class _DailyDealCardState extends State<DailyDealCard> {
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Co.purple, Color(0xFF6B4FA0)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    gradient: LinearGradient(colors: [Co.purple, Color(0xFF6B4FA0)], begin: Alignment.topLeft, end: Alignment.bottomRight),
                   ),
-                  child: CustomPaint(
-                    painter: _WavePainter(),
-                  ),
+                  child: CustomPaint(painter: _WavePainter()),
                 ),
               ),
             ),
@@ -120,7 +103,7 @@ class _DailyDealCardState extends State<DailyDealCard> {
                       children: [
                         Text(
                           L10n.tr().dailyDeal,
-                          style: TStyle.burbleBold(20),
+                          style: TStyle.robotBlackThin().copyWith(color: Co.purple, fontWeight: TStyle.bold),
                         ),
                         const SizedBox(height: 8),
                         _buildCountdownTimer(),
@@ -146,10 +129,7 @@ class _DailyDealCardState extends State<DailyDealCard> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
-            image: DecorationImage(
-              image: NetworkImage(widget.imageUrl),
-              fit: BoxFit.cover,
-            ),
+            image: DecorationImage(image: NetworkImage(widget.imageUrl), fit: BoxFit.cover),
           ),
         ),
 
@@ -159,13 +139,10 @@ class _DailyDealCardState extends State<DailyDealCard> {
           bottom: 0,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              gradient: Grad().shadowGrad(),
-              borderRadius: BorderRadius.circular(12),
-            ),
+            decoration: BoxDecoration(gradient: Grad().shadowGrad(), borderRadius: BorderRadius.circular(12)),
             child: Text(
               '${widget.discountPercentage}%',
-              style: TStyle.burbleSemi(16),
+              style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.semi),
             ),
           ),
         ),
@@ -182,11 +159,17 @@ class _DailyDealCardState extends State<DailyDealCard> {
       children: [
         _buildTimeBox(hours, L10n.tr().hours),
         const SizedBox(width: 4),
-        Text(' : ', style: TStyle.whiteBold(18)),
+        Text(
+          ' : ',
+          style: TStyle.robotBlackMedium().copyWith(color: Co.white, fontWeight: TStyle.bold),
+        ),
         const SizedBox(width: 4),
         _buildTimeBox(minutes, L10n.tr().mins),
         const SizedBox(width: 4),
-        Text(' : ', style: TStyle.whiteBold(18)),
+        Text(
+          ' : ',
+          style: TStyle.robotBlackMedium().copyWith(color: Co.white, fontWeight: TStyle.bold),
+        ),
         const SizedBox(width: 4),
         _buildTimeBox(seconds, L10n.tr().secs),
       ],
@@ -196,17 +179,9 @@ class _DailyDealCardState extends State<DailyDealCard> {
   Widget _buildTimeBox(String value, String label) {
     return Column(
       children: [
-        Text(
-          value,
-          style: TStyle.whiteBold(20),
-        ),
+        Text(value, style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
         const SizedBox(height: 2),
-        Text(
-          label,
-          style: TStyle.whiteRegular(10).copyWith(
-            color: Colors.white.withOpacity(0.8),
-          ),
-        ),
+        Text(label, style: TStyle.robotBlackThin().copyWith(color: Colors.white.withOpacityNew(0.8))),
       ],
     );
   }
@@ -222,18 +197,8 @@ class _WavePainter extends CustomPainter {
 
     final path = Path();
     path.moveTo(0, size.height * 0.7);
-    path.quadraticBezierTo(
-      size.width * 0.25,
-      size.height * 0.6,
-      size.width * 0.5,
-      size.height * 0.7,
-    );
-    path.quadraticBezierTo(
-      size.width * 0.75,
-      size.height * 0.8,
-      size.width,
-      size.height * 0.7,
-    );
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.6, size.width * 0.5, size.height * 0.7);
+    path.quadraticBezierTo(size.width * 0.75, size.height * 0.8, size.width, size.height * 0.7);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();

@@ -10,10 +10,7 @@ import 'package:intl/intl.dart';
 class ChatMessageBubble extends StatelessWidget {
   final ChatMessageModel message;
 
-  const ChatMessageBubble({
-    super.key,
-    required this.message,
-  });
+  const ChatMessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +24,7 @@ class ChatMessageBubble extends StatelessWidget {
         children: [
           Flexible(
             child: Container(
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.75,
-              ),
+              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
                 color: bubbleColor,
@@ -49,41 +44,20 @@ class ChatMessageBubble extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: message.localImagePath != null
-                          ? Image.file(
-                              File(message.localImagePath!),
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            )
-                          : CustomNetworkImage(
-                              message.imageUrl!,
-                              fit: BoxFit.cover,
-                            ),
+                          ? Image.file(File(message.localImagePath!), width: double.infinity, fit: BoxFit.cover)
+                          : CustomNetworkImage(message.imageUrl!, fit: BoxFit.cover),
                     ),
                     if (message.hasText) const SizedBox(height: 8),
                   ],
                   // Text if present
-                  if (message.hasText)
-                    Text(
-                      message.text!,
-                      style: TStyle.blackRegular(14).copyWith(
-                        color: Colors.black87,
-                      ),
-                    ),
+                  if (message.hasText) Text(message.text!, style: TStyle.robotBlackRegular().copyWith(color: Colors.black87)),
                   const SizedBox(height: 4),
                   // Timestamp and status
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        _formatTime(message.timestamp),
-                        style: TStyle.blackRegular(11).copyWith(
-                          color: Colors.black54,
-                        ),
-                      ),
-                      if (isUser) ...[
-                        const SizedBox(width: 4),
-                        _buildStatusIcon(),
-                      ],
+                      Text(_formatTime(message.timestamp), style: TStyle.robotBlackThin().copyWith(color: Colors.black54)),
+                      if (isUser) ...[const SizedBox(width: 4), _buildStatusIcon()],
                     ],
                   ),
                 ],
@@ -101,10 +75,7 @@ class ChatMessageBubble extends StatelessWidget {
         return const SizedBox(
           width: 12,
           height: 12,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
-          ),
+          child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.black54)),
         );
       case MessageStatus.sent:
         return const Icon(Icons.check, size: 14, color: Colors.black54);

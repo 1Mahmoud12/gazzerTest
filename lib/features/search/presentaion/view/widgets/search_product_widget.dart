@@ -85,9 +85,9 @@ class SearchProductWidget extends StatelessWidget {
                       if (product.offer != null)
                         Text(
                           Helpers.getProperPrice(product.offer!.priceAfterDiscount(product.price)),
-                          style: TStyle.greyRegular(12).copyWith(decoration: TextDecoration.lineThrough),
+                          style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey).copyWith(decoration: TextDecoration.lineThrough),
                         ),
-                      Text(Helpers.getProperPrice(product.price), style: TStyle.blackRegular(12)),
+                      Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackThin()),
                     ],
                   ),
                 ],

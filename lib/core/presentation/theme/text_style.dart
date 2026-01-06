@@ -15,60 +15,6 @@ abstract class TStyle {
   static const medium = FontWeight.w500;
   static const bolder = FontWeight.w900;
 
-  static TextStyle burbleRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.lightPurple);
-
-  static TextStyle burbleSemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.lightPurple);
-
-  static TextStyle burbleMed(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: medium, color: Co.lightPurple);
-
-  static TextStyle burbleBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.lightPurple);
-
-  static TextStyle mainwRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.mainText);
-
-  static TextStyle mainwSemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.mainText);
-
-  static TextStyle mainwBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.mainText);
-
-  static TextStyle errorRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.red);
-
-  static TextStyle errorSemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.red);
-
-  static TextStyle greyRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.greyText);
-
-  static TextStyle greySemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.greyText);
-
-  static TextStyle greyBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.greyText);
-
-  static TextStyle whiteRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.white);
-
-  static TextStyle whiteSemi(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.white);
-
-  static TextStyle whiteBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.white);
-
-  static TextStyle blackRegular(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: regular, color: Co.dark);
-
-  static TextStyle blackSemi(double fontSize, {FFamily font = FFamily.poppins, List<Shadow>? shadows}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: semi, color: Co.dark, shadows: shadows);
-
-  static TextStyle blackBold(double fontSize, {FFamily font = FFamily.poppins}) =>
-      TextStyle(fontFamily: font.name, fontSize: fontSize, fontWeight: bold, color: Co.dark);
-
   static FFamily _getFontFamily({FFamily? font, BuildContext? context}) {
     if (font != null) return font;
     // Check language from context or fallback to main context

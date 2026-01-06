@@ -52,7 +52,7 @@ class _HealthyPlanScreenState extends State<HealthyPlanScreen> {
             GradientText(text: L10n.tr().healthyPlan, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
             SizedBox(
               width: 250,
-              child: Text(L10n.tr().thisPartHelpYouToBeMoreHealthy, style: TStyle.blackSemi(18), textAlign: TextAlign.center),
+              child: Text(L10n.tr().thisPartHelpYouToBeMoreHealthy, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
             ),
             PlanAnimatedBtn(
               onPressed: () {

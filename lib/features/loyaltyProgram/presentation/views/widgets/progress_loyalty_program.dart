@@ -33,12 +33,7 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
   final String? nameCurrentTier;
   final double? progressNextTier;
 
-  String _buildNextTierMessage(
-    BuildContext context,
-    String name,
-    int count,
-    num currency,
-  ) {
+  String _buildNextTierMessage(BuildContext context, String name, int count, num currency) {
     final hasCurrency = currency > 0;
     final hasCount = count > 0;
     final currencyStr = Helpers.getProperPrice(currency.toInt());
@@ -86,14 +81,8 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            L10n.tr().loyaltySpendSummary(
-              Helpers.getProperPrice(spentPoints),
-              spendDuration,
-            ),
-            style: TStyle.blackRegular(
-              16,
-              font: FFamily.roboto,
-            ).copyWith(color: Co.darkGrey),
+            L10n.tr().loyaltySpendSummary(Helpers.getProperPrice(spentPoints), spendDuration),
+            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
           ),
           const SizedBox(height: 16),
           LinearProgressIndicator(
@@ -109,11 +98,11 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
             children: [
               Text(
                 Helpers.getProperPrice(minProgress),
-                style: TStyle.burbleSemi(16, font: FFamily.roboto),
+                style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.semi),
               ),
               Text(
                 Helpers.getProperPrice(maxProgress),
-                style: TStyle.burbleSemi(16, font: FFamily.roboto),
+                style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.semi),
               ),
             ],
           ),
@@ -121,16 +110,8 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
           Text(
             (nameCurrentTier == 'HERO')
                 ? L10n.tr().reachForMaxTier
-                : _buildNextTierMessage(
-                    context,
-                    nameNextTier ?? '',
-                    minOrderCount,
-                    progressNextTier ?? 0,
-                  ),
-            style: TStyle.blackRegular(
-              16,
-              font: FFamily.roboto,
-            ).copyWith(color: Co.darkGrey),
+                : _buildNextTierMessage(context, nameNextTier ?? '', minOrderCount, progressNextTier ?? 0),
+            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
             textAlign: TextAlign.center,
           ),
         ],

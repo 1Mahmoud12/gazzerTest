@@ -128,10 +128,10 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         selectedItemColor: Co.purple.withAlpha(20),
         // selectedIcon:
         //     Icon(Icons.check_box, color: Co.mainOrange, size: 15.r),
-        textStyle: TStyle.greyRegular(14),
-        searchBoxTextStyle: TStyle.greyRegular(14),
-        titleStyle: TStyle.greyBold(14),
-        searchBoxHintStyle: TStyle.greyRegular(14),
+        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        searchBoxTextStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        titleStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        searchBoxHintStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
       ),
       countryConfig: CountryConfig(
         decoration: BoxDecoration(
@@ -139,7 +139,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
           border: !widget.showBorder ? null : Border.all(color: Co.lightGrey),
           borderRadius: AppConst.defaultBorderRadius,
         ),
-        textStyle: TStyle.greyRegular(14),
+        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
       ),
       validator: (v) {
         final currentCode = countryCode ?? 'SA';
@@ -158,9 +158,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
       phoneConfig: PhoneConfig(
         focusedColor: widget.borderColor ?? Colors.black54,
         enabledColor: widget.borderColor ?? Colors.black54,
-        labelStyle: TStyle.greyRegular(14),
+        labelStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
         labelText: widget.hasLabel ? 'Phone Number' : null,
-        floatingLabelStyle: TStyle.greyRegular(14),
+        floatingLabelStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
         radius: 16,
         hintText: !widget.hasHint
             ? null
@@ -169,9 +169,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
             : 'xxxxxx',
         backgroundColor: widget.bgColor,
         showCursor: true,
-        errorStyle: TStyle.errorSemi(13),
-        textStyle: TStyle.greySemi(14),
-        hintStyle: TStyle.greySemi(14),
+        errorStyle: TStyle.robotBlackRegular14().copyWith(color: Co.red),
+        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+        hintStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
       ),
     );
   }

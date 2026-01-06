@@ -21,7 +21,10 @@ class ThemeBtn extends StatelessWidget {
           children: [
             Image.asset(isDarkMode ? Assets.darkIc : Assets.lightIc, height: 24, width: 24),
             const HorizontalSpacing(8),
-            Text(isDarkMode ? L10n.tr().dark : L10n.tr().light, style: TStyle.whiteSemi(14)),
+            Text(
+              isDarkMode ? L10n.tr().dark : L10n.tr().light,
+              style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+            ),
           ],
         ),
       ),

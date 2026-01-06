@@ -30,16 +30,11 @@ Future<bool?> warningAlert({
             const VerticalSpacing(20),
             Text(
               title,
-              style: TStyle.burbleBold(18),
+              style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold, color: Co.purple),
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing(10),
-            if (message != null)
-              Text(
-                message,
-                style: TStyle.blackRegular(16),
-                textAlign: TextAlign.center,
-              ),
+            if (message != null) Text(message, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
             // const VericalSpacing(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -52,7 +47,7 @@ Future<bool?> warningAlert({
 
                       // bgColor: cancelBgColor ?? Co.greyText,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.burbleRegular(14).copyWith(color: Co.purple),
+                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
                       borderThickness: 2,
                       onPressed: () {
                         context.pop(false);
@@ -66,7 +61,7 @@ Future<bool?> warningAlert({
                       bgColor: Colors.transparent,
                       borderThickness: 2,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.burbleRegular(14).copyWith(color: Co.purple),
+                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
                       onPressed: () {
                         context.pop(true);
                       },

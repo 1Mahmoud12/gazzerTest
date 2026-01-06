@@ -229,7 +229,11 @@ class SupportCallService {
                   textAlign: TextAlign.center,
                 ),
                 const VerticalSpacing(10),
-                Text(L10n.tr().callSupport, style: TStyle.greyRegular(14), textAlign: TextAlign.center),
+                Text(
+                  L10n.tr().callSupport,
+                  style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+                  textAlign: TextAlign.center,
+                ),
                 const VerticalSpacing(10),
                 Container(
                   padding: const EdgeInsets.all(12),
@@ -244,7 +248,11 @@ class SupportCallService {
                   ),
                 ),
                 const VerticalSpacing(10),
-                Text(L10n.tr().support, style: TStyle.greyRegular(12), textAlign: TextAlign.center),
+                Text(
+                  L10n.tr().support,
+                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                  textAlign: TextAlign.center,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Row(

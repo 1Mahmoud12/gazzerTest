@@ -68,7 +68,7 @@ class SubCategoryItem extends StatelessWidget {
 
             Padding(
               padding: AppConst.defaultHrPadding,
-              child: Text(name, style: TStyle.blackSemi(13)),
+              child: Text(name, style: TStyle.robotBlackSmall()),
             ),
           ],
         ),

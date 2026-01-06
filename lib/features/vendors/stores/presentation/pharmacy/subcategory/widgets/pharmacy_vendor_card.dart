@@ -140,7 +140,12 @@ class PharmacyVendorCard extends StatelessWidget {
                                   child: FittedBox(
                                     fit: BoxFit.scaleDown,
                                     alignment: AlignmentDirectional.centerStart,
-                                    child: Text(location, style: TStyle.greySemi(12), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                    child: Text(
+                                      location,
+                                      style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -156,7 +161,10 @@ class PharmacyVendorCard extends StatelessWidget {
                                 ),
 
                                 const SizedBox(width: 4),
-                                Text(deliveryTime, style: TStyle.greySemi(12)),
+                                Text(
+                                  deliveryTime,
+                                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                                ),
                               ],
                             ),
                           ],
@@ -179,7 +187,7 @@ class PharmacyVendorCard extends StatelessWidget {
                         //               child: FittedBox(
                         //                 fit: BoxFit.scaleDown,
                         //                 alignment: AlignmentDirectional.centerStart,
-                        //                 child: Text(location, style: TStyle.greySemi(12), maxLines: 1, overflow: TextOverflow.ellipsis),
+                        //                 child: Text(location, style: TStyle.robotBlackThin.copyWith(color: Co.darkGrey,fontWeight:TStyle.medium), maxLines: 1, overflow: TextOverflow.ellipsis),
                         //               ),
                         //             ),
                         //           ],

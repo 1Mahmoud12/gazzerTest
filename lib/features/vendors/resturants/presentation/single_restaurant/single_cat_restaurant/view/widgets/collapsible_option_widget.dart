@@ -55,7 +55,10 @@ class _CollapsibleOptionWidgetState extends State<_CollapsibleOptionWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(widget.optionName, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
-                          Text(widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select, style: TStyle.greyRegular(12)),
+                          Text(
+                            widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select,
+                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                          ),
                         ],
                       ),
                     ),

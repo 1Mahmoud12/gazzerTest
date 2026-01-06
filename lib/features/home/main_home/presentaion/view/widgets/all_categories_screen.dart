@@ -86,7 +86,9 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
               final pagination = state is AllCategoriesSuccessState ? state.pagination : (state as AllCategoriesLoadingMoreState).pagination;
 
               if (categories.isEmpty && !isLoadingMore) {
-                return Center(child: Text(L10n.tr().noData, style: TStyle.mainwSemi(14)));
+                return Center(
+                  child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi)),
+                );
               }
 
               return CustomScrollView(

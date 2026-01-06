@@ -124,7 +124,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                           CustomNetworkImage(tab.$1, width: 50, height: 50, fit: BoxFit.cover, borderRaduis: 50),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                            child: Text(tab.$2, style: TStyle.blackSemi(13)),
+                            child: Text(tab.$2, style: TStyle.robotBlackSmall()),
                           ),
                         ],
                       ),

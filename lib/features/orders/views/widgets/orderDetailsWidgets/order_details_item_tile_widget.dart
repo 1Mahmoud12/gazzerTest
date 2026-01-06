@@ -70,7 +70,10 @@ class QuantityBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: OrderItemTile._quantityBadgePadding, vertical: OrderItemTile._quantityBadgePadding / 3),
       decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(OrderItemTile._badgeBorderRadius)),
-      child: Text('$quantity', style: TStyle.whiteBold(10)),
+      child: Text(
+        '$quantity',
+        style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+      ),
     );
   }
 }
@@ -89,7 +92,7 @@ class ItemInfoColumn extends StatelessWidget {
         Text(name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
         if (addOns.isNotEmpty) ...[
           const SizedBox(height: OrderItemTile._addOnsSpacing),
-          Text('${OrderItemTile._addOnsPrefix}${addOns.join(', ')}', style: TStyle.blackRegular(12).copyWith(color: Co.grey)),
+          Text('${OrderItemTile._addOnsPrefix}${addOns.join(', ')}', style: TStyle.robotBlackThin().copyWith(color: Co.grey)),
         ],
       ],
     );

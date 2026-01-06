@@ -44,7 +44,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                       duration: Durations.medium1,
                       child: Text(
                         ' (${state is! TimeSlotsStates ? '' : Helpers.formatTimeSlot(state.selectedTime ?? '00:00')})',
-                        style: TStyle.greySemi(14),
+                        style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                       ),
                     ),
                   ),
@@ -75,7 +75,9 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                 builder: (context, state) {
                   if (state is! TimeSlotsStates) return const SizedBox.shrink();
                   if (state is TimeSlotsError || (state is TimeSlotsLoaded && state.timeSlots.isEmpty)) {
-                    return Center(child: Text(L10n.tr().noAvailableSchedulingTimeSlots, style: TStyle.greyBold(14)));
+                    return Center(
+                      child: Text(L10n.tr().noAvailableSchedulingTimeSlots, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                    );
                   }
                   return Skeletonizer(
                     enabled: state is TimeSlotsLoading,

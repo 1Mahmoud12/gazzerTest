@@ -94,7 +94,7 @@ class _MultiCatRestaurantsScreenState extends State<MultiCatRestaurantsScreen> {
               CircleGradientBorderedImage(image: categoriesWithPlates[index].$1.image),
               Padding(
                 padding: AppConst.defaultHrPadding,
-                child: Text(categoriesWithPlates[index].$1.name, style: TStyle.blackSemi(13)),
+                child: Text(categoriesWithPlates[index].$1.name, style: TStyle.robotBlackSmall()),
               ),
             ],
           );

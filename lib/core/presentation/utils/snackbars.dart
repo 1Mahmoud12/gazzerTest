@@ -22,9 +22,7 @@ class AppSnackbar {
         action: actionLabel == null || onActionPressed == null
             ? null
             : SnackBarAction(label: actionLabel, onPressed: onActionPressed, textColor: Co.white),
-        content: Text(
-          message,
-        ),
+        content: Text(message),
       ),
     );
   }
@@ -62,18 +60,13 @@ class AppSnackbar {
         dismissDirection: DismissDirection.down,
         duration: const Duration(seconds: 2),
         backgroundColor: const Color.fromARGB(255, 45, 45, 45),
-        content: Text(L10n.tr().clickBackAgainToExit, style: TStyle.whiteRegular(18)),
+        content: Text(L10n.tr().clickBackAgainToExit, style: TStyle.robotBlackRegular().copyWith(color: Co.white)),
       ),
     );
   }
 }
 
-SnackBar getSnackBar({
-  required Color bgColor,
-  required String content,
-  required IconData icon,
-  Color? iconColor,
-}) {
+SnackBar getSnackBar({required Color bgColor, required String content, required IconData icon, Color? iconColor}) {
   return SnackBar(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
@@ -90,18 +83,13 @@ SnackBar getSnackBar({
         CircleAvatar(
           backgroundColor: Co.white,
           radius: 22,
-          child: Icon(
-            icon,
-            color: iconColor ?? bgColor,
-            size: 35,
-            weight: 2,
-          ),
+          child: Icon(icon, color: iconColor ?? bgColor, size: 35, weight: 2),
         ),
         const SizedBox(width: 20),
         Expanded(
           child: Text(
             content,
-            style: TStyle.whiteBold(22),
+            style: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),

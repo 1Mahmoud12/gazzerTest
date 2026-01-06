@@ -26,9 +26,9 @@ class OrderIssueResponseScreen extends StatelessWidget {
           children: [
             Text(l10n.weHaveChecked, style: TStyle.robotBlackSubTitle()),
             const VerticalSpacing(16),
-            Text(l10n.orderIssueOutsideRefundWindow, style: TStyle.blackRegular(14)),
+            Text(l10n.orderIssueOutsideRefundWindow, style: TStyle.robotBlackRegular()),
             const VerticalSpacing(12),
-            Text(l10n.contactUsAsSoonAsPossible, style: TStyle.blackRegular(14)),
+            Text(l10n.contactUsAsSoonAsPossible, style: TStyle.robotBlackRegular()),
             const Spacer(),
             Center(
               child: Text(

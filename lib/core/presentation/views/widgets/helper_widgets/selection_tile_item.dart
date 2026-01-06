@@ -33,11 +33,7 @@ class SelectionTileItem extends StatelessWidget {
           spacing: spacing ?? 8,
           children: [
             if (isSingle)
-              GradientRadioBtn(
-                isSelected: isSelected,
-                onPressed: onTap,
-                size: radioSize ?? 12,
-              )
+              GradientRadioBtn(isSelected: isSelected, onPressed: onTap, size: radioSize ?? 12)
             else
               Transform.scale(
                 scale: (radioSize ?? 12) / 12,
@@ -52,13 +48,7 @@ class SelectionTileItem extends StatelessWidget {
                 ),
               ),
 
-            if (title != null)
-              Text(
-                title!,
-                style: titleStyle ?? TStyle.blackSemi(14),
-              )
-            else
-              ?child,
+            if (title != null) Text(title!, style: titleStyle ?? TStyle.robotBlackRegular14()) else ?child,
           ],
         ),
       ),

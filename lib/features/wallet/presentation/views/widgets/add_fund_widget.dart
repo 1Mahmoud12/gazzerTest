@@ -205,7 +205,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
                               bgColor: (int.tryParse(_amountController.text) ?? 0) < 10 ? Co.purple200 : Co.purple,
                               text: L10n.tr().walletRechargeNow,
-                              textStyle: TStyle.whiteBold(16, font: FFamily.roboto),
+                              textStyle: TStyle.robotBlackMedium().copyWith(color: Co.white),
                             ),
                           ),
                         ],

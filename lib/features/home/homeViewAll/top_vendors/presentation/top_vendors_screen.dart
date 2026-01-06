@@ -79,7 +79,9 @@ class _TopVendorsScreenState extends State<TopVendorsScreen> {
               final pagination = state.pagination;
 
               if (vendors.isEmpty) {
-                return Center(child: Text(L10n.tr().noData, style: TStyle.mainwSemi(14)));
+                return Center(
+                  child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi)),
+                );
               }
 
               return _buildVendorsGrid(vendors, pagination);

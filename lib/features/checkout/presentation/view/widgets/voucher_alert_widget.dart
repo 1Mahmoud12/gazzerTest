@@ -20,10 +20,7 @@ Future<bool?> voucherAlert({
   bool asDialog = false,
 }) {
   final content = Container(
-    decoration: BoxDecoration(
-      color: Co.white,
-      borderRadius: BorderRadius.circular(15),
-    ),
+    decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(15)),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -35,10 +32,7 @@ Future<bool?> voucherAlert({
                 onPressed: () {
                   context.pop(false);
                 },
-                icon: const Icon(
-                  Icons.close,
-                  color: Co.purple,
-                ),
+                icon: const Icon(Icons.close, color: Co.purple),
               ),
             ],
           ),
@@ -46,16 +40,11 @@ Future<bool?> voucherAlert({
           if (asDialog) const VerticalSpacing(20),
           Text(
             title,
-            style: TStyle.burbleBold(18),
+            style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold, color: Co.purple),
             textAlign: TextAlign.center,
           ),
           const VerticalSpacing(10),
-          if (message != null)
-            Text(
-              message,
-              style: TStyle.blackRegular(16),
-              textAlign: TextAlign.center,
-            ),
+          if (message != null) Text(message, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
 
           // const VericalSpacing(20),
           Padding(
@@ -70,9 +59,7 @@ Future<bool?> voucherAlert({
 
                       // bgColor: cancelBgColor ?? Co.greyText,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.burbleRegular(
-                        14,
-                      ).copyWith(color: Co.purple),
+                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
                       borderThickness: 2,
                       onPressed: () {
                         context.pop(false);
@@ -87,9 +74,7 @@ Future<bool?> voucherAlert({
                       bgColor: Colors.transparent,
                       borderThickness: 2,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.burbleRegular(
-                        14,
-                      ).copyWith(color: Co.purple),
+                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
                       onPressed: () {
                         context.pop(true);
                       },
@@ -107,15 +92,9 @@ Future<bool?> voucherAlert({
     return showDialog<bool>(
       context: context,
 
-      builder: (context) => Dialog(
-        insetPadding: const EdgeInsets.symmetric(horizontal: 16),
-        child: content,
-      ),
+      builder: (context) => Dialog(insetPadding: const EdgeInsets.symmetric(horizontal: 16), child: content),
     );
   } else {
-    return showModalBottomSheet<bool>(
-      context: context,
-      builder: (context) => content,
-    );
+    return showModalBottomSheet<bool>(context: context, builder: (context) => content);
   }
 }

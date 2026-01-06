@@ -104,7 +104,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                                 child: FittedBox(
                                   alignment: AlignmentDirectional.centerStart,
                                   fit: BoxFit.scaleDown,
-                                  child: Text(prod.store?.name ?? 'brand', style: TStyle.mainwSemi(13)),
+                                  child: Text(prod.store?.name ?? 'brand', style: TStyle.robotBlackThin().copyWith(fontWeight: TStyle.semi)),
                                 ),
                               ),
                             ],
@@ -135,7 +135,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
               ),
             ),
 
-            //  Text(L10n.tr().onAllGrills, style: TStyle.blackSemi(12)),
+            //  Text(L10n.tr().onAllGrills, style: TStyle.robotBlackThin()),
           ],
         ),
       ),

@@ -107,7 +107,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                       Text(
                         "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
                         maxLines: 2,
-                        style: TStyle.greySemi(16),
+                        style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                         textAlign: TextAlign.start,
                       ),
                       const VerticalSpacing(24),
@@ -202,7 +202,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                             }
                             context.read<ProfileCubit>().verifyOtp(ProfileVerifyOtpReq(otpCode: otpCont.text, sessionId: sessionId));
                           },
-                          textStyle: TStyle.mainwSemi(15),
+                          textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
                           bgColor: Colors.transparent,
                           child: Text(L10n.tr().continu, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                         ),

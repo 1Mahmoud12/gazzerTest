@@ -114,8 +114,11 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('$_availablePoints', style: TStyle.whiteBold(16, font: FFamily.roboto)),
-                              Text(L10n.tr().points, style: TStyle.whiteSemi(12, font: FFamily.roboto)),
+                              Text('$_availablePoints', style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                              Text(
+                                L10n.tr().points,
+                                style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                              ),
                             ],
                           ),
                         ),
@@ -150,7 +153,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                           isLoading: isLoading,
                           bgColor: Co.purple,
                           text: L10n.tr().convert,
-                          textStyle: TStyle.whiteBold(16, font: FFamily.roboto),
+                          textStyle: TStyle.robotBlackMedium().copyWith(color: Co.white),
                           radius: 40,
                           width: double.infinity,
                         );

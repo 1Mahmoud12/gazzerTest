@@ -12,20 +12,19 @@ class CartOrderedWithWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        text: "${orderedWith.name}: ",
-        style: TStyle.blackSemi(12),
+        text: '${orderedWith.name}: ',
+        style: TStyle.robotBlackThin(),
         children: [
           TextSpan(
-            text: "x${orderedWith.quantity} ",
-            style: TStyle.greySemi(12),
+            text: 'x${orderedWith.quantity} ',
+            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
           ),
           TextSpan(
-            text: "(${orderedWith.totalPrice.toStringAsFixed(2)} ${L10n.tr().egp})",
-            style: TStyle.greySemi(12),
+            text: '(${orderedWith.totalPrice.toStringAsFixed(2)} ${L10n.tr().egp})',
+            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
           ),
         ],
       ),
-      textAlign: TextAlign.start,
     );
   }
 }

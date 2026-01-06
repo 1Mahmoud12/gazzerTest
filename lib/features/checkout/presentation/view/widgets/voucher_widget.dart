@@ -198,7 +198,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                     isLoading: isLoading,
                                     text: L10n.tr().apply,
                                     bgColor: _voucherController.text.trim().isEmpty ? Co.grey : Co.secondary,
-                                    textStyle: TStyle.burbleBold(14),
+                                    textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.purple),
                                   );
                                 },
                               ),

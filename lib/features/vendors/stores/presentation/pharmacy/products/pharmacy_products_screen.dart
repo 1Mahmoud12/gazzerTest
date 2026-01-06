@@ -51,7 +51,10 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
             padding: AppConst.defaultHrPadding,
             child: Align(
               alignment: isAr ? Alignment.centerRight : Alignment.centerLeft,
-              child: Text(isAr ? '${widget.categoryName} الفئات' : '${widget.categoryName} Categories', style: TStyle.burbleBold(20)),
+              child: Text(
+                isAr ? '${widget.categoryName} الفئات' : '${widget.categoryName} Categories',
+                style: TStyle.robotBlackThin().copyWith(color: Co.purple, fontWeight: TStyle.bold),
+              ),
             ),
           ),
 
@@ -87,7 +90,12 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
                           CircleGradientBorderedImage(image: category['image'] ?? '', showBorder: false),
                           Padding(
                             padding: AppConst.defaultHrPadding,
-                            child: Text(category['name'] ?? '', style: selected ? TStyle.burbleBold(15) : TStyle.blackSemi(13)),
+                            child: Text(
+                              category['name'] ?? '',
+                              style: selected
+                                  ? TStyle.robotBlackRegular14().copyWith(color: Co.purple, fontWeight: TStyle.bold)
+                                  : TStyle.robotBlackSmall(),
+                            ),
                           ),
                         ],
                       ),
@@ -249,7 +257,7 @@ class _SubCategoriesList extends StatelessWidget {
                   // Category Name
                   Text(
                     subCategory['name']!,
-                    style: isSelected ? TStyle.burbleBold(11) : TStyle.blackRegular(11),
+                    style: isSelected ? TStyle.robotBlackThin().copyWith(color: Co.purple, fontWeight: TStyle.bold) : TStyle.robotBlackThin(),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

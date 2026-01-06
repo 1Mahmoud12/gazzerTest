@@ -93,7 +93,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   //   children: [
                   //     Directionality(
                   //       textDirection: TextDirection.ltr,
-                  //       child: Text('(+20)-${req.phone}', style: TStyle.greySemi(14)),
+                  //       child: Text('(+20)-${req.phone}', style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey,fontWeight:TStyle.medium)),
                   //     ),
                   //     TextButton(
                   //       onPressed: () async {

@@ -149,7 +149,7 @@ class MultiCatRestHeader extends StatelessWidget {
         //     padding: const EdgeInsets.symmetric(horizontal: 16),
         //     child: Text(
         //       categires!.join(', '),
-        //       style: TStyle.greyRegular(14),
+        //       style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
         //       textAlign: TextAlign.center,
         //       maxLines: 2,
         //       overflow: TextOverflow.ellipsis,
@@ -218,7 +218,7 @@ class _InfoItem extends StatelessWidget {
             icon,
             const SizedBox(width: 8),
             Flexible(
-              child: Text(text, style: TStyle.blackSemi(14), maxLines: 1, overflow: TextOverflow.ellipsis),
+              child: Text(text, style: TStyle.robotBlackRegular14(), maxLines: 1, overflow: TextOverflow.ellipsis),
             ),
           ],
         ),

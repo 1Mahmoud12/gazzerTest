@@ -20,14 +20,18 @@ class VendorInfoWidget extends StatelessWidget {
           Text(vendor.name, style: TStyle.robotBlackRegular(), maxLines: 1, overflow: TextOverflow.ellipsis),
 
           // if (vendor.tag?.isNotEmpty == true)
-          //   Text(vendor.tag!.join(', '), style: TStyle.greyRegular(12), maxLines: 1, overflow: TextOverflow.ellipsis),
+          //   Text(vendor.tag!.join(', '), style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey), maxLines: 1, overflow: TextOverflow.ellipsis),
           if (vendor.estimatedDeliveryTime != null) ...[
             const VerticalSpacing(4),
             Row(
               spacing: 4,
               children: [
                 const VectorGraphicsWidget(Assets.clockIc, height: 24, width: 24, colorFilter: ColorFilter.mode(Co.purple, BlendMode.srcIn)),
-                Text('${vendor.estimatedDeliveryTime} ${L10n.tr().min}', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
+                Text(
+                  '${vendor.estimatedDeliveryTime} ${L10n.tr().min}',
+                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ],
@@ -36,8 +40,8 @@ class VendorInfoWidget extends StatelessWidget {
           //   children: [
           //     const Icon(Icons.star, color: Co.tertiary, size: 20),
           //     const Spacer(),
-          //     Text(vendor.rate.toStringAsFixed(2), style: TStyle.blackSemi(12).copyWith(color: Co.tertiary)),
-          //     Text("(${vendor.rateCount ?? 0})", style: TStyle.blackSemi(11)),
+          //     Text(vendor.rate.toStringAsFixed(2), style: TStyle.robotBlackThin().copyWith(color: Co.tertiary)),
+          //     Text("(${vendor.rateCount ?? 0})", style: TStyle.robotBlackThin()),
           //     const Spacer(),
           //   ],
           // ),
@@ -46,7 +50,7 @@ class VendorInfoWidget extends StatelessWidget {
           //     children: [
           //       const Icon(Icons.location_on, size: 24),
           //       Expanded(
-          //         child: Text(vendor.zoneName, style: TStyle.greySemi(12), maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
+          //         child: Text(vendor.zoneName, style: TStyle.robotBlackThin.copyWith(color: Co.darkGrey,fontWeight:TStyle.medium), maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
           //       ),
           //     ],
           //   ),
@@ -56,7 +60,7 @@ class VendorInfoWidget extends StatelessWidget {
           //     children: [
           //       const Icon(Icons.access_time_outlined, color: Co.purple, size: 20),
           //       const Spacer(),
-          //       Text("${vendor.deliveryTime} ${L10n.tr().min}", style: TStyle.greySemi(12)),
+          //       Text("${vendor.deliveryTime} ${L10n.tr().min}", style: TStyle.robotBlackThin.copyWith(color: Co.darkGrey,fontWeight:TStyle.medium)),
           //       const Spacer(),
           //     ],
           //   ),

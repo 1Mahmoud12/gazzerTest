@@ -81,7 +81,9 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
               final pagination = state.pagination;
 
               if (stores.isEmpty) {
-                return Center(child: Text(L10n.tr().noData, style: TStyle.mainwSemi(14)));
+                return Center(
+                  child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi)),
+                );
               }
 
               return _buildStoresGrid(stores, pagination);
@@ -148,7 +150,11 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
                         spacing: 4,
                         children: [
                           const VectorGraphicsWidget(Assets.clockIc, height: 24, width: 24),
-                          Text('${store.estimatedDeliveryTime} ${L10n.tr().min}', style: TStyle.greyRegular(13), overflow: TextOverflow.ellipsis),
+                          Text(
+                            '${store.estimatedDeliveryTime} ${L10n.tr().min}',
+                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ],
                       ),
                     ],

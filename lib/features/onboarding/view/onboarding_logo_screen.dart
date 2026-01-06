@@ -50,7 +50,7 @@
 //                   context.myPush(const OnboardingFirstScreen());
 //                 },
 //                 text: L10n.tr().start,
-//                 textStyle: TStyle.whiteBold(20),
+//                 textStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
 //                 padding: const EdgeInsets.all(6),
 //                 width: 150,
 //                 icon: Icons.arrow_forward_ios_rounded,

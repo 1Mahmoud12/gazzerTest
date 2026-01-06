@@ -32,24 +32,14 @@ class VideoTutorialCard extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: AppConst.defaultBorderRadius,
-                    image: const DecorationImage(
-                      image: AssetImage(Assets.assetsPngVideoTutorialPlaceholder2),
-                      fit: BoxFit.cover,
-                    ),
+                    image: const DecorationImage(image: AssetImage(Assets.assetsPngVideoTutorialPlaceholder2), fit: BoxFit.cover),
                   ),
-                  foregroundDecoration: BoxDecoration(
-                    color: Colors.black26,
-                    borderRadius: AppConst.defaultBorderRadius,
-                  ),
+                  foregroundDecoration: BoxDecoration(color: Colors.black26, borderRadius: AppConst.defaultBorderRadius),
                   child: const Center(
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [Co.white, Colors.transparent],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
+                        gradient: LinearGradient(colors: [Co.white, Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(6.0),
@@ -62,7 +52,7 @@ class VideoTutorialCard extends StatelessWidget {
               const HorizontalSpacing(8),
               Expanded(
                 flex: 3,
-                child: Text(L10n.tr().gazzerVideoTutorialGuide, style: TStyle.blackSemi(13), textAlign: TextAlign.center),
+                child: Text(L10n.tr().gazzerVideoTutorialGuide, style: TStyle.robotBlackSmall(), textAlign: TextAlign.center),
               ),
               const HorizontalSpacing(6),
             ],

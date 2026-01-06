@@ -7,13 +7,7 @@ import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 class VendorClosingTimer extends StatefulWidget {
-  const VendorClosingTimer({
-    super.key,
-    required this.endTime,
-    required this.name,
-    required this.startTime,
-    required this.onTimerFinish,
-  });
+  const VendorClosingTimer({super.key, required this.endTime, required this.name, required this.startTime, required this.onTimerFinish});
   final DateTime endTime;
   final DateTime? startTime;
   final Function(BuildContext ctx) onTimerFinish;
@@ -78,11 +72,8 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
             if (difference < 1)
               Expanded(
                 child: Text(
-                  L10n.tr().nameisCurrentlyClosedWeWillOpenAt(
-                    widget.name,
-                    widget.startTime?.defaultTimeFormat ?? L10n.tr().soon,
-                  ),
-                  style: TStyle.whiteBold(12, font: FFamily.inter),
+                  L10n.tr().nameisCurrentlyClosedWeWillOpenAt(widget.name, widget.startTime?.defaultTimeFormat ?? L10n.tr().soon),
+                  style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
                   textAlign: TextAlign.center,
                 ),
               )
@@ -90,7 +81,7 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
               Expanded(
                 child: Text(
                   L10n.tr().vendorClosesInMinutes(difference ~/ 60, widget.name),
-                  style: TStyle.whiteBold(12, font: FFamily.inter),
+                  style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -99,12 +90,12 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
                   children: [
                     TextSpan(
                       text: (difference ~/ 60).toString().padLeft(2, '0'),
-                      style: TStyle.whiteBold(12),
+                      style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
                     ),
                     const TextSpan(text: '  '),
                     TextSpan(
                       text: (difference % 60).toString().padLeft(2, '0'),
-                      style: TStyle.whiteBold(14, font: FFamily.playfair),
+                      style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
                     ),
                   ],
                 ),

@@ -143,7 +143,7 @@ class _StarRatingBar extends StatelessWidget {
 
     return Row(
       children: [
-        Text('$starNumber ${L10n.tr().star}', style: TStyle.greyRegular(12)),
+        Text('$starNumber ${L10n.tr().star}', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
         const HorizontalSpacing(8),
         Expanded(
           child: Stack(

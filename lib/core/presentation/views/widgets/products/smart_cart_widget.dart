@@ -136,7 +136,10 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
   Widget build(BuildContext context) {
     return widget.outOfStock
         ? Center(
-            child: SizedBox(height: 30, child: Text(L10n.tr().outOfStock, style: TStyle.errorSemi(12))),
+            child: SizedBox(
+              height: 30,
+              child: Text(L10n.tr().outOfStock, style: TStyle.robotBlackThin().copyWith(color: Co.red)),
+            ),
           )
         : ValueListenableBuilder<int>(
             valueListenable: quantity,

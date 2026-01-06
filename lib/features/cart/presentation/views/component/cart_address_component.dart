@@ -45,7 +45,9 @@ class CartAddressComponent extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Center(child: Text(L10n.tr().noAddressesSelected, style: TStyle.greyBold(14))),
+                        child: Center(
+                          child: Text(L10n.tr().noAddressesSelected, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                        ),
                       ),
                     ],
                   ),

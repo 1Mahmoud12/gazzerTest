@@ -5,10 +5,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.d
 
 /// Reusable button for uploading prescriptions in pharmacy screens
 class PrescriptionUploadButton extends StatelessWidget {
-  const PrescriptionUploadButton({
-    super.key,
-    required this.onTap,
-  });
+  const PrescriptionUploadButton({super.key, required this.onTap});
 
   final VoidCallback onTap;
 
@@ -21,7 +18,7 @@ class PrescriptionUploadButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Text(
         L10n.tr().uploadPrescription,
-        style: TStyle.burbleBold(16),
+        style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.bold),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),

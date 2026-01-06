@@ -205,7 +205,7 @@ class PaymentMethodWidget extends StatelessWidget {
                           Expanded(
                             child: Text(
                               '${L10n.tr().remainingPaymentBy} ${cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard ? L10n.tr().creditCard : L10n.tr().wallet} ${L10n.tr().and} ${L10n.tr().remainingAmount} ${Helpers.getProperPrice((cubit.totalOrder - walletBalance).clamp(0, double.infinity))}',
-                              style: TStyle.greyRegular(16),
+                              style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
                             ),
                           ),
                         ],
@@ -284,7 +284,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
                         children: [
                           Expanded(child: Text(widget.title, style: TStyle.robotBlackRegular())),
                           // if (widget.walletPhoneNumber != null && widget.walletPhoneNumber!.isNotEmpty)
-                          //   Text(widget.walletPhoneNumber!, style: TStyle.greyRegular(12)),
+                          //   Text(widget.walletPhoneNumber!, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
                         ],
                       ),
                     ],
@@ -520,7 +520,7 @@ class _CardItem extends StatelessWidget {
                   // const SizedBox(height: 4),
                   // Text(
                   //   '${card.cardHolderName} • ${card.formattedExpiry}',
-                  //   style: TStyle.greyRegular(12),
+                  //   style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
                   // ),
                 ],
               ),

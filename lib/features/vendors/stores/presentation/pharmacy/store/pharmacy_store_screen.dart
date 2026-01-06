@@ -85,7 +85,7 @@ class PharmacyStoreScreen extends StatelessWidget {
                       border: Border.all(color: Co.lightGrey),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Text(catWithSubCatProds[index].$1.name, style: TStyle.blackSemi(13)),
+                    child: Text(catWithSubCatProds[index].$1.name, style: TStyle.robotBlackSmall()),
                   ),
                 ],
               );
@@ -216,7 +216,7 @@ class _BestSellingItemCard extends StatelessWidget {
                                   Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                                   if (product.reviewCount > 0) ...[
                                     const SizedBox(width: 4),
-                                    Text('(+${product.reviewCount})', style: TStyle.greyRegular(12)),
+                                    Text('(+${product.reviewCount})', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
                                   ],
                                 ],
                               ),
@@ -251,7 +251,7 @@ class _BestSellingItemCard extends StatelessWidget {
                                 if (product.priceBeforeDiscount != null)
                                   Text(
                                     Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                    style: TStyle.greyRegular(12).copyWith(decoration: TextDecoration.lineThrough),
+                                    style: TStyle.robotBlackThin().copyWith(decoration: TextDecoration.lineThrough, color: Co.darkGrey),
                                   ),
                               ],
                             ),

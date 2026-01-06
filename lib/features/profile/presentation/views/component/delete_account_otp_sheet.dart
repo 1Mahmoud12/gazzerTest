@@ -99,7 +99,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                     Text(
                       "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}${Session().client?.phoneNumber ?? ''}${!L10n.isAr(context) ? '' : '-(20+)'}",
                       maxLines: 2,
-                      style: TStyle.greySemi(16),
+                      style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                       textAlign: TextAlign.start,
                     ),
                     const VerticalSpacing(24),
@@ -199,7 +199,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                         final newReq = req.copyWith(otpCode: otpCont.text.trim());
                         context.read<ProfileCubit>().confirmDeleteAccount(newReq);
                       },
-                      textStyle: TStyle.mainwSemi(15),
+                      textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
                       bgColor: Colors.transparent,
                       child: Text(L10n.tr().continu, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                     ),

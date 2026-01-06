@@ -66,7 +66,11 @@ class _SavedCardsScreenState extends State<SavedCardsScreen> {
                                 children: [
                                   const Icon(Icons.credit_card_off, size: 64, color: Co.grey),
                                   const VerticalSpacing(16),
-                                  Text(L10n.tr().no_saved_cards, style: TStyle.greyRegular(16), textAlign: TextAlign.center),
+                                  Text(
+                                    L10n.tr().no_saved_cards,
+                                    style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                             ),

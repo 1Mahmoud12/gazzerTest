@@ -117,10 +117,7 @@ class _TierBenefitsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '${L10n.tr().level} $title',
-            style: TStyle.whiteBold(18, font: FFamily.roboto).copyWith(color: visual.primaryTextColor),
-          ),
+          Text('${L10n.tr().level} $title', style: TStyle.robotBlackMedium().copyWith(color: visual.primaryTextColor)),
           const SizedBox(height: 12),
           ...tier.benefits.map(
             (benefit) => _BenefitRow(
@@ -154,10 +151,11 @@ class _BenefitRow extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: TStyle.whiteSemi(
-                14,
-                font: FFamily.roboto,
-              ).copyWith(color: textColor, decorationColor: textColor, decoration: !isEnabled ? TextDecoration.lineThrough : TextDecoration.none),
+              style: TStyle.robotBlackRegular().copyWith(
+                color: textColor,
+                decorationColor: textColor,
+                decoration: !isEnabled ? TextDecoration.lineThrough : TextDecoration.none,
+              ),
             ),
           ),
         ],

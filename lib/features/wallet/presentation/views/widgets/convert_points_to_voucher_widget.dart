@@ -16,10 +16,7 @@ import 'package:gazzer/features/wallet/presentation/views/voucher_vendors_screen
 class ConvertPointsToVoucherWidget extends StatelessWidget {
   final double availablePoints;
 
-  const ConvertPointsToVoucherWidget({
-    super.key,
-    required this.availablePoints,
-  });
+  const ConvertPointsToVoucherWidget({super.key, required this.availablePoints});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +31,7 @@ class ConvertPointsToVoucherWidget extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              L10n.tr().walletConvertPointsToVoucher,
-              style: TStyle.robotBlackTitle(),
-            ),
+            Text(L10n.tr().walletConvertPointsToVoucher, style: TStyle.robotBlackTitle()),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(20),
@@ -49,10 +43,7 @@ class ConvertPointsToVoucherWidget extends StatelessWidget {
               child: Column(
                 children: [
                   for (int i = 0; i < vouchers.length; i++) ...[
-                    _VoucherTile(
-                      voucher: vouchers[i],
-                      availablePoints: availablePoints,
-                    ),
+                    _VoucherTile(voucher: vouchers[i], availablePoints: availablePoints),
                     if (i != vouchers.length - 1) const VerticalSpacing(12),
                   ],
                 ],
@@ -73,11 +64,7 @@ class _VoucherTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = L10n.tr().walletVoucherOffer(
-      voucher.amount,
-      voucher.pointsNeeded,
-      L10n.tr().points,
-    );
+    final title = L10n.tr().walletVoucherOffer(voucher.amount, voucher.pointsNeeded, L10n.tr().points);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -95,16 +82,9 @@ class _VoucherTile extends StatelessWidget {
                   builder: (_) => MultiBlocProvider(
                     providers: [
                       BlocProvider.value(value: walletCubit),
-                      BlocProvider(
-                        create: (context) => di<VoucherVendorsCubit>(),
-                      ),
+                      BlocProvider(create: (context) => di<VoucherVendorsCubit>()),
                     ],
-                    child: VoucherVendorsScreen(
-                      title: title,
-                      id: voucher.amount,
-                      pointsNeed: voucher.pointsNeeded,
-                      availablePoints: availablePoints,
-                    ),
+                    child: VoucherVendorsScreen(title: title, id: voucher.amount, pointsNeed: voucher.pointsNeeded, availablePoints: availablePoints),
                   ),
                 ),
               )
@@ -115,28 +95,17 @@ class _VoucherTile extends StatelessWidget {
         },
         child: Row(
           children: [
-            RotatedBox(
-              quarterTurns: L10n.isAr(context) ? 2 : 0,
-              child: SvgPicture.asset(
-                Assets.voucherIc,
-              ),
-            ),
+            RotatedBox(quarterTurns: L10n.isAr(context) ? 2 : 0, child: SvgPicture.asset(Assets.voucherIc)),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: TStyle.robotBlackMedium(
-                      fontSize: 18,
-                      font: FFamily.roboto,
-                    ),
-                  ),
+                  Text(title, style: TStyle.robotBlackMedium(fontSize: 18, font: FFamily.roboto)),
                   const SizedBox(height: 8),
                   Text(
                     L10n.tr().walletValidUntil(voucher.validUntil),
-                    style: TStyle.greySemi(14, font: FFamily.roboto),
+                    style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                   ),
                 ],
               ),

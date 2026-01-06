@@ -89,7 +89,7 @@ class _IncorrectItemCard extends StatelessWidget {
                     children: [
                       Icon(Icons.camera_alt, color: Colors.grey.shade400, size: 32),
                       const SizedBox(height: 8),
-                      Text(L10n.tr().tapToTakePhoto, style: TStyle.blackRegular(12).copyWith(color: Colors.grey.shade600)),
+                      Text(L10n.tr().tapToTakePhoto, style: TStyle.robotBlackThin().copyWith(color: Colors.grey.shade600)),
                     ],
                   ),
                 ),

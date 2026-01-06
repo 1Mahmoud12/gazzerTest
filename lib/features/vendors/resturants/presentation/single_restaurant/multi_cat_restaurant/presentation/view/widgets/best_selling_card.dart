@@ -63,7 +63,12 @@ class _BestSellingCard extends StatelessWidget {
                         ],
                       ),
 
-                    Text(product.description, style: TStyle.greyRegular(10), maxLines: 1, overflow: TextOverflow.ellipsis),
+                    Text(
+                      product.description,
+                      style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

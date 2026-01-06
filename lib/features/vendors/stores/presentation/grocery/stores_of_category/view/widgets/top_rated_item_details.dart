@@ -63,7 +63,7 @@ class TopRatedItemDetails extends StatelessWidget {
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         //   children: [
-                        //     Text(item.name, style: TStyle.whiteBold(16).copyWith(fontWeight: TStyle.bolder)),
+                        //     Text(item.name, style: TStyle.robotBlackMedium().copyWith(color: Co.white).copyWith(fontWeight: TStyle.bolder)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -88,7 +88,7 @@ class TopRatedItemDetails extends StatelessWidget {
 
                         //   ],
                         // ),
-                        // Text(item.description, style: TStyle.whiteSemi(14).copyWith(color: Colors.white60)),
+                        // Text(item.description, style: TStyle.robotBlackRegular14().copyWith(color: Co.white,fontWeight:TStyle.medium).copyWith(color: Colors.white60)),
                         // Row(
                         //   spacing: 12,
                         //   children: [

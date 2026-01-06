@@ -165,7 +165,10 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
                           ? Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(L10n.tr().applied, style: TStyle.whiteSemi(14)),
+                                Text(
+                                  L10n.tr().applied,
+                                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                                ),
                                 const HorizontalSpacing(4),
                                 const Icon(Icons.check, color: Colors.white, size: 16),
                               ],

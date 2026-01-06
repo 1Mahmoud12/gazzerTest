@@ -85,7 +85,7 @@ class _TopRatedCard extends StatelessWidget {
                                 Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
                                 if (product.reviewCount > 0) ...[
                                   const SizedBox(width: 4),
-                                  Text('(+${product.reviewCount})', style: TStyle.greyRegular(12)),
+                                  Text('(+${product.reviewCount})', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
                                 ],
                               ],
                             ),
@@ -122,7 +122,7 @@ class _TopRatedCard extends StatelessWidget {
                               if (product.priceBeforeDiscount != null)
                                 Text(
                                   Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                  style: TStyle.greyRegular(12).copyWith(decoration: TextDecoration.lineThrough),
+                                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey).copyWith(decoration: TextDecoration.lineThrough),
                                 ),
                             ],
                           ),

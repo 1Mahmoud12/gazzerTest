@@ -123,12 +123,7 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Flexible(
-                            child: Text(
-                              L10n.tr().total,
-                              style: TStyle.blackSemi(20, font: FFamily.roboto),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                            ),
+                            child: Text(L10n.tr().total, style: TStyle.robotBlackSubTitle(), overflow: TextOverflow.ellipsis, maxLines: 1),
                           ),
                           const HorizontalSpacing(2),
                           Text(' (${L10n.tr().amountToPay}) ', style: TStyle.robotBlackThin().copyWith(overflow: TextOverflow.ellipsis), maxLines: 1),
@@ -136,7 +131,10 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                       ),
                     ),
                     const HorizontalSpacing(12),
-                    Text(Helpers.getProperPrice(finalTotal), style: TStyle.burbleSemi(20, font: FFamily.roboto)),
+                    Text(
+                      Helpers.getProperPrice(finalTotal),
+                      style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple, fontWeight: TStyle.semi),
+                    ),
                   ],
                 ),
               ),
@@ -165,12 +163,9 @@ class ItemSummary extends StatelessWidget {
       children: [
         Text(
           title,
-          style: total ? TStyle.burbleSemi(16, font: FFamily.roboto) : TStyle.blackSemi(16, font: FFamily.roboto),
+          style: total ? TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold, color: Co.purple) : TStyle.robotBlackMedium(),
         ),
-        Text(
-          valueText,
-          style: total ? TStyle.burbleBold(18, font: FFamily.roboto) : TStyle.blackSemi(18, font: FFamily.roboto),
-        ),
+        Text(valueText, style: total ? TStyle.robotBlackRegular().copyWith(color: Co.purple) : TStyle.robotBlackMedium()),
       ],
     );
   }

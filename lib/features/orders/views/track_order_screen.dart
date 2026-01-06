@@ -267,7 +267,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                     decoration: BoxDecoration(color: Colors.lightBlue.withOpacityNew(0.9), borderRadius: BorderRadius.circular(8)),
                     child: Text(
                       '${_userLocation.latitude.toStringAsFixed(2)} × ${_userLocation.longitude.toStringAsFixed(2)}',
-                      style: TStyle.whiteBold(12),
+                      style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
                     ),
                   ),
                 ),
@@ -357,7 +357,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                     children: [
                       const VectorGraphicsWidget(Assets.customerSupportIc),
                       const HorizontalSpacing(10),
-                      Text(L10n.tr().getHelp, style: TStyle.whiteBold(16)),
+                      Text(L10n.tr().getHelp, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
                     ],
                   ),
                 ),

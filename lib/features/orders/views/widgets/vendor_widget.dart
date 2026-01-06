@@ -52,7 +52,7 @@ class _SingleVendorView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(vendor.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
-              Text('${L10n.tr().orderId}: #$orderId', style: TStyle.blackRegular(12)),
+              Text('${L10n.tr().orderId}: #$orderId', style: TStyle.robotBlackThin()),
             ],
           ),
         ),

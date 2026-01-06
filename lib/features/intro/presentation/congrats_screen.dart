@@ -73,15 +73,15 @@ class _CongratsScreenState extends State<CongratsScreen> {
                   spacing: 12,
                   children: [
                     const HorizontalSpacing(double.infinity),
-                    GradientText(text: "${L10n.tr().congratulations}!", style: TStyle.robotBlackHead(), gradient: Grad().radialGradient),
-                    GradientText(text: L10n.tr().youMadeIt, style: TStyle.mainwBold(16), gradient: Grad().radialGradient),
+                    GradientText(text: '${L10n.tr().congratulations}!', style: TStyle.robotBlackHead(), gradient: Grad().radialGradient),
+                    GradientText(text: L10n.tr().youMadeIt, style: TStyle.robotBlackMedium(), gradient: Grad().radialGradient),
                     const VerticalSpacing(12),
                     OptionBtn(
                       onPressed: () {
                         context.go(widget.navigateTo);
                       },
                       width: 209,
-                      child: GradientText(text: L10n.tr().start, style: TStyle.blackSemi(13)),
+                      child: GradientText(text: L10n.tr().start, style: TStyle.robotBlackSmall()),
                     ),
                     const VerticalSpacing(24),
                   ],
