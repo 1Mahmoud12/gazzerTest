@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -42,8 +43,6 @@ import 'package:gazzer/features/home/homeViewAll/topItems/presentation/view/popu
 import 'package:gazzer/features/home/homeViewAll/top_items_widget/presentation/cubit/top_items_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/top_vendors_widget/presentation/cubit/top_vendors_widget_cubit.dart';
 import 'package:gazzer/features/home/main_home/presentaion/utils/home_utils.dart';
-import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_cubit.dart';
-import 'package:gazzer/features/home/main_home/presentaion/view/cubit/home_states.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/all_categories_screen.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/home_header_logic.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/widgets/sections/active_orders_widget.dart';
@@ -79,32 +78,48 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with AutomaticKeepAliveClientMixin {
+class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
   // Create cubits as instance variables so they persist and can be accessed
-  late final CategoriesWidgetCubit _categoriesCubit;
-  late final DailyOffersWidgetCubit _dailyOffersCubit;
-  late final SuggestsWidgetCubit _suggestsCubit;
-  late final TopVendorsWidgetCubit _topVendorsCubit;
-  late final BestPopularStoresWidgetCubit _bestPopularStoresCubit;
-  late final TopItemsWidgetCubit _topItemsCubit;
-  late final ActiveOrdersWidgetCubit _activeOrdersCubit;
+  final CategoriesWidgetCubit _categoriesCubit = di<CategoriesWidgetCubit>();
+  final DailyOffersWidgetCubit _dailyOffersCubit = di<DailyOffersWidgetCubit>();
+  final SuggestsWidgetCubit _suggestsCubit = di<SuggestsWidgetCubit>();
+  final TopVendorsWidgetCubit _topVendorsCubit = di<TopVendorsWidgetCubit>();
+  final BestPopularStoresWidgetCubit _bestPopularStoresCubit = di<BestPopularStoresWidgetCubit>();
+  final TopItemsWidgetCubit _topItemsCubit = di<TopItemsWidgetCubit>();
+  final ActiveOrdersWidgetCubit _activeOrdersCubit = di<ActiveOrdersWidgetCubit>();
+
+  Timer? _resumeRefreshTimer;
 
   @override
   void initState() {
     super.initState();
-    // Initialize cubits
-    _categoriesCubit = di<CategoriesWidgetCubit>()..getCategories();
-    _dailyOffersCubit = di<DailyOffersWidgetCubit>()..getDailyOffers();
-    _suggestsCubit = di<SuggestsWidgetCubit>()..getSuggests();
-    _topVendorsCubit = di<TopVendorsWidgetCubit>()..getTopVendors();
-    _bestPopularStoresCubit = di<BestPopularStoresWidgetCubit>()
-      ..getBestPopularStores();
-    _topItemsCubit = di<TopItemsWidgetCubit>()..getTopItems();
-    _activeOrdersCubit = di<ActiveOrdersWidgetCubit>()..getActiveOrders();
+
+    // Set system UI overlay style once (moved from build)
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
+    );
+
+    // Initialize critical cubits immediately
+    _categoriesCubit.getCategories();
+    _activeOrdersCubit.getActiveOrders();
+
+    // Stagger initialization of other cubits to reduce initial load
+    Future.microtask(() {
+      _dailyOffersCubit.getDailyOffers();
+      _suggestsCubit.getSuggests();
+    });
+
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _topVendorsCubit.getTopVendors();
+      _bestPopularStoresCubit.getBestPopularStores();
+    });
+
+    Future.delayed(const Duration(milliseconds: 200), () {
+      _topItemsCubit.getTopItems();
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       //context.read<HomeCubit>().getHomeData();
@@ -113,61 +128,60 @@ class _HomeScreenState extends State<HomeScreen>
         HotspotProvider.of(context).startFlow();
         di<SharedPreferences>().setBool(StorageKeys.haveSeenTour, true);
       }
+
+      // Call selectTokens once after first frame (moved from build)
+      selectTokens();
     });
 
+    // Debounce resume callback to avoid multiple rapid refreshes
     LifecycleEventHandler(
       resumeCallBack: () async {
-        _refreshAllWidgets(isRefresh: false);
+        _resumeRefreshTimer?.cancel();
+        _resumeRefreshTimer = Timer(const Duration(seconds: 2), () {
+          _refreshAllWidgets(isRefresh: false);
+        });
       },
     );
   }
 
   @override
   void dispose() {
-    _categoriesCubit.close();
-    _dailyOffersCubit.close();
-    _suggestsCubit.close();
-    _topVendorsCubit.close();
-    _bestPopularStoresCubit.close();
-    _topItemsCubit.close();
-    _activeOrdersCubit.close();
+    _resumeRefreshTimer?.cancel();
     super.dispose();
   }
 
   Future<void> _refreshAllWidgets({bool isRefresh = true}) async {
     if (isRefresh) animationDialogLoading();
-    await Future.wait([
-      _categoriesCubit.getCategories(),
+
+    // Refresh critical widgets first, then others in background
+    await Future.wait([_categoriesCubit.getCategories(), _activeOrdersCubit.getActiveOrders()]);
+
+    // Refresh less critical widgets in background (don't await)
+    // ignore: unawaited_futures
+    Future.wait([
       _dailyOffersCubit.getDailyOffers(),
       _suggestsCubit.getSuggests(),
-      _activeOrdersCubit.getActiveOrders(),
       _topVendorsCubit.getTopVendors(),
       _bestPopularStoresCubit.getBestPopularStores(),
       _topItemsCubit.getTopItems(),
     ]);
+
     if (isRefresh) closeDialog();
+    return;
   }
 
   int exitApp = 0;
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
-    );
     super.build(context); // Required for AutomaticKeepAliveClientMixin
-    selectTokens();
+    // Removed SystemChrome and selectTokens from build() - moved to initState()
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         exitApp++;
         //Utils.showToast(title: 'swipe twice to exit', state: UtilState.success);
-        Alerts.showToast(
-          L10n.tr().swipeTwiceToExit,
-          error: false,
-          isInfo: true,
-          toastGravity: ToastGravity.CENTER,
-        );
+        Alerts.showToast(L10n.tr().swipeTwiceToExit, error: false, isInfo: true, toastGravity: ToastGravity.CENTER);
         Future.delayed(const Duration(seconds: 5), () {
           exitApp = 0;
           setState(() {});
@@ -190,9 +204,7 @@ class _HomeScreenState extends State<HomeScreen>
             floatingWidgetWidth: 50,
             speed: 1,
             dy: HomeUtils.headerHeight(context) + 12,
-            dx: L10n.isAr(context)
-                ? AppConst.defaultHrPadding.right
-                : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
+            dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
             disableBounceAnimation: true,
             mainScreenWidget: MultiBlocProvider(
               providers: [
@@ -204,51 +216,41 @@ class _HomeScreenState extends State<HomeScreen>
                 BlocProvider.value(value: _topItemsCubit),
                 BlocProvider.value(value: _activeOrdersCubit),
               ],
-              child: BlocBuilder<HomeCubit, HomeStates>(
-                builder: (context, state) {
-                  return RefreshIndicator(
-                    onRefresh: _refreshAllWidgets,
-                    child: const CustomScrollView(
-                      physics: BouncingScrollPhysics(),
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 12),
-                            child: _HomeHeader(),
-                          ),
-                        ),
-                        SliverToBoxAdapter(
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 24),
-                            child: _HomeSearchWidget(),
-                          ),
-                        ),
-
-                        ///
-                        CategoriesWidget(),
-
-                        ///
-                        ActiveOrdersWidget(),
-
-                        ///
-                        DailyOffersWidget(),
-
-                        ///
-                        SuggestsWidget(),
-
-                        // ///
-                        TopVendorsWidget(),
-
-                        // ///
-                        BestPopularStoresWidget(),
-
-                        // ///
-                        TopItemsWidget(),
-                        SliverToBoxAdapter(child: VerticalSpacing(100)),
-                      ],
+              child: RefreshIndicator(
+                onRefresh: _refreshAllWidgets,
+                child: const CustomScrollView(
+                  physics: BouncingScrollPhysics(),
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Padding(padding: EdgeInsets.only(bottom: 12), child: _HomeHeader()),
                     ),
-                  );
-                },
+                    SliverToBoxAdapter(
+                      child: Padding(padding: EdgeInsets.only(bottom: 24), child: _HomeSearchWidget()),
+                    ),
+
+                    ///
+                    CategoriesWidget(),
+
+                    ///
+                    ActiveOrdersWidget(),
+
+                    ///
+                    DailyOffersWidget(),
+
+                    ///
+                    SuggestsWidget(),
+
+                    // ///
+                    TopVendorsWidget(),
+
+                    // ///
+                    BestPopularStoresWidget(),
+
+                    // ///
+                    TopItemsWidget(),
+                    SliverToBoxAdapter(child: VerticalSpacing(100)),
+                  ],
+                ),
               ),
             ),
           ),

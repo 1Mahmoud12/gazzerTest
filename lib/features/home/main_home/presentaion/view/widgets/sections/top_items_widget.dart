@@ -22,6 +22,12 @@ class TopItemsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TopItemsWidgetCubit, TopItemsWidgetState>(
+      buildWhen: (previous, current) {
+        // Only rebuild if state type changed or data changed (using Equatable props)
+        if (previous.runtimeType != current.runtimeType) return true;
+        // Equatable handles comparison automatically, but we check type first
+        return previous != current;
+      },
       builder: (context, state) {
         if (state is TopItemsWidgetSuccessState) {
           final items = state.items;

@@ -56,6 +56,14 @@ class ActiveOrdersWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ActiveOrdersWidgetCubit, ActiveOrdersWidgetStates>(
+      buildWhen: (previous, current) {
+        // Only rebuild if state type actually changed or orders changed
+        if (previous.runtimeType != current.runtimeType) return true;
+        if (previous is ActiveOrdersWidgetSuccessState && current is ActiveOrdersWidgetSuccessState) {
+          return previous.orders != current.orders;
+        }
+        return false;
+      },
       builder: (context, state) {
         if (state is ActiveOrdersWidgetSuccessState) {
           final activeOrders = state.orders;

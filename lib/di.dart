@@ -140,7 +140,7 @@ Future init() async {
   di.registerSingleton<ApiClient>(ApiClient());
   di.registerSingleton<CrashlyticsRepo>(CrashlyticsRepoImp());
   _registerRepos();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load();
 
   ///
   /// register buses
@@ -232,14 +232,14 @@ void _registerCubits() {
   di.registerFactory(() => TopItemsCubit(di.get()));
   di.registerFactory(() => TopVendorsCubit(di.get()));
   di.registerFactory(() => SuggestsCubit(di.get()));
-  di.registerFactory(() => CategoriesWidgetCubit(di.get()));
-  di.registerFactory(() => AllCategoriesCubit(di.get()));
-  di.registerFactory(() => DailyOffersWidgetCubit(di.get()));
-  di.registerFactory(() => SuggestsWidgetCubit(di.get()));
-  di.registerFactory(() => TopVendorsWidgetCubit(di.get()));
-  di.registerFactory(() => BestPopularStoresWidgetCubit(di.get()));
-  di.registerFactory(() => TopItemsWidgetCubit(di.get()));
-  di.registerFactory(() => ActiveOrdersWidgetCubit(di.get()));
+  di.registerLazySingleton(() => CategoriesWidgetCubit(di.get()));
+  di.registerLazySingleton(() => AllCategoriesCubit(di.get()));
+  di.registerLazySingleton(() => DailyOffersWidgetCubit(di.get()));
+  di.registerLazySingleton(() => SuggestsWidgetCubit(di.get()));
+  di.registerLazySingleton(() => TopVendorsWidgetCubit(di.get()));
+  di.registerLazySingleton(() => BestPopularStoresWidgetCubit(di.get()));
+  di.registerLazySingleton(() => TopItemsWidgetCubit(di.get()));
+  di.registerLazySingleton(() => ActiveOrdersWidgetCubit(di.get()));
   di.registerFactory(() => BestPopularCubit(repository: di.get()));
   di.registerFactory(() => LoyaltyProgramCubit(di.get()));
   di.registerFactory(() => WalletCubit(di.get()));

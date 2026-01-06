@@ -21,6 +21,14 @@ class DailyOffersWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DailyOffersWidgetCubit, DailyOffersWidgetStates>(
+      buildWhen: (previous, current) {
+        // Only rebuild if state type actually changed or data changed
+        if (previous.runtimeType != current.runtimeType) return true;
+        if (previous is DailyOffersWidgetSuccessState && current is DailyOffersWidgetSuccessState) {
+          return previous.entities != current.entities || previous.banner != current.banner;
+        }
+        return false;
+      },
       builder: (context, state) {
         if (state is DailyOffersWidgetSuccessState) {
           return _DailyOffersContent(items: state.entities, banner: state.banner);

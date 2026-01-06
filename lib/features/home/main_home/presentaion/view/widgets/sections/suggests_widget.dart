@@ -21,6 +21,14 @@ class SuggestsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SuggestsWidgetCubit, SuggestsWidgetStates>(
+      buildWhen: (previous, current) {
+        // Only rebuild if state type actually changed or data changed
+        if (previous.runtimeType != current.runtimeType) return true;
+        if (previous is SuggestsWidgetSuccessState && current is SuggestsWidgetSuccessState) {
+          return previous.entities != current.entities || previous.banner != current.banner;
+        }
+        return false;
+      },
       builder: (context, state) {
         if (state is SuggestsWidgetSuccessState) {
           return _SuggestsContent(items: state.entities, banner: state.banner);
