@@ -39,7 +39,8 @@ class BestPopularStoresWidget extends StatelessWidget {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
           return _BestPopularStoresContent(stores: stores, banner: state.banner);
-        } else if (state is BestPopularStoresWidgetLoadingState) {
+        }
+        /* else if (state is BestPopularStoresWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -48,7 +49,7 @@ class BestPopularStoresWidget extends StatelessWidget {
           );
         } else if (state is BestPopularStoresWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        }
+        }*/
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );

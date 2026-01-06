@@ -20,6 +20,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/c
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_menu/cubit/stores_menu_cubit.dart';
 import 'package:gazzer/features/vendors/stores/presentation/grocery/stores_of_category/view/stores_of_category_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_banner_slider.dart';
+import 'package:gazzer/main.dart';
 
 class StoreMenuScreen extends StatelessWidget {
   const StoreMenuScreen({super.key, required this.state});
@@ -27,6 +28,7 @@ class StoreMenuScreen extends StatelessWidget {
   final StoresMenuStates state;
   @override
   Widget build(BuildContext context) {
+    logger.d('storessss${state.mainCategory.name}');
     final banners = state.banners;
     final mainCat = state.mainCategory;
     final catWzPlates = state.categoryWithStores;
@@ -63,7 +65,7 @@ class StoreMenuScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    MainAppBar(title: L10n.tr().groceryStores),
+                    MainAppBar(title: state.mainCategory.name),
                   ],
                 ),
               ),

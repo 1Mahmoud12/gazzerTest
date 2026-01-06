@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/vertical_rotated_img_card.dart';
 import 'package:gazzer/core/presentation/views/widgets/title_with_more.dart';
@@ -35,7 +35,8 @@ class TopItemsWidget extends StatelessWidget {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
           return _TopItemsContent(items: items, banner: state.banner);
-        } else if (state is TopItemsWidgetLoadingState) {
+        }
+        /*else if (state is TopItemsWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -44,7 +45,7 @@ class TopItemsWidget extends StatelessWidget {
           );
         } else if (state is TopItemsWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        }
+        }*/
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );
@@ -71,7 +72,7 @@ class _TopItemsContent extends StatelessWidget {
           ),
           const VerticalSpacing(12),
           SizedBox(
-            height: 150,
+            height: 100.h,
             child: ListView.separated(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,

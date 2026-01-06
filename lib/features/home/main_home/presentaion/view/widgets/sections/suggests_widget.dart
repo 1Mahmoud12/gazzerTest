@@ -32,7 +32,8 @@ class SuggestsWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is SuggestsWidgetSuccessState) {
           return _SuggestsContent(items: state.entities, banner: state.banner);
-        } else if (state is SuggestsWidgetLoadingState) {
+        }
+        /* else if (state is SuggestsWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -41,7 +42,7 @@ class SuggestsWidget extends StatelessWidget {
           );
         } else if (state is SuggestsWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        }
+        }*/
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );

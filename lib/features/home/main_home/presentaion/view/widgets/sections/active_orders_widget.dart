@@ -34,7 +34,7 @@ class ActiveOrdersWidget extends StatelessWidget {
     // Ensure there's always at least one vendor to prevent "No element" error
     if (vendors.isEmpty) {
       vendors.add(
-        OrderVendorEntity(
+        const OrderVendorEntity(
           id: 0,
           name: 'Vendor', // Default placeholder name
           logo: '',
@@ -117,7 +117,8 @@ class ActiveOrdersWidget extends StatelessWidget {
               const VerticalSpacing(24),
             ]),
           );
-        } else if (state is ActiveOrdersWidgetLoadingState) {
+        }
+        /* else if (state is ActiveOrdersWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -126,7 +127,7 @@ class ActiveOrdersWidget extends StatelessWidget {
           );
         } else if (state is ActiveOrdersWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        }
+        }*/
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );

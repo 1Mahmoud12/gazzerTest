@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/presentation/cubit/categories_widget_cubit.dart';
 import 'package:gazzer/features/home/homeViewAll/categories_widget/presentation/cubit/categories_widget_states.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
@@ -22,7 +21,8 @@ class CategoriesWidget extends StatelessWidget {
       builder: (context, categoriesState) {
         if (categoriesState is CategoriesWidgetSuccessState) {
           return HomeCategoriesComponent(items: categoriesState.categories, banner: categoriesState.banner);
-        } else if (categoriesState is CategoriesWidgetLoadingState) {
+        }
+        /* else if (categoriesState is CategoriesWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -31,7 +31,7 @@ class CategoriesWidget extends StatelessWidget {
           );
         } else if (categoriesState is CategoriesWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        }
+        }*/
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );

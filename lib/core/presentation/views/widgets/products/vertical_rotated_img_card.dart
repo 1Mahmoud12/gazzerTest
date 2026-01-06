@@ -16,8 +16,6 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Details/views/store_details_screen.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 
-import 'circle_gradient_image.dart';
-
 class VerticalRotatedImgCard extends StatelessWidget {
   const VerticalRotatedImgCard({super.key, required this.prod, required this.onTap});
   final GenericItemEntity prod;
@@ -25,7 +23,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width * .8,
+      width: MediaQuery.sizeOf(context).width * .9,
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -93,18 +91,20 @@ class VerticalRotatedImgCard extends StatelessWidget {
                               SizedBox(
                                 width: 24,
                                 height: 24,
-                                child: CircleGradientBorderedImage(
-                                  image: prod.store?.image ?? '',
-                                  shadow: const BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
-                                  showBorder: false,
+                                child: CustomNetworkImage(
+                                  prod.store?.image ?? '',
+                                  borderRaduis: 24,
+                                  // shadow: const BoxShadow(color: Colors.black26, blurRadius: 2, offset: Offset(0, 2)),
+                                  // showBorder: false,
                                 ),
                               ),
                               const SizedBox(width: 8),
                               Flexible(
-                                child: FittedBox(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(prod.store?.name ?? 'brand', style: TStyle.robotBlackThin().copyWith(fontWeight: TStyle.semi)),
+                                child: Text(
+                                  prod.store?.name ?? 'brand',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TStyle.robotBlackThin().copyWith(fontWeight: TStyle.semi),
                                 ),
                               ),
                             ],
@@ -116,8 +116,9 @@ class VerticalRotatedImgCard extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const VectorGraphicsWidget(Assets.soldCartIc),
-                          const HorizontalSpacing(2),
+                          const HorizontalSpacing(4),
                           Text(L10n.tr().sold, style: TStyle.robotBlackSmall()),
+                          const HorizontalSpacing(2),
                           Text(' +${prod.sold}', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
                         ],
                       ),
@@ -126,7 +127,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(Helpers.getProperPrice(prod.price), style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+                      Text(Helpers.getProperPrice(prod.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                       const HorizontalSpacing(8),
                       CartToIncrementIcon(isHorizonal: true, product: prod, iconSize: 25, isDarkContainer: true),
                     ],

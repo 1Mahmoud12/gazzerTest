@@ -32,7 +32,8 @@ class DailyOffersWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is DailyOffersWidgetSuccessState) {
           return _DailyOffersContent(items: state.entities, banner: state.banner);
-        } else if (state is DailyOffersWidgetLoadingState) {
+        }
+        /*else if (state is DailyOffersWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -41,7 +42,7 @@ class DailyOffersWidget extends StatelessWidget {
           );
         } else if (state is DailyOffersWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        }
+        }*/
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );

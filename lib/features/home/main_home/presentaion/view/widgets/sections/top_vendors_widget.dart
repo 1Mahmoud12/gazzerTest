@@ -43,7 +43,8 @@ class TopVendorsWidget extends StatelessWidget {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
           }
           return _TopVendorsContent(vendors: vendors, banner: state.banner);
-        } else if (state is TopVendorsWidgetLoadingState) {
+        }
+        /*else if (state is TopVendorsWidgetLoadingState) {
           return const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -52,7 +53,7 @@ class TopVendorsWidget extends StatelessWidget {
           );
         } else if (state is TopVendorsWidgetErrorState) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
-        }
+        }*/
         return const SliverToBoxAdapter(child: SizedBox.shrink());
       },
     );

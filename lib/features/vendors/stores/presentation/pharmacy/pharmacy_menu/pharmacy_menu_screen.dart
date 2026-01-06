@@ -4,6 +4,7 @@ import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
+import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
@@ -76,10 +77,7 @@ class PharmacyMenuScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     // Pharmacy Header
-                    MenuCategoriesHeaderWidget(
-                      title: L10n.tr().pharmacyStores,
-                      colors: [const Color(0xff4A2197), const Color(0xff4AFF5C).withOpacityNew(.8)],
-                    ),
+                    MenuCategoriesHeaderWidget(title: state.mainCategory.name, colors: [const Color(0xff3AD03F).withOpacityNew(.5), Co.white]),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: MainSearchWidget(hintText: L10n.tr().searchFor),
