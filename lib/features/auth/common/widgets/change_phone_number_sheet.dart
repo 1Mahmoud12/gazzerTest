@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -55,7 +56,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                     const SizedBox.shrink(),
                     Text(widget.title ?? L10n.tr().editYourNumber, style: TStyle.robotBlackTitle().copyWith(color: Co.purple)),
                     const SizedBox.shrink(),
-                    Text(L10n.tr().mobileNumber, style: TStyle.robotBlackRegular14()),
+                    Text(L10n.tr().mobileNumber, style: context.style14400),
                     Form(
                       key: _formKey,
                       child: PhoneTextField(

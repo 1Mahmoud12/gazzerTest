@@ -10,7 +10,7 @@ abstract class Helpers {
       await func();
     } catch (e, stack) {
       if (kDebugMode) {
-        print(e.toString());
+        print(e);
       } else {
         FirebaseCrashlytics.instance.recordError(e, stack, fatal: true);
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
@@ -28,7 +29,7 @@ class PharmacySearchButton extends StatelessWidget {
             Expanded(
               child: Text(
                 hintText ?? L10n.tr().searchForStoresItemsAndCAtegories,
-                style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+                style: context.style14400.copyWith(color: Co.darkGrey),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

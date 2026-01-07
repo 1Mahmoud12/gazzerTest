@@ -29,12 +29,7 @@ class _NotificationsViewState extends State<NotificationsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          L10n.tr().notifications,
-          style: TStyle.robotBlackSubTitle(),
-        ),
-      ),
+      appBar: AppBar(title: Text(L10n.tr().notifications, style: TStyle.robotBlackSubTitle())),
 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -94,10 +89,7 @@ class _NotificationsViewState extends State<NotificationsView> {
             ItemNotification(appNotification: dummyNotification),
             const SizedBox(height: 16),
 
-            Text(
-              L10n.tr().previous_notification,
-              style: TStyle.robotBlackSubTitle(),
-            ),
+            Text(L10n.tr().previous_notification, style: TStyle.robotBlackSubTitle()),
             const SizedBox(height: 16),
             ItemNotification(appNotification: dummyNotification),
             const SizedBox(height: 20),

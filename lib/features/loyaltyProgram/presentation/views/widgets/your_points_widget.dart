@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -128,7 +129,7 @@ class YourPointsItem extends StatelessWidget {
               const VerticalSpacing(4),
               Text(
                 subTitle,
-                style: TStyle.robotBlackRegular14().copyWith(color: Co.purple, fontWeight: TStyle.medium),
+                style: context.style14400.copyWith(color: Co.purple, fontWeight: TStyle.medium),
               ),
             ],
           ),

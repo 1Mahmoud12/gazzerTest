@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -71,7 +71,7 @@ class OrderCardWidget extends StatelessWidget {
                             decoration: BoxDecoration(color: order.status.badgeColor, borderRadius: BorderRadius.circular(20)),
                             child: Text(
                               order.status.label,
-                              style: TStyle.robotBlackRegular14()
+                              style: context.style14400
                                   .copyWith(fontWeight: TStyle.bold, color: _getStatusTextColor(order.status))
                                   .copyWith(color: _getStatusTextColor(order.status)),
                             ),
@@ -132,7 +132,7 @@ class OrderCardWidget extends StatelessWidget {
                       text: L10n.tr().trackOrder,
                       bgColor: Co.purple,
                       radius: 30,
-                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.white),
+                      textStyle: context.style14400.copyWith(color: Co.white),
                       padding: const EdgeInsets.symmetric(vertical: 5),
                     ),
                   ],
@@ -180,7 +180,7 @@ class _RatingDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Co.purple100,
+        color: Co.lightPurple,
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
       ),
       alignment: Alignment.center,
@@ -215,14 +215,14 @@ class _RatingInput extends StatelessWidget {
       },
       child: Container(
         decoration: const BoxDecoration(
-          color: Co.purple100,
+          color: Co.lightPurple,
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
         ),
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: [
-            Text(L10n.tr().rateUs, style: TStyle.robotBlackRegular14()),
+            Text(L10n.tr().rateUs, style: context.style14400),
             const Spacer(),
             ...List.generate(
               5,
@@ -262,7 +262,7 @@ class _ReorderButton extends StatelessWidget {
             children: [
               SvgPicture.asset(Assets.customerSupportIc),
               const HorizontalSpacing(10),
-              Text(L10n.tr().getHelp, style: TStyle.robotBlackRegular14().copyWith(color: Co.white)),
+              Text(L10n.tr().getHelp, style: context.style14400.copyWith(color: Co.white)),
             ],
           ),
         ),
@@ -337,7 +337,7 @@ class _ReorderButton extends StatelessWidget {
               text: L10n.tr().reOrder,
               bgColor: isLoading ? Co.purple.withOpacityNew(0.5) : Co.purple,
               radius: 30,
-              textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.white),
+              textStyle: context.style14400.copyWith(color: Co.white),
               padding: const EdgeInsets.symmetric(vertical: 5),
             ),
           );
@@ -427,7 +427,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                           decoration: BoxDecoration(color: order.status.badgeColor, borderRadius: BorderRadius.circular(20)),
                           child: Text(
                             order.status.label,
-                            style: TStyle.robotBlackRegular14()
+                            style: context.style14400
                                 .copyWith(fontWeight: TStyle.bold, color: _getStatusTextColor(order.status))
                                 .copyWith(color: _getStatusTextColor(order.status)),
                           ),
@@ -497,7 +497,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                   text: L10n.tr().trackOrder,
                   bgColor: Co.purple,
                   radius: 30,
-                  textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.white),
+                  textStyle: context.style14400.copyWith(color: Co.white),
                   padding: const EdgeInsets.symmetric(vertical: 5),
                 ),
               ],
@@ -560,7 +560,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                       decoration: BoxDecoration(color: order.status.badgeColor, borderRadius: BorderRadius.circular(20)),
                       child: Text(
                         order.status.label,
-                        style: TStyle.robotBlackRegular14()
+                        style: context.style14400
                             .copyWith(fontWeight: TStyle.bold, color: _getStatusTextColor(order.status))
                             .copyWith(color: _getStatusTextColor(order.status)),
                       ),
@@ -612,7 +612,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
               text: L10n.tr().trackOrder,
               bgColor: Co.purple,
               radius: 30,
-              textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.white),
+              textStyle: context.style14400.copyWith(color: Co.white),
               padding: const EdgeInsets.symmetric(vertical: 5),
             ),
           ],

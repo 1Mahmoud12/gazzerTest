@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 
@@ -30,8 +31,7 @@ class StackedImagesWidget extends StatelessWidget {
             }),
           ),
         ),
-        if (images.length > 4)
-          Text("+${images.length - 4} ${L10n.tr().items}", style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+        if (images.length > 4) Text("+${images.length - 4} ${L10n.tr().items}", style: context.style14400.copyWith(fontWeight: TStyle.bold)),
       ],
     );
   }

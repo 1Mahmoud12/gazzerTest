@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -198,7 +199,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                     isLoading: isLoading,
                                     text: L10n.tr().apply,
                                     bgColor: _voucherController.text.trim().isEmpty ? Co.grey : Co.secondary,
-                                    textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.purple),
+                                    textStyle: context.style14400.copyWith(fontWeight: TStyle.bold, color: Co.purple),
                                   );
                                 },
                               ),

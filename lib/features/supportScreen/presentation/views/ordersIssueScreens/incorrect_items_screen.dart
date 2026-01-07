@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -29,10 +30,7 @@ class ItemComplaintData {
   File? photo;
   final TextEditingController noteController;
 
-  ItemComplaintData({
-    required this.itemId,
-    this.photo,
-  }) : noteController = TextEditingController();
+  ItemComplaintData({required this.itemId, this.photo}) : noteController = TextEditingController();
 
   String? get note {
     final text = noteController.text.trim();
@@ -45,11 +43,7 @@ class ItemComplaintData {
 }
 
 class IncorrectItemsScreen extends StatefulWidget {
-  const IncorrectItemsScreen({
-    super.key,
-    required this.orderId,
-    this.faqCategoryId,
-  });
+  const IncorrectItemsScreen({super.key, required this.orderId, this.faqCategoryId});
 
   final int orderId;
   final int? faqCategoryId;
@@ -90,10 +84,7 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
 
   Future<void> _pickImageForItem(int itemId) async {
     try {
-      final XFile? image = await _imagePicker.pickImage(
-        source: ImageSource.camera,
-        imageQuality: 80,
-      );
+      final XFile? image = await _imagePicker.pickImage(source: ImageSource.camera, imageQuality: 80);
 
       if (image != null) {
         setState(() {
@@ -111,10 +102,7 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
     });
   }
 
-  void _onCheckPressed(
-    BuildContext context,
-    List<OrderDetailItemEntity> allItems,
-  ) {
+  void _onCheckPressed(BuildContext context, List<OrderDetailItemEntity> allItems) {
     if (_selectedItemIds.isEmpty) {
       Alerts.showToast(L10n.tr().youMustCheckOneAtLeast);
       return;
@@ -146,23 +134,14 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
     final l10n = L10n.tr();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => OrderDetailCubit(di.get(), widget.orderId)..loadOrderDetail(),
-        ),
-        BlocProvider(
-          create: (context) => ComplaintCubit(di.get()),
-        ),
+        BlocProvider(create: (context) => OrderDetailCubit(di.get(), widget.orderId)..loadOrderDetail()),
+        BlocProvider(create: (context) => ComplaintCubit(di.get())),
       ],
       child: BlocConsumer<ComplaintCubit, ComplaintStates>(
         listener: (context, complaintState) {
           if (complaintState is ComplaintSuccessState) {
             // Navigate to response screen after successful submission
-            context.navigateToPage(
-              OrderIssueResponseScreen(
-                orderId: widget.orderId,
-                faqCategoryId: widget.faqCategoryId,
-              ),
-            );
+            context.navigateToPage(OrderIssueResponseScreen(orderId: widget.orderId, faqCategoryId: widget.faqCategoryId));
           }
         },
         builder: (context, complaintState) {
@@ -170,20 +149,14 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
             builder: (context, state) {
               if (state is OrderDetailLoading && state.orderDetail == null) {
                 return Scaffold(
-                  appBar: MainAppBar(
-                    title: l10n.missingOrIncorrectItems,
-                  ),
-                  body: const Center(
-                    child: LoadingWidget(),
-                  ),
+                  appBar: MainAppBar(title: l10n.missingOrIncorrectItems),
+                  body: const Center(child: LoadingWidget()),
                 );
               }
 
               if (state is OrderDetailError) {
                 return Scaffold(
-                  appBar: MainAppBar(
-                    title: l10n.missingOrIncorrectItems,
-                  ),
+                  appBar: MainAppBar(title: l10n.missingOrIncorrectItems),
                   body: FailureComponent(
                     message: state.message,
                     onRetry: () {
@@ -201,12 +174,8 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
 
               if (orderDetail == null) {
                 return Scaffold(
-                  appBar: MainAppBar(
-                    title: l10n.missingOrIncorrectItems,
-                  ),
-                  body: const Center(
-                    child: LoadingWidget(),
-                  ),
+                  appBar: MainAppBar(title: l10n.missingOrIncorrectItems),
+                  body: const Center(child: LoadingWidget()),
                 );
               }
 
@@ -214,9 +183,7 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
               final allItems = orderDetail.vendors.expand((vendor) => vendor.items).toList();
 
               return Scaffold(
-                appBar: MainAppBar(
-                  title: l10n.missingOrIncorrectItems,
-                ),
+                appBar: MainAppBar(title: l10n.missingOrIncorrectItems),
                 body: Column(
                   children: [
                     Expanded(
@@ -225,15 +192,10 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text(
-                              l10n.selectMissingIncorrectItems,
-                              style: TStyle.robotBlackMedium(),
-                            ),
+                            Text(l10n.selectMissingIncorrectItems, style: TStyle.robotBlackMedium()),
                             const VerticalSpacing(16),
                             ...allItems.map((item) {
-                              final isSelected = _selectedItemIds.contains(
-                                item.id,
-                              );
+                              final isSelected = _selectedItemIds.contains(item.id);
                               final itemData = _itemComplaintData[item.id];
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 16),
@@ -254,11 +216,7 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
                     SafeArea(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
-                        child: MainBtn(
-                          onPressed: () => _onCheckPressed(context, allItems),
-                          text: l10n.check,
-                          width: double.infinity,
-                        ),
+                        child: MainBtn(onPressed: () => _onCheckPressed(context, allItems), text: l10n.check, width: double.infinity),
                       ),
                     ),
                   ],

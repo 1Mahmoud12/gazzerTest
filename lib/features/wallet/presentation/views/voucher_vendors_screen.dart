@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -139,7 +139,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                     padding: const EdgeInsets.all(16),
                     margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Co.purple100,
+                      color: Co.lightPurple,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: Co.purple),
                     ),
@@ -155,10 +155,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                             const SizedBox(height: 4),
                             Text(
                               '${L10n.tr().remaining}: ${_remainingPoints.toInt()} ${L10n.tr().points}',
-                              style: TStyle.robotBlackRegular14().copyWith(
-                                fontWeight: TStyle.bold,
-                                color: _remainingPoints < 0 ? Colors.red : Co.purple,
-                              ),
+                              style: context.style14400.copyWith(fontWeight: TStyle.bold, color: _remainingPoints < 0 ? Colors.red : Co.purple),
                             ),
                           ],
                         ),
@@ -253,7 +250,7 @@ class _VendorTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isSelected ? Co.purple100 : Co.bg,
+            color: isSelected ? Co.lightPurple : Co.bg,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isSelected

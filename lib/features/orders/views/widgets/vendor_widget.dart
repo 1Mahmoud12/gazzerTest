@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
@@ -51,7 +52,7 @@ class _SingleVendorView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(vendor.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+              Text(vendor.name, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
               Text('${L10n.tr().orderId}: #$orderId', style: TStyle.robotBlackThin()),
             ],
           ),
@@ -143,7 +144,7 @@ class _VendorTile extends StatelessWidget {
           const HorizontalSpacing(12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(vendor.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold))],
+            children: [Text(vendor.name, style: context.style14400.copyWith(fontWeight: TStyle.bold))],
           ),
         ],
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
@@ -55,7 +55,7 @@ class HeaderSection extends StatelessWidget {
             Expanded(
               child: Text(
                 L10n.tr(context).typeYouReviewHere,
-                style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                style: context.style14400.copyWith(color: Co.purple),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),
@@ -170,7 +170,7 @@ class ReviewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Name
-              Text(review['name'], style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+              Text(review['name'], style: context.style14400.copyWith(fontWeight: TStyle.bold)),
 
               const SizedBox(height: 4),
 

@@ -73,9 +73,7 @@ class InstaImageViewer extends StatelessWidget {
                           )
                         : Image.file(
                             File(filePath!),
-                            errorBuilder: (context, error, stackTrace) => const Center(
-                              child: Icon(Icons.error, color: Colors.red, size: 50),
-                            ),
+                            errorBuilder: (context, error, stackTrace) => const Center(child: Icon(Icons.error, color: Colors.red, size: 50)),
                           ),
                   );
                 },
@@ -217,9 +215,7 @@ class FullScreenViewerState extends State<FullScreenViewer> {
         backgroundColor: widget.backgroundIsTransparent ? Colors.transparent : widget.backgroundColor,
         body: Container(
           color: widget.backgroundColor.withAlpha((_opacity * 255).toInt()),
-          constraints: BoxConstraints.expand(
-            height: MediaQuery.of(context).size.height,
-          ),
+          constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height),
           child: Stack(
             children: <Widget>[
               AnimatedPositioned(
@@ -233,21 +229,13 @@ class FullScreenViewerState extends State<FullScreenViewer> {
                   boundaryMargin: const EdgeInsets.all(double.infinity),
                   panEnabled: false,
                   child: widget.disableSwipeToDismiss
-                      ? ClipRRect(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(40),
-                          ),
-                          clipBehavior: Clip.hardEdge,
-                          child: widget.child,
-                        )
+                      ? ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(40)), clipBehavior: Clip.hardEdge, child: widget.child)
                       : KeymotionGestureDetector(
                           onStart: (details) => _dragStart(details),
                           onUpdate: (details) => _dragUpdate(details),
                           onEnd: (details) => _dragEnd(details),
                           child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(40),
-                            ),
+                            borderRadius: const BorderRadius.all(Radius.circular(40)),
                             clipBehavior: Clip.hardEdge,
                             child: widget.child,
                           ),
@@ -263,18 +251,8 @@ class FullScreenViewerState extends State<FullScreenViewer> {
                     child: Container(
                       width: 40,
                       height: 40,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(40),
-                        ),
-                        color: Color(0xff222222),
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.close,
-                          color: Colors.grey,
-                        ),
-                      ),
+                      decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(40)), color: Color(0xff222222)),
+                      child: const Center(child: Icon(Icons.close, color: Colors.grey)),
                     ),
                   ),
                 ),
@@ -289,13 +267,7 @@ class FullScreenViewerState extends State<FullScreenViewer> {
 
 class KeymotionGestureDetector extends StatelessWidget {
   /// @macro
-  const KeymotionGestureDetector({
-    super.key,
-    required this.child,
-    this.onUpdate,
-    this.onEnd,
-    this.onStart,
-  });
+  const KeymotionGestureDetector({super.key, required this.child, this.onUpdate, this.onEnd, this.onStart});
 
   final Widget child;
   final GestureDragUpdateCallback? onUpdate;

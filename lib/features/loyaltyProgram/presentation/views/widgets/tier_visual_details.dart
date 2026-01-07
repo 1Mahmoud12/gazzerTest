@@ -52,7 +52,7 @@ final Map<String, TierVisualDetails> allTiersDetails = {
     bannerKey: 'gainerBanner',
   ),
   'saver': const TierVisualDetails(
-    mainColor: Co.purple100,
+    mainColor: Co.lightPurple,
     primaryTextColor: Co.dark,
     secondaryTextColor: Co.darkGrey,
     logo: Assets.silverIc,
@@ -61,7 +61,7 @@ final Map<String, TierVisualDetails> allTiersDetails = {
     bannerKey: 'silverBanner',
   ),
   'silver': const TierVisualDetails(
-    mainColor: Co.purple100,
+    mainColor: Co.lightPurple,
     primaryTextColor: Co.dark,
     secondaryTextColor: Co.darkGrey,
     logo: Assets.silverIc,

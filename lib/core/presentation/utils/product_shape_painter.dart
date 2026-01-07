@@ -56,12 +56,7 @@ class ProductShapePaint extends CustomPainter {
     Paint paint0Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
-    paint0Stroke.shader = ui.Gradient.linear(
-      Offset(0, size.height * 0.4),
-      Offset(size.width * 0.3, size.height),
-      [begin, end],
-      [0, 0.5],
-    );
+    paint0Stroke.shader = ui.Gradient.linear(Offset(0, size.height * 0.4), Offset(size.width * 0.3, size.height), [begin, end], [0, 0.5]);
     canvas.drawPath(path_0, paint0Stroke);
 
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;

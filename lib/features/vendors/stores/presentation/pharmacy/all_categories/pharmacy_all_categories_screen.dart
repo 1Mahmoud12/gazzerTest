@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
@@ -9,6 +8,8 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/common/widgets/pharmacy_category_card.dart';
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/subcategory/pharmacy_subcategory_screen.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../../core/presentation/extensions/context.dart';
 
 part 'pharmacy_all_categories_screen.g.dart';
 

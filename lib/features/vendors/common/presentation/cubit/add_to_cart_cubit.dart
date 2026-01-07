@@ -552,10 +552,10 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.addToCartItem(req);
     switch (response) {
-      case Ok<CartResponse> res:
+      case final Ok<CartResponse> res:
         _bus.cartResponseToValues(res.value);
         emit(state.copyWith(status: ApiStatus.success, message: res.value.message, hasUserInteracted: false));
-      case Err err:
+      case final Err err:
         if (context.mounted && err.error is CartError && (err.error as CartError).needsNewPouchApproval) {
           final confirmed = await warningAlert(
             title: L10n.tr().exceedPouch,
@@ -580,10 +580,10 @@ class AddToCartCubit extends Cubit<AddToCartStates> {
     emit(state.copyWith(status: ApiStatus.loading));
     final response = await _repo.updateCartItem(req);
     switch (response) {
-      case Ok<CartResponse> res:
+      case final Ok<CartResponse> res:
         _bus.cartResponseToValues(res.value);
         emit(state.copyWith(status: ApiStatus.success, message: res.value.message, hasUserInteracted: false));
-      case Err err:
+      case final Err err:
         if (context.mounted && err.error is CartError && (err.error as CartError).needsNewPouchApproval) {
           final confirmed = await warningAlert(
             title: L10n.tr().exceedPouch,

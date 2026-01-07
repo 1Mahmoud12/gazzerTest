@@ -19,13 +19,7 @@ class CircleGradientBorderedImage extends StatelessWidget {
           border: !showBorder ? null : GradientBoxBorder(gradient: Grad().shadowGrad()),
         ),
         child: ClipOval(
-          child: AspectRatio(
-            aspectRatio: 1.0,
-            child: CustomNetworkImage(
-              image,
-              fit: BoxFit.cover,
-            ),
-          ),
+          child: AspectRatio(aspectRatio: 1.0, child: CustomNetworkImage(image, fit: BoxFit.cover)),
         ),
       ),
     );

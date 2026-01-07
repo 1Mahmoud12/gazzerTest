@@ -10,10 +10,7 @@ import 'package:gazzer/features/wallet/presentation/views/widgets/wallet_history
 import 'package:intl/intl.dart';
 
 class WalletHistoryWidget extends StatelessWidget {
-  const WalletHistoryWidget({
-    super.key,
-    required this.transactions,
-  });
+  const WalletHistoryWidget({super.key, required this.transactions});
 
   final List<TransactionEntity> transactions;
 
@@ -59,14 +56,7 @@ class WalletHistoryWidget extends StatelessWidget {
       final date = DateFormat('dd\\MM\\yyyy').format(transaction.createdAt);
       final time = transaction.createdAt.defaultTimeFormat;
 
-      return WalletHistoryEntry(
-        title: title,
-        subtitle: subtitle,
-        date: date,
-        time: time,
-        amount: transaction.amount.toInt(),
-        iconAsset: iconAssets,
-      );
+      return WalletHistoryEntry(title: title, subtitle: subtitle, date: date, time: time, amount: transaction.amount.toInt(), iconAsset: iconAssets);
     }).toList();
   }
 
@@ -83,11 +73,7 @@ class WalletHistoryWidget extends StatelessWidget {
           onPressed: entries.isEmpty
               ? null
               : () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const WalletHistoryScreen(),
-                    ),
-                  );
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletHistoryScreen()));
                 },
         ),
         const SizedBox(height: 16),

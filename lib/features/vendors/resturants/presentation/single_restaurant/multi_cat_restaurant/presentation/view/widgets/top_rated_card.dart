@@ -82,7 +82,7 @@ class _TopRatedCard extends StatelessWidget {
                               children: [
                                 const VectorGraphicsWidget(Assets.starRateIc),
                                 const SizedBox(width: 4),
-                                Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                                Text(product.rate.toStringAsFixed(1), style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                                 if (product.reviewCount > 0) ...[
                                   const SizedBox(width: 4),
                                   Text('(+${product.reviewCount})', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),

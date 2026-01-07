@@ -23,9 +23,7 @@ class DeliveryAddressCard extends StatelessWidget {
       padding: const EdgeInsets.all(_padding),
       decoration: BoxDecoration(
         color: Co.white,
-        borderRadius: BorderRadius.circular(
-          OrderDetailsConstants.cardBorderRadius,
-        ),
+        borderRadius: BorderRadius.circular(OrderDetailsConstants.cardBorderRadius),
         border: Border.all(color: Co.lightGrey),
       ),
       child: Row(
@@ -69,25 +67,13 @@ class AddressInfoColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          deliveryAddressLabel,
-          style: TStyle.robotBlackSmall(),
-        ),
+        Text(deliveryAddressLabel, style: TStyle.robotBlackSmall()),
         const SizedBox(height: DeliveryAddressCard._textSpacing),
-        Text(
-          address,
-          style: TStyle.robotBlackThin(),
-        ),
+        Text(address, style: TStyle.robotBlackThin()),
         const SizedBox(height: DeliveryAddressCard._textSpacing),
-        Text(
-          name,
-          style: TStyle.robotBlackSmall(),
-        ),
+        Text(name, style: TStyle.robotBlackSmall()),
         const SizedBox(height: DeliveryAddressCard._textSpacing),
-        Text(
-          '$mobileNumberLabel: $mobileNumber',
-          style: TStyle.robotBlackSmall(),
-        ),
+        Text('$mobileNumberLabel: $mobileNumber', style: TStyle.robotBlackSmall()),
       ],
     );
   }

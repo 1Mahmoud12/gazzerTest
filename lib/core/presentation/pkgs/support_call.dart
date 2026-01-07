@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -231,7 +232,7 @@ class SupportCallService {
                 const VerticalSpacing(10),
                 Text(
                   L10n.tr().callSupport,
-                  style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+                  style: context.style14400.copyWith(color: Co.darkGrey),
                   textAlign: TextAlign.center,
                 ),
                 const VerticalSpacing(10),

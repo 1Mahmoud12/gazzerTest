@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/orders/domain/entities/order_status.dart';
@@ -87,7 +88,7 @@ class StatusBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(color: status.badgeColor, borderRadius: BorderRadius.circular(OrderDetailsConstants.badgeBorderRadius)),
-      child: Text(status.label, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+      child: Text(status.label, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
     );
   }
 }

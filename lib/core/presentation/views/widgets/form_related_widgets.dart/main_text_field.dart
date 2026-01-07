@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -124,7 +125,7 @@ class _MainTextFieldState extends State<MainTextField> {
             cursorColor: Co.purple,
             controller: widget.controller,
             enabled: widget.enabled,
-            style: widget.style ?? TStyle.robotBlackRegular14(),
+            style: widget.style ?? context.style14400,
             validator: widget.validator,
             onChanged: widget.onChange,
             autofillHints: widget.autofillHints,
@@ -149,7 +150,7 @@ class _MainTextFieldState extends State<MainTextField> {
               counterText: widget.showMaxLegnth ? null : '',
               hint: widget.hintText == null
                   ? null
-                  : Text(widget.hintText!, style: widget.style ?? TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey), maxLines: 1),
+                  : Text(widget.hintText!, style: widget.style ?? context.style14400.copyWith(color: Co.darkGrey), maxLines: 1),
               helperMaxLines: 1,
               // helperMaxLines: 5,
               labelStyle: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),

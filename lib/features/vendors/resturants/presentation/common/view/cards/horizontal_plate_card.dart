@@ -87,11 +87,7 @@ class HorizontalPlateCard extends StatelessWidget {
                                       ),
                                     ),
                                     if (item.outOfStock)
-                                      CardBadge(
-                                        text: L10n.tr().notAvailable,
-                                        alignment: AlignmentDirectional.topStart,
-                                        fullWidth: true,
-                                      )
+                                      CardBadge(text: L10n.tr().notAvailable, alignment: AlignmentDirectional.topStart, fullWidth: true)
                                     else if (item.badge != null)
                                       CardBadge(
                                         text: item.badge!,
@@ -113,13 +109,7 @@ class HorizontalPlateCard extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 2),
                       child: AbsorbPointer(
                         absorbing: item.outOfStock,
-                        child: CartToIncrementIcon(
-                          isDarkContainer: true,
-                          isHorizonal: false,
-                          product: item,
-                          iconSize: 20,
-                          isCartIcon: false,
-                        ),
+                        child: CartToIncrementIcon(isDarkContainer: true, isHorizonal: false, product: item, iconSize: 20, isCartIcon: false),
                       ),
                     ),
                   ],

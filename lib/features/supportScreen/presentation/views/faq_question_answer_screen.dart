@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -37,7 +38,7 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
             Center(
               child: Text(
                 L10n.tr().wasThisHelpful,
-                style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.purple),
+                style: context.style14400.copyWith(fontWeight: TStyle.bold, color: Co.purple),
               ),
             ),
             const VerticalSpacing(12),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/auth/common/widgets/change_phone_number_sheet.dart';
@@ -58,7 +58,7 @@ class ForgetPasswordBtn extends StatelessWidget {
       style: TextButton.styleFrom(minimumSize: Size.zero),
       child: Text(
         L10n.tr().forgotPassword,
-        style: TStyle.robotBlackRegular14().copyWith(color: Co.purple, decoration: TextDecoration.underline),
+        style: context.style14400.copyWith(color: context.primaryColor, decoration: TextDecoration.underline),
       ),
     );
   }

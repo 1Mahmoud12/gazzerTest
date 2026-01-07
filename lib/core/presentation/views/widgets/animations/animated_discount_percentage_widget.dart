@@ -14,7 +14,8 @@ class _AnimatedDiscountPercentageWidgetState extends State<AnimatedDiscountPerce
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this, lowerBound: -0.05, upperBound: 0, duration: const Duration(milliseconds: 1000))..repeat(reverse: true);
+    _controller = AnimationController(vsync: this, lowerBound: -0.05, upperBound: 0, duration: const Duration(milliseconds: 1000))
+      ..repeat(reverse: true);
     super.initState();
   }
 

@@ -4,12 +4,7 @@ import 'package:gazzer/features/vendors/stores/presentation/pharmacy/utils/pharm
 
 /// Gradient wave container with large wave shape for height 350
 class GradientLargeWaveContainer extends StatelessWidget {
-  const GradientLargeWaveContainer({
-    super.key,
-    required this.child,
-    this.height = 350,
-    this.padding,
-  });
+  const GradientLargeWaveContainer({super.key, required this.child, this.height = 350, this.padding});
 
   final Widget child;
   final double height;
@@ -25,15 +20,10 @@ class GradientLargeWaveContainer extends StatelessWidget {
             height: height,
             width: double.infinity,
 
-            decoration: BoxDecoration(
-              gradient: Grad().pharmacyLinearGrad,
-            ),
+            decoration: BoxDecoration(gradient: Grad().pharmacyLinearGrad),
           ),
         ),
-        Padding(
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: child,
-        ),
+        Padding(padding: padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: child),
       ],
     );
   }

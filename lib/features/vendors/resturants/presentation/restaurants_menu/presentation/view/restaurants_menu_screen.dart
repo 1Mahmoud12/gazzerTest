@@ -115,7 +115,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                     final tab = isLoading ? ('test', 'Fakers._netWorkImage', index) : tabs[index];
                     return Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Co.purple100),
+                        border: Border.all(color: Co.lightPurple),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Row(

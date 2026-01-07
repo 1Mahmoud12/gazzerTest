@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -93,7 +94,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   //   children: [
                   //     Directionality(
                   //       textDirection: TextDirection.ltr,
-                  //       child: Text('(+20)-${req.phone}', style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey,fontWeight:TStyle.medium)),
+                  //       child: Text('(+20)-${req.phone}', style: context.style14400.copyWith(color: Co.darkGrey,fontWeight:TStyle.medium)),
                   //     ),
                   //     TextButton(
                   //       onPressed: () async {
@@ -113,7 +114,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   //         );
                   //         setState(() {});
                   //       },
-                  //       child: Text(L10n.tr().wrongNumber, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                  //       child: Text(L10n.tr().wrongNumber, style: context.style14400.copyWith(color: Co.purple)),
                   //     ),
                   //   ],
                   // ),
@@ -122,7 +123,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(L10n.tr().password, maxLines: 1, style: TStyle.robotBlackRegular14()),
+                        Text(L10n.tr().password, maxLines: 1, style: context.style14400),
                         const VerticalSpacing(8),
                         Directionality(
                           textDirection: TextDirection.ltr,
@@ -139,7 +140,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           ),
                         ),
                         const VerticalSpacing(32),
-                        Text(L10n.tr().confirmPassword, maxLines: 1, style: TStyle.robotBlackRegular14()),
+                        Text(L10n.tr().confirmPassword, maxLines: 1, style: context.style14400),
                         const VerticalSpacing(8),
                         Directionality(
                           textDirection: TextDirection.ltr,

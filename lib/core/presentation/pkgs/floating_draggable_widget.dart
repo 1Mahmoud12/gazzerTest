@@ -260,14 +260,8 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
                             setState(() {
                               if (isTabbed && isDragEnable) {
                                 isDragging = false;
-                                left = _getDx(
-                                  left + value.velocity.pixelsPerSecond.dx / (widget.speed ?? 50.0).toDouble(),
-                                  width,
-                                );
-                                top = _getDy(
-                                  top + value.velocity.pixelsPerSecond.dy / (widget.speed ?? 50.0).toDouble(),
-                                  height,
-                                );
+                                left = _getDx(left + value.velocity.pixelsPerSecond.dx / (widget.speed ?? 50.0).toDouble(), width);
+                                top = _getDy(top + value.velocity.pixelsPerSecond.dy / (widget.speed ?? 50.0).toDouble(), height);
                                 if (widget.onDragEvent != null) {
                                   widget.onDragEvent!(left, top);
                                 }

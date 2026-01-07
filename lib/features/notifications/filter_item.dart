@@ -3,13 +3,7 @@ import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 class FilterItem extends StatefulWidget {
-  const FilterItem({
-    super.key,
-    required this.isSelected,
-    required this.title,
-    required this.selectedTap,
-    required this.type,
-  });
+  const FilterItem({super.key, required this.isSelected, required this.title, required this.selectedTap, required this.type});
   final bool isSelected;
   final String title;
   final Function(NotificationType) selectedTap;
@@ -38,9 +32,7 @@ class _FilterItemState extends State<FilterItem> {
         child: Center(
           child: Text(
             widget.title,
-            style: TStyle.robotBlackRegular().copyWith(
-              color: widget.isSelected ? Co.white : Co.black,
-            ),
+            style: TStyle.robotBlackRegular().copyWith(color: widget.isSelected ? Co.white : Co.black),
             textAlign: TextAlign.center,
           ),
         ),

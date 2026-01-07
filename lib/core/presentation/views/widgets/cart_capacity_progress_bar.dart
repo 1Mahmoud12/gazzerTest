@@ -13,11 +13,7 @@ import 'package:gazzer/features/cart/presentation/cubit/cart_states.dart';
 /// - Orange: From 60% to 85%
 /// - Red: From 85% to 100%
 class CartCapacityProgressBar extends StatelessWidget {
-  const CartCapacityProgressBar({
-    super.key,
-    this.height = 4.0,
-    this.borderRadius,
-  });
+  const CartCapacityProgressBar({super.key, this.height = 4.0, this.borderRadius});
 
   final double height;
   final BorderRadius? borderRadius;
@@ -62,11 +58,7 @@ class CartCapacityProgressBar extends StatelessWidget {
 
         return InkWell(
           onTap: () {
-            Alerts.showToast(
-              L10n.tr().cartCapacity,
-              error: false,
-              isInfo: true,
-            );
+            Alerts.showToast(L10n.tr().cartCapacity, error: false, isInfo: true);
           },
           child: ClipRRect(
             borderRadius: borderRadius ?? BorderRadius.circular(height / 2),

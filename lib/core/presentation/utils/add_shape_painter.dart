@@ -2697,14 +2697,7 @@ class AddShapePainter extends CustomPainter {
       size.height * 0.02007111,
     );
     path_0.lineTo(size.width * 0.4691538, size.height * 0.02646012);
-    path_0.cubicTo(
-      size.width * 0.4677308,
-      size.height * 0.01886568,
-      size.width * 0.4695282,
-      size.height * 0.003013679,
-      size.width * 0.4638692,
-      0,
-    );
+    path_0.cubicTo(size.width * 0.4677308, size.height * 0.01886568, size.width * 0.4695282, size.height * 0.003013679, size.width * 0.4638692, 0);
     path_0.lineTo(size.width * 0.4623436, size.height * 0.007142407);
     path_0.cubicTo(
       size.width * 0.4637179,
@@ -3660,5 +3653,3 @@ class AddShapePainter extends CustomPainter {
     return true;
   }
 }
-
-

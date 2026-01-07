@@ -83,11 +83,7 @@ class VerticalPlateCard extends StatelessWidget {
                               ),
                             ),
                             if (item.outOfStock)
-                              CardBadge(
-                                text: L10n.tr().notAvailable,
-                                alignment: AlignmentDirectional.topStart,
-                                fullWidth: true,
-                              )
+                              CardBadge(text: L10n.tr().notAvailable, alignment: AlignmentDirectional.topStart, fullWidth: true)
                             else if (item.badge != null)
                               CardBadge(
                                 text: item.badge!,
@@ -108,13 +104,7 @@ class VerticalPlateCard extends StatelessWidget {
                             DecoratedFavoriteWidget(size: 24, padding: 4, fovorable: item),
                             AbsorbPointer(
                               absorbing: item.outOfStock,
-                              child: CartToIncrementIcon(
-                                isDarkContainer: true,
-                                isHorizonal: false,
-                                product: item,
-                                iconSize: 20,
-                                isCartIcon: false,
-                              ),
+                              child: CartToIncrementIcon(isDarkContainer: true, isHorizonal: false, product: item, iconSize: 20, isCartIcon: false),
                             ),
                           ],
                         ),

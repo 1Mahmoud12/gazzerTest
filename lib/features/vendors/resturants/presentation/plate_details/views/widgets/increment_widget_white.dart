@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -46,7 +46,7 @@ class IncrementWidgetWhite extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         borderRadius: AppConst.defaultBorderRadius,
-        border: Border.all(color: Co.purple100),
+        border: Border.all(color: Co.lightPurple),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

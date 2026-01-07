@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -44,7 +45,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                       duration: Durations.medium1,
                       child: Text(
                         ' (${state is! TimeSlotsStates ? '' : Helpers.formatTimeSlot(state.selectedTime ?? '00:00')})',
-                        style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                        style: context.style14400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                       ),
                     ),
                   ),
@@ -99,7 +100,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
-                          child: Text(Helpers.formatTimeSlot(state.timeSlots[index]), style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                          child: Text(Helpers.formatTimeSlot(state.timeSlots[index]), style: context.style14400.copyWith(color: Co.purple)),
                         );
                       },
                     ),

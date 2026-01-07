@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -104,7 +105,7 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
                         children: [
                           Text(value.name, style: TStyle.robotBlackRegular()),
                           // Show price if not free, else show "مجاني" (free)
-                          Text(value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ', style: TStyle.robotBlackRegular14()),
+                          Text(value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ', style: context.style14400),
                         ],
                       ),
                     ),

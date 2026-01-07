@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -26,7 +27,7 @@ class ImageWithAlignedBtn extends StatelessWidget {
               height: 35,
               text: L10n.tr().orderNow,
               bgColor: Co.secondary,
-              textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+              textStyle: context.style14400.copyWith(color: Co.purple),
             ),
           ),
         ],

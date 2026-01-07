@@ -43,7 +43,7 @@ class _IncorrectItemCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              Expanded(child: Text(item.name, style: TStyle.robotBlackRegular14())),
+              Expanded(child: Text(item.name, style: context.style14400)),
             ],
           ),
           // Show photo and note fields only if selected

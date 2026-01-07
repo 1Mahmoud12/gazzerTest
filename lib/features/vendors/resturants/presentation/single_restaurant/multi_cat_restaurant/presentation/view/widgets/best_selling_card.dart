@@ -38,7 +38,7 @@ class _BestSellingCard extends StatelessWidget {
                   children: [
                     Text(
                       product.name,
-                      style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold),
+                      style: context.style14400.copyWith(fontWeight: TStyle.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

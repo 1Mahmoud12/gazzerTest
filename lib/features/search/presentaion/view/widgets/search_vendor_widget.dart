@@ -13,7 +13,7 @@ class SearchVendorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeleton.leaf(
       child: DecoratedBox(
-        decoration: BoxDecoration(color: Co.purple100, borderRadius: AppConst.defaultInnerBorderRadius),
+        decoration: BoxDecoration(color: Co.lightPurple, borderRadius: AppConst.defaultInnerBorderRadius),
         child: Padding(
           padding: const EdgeInsetsGeometry.all(12),
           child: Column(

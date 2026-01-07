@@ -23,18 +23,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await Helpers.customTryCatch(
-    () async => await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    ),
-  );
+  await Helpers.customTryCatch(() async => await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform));
   await ScreenUtil.ensureScreenSize();
 
-  await Helpers.customTryCatch(
-    () async => await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    ),
-  );
+  await Helpers.customTryCatch(() async => await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform));
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
@@ -45,8 +37,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationUtility.initializeAwesomeNotification();
   try {
-    AppConst.messageGlobal = await FirebaseMessaging.instance
-        .getInitialMessage();
+    AppConst.messageGlobal = await FirebaseMessaging.instance.getInitialMessage();
     if (AppConst.messageGlobal?.data != null) {
       AppNavigator.initialRoute = '/';
     }

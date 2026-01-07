@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
@@ -317,7 +317,7 @@ class _ProductImageHeader extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: Text(
                 '${plate.offer!.discount} ${plate.offer!.discountType == DiscountType.percentage ? '%' : ''}',
-                style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold),
+                style: context.style14400.copyWith(fontWeight: TStyle.bold),
               ),
             ),
           ),
@@ -346,10 +346,7 @@ class _VendorInfo extends StatelessWidget {
           children: [
             Text(Helpers.getProperPrice(plate.price), style: TStyle.robotBlackMedium()),
             if (plate.offer != null)
-              Text(
-                Helpers.getProperPrice(plate.priceBeforeDiscount!),
-                style: TStyle.robotBlackRegular14().copyWith(decoration: TextDecoration.lineThrough),
-              ),
+              Text(Helpers.getProperPrice(plate.priceBeforeDiscount!), style: context.style14400.copyWith(decoration: TextDecoration.lineThrough)),
           ],
         ),
       ],
@@ -425,7 +422,7 @@ class _CollapsibleOptionState extends State<_CollapsibleOption> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: widget.isRequired ? Co.purple100 : Co.grey.withOpacityNew(0.1),
+                        color: widget.isRequired ? Co.lightPurple : Co.grey.withOpacityNew(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(

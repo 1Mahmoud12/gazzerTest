@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -302,7 +302,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
               const VerticalSpacing(6),
               Container(
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(24)),
+                decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(24)),
                 child: Row(
                   children: [
                     Expanded(child: Text('${L10n.tr().yourPoints}: ${widget.availablePoints}', style: TStyle.robotBlackRegular())),

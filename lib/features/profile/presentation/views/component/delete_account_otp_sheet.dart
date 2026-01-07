@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -118,7 +119,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                               children: [
                                 const Icon(Icons.timer, color: Co.purple, size: 25),
                                 const HorizontalSpacing(8),
-                                Text(L10n.tr().resendCode, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                                Text(L10n.tr().resendCode, style: context.style14400.copyWith(color: Co.purple)),
                               ],
                             ),
                           ),
@@ -199,7 +200,7 @@ class _DeleteAccountSheetState extends State<DeleteAccountSheet> {
                         final newReq = req.copyWith(otpCode: otpCont.text.trim());
                         context.read<ProfileCubit>().confirmDeleteAccount(newReq);
                       },
-                      textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
+                      textStyle: context.style14400.copyWith(fontWeight: TStyle.semi),
                       bgColor: Colors.transparent,
                       child: Text(L10n.tr().continu, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
                     ),

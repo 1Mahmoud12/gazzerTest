@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -181,7 +182,7 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
                             const VerticalSpacing(16),
                             ..._buildItemSections(orderDetail),
                             const VerticalSpacing(16),
-                            Text(l10n.addYourNotes, style: TStyle.robotBlackRegular14()),
+                            Text(l10n.addYourNotes, style: context.style14400),
                             const VerticalSpacing(8),
                             MainTextField(controller: _notesController, hintText: l10n.typeYourMessage, maxLines: 5),
                           ],

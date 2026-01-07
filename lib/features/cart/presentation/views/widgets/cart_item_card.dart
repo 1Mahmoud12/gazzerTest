@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -79,7 +79,7 @@ class CartItemCard extends StatelessWidget {
               child: Opacity(
                 opacity: item.quantityInStock == 0 ? 0.5 : 1,
                 child: DecoratedBox(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Co.purple100.withOpacityNew(.5)),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Co.lightPurple.withOpacityNew(.5)),
                   child: Padding(
                     padding: AppConst.defaultPadding,
                     child: Row(
@@ -101,7 +101,7 @@ class CartItemCard extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(item.prod.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold), maxLines: 2),
+                                  Text(item.prod.name, style: context.style14400.copyWith(fontWeight: TStyle.bold), maxLines: 2),
                                   if (item.options.isNotEmpty)
                                     ...List.generate(item.options.length, (index) => CartOptionWidget(option: item.options[index])),
                                   if (item.orderedWith.isNotEmpty)

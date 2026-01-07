@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class Co {
   static const bg = Color(0xFFFFFFFF);
+  static const darkBg = Color(0xFF242424);
 
   // Assets Colors
   static const purple = Color(0xFF52229E);
@@ -21,7 +22,6 @@ class Co {
 
   // Main color ** BG **
   /// Linear gradient
-  static const lightPurple = Color(0xFF5E24AA);
   static const darkPurple = Color(0xFF230064);
 
   /// Radial gradient
@@ -56,7 +56,7 @@ class Co {
 
   static const customWalletColor = Color(0xFFFFE06D);
   static const storeGradient = Color(0xFFFFC773);
-  static const purple100 = Color(0xFFEBE3FE);
+  static const lightPurple = Color(0xFFEBE3FE);
   static const purple200 = Color(0xFFBBA3F9);
   static const purple600 = Color(0xFF8C64E6);
   static const earnedMoney = Color(0xFFFFCF86);

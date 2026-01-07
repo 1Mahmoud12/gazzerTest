@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -92,9 +92,7 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
                             padding: AppConst.defaultHrPadding,
                             child: Text(
                               category['name'] ?? '',
-                              style: selected
-                                  ? TStyle.robotBlackRegular14().copyWith(color: Co.purple, fontWeight: TStyle.bold)
-                                  : TStyle.robotBlackSmall(),
+                              style: selected ? context.style14400.copyWith(color: Co.purple, fontWeight: TStyle.bold) : TStyle.robotBlackSmall(),
                             ),
                           ),
                         ],

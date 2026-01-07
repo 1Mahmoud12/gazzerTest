@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -42,7 +43,7 @@ class RestCatMiniProductCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(prod.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                  Text(prod.name, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,11 +78,11 @@ class RestCatMiniProductCard extends StatelessWidget {
                       const Icon(Icons.star, color: Co.secondary, size: 20),
                       Text(
                         prod.rate.toStringAsFixed(1),
-                        style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.secondary).copyWith(color: Co.secondary),
+                        style: context.style14400.copyWith(fontWeight: TStyle.bold, color: Co.secondary).copyWith(color: Co.secondary),
                       ),
                     ],
                   ),
-                  Text(Helpers.getProperPrice(prod.price), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                  Text(Helpers.getProperPrice(prod.price), style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                 ],
               ),
             ),

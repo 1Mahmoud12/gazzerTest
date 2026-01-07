@@ -34,7 +34,7 @@ class SelectAddressCard extends StatelessWidget {
             Alerts.showToast((snapshot.data! as AddressCardErrors).error);
           }
           return Container(
-            decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(24)),
+            decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(24)),
             padding: AppConst.defaultPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

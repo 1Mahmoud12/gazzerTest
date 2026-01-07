@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -42,7 +44,7 @@ class Dialogs {
                       child: MainBtn(
                         text: cancelBtn ?? L10n.tr().cancel,
                         bgColor: cancelBgColor ?? Co.greyText,
-                        textStyle: cancelColor == null ? null : TStyle.robotBlackRegular14().copyWith(color: cancelColor, fontWeight: TStyle.medium),
+                        textStyle: cancelColor == null ? null : context.style14400.copyWith(color: cancelColor, fontWeight: TStyle.medium),
                         onPressed: () {
                           context.pop(false);
                         },
@@ -53,7 +55,7 @@ class Dialogs {
                       child: MainBtn(
                         text: okBtn ?? L10n.tr().confirm,
                         bgColor: okBgColor ?? Co.purple,
-                        textStyle: okColor == null ? null : TStyle.robotBlackRegular14().copyWith(color: okColor, fontWeight: TStyle.medium),
+                        textStyle: okColor == null ? null : context.style14400.copyWith(color: okColor, fontWeight: TStyle.medium),
                         onPressed: () {
                           context.pop(true);
                         },
@@ -169,7 +171,7 @@ class Dialogs {
   // //                   const WidthSpacing(10),
   // //                   Expanded(
   // //                       child: Text((errorModel.errors!)[index],
-  // //                           style: TStyle.robotBlackRegular14())),
+  // //                           style: context.style14400)),
   // //                 ],
   // //               );
   // //             },
@@ -200,7 +202,9 @@ class Dialogs {
                 child: MainBtn(
                   text: okBtn ?? L10n.tr().confirm,
                   bgColor: okBgColor ?? Co.purple,
-                  textStyle: okColor == null ? null : TStyle.robotBlackRegular14().copyWith(color: okColor, fontWeight: TStyle.medium),
+                  textStyle: okColor == null
+                      ? null
+                      : AppNavigator.mainKey.currentContext!.style14400.copyWith(color: okColor, fontWeight: TStyle.medium),
                   onPressed: onConfirm,
                 ),
               ),

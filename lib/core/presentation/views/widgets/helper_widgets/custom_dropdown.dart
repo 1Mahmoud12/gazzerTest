@@ -120,7 +120,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
           color: widget.fillColor ?? Co.white,
-          border: Border.all(color: widget.borderColor ?? Co.purple100),
+          border: Border.all(color: widget.borderColor ?? Co.lightPurple),
         ),
         child: PopupMenuButton<T>(
           color: Co.white,

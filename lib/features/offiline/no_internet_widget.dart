@@ -1,4 +1,5 @@
-// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';
+
 // import 'package:kure/config/app_consts.dart';
 // import 'package:kure/config/localization/l10n/l10n.dart';
 // import 'package:kure/config/theming/theming.dart';
@@ -37,7 +38,7 @@
 //                       const VerticalSpacing(16),
 //                       // Text(L10n.tr().noInternetConnect, style: TStyle.blackBold(17)),
 //                       const VerticalSpacing(8),
-//                       Text(L10n.tr().pleaseCheckYourInternetConnection, style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey,fontWeight:TStyle.medium)),
+//                       Text(L10n.tr().pleaseCheckYourInternetConnection, style: context.style14400.copyWith(color: Co.darkGrey,fontWeight:TStyle.medium)),
 //                       const VerticalSpacing(16),
 //                       MainButton(
 //                         margin: AppConsts.defaultHorPadding,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -69,7 +70,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(L10n.tr().password, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().password, style: context.style14400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: password,
@@ -82,7 +83,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     autofillHints: const [AutofillHints.newPassword],
                   ),
                   const VerticalSpacing(16),
-                  Text(L10n.tr().confirmPassword, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().confirmPassword, style: context.style14400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: confirmPassword,

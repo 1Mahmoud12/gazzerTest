@@ -7,10 +7,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class PaymentScreen extends StatefulWidget {
   final String paymentUrl;
 
-  const PaymentScreen({
-    super.key,
-    required this.paymentUrl,
-  });
+  const PaymentScreen({super.key, required this.paymentUrl});
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -67,11 +64,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         // final status = result['status'];
         // final paymentStatus = result['payment_status'];
       } catch (error, stackTrace) {
-        logger.e(
-          'Failed to confirm payment',
-          error: error,
-          stackTrace: stackTrace,
-        );
+        logger.e('Failed to confirm payment', error: error, stackTrace: stackTrace);
         if (mounted) {
           Navigator.pop(context, url);
         }
@@ -90,10 +83,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       body: Stack(
         children: [
           WebViewWidget(controller: _controller),
-          if (isLoading)
-            const Center(
-              child: CircularProgressIndicator(),
-            ),
+          if (isLoading) const Center(child: CircularProgressIndicator()),
         ],
       ),
     );

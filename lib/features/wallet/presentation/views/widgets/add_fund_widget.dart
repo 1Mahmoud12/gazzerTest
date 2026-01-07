@@ -124,7 +124,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                 decoration: BoxDecoration(
                   color: Co.bg,
                   borderRadius: BorderRadius.circular(28),
-                  border: Border.all(color: Co.purple100),
+                  border: Border.all(color: Co.lightPurple),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

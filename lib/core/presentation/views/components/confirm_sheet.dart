@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
@@ -31,7 +32,7 @@ class ConfirmSheet extends StatelessWidget {
               fixedSize: const Size(250, 60),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
-            child: Text(btnText, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+            child: Text(btnText, style: context.style14400.copyWith(color: Co.purple)),
           ),
         ],
       ),

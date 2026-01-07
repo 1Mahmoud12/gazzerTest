@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -230,7 +231,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                               });
                             }
                           },
-                          child: Text(locationAddress ?? '', style: TStyle.robotBlackRegular14()),
+                          child: Text(locationAddress ?? '', style: context.style14400),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -420,7 +421,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                   isLoading: state is SaveAddressLoading,
                   child: Text(
                     L10n.tr().saveAddress,
-                    style: TStyle.robotBlackRegular14().copyWith(color: Co.white),
+                    style: context.style14400.copyWith(color: Co.white),
                     textAlign: TextAlign.center,
                   ),
                 ),

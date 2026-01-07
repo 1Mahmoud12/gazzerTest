@@ -50,7 +50,7 @@ class CategoryCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: Co.purple100),
+        border: Border.all(color: Co.lightPurple),
         borderRadius: BorderRadius.circular(24),
         // shadows will enforce that the gradient has no opacity
         // gradient: Grad().bglightLinear.copyWith(colors: [const Color(0xFFD0CADA), Co.bg], begin: Alignment.centerLeft, end: Alignment.centerRight),

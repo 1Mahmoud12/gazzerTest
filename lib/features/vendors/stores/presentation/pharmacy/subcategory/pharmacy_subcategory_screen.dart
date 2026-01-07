@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -78,7 +78,7 @@ class _PharmacySubcategoryScreenState extends State<PharmacySubcategoryScreen> {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(90),
-              border: Border.all(color: Co.purple100, width: 2),
+              border: Border.all(color: Co.lightPurple, width: 2),
               color: selected == index ? Co.purple : Co.white,
             ),
             padding: const EdgeInsets.all(8),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -47,7 +47,7 @@ Future<bool?> warningAlert({
 
                       // bgColor: cancelBgColor ?? Co.greyText,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                      textStyle: context.style14400.copyWith(color: Co.purple),
                       borderThickness: 2,
                       onPressed: () {
                         context.pop(false);
@@ -61,7 +61,7 @@ Future<bool?> warningAlert({
                       bgColor: Colors.transparent,
                       borderThickness: 2,
                       borderColor: Co.buttonGradient.withOpacityNew(.35),
-                      textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                      textStyle: context.style14400.copyWith(color: Co.purple),
                       onPressed: () {
                         context.pop(true);
                       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -163,7 +164,7 @@ class VendorInfoCard extends StatelessWidget {
                             spacing: 6,
                             children: [
                               const Icon(Icons.star, color: Co.secondary, size: 20),
-                              Text(vendor.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                              Text(vendor.rate.toStringAsFixed(1), style: context.style14400.copyWith(color: Co.purple)),
                             ],
                           ),
                         ],

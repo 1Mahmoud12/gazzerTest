@@ -105,7 +105,7 @@ class _HomeHeaderState extends State<_HomeHeader> {
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                        style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                       ),
                     );
                   },
@@ -202,7 +202,7 @@ Widget _buildAddressItem(BuildContext context, AddressEntity address, AddressesB
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(address.label, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                Text(address.label, style: context.style14400.copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
                 Text('${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
               ],
@@ -226,7 +226,7 @@ Widget _buildCurrentLocationOption(BuildContext context) {
     child: Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border.all(color: Co.purple100),
+        border: Border.all(color: Co.lightPurple),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -237,7 +237,7 @@ Widget _buildCurrentLocationOption(BuildContext context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L10n.tr().deliverToCurrentLocation, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                Text(L10n.tr().deliverToCurrentLocation, style: context.style14400.copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
                 Text(L10n.tr().outsideDeliveryZone, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
               ],
@@ -256,7 +256,7 @@ Widget _buildMapLocationOption(BuildContext context) {
     child: Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border.all(color: Co.purple100),
+        border: Border.all(color: Co.lightPurple),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -267,7 +267,7 @@ Widget _buildMapLocationOption(BuildContext context) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L10n.tr().deliverToDifferentLocation, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                Text(L10n.tr().deliverToDifferentLocation, style: context.style14400.copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
                 Text(L10n.tr().chooseLocationOnMap, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
               ],

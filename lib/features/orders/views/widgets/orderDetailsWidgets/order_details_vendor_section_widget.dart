@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -74,7 +75,7 @@ class VendorHeader extends StatelessWidget {
             VendorLogo(imageUrl: _getVendorImageUrl(), fallbackInitial: _getVendorInitial()),
             const SizedBox(width: VendorSection._iconSpacing),
             Expanded(
-              child: Text(vendor.name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+              child: Text(vendor.name, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
             ),
             ItemsCountIndicator(count: itemsCount),
             const SizedBox(width: VendorSection._iconSpacing),

@@ -14,9 +14,6 @@ class GazzerSupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Redirect to new chat screen
-    return GazzerSupportChatScreen(
-      chatId: chatId,
-      orderId: orderId,
-    );
+    return GazzerSupportChatScreen(chatId: chatId, orderId: orderId);
   }
 }

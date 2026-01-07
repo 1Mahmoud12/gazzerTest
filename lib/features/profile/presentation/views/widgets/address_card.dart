@@ -26,7 +26,7 @@ class AddressCard extends StatelessWidget {
     return InkWell(
       onTap: onSelect?.call(address),
       child: Container(
-        decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(24)),
+        decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(24)),
         padding: AppConst.defaultPadding,
 
         child: StreamBuilder(

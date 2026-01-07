@@ -12,13 +12,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_
 class SubcategoryItemsScreen extends StatelessWidget {
   static const route = '/subcategory-items';
 
-  const SubcategoryItemsScreen({
-    super.key,
-    required this.items,
-    required this.subcategoryName,
-    required this.vendor,
-    required this.maincat,
-  });
+  const SubcategoryItemsScreen({super.key, required this.items, required this.subcategoryName, required this.vendor, required this.maincat});
 
   final List<ProductEntity> items;
   final String subcategoryName;
@@ -37,9 +31,7 @@ class SubcategoryItemsScreen extends StatelessWidget {
         children: [
           GrocHeaderContainer(
             child: Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.paddingOf(context).top,
-              ),
+              padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
               child: Column(
                 children: [
                   const AppBarRowWidget(),
@@ -59,9 +51,7 @@ class SubcategoryItemsScreen extends StatelessWidget {
           ),
           const VerticalSpacing(16),
           // Subcategory Items
-          Expanded(
-            child: _buildItemsContent(context),
-          ),
+          Expanded(child: _buildItemsContent(context)),
         ],
       ),
     );
@@ -82,10 +72,7 @@ class SubcategoryItemsScreen extends StatelessWidget {
         mainAxisSpacing: 8,
       ),
       itemBuilder: (context, index) {
-        return GrocProdCard(
-          product: items[index],
-          shape: maincat,
-        );
+        return GrocProdCard(product: items[index], shape: maincat);
       },
     );
   }

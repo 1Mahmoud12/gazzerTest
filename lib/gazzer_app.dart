@@ -109,6 +109,9 @@ class _GazzerAppState extends State<GazzerApp> {
               builder: (context, child) => MaterialApp.router(
                 routerConfig: router,
                 theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: L10n.localizationDelegates,
                 supportedLocales: L10n.supportedLocales,

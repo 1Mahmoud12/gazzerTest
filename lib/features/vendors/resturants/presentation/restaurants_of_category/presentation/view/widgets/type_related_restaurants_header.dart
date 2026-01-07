@@ -1,6 +1,7 @@
 part of "../restaurants_of_category_screen.dart";
 
-// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';
+
 // import 'package:gazzer/core/presentation/theme/app_colors.dart';
 // import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 // import 'package:gazzer/core/presentation/theme/text_style.dart';

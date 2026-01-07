@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -167,7 +168,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                           ),
                         ],
-                        style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, height: 1.7),
+                        style: context.style14400.copyWith(fontWeight: TStyle.bold, height: 1.7),
                       ),
                     ),
                   ],
@@ -195,7 +196,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                                 groupValue: reasonId,
                                 splashRadius: AppConst.defaultRadius,
                                 contentPadding: EdgeInsets.zero,
-                                title: Text(L10n.tr().otherReason, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                                title: Text(L10n.tr().otherReason, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                                 onChanged: (value) {
                                   setState(() => reasonId = value);
                                 },
@@ -208,7 +209,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                                 items[index].description,
                                 style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                               ),
-                              title: Text(items[index].title, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                              title: Text(items[index].title, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                               splashRadius: AppConst.defaultRadius,
                               contentPadding: EdgeInsets.zero,
                               groupValue: reasonId,
@@ -274,7 +275,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                         },
 
                         radius: AppConst.defaultRadius,
-                        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.secondary),
+                        textStyle: context.style14400.copyWith(color: Co.secondary),
                         text: L10n.tr().continu,
                       ),
                     ),

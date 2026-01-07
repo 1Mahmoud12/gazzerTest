@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -89,7 +90,7 @@ class ItemInfoColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(name, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+        Text(name, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
         if (addOns.isNotEmpty) ...[
           const SizedBox(height: OrderItemTile._addOnsSpacing),
           Text('${OrderItemTile._addOnsPrefix}${addOns.join(', ')}', style: TStyle.robotBlackThin().copyWith(color: Co.grey)),
@@ -106,6 +107,6 @@ class ItemPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(Helpers.getProperPrice(price), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold));
+    return Text(Helpers.getProperPrice(price), style: context.style14400.copyWith(fontWeight: TStyle.bold));
   }
 }

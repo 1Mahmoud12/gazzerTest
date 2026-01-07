@@ -24,7 +24,7 @@ class _ProfileAddressesComponent extends StatelessWidget {
                         child: Center(
                           child: Text(
                             L10n.tr().youHaveNoAddressesYet,
-                            style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                            style: context.style14400.copyWith(color: Co.purple),
                             textAlign: TextAlign.center,
                           ),
                         ),

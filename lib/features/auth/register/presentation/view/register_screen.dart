@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -165,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(L10n.tr().fullName, maxLines: 1, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().fullName, maxLines: 1, style: context.style14400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: _nameController,
@@ -181,7 +182,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                   const VerticalSpacing(16),
-                  Text(L10n.tr().emailAddress, maxLines: 1, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().emailAddress, maxLines: 1, style: context.style14400),
                   const VerticalSpacing(8),
                   Directionality(
                     textDirection: TextDirection.ltr,
@@ -201,7 +202,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const VerticalSpacing(16),
-                  Text(L10n.tr().mobileNumber, maxLines: 1, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().mobileNumber, maxLines: 1, style: context.style14400),
                   const VerticalSpacing(8),
                   Directionality(
                     textDirection: TextDirection.ltr,
@@ -275,7 +276,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     radius: 24,
                     child: Text(
                       L10n.tr().signUp,
-                      style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                      style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                     ),
                   );
                 },

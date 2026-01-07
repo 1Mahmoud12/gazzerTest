@@ -54,7 +54,7 @@ class _CollapsibleOptionWidgetState extends State<_CollapsibleOptionWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.optionName, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                          Text(widget.optionName, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                           Text(
                             widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select,
                             style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
@@ -65,7 +65,7 @@ class _CollapsibleOptionWidgetState extends State<_CollapsibleOptionWidget> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: widget.isRequired ? Co.purple100 : Co.grey.withOpacityNew(0.1),
+                        color: widget.isRequired ? Co.lightPurple : Co.grey.withOpacityNew(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -71,7 +72,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(L10n.tr().currentPassword, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().currentPassword, style: context.style14400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: currentPassword,
@@ -85,7 +86,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                   ),
 
                   const VerticalSpacing(16),
-                  Text(L10n.tr().newPassword, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().newPassword, style: context.style14400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: password,
@@ -98,7 +99,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                     autofillHints: const [AutofillHints.newPassword],
                   ),
                   const VerticalSpacing(16),
-                  Text(L10n.tr().confirmPassword, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().confirmPassword, style: context.style14400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: confirmPassword,

@@ -3,12 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class CircularCarousalWidget extends StatefulWidget {
-  const CircularCarousalWidget({
-    super.key,
-    required this.itemsCount,
-    required this.itemBuilder,
-    required this.maxItemWidth,
-  });
+  const CircularCarousalWidget({super.key, required this.itemsCount, required this.itemBuilder, required this.maxItemWidth});
   final Widget Function(BuildContext context, int index) itemBuilder;
   final int itemsCount;
   final double maxItemWidth;
@@ -39,10 +34,7 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
   }
 
   _updateController() {
-    _controller = PageController(
-      viewportFraction: widget.maxItemWidth / maxAvailableWidth,
-      initialPage: widget.itemsCount ~/ 2,
-    );
+    _controller = PageController(viewportFraction: widget.maxItemWidth / maxAvailableWidth, initialPage: widget.itemsCount ~/ 2);
     // print('maxAvailableWidth: $maxAvailableWidth');
     // print('viewportFraction: ${widget.maxItemWidth / maxAvailableWidth}');
     // print('initialPage: ${widget.itemsCount ~/ 2}');
@@ -99,10 +91,7 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
                       children: [
                         Align(
                           alignment: Alignment(0, _calculatePosition(index)),
-                          child: Transform.rotate(
-                            angle: _calculateAngel(index),
-                            child: widget.itemBuilder(context, index),
-                          ),
+                          child: Transform.rotate(angle: _calculateAngel(index), child: widget.itemBuilder(context, index)),
                         ),
                       ],
                     ),

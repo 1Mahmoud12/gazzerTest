@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -61,7 +61,7 @@ class MissingItemTile extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: [
-                      Text(item.name, style: TStyle.robotBlackRegular14(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                      Text(item.name, style: context.style14400, maxLines: 1, overflow: TextOverflow.ellipsis),
                       if (isSelected) ...[
                         const SizedBox(height: 8),
                         Row(
@@ -70,7 +70,7 @@ class MissingItemTile extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Co.purple100),
+                                border: Border.all(color: Co.lightPurple),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
@@ -82,7 +82,7 @@ class MissingItemTile extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 12),
-                                    child: Text('$quantity', style: TStyle.robotBlackRegular14()),
+                                    child: Text('$quantity', style: context.style14400),
                                   ),
                                   InkWell(
                                     onTap: quantity < item.quantity
@@ -102,7 +102,7 @@ class MissingItemTile extends StatelessWidget {
                   ),
                 ),
                 const HorizontalSpacing(8),
-                Text(Helpers.getProperPrice(item.price), style: TStyle.robotBlackRegular14().copyWith(fontWeight: FontWeight.w600)),
+                Text(Helpers.getProperPrice(item.price), style: context.style14400.copyWith(fontWeight: FontWeight.w600)),
               ],
             ),
           ],

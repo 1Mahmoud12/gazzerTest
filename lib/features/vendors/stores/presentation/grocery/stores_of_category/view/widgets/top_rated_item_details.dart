@@ -88,7 +88,7 @@ class TopRatedItemDetails extends StatelessWidget {
 
                         //   ],
                         // ),
-                        // Text(item.description, style: TStyle.robotBlackRegular14().copyWith(color: Co.white,fontWeight:TStyle.medium).copyWith(color: Colors.white60)),
+                        // Text(item.description, style: context.style14400.copyWith(color: Co.white,fontWeight:TStyle.medium).copyWith(color: Colors.white60)),
                         // Row(
                         //   spacing: 12,
                         //   children: [

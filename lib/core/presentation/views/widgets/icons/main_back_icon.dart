@@ -11,10 +11,7 @@ class MainBackIcon extends StatelessWidget {
         SystemSound.play(SystemSoundType.click);
         Navigator.maybePop(context);
       },
-      icon: Icon(
-        Icons.arrow_back_ios,
-        color: color,
-      ),
+      icon: Icon(Icons.arrow_back_ios, color: color),
     );
   }
 }

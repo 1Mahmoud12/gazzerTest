@@ -34,11 +34,7 @@ class WorkingHoursCubit extends Cubit<WorkingHoursState> {
     final currentTime = TimeOfDay.fromDateTime(now);
 
     // Find today's schedule
-    final todaySchedule = workingHours
-        .where(
-          (schedule) => schedule.dayOfWeek.toLowerCase() == currentDay.toLowerCase(),
-        )
-        .firstOrNull;
+    final todaySchedule = workingHours.where((schedule) => schedule.dayOfWeek.toLowerCase() == currentDay.toLowerCase()).firstOrNull;
 
     // If no schedule for today, return false
     if (todaySchedule == null || !todaySchedule.isActive) {
@@ -78,9 +74,6 @@ class WorkingHoursCubit extends Cubit<WorkingHoursState> {
 
   TimeOfDay _parseTime(String timeString) {
     final parts = timeString.split(':');
-    return TimeOfDay(
-      hour: int.parse(parts[0]),
-      minute: int.parse(parts[1]),
-    );
+    return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
   }
 }

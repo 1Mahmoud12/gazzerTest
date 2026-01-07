@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/intl_phone/intl_phone.dart';
@@ -128,10 +129,10 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         selectedItemColor: Co.purple.withAlpha(20),
         // selectedIcon:
         //     Icon(Icons.check_box, color: Co.mainOrange, size: 15.r),
-        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
-        searchBoxTextStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
-        titleStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
-        searchBoxHintStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        textStyle: context.style14400.copyWith(color: Co.darkGrey),
+        searchBoxTextStyle: context.style14400.copyWith(color: Co.darkGrey),
+        titleStyle: context.style14400.copyWith(color: Co.darkGrey),
+        searchBoxHintStyle: context.style14400.copyWith(color: Co.darkGrey),
       ),
       countryConfig: CountryConfig(
         decoration: BoxDecoration(
@@ -139,7 +140,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
           border: !widget.showBorder ? null : Border.all(color: Co.lightGrey),
           borderRadius: AppConst.defaultBorderRadius,
         ),
-        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        textStyle: context.style14400.copyWith(color: Co.darkGrey),
       ),
       validator: (v) {
         final currentCode = countryCode ?? 'SA';
@@ -158,9 +159,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
       phoneConfig: PhoneConfig(
         focusedColor: widget.borderColor ?? Colors.black54,
         enabledColor: widget.borderColor ?? Colors.black54,
-        labelStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        labelStyle: context.style14400.copyWith(color: Co.darkGrey),
         labelText: widget.hasLabel ? 'Phone Number' : null,
-        floatingLabelStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        floatingLabelStyle: context.style14400.copyWith(color: Co.darkGrey),
         radius: 16,
         hintText: !widget.hasHint
             ? null
@@ -169,9 +170,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
             : 'xxxxxx',
         backgroundColor: widget.bgColor,
         showCursor: true,
-        errorStyle: TStyle.robotBlackRegular14().copyWith(color: Co.red),
-        textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
-        hintStyle: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+        errorStyle: context.style14400.copyWith(color: Co.red),
+        textStyle: context.style14400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+        hintStyle: context.style14400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
       ),
     );
   }

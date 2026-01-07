@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -20,7 +21,7 @@ class CardRestInfoWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       decoration: BoxDecoration(
-        border: Border.all(color: Co.purple100),
+        border: Border.all(color: Co.lightPurple),
         borderRadius: const BorderRadius.only(bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)),
       ),
       child: Column(
@@ -78,7 +79,7 @@ class CardRestInfoWidget extends StatelessWidget {
                         vendor.zoneName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+                        style: context.style14400.copyWith(color: Co.darkGrey),
                       ),
                     ),
                   ],
@@ -96,7 +97,7 @@ class CardRestInfoWidget extends StatelessWidget {
                           '${vendor.deliveryTime!} ${L10n.tr().min}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TStyle.robotBlackRegular14(),
+                          style: context.style14400,
                         ),
                       ),
                     ],

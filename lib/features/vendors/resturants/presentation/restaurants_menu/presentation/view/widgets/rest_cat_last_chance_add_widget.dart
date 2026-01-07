@@ -1,7 +1,8 @@
 // import 'dart:async';
 
 // import 'package:animations/animations.dart';
-// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';
+
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:gazzer/core/data/resources/fakers.dart';
 // import 'package:gazzer/core/presentation/resources/assets.dart';

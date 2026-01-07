@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
@@ -26,11 +27,11 @@ class BalanceWidget extends StatelessWidget {
                 Text(L10n.tr().walletKeepItUp, style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
                 Text(
                   L10n.tr().walletNewAchievements,
-                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                  style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                 ),
                 Text(
                   L10n.tr().walletBalanceLabel(balanceText, L10n.tr().egp),
-                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                  style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                 ),
               ],
             ),

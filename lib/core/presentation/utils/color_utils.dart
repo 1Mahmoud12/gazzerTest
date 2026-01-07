@@ -40,7 +40,7 @@ class ColorUtils {
   // }
 
   /// Safe conversion that returns a default color if parsing fails
-  static Color safeHexToColor(String? hexString, {Color defaultColor = Co.purple100}) {
+  static Color safeHexToColor(String? hexString, {Color defaultColor = Co.lightPurple}) {
     if (hexString == null || hexString.isEmpty) return defaultColor;
     try {
       final val = _hexToColor(hexString);

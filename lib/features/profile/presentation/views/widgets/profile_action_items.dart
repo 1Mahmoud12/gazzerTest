@@ -93,7 +93,7 @@ class _SignOutButton extends StatelessWidget {
                   children: [
                     Text(
                       L10n.tr().signOut,
-                      style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                      style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                     ),
                     const HorizontalSpacing(8),
                     SvgPicture.asset(Assets.signOutIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
@@ -132,7 +132,7 @@ class _SignOutButton extends StatelessWidget {
             const HorizontalSpacing(8),
             Text(
               L10n.tr().signOut,
-              style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+              style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
             ),
           ],
         ),

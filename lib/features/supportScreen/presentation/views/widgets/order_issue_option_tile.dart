@@ -15,7 +15,7 @@ class OrderIssueOptionTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-        decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
+        decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
             Expanded(child: Text(title, style: TStyle.robotBlackMedium())),

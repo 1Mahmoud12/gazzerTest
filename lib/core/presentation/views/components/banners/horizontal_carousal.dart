@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
@@ -75,7 +76,7 @@ class _HorizontalCarousalState extends State<HorizontalCarousal> {
               height: 32,
               width: 110,
               bgColor: Co.secondary,
-              textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+              textStyle: context.style14400.copyWith(color: Co.purple),
               onPressed: () {},
             ),
           ),

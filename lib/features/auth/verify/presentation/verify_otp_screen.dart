@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/network/error_models.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -173,7 +174,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
             //             },
             //           );
             //         },
-            //         child: Text(L10n.tr().wrongNumber, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+            //         child: Text(L10n.tr().wrongNumber, style: context.style14400.copyWith(color: Co.purple)),
             //       ),
             //   ],
             // ),
@@ -185,7 +186,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
               height: 70,
               child: Row(
                 children: [
-                  Text(L10n.tr().resendCode, style: TStyle.robotBlackRegular14()),
+                  Text(L10n.tr().resendCode, style: context.style14400),
                   Expanded(
                     child: ValueListenableBuilder(
                       valueListenable: seconds,
@@ -195,7 +196,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                           return Text(
                             " ${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')} S",
 
-                            style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                            style: context.style14400.copyWith(color: Co.purple),
                           );
                         }
 
@@ -211,12 +212,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                               children: [
                                 MainBtn(
                                   onPressed: resend,
-                                  bgColor: Co.purple100,
+                                  bgColor: Co.lightPurple,
                                   width: 80,
                                   padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                                   child: Text(
                                     L10n.tr().resend,
-                                    style: TStyle.robotBlackRegular14().copyWith(color: Co.black),
+                                    style: context.style14400.copyWith(color: Co.black),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),

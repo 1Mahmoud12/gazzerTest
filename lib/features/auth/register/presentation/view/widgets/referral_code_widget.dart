@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -117,7 +118,7 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('${L10n.tr().referralCode} (${L10n.tr().optional})', style: TStyle.robotBlackRegular14()),
+        Text('${L10n.tr().referralCode} (${L10n.tr().optional})', style: context.style14400),
         const VerticalSpacing(8),
         IntrinsicHeight(
           child: Row(
@@ -156,7 +157,7 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
                       onPressed: _referralCodeController.text.isEmpty ? () {} : _applyReferralCode,
                       isEnabled: !isApplied && !isChecking,
                       isLoading: isChecking,
-                      bgColor: _referralCodeController.text.isNotEmpty ? Co.purple : Co.purple100,
+                      bgColor: _referralCodeController.text.isNotEmpty ? Co.purple : Co.lightPurple,
                       radius: 24,
                       width: MediaQuery.sizeOf(context).width * .3,
 
@@ -167,7 +168,7 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
                               children: [
                                 Text(
                                   L10n.tr().applied,
-                                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                                  style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                                 ),
                                 const HorizontalSpacing(4),
                                 const Icon(Icons.check, color: Colors.white, size: 16),
@@ -191,7 +192,7 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
             children: [
               const Icon(Icons.check_circle, color: Colors.green, size: 16),
               const HorizontalSpacing(4),
-              Text(L10n.tr().codeAppliedSuccessfully, style: TStyle.robotBlackRegular14().copyWith(color: Colors.green)),
+              Text(L10n.tr().codeAppliedSuccessfully, style: context.style14400.copyWith(color: Colors.green)),
             ],
           ),
         ] else if (_referralCodeState == ReferralCodeState.error && _referralCodeErrorMessage != null) ...[
@@ -201,7 +202,7 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
               const Icon(Icons.warning_amber_rounded, color: Colors.red, size: 16),
               const HorizontalSpacing(4),
               Expanded(
-                child: Text(_referralCodeErrorMessage!, style: TStyle.robotBlackRegular14().copyWith(color: Colors.red)),
+                child: Text(_referralCodeErrorMessage!, style: context.style14400.copyWith(color: Colors.red)),
               ),
             ],
           ),

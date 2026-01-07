@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -11,6 +10,8 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../core/presentation/extensions/color.dart';
 
 /// Full screen for tracking order delivery with Google Map
 class TrackOrderScreen extends StatefulWidget {
@@ -296,7 +297,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                 // Delivery Man Information
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(24), color: Co.purple100),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(24), color: Co.lightPurple),
                   child: Row(
                     children: [
                       Expanded(

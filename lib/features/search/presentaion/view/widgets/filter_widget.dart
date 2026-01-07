@@ -70,7 +70,7 @@ class _FilterItem extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             //  color: isSelected ? Co.secondary.withAlpha(80) : Colors.transparent,
-            border: Border.all(color: isSelected ? Co.purple : Co.purple100, width: 2),
+            border: Border.all(color: isSelected ? Co.purple : Co.lightPurple, width: 2),
             borderRadius: AppConst.defaultBorderRadius,
           ),
           child: Padding(

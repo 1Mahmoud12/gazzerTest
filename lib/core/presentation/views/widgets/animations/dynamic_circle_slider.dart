@@ -1,6 +1,6 @@
 // import 'dart:math' as math;
 
-// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';
 
 // class ShawarmaCarousel extends StatefulWidget {
 //   const ShawarmaCarousel({

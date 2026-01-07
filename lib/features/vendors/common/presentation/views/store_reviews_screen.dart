@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -120,10 +121,10 @@ class _RatingSummarySection extends StatelessWidget {
                 const Padding(padding: EdgeInsets.only(bottom: 8), child: VectorGraphicsWidget(Assets.starRateIc, width: 22, height: 22)),
               ],
             ),
-            Text('${statistics.totalReviews} ${L10n.tr().reviews}', style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey)),
+            Text('${statistics.totalReviews} ${L10n.tr().reviews}', style: context.style14400.copyWith(color: Co.darkGrey)),
             const VerticalSpacing(16),
             Text('${statistics.recommendationPercentage}%', style: TStyle.robotBlackTitle()),
-            Text(L10n.tr().recommended, style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey)),
+            Text(L10n.tr().recommended, style: context.style14400.copyWith(color: Co.darkGrey)),
           ],
         ),
       ],
@@ -167,7 +168,7 @@ class _StarRatingBar extends StatelessWidget {
           width: 35,
           child: Text(
             '$percentage%',
-            style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+            style: context.style14400.copyWith(color: Co.darkGrey),
             textAlign: TextAlign.end,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

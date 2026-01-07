@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -38,7 +38,7 @@ class ConvertPointsToVoucherWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Co.bg,
                 borderRadius: BorderRadius.circular(28),
-                border: Border.all(color: Co.purple100),
+                border: Border.all(color: Co.lightPurple),
               ),
               child: Column(
                 children: [
@@ -105,7 +105,7 @@ class _VoucherTile extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     L10n.tr().walletValidUntil(voucher.validUntil),
-                    style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                    style: context.style14400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                   ),
                 ],
               ),

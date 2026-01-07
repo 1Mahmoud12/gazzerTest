@@ -31,13 +31,7 @@ class GradientText extends StatelessWidget {
           return (gradient ?? Grad().textGradient).createShader(bounds);
         },
         blendMode: BlendMode.srcIn,
-        child: Text(
-          text,
-          textAlign: textAlign,
-          style: style,
-          maxLines: maxLines,
-          overflow: maxLines != null ? TextOverflow.ellipsis : null,
-        ),
+        child: Text(text, textAlign: textAlign, style: style, maxLines: maxLines, overflow: maxLines != null ? TextOverflow.ellipsis : null),
       ),
     );
   }

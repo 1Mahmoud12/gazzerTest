@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -90,7 +91,7 @@ class SingleGridProduct extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Text(Helpers.getProperPrice(prod.price), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                                Text(Helpers.getProperPrice(prod.price), style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                               ],
                             ),
                             DecoratedFavoriteWidget(

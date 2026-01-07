@@ -1,6 +1,7 @@
 // import 'dart:ui';
 
-// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';
+
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:gazzer/core/presentation/localization/l10n.dart';
 // import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -70,7 +71,7 @@
 //                               Positioned(top: -35, right: -10, child: Image.asset(Assets.assetsPngWave, height: 40, width: 40)),
 //                             ],
 //                           ),
-//                           Text(L10n.tr().niceToMeetYou, style: TStyle.robotBlackRegular14()),
+//                           Text(L10n.tr().niceToMeetYou, style: context.style14400),
 //                           const VerticalSpacing(20),
 //                         ],
 //                       ),

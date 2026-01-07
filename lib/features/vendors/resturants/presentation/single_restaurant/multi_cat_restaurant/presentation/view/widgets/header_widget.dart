@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -119,7 +119,7 @@ class MultiCatRestHeader extends StatelessWidget {
                     onTap: () {
                       context.navigateToPage(StoreReviewsScreen(storeType: restaurant.storeCategoryType ?? '', storeId: restaurant.id));
                     },
-                    child: Text(L10n.tr().review, style: TStyle.robotBlackRegular14().copyWith(color: Co.purple)),
+                    child: Text(L10n.tr().review, style: context.style14400.copyWith(color: Co.purple)),
                   ),
                 ],
               ),
@@ -152,7 +152,7 @@ class MultiCatRestHeader extends StatelessWidget {
         //     padding: const EdgeInsets.symmetric(horizontal: 16),
         //     child: Text(
         //       categires!.join(', '),
-        //       style: TStyle.robotBlackRegular14().copyWith(color: Co.darkGrey),
+        //       style: context.style14400.copyWith(color: Co.darkGrey),
         //       textAlign: TextAlign.center,
         //       maxLines: 2,
         //       overflow: TextOverflow.ellipsis,
@@ -163,7 +163,7 @@ class MultiCatRestHeader extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-          decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
+          decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(16)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -221,7 +221,7 @@ class _InfoItem extends StatelessWidget {
             icon,
             const SizedBox(width: 8),
             Flexible(
-              child: Text(text, style: TStyle.robotBlackRegular14(), maxLines: 1, overflow: TextOverflow.ellipsis),
+              child: Text(text, style: context.style14400, maxLines: 1, overflow: TextOverflow.ellipsis),
             ),
           ],
         ),

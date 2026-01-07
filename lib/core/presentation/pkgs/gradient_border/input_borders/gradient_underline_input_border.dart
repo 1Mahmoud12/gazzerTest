@@ -29,13 +29,7 @@ class GradientUnderlineInputBorder extends InputBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      ..addRRect(
-        borderRadius
-            .resolve(textDirection)
-            .toRRect(rect)
-            .deflate(borderSide.width),
-      );
+    return Path()..addRRect(borderRadius.resolve(textDirection).toRRect(rect).deflate(borderSide.width));
   }
 
   @override
@@ -44,27 +38,15 @@ class GradientUnderlineInputBorder extends InputBorder {
   }
 
   @override
-  void paint(
-    Canvas canvas,
-    Rect rect, {
-    double? gapStart,
-    double gapExtent = 0.0,
-    double gapPercentage = 0.0,
-    TextDirection? textDirection,
-  }) {
+  void paint(Canvas canvas, Rect rect, {double? gapStart, double gapExtent = 0.0, double gapPercentage = 0.0, TextDirection? textDirection}) {
     final paint = _getPaint(rect);
-    Rect underlineRect =
-        Rect.fromLTWH(rect.left, rect.height - width, rect.width, width);
+    Rect underlineRect = Rect.fromLTWH(rect.left, rect.height - width, rect.width, width);
     canvas.drawRect(underlineRect, paint);
   }
 
   @override
   ShapeBorder scale(double t) {
-    return GradientUnderlineInputBorder(
-      width: width * t,
-      borderRadius: borderRadius * t,
-      gradient: gradient,
-    );
+    return GradientUnderlineInputBorder(width: width * t, borderRadius: borderRadius * t, gradient: gradient);
   }
 
   Paint _getPaint(Rect rect) {
@@ -73,5 +55,4 @@ class GradientUnderlineInputBorder extends InputBorder {
       ..shader = gradient.createShader(rect)
       ..style = PaintingStyle.stroke;
   }
-
 }

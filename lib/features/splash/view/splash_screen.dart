@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -140,7 +141,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                   children: [
                                     Text(
                                       L10n.tr().retry,
-                                      style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                                      style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                                     ),
                                     const Icon(Icons.refresh, color: Co.white, size: 24),
                                   ],
@@ -151,7 +152,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                 TokenService.deleteToken();
                                 context.go(LoginScreen.route);
                               },
-                              child: Text(L10n.tr().skip, style: TStyle.robotBlackRegular14()),
+                              child: Text(L10n.tr().skip, style: context.style14400),
                             ),
                           ],
                         ),

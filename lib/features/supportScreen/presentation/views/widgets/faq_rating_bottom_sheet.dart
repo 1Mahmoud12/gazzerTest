@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -14,6 +13,8 @@ import 'package:gazzer/features/supportScreen/data/requests/faq_rating_request.d
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_states.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../core/presentation/extensions/color.dart';
 
 /// Shows a rating bottom sheet for FAQ questions
 Future<void> showFaqRatingBottomSheet(BuildContext context, {int? faqQuestionId, int? faqCategoryId, int? orderId}) async {
@@ -84,7 +85,7 @@ class _FaqRatingBottomSheetState extends State<FaqRatingBottomSheet> {
 
         return Container(
           decoration: const BoxDecoration(
-            color: Co.purple100,
+            color: Co.lightPurple,
             borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
           ),
           width: double.infinity,

@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 extension NavigationExtension on BuildContext {
-  Future<dynamic> navigateToPage(
-    Widget widget, {
-    PageTransitionType? pageTransitionType,
-    int? animation,
-  }) async {
+  Future<dynamic> navigateToPage(Widget widget, {PageTransitionType? pageTransitionType, int? animation}) async {
     return Navigator.of(this).push(
       PageTransition(
         child: widget,
@@ -16,10 +12,7 @@ extension NavigationExtension on BuildContext {
     );
   }
 
-  Future<dynamic> navigateToPageWithReplacement(
-    Widget page, {
-    int? animation,
-  }) async {
+  Future<dynamic> navigateToPageWithReplacement(Widget page, {int? animation}) async {
     return Navigator.of(this).pushReplacement(
       PageTransition(
         child: page,
@@ -29,10 +22,7 @@ extension NavigationExtension on BuildContext {
     );
   }
 
-  Future<dynamic> navigateToPageWithClearStack(
-    Widget page, {
-    int? animation,
-  }) async {
+  Future<dynamic> navigateToPageWithClearStack(Widget page, {int? animation}) async {
     return Navigator.of(this).pushAndRemoveUntil(
       PageTransition(
         child: page,

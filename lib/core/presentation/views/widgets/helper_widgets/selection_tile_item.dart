@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_radio_btn.dart';
 
 class SelectionTileItem extends StatelessWidget {
@@ -48,7 +48,7 @@ class SelectionTileItem extends StatelessWidget {
                 ),
               ),
 
-            if (title != null) Text(title!, style: titleStyle ?? TStyle.robotBlackRegular14()) else ?child,
+            if (title != null) Text(title!, style: titleStyle ?? context.style14400) else ?child,
           ],
         ),
       ),

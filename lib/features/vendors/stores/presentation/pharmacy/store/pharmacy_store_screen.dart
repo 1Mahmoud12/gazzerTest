@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -213,7 +214,7 @@ class _BestSellingItemCard extends StatelessWidget {
                                 children: [
                                   const VectorGraphicsWidget(Assets.starRateIc),
                                   const SizedBox(width: 4),
-                                  Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold)),
+                                  Text(product.rate.toStringAsFixed(1), style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                                   if (product.reviewCount > 0) ...[
                                     const SizedBox(width: 4),
                                     Text('(+${product.reviewCount})', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),

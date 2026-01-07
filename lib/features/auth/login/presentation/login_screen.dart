@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${L10n.tr().mobileNumber} / ${L10n.tr().emailAddress}', maxLines: 1, style: TStyle.robotBlackRegular14()),
+                        Text('${L10n.tr().mobileNumber} / ${L10n.tr().emailAddress}', maxLines: 1, style: context.style14400),
                         const VerticalSpacing(8),
                         Directionality(
                           textDirection: TextDirection.ltr,
@@ -165,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         const VerticalSpacing(16),
-                        Text(L10n.tr().password, maxLines: 1, style: TStyle.robotBlackRegular14()),
+                        Text(L10n.tr().password, maxLines: 1, style: context.style14400),
                         const VerticalSpacing(8),
                         Directionality(
                           textDirection: TextDirection.ltr,
@@ -223,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             context.read<LoginCubit>().login(loginValue, _pasword.text.trim());
                           }
                         },
-                        textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
+                        textStyle: context.style14400.copyWith(fontWeight: TStyle.semi),
 
                         child: Text(L10n.tr().login, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
                       ),
@@ -235,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       context.push(RegisterScreen.route);
                     },
-                    textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
+                    textStyle: context.style14400.copyWith(fontWeight: TStyle.semi),
                     bgColor: Colors.transparent,
                     borderColor: Co.purple,
                     child: Text(L10n.tr().signUp, style: TStyle.robotBlackMedium()),
@@ -258,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (Navigator.canPop(context)) return context.pop();
                       const LoadingScreenRoute(navigateToRoute: HomeScreen.route).go(context);
                     },
-                    textStyle: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
+                    textStyle: context.style14400.copyWith(fontWeight: TStyle.semi),
                     bgColor: Colors.transparent,
                     borderColor: Colors.transparent,
                     child: RichText(

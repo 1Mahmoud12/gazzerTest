@@ -55,7 +55,7 @@ class _InviteEarnComponent extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                 child: Text(
                   L10n.tr().copyCode,
-                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                  style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                 ),
               ),
             ],
@@ -72,7 +72,7 @@ class _InviteEarnComponent extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                 child: Text(
                   L10n.tr().shareLink,
-                  style: TStyle.robotBlackRegular14().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                  style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                 ),
               ),
             ],

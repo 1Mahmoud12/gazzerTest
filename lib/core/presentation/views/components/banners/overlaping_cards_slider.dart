@@ -3,12 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class OverlapingCardsSlider extends StatefulWidget {
-  const OverlapingCardsSlider({
-    super.key,
-    required this.builder,
-    required this.itemCount,
-    this.scrollDirection = Axis.horizontal,
-  });
+  const OverlapingCardsSlider({super.key, required this.builder, required this.itemCount, this.scrollDirection = Axis.horizontal});
   final Widget Function(BuildContext context, int index) builder;
   final int itemCount;
   final Axis scrollDirection;

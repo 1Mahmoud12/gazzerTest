@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/dto/pagination_dto.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -80,7 +81,7 @@ class _TopVendorsScreenState extends State<TopVendorsScreen> {
 
               if (vendors.isEmpty) {
                 return Center(
-                  child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi)),
+                  child: Text(L10n.tr().noData, style: context.style14400.copyWith(fontWeight: TStyle.semi)),
                 );
               }
 

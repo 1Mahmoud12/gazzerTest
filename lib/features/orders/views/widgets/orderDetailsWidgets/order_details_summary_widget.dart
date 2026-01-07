@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -11,6 +10,8 @@ import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart'
 import 'package:gazzer/features/orders/domain/entities/order_status.dart';
 import 'package:gazzer/features/orders/domain/entities/order_summary_entity.dart';
 import 'package:gazzer/features/orders/views/widgets/orderDetailsWidgets/delivery_tracking_map_widget.dart';
+
+import '../../../../../core/presentation/extensions/color.dart';
 
 /// Order summary section displaying pricing breakdown
 class OrderSummarySection extends StatelessWidget {
@@ -56,7 +57,7 @@ class OrderSummarySection extends StatelessWidget {
         const VerticalSpacing(10),
         Container(
           padding: const EdgeInsets.all(_padding),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(_borderRadius), color: Co.purple100),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(_borderRadius), color: Co.lightPurple),
           child: Column(
             children: [
               // Sub Total
@@ -336,7 +337,7 @@ class _DeliveryManSection extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24), color: Co.purple100),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(24), color: Co.lightPurple),
       child: Row(
         children: [
           Expanded(

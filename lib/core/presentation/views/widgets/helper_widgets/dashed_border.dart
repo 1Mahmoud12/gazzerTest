@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DashedBorder extends StatelessWidget {
-  const DashedBorder({
-    super.key,
-    required this.width,
-    required this.gap,
-    this.color = Colors.black,
-    this.thickness = 1,
-  });
+  const DashedBorder({super.key, required this.width, required this.gap, this.color = Colors.black, this.thickness = 1});
   final double width;
   final double gap;
   final Color color;

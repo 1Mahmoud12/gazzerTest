@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -179,10 +180,10 @@ class FaqListScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
+                decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(16)),
                 child: Row(
                   children: [
-                    Expanded(child: Text(category.name, style: TStyle.robotBlackRegular14())),
+                    Expanded(child: Text(category.name, style: context.style14400)),
                     const Icon(Icons.chevron_right, color: Co.purple),
                   ],
                 ),
@@ -210,7 +211,7 @@ class FaqListScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    decoration: BoxDecoration(color: Co.purple100, borderRadius: BorderRadius.circular(16)),
+                    decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(16)),
                     child: Row(
                       children: [
                         Expanded(child: Text(node.title, style: TStyle.robotBlackRegular())),

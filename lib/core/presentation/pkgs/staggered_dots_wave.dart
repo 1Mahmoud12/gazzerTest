@@ -16,12 +16,7 @@ class _StaggeredDotsWaveState extends State<StaggeredDotsWave> with SingleTicker
   late final double oddDotHeight;
   late final double evenDotHeight;
 
-  final baseIntervals = [
-    const Interval(0.0, 0.1),
-    const Interval(0.18, 0.28),
-    const Interval(0.28, 0.38),
-    const Interval(0.47, 0.57),
-  ];
+  final baseIntervals = [const Interval(0.0, 0.1), const Interval(0.18, 0.28), const Interval(0.28, 0.38), const Interval(0.47, 0.57)];
 
   Interval _getInterval(int index, int intervalIndex) {
     final interval = baseIntervals[intervalIndex];

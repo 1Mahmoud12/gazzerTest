@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
@@ -117,7 +118,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                       return Center(
                         child: Text(
                           _currentSearch.isEmpty ? L10n.tr().noData : L10n.tr().noSearchResults,
-                          style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.semi),
+                          style: context.style14400.copyWith(fontWeight: TStyle.semi),
                         ),
                       );
                     }

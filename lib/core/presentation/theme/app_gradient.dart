@@ -11,11 +11,7 @@ class Grad {
   );
 
   /// grcery gradients
-  RadialGradient get grocRadial => const RadialGradient(
-    colors: [Color(0x88FF9F08), Co.darkMauve],
-    center: Alignment.center,
-    radius: 1,
-  );
+  RadialGradient get grocRadial => const RadialGradient(colors: [Color(0x88FF9F08), Co.darkMauve], center: Alignment.center, radius: 1);
 
   /// restaurant gradients
   final linearGradient = LinearGradient(
@@ -24,11 +20,8 @@ class Grad {
     end: Alignment.bottomCenter,
     stops: [0.07, 0.79, 1.0],
   );
-  RadialGradient get radialGradient => const RadialGradient(
-    colors: [Co.mauve, Co.darkMauve],
-    center: Alignment.center,
-    radius: 1,
-  );
+
+  RadialGradient get radialGradient => const RadialGradient(colors: [Co.mauve, Co.darkMauve], center: Alignment.center, radius: 1);
   LinearGradient get textGradient => const LinearGradient(
     colors: [Color(0xFF6F2BCB), Co.mauve, Color(0xFF0D0130)],
     end: Alignment.bottomRight,
@@ -55,53 +48,26 @@ class Grad {
     end: Alignment.topCenter,
     stops: [0.2, 0.8],
   );
-  LinearGradient get bglightLinear => bgLinear.copyWith(
-    colors: [Co.buttonGradient.withAlpha(80), Co.bg.withAlpha(0)],
-    stops: const [0.0, 1],
-  );
 
-  final hoverGradient = const LinearGradient(
-    colors: [Color(0x00402788), Color(0xFF402788)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
+  LinearGradient get bglightLinear => bgLinear.copyWith(colors: [Co.buttonGradient.withAlpha(80), Co.bg.withAlpha(0)], stops: const [0.0, 1]);
+
+  final hoverGradient = const LinearGradient(colors: [Color(0x00402788), Color(0xFF402788)], begin: Alignment.topCenter, end: Alignment.bottomCenter);
 }
 
 extension LinearGradientExt on LinearGradient {
-  LinearGradient copyWith({
-    List<Color>? colors,
-    AlignmentGeometry? begin,
-    AlignmentGeometry? end,
-    List<double>? stops,
-  }) {
-    return LinearGradient(
-      colors: colors ?? this.colors,
-      begin: begin ?? this.begin,
-      end: end ?? this.end,
-      stops: stops ?? this.stops,
-    );
+  LinearGradient copyWith({List<Color>? colors, AlignmentGeometry? begin, AlignmentGeometry? end, List<double>? stops}) {
+    return LinearGradient(colors: colors ?? this.colors, begin: begin ?? this.begin, end: end ?? this.end, stops: stops ?? this.stops);
   }
 }
 
 extension RadialGradientExtension on RadialGradient {
   RadialGradient copyWith({List<Color>? colors, AlignmentGeometry? center, double? radius, List<double>? stops}) {
-    return RadialGradient(
-      colors: colors ?? this.colors,
-      center: center ?? this.center,
-      radius: radius ?? this.radius,
-      stops: stops ?? this.stops,
-    );
+    return RadialGradient(colors: colors ?? this.colors, center: center ?? this.center, radius: radius ?? this.radius, stops: stops ?? this.stops);
   }
 }
 
 extension GradientExtension on Gradient {
-  Gradient copyWith({
-    List<Color>? colors,
-    AlignmentGeometry? begin,
-    AlignmentGeometry? end,
-    List<double>? stops,
-    double? radius,
-  }) {
+  Gradient copyWith({List<Color>? colors, AlignmentGeometry? begin, AlignmentGeometry? end, List<double>? stops, double? radius}) {
     if (this is LinearGradient) {
       return (this as LinearGradient).copyWith(colors: colors, begin: begin, end: end, stops: stops);
     } else if (this is RadialGradient) {

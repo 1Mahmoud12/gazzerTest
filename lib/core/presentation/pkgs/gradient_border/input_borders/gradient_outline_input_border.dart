@@ -32,13 +32,7 @@ class GradientOutlineInputBorder extends InputBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      ..addRRect(
-        borderRadius
-            .resolve(textDirection)
-            .toRRect(rect)
-            .deflate(borderSide.width),
-      );
+    return Path()..addRRect(borderRadius.resolve(textDirection).toRRect(rect).deflate(borderSide.width));
   }
 
   @override
@@ -47,40 +41,22 @@ class GradientOutlineInputBorder extends InputBorder {
   }
 
   @override
-  void paint(
-    Canvas canvas,
-    Rect rect, {
-    double? gapStart,
-    double gapExtent = 0.0,
-    double gapPercentage = 0.0,
-    TextDirection? textDirection,
-  }) {
+  void paint(Canvas canvas, Rect rect, {double? gapStart, double gapExtent = 0.0, double gapPercentage = 0.0, TextDirection? textDirection}) {
     final paint = _getPaint(rect);
     final outer = borderRadius.toRRect(rect);
     final center = outer.deflate(borderSide.width / 2.0);
     if (gapStart == null || gapExtent <= 0.0 || gapPercentage == 0.0) {
       canvas.drawRRect(center, paint);
     } else {
-      final extent =
-          lerpDouble(0.0, gapExtent + gapPadding * 2.0, gapPercentage)!;
+      final extent = lerpDouble(0.0, gapExtent + gapPadding * 2.0, gapPercentage)!;
       switch (textDirection!) {
         case TextDirection.rtl:
-          final path = _gapBorderPath(
-            canvas,
-            center,
-            math.max(0, gapStart + gapPadding - extent),
-            extent,
-          );
+          final path = _gapBorderPath(canvas, center, math.max(0, gapStart + gapPadding - extent), extent);
           canvas.drawPath(path, paint);
           break;
 
         case TextDirection.ltr:
-          final path = _gapBorderPath(
-            canvas,
-            center,
-            math.max(0, gapStart - gapPadding),
-            extent,
-          );
+          final path = _gapBorderPath(canvas, center, math.max(0, gapStart - gapPadding), extent);
           canvas.drawPath(path, paint);
           break;
       }
@@ -89,11 +65,7 @@ class GradientOutlineInputBorder extends InputBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return GradientOutlineInputBorder(
-      width: width * t,
-      borderRadius: borderRadius * t,
-      gradient: gradient,
-    );
+    return GradientOutlineInputBorder(width: width * t, borderRadius: borderRadius * t, gradient: gradient);
   }
 
   Paint _getPaint(Rect rect) {
@@ -103,23 +75,13 @@ class GradientOutlineInputBorder extends InputBorder {
       ..style = PaintingStyle.stroke;
   }
 
-  Path _gapBorderPath(
-    Canvas canvas,
-    RRect center,
-    double start,
-    double extent,
-  ) {
+  Path _gapBorderPath(Canvas canvas, RRect center, double start, double extent) {
     // When the corner radii on any side add up to be greater than the
     // given height, each radius has to be scaled to not exceed the
     // size of the width/height of the RRect.
     final scaledRRect = center.scaleRadii();
 
-    final tlCorner = Rect.fromLTWH(
-      scaledRRect.left,
-      scaledRRect.top,
-      scaledRRect.tlRadiusX * 2.0,
-      scaledRRect.tlRadiusY * 2.0,
-    );
+    final tlCorner = Rect.fromLTWH(scaledRRect.left, scaledRRect.top, scaledRRect.tlRadiusX * 2.0, scaledRRect.tlRadiusY * 2.0);
     final trCorner = Rect.fromLTWH(
       scaledRRect.right - scaledRRect.trRadiusX * 2.0,
       scaledRRect.top,
@@ -140,9 +102,7 @@ class GradientOutlineInputBorder extends InputBorder {
     );
 
     const cornerArcSweep = math.pi / 2.0;
-    final tlCornerArcSweep = start < scaledRRect.tlRadiusX
-        ? math.asin((start / scaledRRect.tlRadiusX).clamp(-1.0, 1.0))
-        : math.pi / 2.0;
+    final tlCornerArcSweep = start < scaledRRect.tlRadiusX ? math.asin((start / scaledRRect.tlRadiusX).clamp(-1.0, 1.0)) : math.pi / 2.0;
 
     final path = Path()
       ..addArc(tlCorner, math.pi, tlCornerArcSweep)

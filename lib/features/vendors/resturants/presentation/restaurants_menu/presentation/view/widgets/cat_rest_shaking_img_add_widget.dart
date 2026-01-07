@@ -16,12 +16,7 @@ class _ShakingBannerState extends State<ShakingBanner> with SingleTickerProvider
 
   @override
   void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-      lowerBound: 0,
-      upperBound: 0.015,
-    );
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 300), lowerBound: 0, upperBound: 0.015);
     // _animation = Tween<double>(begin: 0, end: 10).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticInOut));
     // _animate();
 
@@ -66,11 +61,7 @@ class _ShakingBannerState extends State<ShakingBanner> with SingleTickerProvider
               Positioned(
                 right: -20,
                 bottom: 0,
-                child: RotationTransition(
-                  alignment: Alignment.topRight,
-                  turns: _controller,
-                  child: Image.asset(widget.foreGround, height: 200),
-                ),
+                child: RotationTransition(alignment: Alignment.topRight, turns: _controller, child: Image.asset(widget.foreGround, height: 200)),
               ),
             ],
           ),

@@ -38,10 +38,7 @@ class _TutorialHeaderState extends State<TutorialHeader> {
                   width: width * 1.2,
                   height: width,
                   decoration: BoxDecoration(
-                    gradient: Grad().bglightLinear.copyWith(
-                      begin: Alignment.centerRight,
-                      colors: [Co.buttonGradient, Colors.black.withAlpha(0)],
-                    ),
+                    gradient: Grad().bglightLinear.copyWith(begin: Alignment.centerRight, colors: [Co.buttonGradient, Colors.black.withAlpha(0)]),
                   ),
                   // foregroundDecoration: BoxDecoration(gradient: Grad().linearGradient),
                 ),

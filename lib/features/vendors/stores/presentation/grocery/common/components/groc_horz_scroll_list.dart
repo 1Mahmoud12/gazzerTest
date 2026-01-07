@@ -37,10 +37,7 @@ class GrocHorzScrollList<T> extends StatelessWidget {
       child: Column(
         spacing: 4,
         children: [
-          TitleWithMore(
-            title: title ?? '',
-            onPressed: items.length > 10 ? onViewAllPressed : null,
-          ),
+          TitleWithMore(title: title ?? '', onPressed: items.length > 10 ? onViewAllPressed : null),
           SizedBox(
             height: cardHeight ?? 160,
             child: ListView.separated(
@@ -51,17 +48,10 @@ class GrocHorzScrollList<T> extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = items[index];
                 if (item is StoreEntity) {
-                  return GrocCardThree(
-                    width: cardWidth ?? 140,
-                    vendor: item,
-                    onPressed: () => onSinglceCardPressed(item),
-                  );
+                  return GrocCardThree(width: cardWidth ?? 140, vendor: item, onPressed: () => onSinglceCardPressed(item));
                 }
                 if (item is ProductEntity) {
-                  return GrocProdCard(
-                    product: item,
-                    shape: shape,
-                  );
+                  return GrocProdCard(product: item, shape: shape);
                 }
 
                 return const SizedBox();

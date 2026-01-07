@@ -205,7 +205,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                         Expanded(
                           child: MainBtn(
                             text: 'Back',
-                            bgColor: Co.purple100,
+                            bgColor: Co.lightPurple,
                             textStyle: TStyle.robotBlackMedium().copyWith(color: Co.black),
                             onPressed: isLoading ? () {} : _goToPreviousStep,
                           ),
@@ -219,7 +219,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                               ? Co.purple
                               : _canSubmit && !isLoading && _currentStep == 1
                               ? Co.purple
-                              : Co.purple100,
+                              : Co.lightPurple,
                           textStyle: (_canProceedToNextStep && !isLoading && _currentStep == 0) || (_canSubmit && !isLoading && _currentStep == 1)
                               ? TStyle.robotBlackRegular().copyWith(color: Co.white)
                               : TStyle.robotBlackMedium().copyWith(color: Co.black),

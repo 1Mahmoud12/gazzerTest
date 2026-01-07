@@ -1,4 +1,5 @@
-// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';
+
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:gazzer/core/presentation/localization/l10n.dart';
 // import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -144,7 +145,7 @@
 //                     child: Column(
 //                       crossAxisAlignment: CrossAxisAlignment.start,
 //                       children: [
-//                         Text(L10n.tr().cardNumber, style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold)),
+//                         Text(L10n.tr().cardNumber, style: context.style14400.copyWith(fontWeight:TStyle.bold)),
 //                         const VerticalSpacing(8),
 //                         MainTextField(
 //                           controller: _cardNumberController,
@@ -165,7 +166,7 @@
 //                                 children: [
 //                                   Text(
 //                                     L10n.tr().expiryMonth,
-//                                     style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
+//                                     style: context.style14400.copyWith(fontWeight:TStyle.bold),
 //                                   ),
 //                                   const VerticalSpacing(8),
 //                                   MainTextField(
@@ -188,7 +189,7 @@
 //                                 children: [
 //                                   Text(
 //                                     L10n.tr().expiryYear,
-//                                     style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
+//                                     style: context.style14400.copyWith(fontWeight:TStyle.bold),
 //                                   ),
 //                                   const VerticalSpacing(8),
 //                                   MainTextField(
@@ -209,7 +210,7 @@
 //                         const VerticalSpacing(16),
 //                         Text(
 //                           L10n.tr().cardHolderName,
-//                           style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
+//                           style: context.style14400.copyWith(fontWeight:TStyle.bold),
 //                         ),
 //                         const VerticalSpacing(8),
 //                         MainTextField(
@@ -242,7 +243,7 @@
 //                             Expanded(
 //                               child: Text(
 //                                 L10n.tr().setAsDefaultCard,
-//                                 style: TStyle.robotBlackRegular14().copyWith(fontWeight:TStyle.bold),
+//                                 style: context.style14400.copyWith(fontWeight:TStyle.bold),
 //                               ),
 //                             ),
 //                           ],

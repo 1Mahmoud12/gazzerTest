@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -36,7 +37,7 @@ class FailureComponent extends StatelessWidget {
                   radius: 16,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   text: L10n.tr().tryAgain,
-                  textStyle: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+                  textStyle: context.style14400.copyWith(color: Co.purple),
                 ),
               ],
             ),

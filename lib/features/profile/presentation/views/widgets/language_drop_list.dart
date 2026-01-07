@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/home/main_home/presentaion/view/home_screen.dart';
 import 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
@@ -35,7 +35,7 @@ class LanguageDropList extends StatelessWidget {
               ),
             ),
             focusColor: Co.purple,
-            style: TStyle.robotBlackRegular14().copyWith(color: Co.purple),
+            style: context.style14400.copyWith(color: Co.purple),
             borderRadius: AppConst.defaultBorderRadius,
             isExpanded: true,
             iconEnabledColor: Co.purple,

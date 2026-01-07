@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
@@ -33,7 +34,7 @@ class OrderIssueResponseScreen extends StatelessWidget {
             Center(
               child: Text(
                 l10n.wasThisHelpful,
-                style: TStyle.robotBlackRegular14().copyWith(fontWeight: TStyle.bold, color: Co.purple),
+                style: context.style14400.copyWith(fontWeight: TStyle.bold, color: Co.purple),
               ),
             ),
             const VerticalSpacing(12),
