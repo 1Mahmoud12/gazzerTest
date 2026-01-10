@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/pkgs/notification/notification.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
@@ -23,10 +24,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await Helpers.customTryCatch(() async => await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform));
-  await ScreenUtil.ensureScreenSize();
+  await Future.wait([
+    ScreenUtil.ensureScreenSize(),
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+    NotificationUtility.initializeAwesomeNotification(),
+    Helpers.customTryCatch(() async => Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)),
+    Helpers.customTryCatch(() async => NotificationUtility.initializeAwesomeNotification()),
+    // Load location independently of client (for headers)
+    Session().loadLocation(),
+  ]);
 
-  await Helpers.customTryCatch(() async => await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform));
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
@@ -34,8 +41,6 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await NotificationUtility.initializeAwesomeNotification();
   try {
     AppConst.messageGlobal = await FirebaseMessaging.instance.getInitialMessage();
     if (AppConst.messageGlobal?.data != null) {
