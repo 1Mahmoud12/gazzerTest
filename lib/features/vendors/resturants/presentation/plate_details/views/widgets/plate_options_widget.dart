@@ -103,7 +103,7 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(value.name, style: TStyle.robotBlackRegular()),
+                          Text(value.name, style: context.style16400),
                           // Show price if not free, else show "مجاني" (free)
                           Text(value.isFree ? L10n.tr().free : '${Helpers.getProperPrice(value.price)} ', style: context.style14400),
                         ],

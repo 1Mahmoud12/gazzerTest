@@ -244,7 +244,7 @@ class SupportCallService {
                     children: [
                       const Icon(Icons.phone, color: Co.purple, size: 20),
                       const HorizontalSpacing(8),
-                      Text(AppConst.supportPhoneNumber, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                      Text(AppConst.supportPhoneNumber, style: context.style16400.copyWith(color: Co.purple)),
                     ],
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -158,12 +159,12 @@ class _DeliveryTrackingMapWidgetState extends State<DeliveryTrackingMapWidget> {
                 },
                 child: Text(
                   L10n.tr().view_delivery_man_on_map,
-                  style: TStyle.robotBlackRegular().copyWith(color: Co.purple, decoration: TextDecoration.underline, decorationColor: Co.purple),
+                  style: context.style16400.copyWith(color: Co.purple, decoration: TextDecoration.underline, decorationColor: Co.purple),
                 ),
               ),
               const VerticalSpacing(8),
               // Delivery arrival time
-              Text('${L10n.tr().delivery_arrival_time} : ${_formatArrivalTime()}', style: TStyle.robotBlackRegular()),
+              Text('${L10n.tr().delivery_arrival_time} : ${_formatArrivalTime()}', style: context.style16400),
             ],
           ),
         ),

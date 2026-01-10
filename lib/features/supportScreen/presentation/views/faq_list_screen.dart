@@ -214,7 +214,7 @@ class FaqListScreen extends StatelessWidget {
                     decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(16)),
                     child: Row(
                       children: [
-                        Expanded(child: Text(node.title, style: TStyle.robotBlackRegular())),
+                        Expanded(child: Text(node.title, style: context.style16400)),
                         const Icon(Icons.chevron_right, color: Co.purple),
                       ],
                     ),

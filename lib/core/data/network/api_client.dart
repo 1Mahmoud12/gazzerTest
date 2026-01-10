@@ -3,8 +3,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/di.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps_flutter;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,14 +41,32 @@ class ApiClient {
         _acceptLanguage: di<SharedPreferences>().getString(StorageKeys.locale) ?? Platform.localeName.substring(0, 2),
       },
     );
-
+    //api "provinces/validate-location"
     /// Adding interceptors for logging only in debug mode
     if (kDebugMode) {
       _dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true));
     }
+    // Initialize location headers from Session if available
+    _updateLocationHeaders(Session().tmpLocation);
   }
 
   void changeLocale(String languageCode) => _dio.options.headers[_acceptLanguage] = languageCode;
+
+  /// Update location headers dynamically
+  /// This is called whenever location changes
+  void updateLocationHeaders(google_maps_flutter.LatLng? location) {
+    _updateLocationHeaders(location);
+  }
+
+  void _updateLocationHeaders(google_maps_flutter.LatLng? location) {
+    if (location != null) {
+      _dio.options.headers['lat'] = location.latitude.toString();
+      _dio.options.headers['long'] = location.longitude.toString();
+    } else {
+      _dio.options.headers.remove('lat');
+      _dio.options.headers.remove('long');
+    }
+  }
 
   Map<String, dynamic> _getHeaders(Map<String, dynamic>? headers) {
     final custHeaders = <String, dynamic>{};

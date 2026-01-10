@@ -339,7 +339,7 @@ class _VendorInfo extends StatelessWidget {
         const VectorGraphicsWidget(Assets.restaurantNameIc),
         const SizedBox(width: 12),
         Expanded(
-          child: Text(plate.store!.name, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+          child: Text(plate.store!.name, style: context.style16400.copyWith(fontWeight: TStyle.bold)),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -411,7 +411,7 @@ class _CollapsibleOptionState extends State<_CollapsibleOption> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         spacing: 4,
                         children: [
-                          Text(widget.optionName, style: TStyle.robotBlackRegular()),
+                          Text(widget.optionName, style: context.style16400),
                           Text(
                             widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select,
                             style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey),
@@ -465,7 +465,7 @@ class _NotesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(L10n.tr().notes, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+        Text(L10n.tr().notes, style: context.style16400.copyWith(fontWeight: TStyle.bold)),
         const SizedBox(height: 12),
         MainTextField(
           controller: TextEditingController(text: note),

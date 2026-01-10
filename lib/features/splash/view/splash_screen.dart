@@ -130,7 +130,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         child: Column(
                           spacing: 8,
                           children: [
-                            Text(L10n.tr().errorFetchingUserData, style: TStyle.robotBlackRegular().copyWith(color: Co.red)),
+                            Text(L10n.tr().errorFetchingUserData, style: context.style16400.copyWith(color: Co.red)),
                             const SizedBox.shrink(),
                             if (trialCount < 3)
                               OutlinedButton(

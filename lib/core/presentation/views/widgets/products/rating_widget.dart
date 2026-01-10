@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
-
-import '../../../theme/text_style.dart';
 
 class AppRatingWidget extends StatelessWidget {
   final String initialRating;
@@ -19,7 +18,7 @@ class AppRatingWidget extends StatelessWidget {
       children: [
         SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
         const HorizontalSpacing(4),
-        Text('${double.tryParse(initialRating) ?? 0.0}', style: TStyle.robotBlackRegular()),
+        Text('${double.tryParse(initialRating) ?? 0.0}', style: context.style16400),
       ],
     );
   }

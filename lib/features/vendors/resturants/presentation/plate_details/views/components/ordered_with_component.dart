@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -79,7 +80,7 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                         Expanded(
                           child: Text(
                             p.name,
-                            style: TStyle.robotBlackRegular().copyWith(color: Co.purple),
+                            style: context.style16400.copyWith(color: Co.purple),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -90,7 +91,7 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                           children: [
                             SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
                             const HorizontalSpacing(4),
-                            Text(p.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                            Text(p.rate.toStringAsFixed(1), style: context.style16400),
                           ],
                         ),
                       ],

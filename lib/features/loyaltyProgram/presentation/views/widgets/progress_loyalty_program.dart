@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -98,11 +99,11 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
             children: [
               Text(
                 Helpers.getProperPrice(minProgress),
-                style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.semi),
+                style: context.style16400.copyWith(color: Co.purple, fontWeight: TStyle.semi),
               ),
               Text(
                 Helpers.getProperPrice(maxProgress),
-                style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.semi),
+                style: context.style16400.copyWith(color: Co.purple, fontWeight: TStyle.semi),
               ),
             ],
           ),

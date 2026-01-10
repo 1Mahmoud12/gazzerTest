@@ -96,7 +96,7 @@ class OrderCardWidget extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            Text(L10n.tr().price, style: TStyle.robotBlackRegular()),
+                            Text(L10n.tr().price, style: context.style16400),
                             Text(Helpers.getProperPrice(order.price), style: TStyle.robotBlackMedium()),
                           ],
                         ),
@@ -104,7 +104,7 @@ class OrderCardWidget extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: [
-                            Text(L10n.tr().items, style: TStyle.robotBlackRegular()),
+                            Text(L10n.tr().items, style: context.style16400),
                             Text('${order.itemsCount}', style: TStyle.robotBlackMedium()),
                           ],
                         ),
@@ -453,7 +453,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(L10n.tr().price, style: TStyle.robotBlackRegular()),
+                                    Text(L10n.tr().price, style: context.style16400),
                                     Text(Helpers.getProperPrice(order.price), style: TStyle.robotBlackMedium()),
                                   ],
                                 ),
@@ -462,7 +462,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(L10n.tr().items, style: TStyle.robotBlackRegular()),
+                                    Text(L10n.tr().items, style: context.style16400),
                                     Text('${order.itemsCount}', style: TStyle.robotBlackMedium()),
                                   ],
                                 ),
@@ -579,7 +579,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: [
-                      Text(L10n.tr().price, style: TStyle.robotBlackRegular()),
+                      Text(L10n.tr().price, style: context.style16400),
                       Text(Helpers.getProperPrice(order.price), style: TStyle.robotBlackMedium()),
                     ],
                   ),
@@ -587,7 +587,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: [
-                      Text(L10n.tr().items, style: TStyle.robotBlackRegular()),
+                      Text(L10n.tr().items, style: context.style16400),
                       Text('${order.itemsCount}', style: TStyle.robotBlackMedium()),
                     ],
                   ),

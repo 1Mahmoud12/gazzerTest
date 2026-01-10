@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -96,7 +97,7 @@ class _SuccessDialogContent extends StatelessWidget {
                         Text(
                           subTitle!,
                           textAlign: TextAlign.center,
-                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                          style: context.style16400.copyWith(color: Co.darkGrey),
                         ),
                         const VerticalSpacing(20),
                       ],

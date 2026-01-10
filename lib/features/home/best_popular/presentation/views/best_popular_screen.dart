@@ -145,7 +145,7 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
                       Expanded(
                         child: CustomNetworkImage(store.image, fit: BoxFit.cover, width: double.infinity, height: 120, borderRaduis: 12),
                       ),
-                      Text(store.name, style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1, textAlign: TextAlign.center),
+                      Text(store.name, style: context.style16400, overflow: TextOverflow.ellipsis, maxLines: 1, textAlign: TextAlign.center),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         spacing: 4,

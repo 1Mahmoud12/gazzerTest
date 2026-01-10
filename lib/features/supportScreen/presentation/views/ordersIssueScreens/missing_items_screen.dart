@@ -225,13 +225,13 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
                     child: Center(
                       child: Text(
                         vendorDetail.vendor.name.isNotEmpty ? vendorDetail.vendor.name.substring(0, 1).toUpperCase() : 'V',
-                        style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+                        style: context.style16400.copyWith(fontWeight: TStyle.bold),
                       ),
                     ),
                   ),
                 const HorizontalSpacing(12),
                 Expanded(
-                  child: Text(vendorDetail.vendor.name, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+                  child: Text(vendorDetail.vendor.name, style: context.style16400.copyWith(fontWeight: TStyle.bold)),
                 ),
               ],
             ),

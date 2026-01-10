@@ -33,7 +33,7 @@ class _InviteEarnComponent extends StatelessWidget {
         spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(client.referral?.shareMessage ?? '', style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
+          Text(client.referral?.shareMessage ?? '', style: context.style16400.copyWith(color: Co.darkGrey)),
           const VerticalSpacing(8),
           // Referral Code Section
           Row(

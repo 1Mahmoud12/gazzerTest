@@ -185,7 +185,7 @@ class ProfileContentBody extends StatelessWidget {
 
                         Text(
                           L10n.tr().login,
-                          style: TStyle.robotBlackRegular().copyWith(color: Co.white),
+                          style: context.style16400.copyWith(color: Co.white),
                           textAlign: TextAlign.center,
                         ),
                       ],

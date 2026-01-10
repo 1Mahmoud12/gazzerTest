@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -34,7 +35,7 @@ class UnAuthComponent extends StatelessWidget {
 
               Text(
                 L10n.tr().login,
-                style: TStyle.robotBlackRegular().copyWith(color: Co.white),
+                style: context.style16400.copyWith(color: Co.white),
                 textAlign: TextAlign.center,
               ),
             ],

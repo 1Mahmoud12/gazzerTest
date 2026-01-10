@@ -246,7 +246,7 @@
 //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //             children: [
 //               Text(isAr ? 'السعر' : 'PRICE', style: TStyle.greyRegular(12).copyWith(color: Co.grey)),
-//               Text(isAr ? '100 جنيه' : '100 EGP', style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold).copyWith()),
+//               Text(isAr ? '100 جنيه' : '100 EGP', style: context.style16400.copyWith(fontWeight:TStyle.bold).copyWith()),
 //             ],
 //           ),
 //         ],

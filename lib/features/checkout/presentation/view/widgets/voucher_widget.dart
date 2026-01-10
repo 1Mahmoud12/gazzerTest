@@ -55,7 +55,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(L10n.tr().havePromoCode, style: TStyle.robotBlackRegular(), textAlign: TextAlign.start),
+                  Text(L10n.tr().havePromoCode, style: context.style16400, textAlign: TextAlign.start),
                   if (!cubit.isTextFieldEnabled) ...[
                     const VerticalSpacing(10),
                     BlocBuilder<CheckoutCubit, CheckoutStates>(
@@ -114,7 +114,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                         final code = voucher.code;
                                         return Text(
                                           code.isEmpty ? L10n.tr().selectVoucher : code,
-                                          style: TStyle.robotBlackRegular().copyWith(color: code.isEmpty ? Co.darkGrey : Co.black),
+                                          style: context.style16400.copyWith(color: code.isEmpty ? Co.darkGrey : Co.black),
                                         );
                                       },
                                       borderRadius: AppConst.defaultBorderRadius.topLeft.x,
@@ -138,7 +138,7 @@ class _VoucherWidgetState extends State<VoucherWidget> {
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                                   decoration: BoxDecoration(color: Co.clearRed, borderRadius: BorderRadius.circular(40)),
-                                  child: Text(L10n.tr().clear, style: TStyle.robotBlackRegular()),
+                                  child: Text(L10n.tr().clear, style: context.style16400),
                                 ),
                               ),
                             ],

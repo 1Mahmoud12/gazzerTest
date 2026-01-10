@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -95,7 +96,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               backgroundColor: Co.bg,
               appBar: MainAppBar(title: L10n.tr().orderDetails),
               body: Center(
-                child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                child: Text(L10n.tr().noData, style: context.style16400.copyWith(color: Co.purple)),
               ),
             );
           }

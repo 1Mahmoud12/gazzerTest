@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -90,11 +91,11 @@ class SelectAddressCard extends StatelessWidget {
                                           TextSpan(text: ', ${L10n.tr().apartmentNumber} ${address.apartment}'),
                                           if (address.landmark != null) TextSpan(text: ', ${L10n.tr().landmark} ${address.landmark}.'),
                                         ],
-                                        style: TStyle.robotBlackRegular().copyWith(height: 1.7),
+                                        style: context.style16400.copyWith(height: 1.7),
                                       ),
                                     ),
-                                    Text('0${Session().client?.phoneNumber}', style: TStyle.robotBlackRegular().copyWith(height: 1.7)),
-                                    Text('${Session().client?.clientName}', style: TStyle.robotBlackRegular().copyWith(height: 1.7)),
+                                    Text('0${Session().client?.phoneNumber}', style: context.style16400.copyWith(height: 1.7)),
+                                    Text('${Session().client?.clientName}', style: context.style16400.copyWith(height: 1.7)),
                                   ],
                                 ),
                               ),

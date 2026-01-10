@@ -69,7 +69,7 @@ class VendorInfoCard extends StatelessWidget {
                               fit: BoxFit.scaleDown,
                               child: GradientText(
                                 text: vendor.name,
-                                style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+                                style: context.style16400.copyWith(fontWeight: TStyle.bold),
                               ),
                             ),
                             if (categories?.isNotEmpty == true)

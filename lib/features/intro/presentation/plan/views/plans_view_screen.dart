@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -52,7 +53,7 @@ class PlansViewScreen extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: L10n.tr().weightLossPlan,
-                              style: TStyle.robotBlackRegular().copyWith(color: Co.purple),
+                              style: context.style16400.copyWith(color: Co.purple),
                             ),
                             const TextSpan(text: '\n'),
                             TextSpan(

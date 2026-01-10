@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -20,7 +21,7 @@ class NotesCartWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Order notes
-          Text(L10n.tr().order_notes, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+          Text(L10n.tr().order_notes, style: context.style16400.copyWith(fontWeight: TStyle.bold)),
           Container(
             decoration: BoxDecoration(color: Co.bg, borderRadius: AppConst.defaultBorderRadius),
             padding: const EdgeInsets.symmetric(vertical: 8),

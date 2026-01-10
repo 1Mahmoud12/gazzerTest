@@ -151,7 +151,7 @@ class _BenefitRow extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: TStyle.robotBlackRegular().copyWith(
+              style: context.style16400.copyWith(
                 color: textColor,
                 decorationColor: textColor,
                 decoration: !isEnabled ? TextDecoration.lineThrough : TextDecoration.none,

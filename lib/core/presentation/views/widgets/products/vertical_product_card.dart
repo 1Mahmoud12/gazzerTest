@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -110,7 +111,7 @@ class VerticalProductCard extends StatelessWidget {
                           children: [
                             SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
                             const HorizontalSpacing(4),
-                            Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                            Text(product.rate.toStringAsFixed(1), style: context.style16400),
                           ],
                         ),
                       ],

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
@@ -50,7 +51,7 @@ class ChatMessageBubble extends StatelessWidget {
                     if (message.hasText) const SizedBox(height: 8),
                   ],
                   // Text if present
-                  if (message.hasText) Text(message.text!, style: TStyle.robotBlackRegular().copyWith(color: Colors.black87)),
+                  if (message.hasText) Text(message.text!, style: context.style16400.copyWith(color: Colors.black87)),
                   const SizedBox(height: 4),
                   // Timestamp and status
                   Row(

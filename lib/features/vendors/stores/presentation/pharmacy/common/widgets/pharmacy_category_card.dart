@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
 /// Reusable category card for pharmacy categories with image, name, and rating
@@ -56,7 +55,7 @@ class PharmacyCategoryCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: Text(
                 name,
-                style: TStyle.robotBlackRegular().copyWith(fontWeight: FontWeight.w500),
+                style: context.style16400.copyWith(fontWeight: FontWeight.w500),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,

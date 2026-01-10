@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -69,7 +70,7 @@ class VendorCartProductsItem extends StatelessWidget {
                                     height: 25,
                                     width: 25,
                                   ),
-                                  Text('${cartVendor.items.length} ${L10n.tr().items}', style: TStyle.robotBlackRegular()),
+                                  Text('${cartVendor.items.length} ${L10n.tr().items}', style: context.style16400),
                                 ],
                               ),
                           ],
@@ -111,7 +112,7 @@ class VendorCartProductsItem extends StatelessWidget {
             padding: const EdgeInsetsGeometry.symmetric(vertical: 12, horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [Text(L10n.tr().remove_all, style: TStyle.robotBlackRegular().copyWith(color: Co.darkRed))],
+              children: [Text(L10n.tr().remove_all, style: context.style16400.copyWith(color: Co.darkRed))],
             ),
           ),
       ],

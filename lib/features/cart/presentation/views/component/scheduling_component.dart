@@ -37,7 +37,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                 spacing: 8,
                 children: [
                   const Icon(Icons.access_time_outlined, color: Co.secondary),
-                  Text(L10n.tr().scheduling, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                  Text(L10n.tr().scheduling, style: context.style16400.copyWith(color: Co.purple)),
                   BlocBuilder<CartCubit, CartStates>(
                     buildWhen: (previous, current) => current is TimeSlotsStates,
                     builder: (context, state) => AnimatedOpacity(

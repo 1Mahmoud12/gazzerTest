@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/presentation/cubits/base_error_state.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -186,7 +187,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                             disabledColor: Co.grey.withAlpha(80),
 
                                             text: L10n.tr().checkout,
-                                            textStyle: TStyle.robotBlackRegular().copyWith(color: Co.white),
+                                            textStyle: context.style16400.copyWith(color: Co.white),
                                             width: double.infinity,
                                             padding: const EdgeInsets.symmetric(vertical: 6),
                                             bgColor: Co.purple,
@@ -234,7 +235,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                               spacing: 8,
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
-                                                Text(L10n.tr().shareCart, style: TStyle.robotBlackRegular().copyWith(color: Co.black)),
+                                                Text(L10n.tr().shareCart, style: context.style16400.copyWith(color: Co.black)),
 
                                                 const VectorGraphicsWidget(Assets.shareIc, height: 21, width: 21),
                                               ],

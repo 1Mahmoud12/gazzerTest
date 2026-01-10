@@ -33,7 +33,7 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
           children: [
             Text(args.title, style: TStyle.robotBlackSubTitle()),
             const VerticalSpacing(12),
-            Text(args.answer, style: TStyle.robotBlackRegular()),
+            Text(args.answer, style: context.style16400),
             const VerticalSpacing(16),
             Center(
               child: Text(

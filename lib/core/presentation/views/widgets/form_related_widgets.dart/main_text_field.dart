@@ -153,7 +153,7 @@ class _MainTextFieldState extends State<MainTextField> {
                   : Text(widget.hintText!, style: widget.style ?? context.style14400.copyWith(color: Co.darkGrey), maxLines: 1),
               helperMaxLines: 1,
               // helperMaxLines: 5,
-              labelStyle: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+              labelStyle: context.style16400.copyWith(color: Co.darkGrey),
 
               labelText: widget.label,
               prefixIcon: widget.prefix == null

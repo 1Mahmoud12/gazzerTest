@@ -114,7 +114,7 @@ class _VendorDropdownState extends State<_VendorDropdown> {
               const Icon(Icons.keyboard_arrow_down, color: Co.black),
             ],
           ),
-          Text('${L10n.tr().orderId}: #${widget.orderId}', style: TStyle.robotBlackRegular().copyWith(fontSize: 14)),
+          Text('${L10n.tr().orderId}: #${widget.orderId}', style: context.style16400.copyWith(fontSize: 14)),
         ],
       ),
     );

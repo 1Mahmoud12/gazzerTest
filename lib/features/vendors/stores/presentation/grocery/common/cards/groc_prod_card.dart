@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -78,7 +79,7 @@ class GrocProdCard extends StatelessWidget {
                         children: [
                           SvgPicture.asset(Assets.starRateIc, width: 16, height: 16),
                           const HorizontalSpacing(4),
-                          Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                          Text(product.rate.toStringAsFixed(1), style: context.style16400),
                         ],
                       ),
                     ],

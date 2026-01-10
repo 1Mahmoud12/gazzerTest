@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -134,11 +134,11 @@ class _ChatInputFieldState extends State<ChatInputField> {
                         textInputAction: TextInputAction.newline,
                         decoration: InputDecoration(
                           hintText: L10n.tr().typeMessage,
-                          hintStyle: TStyle.robotBlackRegular().copyWith(color: Colors.black38),
+                          hintStyle: context.style16400.copyWith(color: Colors.black38),
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.symmetric(vertical: 12),
                         ),
-                        style: TStyle.robotBlackRegular(),
+                        style: context.style16400,
                       ),
                     ),
                   ),

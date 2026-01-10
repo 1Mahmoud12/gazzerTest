@@ -24,7 +24,7 @@ class FailureComponent extends StatelessWidget {
           if (message != null)
             Text(
               message!,
-              style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+              style: context.style16400.copyWith(fontWeight: TStyle.bold),
               textAlign: TextAlign.center,
             ),
           if (onRetry != null)

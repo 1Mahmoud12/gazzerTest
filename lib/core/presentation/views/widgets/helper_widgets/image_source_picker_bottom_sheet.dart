@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -131,7 +132,7 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
                 title: Text(
                   L10n.tr().cancel,
                   textAlign: TextAlign.center,
-                  style: TStyle.robotBlackRegular().copyWith(color: Co.purple),
+                  style: context.style16400.copyWith(color: Co.purple),
                 ),
                 onTap: () {
                   Navigator.pop(context);

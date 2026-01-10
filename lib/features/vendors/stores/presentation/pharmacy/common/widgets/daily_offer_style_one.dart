@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -135,7 +136,7 @@ class _BottomSection extends StatelessWidget {
             Expanded(
               child: Text(
                 product.description,
-                style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                style: context.style16400.copyWith(color: Co.darkGrey),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

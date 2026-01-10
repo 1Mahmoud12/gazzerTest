@@ -202,7 +202,7 @@
 //                             disabledColor: Co.grey.withAlpha(80),
 //
 //                             text: L10n.tr().checkout,
-//                             textStyle: TStyle.robotBlackRegular().copyWith(color: Co.white),
+//                             textStyle: context.style16400.copyWith(color: Co.white),
 //                             width: double.infinity,
 //                             padding: const EdgeInsets.symmetric(vertical: 6),
 //                             bgColor: Co.purple,

@@ -188,7 +188,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 },
               ),
               const VerticalSpacing(4),
-              Text(L10n.tr().location, style: TStyle.robotBlackRegular()),
+              Text(L10n.tr().location, style: context.style16400),
               const VerticalSpacing(4),
               GestureDetector(
                 onTap: () async {
@@ -257,7 +257,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 ),
               ),
               const VerticalSpacing(4),
-              Text(L10n.tr().governorate, style: TStyle.robotBlackRegular()),
+              Text(L10n.tr().governorate, style: context.style16400),
               const VerticalSpacing(4),
               BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
                 buildWhen: (previous, current) => current is GetProvincesStates,
@@ -288,7 +288,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 },
               ),
               const VerticalSpacing(4),
-              Text(L10n.tr().area, style: TStyle.robotBlackRegular()),
+              Text(L10n.tr().area, style: context.style16400),
               const VerticalSpacing(4),
               BlocBuilder<AddEditAddressCubit, AddEditAddressStates>(
                 buildWhen: (previous, current) => current is GetZonesStates,
@@ -314,7 +314,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 },
               ),
               const VerticalSpacing(4),
-              Text(L10n.tr().building, style: TStyle.robotBlackRegular()),
+              Text(L10n.tr().building, style: context.style16400),
               const VerticalSpacing(4),
               MainTextField(
                 controller: buildingController,
@@ -333,7 +333,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                       spacing: 6,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(L10n.tr().floor, style: TStyle.robotBlackRegular()),
+                        Text(L10n.tr().floor, style: context.style16400),
                         MainTextField(
                           controller: floorController,
                           showBorder: false,
@@ -351,7 +351,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                       spacing: 6,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(L10n.tr().apartment, style: TStyle.robotBlackRegular()),
+                        Text(L10n.tr().apartment, style: context.style16400),
                         MainTextField(
                           controller: apartmentController,
                           showBorder: false,
@@ -367,7 +367,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                 ],
               ),
               const SizedBox(height: 12),
-              Text(L10n.tr().landmark, style: TStyle.robotBlackRegular()),
+              Text(L10n.tr().landmark, style: context.style16400),
               MainTextField(
                 controller: landMarkControler,
                 showBorder: false,
@@ -446,7 +446,7 @@ class _AddressNameField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(L10n.tr().addressName, style: TStyle.robotBlackRegular()),
+        Text(L10n.tr().addressName, style: context.style16400),
         const VerticalSpacing(4),
         MainTextField(controller: controller, showBorder: false, borderRadius: 10, max: 50, hintText: 'home,work,..', validator: Validators.notEmpty),
         const SizedBox(height: 8),
@@ -484,7 +484,7 @@ class _QuickSelectButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey.shade300),
         ),
-        child: Center(child: Text(label, style: TStyle.robotBlackRegular())),
+        child: Center(child: Text(label, style: context.style16400)),
       ),
     );
   }

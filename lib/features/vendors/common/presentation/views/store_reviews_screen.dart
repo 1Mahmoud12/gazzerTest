@@ -247,7 +247,7 @@ class _ReviewCard extends StatelessWidget {
                 ),
                 if (review.comment != null && review.comment!.isNotEmpty) ...[
                   const VerticalSpacing(8),
-                  Text(review.comment!, style: TStyle.robotBlackRegular()),
+                  Text(review.comment!, style: context.style16400),
                 ],
               ],
             ),

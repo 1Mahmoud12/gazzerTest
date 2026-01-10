@@ -142,7 +142,7 @@ class _DailyDealCardState extends State<DailyDealCard> {
             decoration: BoxDecoration(gradient: Grad().shadowGrad(), borderRadius: BorderRadius.circular(12)),
             child: Text(
               '${widget.discountPercentage}%',
-              style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.semi),
+              style: context.style16400.copyWith(color: Co.purple, fontWeight: TStyle.semi),
             ),
           ),
         ),

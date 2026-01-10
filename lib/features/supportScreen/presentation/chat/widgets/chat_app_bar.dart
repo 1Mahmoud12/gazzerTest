@@ -42,7 +42,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(L10n.tr().guzzerSupport, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+                  Text(L10n.tr().guzzerSupport, style: context.style16400.copyWith(fontWeight: TStyle.bold)),
                   const SizedBox(height: 2),
                   BlocBuilder<WorkingHoursCubit, WorkingHoursState>(
                     builder: (context, state) {

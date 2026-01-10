@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
@@ -32,7 +33,7 @@ class _FilterItemState extends State<FilterItem> {
         child: Center(
           child: Text(
             widget.title,
-            style: TStyle.robotBlackRegular().copyWith(color: widget.isSelected ? Co.white : Co.black),
+            style: context.style16400.copyWith(color: widget.isSelected ? Co.white : Co.black),
             textAlign: TextAlign.center,
           ),
         ),

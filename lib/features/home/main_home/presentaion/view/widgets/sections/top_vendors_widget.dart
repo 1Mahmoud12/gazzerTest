@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
 import 'package:gazzer/core/domain/vendor_entity.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -124,7 +125,7 @@ class _TopVendorsContent extends StatelessWidget {
                         width: 100,
                         child: Text(
                           vendor.name,
-                          style: TStyle.robotBlackRegular(),
+                          style: context.style16400,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           textAlign: TextAlign.center,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -9,7 +10,6 @@ import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.da
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
-import '../../../../../../../core/presentation/extensions/color.dart';
 
 /// Card widget for displaying pharmacy vendor information
 class PharmacyVendorCard extends StatelessWidget {
@@ -79,7 +79,7 @@ class PharmacyVendorCard extends StatelessWidget {
                           decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(12)),
                           child: Text(
                             '$discountPercentage%',
-                            style: TStyle.robotBlackRegular().copyWith(color: Co.black),
+                            style: context.style16400.copyWith(color: Co.black),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -108,7 +108,7 @@ class PharmacyVendorCard extends StatelessWidget {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(rating.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                                Text(rating.toStringAsFixed(1), style: context.style16400),
                                 const HorizontalSpacing(4),
                                 SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
                               ],

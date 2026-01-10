@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -10,8 +11,6 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 import 'package:gazzer/features/supportScreen/presentation/views/order_issue_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../../../core/presentation/extensions/color.dart';
 
 /// Full screen for tracking order delivery with Google Map
 class TrackOrderScreen extends StatefulWidget {
@@ -289,8 +288,8 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                 Wrap(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('${L10n.tr().estimated_delivery_time}: ${_formatTimeRange()}', style: TStyle.robotBlackRegular()),
-                    Text('${L10n.tr().road_distance}: ${_roadDistance.toStringAsFixed(2)} Km', style: TStyle.robotBlackRegular()),
+                    Text('${L10n.tr().estimated_delivery_time}: ${_formatTimeRange()}', style: context.style16400),
+                    Text('${L10n.tr().road_distance}: ${_roadDistance.toStringAsFixed(2)} Km', style: context.style16400),
                   ],
                 ),
                 const VerticalSpacing(16),
@@ -304,7 +303,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(L10n.tr().your_delivery_man, style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
+                            Text(L10n.tr().your_delivery_man, style: context.style16400.copyWith(color: Co.darkGrey)),
                             const VerticalSpacing(4),
                             Text(_deliveryManName, style: TStyle.robotBlackMedium()),
                           ],

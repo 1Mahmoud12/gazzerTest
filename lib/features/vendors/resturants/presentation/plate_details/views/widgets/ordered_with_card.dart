@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -59,7 +60,7 @@ class OrderedWithCard extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: Text(product.name, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                                child: Text(product.name, style: context.style16400.copyWith(color: Co.purple)),
                               ),
                               Row(
                                 children: [

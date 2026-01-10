@@ -175,7 +175,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
                                   children: [
                                     GradientText(
                                       text: L10n.tr().storesOffersForYou,
-                                      style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+                                      style: context.style16400.copyWith(fontWeight: TStyle.bold),
                                     ),
                                   ],
                                 ),

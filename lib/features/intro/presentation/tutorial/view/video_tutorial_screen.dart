@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -27,7 +28,7 @@ class VideoTutorialScreen extends StatelessWidget {
             padding: AppConst.defaultHrPadding,
             child: GradientText(
               text: L10n.tr().dailyOffersForYou,
-              style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+              style: context.style16400.copyWith(fontWeight: TStyle.bold),
               gradient: Grad().textGradient,
             ),
           ),
@@ -51,7 +52,7 @@ class VideoTutorialScreen extends StatelessWidget {
             padding: AppConst.defaultHrPadding,
             child: GradientText(
               text: L10n.tr().dailyOffersForYou,
-              style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold),
+              style: context.style16400.copyWith(fontWeight: TStyle.bold),
               gradient: Grad().textGradient,
             ),
           ),

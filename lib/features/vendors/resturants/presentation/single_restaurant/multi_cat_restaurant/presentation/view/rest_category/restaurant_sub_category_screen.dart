@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/di.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
@@ -46,7 +46,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
       body: Column(
         children: [
           MultiCatRestHeader(restaurant: vendor, categires: null),
-          Text(subcatName, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+          Text(subcatName, style: context.style16400.copyWith(color: Co.purple)),
           FutureBuilder(
             future: di<RestaurantsRepo>().getPlatesOfSpecificRestaurantCategory(vendor.id, subCatId),
             builder: (context, snapshot) {

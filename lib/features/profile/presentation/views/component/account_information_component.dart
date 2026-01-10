@@ -41,7 +41,7 @@ class _AccountInformationComponent extends StatelessWidget {
                   child: FittedBox(
                     child: Text(
                       L10n.tr().editAccountInformation,
-                      style: TStyle.robotBlackRegular().copyWith(color: Co.white),
+                      style: context.style16400.copyWith(color: Co.white),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -57,7 +57,7 @@ class _AccountInformationComponent extends StatelessWidget {
                   bgColor: Colors.transparent,
                   borderColor: Co.purple,
                   radius: 24,
-                  child: Text(L10n.tr().changePassword, style: TStyle.robotBlackRegular(), textAlign: TextAlign.center),
+                  child: Text(L10n.tr().changePassword, style: context.style16400, textAlign: TextAlign.center),
                 ),
               ),
             ],
@@ -90,7 +90,7 @@ class ProfileInformationRow extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.scaleDown,
                 alignment: AlignmentDirectional.centerStart,
-                child: Text(value, style: TStyle.robotBlackRegular()),
+                child: Text(value, style: context.style16400),
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -78,7 +79,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         const VerticalSpacing(12),
                         Padding(
                           padding: AppConst.defaultHrPadding,
-                          child: Text(state.product.description, style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
+                          child: Text(state.product.description, style: context.style16400.copyWith(color: Co.darkGrey)),
                         ),
                       ],
                       const VerticalSpacing(12),

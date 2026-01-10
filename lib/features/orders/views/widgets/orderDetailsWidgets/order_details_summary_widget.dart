@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -10,8 +11,6 @@ import 'package:gazzer/features/orders/domain/entities/order_detail_entity.dart'
 import 'package:gazzer/features/orders/domain/entities/order_status.dart';
 import 'package:gazzer/features/orders/domain/entities/order_summary_entity.dart';
 import 'package:gazzer/features/orders/views/widgets/orderDetailsWidgets/delivery_tracking_map_widget.dart';
-
-import '../../../../../core/presentation/extensions/color.dart';
 
 /// Order summary section displaying pricing breakdown
 class OrderSummarySection extends StatelessWidget {
@@ -49,7 +48,7 @@ class OrderSummarySection extends StatelessWidget {
               splashColor: Colors.transparent,
               child: Text(
                 L10n.tr().viewReceipt,
-                style: TStyle.robotBlackRegular().copyWith(color: Co.purple, decoration: TextDecoration.underline),
+                style: context.style16400.copyWith(color: Co.purple, decoration: TextDecoration.underline),
               ),
             ),
           ],
@@ -162,7 +161,7 @@ class OrderSummarySection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${L10n.tr().total} (${L10n.tr().amountToPay})', style: TStyle.robotBlackRegular()),
+            Text('${L10n.tr().total} (${L10n.tr().amountToPay})', style: context.style16400),
             Text(Helpers.getProperPrice(finalTotal), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
           ],
         ),
@@ -170,8 +169,8 @@ class OrderSummarySection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(L10n.tr().paymentMethod, style: TStyle.robotBlackRegular()),
-            Text(summary?.paymentMethod ?? orderDetail.paymentMethod, style: TStyle.robotBlackRegular()),
+            Text(L10n.tr().paymentMethod, style: context.style16400),
+            Text(summary?.paymentMethod ?? orderDetail.paymentMethod, style: context.style16400),
           ],
         ),
         const VerticalSpacing(16),
@@ -295,7 +294,7 @@ class _CollapsibleOrderSummaryCardState extends State<_CollapsibleOrderSummaryCa
                   if ((widget.summary?.serviceFees ?? widget.orderDetail.serviceFee) != 0)
                     _buildSummaryItem('Service fees', widget.summary?.serviceFees ?? widget.orderDetail.serviceFee),
                   if (widget.summary?.coupon != null && widget.summary!.coupon!.isNotEmpty)
-                    _buildSummaryItem('Coupon', widget.summary!.coupon!, isText: true),
+                    _buildSummaryItem('Coupon', widget.summary!.coupon, isText: true),
                   if ((widget.summary?.couponDiscount ?? 0.0) != 0)
                     _buildSummaryItem('Coupon Discount', widget.summary!.couponDiscount, isDiscount: true),
                   if ((widget.summary?.deliveryFees ?? widget.orderDetail.deliveryFee) != 0)
@@ -320,8 +319,8 @@ class _CollapsibleOrderSummaryCardState extends State<_CollapsibleOrderSummaryCa
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TStyle.robotBlackRegular()),
-          Text(valueText, style: TStyle.robotBlackRegular()),
+          Text(title, style: context.style16400),
+          Text(valueText, style: context.style16400),
         ],
       ),
     );
@@ -333,7 +332,7 @@ class _DeliveryManSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Replace with actual delivery man data from orderDetail
-    final deliveryManName = 'Ahmed Ali'; // Placeholder
+    const deliveryManName = 'Ahmed Ali'; // Placeholder
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -344,7 +343,7 @@ class _DeliveryManSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L10n.tr().your_delivery_man, style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
+                Text(L10n.tr().your_delivery_man, style: context.style16400.copyWith(color: Co.darkGrey)),
                 const VerticalSpacing(4),
                 Text(deliveryManName, style: TStyle.robotBlackMedium()),
               ],

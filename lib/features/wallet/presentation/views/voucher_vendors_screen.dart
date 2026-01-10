@@ -149,9 +149,9 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${L10n.tr().available}: ${widget.availablePoints.toInt()} ${L10n.tr().points}', style: TStyle.robotBlackRegular()),
+                            Text('${L10n.tr().available}: ${widget.availablePoints.toInt()} ${L10n.tr().points}', style: context.style16400),
                             const SizedBox(height: 4),
-                            Text('${L10n.tr().selected}: $_totalPointsUsed ${L10n.tr().points}', style: TStyle.robotBlackRegular()),
+                            Text('${L10n.tr().selected}: $_totalPointsUsed ${L10n.tr().points}', style: context.style16400),
                             const SizedBox(height: 4),
                             Text(
                               '${L10n.tr().remaining}: ${_remainingPoints.toInt()} ${L10n.tr().points}',

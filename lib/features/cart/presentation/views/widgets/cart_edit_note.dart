@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -54,7 +55,7 @@ class _CartEditNoteState extends State<CartEditNote> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(L10n.tr().editNote, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                  Text(L10n.tr().editNote, style: context.style16400.copyWith(color: Co.purple)),
                   const VerticalSpacing(0),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

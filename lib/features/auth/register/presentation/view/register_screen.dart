@@ -332,7 +332,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             // const VerticalSpacing(24),
-            // Center(child: Text(L10n.tr().or, style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey))),
+            // Center(child: Text(L10n.tr().or, style: context.style16400.copyWith(color: Co.darkGrey))),
             // const VerticalSpacing(10),
             // const SocialAuthWidget(),
           ],

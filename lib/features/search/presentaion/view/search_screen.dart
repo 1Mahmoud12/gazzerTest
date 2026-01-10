@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -58,11 +59,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           ? RichText(
                               text: TextSpan(
                                 text: L10n.tr().searchFor,
-                                style: TStyle.robotBlackRegular().copyWith(fontWeight: FontWeight.w500),
+                                style: context.style16400.copyWith(fontWeight: FontWeight.w500),
                                 children: [
                                   TextSpan(
                                     text: ' ${cubit.state.query.searchWord.trim()}',
-                                    style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: FontWeight.w500),
+                                    style: context.style16400.copyWith(color: Co.purple, fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),

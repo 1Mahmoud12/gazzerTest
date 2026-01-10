@@ -63,7 +63,7 @@ class HeaderSection extends StatelessWidget {
 
             const HorizontalSpacing(4),
             const Spacer(),
-            Text('4.6', style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1),
+            Text('4.6', style: context.style16400, overflow: TextOverflow.ellipsis, maxLines: 1),
             const HorizontalSpacing(4),
             ...List.generate(
               5,
@@ -73,7 +73,7 @@ class HeaderSection extends StatelessWidget {
               ),
             ),
             const HorizontalSpacing(4),
-            Text('(1120)', style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1),
+            Text('(1120)', style: context.style16400, overflow: TextOverflow.ellipsis, maxLines: 1),
           ],
         ),
       ],

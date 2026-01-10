@@ -41,7 +41,7 @@ class _ItemNotificationState extends State<ItemNotification> {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.appNotification.description, style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey)),
+            Text(widget.appNotification.description, style: context.style16400.copyWith(color: Co.darkGrey)),
             SizedBox(height: 4),
             Text(widget.appNotification.time, style: context.style14400.copyWith(color: Co.darkGrey)),
           ],

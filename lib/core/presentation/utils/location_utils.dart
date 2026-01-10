@@ -158,9 +158,8 @@ class LocationUtils {
       await prefs.setDouble('selected_lat', location.latitude);
       await prefs.setDouble('selected_lng', location.longitude);
       await prefs.setString('selected_location_description', addressDescription);
-      // Also save to Session
-      Session().tmpLocation = location;
-      Session().tmpLocationDescription = addressDescription;
+      // Also save to Session and update API headers
+      Session().updateLocation(location, addressDescription);
     } catch (e) {
       log('Error saving location to cache: $e');
     }
@@ -170,18 +169,16 @@ class LocationUtils {
   static Future<void> getLocationToCache() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      LatLng? location = const LatLng(0, 0);
       final double? lat = prefs.getDouble('selected_lat');
       final double? long = prefs.getDouble('selected_lng');
       if (lat == null || long == null) {
         return;
       }
-      location = LatLng(lat, long);
+      final location = LatLng(lat, long);
       final addressDescription = await LocationUtils.getAddressFromCoordinates(location.latitude, location.longitude);
       await prefs.setString('selected_location_description', addressDescription);
-      // Also save to Session
-      Session().tmpLocation = location;
-      Session().tmpLocationDescription = addressDescription;
+      // Also save to Session and update API headers
+      Session().updateLocation(location, addressDescription);
     } catch (e) {
       log('Error saving location to cache: $e');
     }

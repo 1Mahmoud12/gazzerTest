@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
@@ -18,7 +19,7 @@ class PrescriptionUploadButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Text(
         L10n.tr().uploadPrescription,
-        style: TStyle.robotBlackRegular().copyWith(color: Co.purple, fontWeight: TStyle.bold),
+        style: context.style16400.copyWith(color: Co.purple, fontWeight: TStyle.bold),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),

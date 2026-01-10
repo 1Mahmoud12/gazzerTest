@@ -1,3 +1,4 @@
+import 'package:gazzer/core/data/network/api_client.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/di.dart';
@@ -17,7 +18,8 @@ class Session {
   static final _inst = Session._();
   factory Session() => _inst;
 
-  bool get showTour => di<SharedPreferences>().getBool(StorageKeys.haveSeenTour) != true;
+  bool get showTour =>
+      di<SharedPreferences>().getBool(StorageKeys.haveSeenTour) != true;
 
   ClientEntity? _client;
   ClientEntity? get client => _client;
@@ -30,9 +32,25 @@ class Session {
   String? tmpLocationDescription;
   final addresses = <AddressEntity>[];
 
-  AddressEntity? get defaultAddress => addresses.firstWhereOrNull((e) => e.isDefault);
+  AddressEntity? get defaultAddress =>
+      addresses.firstWhereOrNull((e) => e.isDefault);
 
-  AddressEntity? get selectedLocation => addresses.firstWhereOrNull((e) => e.isDefault);
+  AddressEntity? get selectedLocation =>
+      addresses.firstWhereOrNull((e) => e.isDefault);
+
+  /// Load location independently of client data
+  /// This should be called at app startup
+  Future<void> loadLocation() async {
+    await _loadCachedLocation();
+  }
+
+  /// Update location and notify API client to update headers
+  void updateLocation(LatLng? location, String? description) {
+    tmpLocation = location;
+    tmpLocationDescription = description;
+    // Update API headers when location changes
+    di<ApiClient>().updateLocationHeaders(location);
+  }
 
   Future<void> loadUserData() async {
     /// cart
@@ -42,7 +60,6 @@ class Session {
       di<FavoriteBus>().getFavorites(),
       di<AddressesBus>().refreshAddresses(),
       di<CartCubit>().loadCart(),
-      _loadCachedLocation(),
     ]);
   }
 
@@ -54,8 +71,8 @@ class Session {
       final description = prefs.getString('selected_location_description');
 
       if (lat != null && lng != null) {
-        tmpLocation = LatLng(lat, lng);
-        tmpLocationDescription = description;
+        // Use updateLocation to ensure headers are updated
+        updateLocation(LatLng(lat, lng), description);
       }
     } catch (e) {
       // Ignore errors when loading cached location

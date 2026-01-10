@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/text_style.dart';
@@ -60,7 +61,7 @@ class AppSnackbar {
         dismissDirection: DismissDirection.down,
         duration: const Duration(seconds: 2),
         backgroundColor: const Color.fromARGB(255, 45, 45, 45),
-        content: Text(L10n.tr().clickBackAgainToExit, style: TStyle.robotBlackRegular().copyWith(color: Co.white)),
+        content: Text(L10n.tr().clickBackAgainToExit, style: context.style16400.copyWith(color: Co.white)),
       ),
     );
   }
@@ -69,7 +70,7 @@ class AppSnackbar {
 SnackBar getSnackBar({required Color bgColor, required String content, required IconData icon, Color? iconColor}) {
   return SnackBar(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+    padding: const EdgeInsets.symmetric(vertical: 10),
     showCloseIcon: true,
     dismissDirection: DismissDirection.down,
     closeIconColor: Co.white,

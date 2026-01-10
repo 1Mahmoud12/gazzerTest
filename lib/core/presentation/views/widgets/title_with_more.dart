@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -61,7 +62,7 @@ class TitleWithMore extends StatelessWidget {
                 foregroundColor: Colors.transparent,
                 overlayColor: Colors.transparent,
               ),
-              child: Text(L10n.tr().viewAll, style: TStyle.robotBlackRegular()),
+              child: Text(L10n.tr().viewAll, style: context.style16400),
             ),
           ),
       ],

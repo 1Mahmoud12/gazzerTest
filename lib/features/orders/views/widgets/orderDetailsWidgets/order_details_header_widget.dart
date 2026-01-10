@@ -48,9 +48,9 @@ class OrderInfoColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('${L10n.tr().orderId}: #$orderId', style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+        Text('${L10n.tr().orderId}: #$orderId', style: context.style16400.copyWith(fontWeight: TStyle.bold)),
         const SizedBox(height: OrderDetailsConstants.smallSpacing),
-        Text(formattedDate, style: TStyle.robotBlackRegular().copyWith(color: Co.grey)),
+        Text(formattedDate, style: context.style16400.copyWith(color: Co.grey)),
       ],
     );
   }

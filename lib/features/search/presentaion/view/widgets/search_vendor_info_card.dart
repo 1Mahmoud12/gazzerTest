@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -50,7 +51,7 @@ class SearchVendorInfoCard extends StatelessWidget {
                         const HorizontalSpacing(4),
                         Text(
                           vendor.rate.toStringAsFixed(1),
-                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                          style: context.style16400.copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -68,7 +69,7 @@ class SearchVendorInfoCard extends StatelessWidget {
                         const HorizontalSpacing(4),
                         Text(
                           vendor.zoneName,
-                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                          style: context.style16400.copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -79,7 +80,7 @@ class SearchVendorInfoCard extends StatelessWidget {
                         const HorizontalSpacing(4),
                         Text(
                           '${vendor.deliveryTime} ${L10n.tr().mins}',
-                          style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                          style: context.style16400.copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),

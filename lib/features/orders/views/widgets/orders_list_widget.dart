@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -34,7 +35,7 @@ class OrdersListWidget extends StatelessWidget {
 
         if (orders.isEmpty && state is! OrdersLoading) {
           return Center(
-            child: Text(L10n.tr().noData, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+            child: Text(L10n.tr().noData, style: context.style16400.copyWith(color: Co.purple)),
           );
         }
 

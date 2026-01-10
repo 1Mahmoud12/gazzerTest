@@ -45,7 +45,7 @@ class CardRestInfoWidget extends StatelessWidget {
                   children: [
                     const VectorGraphicsWidget(Assets.starRateIc),
 
-                    Text(vendor.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular()),
+                    Text(vendor.rate.toStringAsFixed(1), style: context.style16400),
                   ],
                 ),
               ],

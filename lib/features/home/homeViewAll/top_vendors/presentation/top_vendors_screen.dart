@@ -163,7 +163,7 @@ class _VendorCard extends StatelessWidget {
               Expanded(
                 child: CustomNetworkImage(vendor.image, fit: BoxFit.cover, width: double.infinity, height: 120, borderRaduis: 12),
               ),
-              Text(vendor.name, style: TStyle.robotBlackRegular(), overflow: TextOverflow.ellipsis, maxLines: 1),
+              Text(vendor.name, style: context.style16400, overflow: TextOverflow.ellipsis, maxLines: 1),
             ],
           ),
         ),

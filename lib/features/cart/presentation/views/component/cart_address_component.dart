@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -24,7 +25,7 @@ class CartAddressComponent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(L10n.tr().deliveryAddress, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+          Text(L10n.tr().deliveryAddress, style: context.style16400.copyWith(color: Co.purple)),
           const Divider(height: 9, thickness: 1),
           BlocBuilder<CartCubit, CartStates>(
             buildWhen: (previous, current) => current is FullCartStates,

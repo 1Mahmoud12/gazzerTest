@@ -85,15 +85,15 @@ class _HomeHeaderState extends State<_HomeHeader> {
                         TextSpan(
                           children: [
                             if (address != null) ...[
-                              TextSpan(text: L10n.tr().deliverTo, style: TStyle.robotBlackRegular()),
-                              TextSpan(text: ' ${address.label} ', style: TStyle.robotBlackRegular()),
+                              TextSpan(text: L10n.tr().deliverTo, style: context.style16400),
+                              TextSpan(text: ' ${address.label} ', style: context.style16400),
                               const WidgetSpan(
                                 child: Icon(Icons.keyboard_arrow_down, color: Co.black),
                                 alignment: PlaceholderAlignment.middle,
                               ),
                               TextSpan(text: '\n${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackSmall()),
                             ] else if (tmpLocation != null && tmpLocationDescription != null) ...[
-                              TextSpan(text: L10n.tr().deliverTo, style: TStyle.robotBlackRegular()),
+                              TextSpan(text: L10n.tr().deliverTo, style: context.style16400),
                               const WidgetSpan(
                                 child: Icon(Icons.keyboard_arrow_down, color: Co.black),
                                 alignment: PlaceholderAlignment.middle,

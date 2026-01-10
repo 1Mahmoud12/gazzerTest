@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -17,7 +18,7 @@ class VendorInfoWidget extends StatelessWidget {
         spacing: 4,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(vendor.name, style: TStyle.robotBlackRegular(), maxLines: 1, overflow: TextOverflow.ellipsis),
+          Text(vendor.name, style: context.style16400, maxLines: 1, overflow: TextOverflow.ellipsis),
 
           // if (vendor.tag?.isNotEmpty == true)
           //   Text(vendor.tag!.join(', '), style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey), maxLines: 1, overflow: TextOverflow.ellipsis),

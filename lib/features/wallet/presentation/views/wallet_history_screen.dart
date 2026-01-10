@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -166,7 +167,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
                       return Padding(
                         padding: const EdgeInsetsDirectional.only(end: 12),
                         child: ChoiceChip(
-                          label: Text(filter.$2, style: TStyle.robotBlackRegular().copyWith(color: isSelected ? Co.white : Co.black)),
+                          label: Text(filter.$2, style: context.style16400.copyWith(color: isSelected ? Co.white : Co.black)),
                           selected: isSelected,
                           onSelected: (_) {
                             setState(() {
@@ -177,7 +178,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
                           checkmarkColor: isSelected ? Co.white : Co.purple,
                           selectedColor: Co.purple,
                           backgroundColor: Co.bg,
-                          labelStyle: TStyle.robotBlackRegular().copyWith(color: isSelected ? Co.white : Co.dark),
+                          labelStyle: context.style16400.copyWith(color: isSelected ? Co.white : Co.dark),
                           shape: StadiumBorder(side: BorderSide(color: isSelected ? Co.purple : Co.lightGrey)),
                         ),
                       );
@@ -192,7 +193,7 @@ class _WalletHistoryScreenState extends State<WalletHistoryScreen> {
                           child: Text(
                             l10n.walletHistorySubtitle,
                             textAlign: TextAlign.center,
-                            style: TStyle.robotBlackRegular().copyWith(color: Co.grey),
+                            style: context.style16400.copyWith(color: Co.grey),
                           ),
                         )
                       : NotificationListener<ScrollNotification>(

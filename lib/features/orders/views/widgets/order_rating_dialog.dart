@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -221,7 +222,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                               ? Co.purple
                               : Co.lightPurple,
                           textStyle: (_canProceedToNextStep && !isLoading && _currentStep == 0) || (_canSubmit && !isLoading && _currentStep == 1)
-                              ? TStyle.robotBlackRegular().copyWith(color: Co.white)
+                              ? context.style16400.copyWith(color: Co.white)
                               : TStyle.robotBlackMedium().copyWith(color: Co.black),
                           onPressed: _currentStep == 0
                               ? (_canProceedToNextStep && !isLoading ? _goToNextStep : () {})
@@ -279,11 +280,11 @@ class _VendorRatingItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Text(vendor.name, style: TStyle.robotBlackRegular(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                        child: Text(vendor.name, style: context.style16400, maxLines: 1, overflow: TextOverflow.ellipsis),
                       ),
                       GestureDetector(
                         onTap: onToggleNotes,
-                        child: Text(L10n.tr().addNotes, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                        child: Text(L10n.tr().addNotes, style: context.style16400.copyWith(color: Co.purple)),
                       ),
                     ],
                   ),
@@ -350,10 +351,10 @@ class _DeliveryManRatingItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(child: Text(L10n.tr().deliveryMan, style: TStyle.robotBlackRegular())),
+                      Expanded(child: Text(L10n.tr().deliveryMan, style: context.style16400)),
                       GestureDetector(
                         onTap: onToggleNotes,
-                        child: Text(L10n.tr().addNotes, style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                        child: Text(L10n.tr().addNotes, style: context.style16400.copyWith(color: Co.purple)),
                       ),
                     ],
                   ),

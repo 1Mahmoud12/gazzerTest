@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -12,8 +13,6 @@ import 'package:gazzer/features/cart/presentation/views/component/un_auth_compon
 import 'package:gazzer/features/checkout/presentation/cubit/cardsCubit/cards_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_cubit.dart';
 import 'package:gazzer/features/checkout/presentation/cubit/checkoutCubit/checkout_states.dart';
-
-import '../../../../core/presentation/extensions/color.dart';
 
 class SavedCardsScreen extends StatefulWidget {
   const SavedCardsScreen({super.key});
@@ -69,7 +68,7 @@ class _SavedCardsScreenState extends State<SavedCardsScreen> {
                                   const VerticalSpacing(16),
                                   Text(
                                     L10n.tr().no_saved_cards,
-                                    style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                                    style: context.style16400.copyWith(color: Co.darkGrey),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -122,9 +121,9 @@ class _CardItem extends StatelessWidget {
                   child: Text(card.cardHolderName, style: TStyle.robotBlackMedium()),
                 ),
                 const VerticalSpacing(10),
-                Text(card.maskedCardNumber, style: TStyle.robotBlackRegular()),
+                Text(card.maskedCardNumber, style: context.style16400),
                 const VerticalSpacing(10),
-                Text(card.formattedExpiry, style: TStyle.robotBlackRegular()),
+                Text(card.formattedExpiry, style: context.style16400),
                 if (card.isDefault)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -159,7 +158,7 @@ class _CardItem extends StatelessWidget {
                     children: [
                       const VectorGraphicsWidget(Assets.deleteIc),
                       const HorizontalSpacing(6),
-                      Text(L10n.tr().delete, style: TStyle.robotBlackRegular()),
+                      Text(L10n.tr().delete, style: context.style16400),
                     ],
                   ),
                 ),

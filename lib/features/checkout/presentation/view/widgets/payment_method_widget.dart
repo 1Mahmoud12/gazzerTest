@@ -145,7 +145,7 @@ class PaymentMethodWidget extends StatelessWidget {
                                     Navigator.of(context).pop();
                                   },
                                   text: L10n.tr().complete_with_card,
-                                  textStyle: TStyle.robotBlackRegular(),
+                                  textStyle: context.style16400,
                                   bgColor: Colors.transparent,
                                   borderColor: Co.black,
                                 ),
@@ -156,7 +156,7 @@ class PaymentMethodWidget extends StatelessWidget {
                                     Navigator.of(context).pop();
                                   },
                                   text: L10n.tr().wallet,
-                                  textStyle: TStyle.robotBlackRegular(),
+                                  textStyle: context.style16400,
                                   bgColor: Colors.transparent,
                                   borderColor: Co.black,
                                 ),
@@ -168,7 +168,7 @@ class PaymentMethodWidget extends StatelessWidget {
                                       // Navigator.of(context).pop();
                                     },
                                     text: L10n.tr().complete_with_apple_pay,
-                                    textStyle: TStyle.robotBlackRegular(),
+                                    textStyle: context.style16400,
                                     bgColor: Colors.transparent,
                                     borderColor: Co.black,
                                   ),
@@ -205,7 +205,7 @@ class PaymentMethodWidget extends StatelessWidget {
                           Expanded(
                             child: Text(
                               '${L10n.tr().remainingPaymentBy} ${cubit.remainingPaymentMethod == PaymentMethod.creditDebitCard ? L10n.tr().creditCard : L10n.tr().wallet} ${L10n.tr().and} ${L10n.tr().remainingAmount} ${Helpers.getProperPrice((cubit.totalOrder - walletBalance).clamp(0, double.infinity))}',
-                              style: TStyle.robotBlackRegular().copyWith(color: Co.darkGrey),
+                              style: context.style16400.copyWith(color: Co.darkGrey),
                             ),
                           ),
                         ],
@@ -282,7 +282,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
                     children: [
                       Row(
                         children: [
-                          Expanded(child: Text(widget.title, style: TStyle.robotBlackRegular())),
+                          Expanded(child: Text(widget.title, style: context.style16400)),
                           // if (widget.walletPhoneNumber != null && widget.walletPhoneNumber!.isNotEmpty)
                           //   Text(widget.walletPhoneNumber!, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
                         ],
@@ -296,7 +296,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
             ),
             if (widget.balance != null) ...[
               const VerticalSpacing(6),
-              Text('${L10n.tr().yourBalance}: ${Helpers.getProperPrice(widget.balance!)}', style: TStyle.robotBlackRegular()),
+              Text('${L10n.tr().yourBalance}: ${Helpers.getProperPrice(widget.balance!)}', style: context.style16400),
             ],
             if (widget.availablePoints != null && widget.availablePoints! >= 0) ...[
               const VerticalSpacing(6),
@@ -305,7 +305,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
                 decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(24)),
                 child: Row(
                   children: [
-                    Expanded(child: Text('${L10n.tr().yourPoints}: ${widget.availablePoints}', style: TStyle.robotBlackRegular())),
+                    Expanded(child: Text('${L10n.tr().yourPoints}: ${widget.availablePoints}', style: context.style16400)),
                     const HorizontalSpacing(4),
                     if (widget.method == PaymentMethod.gazzerWallet)
                       Container(
@@ -417,7 +417,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
 //           mainAxisSize: MainAxisSize.min,
 //           crossAxisAlignment: CrossAxisAlignment.start,
 //           children: [
-//             Text(L10n.tr().choosePaymentMethod, style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold)),
+//             Text(L10n.tr().choosePaymentMethod, style: context.style16400.copyWith(fontWeight:TStyle.bold)),
 //             const SizedBox(height: 12),
 //             MainBtn(
 //               onPressed: () {
@@ -462,7 +462,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
 //           mainAxisSize: MainAxisSize.min,
 //           crossAxisAlignment: CrossAxisAlignment.start,
 //           children: [
-//             Text(L10n.tr().enterPhoneNumber, style: TStyle.robotBlackRegular().copyWith(fontWeight:TStyle.bold)),
+//             Text(L10n.tr().enterPhoneNumber, style: context.style16400.copyWith(fontWeight:TStyle.bold)),
 //             const SizedBox(height: 8),
 //
 //             Align(
@@ -515,7 +515,7 @@ class _CardItem extends StatelessWidget {
                 children: [
                   Directionality(
                     textDirection: TextDirection.ltr,
-                    child: Text(card.cardNumber, style: TStyle.robotBlackRegular().copyWith(fontWeight: TStyle.bold)),
+                    child: Text(card.cardNumber, style: context.style16400.copyWith(fontWeight: TStyle.bold)),
                   ),
                   // const SizedBox(height: 4),
                   // Text(

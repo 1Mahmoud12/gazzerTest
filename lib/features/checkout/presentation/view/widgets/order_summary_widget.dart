@@ -165,7 +165,7 @@ class ItemSummary extends StatelessWidget {
           title,
           style: total ? TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold, color: Co.purple) : TStyle.robotBlackMedium(),
         ),
-        Text(valueText, style: total ? TStyle.robotBlackRegular().copyWith(color: Co.purple) : TStyle.robotBlackMedium()),
+        Text(valueText, style: total ? context.style16400.copyWith(color: Co.purple) : TStyle.robotBlackMedium()),
       ],
     );
   }

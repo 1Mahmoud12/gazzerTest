@@ -248,7 +248,7 @@ class _BestSellingItemCard extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackRegular().copyWith(color: Co.purple)),
+                                Text(Helpers.getProperPrice(product.price), style: context.style16400.copyWith(color: Co.purple)),
                                 if (product.priceBeforeDiscount != null)
                                   Text(
                                     Helpers.getProperPrice(product.priceBeforeDiscount!),

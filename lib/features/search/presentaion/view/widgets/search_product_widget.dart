@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -70,14 +71,14 @@ class SearchProductWidget extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    style: TStyle.robotBlackRegular().copyWith(fontWeight: FontWeight.w500),
+                    style: context.style16400.copyWith(fontWeight: FontWeight.w500),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(
                     children: [
                       const VectorGraphicsWidget(Assets.starRateIc, width: 20, height: 20),
-                      Text(product.rate.toStringAsFixed(1), style: TStyle.robotBlackRegular().copyWith(fontWeight: FontWeight.w500)),
+                      Text(product.rate.toStringAsFixed(1), style: context.style16400.copyWith(fontWeight: FontWeight.w500)),
                     ],
                   ),
                   Row(

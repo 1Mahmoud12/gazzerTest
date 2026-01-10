@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
@@ -71,7 +72,7 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
                       isAnimating.value = false;
                       context.push(FrequancyCombosScreen.route).then((v) => isAnimating.value = true);
                     },
-                    textStyle: TStyle.robotBlackRegular().copyWith(color: Co.purple),
+                    textStyle: context.style16400.copyWith(color: Co.purple),
                     isAnimating: isAnimating,
                     animDuration: animDuration,
                     text: focusData[index],
