@@ -30,11 +30,11 @@ class Dialogs {
               const VerticalSpacing(20),
               Text(
                 title,
-                style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold),
+                style: context.style16500.copyWith(fontWeight: TStyle.bold),
                 textAlign: TextAlign.center,
               ),
               const VerticalSpacing(10),
-              if (message != null) Text(message, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+              if (message != null) Text(message, style: context.style16500, textAlign: TextAlign.center),
               // const VericalSpacing(20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -193,12 +193,12 @@ class Dialogs {
             mainAxisSize: MainAxisSize.min,
             children: [
               const VerticalSpacing(20),
-              Text(title, style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold)),
+              Text(title, style: AppNavigator.mainKey.currentContext!.style16500.copyWith(fontWeight: TStyle.bold)),
               const VerticalSpacing(10),
-              if (message != null) Text(message, style: TStyle.robotBlackMedium()),
+              if (message != null) Text(message, style: AppNavigator.mainKey.currentContext!.style16500),
               const VerticalSpacing(20),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: MainBtn(
                   text: okBtn ?? L10n.tr().confirm,
                   bgColor: okBgColor ?? Co.purple,

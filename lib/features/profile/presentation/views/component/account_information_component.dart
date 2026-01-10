@@ -86,7 +86,7 @@ class ProfileInformationRow extends StatelessWidget {
             spacing: 2,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey)),
+              Text(title, style: context.style16500.copyWith(color: Co.darkGrey)),
               FittedBox(
                 fit: BoxFit.scaleDown,
                 alignment: AlignmentDirectional.centerStart,

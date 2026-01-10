@@ -41,7 +41,7 @@ class OrderSummarySection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(L10n.tr().orderSummary, style: TStyle.robotBlackTitle()),
+            Text(L10n.tr().orderSummary, style: context.style24500),
             InkWell(
               onTap: () => Alerts.showToast(L10n.tr().comingSoon, error: false),
               highlightColor: Colors.transparent,
@@ -162,7 +162,7 @@ class OrderSummarySection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('${L10n.tr().total} (${L10n.tr().amountToPay})', style: context.style16400),
-            Text(Helpers.getProperPrice(finalTotal), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+            Text(Helpers.getProperPrice(finalTotal), style: context.style16500.copyWith(color: Co.purple)),
           ],
         ),
         const VerticalSpacing(12),
@@ -202,8 +202,8 @@ class OrderSummaryItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: TStyle.robotBlackMedium()),
-        Text(valueText, style: TStyle.robotBlackMedium()),
+        Text(title, style: context.style16500),
+        Text(valueText, style: context.style16500),
       ],
     );
   }
@@ -224,17 +224,17 @@ class FinalTotalRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Flexible(
-                child: Text(L10n.tr().total, style: TStyle.robotBlackSubTitle(), overflow: TextOverflow.ellipsis, maxLines: 1),
+                child: Text(L10n.tr().total, style: context.style20500, overflow: TextOverflow.ellipsis, maxLines: 1),
               ),
               const HorizontalSpacing(2),
-              Text(' (${L10n.tr().amountToPay}) ', style: TStyle.robotBlackThin().copyWith(overflow: TextOverflow.ellipsis), maxLines: 1),
+              Text(' (${L10n.tr().amountToPay}) ', style: context.style12400.copyWith(overflow: TextOverflow.ellipsis), maxLines: 1),
             ],
           ),
         ),
         const HorizontalSpacing(12),
         Text(
           Helpers.getProperPrice(total),
-          style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple, fontWeight: TStyle.semi),
+          style: context.style20500.copyWith(color: Co.purple, fontWeight: TStyle.semi),
         ),
       ],
     );
@@ -270,7 +270,7 @@ class _CollapsibleOrderSummaryCardState extends State<_CollapsibleOrderSummaryCa
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Order Summery', style: TStyle.robotBlackMedium()),
+                  Text('Order Summery', style: context.style16500),
                   Icon(_isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: Co.purple),
                 ],
               ),
@@ -345,7 +345,7 @@ class _DeliveryManSection extends StatelessWidget {
               children: [
                 Text(L10n.tr().your_delivery_man, style: context.style16400.copyWith(color: Co.darkGrey)),
                 const VerticalSpacing(4),
-                Text(deliveryManName, style: TStyle.robotBlackMedium()),
+                Text(deliveryManName, style: context.style16500),
               ],
             ),
           ),

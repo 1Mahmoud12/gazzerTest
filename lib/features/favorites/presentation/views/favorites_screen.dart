@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -83,7 +84,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     }
                     if (event == null || event.favorites.isEmpty) {
                       return Center(
-                        child: Text(L10n.tr().youHaveNoFavoritesYet, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+                        child: Text(L10n.tr().youHaveNoFavoritesYet, style: context.style20500.copyWith(color: Co.purple)),
                       );
                     }
 
@@ -123,7 +124,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                             const VerticalSpacing(8),
                             if (currentList.isEmpty)
                               Center(
-                                child: Text(L10n.tr().noData, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                child: Text(L10n.tr().noData, style: context.style16500.copyWith(color: Co.purple)),
                               )
                             else
                               LayoutBuilder(

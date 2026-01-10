@@ -122,7 +122,7 @@
 //           appBar: AppBar(
 //             title: GradientText(
 //               text: L10n.tr().createYourCard,
-//               style: TStyle.robotBlackMedium().copyWith(fontWeight:TStyle.bold),
+//               style: context.style16500.copyWith(fontWeight:TStyle.bold),
 //             ),
 //           ),
 //           body: ListView(

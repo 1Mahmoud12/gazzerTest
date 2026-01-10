@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
@@ -73,7 +74,7 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
               Expanded(
                 child: Text(
                   L10n.tr().nameisCurrentlyClosedWeWillOpenAt(widget.name, widget.startTime?.defaultTimeFormat ?? L10n.tr().soon),
-                  style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+                  style: context.style12400.copyWith(color: Co.white, fontWeight: TStyle.bold),
                   textAlign: TextAlign.center,
                 ),
               )
@@ -81,7 +82,7 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
               Expanded(
                 child: Text(
                   L10n.tr().vendorClosesInMinutes(difference ~/ 60, widget.name),
-                  style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+                  style: context.style12400.copyWith(color: Co.white, fontWeight: TStyle.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -90,12 +91,12 @@ class _VendorClosingTimerState extends State<VendorClosingTimer> {
                   children: [
                     TextSpan(
                       text: (difference ~/ 60).toString().padLeft(2, '0'),
-                      style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+                      style: context.style12400.copyWith(color: Co.white, fontWeight: TStyle.bold),
                     ),
                     const TextSpan(text: '  '),
                     TextSpan(
                       text: (difference % 60).toString().padLeft(2, '0'),
-                      style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+                      style: context.style12400.copyWith(color: Co.white, fontWeight: TStyle.bold),
                     ),
                   ],
                 ),

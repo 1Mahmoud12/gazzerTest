@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/confirm_sheet.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -47,7 +46,7 @@ class AddressCard extends StatelessWidget {
                     children: [
                       VectorGraphicsWidget(address.labelSvg, width: 20, height: 20, colorFilter: const ColorFilter.mode(Co.black, BlendMode.srcIn)),
                       const HorizontalSpacing(8),
-                      Expanded(child: Text(address.labelType.label ?? address.label, style: TStyle.robotBlackMedium(), maxLines: 2)),
+                      Expanded(child: Text(address.labelType.label ?? address.label, style: context.style16500, maxLines: 2)),
                       if (defaultButton)
                         if (address.isDefault)
                           InkWell(
@@ -59,14 +58,14 @@ class AddressCard extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                 child: snapshot.data is SetDefaultLoading && (snapshot.data! as SetDefaultLoading).id == address.id
                                     ? const AdaptiveProgressIndicator(size: 12)
-                                    : Text(L10n.tr().defaultt, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                                    : Text(L10n.tr().defaultt, style: context.style16500.copyWith(color: Co.white)),
                               ),
                             ),
                           )
                         else
                           InkWell(
                             onTap: snapshot.data is SetDefaultLoading ? null : () => bus.setDefault(address.id),
-                            child: Text(L10n.tr().setAsDefault, style: TStyle.robotBlackThin().copyWith(color: Co.purple)),
+                            child: Text(L10n.tr().setAsDefault, style: context.style12400.copyWith(color: Co.purple)),
                           ),
                     ],
                   ),
@@ -131,7 +130,7 @@ class AddressCard extends StatelessWidget {
                                   children: [
                                     const VectorGraphicsWidget(Assets.deleteIc),
                                     const HorizontalSpacing(4),
-                                    Text(L10n.tr().delete, style: TStyle.robotBlackMedium()),
+                                    Text(L10n.tr().delete, style: context.style16500),
                                   ],
                                 ),
                         ),

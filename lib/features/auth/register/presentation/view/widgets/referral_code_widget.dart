@@ -176,7 +176,7 @@ class _ReferralCodeWidgetState extends State<ReferralCodeWidget> {
                             )
                           : Text(
                               L10n.tr().apply,
-                              style: TStyle.robotBlackMedium().copyWith(color: _referralCodeController.text.isNotEmpty ? Co.white : Co.black),
+                              style: context.style16500.copyWith(color: _referralCodeController.text.isNotEmpty ? Co.white : Co.black),
                               textAlign: TextAlign.center,
                             ),
                     );

@@ -79,7 +79,7 @@ class _DailyOffersScreenState extends State<DailyOffersScreen> {
     return Scaffold(
       appBar: MainAppBar(
         title: L10n.tr().dailyOffersForYou,
-        titleStyle: TStyle.robotBlackTitle().copyWith(color: Co.purple),
+        titleStyle: context.style24500.copyWith(color: Co.purple),
       ),
 
       body: Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -47,10 +48,9 @@ class PostCheckoutScreen extends StatelessWidget {
                   child: Column(
                     spacing: 32,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SvgPicture.asset(Assets.assetsSvgSuccess),
-                      GradientText(text: L10n.tr().orderPlacedSuccessfully, style: TStyle.robotBlackSubTitle()),
+                      GradientText(text: L10n.tr().orderPlacedSuccessfully, style: context.style20500),
                       const VerticalSpacing(64),
                     ],
                   ),

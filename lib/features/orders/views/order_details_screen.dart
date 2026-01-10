@@ -125,15 +125,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     RichText(
                       text: TextSpan(
                         text: L10n.tr().estimated_delivery_time,
-                        style: TStyle.robotBlackMedium(),
+                        style: context.style16500,
                         children: [
                           TextSpan(
                             text: ': ',
-                            style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                            style: context.style16500.copyWith(color: Co.purple),
                           ),
                           TextSpan(
                             text: '20-30',
-                            style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                            style: context.style16500.copyWith(color: Co.purple),
                           ),
                         ],
                       ),
@@ -150,7 +150,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(color: Co.earnedMoney, borderRadius: BorderRadius.circular(40)),
                         alignment: AlignmentDirectional.center,
-                        child: Text(L10n.tr().youHaveEarnedPoints(orderDetail.loyaltyPointsEarned), style: TStyle.robotBlackMedium()),
+                        child: Text(L10n.tr().youHaveEarnedPoints(orderDetail.loyaltyPointsEarned), style: context.style16500),
                       ),
                     ],
                     const SizedBox(height: OrderDetailsConstants.defaultSpacing),
@@ -163,7 +163,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         children: [
                           SvgPicture.asset(Assets.customerSupportIc),
                           const HorizontalSpacing(10),
-                          Text(L10n.tr().getHelp, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                          Text(L10n.tr().getHelp, style: context.style16500.copyWith(color: Co.white)),
                         ],
                       ),
                     ),

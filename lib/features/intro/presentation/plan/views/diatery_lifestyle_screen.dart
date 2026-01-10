@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
@@ -35,7 +36,7 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
     super.dispose();
   }
 
-  final focusData = ["Vegetarian", "Vegan", "Low-Carb/Keto", "No Specific Diet"];
+  final focusData = ['Vegetarian', 'Vegan', 'Low-Carb/Keto', 'No Specific Diet'];
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(
@@ -49,11 +50,7 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(
-                text: "Do You Follow Any Specific Dietary Lifestyle?",
-                style: TStyle.robotBlackSubTitle(),
-                gradient: Grad().textGradient,
-              ),
+              child: GradientText(text: 'Do You Follow Any Specific Dietary Lifestyle?', style: context.style20500, gradient: Grad().textGradient),
             ),
             const VerticalSpacing(24),
             Column(

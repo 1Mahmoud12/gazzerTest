@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/staggered_dots_wave.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientText, HorizontalSpacing;
 import 'package:go_router/go_router.dart';
@@ -53,13 +53,12 @@ class LoadingScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
           spacing: 8,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             const HorizontalSpacing(double.infinity),
-            GradientText(text: L10n.tr().loading, style: TStyle.robotBlackSubTitle(), gradient: Grad().radialGradient),
-            StaggeredDotsWave(colors: [Co.tertiary, Co.purple, Co.greyText, Co.secondary, Co.secondary], size: 100, dotsNumber: 5),
+            GradientText(text: L10n.tr().loading, style: context.style20500, gradient: Grad().radialGradient),
+            StaggeredDotsWave(colors: const [Co.tertiary, Co.purple, Co.greyText, Co.secondary, Co.secondary], size: 100, dotsNumber: 5),
           ],
         ),
       ),

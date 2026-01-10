@@ -109,7 +109,7 @@ class VendorLogo extends StatelessWidget {
               ),
             )
           : Center(
-              child: Text(fallbackInitial, style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold)),
+              child: Text(fallbackInitial, style: context.style16500.copyWith(fontWeight: TStyle.bold)),
             ),
     );
   }
@@ -127,7 +127,7 @@ class ItemsCountIndicator extends StatelessWidget {
       children: [
         SvgPicture.asset(Assets.cartItemIc),
         const SizedBox(width: VendorSection._cartIconSpacing),
-        Text('$count ${l10n.items}', style: TStyle.robotBlackMedium()),
+        Text('$count ${l10n.items}', style: context.style16500),
       ],
     );
   }

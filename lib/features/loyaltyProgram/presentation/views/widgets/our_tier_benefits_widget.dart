@@ -75,7 +75,7 @@ class _OurTierBenefitsWidgetState extends State<OurTierBenefitsWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(L10n.tr().ourTierBenefits, style: TStyle.robotBlackMedium()),
+        Text(L10n.tr().ourTierBenefits, style: context.style16500),
         const SizedBox(height: 16),
         SingleChildScrollView(
           controller: _scrollController,
@@ -117,7 +117,7 @@ class _TierBenefitsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('${L10n.tr().level} $title', style: TStyle.robotBlackMedium().copyWith(color: visual.primaryTextColor)),
+          Text('${L10n.tr().level} $title', style: context.style16500.copyWith(color: visual.primaryTextColor)),
           const SizedBox(height: 12),
           ...tier.benefits.map(
             (benefit) => _BenefitRow(

@@ -137,7 +137,7 @@ class ProfileContentBody extends StatelessWidget {
                 children: [
                   Text(
                     LoyaltyTierName.fromString(cubit.client!.tierName!).getDisplayName(context),
-                    style: TStyle.robotBlackMedium().copyWith(color: Co.white),
+                    style: context.style16500.copyWith(color: Co.white),
                   ),
                   SvgPicture.asset(allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.logo),
                 ],

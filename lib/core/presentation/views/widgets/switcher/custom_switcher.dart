@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/switcher/switcher_item.dart';
 
 /// Custom segmented control switcher widget
@@ -47,7 +47,7 @@ class CustomSwitcher extends StatelessWidget {
                 child: Center(
                   child: Text(
                     item.name,
-                    style: TStyle.robotBlackMedium().copyWith(
+                    style: context.style16500.copyWith(
                       color: isSelected ? Co.white : Co.greyText,
                       fontSize: 14,
                       fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,

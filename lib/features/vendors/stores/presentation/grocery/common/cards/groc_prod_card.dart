@@ -48,7 +48,7 @@ class GrocProdCard extends StatelessWidget {
                             decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(20)),
                             child: Text(
                               "${product.offer?.discount}${product.offer?.discountType == DiscountType.percentage ? "%" : ""}",
-                              style: TStyle.robotBlackMedium(),
+                              style: context.style16500,
                             ),
                           ),
                         FavoriteWidget(size: 40, fovorable: product, padding: 0),
@@ -67,7 +67,7 @@ class GrocProdCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           product.name,
-                          style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
+                          style: context.style16500.copyWith(fontWeight: FontWeight.w700),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -88,7 +88,7 @@ class GrocProdCard extends StatelessWidget {
                   const VerticalSpacing(4),
                   Text(
                     product.description == '' ? product.name : product.description,
-                    style: TStyle.robotBlackSmall(),
+                    style: context.style14400,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
@@ -107,14 +107,14 @@ class GrocProdCard extends StatelessWidget {
                               children: [
                                 FittedBox(
                                   alignment: AlignmentDirectional.centerStart,
-                                  child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                  child: Text(Helpers.getProperPrice(product.price), style: context.style16500.copyWith(color: Co.purple)),
                                 ),
                                 if (product.offer != null)
                                   FittedBox(
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Text(
                                       Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                      style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                      style: context.style16500.copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
                                     ),
                                   ),
                               ],

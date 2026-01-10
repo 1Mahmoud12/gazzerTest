@@ -76,7 +76,7 @@ class IncrementWidgetWhite extends StatelessWidget {
           ),
           ConstrainedBox(
             constraints: const BoxConstraints(minWidth: 30),
-            child: Text('$initVal', style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+            child: Text('$initVal', style: context.style16500, textAlign: TextAlign.center),
           ),
           IconButton(
             onPressed: canDecrement

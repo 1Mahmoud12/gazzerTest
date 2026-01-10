@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/dto/pagination_dto.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -66,7 +67,7 @@ class _SuggestedScreenState extends State<SuggestedScreen> {
       child: Scaffold(
         appBar: MainAppBar(
           title: L10n.tr().suggestedForYou,
-          titleStyle: TStyle.robotBlackTitle().copyWith(color: Co.purple),
+          titleStyle: context.style24500.copyWith(color: Co.purple),
         ),
         //extendBody: true,
         //extendBodyBehindAppBar: true,

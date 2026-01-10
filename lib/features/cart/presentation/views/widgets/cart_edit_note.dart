@@ -3,7 +3,6 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -60,7 +59,7 @@ class _CartEditNoteState extends State<CartEditNote> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: Text(widget.item.prod.name, style: TStyle.robotBlackMedium())),
+                      Expanded(child: Text(widget.item.prod.name, style: context.style16500)),
                       DecoratedBox(
                         position: DecorationPosition.foreground,
                         decoration: BoxDecoration(

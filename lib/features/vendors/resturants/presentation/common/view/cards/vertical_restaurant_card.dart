@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
@@ -81,7 +81,7 @@ class VerticalRestaurantCard extends StatelessWidget {
                 ],
               ),
             ),
-            if (closed) Center(child: Text(L10n.tr().closed, style: TStyle.robotBlackTitle())),
+            if (closed) Center(child: Text(L10n.tr().closed, style: context.style24500)),
           ],
         ),
       ),

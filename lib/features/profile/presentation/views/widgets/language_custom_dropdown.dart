@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -52,7 +53,7 @@ class LanguageCustomDropdown extends StatelessWidget {
             children: [
               Image.asset(language.flagAsset, height: 24, width: 24),
               const HorizontalSpacing(8),
-              Text(language.name, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+              Text(language.name, style: context.style16500.copyWith(color: Co.purple)),
             ],
           ),
         );
@@ -67,7 +68,7 @@ class LanguageCustomDropdown extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 alignment: AlignmentDirectional.centerStart,
-                child: Text(language.name, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                child: Text(language.name, style: context.style16500.copyWith(color: Co.purple)),
               ),
             ),
           ],

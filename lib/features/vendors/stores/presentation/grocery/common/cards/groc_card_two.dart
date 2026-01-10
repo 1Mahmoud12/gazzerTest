@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -64,10 +65,10 @@ class GrocCardTwo extends StatelessWidget {
                           height: !vendor.isOpen ? 55 : 24,
                           alignment: Alignment.center,
                           child: !vendor.isOpen
-                              ? Text(L10n.tr().closed, style: TStyle.robotBlackThin())
+                              ? Text(L10n.tr().closed, style: context.style12400)
                               : vendor.badge == null
                               ? null
-                              : Text(vendor.badge!, style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
+                              : Text(vendor.badge!, style: context.style14400.copyWith(color: Co.purple)),
                         ),
                       ),
                     ),

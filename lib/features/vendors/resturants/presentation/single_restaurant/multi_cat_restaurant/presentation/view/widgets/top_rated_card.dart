@@ -55,7 +55,7 @@ class _TopRatedCard extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                  child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                  child: Text(product.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
                                 ),
                               ],
                             ),
@@ -66,7 +66,7 @@ class _TopRatedCard extends StatelessWidget {
                                 decoration: BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.circular(50)),
                                 child: Text(
                                   '${product.offer!.discount}${product.offer!.discountType == DiscountType.percentage ? '%' : ''}',
-                                  style: TStyle.robotBlackMedium(),
+                                  style: context.style16500,
                                 ),
                               ),
                             ],
@@ -85,7 +85,7 @@ class _TopRatedCard extends StatelessWidget {
                                 Text(product.rate.toStringAsFixed(1), style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                                 if (product.reviewCount > 0) ...[
                                   const SizedBox(width: 4),
-                                  Text('(+${product.reviewCount})', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                                  Text('(+${product.reviewCount})', style: context.style12400.copyWith(color: Co.darkGrey)),
                                 ],
                               ],
                             ),
@@ -96,8 +96,8 @@ class _TopRatedCard extends StatelessWidget {
                                 children: [
                                   const VectorGraphicsWidget(Assets.soldCartIc),
                                   const HorizontalSpacing(2),
-                                  Text(L10n.tr().sold, style: TStyle.robotBlackSmall()),
-                                  Text(' +${product.sold}', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+                                  Text(L10n.tr().sold, style: context.style14400),
+                                  Text(' +${product.sold}', style: context.style14400.copyWith(color: Co.darkGrey)),
                                 ],
                               ),
                           ],
@@ -122,7 +122,7 @@ class _TopRatedCard extends StatelessWidget {
                               if (product.priceBeforeDiscount != null)
                                 Text(
                                   Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey).copyWith(decoration: TextDecoration.lineThrough),
+                                  style: context.style12400.copyWith(color: Co.darkGrey).copyWith(decoration: TextDecoration.lineThrough),
                                 ),
                             ],
                           ),

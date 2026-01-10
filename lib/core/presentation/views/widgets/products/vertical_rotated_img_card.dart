@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
@@ -53,7 +54,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
-                        child: Text(prod.name, style: TStyle.robotBlackMedium(), overflow: TextOverflow.ellipsis),
+                        child: Text(prod.name, style: context.style16500, overflow: TextOverflow.ellipsis),
                       ),
                       const HorizontalSpacing(8),
                       Row(
@@ -61,9 +62,9 @@ class VerticalRotatedImgCard extends StatelessWidget {
                         children: [
                           const VectorGraphicsWidget(Assets.starRateIc),
                           const HorizontalSpacing(4),
-                          Text(prod.rate.toStringAsFixed(1), style: TStyle.robotBlackSmall()),
+                          Text(prod.rate.toStringAsFixed(1), style: context.style14400),
                           const HorizontalSpacing(2),
-                          Text('(+${prod.reviewCount})', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+                          Text('(+${prod.reviewCount})', style: context.style14400.copyWith(color: Co.darkGrey)),
                         ],
                       ),
                     ],
@@ -96,7 +97,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                                   prod.store?.name ?? '',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TStyle.robotBlackThin().copyWith(fontWeight: TStyle.semi),
+                                  style: context.style12400.copyWith(fontWeight: TStyle.semi),
                                 ),
                               ),
                             ],
@@ -109,9 +110,9 @@ class VerticalRotatedImgCard extends StatelessWidget {
                         children: [
                           const VectorGraphicsWidget(Assets.soldCartIc),
                           const HorizontalSpacing(4),
-                          Text(L10n.tr().sold, style: TStyle.robotBlackSmall()),
+                          Text(L10n.tr().sold, style: context.style14400),
                           const HorizontalSpacing(2),
-                          Text(' +${prod.sold}', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+                          Text(' +${prod.sold}', style: context.style14400.copyWith(color: Co.darkGrey)),
                         ],
                       ),
                     ],
@@ -119,7 +120,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(Helpers.getProperPrice(prod.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                      Text(Helpers.getProperPrice(prod.price), style: context.style16500.copyWith(color: Co.purple)),
                       const HorizontalSpacing(8),
                       CartToIncrementIcon(isHorizonal: true, product: prod, iconSize: 25, isDarkContainer: true),
                     ],
@@ -128,7 +129,7 @@ class VerticalRotatedImgCard extends StatelessWidget {
               ),
             ),
 
-            //  Text(L10n.tr().onAllGrills, style: TStyle.robotBlackThin()),
+            //  Text(L10n.tr().onAllGrills, style: context.style12400),
           ],
         ),
       ),

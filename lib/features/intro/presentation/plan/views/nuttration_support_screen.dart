@@ -55,11 +55,7 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(
-                text: "What types of nutrition support would you like?",
-                style: TStyle.robotBlackSubTitle(),
-                gradient: Grad().textGradient,
-              ),
+              child: GradientText(text: "What types of nutrition support would you like?", style: context.style20500, gradient: Grad().textGradient),
             ),
             const VerticalSpacing(24),
             Column(

@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/cart/presentation/cubit/cart_cubit.dart';
@@ -47,7 +46,7 @@ class CartAddressComponent extends StatelessWidget {
                       ),
                       Expanded(
                         child: Center(
-                          child: Text(L10n.tr().noAddressesSelected, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                          child: Text(L10n.tr().noAddressesSelected, style: context.style12400.copyWith(color: Co.darkGrey)),
                         ),
                       ),
                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -49,7 +50,7 @@ class _HealthFocusScreenState extends State<HealthFocusScreen> {
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: GradientText(text: L10n.tr().whatIsYourPrimaryHealthFocus, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
+              child: GradientText(text: L10n.tr().whatIsYourPrimaryHealthFocus, style: context.style20500, gradient: Grad().textGradient),
             ),
             const VerticalSpacing(24),
             Column(

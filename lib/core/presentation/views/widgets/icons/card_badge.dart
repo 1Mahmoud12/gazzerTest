@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 
 class CardBadge extends StatelessWidget {
   const CardBadge({super.key, this.alignment, required this.text, this.textStyle, this.color, this.fullWidth = false});
@@ -18,7 +18,7 @@ class CardBadge extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: fullWidth ? MainAxisSize.max : MainAxisSize.min,
-          children: [Text(text, style: textStyle ?? TStyle.robotBlackSmall().copyWith(color: Co.purple))],
+          children: [Text(text, style: textStyle ?? context.style14400.copyWith(color: Co.purple))],
         ),
       ),
     );

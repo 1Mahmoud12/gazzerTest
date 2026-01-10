@@ -48,9 +48,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().grossAmount, style: TStyle.robotBlackMedium()),
+//                                 Text(L10n.tr().grossAmount, style: context.style16500),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.subTotal), style: TStyle.robotBlackMedium()),
+//                                 Text(Helpers.getProperPrice(state.summary.subTotal), style: context.style16500),
 //                               ],
 //                             ),
 //                           ),
@@ -61,9 +61,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().itemsDiscount, style: TStyle.robotBlackMedium()),
+//                                 Text(L10n.tr().itemsDiscount, style: context.style16500),
 //                                 const HorizontalSpacing(12),
-//                                 Text('-${Helpers.getProperPrice(state.summary.discount)}', style: TStyle.robotBlackMedium()),
+//                                 Text('-${Helpers.getProperPrice(state.summary.discount)}', style: context.style16500),
 //                               ],
 //                             ),
 //                           ),
@@ -73,9 +73,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().vatAmount, style: TStyle.robotBlackMedium()),
+//                                 Text(L10n.tr().vatAmount, style: context.style16500),
 //                                 const HorizontalSpacing(12),
-//                                 Text(Helpers.getProperPrice(state.summary.tax), style: TStyle.robotBlackMedium()),
+//                                 Text(Helpers.getProperPrice(state.summary.tax), style: context.style16500),
 //                               ],
 //                             ),
 //                           ),
@@ -86,9 +86,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().serviceFee, style: TStyle.robotBlackMedium()),
+//                                 Text(L10n.tr().serviceFee, style: context.style16500),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.serviceFee), style: TStyle.robotBlackMedium()),
+//                                 Text(Helpers.getProperPrice(state.summary.serviceFee), style: context.style16500),
 //                               ],
 //                             ),
 //                           ),
@@ -99,9 +99,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().deliveryFee, style: TStyle.robotBlackMedium()),
+//                                 Text(L10n.tr().deliveryFee, style: context.style16500),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.deliveryFee), style: TStyle.robotBlackMedium()),
+//                                 Text(Helpers.getProperPrice(state.summary.deliveryFee), style: context.style16500),
 //                               ],
 //                             ),
 //                           ),
@@ -112,9 +112,9 @@
 //                             child: Row(
 //                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                               children: [
-//                                 Text(L10n.tr().deliveryFeeDiscount, style: TStyle.robotBlackMedium()),
+//                                 Text(L10n.tr().deliveryFeeDiscount, style: context.style16500),
 //                                 const HorizontalSpacing(6),
-//                                 Text(Helpers.getProperPrice(state.summary.deliveryFeeDiscount), style: TStyle.robotBlackMedium()),
+//                                 Text(Helpers.getProperPrice(state.summary.deliveryFeeDiscount), style: context.style16500),
 //                               ],
 //                             ),
 //                           ),
@@ -131,7 +131,7 @@
 //                                     Flexible(
 //                                       child: Text(
 //                                         L10n.tr().total,
-//                                         style: TStyle.robotBlackSubTitle()
+//                                         style: context.style20500
 //                                         overflow: TextOverflow.ellipsis,
 //                                         maxLines: 1,
 //                                       ),
@@ -139,14 +139,14 @@
 //                                     const HorizontalSpacing(2),
 //                                     Text(
 //                                       ' (${L10n.tr().amountToPay}) ',
-//                                       style: TStyle.robotBlackThin().copyWith(overflow: TextOverflow.ellipsis),
+//                                       style: context.style12400.copyWith(overflow: TextOverflow.ellipsis),
 //                                       maxLines: 1,
 //                                     ),
 //                                   ],
 //                                 ),
 //                               ),
 //                               const HorizontalSpacing(12),
-//                               Text(Helpers.getProperPrice(state.summary.total), style: TStyle.robotBlackSubTitle().copyWith(color:Co.purple,fontWeight: TStyle.semi,)),
+//                               Text(Helpers.getProperPrice(state.summary.total), style: context.style20500.copyWith(color:Co.purple,fontWeight: TStyle.semi,)),
 //                             ],
 //                           ),
 //                         ),
@@ -177,7 +177,7 @@
 //                             width: double.infinity,
 //                             height: 0,
 //                             borderColor: Co.purple,
-//                             textStyle: TStyle.robotBlackMedium(),
+//                             textStyle: context.style16500,
 //                             bgColor: Colors.transparent,
 //                           ),
 //                         ),

@@ -178,7 +178,7 @@ class _MissingItemsScreenState extends State<MissingItemsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text(l10n.selectMissingIncorrectItems, style: TStyle.robotBlackMedium()),
+                            Text(l10n.selectMissingIncorrectItems, style: context.style16500),
                             const VerticalSpacing(16),
                             ..._buildItemSections(orderDetail),
                             const VerticalSpacing(16),

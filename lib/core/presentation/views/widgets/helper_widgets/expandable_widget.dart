@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
@@ -104,7 +105,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
               children: [
                 if (widget.icon != null) ...[SvgPicture.asset(widget.icon!), const HorizontalSpacing(12)],
                 Expanded(
-                  child: widget.titleWidget ?? Text(widget.title, style: widget.titleStyle ?? TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                  child: widget.titleWidget ?? Text(widget.title, style: widget.titleStyle ?? context.style16500.copyWith(color: Co.purple)),
                 ),
                 RotatedBox(
                   quarterTurns: _isExpanded ? 0 : 2,

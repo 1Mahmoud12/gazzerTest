@@ -3,7 +3,6 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 
 class AppNotification {
@@ -37,7 +36,7 @@ class _ItemNotificationState extends State<ItemNotification> {
           decoration: const BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.all(Radius.circular(8))),
           child: SizedBox(width: 20, height: 20, child: VectorGraphicsWidget(widget.appNotification.type.asset, fit: BoxFit.none)),
         ),
-        title: Text(widget.appNotification.title, style: TStyle.robotBlackMedium()),
+        title: Text(widget.appNotification.title, style: context.style16500),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

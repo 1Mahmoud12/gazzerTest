@@ -58,7 +58,7 @@ class VendorCartProductsItem extends StatelessWidget {
                           children: [
                             ClipOval(child: CustomNetworkImage(cartVendor.image, width: 40, height: 40, fit: BoxFit.cover)),
                             const HorizontalSpacing(8),
-                            Text(cartVendor.name, style: TStyle.robotBlackMedium()),
+                            Text(cartVendor.name, style: context.style16500),
                             const Spacer(),
                             if (!availableVendor)
                               Row(
@@ -101,7 +101,7 @@ class VendorCartProductsItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.info_outline, size: 18),
 
-                    Expanded(child: Text(L10n.tr().restaurant_not_available_message, style: TStyle.robotBlackThin())),
+                    Expanded(child: Text(L10n.tr().restaurant_not_available_message, style: context.style12400)),
                   ],
                 ),
               ),

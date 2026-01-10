@@ -66,7 +66,7 @@ class MissingItemTile extends StatelessWidget {
                         const SizedBox(height: 8),
                         Row(
                           children: [
-                            Text('${L10n.tr().quantity}: ', style: TStyle.robotBlackThin()),
+                            Text('${L10n.tr().quantity}: ', style: context.style12400),
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(

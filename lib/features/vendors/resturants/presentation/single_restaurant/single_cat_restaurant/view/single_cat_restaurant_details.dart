@@ -189,7 +189,7 @@ class _SingleCatRestaurantScreenState extends State<SingleCatRestaurantScreen> {
                           children: [
                             Align(
                               alignment: AlignmentDirectional.center,
-                              child: Text(plate.name, style: TStyle.robotBlackTitle().copyWith(color: Co.purple)),
+                              child: Text(plate.name, style: context.style24500.copyWith(color: Co.purple)),
                             ),
                             const VerticalSpacing(12),
                             ClipRRect(

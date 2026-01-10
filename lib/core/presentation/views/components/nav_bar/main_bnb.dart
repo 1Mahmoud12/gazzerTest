@@ -108,7 +108,7 @@ class _MainBnbState extends State<MainBnb> {
       children: [
         VectorGraphicsWidget(iconAsset, height: 24, width: 24, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
         const SizedBox(height: 4),
-        Text(label, style: TStyle.robotBlackMedium().copyWith(color: color, fontSize: 10)),
+        Text(label, style: context.style16500.copyWith(color: color, fontSize: 10)),
       ],
     );
   }

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
+import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 
 class AppSnackbar {
   static void showActionSnackBar(
@@ -29,7 +29,7 @@ class AppSnackbar {
   }
 
   static void validationError(BuildContext context, String content, {int? duration}) {
-    if (content.contains("429")) return;
+    if (content.contains('429')) return;
 
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(
@@ -77,7 +77,6 @@ SnackBar getSnackBar({required Color bgColor, required String content, required 
     duration: const Duration(seconds: 2),
     backgroundColor: bgColor,
     content: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(width: 30),
@@ -90,7 +89,7 @@ SnackBar getSnackBar({required Color bgColor, required String content, required 
         Expanded(
           child: Text(
             content,
-            style: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
+            style: AppNavigator.mainKey.currentContext!.style20500.copyWith(color: Co.white),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),

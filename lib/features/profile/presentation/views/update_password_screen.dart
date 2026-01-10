@@ -64,7 +64,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
             const Center(child: VectorGraphicsWidget(Assets.assetsSvgCharacter, height: 130)),
             Text(
               L10n.tr().resetPassword,
-              style: TStyle.robotBlackHead().copyWith(color: Co.purple),
+              style: context.style32700.copyWith(color: Co.purple),
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing(32),

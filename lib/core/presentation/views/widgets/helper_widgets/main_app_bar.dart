@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
@@ -52,7 +53,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
-      title: title == null ? null : Text(title!, style: titleStyle ?? TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+      title: title == null ? null : Text(title!, style: titleStyle ?? context.style20500.copyWith(color: Co.purple)),
       leadingWidth: shouldShowLeading ? 65 : 0,
       leading: shouldShowLeading
           ? IconButton(

@@ -9,7 +9,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/dialogs.dart';
@@ -101,7 +100,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                 cubit.removeFromCartByType('all', 0);
               }
             },
-            child: Text(L10n.tr().remove_all, style: TStyle.robotBlackMedium().copyWith(color: Co.darkRed)),
+            child: Text(L10n.tr().remove_all, style: context.style16500.copyWith(color: Co.darkRed)),
           ),
           onBack: () {
             context.go(HomeScreen.route);
@@ -201,7 +200,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                             width: double.infinity,
                                             height: 0,
                                             borderColor: Co.purple,
-                                            textStyle: TStyle.robotBlackMedium(),
+                                            textStyle: context.style16500,
                                             bgColor: Colors.transparent,
                                           ),
                                           MainBtn(
@@ -229,7 +228,7 @@ class _CartScreenState extends State<CartScreen> with AutomaticKeepAliveClientMi
                                             width: double.infinity,
                                             height: 0,
                                             borderColor: Co.purple,
-                                            textStyle: TStyle.robotBlackMedium(),
+                                            textStyle: context.style16500,
                                             bgColor: Colors.transparent,
                                             child: Row(
                                               spacing: 8,

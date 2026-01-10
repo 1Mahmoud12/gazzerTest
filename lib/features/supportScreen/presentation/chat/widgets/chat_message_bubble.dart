@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/features/supportScreen/presentation/chat/models/chat_message_model.dart';
 import 'package:intl/intl.dart';
@@ -57,7 +56,7 @@ class ChatMessageBubble extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(_formatTime(message.timestamp), style: TStyle.robotBlackThin().copyWith(color: Colors.black54)),
+                      Text(_formatTime(message.timestamp), style: context.style12400.copyWith(color: Colors.black54)),
                       if (isUser) ...[const SizedBox(width: 4), _buildStatusIcon()],
                     ],
                   ),

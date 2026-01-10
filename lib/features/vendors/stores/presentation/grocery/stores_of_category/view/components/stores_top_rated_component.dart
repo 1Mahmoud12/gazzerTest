@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -32,7 +33,7 @@ class _StoresTopRatedComponentState extends State<StoresTopRatedComponent> {
       label: Badge(
         alignment: const Alignment(-0.6, 0),
         backgroundColor: Colors.transparent,
-        label: GradientText(text: L10n.tr().exploreBest, style: TStyle.robotBlackHead()),
+        label: GradientText(text: L10n.tr().exploreBest, style: context.style32700),
         child: SvgPicture.asset(Assets.assetsSvgBadge, width: 520, fit: BoxFit.cover),
       ),
       child: SizedBox(

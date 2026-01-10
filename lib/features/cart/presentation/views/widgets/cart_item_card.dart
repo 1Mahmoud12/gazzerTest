@@ -112,7 +112,7 @@ class CartItemCard extends StatelessWidget {
                                         Expanded(
                                           child: Text(
                                             '- ${item.notes!}',
-                                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                            style: context.style12400.copyWith(color: Co.darkGrey),
                                             maxLines: 2,
                                             textAlign: TextAlign.start,
                                             overflow: TextOverflow.ellipsis,
@@ -152,10 +152,7 @@ class CartItemCard extends StatelessWidget {
                                         child: Row(
                                           spacing: horzSpacing,
                                           children: [
-                                            Text(
-                                              Helpers.getProperPrice(item.totalPrice),
-                                              style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
-                                            ),
+                                            Text(Helpers.getProperPrice(item.totalPrice), style: context.style16500.copyWith(color: Co.purple)),
                                           ],
                                         ),
                                       ),
@@ -252,7 +249,7 @@ class CartItemCard extends StatelessWidget {
                 spacing: 6,
                 children: [
                   const VectorGraphicsWidget(Assets.deleteIc, colorFilter: ColorFilter.mode(Co.white, BlendMode.srcIn)),
-                  Text(L10n.tr().items_no_longer_available, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                  Text(L10n.tr().items_no_longer_available, style: context.style16500.copyWith(color: Co.white)),
                 ],
               ),
             ),

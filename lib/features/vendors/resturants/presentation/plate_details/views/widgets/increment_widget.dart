@@ -40,7 +40,7 @@ class IncrementWidget extends StatelessWidget {
           if (initVal != 0)
             ConstrainedBox(
               constraints: const BoxConstraints(minWidth: 40),
-              child: Text('$initVal', style: TStyle.robotBlackSubTitle(), textAlign: TextAlign.center),
+              child: Text('$initVal', style: context.style20500, textAlign: TextAlign.center),
             ),
           if (initVal != 0)
             Expanded(

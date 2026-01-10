@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -136,15 +137,11 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
                     const SizedBox(height: 16),
                     Text(
                       l10n.walletYouWillRecharge(widget.amount.toStringAsFixed(0), l10n.egp),
-                      style: TStyle.robotBlackMedium(),
+                      style: context.style16500,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      l10n.walletPleaseSelectPaymentMethod,
-                      style: TStyle.robotBlackMedium(font: FFamily.roboto),
-                      textAlign: TextAlign.center,
-                    ),
+                    Text(l10n.walletPleaseSelectPaymentMethod, style: context.style16500, textAlign: TextAlign.center),
                   ],
                 ),
               ),
@@ -220,7 +217,7 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
                   isEnabled: _selectedMethod != null,
                   bgColor: Co.purple,
                   text: l10n.walletPayNow,
-                  textStyle: TStyle.robotBlackMedium().copyWith(color: Co.white),
+                  textStyle: context.style16500.copyWith(color: Co.white),
                   width: double.infinity,
                   radius: 40,
                 ),
@@ -260,10 +257,8 @@ class _PaymentMethodOption extends StatelessWidget {
               children: [
                 SvgPicture.asset(icon, width: 32, height: 32),
                 const SizedBox(width: 12),
-                Expanded(
-                  child: Text(title, style: TStyle.robotBlackMedium(font: FFamily.roboto)),
-                ),
-                GradientRadioBtn(isSelected: isSelected, onPressed: onTap, size: 12),
+                Expanded(child: Text(title, style: context.style16500)),
+                GradientRadioBtn(isSelected: isSelected, onPressed: onTap),
               ],
             ),
             if (paymentMethodWidget != null) paymentMethodWidget!,
@@ -316,9 +311,7 @@ class _CreditDebitSection extends StatelessWidget {
                         children: [
                           GradientRadioBtn(isSelected: cardIsSelected, onPressed: () => onCardSelected(card), size: 8),
                           const SizedBox(width: 8),
-                          Expanded(
-                            child: Text('**** **** **** ${card.last4Digits}', style: TStyle.robotBlackMedium(font: FFamily.roboto)),
-                          ),
+                          Expanded(child: Text('**** **** **** ${card.last4Digits}', style: context.style16500)),
                         ],
                       ),
                     ),
@@ -344,10 +337,7 @@ class _CreditDebitSection extends StatelessWidget {
                       children: [
                         GradientRadioBtn(isSelected: newCardIsSelected, onPressed: onAddNewCard, size: 8),
                         const SizedBox(width: 8),
-                        Text(
-                          l10n.walletPayWithAnotherCard,
-                          style: TStyle.robotBlackMedium(font: FFamily.roboto).copyWith(color: Co.purple),
-                        ),
+                        Text(l10n.walletPayWithAnotherCard, style: context.style16500.copyWith(color: Co.purple)),
                       ],
                     ),
                   ),

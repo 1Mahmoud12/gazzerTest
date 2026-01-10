@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/domain/entities/favorable_interface.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
-import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle, Co;
+import 'package:gazzer/core/presentation/theme/app_theme.dart' show Co;
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/utils/product_shape_painter.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
@@ -141,7 +142,7 @@ class _FavoriteCardState extends State<FavoriteCard> {
                             Expanded(
                               child: Text(
                                 Helpers.shortIrretableStrings(widget.favorite.name.split(' '), 24) ?? '',
-                                style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
+                                style: context.style14400.copyWith(color: Co.purple),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
@@ -153,18 +154,18 @@ class _FavoriteCardState extends State<FavoriteCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             if (widget.favorite.favorablePrice != null)
-                              Text(Helpers.getProperPrice(widget.favorite.favorablePrice!), style: TStyle.robotBlackThin().copyWith(color: Co.purple))
+                              Text(Helpers.getProperPrice(widget.favorite.favorablePrice!), style: context.style12400.copyWith(color: Co.purple))
                             else
                               const SizedBox.shrink(),
                             Row(
                               children: [
                                 const Icon(Icons.star, color: Co.secondary, size: 16),
-                                Text(widget.favorite.rate.toStringAsFixed(1), style: TStyle.robotBlackSmall().copyWith(color: Co.secondary)),
+                                Text(widget.favorite.rate.toStringAsFixed(1), style: context.style14400.copyWith(color: Co.secondary)),
                               ],
                             ),
                           ],
                         ),
-                        Expanded(child: Text(widget.favorite.description, style: TStyle.robotBlackThin())),
+                        Expanded(child: Text(widget.favorite.description, style: context.style12400)),
                         const VerticalSpacing(8),
                         if (_canAddToCart())
                           Align(

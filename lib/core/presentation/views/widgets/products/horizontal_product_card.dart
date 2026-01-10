@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
@@ -60,11 +61,11 @@ class HorizontalProductCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TStyle.robotBlackMedium()),
+                            Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: context.style16500),
                             // const VerticalSpacing(8),
                             // Text(
                             //   product.description == '' ? product.name : product.description,
-                            //   style: TStyle.robotBlackSmall(),
+                            //   style: context.style14400,
                             //   maxLines: 1,
                             //   overflow: TextOverflow.ellipsis,
                             //   textAlign: TextAlign.start,
@@ -91,12 +92,7 @@ class HorizontalProductCard extends StatelessWidget {
                                     SvgPicture.asset(Assets.restaurantNameIc),
                                     const SizedBox(width: 8),
                                     Expanded(
-                                      child: Text(
-                                        product.store?.name ?? '',
-                                        style: TStyle.robotBlackMedium(),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
+                                      child: Text(product.store?.name ?? '', style: context.style16500, overflow: TextOverflow.ellipsis, maxLines: 1),
                                     ),
                                   ],
                                 ),
@@ -111,7 +107,7 @@ class HorizontalProductCard extends StatelessWidget {
                         decoration: const BoxDecoration(color: Co.purple, shape: BoxShape.circle),
                         child: Text(
                           '${Helpers.getProperPrice(product.price.toInt(), showCurrency: false)}\n${L10n.tr().egp}',
-                          style: TStyle.robotBlackMedium().copyWith(color: Co.white),
+                          style: context.style16500.copyWith(color: Co.white),
                           textAlign: TextAlign.center,
                         ),
                       ),

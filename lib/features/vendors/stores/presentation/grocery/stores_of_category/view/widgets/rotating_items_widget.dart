@@ -1,5 +1,6 @@
 import 'package:circular_motion/circular_motion.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
@@ -74,7 +75,7 @@ class RotatingItemWidget extends StatelessWidget {
                             CircleAvatar(radius: 28, backgroundImage: NetworkImage(item.image)),
                             Text(
                               item.name.length > 10 ? '${item.name.substring(0, 10)}...' : item.name,
-                              style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                              style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),

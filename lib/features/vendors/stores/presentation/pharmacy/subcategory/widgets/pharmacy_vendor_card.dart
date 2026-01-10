@@ -10,7 +10,6 @@ import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.da
 import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_widget.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
-
 /// Card widget for displaying pharmacy vendor information
 class PharmacyVendorCard extends StatelessWidget {
   const PharmacyVendorCard({
@@ -99,7 +98,7 @@ class PharmacyVendorCard extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 name,
-                                style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w700),
+                                style: context.style16500.copyWith(fontWeight: FontWeight.w700),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -118,7 +117,7 @@ class PharmacyVendorCard extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           name,
-                          style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey),
+                          style: context.style14400.copyWith(color: Co.darkGrey),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -143,7 +142,7 @@ class PharmacyVendorCard extends StatelessWidget {
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Text(
                                       location,
-                                      style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                                      style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -164,7 +163,7 @@ class PharmacyVendorCard extends StatelessWidget {
                                 const SizedBox(width: 4),
                                 Text(
                                   deliveryTime,
-                                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                                  style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                                 ),
                               ],
                             ),
@@ -206,7 +205,7 @@ class PharmacyVendorCard extends StatelessWidget {
                         //           children: [
                         //             const Icon(Icons.star, color: Co.tertiary, size: 18),
                         //             const SizedBox(width: 4),
-                        //             Text('$rating ( $reviewCount )', style: TStyle.robotBlackThin().copyWith(color: Co.tertiary)),
+                        //             Text('$rating ( $reviewCount )', style: context.style12400.copyWith(color: Co.tertiary)),
                         //           ],
                         //         ),
                         //         const VerticalSpacing(4),
@@ -246,7 +245,7 @@ class PharmacyVendorCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(24)),
-              child: Text(L10n.tr().closed, style: TStyle.robotBlackSubTitle()),
+              child: Text(L10n.tr().closed, style: context.style20500),
             ),
         ],
       ),

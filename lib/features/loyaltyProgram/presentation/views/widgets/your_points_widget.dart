@@ -41,7 +41,7 @@ class YourPointsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(L10n.tr().yourPoints, style: TStyle.robotBlackSubTitle().copyWith(color: visual.primaryTextColor)),
+          Text(L10n.tr().yourPoints, style: context.style20500.copyWith(color: visual.primaryTextColor)),
           const SizedBox(height: 16),
           Row(
             children: [
@@ -50,8 +50,8 @@ class YourPointsWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(availablePoints.toString(), style: TStyle.robotBlackSubTitle().copyWith(color: visual.primaryTextColor)),
-                  Text(L10n.tr().availablePoints, style: TStyle.robotBlackSubTitle().copyWith(color: visual.secondaryTextColor)),
+                  Text(availablePoints.toString(), style: context.style20500.copyWith(color: visual.primaryTextColor)),
+                  Text(L10n.tr().availablePoints, style: context.style20500.copyWith(color: visual.secondaryTextColor)),
                 ],
               ),
             ],
@@ -125,7 +125,7 @@ class YourPointsItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TStyle.robotBlackMedium().copyWith(color: firstTextColor)),
+              Text(title, style: context.style16500.copyWith(color: firstTextColor)),
               const VerticalSpacing(4),
               Text(
                 subTitle,

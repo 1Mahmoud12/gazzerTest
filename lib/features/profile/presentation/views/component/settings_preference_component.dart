@@ -19,7 +19,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
         initiallyExpanded: true,
         icon: Assets.settingIc,
         title: '${L10n.tr().settings} & ${L10n.tr().preferences}',
-        titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+        titleStyle: context.style20500.copyWith(color: Co.purple),
         body: Column(
           spacing: 6,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +100,7 @@ class _ItitleWithSvg extends StatelessWidget {
       spacing: 16,
       children: [
         SvgPicture.asset(svg, height: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
-        Text(title, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+        Text(title, style: context.style16500.copyWith(color: Co.purple)),
       ],
     );
   }

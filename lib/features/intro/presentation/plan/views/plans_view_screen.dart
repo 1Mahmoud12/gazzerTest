@@ -6,7 +6,6 @@ import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
@@ -30,7 +29,7 @@ class PlansViewScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(text: L10n.tr().yourPlanToOptimizeCalories, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
+              child: GradientText(text: L10n.tr().yourPlanToOptimizeCalories, style: context.style20500, gradient: Grad().textGradient),
             ),
             Expanded(
               child: GridView.builder(
@@ -56,13 +55,10 @@ class PlansViewScreen extends StatelessWidget {
                               style: context.style16400.copyWith(color: Co.purple),
                             ),
                             const TextSpan(text: '\n'),
-                            TextSpan(
-                              text: 'Daily Calorie Range: 1200–1500 kcal (adjusted based on user data)\nFeatures:',
-                              style: TStyle.robotBlackThin(),
-                            ),
+                            TextSpan(text: 'Daily Calorie Range: 1200–1500 kcal (adjusted based on user data)\nFeatures:', style: context.style12400),
                             const TextSpan(text: '\n'),
 
-                            ...List.generate(4, (i) => TextSpan(text: '\n•  Low-carb, high-protein meals', style: TStyle.robotBlackThin())),
+                            ...List.generate(4, (i) => TextSpan(text: '\n•  Low-carb, high-protein meals', style: context.style12400)),
                           ],
                         ),
                         overflow: TextOverflow.fade,

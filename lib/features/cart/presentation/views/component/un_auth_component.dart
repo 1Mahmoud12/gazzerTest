@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/main_btn.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
@@ -17,7 +16,7 @@ class UnAuthComponent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Row(),
-        Text(msg, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+        Text(msg, style: context.style16500.copyWith(color: Co.purple)),
         const VerticalSpacing(24),
         MainBtn(
           onPressed: () {

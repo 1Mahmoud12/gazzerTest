@@ -83,7 +83,7 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
         children: [
           Text(
             L10n.tr().loyaltySpendSummary(Helpers.getProperPrice(spentPoints), spendDuration),
-            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+            style: context.style12400.copyWith(color: Co.darkGrey),
           ),
           const SizedBox(height: 16),
           LinearProgressIndicator(
@@ -112,7 +112,7 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
             (nameCurrentTier == 'HERO')
                 ? L10n.tr().reachForMaxTier
                 : _buildNextTierMessage(context, nameNextTier ?? '', minOrderCount, progressNextTier ?? 0),
-            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+            style: context.style12400.copyWith(color: Co.darkGrey),
             textAlign: TextAlign.center,
           ),
         ],

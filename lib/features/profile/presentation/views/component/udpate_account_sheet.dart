@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -52,7 +53,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
         spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(L10n.tr().editAccountInformation, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+          Text(L10n.tr().editAccountInformation, style: context.style16500.copyWith(color: Co.purple)),
           Divider(height: 8, thickness: 1, color: Co.purple.withAlpha(90)),
           Form(
             key: _formKey,
@@ -72,7 +73,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().fullName, style: TStyle.robotBlackMedium()),
+                            child: Text(L10n.tr().fullName, style: context.style16500),
                           ),
                           MainTextField(
                             controller: _nameController,
@@ -102,7 +103,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().emailAddress, style: TStyle.robotBlackMedium()),
+                            child: Text(L10n.tr().emailAddress, style: context.style16500),
                           ),
                           Directionality(
                             textDirection: TextDirection.ltr,
@@ -136,7 +137,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().mobileNumber, style: TStyle.robotBlackMedium()),
+                            child: Text(L10n.tr().mobileNumber, style: context.style16500),
                           ),
                           Directionality(
                             textDirection: TextDirection.ltr,
@@ -204,7 +205,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
             radius: 24,
             child: Text(
               L10n.tr().saveChanges,
-              style: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
+              style: context.style20500.copyWith(color: Co.white),
               textAlign: TextAlign.center,
             ),
           ),

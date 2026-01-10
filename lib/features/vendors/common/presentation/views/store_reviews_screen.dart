@@ -67,7 +67,7 @@ class _StoreReviewsScreenState extends State<StoreReviewsScreen> {
                     //  const VerticalSpacing(16),
 
                     // Reviews List
-                    Text('${statistics.totalReviews} ${L10n.tr().reviews}', style: TStyle.robotBlackSubTitle()),
+                    Text('${statistics.totalReviews} ${L10n.tr().reviews}', style: context.style20500),
                     const VerticalSpacing(16),
                     ...reviews.reviews.map((review) => _ReviewCard(review: review)),
                   ],
@@ -116,14 +116,14 @@ class _RatingSummarySection extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(statistics.averageRating.toStringAsFixed(1), style: TStyle.robotBlackTitle()),
+                Text(statistics.averageRating.toStringAsFixed(1), style: context.style24500),
                 const HorizontalSpacing(8),
                 const Padding(padding: EdgeInsets.only(bottom: 8), child: VectorGraphicsWidget(Assets.starRateIc, width: 22, height: 22)),
               ],
             ),
             Text('${statistics.totalReviews} ${L10n.tr().reviews}', style: context.style14400.copyWith(color: Co.darkGrey)),
             const VerticalSpacing(16),
-            Text('${statistics.recommendationPercentage}%', style: TStyle.robotBlackTitle()),
+            Text('${statistics.recommendationPercentage}%', style: context.style24500),
             Text(L10n.tr().recommended, style: context.style14400.copyWith(color: Co.darkGrey)),
           ],
         ),
@@ -144,7 +144,7 @@ class _StarRatingBar extends StatelessWidget {
 
     return Row(
       children: [
-        Text('$starNumber ${L10n.tr().star}', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+        Text('$starNumber ${L10n.tr().star}', style: context.style12400.copyWith(color: Co.darkGrey)),
         const HorizontalSpacing(8),
         Expanded(
           child: Stack(
@@ -215,10 +215,7 @@ class _ReviewCard extends StatelessWidget {
                     height: 50,
                     color: Co.secondary,
                     child: Center(
-                      child: Text(
-                        review.clientName.isNotEmpty ? review.clientName.substring(0, 1).toUpperCase() : 'C',
-                        style: TStyle.robotBlackSubTitle(),
-                      ),
+                      child: Text(review.clientName.isNotEmpty ? review.clientName.substring(0, 1).toUpperCase() : 'C', style: context.style20500),
                     ),
                   ),
           ),
@@ -228,7 +225,7 @@ class _ReviewCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(review.clientName, style: TStyle.robotBlackMedium()),
+                Text(review.clientName, style: context.style16500),
                 const VerticalSpacing(8),
                 // Stars
                 Row(
@@ -242,7 +239,7 @@ class _ReviewCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(dateFormat.format(review.createdAt), style: TStyle.robotBlackThin()),
+                    Text(dateFormat.format(review.createdAt), style: context.style12400),
                   ],
                 ),
                 if (review.comment != null && review.comment!.isNotEmpty) ...[

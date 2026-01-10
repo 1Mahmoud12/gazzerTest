@@ -38,7 +38,7 @@ class CardRestInfoWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(vendor.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  child: Text(vendor.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
                 ),
                 Row(
                   spacing: 4,
@@ -52,7 +52,7 @@ class CardRestInfoWidget extends StatelessWidget {
             ),
           ),
           // if (vendor.tag != null && vendor.tag!.isNotEmpty)
-          //   Text(vendor.shortTag(25)!, style: TStyle.robotBlackSmall().copyWith(color: Co.secondary), maxLines: 1, overflow: TextOverflow.ellipsis),
+          //   Text(vendor.shortTag(25)!, style: context.style14400.copyWith(color: Co.secondary), maxLines: 1, overflow: TextOverflow.ellipsis),
           const VerticalSpacing(8),
           Row(
             children: [
@@ -61,7 +61,7 @@ class CardRestInfoWidget extends StatelessWidget {
                   vendor.description == '' ? vendor.name : vendor.description,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey),
+                  style: context.style16500.copyWith(color: Co.darkGrey),
                 ),
               ),
             ],

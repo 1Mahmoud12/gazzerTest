@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_state.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -153,11 +154,11 @@ class ProfileHeaderContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(client.clientName, style: TStyle.robotBlackMedium()),
+                  Text(client.clientName, style: context.style16500),
                   // if (client.email != null)
-                  //   Text(client.email ?? L10n.tr().notSetYet, style: TStyle.robotBlackMedium().copyWith(color: Colors.black87)),
+                  //   Text(client.email ?? L10n.tr().notSetYet, style: context.style16500.copyWith(color: Colors.black87)),
                   // const SizedBox.shrink(),
-                  Text('${L10n.tr().memberSince} ${client.formatedCreatedAt}', style: TStyle.robotBlackMedium()),
+                  Text('${L10n.tr().memberSince} ${client.formatedCreatedAt}', style: context.style16500),
                 ],
               ),
             ),

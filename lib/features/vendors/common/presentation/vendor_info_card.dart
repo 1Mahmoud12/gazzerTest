@@ -75,16 +75,16 @@ class VendorInfoCard extends StatelessWidget {
                             if (categories?.isNotEmpty == true)
                               Text(
                                 Helpers.shortIrretableStrings(categories!, 38) ?? '',
-                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                style: context.style12400.copyWith(color: Co.darkGrey),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             if (vendor.alwaysOpen)
-                              Text(L10n.tr().alwayeysOpen, style: TStyle.robotBlackSmall(), textAlign: TextAlign.center)
+                              Text(L10n.tr().alwayeysOpen, style: context.style14400, textAlign: TextAlign.center)
                             else if (vendor.alwaysClosed)
                               Text(
                                 L10n.tr().thisRestaurantIsCurrentlyUnavailable,
-                                style: TStyle.robotBlackThin().copyWith(color: Co.darkRed),
+                                style: context.style12400.copyWith(color: Co.darkRed),
                                 textAlign: TextAlign.center,
                               )
                             else
@@ -99,17 +99,17 @@ class VendorInfoCard extends StatelessWidget {
                                           children: [
                                             TextSpan(
                                               text: '${L10n.tr().from}:  ',
-                                              style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
+                                              style: context.style14400.copyWith(color: Co.purple),
                                             ),
                                             if (vendor.startTime != null)
                                               TextSpan(
                                                 text: vendor.startTime!.defaultTimeFormat,
-                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                                style: context.style12400.copyWith(color: Co.darkGrey),
                                               )
                                             else
                                               TextSpan(
                                                 text: L10n.tr().availabilityUnknown,
-                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                                style: context.style12400.copyWith(color: Co.darkGrey),
                                               ),
                                           ],
                                         ),
@@ -126,17 +126,17 @@ class VendorInfoCard extends StatelessWidget {
                                           children: [
                                             TextSpan(
                                               text: '${L10n.tr().to}:  ',
-                                              style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
+                                              style: context.style14400.copyWith(color: Co.purple),
                                             ),
                                             if (vendor.endTime != null)
                                               TextSpan(
                                                 text: vendor.endTime!.defaultTimeFormat,
-                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                                style: context.style12400.copyWith(color: Co.darkGrey),
                                               )
                                             else
                                               TextSpan(
                                                 text: L10n.tr().availabilityUnknown,
-                                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                                style: context.style12400.copyWith(color: Co.darkGrey),
                                               ),
                                           ],
                                         ),
@@ -192,7 +192,7 @@ class VendorInfoCard extends StatelessWidget {
                           ),
                           Text(
                             vendor.zoneName.toUpperCase(),
-                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
@@ -211,7 +211,7 @@ class VendorInfoCard extends StatelessWidget {
                           ),
                           Text(
                             '${vendor.deliveryTime} ${L10n.tr().min}',
-                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
@@ -230,7 +230,7 @@ class VendorInfoCard extends StatelessWidget {
                           ),
                           Text(
                             Helpers.getProperPrice(vendor.deliveryFee!),
-                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],

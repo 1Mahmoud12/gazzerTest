@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
@@ -49,10 +50,10 @@ class _HealthyPlanScreenState extends State<HealthyPlanScreen> {
           spacing: 12,
           children: [
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
-            GradientText(text: L10n.tr().healthyPlan, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
+            GradientText(text: L10n.tr().healthyPlan, style: context.style20500, gradient: Grad().textGradient),
             SizedBox(
               width: 250,
-              child: Text(L10n.tr().thisPartHelpYouToBeMoreHealthy, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+              child: Text(L10n.tr().thisPartHelpYouToBeMoreHealthy, style: context.style16500, textAlign: TextAlign.center),
             ),
             PlanAnimatedBtn(
               onPressed: () {

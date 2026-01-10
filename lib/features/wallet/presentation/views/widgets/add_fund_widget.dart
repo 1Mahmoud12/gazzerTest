@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
 import 'package:gazzer/core/presentation/pkgs/paymob/paymob_view.dart';
@@ -117,7 +118,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(L10n.tr().walletAddFunds, style: TStyle.robotBlackTitle()),
+              Text(L10n.tr().walletAddFunds, style: context.style24500),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -134,7 +135,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                         SvgPicture.asset(Assets.visaIc),
                         const SizedBox(width: 12),
                         Flexible(
-                          child: Text(L10n.tr().walletRechargeViaCard, style: TStyle.robotBlackMedium(), overflow: TextOverflow.ellipsis),
+                          child: Text(L10n.tr().walletRechargeViaCard, style: context.style16500, overflow: TextOverflow.ellipsis),
                         ),
                       ],
                     ),
@@ -150,7 +151,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                               controller: _amountController,
                               keyboardType: const TextInputType.numberWithOptions(decimal: true),
                               focusNode: _amountFocusNode,
-                              style: TStyle.robotBlackMedium(),
+                              style: context.style16500,
                               hintText: L10n.tr().walletEnterAmount,
                               autovalidateMode: AutovalidateMode.onUserInteraction,
                               onChange: (value) {
@@ -205,7 +206,7 @@ class _AddFundWidgetState extends State<_AddFundWidgetContent> {
                               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
                               bgColor: (int.tryParse(_amountController.text) ?? 0) < 10 ? Co.purple200 : Co.purple,
                               text: L10n.tr().walletRechargeNow,
-                              textStyle: TStyle.robotBlackMedium().copyWith(color: Co.white),
+                              textStyle: context.style16500.copyWith(color: Co.white),
                             ),
                           ),
                         ],

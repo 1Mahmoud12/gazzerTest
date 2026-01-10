@@ -153,7 +153,7 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
                           const VectorGraphicsWidget(Assets.clockIc, height: 24, width: 24),
                           Text(
                             '${store.estimatedDeliveryTime} ${L10n.tr().min}',
-                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                            style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],

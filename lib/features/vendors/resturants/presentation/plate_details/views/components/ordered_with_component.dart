@@ -53,7 +53,7 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
         const VerticalSpacing(16),
         Padding(
           padding: AppConst.defaultHrPadding,
-          child: Text(widget.title, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+          child: Text(widget.title, style: context.style20500.copyWith(color: Co.purple)),
         ),
 
         SingleChildScrollView(
@@ -111,14 +111,14 @@ class _OrderedWithComponentState extends State<OrderedWithComponent> {
                                 children: [
                                   FittedBox(
                                     alignment: AlignmentDirectional.centerStart,
-                                    child: Text(Helpers.getProperPrice(p.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                    child: Text(Helpers.getProperPrice(p.price), style: context.style16500.copyWith(color: Co.purple)),
                                   ),
                                   if (p.offer != null)
                                     FittedBox(
                                       alignment: AlignmentDirectional.centerStart,
                                       child: Text(
                                         Helpers.getProperPrice(p.priceBeforeDiscount!),
-                                        style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                        style: context.style16500.copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
                                       ),
                                     ),
                                 ],

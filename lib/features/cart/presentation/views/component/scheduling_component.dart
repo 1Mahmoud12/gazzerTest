@@ -77,7 +77,7 @@ class _SchedulingComponentState extends State<SchedulingComponent> {
                   if (state is! TimeSlotsStates) return const SizedBox.shrink();
                   if (state is TimeSlotsError || (state is TimeSlotsLoaded && state.timeSlots.isEmpty)) {
                     return Center(
-                      child: Text(L10n.tr().noAvailableSchedulingTimeSlots, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                      child: Text(L10n.tr().noAvailableSchedulingTimeSlots, style: context.style12400.copyWith(color: Co.darkGrey)),
                     );
                   }
                   return Skeletonizer(

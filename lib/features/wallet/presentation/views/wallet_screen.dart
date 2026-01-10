@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -32,7 +33,7 @@ class _WalletScreenState extends State<WalletScreen> {
         appBar: MainAppBar(
           iconsColor: Co.secondary,
           title: L10n.tr().wallet,
-          titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple, fontWeight: TStyle.medium),
+          titleStyle: context.style20500.copyWith(color: Co.purple, fontWeight: TStyle.medium),
         ),
         body: Session().client == null
             ? Expanded(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty))

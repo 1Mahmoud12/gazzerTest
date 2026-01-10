@@ -104,7 +104,7 @@ class MultiCatRestHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(restaurant.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TStyle.robotBlackSubTitle()),
+                child: Text(restaurant.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: context.style20500),
               ),
               const SizedBox(width: 12),
               Row(
@@ -213,7 +213,7 @@ class _InfoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(title, style: TStyle.robotBlackMedium()),
+        Text(title, style: context.style16500),
         const SizedBox(height: 4),
         Row(
           mainAxisSize: MainAxisSize.min,

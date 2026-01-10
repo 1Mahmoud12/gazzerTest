@@ -4,7 +4,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
@@ -42,7 +41,7 @@ class SearchVendorInfoCard extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(vendor.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                      child: Text(vendor.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
                     ),
                     const HorizontalSpacing(4),
                     Row(

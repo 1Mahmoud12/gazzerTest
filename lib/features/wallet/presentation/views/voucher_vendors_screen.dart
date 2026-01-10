@@ -102,7 +102,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.message, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+                    Text(state.message, style: context.style16500, textAlign: TextAlign.center),
                     const VerticalSpacing(16),
                     MainBtn(
                       onPressed: () => context.read<VoucherVendorsCubit>().loadVoucherStores(widget.id),
@@ -127,7 +127,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                   : (state as VoucherVendorsConvertSuccess).stores;
 
               if (stores.isEmpty) {
-                return Center(child: Text(L10n.tr().noData, style: TStyle.robotBlackMedium()));
+                return Center(child: Text(L10n.tr().noData, style: context.style16500));
               }
 
               final isConverting = state is VoucherVendorsConverting;
@@ -165,7 +165,7 @@ class _VoucherVendorsScreenState extends State<VoucherVendorsScreen> {
                             decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(20)),
                             child: Text(
                               '${_selectedStores.length} ${L10n.tr().selected}',
-                              style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+                              style: context.style12400.copyWith(color: Co.white, fontWeight: TStyle.bold),
                             ),
                           ),
                       ],
@@ -288,7 +288,7 @@ class _VendorTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(L10n.isAr(context) ? store.storeNameAr : store.storeName, style: TStyle.robotBlackMedium()),
+                    Text(L10n.isAr(context) ? store.storeNameAr : store.storeName, style: context.style16500),
                     const SizedBox(height: 4),
                     Text('$discountText ${L10n.tr().discount}', style: textTheme.bodySmall?.copyWith(color: Co.darkGrey)),
                     const SizedBox(height: 4),

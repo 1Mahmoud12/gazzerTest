@@ -54,7 +54,7 @@ class _ChangePhoneNumberSheetState extends State<ChangePhoneNumberSheet> {
                   spacing: 16,
                   children: [
                     const SizedBox.shrink(),
-                    Text(widget.title ?? L10n.tr().editYourNumber, style: TStyle.robotBlackTitle().copyWith(color: Co.purple)),
+                    Text(widget.title ?? L10n.tr().editYourNumber, style: context.style24500.copyWith(color: Co.purple)),
                     const SizedBox.shrink(),
                     Text(L10n.tr().mobileNumber, style: context.style14400),
                     Form(

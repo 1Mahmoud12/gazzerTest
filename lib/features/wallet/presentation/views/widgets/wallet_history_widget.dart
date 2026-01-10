@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/date_time.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -81,10 +82,7 @@ class WalletHistoryWidget extends StatelessWidget {
           Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                l10n.walletHistorySubtitle,
-                style: TStyle.robotBlackRegular(font: FFamily.roboto).copyWith(color: Co.grey),
-              ),
+              child: Text(l10n.walletHistorySubtitle, style: context.style16400.copyWith(color: Co.grey)),
             ),
           )
         else

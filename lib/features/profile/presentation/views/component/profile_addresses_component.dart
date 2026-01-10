@@ -50,7 +50,7 @@ class _ProfileAddressesComponent extends StatelessWidget {
             },
             child: Text(
               L10n.tr().addNewAddress,
-              style: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
+              style: context.style20500.copyWith(color: Co.white),
               textAlign: TextAlign.center,
             ),
           ),

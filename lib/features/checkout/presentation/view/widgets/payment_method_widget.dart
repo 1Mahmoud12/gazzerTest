@@ -39,7 +39,7 @@ class PaymentMethodWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(L10n.tr().choosePaymentMethod, style: TStyle.robotBlackSubTitle()),
+              Text(L10n.tr().choosePaymentMethod, style: context.style20500),
               const VerticalSpacing(16),
               Container(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
@@ -284,7 +284,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
                         children: [
                           Expanded(child: Text(widget.title, style: context.style16400)),
                           // if (widget.walletPhoneNumber != null && widget.walletPhoneNumber!.isNotEmpty)
-                          //   Text(widget.walletPhoneNumber!, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                          //   Text(widget.walletPhoneNumber!, style: context.style12400.copyWith(color: Co.darkGrey)),
                         ],
                       ),
                     ],
@@ -321,7 +321,7 @@ class _PaymentMethodItemState extends State<_PaymentMethodItem> {
                             }
                           },
 
-                          child: Text(L10n.tr().convert, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                          child: Text(L10n.tr().convert, style: context.style16500.copyWith(color: Co.white)),
                         ),
                       ),
                   ],
@@ -520,7 +520,7 @@ class _CardItem extends StatelessWidget {
                   // const SizedBox(height: 4),
                   // Text(
                   //   '${card.cardHolderName} • ${card.formattedExpiry}',
-                  //   style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                  //   style: context.style12400.copyWith(color: Co.darkGrey),
                   // ),
                 ],
               ),
@@ -529,7 +529,7 @@ class _CardItem extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-                child: Text(L10n.tr().defaultCard, style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
+                child: Text(L10n.tr().defaultCard, style: context.style14400.copyWith(color: Co.purple)),
               ),
           ],
         ),

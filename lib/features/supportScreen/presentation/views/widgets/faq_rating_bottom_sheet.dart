@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -13,8 +14,6 @@ import 'package:gazzer/features/supportScreen/data/requests/faq_rating_request.d
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_cubit.dart';
 import 'package:gazzer/features/supportScreen/presentation/cubit/faq_rating_states.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../../core/presentation/extensions/color.dart';
 
 /// Shows a rating bottom sheet for FAQ questions
 Future<void> showFaqRatingBottomSheet(BuildContext context, {int? faqQuestionId, int? faqCategoryId, int? orderId}) async {
@@ -100,7 +99,7 @@ class _FaqRatingBottomSheetState extends State<FaqRatingBottomSheet> {
                 margin: const EdgeInsets.only(bottom: 20),
                 decoration: BoxDecoration(color: Co.white.withOpacityNew(0.3), borderRadius: BorderRadius.circular(2)),
               ),
-              Text(L10n.tr().wasThisHelpful, textAlign: TextAlign.center, style: TStyle.robotBlackMedium().copyWith(fontSize: 18)),
+              Text(L10n.tr().wasThisHelpful, textAlign: TextAlign.center, style: context.style16500.copyWith(fontSize: 18)),
               const VerticalSpacing(24),
               RatingBar.builder(
                 initialRating: _rating,

@@ -52,27 +52,27 @@ class _BestSellingCard extends StatelessWidget {
                               alignment: AlignmentDirectional.centerStart,
                               child: Text(
                                 '${L10n.tr().totalUnitSolid}: ',
-                                style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
+                                style: context.style14400.copyWith(color: Co.purple),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
                           const HorizontalSpacing(5),
-                          Text('${product.orderCount ?? 0}', style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
+                          Text('${product.orderCount ?? 0}', style: context.style14400.copyWith(color: Co.purple)),
                         ],
                       ),
 
                     Text(
                       product.description,
-                      style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                      style: context.style12400.copyWith(color: Co.darkGrey),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
+                        Text(Helpers.getProperPrice(product.price), style: context.style14400.copyWith(color: Co.purple)),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -80,7 +80,7 @@ class _BestSellingCard extends StatelessWidget {
                             const SizedBox(width: 2),
                             Text(
                               product.rate.toStringAsFixed(1),
-                              style: TStyle.robotBlackThin().copyWith(color: Co.secondary, fontWeight: TStyle.bold),
+                              style: context.style12400.copyWith(color: Co.secondary, fontWeight: TStyle.bold),
                             ),
                           ],
                         ),

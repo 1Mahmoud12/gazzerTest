@@ -42,7 +42,7 @@ class GlobalIncrementWidget extends StatelessWidget {
 
       ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 15),
-        child: Text('$initVal', style: TStyle.robotBlackSubTitle(), textAlign: TextAlign.center),
+        child: Text('$initVal', style: context.style20500, textAlign: TextAlign.center),
       ),
       InkWell(
         onTap: canAdd

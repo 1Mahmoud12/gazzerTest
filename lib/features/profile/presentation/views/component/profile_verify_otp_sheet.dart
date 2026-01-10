@@ -108,7 +108,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                       Text(
                         "${L10n.tr().anOTPhasBeenSentTo} ${L10n.isAr(context) ? '' : '(+20)-'}$phoneNumber${!L10n.isAr(context) ? '' : '-(20+)'}",
                         maxLines: 2,
-                        style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                        style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                         textAlign: TextAlign.start,
                       ),
                       const VerticalSpacing(24),
@@ -135,7 +135,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                                   return Text(
                                     "${value ~/ 60}:${(value % 60).toString().padLeft(2, '0')}",
                                     textAlign: TextAlign.end,
-                                    style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                                    style: context.style16500.copyWith(color: Co.purple),
                                   );
                                 }
 
@@ -176,7 +176,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       const Icon(Icons.phone, size: 32, color: Co.purple),
-                                      Text(L10n.tr().callSupport, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                      Text(L10n.tr().callSupport, style: context.style16500.copyWith(color: Co.purple)),
                                     ],
                                   ),
                                 ),
@@ -205,7 +205,7 @@ class _ProfileVerifyOtpScreenState extends State<ProfileVerifyOtpScreen> {
                           },
                           textStyle: context.style14400.copyWith(fontWeight: TStyle.semi),
                           bgColor: Colors.transparent,
-                          child: Text(L10n.tr().continu, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                          child: Text(L10n.tr().continu, style: context.style16500.copyWith(color: Co.purple)),
                         ),
                       ),
                     ],

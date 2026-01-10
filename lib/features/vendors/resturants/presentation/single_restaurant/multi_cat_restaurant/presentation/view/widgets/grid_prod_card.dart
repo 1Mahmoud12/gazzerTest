@@ -57,11 +57,11 @@ class SingleGridProduct extends StatelessWidget {
                                 child: Text.rich(
                                   TextSpan(
                                     children: [
-                                      TextSpan(text: prod.name, style: TStyle.robotBlackSmall()),
+                                      TextSpan(text: prod.name, style: context.style14400),
                                       const TextSpan(text: '\n'),
                                       TextSpan(
                                         text: "TEST ",
-                                        style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                                        style: context.style12400.copyWith(color: Co.darkGrey),
                                       ),
                                     ],
                                   ),
@@ -87,7 +87,7 @@ class SingleGridProduct extends StatelessWidget {
                                     const Icon(Icons.star, color: Co.secondary, size: 18),
                                     Text(
                                       prod.rate.toStringAsFixed(1),
-                                      style: TStyle.robotBlackSmall().copyWith(color: Co.secondary, fontWeight: TStyle.bold),
+                                      style: context.style14400.copyWith(color: Co.secondary, fontWeight: TStyle.bold),
                                     ),
                                   ],
                                 ),

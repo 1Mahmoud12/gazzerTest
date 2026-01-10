@@ -44,7 +44,7 @@ class _NavigationItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           children: [
-            Expanded(child: Text(title, style: TStyle.robotBlackMedium())),
+            Expanded(child: Text(title, style: context.style16500)),
             RotatedBox(quarterTurns: L10n.isAr(context) ? 3 : 1, child: SvgPicture.asset(Assets.arrowUp)),
           ],
         ),

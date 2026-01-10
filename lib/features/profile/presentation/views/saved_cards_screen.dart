@@ -118,7 +118,7 @@ class _CardItem extends StatelessWidget {
               children: [
                 Directionality(
                   textDirection: TextDirection.ltr,
-                  child: Text(card.cardHolderName, style: TStyle.robotBlackMedium()),
+                  child: Text(card.cardHolderName, style: context.style16500),
                 ),
                 const VerticalSpacing(10),
                 Text(card.maskedCardNumber, style: context.style16400),
@@ -128,7 +128,7 @@ class _CardItem extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-                    child: Text(L10n.tr().defaultCard, style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
+                    child: Text(L10n.tr().defaultCard, style: context.style14400.copyWith(color: Co.purple)),
                   ),
                 const HorizontalSpacing(8),
                 InkWell(

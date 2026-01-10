@@ -51,7 +51,7 @@ class SearchProductWidget extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
-                  child: Text(product.badge ?? '', style: TStyle.robotBlackSmall().copyWith(color: Co.purple)),
+                  child: Text(product.badge ?? '', style: context.style14400.copyWith(color: Co.purple)),
                 ),
               ),
               child: ClipRRect(
@@ -86,9 +86,9 @@ class SearchProductWidget extends StatelessWidget {
                       if (product.offer != null)
                         Text(
                           Helpers.getProperPrice(product.offer!.priceAfterDiscount(product.price)),
-                          style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey).copyWith(decoration: TextDecoration.lineThrough),
+                          style: context.style12400.copyWith(color: Co.darkGrey).copyWith(decoration: TextDecoration.lineThrough),
                         ),
-                      Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackThin()),
+                      Text(Helpers.getProperPrice(product.price), style: context.style12400),
                     ],
                   ),
                 ],

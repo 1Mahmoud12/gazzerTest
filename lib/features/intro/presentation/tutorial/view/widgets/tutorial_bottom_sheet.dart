@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_text.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/option_btn.dart';
 import 'package:gazzer/features/auth/login/presentation/login_screen.dart';
@@ -75,7 +75,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                   spacing: 12,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    GradientText(text: L10n.tr().selectLanguage, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
+                    GradientText(text: L10n.tr().selectLanguage, style: context.style20500, gradient: Grad().textGradient),
                     const SizedBox(height: 40, width: double.infinity),
                     PlanAnimatedBtn(
                       onPressed: () => changeLanguage('en'),
@@ -88,7 +88,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(Assets.assetsPngFlagEn, height: 24, width: 24),
-                            Text(L10n.tr().english, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                            Text(L10n.tr().english, style: context.style16500.copyWith(color: Co.purple)),
                           ],
                         ),
                       ),
@@ -104,7 +104,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(Assets.assetsPngFlagEg, height: 24, width: 24),
-                            Text("العربية", style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                            Text("العربية", style: context.style16500.copyWith(color: Co.purple)),
                           ],
                         ),
                       ),

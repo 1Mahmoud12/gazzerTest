@@ -11,7 +11,7 @@ class _FoodDetailsWidget extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(text: L10n.tr().details, style: TStyle.robotBlackMedium()),
+                  TextSpan(text: L10n.tr().details, style: context.style16500),
                   const TextSpan(text: '\n'),
                   const WidgetSpan(child: VerticalSpacing(24)),
                   TextSpan(text: product.description, style: context.style14400),

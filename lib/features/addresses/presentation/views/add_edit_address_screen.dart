@@ -8,7 +8,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/components/select_search_menu.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
@@ -168,7 +167,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
     return Scaffold(
       appBar: MainAppBar(
         title: cubit.oldAddress == null ? L10n.tr().addAddress : L10n.tr().editAddress,
-        titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+        titleStyle: context.style20500.copyWith(color: Co.purple),
       ),
       body: SingleChildScrollView(
         padding: AppConst.defaultPadding,

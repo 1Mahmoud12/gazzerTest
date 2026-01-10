@@ -3,7 +3,6 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart' show GradientRadioBtn, HorizontalSpacing, VerticalSpacing;
 import 'package:gazzer/features/vendors/common/domain/item_option_entity.dart';
@@ -123,7 +122,7 @@ class _PlateOptionsWidgetState extends State<PlateOptionsWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${L10n.tr().choose} ${value.name}', style: TStyle.robotBlackThin().copyWith(color: Colors.grey[600])),
+                  Text('${L10n.tr().choose} ${value.name}', style: context.style12400.copyWith(color: Colors.grey[600])),
                   const VerticalSpacing(8),
                   ..._buildValuesList(value.subAddons, level + 1, currentPath, value.type),
                 ],

@@ -103,7 +103,7 @@ class _DailyDealCardState extends State<DailyDealCard> {
                       children: [
                         Text(
                           L10n.tr().dailyDeal,
-                          style: TStyle.robotBlackThin().copyWith(color: Co.purple, fontWeight: TStyle.bold),
+                          style: context.style12400.copyWith(color: Co.purple, fontWeight: TStyle.bold),
                         ),
                         const SizedBox(height: 8),
                         _buildCountdownTimer(),
@@ -161,14 +161,14 @@ class _DailyDealCardState extends State<DailyDealCard> {
         const SizedBox(width: 4),
         Text(
           ' : ',
-          style: TStyle.robotBlackMedium().copyWith(color: Co.white, fontWeight: TStyle.bold),
+          style: context.style16500.copyWith(color: Co.white, fontWeight: TStyle.bold),
         ),
         const SizedBox(width: 4),
         _buildTimeBox(minutes, L10n.tr().mins),
         const SizedBox(width: 4),
         Text(
           ' : ',
-          style: TStyle.robotBlackMedium().copyWith(color: Co.white, fontWeight: TStyle.bold),
+          style: context.style16500.copyWith(color: Co.white, fontWeight: TStyle.bold),
         ),
         const SizedBox(width: 4),
         _buildTimeBox(seconds, L10n.tr().secs),
@@ -179,9 +179,9 @@ class _DailyDealCardState extends State<DailyDealCard> {
   Widget _buildTimeBox(String value, String label) {
     return Column(
       children: [
-        Text(value, style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
+        Text(value, style: context.style20500.copyWith(color: Co.white)),
         const SizedBox(height: 2),
-        Text(label, style: TStyle.robotBlackThin().copyWith(color: Colors.white.withOpacityNew(0.8))),
+        Text(label, style: context.style12400.copyWith(color: Colors.white.withOpacityNew(0.8))),
       ],
     );
   }

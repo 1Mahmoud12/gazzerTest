@@ -48,7 +48,7 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TitleWithMore(title: L10n.tr().reviews, titleStyle: TStyle.robotBlackSubTitle(), onPressed: onViewAll),
+        TitleWithMore(title: L10n.tr().reviews, titleStyle: context.style20500, onPressed: onViewAll),
         const VerticalSpacing(12),
         Row(
           children: [
@@ -177,7 +177,7 @@ class ReviewItem extends StatelessWidget {
               // Review Text
               Text(
                 review['text'],
-                style: TStyle.robotBlackThin()..copyWith(height: 1.4, color: Co.darkGrey),
+                style: context.style12400..copyWith(height: 1.4, color: Co.darkGrey),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),

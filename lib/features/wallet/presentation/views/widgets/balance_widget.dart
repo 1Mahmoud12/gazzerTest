@@ -24,7 +24,7 @@ class BalanceWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L10n.tr().walletKeepItUp, style: TStyle.robotBlackSubTitle().copyWith(color: Co.white)),
+                Text(L10n.tr().walletKeepItUp, style: context.style20500.copyWith(color: Co.white)),
                 Text(
                   L10n.tr().walletNewAchievements,
                   style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
@@ -47,7 +47,7 @@ class BalanceWidget extends StatelessWidget {
               child: Text(
                 '$balanceText \n ${L10n.tr().egp}',
                 textAlign: TextAlign.center,
-                style: TStyle.robotBlackSubTitle().copyWith(color: Co.white),
+                style: context.style20500.copyWith(color: Co.white),
               ),
             ),
           ),

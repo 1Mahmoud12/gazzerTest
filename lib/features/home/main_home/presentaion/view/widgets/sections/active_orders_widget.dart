@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -83,7 +84,7 @@ class ActiveOrdersWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: TitleWithMore(
                   title: L10n.tr().your_active_orders,
-                  titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+                  titleStyle: context.style20500.copyWith(color: Co.purple),
                   onPressed: () {
                     context.push(OrdersScreen.route);
                   },

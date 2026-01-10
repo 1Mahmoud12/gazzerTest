@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/notifications/filter_item.dart';
 import 'package:gazzer/features/notifications/presintation/item_notification.dart';
 
@@ -29,7 +29,7 @@ class _NotificationsViewState extends State<NotificationsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(L10n.tr().notifications, style: TStyle.robotBlackSubTitle())),
+      appBar: AppBar(title: Text(L10n.tr().notifications, style: context.style20500)),
 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -84,12 +84,12 @@ class _NotificationsViewState extends State<NotificationsView> {
 
             const SizedBox(height: 16),
 
-            Text(L10n.tr().today, style: TStyle.robotBlackSubTitle()),
+            Text(L10n.tr().today, style: context.style20500),
             const SizedBox(height: 16),
             ItemNotification(appNotification: dummyNotification),
             const SizedBox(height: 16),
 
-            Text(L10n.tr().previous_notification, style: TStyle.robotBlackSubTitle()),
+            Text(L10n.tr().previous_notification, style: context.style20500),
             const SizedBox(height: 16),
             ItemNotification(appNotification: dummyNotification),
             const SizedBox(height: 20),

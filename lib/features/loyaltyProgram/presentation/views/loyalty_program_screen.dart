@@ -31,7 +31,7 @@ class LoyaltyProgramScreen extends StatelessWidget {
         appBar: MainAppBar(
           iconsColor: Co.secondary,
           title: L10n.tr().loyaltyProgram,
-          titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple, fontWeight: TStyle.medium),
+          titleStyle: context.style20500.copyWith(color: Co.purple, fontWeight: TStyle.medium),
         ),
         body: Center(child: UnAuthComponent(msg: L10n.tr().pleaseLoginToUseLoyalty)),
       );
@@ -50,7 +50,7 @@ class _LoyaltyProgramView extends StatelessWidget {
       appBar: MainAppBar(
         iconsColor: Co.secondary,
         title: L10n.tr().loyaltyProgram,
-        titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple, fontWeight: TStyle.medium),
+        titleStyle: context.style20500.copyWith(color: Co.purple, fontWeight: TStyle.medium),
       ),
       body: BlocBuilder<LoyaltyProgramCubit, LoyaltyProgramState>(
         builder: (context, state) {
@@ -202,7 +202,7 @@ class _ProgramContent extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
         children: [
-          Text(bannerText, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+          Text(bannerText, style: context.style16500, textAlign: TextAlign.center),
           const SizedBox(height: 16),
           NameLogoLoyaltyProgram(
             mainColor: visuals.mainColor,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -25,10 +26,10 @@ class EmptyCartWidget extends StatelessWidget {
             ),
             const VerticalSpacing(16),
 
-            Text(L10n.tr().nothing_here_yet, style: TStyle.robotBlackTitle(), textAlign: TextAlign.center),
+            Text(L10n.tr().nothing_here_yet, style: context.style24500, textAlign: TextAlign.center),
             const VerticalSpacing(16),
 
-            Text(L10n.tr().add_items_to_cart_to_continue_order, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+            Text(L10n.tr().add_items_to_cart_to_continue_order, style: context.style16500, textAlign: TextAlign.center),
             const VerticalSpacing(16),
             MainBtn(
               onPressed: () {

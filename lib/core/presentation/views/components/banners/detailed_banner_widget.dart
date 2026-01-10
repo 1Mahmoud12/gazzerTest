@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/color_utils.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/spiky_shape_widget.dart';
 
@@ -20,8 +20,8 @@ class DetailedBannerWidget extends StatelessWidget {
         rtChild: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (banner.title != null) Text(banner.title!, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
-            if (banner.subtitle != null) Text(banner.subtitle!, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+            if (banner.title != null) Text(banner.title!, style: context.style20500.copyWith(color: Co.purple)),
+            if (banner.subtitle != null) Text(banner.subtitle!, style: context.style16500.copyWith(color: Co.purple)),
           ],
         ),
       ),

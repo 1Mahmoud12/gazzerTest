@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/fakers.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/floating_draggable_widget.dart';
@@ -124,7 +125,7 @@ class _RestaurantsMenuScreenState extends State<RestaurantsMenuScreen> {
                           CustomNetworkImage(tab.$1, width: 50, height: 50, fit: BoxFit.cover, borderRaduis: 50),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                            child: Text(tab.$2, style: TStyle.robotBlackSmall()),
+                            child: Text(tab.$2, style: context.style14400),
                           ),
                         ],
                       ),

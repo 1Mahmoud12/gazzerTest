@@ -113,7 +113,7 @@ class _BottomSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+              child: Text(product.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
             ),
             if (product.offer != null) ...[
               Container(
@@ -121,7 +121,7 @@ class _BottomSection extends StatelessWidget {
                 decoration: BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.circular(50)),
                 child: Text(
                   '${product.offer!.discount.toInt()}${product.offer!.discountType == DiscountType.percentage ? ' %' : ''}',
-                  style: TStyle.robotBlackMedium(),
+                  style: context.style16500,
                 ),
               ),
             ],
@@ -146,9 +146,9 @@ class _BottomSection extends StatelessWidget {
               children: [
                 const VectorGraphicsWidget(Assets.starRateIc),
                 const HorizontalSpacing(4),
-                Text(product.rate.toString(), style: TStyle.robotBlackSmall()),
+                Text(product.rate.toString(), style: context.style14400),
                 const HorizontalSpacing(2),
-                Text('(+${product.reviewCount})', style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey)),
+                Text('(+${product.reviewCount})', style: context.style14400.copyWith(color: Co.darkGrey)),
               ],
             ),
           ],
@@ -166,14 +166,14 @@ class _BottomSection extends StatelessWidget {
                 children: [
                   FittedBox(
                     alignment: AlignmentDirectional.centerStart,
-                    child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                    child: Text(Helpers.getProperPrice(product.price), style: context.style16500.copyWith(color: Co.purple)),
                   ),
                   if (product.offer != null)
                     FittedBox(
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         Helpers.getProperPrice(product.priceBeforeDiscount!),
-                        style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                        style: context.style16500.copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
                       ),
                     ),
                 ],

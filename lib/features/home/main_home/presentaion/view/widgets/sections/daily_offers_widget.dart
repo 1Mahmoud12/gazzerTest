@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/domain/entities/banner_entity.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
@@ -65,7 +66,7 @@ class _DailyOffersContent extends StatelessWidget {
         delegate: SliverChildListDelegate([
           TitleWithMore(
             title: L10n.tr().dailyOffersForYou,
-            titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+            titleStyle: context.style20500.copyWith(color: Co.purple),
             onPressed: () {
               context.push(DailyOffersScreen.route);
             },

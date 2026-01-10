@@ -169,7 +169,7 @@ class GuideProvider extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
               ),
-              child: Text(L10n.tr().gotIt, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+              child: Text(L10n.tr().gotIt, style: context.style16500.copyWith(color: Co.white)),
             ),
           ],
         ),

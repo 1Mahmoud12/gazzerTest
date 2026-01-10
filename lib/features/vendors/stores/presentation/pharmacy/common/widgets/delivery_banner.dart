@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 
 /// Reusable banner for displaying delivery information
 class DeliveryBanner extends StatelessWidget {
@@ -17,7 +17,7 @@ class DeliveryBanner extends StatelessWidget {
       decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(12)),
       child: Text(
         message,
-        style: TStyle.robotBlackSubTitle().copyWith(
+        style: context.style20500.copyWith(
           shadows: [
             const Shadow(
               color: Color(0xADFF9900), // #FF9900AD

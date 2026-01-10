@@ -40,11 +40,11 @@ Future<bool?> voucherAlert({
           if (asDialog) const VerticalSpacing(20),
           Text(
             title,
-            style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold, color: Co.purple),
+            style: context.style16500.copyWith(fontWeight: TStyle.bold, color: Co.purple),
             textAlign: TextAlign.center,
           ),
           const VerticalSpacing(10),
-          if (message != null) Text(message, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+          if (message != null) Text(message, style: context.style16500, textAlign: TextAlign.center),
 
           // const VericalSpacing(20),
           Padding(

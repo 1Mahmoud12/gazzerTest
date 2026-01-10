@@ -31,7 +31,7 @@ class ConvertPointsToVoucherWidget extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(L10n.tr().walletConvertPointsToVoucher, style: TStyle.robotBlackTitle()),
+            Text(L10n.tr().walletConvertPointsToVoucher, style: context.style24500),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(20),
@@ -101,7 +101,7 @@ class _VoucherTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TStyle.robotBlackMedium(fontSize: 18, font: FFamily.roboto)),
+                  Text(title, style: context.style16500),
                   const SizedBox(height: 8),
                   Text(
                     L10n.tr().walletValidUntil(voucher.validUntil),

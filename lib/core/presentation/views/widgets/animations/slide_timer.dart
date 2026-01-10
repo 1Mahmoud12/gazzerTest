@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
@@ -35,7 +36,7 @@ class _SlideTimerState extends State<SlideTimer> {
 
   @override
   void initState() {
-    style = widget.textStyle ?? TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold);
+    style = widget.textStyle ?? context.style16500.copyWith(fontWeight: TStyle.bold);
     _calculate();
     timer = Timer.periodic(widget.duration, (timer) {
       setState(() => _calculate());

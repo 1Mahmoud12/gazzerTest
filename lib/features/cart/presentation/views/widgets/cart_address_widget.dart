@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
@@ -30,7 +31,7 @@ class CartAddressWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(address.labelType.label ?? address.label, style: TStyle.robotBlackMedium().copyWith(color: Co.purple), maxLines: 2),
+                  Text(address.labelType.label ?? address.label, style: context.style16500.copyWith(color: Co.purple), maxLines: 2),
                   RichText(
                     text: TextSpan(
                       children: [
@@ -41,7 +42,7 @@ class CartAddressWidget extends StatelessWidget {
                         TextSpan(text: ', ${L10n.tr().apartmentNumber} ${address.apartment}'),
                         if (address.landmark != null) TextSpan(text: ', ${L10n.tr().landmark} ${address.landmark}.'),
                       ],
-                      style: TStyle.robotBlackThin().copyWith(height: 1.7, color: Co.darkGrey),
+                      style: context.style12400.copyWith(height: 1.7, color: Co.darkGrey),
                     ),
                   ),
                 ],

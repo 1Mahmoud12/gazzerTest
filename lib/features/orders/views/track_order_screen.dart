@@ -267,7 +267,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                     decoration: BoxDecoration(color: Colors.lightBlue.withOpacityNew(0.9), borderRadius: BorderRadius.circular(8)),
                     child: Text(
                       '${_userLocation.latitude.toStringAsFixed(2)} × ${_userLocation.longitude.toStringAsFixed(2)}',
-                      style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.bold),
+                      style: context.style12400.copyWith(color: Co.white, fontWeight: TStyle.bold),
                     ),
                   ),
                 ),
@@ -305,7 +305,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                           children: [
                             Text(L10n.tr().your_delivery_man, style: context.style16400.copyWith(color: Co.darkGrey)),
                             const VerticalSpacing(4),
-                            Text(_deliveryManName, style: TStyle.robotBlackMedium()),
+                            Text(_deliveryManName, style: context.style16500),
                           ],
                         ),
                       ),
@@ -357,7 +357,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                     children: [
                       const VectorGraphicsWidget(Assets.customerSupportIc),
                       const HorizontalSpacing(10),
-                      Text(L10n.tr().getHelp, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                      Text(L10n.tr().getHelp, style: context.style16500.copyWith(color: Co.white)),
                     ],
                   ),
                 ),

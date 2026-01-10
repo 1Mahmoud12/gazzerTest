@@ -81,7 +81,7 @@ class OrderCardWidget extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: Text(
                               isToday ? '${L10n.tr().today} ${dateFormat.format(order.orderDate)}' : dateFormat.format(order.orderDate),
-                              style: TStyle.robotBlackThin(),
+                              style: context.style12400,
                             ),
                           ),
                         ],
@@ -97,7 +97,7 @@ class OrderCardWidget extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(L10n.tr().price, style: context.style16400),
-                            Text(Helpers.getProperPrice(order.price), style: TStyle.robotBlackMedium()),
+                            Text(Helpers.getProperPrice(order.price), style: context.style16500),
                           ],
                         ),
                       ),
@@ -105,14 +105,14 @@ class OrderCardWidget extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(L10n.tr().items, style: context.style16400),
-                            Text('${order.itemsCount}', style: TStyle.robotBlackMedium()),
+                            Text('${order.itemsCount}', style: context.style16500),
                           ],
                         ),
                       ),
                       Expanded(
                         child: Text(
                           L10n.tr().viewDetails,
-                          style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.underline, color: Co.purple),
+                          style: context.style16500.copyWith(decoration: TextDecoration.underline, color: Co.purple),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -185,7 +185,7 @@ class _RatingDisplay extends StatelessWidget {
       ),
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Text(L10n.tr().you_rate_stars(rating), style: TStyle.robotBlackMedium(), textAlign: TextAlign.center),
+      child: Text(L10n.tr().you_rate_stars(rating), style: context.style16500, textAlign: TextAlign.center),
     );
   }
 }
@@ -433,7 +433,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                           ),
                         ),
                         const VerticalSpacing(6),
-                        Text(timeEstimate, style: TStyle.robotBlackThin()),
+                        Text(timeEstimate, style: context.style12400),
                       ],
                     ),
                   ],
@@ -454,7 +454,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(L10n.tr().price, style: context.style16400),
-                                    Text(Helpers.getProperPrice(order.price), style: TStyle.robotBlackMedium()),
+                                    Text(Helpers.getProperPrice(order.price), style: context.style16500),
                                   ],
                                 ),
                               ),
@@ -463,7 +463,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(L10n.tr().items, style: context.style16400),
-                                    Text('${order.itemsCount}', style: TStyle.robotBlackMedium()),
+                                    Text('${order.itemsCount}', style: context.style16500),
                                   ],
                                 ),
                               ),
@@ -474,11 +474,7 @@ class _ActiveOrderCardWithMap extends StatelessWidget {
                             onTap: onViewDetails,
                             child: Text(
                               L10n.tr().viewDetails,
-                              style: TStyle.robotBlackMedium().copyWith(
-                                decoration: TextDecoration.underline,
-                                color: Co.purple,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: context.style16500.copyWith(decoration: TextDecoration.underline, color: Co.purple, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ],
@@ -566,7 +562,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                       ),
                     ),
                     const VerticalSpacing(6),
-                    Text(timeEstimate, style: TStyle.robotBlackThin()),
+                    Text(timeEstimate, style: context.style12400),
                   ],
                 ),
               ],
@@ -580,7 +576,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(L10n.tr().price, style: context.style16400),
-                      Text(Helpers.getProperPrice(order.price), style: TStyle.robotBlackMedium()),
+                      Text(Helpers.getProperPrice(order.price), style: context.style16500),
                     ],
                   ),
                 ),
@@ -588,7 +584,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(L10n.tr().items, style: context.style16400),
-                      Text('${order.itemsCount}', style: TStyle.robotBlackMedium()),
+                      Text('${order.itemsCount}', style: context.style16500),
                     ],
                   ),
                 ),
@@ -597,7 +593,7 @@ class _ActiveOrderCardWithoutMap extends StatelessWidget {
                     onTap: onViewDetails,
                     child: Text(
                       L10n.tr().viewDetails,
-                      style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.underline, color: Co.purple, fontWeight: FontWeight.w600),
+                      style: context.style16500.copyWith(decoration: TextDecoration.underline, color: Co.purple, fontWeight: FontWeight.w600),
                       textAlign: TextAlign.center,
                     ),
                   ),

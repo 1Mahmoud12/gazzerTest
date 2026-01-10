@@ -96,7 +96,7 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
                         children: [
                           const VectorGraphicsWidget(Assets.galleryIc),
                           const HorizontalSpacing(16),
-                          Text(L10n.tr().gallery, style: TStyle.robotBlackMedium()),
+                          Text(L10n.tr().gallery, style: context.style16500),
                         ],
                       ),
                     ),
@@ -116,7 +116,7 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
                         children: [
                           SvgPicture.asset(Assets.cameraIc),
                           const HorizontalSpacing(16),
-                          Text(L10n.tr().camera, style: TStyle.robotBlackMedium()),
+                          Text(L10n.tr().camera, style: context.style16500),
                         ],
                       ),
                     ),

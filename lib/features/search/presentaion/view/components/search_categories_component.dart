@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/home/main_home/domain/category_entity.dart';
@@ -66,8 +67,8 @@ class _SearchCategoriesComponentState extends State<SearchCategoriesComponent> w
       isScrollable: true,
       dividerColor: Colors.transparent,
       dividerHeight: 0.5,
-      unselectedLabelStyle: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w400),
-      labelStyle: TStyle.robotBlackMedium().copyWith(color: Co.purple, fontWeight: FontWeight.w400),
+      unselectedLabelStyle: context.style16500.copyWith(fontWeight: FontWeight.w400),
+      labelStyle: context.style16500.copyWith(color: Co.purple, fontWeight: FontWeight.w400),
       padding: EdgeInsets.zero,
       tabAlignment: TabAlignment.start,
       indicatorWeight: 1,

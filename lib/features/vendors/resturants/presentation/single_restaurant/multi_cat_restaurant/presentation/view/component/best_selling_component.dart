@@ -16,7 +16,7 @@ class _BestSellingComponent extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(L10n.tr().bestSellingItems, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+            child: Text(L10n.tr().bestSellingItems, style: context.style20500.copyWith(color: Co.purple)),
           ),
           const VerticalSpacing(8),
 

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/irretable.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
@@ -138,7 +139,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
         ? Center(
             child: SizedBox(
               height: 30,
-              child: Text(L10n.tr().outOfStock, style: TStyle.robotBlackThin().copyWith(color: Co.red)),
+              child: Text(L10n.tr().outOfStock, style: context.style12400.copyWith(color: Co.red)),
             ),
           )
         : ValueListenableBuilder<int>(
@@ -233,7 +234,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
             constraints: const BoxConstraints(minWidth: 40),
             child: Text(
               '$qty',
-              style: TStyle.robotBlackMedium().copyWith(color: Co.secondary, fontWeight: TStyle.bold),
+              style: context.style16500.copyWith(color: Co.secondary, fontWeight: TStyle.bold),
               textAlign: TextAlign.center,
             ),
           ),

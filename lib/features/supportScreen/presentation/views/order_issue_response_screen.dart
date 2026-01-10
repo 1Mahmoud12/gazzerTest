@@ -25,7 +25,7 @@ class OrderIssueResponseScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(l10n.weHaveChecked, style: TStyle.robotBlackSubTitle()),
+            Text(l10n.weHaveChecked, style: context.style20500),
             const VerticalSpacing(16),
             Text(l10n.orderIssueOutsideRefundWindow, style: context.style16400),
             const VerticalSpacing(12),

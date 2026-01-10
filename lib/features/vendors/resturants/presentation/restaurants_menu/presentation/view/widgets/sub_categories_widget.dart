@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/pkgs/gradient_border/box_borders/gradient_box_border.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -68,7 +69,7 @@ class SubCategoryItem extends StatelessWidget {
 
             Padding(
               padding: AppConst.defaultHrPadding,
-              child: Text(name, style: TStyle.robotBlackSmall()),
+              child: Text(name, style: context.style14400),
             ),
           ],
         ),

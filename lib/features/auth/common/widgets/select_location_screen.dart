@@ -172,7 +172,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                         onPressed: () {
                           widget.extra.onSubmit(context, initLocation.value!);
                         },
-                        child: Text(L10n.tr().confirm, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                        child: Text(L10n.tr().confirm, style: context.style16500.copyWith(color: Co.white)),
                       ),
                     ],
                   ),

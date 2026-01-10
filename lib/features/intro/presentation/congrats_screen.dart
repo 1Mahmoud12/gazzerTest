@@ -1,5 +1,6 @@
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -73,15 +74,15 @@ class _CongratsScreenState extends State<CongratsScreen> {
                   spacing: 12,
                   children: [
                     const HorizontalSpacing(double.infinity),
-                    GradientText(text: '${L10n.tr().congratulations}!', style: TStyle.robotBlackHead(), gradient: Grad().radialGradient),
-                    GradientText(text: L10n.tr().youMadeIt, style: TStyle.robotBlackMedium(), gradient: Grad().radialGradient),
+                    GradientText(text: '${L10n.tr().congratulations}!', style: context.style32700, gradient: Grad().radialGradient),
+                    GradientText(text: L10n.tr().youMadeIt, style: context.style16500, gradient: Grad().radialGradient),
                     const VerticalSpacing(12),
                     OptionBtn(
                       onPressed: () {
                         context.go(widget.navigateTo);
                       },
                       width: 209,
-                      child: GradientText(text: L10n.tr().start, style: TStyle.robotBlackSmall()),
+                      child: GradientText(text: L10n.tr().start, style: context.style14400),
                     ),
                     const VerticalSpacing(24),
                   ],

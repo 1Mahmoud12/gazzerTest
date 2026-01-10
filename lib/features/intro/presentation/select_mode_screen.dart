@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_gradient.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/classic_app_bar.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -50,7 +50,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
           spacing: 12,
           children: [
             Hero(tag: Tags.character, child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
-            GradientText(text: L10n.tr().howToLogin, style: TStyle.robotBlackSubTitle(), gradient: Grad().textGradient),
+            GradientText(text: L10n.tr().howToLogin, style: context.style20500, gradient: Grad().textGradient),
             const SizedBox(height: 40, width: double.infinity),
             Hero(
               tag: Tags.btn,

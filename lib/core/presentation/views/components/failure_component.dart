@@ -19,7 +19,7 @@ class FailureComponent extends StatelessWidget {
         children: [
           const VerticalSpacing(8),
           Image.asset(Assets.assetsPngError, height: 200, fit: BoxFit.contain),
-          Text(L10n.tr().oops, style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple)),
+          Text(L10n.tr().oops, style: context.style20500.copyWith(color: Co.purple)),
           const Row(),
           if (message != null)
             Text(

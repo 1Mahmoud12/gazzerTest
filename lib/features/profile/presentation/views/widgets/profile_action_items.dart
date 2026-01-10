@@ -18,7 +18,7 @@ class _PrivacySecurityItem extends StatelessWidget {
           SvgPicture.asset(Assets.privacyIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
           const HorizontalSpacing(16),
           Expanded(
-            child: Text('${L10n.tr().privacy} & ${L10n.tr().security}', style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+            child: Text('${L10n.tr().privacy} & ${L10n.tr().security}', style: context.style16500.copyWith(color: Co.purple)),
           ),
           RotatedBox(
             quarterTurns: L10n.isAr(context) ? 3 : 1,
@@ -46,7 +46,7 @@ class _GetSupportItem extends StatelessWidget {
           SvgPicture.asset(Assets.getSupportIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
           const HorizontalSpacing(16),
           Expanded(
-            child: Text(L10n.tr().getSupport, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+            child: Text(L10n.tr().getSupport, style: context.style16500.copyWith(color: Co.purple)),
           ),
           RotatedBox(
             quarterTurns: L10n.isAr(context) ? 3 : 1,
@@ -78,7 +78,7 @@ class _SignOutButton extends StatelessWidget {
               SvgPicture.asset(Assets.signOutIc, colorFilter: const ColorFilter.mode(Co.logoutRed, BlendMode.srcIn)),
               const VerticalSpacing(24),
               // Confirmation text
-              Text(L10n.tr().areYouSureYouWantToLogout, style: TStyle.robotBlackMedium().copyWith(fontSize: 16), textAlign: TextAlign.center),
+              Text(L10n.tr().areYouSureYouWantToLogout, style: context.style16500.copyWith(fontSize: 16), textAlign: TextAlign.center),
               const VerticalSpacing(32),
               // Sign Out button
               MainBtn(
@@ -161,7 +161,7 @@ class _DeleteAccountItem extends StatelessWidget {
           children: [
             SvgPicture.asset(Assets.deleteIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn)),
             const HorizontalSpacing(16),
-            Text(L10n.tr().deleteAccount, style: TStyle.robotBlackMedium().copyWith(color: Colors.black87)),
+            Text(L10n.tr().deleteAccount, style: context.style16500.copyWith(color: Colors.black87)),
           ],
         ),
       ),

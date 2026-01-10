@@ -150,14 +150,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
             Text(
               L10n.tr().welcomeToGazzer,
-              style: TStyle.robotBlackHead().copyWith(color: Co.purple),
+              style: context.style32700.copyWith(color: Co.purple),
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing(8),
             Text(
               L10n.tr().singUpToExploreWideVarietyOfProducts,
               maxLines: 2,
-              style: TStyle.robotBlackSmall().copyWith(color: Co.gr100),
+              style: context.style14400.copyWith(color: Co.gr100),
               textAlign: TextAlign.center,
             ),
 
@@ -288,7 +288,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Expanded(child: Divider()),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(L10n.tr().or, style: TStyle.robotBlackSmall()),
+                  child: Text(L10n.tr().or, style: context.style14400),
                 ),
                 const Expanded(child: Divider()),
               ],
@@ -301,7 +301,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               bgColor: Colors.transparent,
               borderColor: Co.purple,
               radius: 24,
-              child: Text(L10n.tr().login, style: TStyle.robotBlackMedium()),
+              child: Text(L10n.tr().login, style: context.style16500),
             ),
             const VerticalSpacing(8),
             MainBtn(
@@ -313,19 +313,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
               borderColor: Colors.transparent,
               child: RichText(
                 text: TextSpan(
-                  style: TStyle.robotBlackMedium(),
+                  style: context.style16500,
                   children: [
                     TextSpan(
                       text: L10n.tr().continu,
-                      style: TStyle.robotBlackMedium().copyWith(color: Colors.black87),
+                      style: context.style16500.copyWith(color: Colors.black87),
                     ),
                     TextSpan(
                       text: ' ${L10n.tr().to} ',
-                      style: TStyle.robotBlackMedium().copyWith(color: Colors.black87),
+                      style: context.style16500.copyWith(color: Colors.black87),
                     ),
                     TextSpan(
                       text: L10n.tr().guestMode,
-                      style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                      style: context.style16500.copyWith(color: Co.purple),
                     ),
                   ],
                 ),

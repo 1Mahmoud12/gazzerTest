@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -81,7 +82,7 @@ class _FilterItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TStyle.robotBlackMedium().copyWith(fontWeight: FontWeight.w400, color: isSelected ? Co.purple : null),
+                  style: context.style16500.copyWith(fontWeight: FontWeight.w400, color: isSelected ? Co.purple : null),
                 ),
                 if (icon != null) icon!,
               ],

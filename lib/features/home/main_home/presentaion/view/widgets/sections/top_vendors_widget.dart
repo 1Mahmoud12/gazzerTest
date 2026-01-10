@@ -8,7 +8,6 @@ import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/navigate.dart';
 import 'package:gazzer/core/presentation/views/components/banners/main_banner_widget.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
@@ -75,7 +74,7 @@ class _TopVendorsContent extends StatelessWidget {
         delegate: SliverChildListDelegate([
           TitleWithMore(
             title: L10n.tr().topVendors,
-            titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+            titleStyle: context.style20500.copyWith(color: Co.purple),
             onPressed: () {
               context.push(TopVendorsScreen.route);
             },

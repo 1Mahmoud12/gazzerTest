@@ -6,7 +6,6 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/form_related_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
@@ -134,7 +133,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(L10n.tr().rateYourOrder, style: TStyle.robotBlackMedium()),
+                  Text(L10n.tr().rateYourOrder, style: context.style16500),
                   const VerticalSpacing(16),
                   Flexible(
                     child: SingleChildScrollView(
@@ -207,7 +206,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                           child: MainBtn(
                             text: 'Back',
                             bgColor: Co.lightPurple,
-                            textStyle: TStyle.robotBlackMedium().copyWith(color: Co.black),
+                            textStyle: context.style16500.copyWith(color: Co.black),
                             onPressed: isLoading ? () {} : _goToPreviousStep,
                           ),
                         ),
@@ -223,7 +222,7 @@ class _OrderRatingDialogState extends State<OrderRatingDialog> {
                               : Co.lightPurple,
                           textStyle: (_canProceedToNextStep && !isLoading && _currentStep == 0) || (_canSubmit && !isLoading && _currentStep == 1)
                               ? context.style16400.copyWith(color: Co.white)
-                              : TStyle.robotBlackMedium().copyWith(color: Co.black),
+                              : context.style16500.copyWith(color: Co.black),
                           onPressed: _currentStep == 0
                               ? (_canProceedToNextStep && !isLoading ? _goToNextStep : () {})
                               : (_canSubmit && !isLoading ? () => _submitReview(cubit) : () {}),

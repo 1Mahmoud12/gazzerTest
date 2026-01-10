@@ -134,7 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             state.query.searchWord.trim().isEmpty
                                 ? L10n.tr().enterTheWordYouWantToSearchFor
                                 : L10n.tr().noResultsFoundTryAdjustingYourFilter,
-                            style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey),
+                            style: context.style16500.copyWith(color: Co.darkGrey),
                             textAlign: TextAlign.center,
                           ),
                         ),

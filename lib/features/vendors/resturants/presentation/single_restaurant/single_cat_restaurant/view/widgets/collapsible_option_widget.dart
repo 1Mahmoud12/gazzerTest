@@ -57,7 +57,7 @@ class _CollapsibleOptionWidgetState extends State<_CollapsibleOptionWidget> {
                           Text(widget.optionName, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                           Text(
                             widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select,
-                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                            style: context.style12400.copyWith(color: Co.darkGrey),
                           ),
                         ],
                       ),
@@ -70,7 +70,7 @@ class _CollapsibleOptionWidgetState extends State<_CollapsibleOptionWidget> {
                       ),
                       child: Text(
                         widget.isRequired ? L10n.tr().required : L10n.tr().optional,
-                        style: TStyle.robotBlackThin().copyWith(fontWeight: FontWeight.w500, color: widget.isRequired ? Co.black : Co.grey),
+                        style: context.style12400.copyWith(fontWeight: FontWeight.w500, color: widget.isRequired ? Co.black : Co.grey),
                       ),
                     ),
                     const SizedBox(width: 8),

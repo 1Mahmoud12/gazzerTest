@@ -5,7 +5,6 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/adaptive_progress_indicator.dart';
 
 export 'package:flutter/services.dart';
@@ -142,7 +141,7 @@ class _MainTextFieldState extends State<MainTextField> {
             keyboardType: widget.keyboardType ?? TextInputType.emailAddress,
             autovalidateMode: widget.autovalidateMode,
             decoration: InputDecoration(
-              errorStyle: TStyle.robotBlackSmall().copyWith(color: Co.red),
+              errorStyle: context.style14400.copyWith(color: Co.red),
               errorMaxLines: 5,
               hintMaxLines: 5,
               contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 16),

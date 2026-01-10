@@ -21,7 +21,7 @@ class VendorInfoWidget extends StatelessWidget {
           Text(vendor.name, style: context.style16400, maxLines: 1, overflow: TextOverflow.ellipsis),
 
           // if (vendor.tag?.isNotEmpty == true)
-          //   Text(vendor.tag!.join(', '), style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey), maxLines: 1, overflow: TextOverflow.ellipsis),
+          //   Text(vendor.tag!.join(', '), style: context.style12400.copyWith(color: Co.darkGrey), maxLines: 1, overflow: TextOverflow.ellipsis),
           if (vendor.estimatedDeliveryTime != null) ...[
             const VerticalSpacing(4),
             Row(
@@ -30,7 +30,7 @@ class VendorInfoWidget extends StatelessWidget {
                 const VectorGraphicsWidget(Assets.clockIc, height: 24, width: 24, colorFilter: ColorFilter.mode(Co.purple, BlendMode.srcIn)),
                 Text(
                   '${vendor.estimatedDeliveryTime} ${L10n.tr().min}',
-                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                  style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -41,8 +41,8 @@ class VendorInfoWidget extends StatelessWidget {
           //   children: [
           //     const Icon(Icons.star, color: Co.tertiary, size: 20),
           //     const Spacer(),
-          //     Text(vendor.rate.toStringAsFixed(2), style: TStyle.robotBlackThin().copyWith(color: Co.tertiary)),
-          //     Text("(${vendor.rateCount ?? 0})", style: TStyle.robotBlackThin()),
+          //     Text(vendor.rate.toStringAsFixed(2), style: context.style12400.copyWith(color: Co.tertiary)),
+          //     Text("(${vendor.rateCount ?? 0})", style: context.style12400),
           //     const Spacer(),
           //   ],
           // ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
@@ -79,7 +80,7 @@ class _AddressMapWidgetState extends State<AddressMapWidget> {
         ),
         child: selectedLocation == null
             ? Center(
-                child: Text(L10n.tr().selectLocation, style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold)),
+                child: Text(L10n.tr().selectLocation, style: context.style16500.copyWith(fontWeight: TStyle.bold)),
               )
             : AbsorbPointer(
                 child: GoogleMap(

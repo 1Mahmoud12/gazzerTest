@@ -84,7 +84,7 @@ class VerticalProductCard extends StatelessWidget {
                             decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(20)),
                             child: Text(
                               "${product.offer?.discount}${product.offer?.discountType == DiscountType.percentage ? "%" : ""}",
-                              style: TStyle.robotBlackMedium(),
+                              style: context.style16500,
                             ),
                           ),
                         FavoriteWidget(size: 40, fovorable: product, padding: 0),
@@ -102,7 +102,7 @@ class VerticalProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(product.name, style: TStyle.robotBlackMedium(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                          child: Text(product.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
                         ),
 
                         const SizedBox(width: 10),
@@ -120,7 +120,7 @@ class VerticalProductCard extends StatelessWidget {
                     //   const VerticalSpacing(10),
                     //   Text(
                     //     product.description,
-                    //     style: TStyle.robotBlackSmall(),
+                    //     style: context.style14400,
                     //     maxLines: 1,
                     //     overflow: TextOverflow.ellipsis,
                     //     textAlign: TextAlign.start,
@@ -147,7 +147,7 @@ class VerticalProductCard extends StatelessWidget {
                             VectorGraphicsWidget(pharmacy ? Assets.pharmacyStoreIc : Assets.restaurantNameIc),
                             const SizedBox(width: 8),
                             Expanded(
-                              child: Text(product.store?.name ?? '', style: TStyle.robotBlackMedium(), overflow: TextOverflow.ellipsis, maxLines: 1),
+                              child: Text(product.store?.name ?? '', style: context.style16500, overflow: TextOverflow.ellipsis, maxLines: 1),
                             ),
                           ],
                         ),
@@ -171,7 +171,7 @@ class VerticalProductCard extends StatelessWidget {
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Text(
                                       product.offer != null ? Helpers.getProperPrice(product.price) : '',
-                                      style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                                      style: context.style16500.copyWith(color: Co.purple),
                                     ),
                                   ),
                                   if (product.offer != null)
@@ -179,13 +179,13 @@ class VerticalProductCard extends StatelessWidget {
                                       alignment: AlignmentDirectional.centerStart,
                                       child: Text(
                                         Helpers.getProperPrice(product.priceBeforeDiscount!),
-                                        style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                        style: context.style16500.copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
                                       ),
                                     )
                                   else
                                     FittedBox(
                                       alignment: AlignmentDirectional.centerStart,
-                                      child: Text(Helpers.getProperPrice(product.price), style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+                                      child: Text(Helpers.getProperPrice(product.price), style: context.style16500.copyWith(color: Co.purple)),
                                     ),
                                 ],
                               ),

@@ -80,11 +80,11 @@ class _ProfileHeaderWidgetState extends State<_ProfileHeaderWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(widget.client.clientName, style: TStyle.robotBlackMedium()),
+                  Text(widget.client.clientName, style: context.style16500),
                   // if (widget.client.email != null)
-                  //   Text(widget.client.email ?? L10n.tr().notSetYet, style: TStyle.robotBlackMedium().copyWith(color: Colors.black87)),
+                  //   Text(widget.client.email ?? L10n.tr().notSetYet, style: context.style16500.copyWith(color: Colors.black87)),
                   // const SizedBox.shrink(),
-                  Text('${L10n.tr().memberSince} ${widget.client.formatedCreatedAt}', style: TStyle.robotBlackMedium()),
+                  Text('${L10n.tr().memberSince} ${widget.client.formatedCreatedAt}', style: context.style16500),
                 ],
               ),
             ),

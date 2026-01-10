@@ -31,7 +31,7 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
         child: ListView(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(args.title, style: TStyle.robotBlackSubTitle()),
+            Text(args.title, style: context.style20500),
             const VerticalSpacing(12),
             Text(args.answer, style: context.style16400),
             const VerticalSpacing(16),

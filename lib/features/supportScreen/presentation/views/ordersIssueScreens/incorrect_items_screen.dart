@@ -192,7 +192,7 @@ class _IncorrectItemsScreenState extends State<IncorrectItemsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text(l10n.selectMissingIncorrectItems, style: TStyle.robotBlackMedium()),
+                            Text(l10n.selectMissingIncorrectItems, style: context.style16500),
                             const VerticalSpacing(16),
                             ...allItems.map((item) {
                               final isSelected = _selectedItemIds.contains(item.id);

@@ -89,7 +89,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(L10n.tr().walletConvertPointsToMoney, style: TStyle.robotBlackTitle()),
+              Text(L10n.tr().walletConvertPointsToMoney, style: context.style24500),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -104,9 +104,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Flexible(
-                          child: Text(L10n.tr().walletConvertLoyaltyPoints, style: TStyle.robotBlackSubTitle(font: FFamily.roboto)),
-                        ),
+                        Flexible(child: Text(L10n.tr().walletConvertLoyaltyPoints, style: context.style20500)),
                         const HorizontalSpacing(12),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -114,10 +112,10 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('$_availablePoints', style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                              Text('$_availablePoints', style: context.style16500.copyWith(color: Co.white)),
                               Text(
                                 L10n.tr().points,
-                                style: TStyle.robotBlackThin().copyWith(color: Co.white, fontWeight: TStyle.medium),
+                                style: context.style12400.copyWith(color: Co.white, fontWeight: TStyle.medium),
                               ),
                             ],
                           ),
@@ -153,7 +151,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                           isLoading: isLoading,
                           bgColor: Co.purple,
                           text: L10n.tr().convert,
-                          textStyle: TStyle.robotBlackMedium().copyWith(color: Co.white),
+                          textStyle: context.style16500.copyWith(color: Co.white),
                           radius: 40,
                           width: double.infinity,
                         );
@@ -238,7 +236,7 @@ class _PointsSelector extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Text('$value', style: TStyle.robotBlackMedium()),
+          Text('$value', style: context.style16500),
           const SizedBox(width: 12),
           Expanded(
             child: _RoundIconButton(
@@ -278,8 +276,8 @@ class _AmountPreview extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(amount.toStringAsFixed(2), style: TStyle.robotBlackMedium()),
-          Text(L10n.tr().egp, style: TStyle.robotBlackMedium()),
+          Text(amount.toStringAsFixed(2), style: context.style16500),
+          Text(L10n.tr().egp, style: context.style16500),
         ],
       ),
     );

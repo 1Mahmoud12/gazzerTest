@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gazzer/core/data/network/result_model.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/pkgs/dialog_loading_animation.dart';
@@ -63,7 +64,7 @@ class TopRatedItemDetails extends StatelessWidget {
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         //   children: [
-                        //     Text(item.name, style: TStyle.robotBlackMedium().copyWith(color: Co.white).copyWith(fontWeight: TStyle.bolder)),
+                        //     Text(item.name, style: context.style16500.copyWith(color: Co.white).copyWith(fontWeight: TStyle.bolder)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -73,11 +74,11 @@ class TopRatedItemDetails extends StatelessWidget {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(L10n.tr().save, style: TStyle.robotBlackMedium()),
+                                  Text(L10n.tr().save, style: context.style16500),
                                   const HorizontalSpacing(6),
                                   Text(
                                     "${item.offer?.discount}${item.offer?.discountType == DiscountType.percentage ? "%" : ""}",
-                                    style: TStyle.robotBlackMedium(),
+                                    style: context.style16500,
                                   ),
                                 ],
                               ),
@@ -99,7 +100,7 @@ class TopRatedItemDetails extends StatelessWidget {
                         //         mainAxisAlignment: MainAxisAlignment.center,
                         //         children: [
                         //           const Icon(Icons.star, color: Co.secondary, size: 20),
-                        //           Text(item.rate.toStringAsFixed(2), style: TStyle.robotBlackSmall().copyWith(color: Co.secondary,fontWeight:bold)),
+                        //           Text(item.rate.toStringAsFixed(2), style: context.style14400.copyWith(color: Co.secondary,fontWeight:bold)),
                         //         ],
                         //       ),
                         //     ),

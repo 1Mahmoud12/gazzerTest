@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 // import 'package:panara_dialogs/panara_dialogs.dart';
 
 class Alerts {
@@ -18,7 +18,7 @@ class Alerts {
         dismissDirection: DismissDirection.up,
         duration: const Duration(seconds: 2),
         backgroundColor: Co.dark.withAlpha(175),
-        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: context.style16500.copyWith(color: Co.white)),
       ),
     );
   }
@@ -32,7 +32,7 @@ class Alerts {
             onPressed: () {
               ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
             },
-            child: Text(L10n.tr().cancel, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+            child: Text(L10n.tr().cancel, style: context.style16500.copyWith(color: Co.white)),
           ),
         ],
 
@@ -43,7 +43,7 @@ class Alerts {
         // dismissDirection: DismissDirection.up,
         // duration: const Duration(seconds: 2),
         backgroundColor: Co.dark,
-        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+        content: Text(msg ?? L10n.tr().pressDoubleBackToExit, style: context.style16500.copyWith(color: Co.white)),
       ),
     );
   }

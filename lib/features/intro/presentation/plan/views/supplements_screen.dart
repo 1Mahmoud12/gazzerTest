@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
@@ -35,7 +36,7 @@ class _SupplementsScreenState extends State<SupplementsScreen> {
     super.dispose();
   }
 
-  final focusData = ["Yes, Daily", "Occasionally", "No"];
+  final focusData = ['Yes, Daily', 'Occasionally', 'No'];
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +52,8 @@ class _SupplementsScreenState extends State<SupplementsScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GradientText(
-                text: "Do you take medications or health supplements regularly?",
-                style: TStyle.robotBlackSubTitle(),
+                text: 'Do you take medications or health supplements regularly?',
+                style: context.style20500,
                 gradient: Grad().textGradient,
               ),
             ),

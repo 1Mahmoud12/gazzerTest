@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/resources.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/image_background_widget.dart';
@@ -36,7 +37,7 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
     super.dispose();
   }
 
-  final focusData = ["Every 3 days", "weely", "I'll Choose Manually"];
+  final focusData = ['Every 3 days', 'weely', "I'll Choose Manually"];
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(
@@ -51,8 +52,8 @@ class _FrequancyCombosScreenState extends State<FrequancyCombosScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GradientText(
-                text: "How often would you like to receive your healthy combos?",
-                style: TStyle.robotBlackSubTitle(),
+                text: 'How often would you like to receive your healthy combos?',
+                style: context.style20500,
                 gradient: Grad().textGradient,
               ),
             ),

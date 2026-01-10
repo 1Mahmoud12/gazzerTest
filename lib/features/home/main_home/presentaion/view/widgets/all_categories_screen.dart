@@ -61,7 +61,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
     return Scaffold(
       appBar: MainAppBar(
         title: L10n.tr().categories,
-        titleStyle: TStyle.robotBlackTitle().copyWith(color: Co.purple),
+        titleStyle: context.style24500.copyWith(color: Co.purple),
       ),
       body: BlocProvider(
         create: (context) {
@@ -172,7 +172,7 @@ class _CategoryGridCard extends StatelessWidget {
           children: [
             SizedBox(width: 80, height: 80, child: CircleGradientBorderedImage(image: category.image)),
             const VerticalSpacing(8),
-            Text(category.name, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
+            Text(category.name, style: context.style16500, textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
           ],
         ),
       ),

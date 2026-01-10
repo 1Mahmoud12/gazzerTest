@@ -4,7 +4,6 @@ import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
 import 'package:gazzer/core/presentation/views/components/failure_component.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
@@ -73,7 +72,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       const VerticalSpacing(12),
                       Padding(
                         padding: AppConst.defaultHrPadding,
-                        child: Text(state.product.name, style: TStyle.robotBlackSubTitle()),
+                        child: Text(state.product.name, style: context.style20500),
                       ),
                       if (state.product.description != '') ...[
                         const VerticalSpacing(12),
@@ -101,7 +100,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                         alignment: AlignmentDirectional.centerStart,
                                         child: Text(
                                           Helpers.getProperPrice(state.product.price),
-                                          style: TStyle.robotBlackMedium().copyWith(color: Co.purple),
+                                          style: context.style16500.copyWith(color: Co.purple),
                                         ),
                                       ),
                                       if (state.product.offer != null)
@@ -109,7 +108,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                           alignment: AlignmentDirectional.centerStart,
                                           child: Text(
                                             Helpers.getProperPrice(state.product.priceBeforeDiscount!),
-                                            style: TStyle.robotBlackMedium().copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                                            style: context.style16500.copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
                                           ),
                                         ),
                                     ],

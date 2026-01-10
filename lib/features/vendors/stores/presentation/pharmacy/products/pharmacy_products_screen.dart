@@ -53,7 +53,7 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
               alignment: isAr ? Alignment.centerRight : Alignment.centerLeft,
               child: Text(
                 isAr ? '${widget.categoryName} الفئات' : '${widget.categoryName} Categories',
-                style: TStyle.robotBlackThin().copyWith(color: Co.purple, fontWeight: TStyle.bold),
+                style: context.style12400.copyWith(color: Co.purple, fontWeight: TStyle.bold),
               ),
             ),
           ),
@@ -92,7 +92,7 @@ class _PharmacyProductsScreenState extends State<PharmacyProductsScreen> {
                             padding: AppConst.defaultHrPadding,
                             child: Text(
                               category['name'] ?? '',
-                              style: selected ? context.style14400.copyWith(color: Co.purple, fontWeight: TStyle.bold) : TStyle.robotBlackSmall(),
+                              style: selected ? context.style14400.copyWith(color: Co.purple, fontWeight: TStyle.bold) : context.style14400,
                             ),
                           ),
                         ],
@@ -255,7 +255,7 @@ class _SubCategoriesList extends StatelessWidget {
                   // Category Name
                   Text(
                     subCategory['name']!,
-                    style: isSelected ? TStyle.robotBlackThin().copyWith(color: Co.purple, fontWeight: TStyle.bold) : TStyle.robotBlackThin(),
+                    style: isSelected ? context.style12400.copyWith(color: Co.purple, fontWeight: TStyle.bold) : context.style12400,
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

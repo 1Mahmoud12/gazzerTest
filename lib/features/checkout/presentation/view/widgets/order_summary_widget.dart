@@ -123,17 +123,17 @@ class _OrderSummaryWidgetState extends State<OrderSummaryWidget> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Flexible(
-                            child: Text(L10n.tr().total, style: TStyle.robotBlackSubTitle(), overflow: TextOverflow.ellipsis, maxLines: 1),
+                            child: Text(L10n.tr().total, style: context.style20500, overflow: TextOverflow.ellipsis, maxLines: 1),
                           ),
                           const HorizontalSpacing(2),
-                          Text(' (${L10n.tr().amountToPay}) ', style: TStyle.robotBlackThin().copyWith(overflow: TextOverflow.ellipsis), maxLines: 1),
+                          Text(' (${L10n.tr().amountToPay}) ', style: context.style12400.copyWith(overflow: TextOverflow.ellipsis), maxLines: 1),
                         ],
                       ),
                     ),
                     const HorizontalSpacing(12),
                     Text(
                       Helpers.getProperPrice(finalTotal),
-                      style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple, fontWeight: TStyle.semi),
+                      style: context.style20500.copyWith(color: Co.purple, fontWeight: TStyle.semi),
                     ),
                   ],
                 ),
@@ -163,9 +163,9 @@ class ItemSummary extends StatelessWidget {
       children: [
         Text(
           title,
-          style: total ? TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold, color: Co.purple) : TStyle.robotBlackMedium(),
+          style: total ? context.style16500.copyWith(fontWeight: TStyle.bold, color: Co.purple) : context.style16500,
         ),
-        Text(valueText, style: total ? context.style16400.copyWith(color: Co.purple) : TStyle.robotBlackMedium()),
+        Text(valueText, style: total ? context.style16400.copyWith(color: Co.purple) : context.style16500),
       ],
     );
   }

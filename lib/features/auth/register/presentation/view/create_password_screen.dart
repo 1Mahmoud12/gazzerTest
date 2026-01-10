@@ -7,7 +7,6 @@ import 'package:gazzer/core/presentation/resources/app_const.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/resources/hero_tags.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
-import 'package:gazzer/core/presentation/theme/text_style.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 import 'package:gazzer/core/presentation/views/widgets/form_related_widgets.dart/main_text_field.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
@@ -80,12 +79,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
                   Text(
                     L10n.tr().createPassword,
-                    style: TStyle.robotBlackHead().copyWith(color: Co.purple),
+                    style: context.style32700.copyWith(color: Co.purple),
                     textAlign: TextAlign.center,
                   ),
                   Text(
                     L10n.tr().createPasswordToVerify,
-                    style: TStyle.robotBlackSmall().copyWith(color: Co.gr100),
+                    style: context.style14400.copyWith(color: Co.gr100),
                     textAlign: TextAlign.center,
                   ),
 

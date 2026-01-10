@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gazzer/core/data/resources/session.dart';
-import 'package:gazzer/core/presentation/extensions/color.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/utils/helpers.dart';
@@ -66,9 +66,9 @@ class ProductPriceSummary extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: [
-                        Text(_getButtonText(context), style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                        Text(_getButtonText(context), style: context.style16500.copyWith(color: Co.white)),
                         const Spacer(),
-                        Text(Helpers.getProperPrice(price), style: TStyle.robotBlackMedium().copyWith(color: Co.white)),
+                        Text(Helpers.getProperPrice(price), style: context.style16500.copyWith(color: Co.white)),
                       ],
                     ),
                   ),

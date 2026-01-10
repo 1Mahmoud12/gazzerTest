@@ -42,9 +42,9 @@ class _InviteEarnComponent extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(L10n.tr().yourCode, style: TStyle.robotBlackMedium().copyWith(color: Co.darkGrey)),
+                    Text(L10n.tr().yourCode, style: context.style16500.copyWith(color: Co.darkGrey)),
                     const HorizontalSpacing(4),
-                    Text(referralCode, style: TStyle.robotBlackMedium()),
+                    Text(referralCode, style: context.style16500),
                   ],
                 ),
               ),
@@ -64,7 +64,7 @@ class _InviteEarnComponent extends StatelessWidget {
           // Share Link Section
           Row(
             children: [
-              Expanded(child: Text(L10n.tr().shareApplicationLink, style: TStyle.robotBlackMedium())),
+              Expanded(child: Text(L10n.tr().shareApplicationLink, style: context.style16500)),
               MainBtn(
                 onPressed: () => _shareLink(context, shareLink),
                 bgColor: Co.purple,

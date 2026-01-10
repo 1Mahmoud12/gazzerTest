@@ -91,16 +91,16 @@ class _HomeHeaderState extends State<_HomeHeader> {
                                 child: Icon(Icons.keyboard_arrow_down, color: Co.black),
                                 alignment: PlaceholderAlignment.middle,
                               ),
-                              TextSpan(text: '\n${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackSmall()),
+                              TextSpan(text: '\n${address.zoneName}, ${address.provinceName}', style: context.style14400),
                             ] else if (tmpLocation != null && tmpLocationDescription != null) ...[
                               TextSpan(text: L10n.tr().deliverTo, style: context.style16400),
                               const WidgetSpan(
                                 child: Icon(Icons.keyboard_arrow_down, color: Co.black),
                                 alignment: PlaceholderAlignment.middle,
                               ),
-                              TextSpan(text: '\n$tmpLocationDescription', style: TStyle.robotBlackSmall()),
+                              TextSpan(text: '\n$tmpLocationDescription', style: context.style14400),
                             ] else
-                              TextSpan(text: L10n.tr().noAddressesSelected, style: TStyle.robotBlackSmall()),
+                              TextSpan(text: L10n.tr().noAddressesSelected, style: context.style14400),
                           ],
                         ),
                         maxLines: 2,
@@ -163,7 +163,7 @@ Widget _buildSheetHeader(BuildContext context, LatLng? selectedLocation) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(L10n.tr().chooseDeliveryLocation, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+      Text(L10n.tr().chooseDeliveryLocation, style: context.style16500.copyWith(color: Co.purple)),
       IconButton(icon: const Icon(Icons.close), onPressed: () => _handleSheetClose(context, selectedLocation)),
     ],
   );
@@ -173,7 +173,7 @@ Widget _buildSavedAddressesSection(BuildContext context, List<AddressEntity> add
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(L10n.tr().savedAddresses, style: TStyle.robotBlackMedium().copyWith(color: Co.purple)),
+      Text(L10n.tr().savedAddresses, style: context.style16500.copyWith(color: Co.purple)),
       const VerticalSpacing(12),
       Flexible(
         child: ListView.separated(
@@ -204,7 +204,7 @@ Widget _buildAddressItem(BuildContext context, AddressEntity address, AddressesB
               children: [
                 Text(address.label, style: context.style14400.copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
-                Text('${address.zoneName}, ${address.provinceName}', style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                Text('${address.zoneName}, ${address.provinceName}', style: context.style12400.copyWith(color: Co.darkGrey)),
               ],
             ),
           ),
@@ -212,7 +212,7 @@ Widget _buildAddressItem(BuildContext context, AddressEntity address, AddressesB
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(color: Co.purple.withOpacityNew(0.1), borderRadius: BorderRadius.circular(8)),
-              child: Text(L10n.tr().defaultt, style: TStyle.robotBlackSmall().copyWith(color: Co.secondary)),
+              child: Text(L10n.tr().defaultt, style: context.style14400.copyWith(color: Co.secondary)),
             ),
         ],
       ),
@@ -239,7 +239,7 @@ Widget _buildCurrentLocationOption(BuildContext context) {
               children: [
                 Text(L10n.tr().deliverToCurrentLocation, style: context.style14400.copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
-                Text(L10n.tr().outsideDeliveryZone, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                Text(L10n.tr().outsideDeliveryZone, style: context.style12400.copyWith(color: Co.darkGrey)),
               ],
             ),
           ),
@@ -269,7 +269,7 @@ Widget _buildMapLocationOption(BuildContext context) {
               children: [
                 Text(L10n.tr().deliverToDifferentLocation, style: context.style14400.copyWith(color: Co.purple)),
                 const VerticalSpacing(4),
-                Text(L10n.tr().chooseLocationOnMap, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                Text(L10n.tr().chooseLocationOnMap, style: context.style12400.copyWith(color: Co.darkGrey)),
               ],
             ),
           ),

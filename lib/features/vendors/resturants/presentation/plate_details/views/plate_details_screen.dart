@@ -344,7 +344,7 @@ class _VendorInfo extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(Helpers.getProperPrice(plate.price), style: TStyle.robotBlackMedium()),
+            Text(Helpers.getProperPrice(plate.price), style: context.style16500),
             if (plate.offer != null)
               Text(Helpers.getProperPrice(plate.priceBeforeDiscount!), style: context.style14400.copyWith(decoration: TextDecoration.lineThrough)),
           ],
@@ -414,7 +414,7 @@ class _CollapsibleOptionState extends State<_CollapsibleOption> {
                           Text(widget.optionName, style: context.style16400),
                           Text(
                             widget.type == OptionType.radio ? L10n.tr().select_1 : L10n.tr().multi_select,
-                            style: TStyle.robotBlackSmall().copyWith(color: Co.darkGrey),
+                            style: context.style14400.copyWith(color: Co.darkGrey),
                           ),
                         ],
                       ),
@@ -427,7 +427,7 @@ class _CollapsibleOptionState extends State<_CollapsibleOption> {
                       ),
                       child: Text(
                         widget.isRequired ? L10n.tr().required : L10n.tr().optional,
-                        style: TStyle.robotBlackThin().copyWith(fontWeight: FontWeight.w500, color: widget.isRequired ? Co.black : Co.grey),
+                        style: context.style12400.copyWith(fontWeight: FontWeight.w500, color: widget.isRequired ? Co.black : Co.grey),
                       ),
                     ),
                     const SizedBox(width: 8),

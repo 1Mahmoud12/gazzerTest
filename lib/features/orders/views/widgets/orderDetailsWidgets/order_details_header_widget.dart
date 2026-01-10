@@ -100,6 +100,6 @@ class DeliveryTimeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('${L10n.tr().take} $minutes ${L10n.tr().min}', style: TStyle.robotBlackThin().copyWith(color: Co.grey));
+    return Text('${L10n.tr().take} $minutes ${L10n.tr().min}', style: context.style12400.copyWith(color: Co.grey));
   }
 }

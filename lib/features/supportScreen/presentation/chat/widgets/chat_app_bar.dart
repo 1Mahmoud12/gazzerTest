@@ -62,7 +62,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                           const SizedBox(width: 6),
                           Text(
                             isOnline ? L10n.tr().online : L10n.tr().offline,
-                            style: TStyle.robotBlackMedium().copyWith(color: isOnline ? Colors.green : Colors.grey),
+                            style: context.style16500.copyWith(color: isOnline ? Colors.green : Colors.grey),
                           ),
                         ],
                       );

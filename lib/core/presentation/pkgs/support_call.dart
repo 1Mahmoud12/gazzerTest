@@ -226,7 +226,7 @@ class SupportCallService {
                 const VerticalSpacing(20),
                 Text(
                   L10n.tr().contactUs,
-                  style: TStyle.robotBlackMedium().copyWith(fontWeight: TStyle.bold),
+                  style: context.style16500.copyWith(fontWeight: TStyle.bold),
                   textAlign: TextAlign.center,
                 ),
                 const VerticalSpacing(10),
@@ -251,7 +251,7 @@ class SupportCallService {
                 const VerticalSpacing(10),
                 Text(
                   L10n.tr().support,
-                  style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey),
+                  style: context.style12400.copyWith(color: Co.darkGrey),
                   textAlign: TextAlign.center,
                 ),
                 Padding(

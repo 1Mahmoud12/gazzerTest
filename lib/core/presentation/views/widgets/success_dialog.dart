@@ -91,7 +91,7 @@ class _SuccessDialogContent extends StatelessWidget {
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
                     children: [
-                      Text(title, textAlign: TextAlign.center, style: TStyle.robotBlackSubTitle()),
+                      Text(title, textAlign: TextAlign.center, style: context.style20500),
                       const VerticalSpacing(12),
                       if (subTitle != null) ...[
                         Text(

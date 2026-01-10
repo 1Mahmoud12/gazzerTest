@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 /// Tile widget for order issue screen options
@@ -18,7 +19,7 @@ class OrderIssueOptionTile extends StatelessWidget {
         decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
-            Expanded(child: Text(title, style: TStyle.robotBlackMedium())),
+            Expanded(child: Text(title, style: context.style16500)),
             const Icon(Icons.chevron_right, color: Co.purple),
           ],
         ),

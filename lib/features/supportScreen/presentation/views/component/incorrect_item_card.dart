@@ -50,7 +50,7 @@ class _IncorrectItemCard extends StatelessWidget {
           if (isSelected) ...[
             const VerticalSpacing(12),
             // Photo section
-            Text(L10n.tr().takePhotoOfItem, style: TStyle.robotBlackThin()),
+            Text(L10n.tr().takePhotoOfItem, style: context.style12400),
             const VerticalSpacing(8),
             if (itemData?.photo != null)
               Stack(
@@ -89,14 +89,14 @@ class _IncorrectItemCard extends StatelessWidget {
                     children: [
                       Icon(Icons.camera_alt, color: Colors.grey.shade400, size: 32),
                       const SizedBox(height: 8),
-                      Text(L10n.tr().tapToTakePhoto, style: TStyle.robotBlackThin().copyWith(color: Colors.grey.shade600)),
+                      Text(L10n.tr().tapToTakePhoto, style: context.style12400.copyWith(color: Colors.grey.shade600)),
                     ],
                   ),
                 ),
               ),
             const VerticalSpacing(12),
             // Note section
-            Text(L10n.tr().addYourNotes, style: TStyle.robotBlackThin()),
+            Text(L10n.tr().addYourNotes, style: context.style12400),
             const VerticalSpacing(8),
             MainTextField(controller: itemData?.noteController ?? TextEditingController(), hintText: L10n.tr().typeYourMessage, maxLines: 3),
           ],

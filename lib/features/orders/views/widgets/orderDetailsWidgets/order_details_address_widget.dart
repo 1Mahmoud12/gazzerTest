@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -67,13 +68,13 @@ class AddressInfoColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(deliveryAddressLabel, style: TStyle.robotBlackSmall()),
+        Text(deliveryAddressLabel, style: context.style14400),
         const SizedBox(height: DeliveryAddressCard._textSpacing),
-        Text(address, style: TStyle.robotBlackThin()),
+        Text(address, style: context.style12400),
         const SizedBox(height: DeliveryAddressCard._textSpacing),
-        Text(name, style: TStyle.robotBlackSmall()),
+        Text(name, style: context.style14400),
         const SizedBox(height: DeliveryAddressCard._textSpacing),
-        Text('$mobileNumberLabel: $mobileNumber', style: TStyle.robotBlackSmall()),
+        Text('$mobileNumberLabel: $mobileNumber', style: context.style14400),
       ],
     );
   }

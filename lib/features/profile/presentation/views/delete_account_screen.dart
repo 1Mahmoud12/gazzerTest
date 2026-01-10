@@ -148,7 +148,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                     alignment: AlignmentDirectional.bottomStart,
                     child: Padding(
                       padding: AppConst.defaultPadding,
-                      child: Text(L10n.tr().deleteAccount, style: TStyle.robotBlackSubTitle().copyWith(color: Co.secondary)),
+                      child: Text(L10n.tr().deleteAccount, style: context.style20500.copyWith(color: Co.secondary)),
                     ),
                   ),
                 ),
@@ -165,7 +165,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                           const TextSpan(text: '\n'),
                           TextSpan(
                             text: L10n.tr().thisFeedbackHelpsUsImproveOurServices,
-                            style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                            style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                           ),
                         ],
                         style: context.style14400.copyWith(fontWeight: TStyle.bold, height: 1.7),
@@ -207,7 +207,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
 
                               subtitle: Text(
                                 items[index].description,
-                                style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                                style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
                               ),
                               title: Text(items[index].title, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
                               splashRadius: AppConst.defaultRadius,

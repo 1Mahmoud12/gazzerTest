@@ -70,13 +70,6 @@ abstract class TStyle {
     color: Co.dark,
   );
 
-  static TextStyle robotBlackRegular14({double fontSize = 14, FFamily? font, BuildContext? context}) => TextStyle(
-    fontFamily: _getFontFamily(font: font, context: context).name,
-    fontSize: _getFontSize(fontSize: fontSize, context: context).sp,
-    fontWeight: regular,
-    color: Co.dark,
-  );
-
   static TextStyle robotBlackSmall({double fontSize = 14, FFamily? font, BuildContext? context}) => TextStyle(
     fontFamily: _getFontFamily(font: font, context: context).name,
     fontSize: _getFontSize(fontSize: fontSize, context: context).sp,

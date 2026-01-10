@@ -53,7 +53,7 @@ class _SingleVendorView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(vendor.name, style: context.style14400.copyWith(fontWeight: TStyle.bold)),
-              Text('${L10n.tr().orderId}: #$orderId', style: TStyle.robotBlackThin()),
+              Text('${L10n.tr().orderId}: #$orderId', style: context.style12400),
             ],
           ),
         ),
@@ -110,7 +110,7 @@ class _VendorDropdownState extends State<_VendorDropdown> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(L10n.tr().vendors, style: TStyle.robotBlackMedium()),
+              Text(L10n.tr().vendors, style: context.style16500),
               const Icon(Icons.keyboard_arrow_down, color: Co.black),
             ],
           ),

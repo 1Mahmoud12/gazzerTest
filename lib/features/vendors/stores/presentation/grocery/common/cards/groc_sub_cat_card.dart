@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
@@ -52,7 +53,7 @@ class GrocSubCatCard extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Text(
                 subCat.name,
-                style: TStyle.robotBlackSmall().copyWith(color: Co.purple),
+                style: context.style14400.copyWith(color: Co.purple),
                 textAlign: TextAlign.center,
               ),
             ),

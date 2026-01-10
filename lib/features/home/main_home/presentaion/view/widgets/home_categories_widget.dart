@@ -22,7 +22,7 @@ class HomeCategoriesComponent extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: TitleWithMore(
             title: L10n.tr().categories,
-            titleStyle: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+            titleStyle: context.style20500.copyWith(color: Co.purple),
             onPressed: () {
               context.push(AllCategoriesScreen.route);
             },
@@ -83,7 +83,7 @@ class CategoryCard extends StatelessWidget {
           spacing: 8,
           children: [
             SizedBox(width: 60, height: 60, child: CircleGradientBorderedImage(image: category.image)),
-            Text(category.name, style: TStyle.robotBlackMedium(), textAlign: TextAlign.center, overflow: TextOverflow.fade),
+            Text(category.name, style: context.style16500, textAlign: TextAlign.center, overflow: TextOverflow.fade),
             const SizedBox.shrink(),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -44,12 +45,11 @@ class WalletHistoryTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(entry.title, style: TStyle.robotBlackMedium()),
+                Text(entry.title, style: context.style16500),
                 const SizedBox(height: 4),
-                if (entry.subtitle.isNotEmpty && entry.subtitle != 'description')
-                  Text(entry.subtitle, style: TStyle.robotBlackRegular(font: FFamily.roboto)),
+                if (entry.subtitle.isNotEmpty && entry.subtitle != 'description') Text(entry.subtitle, style: context.style16400),
                 if (entry.subtitle.isNotEmpty && entry.subtitle != 'description') const SizedBox(height: 4),
-                Text(entry.date, style: TStyle.robotBlackThin().copyWith(color: Co.darkGrey)),
+                Text(entry.date, style: context.style12400.copyWith(color: Co.darkGrey)),
               ],
             ),
           ),
@@ -58,13 +58,10 @@ class WalletHistoryTile extends StatelessWidget {
             children: [
               Text(
                 '${(entry.amount < 0 || entry.title == L10n.tr().paid) ? '-' : '+'} ${entry.amount.abs()} ${L10n.tr().egp}',
-                style: TStyle.robotBlackSubTitle().copyWith(color: Co.purple),
+                style: context.style20500.copyWith(color: Co.purple),
               ),
               const SizedBox(height: 4),
-              Text(
-                entry.time,
-                style: TStyle.robotBlackMedium(font: FFamily.roboto).copyWith(color: Co.darkGrey),
-              ),
+              Text(entry.time, style: context.style16500.copyWith(color: Co.darkGrey)),
             ],
           ),
         ],

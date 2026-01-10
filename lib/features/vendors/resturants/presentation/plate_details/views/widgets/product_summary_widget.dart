@@ -11,7 +11,7 @@ class ProductSummaryWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(plate.name, style: TStyle.robotBlackSubTitle()),
+        Text(plate.name, style: context.style20500),
         const SizedBox(height: 8),
         Text(plate.description, style: context.style14400.copyWith(color: Co.darkGrey)),
       ],
