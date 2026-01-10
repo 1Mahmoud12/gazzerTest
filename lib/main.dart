@@ -32,6 +32,7 @@ void main() async {
     Helpers.customTryCatch(() async => NotificationUtility.initializeAwesomeNotification()),
     // Load location independently of client (for headers)
     Session().loadLocation(),
+    init(),
   ]);
 
   FlutterError.onError = (errorDetails) {
@@ -51,7 +52,6 @@ void main() async {
     log('$error');
   }
   Bloc.observer = MyBlocObserver();
-  await init();
 
   runApp(const GazzerApp());
 }
