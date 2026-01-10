@@ -59,7 +59,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         child: ListView(
           padding: AppConst.defaultHrPadding,
           children: [
-            Center(child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130)),
+            Center(
+              child: SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
+            ),
             Text(
               L10n.tr().resetPassword,
               style: context.style32700.copyWith(color: Co.purple),

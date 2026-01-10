@@ -56,7 +56,11 @@ class PharmacyVendorCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isClosed ? Co.closedColor.withOpacityNew(.1) : Co.white,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: isClosed ? Co.purple.withOpacityNew(0.1) : Co.purple.withOpacityNew(0.2), width: 1),
+                border: Border.all(
+                  color: isClosed
+                      ? Co.purple.withOpacityNew(0.1)
+                      : Co.purple.withOpacityNew(0.2),
+                ),
               ),
               child: Row(
                 children: [
@@ -67,15 +71,23 @@ class PharmacyVendorCard extends StatelessWidget {
                       Container(
                         width: 100,
                         height: 80,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(40)),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
                         margin: const EdgeInsets.only(bottom: 20),
                         child: CustomNetworkImage(logoUrl),
                       ),
                       if (discountPercentage != null)
                         Container(
                           margin: const EdgeInsets.all(4),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                          decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(12)),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Co.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                           child: Text(
                             '$discountPercentage%',
                             style: context.style16400.copyWith(color: Co.black),
@@ -98,7 +110,9 @@ class PharmacyVendorCard extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 name,
-                                style: context.style16500.copyWith(fontWeight: FontWeight.w700),
+                                style: context.style16500.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -107,9 +121,16 @@ class PharmacyVendorCard extends StatelessWidget {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(rating.toStringAsFixed(1), style: context.style16400),
+                                Text(
+                                  rating.toStringAsFixed(1),
+                                  style: context.style16400,
+                                ),
                                 const HorizontalSpacing(4),
-                                SvgPicture.asset(Assets.starRateIc, width: 20, height: 20),
+                                SvgPicture.asset(
+                                  Assets.starRateIc,
+                                  width: 20,
+                                  height: 20,
+                                ),
                               ],
                             ),
                           ],
@@ -117,7 +138,9 @@ class PharmacyVendorCard extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           name,
-                          style: context.style14400.copyWith(color: Co.darkGrey),
+                          style: context.style14400.copyWith(
+                            color: Co.darkGrey,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -132,7 +155,10 @@ class PharmacyVendorCard extends StatelessWidget {
                                   Assets.locationIc,
                                   width: 16,
                                   height: 16,
-                                  colorFilter: ColorFilter.mode(Co.secondary, BlendMode.srcIn),
+                                  colorFilter: ColorFilter.mode(
+                                    Co.secondary,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                                 const SizedBox(width: 4),
                                 SizedBox(
@@ -142,7 +168,10 @@ class PharmacyVendorCard extends StatelessWidget {
                                     alignment: AlignmentDirectional.centerStart,
                                     child: Text(
                                       location,
-                                      style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                                      style: context.style12400.copyWith(
+                                        color: Co.darkGrey,
+                                        fontWeight: TStyle.medium,
+                                      ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -157,13 +186,19 @@ class PharmacyVendorCard extends StatelessWidget {
                                   Assets.clockIc,
                                   width: 16,
                                   height: 16,
-                                  colorFilter: ColorFilter.mode(Co.secondary, BlendMode.srcIn),
+                                  colorFilter: ColorFilter.mode(
+                                    Co.secondary,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
 
                                 const SizedBox(width: 4),
                                 Text(
                                   deliveryTime,
-                                  style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                                  style: context.style12400.copyWith(
+                                    color: Co.darkGrey,
+                                    fontWeight: TStyle.medium,
+                                  ),
                                 ),
                               ],
                             ),
@@ -244,7 +279,10 @@ class PharmacyVendorCard extends StatelessWidget {
           if (isClosed)
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-              decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(24)),
+              decoration: BoxDecoration(
+                color: Co.white,
+                borderRadius: BorderRadius.circular(24),
+              ),
               child: Text(L10n.tr().closed, style: context.style20500),
             ),
         ],

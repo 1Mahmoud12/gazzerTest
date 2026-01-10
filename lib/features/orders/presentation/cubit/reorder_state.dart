@@ -39,12 +39,7 @@ class ReorderErrorState extends ReorderState {
 }
 
 class ReorderHasExistingItems extends ReorderState {
-  const ReorderHasExistingItems({
-    required this.message,
-    required this.addNewPouchApproval,
-    required this.hasExistingItem,
-    this.detailedMessage,
-  });
+  const ReorderHasExistingItems({required this.message, required this.addNewPouchApproval, required this.hasExistingItem, this.detailedMessage});
 
   final String message;
   final bool addNewPouchApproval;

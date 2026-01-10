@@ -14,9 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Singleton class to manage the session data.
 /// It holds the current client information and data related to this app session.
 class Session {
+  factory Session() => _inst;
   Session._();
   static final _inst = Session._();
-  factory Session() => _inst;
 
   bool get showTour =>
       di<SharedPreferences>().getBool(StorageKeys.haveSeenTour) != true;

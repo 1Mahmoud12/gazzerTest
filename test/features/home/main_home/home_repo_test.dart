@@ -17,7 +17,10 @@ void main() async {
   late MockApiClient apiClient;
   late HomeRepo homeRepo;
   final homeData = HomeData();
-  final Response successResponse = Response(statusCode: 200, requestOptions: RequestOptions());
+  final Response successResponse = Response(
+    statusCode: 200,
+    requestOptions: RequestOptions(),
+  );
   final DioException errorResponse = DioException(
     requestOptions: RequestOptions(),
     type: DioExceptionType.badResponse,

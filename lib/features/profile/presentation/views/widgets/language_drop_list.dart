@@ -23,15 +23,15 @@ class LanguageDropList extends StatelessWidget {
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                 borderRadius: AppConst.defaultBorderRadius,
-                borderSide: const BorderSide(color: Co.purple, width: 1),
+                borderSide: const BorderSide(color: Co.purple),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: AppConst.defaultBorderRadius,
-                borderSide: const BorderSide(color: Co.purple, width: 1),
+                borderSide: const BorderSide(color: Co.purple),
               ),
               border: OutlineInputBorder(
                 borderRadius: AppConst.defaultBorderRadius,
-                borderSide: const BorderSide(color: Co.purple, width: 1),
+                borderSide: const BorderSide(color: Co.purple),
               ),
             ),
             focusColor: Co.purple,
@@ -39,11 +39,11 @@ class LanguageDropList extends StatelessWidget {
             borderRadius: AppConst.defaultBorderRadius,
             isExpanded: true,
             iconEnabledColor: Co.purple,
-            value: cubit.state.lang,
+            initialValue: cubit.state.lang,
 
-            items: [
-              const DropdownMenuItem(value: 'en', child: Text('English')),
-              const DropdownMenuItem(value: 'ar', child: Text('العربية')),
+            items: const [
+              DropdownMenuItem(value: 'en', child: Text('English')),
+              DropdownMenuItem(value: 'ar', child: Text('العربية')),
             ],
             onChanged: (value) async {
               if (value != null) await cubit.changeLanguage(value);

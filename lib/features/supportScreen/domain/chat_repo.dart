@@ -8,11 +8,7 @@ class SendMessageResponse {
   final int? chatId;
   final List<ChatMessageEntity>? messages;
 
-  SendMessageResponse({
-    this.message,
-    this.chatId,
-    this.messages,
-  });
+  SendMessageResponse({this.message, this.chatId, this.messages});
 }
 
 abstract class ChatRepo extends BaseApiRepo {

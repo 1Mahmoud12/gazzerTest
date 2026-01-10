@@ -78,7 +78,7 @@ class _MainBtnState extends State<MainBtn> {
             //     : value
             //     ? Grad().hoverGradient
             //     : Grad().radialGradient,
-            boxShadow: [if (value) const BoxShadow(color: Co.darkMain, blurRadius: 0, spreadRadius: 0, offset: Offset(0, 0))],
+            boxShadow: [if (value) const BoxShadow(color: Co.darkMain)],
           ),
           child: DecoratedBox(
             decoration: BoxDecoration(
@@ -125,7 +125,7 @@ class _MainBtnState extends State<MainBtn> {
                           decoration: BoxDecoration(
                             gradient: Grad().radialGradient,
                             shape: BoxShape.circle,
-                            boxShadow: [BoxShadow(color: Co.shadowColor.withAlpha(63), blurRadius: 4.1, spreadRadius: 1, offset: const Offset(0, 0))],
+                            boxShadow: [BoxShadow(color: Co.shadowColor.withAlpha(63), blurRadius: 4.1, spreadRadius: 1)],
                           ),
                           child: DecoratedBox(
                             decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().linearGradient),

@@ -77,10 +77,7 @@ class WalletRepoImpl extends WalletRepo {
   Future<Result<String>> convertPoints(int points) async {
     final request = ConvertPointsRequest(points: points);
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.convertPoints,
-        requestBody: request.toJson(),
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.convertPoints, requestBody: request.toJson()),
       parser: (response) {
         return response.data['message'] as String? ?? 'Points converted successfully';
       },
@@ -88,24 +85,14 @@ class WalletRepoImpl extends WalletRepo {
   }
 
   @override
-  Future<Result<WalletTransactionsResponse>> getWalletTransactions({
-    int page = 1,
-    int perPage = 15,
-    String? type,
-  }) async {
-    final queryParams = <String, dynamic>{
-      'page': page,
-      'per_page': perPage,
-    };
+  Future<Result<WalletTransactionsResponse>> getWalletTransactions({int page = 1, int perPage = 15, String? type}) async {
+    final queryParams = <String, dynamic>{'page': page, 'per_page': perPage};
     if (type != null && type.isNotEmpty) {
       queryParams['type'] = type;
     }
 
     final result = await super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.walletTransactions,
-        queryParameters: queryParams,
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.walletTransactions, queryParameters: queryParams),
       parser: (response) {
         _saveTransactionsToCache(response.data, type);
         final dto = WalletTransactionsResponseDto.fromJson(response.data as Map<String, dynamic>);
@@ -158,18 +145,9 @@ class WalletRepoImpl extends WalletRepo {
     String? phone,
     int? cardId,
   }) async {
-    final request = AddBalanceRequest(
-      amount: amount,
-      description: description,
-      paymentMethod: paymentMethod,
-      phone: phone,
-      cardId: cardId,
-    );
+    final request = AddBalanceRequest(amount: amount, description: description, paymentMethod: paymentMethod, phone: phone, cardId: cardId);
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.addBalance,
-        requestBody: request.toJson(),
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.addBalance, requestBody: request.toJson()),
       parser: (response) {
         logger.d(response.data);
         final dto = AddBalanceResponseDto.fromJson(response.data as Map<String, dynamic>);
@@ -198,10 +176,7 @@ class WalletRepoImpl extends WalletRepo {
   @override
   Future<Result<String>> convertVoucher(String voucherCode) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.convertVoucher,
-        requestBody: {'voucher_code': voucherCode},
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.convertVoucher, requestBody: {'voucher_code': voucherCode}),
       parser: (response) {
         return response.data['message'] as String? ?? 'Voucher converted successfully';
       },

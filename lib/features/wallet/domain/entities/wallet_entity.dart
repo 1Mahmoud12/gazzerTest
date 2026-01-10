@@ -17,10 +17,7 @@ class WalletEntity {
 }
 
 class WalletInfoEntity {
-  const WalletInfoEntity({
-    required this.balance,
-    required this.lastUpdated,
-  });
+  const WalletInfoEntity({required this.balance, required this.lastUpdated});
 
   final double balance;
   final DateTime lastUpdated;
@@ -51,10 +48,7 @@ class WalletLoyaltyPointsEntity {
 }
 
 class ExpirationDetailEntity {
-  const ExpirationDetailEntity({
-    required this.expiresAt,
-    required this.points,
-  });
+  const ExpirationDetailEntity({required this.expiresAt, required this.points});
 
   final DateTime expiresAt;
   final int points;

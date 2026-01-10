@@ -11,17 +11,17 @@ class Grad {
   );
 
   /// grcery gradients
-  RadialGradient get grocRadial => const RadialGradient(colors: [Color(0x88FF9F08), Co.darkMauve], center: Alignment.center, radius: 1);
+  RadialGradient get grocRadial => const RadialGradient(colors: [Color(0x88FF9F08), Co.darkMauve], radius: 1);
 
   /// restaurant gradients
   final linearGradient = LinearGradient(
     colors: [Co.lightPurple, Co.darkPurple.withAlpha(201), Co.darkPurple.withAlpha(0)],
     begin: Alignment.topLeft,
     end: Alignment.bottomCenter,
-    stops: [0.07, 0.79, 1.0],
+    stops: const [0.07, 0.79, 1.0],
   );
 
-  RadialGradient get radialGradient => const RadialGradient(colors: [Co.mauve, Co.darkMauve], center: Alignment.center, radius: 1);
+  RadialGradient get radialGradient => const RadialGradient(colors: [Co.mauve, Co.darkMauve], radius: 1);
   LinearGradient get textGradient => const LinearGradient(
     colors: [Color(0xFF6F2BCB), Co.mauve, Color(0xFF0D0130)],
     end: Alignment.bottomRight,
@@ -34,7 +34,7 @@ class Grad {
     colors: [Colors.black.withAlpha(0), Co.buttonGradient],
     begin: isVertical ? Alignment.topCenter : Alignment.centerRight,
     end: isVertical ? Alignment.bottomCenter : Alignment.centerLeft,
-    stops: [0.0, 0.5],
+    stops: const [0.0, 0.5],
   );
   final errorGradient = const LinearGradient(
     colors: [Colors.transparent, Co.red],

@@ -90,7 +90,7 @@ class FaqListScreen extends StatelessWidget {
       // Has children: navigate to sub-list
       context.navigateToPage(
         FaqListScreen(
-          args: FaqListArgs(title: node.title, nodes: node.children, showCategoriesOnly: false),
+          args: FaqListArgs(title: node.title, nodes: node.children),
         ),
       );
     }
@@ -128,7 +128,7 @@ class FaqListScreen extends StatelessWidget {
         // Has children: navigate to children
         context.navigateToPage(
           FaqListScreen(
-            args: FaqListArgs(title: category.name, categories: category.children, showCategoriesOnly: false),
+            args: FaqListArgs(title: category.name, categories: category.children),
           ),
         );
       } else if (category.questions.isNotEmpty) {
@@ -154,7 +154,6 @@ class FaqListScreen extends StatelessWidget {
                 nodes: category.questions
                     .map((q) => FaqNode(title: q.question, answer: q.answer, questionId: q.id, categoryId: category.id))
                     .toList(),
-                showCategoriesOnly: false,
               ),
             ),
           );

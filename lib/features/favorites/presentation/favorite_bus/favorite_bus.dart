@@ -64,10 +64,10 @@ class FavoriteBus extends AppBus {
     switch (result) {
       case Ok<String> _:
         _addToFavorites(favorite);
-        fire(AddedFavoriteSuccess(id: favorite.id, type: (favorite.favoriteType.toView), favorites: favorites));
+        fire(AddedFavoriteSuccess(id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
         break;
       case final Err error:
-        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: (favorite.favoriteType.toView), favorites: favorites));
+        fire(ToggleFavoriteFailure(message: error.error.message, id: favorite.id, type: favorite.favoriteType.toView, favorites: favorites));
     }
   }
 

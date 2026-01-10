@@ -14,10 +14,10 @@ class FaqRatingCubit extends Cubit<FaqRatingStates> {
 
     final result = await _repo.submitRating(request);
     switch (result) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         emit(FaqRatingSuccessState(ok.value));
         break;
-      case Err<String> err:
+      case final Err<String> err:
         emit(FaqRatingErrorState(err.error.message));
         break;
     }

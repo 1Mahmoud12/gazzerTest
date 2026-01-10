@@ -26,7 +26,10 @@ class AllCategoriesCubit extends Cubit<AllCategoriesStates> {
     }
 
     // Fetch data from API
-    final res = await _repo.getAllCategories(page: _currentPage, perPage: _perPage);
+    final res = await _repo.getAllCategories(
+      page: _currentPage,
+      perPage: _perPage,
+    );
     switch (res) {
       case final Ok<AllCategoriesResponse> ok:
         if (loadMore) {
@@ -35,7 +38,9 @@ class AllCategoriesCubit extends Cubit<AllCategoriesStates> {
           _allCategories = List.from(ok.value.categories);
         }
         _pagination = ok.value.pagination;
-        emit(AllCategoriesSuccessState(_allCategories, pagination: _pagination));
+        emit(
+          AllCategoriesSuccessState(_allCategories, pagination: _pagination),
+        );
         break;
       case final Err err:
         if (!loadMore) {

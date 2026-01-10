@@ -15,7 +15,13 @@ class _BestSellingCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacityNew(0.1), blurRadius: 8, offset: const Offset(0, 2))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacityNew(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: InkWell(
         onTap: () {
@@ -26,7 +32,11 @@ class _BestSellingCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: CustomNetworkImage(product.image, fit: BoxFit.cover, width: double.infinity),
+              child: CustomNetworkImage(
+                product.image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
             ),
             Expanded(
               flex: 2,
@@ -38,7 +48,9 @@ class _BestSellingCard extends StatelessWidget {
                   children: [
                     Text(
                       product.name,
-                      style: context.style14400.copyWith(fontWeight: TStyle.bold),
+                      style: context.style14400.copyWith(
+                        fontWeight: TStyle.bold,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -52,14 +64,21 @@ class _BestSellingCard extends StatelessWidget {
                               alignment: AlignmentDirectional.centerStart,
                               child: Text(
                                 '${L10n.tr().totalUnitSolid}: ',
-                                style: context.style14400.copyWith(color: Co.purple),
+                                style: context.style14400.copyWith(
+                                  color: Co.purple,
+                                ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
                           const HorizontalSpacing(5),
-                          Text('${product.orderCount ?? 0}', style: context.style14400.copyWith(color: Co.purple)),
+                          Text(
+                            '${product.orderCount ?? 0}',
+                            style: context.style14400.copyWith(
+                              color: Co.purple,
+                            ),
+                          ),
                         ],
                       ),
 
@@ -72,7 +91,10 @@ class _BestSellingCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(Helpers.getProperPrice(product.price), style: context.style14400.copyWith(color: Co.purple)),
+                        Text(
+                          Helpers.getProperPrice(product.price),
+                          style: context.style14400.copyWith(color: Co.purple),
+                        ),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -80,7 +102,10 @@ class _BestSellingCard extends StatelessWidget {
                             const SizedBox(width: 2),
                             Text(
                               product.rate.toStringAsFixed(1),
-                              style: context.style12400.copyWith(color: Co.secondary, fontWeight: TStyle.bold),
+                              style: context.style12400.copyWith(
+                                color: Co.secondary,
+                                fontWeight: TStyle.bold,
+                              ),
                             ),
                           ],
                         ),

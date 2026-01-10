@@ -18,12 +18,11 @@ class OrderItemTile extends StatelessWidget {
   static const double _imageSpacing = 12.0;
   static const double _addOnsSpacing = 4.0;
   static const double _quantityBadgePadding = 6.0;
-  static String _addOnsPrefix = '${L10n.tr().addons}: ';
+  static final String _addOnsPrefix = '${L10n.tr().addons}: ';
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ItemImageWithBadge(imageUrl: item.image, quantity: item.quantity),
         const SizedBox(width: _imageSpacing),

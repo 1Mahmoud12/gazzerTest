@@ -45,7 +45,12 @@ class _BannerSliderState extends State<BannerSlider> {
                 padding: const EdgeInsets.symmetric(horizontal: 6),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: CustomNetworkImage(widget.images[index], fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+                  child: CustomNetworkImage(
+                    widget.images[index],
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
                 ),
               );
             },
@@ -63,7 +68,9 @@ class _BannerSliderState extends State<BannerSlider> {
                 width: _currentPage == index ? 24 : 8,
                 height: 8,
                 decoration: BoxDecoration(
-                  color: _currentPage == index ? Co.buttonGradient : Co.buttonGradient,
+                  color: _currentPage == index
+                      ? Co.buttonGradient
+                      : Co.buttonGradient,
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),

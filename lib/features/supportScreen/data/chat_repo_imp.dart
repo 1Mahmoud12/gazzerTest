@@ -9,10 +9,7 @@ import 'package:gazzer/features/supportScreen/data/requests/send_message_request
 import 'package:gazzer/features/supportScreen/domain/chat_repo.dart';
 import 'package:gazzer/features/supportScreen/domain/entities/chat_entity.dart';
 
-enum SupportEnum {
-  general,
-  order_issue,
-}
+enum SupportEnum { general, order_issue }
 
 class ChatRepoImp extends ChatRepo {
   final ApiClient _apiClient;
@@ -22,13 +19,7 @@ class ChatRepoImp extends ChatRepo {
   @override
   Future<Result<ChatResponse>> getChatMessages(int chatId, {int page = 1}) {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.getChatMessages(chatId),
-        queryParameters: {
-          'is_paginated': 1,
-          'page': page,
-        },
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.getChatMessages(chatId), queryParameters: {'is_paginated': 1, 'page': page}),
       parser: (response) {
         return ChatResponseDTO.fromJson(response.data).toEntity();
       },
@@ -39,12 +30,7 @@ class ChatRepoImp extends ChatRepo {
   Future<Result<SendMessageResponse>> sendMessage(SendMessageRequest request) {
     if (!request.isValid) {
       return Future.value(
-        Err(
-          BaseError(
-            message: 'Invalid request: must have chat_id or order_id, and message or attachment',
-            e: ErrorType.badResponse,
-          ),
-        ),
+        Err(BaseError(message: 'Invalid request: must have chat_id or order_id, and message or attachment', e: ErrorType.badResponse)),
       );
     }
 
@@ -57,15 +43,10 @@ class ChatRepoImp extends ChatRepo {
             if (request.orderId != null) 'order_id': request.orderId,
             'type': request.orderId != null ? SupportEnum.order_issue.name : SupportEnum.general.name,
             if (request.message != null && request.message!.trim().isNotEmpty) 'message': request.message!.trim(),
-            'attachment': await MultipartFile.fromFile(
-              request.attachment!.path,
-            ),
+            'attachment': await MultipartFile.fromFile(request.attachment!.path),
           });
 
-          return _apiClient.post(
-            endpoint: Endpoints.sendChatMessage,
-            requestBody: formData,
-          );
+          return _apiClient.post(endpoint: Endpoints.sendChatMessage, requestBody: formData);
         } else {
           // Send without file
           return _apiClient.post(

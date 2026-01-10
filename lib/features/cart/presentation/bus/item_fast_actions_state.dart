@@ -6,9 +6,9 @@ class ItemFastActionState extends Equatable {
   final bool isDecreasing;
 
   const ItemFastActionState({
-     this.isAdding = false,
-     this.isIncreasing = false,
-     this.isDecreasing = false,
+    this.isAdding = false,
+    this.isIncreasing = false,
+    this.isDecreasing = false,
   });
 
   @override

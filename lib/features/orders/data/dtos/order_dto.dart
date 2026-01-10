@@ -64,22 +64,12 @@ class OrderDto {
     // Map stores to vendors
     final vendors =
         stores?.map((store) {
-          return OrderVendorEntity(
-            id: store.storeId ?? 0,
-            name: store.storeName ?? '',
-            logo: store.storeImage,
-            image: store.storeImage,
-          );
+          return OrderVendorEntity(id: store.storeId ?? 0, name: store.storeName ?? '', logo: store.storeImage, image: store.storeImage);
         }).toList() ??
         [];
 
     // Calculate total items count
-    final itemsCount =
-        stores?.fold<int>(
-          0,
-          (sum, store) => sum + (store.orderItems?.length ?? 0),
-        ) ??
-        0;
+    final itemsCount = stores?.fold<int>(0, (sum, store) => sum + (store.orderItems?.length ?? 0)) ?? 0;
 
     // Parse order status
     OrderStatus status = OrderStatus.pending;
@@ -130,12 +120,7 @@ class PaymentMethodDto {
   String? paymentStatus;
   String? paidAt;
 
-  PaymentMethodDto({
-    this.paymentMethod,
-    this.amount,
-    this.paymentStatus,
-    this.paidAt,
-  });
+  PaymentMethodDto({this.paymentMethod, this.amount, this.paymentStatus, this.paidAt});
 
   factory PaymentMethodDto.fromJson(Map<String, dynamic> json) {
     return PaymentMethodDto(
@@ -158,17 +143,7 @@ class DeliveryAddressDto {
   String? province;
   String? provinceZone;
 
-  DeliveryAddressDto({
-    this.address,
-    this.building,
-    this.floor,
-    this.apartment,
-    this.street,
-    this.long,
-    this.lat,
-    this.province,
-    this.provinceZone,
-  });
+  DeliveryAddressDto({this.address, this.building, this.floor, this.apartment, this.street, this.long, this.lat, this.province, this.provinceZone});
 
   factory DeliveryAddressDto.fromJson(Map<String, dynamic> json) {
     return DeliveryAddressDto(
@@ -239,18 +214,10 @@ class VoucherDto {
   String? discountType;
   int? discountValue;
 
-  VoucherDto({
-    this.code,
-    this.discountType,
-    this.discountValue,
-  });
+  VoucherDto({this.code, this.discountType, this.discountValue});
 
   factory VoucherDto.fromJson(Map<String, dynamic> json) {
-    return VoucherDto(
-      code: json['code'] as String?,
-      discountType: json['discount_type'] as String?,
-      discountValue: json['discount_value'] as int?,
-    );
+    return VoucherDto(code: json['code'] as String?, discountType: json['discount_type'] as String?, discountValue: json['discount_value'] as int?);
   }
 }
 

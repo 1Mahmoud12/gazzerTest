@@ -30,7 +30,7 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
 
   int get _conversionRate => (widget.loyaltyPoints?.conversionRate?.points ?? 0).toInt();
 
-  int get _conversionRateBerTransaction => (widget.loyaltyPoints?.conversionRateBerTransaction ?? 0).toInt();
+  int get _conversionRateBerTransaction => widget.loyaltyPoints?.conversionRateBerTransaction ?? 0;
 
   double get _estimatedValue => widget.loyaltyPoints?.estimatedValue ?? 0.0;
 
@@ -176,7 +176,6 @@ class _ConvertPointsWidgetState extends State<ConvertPointsWidget> {
                         return Column(
                           children: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Expanded(flex: 2, child: controls),
                                 const SizedBox(width: 16),
@@ -304,7 +303,6 @@ class _RoundIconButton extends StatelessWidget {
         ),
         child: FittedBox(
           fit: BoxFit.scaleDown,
-          alignment: Alignment.center,
           child: Icon(icon, color: color ?? Co.dark, size: 18),
         ),
       ),

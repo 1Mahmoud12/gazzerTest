@@ -43,7 +43,10 @@ class ClientEntity {
   String get formatedCreatedAt {
     if (createdAt == null) return L10n.tr().notSetYet;
     final date = DateTime.parse(createdAt!);
-    final formateddate = DateFormat('MMMM, yyyy', L10n.isAr(AppNavigator.mainKey.currentContext!) ? 'ar' : 'en').format(date);
+    final formateddate = DateFormat(
+      'MMMM, yyyy',
+      L10n.isAr(AppNavigator.mainKey.currentContext!) ? 'ar' : 'en',
+    ).format(date);
     return formateddate;
   }
 

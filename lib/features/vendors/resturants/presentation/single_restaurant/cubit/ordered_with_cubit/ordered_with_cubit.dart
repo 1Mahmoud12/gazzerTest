@@ -10,6 +10,7 @@ import 'package:gazzer/features/vendors/resturants/presentation/single_restauran
 class SingleCatRestaurantCubit extends Cubit<SingleCatRestaurantStates> {
   final PlatesRepo _repo;
   final int restId;
+
   SingleCatRestaurantCubit(this._repo, this.restId, int firstPlateId) : super(OrderedWithInitial()) {
     loadItems(firstPlateId);
     loadPlateDetails(firstPlateId);

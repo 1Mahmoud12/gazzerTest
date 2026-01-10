@@ -14,13 +14,13 @@ class AddressesBus extends AppBus {
     fire(FetchAddressesLoading());
     final result = await _repo.getAddresses();
     switch (result) {
-      case Ok<List<AddressEntity>> data:
+      case final Ok<List<AddressEntity>> data:
         Session().addresses.clear();
         data.value.sort((a, b) => a.isDefault ? -1 : 1);
         Session().addresses.addAll(data.value);
         fire(FetchAddressesSuccess(addresses: data.value));
         break;
-      case Err err:
+      case final Err err:
         fire(FetchAddressesError(err.error.message));
         break;
     }
@@ -30,12 +30,12 @@ class AddressesBus extends AppBus {
     fire(SetDefaultLoading(id: id));
     final result = await _repo.setDefaultAddress(id);
     switch (result) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         refreshAddresses();
         Alerts.showToast(ok.value, error: false);
         fire(SetDefaultSuccess(id: id));
         break;
-      case Err err:
+      case final Err err:
         fire(SetDefaultError(err.error.message, id: id));
         break;
     }
@@ -45,12 +45,12 @@ class AddressesBus extends AppBus {
     fire(DeleteAddressLoading(id: id));
     final result = await _repo.deleteAddress(id);
     switch (result) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         Alerts.showToast(ok.value, error: false);
         refreshAddresses();
         fire(DeleteAddressSuccess(id: id));
         break;
-      case Err err:
+      case final Err err:
         fire(DeleteAddressError(err.error.message, id: id));
         break;
     }

@@ -17,7 +17,7 @@ class AddressRepoImp extends AddressRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.addresses),
       parser: (response) {
         final addresses = <AddressEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           addresses.add(AddressDTO.fromJson(item).toEntity());
         }
         return addresses;
@@ -28,10 +28,7 @@ class AddressRepoImp extends AddressRepo {
   @override
   Future<Result<String>> addAddress(AddressRequest address) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.addAddress,
-        requestBody: address.toJson(),
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.addAddress, requestBody: address.toJson()),
       parser: (response) => response.data['message'].toString(),
     );
   }
@@ -39,10 +36,7 @@ class AddressRepoImp extends AddressRepo {
   @override
   Future<Result<String>> editAddress(AddressRequest address) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.editAddress(address.id!),
-        requestBody: address.toJson(),
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.editAddress(address.id!), requestBody: address.toJson()),
       parser: (response) => response.data['message'].toString(),
     );
   }
@@ -58,10 +52,7 @@ class AddressRepoImp extends AddressRepo {
   @override
   Future<Result<String>> setDefaultAddress(int addressId) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.setDefaultAddress,
-        requestBody: {'address_id': addressId},
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.setDefaultAddress, requestBody: {'address_id': addressId}),
       parser: (response) => response.data['message'].toString(),
     );
   }

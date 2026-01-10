@@ -45,7 +45,7 @@ class BestPopularCubit extends Cubit<BestPopularStates> {
     final result = await _repository.getBestPopularStores(page: _currentPage, perPage: _perPage);
 
     switch (result) {
-      case Ok<BestPopularResponse> ok:
+      case final Ok<BestPopularResponse> ok:
         if (loadMore) {
           _allStores.addAll(ok.value.stores);
         } else {
@@ -54,7 +54,7 @@ class BestPopularCubit extends Cubit<BestPopularStates> {
         _pagination = ok.value.pagination;
         emit(BestPopularSuccessState(stores: _allStores, pagination: _pagination));
         break;
-      case Err<BestPopularResponse> err:
+      case final Err<BestPopularResponse> err:
         if (!loadMore) {
           emit(BestPopularErrorState(error: err.error.message));
         }

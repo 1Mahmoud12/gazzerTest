@@ -27,7 +27,6 @@ class _TutorialHeaderState extends State<TutorialHeader> {
       height: HomeUtils.headerHeight(context),
       child: Stack(
         alignment: Alignment.center,
-        fit: StackFit.loose,
         children: [
           Positioned(
             bottom: 20,

@@ -30,7 +30,14 @@ class PersistentCartButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
-          boxShadow: [BoxShadow(color: Co.purple.withOpacityNew(0.25), blurRadius: 15, spreadRadius: 2, offset: const Offset(0, 4))],
+          boxShadow: [
+            BoxShadow(
+              color: Co.purple.withOpacityNew(0.25),
+              blurRadius: 15,
+              spreadRadius: 2,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Stack(
           alignment: Alignment.center,
@@ -39,7 +46,8 @@ class PersistentCartButton extends StatelessWidget {
             BlocBuilder<CartCubit, CartStates>(
               buildWhen: (previous, current) {
                 if (current is FullCartLoaded && previous is FullCartLoaded) {
-                  return previous.pouchSummary?.totalFillPercentage != current.pouchSummary?.totalFillPercentage;
+                  return previous.pouchSummary?.totalFillPercentage !=
+                      current.pouchSummary?.totalFillPercentage;
                 }
                 return current is FullCartLoaded;
               },
@@ -49,7 +57,8 @@ class PersistentCartButton extends StatelessWidget {
 
                 if (state is FullCartLoaded && state.pouchSummary != null) {
                   final pouchSummary = state.pouchSummary!;
-                  final totalCapacity = pouchSummary.totalCapacity?.toDouble() ?? 0.0;
+                  final totalCapacity =
+                      pouchSummary.totalCapacity?.toDouble() ?? 0.0;
                   final totalLoad = pouchSummary.totalLoad?.toDouble() ?? 0.0;
 
                   if (totalCapacity > 0) {
@@ -79,8 +88,19 @@ class PersistentCartButton extends StatelessWidget {
             ),
             // Cart icon
             Container(
-              decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-              child: Center(child: SvgPicture.asset(Assets.cartIc, colorFilter: const ColorFilter.mode(Co.purple, BlendMode.srcIn))),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  Assets.cartIc,
+                  colorFilter: const ColorFilter.mode(
+                    Co.purple,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

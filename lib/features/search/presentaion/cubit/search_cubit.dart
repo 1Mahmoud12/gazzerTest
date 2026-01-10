@@ -23,7 +23,7 @@ class SearchCubit extends Cubit<SearchState> {
   // SearchQuery _query = const SearchQuery();
   // SearchQuery get query => _query;
 
-  var token = CancelToken();
+  CancelToken token = CancelToken();
   void _terminatePrevCalss() {
     token.cancel();
     token = token.regenerate();
@@ -32,8 +32,14 @@ class SearchCubit extends Cubit<SearchState> {
   Future<void> performSearch(SearchQuery query) async {
     // If categoryId is null or 0, keep it as-is (don't use defaultCatId)
     // The toQuery() method will handle not sending category_id when it's null or 0
-    final categoryId = (query.categoryId == null || query.categoryId == 0) ? null : query.categoryId;
-    final newQuery = query.copyWith(searchWord: controller.text, currentPage: 1, categoryId: categoryId);
+    final categoryId = (query.categoryId == null || query.categoryId == 0)
+        ? null
+        : query.categoryId;
+    final newQuery = query.copyWith(
+      searchWord: controller.text,
+      currentPage: 1,
+      categoryId: categoryId,
+    );
     if (newQuery.searchWord.trim().length < 3) {
       emit(SearchSuccess(vendors: [], query: newQuery));
       return;
@@ -74,7 +80,9 @@ class SearchCubit extends Cubit<SearchState> {
         emit(LoadMoreResultsSuccess(vendors: _vendors, query: newQueryy));
         break;
       case final Err<SearchResponse> err:
-        emit(LoadMoreResultsError(message: err.error.message, query: newQueryy));
+        emit(
+          LoadMoreResultsError(message: err.error.message, query: newQueryy),
+        );
         break;
     }
   }

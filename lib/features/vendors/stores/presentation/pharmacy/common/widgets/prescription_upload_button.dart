@@ -19,7 +19,10 @@ class PrescriptionUploadButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Text(
         L10n.tr().uploadPrescription,
-        style: context.style16400.copyWith(color: Co.purple, fontWeight: TStyle.bold),
+        style: context.style16400.copyWith(
+          color: Co.purple,
+          fontWeight: TStyle.bold,
+        ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),

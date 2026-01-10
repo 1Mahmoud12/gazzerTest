@@ -13,7 +13,10 @@ class SuggestsResponse {
 abstract class SuggestsRepo extends BaseApiRepo {
   SuggestsRepo(super.crashlyticsRepo);
 
-  Future<Result<SuggestsResponse>> getSuggests({int page = 1, int perPage = 10});
+  Future<Result<SuggestsResponse>> getSuggests({
+    int page = 1,
+    int perPage = 10,
+  });
 
   Future<SuggestsDtoData?> getCachedSuggests();
 }

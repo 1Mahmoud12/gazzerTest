@@ -22,7 +22,8 @@ class ScrollableTabedList extends StatefulWidget {
   State<ScrollableTabedList> createState() => _ScrollableTabedListState();
 }
 
-class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTickerProviderStateMixin {
+class _ScrollableTabedListState extends State<ScrollableTabedList>
+    with SingleTickerProviderStateMixin {
   late final StickyHeaderController _controller;
   late final TabController _tabController;
   final padding = ValueNotifier(0.0);
@@ -71,7 +72,9 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
         child: ListView.builder(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
-          physics: const AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics()),
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: ClampingScrollPhysics(),
+          ),
           itemCount: widget.itemsCount + 2,
           itemBuilder: (context, index) {
             if (index < 1) {
@@ -90,7 +93,8 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
                   // }
                   if (childStickyHeaderInfo == null) {
                     _tabController.animateTo(0);
-                  } else if (childStickyHeaderInfo.index != _tabController.index + 2) {
+                  } else if (childStickyHeaderInfo.index !=
+                      _tabController.index + 2) {
                     _tabController.animateTo(childStickyHeaderInfo.index - 2);
                   }
                   return false;
@@ -111,8 +115,15 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
                           controller: _tabController,
                           isScrollable: true,
                           tabAlignment: TabAlignment.start,
-                          indicatorPadding: const EdgeInsets.symmetric(horizontal: 4),
-                          indicator: const UnderlineTabIndicator(borderSide: BorderSide(color: Colors.transparent, width: 2.0)),
+                          indicatorPadding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                          ),
+                          indicator: const UnderlineTabIndicator(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 2.0,
+                            ),
+                          ),
                           tabs: List.generate(widget.itemsCount, (index) {
                             return InkWell(
                               onTap: () {
@@ -141,13 +152,19 @@ class _ScrollableTabedListState extends State<ScrollableTabedList> with SingleTi
               Widget child;
               if (index == widget.itemsCount + 1) {
                 child = ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight - topPadding - 30),
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight - topPadding - 30,
+                  ),
                   child: widget.listItemBuilder(context, index - 2),
                 );
               } else {
                 child = widget.listItemBuilder(context, index - 2);
               }
-              return StickyContainerWidget(index: index, parentIndex: 1, overlapParent: false, child: child);
+              return StickyContainerWidget(
+                index: index,
+                parentIndex: 1,
+                child: child,
+              );
             }
           },
         ),

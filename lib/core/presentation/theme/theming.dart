@@ -10,7 +10,10 @@ class AppTheme {
   AppTheme._();
   static final lightTheme = ThemeData(
     pageTransitionsTheme: PageTransitionsTheme(
-      builders: {TargetPlatform.android: CustomPageTransitionBuilder(), TargetPlatform.iOS: CustomPageTransitionBuilder()},
+      builders: {
+        TargetPlatform.android: CustomPageTransitionBuilder(),
+        TargetPlatform.iOS: CustomPageTransitionBuilder(),
+      },
     ),
     primaryColor: Co.purple,
     textTheme: TextTheme(
@@ -24,8 +27,14 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: Co.bg,
     switchTheme: const SwitchThemeData(
-      thumbColor: WidgetStateColor.fromMap({WidgetState.selected: Co.secondary, WidgetState.any: Co.purple}),
-      trackColor: WidgetStateColor.fromMap({WidgetState.selected: Color(0x55FF9900), WidgetState.any: Color(0x5552229E)}),
+      thumbColor: WidgetStateColor.fromMap({
+        WidgetState.selected: Co.secondary,
+        WidgetState.any: Co.purple,
+      }),
+      trackColor: WidgetStateColor.fromMap({
+        WidgetState.selected: Color(0x55FF9900),
+        WidgetState.any: Color(0x5552229E),
+      }),
       overlayColor: WidgetStatePropertyAll(Colors.transparent),
       trackOutlineColor: WidgetStatePropertyAll(Colors.transparent),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -49,15 +58,22 @@ class AppTheme {
     buttonTheme: ButtonThemeData(
       height: 0,
       minWidth: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius),
+      ),
     ),
     dialogTheme: const DialogThemeData(backgroundColor: Color(0xffF0F0F0)),
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Co.white),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(backgroundColor: Colors.transparent),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+    ),
   );
   static final darkTheme = ThemeData(
     pageTransitionsTheme: PageTransitionsTheme(
-      builders: {TargetPlatform.android: CustomPageTransitionBuilder(), TargetPlatform.iOS: CustomPageTransitionBuilder()},
+      builders: {
+        TargetPlatform.android: CustomPageTransitionBuilder(),
+        TargetPlatform.iOS: CustomPageTransitionBuilder(),
+      },
     ),
     textTheme: TextTheme(
       displayLarge: TStyle.robotBlackHead().copyWith(color: Co.white),
@@ -71,8 +87,14 @@ class AppTheme {
     primaryColor: Co.white,
     scaffoldBackgroundColor: Co.darkBg,
     switchTheme: const SwitchThemeData(
-      thumbColor: WidgetStateColor.fromMap({WidgetState.selected: Co.secondary, WidgetState.any: Co.purple}),
-      trackColor: WidgetStateColor.fromMap({WidgetState.selected: Color(0x55FF9900), WidgetState.any: Color(0x5552229E)}),
+      thumbColor: WidgetStateColor.fromMap({
+        WidgetState.selected: Co.secondary,
+        WidgetState.any: Co.purple,
+      }),
+      trackColor: WidgetStateColor.fromMap({
+        WidgetState.selected: Color(0x55FF9900),
+        WidgetState.any: Color(0x5552229E),
+      }),
       overlayColor: WidgetStatePropertyAll(Colors.transparent),
       trackOutlineColor: WidgetStatePropertyAll(Colors.transparent),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -96,10 +118,14 @@ class AppTheme {
     buttonTheme: ButtonThemeData(
       height: 0,
       minWidth: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConst.defaultInnerRadius),
+      ),
     ),
     dialogTheme: const DialogThemeData(backgroundColor: Color(0xffF0F0F0)),
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Co.white),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(backgroundColor: Colors.transparent),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+    ),
   );
 }

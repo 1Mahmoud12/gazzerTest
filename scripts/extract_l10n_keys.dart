@@ -29,13 +29,18 @@ void main() async {
     return;
   }
 
-  await for (final entity in sourceDir.list(recursive: true, followLinks: false)) {
+  await for (final entity in sourceDir.list(
+    recursive: true,
+    followLinks: false,
+  )) {
     if (entity is File && entity.path.endsWith('.dart')) {
       final content = await entity.readAsString();
       final matches = textRegex.allMatches(content).toList();
       matches.addAll(textSpanRegex.allMatches(content));
       if (matches.isEmpty) continue;
-      keys.add("${entity.uri.pathSegments.last.replaceAll('.dart', '')}__________________FILEE");
+      keys.add(
+        "${entity.uri.pathSegments.last.replaceAll('.dart', '')}__________________FILEE",
+      );
       for (final match in matches) {
         keys.add(toCamelCase(match.group(1)!));
       }
@@ -45,13 +50,19 @@ void main() async {
   final Map<String, dynamic> arbContent = {'@@locale': 'en'};
 
   for (final key in keys) {
-    arbContent[key] = key.splitMapJoin(RegExp('([A-Z])'), onMatch: (m) => '_${m.group(0)}', onNonMatch: (n) => n);
+    arbContent[key] = key.splitMapJoin(
+      RegExp('([A-Z])'),
+      onMatch: (m) => '_${m.group(0)}',
+      onNonMatch: (n) => n,
+    );
     // arbContent["@${key}"] = {"description": "", "type": "text"};
   }
 
   final arbFile = File(arbPath);
   arbFile.createSync(recursive: true);
-  arbFile.writeAsStringSync(const JsonEncoder.withIndent('  ').convert(arbContent));
+  arbFile.writeAsStringSync(
+    const JsonEncoder.withIndent('  ').convert(arbContent),
+  );
 
   log('✅ Generated $arbPath with ${keys.length} keys.');
 }

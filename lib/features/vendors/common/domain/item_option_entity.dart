@@ -39,7 +39,8 @@ class SubAddonEntity extends Equatable {
   final bool? isRequired;
   final bool? controlsPrice;
   final List<SubAddonEntity> subAddons;
-  final bool isLeafValue; // True when type is null (final value, no more sub-addons)
+  final bool
+  isLeafValue; // True when type is null (final value, no more sub-addons)
 
   const SubAddonEntity({
     required this.id,

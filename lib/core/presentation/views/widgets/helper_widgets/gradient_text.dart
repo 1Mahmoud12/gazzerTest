@@ -24,14 +24,23 @@ class GradientText extends StatelessWidget {
       replacement: Container(
         width: 60,
         height: style.fontSize ?? 16,
-        decoration: BoxDecoration(color: Colors.white60, borderRadius: AppConst.defaultBorderRadius),
+        decoration: BoxDecoration(
+          color: Colors.white60,
+          borderRadius: AppConst.defaultBorderRadius,
+        ),
       ),
       child: ShaderMask(
         shaderCallback: (bounds) {
           return (gradient ?? Grad().textGradient).createShader(bounds);
         },
         blendMode: BlendMode.srcIn,
-        child: Text(text, textAlign: textAlign, style: style, maxLines: maxLines, overflow: maxLines != null ? TextOverflow.ellipsis : null),
+        child: Text(
+          text,
+          textAlign: textAlign,
+          style: style,
+          maxLines: maxLines,
+          overflow: maxLines != null ? TextOverflow.ellipsis : null,
+        ),
       ),
     );
   }

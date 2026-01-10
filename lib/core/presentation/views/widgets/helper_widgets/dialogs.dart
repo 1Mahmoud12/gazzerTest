@@ -183,7 +183,7 @@ class Dialogs {
   // //   );
   // // }
 
-  static infoDialog({required Function() onConfirm, required String title, String? message, String? okBtn, Color? okColor, Color? okBgColor}) {
+  static Dialog infoDialog({required Function() onConfirm, required String title, String? message, String? okBtn, Color? okColor, Color? okBgColor}) {
     return Dialog(
       child: Container(
         decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(15)),

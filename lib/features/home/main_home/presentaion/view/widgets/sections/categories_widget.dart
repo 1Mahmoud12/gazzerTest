@@ -13,14 +13,19 @@ class CategoriesWidget extends StatelessWidget {
       buildWhen: (previous, current) {
         // Only rebuild if state type actually changed or data changed
         if (previous.runtimeType != current.runtimeType) return true;
-        if (previous is CategoriesWidgetSuccessState && current is CategoriesWidgetSuccessState) {
-          return previous.categories != current.categories || previous.banner != current.banner;
+        if (previous is CategoriesWidgetSuccessState &&
+            current is CategoriesWidgetSuccessState) {
+          return previous.categories != current.categories ||
+              previous.banner != current.banner;
         }
         return false;
       },
       builder: (context, categoriesState) {
         if (categoriesState is CategoriesWidgetSuccessState) {
-          return HomeCategoriesComponent(items: categoriesState.categories, banner: categoriesState.banner);
+          return HomeCategoriesComponent(
+            items: categoriesState.categories,
+            banner: categoriesState.banner,
+          );
         }
         /* else if (categoriesState is CategoriesWidgetLoadingState) {
           return const SliverToBoxAdapter(

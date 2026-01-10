@@ -18,12 +18,18 @@ class ThemeBtn extends StatelessWidget {
 
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(24), color: Co.purple),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              color: Co.purple,
+            ),
             child: AnimatedSwitcher(
               duration: Durations.extralong4,
               transitionBuilder: (child, animation) {
                 return SlideTransition(
-                  position: Tween<Offset>(begin: const Offset(0.9, 0), end: Offset.zero).animate(animation),
+                  position: Tween<Offset>(
+                    begin: const Offset(0.9, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
                   child: FadeTransition(opacity: animation, child: child),
                 );
               },
@@ -31,11 +37,18 @@ class ThemeBtn extends StatelessWidget {
                 key: ValueKey(isDarkMode),
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(isDarkMode ? Assets.darkIc : Assets.lightIc, height: 24, width: 24),
+                  Image.asset(
+                    isDarkMode ? Assets.darkIc : Assets.lightIc,
+                    height: 24,
+                    width: 24,
+                  ),
                   const HorizontalSpacing(8),
                   Text(
                     isDarkMode ? L10n.tr().dark : L10n.tr().light,
-                    style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
+                    style: context.style14400.copyWith(
+                      color: Co.white,
+                      fontWeight: TStyle.medium,
+                    ),
                   ),
                 ],
               ),

@@ -6,10 +6,7 @@ class ComplaintResponse {
   final int id;
   final String message;
 
-  ComplaintResponse({
-    required this.id,
-    required this.message,
-  });
+  ComplaintResponse({required this.id, required this.message});
 }
 
 abstract class ComplaintRepo extends BaseApiRepo {

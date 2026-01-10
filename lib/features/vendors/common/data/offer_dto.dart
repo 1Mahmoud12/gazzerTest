@@ -8,7 +8,13 @@ class OfferDTO {
   String? discountType;
   int? maxDiscount;
 
-  OfferDTO({this.id, this.expiredAt, this.discount, this.discountType, this.maxDiscount});
+  OfferDTO({
+    this.id,
+    this.expiredAt,
+    this.discount,
+    this.discountType,
+    this.maxDiscount,
+  });
 
   OfferDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];

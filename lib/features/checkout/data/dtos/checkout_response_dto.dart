@@ -19,7 +19,9 @@ class CheckoutResponseDTO {
     final payment = data['payment'] as Map<String, dynamic>? ?? {};
     final invoice = payment['invoice'] as Map<String, dynamic>? ?? {};
     final orderPayments = order['order_payments'] as List<dynamic>? ?? [];
-    final firstPayment = orderPayments.isNotEmpty ? orderPayments[0] as Map<String, dynamic>? : null;
+    final firstPayment = orderPayments.isNotEmpty
+        ? orderPayments[0] as Map<String, dynamic>?
+        : null;
 
     return CheckoutResponseDTO(
       orderId: (order['id'] as num?)?.toInt() ?? 0,

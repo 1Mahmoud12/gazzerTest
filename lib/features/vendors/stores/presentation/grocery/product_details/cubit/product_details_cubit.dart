@@ -7,6 +7,7 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/product_deta
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   final StoresRepo _repo;
   final int productId;
+
   ProductDetailsCubit(this._repo, this.productId) : super(ProductDetailsInitial()) {
     loadProductDetails();
   }
@@ -15,10 +16,10 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     emit(ProductDetailsLoading());
     final result = await _repo.loadProductDetails(productId);
     switch (result) {
-      case Ok<ProductDetailsResponse> ok:
+      case final Ok<ProductDetailsResponse> ok:
         emit(ProductDetailsLoaded(product: ok.value.product, orderedWith: ok.value.orderedWith));
         break;
-      case Err error:
+      case final Err error:
         emit(ProductDetailsError(error.error.message));
         break;
     }

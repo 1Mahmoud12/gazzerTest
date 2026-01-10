@@ -25,14 +25,5 @@ class SearchProductEntity extends Equatable {
   }) : _price = price;
 
   @override
-  List<Object?> get props => [
-    id,
-    name,
-    image,
-    badge,
-    price,
-    rate,
-    type,
-    offer,
-  ];
+  List<Object?> get props => [id, name, image, badge, price, rate, type, offer];
 }

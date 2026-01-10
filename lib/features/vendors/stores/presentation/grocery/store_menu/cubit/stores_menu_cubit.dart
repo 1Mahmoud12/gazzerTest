@@ -16,10 +16,17 @@ class StoresMenuCubit extends Cubit<StoresMenuStates> {
       emit(ScreenDataLoading());
       // Check cache first
       final cached = await storeRepo.getCachedStoresMenuPage(mainId);
-      final hasCachedData = cached != null && cached.categoryWzStores.isNotEmpty;
+      final hasCachedData =
+          cached != null && cached.categoryWzStores.isNotEmpty;
 
       if (hasCachedData) {
-        emit(ScreenDataLoaded(mainCategory: cached.mainCategory, banners: cached.banners, categoryWithStores: cached.categoryWzStores));
+        emit(
+          ScreenDataLoaded(
+            mainCategory: cached.mainCategory,
+            banners: cached.banners,
+            categoryWithStores: cached.categoryWzStores,
+          ),
+        );
       }
     } else {
       emit(ScreenDataLoading());
@@ -29,7 +36,13 @@ class StoresMenuCubit extends Cubit<StoresMenuStates> {
     final result = await storeRepo.loadStoresMenuPage(mainId);
     switch (result) {
       case final Ok<StoresMenuResponse> data:
-        emit(ScreenDataLoaded(mainCategory: data.value.mainCategory, banners: data.value.banners, categoryWithStores: data.value.categoryWzStores));
+        emit(
+          ScreenDataLoaded(
+            mainCategory: data.value.mainCategory,
+            banners: data.value.banners,
+            categoryWithStores: data.value.categoryWzStores,
+          ),
+        );
         break;
       case final Err error:
         // If we have cached data, don't show error, just keep showing cache

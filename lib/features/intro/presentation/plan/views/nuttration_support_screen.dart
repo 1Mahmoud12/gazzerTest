@@ -15,7 +15,8 @@ class NuttrationSupportScreen extends StatefulWidget {
   const NuttrationSupportScreen({super.key});
   static const route = '/nutrition-support';
   @override
-  State<NuttrationSupportScreen> createState() => _NuttrationSupportScreenState();
+  State<NuttrationSupportScreen> createState() =>
+      _NuttrationSupportScreenState();
 }
 
 class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
@@ -37,10 +38,10 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
   }
 
   final focusData = [
-    "Healthy meal\nsuggestions",
-    "Grocery combos \nfor meal prep",
-    " Vitamins &\nsupplements",
-    "Quick prep or ready\nto eat options",
+    'Healthy meal\nsuggestions',
+    'Grocery combos \nfor meal prep',
+    ' Vitamins &\nsupplements',
+    'Quick prep or ready\nto eat options',
   ];
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,11 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(text: "What types of nutrition support would you like?", style: context.style20500, gradient: Grad().textGradient),
+              child: GradientText(
+                text: 'What types of nutrition support would you like?',
+                style: context.style20500,
+                gradient: Grad().textGradient,
+              ),
             ),
             const VerticalSpacing(24),
             Column(
@@ -66,7 +71,9 @@ class _NuttrationSupportScreenState extends State<NuttrationSupportScreen> {
                   (index) => PlanAnimatedBtn(
                     onPressed: () {
                       isAnimating.value = false;
-                      context.push(FrequancyCombosScreen.route).then((v) => isAnimating.value = true);
+                      context
+                          .push(FrequancyCombosScreen.route)
+                          .then((v) => isAnimating.value = true);
                     },
                     textStyle: context.style16400.copyWith(color: Co.purple),
                     isAnimating: isAnimating,

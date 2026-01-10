@@ -6,7 +6,8 @@ class _HomeBestPopular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
+    if (items.isEmpty)
+      return const SliverToBoxAdapter(child: SizedBox.shrink());
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
       sliver: SliverList(
@@ -34,7 +35,10 @@ class _HomeBestPopular extends StatelessWidget {
                     if (prod is PlateEntity) {
                       PlateDetailsRoute(id: prod.id).push(context);
                     } else if (prod is ProductEntity) {
-                      ProductDetailsRoute(productId: prod.id /*, $extra: findCartItem(context.read<CartCubit>(), product)*/).push(context);
+                      ProductDetailsRoute(
+                        productId: prod
+                            .id /*, $extra: findCartItem(context.read<CartCubit>(), product)*/,
+                      ).push(context);
                     }
                   },
                 );

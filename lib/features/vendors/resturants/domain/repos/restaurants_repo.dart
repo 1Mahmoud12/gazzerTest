@@ -12,15 +12,19 @@ abstract class RestaurantsRepo extends BaseApiRepo {
 
   /// ** restaurants
   Future<Result<List<RestaurantEntity>>> getAllRestaurants(int pag, int limit);
+
   Future<Result<List<RestaurantEntity>>> getRestaurantsOfCategory(int catOfPlateId, {int pag = 0, int limit = 10});
 
   /// categories of plates
   Future<Result<List<CategoryOfPlateEntity>>> getAllPlatesCategories();
+
   Future<Result<List<CategoryOfPlateEntity>>> getCategoriesOfPlatesByRestaurant(int restaurantId);
 
   // ** sections
   Future<Result<List<RestaurantEntity>>> getTopRatedRestaurants(int id, {int pag = 0, int limit = 10});
+
   Future<Result<List<RestaurantEntity>>> getOffersRestaurants(int id, {int pag = 0, int limit = 10});
+
   Future<Result<List<RestaurantEntity>>> getTodaysPickRestaurants(int id, {int pag = 0, int limit = 10});
 
   /// pages

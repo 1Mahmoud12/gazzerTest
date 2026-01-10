@@ -10,24 +10,15 @@ class ComplaintResponseDTO {
   final int id;
   final String message;
 
-  ComplaintResponseDTO({
-    required this.id,
-    required this.message,
-  });
+  ComplaintResponseDTO({required this.id, required this.message});
 
   factory ComplaintResponseDTO.fromJson(Map<String, dynamic> json) {
     final data = json['data'] ?? json;
-    return ComplaintResponseDTO(
-      id: data['id'] ?? 0,
-      message: data['message'] ?? json['message'] ?? 'Complaint submitted successfully',
-    );
+    return ComplaintResponseDTO(id: data['id'] ?? 0, message: data['message'] ?? json['message'] ?? 'Complaint submitted successfully');
   }
 
   ComplaintResponse toEntity() {
-    return ComplaintResponse(
-      id: id,
-      message: message,
-    );
+    return ComplaintResponse(id: id, message: message);
   }
 }
 
@@ -39,14 +30,7 @@ class ComplaintRepoImp extends ComplaintRepo {
   @override
   Future<Result<ComplaintResponse>> submitComplaint(ComplaintRequest request) {
     if (!request.isValid) {
-      return Future.value(
-        Err(
-          BaseError(
-            message: 'Invalid request: order_item_ids cannot be empty',
-            e: ErrorType.badResponse,
-          ),
-        ),
-      );
+      return Future.value(Err(BaseError(message: 'Invalid request: order_item_ids cannot be empty', e: ErrorType.badResponse)));
     }
 
     return super.call(
@@ -63,17 +47,13 @@ class ComplaintRepoImp extends ComplaintRepo {
 
           // Add single attachment (for backward compatibility)
           if (request.attachment != null) {
-            formDataMap['attachment'] = await MultipartFile.fromFile(
-              request.attachment!.path,
-            );
+            formDataMap['attachment'] = await MultipartFile.fromFile(request.attachment!.path);
           }
 
           // Add multiple attachments as array
           if (request.attachments != null && request.attachments!.isNotEmpty) {
             for (int i = 0; i < request.attachments!.length; i++) {
-              formDataMap['attachment[$i]'] = await MultipartFile.fromFile(
-                request.attachments![i].path,
-              );
+              formDataMap['attachment[$i]'] = await MultipartFile.fromFile(request.attachments![i].path);
             }
           }
 
@@ -91,10 +71,7 @@ class ComplaintRepoImp extends ComplaintRepo {
 
           final formData = FormData.fromMap(formDataMap);
 
-          return _apiClient.post(
-            endpoint: Endpoints.submitComplaint,
-            requestBody: formData,
-          );
+          return _apiClient.post(endpoint: Endpoints.submitComplaint, requestBody: formData);
         } else {
           // Send without file
           final requestBody = <String, dynamic>{
@@ -115,10 +92,7 @@ class ComplaintRepoImp extends ComplaintRepo {
             }
           }
 
-          return _apiClient.post(
-            endpoint: Endpoints.submitComplaint,
-            requestBody: requestBody,
-          );
+          return _apiClient.post(endpoint: Endpoints.submitComplaint, requestBody: requestBody);
         }
       },
       parser: (response) {

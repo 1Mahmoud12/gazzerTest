@@ -9,15 +9,7 @@ class BestPopularDto {
   final dynamic banner;
   final List<BestPopularStoreDto> data;
 
-  BestPopularDto({
-    required this.id,
-    required this.title,
-    required this.type,
-    this.bannerId,
-    required this.isActive,
-    this.banner,
-    required this.data,
-  });
+  BestPopularDto({required this.id, required this.title, required this.type, this.bannerId, required this.isActive, this.banner, required this.data});
 
   factory BestPopularDto.fromJson(Map<String, dynamic> json) {
     return BestPopularDto(
@@ -153,15 +145,9 @@ class ProvinceZoneDto {
   final int id;
   final String zoneName;
 
-  ProvinceZoneDto({
-    required this.id,
-    required this.zoneName,
-  });
+  ProvinceZoneDto({required this.id, required this.zoneName});
 
   factory ProvinceZoneDto.fromJson(Map<String, dynamic> json) {
-    return ProvinceZoneDto(
-      id: json['id'] ?? 0,
-      zoneName: json['zone_name'] ?? '',
-    );
+    return ProvinceZoneDto(id: json['id'] ?? 0, zoneName: json['zone_name'] ?? '');
   }
 }

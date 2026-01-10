@@ -56,7 +56,7 @@ class PlateDetailsDTO {
           options!.add(Options.fromJson(v));
         });
       } catch (e) {
-        print(' !!! Opions parsing error ${e.toString()}');
+        print(' !!! Opions parsing error $e');
       }
     }
     offer = json['offer'] != null ? OfferDTO.fromJson(json['offer']) : null;
@@ -87,7 +87,7 @@ class PlateDetailsDTO {
 
   List<ItemOptionEntity> toOptionsEntity() {
     final loadedOptions = options?.map((e) => e.toEntity());
-    final nonNullOptions = loadedOptions?.where((e) => e != null).map((e) => e as ItemOptionEntity).toList();
+    final nonNullOptions = loadedOptions?.where((e) => e != null).map((e) => e!).toList();
     return nonNullOptions ?? [];
   }
 }

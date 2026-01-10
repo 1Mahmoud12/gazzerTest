@@ -29,9 +29,14 @@ class ConfirmSheet extends StatelessWidget {
             },
             style: OutlinedButton.styleFrom(
               fixedSize: const Size(250, 60),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
             ),
-            child: Text(btnText, style: context.style14400.copyWith(color: Co.purple)),
+            child: Text(
+              btnText,
+              style: context.style14400.copyWith(color: Co.purple),
+            ),
           ),
         ],
       ),

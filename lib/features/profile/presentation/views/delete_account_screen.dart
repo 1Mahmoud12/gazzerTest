@@ -255,7 +255,6 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                       top: false,
                       left: false,
                       right: false,
-                      bottom: true,
                       child: MainBtn(
                         onPressed: () async {
                           if (_formKey.currentState?.validate() != true) return;

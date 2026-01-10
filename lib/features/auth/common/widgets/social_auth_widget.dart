@@ -53,9 +53,9 @@ class _SocialAuthWidgetState extends State<SocialAuthWidget> {
                       item.$1.execute();
                     },
               style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
+                shape: const CircleBorder(),
                 elevation: 8,
-                padding: EdgeInsetsDirectional.all(8),
+                padding: const EdgeInsetsDirectional.all(8),
                 minimumSize: Size.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),

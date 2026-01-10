@@ -5,7 +5,12 @@ import 'package:gazzer/core/presentation/views/widgets/decoration_widgets/double
 import 'package:skeletonizer/skeletonizer.dart';
 
 class SwitchingDecoratedwidget extends StatelessWidget {
-  const SwitchingDecoratedwidget({super.key, required this.isDarkContainer, this.borderRadius, required this.child});
+  const SwitchingDecoratedwidget({
+    super.key,
+    required this.isDarkContainer,
+    this.borderRadius,
+    required this.child,
+  });
   final bool isDarkContainer;
   final BorderRadiusGeometry? borderRadius;
 
@@ -15,7 +20,10 @@ class SwitchingDecoratedwidget extends StatelessWidget {
     if (isDarkContainer) {
       return Skeleton.shade(
         child: DoubledDecoratedWidget(
-          innerDecoration: BoxDecoration(borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12), gradient: Grad().linearGradient),
+          innerDecoration: BoxDecoration(
+            borderRadius: borderRadius ?? BorderRadiusGeometry.circular(12),
+            gradient: Grad().linearGradient,
+          ),
 
           child: child,
         ),

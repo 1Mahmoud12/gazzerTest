@@ -55,7 +55,7 @@ class _PlanAnimatedBtnState extends State<PlanAnimatedBtn> {
             color: value ? null : Colors.transparent,
             border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 2),
           ),
-          child: child!,
+          child: child,
         ),
         child: FilledButton(
           onPressed: () {

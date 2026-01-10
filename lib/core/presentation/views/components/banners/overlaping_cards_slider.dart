@@ -25,7 +25,7 @@ class _OverlapingCardsSliderState extends State<OverlapingCardsSlider> with Sing
     return i;
   }
 
-  _animate() {
+  void _animate() {
     if (_controller.isCompleted) {
       setState(() {
         current = next;

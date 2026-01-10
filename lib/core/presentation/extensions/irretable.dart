@@ -1,7 +1,7 @@
 extension FirstWhereExt<T> on List<T> {
   /// The first element satisfying [test], or `null` if there are none.
   T? firstWhereOrNull(bool Function(T element) test) {
-    for (var element in this) {
+    for (final element in this) {
       if (test(element)) return element;
     }
     return null;
@@ -11,7 +11,7 @@ extension FirstWhereExt<T> on List<T> {
 extension FirstWhereExtIretable<T> on Iterable<T> {
   /// The first element satisfying [test], or `null` if there are none.
   T? firstWhereOrNull(bool Function(T element) test) {
-    for (var element in this) {
+    for (final element in this) {
       if (test(element)) return element;
     }
     return null;

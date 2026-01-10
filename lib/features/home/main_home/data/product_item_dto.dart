@@ -11,7 +11,8 @@ part 'category_dto.dart';
 
 sealed class ProductItemDTO {
   ProductItemDTO();
-  ProductItemDTO.fromJson(Map<String, dynamic> json);
+
+  ProductItemDTO.fromJson();
 }
 
 class SectionItemDTO extends ProductItemDTO {

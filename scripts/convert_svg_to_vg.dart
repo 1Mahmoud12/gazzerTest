@@ -18,7 +18,11 @@ Future<void> main() async {
     exit(1);
   }
 
-  final svgFiles = svgDir.listSync(recursive: true).whereType<File>().where((file) => file.path.endsWith('.svg')).toList();
+  final svgFiles = svgDir
+      .listSync(recursive: true)
+      .whereType<File>()
+      .where((file) => file.path.endsWith('.svg'))
+      .toList();
 
   if (svgFiles.isEmpty) {
     log('No SVG files found in assets/svg');
@@ -38,7 +42,14 @@ Future<void> main() async {
       log('Converting: ${path.basename(svgPath)}...');
 
       // Run vector_graphics_compiler with correct flags
-      final result = await Process.run('dart', ['run', 'vector_graphics_compiler', '-i', svgPath, '-o', vgPath], runInShell: true);
+      final result = await Process.run('dart', [
+        'run',
+        'vector_graphics_compiler',
+        '-i',
+        svgPath,
+        '-o',
+        vgPath,
+      ], runInShell: true);
 
       if (result.exitCode == 0) {
         log('  ✓ Success: ${path.basename(vgPath)}\n');
@@ -70,7 +81,9 @@ Future<void> main() async {
   log('Failed: $failCount');
 
   if (successCount > 0) {
-    log('\nNote: Remember to update your pubspec.yaml to include .vg files in assets');
+    log(
+      '\nNote: Remember to update your pubspec.yaml to include .vg files in assets',
+    );
     log('Add: - assets/svg/**/*.vg');
   }
 }

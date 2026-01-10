@@ -1,19 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:gazzer/features/supportScreen/domain/entities/chat_entity.dart';
 
-enum MessageSender {
-  user,
-  support,
-  system,
-}
+enum MessageSender { user, support, system }
 
-enum MessageStatus {
-  sending,
-  sent,
-  delivered,
-  read,
-  failed,
-}
+enum MessageStatus { sending, sent, delivered, read, failed }
 
 class ChatMessageModel extends Equatable {
   final String id;
@@ -67,7 +57,8 @@ class ChatMessageModel extends Equatable {
 
   bool get isFromUser => sender == MessageSender.user;
 
-  bool get isFromSupport => sender == MessageSender.support || sender == MessageSender.system;
+  bool get isFromSupport =>
+      sender == MessageSender.support || sender == MessageSender.system;
 
   bool get isSending => status == MessageStatus.sending;
 

@@ -15,7 +15,8 @@ class PaymobWebhookService {
       );
       final data = response.data;
 
-      if (data is Map<String, dynamic> && data['data']['payment_status'] == 'completed') {
+      if (data is Map<String, dynamic> &&
+          data['data']['payment_status'] == 'completed') {
         return data;
       }
       return {'status': 'error', 'message': 'Invalid response'};

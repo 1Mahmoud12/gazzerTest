@@ -14,7 +14,13 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 /// Daily offer style one widget - Product card with discount and multiple product images
 class DailyOfferStyleOne extends StatelessWidget {
-  const DailyOfferStyleOne({super.key, required this.product, this.discountPercentage = 30, this.onTap, this.width});
+  const DailyOfferStyleOne({
+    super.key,
+    required this.product,
+    this.discountPercentage = 30,
+    this.onTap,
+    this.width,
+  });
 
   final ProductEntity product;
   final int discountPercentage;
@@ -40,7 +46,11 @@ class DailyOfferStyleOne extends StatelessWidget {
             spacing: 8,
             children: [
               // Top Section - Product Images and Icons
-              _TopSection(product: product, discountPercentage: discountPercentage, isAr: isAr),
+              _TopSection(
+                product: product,
+                discountPercentage: discountPercentage,
+                isAr: isAr,
+              ),
 
               // Bottom Section - Product Details
               Expanded(
@@ -55,7 +65,11 @@ class DailyOfferStyleOne extends StatelessWidget {
 }
 
 class _TopSection extends StatelessWidget {
-  const _TopSection({required this.product, required this.discountPercentage, required this.isAr});
+  const _TopSection({
+    required this.product,
+    required this.discountPercentage,
+    required this.isAr,
+  });
 
   final ProductEntity product;
   final int discountPercentage;
@@ -113,12 +127,20 @@ class _BottomSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Text(product.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
+              child: Text(
+                product.name,
+                style: context.style16500,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             if (product.offer != null) ...[
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.circular(50)),
+                decoration: BoxDecoration(
+                  color: Co.secondary,
+                  borderRadius: BorderRadius.circular(50),
+                ),
                 child: Text(
                   '${product.offer!.discount.toInt()}${product.offer!.discountType == DiscountType.percentage ? ' %' : ''}',
                   style: context.style16500,
@@ -148,7 +170,10 @@ class _BottomSection extends StatelessWidget {
                 const HorizontalSpacing(4),
                 Text(product.rate.toString(), style: context.style14400),
                 const HorizontalSpacing(2),
-                Text('(+${product.reviewCount})', style: context.style14400.copyWith(color: Co.darkGrey)),
+                Text(
+                  '(+${product.reviewCount})',
+                  style: context.style14400.copyWith(color: Co.darkGrey),
+                ),
               ],
             ),
           ],
@@ -166,14 +191,20 @@ class _BottomSection extends StatelessWidget {
                 children: [
                   FittedBox(
                     alignment: AlignmentDirectional.centerStart,
-                    child: Text(Helpers.getProperPrice(product.price), style: context.style16500.copyWith(color: Co.purple)),
+                    child: Text(
+                      Helpers.getProperPrice(product.price),
+                      style: context.style16500.copyWith(color: Co.purple),
+                    ),
                   ),
                   if (product.offer != null)
                     FittedBox(
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         Helpers.getProperPrice(product.priceBeforeDiscount!),
-                        style: context.style16500.copyWith(decoration: TextDecoration.lineThrough, color: Co.greyText),
+                        style: context.style16500.copyWith(
+                          decoration: TextDecoration.lineThrough,
+                          color: Co.greyText,
+                        ),
                       ),
                     ),
                 ],
@@ -182,7 +213,12 @@ class _BottomSection extends StatelessWidget {
 
             const SizedBox(width: 8),
             if (!(key?.toString().contains('store') ?? false))
-              CartToIncrementIcon(isHorizonal: true, product: product, iconSize: 25, isDarkContainer: true),
+              CartToIncrementIcon(
+                isHorizonal: true,
+                product: product,
+                iconSize: 25,
+                isDarkContainer: true,
+              ),
           ],
         ),
       ],

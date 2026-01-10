@@ -74,7 +74,6 @@ class _PharmacyScrollableTabedListState extends State<PharmacyScrollableTabedLis
         child: ListView.builder(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
-          reverse: false,
           physics: const AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics()),
           itemCount: widget.itemsCount + 2,
           itemBuilder: (context, index) {
@@ -151,7 +150,7 @@ class _PharmacyScrollableTabedListState extends State<PharmacyScrollableTabedLis
               } else {
                 child = widget.listItemBuilder(context, index - 2);
               }
-              return StickyContainerWidget(index: index, parentIndex: 1, overlapParent: false, child: child);
+              return StickyContainerWidget(index: index, parentIndex: 1, child: child);
             }
           },
         ),

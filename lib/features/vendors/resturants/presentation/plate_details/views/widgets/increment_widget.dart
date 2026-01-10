@@ -7,7 +7,12 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dart';
 
 class IncrementWidget extends StatelessWidget {
-  const IncrementWidget({super.key, this.initVal = 1, required this.onChanged, this.isIncrementDisabled = false});
+  const IncrementWidget({
+    super.key,
+    this.initVal = 1,
+    required this.onChanged,
+    this.isIncrementDisabled = false,
+  });
   final int initVal;
   final Function(bool isAdding) onChanged;
   final bool isIncrementDisabled;
@@ -34,13 +39,23 @@ class IncrementWidget extends StatelessWidget {
                       SystemSound.play(SystemSoundType.click);
                       onChanged(true);
                     },
-              child: Icon(Icons.add, color: isIncrementDisabled ? Co.black.withOpacityNew(0.4) : Co.black, size: 22),
+              child: Icon(
+                Icons.add,
+                color: isIncrementDisabled
+                    ? Co.black.withOpacityNew(0.4)
+                    : Co.black,
+                size: 22,
+              ),
             ),
           ),
           if (initVal != 0)
             ConstrainedBox(
               constraints: const BoxConstraints(minWidth: 40),
-              child: Text('$initVal', style: context.style20500, textAlign: TextAlign.center),
+              child: Text(
+                '$initVal',
+                style: context.style20500,
+                textAlign: TextAlign.center,
+              ),
             ),
           if (initVal != 0)
             Expanded(

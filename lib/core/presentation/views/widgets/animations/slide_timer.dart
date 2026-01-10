@@ -77,7 +77,7 @@ class _SlideTimerState extends State<SlideTimer> {
               Text(L10n.tr().hours, style: style.copyWith(fontSize: 8)),
             ],
           ),
-          Text(" : ", style: style),
+          Text(' : ', style: style),
 
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -98,7 +98,7 @@ class _SlideTimerState extends State<SlideTimer> {
               Text(L10n.tr().mins, style: style.copyWith(fontSize: 8)),
             ],
           ),
-          Text(" : ", style: style),
+          Text(' : ', style: style),
 
           Column(
             mainAxisSize: MainAxisSize.min,

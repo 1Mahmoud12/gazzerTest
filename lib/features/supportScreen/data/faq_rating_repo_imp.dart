@@ -12,10 +12,7 @@ class FaqRatingRepoImp extends FaqRatingRepo {
   @override
   Future<Result<String>> submitRating(FaqRatingRequest request) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.faqRating,
-        requestBody: request.toJson(),
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.faqRating, requestBody: request.toJson()),
       parser: (response) => response.data['message']?.toString() ?? 'Rating submitted successfully',
     );
   }

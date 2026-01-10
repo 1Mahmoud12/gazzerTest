@@ -89,30 +89,21 @@ class LoyaltyPoints {
 }
 
 class EarningRate {
-  const EarningRate({
-    required this.pointsPerAmount,
-    required this.amountUnit,
-  });
+  const EarningRate({required this.pointsPerAmount, required this.amountUnit});
 
   final num? pointsPerAmount;
   final num? amountUnit;
 }
 
 class ConversionRate {
-  const ConversionRate({
-    required this.points,
-    required this.egp,
-  });
+  const ConversionRate({required this.points, required this.egp});
 
   final num? points;
   final num? egp;
 }
 
 class TierBenefits {
-  const TierBenefits({
-    required this.tier,
-    required this.benefits,
-  });
+  const TierBenefits({required this.tier, required this.benefits});
 
   final LoyaltyTier? tier;
   final List<LoyaltyBenefit> benefits;

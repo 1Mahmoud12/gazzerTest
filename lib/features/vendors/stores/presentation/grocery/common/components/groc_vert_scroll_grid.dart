@@ -44,7 +44,10 @@ class GrocVertScrollGrid<T> extends StatelessWidget {
       child: Column(
         spacing: 16,
         children: [
-          TitleWithMore(title: title ?? '', onPressed: items.length > 10 ? onViewAllPressed : null),
+          TitleWithMore(
+            title: title ?? '',
+            onPressed: items.length > 10 ? onViewAllPressed : null,
+          ),
           GridView.builder(
             physics: canScroll ? null : const NeverScrollableScrollPhysics(),
 

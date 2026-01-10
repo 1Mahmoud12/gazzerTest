@@ -9,6 +9,7 @@ class AppRatingWidget extends StatelessWidget {
   final double itemSize;
   final bool ignoreGesture;
   final Function(double)? onRate;
+
   const AppRatingWidget(this.initialRating, {this.itemSize = 15, this.ignoreGesture = true, super.key, this.onRate});
 
   @override

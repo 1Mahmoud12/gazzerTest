@@ -28,6 +28,7 @@ sealed class FastItemEvents extends AppEvent {
   final int prodId;
   final ItemFastActionState state;
   final List<CartItemEntity> items;
+
   FastItemEvents({required this.prodId, this.state = const ItemFastActionState(), required this.items});
 }
 
@@ -41,5 +42,6 @@ class FastItemActionsLoaded extends FastItemEvents {
 
 class FastItemActionsError extends FastItemEvents {
   final String? message;
+
   FastItemActionsError(this.message, {required super.items, required super.prodId});
 }

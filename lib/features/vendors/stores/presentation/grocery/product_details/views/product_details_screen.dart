@@ -211,7 +211,7 @@ class ProductDetailsScreen extends StatelessWidget {
           );
         }
         return Scaffold(
-          appBar: MainAppBar(showCart: true, onShare: () {}, showNotification: false),
+          appBar: MainAppBar(showCart: true, onShare: () {}),
           body: const Center(child: AdaptiveProgressIndicator()),
         );
       },

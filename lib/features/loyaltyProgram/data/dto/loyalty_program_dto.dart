@@ -1,11 +1,7 @@
 import 'package:gazzer/features/loyaltyProgram/domain/entities/loyalty_program_entity.dart';
 
 class LoyaltyProgramResponseDto {
-  LoyaltyProgramResponseDto({
-    required this.status,
-    required this.message,
-    required this.data,
-  });
+  LoyaltyProgramResponseDto({required this.status, required this.message, required this.data});
 
   final String? status;
   final String? message;
@@ -23,12 +19,7 @@ class LoyaltyProgramResponseDto {
 }
 
 class LoyaltyProgramDataDto {
-  LoyaltyProgramDataDto({
-    required this.currentTier,
-    required this.tierProgress,
-    required this.points,
-    required this.tierBenefits,
-  });
+  LoyaltyProgramDataDto({required this.currentTier, required this.tierProgress, required this.points, required this.tierBenefits});
 
   final LoyaltyTierDto? currentTier;
   final TierProgressDto? tierProgress;
@@ -141,12 +132,7 @@ class TierProgressDto {
 }
 
 class NextTierDto {
-  NextTierDto({
-    required this.name,
-    required this.displayName,
-    required this.spentNeeded,
-    required this.ordersNeeded,
-  });
+  NextTierDto({required this.name, required this.displayName, required this.spentNeeded, required this.ordersNeeded});
 
   final String? name;
   final String? displayName;
@@ -162,12 +148,7 @@ class NextTierDto {
     );
   }
 
-  NextTier toEntity() => NextTier(
-    name: name,
-    displayName: displayName,
-    spentNeeded: spentNeeded,
-    ordersNeeded: ordersNeeded,
-  );
+  NextTier toEntity() => NextTier(name: name, displayName: displayName, spentNeeded: spentNeeded, ordersNeeded: ordersNeeded);
 }
 
 class LoyaltyPointsDto {
@@ -213,54 +194,33 @@ class LoyaltyPointsDto {
 }
 
 class EarningRateDto {
-  EarningRateDto({
-    required this.pointsPerAmount,
-    required this.amountUnit,
-  });
+  EarningRateDto({required this.pointsPerAmount, required this.amountUnit});
 
   final num? pointsPerAmount;
   final num? amountUnit;
 
   factory EarningRateDto.fromJson(Map<String, dynamic> json) {
-    return EarningRateDto(
-      pointsPerAmount: json['points_per_amount'],
-      amountUnit: json['amount_unit'],
-    );
+    return EarningRateDto(pointsPerAmount: json['points_per_amount'], amountUnit: json['amount_unit']);
   }
 
-  EarningRate toEntity() => EarningRate(
-    pointsPerAmount: pointsPerAmount,
-    amountUnit: amountUnit,
-  );
+  EarningRate toEntity() => EarningRate(pointsPerAmount: pointsPerAmount, amountUnit: amountUnit);
 }
 
 class ConversionRateDto {
-  ConversionRateDto({
-    required this.points,
-    required this.egp,
-  });
+  ConversionRateDto({required this.points, required this.egp});
 
   final num? points;
   final num? egp;
 
   factory ConversionRateDto.fromJson(Map<String, dynamic> json) {
-    return ConversionRateDto(
-      points: json['points'],
-      egp: json['egp'],
-    );
+    return ConversionRateDto(points: json['points'], egp: json['egp']);
   }
 
-  ConversionRate toEntity() => ConversionRate(
-    points: points,
-    egp: egp,
-  );
+  ConversionRate toEntity() => ConversionRate(points: points, egp: egp);
 }
 
 class TierBenefitsDto {
-  TierBenefitsDto({
-    required this.tier,
-    required this.benefits,
-  });
+  TierBenefitsDto({required this.tier, required this.benefits});
 
   final LoyaltyTierDto? tier;
   final List<LoyaltyBenefitDto> benefits;
@@ -272,19 +232,11 @@ class TierBenefitsDto {
     );
   }
 
-  TierBenefits toEntity() => TierBenefits(
-    tier: tier?.toEntity(),
-    benefits: benefits.map((e) => e.toEntity()).toList(),
-  );
+  TierBenefits toEntity() => TierBenefits(tier: tier?.toEntity(), benefits: benefits.map((e) => e.toEntity()).toList());
 }
 
 class LoyaltyBenefitDto {
-  LoyaltyBenefitDto({
-    required this.id,
-    required this.benefitType,
-    required this.isEnabled,
-    required this.title,
-  });
+  LoyaltyBenefitDto({required this.id, required this.benefitType, required this.isEnabled, required this.title});
 
   final int? id;
   final String? benefitType;
@@ -300,10 +252,5 @@ class LoyaltyBenefitDto {
     );
   }
 
-  LoyaltyBenefit toEntity() => LoyaltyBenefit(
-    id: id,
-    benefitType: benefitType,
-    isEnabled: isEnabled,
-    title: title,
-  );
+  LoyaltyBenefit toEntity() => LoyaltyBenefit(id: id, benefitType: benefitType, isEnabled: isEnabled, title: title);
 }

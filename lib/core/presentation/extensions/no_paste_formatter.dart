@@ -6,7 +6,8 @@ class NoPasteFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    if (newValue.text.length > oldValue.text.length && newValue.text.length - oldValue.text.length > 2) {
+    if (newValue.text.length > oldValue.text.length &&
+        newValue.text.length - oldValue.text.length > 2) {
       return oldValue;
     }
     return newValue;

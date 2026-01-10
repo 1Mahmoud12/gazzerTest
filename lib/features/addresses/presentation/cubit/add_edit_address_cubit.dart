@@ -8,16 +8,17 @@ import 'package:gazzer/features/addresses/presentation/cubit/add_edit_address_st
 class AddEditAddressCubit extends Cubit<AddEditAddressStates> {
   final AddressRepo _repo;
   final AddressEntity? oldAddress;
+
   AddEditAddressCubit(this._repo, {this.oldAddress}) : super(AddEditAddressInit());
 
   Future<void> getProvinces() async {
     emit(GetProvincesLoading());
     final result = await _repo.getProvinces();
     switch (result) {
-      case Ok<List<({int id, String name})>> data:
+      case final Ok<List<({int id, String name})>> data:
         emit(GetProvincesSuccess(provinces: data.value));
         break;
-      case Err err:
+      case final Err err:
         emit(GetProvincesError(err.error.message));
         break;
     }
@@ -27,10 +28,10 @@ class AddEditAddressCubit extends Cubit<AddEditAddressStates> {
     emit(GetZonesLoading());
     final result = await _repo.getZonez(id);
     switch (result) {
-      case Ok<List<({int id, String name})>> data:
+      case final Ok<List<({int id, String name})>> data:
         emit(GetZonesSuccess(zones: data.value));
         break;
-      case Err err:
+      case final Err err:
         emit(GetZonesError(err.error.message));
         break;
     }
@@ -46,10 +47,10 @@ class AddEditAddressCubit extends Cubit<AddEditAddressStates> {
       result = await _repo.editAddress(req);
     }
     switch (result) {
-      case Ok<String> data:
+      case final Ok<String> data:
         emit(SaveAddressSuccess(data.value));
         break;
-      case Err err:
+      case final Err err:
         emit(SaveAddressError(err.error.message));
         break;
     }

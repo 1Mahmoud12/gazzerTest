@@ -48,7 +48,10 @@ class PharmacyHeader extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Top Action Bar
-                const AppBarRowWidget(bacButtonColor: Co.mauve, iconsColor: Co.secondary),
+                const AppBarRowWidget(
+                  bacButtonColor: Co.mauve,
+                  iconsColor: Co.secondary,
+                ),
                 const SizedBox(height: 16),
 
                 // Search Bar
@@ -60,9 +63,12 @@ class PharmacyHeader extends StatelessWidget {
                         controller: TextEditingController(),
                         height: 80,
                         hintText: L10n.tr().searchForStoresItemsAndCAtegories,
-                        borderRadius: 64,
                         bgColor: Colors.transparent,
-                        prefix: const Icon(Icons.search, color: Co.purple, size: 24),
+                        prefix: const Icon(
+                          Icons.search,
+                          color: Co.purple,
+                          size: 24,
+                        ),
                       ),
                     ),
                     const HorizontalSpacing(10),

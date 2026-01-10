@@ -8,7 +8,11 @@ class MenuCategoriesHeaderWidget extends StatelessWidget {
   final String title;
   final List<Color> colors;
 
-  const MenuCategoriesHeaderWidget({super.key, required this.title, required this.colors});
+  const MenuCategoriesHeaderWidget({
+    super.key,
+    required this.title,
+    required this.colors,
+  });
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.paddingOf(context).top + (1.5 * kToolbarHeight);
@@ -31,7 +35,10 @@ class MenuCategoriesHeaderWidget extends StatelessWidget {
                   clipper: AddShapeClipper(),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      gradient: Grad().bgLinear.copyWith(colors: colors, stops: const [0.0, 1]),
+                      gradient: Grad().bgLinear.copyWith(
+                        colors: colors,
+                        stops: const [0.0, 1],
+                      ),
                     ),
                   ),
                 ),

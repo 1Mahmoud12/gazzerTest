@@ -10,16 +10,13 @@ class LoginCubit extends Cubit<LoginStates> {
 
   Future<void> login(String phone, String password) async {
     emit(LoginLoadingState());
-    final res = await _repo.login(
-      phone,
-      password,
-    );
+    final res = await _repo.login(phone, password);
     switch (res) {
-      case Ok<String> ok:
+      case final Ok<String> ok:
         await Session().loadUserData();
         emit(LoginSuccessState(ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(LoginErrorState(err.error.message));
         break;
     }

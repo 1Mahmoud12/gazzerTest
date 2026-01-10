@@ -33,7 +33,13 @@ class SearchVendorInfoCard extends StatelessWidget {
       child: Row(
         spacing: 12,
         children: [
-          CustomNetworkImage(vendor.image, height: 75, width: 65, fit: BoxFit.cover, borderRaduis: 16),
+          CustomNetworkImage(
+            vendor.image,
+            height: 75,
+            width: 65,
+            fit: BoxFit.cover,
+            borderRaduis: 16,
+          ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,16 +47,28 @@ class SearchVendorInfoCard extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(vendor.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
+                      child: Text(
+                        vendor.name,
+                        style: context.style16500,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     const HorizontalSpacing(4),
                     Row(
                       children: [
-                        const VectorGraphicsWidget(Assets.starRateIc, width: 20, height: 20),
+                        const VectorGraphicsWidget(
+                          Assets.starRateIc,
+                          width: 20,
+                          height: 20,
+                        ),
                         const HorizontalSpacing(4),
                         Text(
                           vendor.rate.toStringAsFixed(1),
-                          style: context.style16400.copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                          style: context.style16400.copyWith(
+                            color: Co.darkGrey,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
@@ -64,22 +82,36 @@ class SearchVendorInfoCard extends StatelessWidget {
 
                       spacing: 4,
                       children: [
-                        const VectorGraphicsWidget(Assets.locationIc, width: 20, height: 20),
+                        const VectorGraphicsWidget(
+                          Assets.locationIc,
+                          width: 20,
+                          height: 20,
+                        ),
                         const HorizontalSpacing(4),
                         Text(
                           vendor.zoneName,
-                          style: context.style16400.copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                          style: context.style16400.copyWith(
+                            color: Co.darkGrey,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const VectorGraphicsWidget(Assets.clockIc, width: 20, height: 20),
+                        const VectorGraphicsWidget(
+                          Assets.clockIc,
+                          width: 20,
+                          height: 20,
+                        ),
                         const HorizontalSpacing(4),
                         Text(
                           '${vendor.deliveryTime} ${L10n.tr().mins}',
-                          style: context.style16400.copyWith(color: Co.darkGrey, fontWeight: FontWeight.w500),
+                          style: context.style16400.copyWith(
+                            color: Co.darkGrey,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),

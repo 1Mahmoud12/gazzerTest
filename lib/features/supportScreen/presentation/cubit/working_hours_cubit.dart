@@ -15,10 +15,10 @@ class WorkingHoursCubit extends Cubit<WorkingHoursState> {
 
     final result = await _repo.getWorkingHours();
     switch (result) {
-      case Ok<List<WorkingHoursEntity>> ok:
+      case final Ok<List<WorkingHoursEntity>> ok:
         emit(WorkingHoursLoaded(ok.value));
         break;
-      case Err<List<WorkingHoursEntity>> err:
+      case final Err<List<WorkingHoursEntity>> err:
         emit(WorkingHoursError(err.error.message));
         break;
     }

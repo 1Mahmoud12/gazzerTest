@@ -22,7 +22,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.allRestaurants(page, limit)),
       parser: (response) {
         final data = <RestaurantEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(RestaurantDTO.fromJson(item).toRestEntity());
         }
         return data;
@@ -38,7 +38,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       ),
       parser: (response) {
         final data = <RestaurantEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(RestaurantDTO.fromJson(item).toRestEntity());
         }
         return data;
@@ -52,7 +52,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.platesCategories),
       parser: (response) {
         final data = <CategoryOfPlateEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(CategoryOfPlateDTO.fromJson(item).toCategoryOfPlateEntity());
         }
         return data;
@@ -66,7 +66,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.categoryOfPlatesByRest(restaurantId)),
       parser: (response) {
         final data = <CategoryOfPlateEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(CategoryOfPlateDTO.fromJson(item).toCategoryOfPlateEntity());
         }
         return data;
@@ -82,7 +82,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       ),
       parser: (response) {
         final data = <RestaurantEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(RestaurantDTO.fromJson(item).toRestEntity());
         }
         return data;
@@ -98,7 +98,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       ),
       parser: (response) {
         final data = <RestaurantEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(RestaurantDTO.fromJson(item).toRestEntity());
         }
         return data;
@@ -114,7 +114,7 @@ class RestaurantsRepoImp extends RestaurantsRepo {
       ),
       parser: (response) {
         final data = <RestaurantEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(RestaurantDTO.fromJson(item).toRestEntity());
         }
         return data;

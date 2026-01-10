@@ -4,22 +4,35 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
 class CircleGradientBorderedImage extends StatelessWidget {
-  const CircleGradientBorderedImage({super.key, required this.image, this.shadow, this.showBorder = true});
+  const CircleGradientBorderedImage({
+    super.key,
+    required this.image,
+    this.shadow,
+    this.showBorder = true,
+  });
   final String image;
   final BoxShadow? shadow;
   final bool showBorder;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: shadow == null ? null : [shadow!]),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        boxShadow: shadow == null ? null : [shadow!],
+      ),
       child: DecoratedBox(
         position: DecorationPosition.foreground,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: !showBorder ? null : GradientBoxBorder(gradient: Grad().shadowGrad()),
+          border: !showBorder
+              ? null
+              : GradientBoxBorder(gradient: Grad().shadowGrad()),
         ),
         child: ClipOval(
-          child: AspectRatio(aspectRatio: 1.0, child: CustomNetworkImage(image, fit: BoxFit.cover)),
+          child: AspectRatio(
+            aspectRatio: 1.0,
+            child: CustomNetworkImage(image, fit: BoxFit.cover),
+          ),
         ),
       ),
     );

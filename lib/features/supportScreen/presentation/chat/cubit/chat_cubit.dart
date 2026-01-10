@@ -22,7 +22,7 @@ class ChatCubit extends Cubit<ChatStates> {
       loadChatMessages();
     } else {
       // No chat_id - show empty state where user can start a new chat
-      _currentLoadedState = ChatLoadedState(messages: [], chatId: null, orderId: orderId);
+      _currentLoadedState = ChatLoadedState(messages: [], orderId: orderId);
       emit(_currentLoadedState!);
     }
   }
@@ -38,7 +38,7 @@ class ChatCubit extends Cubit<ChatStates> {
 
     final result = await _repo.getChatMessages(_chatId!, page: page);
     switch (result) {
-      case Ok<ChatResponse> ok:
+      case final Ok<ChatResponse> ok:
         final chatResponse = ok.value;
         final messages = chatResponse.chat.messages.map((e) => ChatMessageModel.fromEntity(e)).toList();
 
@@ -65,7 +65,7 @@ class ChatCubit extends Cubit<ChatStates> {
         // Update internal chatId
         _chatId = chatResponse.chat.id;
         break;
-      case Err<ChatResponse> err:
+      case final Err<ChatResponse> err:
         emit(ChatErrorState(err.error.message));
         break;
     }
@@ -123,7 +123,7 @@ class ChatCubit extends Cubit<ChatStates> {
 
     final result = await _repo.sendMessage(request);
     switch (result) {
-      case Ok<SendMessageResponse> ok:
+      case final Ok<SendMessageResponse> ok:
         // Update chat_id from response
         if (ok.value.chatId != null) {
           _chatId = ok.value.chatId;
@@ -159,7 +159,7 @@ class ChatCubit extends Cubit<ChatStates> {
           emit(_currentLoadedState!);
         }
         break;
-      case Err<SendMessageResponse> err:
+      case final Err<SendMessageResponse> err:
         // Update message status to failed
         final failedMessages = updatedMessages.map((m) => m.id == tempMessage.id ? m.copyWith(status: MessageStatus.failed) : m).toList();
 

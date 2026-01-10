@@ -36,7 +36,7 @@ class _HealthFocusScreenState extends State<HealthFocusScreen> {
     super.dispose();
   }
 
-  final focusData = ["Lose Weight", "Build Muscle", "Eat Healthier", "Manage A Condition"];
+  final focusData = ['Lose Weight', 'Build Muscle', 'Eat Healthier', 'Manage A Condition'];
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(

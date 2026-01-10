@@ -4,10 +4,7 @@ class ChatResponse extends Equatable {
   final ChatEntity chat;
   final PaginationEntity pagination;
 
-  const ChatResponse({
-    required this.chat,
-    required this.pagination,
-  });
+  const ChatResponse({required this.chat, required this.pagination});
 
   @override
   List<Object?> get props => [chat, pagination];

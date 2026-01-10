@@ -20,7 +20,9 @@ abstract class WalletRepo extends BaseApiRepo {
     String? type,
   });
 
-  Future<WalletTransactionsResponse?> getCachedWalletTransactions({String? type});
+  Future<WalletTransactionsResponse?> getCachedWalletTransactions({
+    String? type,
+  });
 
   Future<Result<AddBalanceResponse?>> addBalance({
     required double amount,

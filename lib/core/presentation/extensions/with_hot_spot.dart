@@ -39,9 +39,17 @@ extension WithHotspotX on Widget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (title.isNotEmpty) Text(title, style: theme.textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600)),
-                    if (title.isNotEmpty && text.isNotEmpty) const SizedBox(height: 6),
-                    if (text.isNotEmpty) Text(text, style: theme.textTheme.bodyMedium),
+                    if (title.isNotEmpty)
+                      Text(
+                        title,
+                        style: theme.textTheme.titleMedium!.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    if (title.isNotEmpty && text.isNotEmpty)
+                      const SizedBox(height: 6),
+                    if (text.isNotEmpty)
+                      Text(text, style: theme.textTheme.bodyMedium),
                   ],
                 ),
               ),

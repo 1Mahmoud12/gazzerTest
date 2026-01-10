@@ -21,7 +21,10 @@ Future<bool?> warningAlert({
   return showModalBottomSheet(
     context: context,
     builder: (context) => Container(
-      decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(15)),
+      decoration: BoxDecoration(
+        color: Co.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -30,11 +33,19 @@ Future<bool?> warningAlert({
             const VerticalSpacing(20),
             Text(
               title,
-              style: context.style16500.copyWith(fontWeight: TStyle.bold, color: Co.purple),
+              style: context.style16500.copyWith(
+                fontWeight: TStyle.bold,
+                color: Co.purple,
+              ),
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing(10),
-            if (message != null) Text(message, style: context.style16500, textAlign: TextAlign.center),
+            if (message != null)
+              Text(
+                message,
+                style: context.style16500,
+                textAlign: TextAlign.center,
+              ),
             // const VericalSpacing(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

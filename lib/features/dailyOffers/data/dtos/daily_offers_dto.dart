@@ -7,12 +7,7 @@ import 'package:gazzer/features/vendors/resturants/data/dtos/plate_dto.dart';
 import 'package:gazzer/features/vendors/stores/data/dtos/product_dto.dart';
 
 class DailyOffersDto {
-  DailyOffersDto({
-    required this.status,
-    required this.message,
-    required this.data,
-    this.pagination,
-  });
+  DailyOffersDto({required this.status, required this.message, required this.data, this.pagination});
 
   final String? status;
   final String? message;
@@ -21,62 +16,41 @@ class DailyOffersDto {
 
   factory DailyOffersDto.fromJson(Map<String, dynamic> json) {
     return DailyOffersDto(
-      status: json["status"],
-      message: json["message"],
-      data: json["data"] == null ? null : DailyOfferDataModel.fromJson(json["data"]),
-      pagination: json["pagination"] == null ? null : PaginationInfo.fromJson(json["pagination"]),
+      status: json['status'],
+      message: json['message'],
+      data: json['data'] == null ? null : DailyOfferDataModel.fromJson(json['data']),
+      pagination: json['pagination'] == null ? null : PaginationInfo.fromJson(json['pagination']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    "status": status,
-    "message": message,
-    "data": data?.toJson(),
-    "pagination": pagination?.toJson(),
-  };
+  Map<String, dynamic> toJson() => {'status': status, 'message': message, 'data': data?.toJson(), 'pagination': pagination?.toJson()};
 }
 
 class DailyOfferDataModel {
-  DailyOfferDataModel({
-    required this.storesWithOffers,
-    required this.itemsWithOffers,
-  });
+  DailyOfferDataModel({required this.storesWithOffers, required this.itemsWithOffers});
 
   final List<StoresWithOffer> storesWithOffers;
   final List<ItemsWithOffer> itemsWithOffers;
 
   factory DailyOfferDataModel.fromJson(Map<String, dynamic> json) {
     return DailyOfferDataModel(
-      storesWithOffers: json["stores_with_offers"] == null
+      storesWithOffers: json['stores_with_offers'] == null
           ? []
-          : List<StoresWithOffer>.from(
-              json["stores_with_offers"]!.map(
-                (x) => StoresWithOffer.fromJson(x),
-              ),
-            ),
-      itemsWithOffers: json["items_with_offers"] == null
+          : List<StoresWithOffer>.from(json['stores_with_offers']!.map((x) => StoresWithOffer.fromJson(x))),
+      itemsWithOffers: json['items_with_offers'] == null
           ? []
-          : List<ItemsWithOffer>.from(
-              json["items_with_offers"]!.map((x) => ItemsWithOffer.fromJson(x)),
-            ),
+          : List<ItemsWithOffer>.from(json['items_with_offers']!.map((x) => ItemsWithOffer.fromJson(x))),
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "stores_with_offers": storesWithOffers.map((x) => x.toJson()).toList(),
-    "items_with_offers": itemsWithOffers.map((x) => x.toJson()).toList(),
+    'stores_with_offers': storesWithOffers.map((x) => x.toJson()).toList(),
+    'items_with_offers': itemsWithOffers.map((x) => x.toJson()).toList(),
   };
 }
 
 class ItemsWithOffer {
-  ItemsWithOffer._({
-    this.id,
-    this.expiredAt,
-    this.discount,
-    this.discountType,
-    this.maxDiscount,
-    this.item,
-  });
+  ItemsWithOffer._({this.id, this.expiredAt, this.discount, this.discountType, this.maxDiscount, this.item});
 
   final int? id;
   final String? expiredAt;
@@ -88,26 +62,26 @@ class ItemsWithOffer {
 
   factory ItemsWithOffer.fromJson(Map<String, dynamic> json) {
     // Extract values first
-    final id = json["id"];
-    final expiredAt = json["expired_at"];
-    final discount = json["discount"];
-    final discountType = json["discount_type"];
-    final maxDiscount = json["max_discount"];
+    final id = json['id'];
+    final expiredAt = json['expired_at'];
+    final discount = json['discount'];
+    final discountType = json['discount_type'];
+    final maxDiscount = json['max_discount'];
 
     // Parse item type
-    final parsedItemType = ItemType.fromString(json["item_type"] ?? 'Unknown');
+    final parsedItemType = ItemType.fromString(json['item_type'] ?? 'Unknown');
 
     // Parse item based on type
     GenericItemDTO? parsedItem;
-    if (json["item"] != null) {
+    if (json['item'] != null) {
       try {
         if (parsedItemType == ItemType.plate) {
-          parsedItem = PlateDTO.fromJson(json["item"]);
+          parsedItem = PlateDTO.fromJson(json['item']);
         } else if (parsedItemType == ItemType.product || parsedItemType == ItemType.storeItem) {
-          parsedItem = ProductDTO.fromJson(json["item"]);
+          parsedItem = ProductDTO.fromJson(json['item']);
         } else {
           // Fallback to ProductDTO if type is unknown or unexpected
-          parsedItem = ProductDTO.fromJson(json["item"]);
+          parsedItem = ProductDTO.fromJson(json['item']);
         }
       } catch (e, stackTrace) {
         print('Error parsing item for type ${parsedItemType.value}: $e');
@@ -130,13 +104,13 @@ class ItemsWithOffer {
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "expired_at": expiredAt,
-    "discount": discount,
-    "discount_type": discountType,
-    "max_discount": maxDiscount,
-    "item_type": itemType.value,
-    "item": item?.toEntity(),
+    'id': id,
+    'expired_at': expiredAt,
+    'discount': discount,
+    'discount_type': discountType,
+    'max_discount': maxDiscount,
+    'item_type': itemType.value,
+    'item': item?.toEntity(),
   };
 
   /// Converts ItemsWithOffer to GenericItemEntity with the offer from wrapper
@@ -168,13 +142,7 @@ class ItemsWithOffer {
 }
 
 class Offer {
-  Offer({
-    required this.id,
-    required this.expiredAt,
-    required this.discount,
-    required this.discountType,
-    required this.maxDiscount,
-  });
+  Offer({required this.id, required this.expiredAt, required this.discount, required this.discountType, required this.maxDiscount});
 
   final int? id;
   final DateTime? expiredAt;
@@ -184,20 +152,20 @@ class Offer {
 
   factory Offer.fromJson(Map<String, dynamic> json) {
     return Offer(
-      id: json["id"],
-      expiredAt: DateTime.tryParse(json["expired_at"] ?? ""),
-      discount: json["discount"],
-      discountType: json["discount_type"],
-      maxDiscount: json["max_discount"],
+      id: json['id'],
+      expiredAt: DateTime.tryParse(json['expired_at'] ?? ''),
+      discount: json['discount'],
+      discountType: json['discount_type'],
+      maxDiscount: json['max_discount'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "expired_at": expiredAt?.toIso8601String(),
-    "discount": discount,
-    "discount_type": discountType,
-    "max_discount": maxDiscount,
+    'id': id,
+    'expired_at': expiredAt?.toIso8601String(),
+    'discount': discount,
+    'discount_type': discountType,
+    'max_discount': maxDiscount,
   };
 }
 
@@ -254,77 +222,68 @@ class StoresWithOffer {
 
   factory StoresWithOffer.fromJson(Map<String, dynamic> json) {
     return StoresWithOffer(
-      id: json["id"],
-      storeName: json["store_name"],
-      storeType: json["store_type"],
-      image: json["image"],
-      storeCategoryId: json["store_category_id"],
-      storeCategoryType: json["store_category_type"],
-      vendorId: json["vendor_id"],
-      address: json["address"],
-      estimatedDeliveryTime: json["estimated_delivery_time"],
-      maxDeliveryTime: json["max_delivery_time"],
-      minDeliveryTime: json["min_delivery_time"],
-      rate: json["rate"],
-      rateCount: json["rate_count"],
-      isFavorite: json["is_favorite"],
-      isOpen: json["is_open"],
-      workFrom: json["work_from"],
-      workTo: json["work_to"],
-      is24Hours: json["is_24_hours"],
-      isAlwaysClose: json["is_always_close"],
-      closingAlertAppearBefore: json["closing_alert_appear_before"],
-      tags: json["tags"] == null ? [] : List<dynamic>.from(json["tags"]!.map((x) => x)),
-      provinceZone: json["province_zone"] == null ? null : ProvinceZone.fromJson(json["province_zone"]),
-      offer: json["offer"] == null ? null : Offer.fromJson(json["offer"]),
+      id: json['id'],
+      storeName: json['store_name'],
+      storeType: json['store_type'],
+      image: json['image'],
+      storeCategoryId: json['store_category_id'],
+      storeCategoryType: json['store_category_type'],
+      vendorId: json['vendor_id'],
+      address: json['address'],
+      estimatedDeliveryTime: json['estimated_delivery_time'],
+      maxDeliveryTime: json['max_delivery_time'],
+      minDeliveryTime: json['min_delivery_time'],
+      rate: json['rate'],
+      rateCount: json['rate_count'],
+      isFavorite: json['is_favorite'],
+      isOpen: json['is_open'],
+      workFrom: json['work_from'],
+      workTo: json['work_to'],
+      is24Hours: json['is_24_hours'],
+      isAlwaysClose: json['is_always_close'],
+      closingAlertAppearBefore: json['closing_alert_appear_before'],
+      tags: json['tags'] == null ? [] : List<dynamic>.from(json['tags']!.map((x) => x)),
+      provinceZone: json['province_zone'] == null ? null : ProvinceZone.fromJson(json['province_zone']),
+      offer: json['offer'] == null ? null : Offer.fromJson(json['offer']),
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "store_name": storeName,
-    "store_type": storeType,
-    "image": image,
-    "store_category_id": storeCategoryId,
-    "storeCategoryType": storeCategoryType,
-    "vendor_id": vendorId,
-    "address": address,
-    "estimated_delivery_time": estimatedDeliveryTime,
-    "max_delivery_time": maxDeliveryTime,
-    "min_delivery_time": minDeliveryTime,
-    "rate": rate,
-    "rate_count": rateCount,
-    "is_favorite": isFavorite,
-    "is_open": isOpen,
-    "work_from": workFrom,
-    "work_to": workTo,
-    "is_24_hours": is24Hours,
-    "is_always_close": isAlwaysClose,
-    "closing_alert_appear_before": closingAlertAppearBefore,
-    "tags": tags.map((x) => x).toList(),
-    "province_zone": provinceZone?.toJson(),
-    "offer": offer?.toJson(),
+    'id': id,
+    'store_name': storeName,
+    'store_type': storeType,
+    'image': image,
+    'store_category_id': storeCategoryId,
+    'storeCategoryType': storeCategoryType,
+    'vendor_id': vendorId,
+    'address': address,
+    'estimated_delivery_time': estimatedDeliveryTime,
+    'max_delivery_time': maxDeliveryTime,
+    'min_delivery_time': minDeliveryTime,
+    'rate': rate,
+    'rate_count': rateCount,
+    'is_favorite': isFavorite,
+    'is_open': isOpen,
+    'work_from': workFrom,
+    'work_to': workTo,
+    'is_24_hours': is24Hours,
+    'is_always_close': isAlwaysClose,
+    'closing_alert_appear_before': closingAlertAppearBefore,
+    'tags': tags.map((x) => x).toList(),
+    'province_zone': provinceZone?.toJson(),
+    'offer': offer?.toJson(),
   };
 }
 
 class ProvinceZone {
-  ProvinceZone({
-    required this.id,
-    required this.zoneName,
-  });
+  ProvinceZone({required this.id, required this.zoneName});
 
   final int? id;
   final String? zoneName;
 
   factory ProvinceZone.fromJson(Map<String, dynamic> json) {
-    return ProvinceZone(
-      id: json["id"],
-      zoneName: json["zone_name"],
-    );
+    return ProvinceZone(id: json['id'], zoneName: json['zone_name']);
   }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "zone_name": zoneName,
-  };
+  Map<String, dynamic> toJson() => {'id': id, 'zone_name': zoneName};
 }

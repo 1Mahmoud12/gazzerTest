@@ -11,7 +11,12 @@ class AppNotification {
   final String time;
   final NotificationType type;
 
-  AppNotification({required this.title, required this.description, required this.time, required this.type});
+  AppNotification({
+    required this.title,
+    required this.description,
+    required this.time,
+    required this.type,
+  });
 }
 
 class ItemNotification extends StatefulWidget {
@@ -27,22 +32,41 @@ class _ItemNotificationState extends State<ItemNotification> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Co.w900, borderRadius: BorderRadius.all(Radius.circular(24))),
+      decoration: const BoxDecoration(
+        color: Co.w900,
+        borderRadius: BorderRadius.all(Radius.circular(24)),
+      ),
 
       child: ListTile(
         leading: Container(
           width: 48,
           height: 48,
-          decoration: const BoxDecoration(color: Co.secondary, borderRadius: BorderRadius.all(Radius.circular(8))),
-          child: SizedBox(width: 20, height: 20, child: VectorGraphicsWidget(widget.appNotification.type.asset, fit: BoxFit.none)),
+          decoration: const BoxDecoration(
+            color: Co.secondary,
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          child: SizedBox(
+            width: 20,
+            height: 20,
+            child: VectorGraphicsWidget(
+              widget.appNotification.type.asset,
+              fit: BoxFit.none,
+            ),
+          ),
         ),
         title: Text(widget.appNotification.title, style: context.style16500),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.appNotification.description, style: context.style16400.copyWith(color: Co.darkGrey)),
-            SizedBox(height: 4),
-            Text(widget.appNotification.time, style: context.style14400.copyWith(color: Co.darkGrey)),
+            Text(
+              widget.appNotification.description,
+              style: context.style16400.copyWith(color: Co.darkGrey),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              widget.appNotification.time,
+              style: context.style14400.copyWith(color: Co.darkGrey),
+            ),
           ],
         ),
 

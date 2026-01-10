@@ -6,12 +6,7 @@ class OrdersResponseDto {
   PaginationDto? pagination;
   List<OrderDto>? data;
 
-  OrdersResponseDto({
-    this.status,
-    this.message,
-    this.pagination,
-    this.data,
-  });
+  OrdersResponseDto({this.status, this.message, this.pagination, this.data});
 
   factory OrdersResponseDto.fromJson(Map<String, dynamic> json) {
     final List<OrderDto> data = [];
@@ -25,7 +20,9 @@ class OrdersResponseDto {
     return OrdersResponseDto(
       status: json['status'] as String?,
       message: json['message'] as String?,
-      pagination: json['pagination'] != null ? PaginationDto.fromJson(json['pagination'] as Map<String, dynamic>) : null,
+      pagination: json['pagination'] != null
+          ? PaginationDto.fromJson(json['pagination'] as Map<String, dynamic>)
+          : null,
       data: data,
     );
   }

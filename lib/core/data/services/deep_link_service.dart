@@ -65,8 +65,13 @@ class DeepLinkService extends WidgetsBindingObserver {
     // 1. App just transitioned from background to resumed (not already resumed)
     // 2. We have a pending URI from a deep link
     // 3. We haven't already processed this pending URI
-    if (!wasResumed && _isAppResumed && _pendingUri != null && !_hasProcessedPendingUri) {
-      debugPrint('App resumed from background, processing pending deep link: $_pendingUri');
+    if (!wasResumed &&
+        _isAppResumed &&
+        _pendingUri != null &&
+        !_hasProcessedPendingUri) {
+      debugPrint(
+        'App resumed from background, processing pending deep link: $_pendingUri',
+      );
       final uri = _pendingUri!;
       _pendingUri = null;
       _hasProcessedPendingUri = true;
@@ -95,7 +100,9 @@ class DeepLinkService extends WidgetsBindingObserver {
 
     final context = AppNavigator.mainKey.currentContext;
     if (context == null) {
-      debugPrint('Context not available, storing URI and will retry when context is ready');
+      debugPrint(
+        'Context not available, storing URI and will retry when context is ready',
+      );
       _pendingUri = uri;
       // Retry after a delay
       Future.delayed(const Duration(milliseconds: 500), () {
@@ -126,7 +133,9 @@ class DeepLinkService extends WidgetsBindingObserver {
       String path;
       if (uri.scheme == 'gazzar' || uri.scheme == 'gazzer') {
         // Custom scheme: gazzar://invite?ref=CODE
-        path = uri.path.isEmpty ? uri.toString().replaceAll('${uri.scheme}://', '') : uri.path;
+        path = uri.path.isEmpty
+            ? uri.toString().replaceAll('${uri.scheme}://', '')
+            : uri.path;
       } else {
         // HTTP/HTTPS URL: https://tkgazzer.com/invite?ref=CODE
         path = uri.path;
@@ -199,12 +208,12 @@ class DeepLinkService extends WidgetsBindingObserver {
 
   /// Get the initial link when app is opened from terminated state
   Future<Uri?> getInitialLink() async {
-    return await _appLinks.getInitialLink();
+    return _appLinks.getInitialLink();
   }
 
   /// Get the latest link
   Future<Uri?> getLatestLink() async {
-    return await _appLinks.getLatestLink();
+    return _appLinks.getLatestLink();
   }
 
   /// Dispose resources

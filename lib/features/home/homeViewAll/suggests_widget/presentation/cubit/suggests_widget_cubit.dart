@@ -14,7 +14,13 @@ class SuggestsWidgetCubit extends Cubit<SuggestsWidgetStates> {
     final hasCachedData = cached != null && cached.entities.isNotEmpty;
 
     if (hasCachedData) {
-      emit(SuggestsWidgetSuccessState(cached.entities, cached.banner, isFromCache: true));
+      emit(
+        SuggestsWidgetSuccessState(
+          cached.entities,
+          cached.banner,
+          isFromCache: true,
+        ),
+      );
     }
 
     // Show loading if no cached data
@@ -26,10 +32,10 @@ class SuggestsWidgetCubit extends Cubit<SuggestsWidgetStates> {
     final res = await _repo.getSuggests();
 
     switch (res) {
-      case Ok<SuggestsWidgetData> ok:
-        emit(SuggestsWidgetSuccessState(ok.value.entities, ok.value.banner, isFromCache: false));
+      case final Ok<SuggestsWidgetData> ok:
+        emit(SuggestsWidgetSuccessState(ok.value.entities, ok.value.banner));
         break;
-      case Err err:
+      case final Err err:
         // If API fails and we have cached data, keep showing it
         if (!hasCachedData) {
           emit(SuggestsWidgetErrorState(err.error.message));

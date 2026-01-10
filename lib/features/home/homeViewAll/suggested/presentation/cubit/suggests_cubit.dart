@@ -18,10 +18,12 @@ class SuggestsCubit extends Cubit<SuggestsStates> {
     if (loadMore) {
       if (_pagination == null || !_pagination!.hasNext) return;
       _currentPage++;
-      emit(SuggestsLoadingMoreState(
-        SuggestsDtoData(entities: _allEntities),
-        _pagination,
-      ));
+      emit(
+        SuggestsLoadingMoreState(
+          SuggestsDtoData(entities: _allEntities),
+          _pagination,
+        ),
+      );
     } else {
       emit(SuggestsLoadingState());
       _currentPage = 1;
@@ -47,10 +49,12 @@ class SuggestsCubit extends Cubit<SuggestsStates> {
           _allEntities = List.from(ok.value.data?.entities ?? []);
         }
         _pagination = ok.value.pagination;
-        emit(SuggestsSuccessState(
-          SuggestsDtoData(entities: _allEntities),
-          pagination: _pagination,
-        ));
+        emit(
+          SuggestsSuccessState(
+            SuggestsDtoData(entities: _allEntities),
+            pagination: _pagination,
+          ),
+        );
         break;
       case final Err err:
         if (!loadMore) {

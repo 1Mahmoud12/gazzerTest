@@ -3,7 +3,12 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class CircularCarousalWidget extends StatefulWidget {
-  const CircularCarousalWidget({super.key, required this.itemsCount, required this.itemBuilder, required this.maxItemWidth});
+  const CircularCarousalWidget({
+    super.key,
+    required this.itemsCount,
+    required this.itemBuilder,
+    required this.maxItemWidth,
+  });
   final Widget Function(BuildContext context, int index) itemBuilder;
   final int itemsCount;
   final double maxItemWidth;
@@ -18,7 +23,10 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
   double _calculatePosition(int index) {
     if (_controller.position.haveDimensions) {
       final value = _controller.page! - index;
-      double position = (-1 + (0.4 * math.pow(value.abs(), 1.8))).clamp(-1, 1.0);
+      final double position = (-1 + (0.4 * math.pow(value.abs(), 1.8))).clamp(
+        -1,
+        1.0,
+      );
       return position;
     }
     return 0.0;
@@ -27,14 +35,17 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
   double _calculateAngel(int index) {
     if (_controller.position.haveDimensions) {
       final value = _controller.page! - index;
-      final angle = -math.pi * (0.5 / 3) * (value);
+      final angle = -math.pi * (0.5 / 3) * value;
       return angle;
     }
     return 0.0;
   }
 
-  _updateController() {
-    _controller = PageController(viewportFraction: widget.maxItemWidth / maxAvailableWidth, initialPage: widget.itemsCount ~/ 2);
+  void _updateController() {
+    _controller = PageController(
+      viewportFraction: widget.maxItemWidth / maxAvailableWidth,
+      initialPage: widget.itemsCount ~/ 2,
+    );
     // print('maxAvailableWidth: $maxAvailableWidth');
     // print('viewportFraction: ${widget.maxItemWidth / maxAvailableWidth}');
     // print('initialPage: ${widget.itemsCount ~/ 2}');
@@ -43,7 +54,10 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
 
   @override
   void initState() {
-    _controller = PageController(viewportFraction: 0.27, initialPage: widget.itemsCount ~/ 2);
+    _controller = PageController(
+      viewportFraction: 0.27,
+      initialPage: widget.itemsCount ~/ 2,
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateController();
       setState(() {});
@@ -75,7 +89,6 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
           height: constraints.maxHeight,
           width: constraints.maxWidth,
           child: PageView.builder(
-            pageSnapping: true,
             allowImplicitScrolling: true,
             controller: _controller,
             itemCount: widget.itemsCount,
@@ -91,7 +104,10 @@ class _CircularCarousalWidgetState extends State<CircularCarousalWidget> {
                       children: [
                         Align(
                           alignment: Alignment(0, _calculatePosition(index)),
-                          child: Transform.rotate(angle: _calculateAngel(index), child: widget.itemBuilder(context, index)),
+                          child: Transform.rotate(
+                            angle: _calculateAngel(index),
+                            child: widget.itemBuilder(context, index),
+                          ),
                         ),
                       ],
                     ),

@@ -4,12 +4,7 @@ class ItemUnitBrandDTO {
   double? conversionFactor;
   BrandDTO? brand;
 
-  ItemUnitBrandDTO({
-    this.id,
-    this.price,
-    this.conversionFactor,
-    this.brand,
-  });
+  ItemUnitBrandDTO({this.id, this.price, this.conversionFactor, this.brand});
 
   ItemUnitBrandDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -40,10 +35,7 @@ class BrandDTO {
   }
 
   BrandEntity toEntity() {
-    return BrandEntity(
-      id: id ?? 0,
-      brandName: brandName ?? '',
-    );
+    return BrandEntity(id: id ?? 0, brandName: brandName ?? '');
   }
 }
 
@@ -53,12 +45,7 @@ class ItemUnitBrandEntity {
   double? conversionFactor;
   BrandEntity? brand;
 
-  ItemUnitBrandEntity({
-    this.id,
-    this.price,
-    this.conversionFactor,
-    this.brand,
-  });
+  ItemUnitBrandEntity({this.id, this.price, this.conversionFactor, this.brand});
 }
 
 class BrandEntity {

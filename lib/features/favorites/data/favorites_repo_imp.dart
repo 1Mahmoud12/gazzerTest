@@ -24,11 +24,7 @@ class FavoritesRepoImp extends FavoritesRepo {
   @override
   Future<Result<String>> addFavorite(int id, FavoriteType type, {CancelToken? cancelToken}) async {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.addFavorite,
-        requestBody: {'id': id, 'type': type.type},
-        cancelToken: cancelToken,
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.addFavorite, requestBody: {'id': id, 'type': type.type}, cancelToken: cancelToken),
       parser: (response) => response.data['message'] as String,
     );
   }
@@ -36,11 +32,7 @@ class FavoritesRepoImp extends FavoritesRepo {
   @override
   Future<Result<String>> removeFavorite(int id, FavoriteType type, {CancelToken? cancelToken}) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.removeFavorite,
-        requestBody: {'id': id, 'type': type.type},
-        cancelToken: cancelToken,
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.removeFavorite, requestBody: {'id': id, 'type': type.type}, cancelToken: cancelToken),
       parser: (response) => response.data['message'] as String,
     );
   }

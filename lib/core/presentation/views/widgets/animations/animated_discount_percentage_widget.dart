@@ -33,11 +33,8 @@ class _AnimatedDiscountPercentageWidgetState extends State<AnimatedDiscountPerce
           backgroundColor: Colors.transparent,
           alignment: const Alignment(0, 0),
           padding: const EdgeInsets.all(8),
-          label: RotationTransition(
-            turns: _controller,
-            child: SvgPicture.asset(Assets.assetsSvgPercentage, height: 71, fit: BoxFit.contain),
-          ),
-          child: SvgPicture.asset(Assets.assetsSvgPercentageBg, width: 150, fit: BoxFit.contain),
+          label: RotationTransition(turns: _controller, child: SvgPicture.asset(Assets.assetsSvgPercentage, height: 71)),
+          child: SvgPicture.asset(Assets.assetsSvgPercentageBg, width: 150),
         ),
       ],
     );

@@ -21,13 +21,21 @@ final class StoresMenuInit extends StoresMenuStates {}
 ///
 /// screen data states
 sealed class ScreenDataStates extends StoresMenuStates {
-  ScreenDataStates({super.mainCategory, super.banners, super.categoryWithStores});
+  ScreenDataStates({
+    super.mainCategory,
+    super.banners,
+    super.categoryWithStores,
+  });
 }
 
 final class ScreenDataLoading extends ScreenDataStates {}
 
 final class ScreenDataLoaded extends ScreenDataStates {
-  ScreenDataLoaded({required super.mainCategory, required super.banners, required super.categoryWithStores});
+  ScreenDataLoaded({
+    required super.mainCategory,
+    required super.banners,
+    required super.categoryWithStores,
+  });
 }
 
 final class ScreenDataError extends ScreenDataStates {

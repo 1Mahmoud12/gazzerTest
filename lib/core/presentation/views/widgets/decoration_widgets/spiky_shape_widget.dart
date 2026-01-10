@@ -103,7 +103,7 @@ class HomeDoubleAddWidget extends StatelessWidget {
                             flex: 2,
                             child: Center(
                               child: image!.endsWith('svg')
-                                  ? SvgPicture.asset(image!, height: 150, fit: BoxFit.contain)
+                                  ? SvgPicture.asset(image!, height: 150)
                                   : image!.endsWith('json')
                                   ? Lottie.asset(image!, fit: BoxFit.contain, alignment: Alignment.bottomCenter)
                                   : Image.asset(image!, height: 150, fit: BoxFit.contain),

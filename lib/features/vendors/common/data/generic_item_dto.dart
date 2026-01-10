@@ -18,7 +18,12 @@ class SimpleStoreDTO {
   }
 
   SimpleStoreEntity toEntity() {
-    return SimpleStoreEntity(id: id ?? 0, name: name ?? '', type: type ?? '', image: image ?? '');
+    return SimpleStoreEntity(
+      id: id ?? 0,
+      name: name ?? '',
+      type: type ?? '',
+      image: image ?? '',
+    );
   }
 }
 
@@ -28,7 +33,12 @@ class SimpleStoreEntity {
   final String type;
   final String image;
 
-  SimpleStoreEntity({required this.id, required this.name, required this.type, required this.image});
+  SimpleStoreEntity({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.image,
+  });
 }
 
 abstract class GenericItemDTO {

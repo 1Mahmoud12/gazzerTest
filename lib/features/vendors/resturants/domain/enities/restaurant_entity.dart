@@ -39,9 +39,5 @@ class RestaurantEntity extends GenericVendorEntity {
   });
 
   @override
-  List<Object?> get props => [
-    ...super.props,
-    deliveryFees,
-    categoryOfPlate,
-  ];
+  List<Object?> get props => [...super.props, deliveryFees, categoryOfPlate];
 }

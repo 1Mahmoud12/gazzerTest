@@ -32,11 +32,14 @@ mixin _$PlateDetailsRoute on GoRouteData {
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
   @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location, extra: _self.$extra);
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
 
   @override
-  void pushReplacement(BuildContext context) => context.pushReplacement(location, extra: _self.$extra);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
 
   @override
-  void replace(BuildContext context) => context.replace(location, extra: _self.$extra);
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
 }

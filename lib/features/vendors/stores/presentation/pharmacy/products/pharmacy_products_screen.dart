@@ -243,7 +243,7 @@ class _SubCategoriesList extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             color: Co.bg.withOpacityNew(0.5),
-                            child: Icon(Icons.category, color: Co.buttonGradient, size: 30),
+                            child: const Icon(Icons.category, color: Co.buttonGradient, size: 30),
                           );
                         },
                       ),

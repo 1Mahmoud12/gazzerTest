@@ -5,11 +5,7 @@ class SendMessageResponseDTO {
   final int? chatId;
   final List<ChatMessageDTO>? messages;
 
-  SendMessageResponseDTO({
-    this.message,
-    this.chatId,
-    this.messages,
-  });
+  SendMessageResponseDTO({this.message, this.chatId, this.messages});
 
   factory SendMessageResponseDTO.fromJson(Map<String, dynamic> json) {
     final data = json['data'] as Map<String, dynamic>?;
@@ -18,7 +14,9 @@ class SendMessageResponseDTO {
     // Extract messages from data.messages array
     List<ChatMessageDTO>? messagesList;
     if (data?['messages'] != null) {
-      messagesList = (data!['messages'] as List<dynamic>).map((msg) => ChatMessageDTO.fromJson(msg as Map<String, dynamic>)).toList();
+      messagesList = (data!['messages'] as List<dynamic>)
+          .map((msg) => ChatMessageDTO.fromJson(msg as Map<String, dynamic>))
+          .toList();
     }
 
     // Get the last message (the one we just sent) or first message from messages array

@@ -45,7 +45,9 @@ class VendorDTO extends ProductItemDTO {
     secondContactPerson = json['second_contact_person'];
     image = json['image'];
     type = json['type'];
-    storeInfo = json['store_info'] == null ? null : StoreInfo.fromJson(json['store_info']);
+    storeInfo = json['store_info'] == null
+        ? null
+        : StoreInfo.fromJson(json['store_info']);
   }
 
   VendorEntity toEntity() {

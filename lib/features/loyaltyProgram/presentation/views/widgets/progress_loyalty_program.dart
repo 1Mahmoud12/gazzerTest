@@ -76,7 +76,7 @@ class ProgressLoyaltyPrograms extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
       decoration: BoxDecoration(
-        border: Border.all(color: mainColor, width: 1),
+        border: Border.all(color: mainColor),
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(

@@ -126,9 +126,9 @@ class OrderDetailDto {
                 // Extract add-ons from option_values or ordered_with
                 final addOns = <String>[];
                 if (item.optionValues != null) {
-                  for (var optionGroup in item.optionValues!) {
+                  for (final optionGroup in item.optionValues!) {
                     if (optionGroup is List) {
-                      for (var option in optionGroup) {
+                      for (final option in optionGroup) {
                         if (option is String && option.isNotEmpty) {
                           addOns.add(option);
                         }
@@ -137,7 +137,7 @@ class OrderDetailDto {
                   }
                 }
                 if (item.orderedWith != null) {
-                  for (var item in item.orderedWith!) {
+                  for (final item in item.orderedWith!) {
                     if (item is Map && item['name'] != null) {
                       addOns.add(item['name'].toString());
                     }
@@ -168,12 +168,7 @@ class OrderDetailDto {
               [];
 
           return OrderDetailVendorEntity(
-            vendor: OrderVendorEntity(
-              id: store.storeId ?? 0,
-              name: store.storeName ?? '',
-              logo: store.storeImage,
-              image: store.storeImage,
-            ),
+            vendor: OrderVendorEntity(id: store.storeId ?? 0, name: store.storeName ?? '', logo: store.storeImage, image: store.storeImage),
             items: items,
           );
         }).toList() ??
@@ -208,7 +203,7 @@ class OrderDetailDto {
       final voucher = stores!.first.voucher!;
       voucherCode = voucher.code;
       voucherDiscountType = voucher.discountType;
-      voucherDiscountAmount = (voucher.discountValue != null ? voucher.discountValue!.toDouble() : null);
+      voucherDiscountAmount = voucher.discountValue?.toDouble();
     }
 
     // Calculate delivery fee and service fee
@@ -216,7 +211,7 @@ class OrderDetailDto {
     // The total_amount includes everything, so we calculate from subtotal
     final calculatedDeliveryFee = (totalAmount ?? 0.0) - (subtotal ?? 0.0) - (taxAmount ?? 0.0);
     final deliveryFee = calculatedDeliveryFee > 0 ? calculatedDeliveryFee : 0.0;
-    final serviceFee = 0.0; // Not provided in API
+    const serviceFee = 0.0; // Not provided in API
 
     // Build delivery address
     String deliveryName = '';
@@ -235,11 +230,7 @@ class OrderDetailDto {
             name: deliveryName,
             mobileNumber: '${countryPrefix ?? ''}${phoneNumber ?? ''}'.trim(),
           )
-        : const DeliveryAddressEntity(
-            address: '',
-            name: '',
-            mobileNumber: '',
-          );
+        : const DeliveryAddressEntity(address: '', name: '', mobileNumber: '');
 
     // Map order summary
     OrderSummaryEntity? orderSummaryEntity;
@@ -291,7 +282,6 @@ class OrderDetailDto {
       subTotal: subtotal ?? 0.0,
       discount: discount ?? 0.0,
       deliveryFee: deliveryFee,
-      serviceFee: serviceFee,
       total: totalAmount ?? 0.0,
       paymentMethod: paymentMethod,
       voucherCode: voucherCode,
@@ -309,12 +299,7 @@ class PaymentMethodDetailDto {
   String? paymentStatus;
   String? paidAt;
 
-  PaymentMethodDetailDto({
-    this.paymentMethod,
-    this.amount,
-    this.paymentStatus,
-    this.paidAt,
-  });
+  PaymentMethodDetailDto({this.paymentMethod, this.amount, this.paymentStatus, this.paidAt});
 
   factory PaymentMethodDetailDto.fromJson(Map<String, dynamic> json) {
     return PaymentMethodDetailDto(
@@ -432,11 +417,7 @@ class VoucherDetailDto {
   String? discountType;
   int? discountValue;
 
-  VoucherDetailDto({
-    this.code,
-    this.discountType,
-    this.discountValue,
-  });
+  VoucherDetailDto({this.code, this.discountType, this.discountValue});
 
   factory VoucherDetailDto.fromJson(Map<String, dynamic> json) {
     return VoucherDetailDto(
@@ -537,11 +518,7 @@ class CouponDto {
   String? discountType;
   double? discountValue;
 
-  CouponDto({
-    this.code,
-    this.discountType,
-    this.discountValue,
-  });
+  CouponDto({this.code, this.discountType, this.discountValue});
 
   factory CouponDto.fromJson(Map<String, dynamic> json) {
     return CouponDto(

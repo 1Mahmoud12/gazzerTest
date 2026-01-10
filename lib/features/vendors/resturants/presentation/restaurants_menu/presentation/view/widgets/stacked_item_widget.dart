@@ -11,13 +11,13 @@ class StackedImagesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (images.isEmpty) return const SizedBox.shrink();
-    final double radius = 10.0; // Radius for the CircleAvatar
+    const double radius = 10.0; // Radius for the CircleAvatar
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
           width: (radius * 2) + (radius * min(images.length.toDouble(), 3)),
-          height: (radius * 2),
+          height: radius * 2,
           child: Stack(
             children: List.generate(min(images.length, 4), (i) {
               return Positioned(
@@ -31,7 +31,7 @@ class StackedImagesWidget extends StatelessWidget {
             }),
           ),
         ),
-        if (images.length > 4) Text("+${images.length - 4} ${L10n.tr().items}", style: context.style14400.copyWith(fontWeight: TStyle.bold)),
+        if (images.length > 4) Text('+${images.length - 4} ${L10n.tr().items}', style: context.style14400.copyWith(fontWeight: TStyle.bold)),
       ],
     );
   }

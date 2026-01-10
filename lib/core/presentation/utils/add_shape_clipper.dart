@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AddShapeClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    Path path_0 = Path();
+    final Path path_0 = Path();
     path_0.moveTo(size.width * -0.1074597, size.height * 0.4538302);
     path_0.cubicTo(
       size.width * -0.1100882,
@@ -2695,7 +2695,14 @@ class AddShapeClipper extends CustomClipper<Path> {
       size.height * 0.02007111,
     );
     path_0.lineTo(size.width * 0.4691538, size.height * 0.02646012);
-    path_0.cubicTo(size.width * 0.4677308, size.height * 0.01886568, size.width * 0.4695282, size.height * 0.003013679, size.width * 0.4638692, 0);
+    path_0.cubicTo(
+      size.width * 0.4677308,
+      size.height * 0.01886568,
+      size.width * 0.4695282,
+      size.height * 0.003013679,
+      size.width * 0.4638692,
+      0,
+    );
     path_0.lineTo(size.width * 0.4623436, size.height * 0.007142407);
     path_0.cubicTo(
       size.width * 0.4637179,

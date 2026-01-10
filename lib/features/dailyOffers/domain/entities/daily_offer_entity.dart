@@ -6,8 +6,5 @@ class DailyOfferEntity {
   final List<DailyOfferItemEntity>? item;
   final List<DailyOfferStoreEntity>? store;
 
-  const DailyOfferEntity({
-    required this.item,
-    this.store,
-  });
+  const DailyOfferEntity({required this.item, this.store});
 }

@@ -17,10 +17,10 @@ class ComplaintCubit extends Cubit<ComplaintStates> {
     final result = await _repo.submitComplaint(request);
     closeDialog();
     switch (result) {
-      case Ok<ComplaintResponse> ok:
+      case final Ok<ComplaintResponse> ok:
         emit(ComplaintSuccessState(ok.value));
         break;
-      case Err<ComplaintResponse> err:
+      case final Err<ComplaintResponse> err:
         emit(ComplaintErrorState(err.error.message));
         Alerts.showToast(err.error.message);
         break;

@@ -77,7 +77,7 @@ class _SmartCartWidgetState extends State<SmartCartWidget> with SingleTickerProv
 
   /// Get current quantity from cart
   int _getQuantity() {
-    return cartBus.cartItems.firstWhereOrNull((item) => (item.prod.id == widget.id && item.type == widget.type))?.quantity ?? 0;
+    return cartBus.cartItems.firstWhereOrNull((item) => item.prod.id == widget.id && item.type == widget.type)?.quantity ?? 0;
   }
 
   /// Get cart item entity

@@ -5,5 +5,11 @@ class SocialLoginData {
   final String? photoUrl;
   final String? idToken;
 
-  SocialLoginData({required this.id, this.email, this.name, this.photoUrl, this.idToken});
+  SocialLoginData({
+    required this.id,
+    this.email,
+    this.name,
+    this.photoUrl,
+    this.idToken,
+  });
 }

@@ -21,11 +21,7 @@ class StoreCategoryDto {
     parentId = json['parent_id'];
     products = json['items'] == null
         ? []
-        : List<ProductEntity>.from(
-            (json['items'] as List).map(
-              (item) => ProductDTO.fromJson(item as Map<String, dynamic>).toEntity(),
-            ),
-          );
+        : List<ProductEntity>.from((json['items'] as List).map((item) => ProductDTO.fromJson(item as Map<String, dynamic>).toEntity()));
   }
 
   StoreCategoryEntity toEntity() => StoreCategoryEntity(

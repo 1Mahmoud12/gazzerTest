@@ -22,10 +22,10 @@ class TopItemsWidgetCubit extends Cubit<TopItemsWidgetState> {
     // Fetch data from API
     final res = await _repo.getTopItems();
     switch (res) {
-      case Ok<TopItemsWidgetData> ok:
+      case final Ok<TopItemsWidgetData> ok:
         emit(TopItemsWidgetSuccessState(ok.value.entities, ok.value.banner));
         break;
-      case Err err:
+      case final Err err:
         // If we have cached data, don't show error, just keep showing cache
         if (!hasCachedData) {
           emit(TopItemsWidgetErrorState(err.error.message));

@@ -35,9 +35,12 @@ class TopVendorsCubit extends Cubit<TopVendorsStates> {
     }
 
     // Fetch data from API
-    final res = await _repo.getTopVendors(page: _currentPage, perPage: _perPage);
+    final res = await _repo.getTopVendors(
+      page: _currentPage,
+      perPage: _perPage,
+    );
     switch (res) {
-      case Ok<TopVendorsResponse> ok:
+      case final Ok<TopVendorsResponse> ok:
         if (loadMore) {
           _allVendors.addAll(ok.value.vendors);
         } else {
@@ -46,7 +49,7 @@ class TopVendorsCubit extends Cubit<TopVendorsStates> {
         _pagination = ok.value.pagination;
         emit(TopVendorsSuccessState(_allVendors, pagination: _pagination));
         break;
-      case Err err:
+      case final Err err:
         if (!loadMore) {
           emit(TopVendorsErrorState(err.error.message));
         }

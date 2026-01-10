@@ -9,9 +9,15 @@ class GrocHeaderContainer extends StatelessWidget {
     return DecoratedBox(
       decoration: const BoxDecoration(
         color: Co.secondary,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
       ),
-      child: Padding(padding: const EdgeInsetsGeometry.fromLTRB(8, 0, 8, 8), child: child),
+      child: Padding(
+        padding: const EdgeInsetsGeometry.fromLTRB(8, 0, 8, 8),
+        child: child,
+      ),
     );
   }
 }

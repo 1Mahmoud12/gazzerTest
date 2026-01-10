@@ -22,7 +22,7 @@ class SubCategoriesWidget extends StatelessWidget {
         separatorBuilder: (context, index) => subCategories[index].isAdd ? const SizedBox.shrink() : const HorizontalSpacing(12),
         itemBuilder: (context, index) {
           if (subCategories[index].isAdd) {
-            print("SubCategoriesWidget: Skipping index $index as it is an add index");
+            print('SubCategoriesWidget: Skipping index $index as it is an add index');
             return const SizedBox.shrink();
           }
           return SubCategoryItem(

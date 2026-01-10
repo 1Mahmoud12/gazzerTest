@@ -6,7 +6,14 @@ class ReviewEntity {
   final String? clientAvatar;
   final DateTime createdAt;
 
-  const ReviewEntity({required this.id, required this.rating, this.comment, required this.clientName, this.clientAvatar, required this.createdAt});
+  const ReviewEntity({
+    required this.id,
+    required this.rating,
+    this.comment,
+    required this.clientName,
+    this.clientAvatar,
+    required this.createdAt,
+  });
 }
 
 class StarBreakdownEntity {

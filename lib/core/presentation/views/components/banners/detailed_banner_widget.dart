@@ -20,8 +20,16 @@ class DetailedBannerWidget extends StatelessWidget {
         rtChild: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (banner.title != null) Text(banner.title!, style: context.style20500.copyWith(color: Co.purple)),
-            if (banner.subtitle != null) Text(banner.subtitle!, style: context.style16500.copyWith(color: Co.purple)),
+            if (banner.title != null)
+              Text(
+                banner.title!,
+                style: context.style20500.copyWith(color: Co.purple),
+              ),
+            if (banner.subtitle != null)
+              Text(
+                banner.subtitle!,
+                style: context.style16500.copyWith(color: Co.purple),
+              ),
           ],
         ),
       ),

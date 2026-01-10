@@ -30,7 +30,7 @@ class LoyaltyProgramCubit extends Cubit<LoyaltyProgramState> {
       case Ok<LoyaltyProgramEntity?>(:final value):
         if (value != null) {
           _cached = value;
-          emit(LoyaltyProgramLoaded(data: value, isCached: false));
+          emit(LoyaltyProgramLoaded(data: value));
         } else {
           emit(
             LoyaltyProgramError(
@@ -40,12 +40,7 @@ class LoyaltyProgramCubit extends Cubit<LoyaltyProgramState> {
           );
         }
       case Err<LoyaltyProgramEntity?>(:final error):
-        emit(
-          LoyaltyProgramError(
-            message: error.message,
-            cachedData: _cached,
-          ),
-        );
+        emit(LoyaltyProgramError(message: error.message, cachedData: _cached));
     }
   }
 }

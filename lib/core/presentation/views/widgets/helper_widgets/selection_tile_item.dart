@@ -33,12 +33,18 @@ class SelectionTileItem extends StatelessWidget {
           spacing: spacing ?? 8,
           children: [
             if (isSingle)
-              GradientRadioBtn(isSelected: isSelected, onPressed: onTap, size: radioSize ?? 12)
+              GradientRadioBtn(
+                isSelected: isSelected,
+                onPressed: onTap,
+                size: radioSize ?? 12,
+              )
             else
               Transform.scale(
                 scale: (radioSize ?? 12) / 12,
                 child: Checkbox(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   value: isSelected,
                   visualDensity: VisualDensity.compact,
@@ -48,7 +54,10 @@ class SelectionTileItem extends StatelessWidget {
                 ),
               ),
 
-            if (title != null) Text(title!, style: titleStyle ?? context.style14400) else ?child,
+            if (title != null)
+              Text(title!, style: titleStyle ?? context.style14400)
+            else
+              ?child,
           ],
         ),
       ),

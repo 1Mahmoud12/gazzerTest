@@ -22,7 +22,10 @@ class LongitudinalCarousal extends StatelessWidget {
       itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),
-          child: AspectRatio(aspectRatio: 2.5, child: CustomNetworkImage(images[itemIndex], fit: BoxFit.cover)),
+          child: AspectRatio(
+            aspectRatio: 2.5,
+            child: CustomNetworkImage(images[itemIndex], fit: BoxFit.cover),
+          ),
         );
       },
     );

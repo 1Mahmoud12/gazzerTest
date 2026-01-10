@@ -37,10 +37,6 @@ void defineSharedPreMockfMethods() {
   when(
     prefs.setString(StorageKeys.token, StorageKeys.token),
   ).thenAnswer((_) async => true);
-  when(
-    prefs.getString(StorageKeys.token),
-  ).thenAnswer((_) => StorageKeys.token);
-  when(
-    prefs.remove(StorageKeys.token),
-  ).thenAnswer((_) async => true);
+  when(prefs.getString(StorageKeys.token)).thenAnswer((_) => StorageKeys.token);
+  when(prefs.remove(StorageKeys.token)).thenAnswer((_) async => true);
 }

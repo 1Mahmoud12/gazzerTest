@@ -8,6 +8,8 @@ abstract class FavoritesRepo extends BaseApiRepo {
   FavoritesRepo(super.crashlyticsRepo);
 
   Future<Result<List<Favorable>>> getFavorites();
+
   Future<Result<String>> addFavorite(int id, FavoriteType type, {CancelToken? cancelToken});
+
   Future<Result<String>> removeFavorite(int id, FavoriteType type, {CancelToken? cancelToken});
 }

@@ -6,24 +6,37 @@ import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_wi
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class ProductImageWidget extends StatelessWidget {
-  const ProductImageWidget({super.key, required this.image, required this.plate});
+  const ProductImageWidget({
+    super.key,
+    required this.image,
+    required this.plate,
+  });
   final String image;
   final PlateEntity plate;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        gradient: RadialGradient(colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)], radius: 0.5, stops: const [0.5, 1.0]),
+        gradient: RadialGradient(
+          colors: [Co.purple.withAlpha(80), Co.bg.withAlpha(0)],
+          stops: const [0.5, 1.0],
+        ),
       ),
       child: AspectRatio(
         aspectRatio: 1,
         child: Stack(
           alignment: Alignment.bottomRight,
           children: [
-            SizedBox.expand(child: CustomNetworkImage(image, fit: BoxFit.cover)),
+            SizedBox.expand(
+              child: CustomNetworkImage(image, fit: BoxFit.cover),
+            ),
             Padding(
               padding: const EdgeInsets.only(bottom: 40),
-              child: DecoratedFavoriteWidget(size: 24, borderRadius: AppConst.defaultBorderRadius, fovorable: plate),
+              child: DecoratedFavoriteWidget(
+                size: 24,
+                borderRadius: AppConst.defaultBorderRadius,
+                fovorable: plate,
+              ),
             ),
           ],
         ),

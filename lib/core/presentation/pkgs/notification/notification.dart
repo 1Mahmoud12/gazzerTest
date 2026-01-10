@@ -147,8 +147,8 @@ class NotificationUtility {
       log('======== SupportScreen =======');
 
       // Extract chat_id and order_id from notification data
-      int? chatId = _extractIntFromData(data, 'chat_id') ?? _extractIntFromData(data, 'chatId');
-      int? orderId = _extractIntFromData(data, 'order_id') ?? _extractIntFromData(data, 'orderId');
+      final int? chatId = _extractIntFromData(data, 'chat_id') ?? _extractIntFromData(data, 'chatId');
+      final int? orderId = _extractIntFromData(data, 'order_id') ?? _extractIntFromData(data, 'orderId');
 
       AppNavigator.mainKey.currentState?.push(
         MaterialPageRoute(
@@ -200,8 +200,8 @@ class NotificationUtility {
       log('======== SupportScreen =======');
 
       // Extract chat_id and order_id from notification data
-      int? chatId = _extractIntFromData(data, 'chat_id') ?? _extractIntFromData(data, 'chatId');
-      int? orderId = _extractIntFromData(data, 'order_id') ?? _extractIntFromData(data, 'orderId');
+      final int? chatId = _extractIntFromData(data, 'chat_id') ?? _extractIntFromData(data, 'chatId');
+      final int? orderId = _extractIntFromData(data, 'order_id') ?? _extractIntFromData(data, 'orderId');
 
       AppNavigator.mainKey.currentState?.push(
         MaterialPageRoute(

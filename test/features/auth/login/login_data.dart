@@ -3,6 +3,7 @@ import 'package:gazzer/core/data/local_storage/local_storage.dart';
 class LoginData {
   final validPhone = '1234567890';
   final validPassword = 'Password!123';
+
   Map<String, dynamic> get validBody => {'phone': validPhone, 'password': validPassword};
 
   Map<String, dynamic> get invalidBody => {'phone': invalidPhone, 'password': invalidPassword};

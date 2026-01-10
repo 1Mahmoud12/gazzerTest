@@ -11,10 +11,10 @@ class TopVendorsDto {
 
   factory TopVendorsDto.fromJson(Map<String, dynamic> json) {
     return TopVendorsDto(
-      status: json["status"],
-      message: json["message"],
-      data: json["data"] == null ? null : TopVendorsData.fromJson(json["data"]),
-      pagination: json["pagination"] == null ? null : PaginationInfo.fromJson(json["pagination"]),
+      status: json['status'],
+      message: json['message'],
+      data: json['data'] == null ? null : TopVendorsData.fromJson(json['data']),
+      pagination: json['pagination'] == null ? null : PaginationInfo.fromJson(json['pagination']),
     );
   }
 }
@@ -27,8 +27,8 @@ class TopVendorsData {
 
   factory TopVendorsData.fromJson(Map<String, dynamic> json) {
     return TopVendorsData(
-      entities: json["entities"] == null ? [] : List<TopVendor>.from(json["entities"]!.map((x) => TopVendor.fromJson(x))),
-      banner: json["banner"] == null ? null : Banner.fromJson(json["banner"]),
+      entities: json['entities'] == null ? [] : List<TopVendor>.from(json['entities']!.map((x) => TopVendor.fromJson(x))),
+      banner: json['banner'] == null ? null : Banner.fromJson(json['banner']),
     );
   }
 }
@@ -46,13 +46,13 @@ class TopVendor {
 
   factory TopVendor.fromJson(Map<String, dynamic> json) {
     return TopVendor(
-      id: json["id"],
-      vendorName: json["vendor_name"],
-      contactPerson: json["contact_person"],
-      secondContactPerson: json["second_contact_person"],
-      image: json["image"],
-      type: json["type"],
-      storeInfo: json["store_info"] == null ? null : StoreInfo.fromJson(json["store_info"]),
+      id: json['id'],
+      vendorName: json['vendor_name'],
+      contactPerson: json['contact_person'],
+      secondContactPerson: json['second_contact_person'],
+      image: json['image'],
+      type: json['type'],
+      storeInfo: json['store_info'] == null ? null : StoreInfo.fromJson(json['store_info']),
     );
   }
 }
@@ -96,23 +96,22 @@ class Banner {
 
   factory Banner.fromJson(Map<String, dynamic> json) {
     return Banner(
-      id: json["id"],
-      type: json["type"],
-      image: json["image"],
-      title: json["title"],
-      subtitle: json["subtitle"],
-      page: json["page"],
-      expiredAt: json["expired_at"],
-      isAnimated: json["is_animated"],
-      bannerableId: json["bannerable_id"],
-      targetableId: json["targetable_id"],
-      targetableType: json["targetable_type"],
-      backgroundColor: json["background_color"],
-      discountPercent: json["discount_percent"],
-      buttonDisplayed: json["button_displayed"],
-      buttonText: json["button_text"],
-      images: json["images"] == null ? [] : List<dynamic>.from(json["images"]!.map((x) => x)),
+      id: json['id'],
+      type: json['type'],
+      image: json['image'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      page: json['page'],
+      expiredAt: json['expired_at'],
+      isAnimated: json['is_animated'],
+      bannerableId: json['bannerable_id'],
+      targetableId: json['targetable_id'],
+      targetableType: json['targetable_type'],
+      backgroundColor: json['background_color'],
+      discountPercent: json['discount_percent'],
+      buttonDisplayed: json['button_displayed'],
+      buttonText: json['button_text'],
+      images: json['images'] == null ? [] : List<dynamic>.from(json['images']!.map((x) => x)),
     );
   }
 }
-

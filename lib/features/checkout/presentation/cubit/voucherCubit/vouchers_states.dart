@@ -21,7 +21,11 @@ class VoucherChange extends VouchersStates {
 }
 
 class VoucherApplied extends VouchersStates {
-  const VoucherApplied({required this.voucherCode, required this.discountAmount, required this.discountType});
+  const VoucherApplied({
+    required this.voucherCode,
+    required this.discountAmount,
+    required this.discountType,
+  });
 
   final String voucherCode;
   final double discountAmount;

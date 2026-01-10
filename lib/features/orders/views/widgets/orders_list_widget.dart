@@ -43,11 +43,7 @@ class OrdersListWidget extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final hasMore = state is OrdersLoaded
-            ? state.hasMore
-            : state is OrdersLoading
-            ? state.hasMore
-            : false;
+        final hasMore = state is OrdersLoaded ? state.hasMore : state is OrdersLoading && state.hasMore;
         final isLoadingMore = state is OrdersLoading;
         return RefreshIndicator(
           onRefresh: () async {

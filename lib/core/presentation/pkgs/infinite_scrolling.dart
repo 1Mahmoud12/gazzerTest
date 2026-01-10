@@ -29,20 +29,16 @@ class InfiniteCarousel extends StatefulWidget {
     this.axisDirection = Axis.horizontal,
     this.center = true,
     this.scrollBehavior,
-  })  : assert(itemExtent > 0),
-        assert(itemCount > 0),
-        assert(velocityFactor > 0.0 && velocityFactor <= 1.0),
-        childDelegate = SliverChildBuilderDelegate(
-          (context, index) =>
-              itemBuilder(context, index.abs() % itemCount, index),
-          childCount: loop ? null : itemCount,
-        ),
-        reversedChildDelegate = loop
-            ? SliverChildBuilderDelegate(
-                (context, index) => itemBuilder(context,
-                    itemCount - (index.abs() % itemCount) - 1, -(index + 1)),
-              )
-            : null;
+  }) : assert(itemExtent > 0),
+       assert(itemCount > 0),
+       assert(velocityFactor > 0.0 && velocityFactor <= 1.0),
+       childDelegate = SliverChildBuilderDelegate(
+         (context, index) => itemBuilder(context, index.abs() % itemCount, index),
+         childCount: loop ? null : itemCount,
+       ),
+       reversedChildDelegate = loop
+           ? SliverChildBuilderDelegate((context, index) => itemBuilder(context, itemCount - (index.abs() % itemCount) - 1, -(index + 1)))
+           : null;
 
   /// Total items to build for the carousel.
   final int itemCount;
@@ -60,8 +56,7 @@ class InfiniteCarousel extends StatefulWidget {
   ///
   /// Other is `realIndex`, that is the actual index, i.e. [..., -2, -1, 0, 1, 2, ...] in loop.
   /// Real Index is needed if you want to support JumpToItem by tapping on it.
-  final Widget Function(BuildContext context, int itemIndex, int realIndex)
-      itemBuilder;
+  final Widget Function(BuildContext context, int itemIndex, int realIndex) itemBuilder;
 
   /// Delegate to lazily build items in forward direction.
   final SliverChildDelegate? childDelegate;
@@ -121,9 +116,8 @@ class _InfiniteCarouselState extends State<InfiniteCarousel> {
   @override
   void initState() {
     super.initState();
-    if (widget.controller != null &&
-        widget.controller is InfiniteScrollController) {
-      scrollController = widget.controller as InfiniteScrollController;
+    if (widget.controller != null && widget.controller is InfiniteScrollController) {
+      scrollController = widget.controller! as InfiniteScrollController;
     } else {
       scrollController = InfiniteScrollController();
     }
@@ -131,15 +125,11 @@ class _InfiniteCarouselState extends State<InfiniteCarousel> {
   }
 
   List<Widget> _buildSlivers() {
-    Widget forward = SliverFixedExtentList(
-        key: _forwardListKey,
-        delegate: widget.childDelegate!,
-        itemExtent: widget.itemExtent);
+    final Widget forward = SliverFixedExtentList(key: _forwardListKey, delegate: widget.childDelegate!, itemExtent: widget.itemExtent);
 
     if (!widget.loop) return [forward];
 
-    Widget reversed = SliverFixedExtentList(
-        delegate: widget.reversedChildDelegate!, itemExtent: widget.itemExtent);
+    final Widget reversed = SliverFixedExtentList(delegate: widget.reversedChildDelegate!, itemExtent: widget.itemExtent);
     return [reversed, forward];
   }
 
@@ -148,8 +138,7 @@ class _InfiniteCarouselState extends State<InfiniteCarousel> {
       case Axis.horizontal:
         assert(debugCheckHasDirectionality(context));
         final TextDirection textDirection = Directionality.of(context);
-        final AxisDirection axisDirection =
-            textDirectionToAxisDirection(textDirection);
+        final AxisDirection axisDirection = textDirectionToAxisDirection(textDirection);
         return axisDirection;
       case Axis.vertical:
         return AxisDirection.down;
@@ -162,15 +151,12 @@ class _InfiniteCarouselState extends State<InfiniteCarousel> {
 
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (ScrollUpdateNotification notification) {
-        if (widget.onIndexChanged != null &&
-            notification.metrics is InfiniteExtentMetrics) {
-          final InfiniteExtentMetrics metrics =
-              notification.metrics as InfiniteExtentMetrics;
+        if (widget.onIndexChanged != null && notification.metrics is InfiniteExtentMetrics) {
+          final InfiniteExtentMetrics metrics = notification.metrics as InfiniteExtentMetrics;
           final int currentItem = metrics.itemIndex;
           if (currentItem != _lastReportedItemIndex) {
             _lastReportedItemIndex = currentItem;
-            final int trueIndex =
-                _getTrueIndex(_lastReportedItemIndex, widget.itemCount);
+            final int trueIndex = _getTrueIndex(_lastReportedItemIndex, widget.itemCount);
             widget.onIndexChanged?.call(trueIndex);
           }
         }
@@ -188,8 +174,7 @@ class _InfiniteCarouselState extends State<InfiniteCarousel> {
             itemCount: widget.itemCount,
             physics: widget.physics ?? const InfiniteScrollPhysics(),
             axisDirection: axisDirection,
-            scrollBehavior: widget.scrollBehavior ??
-                ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            scrollBehavior: widget.scrollBehavior ?? ScrollConfiguration.of(context).copyWith(scrollbars: false),
             viewportBuilder: (BuildContext context, ViewportOffset position) {
               return Viewport(
                 center: _forwardListKey,
@@ -209,9 +194,7 @@ class _InfiniteCarouselState extends State<InfiniteCarousel> {
   double _getCenteredAnchor(BoxConstraints constraints) {
     if (!widget.center) return widget.anchor;
 
-    final total = widget.axisDirection == Axis.horizontal
-        ? constraints.maxWidth
-        : constraints.maxHeight;
+    final total = widget.axisDirection == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
     return ((total / 2) - (widget.itemExtent / 2)) / total;
   }
 }
@@ -256,21 +239,15 @@ class InfiniteScrollController extends ScrollController {
   final int initialItem;
 
   /// Returns selected Item index. If loop => true, then it returns the modded index value.
-  int get selectedItem => _getTrueIndex(
-        (position as _InfiniteScrollPosition).itemIndex,
-        (position as _InfiniteScrollPosition).itemCount,
-      );
+  int get selectedItem => _getTrueIndex((position as _InfiniteScrollPosition).itemIndex, (position as _InfiniteScrollPosition).itemCount);
 
   /// Animate to specific item index.
-  Future<void> animateToItem(int itemIndex,
-      {Duration duration = _kDefaultDuration,
-      Curve curve = _kDefaultCurve}) async {
+  Future<void> animateToItem(int itemIndex, {Duration duration = _kDefaultDuration, Curve curve = _kDefaultCurve}) async {
     if (!hasClients) return;
 
     await Future.wait<void>([
       for (final position in positions.cast<_InfiniteScrollPosition>())
-        position.animateTo(itemIndex * position.itemExtent,
-            duration: duration, curve: curve),
+        position.animateTo(itemIndex * position.itemExtent, duration: duration, curve: curve),
     ]);
   }
 
@@ -282,40 +259,28 @@ class InfiniteScrollController extends ScrollController {
   }
 
   /// Animate to next item in viewport.
-  Future<void> nextItem(
-      {Duration duration = _kDefaultDuration,
-      Curve curve = _kDefaultCurve}) async {
+  Future<void> nextItem({Duration duration = _kDefaultDuration, Curve curve = _kDefaultCurve}) async {
     if (!hasClients) return;
 
     await Future.wait<void>([
       for (final position in positions.cast<_InfiniteScrollPosition>())
-        position.animateTo(offset + position.itemExtent,
-            duration: duration, curve: curve),
+        position.animateTo(offset + position.itemExtent, duration: duration, curve: curve),
     ]);
   }
 
   /// Animate to previous item in viewport.
-  Future<void> previousItem(
-      {Duration duration = _kDefaultDuration,
-      Curve curve = _kDefaultCurve}) async {
+  Future<void> previousItem({Duration duration = _kDefaultDuration, Curve curve = _kDefaultCurve}) async {
     if (!hasClients) return;
 
     await Future.wait<void>([
       for (final position in positions.cast<_InfiniteScrollPosition>())
-        position.animateTo(offset - position.itemExtent,
-            duration: duration, curve: curve),
+        position.animateTo(offset - position.itemExtent, duration: duration, curve: curve),
     ]);
   }
 
   @override
-  ScrollPosition createScrollPosition(ScrollPhysics physics,
-      ScrollContext context, ScrollPosition? oldPosition) {
-    return _InfiniteScrollPosition(
-      physics: physics,
-      context: context,
-      initialItem: initialItem,
-      oldPosition: oldPosition,
-    );
+  ScrollPosition createScrollPosition(ScrollPhysics physics, ScrollContext context, ScrollPosition? oldPosition) {
+    return _InfiniteScrollPosition(physics: physics, context: context, initialItem: initialItem, oldPosition: oldPosition);
   }
 }
 
@@ -344,8 +309,7 @@ class InfiniteExtentMetrics extends FixedScrollMetrics {
   }) {
     return InfiniteExtentMetrics(
       // 解决 Null check operator used on a null value
-      minScrollExtent: minScrollExtent ??
-          (hasContentDimensions ? this.minScrollExtent : 0.0),
+      minScrollExtent: minScrollExtent ?? (hasContentDimensions ? this.minScrollExtent : 0.0),
       maxScrollExtent: maxScrollExtent ?? this.maxScrollExtent,
       pixels: pixels ?? this.pixels,
       viewportDimension: viewportDimension ?? this.viewportDimension,
@@ -359,20 +323,11 @@ class InfiniteExtentMetrics extends FixedScrollMetrics {
   final int itemIndex;
 }
 
-int _getItemFromOffset({
-  required double offset,
-  required double itemExtent,
-  required double minScrollExtent,
-  required double maxScrollExtent,
-}) {
-  return (_clipOffsetToScrollableRange(
-              offset, minScrollExtent, maxScrollExtent) /
-          itemExtent)
-      .round();
+int _getItemFromOffset({required double offset, required double itemExtent, required double minScrollExtent, required double maxScrollExtent}) {
+  return (_clipOffsetToScrollableRange(offset, minScrollExtent, maxScrollExtent) / itemExtent).round();
 }
 
-double _clipOffsetToScrollableRange(
-    double offset, double minScrollExtent, double maxScrollExtent) {
+double _clipOffsetToScrollableRange(double offset, double minScrollExtent, double maxScrollExtent) {
   return math.min(math.max(offset, minScrollExtent), maxScrollExtent);
 }
 
@@ -385,17 +340,10 @@ int _getTrueIndex(int currentIndex, int totalCount) {
   return (totalCount + (currentIndex % totalCount)) % totalCount;
 }
 
-class _InfiniteScrollPosition extends ScrollPositionWithSingleContext
-    implements InfiniteExtentMetrics {
-  _InfiniteScrollPosition({
-    required super.physics,
-    required super.context,
-    required int initialItem,
-    super.oldPosition,
-  })  : assert(context is _InfiniteScrollableState),
-        super(
-          initialPixels: _getItemExtentFromScrollContext(context) * initialItem,
-        );
+class _InfiniteScrollPosition extends ScrollPositionWithSingleContext implements InfiniteExtentMetrics {
+  _InfiniteScrollPosition({required super.physics, required super.context, required int initialItem, super.oldPosition})
+    : assert(context is _InfiniteScrollableState),
+      super(initialPixels: _getItemExtentFromScrollContext(context) * initialItem);
 
   double get itemExtent => _getItemExtentFromScrollContext(context);
   static double _getItemExtentFromScrollContext(ScrollContext context) {
@@ -418,9 +366,7 @@ class _InfiniteScrollPosition extends ScrollPositionWithSingleContext
   }
 
   @override
-  double get maxScrollExtent => loop
-      ? (super.hasContentDimensions ? super.maxScrollExtent : 0.0)
-      : itemExtent * (itemCount - 1);
+  double get maxScrollExtent => loop ? (super.hasContentDimensions ? super.maxScrollExtent : 0.0) : itemExtent * (itemCount - 1);
 
   @override
   int get itemIndex {
@@ -445,8 +391,7 @@ class _InfiniteScrollPosition extends ScrollPositionWithSingleContext
   }) {
     return InfiniteExtentMetrics(
       // 解决 Null check operator used on a null value
-      minScrollExtent: minScrollExtent ??
-          (hasContentDimensions ? this.minScrollExtent : 0.0),
+      minScrollExtent: minScrollExtent ?? (hasContentDimensions ? this.minScrollExtent : 0.0),
       maxScrollExtent: maxScrollExtent ?? this.maxScrollExtent,
       pixels: pixels ?? this.pixels,
       viewportDimension: viewportDimension ?? this.viewportDimension,
@@ -475,37 +420,29 @@ class InfiniteScrollPhysics extends ScrollPhysics {
   double applyBoundaryConditions(ScrollMetrics position, double value) => 0.0;
 
   /// Increase friction for scrolling in out-of-bound areas.
-  double frictionFactor(double overscrollFraction) =>
-      0.12 * math.pow(1 - overscrollFraction, 2);
+  double frictionFactor(double overscrollFraction) => 0.12 * math.pow(1 - overscrollFraction, 2);
 
   @override
   double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
-    if (position.pixels > position.minScrollExtent &&
-        position.pixels < position.maxScrollExtent) {
+    if (position.pixels > position.minScrollExtent && position.pixels < position.maxScrollExtent) {
       return offset;
     }
 
-    final double overscrollPastStart =
-        math.max(position.minScrollExtent - position.pixels, 0.0);
-    final double overscrollPastEnd =
-        math.max(position.pixels - position.maxScrollExtent, 0.0);
-    final double overscrollPast =
-        math.max(overscrollPastStart, overscrollPastEnd);
-    final bool easing = (overscrollPastStart > 0.0 && offset < 0.0) ||
-        (overscrollPastEnd > 0.0 && offset > 0.0);
+    final double overscrollPastStart = math.max(position.minScrollExtent - position.pixels, 0.0);
+    final double overscrollPastEnd = math.max(position.pixels - position.maxScrollExtent, 0.0);
+    final double overscrollPast = math.max(overscrollPastStart, overscrollPastEnd);
+    final bool easing = (overscrollPastStart > 0.0 && offset < 0.0) || (overscrollPastEnd > 0.0 && offset > 0.0);
 
     final double friction = easing
         // Apply less resistance when easing the overscroll vs tensioning.
-        ? frictionFactor(
-            (overscrollPast - offset.abs()) / position.viewportDimension)
+        ? frictionFactor((overscrollPast - offset.abs()) / position.viewportDimension)
         : frictionFactor(overscrollPast / position.viewportDimension);
     final double direction = offset.sign;
 
     return direction * _applyFriction(overscrollPast, offset.abs(), friction);
   }
 
-  static double _applyFriction(
-      double extentOutside, double absDelta, double gamma) {
+  static double _applyFriction(double extentOutside, double absDelta, double gamma) {
     assert(absDelta > 0);
     double total = 0.0;
     if (extentOutside > 0) {
@@ -518,24 +455,19 @@ class InfiniteScrollPhysics extends ScrollPhysics {
   }
 
   @override
-  Simulation? createBallisticSimulation(
-      ScrollMetrics position, double velocity) {
+  Simulation? createBallisticSimulation(ScrollMetrics position, double velocity) {
     final _InfiniteScrollPosition metrics = position as _InfiniteScrollPosition;
 
     // Scenario 1:
     // If we're out of range and not headed back in range, defer to the parent
     // ballistics, which should put us back in range at the scrollable's boundary.
-    if ((velocity <= 0.0 && metrics.pixels <= metrics.minScrollExtent) ||
-        (velocity >= 0.0 && metrics.pixels >= metrics.maxScrollExtent)) {
+    if ((velocity <= 0.0 && metrics.pixels <= metrics.minScrollExtent) || (velocity >= 0.0 && metrics.pixels >= metrics.maxScrollExtent)) {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
     // Create a test simulation to see where it would have ballistically fallen
     // naturally without settling onto items.
-    final Simulation? testFrictionSimulation = super.createBallisticSimulation(
-      metrics,
-      velocity * math.min(metrics.velocityFactor + 0.15, 1.0),
-    );
+    final Simulation? testFrictionSimulation = super.createBallisticSimulation(metrics, velocity * math.min(metrics.velocityFactor + 0.15, 1.0));
 
     // Scenario 2:
     // If it was going to end up past the scroll extent, defer back to the
@@ -543,8 +475,7 @@ class InfiniteScrollPhysics extends ScrollPhysics {
     // boundary.
     if (testFrictionSimulation != null &&
         (testFrictionSimulation.x(double.infinity) == metrics.minScrollExtent ||
-            testFrictionSimulation.x(double.infinity) ==
-                metrics.maxScrollExtent)) {
+            testFrictionSimulation.x(double.infinity) == metrics.maxScrollExtent)) {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
@@ -563,8 +494,7 @@ class InfiniteScrollPhysics extends ScrollPhysics {
     // If there's no velocity and we're already at where we intend to land,
     // do nothing.
     final tolerance = toleranceFor(metrics);
-    if (velocity.abs() < tolerance.velocity &&
-        (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
+    if (velocity.abs() < tolerance.velocity && (settlingPixels - metrics.pixels).abs() < tolerance.distance) {
       return null;
     }
 
@@ -572,13 +502,7 @@ class InfiniteScrollPhysics extends ScrollPhysics {
     // If we're going to end back at the same item because initial velocity
     // is too low to break past it, use a spring simulation to get back.
     if (settlingItemIndex == metrics.itemIndex) {
-      return SpringSimulation(
-        spring,
-        metrics.pixels,
-        settlingPixels,
-        velocity * metrics.velocityFactor,
-        tolerance: tolerance,
-      );
+      return SpringSimulation(spring, metrics.pixels, settlingPixels, velocity * metrics.velocityFactor, tolerance: tolerance);
     }
 
     // Scenario 5:
@@ -608,8 +532,7 @@ class PageViewTypeScrollPhysics extends ScrollPhysics {
     return PageViewTypeScrollPhysics(parent: buildParent(ancestor));
   }
 
-  double _getTargetPixels(
-      _InfiniteScrollPosition metrics, Tolerance tolerance, double velocity) {
+  double _getTargetPixels(_InfiniteScrollPosition metrics, Tolerance tolerance, double velocity) {
     int item = metrics.itemIndex;
     if (velocity < -tolerance.velocity) {
       item -= 1;
@@ -620,14 +543,12 @@ class PageViewTypeScrollPhysics extends ScrollPhysics {
   }
 
   @override
-  Simulation? createBallisticSimulation(
-      ScrollMetrics position, double velocity) {
+  Simulation? createBallisticSimulation(ScrollMetrics position, double velocity) {
     final _InfiniteScrollPosition metrics = position as _InfiniteScrollPosition;
 
     // If we're out of range and not headed back in range, defer to the parent
     // ballistics, which should put us back in range at a page boundary.
-    if ((velocity <= 0.0 && metrics.pixels <= metrics.minScrollExtent) ||
-        (velocity >= 0.0 && metrics.pixels >= metrics.maxScrollExtent)) {
+    if ((velocity <= 0.0 && metrics.pixels <= metrics.minScrollExtent) || (velocity >= 0.0 && metrics.pixels >= metrics.maxScrollExtent)) {
       return super.createBallisticSimulation(metrics, velocity);
     }
 
@@ -635,13 +556,7 @@ class PageViewTypeScrollPhysics extends ScrollPhysics {
     final double targetPixels = _getTargetPixels(metrics, tolerance, velocity);
 
     if (targetPixels != metrics.pixels) {
-      return ScrollSpringSimulation(
-        spring,
-        metrics.pixels,
-        targetPixels,
-        velocity,
-        tolerance: tolerance,
-      );
+      return ScrollSpringSimulation(spring, metrics.pixels, targetPixels, velocity, tolerance: tolerance);
     }
     return null;
   }

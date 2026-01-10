@@ -48,13 +48,13 @@ class CartableItemRequest {
     for (final entry in options.entries) {
       final option = {
         'option_id': entry.key,
-        'value_ids': entry.value.map<String>((value) => value.toString()).toList(),
+        'value_ids': entry.value.map<String>((value) => value).toList(),
       };
       list.add(option);
     }
 
     return {
-      "cart_item_id": cartItemId,
+      'cart_item_id': cartItemId,
       'id': id,
       'type': type.value,
       'quantity': quantity,

@@ -4,6 +4,7 @@ class StaggeredDotsWave extends StatefulWidget {
   final double size;
   final int dotsNumber;
   final List<Color> colors;
+
   const StaggeredDotsWave({super.key, required this.size, required this.dotsNumber, required this.colors})
     : assert(dotsNumber == colors.length, 'dotsNumber must match the length of colors list');
 

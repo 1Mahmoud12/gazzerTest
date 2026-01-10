@@ -2,11 +2,7 @@ import 'package:gazzer/features/loyaltyProgram/data/dto/loyalty_program_dto.dart
 import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 
 class WalletResponseDto {
-  WalletResponseDto({
-    required this.status,
-    required this.message,
-    required this.data,
-  });
+  WalletResponseDto({required this.status, required this.message, required this.data});
 
   final String? status;
   final String? message;
@@ -61,25 +57,16 @@ class WalletDataDto {
 }
 
 class WalletInfoDto {
-  WalletInfoDto({
-    required this.balance,
-    required this.lastUpdated,
-  });
+  WalletInfoDto({required this.balance, required this.lastUpdated});
 
   final num balance;
   final String lastUpdated;
 
   factory WalletInfoDto.fromJson(Map<String, dynamic> json) {
-    return WalletInfoDto(
-      balance: json['balance'] as num? ?? 0,
-      lastUpdated: json['last_updated'] as String? ?? '',
-    );
+    return WalletInfoDto(balance: json['balance'] as num? ?? 0, lastUpdated: json['last_updated'] as String? ?? '');
   }
 
-  WalletInfoEntity toEntity() => WalletInfoEntity(
-    balance: balance.toDouble(),
-    lastUpdated: DateTime.tryParse(lastUpdated) ?? DateTime.now(),
-  );
+  WalletInfoEntity toEntity() => WalletInfoEntity(balance: balance.toDouble(), lastUpdated: DateTime.tryParse(lastUpdated) ?? DateTime.now());
 }
 
 class LoyaltyPointsDto {
@@ -135,25 +122,16 @@ class LoyaltyPointsDto {
 }
 
 class ExpirationDetailDto {
-  ExpirationDetailDto({
-    required this.expiresAt,
-    required this.points,
-  });
+  ExpirationDetailDto({required this.expiresAt, required this.points});
 
   final String expiresAt;
   final int points;
 
   factory ExpirationDetailDto.fromJson(Map<String, dynamic> json) {
-    return ExpirationDetailDto(
-      expiresAt: json['expires_at'] as String? ?? '',
-      points: json['points'] as int? ?? 0,
-    );
+    return ExpirationDetailDto(expiresAt: json['expires_at'] as String? ?? '', points: json['points'] as int? ?? 0);
   }
 
-  ExpirationDetailEntity toEntity() => ExpirationDetailEntity(
-    expiresAt: DateTime.tryParse(expiresAt) ?? DateTime.now(),
-    points: points,
-  );
+  ExpirationDetailEntity toEntity() => ExpirationDetailEntity(expiresAt: DateTime.tryParse(expiresAt) ?? DateTime.now(), points: points);
 }
 
 class PaymentCardDto {
@@ -247,11 +225,7 @@ class TransactionDto {
 }
 
 class VoucherAmountDto {
-  VoucherAmountDto({
-    required this.amount,
-    required this.pointsNeeded,
-    required this.validUntil,
-  });
+  VoucherAmountDto({required this.amount, required this.pointsNeeded, required this.validUntil});
 
   final int amount;
   final int pointsNeeded;
@@ -265,9 +239,5 @@ class VoucherAmountDto {
     );
   }
 
-  VoucherAmountEntity toEntity() => VoucherAmountEntity(
-    amount: amount,
-    pointsNeeded: pointsNeeded,
-    validUntil: validUntil,
-  );
+  VoucherAmountEntity toEntity() => VoucherAmountEntity(amount: amount, pointsNeeded: pointsNeeded, validUntil: validUntil);
 }

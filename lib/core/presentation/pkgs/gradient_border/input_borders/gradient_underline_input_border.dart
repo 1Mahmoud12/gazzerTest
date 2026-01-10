@@ -40,7 +40,7 @@ class GradientUnderlineInputBorder extends InputBorder {
   @override
   void paint(Canvas canvas, Rect rect, {double? gapStart, double gapExtent = 0.0, double gapPercentage = 0.0, TextDirection? textDirection}) {
     final paint = _getPaint(rect);
-    Rect underlineRect = Rect.fromLTWH(rect.left, rect.height - width, rect.width, width);
+    final Rect underlineRect = Rect.fromLTWH(rect.left, rect.height - width, rect.width, width);
     canvas.drawRect(underlineRect, paint);
   }
 

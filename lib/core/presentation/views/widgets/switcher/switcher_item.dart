@@ -15,4 +15,3 @@ class SwitcherItem {
   @override
   String toString() => 'SwitcherItem(id: $id, name: $name)';
 }
-

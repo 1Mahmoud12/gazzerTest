@@ -7,10 +7,7 @@ import 'package:gazzer/features/orders/domain/entities/order_item_entity.dart';
 abstract class OrdersRepo extends BaseApiRepo {
   OrdersRepo(super.crashlyticsRepo);
 
-  Future<Result<List<OrderItemEntity>>> getClientOrders({
-    int page = 1,
-    int perPage = 10,
-  });
+  Future<Result<List<OrderItemEntity>>> getClientOrders({int page = 1, int perPage = 10});
 
   Future<List<OrderItemEntity>?> getCachedClientOrders();
 
@@ -36,17 +33,9 @@ class StoreReview {
   final double rating;
   final String comment;
 
-  StoreReview({
-    required this.orderStoreId,
-    required this.rating,
-    this.comment = '',
-  });
+  StoreReview({required this.orderStoreId, required this.rating, this.comment = ''});
 
-  Map<String, dynamic> toJson() => {
-    'store_id': orderStoreId,
-    'rating': rating,
-    'comment': comment,
-  };
+  Map<String, dynamic> toJson() => {'store_id': orderStoreId, 'rating': rating, 'comment': comment};
 }
 
 class DeliveryManReview {
@@ -54,15 +43,7 @@ class DeliveryManReview {
   final double rating;
   final String comment;
 
-  DeliveryManReview({
-    required this.deliveryManId,
-    required this.rating,
-    this.comment = '',
-  });
+  DeliveryManReview({required this.deliveryManId, required this.rating, this.comment = ''});
 
-  Map<String, dynamic> toJson() => {
-    'delivery_man_id': deliveryManId,
-    'rating': rating,
-    'comment': comment,
-  };
+  Map<String, dynamic> toJson() => {'delivery_man_id': deliveryManId, 'rating': rating, 'comment': comment};
 }

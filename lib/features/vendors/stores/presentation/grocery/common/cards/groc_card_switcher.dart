@@ -5,7 +5,14 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards
 import 'package:gazzer/features/vendors/stores/presentation/grocery/common/cards/groc_card_two.dart';
 
 class GrocCardSwitcher<T> extends StatelessWidget {
-  const GrocCardSwitcher({super.key, required this.cardStyle, required this.width, this.height, required this.entity, this.onPressed});
+  const GrocCardSwitcher({
+    super.key,
+    required this.cardStyle,
+    required this.width,
+    this.height,
+    required this.entity,
+    this.onPressed,
+  });
   final CardStyle cardStyle;
   final double width;
   final double? height;
@@ -16,25 +23,45 @@ class GrocCardSwitcher<T> extends StatelessWidget {
     switch (cardStyle) {
       case CardStyle.typeOne:
         if (entity is StoreEntity) {
-          return GrocCardOne(vendor: entity as StoreEntity, width: width, height: height, onPressed: onPressed);
+          return GrocCardOne(
+            vendor: entity as StoreEntity,
+            width: width,
+            height: height,
+            onPressed: onPressed,
+          );
         } else {
           return const SizedBox.shrink();
         }
       case CardStyle.typeTwo:
         if (entity is StoreEntity) {
-          return GrocCardTwo(vendor: entity as StoreEntity, width: width, height: height, onPressed: onPressed);
+          return GrocCardTwo(
+            vendor: entity as StoreEntity,
+            width: width,
+            height: height,
+            onPressed: onPressed,
+          );
         } else {
           return const SizedBox.shrink();
         }
       case CardStyle.typeThree:
         if (entity is StoreEntity) {
-          return GrocCardOne(vendor: entity as StoreEntity, width: width, height: height, onPressed: onPressed);
+          return GrocCardOne(
+            vendor: entity as StoreEntity,
+            width: width,
+            height: height,
+            onPressed: onPressed,
+          );
         } else {
           return const SizedBox.shrink();
         }
       case CardStyle.typeFour:
         if (entity is StoreEntity) {
-          return GrocCardTwo(vendor: entity as StoreEntity, width: width, height: height, onPressed: onPressed);
+          return GrocCardTwo(
+            vendor: entity as StoreEntity,
+            width: width,
+            height: height,
+            onPressed: onPressed,
+          );
         } else {
           return const SizedBox.shrink();
         }

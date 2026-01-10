@@ -12,7 +12,7 @@ class ProductShapePaint extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Path path_0 = Path();
+    final Path path_0 = Path();
     path_0.moveTo(size.width * 0.8821893, size.height * 0.009693466);
     path_0.cubicTo(
       size.width * 0.9402959,
@@ -53,13 +53,13 @@ class ProductShapePaint extends CustomPainter {
     path_0.lineTo(size.width * 0.8821893, size.height * 0.009693466);
     path_0.close();
 
-    Paint paint0Stroke = Paint()
+    final Paint paint0Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     paint0Stroke.shader = ui.Gradient.linear(Offset(0, size.height * 0.4), Offset(size.width * 0.3, size.height), [begin, end], [0, 0.5]);
     canvas.drawPath(path_0, paint0Stroke);
 
-    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint0Fill = Paint()..style = PaintingStyle.fill;
     paint0Fill.color = Colors.transparent;
     canvas.drawPath(path_0, paint0Fill);
   }

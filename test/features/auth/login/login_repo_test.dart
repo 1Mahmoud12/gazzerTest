@@ -35,37 +35,28 @@ void main() async {
       reset(apiClient);
     });
     group('Login Function Tests', () {
-      test(
-        'should return String Message when login succeeds',
-        () async {
-          when(
-            apiClient.post(endpoint: Endpoints.login, requestBody: loginData.validBody),
-          ).thenAnswer((_) async => successResponse..data = loginData.loginSuccessJson);
+      test('should return String Message when login succeeds', () async {
+        when(
+          apiClient.post(endpoint: Endpoints.login, requestBody: loginData.validBody),
+        ).thenAnswer((_) async => successResponse..data = loginData.loginSuccessJson);
 
-          final result = await loginRepo.login(loginData.validPhone, loginData.validPassword);
+        final result = await loginRepo.login(loginData.validPhone, loginData.validPassword);
 
-          expect(result, isInstanceOf<Ok<String>>());
-          expect((result as Ok<String>).value, isNotNull);
-        },
-      );
+        expect(result, isInstanceOf<Ok<String>>());
+        expect((result as Ok<String>).value, isNotNull);
+      });
 
-      test(
-        'should return Error with message when login fails',
-        () async {
-          when(
-            apiClient.post(
-              endpoint: Endpoints.login,
-              requestBody: {'phone': loginData.invalidPhone, 'password': loginData.invalidPassword},
-            ),
-          ).thenThrow(errorResponse);
+      test('should return Error with message when login fails', () async {
+        when(
+          apiClient.post(endpoint: Endpoints.login, requestBody: {'phone': loginData.invalidPhone, 'password': loginData.invalidPassword}),
+        ).thenThrow(errorResponse);
 
-          final result = await loginRepo.login(loginData.invalidPhone, loginData.invalidPassword);
+        final result = await loginRepo.login(loginData.invalidPhone, loginData.invalidPassword);
 
-          expect(result, isInstanceOf<Err<String>>());
-          expect((result as Err<String>).error.message, isNotNull);
-          expect(result.error.message, contains('match'));
-        },
-      );
+        expect(result, isInstanceOf<Err<String>>());
+        expect((result as Err<String>).error.message, isNotNull);
+        expect(result.error.message, contains('match'));
+      });
     });
   });
 }

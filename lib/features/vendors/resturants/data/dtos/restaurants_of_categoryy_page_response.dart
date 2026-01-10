@@ -14,18 +14,18 @@ class RestaurantsOfCategoryyResponse {
     name = json['plate_category'] is Map ? json['plate_category']['name'].toString() : '';
     banners = <BannerEntity>[];
     if (json['banners'] != null) {
-      for (var item in json['banners']) {
+      for (final item in json['banners']) {
         banners.add(BannerDTO.fromJson(item).toEntity());
       }
     }
     lists = <(String, CardStyle, List<RestaurantEntity>)>[];
     if (json['lists'] != null) {
-      for (var item in json['lists']) {
+      for (final item in json['lists']) {
         final name = item['name'].toString();
         final style = CardStyle.fromString(item['card_style'].toString());
         final listRestaurants = <RestaurantEntity>[];
         if (item['entities'] != null) {
-          for (var rest in item['entities']) {
+          for (final rest in item['entities']) {
             listRestaurants.add(RestaurantDTO.fromJson(rest).toRestEntity());
           }
         }
@@ -35,7 +35,7 @@ class RestaurantsOfCategoryyResponse {
     }
     restaurants = <RestaurantEntity>[];
     if (json['restaurants'] != null) {
-      for (var item in json['restaurants']) {
+      for (final item in json['restaurants']) {
         restaurants.add(RestaurantDTO.fromJson(item).toRestEntity());
       }
       restaurants.sort((a, b) => a.isClosed ? 1 : -1);

@@ -7,5 +7,4 @@ class Tags {
   static const String cart = 'cart';
   static const String spickyShape = 'spickyShape';
   static const String planShape = 'planShape';
-  
 }

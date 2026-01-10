@@ -54,7 +54,7 @@ class RestaurantCategoryScreen extends StatelessWidget {
                 return FailureComponent(message: L10n.tr().couldnotLoadDataPleaseTryAgain);
               }
               final isLoading = snapshot.connectionState == ConnectionState.waiting;
-              final items = isLoading ? Fakers.plates : (snapshot.data as Ok<List<PlateEntity>>).value;
+              final items = isLoading ? Fakers.plates : (snapshot.data! as Ok<List<PlateEntity>>).value;
               return Expanded(
                 child: Skeletonizer(
                   enabled: isLoading,

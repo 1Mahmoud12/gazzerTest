@@ -5,11 +5,7 @@ class OrderDetailResponseDto {
   String? message;
   OrderDetailDto? data;
 
-  OrderDetailResponseDto({
-    this.status,
-    this.message,
-    this.data,
-  });
+  OrderDetailResponseDto({this.status, this.message, this.data});
 
   factory OrderDetailResponseDto.fromJson(Map<String, dynamic> json) {
     return OrderDetailResponseDto(

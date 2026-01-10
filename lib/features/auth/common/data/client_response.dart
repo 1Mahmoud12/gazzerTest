@@ -35,7 +35,11 @@ class ReferralDTO {
   }
 
   ReferralEntity toReferralEntity() {
-    return ReferralEntity(code: code, shareLink: shareLink, shareMessage: shareMessage);
+    return ReferralEntity(
+      code: code,
+      shareLink: shareLink,
+      shareMessage: shareMessage,
+    );
   }
 }
 
@@ -83,7 +87,9 @@ class ClientDTO {
     socialId = json['social_id'];
     email = json['email'];
     tierName = json['loyalty_tier_name'];
-    referral = json['referral'] != null ? ReferralDTO.fromJson(json['referral']) : null;
+    referral = json['referral'] != null
+        ? ReferralDTO.fromJson(json['referral'])
+        : null;
   }
 
   ClientEntity toClientEntity() {

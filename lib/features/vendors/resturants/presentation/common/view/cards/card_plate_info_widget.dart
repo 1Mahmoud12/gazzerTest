@@ -25,16 +25,28 @@ class CardPlateInfoWidget extends StatelessWidget {
           children: [
             const Icon(Icons.star, color: Co.tertiary, size: 18),
             const HorizontalSpacing(8),
-            Text(plate.rate.toStringAsFixed(2), style: context.style14400.copyWith(color: Co.tertiary)),
-            Text('(${plate.reviewCount})', style: context.style14400.copyWith(fontWeight: TStyle.bold)),
+            Text(
+              plate.rate.toStringAsFixed(2),
+              style: context.style14400.copyWith(color: Co.tertiary),
+            ),
+            Text(
+              '(${plate.reviewCount})',
+              style: context.style14400.copyWith(fontWeight: TStyle.bold),
+            ),
           ],
         ),
 
         Row(
           spacing: 16,
           children: [
-            Text(plate.price.toStringAsFixed(2), style: context.style14400.copyWith(fontWeight: TStyle.bold)),
-            Text('EGP', style: context.style14400.copyWith(fontWeight: TStyle.bold)),
+            Text(
+              plate.price.toStringAsFixed(2),
+              style: context.style14400.copyWith(fontWeight: TStyle.bold),
+            ),
+            Text(
+              'EGP',
+              style: context.style14400.copyWith(fontWeight: TStyle.bold),
+            ),
           ],
         ),
       ],

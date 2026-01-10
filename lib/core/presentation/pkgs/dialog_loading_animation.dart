@@ -11,7 +11,6 @@ void animationDialogLoading([BuildContext? context]) {
     context: targetContext,
     barrierColor: Colors.black26,
     barrierDismissible: false,
-    useRootNavigator: true,
     builder: (dialogContext) => const Dialog(backgroundColor: Colors.transparent, child: LoadingWidget()),
   );
 }

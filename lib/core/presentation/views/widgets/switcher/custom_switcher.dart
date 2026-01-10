@@ -29,7 +29,10 @@ class CustomSwitcher extends StatelessWidget {
 
     return Container(
       padding: padding,
-      decoration: BoxDecoration(color: Co.lightPurple, borderRadius: BorderRadius.circular(24)),
+      decoration: BoxDecoration(
+        color: Co.lightPurple,
+        borderRadius: BorderRadius.circular(24),
+      ),
       child: Row(
         children: List.generate(items.length, (index) {
           final item = items[index];
@@ -43,14 +46,19 @@ class CustomSwitcher extends StatelessWidget {
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(color: isSelected ? Co.purple : Colors.transparent, borderRadius: BorderRadius.circular(24)),
+                decoration: BoxDecoration(
+                  color: isSelected ? Co.purple : Colors.transparent,
+                  borderRadius: BorderRadius.circular(24),
+                ),
                 child: Center(
                   child: Text(
                     item.name,
                     style: context.style16500.copyWith(
                       color: isSelected ? Co.white : Co.greyText,
                       fontSize: 14,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w500,
                     ),
                   ),
                 ),

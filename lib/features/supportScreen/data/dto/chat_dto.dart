@@ -4,23 +4,14 @@ class ChatResponseDTO {
   final ChatDataDTO data;
   final PaginationDTO pagination;
 
-  ChatResponseDTO({
-    required this.data,
-    required this.pagination,
-  });
+  ChatResponseDTO({required this.data, required this.pagination});
 
   factory ChatResponseDTO.fromJson(Map<String, dynamic> json) {
-    return ChatResponseDTO(
-      data: ChatDataDTO.fromJson(json['data']),
-      pagination: PaginationDTO.fromJson(json['pagination']),
-    );
+    return ChatResponseDTO(data: ChatDataDTO.fromJson(json['data']), pagination: PaginationDTO.fromJson(json['pagination']));
   }
 
   ChatResponse toEntity() {
-    return ChatResponse(
-      chat: data.toEntity(),
-      pagination: pagination.toEntity(),
-    );
+    return ChatResponse(chat: data.toEntity(), pagination: pagination.toEntity());
   }
 }
 

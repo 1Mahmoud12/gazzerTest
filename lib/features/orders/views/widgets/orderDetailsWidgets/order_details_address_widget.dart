@@ -24,7 +24,9 @@ class DeliveryAddressCard extends StatelessWidget {
       padding: const EdgeInsets.all(_padding),
       decoration: BoxDecoration(
         color: Co.white,
-        borderRadius: BorderRadius.circular(OrderDetailsConstants.cardBorderRadius),
+        borderRadius: BorderRadius.circular(
+          OrderDetailsConstants.cardBorderRadius,
+        ),
         border: Border.all(color: Co.lightGrey),
       ),
       child: Row(

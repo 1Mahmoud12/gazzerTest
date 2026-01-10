@@ -93,7 +93,10 @@ class _TopItemsContent extends StatelessWidget {
               },
             ),
           ),
-          if (banner != null) ...[const VerticalSpacing(24), MainBannerWidget(banner: banner!)],
+          if (banner != null) ...[
+            const VerticalSpacing(24),
+            MainBannerWidget(banner: banner!),
+          ],
           const VerticalSpacing(24),
         ]),
       ),

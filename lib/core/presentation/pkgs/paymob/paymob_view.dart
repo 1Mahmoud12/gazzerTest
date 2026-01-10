@@ -64,12 +64,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
         // final status = result['status'];
         // final paymentStatus = result['payment_status'];
       } catch (error, stackTrace) {
-        logger.e('Failed to confirm payment', error: error, stackTrace: stackTrace);
+        logger.e(
+          'Failed to confirm payment',
+          error: error,
+          stackTrace: stackTrace,
+        );
         if (mounted) {
           Navigator.pop(context, url);
         }
       }
-    } else if (url.contains('success=false') || url.contains('txn_response_code=DECLINED')) {
+    } else if (url.contains('success=false') ||
+        url.contains('txn_response_code=DECLINED')) {
       _hasHandledPayment = true;
       if (mounted) {
         Navigator.pop(context, url);

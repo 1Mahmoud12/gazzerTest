@@ -9,7 +9,11 @@ class ClassicAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
+      const SystemUiOverlayStyle(
+        statusBarColor: Co.bg,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
     );
     return AppBar(
       systemOverlayStyle: const SystemUiOverlayStyle(

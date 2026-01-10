@@ -25,14 +25,19 @@ class DailyOffersWidget extends StatelessWidget {
       buildWhen: (previous, current) {
         // Only rebuild if state type actually changed or data changed
         if (previous.runtimeType != current.runtimeType) return true;
-        if (previous is DailyOffersWidgetSuccessState && current is DailyOffersWidgetSuccessState) {
-          return previous.entities != current.entities || previous.banner != current.banner;
+        if (previous is DailyOffersWidgetSuccessState &&
+            current is DailyOffersWidgetSuccessState) {
+          return previous.entities != current.entities ||
+              previous.banner != current.banner;
         }
         return false;
       },
       builder: (context, state) {
         if (state is DailyOffersWidgetSuccessState) {
-          return _DailyOffersContent(items: state.entities, banner: state.banner);
+          return _DailyOffersContent(
+            items: state.entities,
+            banner: state.banner,
+          );
         }
         /*else if (state is DailyOffersWidgetLoadingState) {
           return const SliverToBoxAdapter(
@@ -58,7 +63,8 @@ class _DailyOffersContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
+    if (items.isEmpty)
+      return const SliverToBoxAdapter(child: SizedBox.shrink());
 
     return SliverPadding(
       padding: AppConst.defaultHrPadding,
@@ -82,13 +88,19 @@ class _DailyOffersContent extends StatelessWidget {
                   width: MediaQuery.sizeOf(context).width * .55,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: VerticalProductCard(product: items[index], canAdd: false),
+                    child: VerticalProductCard(
+                      product: items[index],
+                      canAdd: false,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-          if (banner != null) ...[const VerticalSpacing(24), MainBannerWidget(banner: banner!)],
+          if (banner != null) ...[
+            const VerticalSpacing(24),
+            MainBannerWidget(banner: banner!),
+          ],
           const VerticalSpacing(24),
         ]),
       ),

@@ -9,6 +9,9 @@ class ProfileVerifyOtpReq {
   }
 
   ProfileVerifyOtpReq copyWith({String? sessionId, String? otpCode}) {
-    return ProfileVerifyOtpReq(sessionId: sessionId ?? this.sessionId, otpCode: otpCode ?? this.otpCode);
+    return ProfileVerifyOtpReq(
+      sessionId: sessionId ?? this.sessionId,
+      otpCode: otpCode ?? this.otpCode,
+    );
   }
 }

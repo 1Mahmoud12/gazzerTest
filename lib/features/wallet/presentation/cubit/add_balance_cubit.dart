@@ -44,7 +44,9 @@ class AddBalanceCubit extends Cubit<AddBalanceState> {
     closeDialog();
     switch (result) {
       case Ok<AddBalanceResponse?>(:final value):
-        if (value != null && value.iframeUrl != null && value.iframeUrl!.isNotEmpty) {
+        if (value != null &&
+            value.iframeUrl != null &&
+            value.iframeUrl!.isNotEmpty) {
           emit(AddBalanceSuccess(value.iframeUrl!));
         } else {
           emit(const AddBalanceError('No payment URL provided'));

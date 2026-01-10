@@ -8,11 +8,7 @@ sealed class StoreDetailsStates {
   final List<(StoreCategoryEntity, List<StoreCategoryEntity> subcats, List<ProductEntity> prods)> catsWthSubatsAndProds;
   final List<ProductEntity> bestSellingItems;
 
-  StoreDetailsStates({
-    this.store = Fakers.store,
-    this.catsWthSubatsAndProds = const [],
-    this.bestSellingItems = const [],
-  });
+  StoreDetailsStates({this.store = Fakers.store, this.catsWthSubatsAndProds = const [], this.bestSellingItems = const []});
 }
 
 class StoreDetailsInitial extends StoreDetailsStates {}
@@ -30,11 +26,7 @@ class StoreDetailsLoading extends StoreDetailsStates {
 }
 
 class StoreDetailsLoaded extends StoreDetailsStates {
-  StoreDetailsLoaded({
-    required super.store,
-    required super.catsWthSubatsAndProds,
-    super.bestSellingItems = const [],
-  });
+  StoreDetailsLoaded({required super.store, required super.catsWthSubatsAndProds, super.bestSellingItems = const []});
 }
 
 class StoreDetailsError extends StoreDetailsStates {

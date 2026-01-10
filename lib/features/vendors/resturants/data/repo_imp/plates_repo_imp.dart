@@ -18,7 +18,7 @@ class PlatesRepoImp extends PlatesRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.allRestaurants(page, perPage)),
       parser: (response) {
         final data = <PlateEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(PlateDTO.fromJson(item).toEntity());
         }
         data.sort((a, b) => a.outOfStock ? 1 : -1);
@@ -33,7 +33,7 @@ class PlatesRepoImp extends PlatesRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.platesByRest(restId)),
       parser: (response) {
         final data = <PlateEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(PlateDTO.fromJson(item).toEntity());
         }
         data.sort((a, b) => a.outOfStock ? 1 : -1);
@@ -49,7 +49,7 @@ class PlatesRepoImp extends PlatesRepo {
       apiCall: () => _apiClient.get(endpoint: Endpoints.platesOfRestaurantCategory(restId, catOfPlateId)),
       parser: (response) {
         final data = <PlateEntity>[];
-        for (var item in response.data['data']) {
+        for (final item in response.data['data']) {
           data.add(PlateDTO.fromJson(item).toEntity());
         }
         data.sort((a, b) => a.outOfStock ? 1 : -1);

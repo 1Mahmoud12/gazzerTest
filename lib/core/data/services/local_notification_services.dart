@@ -5,9 +5,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-const channelId = "kure";
-const channelName = "Kure App";
-const channelDescription = "Kure Notification Channel";
+const channelId = 'kure';
+const channelName = 'Kure App';
+const channelDescription = 'Kure Notification Channel';
 
 class LocalNotificationServices {
   static final _inst = LocalNotificationServices._();
@@ -19,10 +19,10 @@ class LocalNotificationServices {
   }
 
   Future<void> init() async {
-    var initializationSettingsAndroid = const AndroidInitializationSettings('@drawable/ic_launcher_foreground');
-    var initializationSettingsIOS = const DarwinInitializationSettings(requestProvisionalPermission: true, requestCriticalPermission: true);
+    const initializationSettingsAndroid = AndroidInitializationSettings('@drawable/ic_launcher_foreground');
+    const initializationSettingsIOS = DarwinInitializationSettings(requestProvisionalPermission: true, requestCriticalPermission: true);
 
-    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    const initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
     await _flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
@@ -40,7 +40,7 @@ class LocalNotificationServices {
     if (response.payload?.contains('order_id') == true) {}
   }
 
-  var android = const AndroidNotificationDetails(
+  AndroidNotificationDetails android = const AndroidNotificationDetails(
     channelId,
     channelName,
     channelDescription: channelDescription,
@@ -48,10 +48,10 @@ class LocalNotificationServices {
     priority: Priority.high,
     // actions: []
   );
-  var ios = const DarwinNotificationDetails();
+  DarwinNotificationDetails ios = const DarwinNotificationDetails();
   Future showNotification(RemoteMessage message) async {
     await init();
-    var platform = NotificationDetails(android: android, iOS: ios);
+    final platform = NotificationDetails(android: android, iOS: ios);
     debugPrint(message.data.toString());
     await _flutterLocalNotificationsPlugin.show(
       message.notification.hashCode,
@@ -63,11 +63,10 @@ class LocalNotificationServices {
   }
 
   Future<void> _createAndroidNotificationChannel(String id, String name, String description) async {
-    var androidNotificationChannel = AndroidNotificationChannel(
+    final androidNotificationChannel = AndroidNotificationChannel(
       id,
       name,
       description: description,
-      playSound: true,
       enableLights: true,
       importance: Importance.high,
     );

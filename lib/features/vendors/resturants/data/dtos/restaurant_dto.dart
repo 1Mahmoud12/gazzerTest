@@ -47,7 +47,7 @@ class RestaurantDTO {
     closingAlertAppearBefore = int.tryParse(json['closing_alert_appear_before'].toString());
     if (json['tags'] != null) {
       tags = [];
-      for (var tag in json['tags']) {
+      for (final tag in json['tags']) {
         tags!.add(tag['name'] as String);
       }
     }

@@ -50,48 +50,24 @@ class VouchersCubit extends Cubit<VouchersStates> {
     switch (result) {
       case Ok<VoucherDTO>(:final value):
         final discount = double.tryParse(value.discountValue) ?? 0.0;
-        _cacheSelectedVoucher(
-          code: value.code,
-          discountAmount: discount,
-          discountType: value.discountType,
-        );
+        _cacheSelectedVoucher(code: value.code, discountAmount: discount, discountType: value.discountType);
         selectedVoucherCode = value.code;
         selectedDiscountAmount = discount;
         selectedDiscountType = value.discountType;
-        emit(
-          VoucherApplied(
-            voucherCode: value.code,
-            discountAmount: discount,
-            discountType: value.discountType,
-          ),
-        );
+        emit(VoucherApplied(voucherCode: value.code, discountAmount: discount, discountType: value.discountType));
       case Err(:final error):
-        emit(
-          VoucherError(
-            message: error.message.isEmpty ? L10n.tr().invalidVoucherCode : error.message,
-          ),
-        );
+        emit(VoucherError(message: error.message.isEmpty ? L10n.tr().invalidVoucherCode : error.message));
     }
   }
 
   void applyLocalVoucher(String code) {
     final item = _voucherList.firstWhere((element) => element.code == code);
     final discount = double.tryParse(item.discountValue) ?? 0.0;
-    _cacheSelectedVoucher(
-      code: item.code,
-      discountAmount: discount,
-      discountType: item.discountType,
-    );
+    _cacheSelectedVoucher(code: item.code, discountAmount: discount, discountType: item.discountType);
     selectedVoucherCode = item.code;
     selectedDiscountAmount = discount;
     selectedDiscountType = item.discountType;
-    emit(
-      VoucherApplied(
-        voucherCode: item.code,
-        discountAmount: discount,
-        discountType: item.discountType,
-      ),
-    );
+    emit(VoucherApplied(voucherCode: item.code, discountAmount: discount, discountType: item.discountType));
   }
 
   /// Clear/reset voucher state
@@ -102,11 +78,7 @@ class VouchersCubit extends Cubit<VouchersStates> {
     emit(VouchersInitial());
   }
 
-  void _cacheSelectedVoucher({
-    required String code,
-    required double discountAmount,
-    required String discountType,
-  }) {
+  void _cacheSelectedVoucher({required String code, required double discountAmount, required String discountType}) {
     selectedVoucherCode = code;
     selectedDiscountAmount = discountAmount;
     selectedDiscountType = discountType;

@@ -17,11 +17,7 @@ class DailyOfferCubit extends Cubit<DailyOfferStates> {
 
   DailyOfferCubit(this._repo) : super(DailyOfferInitialState());
 
-  Future<void> getAllOffers({
-    String? search,
-    String? type,
-    bool loadMore = false,
-  }) async {
+  Future<void> getAllOffers({String? search, String? type, bool loadMore = false}) async {
     // Reset pagination if type or search changed
     if (_currentType != type || _currentSearch != search) {
       _currentPage = 1;
@@ -34,13 +30,7 @@ class DailyOfferCubit extends Cubit<DailyOfferStates> {
     if (loadMore) {
       if (_pagination == null || !_pagination!.hasNext) return;
       _currentPage++;
-      emit(DailyOfferLoadingMoreState(
-        DailyOfferDataModel(
-          itemsWithOffers: _allItems,
-          storesWithOffers: _allStores,
-        ),
-        _pagination,
-      ));
+      emit(DailyOfferLoadingMoreState(DailyOfferDataModel(itemsWithOffers: _allItems, storesWithOffers: _allStores), _pagination));
     } else {
       emit(DailyOfferLoadingState());
 
@@ -52,21 +42,13 @@ class DailyOfferCubit extends Cubit<DailyOfferStates> {
         if (hasCachedData) {
           _allItems = List.from(cached.itemsWithOffers);
           _allStores = List.from(cached.storesWithOffers);
-          emit(DailyOfferSuccessState(
-            cached,
-            isFromCache: true,
-          ));
+          emit(DailyOfferSuccessState(cached, isFromCache: true));
         }
       }
     }
 
     // Fetch data (with or without search)
-    final res = await _repo.getAllDailyOffer(
-      search: search,
-      type: type,
-      page: _currentPage,
-      perPage: _perPage,
-    );
+    final res = await _repo.getAllDailyOffer(search: search, type: type, page: _currentPage, perPage: _perPage);
     switch (res) {
       case final Ok<DailyOfferResponse> ok:
         _pagination = ok.value.pagination;
@@ -77,13 +59,12 @@ class DailyOfferCubit extends Cubit<DailyOfferStates> {
           _allItems = List.from(ok.value.data?.itemsWithOffers ?? []);
           _allStores = List.from(ok.value.data?.storesWithOffers ?? []);
         }
-        emit(DailyOfferSuccessState(
-          DailyOfferDataModel(
-            itemsWithOffers: _allItems,
-            storesWithOffers: _allStores,
+        emit(
+          DailyOfferSuccessState(
+            DailyOfferDataModel(itemsWithOffers: _allItems, storesWithOffers: _allStores),
+            pagination: _pagination,
           ),
-          pagination: _pagination,
-        ));
+        );
         break;
       case final Err err:
         if (!loadMore) {

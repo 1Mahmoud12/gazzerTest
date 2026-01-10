@@ -10,9 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'intro_video_tutorial_screen.g.dart';
 
-@TypedGoRoute<IntroVideoTutorialRoute>(path: IntroVideoTutorialScreen.routeUriLink)
+@TypedGoRoute<IntroVideoTutorialRoute>(
+  path: IntroVideoTutorialScreen.routeUriLink,
+)
 @immutable
-class IntroVideoTutorialRoute extends GoRouteData with _$IntroVideoTutorialRoute {
+class IntroVideoTutorialRoute extends GoRouteData
+    with _$IntroVideoTutorialRoute {
   const IntroVideoTutorialRoute({required this.videoLink});
   final String videoLink;
   @override
@@ -26,7 +29,8 @@ class IntroVideoTutorialScreen extends StatefulWidget {
   static const routeUriLink = '/video-player';
   final String videoLink;
   @override
-  State<IntroVideoTutorialScreen> createState() => _IntroVideoTutorialScreenState();
+  State<IntroVideoTutorialScreen> createState() =>
+      _IntroVideoTutorialScreenState();
 }
 
 class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
@@ -55,9 +59,19 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
           SizedBox.expand(
             child: AnimatedCrossFade(
               duration: Durations.extralong1,
-              secondChild: Image.asset(Assets.assetsPngVideoTutorialPlaceholder2, fit: BoxFit.fill, width: double.infinity),
-              firstChild: Image.asset(Assets.assetsPngVideotutorialVideoPlaceholder, fit: BoxFit.fill, width: double.infinity),
-              crossFadeState: isNextPPressed ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              secondChild: Image.asset(
+                Assets.assetsPngVideoTutorialPlaceholder2,
+                fit: BoxFit.fill,
+                width: double.infinity,
+              ),
+              firstChild: Image.asset(
+                Assets.assetsPngVideotutorialVideoPlaceholder,
+                fit: BoxFit.fill,
+                width: double.infinity,
+              ),
+              crossFadeState: isNextPPressed
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
             ),
           ),
           Align(
@@ -68,7 +82,10 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
                 if (value) {
                   return child!;
                 } else {
-                  return DoubledDecoratedWidget(borderRadius: BorderRadius.circular(100), child: child!);
+                  return DoubledDecoratedWidget(
+                    borderRadius: BorderRadius.circular(100),
+                    child: child!,
+                  );
                 }
               },
               child: Directionality(
@@ -96,7 +113,11 @@ class _IntroVideoTutorialScreenState extends State<IntroVideoTutorialScreen> {
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Icon(Icons.arrow_forward_ios, color: Co.bg, size: 32),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Co.bg,
+                      size: 32,
+                    ),
                   ),
                 ),
               ),

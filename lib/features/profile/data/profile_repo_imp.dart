@@ -26,21 +26,13 @@ class ProfileRepoImp extends ProfileRepo {
             'name': req.name,
             'phone': req.phone,
             if (req.email != null) 'email': req.email,
-            'avatar': await MultipartFile.fromFile(
-              req.avatar!.path,
-            ),
+            'avatar': await MultipartFile.fromFile(req.avatar!.path),
           });
 
-          return _apiClient.post(
-            endpoint: Endpoints.updateProfile,
-            requestBody: formData,
-          );
+          return _apiClient.post(endpoint: Endpoints.updateProfile, requestBody: formData);
         } else {
           // Send without file
-          return _apiClient.post(
-            endpoint: Endpoints.updateProfile,
-            requestBody: req.toJson(),
-          );
+          return _apiClient.post(endpoint: Endpoints.updateProfile, requestBody: req.toJson());
         }
       },
       parser: (response) {

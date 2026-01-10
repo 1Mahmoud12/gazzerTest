@@ -100,10 +100,10 @@ class TokenService {
 
   static Future<bool> setToken(String token) async {
     debugPrint('setToken $token');
-    return await di<SharedPreferences>().setString(StorageKeys.token, token);
+    return di<SharedPreferences>().setString(StorageKeys.token, token);
   }
 
   static Future<bool> deleteToken() async {
-    return await di<SharedPreferences>().remove(StorageKeys.token);
+    return di<SharedPreferences>().remove(StorageKeys.token);
   }
 }

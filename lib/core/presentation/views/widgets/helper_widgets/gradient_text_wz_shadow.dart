@@ -24,7 +24,7 @@ class GradientTextWzShadow extends StatelessWidget {
         textPainter.layout(maxWidth: constraints.maxWidth);
         final lines = textPainter.computeLineMetrics().length;
         return SizedBox(
-          height: textPainter.size.height + ((lines) * ((style.fontSize ?? 48) * 0.2)),
+          height: textPainter.size.height + (lines * ((style.fontSize ?? 48) * 0.2)),
           // width: textPainter.size.width,
           child: Stack(
             alignment: Alignment.center,

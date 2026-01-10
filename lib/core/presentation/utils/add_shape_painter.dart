@@ -8,7 +8,7 @@ class AddShapePainter extends CustomPainter {
   AddShapePainter({required this.color});
   @override
   void paint(Canvas canvas, Size size) {
-    Path path_0 = Path();
+    final Path path_0 = Path();
     path_0.moveTo(size.width * -0.1074597, size.height * 0.4538302);
     path_0.cubicTo(
       size.width * -0.1100882,
@@ -3643,7 +3643,7 @@ class AddShapePainter extends CustomPainter {
     path_0.lineTo(size.width * -0.07989103, size.height * 0.3925019);
     path_0.close();
 
-    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint0Fill = Paint()..style = PaintingStyle.fill;
     paint0Fill.color = color;
     canvas.drawPath(path_0, paint0Fill);
   }

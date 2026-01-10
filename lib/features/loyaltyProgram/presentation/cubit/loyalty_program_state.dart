@@ -22,10 +22,7 @@ class LoyaltyProgramLoading extends LoyaltyProgramState {
 }
 
 class LoyaltyProgramLoaded extends LoyaltyProgramState {
-  const LoyaltyProgramLoaded({
-    required this.data,
-    this.isCached = false,
-  });
+  const LoyaltyProgramLoaded({required this.data, this.isCached = false});
 
   final LoyaltyProgramEntity data;
   final bool isCached;
@@ -35,10 +32,7 @@ class LoyaltyProgramLoaded extends LoyaltyProgramState {
 }
 
 class LoyaltyProgramError extends LoyaltyProgramState {
-  const LoyaltyProgramError({
-    required this.message,
-    this.cachedData,
-  });
+  const LoyaltyProgramError({required this.message, this.cachedData});
 
   final String message;
   final LoyaltyProgramEntity? cachedData;

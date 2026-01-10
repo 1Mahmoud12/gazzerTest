@@ -25,13 +25,7 @@ class OrdersCubit extends Cubit<OrdersState> {
       final cached = await _repo.getCachedClientOrders();
       if (cached != null && cached.isNotEmpty) {
         _allOrders = cached;
-        emit(
-          OrdersLoaded(
-            orders: List.from(_allOrders),
-            hasMore: true,
-            currentPage: 1,
-          ),
-        );
+        emit(OrdersLoaded(orders: List.from(_allOrders), hasMore: true));
         // Continue to refresh in background
       }
     }
@@ -42,10 +36,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
     emit(OrdersLoading(orders: List.from(_allOrders), hasMore: _hasMore));
 
-    final result = await _repo.getClientOrders(
-      page: _currentPage,
-      perPage: _perPage,
-    );
+    final result = await _repo.getClientOrders(page: _currentPage);
 
     switch (result) {
       case Ok<List<OrderItemEntity>>(:final value):
@@ -66,12 +57,7 @@ class OrdersCubit extends Cubit<OrdersState> {
           ),
         );
       case Err<List<OrderItemEntity>>(:final error):
-        emit(
-          OrdersError(
-            message: error.message,
-            orders: _allOrders,
-          ),
-        );
+        emit(OrdersError(message: error.message, orders: _allOrders));
     }
   }
 
@@ -102,10 +88,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
     // Load all pages up to the target page
     for (int page = 1; page <= targetPage; page++) {
-      final result = await _repo.getClientOrders(
-        page: page,
-        perPage: _perPage,
-      );
+      final result = await _repo.getClientOrders(page: page);
 
       switch (result) {
         case Ok<List<OrderItemEntity>>(:final value):
@@ -137,12 +120,7 @@ class OrdersCubit extends Cubit<OrdersState> {
           }
         case Err<List<OrderItemEntity>>(:final error):
           // On error, keep current orders and show error toast (handled by listener)
-          emit(
-            OrdersError(
-              message: error.message,
-              orders: currentOrders,
-            ),
-          );
+          emit(OrdersError(message: error.message, orders: currentOrders));
           return;
       }
     }

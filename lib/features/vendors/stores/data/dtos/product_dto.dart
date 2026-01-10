@@ -6,6 +6,7 @@ import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.d
 
 class ProductDTO extends GenericItemDTO {
   String? color;
+  @override
   int? sold;
   // ItemUnitBrand? itemUnitBrand;
 

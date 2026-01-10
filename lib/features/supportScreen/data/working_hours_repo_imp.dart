@@ -13,9 +13,7 @@ class WorkingHoursRepoImp extends WorkingHoursRepo {
   @override
   Future<Result<List<WorkingHoursEntity>>> getWorkingHours() {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.workingHours,
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.workingHours),
       parser: (response) {
         final data = response.data['data'] as List<dynamic>;
         return data

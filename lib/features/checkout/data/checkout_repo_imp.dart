@@ -40,12 +40,7 @@ class CheckoutRepoImp extends CheckoutRepo {
   @override
   Future<Result<VoucherDTO>> checkVoucher(String code) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.checkVoucher,
-        requestBody: {
-          'code': code,
-        },
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.checkVoucher, requestBody: {'code': code}),
       parser: (response) {
         final data = (response.data['data'] ?? {}) as Map<String, dynamic>;
         final voucher = data['voucher'] as Map<String, dynamic>? ?? {};
@@ -88,25 +83,15 @@ class CheckoutRepoImp extends CheckoutRepo {
   @override
   Future<Result<String>> convertPoints(int points) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.convertPoints,
-        requestBody: {
-          'points': points,
-        },
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.convertPoints, requestBody: {'points': points}),
       parser: (response) => response.data['message']?.toString() ?? 'Points converted successfully',
     );
   }
 
   @override
-  Future<Result<CheckoutResponseDTO>> submitCheckout({
-    required CheckoutParams params,
-  }) {
+  Future<Result<CheckoutResponseDTO>> submitCheckout({required CheckoutParams params}) {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.ordersCheckout,
-        requestBody: params.toJson(),
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.ordersCheckout, requestBody: params.toJson()),
       parser: (response) => CheckoutResponseDTO.fromJson(response.data),
     );
   }
@@ -114,10 +99,7 @@ class CheckoutRepoImp extends CheckoutRepo {
   @override
   Future<Result<OrderSummaryDTO>> getOrderSummary({String? voucher}) {
     return super.call(
-      apiCall: () => _apiClient.get(
-        endpoint: Endpoints.orderSummary,
-        queryParameters: voucher != null ? {'voucher': voucher} : null,
-      ),
+      apiCall: () => _apiClient.get(endpoint: Endpoints.orderSummary, queryParameters: voucher != null ? {'voucher': voucher} : null),
       parser: (response) => OrderSummaryDTO.fromJson(response.data['data'] as Map<String, dynamic>),
     );
   }

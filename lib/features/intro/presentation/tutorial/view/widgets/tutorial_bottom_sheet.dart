@@ -68,7 +68,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                   scale: 1.8,
                   child: Hero(
                     tag: Tags.cloud,
-                    child: Image.asset(Assets.assetsPngCloudLogo, fit: BoxFit.fill, alignment: Alignment.center, color: Colors.white),
+                    child: Image.asset(Assets.assetsPngCloudLogo, fit: BoxFit.fill, color: Colors.white),
                   ),
                 ),
                 Column(
@@ -104,7 +104,7 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(Assets.assetsPngFlagEg, height: 24, width: 24),
-                            Text("العربية", style: context.style16500.copyWith(color: Co.purple)),
+                            Text('العربية', style: context.style16500.copyWith(color: Co.purple)),
                           ],
                         ),
                       ),
@@ -126,7 +126,6 @@ class _TutorialBottomSheetState extends State<TutorialBottomSheet> {
                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 64),
                   child: Row(
                     spacing: 24,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: OptionBtn(

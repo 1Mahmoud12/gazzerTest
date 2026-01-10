@@ -5,5 +5,8 @@ import 'package:gazzer/features/vendors/common/domain/entities/review_entity.dar
 abstract class ReviewsRepo extends BaseApiRepo {
   ReviewsRepo(super.crashlyticsRepo);
 
-  Future<Result<StoreReviewsEntity>> getStoreReviews({required String storeType, required int storeId});
+  Future<Result<StoreReviewsEntity>> getStoreReviews({
+    required String storeType,
+    required int storeId,
+  });
 }

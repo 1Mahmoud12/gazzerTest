@@ -62,7 +62,7 @@ class _BestPopularScreenState extends State<BestPopularScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(showCart: false, iconsColor: Co.secondary, title: L10n.tr().bestPopularStores),
+      appBar: MainAppBar(iconsColor: Co.secondary, title: L10n.tr().bestPopularStores),
       body: BlocProvider(
         create: (context) {
           final cubit = di<BestPopularCubit>()..getBestPopularStores();

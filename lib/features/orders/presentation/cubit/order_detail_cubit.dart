@@ -20,11 +20,7 @@ class OrderDetailCubit extends Cubit<OrderDetailState> {
       }
     }
 
-    emit(
-      OrderDetailLoading(
-        orderDetail: state is OrderDetailLoaded ? (state as OrderDetailLoaded).orderDetail : null,
-      ),
-    );
+    emit(OrderDetailLoading(orderDetail: state is OrderDetailLoaded ? (state as OrderDetailLoaded).orderDetail : null));
 
     final result = await _repo.getOrderDetail(_orderId);
 
@@ -32,12 +28,7 @@ class OrderDetailCubit extends Cubit<OrderDetailState> {
       case Ok<OrderDetailEntity>(:final value):
         emit(OrderDetailLoaded(orderDetail: value));
       case Err<OrderDetailEntity>(:final error):
-        emit(
-          OrderDetailError(
-            message: error.message,
-            orderDetail: state is OrderDetailLoaded ? (state as OrderDetailLoaded).orderDetail : null,
-          ),
-        );
+        emit(OrderDetailError(message: error.message, orderDetail: state is OrderDetailLoaded ? (state as OrderDetailLoaded).orderDetail : null));
     }
   }
 }

@@ -21,10 +21,10 @@ class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
     emit(ScreenDataLoading());
     final result = await _restRepo.loadRestaurantsMenuPage();
     switch (result) {
-      case Ok<RestaurantsMenuReponse> data:
+      case final Ok<RestaurantsMenuReponse> data:
         emit(ScreenDataLoaded(categories: data.value.categoryWithrestaurants, banners: data.value.banners));
         break;
-      case Err error:
+      case final Err error:
         emit(ScreenDataError(error: error.error.message));
     }
   }
@@ -34,13 +34,13 @@ class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
 
     final result = await _bannerRepo.getRestaurantPageBanners();
     switch (result) {
-      case Ok<List<BannerEntity>> data:
+      case final Ok<List<BannerEntity>> data:
         banners.clear();
         banners.addAll(data.value);
         emit(RestaurantsCategoriesLoaded(categories: cats, banners: banners));
 
         break;
-      case Err error:
+      case final Err error:
         return emit(RestaurantsCategoriesError(error: error.error.message));
     }
   }
@@ -50,12 +50,12 @@ class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
 
     final result = await _restRepo.getAllPlatesCategories();
     switch (result) {
-      case Ok<List<CategoryOfPlateEntity>> data:
+      case final Ok<List<CategoryOfPlateEntity>> data:
         cats.clear();
         cats.addAll(data.value.map((cat) => (cat, [])));
         emit(RestaurantsCategoriesLoaded(categories: cats, banners: banners));
         break;
-      case Err<List<CategoryOfPlateEntity>> error:
+      case final Err<List<CategoryOfPlateEntity>> error:
         return emit(RestaurantsCategoriesError(error: error.error.message));
     }
   }
@@ -64,11 +64,11 @@ class RestaurantsMenuCubit extends Cubit<RestaurantsMenuStates> {
     emit(VendorsLoading());
     final result = await _restRepo.getRestaurantsOfCategory(id);
     switch (result) {
-      case Ok<List<RestaurantEntity>> data:
+      case final Ok<List<RestaurantEntity>> data:
         cats.firstWhere((cat) => cat.$1.id == id).$2.addAll(data.value);
         emit(VendorsLoaded(categories: cats, banners: banners));
         break;
-      case Err error:
+      case final Err error:
         emit(VendorsError(error: error.error.message));
         break;
     }

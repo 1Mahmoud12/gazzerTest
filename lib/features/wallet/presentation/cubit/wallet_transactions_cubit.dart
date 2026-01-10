@@ -25,13 +25,7 @@ class WalletTransactionsCubit extends Cubit<WalletTransactionsState> {
       if (cached != null) {
         _transactions = cached.transactions;
         _pagination = cached.pagination;
-        emit(
-          WalletTransactionsLoaded(
-            transactions: _transactions,
-            pagination: _pagination,
-            isCached: true,
-          ),
-        );
+        emit(WalletTransactionsLoaded(transactions: _transactions, pagination: _pagination, isCached: true));
         if (!forceRefresh) {
           // Proceed to refresh data in background
         }
@@ -40,24 +34,14 @@ class WalletTransactionsCubit extends Cubit<WalletTransactionsState> {
       emit(const WalletTransactionsLoading());
     }
 
-    final result = await _repo.getWalletTransactions(
-      page: _currentPage,
-      perPage: _perPage,
-      type: type,
-    );
+    final result = await _repo.getWalletTransactions(page: _currentPage, type: type);
 
     switch (result) {
       case Ok<WalletTransactionsResponse>(:final value):
         _transactions = value.transactions;
         _pagination = value.pagination;
         _currentPage = value.pagination?.currentPage ?? 1;
-        emit(
-          WalletTransactionsLoaded(
-            transactions: _transactions,
-            pagination: _pagination,
-            isCached: false,
-          ),
-        );
+        emit(WalletTransactionsLoaded(transactions: _transactions, pagination: _pagination));
       case Err<WalletTransactionsResponse>(:final error):
         emit(
           WalletTransactionsError(
@@ -74,40 +58,19 @@ class WalletTransactionsCubit extends Cubit<WalletTransactionsState> {
       return; // No more pages to load
     }
 
-    emit(
-      WalletTransactionsLoadingMore(
-        transactions: _transactions,
-        pagination: _pagination!,
-      ),
-    );
+    emit(WalletTransactionsLoadingMore(transactions: _transactions, pagination: _pagination));
 
     final nextPage = _currentPage + 1;
-    final result = await _repo.getWalletTransactions(
-      page: nextPage,
-      perPage: _perPage,
-      type: _currentType,
-    );
+    final result = await _repo.getWalletTransactions(page: nextPage, type: _currentType);
 
     switch (result) {
       case Ok<WalletTransactionsResponse>(:final value):
         _transactions.addAll(value.transactions);
         _pagination = value.pagination;
         _currentPage = value.pagination?.currentPage ?? nextPage;
-        emit(
-          WalletTransactionsLoaded(
-            transactions: _transactions,
-            pagination: _pagination,
-            isCached: false,
-          ),
-        );
+        emit(WalletTransactionsLoaded(transactions: _transactions, pagination: _pagination));
       case Err<WalletTransactionsResponse>(:final error):
-        emit(
-          WalletTransactionsError(
-            message: error.message,
-            cachedTransactions: _transactions,
-            cachedPagination: _pagination,
-          ),
-        );
+        emit(WalletTransactionsError(message: error.message, cachedTransactions: _transactions, cachedPagination: _pagination));
     }
   }
 

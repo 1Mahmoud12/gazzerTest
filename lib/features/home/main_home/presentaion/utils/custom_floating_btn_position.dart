@@ -9,6 +9,9 @@ class CustomFloatingBtnPosition extends FloatingActionButtonLocation {
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
     final isAr = scaffoldGeometry.textDirection == TextDirection.rtl;
     if (isAr) return Offset(rightOffset, topPadding);
-    return Offset(scaffoldGeometry.scaffoldSize.width - rightOffset, topPadding);
+    return Offset(
+      scaffoldGeometry.scaffoldSize.width - rightOffset,
+      topPadding,
+    );
   }
 }

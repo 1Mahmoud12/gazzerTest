@@ -3,6 +3,7 @@ part of 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.
 class ProductEntity extends GenericItemEntity {
   final Color? color;
   final int? quantityInStock;
+  @override
   final int? sold;
 
   ///

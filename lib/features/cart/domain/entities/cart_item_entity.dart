@@ -43,9 +43,6 @@ class CartItemEntity extends Equatable {
         image: prod.image,
       ),
       quantity: 1, // Default quantity
-      options: [],
-      orderedWith: [],
-      notes: null,
       itemPrice: 0,
       totalPrice: 0,
     );
@@ -64,7 +61,7 @@ class CartItemEntity extends Equatable {
     num? totalPrice,
   }) {
     return CartItemEntity(
-      cartId: id ?? this.cartId,
+      cartId: id ?? cartId,
       type: type ?? this.type,
       quantity: quantity ?? this.quantity,
       quantityInStock: quantityInStock ?? this.quantityInStock,

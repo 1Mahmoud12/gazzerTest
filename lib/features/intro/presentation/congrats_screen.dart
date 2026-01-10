@@ -93,8 +93,10 @@ class _CongratsScreenState extends State<CongratsScreen> {
               alignment: const Alignment(0, -0.1),
               child: ConfettiWidget(
                 confettiController: controller,
-                blastDirectionality: BlastDirectionality.explosive, // don't specify a direction, blast randomly
-                shouldLoop: true, // start again as soon as the animation is finished
+                blastDirectionality: BlastDirectionality.explosive,
+                // don't specify a direction, blast randomly
+                shouldLoop: true,
+                // start again as soon as the animation is finished
                 colors: const [Colors.green, Colors.blue, Colors.pink, Colors.yellow, Colors.purple],
                 // manually specify the colors to be used
                 numberOfParticles: 12,

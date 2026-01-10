@@ -38,12 +38,7 @@ class MockLoginRepoImp extends _i1.Mock implements _i2.LoginRepoImp {
   _i3.Future<_i4.Result<String>> login(String? phone, String? password) =>
       (super.noSuchMethod(
             Invocation.method(#login, [phone, password]),
-            returnValue: _i3.Future<_i4.Result<String>>.value(
-              _i5.dummyValue<_i4.Result<String>>(
-                this,
-                Invocation.method(#login, [phone, password]),
-              ),
-            ),
+            returnValue: _i3.Future<_i4.Result<String>>.value(_i5.dummyValue<_i4.Result<String>>(this, Invocation.method(#login, [phone, password]))),
           )
           as _i3.Future<_i4.Result<String>>);
 
@@ -55,13 +50,7 @@ class MockLoginRepoImp extends _i1.Mock implements _i2.LoginRepoImp {
       (super.noSuchMethod(
             Invocation.method(#call, [], {#apiCall: apiCall, #parser: parser}),
             returnValue: _i3.Future<_i4.Result<T>>.value(
-              _i5.dummyValue<_i4.Result<T>>(
-                this,
-                Invocation.method(#call, [], {
-                  #apiCall: apiCall,
-                  #parser: parser,
-                }),
-              ),
+              _i5.dummyValue<_i4.Result<T>>(this, Invocation.method(#call, [], {#apiCall: apiCall, #parser: parser})),
             ),
           )
           as _i3.Future<_i4.Result<T>>);

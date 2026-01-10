@@ -16,7 +16,10 @@ Future<bool?> showReorderExistingItemsDialog({
   return showModalBottomSheet(
     context: context,
     builder: (context) => Container(
-      decoration: BoxDecoration(color: Co.white, borderRadius: BorderRadius.circular(15)),
+      decoration: BoxDecoration(
+        color: Co.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -25,11 +28,18 @@ Future<bool?> showReorderExistingItemsDialog({
             const VerticalSpacing(20),
             Text(
               L10n.tr().warning,
-              style: context.style16500.copyWith(fontWeight: TStyle.bold, color: Co.purple),
+              style: context.style16500.copyWith(
+                fontWeight: TStyle.bold,
+                color: Co.purple,
+              ),
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing(10),
-            Text(message ?? '', style: context.style16500, textAlign: TextAlign.center),
+            Text(
+              message ?? '',
+              style: context.style16500,
+              textAlign: TextAlign.center,
+            ),
             const VerticalSpacing(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

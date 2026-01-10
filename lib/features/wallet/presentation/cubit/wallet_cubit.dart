@@ -30,7 +30,7 @@ class WalletCubit extends Cubit<WalletState> {
       case Ok<WalletEntity?>(:final value):
         if (value != null) {
           _cached = value;
-          emit(WalletLoaded(data: value, isCached: false));
+          emit(WalletLoaded(data: value));
         } else {
           emit(
             WalletError(
@@ -40,12 +40,7 @@ class WalletCubit extends Cubit<WalletState> {
           );
         }
       case Err<WalletEntity?>(:final error):
-        emit(
-          WalletError(
-            message: error.message,
-            cachedData: _cached,
-          ),
-        );
+        emit(WalletError(message: error.message, cachedData: _cached));
     }
   }
 }

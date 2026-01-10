@@ -5,7 +5,12 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/gradient_r
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/spacing.dart';
 
 class LabelItem extends StatelessWidget {
-  const LabelItem({super.key, required this.title, required this.onSelect, required this.isSelected});
+  const LabelItem({
+    super.key,
+    required this.title,
+    required this.onSelect,
+    required this.isSelected,
+  });
   final String title;
   final bool isSelected;
   final Function() onSelect;

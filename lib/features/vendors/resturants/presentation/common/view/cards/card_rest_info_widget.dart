@@ -22,7 +22,10 @@ class CardRestInfoWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       decoration: BoxDecoration(
         border: Border.all(color: Co.lightPurple),
-        borderRadius: const BorderRadius.only(bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)),
+        borderRadius: const BorderRadius.only(
+          bottomRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -38,14 +41,22 @@ class CardRestInfoWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(vendor.name, style: context.style16500, maxLines: 1, overflow: TextOverflow.ellipsis),
+                  child: Text(
+                    vendor.name,
+                    style: context.style16500,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Row(
                   spacing: 4,
                   children: [
                     const VectorGraphicsWidget(Assets.starRateIc),
 
-                    Text(vendor.rate.toStringAsFixed(1), style: context.style16400),
+                    Text(
+                      vendor.rate.toStringAsFixed(1),
+                      style: context.style16400,
+                    ),
                   ],
                 ),
               ],
@@ -72,7 +83,12 @@ class CardRestInfoWidget extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    const VectorGraphicsWidget(Assets.locationIc, width: 16, height: 16, colorFilter: ColorFilter.mode(Co.black, BlendMode.srcIn)),
+                    const VectorGraphicsWidget(
+                      Assets.locationIc,
+                      width: 16,
+                      height: 16,
+                      colorFilter: ColorFilter.mode(Co.black, BlendMode.srcIn),
+                    ),
                     const HorizontalSpacing(2),
                     Expanded(
                       child: Text(
@@ -90,7 +106,15 @@ class CardRestInfoWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const VectorGraphicsWidget(Assets.clockIc, width: 16, height: 16, colorFilter: ColorFilter.mode(Co.black, BlendMode.srcIn)),
+                      const VectorGraphicsWidget(
+                        Assets.clockIc,
+                        width: 16,
+                        height: 16,
+                        colorFilter: ColorFilter.mode(
+                          Co.black,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       const HorizontalSpacing(2),
                       Expanded(
                         child: Text(
@@ -122,11 +146,14 @@ class CardRestInfoWidget extends StatelessWidget {
 
   void navigateToVendor(BuildContext context) {
     logger.d(vendor.storeCategoryType);
-    if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.pharmacy.name) {
+    if ((vendor.storeCategoryType ?? '').toLowerCase() ==
+        VendorType.pharmacy.name) {
       PharmacyStoreScreenRoute(id: vendor.id).push(context);
-    } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.grocery.name) {
+    } else if ((vendor.storeCategoryType ?? '').toLowerCase() ==
+        VendorType.grocery.name) {
       StoreDetailsRoute(storeId: vendor.id).push(context);
-    } else if ((vendor.storeCategoryType ?? '').toLowerCase() == VendorType.restaurant.name) {
+    } else if ((vendor.storeCategoryType ?? '').toLowerCase() ==
+        VendorType.restaurant.name) {
       RestaurantDetailsRoute(id: vendor.id).push(context);
     }
   }

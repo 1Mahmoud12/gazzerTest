@@ -27,7 +27,11 @@ class ImageSourcePickerBottomSheet {
   /// Shows the image source picker bottom sheet
   /// Returns the selected File, or null if cancelled or no file selected
   static Future<File?> show({required BuildContext context}) async {
-    final file = await showModalBottomSheet(context: context, backgroundColor: Colors.transparent, builder: (context) => const SelectImageDialog());
+    final file = await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const SelectImageDialog(),
+    );
     return file;
   }
 }
@@ -45,7 +49,10 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
 
   Future<File?> pickImageFromGallery() async {
     try {
-      final XFile? image = await imagePicker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+      final XFile? image = await imagePicker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+      );
       if (image != null) {
         return File(image.path);
       }
@@ -58,7 +65,10 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
 
   Future<File?> pickImageFromCamera() async {
     try {
-      final XFile? image = await imagePicker.pickImage(source: ImageSource.camera, imageQuality: 80);
+      final XFile? image = await imagePicker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 80,
+      );
       if (image != null) {
         return File(image.path);
       }
@@ -79,7 +89,10 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
           children: [
             // Top card with options
             Container(
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Column(
                 children: [
                   InkWell(
@@ -127,7 +140,10 @@ class _SelectImageDialogState extends State<SelectImageDialog> {
             const SizedBox(height: 8),
             // Bottom card with cancel button
             Container(
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: ListTile(
                 title: Text(
                   L10n.tr().cancel,

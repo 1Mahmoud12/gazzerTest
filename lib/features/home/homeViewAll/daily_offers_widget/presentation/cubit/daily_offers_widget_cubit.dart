@@ -16,16 +16,22 @@ class DailyOffersWidgetCubit extends Cubit<DailyOffersWidgetStates> {
     final hasCachedData = cached != null && cached.entities.isNotEmpty;
 
     if (hasCachedData) {
-      emit(DailyOffersWidgetSuccessState(cached.entities, cached.banner, isFromCache: true));
+      emit(
+        DailyOffersWidgetSuccessState(
+          cached.entities,
+          cached.banner,
+          isFromCache: true,
+        ),
+      );
     }
 
     // Fetch data from API
     final res = await _repo.getDailyOffers();
     switch (res) {
-      case Ok<DailyOffersWidgetData> ok:
-        emit(DailyOffersWidgetSuccessState(ok.value.entities, ok.value.banner, isFromCache: false));
+      case final Ok<DailyOffersWidgetData> ok:
+        emit(DailyOffersWidgetSuccessState(ok.value.entities, ok.value.banner));
         break;
-      case Err err:
+      case final Err err:
         // If we have cached data, don't show error, just keep showing cache
         if (!hasCachedData) {
           emit(DailyOffersWidgetErrorState(err.error.message));

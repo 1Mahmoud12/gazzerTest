@@ -30,11 +30,7 @@ enum ComplaintType {
   }
 }
 
-enum OrderIssueType {
-  missing,
-  incorrect,
-  chat,
-}
+enum OrderIssueType { missing, incorrect, chat }
 
 enum CategoryType {
   general,

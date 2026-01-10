@@ -15,10 +15,11 @@ RouteBase get $storesOfCategoryRoute => GoRouteData.$route(
 );
 
 mixin _$StoresOfCategoryRoute on GoRouteData {
-  static StoresOfCategoryRoute _fromState(GoRouterState state) => StoresOfCategoryRoute(
-    mainCatId: int.parse(state.uri.queryParameters['main-cat-id']!),
-    subCatId: int.parse(state.uri.queryParameters['sub-cat-id']!),
-  );
+  static StoresOfCategoryRoute _fromState(GoRouterState state) =>
+      StoresOfCategoryRoute(
+        mainCatId: int.parse(state.uri.queryParameters['main-cat-id']!),
+        subCatId: int.parse(state.uri.queryParameters['sub-cat-id']!),
+      );
 
   StoresOfCategoryRoute get _self => this as StoresOfCategoryRoute;
 
@@ -38,7 +39,8 @@ mixin _$StoresOfCategoryRoute on GoRouteData {
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   @override
-  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 
   @override
   void replace(BuildContext context) => context.replace(location);

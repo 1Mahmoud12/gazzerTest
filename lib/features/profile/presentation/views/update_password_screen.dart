@@ -23,7 +23,10 @@ class UpodatePasswordRoute extends GoRouteData with _$UpodatePasswordRoute {
   final ProfileCubit $extra;
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return BlocProvider.value(value: $extra, child: const UpodatePasswordScreen());
+    return BlocProvider.value(
+      value: $extra,
+      child: const UpodatePasswordScreen(),
+    );
   }
 }
 
@@ -61,7 +64,12 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
         child: ListView(
           padding: AppConst.defaultHrPadding,
           children: [
-            const Center(child: VectorGraphicsWidget(Assets.assetsSvgCharacter, height: 130)),
+            const Center(
+              child: VectorGraphicsWidget(
+                Assets.assetsSvgCharacter,
+                height: 130,
+              ),
+            ),
             Text(
               L10n.tr().resetPassword,
               style: context.style32700.copyWith(color: Co.purple),
@@ -133,7 +141,12 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                 onPressed: () {
                   if (_formKey.currentState?.validate() != true) return;
                   TextInput.finishAutofillContext();
-                  context.read<ProfileCubit>().changePassword(ChangePasswordReq(currentPassword: currentPassword.text, newPassword: password.text));
+                  context.read<ProfileCubit>().changePassword(
+                    ChangePasswordReq(
+                      currentPassword: currentPassword.text,
+                      newPassword: password.text,
+                    ),
+                  );
                 },
                 text: L10n.tr().confirm,
               ),

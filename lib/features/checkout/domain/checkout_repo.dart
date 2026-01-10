@@ -26,7 +26,9 @@ abstract class CheckoutRepo extends BaseApiRepo {
 
   Future<Result<String>> convertPoints(int points);
 
-  Future<Result<CheckoutResponseDTO>> submitCheckout({required CheckoutParams params});
+  Future<Result<CheckoutResponseDTO>> submitCheckout({
+    required CheckoutParams params,
+  });
 
   Future<Result<OrderSummaryDTO>> getOrderSummary({String? voucher});
 }

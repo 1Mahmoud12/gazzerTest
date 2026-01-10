@@ -60,7 +60,7 @@ abstract class Helpers {
   /// Handles all scenarios: SIM availability, permissions, airplane mode, dual SIM, call cancellation
   /// Returns true if call was initiated successfully
   static Future<bool> callSupport(BuildContext context) async {
-    return await SupportCallService.callSupport(context);
+    return SupportCallService.callSupport(context);
   }
 
   /// Show dialog with call options (useful for dual SIM devices)

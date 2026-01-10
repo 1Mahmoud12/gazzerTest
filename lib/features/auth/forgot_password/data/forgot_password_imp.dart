@@ -15,7 +15,7 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
   @override
   Future<Result<String>> forgotPassword(String phoneNumber) async {
     return super.call(
-      apiCall: () => _apiClient.post(endpoint: Endpoints.forgetPassword, requestBody: {"phone": phoneNumber}),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.forgetPassword, requestBody: {'phone': phoneNumber}),
       parser: (response) {
         // phoneNum = phoneNumber;
         resetPasswordToken = '';
@@ -27,10 +27,7 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
   @override
   Future<Result<String>> verifyOtp(String phoneNumber, String otp) async {
     return super.call(
-      apiCall: () => _apiClient.post(
-        endpoint: Endpoints.forgetPasswordVerifyOTP,
-        requestBody: {"phone": phoneNumber, "otp_code": otp},
-      ),
+      apiCall: () => _apiClient.post(endpoint: Endpoints.forgetPasswordVerifyOTP, requestBody: {'phone': phoneNumber, 'otp_code': otp}),
       parser: (response) {
         resetPasswordToken = response.data['data']['reset_password_token'];
         return response.data['message'].toString();
@@ -43,11 +40,7 @@ class ForgotPasswordImp extends ForgotPasswordRepo {
     return super.call(
       apiCall: () => _apiClient.post(
         endpoint: Endpoints.resetPassword,
-        requestBody: {
-          "password_confirmation": newPassword,
-          "password": newPassword,
-          "reset_password_token": resetPasswordToken,
-        },
+        requestBody: {'password_confirmation': newPassword, 'password': newPassword, 'reset_password_token': resetPasswordToken},
       ),
       parser: (response) {
         return response.data['message'].toString();

@@ -25,7 +25,7 @@ class CornerIndendetShape extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final double borderRadius = max(size.height, size.width) * 0.1;
 
-    Path path_0 = Path();
+    final Path path_0 = Path();
     if (corner == Corner.topLeft) {
       path_0.moveTo(indent.width * 1.1, 0);
     } else {
@@ -126,7 +126,7 @@ class CornerIndendetShape extends CustomPainter {
 
     path_0.close();
 
-    Paint paint0Stroke = Paint()
+    final Paint paint0Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
     // Draw shadow
@@ -141,7 +141,7 @@ class CornerIndendetShape extends CustomPainter {
       canvas.drawShadow(path_0, shadow?.$1 ?? Colors.black26, shadow?.$2 ?? 2, false);
     }
 
-    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint0Fill = Paint()..style = PaintingStyle.fill;
     paint0Fill.color = Colors.transparent;
     canvas.drawPath(path_0, paint0Fill);
   }

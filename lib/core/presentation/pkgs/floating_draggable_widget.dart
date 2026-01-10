@@ -122,6 +122,7 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
 
   /// If the user requested to remove the floating widget.
   bool isRemoved = false;
+
   bool hasCollision(GlobalKey<State<StatefulWidget>> key1, GlobalKey<State<StatefulWidget>> key2) {
     final box1 = key1.currentContext?.findRenderObject() as RenderBox?;
     final box2 = key2.currentContext?.findRenderObject() as RenderBox?;
@@ -260,8 +261,8 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
                             setState(() {
                               if (isTabbed && isDragEnable) {
                                 isDragging = false;
-                                left = _getDx(left + value.velocity.pixelsPerSecond.dx / (widget.speed ?? 50.0).toDouble(), width);
-                                top = _getDy(top + value.velocity.pixelsPerSecond.dy / (widget.speed ?? 50.0).toDouble(), height);
+                                left = _getDx(left + value.velocity.pixelsPerSecond.dx / (widget.speed ?? 50.0), width);
+                                top = _getDy(top + value.velocity.pixelsPerSecond.dy / (widget.speed ?? 50.0), height);
                                 if (widget.onDragEvent != null) {
                                   widget.onDragEvent!(left, top);
                                 }
@@ -327,7 +328,7 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
   }
 
   @override
-  void didUpdateWidget(oldWidget) {
+  void didUpdateWidget(FloatingDraggableWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     isDragEnable = widget.isDraggable;
   }
@@ -339,7 +340,7 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
     /// top variable will be no more than the screen total height
     double currentTop;
     if (dy >= (totalHeight - widget.floatingWidgetHeight - (dragLimit?.bottom ?? 0))) {
-      currentTop = (totalHeight - widget.floatingWidgetHeight);
+      currentTop = totalHeight - widget.floatingWidgetHeight;
       currentTop -= dragLimit?.bottom ?? 0;
     } else {
       if (dy <= 0) {
@@ -360,7 +361,7 @@ class _FloatingDraggableWidgetState extends State<FloatingDraggableWidget> with 
     /// widget will not go out side of the screen.
     double currentLeft;
     if (dx >= (totalWidth - widget.floatingWidgetWidth)) {
-      currentLeft = (totalWidth - widget.floatingWidgetWidth);
+      currentLeft = totalWidth - widget.floatingWidgetWidth;
       currentLeft -= dragLimit?.right ?? 0;
     } else {
       if (dx <= (0 + widget.floatingWidgetWidth)) {
@@ -384,5 +385,6 @@ class DragLimit {
   const DragLimit({this.top, this.left, this.right, this.bottom});
 
   DragLimit.symetrical({double? horizontal, double? vertical}) : this(top: vertical, left: horizontal, right: horizontal, bottom: vertical);
+
   DragLimit.all({required double val}) : this(top: val, left: val, right: val, bottom: val);
 }

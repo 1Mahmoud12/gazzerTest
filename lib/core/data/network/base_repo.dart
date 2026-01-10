@@ -110,7 +110,7 @@ abstract class BaseApiRepo {
   //  TODO: should implenet logic te refresh token in this case??
   BaseError? isTokenExpired(Object error) {
     if (error is DioException && error.response?.statusCode == 498) {
-      return BaseError(message: "Token has been expired", e: ErrorType.expireTokenError);
+      return BaseError(message: 'Token has been expired', e: ErrorType.expireTokenError);
     }
     return null;
   }
@@ -121,7 +121,7 @@ abstract class BaseApiRepo {
     try {
       return BaseError(message: L10n.tr().somethingWentWrong, e: ErrorType.parseError);
     } catch (e) {
-      return BaseError(message: "Something went wrong", e: ErrorType.parseError);
+      return BaseError(message: 'Something went wrong', e: ErrorType.parseError);
     }
   }
 }

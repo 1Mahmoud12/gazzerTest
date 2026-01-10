@@ -29,7 +29,10 @@ void main() async {
 
   int replaced = 0;
 
-  await for (final entity in sourceDir.list(recursive: true, followLinks: false)) {
+  await for (final entity in sourceDir.list(
+    recursive: true,
+    followLinks: false,
+  )) {
     if (entity is File && entity.path.endsWith('.dart')) {
       String content = await entity.readAsString();
       bool hasChanges = false;

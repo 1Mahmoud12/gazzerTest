@@ -37,15 +37,15 @@ class SectionDTO {
     banner = json['banner'] != null ? BannerDTO.fromJson(json['banner']) : null;
     data = [];
     if (type == SectionType.categories) {
-      for (var item in json['data']) {
+      for (final item in json['data']) {
         data!.add(MainCategoryDTO.fromJson(item));
       }
     } else if (type == SectionType.topVendors) {
-      for (var item in json['data']) {
+      for (final item in json['data']) {
         data!.add(VendorDTO.fromJson(item));
       }
     } else {
-      for (var item in json['data']) {
+      for (final item in json['data']) {
         data!.add(SectionItemDTO.fromJson(item));
       }
     }

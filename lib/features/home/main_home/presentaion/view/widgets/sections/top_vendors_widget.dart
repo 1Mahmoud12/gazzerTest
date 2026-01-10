@@ -94,14 +94,16 @@ class _TopVendorsContent extends StatelessWidget {
                     if (vendor.type == VendorType.restaurant.value) {
                       context.navigateToPage(
                         BlocProvider(
-                          create: (context) => di<SingleRestaurantCubit>(param1: vendor.storeId),
+                          create: (context) =>
+                              di<SingleRestaurantCubit>(param1: vendor.storeId),
                           child: RestaurantDetailsScreen(id: vendor.storeId),
                         ),
                       );
                     } else if (vendor.type == VendorType.grocery.value) {
                       context.navigateToPage(
                         BlocProvider(
-                          create: (context) => di<StoreDetailsCubit>(param1: vendor.storeId),
+                          create: (context) =>
+                              di<StoreDetailsCubit>(param1: vendor.storeId),
                           child: StoreDetailsScreen(storeId: vendor.storeId),
                         ),
                       );
@@ -110,7 +112,8 @@ class _TopVendorsContent extends StatelessWidget {
                     } else {
                       context.navigateToPage(
                         BlocProvider(
-                          create: (context) => di<StoreDetailsCubit>(param1: vendor.storeId),
+                          create: (context) =>
+                              di<StoreDetailsCubit>(param1: vendor.storeId),
                           child: StoreDetailsScreen(storeId: vendor.storeId),
                         ),
                       );
@@ -119,7 +122,13 @@ class _TopVendorsContent extends StatelessWidget {
                   child: Column(
                     spacing: 8,
                     children: [
-                      CustomNetworkImage(vendor.image, fit: BoxFit.cover, width: 120, height: 100, borderRaduis: 12),
+                      CustomNetworkImage(
+                        vendor.image,
+                        fit: BoxFit.cover,
+                        width: 120,
+                        height: 100,
+                        borderRaduis: 12,
+                      ),
                       SizedBox(
                         width: 100,
                         child: Text(
@@ -136,7 +145,10 @@ class _TopVendorsContent extends StatelessWidget {
               },
             ),
           ),
-          if (banner != null) ...[const VerticalSpacing(24), MainBannerWidget(banner: banner!)],
+          if (banner != null) ...[
+            const VerticalSpacing(24),
+            MainBannerWidget(banner: banner!),
+          ],
           const VerticalSpacing(12),
         ]),
       ),

@@ -19,7 +19,8 @@ class SendMessageRequest {
     // Must have at least one of chat_id or order_id
     if (chatId == null && orderId == null) return false;
     // Must have at least one of message or attachment
-    if ((message == null || message!.trim().isEmpty) && attachment == null) return false;
+    if ((message == null || message!.trim().isEmpty) && attachment == null)
+      return false;
     return true;
   }
 }

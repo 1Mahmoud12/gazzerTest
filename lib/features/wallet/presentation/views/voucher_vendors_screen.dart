@@ -262,7 +262,6 @@ class _VendorTile extends StatelessWidget {
             ),
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Checkbox(
               //   value: isSelected,

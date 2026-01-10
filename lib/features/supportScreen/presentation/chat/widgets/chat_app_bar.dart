@@ -30,12 +30,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         title: Row(
           children: [
-            Container(
-              width: 50,
-              height: 50,
-              padding: const EdgeInsets.all(8),
-              child: SvgPicture.asset(Assets.assetsSvgCharacter, fit: BoxFit.contain),
-            ),
+            Container(width: 50, height: 50, padding: const EdgeInsets.all(8), child: SvgPicture.asset(Assets.assetsSvgCharacter)),
             const SizedBox(width: 12),
             Expanded(
               child: Column(

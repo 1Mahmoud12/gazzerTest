@@ -32,13 +32,24 @@ class WalletHistoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-      decoration: BoxDecoration(color: Co.w100, borderRadius: BorderRadius.circular(28)),
+      decoration: BoxDecoration(
+        color: Co.w100,
+        borderRadius: BorderRadius.circular(28),
+      ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
-            decoration: const BoxDecoration(color: Co.secondary, shape: BoxShape.circle),
-            child: SvgPicture.asset(entry.iconAsset, colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn), height: 24, width: 24),
+            decoration: const BoxDecoration(
+              color: Co.secondary,
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              entry.iconAsset,
+              colorFilter: const ColorFilter.mode(Co.white, BlendMode.srcIn),
+              height: 24,
+              width: 24,
+            ),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -47,9 +58,16 @@ class WalletHistoryTile extends StatelessWidget {
               children: [
                 Text(entry.title, style: context.style16500),
                 const SizedBox(height: 4),
-                if (entry.subtitle.isNotEmpty && entry.subtitle != 'description') Text(entry.subtitle, style: context.style16400),
-                if (entry.subtitle.isNotEmpty && entry.subtitle != 'description') const SizedBox(height: 4),
-                Text(entry.date, style: context.style12400.copyWith(color: Co.darkGrey)),
+                if (entry.subtitle.isNotEmpty &&
+                    entry.subtitle != 'description')
+                  Text(entry.subtitle, style: context.style16400),
+                if (entry.subtitle.isNotEmpty &&
+                    entry.subtitle != 'description')
+                  const SizedBox(height: 4),
+                Text(
+                  entry.date,
+                  style: context.style12400.copyWith(color: Co.darkGrey),
+                ),
               ],
             ),
           ),
@@ -61,7 +79,10 @@ class WalletHistoryTile extends StatelessWidget {
                 style: context.style20500.copyWith(color: Co.purple),
               ),
               const SizedBox(height: 4),
-              Text(entry.time, style: context.style16500.copyWith(color: Co.darkGrey)),
+              Text(
+                entry.time,
+                style: context.style16500.copyWith(color: Co.darkGrey),
+              ),
             ],
           ),
         ],

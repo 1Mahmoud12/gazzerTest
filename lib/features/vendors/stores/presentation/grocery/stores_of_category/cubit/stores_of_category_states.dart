@@ -17,11 +17,18 @@ sealed class StoresOfCategoryStates {
 class StoresOfCategoryInitial extends StoresOfCategoryStates {}
 
 class StoresOfCategoryLoading extends StoresOfCategoryStates {
-  StoresOfCategoryLoading({super.todaysDeals = Fakers.fakeProds, super.stores = Fakers.stores});
+  StoresOfCategoryLoading({
+    super.todaysDeals = Fakers.fakeProds,
+    super.stores = Fakers.stores,
+  });
 }
 
 class StoresOfCategoryLoaded extends StoresOfCategoryStates {
-  StoresOfCategoryLoaded({required super.todaysDeals, required super.stores, required super.subCategory});
+  StoresOfCategoryLoaded({
+    required super.todaysDeals,
+    required super.stores,
+    required super.subCategory,
+  });
 }
 
 class StoresOfCategoryError extends StoresOfCategoryStates {

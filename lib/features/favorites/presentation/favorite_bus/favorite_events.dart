@@ -13,13 +13,7 @@ sealed class GetFavoritesEvent extends FavoriteEvents {
 }
 
 class GetFavoriteLoading extends GetFavoritesEvent {
-  const GetFavoriteLoading()
-    : super(
-        favorites: const {
-          FavoritesViewType.vendor: Fakers.favorites,
-          FavoritesViewType.product: Fakers.favorites,
-        },
-      );
+  const GetFavoriteLoading() : super(favorites: const {FavoritesViewType.vendor: Fakers.favorites, FavoritesViewType.product: Fakers.favorites});
 }
 
 class GetFavoriteSuccess extends GetFavoritesEvent {
@@ -36,6 +30,7 @@ class GetFavoriteFailure extends GetFavoritesEvent {
 sealed class ToggleFavoriteStates extends FavoriteEvents {
   final int id;
   final FavoritesViewType type;
+
   const ToggleFavoriteStates({required this.id, required this.type, required super.favorites});
 }
 
@@ -53,12 +48,7 @@ class RemovedFavoriteSuccess extends ToggleFavoriteStates {
 
 class ToggleFavoriteFailure extends ToggleFavoriteStates {
   final String message;
-  const ToggleFavoriteFailure({
-    required super.id,
-    required this.message,
-    required super.type,
-    required super.favorites,
-  });
+  const ToggleFavoriteFailure({required super.id, required this.message, required super.type, required super.favorites});
 }
 
 class ClearFavorites extends FavoriteEvents {

@@ -13,7 +13,10 @@ class ProductSummaryWidget extends StatelessWidget {
       children: [
         Text(plate.name, style: context.style20500),
         const SizedBox(height: 8),
-        Text(plate.description, style: context.style14400.copyWith(color: Co.darkGrey)),
+        Text(
+          plate.description,
+          style: context.style14400.copyWith(color: Co.darkGrey),
+        ),
       ],
     );
   }

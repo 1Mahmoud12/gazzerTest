@@ -8,7 +8,11 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 
 class MainBnb extends StatefulWidget {
-  const MainBnb({super.key, this.initialIndex = 0, required this.onItemSelected});
+  const MainBnb({
+    super.key,
+    this.initialIndex = 0,
+    required this.onItemSelected,
+  });
   final int initialIndex;
   final Function(int index) onItemSelected;
   @override
@@ -106,9 +110,17 @@ class _MainBnbState extends State<MainBnb> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        VectorGraphicsWidget(iconAsset, height: 24, width: 24, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
+        VectorGraphicsWidget(
+          iconAsset,
+          height: 24,
+          width: 24,
+          colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+        ),
         const SizedBox(height: 4),
-        Text(label, style: context.style16500.copyWith(color: color, fontSize: 10)),
+        Text(
+          label,
+          style: context.style16500.copyWith(color: color, fontSize: 10),
+        ),
       ],
     );
   }

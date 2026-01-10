@@ -20,7 +20,7 @@ class FCMService {
 
   void _init() async {
     _fcm.setAutoInitEnabled(true);
-    await _fcm.requestPermission(alert: true, sound: true, badge: true, criticalAlert: true, provisional: false, announcement: true, carPlay: false);
+    await _fcm.requestPermission(criticalAlert: true, announcement: true);
     // only for ios as andoid won't show pop up notification whilst foreground
     await _fcm.setForegroundNotificationPresentationOptions(
       alert: true, // Required to display a heads up notification in ios
@@ -36,7 +36,7 @@ class FCMService {
       fcmToken = await _fcm.getToken();
       debugPrint(' ########### FCM is ::::: $fcmToken');
     } catch (e) {
-      debugPrint("FCM ERROR: ${e.toString()}");
+      debugPrint('FCM ERROR: $e');
     }
     return fcmToken ?? '';
   }
@@ -85,7 +85,7 @@ class FCMService {
 
   @pragma('vm:entry-point')
   static Future<bool> fcmTerminatedStateApp() async {
-    RemoteMessage? message = await FCMService()._fcm.getInitialMessage();
+    final RemoteMessage? message = await FCMService()._fcm.getInitialMessage();
     if (message?.data.isNotEmpty == true) {
       debugPrint(message?.data.toString());
     }

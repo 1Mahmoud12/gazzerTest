@@ -172,7 +172,7 @@ class FullScreenViewerState extends State<FullScreenViewer> {
     });
   }
 
-  _dragEnd(DragEndDetails details) {
+  void _dragEnd(DragEndDetails details) {
     if (_positionYDelta > _disposeLimit || _positionYDelta < -_disposeLimit) {
       Navigator.of(context).pop();
     } else {
@@ -190,7 +190,7 @@ class FullScreenViewerState extends State<FullScreenViewer> {
     }
   }
 
-  setOpacity() {
+  void setOpacity() {
     final double tmp = _positionYDelta < 0 ? 1 - ((_positionYDelta / 1000) * -1) : 1 - (_positionYDelta / 1000);
     debugPrint(tmp.toString());
     if (tmp > 1) {

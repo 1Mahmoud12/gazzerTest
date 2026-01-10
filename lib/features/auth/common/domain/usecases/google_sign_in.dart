@@ -12,15 +12,22 @@ class SocialLogin {
     try {
       final result = await repo.socialLogin(type);
       switch (result) {
-        case Ok<SocialLoginData> ok:
+        case final Ok<SocialLoginData> ok:
           return await repo.sendSocialToBackend(ok.value);
-        case Err<BaseError> e:
+        case final Err<BaseError> e:
           return Result.error(e.error);
         default:
-          return Result.error(BaseError(message: "Unknown error occurred", e: ErrorType.unknownError));
+          return Result.error(
+            BaseError(
+              message: 'Unknown error occurred',
+              e: ErrorType.unknownError,
+            ),
+          );
       }
     } catch (e) {
-      return Result.error(BaseError(message: "Unknown error occurred", e: ErrorType.unknownError));
+      return Result.error(
+        BaseError(message: 'Unknown error occurred', e: ErrorType.unknownError),
+      );
     }
   }
 }

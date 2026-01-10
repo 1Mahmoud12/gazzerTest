@@ -17,7 +17,7 @@ class SingleRestaurantCubit extends Cubit<SingleRestaurantStates> {
 
     final result = await _repo.loadRestaurantPage(id);
     switch (result) {
-      case Ok<RestaurantPageResponse> ok:
+      case final Ok<RestaurantPageResponse> ok:
         emit(
           SingleRestaurantLoaded(
             restaurant: ok.value.restaurant,
@@ -28,7 +28,7 @@ class SingleRestaurantCubit extends Cubit<SingleRestaurantStates> {
           ),
         );
         break;
-      case Err err:
+      case final Err err:
         emit(SingleRestaurantError(error: err.error.message));
         break;
     }

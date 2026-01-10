@@ -45,7 +45,10 @@ class _NavigationItem extends StatelessWidget {
         child: Row(
           children: [
             Expanded(child: Text(title, style: context.style16500)),
-            RotatedBox(quarterTurns: L10n.isAr(context) ? 3 : 1, child: SvgPicture.asset(Assets.arrowUp)),
+            RotatedBox(
+              quarterTurns: L10n.isAr(context) ? 3 : 1,
+              child: SvgPicture.asset(Assets.arrowUp),
+            ),
           ],
         ),
       ),

@@ -19,8 +19,17 @@ class PharmacySearchButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Co.white.withOpacity(0.9),
           borderRadius: BorderRadius.circular(64),
-          border: Border.all(color: Co.buttonGradient.withOpacity(0.3), width: 2),
-          boxShadow: [BoxShadow(color: Co.buttonGradient.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))],
+          border: Border.all(
+            color: Co.buttonGradient.withOpacity(0.3),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Co.buttonGradient.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Row(
           children: [

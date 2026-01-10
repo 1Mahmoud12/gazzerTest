@@ -34,7 +34,10 @@ class GridWidget extends StatelessWidget {
         ),
         Wrap(
           children: List.generate(products.length, (index) {
-            return GrocProdCard(product: products[index - subcats.length], shape: maincat.style);
+            return GrocProdCard(
+              product: products[index - subcats.length],
+              shape: maincat.style,
+            );
           }),
         ),
         // GridView.builder(

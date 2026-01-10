@@ -5,7 +5,12 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
 class ImageWithAlignedBtn extends StatelessWidget {
-  const ImageWithAlignedBtn({super.key, required this.image, required this.align, required this.btnText});
+  const ImageWithAlignedBtn({
+    super.key,
+    required this.image,
+    required this.align,
+    required this.btnText,
+  });
   final String image;
   final Alignment align;
   final String btnText;
@@ -18,7 +23,12 @@ class ImageWithAlignedBtn extends StatelessWidget {
 
       child: Stack(
         children: [
-          Image.asset(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+          Image.asset(
+            image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
           Align(
             alignment: align,
             child: MainBtn(

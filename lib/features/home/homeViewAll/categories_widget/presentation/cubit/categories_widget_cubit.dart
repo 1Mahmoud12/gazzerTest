@@ -17,14 +17,20 @@ class CategoriesWidgetCubit extends Cubit<CategoriesWidgetStates> {
     final hasCachedData = cached != null && cached.entities.isNotEmpty;
 
     if (hasCachedData) {
-      emit(CategoriesWidgetSuccessState(cached.entities, cached.banner, isFromCache: true));
+      emit(
+        CategoriesWidgetSuccessState(
+          cached.entities,
+          cached.banner,
+          isFromCache: true,
+        ),
+      );
     }
 
     // Fetch data from API
     final res = await _repo.getCategories();
     switch (res) {
       case final Ok<CategoriesWidgetData> ok:
-        emit(CategoriesWidgetSuccessState(ok.value.entities, ok.value.banner, isFromCache: false));
+        emit(CategoriesWidgetSuccessState(ok.value.entities, ok.value.banner));
         break;
       case final Err err:
         // If we have cached data, don't show error, just keep showing cache

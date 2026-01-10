@@ -18,7 +18,7 @@ class RestCatMiniProductCard extends StatelessWidget {
       width: 75,
       clipBehavior: Clip.hardEdge,
       margin: const EdgeInsets.symmetric(vertical: 4),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Co.bg,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppConst.defaultInnerRadius),
@@ -26,14 +26,14 @@ class RestCatMiniProductCard extends StatelessWidget {
           bottomLeft: Radius.circular(AppConst.defaultRadius),
           bottomRight: Radius.circular(AppConst.defaultRadius),
         ),
-        boxShadow: [const BoxShadow(color: Colors.black12, blurRadius: 4, spreadRadius: 4, offset: Offset(0, 0))],
+        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, spreadRadius: 4)],
       ),
       child: Column(
         children: [
           AspectRatio(
             aspectRatio: 1.2,
             child: ClipRRect(
-              borderRadius: const BorderRadius.only(bottomLeft: const Radius.circular(30)),
+              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30)),
               child: Image.asset(prod.image, fit: BoxFit.cover),
             ),
           ),
@@ -73,7 +73,6 @@ class RestCatMiniProductCard extends StatelessWidget {
                   Row(
                     spacing: 6,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Icon(Icons.star, color: Co.secondary, size: 20),
                       Text(

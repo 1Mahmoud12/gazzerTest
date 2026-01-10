@@ -34,7 +34,7 @@ class DailyOffersScreen extends StatefulWidget {
 
 class _DailyOffersScreenState extends State<DailyOffersScreen> {
   Timer? _debounceTimer;
-  String _currentSearch = '';
+  final String _currentSearch = '';
   DailyOfferCubit? _cubit;
   final ScrollController _scrollController = ScrollController();
   String selectedId = 'items';

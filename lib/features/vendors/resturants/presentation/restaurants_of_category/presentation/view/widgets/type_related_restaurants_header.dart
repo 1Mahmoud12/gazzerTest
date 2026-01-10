@@ -1,4 +1,4 @@
-part of "../restaurants_of_category_screen.dart";
+part of '../restaurants_of_category_screen.dart';
 
 // import 'package:flutter/material.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';import 'package:gazzer/core/presentation/utils/extensions.dart';
 
@@ -22,7 +22,13 @@ class _TypeRelatedRestaurantsHeader extends StatelessWidget {
             clipper: AddShapeClipper(),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                gradient: Grad().bgLinear.copyWith(colors: [Co.buttonGradient.withAlpha(200), Co.bg.withAlpha(0)], stops: const [0.0, 1]),
+                gradient: Grad().bgLinear.copyWith(
+                  colors: [
+                    Co.buttonGradient.withAlpha(200),
+                    Co.bg.withAlpha(0),
+                  ],
+                  stops: const [0.0, 1],
+                ),
               ),
               child: MainAppBar(title: title),
             ),

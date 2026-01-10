@@ -5,7 +5,12 @@ import 'package:gazzer/core/presentation/theme/app_gradient.dart';
 import 'package:gazzer/core/presentation/views/widgets/custom_network_image.dart';
 
 class ImageInNestedCircles extends StatelessWidget {
-  const ImageInNestedCircles({super.key, required this.image, required this.imageRatio, this.text});
+  const ImageInNestedCircles({
+    super.key,
+    required this.image,
+    required this.imageRatio,
+    this.text,
+  });
   final String image;
   final int imageRatio;
   final Widget? text;
@@ -16,13 +21,15 @@ class ImageInNestedCircles extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: Grad().bglightLinear.copyWith(colors: [const Color(0xffCFC8DA), Co.bg]),
+          gradient: Grad().bglightLinear.copyWith(
+            colors: [const Color(0xffCFC8DA), Co.bg],
+          ),
           border: GradientBoxBorder(
             gradient: LinearGradient(
               colors: [Colors.black.withAlpha(0), Co.buttonGradient],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: [0.5, 1],
+              stops: const [0.5, 1],
             ),
             width: 2,
           ),
@@ -39,16 +46,21 @@ class ImageInNestedCircles extends StatelessWidget {
                     position: DecorationPosition.foreground,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: GradientBoxBorder(gradient: Grad().shadowGrad(), width: 1),
+                      border: GradientBoxBorder(gradient: Grad().shadowGrad()),
                     ),
                     child: AspectRatio(
                       aspectRatio: 1,
-                      child: CustomNetworkImage(image, fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+                      child: CustomNetworkImage(
+                        image,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
                     ),
                   ),
                 ),
               ),
-              Expanded(flex: 1, child: text ?? const SizedBox.shrink()),
+              Expanded(child: text ?? const SizedBox.shrink()),
             ],
           ),
         ),

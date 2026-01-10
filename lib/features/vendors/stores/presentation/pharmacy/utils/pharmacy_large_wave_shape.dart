@@ -9,7 +9,7 @@ class PharmacyLargeWaveShape extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    Path path = Path();
+    final Path path = Path();
 
     // Start from top-left corner
     path.moveTo(0, 0);

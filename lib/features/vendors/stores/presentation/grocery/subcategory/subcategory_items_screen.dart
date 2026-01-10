@@ -12,7 +12,13 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/common/groc_
 class SubcategoryItemsScreen extends StatelessWidget {
   static const route = '/subcategory-items';
 
-  const SubcategoryItemsScreen({super.key, required this.items, required this.subcategoryName, required this.vendor, required this.maincat});
+  const SubcategoryItemsScreen({
+    super.key,
+    required this.items,
+    required this.subcategoryName,
+    required this.vendor,
+    required this.maincat,
+  });
 
   final List<ProductEntity> items;
   final String subcategoryName;

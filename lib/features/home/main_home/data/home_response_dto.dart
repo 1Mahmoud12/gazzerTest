@@ -14,14 +14,7 @@ class HomeResponseDTO {
   final (List<VendorDTO?>?, BannerDTO?)? topVendors;
   final (List<StoreEntity?>?, BannerDTO?)? bestPopular;
 
-  HomeResponseDTO({
-    this.categories,
-    this.dailyOffers,
-    this.suggested,
-    this.topItems,
-    this.topVendors,
-    this.bestPopular,
-  });
+  HomeResponseDTO({this.categories, this.dailyOffers, this.suggested, this.topItems, this.topVendors, this.bestPopular});
 
   factory HomeResponseDTO.fromJson(Map<String, dynamic> json) {
     (List<MainCategoryDTO>?, BannerDTO?)? categories;
@@ -33,7 +26,7 @@ class HomeResponseDTO {
 
     if (json['data'] != null && json['data'] is List) {
       final sections = <SectionDTO>[];
-      for (var item in json['data']) {
+      for (final item in json['data']) {
         sections.add(SectionDTO.fromJson(item));
       }
 
@@ -57,13 +50,9 @@ class HomeResponseDTO {
           case SectionType.bestPopular:
             // Parse best popular from raw JSON data
             final rawSections = json['data'] as List;
-            for (var rawSection in rawSections) {
+            for (final rawSection in rawSections) {
               if (rawSection['type'] == 'best_popular' && rawSection['data'] != null) {
-                final stores = (rawSection['data'] as List)
-                    .map(
-                      (store) => BestPopularStoreDto.fromJson(store).toEntity(),
-                    )
-                    .toList();
+                final stores = (rawSection['data'] as List).map((store) => BestPopularStoreDto.fromJson(store).toEntity()).toList();
                 bestPopular = (stores, sec.banner);
                 break;
               }

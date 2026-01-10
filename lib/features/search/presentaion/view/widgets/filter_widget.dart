@@ -30,21 +30,31 @@ class FilterWidget extends StatelessWidget {
               //   size: 20,
               // ),
               onTap: () {
-                context.read<SearchCubit>().performSearch(cubit.state.query.copyWith(alpha: state.query.alpha.next()));
+                context.read<SearchCubit>().performSearch(
+                  cubit.state.query.copyWith(alpha: state.query.alpha.next()),
+                );
               },
             ),
             _FilterItem(
               title: '${L10n.tr().rating} +4',
               isSelected: state.query.sortedByRate,
               onTap: () {
-                context.read<SearchCubit>().performSearch(cubit.state.query.copyWith(sortedByRate: !state.query.sortedByRate));
+                context.read<SearchCubit>().performSearch(
+                  cubit.state.query.copyWith(
+                    sortedByRate: !state.query.sortedByRate,
+                  ),
+                );
               },
             ),
             _FilterItem(
               title: L10n.tr().under30mins,
               isSelected: state.query.sortByDeliveryTime,
               onTap: () {
-                context.read<SearchCubit>().performSearch(cubit.state.query.copyWith(sortByDeliveryTime: !state.query.sortByDeliveryTime));
+                context.read<SearchCubit>().performSearch(
+                  cubit.state.query.copyWith(
+                    sortByDeliveryTime: !state.query.sortByDeliveryTime,
+                  ),
+                );
               },
             ),
           ],
@@ -55,7 +65,12 @@ class FilterWidget extends StatelessWidget {
 }
 
 class _FilterItem extends StatelessWidget {
-  const _FilterItem({required this.title, this.icon, required this.isSelected, required this.onTap});
+  const _FilterItem({
+    required this.title,
+    this.icon,
+    required this.isSelected,
+    required this.onTap,
+  });
   final String title;
   final Widget? icon;
   final bool isSelected;
@@ -71,7 +86,10 @@ class _FilterItem extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             //  color: isSelected ? Co.secondary.withAlpha(80) : Colors.transparent,
-            border: Border.all(color: isSelected ? Co.purple : Co.lightPurple, width: 2),
+            border: Border.all(
+              color: isSelected ? Co.purple : Co.lightPurple,
+              width: 2,
+            ),
             borderRadius: AppConst.defaultBorderRadius,
           ),
           child: Padding(
@@ -82,7 +100,10 @@ class _FilterItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.style16500.copyWith(fontWeight: FontWeight.w400, color: isSelected ? Co.purple : null),
+                  style: context.style16500.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: isSelected ? Co.purple : null,
+                  ),
                 ),
                 if (icon != null) icon!,
               ],

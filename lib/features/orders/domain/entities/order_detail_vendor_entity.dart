@@ -5,10 +5,7 @@ class OrderDetailVendorEntity {
   final OrderVendorEntity vendor;
   final List<OrderDetailItemEntity> items;
 
-  const OrderDetailVendorEntity({
-    required this.vendor,
-    required this.items,
-  });
+  const OrderDetailVendorEntity({required this.vendor, required this.items});
 
   int get itemsCount => items.length;
 }

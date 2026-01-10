@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
-import 'package:gazzer/core/presentation/resources/app_const.dart' show AppConst;
+import 'package:gazzer/core/presentation/resources/app_const.dart'
+    show AppConst;
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart' show TStyle;
@@ -19,7 +20,11 @@ import 'package:gazzer/features/vendors/stores/presentation/grocery/store_Detail
 import 'package:gazzer/features/vendors/stores/presentation/pharmacy/store/pharmacy_store_screen.dart';
 
 class VerticalRotatedImgCard extends StatelessWidget {
-  const VerticalRotatedImgCard({super.key, required this.prod, required this.onTap});
+  const VerticalRotatedImgCard({
+    super.key,
+    required this.prod,
+    required this.onTap,
+  });
   final GenericItemEntity prod;
   final Function() onTap;
   @override
@@ -39,7 +44,12 @@ class VerticalRotatedImgCard extends StatelessWidget {
           children: [
             Stack(
               children: [
-                CustomNetworkImage(prod.image, width: 100, height: 100, borderRaduis: AppConst.defaultRadius),
+                CustomNetworkImage(
+                  prod.image,
+                  width: 100,
+                  height: 100,
+                  borderRaduis: AppConst.defaultRadius,
+                ),
                 FavoriteWidget(fovorable: prod),
               ],
             ),
@@ -54,7 +64,11 @@ class VerticalRotatedImgCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
-                        child: Text(prod.name, style: context.style16500, overflow: TextOverflow.ellipsis),
+                        child: Text(
+                          prod.name,
+                          style: context.style16500,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       const HorizontalSpacing(8),
                       Row(
@@ -62,9 +76,17 @@ class VerticalRotatedImgCard extends StatelessWidget {
                         children: [
                           const VectorGraphicsWidget(Assets.starRateIc),
                           const HorizontalSpacing(4),
-                          Text(prod.rate.toStringAsFixed(1), style: context.style14400),
+                          Text(
+                            prod.rate.toStringAsFixed(1),
+                            style: context.style14400,
+                          ),
                           const HorizontalSpacing(2),
-                          Text('(+${prod.reviewCount})', style: context.style14400.copyWith(color: Co.darkGrey)),
+                          Text(
+                            '(+${prod.reviewCount})',
+                            style: context.style14400.copyWith(
+                              color: Co.darkGrey,
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -79,12 +101,21 @@ class VerticalRotatedImgCard extends StatelessWidget {
                               return;
                             }
 
-                            if (prod.store!.type == VendorType.restaurant.value) {
-                              RestaurantDetailsRoute(id: prod.store!.id).push(context);
-                            } else if (prod.store!.type == VendorType.grocery.value) {
-                              StoreDetailsRoute(storeId: prod.store!.id).push(context);
-                            } else if (prod.store!.type == VendorType.pharmacy.value) {
-                              PharmacyStoreScreenRoute(id: prod.store!.id).push(context);
+                            if (prod.store!.type ==
+                                VendorType.restaurant.value) {
+                              RestaurantDetailsRoute(
+                                id: prod.store!.id,
+                              ).push(context);
+                            } else if (prod.store!.type ==
+                                VendorType.grocery.value) {
+                              StoreDetailsRoute(
+                                storeId: prod.store!.id,
+                              ).push(context);
+                            } else if (prod.store!.type ==
+                                VendorType.pharmacy.value) {
+                              PharmacyStoreScreenRoute(
+                                id: prod.store!.id,
+                              ).push(context);
                             }
                           },
                           child: Row(
@@ -97,7 +128,9 @@ class VerticalRotatedImgCard extends StatelessWidget {
                                   prod.store?.name ?? '',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: context.style12400.copyWith(fontWeight: TStyle.semi),
+                                  style: context.style12400.copyWith(
+                                    fontWeight: TStyle.semi,
+                                  ),
                                 ),
                               ),
                             ],
@@ -112,7 +145,12 @@ class VerticalRotatedImgCard extends StatelessWidget {
                           const HorizontalSpacing(4),
                           Text(L10n.tr().sold, style: context.style14400),
                           const HorizontalSpacing(2),
-                          Text(' +${prod.sold}', style: context.style14400.copyWith(color: Co.darkGrey)),
+                          Text(
+                            ' +${prod.sold}',
+                            style: context.style14400.copyWith(
+                              color: Co.darkGrey,
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -120,9 +158,17 @@ class VerticalRotatedImgCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(Helpers.getProperPrice(prod.price), style: context.style16500.copyWith(color: Co.purple)),
+                      Text(
+                        Helpers.getProperPrice(prod.price),
+                        style: context.style16500.copyWith(color: Co.purple),
+                      ),
                       const HorizontalSpacing(8),
-                      CartToIncrementIcon(isHorizonal: true, product: prod, iconSize: 25, isDarkContainer: true),
+                      CartToIncrementIcon(
+                        isHorizonal: true,
+                        product: prod,
+                        iconSize: 25,
+                        isDarkContainer: true,
+                      ),
                     ],
                   ),
                 ],

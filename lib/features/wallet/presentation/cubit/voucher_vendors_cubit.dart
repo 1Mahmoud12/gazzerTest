@@ -30,9 +30,19 @@ class VoucherVendorsCubit extends Cubit<VoucherVendorsState> {
     final result = await _repo.convertVoucher(voucherCode);
     switch (result) {
       case Ok<String>(:final value):
-        emit(VoucherVendorsConvertSuccess(stores: currentState.stores, message: value));
+        emit(
+          VoucherVendorsConvertSuccess(
+            stores: currentState.stores,
+            message: value,
+          ),
+        );
       case Err<String>(:final error):
-        emit(VoucherVendorsConvertError(stores: currentState.stores, message: error.message));
+        emit(
+          VoucherVendorsConvertError(
+            stores: currentState.stores,
+            message: error.message,
+          ),
+        );
     }
   }
 
@@ -56,11 +66,23 @@ class VoucherVendorsCubit extends Cubit<VoucherVendorsState> {
     }
 
     if (errorMessages.isEmpty) {
-      final message = successMessages.isNotEmpty ? successMessages.first : 'All vouchers converted successfully';
-      emit(VoucherVendorsConvertSuccess(stores: currentState.stores, message: message));
+      final message = successMessages.isNotEmpty
+          ? successMessages.first
+          : 'All vouchers converted successfully';
+      emit(
+        VoucherVendorsConvertSuccess(
+          stores: currentState.stores,
+          message: message,
+        ),
+      );
     } else {
       final message = errorMessages.join(', ');
-      emit(VoucherVendorsConvertError(stores: currentState.stores, message: message));
+      emit(
+        VoucherVendorsConvertError(
+          stores: currentState.stores,
+          message: message,
+        ),
+      );
     }
   }
 }

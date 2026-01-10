@@ -7,15 +7,14 @@ import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 import 'package:gazzer/core/presentation/utils/validators.dart';
 
 void main() {
-  testWidgets('myValidator returns translated message for English locale using testWidgets', (
-    WidgetTester tester,
-  ) async {
+  testWidgets('myValidator returns translated message for English locale using testWidgets', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         navigatorKey: AppNavigator.mainKey,
-        locale: const Locale('en'), // Set the desired locale
+        locale: const Locale('en'),
+        // Set the desired locale
         home: Builder(
           builder: (BuildContext context) {
             return const LocalizationWidget(testValidators: validatorsTest);
@@ -64,11 +63,7 @@ void validatorsTest() {
   expect(Validators.emailValidator(null), AppLocalizationsEn().thisFieldIsRequired, reason: '[[ null ]]');
   expect(Validators.emailValidator('invalid'), AppLocalizationsEn().invalidEmail, reason: '[[ invalid ]]');
   expect(Validators.emailValidator('invalid@'), AppLocalizationsEn().invalidEmail, reason: '[[ invalid@ ]]');
-  expect(
-    Validators.emailValidator('invalid@domain'),
-    AppLocalizationsEn().invalidEmail,
-    reason: '[[ invalid@domain ]]',
-  );
+  expect(Validators.emailValidator('invalid@domain'), AppLocalizationsEn().invalidEmail, reason: '[[ invalid@domain ]]');
   expect(Validators.emailValidator('invalid@domain.com'), null, reason: '[[ valid ]]');
 
   /// Test the mobileEGValidator
@@ -79,11 +74,7 @@ void validatorsTest() {
   expect(Validators.mobileEGValidator('1112345678'), null, reason: '[[ 1112345678 ]]');
   expect(Validators.mobileEGValidator('1234567890'), null, reason: '[[ 1234567890 ]]');
   expect(Validators.mobileEGValidator('1534567890'), null, reason: '[[ 1534567890 ]]');
-  expect(
-    Validators.mobileEGValidator('2012345678'),
-    AppLocalizationsEn().invalidPhoneNumber,
-    reason: '[[ 2012345678 ]]',
-  );
+  expect(Validators.mobileEGValidator('2012345678'), AppLocalizationsEn().invalidPhoneNumber, reason: '[[ 2012345678 ]]');
   expect(Validators.mobileEGValidator('asda'), AppLocalizationsEn().invalidPhoneNumber, reason: '[[ asda ]]');
   expect(Validators.mobileEGValidator('22@2#4!'), AppLocalizationsEn().invalidPhoneNumber, reason: '[[ 22@2#4! ]]');
 
@@ -102,73 +93,25 @@ void validatorsTest() {
   expect(Validators.dashedCharactersOnly('  '), AppLocalizationsEn().thisFieldIsRequired, reason: '[[ whitespace ]]');
   expect(Validators.dashedCharactersOnly(null), AppLocalizationsEn().thisFieldIsRequired, reason: '[[ null ]]');
   expect(Validators.dashedCharactersOnly('valid-text'), null, reason: '[[ valid-text ]]');
-  expect(
-    Validators.dashedCharactersOnly('valid-text-123'),
-    AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters,
-    reason: '[[ valid-text-123 ]]',
-  );
-  expect(
-    Validators.dashedCharactersOnly('invalid_text'),
-    AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters,
-    reason: '[[ invalid_text ]]',
-  );
-  expect(
-    Validators.dashedCharactersOnly('invalid-text!'),
-    AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters,
-    reason: '[[ invalid-text! ]]',
-  );
-  expect(
-    Validators.dashedCharactersOnly('invalid-text@'),
-    AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters,
-    reason: '[[ invalid-text@ ]]',
-  );
+  expect(Validators.dashedCharactersOnly('valid-text-123'), AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters, reason: '[[ valid-text-123 ]]');
+  expect(Validators.dashedCharactersOnly('invalid_text'), AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters, reason: '[[ invalid_text ]]');
+  expect(Validators.dashedCharactersOnly('invalid-text!'), AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters, reason: '[[ invalid-text! ]]');
+  expect(Validators.dashedCharactersOnly('invalid-text@'), AppLocalizationsEn().nameAcceptsOnlyDashedAndCharacters, reason: '[[ invalid-text@ ]]');
 
   // Test the valueAtLeastNumber validator
-  expect(
-    Validators.valueAtLeastNum(null, 'test', 5),
-    AppLocalizationsEn().valueMoreThanNum(5, 'test'),
-    reason: '[[ null ]]',
-  );
-  expect(
-    Validators.valueAtLeastNum('', 'test', 5),
-    AppLocalizationsEn().valueMoreThanNum(5, 'test'),
-    reason: '[[ empty ]]',
-  );
-  expect(
-    Validators.valueAtLeastNum('4', 'test', 5),
-    AppLocalizationsEn().valueMoreThanNum(5, 'test'),
-    reason: '[[ 4 ]]',
-  );
+  expect(Validators.valueAtLeastNum(null, 'test', 5), AppLocalizationsEn().valueMoreThanNum(5, 'test'), reason: '[[ null ]]');
+  expect(Validators.valueAtLeastNum('', 'test', 5), AppLocalizationsEn().valueMoreThanNum(5, 'test'), reason: '[[ empty ]]');
+  expect(Validators.valueAtLeastNum('4', 'test', 5), AppLocalizationsEn().valueMoreThanNum(5, 'test'), reason: '[[ 4 ]]');
   expect(Validators.valueAtLeastNum('55555', 'test', 5), null, reason: '[[ 5 ]]');
   expect(Validators.valueAtLeastNum('0', 'test', 1), null, reason: '[[ 0 ]]');
   expect(Validators.valueAtLeastNum('', 'test', 0), null, reason: '[[ blank ]]');
 
   // Test the valueMustBeNum validator
-  expect(
-    Validators.valueMustBeNum(null, 5, 'test'),
-    AppLocalizationsEn().valueMustBeNum(5, 'test'),
-    reason: '[[ null ]]',
-  );
-  expect(
-    Validators.valueMustBeNum('', 5, 'test'),
-    AppLocalizationsEn().valueMustBeNum(5, 'test'),
-    reason: '[[ empty ]]',
-  );
-  expect(
-    Validators.valueMustBeNum('1234', 5, 'test'),
-    AppLocalizationsEn().valueMustBeNum(5, 'test'),
-    reason: '[[ 1234 ]]',
-  );
-  expect(
-    Validators.valueMustBeNum('1234 ', 5, 'test'),
-    AppLocalizationsEn().valueMustBeNum(5, 'test'),
-    reason: '[[ 1234  ]]',
-  );
+  expect(Validators.valueMustBeNum(null, 5, 'test'), AppLocalizationsEn().valueMustBeNum(5, 'test'), reason: '[[ null ]]');
+  expect(Validators.valueMustBeNum('', 5, 'test'), AppLocalizationsEn().valueMustBeNum(5, 'test'), reason: '[[ empty ]]');
+  expect(Validators.valueMustBeNum('1234', 5, 'test'), AppLocalizationsEn().valueMustBeNum(5, 'test'), reason: '[[ 1234 ]]');
+  expect(Validators.valueMustBeNum('1234 ', 5, 'test'), AppLocalizationsEn().valueMustBeNum(5, 'test'), reason: '[[ 1234  ]]');
   expect(Validators.valueMustBeNum('12345', 5, 'test'), null, reason: '[[ 12345 ]]');
   expect(Validators.valueMustBeNum(' 12345 ', 5, 'test'), null, reason: '[[ 12345 ]]');
-  expect(
-    Validators.valueMustBeNum('123456', 5, 'test'),
-    AppLocalizationsEn().valueMustBeNum(5, 'test'),
-    reason: '[[ 123456 ]]',
-  );
+  expect(Validators.valueMustBeNum('123456', 5, 'test'), AppLocalizationsEn().valueMustBeNum(5, 'test'), reason: '[[ 123456 ]]');
 }

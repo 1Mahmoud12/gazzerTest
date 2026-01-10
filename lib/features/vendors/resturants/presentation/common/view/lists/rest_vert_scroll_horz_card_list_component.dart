@@ -68,7 +68,6 @@ class RestVertScrollHorzCardListComponent<T> extends StatelessWidget {
               }
               if (item is PlateEntity) {
                 return HorizontalPlateCard(
-                  corner: Corner.bottomRight,
                   item: item,
                   height: cardHeight ?? 140,
                   imgToTextRatio: 1.05,

@@ -34,9 +34,9 @@ void main() async {
       blocTest<LoginCubit, LoginStates>(
         'test login method with login request that completes with success',
         setUp: () {
-          provideDummy<Result<String>>(const Ok("Client logged in successfully"));
+          provideDummy<Result<String>>(const Ok('Client logged in successfully'));
           when(repo.login(loginData.validPhone, loginData.validPassword)).thenAnswer((_) async {
-            return const Ok("Client logged in successfully");
+            return const Ok('Client logged in successfully');
           });
         },
         build: () => cubit,

@@ -13,5 +13,8 @@ class AllCategoriesResponse {
 abstract class AllCategoriesRepo extends BaseApiRepo {
   AllCategoriesRepo(super.crashlyticsRepo);
 
-  Future<Result<AllCategoriesResponse>> getAllCategories({int page = 1, int perPage = 20});
+  Future<Result<AllCategoriesResponse>> getAllCategories({
+    int page = 1,
+    int perPage = 20,
+  });
 }

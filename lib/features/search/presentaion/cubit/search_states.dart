@@ -7,6 +7,7 @@ import 'package:gazzer/features/search/domain/search_vendor_entity.dart';
 sealed class SearchState {
   final SearchQuery query;
   final List<SearchVendorEntity> vendors;
+
   const SearchState({this.query = const SearchQuery(), this.vendors = const []});
 }
 

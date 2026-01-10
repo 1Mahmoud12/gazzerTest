@@ -55,7 +55,9 @@ class StoreDTO {
     totalOrders = json['totalOrders'];
     workTo = json['work_to'];
     is24Hours = json['is_24_hours'];
-    closingAlertAppearBefore = int.tryParse(json['closing_alert_appear_before'].toString());
+    closingAlertAppearBefore = int.tryParse(
+      json['closing_alert_appear_before'].toString(),
+    );
 
     if (json['tags'] != null) {
       tags = [];
@@ -73,7 +75,13 @@ class StoreDTO {
     try {
       final now = DateTime.now();
       final parts = time.split(' ').first.split(':');
-      return DateTime(now.year, now.month, now.day, int.parse(parts[0]), int.parse(parts[1]));
+      return DateTime(
+        now.year,
+        now.month,
+        now.day,
+        int.parse(parts[0]),
+        int.parse(parts[1]),
+      );
     } catch (e) {
       return null;
     }
@@ -95,7 +103,9 @@ class StoreDTO {
       startTime: _formDateTimeFromString(workFrom ?? ''),
       endTime: _formDateTimeFromString(workTo ?? ''),
       parentId: storeCategoryId,
-      deliveryTime: estimatedDeliveryTime != null ? Helpers.convertIntToRange(estimatedDeliveryTime!, 0.3) : null,
+      deliveryTime: estimatedDeliveryTime != null
+          ? Helpers.convertIntToRange(estimatedDeliveryTime!, 0.3)
+          : null,
       outOfStock: false,
       reviewCount: 20,
       zoneName: provinceZone ?? '',

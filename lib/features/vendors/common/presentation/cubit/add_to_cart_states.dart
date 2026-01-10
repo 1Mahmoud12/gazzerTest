@@ -12,16 +12,7 @@ class AddToCartStates extends Equatable {
   final ApiStatus status;
 
   @override
-  List<Object?> get props => [
-    quantity,
-    note,
-    totalPrice,
-    selectedOptions,
-    message,
-    hasUserInteracted,
-    hasAddedToCArt,
-    status,
-  ];
+  List<Object?> get props => [quantity, note, totalPrice, selectedOptions, message, hasUserInteracted, hasAddedToCArt, status];
   const AddToCartStates({
     required this.quantity,
     required this.note,

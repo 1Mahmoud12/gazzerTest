@@ -14,7 +14,17 @@ class AddressDTO {
   String? floor;
   String? apartment;
 
-  AddressDTO({this.id, this.name, this.address, this.lat, this.long, this.isDefault, this.selectedLocation, this.province, this.provinceZone});
+  AddressDTO({
+    this.id,
+    this.name,
+    this.address,
+    this.lat,
+    this.long,
+    this.isDefault,
+    this.selectedLocation,
+    this.province,
+    this.provinceZone,
+  });
 
   AddressDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -23,8 +33,12 @@ class AddressDTO {
     lat = double.tryParse(json['lat'].toString()) ?? 0.0;
     long = double.tryParse(json['long'].toString()) ?? 0.0;
     isDefault = json['is_default'];
-    province = json['province'] != null ? ProvinceDTO.fromJson(json['province']) : null;
-    provinceZone = json['province_zone'] != null ? ProvinceZoneDTO.fromJson(json['province_zone']) : null;
+    province = json['province'] != null
+        ? ProvinceDTO.fromJson(json['province'])
+        : null;
+    provinceZone = json['province_zone'] != null
+        ? ProvinceZoneDTO.fromJson(json['province_zone'])
+        : null;
     building = json['building'];
     floor = json['floor'];
     apartment = json['apartment'];

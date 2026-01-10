@@ -237,7 +237,7 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
   }
 
   void loadFromJson(String data) {
-    Iterable jsonResult = json.decode(data);
+    final Iterable jsonResult = json.decode(data);
     countries = List<CountryCodeModel>.from(
       jsonResult.map((model) {
         try {
@@ -252,7 +252,10 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
 }
 
 class IntPhoneNumber {
-  String code, dialCode, number;
+  String code;
+  String dialCode;
+  String number;
+
   IntPhoneNumber({required this.code, required this.dialCode, required this.number});
 
   String get fullNumber => '$dialCode $number';

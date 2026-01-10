@@ -155,8 +155,8 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
                 ? (List<ChatMessageModel>.from(state.messages)..sort((a, b) => a.timestamp.compareTo(b.timestamp)))
                 : <ChatMessageModel>[];
 
-            final isLoadingMore = state is ChatLoadedState ? state.isLoadingMore : false;
-            final isSending = state is ChatLoadedState ? state.isSending : false;
+            final isLoadingMore = state is ChatLoadedState && state.isLoadingMore;
+            final isSending = state is ChatLoadedState && state.isSending;
             final imagePreviewPath = state is ChatLoadedState ? state.imagePreviewPath : null;
             final chatId = state is ChatLoadedState ? state.chatId : null;
             final hasNoChat = chatId == null;
@@ -181,7 +181,6 @@ class _GazzerSupportChatScreenState extends State<GazzerSupportChatScreen> {
                         )
                       : ListView.builder(
                           controller: _scrollController,
-                          reverse: false,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           itemCount: messages.length + (isLoadingMore ? 1 : 0),
                           itemBuilder: (context, index) {

@@ -34,7 +34,7 @@ class SearchVendorDTO {
     }
     if (json['tags'] is List) {
       tags = [];
-      for (var e in json['tags']) {
+      for (final e in json['tags']) {
         tags!.add(e['name']);
       }
     }

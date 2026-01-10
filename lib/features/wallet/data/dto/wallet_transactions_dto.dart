@@ -2,12 +2,7 @@ import 'package:gazzer/features/wallet/domain/entities/wallet_entity.dart';
 import 'package:gazzer/features/wallet/domain/entities/wallet_transactions_entity.dart';
 
 class WalletTransactionsResponseDto {
-  WalletTransactionsResponseDto({
-    required this.status,
-    required this.message,
-    required this.pagination,
-    required this.data,
-  });
+  WalletTransactionsResponseDto({required this.status, required this.message, required this.pagination, required this.data});
 
   final String? status;
   final String? message;
@@ -23,19 +18,12 @@ class WalletTransactionsResponseDto {
     );
   }
 
-  WalletTransactionsResponse toEntity() => WalletTransactionsResponse(
-    pagination: pagination?.toEntity(),
-    transactions: data.map((e) => e.toEntity()).toList(),
-  );
+  WalletTransactionsResponse toEntity() =>
+      WalletTransactionsResponse(pagination: pagination?.toEntity(), transactions: data.map((e) => e.toEntity()).toList());
 }
 
 class PaginationDto {
-  PaginationDto({
-    required this.currentPage,
-    required this.lastPage,
-    required this.perPage,
-    required this.total,
-  });
+  PaginationDto({required this.currentPage, required this.lastPage, required this.perPage, required this.total});
 
   final int currentPage;
   final int lastPage;
@@ -51,12 +39,7 @@ class PaginationDto {
     );
   }
 
-  PaginationEntity toEntity() => PaginationEntity(
-    currentPage: currentPage,
-    lastPage: lastPage,
-    perPage: perPage,
-    total: total,
-  );
+  PaginationEntity toEntity() => PaginationEntity(currentPage: currentPage, lastPage: lastPage, perPage: perPage, total: total);
 }
 
 class TransactionDto {

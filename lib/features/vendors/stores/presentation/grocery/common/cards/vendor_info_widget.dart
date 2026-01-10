@@ -18,7 +18,12 @@ class VendorInfoWidget extends StatelessWidget {
         spacing: 4,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(vendor.name, style: context.style16400, maxLines: 1, overflow: TextOverflow.ellipsis),
+          Text(
+            vendor.name,
+            style: context.style16400,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
 
           // if (vendor.tag?.isNotEmpty == true)
           //   Text(vendor.tag!.join(', '), style: context.style12400.copyWith(color: Co.darkGrey), maxLines: 1, overflow: TextOverflow.ellipsis),
@@ -27,10 +32,18 @@ class VendorInfoWidget extends StatelessWidget {
             Row(
               spacing: 4,
               children: [
-                const VectorGraphicsWidget(Assets.clockIc, height: 24, width: 24, colorFilter: ColorFilter.mode(Co.purple, BlendMode.srcIn)),
+                const VectorGraphicsWidget(
+                  Assets.clockIc,
+                  height: 24,
+                  width: 24,
+                  colorFilter: ColorFilter.mode(Co.purple, BlendMode.srcIn),
+                ),
                 Text(
                   '${vendor.estimatedDeliveryTime} ${L10n.tr().min}',
-                  style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.regular),
+                  style: context.style12400.copyWith(
+                    color: Co.darkGrey,
+                    fontWeight: TStyle.regular,
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

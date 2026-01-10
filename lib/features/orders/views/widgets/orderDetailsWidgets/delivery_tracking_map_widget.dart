@@ -147,7 +147,7 @@ class _DeliveryTrackingMapWidgetState extends State<DeliveryTrackingMapWidget> {
                     context.push(
                       TrackOrderScreen.route,
                       extra: {
-                        'orderId': widget.orderId!,
+                        'orderId': widget.orderId,
                         'deliveryTimeMinutes': _estimatedTime,
                         'userLocation': _userLocation,
                         'deliveryLocation': _deliveryLocation,

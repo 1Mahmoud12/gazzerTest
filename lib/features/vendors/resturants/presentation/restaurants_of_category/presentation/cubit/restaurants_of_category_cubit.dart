@@ -22,7 +22,7 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
     emit(RestaurantsOfCategoryPageDataLoading());
     final result = await _repo.loadRestaurantsOfCategoryPage(id);
     switch (result) {
-      case Ok<RestaurantsOfCategoryyResponse> ok:
+      case final Ok<RestaurantsOfCategoryyResponse> ok:
         emit(
           RestaurantsOfCategoryPageDataLoaded(
             restaurants: ok.value.restaurants,
@@ -32,7 +32,7 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
           ),
         );
         break;
-      case Err err:
+      case final Err err:
         emit(RestaurantsOfCategoryPageDataError(err.error.message));
         break;
     }
@@ -42,10 +42,10 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
     emit(TopRatedLoading());
     final result = await _repo.getTopRatedRestaurants(id);
     switch (result) {
-      case Ok<List<RestaurantEntity>> ok:
+      case final Ok<List<RestaurantEntity>> ok:
         emit(TopRatedLoaded(restaurants: ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(TopRatedError(err.error.message));
         break;
     }
@@ -55,10 +55,10 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
     emit(OffersSectionLoading());
     final result = await _repo.getOffersRestaurants(id);
     switch (result) {
-      case Ok<List<RestaurantEntity>> ok:
+      case final Ok<List<RestaurantEntity>> ok:
         emit(OffersSectionLoaded(restaurants: ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(OffersSectionError(err.error.message));
         break;
     }
@@ -68,10 +68,10 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
     emit(TodaysSickSectionLoading());
     final result = await _repo.getTodaysPickRestaurants(id);
     switch (result) {
-      case Ok<List<RestaurantEntity>> ok:
+      case final Ok<List<RestaurantEntity>> ok:
         emit(TodaysSickSectionLoaded(restaurants: ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(TodaysSickSectionError(err.error.message));
         break;
     }
@@ -81,10 +81,10 @@ class RestaurantsOfCategoryCubit extends Cubit<RestaurantsOfCategoryStates> {
     emit(AllRestaurantsOfCategoryLoading());
     final result = await _repo.getRestaurantsOfCategory(id);
     switch (result) {
-      case Ok<List<RestaurantEntity>> ok:
+      case final Ok<List<RestaurantEntity>> ok:
         emit(AllRestaurantsOfCategoryLoaded(restaurants: ok.value));
         break;
-      case Err err:
+      case final Err err:
         emit(AllRestaurantsOfCategoryError(err.error.message));
         break;
     }

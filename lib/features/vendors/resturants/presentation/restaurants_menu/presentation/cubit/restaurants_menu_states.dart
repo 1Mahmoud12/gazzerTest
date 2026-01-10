@@ -26,6 +26,7 @@ final class ScreenDataLoaded extends ScreenDataStates {
 
 final class ScreenDataError extends ScreenDataStates {
   final String error;
+
   ScreenDataError({super.categories = const [], super.banners = const [], required this.error});
 }
 
@@ -45,6 +46,7 @@ final class RestaurantsCategoriesLoaded extends RestaurantsCategoriesStates {
 
 final class RestaurantsCategoriesError extends RestaurantsCategoriesStates {
   final String error;
+
   RestaurantsCategoriesError({super.categories = const [], super.banners = const [], required this.error});
 }
 
@@ -64,5 +66,6 @@ final class VendorsLoaded extends VendorsState {
 
 final class VendorsError extends VendorsState {
   final String error;
+
   VendorsError({super.categories = const [], super.banners = const [], required this.error});
 }

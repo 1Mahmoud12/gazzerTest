@@ -11,7 +11,8 @@ class RestaurantPageResponse {
   late final RestaurantEntity restaurant;
   late final List<PlateEntity> topRated;
   late final List<PlateEntity> bestSelling;
-  late final List<(CategoryOfPlateEntity, List<PlateEntity>)> categoriesWithPlates;
+  late final List<(CategoryOfPlateEntity, List<PlateEntity>)>
+  categoriesWithPlates;
   late final List<BannerEntity> banners;
 
   RestaurantPageResponse.fromJson(Map<String, dynamic> json) {
@@ -22,13 +23,13 @@ class RestaurantPageResponse {
     }
     if (json['plate_categories'] != null) {
       categoriesWithPlates = [];
-      for (var item in json['plate_categories']) {
+      for (final item in json['plate_categories']) {
         final category = CategoryOfPlateDTO.fromJson(
           item,
         ).toCategoryOfPlateEntity();
         final plates = <PlateEntity>[];
         if (item['plates'] != null) {
-          for (var plate in item['plates']) {
+          for (final plate in item['plates']) {
             plates.add(PlateDTO.fromJson(plate).toEntity());
           }
         }
@@ -39,7 +40,7 @@ class RestaurantPageResponse {
     }
     topRated = [];
     if (json['top_rated_plates'] != null) {
-      for (var item in json['top_rated_plates']) {
+      for (final item in json['top_rated_plates']) {
         topRated.add(PlateDTO.fromJson(item).toEntity());
       }
     }
@@ -47,7 +48,7 @@ class RestaurantPageResponse {
 
     bestSelling = [];
     if (json['best_selling_items'] != null) {
-      for (var item in json['best_selling_items']) {
+      for (final item in json['best_selling_items']) {
         bestSelling.add(PlateDTO.fromJson(item).toEntity());
       }
     }
@@ -55,7 +56,7 @@ class RestaurantPageResponse {
 
     banners = [];
     if (json['banners'] != null) {
-      for (var item in json['banners']) {
+      for (final item in json['banners']) {
         banners.add(BannerDTO.fromJson(item).toEntity());
       }
     }

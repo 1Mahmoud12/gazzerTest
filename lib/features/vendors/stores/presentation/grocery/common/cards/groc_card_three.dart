@@ -10,7 +10,13 @@ import 'package:gazzer/features/favorites/presentation/views/widgets/favorite_wi
 import 'package:gazzer/features/vendors/common/domain/generic_vendor_entity.dart';
 
 class GrocCardThree extends StatelessWidget {
-  const GrocCardThree({super.key, required this.width, required this.vendor, this.height, this.onPressed});
+  const GrocCardThree({
+    super.key,
+    required this.width,
+    required this.vendor,
+    this.height,
+    this.onPressed,
+  });
   final double width;
   final double? height;
   final StoreEntity vendor;
@@ -25,7 +31,9 @@ class GrocCardThree extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(borderRadius: AppConst.defaultBorderRadius),
+          shape: RoundedRectangleBorder(
+            borderRadius: AppConst.defaultBorderRadius,
+          ),
           padding: const EdgeInsetsGeometry.all(0),
           disabledBackgroundColor: Colors.transparent,
         ),
@@ -37,18 +45,28 @@ class GrocCardThree extends StatelessWidget {
                 children: [
                   CustomPaint(
                     isComplex: true,
-                    foregroundPainter: CornerIndendetShape(indent: const Size(36, 36), corner: Corner.bottomRight),
+                    foregroundPainter: CornerIndendetShape(
+                      indent: const Size(36, 36),
+                    ),
                     child: ClipPath(
-                      clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: Corner.bottomRight),
+                      clipper: ConrerIndentedClipper(
+                        indent: const Size(36, 36),
+                      ),
                       child: PhysicalModel(
                         color: Colors.transparent,
                         elevation: 50,
-                        shadowColor: Colors.black,
                         child: Padding(
                           padding: const EdgeInsets.all(2),
                           child: ClipPath(
-                            clipper: ConrerIndentedClipper(indent: const Size(36, 36), corner: Corner.bottomRight),
-                            child: CustomNetworkImage(vendor.image, width: double.infinity, height: double.infinity, fit: BoxFit.cover),
+                            clipper: ConrerIndentedClipper(
+                              indent: const Size(36, 36),
+                            ),
+                            child: CustomNetworkImage(
+                              vendor.image,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

@@ -17,17 +17,17 @@ class RestaurantsMenuReponse {
   RestaurantsMenuReponse.fromJson(Map<String, dynamic> json) {
     banners = <BannerEntity>[];
     if (json['banners'] != null) {
-      for (var item in json['banners']) {
+      for (final item in json['banners']) {
         banners.add(BannerDTO.fromJson(item).toEntity());
       }
     }
     categoryWithrestaurants = <(CategoryOfPlateEntity, List<RestaurantEntity>)>[];
     if (json['categories'] != null) {
-      for (var item in json['categories']) {
+      for (final item in json['categories']) {
         final category = CategoryOfPlateDTO.fromJson(item).toCategoryOfPlateEntity();
         final restaurants = <RestaurantEntity>[];
         if (item['restaurants'] != null) {
-          for (var rest in item['restaurants']) {
+          for (final rest in item['restaurants']) {
             restaurants.add(RestaurantDTO.fromJson(rest).toRestEntity());
           }
         }

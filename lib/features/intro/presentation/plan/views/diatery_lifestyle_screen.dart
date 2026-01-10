@@ -36,7 +36,12 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
     super.dispose();
   }
 
-  final focusData = ['Vegetarian', 'Vegan', 'Low-Carb/Keto', 'No Specific Diet'];
+  final focusData = [
+    'Vegetarian',
+    'Vegan',
+    'Low-Carb/Keto',
+    'No Specific Diet',
+  ];
   @override
   Widget build(BuildContext context) {
     return ImageBackgroundWidget(
@@ -50,7 +55,11 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
             SvgPicture.asset(Assets.assetsSvgCharacter, height: 130),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GradientText(text: 'Do You Follow Any Specific Dietary Lifestyle?', style: context.style20500, gradient: Grad().textGradient),
+              child: GradientText(
+                text: 'Do You Follow Any Specific Dietary Lifestyle?',
+                style: context.style20500,
+                gradient: Grad().textGradient,
+              ),
             ),
             const VerticalSpacing(24),
             Column(
@@ -63,7 +72,9 @@ class _DiateryLifestyleScreenState extends State<DiateryLifestyleScreen> {
                     animDuration: animDuration,
                     onPressed: () {
                       isAnimating.value = false;
-                      context.push(SupplementsScreen.route).then((v) => isAnimating.value = true);
+                      context
+                          .push(SupplementsScreen.route)
+                          .then((v) => isAnimating.value = true);
                     },
                     text: focusData[index],
                   ),

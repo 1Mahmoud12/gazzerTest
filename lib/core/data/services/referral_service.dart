@@ -31,7 +31,9 @@ class ReferralService {
     try {
       debugPrint('Checking for referral code on first launch...');
 
-      final response = await _apiClient.get(endpoint: Endpoints.getReferralByDevice);
+      final response = await _apiClient.get(
+        endpoint: Endpoints.getReferralByDevice,
+      );
 
       // Mark as checked regardless of result
       await prefs.setBool(_hasCheckedReferralKey, true);
@@ -63,7 +65,9 @@ class ReferralService {
   void navigateToRegisterWithReferralCode(String referralCode) {
     final context = AppNavigator.mainKey.currentContext;
     if (context != null) {
-      debugPrint('Navigating to register screen with referral code: $referralCode');
+      debugPrint(
+        'Navigating to register screen with referral code: $referralCode',
+      );
       // Use query parameter so RegisterScreen can read it
       context.go('/register?ref=$referralCode');
     } else {

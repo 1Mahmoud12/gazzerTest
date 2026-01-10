@@ -35,7 +35,11 @@ class _OtpWidgetState extends State<OtpWidget> {
       width: widget.width,
       height: widget.height,
       margin: EdgeInsets.symmetric(horizontal: (widget.spacing ?? 32) * 0.5),
-      textStyle: const TextStyle(fontSize: 20, color: Co.greyText, fontWeight: FontWeight.w600),
+      textStyle: const TextStyle(
+        fontSize: 20,
+        color: Co.greyText,
+        fontWeight: FontWeight.w600,
+      ),
       decoration: BoxDecoration(
         border: Border.all(color: Co.darkGrey, width: 1.5),
         borderRadius: BorderRadius.circular(widget.borderRadius ?? 8),
@@ -61,7 +65,10 @@ class _OtpWidgetState extends State<OtpWidget> {
           length: widget.count,
           defaultPinTheme: defaultPinTheme,
           focusedPinTheme: defaultPinTheme,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly, NoPasteFormatter()],
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            NoPasteFormatter(),
+          ],
           submittedPinTheme: defaultPinTheme,
           validator: (v) => Validators.valueMustBeNum(v, widget.count, 'Code'),
           // onCompleted: (pin) => print(pin),

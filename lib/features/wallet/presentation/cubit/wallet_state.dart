@@ -22,10 +22,7 @@ class WalletLoading extends WalletState {
 }
 
 class WalletLoaded extends WalletState {
-  const WalletLoaded({
-    required this.data,
-    this.isCached = false,
-  });
+  const WalletLoaded({required this.data, this.isCached = false});
 
   final WalletEntity data;
   final bool isCached;
@@ -35,10 +32,7 @@ class WalletLoaded extends WalletState {
 }
 
 class WalletError extends WalletState {
-  const WalletError({
-    required this.message,
-    this.cachedData,
-  });
+  const WalletError({required this.message, this.cachedData});
 
   final String message;
   final WalletEntity? cachedData;

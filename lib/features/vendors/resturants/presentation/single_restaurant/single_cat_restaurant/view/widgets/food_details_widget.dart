@@ -14,7 +14,10 @@ class _FoodDetailsWidget extends StatelessWidget {
                   TextSpan(text: L10n.tr().details, style: context.style16500),
                   const TextSpan(text: '\n'),
                   const WidgetSpan(child: VerticalSpacing(24)),
-                  TextSpan(text: product.description, style: context.style14400),
+                  TextSpan(
+                    text: product.description,
+                    style: context.style14400,
+                  ),
                 ],
               ),
             ),

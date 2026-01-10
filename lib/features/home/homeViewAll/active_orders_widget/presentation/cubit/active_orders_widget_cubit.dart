@@ -24,7 +24,7 @@ class ActiveOrdersWidgetCubit extends Cubit<ActiveOrdersWidgetStates> {
     final res = await _repo.getActiveOrders();
     switch (res) {
       case final Ok<List<ActiveOrderEntity>> ok:
-        emit(ActiveOrdersWidgetSuccessState(ok.value, isFromCache: false));
+        emit(ActiveOrdersWidgetSuccessState(ok.value));
         break;
       case final Err err:
         // If we have cached data, don't show error, just keep showing cache

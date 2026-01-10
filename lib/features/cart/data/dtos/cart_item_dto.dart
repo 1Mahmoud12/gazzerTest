@@ -81,7 +81,7 @@ class CartOptionDTO {
   }
   CartOptionEntity toEntity() {
     return CartOptionEntity(
-      id: "${optionId ?? 0}",
+      id: '${optionId ?? 0}',
       name: optionName ?? '',
       values: values?.map((value) => value.toEntity()).toList() ?? [],
     );

@@ -7,7 +7,12 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_wid
 import 'widgets/faq_rating_bottom_sheet.dart';
 
 class FaqQAArgs {
-  const FaqQAArgs({required this.title, required this.answer, required this.faqQuestionId, this.faqCategoryId});
+  const FaqQAArgs({
+    required this.title,
+    required this.answer,
+    required this.faqQuestionId,
+    this.faqCategoryId,
+  });
 
   final String title;
   final String answer;
@@ -38,7 +43,10 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
             Center(
               child: Text(
                 L10n.tr().wasThisHelpful,
-                style: context.style14400.copyWith(fontWeight: TStyle.bold, color: Co.purple),
+                style: context.style14400.copyWith(
+                  fontWeight: TStyle.bold,
+                  color: Co.purple,
+                ),
               ),
             ),
             const VerticalSpacing(12),
@@ -48,13 +56,19 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () async {
                       // Yes - show rating
-                      await showFaqRatingBottomSheet(context, faqQuestionId: args.faqQuestionId, faqCategoryId: args.faqCategoryId);
+                      await showFaqRatingBottomSheet(
+                        context,
+                        faqQuestionId: args.faqQuestionId,
+                        faqCategoryId: args.faqCategoryId,
+                      );
                       // Return true to indicate "yes" was selected
                       //   Navigator.of(context).pop(true);
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(L10n.tr().yes),
@@ -64,13 +78,19 @@ class FaqQuestionAnswerScreen extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () async {
-                      await showFaqRatingBottomSheet(context, faqQuestionId: args.faqQuestionId, faqCategoryId: args.faqCategoryId);
+                      await showFaqRatingBottomSheet(
+                        context,
+                        faqQuestionId: args.faqQuestionId,
+                        faqCategoryId: args.faqCategoryId,
+                      );
                       // No - return false to open chat
                       // Navigator.of(context).pop(false);
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Co.purple),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(L10n.tr().no),

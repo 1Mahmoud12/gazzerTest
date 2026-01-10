@@ -5,7 +5,12 @@ import 'package:gazzer/core/presentation/theme/app_theme.dart';
 import 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.dart';
 
 class RotatingItemWidget extends StatelessWidget {
-  const RotatingItemWidget({super.key, required this.items, required this.onTap, required this.shadowColor});
+  const RotatingItemWidget({
+    super.key,
+    required this.items,
+    required this.onTap,
+    required this.shadowColor,
+  });
   final List<GenericItemEntity> items;
   final Function(GenericItemEntity item) onTap;
   final Color backgroundColor = Colors.transparent;
@@ -20,7 +25,6 @@ class RotatingItemWidget extends StatelessWidget {
       width: 762,
       child: Stack(
         alignment: Alignment.topCenter,
-        clipBehavior: Clip.hardEdge,
         children: [
           Positioned(
             top: topPadding,
@@ -39,12 +43,22 @@ class RotatingItemWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Co.bg,
                     shape: BoxShape.circle,
-                    boxShadow: [BoxShadow(offset: const Offset(24, 4), blurRadius: 17, spreadRadius: 12, color: value.withAlpha(50))],
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(24, 4),
+                        blurRadius: 17,
+                        spreadRadius: 12,
+                        color: value.withAlpha(50),
+                      ),
+                    ],
                   ),
                   child: child,
                 ),
                 child: DecoratedBox(
-                  decoration: BoxDecoration(shape: BoxShape.circle, gradient: Grad().shadowGrad()),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: Grad().shadowGrad(),
+                  ),
                 ),
               ),
             ),
@@ -72,10 +86,18 @@ class RotatingItemWidget extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            CircleAvatar(radius: 28, backgroundImage: NetworkImage(item.image)),
+                            CircleAvatar(
+                              radius: 28,
+                              backgroundImage: NetworkImage(item.image),
+                            ),
                             Text(
-                              item.name.length > 10 ? '${item.name.substring(0, 10)}...' : item.name,
-                              style: context.style12400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+                              item.name.length > 10
+                                  ? '${item.name.substring(0, 10)}...'
+                                  : item.name,
+                              style: context.style12400.copyWith(
+                                color: Co.darkGrey,
+                                fontWeight: TStyle.medium,
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),

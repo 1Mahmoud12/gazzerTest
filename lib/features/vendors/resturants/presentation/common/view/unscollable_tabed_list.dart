@@ -3,7 +3,13 @@ import 'package:gazzer/features/vendors/resturants/presentation/restaurants_menu
 import 'package:scrollable_list_tab_scroller/scrollable_list_tab_scroller.dart';
 
 class UnScollableLTabedList extends StatefulWidget {
-  const UnScollableLTabedList({super.key, required this.itemCount, required this.tabs, required this.listItemBuilder, required this.maxHeight});
+  const UnScollableLTabedList({
+    super.key,
+    required this.itemCount,
+    required this.tabs,
+    required this.listItemBuilder,
+    required this.maxHeight,
+  });
   final int itemCount;
   final List<(String image, String title)> tabs;
   final Widget Function(BuildContext, int) listItemBuilder;
@@ -23,7 +29,8 @@ class _UnScollableLTabedListState extends State<UnScollableLTabedList> {
       animationDuration: Durations.medium3,
       itemCount: widget.tabs.length,
       shrinkWrap: true,
-      headerContainerBuilder: (context, child) => SizedBox(height: 40, child: child),
+      headerContainerBuilder: (context, child) =>
+          SizedBox(height: 40, child: child),
       tabBuilder: (context, index, active) {
         final tab = widget.tabs[index];
         return Padding(
@@ -32,7 +39,8 @@ class _UnScollableLTabedListState extends State<UnScollableLTabedList> {
             image: tab.$1,
             name: tab.$2,
             isSelected: active,
-            ontap: () => controller.scrollTo(index: index, duration: Durations.short1),
+            ontap: () =>
+                controller.scrollTo(index: index, duration: Durations.short1),
           ),
         );
       },

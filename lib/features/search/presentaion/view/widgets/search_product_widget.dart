@@ -47,23 +47,44 @@ class SearchProductWidget extends StatelessWidget {
               label: DecoratedBox(
                 decoration: const BoxDecoration(
                   color: Co.secondary,
-                  borderRadius: BorderRadiusGeometry.directional(topStart: Radius.circular(12), bottomEnd: Radius.circular(12)),
+                  borderRadius: BorderRadiusGeometry.directional(
+                    topStart: Radius.circular(12),
+                    bottomEnd: Radius.circular(12),
+                  ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
-                  child: Text(product.badge ?? '', style: context.style14400.copyWith(color: Co.purple)),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 2,
+                    horizontal: 6,
+                  ),
+                  child: Text(
+                    product.badge ?? '',
+                    style: context.style14400.copyWith(color: Co.purple),
+                  ),
                 ),
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-                child: CustomNetworkImage(product.image, width: 105, height: 70, fit: BoxFit.cover, borderRaduis: 6),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+                child: CustomNetworkImage(
+                  product.image,
+                  width: 105,
+                  height: 70,
+                  fit: BoxFit.cover,
+                  borderRaduis: 6,
+                ),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
                 color: Co.white,
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(24), bottomRight: Radius.circular(24)),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(24),
+                  bottomRight: Radius.circular(24),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,24 +92,42 @@ class SearchProductWidget extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    style: context.style16400.copyWith(fontWeight: FontWeight.w500),
+                    style: context.style16400.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(
                     children: [
-                      const VectorGraphicsWidget(Assets.starRateIc, width: 20, height: 20),
-                      Text(product.rate.toStringAsFixed(1), style: context.style16400.copyWith(fontWeight: FontWeight.w500)),
+                      const VectorGraphicsWidget(
+                        Assets.starRateIc,
+                        width: 20,
+                        height: 20,
+                      ),
+                      Text(
+                        product.rate.toStringAsFixed(1),
+                        style: context.style16400.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ],
                   ),
                   Row(
                     children: [
                       if (product.offer != null)
                         Text(
-                          Helpers.getProperPrice(product.offer!.priceAfterDiscount(product.price)),
-                          style: context.style12400.copyWith(color: Co.darkGrey).copyWith(decoration: TextDecoration.lineThrough),
+                          Helpers.getProperPrice(
+                            product.offer!.priceAfterDiscount(product.price),
+                          ),
+                          style: context.style12400
+                              .copyWith(color: Co.darkGrey)
+                              .copyWith(decoration: TextDecoration.lineThrough),
                         ),
-                      Text(Helpers.getProperPrice(product.price), style: context.style12400),
+                      Text(
+                        Helpers.getProperPrice(product.price),
+                        style: context.style12400,
+                      ),
                     ],
                   ),
                 ],

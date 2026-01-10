@@ -2,6 +2,7 @@ part of 'package:gazzer/features/vendors/common/domain/generic_item_entity.dart.
 
 class PlateEntity extends GenericItemEntity {
   final int categoryPlateId;
+  @override
   final int sold;
 
   const PlateEntity({
