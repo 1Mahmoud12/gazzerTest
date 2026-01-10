@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -22,10 +21,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_________________Start => '__________________';
 
   @override
-  String get noResultsFoundTryAdjustingYourFilter => 'No results found, try adjusting your filter';
+  String get noResultsFoundTryAdjustingYourFilter =>
+      'No results found, try adjusting your filter';
 
   @override
-  String get unableToLoadResultsPleaseTryAgainLater => 'Unable to load results, please try again later';
+  String get unableToLoadResultsPleaseTryAgainLater =>
+      'Unable to load results, please try again later';
 
   @override
   String get rating => 'Rating';
@@ -40,7 +41,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delivery => 'Delivery';
 
   @override
-  String get enterTheWordYouWantToSearchFor => 'Enter the word you want to search for';
+  String get enterTheWordYouWantToSearchFor =>
+      'Enter the word you want to search for';
 
   @override
   String get enterThreeLetterOrMore => 'Enter three letters or more...';
@@ -58,7 +60,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pm => 'PM';
 
   @override
-  String get noAvailableSchedulingTimeSlots => 'No available scheduling time slots';
+  String get noAvailableSchedulingTimeSlots =>
+      'No available scheduling time slots';
 
   @override
   String get editNote => 'Edit Note';
@@ -105,7 +108,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get yourChoicesWillBeClearedBecauseYouDidntAddToCart => 'Your choices will be cleared because you didn\'t add to cart';
+  String get yourChoicesWillBeClearedBecauseYouDidntAddToCart =>
+      'Your choices will be cleared because you didn\'t add to cart';
 
   @override
   String get subTotal => 'Sub Total';
@@ -156,7 +160,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get address_________________Start => '__________________';
 
   @override
-  String get defaultAddressChangedSuccessfully => 'Default address changed successfully';
+  String get defaultAddressChangedSuccessfully =>
+      'Default address changed successfully';
 
   @override
   String confirmDeleteAddressName(String label) {
@@ -269,7 +274,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locationPermissionsDenied => 'Location permissions are denied';
 
   @override
-  String get locationPermissionsPermanentlyDenied => 'Location permissions are permanently denied';
+  String get locationPermissionsPermanentlyDenied =>
+      'Location permissions are permanently denied';
 
   @override
   String get errorGettingCurrentLocation => 'Error getting current location';
@@ -347,7 +353,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get thisRestaurantIsCurrentlyUnavailable => 'This restaurant is currently unavailable';
+  String get thisRestaurantIsCurrentlyUnavailable =>
+      'This restaurant is currently unavailable';
 
   @override
   String get alwayeysOpen => 'Always Open';
@@ -362,7 +369,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notAvailable => 'Not Available';
 
   @override
-  String get couldnotLoadDataPleaseTryAgain => 'Could not load data. Please try again';
+  String get couldnotLoadDataPleaseTryAgain =>
+      'Could not load data. Please try again';
 
   @override
   String get outOFStock => 'Out of Stock';
@@ -418,10 +426,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountSuccessfullyDeleted => 'Account successfully deleted';
 
   @override
-  String get whyAreYouDeletingYourAccount => 'Why are you deleting your account?';
+  String get whyAreYouDeletingYourAccount =>
+      'Why are you deleting your account?';
 
   @override
-  String get thisFeedbackHelpsUsImproveOurServices => 'This feedback helps us improve our services.';
+  String get thisFeedbackHelpsUsImproveOurServices =>
+      'This feedback helps us improve our services.';
 
   @override
   String get otherReason => 'Other Reason';
@@ -550,7 +560,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restaurants_________________Start => '__________________';
 
   @override
-  String get thisVendorIsClosedOrBusyRightNow => 'This vendor is closed/busy right now';
+  String get thisVendorIsClosedOrBusyRightNow =>
+      'This vendor is closed/busy right now';
 
   @override
   String get details => 'Details';
@@ -613,7 +624,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get plans_________________Start => '__________________';
 
   @override
-  String get whatIsYourPrimaryHealthFocus => 'What Is Your Primary Health Focus';
+  String get whatIsYourPrimaryHealthFocus =>
+      'What Is Your Primary Health Focus';
 
   @override
   String get yourPlanToOptimizeCalories => 'Your Plan To Optimize Calories';
@@ -667,7 +679,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get freeDelivery => 'Free Delivery';
 
   @override
-  String get searchForStoresItemsAndCAtegories => 'Search For Stores Items And Categories';
+  String get searchForStoresItemsAndCAtegories =>
+      'Search For Stores Items And Categories';
 
   @override
   String get categories => 'Categories';
@@ -805,7 +818,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bestPopularStores => 'Best Popular Stores';
 
   @override
-  String get noItemsAvailableInThisCategory => 'No items available in this category';
+  String get noItemsAvailableInThisCategory =>
+      'No items available in this category';
 
   @override
   String get gotIt => 'Got It';
@@ -903,7 +917,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get walletHistoryTitle => 'Wallet History';
 
   @override
-  String get walletHistorySubtitle => 'Track all your wallet activity in one place';
+  String get walletHistorySubtitle =>
+      'Track all your wallet activity in one place';
 
   @override
   String walletYouWillRecharge(String amount, String currency) {
@@ -911,7 +926,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get walletPleaseSelectPaymentMethod => 'Please select the payment method you want:';
+  String get walletPleaseSelectPaymentMethod =>
+      'Please select the payment method you want:';
 
   @override
   String get walletCreditOrDebit => 'Credit or Debit';
@@ -1043,22 +1059,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get callSupport => 'Call Support';
 
   @override
-  String get unableToMakeCall => 'Unable to make a call. Please check your SIM card.';
+  String get unableToMakeCall =>
+      'Unable to make a call. Please check your SIM card.';
 
   @override
-  String get callFailed => 'Call failed. Please try again or check your device settings.';
+  String get callFailed =>
+      'Call failed. Please try again or check your device settings.';
 
   @override
   String get callingSupport => 'Calling support...';
 
   @override
-  String get deviceInAirplaneMode => 'Your device is in airplane mode. Please disable airplane mode to make calls.';
+  String get deviceInAirplaneMode =>
+      'Your device is in airplane mode. Please disable airplane mode to make calls.';
 
   @override
-  String get noSimCardDetected => 'No SIM card detected. Please insert a SIM card to make calls.';
+  String get noSimCardDetected =>
+      'No SIM card detected. Please insert a SIM card to make calls.';
 
   @override
-  String get simCardNotReady => 'SIM card is not ready. Please check your SIM card.';
+  String get simCardNotReady =>
+      'SIM card is not ready. Please check your SIM card.';
 
   @override
   String enterNumDigitCodeNumber(int num) {
@@ -1090,13 +1111,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmNewPassword => 'Confirm New Password';
 
   @override
-  String get nameAcceptsOnlyDashedAndCharacters => 'Name accepts only characters, dashes and white spaces';
+  String get nameAcceptsOnlyDashedAndCharacters =>
+      'Name accepts only characters, dashes and white spaces';
 
   @override
   String get passwordsDoNotMatch => 'Passwords do not match.';
 
   @override
-  String get pleaseReEnterYourNewPassword => 'Please re-enter your new password.';
+  String get pleaseReEnterYourNewPassword =>
+      'Please re-enter your new password.';
 
   @override
   String get clickBackAgainToExit => 'Click back again to exit';
@@ -1105,7 +1128,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get thisFieldIsRequired => 'This field is required';
 
   @override
-  String get fullNameShouldBeThreeLettersOrMore => 'Full name Should be three letters or more';
+  String get fullNameShouldBeThreeLettersOrMore =>
+      'Full name Should be three letters or more';
 
   @override
   String valueShouldBeNumAtelase(int num, String val) {
@@ -1168,16 +1192,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alert => 'Alert';
 
   @override
-  String get areYouSureYouWantToDeleteThisItem => 'Are you sure you want to delete this item?';
+  String get areYouSureYouWantToDeleteThisItem =>
+      'Are you sure you want to delete this item?';
 
   @override
-  String get areYouSureYouWantToClearAllItems => 'Are you sure you want to clear all items?';
+  String get areYouSureYouWantToClearAllItems =>
+      'Are you sure you want to clear all items?';
 
   @override
   String get areYouSureYouWantToLogout => 'Are you sure you want to logout?';
 
   @override
-  String get areYouSureYouWantToDeleteThisAccount => 'Are you sure you want to delete this account?';
+  String get areYouSureYouWantToDeleteThisAccount =>
+      'Are you sure you want to delete this account?';
 
   @override
   String get pressDoubleBackToExit => 'Press double back to exit';
@@ -1219,7 +1246,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectMode => 'Select Mode';
 
   @override
-  String get singUpToExploreWideVarietyOfProducts => 'Sign up to explore a wide variety of products';
+  String get singUpToExploreWideVarietyOfProducts =>
+      'Sign up to explore a wide variety of products';
 
   @override
   String get fullName => 'Full Name';
@@ -1249,7 +1277,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get healthyPlan => 'Healthy Plan';
 
   @override
-  String get thisPartHelpYouToBeMoreHealthy => 'This part helps you to be more healthy';
+  String get thisPartHelpYouToBeMoreHealthy =>
+      'This part helps you to be more healthy';
 
   @override
   String get setHealthPlan => 'Set Health Plan';
@@ -1291,13 +1320,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phoneMustStartWithZero => 'Phone number must start with 0';
 
   @override
-  String get phoneMustBeElevenDigits => 'Phone number must be exactly 11 digits';
+  String get phoneMustBeElevenDigits =>
+      'Phone number must be exactly 11 digits';
 
   @override
   String get phoneMustBeTenDigits => 'Phone number must be exactly 10 digits';
 
   @override
-  String get phoneMustContainOnlyDigits => 'Phone number must contain only digits';
+  String get phoneMustContainOnlyDigits =>
+      'Phone number must contain only digits';
 
   @override
   String get storesOffersForYou => 'Stores Offers For You';
@@ -1306,19 +1337,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updating => 'Updating...';
 
   @override
-  String get phoneMustBeTenOrElevenDigits => 'Phone number must be 10 or 11 digits';
+  String get phoneMustBeTenOrElevenDigits =>
+      'Phone number must be 10 or 11 digits';
 
   @override
   String get noSearchResults => 'No results found';
 
   @override
-  String get phoneAlreadyRegistered => 'This phone number is already registered';
+  String get phoneAlreadyRegistered =>
+      'This phone number is already registered';
 
   @override
-  String get emailAlreadyRegistered => 'This email address is already registered';
+  String get emailAlreadyRegistered =>
+      'This email address is already registered';
 
   @override
-  String get phoneAndEmailAlreadyRegistered => 'This phone number and email are already registered';
+  String get phoneAndEmailAlreadyRegistered =>
+      'This phone number and email are already registered';
 
   @override
   String get uploadPrescription => 'Upload Prescription';
@@ -1336,10 +1371,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyDeal => 'Daily Deal';
 
   @override
-  String get max_quantity_reached_for_product => 'You have reached the maximum quantity available for this product';
+  String get max_quantity_reached_for_product =>
+      'You have reached the maximum quantity available for this product';
 
   @override
-  String get maximumQuantityReachedForItem => 'Maximum quantity reached for this Item.';
+  String get maximumQuantityReachedForItem =>
+      'Maximum quantity reached for this Item.';
 
   @override
   String get reviews => 'Reviews';
@@ -1354,7 +1391,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get choose => 'Choose';
 
   @override
-  String get noPersonalizedSuggestions => 'No personalized suggestions yet. Start exploring our latest offers!';
+  String get noPersonalizedSuggestions =>
+      'No personalized suggestions yet. Start exploring our latest offers!';
 
   @override
   String get totalUnitSolid => 'Total Unit Solid';
@@ -1363,7 +1401,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updateCart => 'Update Cart';
 
   @override
-  String get exceedPouch => 'Selected items exceed pouch size. Remove some items or assign additional deliveryman?';
+  String get exceedPouch =>
+      'Selected items exceed pouch size. Remove some items or assign additional deliveryman?';
 
   @override
   String get editItems => 'Edit Items';
@@ -1462,7 +1501,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get expiryDateMustBeInFuture => 'Expiry date must be in the future';
 
   @override
-  String get nameMustBeGreaterThanOneWord => 'Name must be greater than one word';
+  String get nameMustBeGreaterThanOneWord =>
+      'Name must be greater than one word';
 
   @override
   String get setAsDefaultCard => 'Set as default card';
@@ -1510,7 +1550,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get orangeCash => 'Orange Cash';
 
   @override
-  String get payment_completed_successfully => 'Payment completed successfully!';
+  String get payment_completed_successfully =>
+      'Payment completed successfully!';
 
   @override
   String get payment_failed => 'Payment failed. Please try again.';
@@ -1608,16 +1649,20 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get heroBanner => 'You’ve reached the top — you’re one of our elite customers!';
+  String get heroBanner =>
+      'You’ve reached the top — you’re one of our elite customers!';
 
   @override
-  String get winnerBanner => 'You’re among our top customers, enjoy special discounts and surprises.';
+  String get winnerBanner =>
+      'You’re among our top customers, enjoy special discounts and surprises.';
 
   @override
-  String get gainerBanner => 'You’re gaining momentum! Unlock free delivery and early perks.';
+  String get gainerBanner =>
+      'You’re gaining momentum! Unlock free delivery and early perks.';
 
   @override
-  String get silverBanner => 'You’re just getting started — earn points with every order!';
+  String get silverBanner =>
+      'You’re just getting started — earn points with every order!';
 
   @override
   String get exclusiveVoucher => 'Exclusive Voucher';
@@ -1629,13 +1674,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exclusiveDiscount => 'Exclusive Discount';
 
   @override
-  String get phoneMustStartWithZeroOrOne => 'Egyptian number must start with 1 or 01';
+  String get phoneMustStartWithZeroOrOne =>
+      'Egyptian number must start with 1 or 01';
 
   @override
-  String get cantConvertLessZanZero => 'You cannot convert less than zero points';
+  String get cantConvertLessZanZero =>
+      'You cannot convert less than zero points';
 
   @override
-  String get cantConvertMoreThanAvailable => 'You cannot convert more points than available';
+  String get cantConvertMoreThanAvailable =>
+      'You cannot convert more points than available';
 
   @override
   String get youJustCashedIn => 'You just cashed in';
@@ -1644,7 +1692,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get thisIsBeginning => 'This is just the beginning,';
 
   @override
-  String get keepCollecting => 'This is just the beginning, keep collecting and cashing in';
+  String get keepCollecting =>
+      'This is just the beginning, keep collecting and cashing in';
 
   @override
   String youJustCashedPoints(int points, double currency) {
@@ -1663,7 +1712,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get needToAddReviewFirst => 'You need to add a review first';
 
   @override
-  String get faqSatisfactionQuestion => 'How satisfied are you with the FAQ answers?\nWas that helpful?';
+  String get faqSatisfactionQuestion =>
+      'How satisfied are you with the FAQ answers?\nWas that helpful?';
 
   @override
   String get vendors => 'Vendors';
@@ -1690,7 +1740,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get getHelp => 'Get Help';
 
   @override
-  String get makeAdditonMoreThan10Pounds => 'The added amount must be more than 10 pounds';
+  String get makeAdditonMoreThan10Pounds =>
+      'The added amount must be more than 10 pounds';
 
   @override
   String get today => 'Today';
@@ -1771,7 +1822,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paymentAndRefund => 'Payment and refund';
 
   @override
-  String get selectMissingIncorrectItems => 'Please select your missing or incorrect item and we will check it :';
+  String get selectMissingIncorrectItems =>
+      'Please select your missing or incorrect item and we will check it :';
 
   @override
   String get addYourNotes => 'Add your notes';
@@ -1790,7 +1842,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'We are sorry to hear about this issue with this order. It looks like you placed the order some time ago and it\'s now outside the eligible refund window.';
 
   @override
-  String get contactUsAsSoonAsPossible => 'In the future, If you have an issue, Please contact us as soon as possible';
+  String get contactUsAsSoonAsPossible =>
+      'In the future, If you have an issue, Please contact us as soon as possible';
 
   @override
   String get wasThisHelpful => 'Was this helpful?';
@@ -1856,7 +1909,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tapToTakePhoto => 'Tap to take photo';
 
   @override
-  String get phoneMustMatchEgyptPrefix => 'Phone number must start with 1 followed by 0, 1, 2, or 5';
+  String get phoneMustMatchEgyptPrefix =>
+      'Phone number must start with 1 followed by 0, 1, 2, or 5';
 
   @override
   String get keep => 'Keep';
@@ -1868,7 +1922,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get offline => 'Offline';
 
   @override
-  String get maximumQuantityReached => 'Maximum quantity reached for this item.';
+  String get maximumQuantityReached =>
+      'Maximum quantity reached for this item.';
 
   @override
   String get trackOrder => 'Track Order';
@@ -1880,7 +1935,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rateYourOrder => 'Rate Your order';
 
   @override
-  String get reachForMaxTier => 'Congratulations, you have reached the Maximum level. Enjoy all our benefits.';
+  String get reachForMaxTier =>
+      'Congratulations, you have reached the Maximum level. Enjoy all our benefits.';
 
   @override
   String get delete => 'Delete';
@@ -1946,7 +2002,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sold => 'Sold';
 
   @override
-  String get add_items_to_cart_to_continue_order => 'Add items to cart to continue order';
+  String get add_items_to_cart_to_continue_order =>
+      'Add items to cart to continue order';
 
   @override
   String get start_ordering => 'Start ordering';
@@ -1980,10 +2037,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourBalance => 'Your balance';
 
   @override
-  String get choose_additional_payment_method => 'Please choose an additional payment method to complete the remaining amount.';
+  String get choose_additional_payment_method =>
+      'Please choose an additional payment method to complete the remaining amount.';
 
   @override
-  String get wallet_insufficient_balance => 'Your Gazzer wallet balance is insufficient';
+  String get wallet_insufficient_balance =>
+      'Your Gazzer wallet balance is insufficient';
 
   @override
   String get complete_with_card => 'Complete with Credit or Debit';
@@ -1995,10 +2054,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get complete_with_e_wallet => 'Complete with E-wallet';
 
   @override
-  String get areYouSureYouWantToDeleteThisVendor => 'Are you sure you want to delete this vendor?';
+  String get areYouSureYouWantToDeleteThisVendor =>
+      'Are you sure you want to delete this vendor?';
 
   @override
-  String get areYouSureYouWantToDeleteAllCart => 'Are you sure you want to remove all items from the cart?';
+  String get areYouSureYouWantToDeleteAllCart =>
+      'Are you sure you want to remove all items from the cart?';
 
   @override
   String get saved_cards => 'Saved Cards';
@@ -2007,7 +2068,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get no_saved_cards => 'No saved cards';
 
   @override
-  String get please_login_to_view_saved_cards => 'Please login to view saved cards';
+  String get please_login_to_view_saved_cards =>
+      'Please login to view saved cards';
 
   @override
   String get multi_select => 'Multi select';

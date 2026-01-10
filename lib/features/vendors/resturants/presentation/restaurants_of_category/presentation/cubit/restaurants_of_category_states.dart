@@ -23,30 +23,16 @@ sealed class RestaurantsOfCategoryPageDataStates extends RestaurantsOfCategorySt
   final String name;
   final List<(String, CardStyle, List<RestaurantEntity>)> lists;
   final List<BannerEntity> banners;
-  RestaurantsOfCategoryPageDataStates({
-    super.restaurants = const [],
-    this.name = '',
-    this.lists = const [],
-    this.banners = const [],
-  });
+  RestaurantsOfCategoryPageDataStates({super.restaurants = const [], this.name = '', this.lists = const [], this.banners = const []});
 }
 
 class RestaurantsOfCategoryPageDataLoading extends RestaurantsOfCategoryPageDataStates {
   RestaurantsOfCategoryPageDataLoading()
-    : super(
-        restaurants: Fakers.restaurants,
-        lists: [('', CardStyle.typeOne, Fakers.restaurants)],
-        banners: Fakers.banners,
-      );
+    : super(restaurants: Fakers.restaurants, lists: [('', CardStyle.typeOne, Fakers.restaurants)], banners: Fakers.banners);
 }
 
 class RestaurantsOfCategoryPageDataLoaded extends RestaurantsOfCategoryPageDataStates {
-  RestaurantsOfCategoryPageDataLoaded({
-    required super.restaurants,
-    required super.name,
-    required super.lists,
-    required super.banners,
-  });
+  RestaurantsOfCategoryPageDataLoaded({required super.restaurants, required super.name, required super.lists, required super.banners});
 }
 
 class RestaurantsOfCategoryPageDataError extends RestaurantsOfCategoryPageDataStates {
