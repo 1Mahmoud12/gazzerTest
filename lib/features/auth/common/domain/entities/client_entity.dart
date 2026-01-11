@@ -40,6 +40,22 @@ class ClientEntity {
     this.referral,
   });
 
+
+factory ClientEntity.domy() {
+    return  ClientEntity(
+    id: 1,
+    phoneNumber: '+201012345678',
+    clientName: 'Ahmed Hassan',
+    clientStatusId: 1,
+    driver: 'Uber',
+    socialId: 'ahmed_hassan_92',
+    email: 'ahmed.hassan@gmail.com',
+    image: 'https://i.pravatar.cc/150?img=4',
+    createdAt: '2023-01-15T10:30:00Z',
+    tierName: 'hero',
+   
+  );
+  }
   String get formatedCreatedAt {
     if (createdAt == null) return L10n.tr().notSetYet;
     final date = DateTime.parse(createdAt!);

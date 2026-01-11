@@ -1,13 +1,20 @@
 part of 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 
 class _SettingsPreferenceComponent extends StatelessWidget {
-  const _SettingsPreferenceComponent(this.client);
+  const _SettingsPreferenceComponent(
+    this.client, {
+    required this.textColor,
+    required this.iconColor,
+  });
   final ClientEntity? client;
+  final Color textColor;
+  final Color iconColor;
   @override
   Widget build(BuildContext context) {
     const startPadding = 32.0;
     return BlocListener<ProfileCubit, ProfileStates>(
-      listenWhen: (previous, current) => current is LogoutSuccess || current is LogoutError,
+      listenWhen: (previous, current) =>
+          current is LogoutSuccess || current is LogoutError,
       listener: (context, state) {
         if (state is LogoutSuccess) {
           Alerts.showToast(state.message, error: false);
@@ -18,8 +25,9 @@ class _SettingsPreferenceComponent extends StatelessWidget {
       child: ExpandableWidget(
         initiallyExpanded: true,
         icon: Assets.settingIc,
+        arrowColor: iconColor,
         title: '${L10n.tr().settings} & ${L10n.tr().preferences}',
-        titleStyle: context.style20500.copyWith(color: Co.purple),
+        titleStyle: context.style20500.copyWith(color: textColor),
         body: Column(
           spacing: 6,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,9 +35,13 @@ class _SettingsPreferenceComponent extends StatelessWidget {
             ///
             Row(
               children: [
-                _ItitleWithSvg(svg: Assets.languageIc, title: L10n.tr().language),
+                _ItitleWithSvg(
+                  svg: Assets.languageIc,
+                  title: L10n.tr().language,
+                  textColor: textColor,
+                ),
                 const SizedBox(width: 20),
-                const Expanded(child: LanguageCustomDropdown(startPadding: 0)),
+                Expanded(child: LanguageCustomDropdown(startPadding: 0 , textColor: textColor, iconColor: iconColor, isDarkMode: context.read<AppSettingsCubit>().state.isDarkMode)),
               ],
             ),
             const VerticalSpacing(6),
@@ -37,16 +49,20 @@ class _SettingsPreferenceComponent extends StatelessWidget {
             ///
             Row(
               children: [
-                _ItitleWithSvg(svg: Assets.appearanceIc, title: L10n.tr().appearance),
+                _ItitleWithSvg(
+                  svg: Assets.appearanceIc,
+                  title: L10n.tr().appearance,
+                  textColor: textColor,
+                ),
                 const SizedBox(width: 20),
                 const Spacer(),
                 const ThemeBtn(startPadding: startPadding),
               ],
             ),
             const VerticalSpacing(6),
-            const _PrivacySecurityItem(),
+            _PrivacySecurityItem(textColor: textColor , iconColor: iconColor,),
             const VerticalSpacing(12),
-            const _GetSupportItem(),
+            _GetSupportItem(textColor: textColor, iconColor: iconColor,),
             const VerticalSpacing(12),
 
             ///
@@ -91,16 +107,25 @@ class _SettingsPreferenceComponent extends StatelessWidget {
 }
 
 class _ItitleWithSvg extends StatelessWidget {
-  const _ItitleWithSvg({required this.title, required this.svg});
+  const _ItitleWithSvg({
+    required this.title,
+    required this.svg,
+    required this.textColor,
+  });
   final String title;
   final String svg;
+  final Color textColor;
   @override
   Widget build(BuildContext context) {
     return Row(
       spacing: 16,
       children: [
-        SvgPicture.asset(svg, height: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
-        Text(title, style: context.style16500.copyWith(color: Co.purple)),
+        SvgPicture.asset(
+          svg,
+          height: 24,
+          colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn),
+        ),
+        Text(title, style: context.style16500.copyWith(color: textColor)),
       ],
     );
   }

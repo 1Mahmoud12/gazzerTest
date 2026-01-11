@@ -16,9 +16,15 @@ class LanguageItem {
 }
 
 class LanguageCustomDropdown extends StatelessWidget {
-  const LanguageCustomDropdown({super.key, required this.startPadding});
+  const LanguageCustomDropdown({super.key, required this.startPadding, required this.textColor, required this.iconColor, required this.isDarkMode});
 
   final double startPadding;
+  final Color textColor;
+  final Color iconColor;
+  final bool isDarkMode;
+  
+
+
 
   static const List<LanguageItem> languages = [
     LanguageItem(code: 'en', name: 'English', flagAsset: Assets.assetsPngFlagEn),
@@ -27,11 +33,17 @@ class LanguageCustomDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final cubit = context.read<AppSettingsCubit>();
+    
+    final backgroundColor = isDarkMode ? Colors.transparent : Co.white;
     final currentLang = cubit.state.lang;
     final selectedLanguage = languages.firstWhere((lang) => lang.code == currentLang, orElse: () => languages.first);
 
     return CustomDropdown<LanguageItem>(
+      iconColor: iconColor,
+      fillColor: backgroundColor,
+       borderColor: isDarkMode ? Co.darkModeStroke : Co.lightPurple,
       items: languages,
       selectedItem: selectedLanguage,
       width: MediaQuery.sizeOf(context).width * .6,
@@ -53,7 +65,7 @@ class LanguageCustomDropdown extends StatelessWidget {
             children: [
               Image.asset(language.flagAsset, height: 24, width: 24),
               const HorizontalSpacing(8),
-              Text(language.name, style: context.style16500.copyWith(color: Co.purple)),
+              Text(language.name, style: context.style16400.copyWith(color: textColor)),
             ],
           ),
         );
@@ -68,7 +80,7 @@ class LanguageCustomDropdown extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 alignment: AlignmentDirectional.centerStart,
-                child: Text(language.name, style: context.style16500.copyWith(color: Co.purple)),
+                child: Text(language.name, style: context.style16500.copyWith(color:textColor)),
               ),
             ),
           ],

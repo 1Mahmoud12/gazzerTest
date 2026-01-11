@@ -49,7 +49,7 @@ class StoresOfCategoryScreen extends StatelessWidget {
       dx: mediaQuery.size.width - 80,
       dy: mediaQuery.padding.top + kToolbarHeight,
       mainScreenWidget: Scaffold(
-        appBar: const MainAppBar(),
+        appBar:  MainAppBar(),
         extendBody: true,
         extendBodyBehindAppBar: true,
         body: BlocBuilder<StoresOfCategoryCubit, StoresOfCategoryStates>(

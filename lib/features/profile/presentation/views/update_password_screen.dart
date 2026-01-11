@@ -57,7 +57,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(),
+      appBar:  MainAppBar(),
       // backgroundColor: Co.secText,
       body: Form(
         key: _formKey,

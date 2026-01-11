@@ -68,6 +68,7 @@ class AppTheme {
       backgroundColor: Colors.transparent,
     ),
   );
+
   static final darkTheme = ThemeData(
     pageTransitionsTheme: PageTransitionsTheme(
       builders: {
@@ -112,9 +113,11 @@ class AppTheme {
         systemStatusBarContrastEnforced: true,
       ),
       centerTitle: true,
+      foregroundColor: Colors.white,
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
     ),
+
     buttonTheme: ButtonThemeData(
       height: 0,
       minWidth: 0,

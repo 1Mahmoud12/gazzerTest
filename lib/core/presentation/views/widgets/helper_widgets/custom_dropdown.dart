@@ -26,7 +26,7 @@ class CustomDropdown<T> extends StatefulWidget {
     this.maxWidth = true,
     this.addSpacer = true,
     this.enabled = true,
-    this.onTap,
+    this.onTap, this.iconColor,
   });
 
   /// List of items to display in the dropdown
@@ -55,6 +55,9 @@ class CustomDropdown<T> extends StatefulWidget {
 
   /// Fill color of the dropdown button
   final Color? fillColor;
+
+  /// Icon color of the dropdown button
+  final Color? iconColor;
 
   /// Border radius of the dropdown button
   final double? borderRadius;
@@ -97,7 +100,9 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
   void initState() {
     super.initState();
     _selectedItem = widget.selectedItem;
-    developer.log('CustomDropdown initialized with selected item: $_selectedItem');
+    developer.log(
+      'CustomDropdown initialized with selected item: $_selectedItem',
+    );
   }
 
   @override
@@ -116,7 +121,10 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
       onTap: widget.onTap,
       child: Container(
         width: widget.width,
-        padding: widget.buttonPadding ?? widget.padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding:
+            widget.buttonPadding ??
+            widget.padding ??
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
           color: widget.fillColor ?? Co.white,
@@ -124,9 +132,12 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
         ),
         child: PopupMenuButton<T>(
           color: Co.white,
+
           elevation: 4,
           enabled: widget.enabled && widget.onTap == null,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           constraints: BoxConstraints(
             maxHeight: widget.menuMaxHeight ?? double.infinity,
             minWidth: screenWidth * 0.3,
@@ -148,28 +159,48 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
             return widget.items.map((T item) {
               return PopupMenuItem<T>(
                 value: item,
-                padding: widget.menuItemPadding ?? const EdgeInsets.only(left: 10.0),
+                padding:
+                    widget.menuItemPadding ?? const EdgeInsets.only(left: 10.0),
                 child: Container(
-                  alignment: widget.maxWidth ? AlignmentDirectional.centerStart : AlignmentDirectional.center,
+                  alignment: widget.maxWidth
+                      ? AlignmentDirectional.centerStart
+                      : AlignmentDirectional.center,
                   decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(color: Colors.black.withAlpha((0.2 * 255).toInt()))),
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.black.withAlpha((0.2 * 255).toInt()),
+                      ),
+                    ),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-                  width: widget.maxWidth ? screenWidth * 0.9 : screenWidth * 0.3,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 12,
+                  ),
+                  width: widget.maxWidth
+                      ? screenWidth * 0.9
+                      : screenWidth * 0.3,
                   child: widget.itemBuilder(context, item),
                 ),
               );
             }).toList();
           },
-          popUpAnimationStyle: const AnimationStyle(curve: Curves.linear, duration: Duration(milliseconds: 400)),
+          popUpAnimationStyle: const AnimationStyle(
+            curve: Curves.linear,
+            duration: Duration(milliseconds: 400),
+          ),
           child: Row(
             children: [
-              Expanded(child: widget.selectedItemBuilder(context, _selectedItem)),
+              Expanded(
+                child: widget.selectedItemBuilder(context, _selectedItem),
+              ),
               if (widget.addSpacer) const Spacer(),
               if (widget.showDropDownIcon)
                 RotatedBox(
                   quarterTurns: widget.directionArrowButton ?? 0,
-                  child: const Icon(Icons.keyboard_arrow_down, color: Co.black),
+                  child: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: widget.iconColor ?? Co.black,
+                  ),
                 ),
             ],
           ),

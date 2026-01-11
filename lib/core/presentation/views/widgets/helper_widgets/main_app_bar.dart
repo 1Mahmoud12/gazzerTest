@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
@@ -9,7 +11,7 @@ import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget
 import 'package:gazzer/core/presentation/views/widgets/vector_graphics_widget.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppBar({
+  MainAppBar({
     super.key,
     this.showCart = false,
     this.iconsColor = Co.purple,
@@ -30,7 +32,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showCart;
   final bool showLanguage;
   final bool showNotification;
-  final Color iconsColor;
+  Color iconsColor;
   final Color? bacButtonColor;
   final Color? backgroundColor;
   final bool isCartScreen;
@@ -45,20 +47,32 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.read<AppSettingsCubit>().state.isDarkMode;
+    print('isDarkMode $isDarkMode');
+    iconsColor = isDarkMode ? Colors.white : iconsColor;   
     final canPop = Navigator.canPop(context);
     final shouldShowLeading = showLeading && (canPop || onBack != null);
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
+      const SystemUiOverlayStyle(
+        statusBarColor: Co.bg,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
     );
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
-      title: title == null ? null : Text(title!, style: titleStyle ?? context.style20500.copyWith(color: Co.purple)),
+      title: title == null
+          ? null
+          : Text(title!, style: titleStyle ?? context.style20500),
       leadingWidth: shouldShowLeading ? 65 : 0,
       leading: shouldShowLeading
           ? IconButton(
               onPressed: onBack ?? () => Navigator.pop(context),
-              icon: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back, color: Co.black),
+              icon: Icon(
+                Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+                color: Co.black,
+              ),
             )
           : null,
       systemOverlayStyle: const SystemUiOverlayStyle(
@@ -67,7 +81,13 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         statusBarBrightness: Brightness.light,
       ),
       actions: [
-        if (showCart) MainCartWidget(size: 20, padding: 8, navigate: !isCartScreen, showBadge: showBadge),
+        if (showCart)
+          MainCartWidget(
+            size: 20,
+            padding: 8,
+            navigate: !isCartScreen,
+            showBadge: showBadge,
+          ),
         if (showNotification)
           IconButton(
             onPressed: () {},
@@ -76,6 +96,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               Assets.assetsSvgNotification,
               height: 21,
               width: 21,
+              
               colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
             ),
           ),
@@ -83,7 +104,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             onPressed: () {},
             // style: IconButton.styleFrom(backgroundColor: Colors.black12),
-            icon: VectorGraphicsWidget(Assets.assetsSvgLanguage, height: 21, width: 21, colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn)),
+            icon: VectorGraphicsWidget(
+              Assets.assetsSvgLanguage,
+              height: 21,
+              width: 21,
+              colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+            ),
           ),
         if (onShare != null)
           IconButton(

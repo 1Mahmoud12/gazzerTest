@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class Co {
+
   static const bg = Color(0xFFFFFFFF);
   static const darkBg = Color(0xFF242424);
-
+  
   // Assets Colors
   static const purple = Color(0xFF52229E);
   static const altPurple = Color(0xFF5E24AA);
@@ -62,4 +63,9 @@ class Co {
   static const earnedMoney = Color(0xFFFFCF86);
   static const borderColor = Color(0xFFE0E0E0);
   static Color closedColor = const Color(0xFF1D1D1D);
+
+
+  //dark colors
+  static const darkModeStroke = Color(0xFF2F2A3A);
+
 }

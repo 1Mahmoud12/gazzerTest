@@ -2,7 +2,13 @@ part of 'package:gazzer/features/profile/presentation/views/profile_screen.dart'
 
 /// Privacy & Security navigation item
 class _PrivacySecurityItem extends StatelessWidget {
-  const _PrivacySecurityItem();
+  const _PrivacySecurityItem({
+    required this.textColor,
+    required this.iconColor,
+  });
+
+  final Color textColor;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +21,25 @@ class _PrivacySecurityItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: Row(
         children: [
-          SvgPicture.asset(Assets.privacyIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
+          SvgPicture.asset(
+            Assets.privacyIc,
+            height: 24,
+            width: 24,
+            colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn),
+          ),
           const HorizontalSpacing(16),
           Expanded(
-            child: Text('${L10n.tr().privacy} & ${L10n.tr().security}', style: context.style16500.copyWith(color: Co.purple)),
+            child: Text(
+              '${L10n.tr().privacy} & ${L10n.tr().security}',
+              style: context.style16500.copyWith(color: textColor),
+            ),
           ),
           RotatedBox(
             quarterTurns: L10n.isAr(context) ? 3 : 1,
-            child: SvgPicture.asset(Assets.arrowUp, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
+            child: SvgPicture.asset(
+              Assets.arrowUp,
+              colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+            ),
           ),
         ],
       ),
@@ -32,8 +49,9 @@ class _PrivacySecurityItem extends StatelessWidget {
 
 /// Get Support navigation item
 class _GetSupportItem extends StatelessWidget {
-  const _GetSupportItem();
-
+  const _GetSupportItem({required this.textColor, required this.iconColor});
+  final Color textColor;
+  final Color iconColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -43,14 +61,25 @@ class _GetSupportItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: Row(
         children: [
-          SvgPicture.asset(Assets.getSupportIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn)),
+          SvgPicture.asset(
+            Assets.getSupportIc,
+            height: 24,
+            width: 24,
+            colorFilter: const ColorFilter.mode(Co.secondary, BlendMode.srcIn),
+          ),
           const HorizontalSpacing(16),
           Expanded(
-            child: Text(L10n.tr().getSupport, style: context.style16500.copyWith(color: Co.purple)),
+            child: Text(
+              L10n.tr().getSupport,
+              style: context.style16500.copyWith(color: textColor),
+            ),
           ),
           RotatedBox(
             quarterTurns: L10n.isAr(context) ? 3 : 1,
-            child: SvgPicture.asset(Assets.arrowUp, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
+            child: SvgPicture.asset(
+              Assets.arrowUp,
+              colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+            ),
           ),
         ],
       ),
@@ -75,10 +104,20 @@ class _SignOutButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Icon at the top
-              SvgPicture.asset(Assets.signOutIc, colorFilter: const ColorFilter.mode(Co.logoutRed, BlendMode.srcIn)),
+              SvgPicture.asset(
+                Assets.signOutIc,
+                colorFilter: const ColorFilter.mode(
+                  Co.logoutRed,
+                  BlendMode.srcIn,
+                ),
+              ),
               const VerticalSpacing(24),
               // Confirmation text
-              Text(L10n.tr().areYouSureYouWantToLogout, style: context.style16500.copyWith(fontSize: 16), textAlign: TextAlign.center),
+              Text(
+                L10n.tr().areYouSureYouWantToLogout,
+                style: context.style16500.copyWith(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
               const VerticalSpacing(32),
               // Sign Out button
               MainBtn(
@@ -93,10 +132,21 @@ class _SignOutButton extends StatelessWidget {
                   children: [
                     Text(
                       L10n.tr().signOut,
-                      style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
+                      style: context.style14400.copyWith(
+                        color: Co.white,
+                        fontWeight: TStyle.medium,
+                      ),
                     ),
                     const HorizontalSpacing(8),
-                    SvgPicture.asset(Assets.signOutIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+                    SvgPicture.asset(
+                      Assets.signOutIc,
+                      height: 20,
+                      width: 20,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -114,7 +164,8 @@ class _SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileStates>(
-      buildWhen: (previous, current) => previous is LogoutLoading && current is LogoutLoading,
+      buildWhen: (previous, current) =>
+          previous is LogoutLoading && current is LogoutLoading,
       builder: (context, state) => MainBtn(
         onPressed: () {
           _showSignOutConfirmation(context);
@@ -127,12 +178,23 @@ class _SignOutButton extends StatelessWidget {
           children: [
             RotatedBox(
               quarterTurns: L10n.isAr(context) ? 0 : 2,
-              child: SvgPicture.asset(Assets.signOutIc, height: 20, width: 20, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+              child: SvgPicture.asset(
+                Assets.signOutIc,
+                height: 20,
+                width: 20,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
             const HorizontalSpacing(8),
             Text(
               L10n.tr().signOut,
-              style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
+              style: context.style14400.copyWith(
+                color: Co.white,
+                fontWeight: TStyle.medium,
+              ),
             ),
           ],
         ),
@@ -159,9 +221,17 @@ class _DeleteAccountItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(Assets.deleteIc, height: 24, width: 24, colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn)),
+            SvgPicture.asset(
+              Assets.deleteIc,
+              height: 24,
+              width: 24,
+              colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn),
+            ),
             const HorizontalSpacing(16),
-            Text(L10n.tr().deleteAccount, style: context.style16500.copyWith(color: Colors.black87)),
+            Text(
+              L10n.tr().deleteAccount,
+              style: context.style16500.copyWith(color: Colors.black87),
+            ),
           ],
         ),
       ),

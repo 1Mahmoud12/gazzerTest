@@ -83,7 +83,10 @@ class ProfileScreen extends StatelessWidget {
                     useSafeArea: true,
                     builder: (context) => BlocProvider.value(
                       value: cubit,
-                      child: ProfileVerifyOtpScreen(sessionId: state.sessionId, req: state.req),
+                      child: ProfileVerifyOtpScreen(
+                        sessionId: state.sessionId,
+                        req: state.req,
+                      ),
                     ),
                   );
                 }
@@ -96,11 +99,14 @@ class ProfileScreen extends StatelessWidget {
                 appBar: MainAppBar(),
                 body: SafeArea(
                   child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
-                    listenWhen: (previous, current) => previous.lang != current.lang,
+                    listenWhen: (previous, current) =>
+                        previous.lang != current.lang,
                     listener: (context, state) {
                       di<AddressesBus>().refreshAddresses();
                     },
-                    buildWhen: (previous, current) => previous.lang != current.lang || previous.isDarkMode != current.isDarkMode,
+                    buildWhen: (previous, current) =>
+                        previous.lang != current.lang ||
+                        previous.isDarkMode != current.isDarkMode,
                     builder: (context, state) {
                       return ProfileContentBody(cubit: cubit);
                     },
@@ -124,29 +130,45 @@ class ProfileContentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       cubit.client = ClientEntity.domy();
+    final isDarkMode = context.read<AppSettingsCubit>().state.isDarkMode;
+    final textColor = isDarkMode ? Colors.white : Co.purple;
+    final iconColor = isDarkMode ? Colors.white : Co.black;
     return SingleChildScrollView(
       child: Column(
         children: [
           if (cubit.client?.tierName != null)
             Container(
-              color: allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.mainColor,
+              color: allTiersDetails[cubit.client!.tierName!.toLowerCase()]!
+                  .mainColor,
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: Row(
                 spacing: 12,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    LoyaltyTierName.fromString(cubit.client!.tierName!).getDisplayName(context),
+                    LoyaltyTierName.fromString(
+                      cubit.client!.tierName!,
+                    ).getDisplayName(context),
                     style: context.style16500.copyWith(color: Co.white),
                   ),
-                  SvgPicture.asset(allTiersDetails[cubit.client!.tierName!.toLowerCase()]!.logo),
+                  SvgPicture.asset(
+                    allTiersDetails[cubit.client!.tierName!.toLowerCase()]!
+                        .logo,
+                  ),
                 ],
               ),
             ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
+
+              
               children: [
+
+               
+
+               
                 if (cubit.client != null) ...[
                   _ProfileHeaderWidget(cubit.client!),
                   const VerticalSpacing(12),
@@ -161,7 +183,11 @@ class ProfileContentBody extends StatelessWidget {
                   _InviteEarnComponent(),
                   const VerticalSpacing(12),
                 ],
-                _SettingsPreferenceComponent(cubit.client),
+                _SettingsPreferenceComponent(
+                  cubit.client,
+                  textColor: textColor,
+                  iconColor: iconColor,
+                ),
                 const VerticalSpacing(12),
 
                 if (cubit.client != null) ...[
@@ -176,7 +202,10 @@ class ProfileContentBody extends StatelessWidget {
                     bgColor: Co.purple,
                     radius: 16,
                     margin: const EdgeInsets.symmetric(horizontal: 16),
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 8,
+                    ),
                     child: Row(
                       spacing: 16,
                       mainAxisAlignment: MainAxisAlignment.center,

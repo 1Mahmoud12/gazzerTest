@@ -34,11 +34,9 @@ extension BuildContextExtension on BuildContext {
   TextStyle get style32700 => textTheme.displayLarge!;
   TextStyle get style24500 => textTheme.titleLarge!;
   TextStyle get style20500 => textTheme.titleMedium!;
-
   TextStyle get style16500 => textTheme.titleSmall!;
   TextStyle get style16400 => textTheme.labelLarge!;
   TextStyle get style14400 => textTheme.labelMedium!;
-
   TextStyle get style12400 => textTheme.labelSmall!;
 }
 

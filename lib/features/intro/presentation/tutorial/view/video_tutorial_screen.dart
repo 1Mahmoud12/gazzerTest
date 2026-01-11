@@ -16,7 +16,7 @@ class VideoTutorialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(iconsColor: Co.secondary),
+      appBar:  MainAppBar(iconsColor: Co.secondary),
       extendBody: true,
       extendBodyBehindAppBar: true,
       body: Column(

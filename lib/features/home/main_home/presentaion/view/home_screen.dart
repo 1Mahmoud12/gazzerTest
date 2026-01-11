@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gazzer/core/data/dto/banner_dto.dart';
 import 'package:gazzer/core/data/resources/session.dart';
 import 'package:gazzer/core/data/services/local_storage.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/extensions/enum.dart';
 import 'package:gazzer/core/presentation/extensions/with_hot_spot.dart';
@@ -78,7 +79,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -87,9 +89,11 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   final DailyOffersWidgetCubit _dailyOffersCubit = di<DailyOffersWidgetCubit>();
   final SuggestsWidgetCubit _suggestsCubit = di<SuggestsWidgetCubit>();
   final TopVendorsWidgetCubit _topVendorsCubit = di<TopVendorsWidgetCubit>();
-  final BestPopularStoresWidgetCubit _bestPopularStoresCubit = di<BestPopularStoresWidgetCubit>();
+  final BestPopularStoresWidgetCubit _bestPopularStoresCubit =
+      di<BestPopularStoresWidgetCubit>();
   final TopItemsWidgetCubit _topItemsCubit = di<TopItemsWidgetCubit>();
-  final ActiveOrdersWidgetCubit _activeOrdersCubit = di<ActiveOrdersWidgetCubit>();
+  final ActiveOrdersWidgetCubit _activeOrdersCubit =
+      di<ActiveOrdersWidgetCubit>();
 
   Timer? _resumeRefreshTimer;
 
@@ -99,7 +103,11 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
 
     // Set system UI overlay style once (moved from build)
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Co.bg, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.light),
+      const SystemUiOverlayStyle(
+        statusBarColor: Co.bg,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
     );
 
     // Initialize critical cubits immediately
@@ -154,7 +162,10 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
     if (isRefresh) animationDialogLoading();
 
     // Refresh critical widgets first, then others in background
-    await Future.wait([_categoriesCubit.getCategories(), _activeOrdersCubit.getActiveOrders()]);
+    await Future.wait([
+      _categoriesCubit.getCategories(),
+      _activeOrdersCubit.getActiveOrders(),
+    ]);
 
     // Refresh less critical widgets in background (don't await)
     // ignore: unawaited_futures
@@ -181,7 +192,12 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       onPopInvokedWithResult: (didPop, result) {
         exitApp++;
         //Utils.showToast(title: 'swipe twice to exit', state: UtilState.success);
-        Alerts.showToast(L10n.tr().swipeTwiceToExit, error: false, isInfo: true, toastGravity: ToastGravity.CENTER);
+        Alerts.showToast(
+          L10n.tr().swipeTwiceToExit,
+          error: false,
+          isInfo: true,
+          toastGravity: ToastGravity.CENTER,
+        );
         Future.delayed(const Duration(seconds: 5), () {
           exitApp = 0;
           setState(() {});
@@ -204,7 +220,9 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
             floatingWidgetWidth: 50,
             speed: 1,
             dy: HomeUtils.headerHeight(context) + 12,
-            dx: L10n.isAr(context) ? AppConst.defaultHrPadding.right : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
+            dx: L10n.isAr(context)
+                ? AppConst.defaultHrPadding.right
+                : constraints.maxWidth - (50 + AppConst.defaultHrPadding.right),
             disableBounceAnimation: true,
             mainScreenWidget: MultiBlocProvider(
               providers: [
@@ -222,10 +240,16 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
                   physics: BouncingScrollPhysics(),
                   slivers: [
                     SliverToBoxAdapter(
-                      child: Padding(padding: EdgeInsets.only(bottom: 12), child: _HomeHeader()),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 12),
+                        child: _HomeHeader(),
+                      ),
                     ),
                     SliverToBoxAdapter(
-                      child: Padding(padding: EdgeInsets.only(bottom: 24), child: _HomeSearchWidget()),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 24),
+                        child: _HomeSearchWidget(),
+                      ),
                     ),
 
                     ///

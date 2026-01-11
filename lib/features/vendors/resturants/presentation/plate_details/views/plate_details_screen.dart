@@ -286,7 +286,7 @@ class SinglePlateScreen extends StatelessWidget {
             ),
           );
         }
-        return const Scaffold(
+        return  Scaffold(
           appBar: MainAppBar(),
           body: Center(child: AdaptiveProgressIndicator()),
         );

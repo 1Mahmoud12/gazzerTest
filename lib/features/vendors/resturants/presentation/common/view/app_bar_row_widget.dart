@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/main_back_icon.dart';
 import 'package:gazzer/core/presentation/views/widgets/products/main_cart_widget.dart';
+import 'package:http/http.dart';
 
 class AppBarRowWidget extends StatelessWidget {
   const AppBarRowWidget({
@@ -34,6 +37,12 @@ class AppBarRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+ final isDarkMode = context.read<AppSettingsCubit>().state.isDarkMode;
+    print('isDarkMode $isDarkMode');
+    final iconsColor1 = isDarkMode ? Colors.white : iconsColor;   
+
+
     return Container(
       color: backgroundColor,
       child: Row(
@@ -53,7 +62,7 @@ class AppBarRowWidget extends StatelessWidget {
                 Assets.assetsSvgNotification,
                 height: 21,
                 width: 21,
-                colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(iconsColor1, BlendMode.srcIn),
               ),
             ),
           if (showLanguage)
@@ -64,7 +73,7 @@ class AppBarRowWidget extends StatelessWidget {
                 Assets.assetsSvgLanguage,
                 height: 21,
                 width: 21,
-                colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(iconsColor1, BlendMode.srcIn),
               ),
             ),
           if (onShare != null)

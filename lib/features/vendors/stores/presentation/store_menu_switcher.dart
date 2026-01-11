@@ -46,7 +46,7 @@ class StoreMenuSwitcher extends StatelessWidget {
             builder: (context, state) {
               if (state is ScreenDataLoading || state is StoresMenuInit || state is ScreenDataError) {
                 return Scaffold(
-                  appBar: const MainAppBar(
+                  appBar:  MainAppBar(
                     // don't show cart : multiple hero
                   ),
                   body: state is ScreenDataError
