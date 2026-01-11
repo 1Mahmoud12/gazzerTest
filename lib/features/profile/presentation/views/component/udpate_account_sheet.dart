@@ -138,6 +138,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             textDirection: TextDirection.ltr,
 
                             child: MainTextField(
+                           
                               controller: _emailController,
                               hintText: L10n.tr().emailAddress,
                               showBorder: false,
