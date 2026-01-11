@@ -91,9 +91,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                           MainTextField(
                             controller: _nameController,
                             hintText: L10n.tr().yourFullName,
-
                             showBorder: false,
-
                             validator: (v) {
                               return Validators.dashedCharactersOnly(v) ??
                                   Validators.valueAtLeastNum(
@@ -138,7 +136,6 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             textDirection: TextDirection.ltr,
 
                             child: MainTextField(
-                           
                               controller: _emailController,
                               hintText: L10n.tr().emailAddress,
                               showBorder: false,
@@ -160,6 +157,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                     ),
                   ],
                 ),
+
                 Row(
                   spacing: 14,
                   children: [
@@ -182,12 +180,16 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                           ),
                           Directionality(
                             textDirection: TextDirection.ltr,
+
                             child: PhoneTextField(
                               controller: _phoneController,
                               hasLabel: false,
                               hasHint: true,
                               borderColor: Colors.red,
-                              bgColor: Co.w900,
+                              bgColor: context.isDarkMode
+                                  ? Co.darkModeSubLayer
+                                  : Co.lightModeSubLayer,
+
                               showBorder: false,
                               code: 'EG',
                               onChange: (phone) {
@@ -251,7 +253,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
             radius: 24,
             child: Text(
               L10n.tr().saveChanges,
-              style: context.style20500.copyWith(color: Co.white),
+              style: context.style14400.copyWith(color: Co.white),
               textAlign: TextAlign.center,
             ),
           ),

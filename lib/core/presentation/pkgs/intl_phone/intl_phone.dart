@@ -47,14 +47,18 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   }) : dialogConfig = dialogConfig ?? DialogConfig(),
        controller = controller ?? TextEditingController(),
        countryConfig = countryConfig ?? CountryConfig(),
-       initCountry = initCountry ?? CountryCodeModel(name: 'United States', dial_code: '+1', code: 'US'),
+       initCountry =
+           initCountry ??
+           CountryCodeModel(name: 'United States', dial_code: '+1', code: 'US'),
        phoneConfig = phoneConfig ?? PhoneConfig();
 
   @override
-  State<InternationalPhoneNumberInput> createState() => _InternationalPhoneNumberInputState();
+  State<InternationalPhoneNumberInput> createState() =>
+      _InternationalPhoneNumberInputState();
 }
 
-class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumberInput> {
+class _InternationalPhoneNumberInputState
+    extends State<InternationalPhoneNumberInput> {
   List<CountryCodeModel>? countries;
   late CountryCodeModel selected;
 
@@ -67,7 +71,9 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
     if (widget.loadFromJson == null) {
       getAllCountry();
     } else {
-      widget.loadFromJson!().then((data) => data != null ? loadFromJson(data) : getAllCountry());
+      widget.loadFromJson!().then(
+        (data) => data != null ? loadFromJson(data) : getAllCountry(),
+      );
     }
     node = widget.phoneConfig.focusNode ?? FocusNode();
     widget.controller.addListener(controllerOnChange);
@@ -77,7 +83,11 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
   void controllerOnChange() {
     if (widget.onInputChanged != null) {
       widget.onInputChanged!(
-        IntPhoneNumber(code: selected.code, dialCode: selected.dial_code, number: widget.controller.text.trimLeft().trimRight()),
+        IntPhoneNumber(
+          code: selected.code,
+          dialCode: selected.dial_code,
+          number: widget.controller.text.trimLeft().trimRight(),
+        ),
       );
     }
   }
@@ -146,8 +156,15 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
                     mainAxisSize: MainAxisSize.min,
                     spacing: 5,
                     children: [
-                      FlagView(countryCodeModel: selected, isFlat: widget.countryConfig.flatFlag, size: 24),
-                      Text(selected.dial_code, style: widget.phoneConfig.hintStyle),
+                      FlagView(
+                        countryCodeModel: selected,
+                        isFlat: widget.countryConfig.flatFlag,
+                        size: 24,
+                      ),
+                      Text(
+                        selected.dial_code,
+                        style: widget.phoneConfig.hintStyle,
+                      ),
                     ],
                   ),
                 ),
@@ -167,7 +184,9 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             autovalidateMode: AutovalidateMode.onUserInteraction,
             textInputAction: widget.phoneConfig.textInputAction,
             focusNode: widget.phoneConfig.focusNode,
-            style: widget.phoneConfig.textStyle.copyWith(decoration: TextDecoration.none),
+            style: widget.phoneConfig.textStyle.copyWith(
+              decoration: TextDecoration.none,
+            ),
             scrollPadding: EdgeInsets.zero,
             textAlignVertical: TextAlignVertical.center,
             keyboardType: const TextInputType.numberWithOptions(signed: true),
@@ -179,7 +198,10 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
             inputFormatters: widget.inputFormatters,
             decoration: InputDecoration(
               isDense: true,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 14,
+              ),
               filled: widget.phoneConfig.backgroundColor != null,
               fillColor: widget.phoneConfig.backgroundColor,
               hintStyle: widget.phoneConfig.hintStyle,
@@ -191,26 +213,38 @@ class _InternationalPhoneNumberInputState extends State<InternationalPhoneNumber
                       borderRadius: BorderRadius.circular(16),
                     ),
               enabledBorder: !widget.showBorder
-                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  ? OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: AppConst.defaultBorderRadius,
+                    )
                   : OutlineInputBorder(
                       borderSide: const BorderSide(color: Co.lightGrey),
                       borderRadius: BorderRadius.circular(16),
                     ),
               focusedBorder: !widget.showBorder
-                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  ? OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: AppConst.defaultBorderRadius,
+                    )
                   : OutlineInputBorder(
                       borderSide: const BorderSide(color: Co.lightGrey),
                       borderRadius: BorderRadius.circular(16),
                     ),
 
               focusedErrorBorder: !widget.showBorder
-                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  ? OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: AppConst.defaultBorderRadius,
+                    )
                   : OutlineInputBorder(
                       borderSide: const BorderSide(color: Co.dark),
                       borderRadius: BorderRadius.circular(16),
                     ),
               errorBorder: !widget.showBorder
-                  ? OutlineInputBorder(borderSide: BorderSide.none, borderRadius: AppConst.defaultBorderRadius)
+                  ? OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: AppConst.defaultBorderRadius,
+                    )
                   : OutlineInputBorder(
                       borderSide: const BorderSide(color: Co.red),
                       borderRadius: BorderRadius.circular(16),
@@ -256,7 +290,11 @@ class IntPhoneNumber {
   String dialCode;
   String number;
 
-  IntPhoneNumber({required this.code, required this.dialCode, required this.number});
+  IntPhoneNumber({
+    required this.code,
+    required this.dialCode,
+    required this.number,
+  });
 
   String get fullNumber => '$dialCode $number';
 
@@ -264,5 +302,6 @@ class IntPhoneNumber {
 
   String get rawDialCode => dialCode.replaceAll('+', '');
 
-  String get rawFullNumber => fullNumber.replaceAll(' ', '').replaceAll('+', '');
+  String get rawFullNumber =>
+      fullNumber.replaceAll(' ', '').replaceAll('+', '');
 }

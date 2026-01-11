@@ -113,7 +113,14 @@ class _MainTextFieldState extends State<MainTextField> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = context.isDarkMode;
-    final iconContraints = widget.iconsConstraints ?? const BoxConstraints(minHeight: 25, maxHeight: 40, maxWidth: 40, minWidth: 25);
+    final iconContraints =
+        widget.iconsConstraints ??
+        const BoxConstraints(
+          minHeight: 25,
+          maxHeight: 40,
+          maxWidth: 40,
+          minWidth: 25,
+        );
     return Material(
       color: Colors.transparent,
       child: ValueListenableBuilder(
@@ -125,7 +132,9 @@ class _MainTextFieldState extends State<MainTextField> {
             cursorColor: Co.purple,
             controller: widget.controller,
             enabled: widget.enabled,
-            style: widget.style ?? context.style14400,
+            style:
+                widget.style ??
+                context.style14400.copyWith(fontWeight: FontWeight.w500),
             validator: widget.validator,
             onChanged: widget.onChange,
             autofillHints: widget.autofillHints,
@@ -145,12 +154,20 @@ class _MainTextFieldState extends State<MainTextField> {
               errorStyle: context.style14400.copyWith(color: Co.red),
               errorMaxLines: 5,
               hintMaxLines: 5,
-              contentPadding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+              contentPadding:
+                  widget.padding ??
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
               isDense: true,
               counterText: widget.showMaxLegnth ? null : '',
               hint: widget.hintText == null
                   ? null
-                  : Text(widget.hintText!, style: widget.style ?? context.style14400.copyWith(color: Co.darkGrey), maxLines: 1),
+                  : Text(
+                      widget.hintText!,
+                      style:
+                          widget.style ??
+                          context.style14400.copyWith(color: Co.darkGrey),
+                      maxLines: 1,
+                    ),
               helperMaxLines: 1,
               // helperMaxLines: 5,
               labelStyle: context.style16400.copyWith(color: Co.darkGrey),
@@ -159,27 +176,41 @@ class _MainTextFieldState extends State<MainTextField> {
               prefixIcon: widget.prefix == null
                   ? null
                   : Padding(
-                      padding: EdgeInsets.only(right: L10n.isAr(context) ? 0 : 5, left: L10n.isAr(context) ? 5 : 0),
+                      padding: EdgeInsets.only(
+                        right: L10n.isAr(context) ? 0 : 5,
+                        left: L10n.isAr(context) ? 5 : 0,
+                      ),
                       child: MaterialButton(
                         minWidth: 20,
                         onPressed: widget.prefixOnTap,
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        shape: RoundedRectangleBorder(borderRadius: AppConst.defaultInnerBorderRadius),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: AppConst.defaultInnerBorderRadius,
+                        ),
                         color: widget.prefixColor,
                         child: widget.prefix,
                       ),
                     ),
               suffixIconConstraints: iconContraints,
-              suffixIcon: Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: getSiffixIcon(value)),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: getSiffixIcon(value),
+              ),
               suffix: widget.suffixWidget,
               filled: widget.isFilled || widget.bgColor != null,
-              fillColor: widget.bgColor ??  (isDarkMode ? Co.darkModeSubLayer : Co.lightModeSubLayer),
+              fillColor:
+                  widget.bgColor ??
+                  (isDarkMode ? Co.darkModeSubLayer : Co.lightModeSubLayer),
               enabled: widget.enabled,
 
               focusedBorder: OutlineInputBorder(
-                
-                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24 ,   ),
-                borderSide: BorderSide(color: widget.borderColor ?? Co.purple),
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
+                borderSide: BorderSide(
+                  width: widget.showBorder ? 1 : 0,
+                  color:
+                      widget.borderColor ??
+                      (isDarkMode ? Co.darkModeSubLayer : Co.lightModeSubLayer),
+                ),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
@@ -187,14 +218,27 @@ class _MainTextFieldState extends State<MainTextField> {
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
-                borderSide: BorderSide(color: widget.borderColor ?? Co.red),
+                borderSide: BorderSide(
+                  width: widget.showBorder ? 1 : 0,
+                  color: widget.borderColor ?? Co.red,
+                ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
-                borderSide: BorderSide(color: widget.borderColor ?? Co.lightGrey),
+                borderSide: BorderSide(
+                  width: widget.showBorder ? 1 : 0,
+                  color:
+                      widget.borderColor ??
+                      (isDarkMode ? Co.darkModeSubLayer : Co.lightModeSubLayer),
+                ),
               ),
               disabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: widget.disabledColor ?? Co.grey),
+                borderSide: BorderSide(
+                  width: widget.showBorder ? 1 : 0,
+                  color:
+                      widget.borderColor ??
+                      (isDarkMode ? Co.darkModeSubLayer : Co.lightModeSubLayer),
+                ),
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
               ),
             ),
@@ -210,7 +254,11 @@ class _MainTextFieldState extends State<MainTextField> {
     if (widget.isPassword) {
       return InkWell(
         onTap: () => isObscure.value = !value,
-        child: Icon(value ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill, color: Co.dark, size: 20),
+        child: Icon(
+          value ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill,
+          color: Co.dark,
+          size: 20,
+        ),
       );
     }
     return null;

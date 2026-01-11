@@ -83,7 +83,9 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
       normalized = '01${normalized.substring(3)}';
     }
     if (normalized.startsWith('0') && !normalized.startsWith('01')) {
-      while (normalized.length > 1 && normalized.startsWith('0') && normalized[1] != '1') {
+      while (normalized.length > 1 &&
+          normalized.startsWith('0') &&
+          normalized[1] != '1') {
         normalized = normalized.substring(1);
       }
     }
@@ -134,6 +136,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         titleStyle: context.style14400.copyWith(color: Co.darkGrey),
         searchBoxHintStyle: context.style14400.copyWith(color: Co.darkGrey),
       ),
+
       countryConfig: CountryConfig(
         decoration: BoxDecoration(
           color: widget.bgColor,
@@ -146,7 +149,8 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         final currentCode = countryCode ?? 'SA';
         if (currentCode == 'EG') {
           final value = (v ?? '').trim();
-          if (value.isNotEmpty && !(value.startsWith('1') || value.startsWith('01'))) {
+          if (value.isNotEmpty &&
+              !(value.startsWith('1') || value.startsWith('01'))) {
             return L10n.tr(context).phoneMustStartWithZeroOrOne;
           }
         }
@@ -171,8 +175,11 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         backgroundColor: widget.bgColor,
         showCursor: true,
         errorStyle: context.style14400.copyWith(color: Co.red),
-        textStyle: context.style14400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
-        hintStyle: context.style14400.copyWith(color: Co.darkGrey, fontWeight: TStyle.medium),
+        textStyle: context.style14400.copyWith(fontWeight: TStyle.medium),
+        hintStyle: context.style14400.copyWith(
+          color: Co.darkGrey,
+          fontWeight: TStyle.medium,
+        ),
       ),
     );
   }
@@ -180,7 +187,10 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
 
 class GeneralUtil {
   static List<CountryCodeModel> loadJson() {
-    final List<CountryCodeModel> listCountryCodeModel = List<CountryCodeModel>.from(countries.map((model) => CountryCodeModel.fromJson(model)));
+    final List<CountryCodeModel> listCountryCodeModel =
+        List<CountryCodeModel>.from(
+          countries.map((model) => CountryCodeModel.fromJson(model)),
+        );
 
     return listCountryCodeModel;
   }
