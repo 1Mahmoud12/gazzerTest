@@ -52,8 +52,14 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
         spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(L10n.tr().editAccountInformation, style: context.style16500.copyWith(color: Co.purple)),
-          Divider(height: 8, thickness: 1, color: Co.purple.withAlpha(90)),
+          Text(L10n.tr().editAccountInformation, style: context.style16500),
+          Divider(
+            height: 8,
+            thickness: 1,
+            color: context.isDarkMode
+                ? Co.darkModeStroke
+                : Co.purple.withAlpha(90),
+          ),
           Form(
             key: _formKey,
             child: Column(
@@ -72,19 +78,32 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().fullName, style: context.style16500),
+                            child: Text(
+                              L10n.tr().fullName,
+                              style: context.style16400,
+                            ),
                           ),
                           MainTextField(
+                            
                             controller: _nameController,
                             hintText: L10n.tr().yourFullName,
-                            bgColor: Co.w900,
+                            
                             showBorder: false,
 
                             validator: (v) {
                               return Validators.dashedCharactersOnly(v) ??
-                                  Validators.valueAtLeastNum(v, L10n.tr().fullName, 3, msg: L10n.tr().fullNameShouldBeThreeLettersOrMore);
+                                  Validators.valueAtLeastNum(
+                                    v,
+                                    L10n.tr().fullName,
+                                    3,
+                                    msg: L10n.tr()
+                                        .fullNameShouldBeThreeLettersOrMore,
+                                  );
                             },
-                            autofillHints: const [AutofillHints.username, AutofillHints.name],
+                            autofillHints: const [
+                              AutofillHints.username,
+                              AutofillHints.name,
+                            ],
                           ),
                         ],
                       ),
@@ -94,7 +113,11 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 Row(
                   spacing: 14,
                   children: [
-                    const Icon(Icons.email_outlined, size: 25, color: Co.secondary),
+                    const Icon(
+                      Icons.email_outlined,
+                      size: 25,
+                      color: Co.secondary,
+                    ),
                     Expanded(
                       child: Column(
                         spacing: 8,
@@ -102,7 +125,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().emailAddress, style: context.style16500),
+                            child: Text(
+                              L10n.tr().emailAddress,
+                              style: context.style16500,
+                            ),
                           ),
                           Directionality(
                             textDirection: TextDirection.ltr,
@@ -110,14 +136,18 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             child: MainTextField(
                               controller: _emailController,
                               hintText: L10n.tr().emailAddress,
-                              bgColor: Co.w900,
                               showBorder: false,
-                              inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'\s'))],
+                              inputFormatters: [
+                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                              ],
                               validator: (v) {
                                 if (v?.trim().isNotEmpty != true) return null;
                                 return Validators.emailValidator(v);
                               },
-                              autofillHints: const [AutofillHints.username, AutofillHints.name],
+                              autofillHints: const [
+                                AutofillHints.username,
+                                AutofillHints.name,
+                              ],
                             ),
                           ),
                         ],
@@ -128,7 +158,11 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 Row(
                   spacing: 14,
                   children: [
-                    const Icon(Icons.phone_outlined, size: 25, color: Co.secondary),
+                    const Icon(
+                      Icons.phone_outlined,
+                      size: 25,
+                      color: Co.secondary,
+                    ),
                     Expanded(
                       child: Column(
                         spacing: 8,
@@ -136,7 +170,10 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(L10n.tr().mobileNumber, style: context.style16500),
+                            child: Text(
+                              L10n.tr().mobileNumber,
+                              style: context.style16500,
+                            ),
                           ),
                           Directionality(
                             textDirection: TextDirection.ltr,
@@ -151,7 +188,8 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                               onChange: (phone) {
                                 // Check if exactly 10 digits
                                 if (phone.number.length > 11) {
-                                  _phoneController.text = phone.number.substring(0, 11);
+                                  _phoneController.text = phone.number
+                                      .substring(0, 11);
                                 }
                               },
                               validator: (v, code) {
@@ -198,7 +236,11 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                 phone = phone.substring(1);
               }
 
-              final req = UpdateProfileReq(name: _nameController.text.trim(), email: _emailController.text.trim(), phone: phone);
+              final req = UpdateProfileReq(
+                name: _nameController.text.trim(),
+                email: _emailController.text.trim(),
+                phone: phone,
+              );
               context.pop(req);
             },
             radius: 24,

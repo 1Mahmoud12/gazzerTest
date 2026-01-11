@@ -1,11 +1,12 @@
 part of '../profile_screen.dart';
 
 class _ProfileNavigationComponent extends StatelessWidget {
-  const _ProfileNavigationComponent();
-
+  const _ProfileNavigationComponent({required this.iconColor});
+  final Color? iconColor;
   @override
   Widget build(BuildContext context) {
     return ExpandableWidget(
+      arrowColor: iconColor,
       title: L10n.tr().loyaltyProgram,
       icon: Assets.loyaltyIc,
       body: Column(
@@ -47,7 +48,13 @@ class _NavigationItem extends StatelessWidget {
             Expanded(child: Text(title, style: context.style16500)),
             RotatedBox(
               quarterTurns: L10n.isAr(context) ? 3 : 1,
-              child: SvgPicture.asset(Assets.arrowUp),
+              child: SvgPicture.asset(
+                Assets.arrowUp,
+                colorFilter: ColorFilter.mode(
+                  context.isDarkMode ? Co.white : Co.black,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
           ],
         ),

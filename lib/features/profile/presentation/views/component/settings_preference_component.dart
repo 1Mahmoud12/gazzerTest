@@ -41,7 +41,7 @@ class _SettingsPreferenceComponent extends StatelessWidget {
                   textColor: textColor,
                 ),
                 const SizedBox(width: 20),
-                Expanded(child: LanguageCustomDropdown(startPadding: 0 , textColor: textColor, iconColor: iconColor, isDarkMode: context.read<AppSettingsCubit>().state.isDarkMode)),
+                Expanded(child: LanguageCustomDropdown(startPadding: 0 , textColor: textColor, iconColor: iconColor, isDarkMode: context.isDarkMode)),
               ],
             ),
             const VerticalSpacing(6),

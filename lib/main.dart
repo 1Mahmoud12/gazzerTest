@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -27,8 +28,14 @@ void main() async {
     ScreenUtil.ensureScreenSize(),
     Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
     NotificationUtility.initializeAwesomeNotification(),
-    Helpers.customTryCatch(() async => Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)),
-    Helpers.customTryCatch(() async => NotificationUtility.initializeAwesomeNotification()),
+    Helpers.customTryCatch(
+      () async => Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      ),
+    ),
+    Helpers.customTryCatch(
+      () async => NotificationUtility.initializeAwesomeNotification(),
+    ),
     // Load location independently of client (for headers)
     Session().loadLocation(),
     init(),
@@ -42,7 +49,8 @@ void main() async {
     return true;
   };
   try {
-    AppConst.messageGlobal = await FirebaseMessaging.instance.getInitialMessage();
+    AppConst.messageGlobal = await FirebaseMessaging.instance
+        .getInitialMessage();
     if (AppConst.messageGlobal?.data != null) {
       AppNavigator.initialRoute = '/';
     }

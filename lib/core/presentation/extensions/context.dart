@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/routing/app_navigator.dart';
 
@@ -86,4 +88,9 @@ extension ArabicNumbersDouble on double {
   String toArabicString({required bool isArabic}) {
     return isArabic ? toString().toArabicNumbers() : toString();
   }
+  }
+
+extension DarkMoodExtension on BuildContext {
+  bool get isDarkMode => read<AppSettingsCubit>().state.isDarkMode;    
+
 }

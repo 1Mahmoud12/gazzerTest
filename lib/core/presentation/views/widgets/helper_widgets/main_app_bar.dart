@@ -47,9 +47,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = context.read<AppSettingsCubit>().state.isDarkMode;
-    print('isDarkMode $isDarkMode');
-    iconsColor = isDarkMode ? Colors.white : iconsColor;   
+    final isDarkMode = context.isDarkMode;
+    iconsColor = isDarkMode ? Colors.white : iconsColor;
     final canPop = Navigator.canPop(context);
     final shouldShowLeading = showLeading && (canPop || onBack != null);
     SystemChrome.setSystemUIOverlayStyle(
@@ -64,7 +63,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       title: title == null
           ? null
-          : Text(title!, style: titleStyle ?? context.style20500),
+          : Text(title!, style: titleStyle ?? context.style24500),
       leadingWidth: shouldShowLeading ? 65 : 0,
       leading: shouldShowLeading
           ? IconButton(
@@ -96,7 +95,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               Assets.assetsSvgNotification,
               height: 21,
               width: 21,
-              
+
               colorFilter: ColorFilter.mode(iconsColor, BlendMode.srcIn),
             ),
           ),

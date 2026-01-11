@@ -1,11 +1,13 @@
 part of 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 
 class _ProfileAddressesComponent extends StatelessWidget {
-  const _ProfileAddressesComponent();
+  const _ProfileAddressesComponent({this.iconColor});
 
+  final Color? iconColor;
   @override
   Widget build(BuildContext context) {
     return ExpandableWidget(
+      arrowColor: iconColor,
       title: L10n.tr().addresses,
       icon: Assets.addressIc,
       body: Column(
@@ -15,18 +17,23 @@ class _ProfileAddressesComponent extends StatelessWidget {
           StreamBuilder(
             stream: di<AddressesBus>().getStream<FetchAddressesEvents>(),
             builder: (context, snapshot) {
-              final addresses = Session().addresses;
+              // final addresses = Session().addresses;
+              final addresses = List.generate(4, (id) {
+                if (id == 2) {
+                  return AddressEntity.domy(isDefault: true);
+                } else {
+                  return AddressEntity.domy();
+                }
+              });
+
               return Skeletonizer(
                 enabled: snapshot.data is FetchAddressesLoading,
                 child: addresses.isEmpty
                     ? SizedBox(
                         height: 60,
-                        child: Center(
-                          child: Text(
-                            L10n.tr().youHaveNoAddressesYet,
-                            style: context.style14400.copyWith(color: Co.purple),
-                            textAlign: TextAlign.center,
-                          ),
+                        child: Text(
+                          L10n.tr().youHaveNoAddressesYet,
+                          style: context.style16400,
                         ),
                       )
                     : Scrollbar(
@@ -35,9 +42,14 @@ class _ProfileAddressesComponent extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           itemCount: addresses.length,
-                          separatorBuilder: (context, index) => const VerticalSpacing(16),
+                          separatorBuilder: (context, index) =>
+                              const VerticalSpacing(16),
                           itemBuilder: (context, index) {
-                            return AddressCard(address: AddressModel.fromEntity(addresses[index]));
+                            return AddressCard(
+                              address: AddressModel.fromEntity(
+                                addresses[index],
+                              ),
+                            );
                           },
                         ),
                       ),
@@ -50,7 +62,7 @@ class _ProfileAddressesComponent extends StatelessWidget {
             },
             child: Text(
               L10n.tr().addNewAddress,
-              style: context.style20500.copyWith(color: Co.white),
+              style: context.style14400,
               textAlign: TextAlign.center,
             ),
           ),

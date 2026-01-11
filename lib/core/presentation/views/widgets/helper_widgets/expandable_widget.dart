@@ -20,11 +20,10 @@ class ExpandableWidget extends StatefulWidget {
     this.initiallyExpanded = false,
     this.onExpansionChanged,
     this.titleStyle,
-    this.iconColor,
     this.arrowColor,
     this.borderColor,
     this.borderRadius,
-    this.padding,
+    this.padding, this.textColor,
   });
 
   /// The title text to display
@@ -48,11 +47,11 @@ class ExpandableWidget extends StatefulWidget {
   /// Style for the title text
   final TextStyle? titleStyle;
 
-  /// Color for the icon
-  final Color? iconColor;
 
   /// Color for the arrow icon
   final Color? arrowColor;
+
+  final Color? textColor;
 
   /// Color for the border
   final Color? borderColor;
@@ -105,7 +104,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
               children: [
                 if (widget.icon != null) ...[SvgPicture.asset(widget.icon!), const HorizontalSpacing(12)],
                 Expanded(
-                  child: widget.titleWidget ?? Text(widget.title, style: widget.titleStyle ?? context.style16500.copyWith(color: Co.purple)),
+                  child: widget.titleWidget ?? Text(widget.title, style: widget.titleStyle ?? context.style16500.copyWith(color: widget.textColor)),
                 ),
                 RotatedBox(
                   quarterTurns: _isExpanded ? 0 : 2,

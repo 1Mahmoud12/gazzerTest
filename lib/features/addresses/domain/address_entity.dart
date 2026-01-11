@@ -36,6 +36,25 @@ class AddressEntity extends Equatable {
     this.landmark,
   });
 
+  factory AddressEntity.domy({bool isDefault = false}) {
+    return AddressEntity(
+      id: 2,
+      provinceId: 10,
+      provinceName: 'Cairo',
+      zoneId: 102,
+      zoneName: 'Heliopolis',
+      label: 'Work',
+      lat: 30.0910,
+      lng: 31.3235,
+      isDefault: isDefault,
+      selectedLocation: false,
+      floor: '5',
+      apartment: '502',
+      building: '18',
+      landmark: 'Next to Baron Palace',
+    );
+  }
+
   @override
   List<Object?> get props => [
     id,

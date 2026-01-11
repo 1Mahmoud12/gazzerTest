@@ -8,6 +8,8 @@ import '../views/widgets/form_related_widgets.dart/main_text_field.dart';
 
 class AppTheme {
   AppTheme._();
+
+
   static final lightTheme = ThemeData(
     pageTransitionsTheme: PageTransitionsTheme(
       builders: {
@@ -126,7 +128,7 @@ class AppTheme {
       ),
     ),
     dialogTheme: const DialogThemeData(backgroundColor: Color(0xffF0F0F0)),
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Co.white),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Co.darkModeLayer),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.transparent,
     ),

@@ -1,7 +1,8 @@
 part of '../profile_screen.dart';
 
 class _InviteEarnComponent extends StatelessWidget {
-  const _InviteEarnComponent();
+  const _InviteEarnComponent({required this.iconColor});
+  final Color? iconColor;
 
   Future<void> _copyCode(BuildContext context, String code) async {
     await Clipboard.setData(ClipboardData(text: code));
@@ -27,6 +28,7 @@ class _InviteEarnComponent extends StatelessWidget {
     if (referralCode.isEmpty) return const SizedBox.shrink();
 
     return ExpandableWidget(
+      arrowColor: iconColor,
       title: L10n.tr().inviteAndEarn,
       icon: Assets.inviteIc,
       body: Column(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gazzer/core/presentation/cubits/app_settings_cubit.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/resources/assets.dart';
 import 'package:gazzer/core/presentation/theme/app_colors.dart';
 import 'package:gazzer/core/presentation/views/widgets/icons/main_back_icon.dart';
@@ -38,7 +39,7 @@ class AppBarRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
- final isDarkMode = context.read<AppSettingsCubit>().state.isDarkMode;
+final isDarkMode = context.isDarkMode;
     print('isDarkMode $isDarkMode');
     final iconsColor1 = isDarkMode ? Colors.white : iconsColor;   
 

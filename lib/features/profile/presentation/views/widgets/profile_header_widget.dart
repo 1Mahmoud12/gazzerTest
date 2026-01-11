@@ -22,7 +22,12 @@ class _ProfileHeaderWidgetState extends State<_ProfileHeaderWidget> {
     final client = cubit.client;
     if (client == null) return;
 
-    final req = UpdateProfileReq(name: client.clientName, phone: client.phoneNumber, email: client.email, avatar: avatarFile);
+    final req = UpdateProfileReq(
+      name: client.clientName,
+      phone: client.phoneNumber,
+      email: client.email,
+      avatar: avatarFile,
+    );
 
     await cubit.updateProfile(req);
   }
@@ -41,7 +46,7 @@ class _ProfileHeaderWidgetState extends State<_ProfileHeaderWidget> {
                   radius: 40,
                   backgroundColor: Co.white,
                   child: Padding(
-                    padding: const EdgeInsetsGeometry.all(2),
+                    padding: EdgeInsets.zero,
                     child: ClipOval(
                       child: AspectRatio(
                         aspectRatio: 1,
@@ -57,20 +62,31 @@ class _ProfileHeaderWidgetState extends State<_ProfileHeaderWidget> {
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () async {
-                    final file = await _showImageSourceDialog();
-                    if (file != null) {
-                      await _updateAvatar(file);
-                    }
-                  },
-                  style: IconButton.styleFrom(
-                    padding: const EdgeInsets.all(4),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size.zero,
-                    backgroundColor: Co.purple,
+
+                Positioned.directional(
+                  textDirection: Directionality.of(context),
+                  bottom: 1,
+                  end: 1,
+
+                  child: IconButton(
+                    onPressed: () async {
+                      final file = await _showImageSourceDialog();
+                      if (file != null) {
+                        await _updateAvatar(file);
+                      }
+                    },
+                    style: IconButton.styleFrom(
+                      padding: const EdgeInsets.all(4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size.zero,
+                      backgroundColor: Co.purple,
+                    ),
+                    icon: SvgPicture.asset(
+                      Assets.assetsSvgEdit,
+                      height: 18,
+                      width: 18,
+                    ),
                   ),
-                  icon: SvgPicture.asset(Assets.assetsSvgEdit, height: 18, width: 18),
                 ),
               ],
             ),
@@ -80,11 +96,14 @@ class _ProfileHeaderWidgetState extends State<_ProfileHeaderWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(widget.client.clientName, style: context.style16500),
+                  Text(widget.client.clientName, style: context.style20500),
                   // if (widget.client.email != null)
                   //   Text(widget.client.email ?? L10n.tr().notSetYet, style: context.style16500.copyWith(color: Colors.black87)),
                   // const SizedBox.shrink(),
-                  Text('${L10n.tr().memberSince} ${widget.client.formatedCreatedAt}', style: context.style16500),
+                  Text(
+                    '${L10n.tr().memberSince} ${widget.client.formatedCreatedAt}',
+                    style: context.style12400,
+                  ),
                 ],
               ),
             ),

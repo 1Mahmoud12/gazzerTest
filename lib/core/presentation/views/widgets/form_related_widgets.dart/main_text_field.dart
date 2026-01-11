@@ -112,6 +112,7 @@ class _MainTextFieldState extends State<MainTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.isDarkMode;
     final iconContraints = widget.iconsConstraints ?? const BoxConstraints(minHeight: 25, maxHeight: 40, maxWidth: 40, minWidth: 25);
     return Material(
       color: Colors.transparent,
@@ -172,7 +173,7 @@ class _MainTextFieldState extends State<MainTextField> {
               suffixIcon: Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: getSiffixIcon(value)),
               suffix: widget.suffixWidget,
               filled: widget.isFilled || widget.bgColor != null,
-              fillColor: widget.bgColor ?? Co.white,
+              fillColor: widget.bgColor ??  (isDarkMode ? Co.darkModeSubLayer : Co.lightModeSubLayer),
               enabled: widget.enabled,
 
               focusedBorder: OutlineInputBorder(

@@ -18,6 +18,7 @@ import 'package:gazzer/core/presentation/views/widgets/helper_widgets/alerts.dar
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 import 'package:gazzer/core/presentation/views/widgets/helper_widgets/image_source_picker_bottom_sheet.dart';
 import 'package:gazzer/di.dart';
+import 'package:gazzer/features/addresses/domain/address_entity.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_bus.dart';
 import 'package:gazzer/features/addresses/presentation/bus/addresses_events.dart';
 import 'package:gazzer/features/addresses/presentation/views/add_edit_address_screen.dart';
@@ -130,10 +131,11 @@ class ProfileContentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-       cubit.client = ClientEntity.domy();
-    final isDarkMode = context.read<AppSettingsCubit>().state.isDarkMode;
+    cubit.client = ClientEntity.domy();
+    final isDarkMode = context.isDarkMode;
     final textColor = isDarkMode ? Colors.white : Co.purple;
     final iconColor = isDarkMode ? Colors.white : Co.black;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -146,41 +148,42 @@ class ProfileContentBody extends StatelessWidget {
                 spacing: 12,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SvgPicture.asset(
+                    allTiersDetails[cubit.client!.tierName!.toLowerCase()]!
+                        .logo,
+                  ),
                   Text(
                     LoyaltyTierName.fromString(
                       cubit.client!.tierName!,
                     ).getDisplayName(context),
                     style: context.style16500.copyWith(color: Co.white),
                   ),
-                  SvgPicture.asset(
-                    allTiersDetails[cubit.client!.tierName!.toLowerCase()]!
-                        .logo,
-                  ),
                 ],
               ),
             ),
+          const VerticalSpacing(18),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
-
-              
               children: [
-
-               
-
-               
                 if (cubit.client != null) ...[
                   _ProfileHeaderWidget(cubit.client!),
+                  const VerticalSpacing(36),
+                  _AccountInformationComponent(
+                    cubit.client!,
+                    textColor: textColor,
+                    iconColor: iconColor,
+                  ),
                   const VerticalSpacing(12),
-                  _AccountInformationComponent(cubit.client!),
+                  _ProfileAddressesComponent(
+                    iconColor: iconColor,
+                  ),
                   const VerticalSpacing(12),
-                  _ProfileAddressesComponent(),
+                  _ProfileNavigationComponent(iconColor: iconColor),
                   const VerticalSpacing(12),
-                  _ProfileNavigationComponent(),
+                  _SavedCardComponent(iconColor: iconColor),
                   const VerticalSpacing(12),
-                  _SavedCardComponent(),
-                  const VerticalSpacing(12),
-                  _InviteEarnComponent(),
+                  _InviteEarnComponent(iconColor: iconColor),
                   const VerticalSpacing(12),
                 ],
                 _SettingsPreferenceComponent(
@@ -192,7 +195,7 @@ class ProfileContentBody extends StatelessWidget {
 
                 if (cubit.client != null) ...[
                   _SignOutButton(cubit: cubit),
-                  const VerticalSpacing(12),
+                  const VerticalSpacing(24),
                   _DeleteAccountItem(cubit: cubit),
                 ] else ...[
                   MainBtn(
@@ -210,13 +213,12 @@ class ProfileContentBody extends StatelessWidget {
                       spacing: 16,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(Assets.signOutIc),
-
                         Text(
                           L10n.tr().login,
                           style: context.style16400.copyWith(color: Co.white),
                           textAlign: TextAlign.center,
                         ),
+                        SvgPicture.asset(Assets.signOutIc),
                       ],
                     ),
                   ),

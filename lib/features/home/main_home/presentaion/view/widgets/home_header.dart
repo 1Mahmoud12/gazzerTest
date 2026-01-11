@@ -16,7 +16,7 @@ class _HomeHeaderState extends State<_HomeHeader> {
   @override
   void initState() {
     super.initState();
-    isDarkMode = context.read<AppSettingsCubit>().state.isDarkMode;
+    isDarkMode = context.isDarkMode;
     iconColor = isDarkMode ? Colors.white : Co.purple;
     // Check for cached location after the first frame is built
     WidgetsBinding.instance.addPostFrameCallback((_) {

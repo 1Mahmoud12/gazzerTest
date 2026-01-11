@@ -40,6 +40,8 @@ class Co {
   static const w900 = Color(0xFFF0F0F0);
   static const dark = Color(0xFF2B2B2B);
   static const gryPrimary = Color(0xFF9F93C3);
+  static const lightModeSubLayer = Color(0xFFF0F0F0);
+
 
   // for decorations
   static const shadowColor = Color(0xFFFAF5FF);
@@ -67,5 +69,7 @@ class Co {
 
   //dark colors
   static const darkModeStroke = Color(0xFF2F2A3A);
+  static const darkModeLayer = Color(0xFF1E1E1E);
+  static const darkModeSubLayer = Color(0xFF2C2C2C);
 
 }

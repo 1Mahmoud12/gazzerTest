@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
 
 /// A generic dropdown widget that displays a list of items and allows selection
@@ -26,7 +27,8 @@ class CustomDropdown<T> extends StatefulWidget {
     this.maxWidth = true,
     this.addSpacer = true,
     this.enabled = true,
-    this.onTap, this.iconColor,
+    this.onTap,
+    this.iconColor,
   });
 
   /// List of items to display in the dropdown
@@ -131,7 +133,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
           border: Border.all(color: widget.borderColor ?? Co.lightPurple),
         ),
         child: PopupMenuButton<T>(
-          color: Co.white,
+          color: context.isDarkMode ? Co.darkModeLayer : Co.white,
 
           elevation: 4,
           enabled: widget.enabled && widget.onTap == null,

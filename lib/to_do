@@ -1,3 +1,5 @@
 
 
 _ delet the domey clint in profile screen {   cubit.client = ClientEntity.domy();  }
+
+_ delet the domey address in _ProfileAddressesComponent {   final addresses = List.generate(4, (id) => AddressEntity.domy());  }

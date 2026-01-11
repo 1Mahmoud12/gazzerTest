@@ -176,8 +176,13 @@ class _SignOutButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              L10n.tr().signOut,
+              style: context.style16400.copyWith(color: Co.white),
+            ),
+            const HorizontalSpacing(8),
             RotatedBox(
-              quarterTurns: L10n.isAr(context) ? 0 : 2,
+              quarterTurns: L10n.isAr(context) ? 2 : 0,
               child: SvgPicture.asset(
                 Assets.signOutIc,
                 height: 20,
@@ -186,14 +191,6 @@ class _SignOutButton extends StatelessWidget {
                   Colors.white,
                   BlendMode.srcIn,
                 ),
-              ),
-            ),
-            const HorizontalSpacing(8),
-            Text(
-              L10n.tr().signOut,
-              style: context.style14400.copyWith(
-                color: Co.white,
-                fontWeight: TStyle.medium,
               ),
             ),
           ],
@@ -227,11 +224,10 @@ class _DeleteAccountItem extends StatelessWidget {
               width: 24,
               colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn),
             ),
+
             const HorizontalSpacing(16),
-            Text(
-              L10n.tr().deleteAccount,
-              style: context.style16500.copyWith(color: Colors.black87),
-            ),
+
+            Text(L10n.tr().deleteAccount, style: context.style16400),
           ],
         ),
       ),
