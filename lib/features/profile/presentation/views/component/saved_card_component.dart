@@ -1,8 +1,9 @@
 part of '../profile_screen.dart';
 
 class _SavedCardComponent extends StatelessWidget {
-  const _SavedCardComponent({required this.iconColor});
-final Color? iconColor;
+  const _SavedCardComponent({required this.iconColor, this.textColor});
+  final Color? iconColor;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -11,9 +12,12 @@ final Color? iconColor;
       },
       child: IgnorePointer(
         child: ExpandableWidget(
-          
+          textColor: textColor,
           arrowColor: iconColor,
-          title: L10n.tr().saved_cards, icon: Assets.savedCardsIc, body: const SizedBox()),
+          title: L10n.tr().saved_cards,
+          icon: Assets.savedCardsIc,
+          body: const SizedBox(),
+        ),
       ),
     );
   }

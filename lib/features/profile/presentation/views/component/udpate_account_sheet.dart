@@ -52,7 +52,12 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
         spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(L10n.tr().editAccountInformation, style: context.style16500),
+          Text(
+            L10n.tr().editAccountInformation,
+            style: context.style16500.copyWith(
+              color: !context.isDarkMode ? Co.purple : null,
+            ),
+          ),
           Divider(
             height: 8,
             thickness: 1,
@@ -84,10 +89,9 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             ),
                           ),
                           MainTextField(
-                            
                             controller: _nameController,
                             hintText: L10n.tr().yourFullName,
-                            
+
                             showBorder: false,
 
                             validator: (v) {
@@ -127,7 +131,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: Text(
                               L10n.tr().emailAddress,
-                              style: context.style16500,
+                              style: context.style16400,
                             ),
                           ),
                           Directionality(
@@ -172,7 +176,7 @@ class _UdpateAccountSheetState extends State<UdpateAccountSheet> {
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: Text(
                               L10n.tr().mobileNumber,
-                              style: context.style16500,
+                              style: context.style16400,
                             ),
                           ),
                           Directionality(

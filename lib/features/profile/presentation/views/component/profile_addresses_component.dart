@@ -1,13 +1,15 @@
 part of 'package:gazzer/features/profile/presentation/views/profile_screen.dart';
 
 class _ProfileAddressesComponent extends StatelessWidget {
-  const _ProfileAddressesComponent({this.iconColor});
+  const _ProfileAddressesComponent({this.iconColor, this.textColor});
 
   final Color? iconColor;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return ExpandableWidget(
       arrowColor: iconColor,
+      textColor: textColor,
       title: L10n.tr().addresses,
       icon: Assets.addressIc,
       body: Column(

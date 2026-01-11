@@ -176,26 +176,26 @@ class _MainTextFieldState extends State<MainTextField> {
               fillColor: widget.bgColor ??  (isDarkMode ? Co.darkModeSubLayer : Co.lightModeSubLayer),
               enabled: widget.enabled,
 
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: widget.showBorder ? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.purple),
-              ),
-              errorBorder: OutlineInputBorder(
+              ) : InputBorder.none,
+              errorBorder: widget.showBorder ? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: const BorderSide(color: Co.red),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
+              ) : InputBorder.none,
+              focusedErrorBorder: widget.showBorder ? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.red),
-              ),
-              enabledBorder: OutlineInputBorder(
+              ) : InputBorder.none,
+              enabledBorder: widget.showBorder ? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
                 borderSide: BorderSide(color: widget.borderColor ?? Co.lightGrey),
-              ),
-              disabledBorder: OutlineInputBorder(
+              ) : InputBorder.none,
+              disabledBorder: widget.showBorder ? OutlineInputBorder(
                 borderSide: BorderSide(color: widget.disabledColor ?? Co.grey),
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 24),
-              ),
+              ) : InputBorder.none,
             ),
           );
         },

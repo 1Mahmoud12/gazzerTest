@@ -1,11 +1,13 @@
 part of '../profile_screen.dart';
 
 class _ProfileNavigationComponent extends StatelessWidget {
-  const _ProfileNavigationComponent({required this.iconColor});
+  const _ProfileNavigationComponent({required this.iconColor, this.textColor});
   final Color? iconColor;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return ExpandableWidget(
+      textColor: textColor,
       arrowColor: iconColor,
       title: L10n.tr().loyaltyProgram,
       icon: Assets.loyaltyIc,

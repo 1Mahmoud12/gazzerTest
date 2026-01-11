@@ -177,13 +177,14 @@ class ProfileContentBody extends StatelessWidget {
                   const VerticalSpacing(12),
                   _ProfileAddressesComponent(
                     iconColor: iconColor,
+                     textColor: textColor,
                   ),
                   const VerticalSpacing(12),
-                  _ProfileNavigationComponent(iconColor: iconColor),
+                  _ProfileNavigationComponent(iconColor: iconColor , textColor: textColor),
                   const VerticalSpacing(12),
-                  _SavedCardComponent(iconColor: iconColor),
+                  _SavedCardComponent(iconColor: iconColor, textColor: textColor),
                   const VerticalSpacing(12),
-                  _InviteEarnComponent(iconColor: iconColor),
+                  _InviteEarnComponent(iconColor: iconColor, textColor: textColor),
                   const VerticalSpacing(12),
                 ],
                 _SettingsPreferenceComponent(

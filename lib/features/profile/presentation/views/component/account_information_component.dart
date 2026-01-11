@@ -122,7 +122,7 @@ class ProfileInformationRow extends StatelessWidget {
               Text(
                 title,
                 style: context.style16400.copyWith(
-                  color: !context.isDarkMode ? Co.darkGrey : null,
+                  color: context.isDarkMode ? Co.lightGrey : Co.darkGrey,
                 ),
               ),
               FittedBox(

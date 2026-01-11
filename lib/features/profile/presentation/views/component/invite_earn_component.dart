@@ -1,9 +1,9 @@
 part of '../profile_screen.dart';
 
 class _InviteEarnComponent extends StatelessWidget {
-  const _InviteEarnComponent({required this.iconColor});
+  const _InviteEarnComponent({required this.iconColor, this.textColor});
   final Color? iconColor;
-
+final Color? textColor;
   Future<void> _copyCode(BuildContext context, String code) async {
     await Clipboard.setData(ClipboardData(text: code));
     Alerts.showToast(L10n.tr().codeAppliedSuccessfully, error: false);

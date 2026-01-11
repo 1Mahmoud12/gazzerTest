@@ -23,7 +23,8 @@ class ExpandableWidget extends StatefulWidget {
     this.arrowColor,
     this.borderColor,
     this.borderRadius,
-    this.padding, this.textColor,
+    this.padding,
+    this.textColor,
   });
 
   /// The title text to display
@@ -46,7 +47,6 @@ class ExpandableWidget extends StatefulWidget {
 
   /// Style for the title text
   final TextStyle? titleStyle;
-
 
   /// Color for the arrow icon
   final Color? arrowColor;
@@ -102,20 +102,42 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
             padding: widget.padding ?? const EdgeInsets.all(16),
             child: Row(
               children: [
-                if (widget.icon != null) ...[SvgPicture.asset(widget.icon!), const HorizontalSpacing(12)],
+                if (widget.icon != null) ...[
+                  SvgPicture.asset(widget.icon!),
+                  const HorizontalSpacing(12),
+                ],
                 Expanded(
-                  child: widget.titleWidget ?? Text(widget.title, style: widget.titleStyle ?? context.style16500.copyWith(color: widget.textColor)),
+                  child:
+                      widget.titleWidget ??
+                      Text(
+                        widget.title,
+                        style:
+                            widget.titleStyle ??
+                            context.style16500.copyWith(
+                              color: widget.textColor,
+                            ),
+                      ),
                 ),
                 RotatedBox(
                   quarterTurns: _isExpanded ? 0 : 2,
-                  child: SvgPicture.asset(Assets.arrowUp, colorFilter: ColorFilter.mode(widget.arrowColor ?? Co.purple, BlendMode.srcIn)),
+                  child: SvgPicture.asset(
+                    Assets.arrowUp,
+                    colorFilter: ColorFilter.mode(
+                      widget.arrowColor ?? Co.purple,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
         ),
         // Body section - shown when expanded
-        if (_isExpanded) Padding(padding: widget.padding ?? const EdgeInsets.all(16), child: widget.body),
+        if (_isExpanded)
+          Padding(
+            padding: widget.padding ?? const EdgeInsets.all(16),
+            child: widget.body,
+          ),
       ],
     );
   }
