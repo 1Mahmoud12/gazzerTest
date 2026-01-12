@@ -186,7 +186,7 @@
   "reason": "Reason",
   "other": "Other",
   "enterReson": "Enter Reason",
-  "currentPassword": "Current Password",
+  "currentPassword": "Old Password",
   "newPassword": "New Password",
   "profileUpdatedSuccessfully": "Profile updated Successfully",
   "youHaveNoAddressesYet": "You have no addresses yet",
@@ -880,7 +880,9 @@
   "offers": "Offers",
   "system": "System",
   "today": "Today",
-  "previous_notification": "Previous Notification"
+  "previous_notification": "Previous Notification",
+  "reset_your_password": "Reset your password",
+  "confirm_address":"Confirm Address"
 
 
 }

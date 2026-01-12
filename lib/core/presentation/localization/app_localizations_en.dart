@@ -449,7 +449,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterReson => 'Enter Reason';
 
   @override
-  String get currentPassword => 'Current Password';
+  String get currentPassword => 'Old Password';
 
   @override
   String get newPassword => 'New Password';
@@ -2187,4 +2187,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get previous_notification => 'Previous Notification';
+
+  @override
+  String get reset_your_password => 'Reset your password';
+
+  @override
+  String get confirm_address => 'Confirm Address';
 }

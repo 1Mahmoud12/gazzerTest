@@ -19,7 +19,11 @@ part 'select_location_screen.g.dart';
 class SelectLocationRoute extends GoRouteData with _$SelectLocationRoute {
   const SelectLocationRoute(this.$extra);
 
-  final ({LatLng? initLocation, Function(BuildContext context, LatLng) onSubmit}) $extra;
+  final ({
+    LatLng? initLocation,
+    Function(BuildContext context, LatLng) onSubmit,
+  })
+  $extra;
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return SelectLocationScreen(extra: $extra);
@@ -29,7 +33,11 @@ class SelectLocationRoute extends GoRouteData with _$SelectLocationRoute {
 class SelectLocationScreen extends StatefulWidget {
   const SelectLocationScreen({super.key, required this.extra});
   static const route = '/select-location';
-  final ({LatLng? initLocation, Function(BuildContext context, LatLng) onSubmit}) extra;
+  final ({
+    LatLng? initLocation,
+    Function(BuildContext context, LatLng) onSubmit,
+  })
+  extra;
   @override
   State<SelectLocationScreen> createState() => _SelectLocationScreenState();
 }
@@ -46,7 +54,8 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
       return false;
     }
     permission = await Geolocator.checkPermission();
-    if (!(permission == LocationPermission.whileInUse || permission == LocationPermission.always)) {
+    if (!(permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always)) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) return false;
       if (permission == LocationPermission.deniedForever) return false;
@@ -78,7 +87,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: MainAppBar(title: L10n.tr().selectAddress),
       body: FutureBuilder<LatLng?>(
         future: getCurrentPosition(false),
         builder: (context, location) {
@@ -89,7 +98,10 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                 const Align(
                   alignment: AlignmentDirectional.topStart,
                   child: SafeArea(
-                    child: Padding(padding: EdgeInsets.fromLTRB(12, 12, 12, 0), child: BackButton()),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
+                      child: BackButton(),
+                    ),
                   ),
                 ),
                 const Center(child: AdaptiveProgressIndicator()),
@@ -97,17 +109,23 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                 Stack(
                   alignment: AlignmentDirectional.bottomEnd,
                   children: [
+                    VerticalSpacing(24),
                     GoogleMap(
                       onMapCreated: (controller) {
                         mapController = controller;
-                        initLocation.value = location.data ?? const LatLng(30.0444, 31.2357);
+                        initLocation.value =
+                            location.data ?? const LatLng(30.0444, 31.2357);
                       },
-                      initialCameraPosition: CameraPosition(target: location.data ?? const LatLng(30.0444, 31.2357), zoom: 13),
+                      initialCameraPosition: CameraPosition(
+                        target: location.data ?? const LatLng(30.0444, 31.2357),
+                        zoom: 13,
+                      ),
                       zoomControlsEnabled: false,
                       compassEnabled: false,
                       myLocationButtonEnabled: false,
                       mapToolbarEnabled: false,
-                      onCameraMove: (position) => initLocation.value = position.target,
+                      onCameraMove: (position) =>
+                          initLocation.value = position.target,
                       onTap: (latlng) {},
                     ),
                     Column(
@@ -120,7 +138,11 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                               isgetttingCurrent.value = true;
                               final location = await getCurrentPosition(true);
                               if (location != null) {
-                                mapController?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: location, zoom: 17)));
+                                mapController?.animateCamera(
+                                  CameraUpdate.newCameraPosition(
+                                    CameraPosition(target: location, zoom: 17),
+                                  ),
+                                );
                               }
                               isgetttingCurrent.value = false;
                             },
@@ -129,7 +151,11 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                               builder: (context, value, child) => CircleAvatar(
                                 backgroundColor: Co.purple,
                                 radius: 25,
-                                child: value == true ? const AdaptiveProgressIndicator() : SvgPicture.asset(Assets.currentPositionIc),
+                                child: value == true
+                                    ? const AdaptiveProgressIndicator()
+                                    : SvgPicture.asset(
+                                        Assets.currentPositionIc,
+                                      ),
                               ),
                             ),
                           ),
@@ -144,21 +170,29 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                     child: CircleAvatar(
                       radius: 35,
                       backgroundColor: Co.secondary.withOpacityNew(.74),
-                      child: Padding(padding: const EdgeInsets.all(16), child: SvgPicture.asset(Assets.pinIc)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: SvgPicture.asset(Assets.pinIc),
+                      ),
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: MainAppBar(title: L10n.tr().selectAddress, backgroundColor: Co.white),
-                    ),
-                  ],
-                ),
+                // Column(
+                //   children: [
+                //     Align(
+                //       alignment: Alignment.topCenter,
+                //       child: MainAppBar(
+                //         title: L10n.tr().selectAddress,
+                //         backgroundColor: context.isDarkMode
+                //             ? Co.darkBg
+                //             : Co.white,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
               Container(
-                color: Co.white,
+                color: context.isDarkMode ? Co.darkBg : Co.white,
                 height: 150,
                 padding: const EdgeInsets.all(16),
                 alignment: Alignment.bottomCenter,
@@ -172,7 +206,10 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                         onPressed: () {
                           widget.extra.onSubmit(context, initLocation.value!);
                         },
-                        child: Text(L10n.tr().confirm, style: context.style16500.copyWith(color: Co.white)),
+                        child: Text(
+                          L10n.tr().confirm,
+                          style: context.style16500.copyWith(color: Co.white),
+                        ),
                       ),
                     ],
                   ),

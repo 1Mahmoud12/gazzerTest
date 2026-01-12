@@ -57,7 +57,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  MainAppBar(),
+      appBar: MainAppBar(),
       // backgroundColor: Co.secText,
       body: Form(
         key: _formKey,
@@ -72,29 +72,44 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
             ),
             Text(
               L10n.tr().resetPassword,
-              style: context.style32700.copyWith(color: Co.purple),
+              style: context.style24500.copyWith(
+                color: context.isDarkMode ? Co.white : Co.purple,
+              ),
               textAlign: TextAlign.center,
             ),
+            Text(
+              L10n.tr().reset_your_password,
+              style: context.style14400.copyWith(
+                color: context.isDarkMode ? Co.lightGrey : Co.gr100,
+              ),
+              textAlign: TextAlign.center,
+            ),
+
             const VerticalSpacing(32),
             AutofillGroup(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(L10n.tr().currentPassword, style: context.style14400),
+                  Text(L10n.tr().currentPassword, style: context.style16400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: currentPassword,
                     hintText: L10n.tr().currentPassword,
                     bgColor: Colors.transparent,
                     isPassword: true,
-                    prefix: const VectorGraphicsWidget(Assets.lockIc),
-
+                    prefix: const VectorGraphicsWidget(
+                      Assets.lockIc,
+                      colorFilter: ColorFilter.mode(
+                        Co.darkGrey,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                     validator: Validators.notEmpty,
                     autofillHints: const [AutofillHints.newPassword],
                   ),
 
                   const VerticalSpacing(16),
-                  Text(L10n.tr().newPassword, style: context.style14400),
+                  Text(L10n.tr().newPassword, style: context.style16400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: password,
@@ -107,7 +122,7 @@ class _UpodatePasswordScreenState extends State<UpodatePasswordScreen> {
                     autofillHints: const [AutofillHints.newPassword],
                   ),
                   const VerticalSpacing(16),
-                  Text(L10n.tr().confirmPassword, style: context.style14400),
+                  Text(L10n.tr().confirmPassword, style: context.style16400),
                   const VerticalSpacing(8),
                   MainTextField(
                     controller: confirmPassword,

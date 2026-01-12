@@ -59,9 +59,17 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
       backgroundColor: backgroundColor,
+
       title: title == null
           ? null
-          : Text(title!, style: titleStyle ?? context.style24500),
+          : Text(
+              title!,
+              style:
+                  titleStyle ??
+                  context.style24500.copyWith(
+                    color: isDarkMode ? Colors.white : Co.purple,
+                  ),
+            ),
       leadingWidth: shouldShowLeading ? 65 : 0,
       leading: shouldShowLeading
           ? IconButton(

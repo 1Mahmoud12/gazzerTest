@@ -867,7 +867,11 @@
     "offers": "العروض",
     "system": "النظام",
     "today": "اليوم",
-    "previous_notification": "الإشعارات السابقة"
+    "previous_notification": "الإشعارات السابقة",
+
+
+      "reset_your_password": "Reset your password ",
+ "confirm_address":"Confirm Address"
 
 
 

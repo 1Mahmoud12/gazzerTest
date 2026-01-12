@@ -935,7 +935,7 @@ abstract class AppLocalizations {
   /// No description provided for @currentPassword.
   ///
   /// In en, this message translates to:
-  /// **'Current Password'**
+  /// **'Old Password'**
   String get currentPassword;
 
   /// No description provided for @newPassword.
@@ -4243,6 +4243,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Previous Notification'**
   String get previous_notification;
+
+  /// No description provided for @reset_your_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset your password'**
+  String get reset_your_password;
+
+  /// No description provided for @confirm_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Address'**
+  String get confirm_address;
 }
 
 class _AppLocalizationsDelegate

@@ -2177,4 +2177,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get previous_notification => 'الإشعارات السابقة';
+
+  @override
+  String get reset_your_password => 'Reset your password ';
+
+  @override
+  String get confirm_address => 'Confirm Address';
 }

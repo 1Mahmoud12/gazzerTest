@@ -165,7 +165,7 @@ class _MainTextFieldState extends State<MainTextField> {
                       widget.hintText!,
                       style:
                           widget.style ??
-                          context.style14400.copyWith(color: Co.darkGrey),
+                          context.style16400.copyWith(color: Co.darkGrey),
                       maxLines: 1,
                     ),
               helperMaxLines: 1,
@@ -256,7 +256,7 @@ class _MainTextFieldState extends State<MainTextField> {
         onTap: () => isObscure.value = !value,
         child: Icon(
           value ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill,
-          color: Co.dark,
+          color: Co.darkGrey,
           size: 20,
         ),
       );
