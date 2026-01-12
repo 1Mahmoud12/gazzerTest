@@ -840,9 +840,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get walletNewAchievements => 'For new achievements!';
 
   @override
-  String walletBalanceLabel(String amount, String currency) {
-    return 'Your Balance : $amount $currency';
-  }
+  String get walletBalanceLabel => 'Your Balance : ';
 
   @override
   String get walletAddFunds => 'Add Funds';

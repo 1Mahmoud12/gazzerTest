@@ -837,9 +837,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get walletNewAchievements => 'للمزيد من الإنجازات!';
 
   @override
-  String walletBalanceLabel(String amount, String currency) {
-    return 'رصيدك : $amount $currency';
-  }
+  String get walletBalanceLabel => 'رصيدك : null null';
 
   @override
   String get walletAddFunds => 'شحن الرصيد';

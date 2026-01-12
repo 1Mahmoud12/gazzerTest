@@ -315,17 +315,8 @@
   "wallet_________________Start": "__________________",
   "walletKeepItUp": "Keep it up",
   "walletNewAchievements": "For new achievements!",
-  "walletBalanceLabel": "Your Balance : {amount} {currency}",
-  "@walletBalanceLabel": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
+  "walletBalanceLabel": "Your Balance : ",
+  
   "walletAddFunds": "Add Funds",
   "walletRechargeViaCard": "Recharge Via Card",
   "walletEnterAmount": "Enter Your Amount",

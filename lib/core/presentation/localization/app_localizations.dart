@@ -1709,8 +1709,8 @@ abstract class AppLocalizations {
   /// No description provided for @walletBalanceLabel.
   ///
   /// In en, this message translates to:
-  /// **'Your Balance : {amount} {currency}'**
-  String walletBalanceLabel(String amount, String currency);
+  /// **'Your Balance : '**
+  String get walletBalanceLabel;
 
   /// No description provided for @walletAddFunds.
   ///

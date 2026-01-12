@@ -43,13 +43,29 @@ class BalanceWidget extends StatelessWidget {
                 ),
 
                 const VerticalSpacing(8),
-                Text(
-                  L10n.tr().walletBalanceLabel(balanceText, L10n.tr().egp),
-                  style: context.style16500.copyWith(
+                Text.rich(
+                  TextSpan(
+                    text: L10n.tr().walletBalanceLabel,
+                    style: context.style16500.copyWith(
                     color: Co.white,
                     fontWeight: TStyle.medium,
                   ),
+                    children: [
+                      TextSpan(
+                        text: ' $balanceText ${L10n.tr().egp}',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
+
+                // Text(
+                //   L10n.tr().walletBalanceLabel(balanceText, L10n.tr().egp),
+                //   style: context.style16500.copyWith(
+                //     color: Co.white,
+                //     fontWeight: TStyle.medium,
+                //   ),
+                // ),
               ],
             ),
           ),
