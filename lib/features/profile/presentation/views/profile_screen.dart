@@ -98,6 +98,7 @@ class ProfileScreen extends StatelessWidget {
               isLoading: state is ProfileLoadingStates,
               child: Scaffold(
                 appBar: MainAppBar(),
+
                 body: SafeArea(
                   child: BlocConsumer<AppSettingsCubit, AppSettingsState>(
                     listenWhen: (previous, current) =>
@@ -177,14 +178,23 @@ class ProfileContentBody extends StatelessWidget {
                   const VerticalSpacing(12),
                   _ProfileAddressesComponent(
                     iconColor: iconColor,
-                     textColor: textColor,
+                    textColor: textColor,
                   ),
                   const VerticalSpacing(12),
-                  _ProfileNavigationComponent(iconColor: iconColor , textColor: textColor),
+                  _ProfileNavigationComponent(
+                    iconColor: iconColor,
+                    textColor: textColor,
+                  ),
                   const VerticalSpacing(12),
-                  _SavedCardComponent(iconColor: iconColor, textColor: textColor),
+                  _SavedCardComponent(
+                    iconColor: iconColor,
+                    textColor: textColor,
+                  ),
                   const VerticalSpacing(12),
-                  _InviteEarnComponent(iconColor: iconColor, textColor: textColor),
+                  _InviteEarnComponent(
+                    iconColor: iconColor,
+                    textColor: textColor,
+                  ),
                   const VerticalSpacing(12),
                 ],
                 _SettingsPreferenceComponent(

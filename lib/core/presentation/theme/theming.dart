@@ -9,7 +9,6 @@ import '../views/widgets/form_related_widgets.dart/main_text_field.dart';
 class AppTheme {
   AppTheme._();
 
-
   static final lightTheme = ThemeData(
     pageTransitionsTheme: PageTransitionsTheme(
       builders: {
@@ -47,6 +46,7 @@ class AppTheme {
     ///
     ///
     appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(color: Co.black),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Co.bg,
         statusBarBrightness: Brightness.light,
@@ -108,6 +108,7 @@ class AppTheme {
     ///
     ///
     appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(color: Co.white),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Co.bg,
         statusBarBrightness: Brightness.light,
@@ -128,7 +129,9 @@ class AppTheme {
       ),
     ),
     dialogTheme: const DialogThemeData(backgroundColor: Color(0xffF0F0F0)),
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Co.darkModeLayer),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Co.darkModeLayer,
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.transparent,
     ),

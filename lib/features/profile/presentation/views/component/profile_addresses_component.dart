@@ -64,7 +64,7 @@ class _ProfileAddressesComponent extends StatelessWidget {
             },
             child: Text(
               L10n.tr().addNewAddress,
-              style: context.style14400,
+              style: context.style14400.copyWith(color: Co.white),
               textAlign: TextAlign.center,
             ),
           ),

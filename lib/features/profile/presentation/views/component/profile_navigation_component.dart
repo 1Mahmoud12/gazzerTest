@@ -1,9 +1,12 @@
 part of '../profile_screen.dart';
 
 class _ProfileNavigationComponent extends StatelessWidget {
-  const _ProfileNavigationComponent({required this.iconColor, this.textColor});
+  const _ProfileNavigationComponent({
+    required this.iconColor,
+    required this.textColor,
+  });
   final Color? iconColor;
-  final Color? textColor;
+  final Color textColor;
   @override
   Widget build(BuildContext context) {
     return ExpandableWidget(
@@ -15,12 +18,14 @@ class _ProfileNavigationComponent extends StatelessWidget {
         spacing: 12,
         children: [
           _NavigationItem(
+            textColor: textColor,
             title: L10n.tr().loyaltyProgram,
             onTap: () {
               context.push(LoyaltyProgramHeroOneScreen.route);
             },
           ),
           _NavigationItem(
+            textColor: textColor,
             title: L10n.tr().wallet,
             onTap: () {
               context.push(WalletScreen.route);
@@ -33,9 +38,14 @@ class _ProfileNavigationComponent extends StatelessWidget {
 }
 
 class _NavigationItem extends StatelessWidget {
-  const _NavigationItem({required this.title, required this.onTap});
+  const _NavigationItem({
+    required this.title,
+    required this.onTap,
+    required this.textColor,
+  });
 
   final String title;
+  final Color textColor;
   final VoidCallback onTap;
 
   @override
@@ -47,7 +57,12 @@ class _NavigationItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           children: [
-            Expanded(child: Text(title, style: context.style16500)),
+            Expanded(
+              child: Text(
+                title,
+                style: context.style14400.copyWith(color: textColor),
+              ),
+            ),
             RotatedBox(
               quarterTurns: L10n.isAr(context) ? 3 : 1,
               child: SvgPicture.asset(

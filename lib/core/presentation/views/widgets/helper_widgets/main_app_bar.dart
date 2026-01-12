@@ -76,7 +76,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: onBack ?? () => Navigator.pop(context),
               icon: Icon(
                 Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                color: Co.black,
+                color: context.isDarkMode ? Colors.white : Co.black,
               ),
             )
           : null,

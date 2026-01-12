@@ -88,109 +88,107 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(title: L10n.tr().selectAddress),
+
       body: FutureBuilder<LatLng?>(
         future: getCurrentPosition(false),
         builder: (context, location) {
-          return Stack(
-            alignment: Alignment.bottomCenter,
+          return Column(
             children: [
-              if (location.connectionState == ConnectionState.waiting) ...[
-                const Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
-                      child: BackButton(),
-                    ),
-                  ),
-                ),
-                const Center(child: AdaptiveProgressIndicator()),
-              ] else ...[
-                Stack(
-                  alignment: AlignmentDirectional.bottomEnd,
+              Expanded(
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
                   children: [
-                    VerticalSpacing(24),
-                    GoogleMap(
-                      onMapCreated: (controller) {
-                        mapController = controller;
-                        initLocation.value =
-                            location.data ?? const LatLng(30.0444, 31.2357);
-                      },
-                      initialCameraPosition: CameraPosition(
-                        target: location.data ?? const LatLng(30.0444, 31.2357),
-                        zoom: 13,
-                      ),
-                      zoomControlsEnabled: false,
-                      compassEnabled: false,
-                      myLocationButtonEnabled: false,
-                      mapToolbarEnabled: false,
-                      onCameraMove: (position) =>
-                          initLocation.value = position.target,
-                      onTap: (latlng) {},
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: InkWell(
-                            onTap: () async {
-                              isgetttingCurrent.value = true;
-                              final location = await getCurrentPosition(true);
-                              if (location != null) {
-                                mapController?.animateCamera(
-                                  CameraUpdate.newCameraPosition(
-                                    CameraPosition(target: location, zoom: 17),
-                                  ),
-                                );
-                              }
-                              isgetttingCurrent.value = false;
-                            },
-                            child: ValueListenableBuilder<bool>(
-                              valueListenable: isgetttingCurrent,
-                              builder: (context, value, child) => CircleAvatar(
-                                backgroundColor: Co.purple,
-                                radius: 25,
-                                child: value == true
-                                    ? const AdaptiveProgressIndicator()
-                                    : SvgPicture.asset(
-                                        Assets.currentPositionIc,
-                                      ),
+                    if (location.connectionState ==
+                        ConnectionState.waiting) ...[
+                      const Center(child: AdaptiveProgressIndicator()),
+                    ] else ...[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
+                        child: Stack(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          children: [
+                            GoogleMap(
+                              onMapCreated: (controller) {
+                                mapController = controller;
+                                initLocation.value =
+                                    location.data ??
+                                    const LatLng(30.0444, 31.2357);
+                              },
+                              initialCameraPosition: CameraPosition(
+                                target:
+                                    location.data ??
+                                    const LatLng(30.0444, 31.2357),
+                                zoom: 13,
                               ),
+                              zoomControlsEnabled: false,
+                              compassEnabled: false,
+                              myLocationButtonEnabled: false,
+                              mapToolbarEnabled: false,
+                              onCameraMove: (position) =>
+                                  initLocation.value = position.target,
+                              onTap: (latlng) {},
+                            ),
+
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      isgetttingCurrent.value = true;
+                                      final location = await getCurrentPosition(
+                                        true,
+                                      );
+                                      if (location != null) {
+                                        mapController?.animateCamera(
+                                          CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                              target: location,
+                                              zoom: 17,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      isgetttingCurrent.value = false;
+                                    },
+                                    child: ValueListenableBuilder<bool>(
+                                      valueListenable: isgetttingCurrent,
+                                      builder: (context, value, child) =>
+                                          CircleAvatar(
+                                            backgroundColor: Co.purple,
+                                            radius: 25,
+                                            child: value == true
+                                                ? const AdaptiveProgressIndicator()
+                                                : SvgPicture.asset(
+                                                    Assets.currentPositionIc,
+                                                  ),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SafeArea(
+                        child: Align(
+                          child: CircleAvatar(
+                            radius: 35,
+                            backgroundColor: Co.secondary.withOpacityNew(.74),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: SvgPicture.asset(Assets.pinIc),
                             ),
                           ),
                         ),
-                        const VerticalSpacing(150),
-                      ],
-                    ),
+                      ),
+                    ],
                   ],
                 ),
-                SafeArea(
-                  child: Align(
-                    child: CircleAvatar(
-                      radius: 35,
-                      backgroundColor: Co.secondary.withOpacityNew(.74),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: SvgPicture.asset(Assets.pinIc),
-                      ),
-                    ),
-                  ),
-                ),
-                // Column(
-                //   children: [
-                //     Align(
-                //       alignment: Alignment.topCenter,
-                //       child: MainAppBar(
-                //         title: L10n.tr().selectAddress,
-                //         backgroundColor: context.isDarkMode
-                //             ? Co.darkBg
-                //             : Co.white,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-              ],
+              ),
               Container(
                 color: context.isDarkMode ? Co.darkBg : Co.white,
                 height: 150,
@@ -207,7 +205,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                           widget.extra.onSubmit(context, initLocation.value!);
                         },
                         child: Text(
-                          L10n.tr().confirm,
+                          L10n.tr().confirm_address,
                           style: context.style16500.copyWith(color: Co.white),
                         ),
                       ),

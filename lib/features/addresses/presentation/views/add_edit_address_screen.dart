@@ -193,7 +193,6 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
         title: cubit.oldAddress == null
             ? L10n.tr().addAddress
             : L10n.tr().editAddress,
-        titleStyle: context.style24500,
       ),
       body: SingleChildScrollView(
         padding: AppConst.defaultPadding,
@@ -261,7 +260,7 @@ class _AddEditAddressScreenState extends State<AddEditAddressScreen> {
                         height: 20,
                         width: 20,
                         colorFilter: ColorFilter.mode(
-                          context.isDarkMode ? Co.secondary : Co.darkGrey  ,
+                          context.isDarkMode ? Co.secondary : Co.darkGrey,
                           BlendMode.srcIn,
                         ),
                       ),
