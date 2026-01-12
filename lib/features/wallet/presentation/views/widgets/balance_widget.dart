@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gazzer/core/presentation/extensions/context.dart';
 import 'package:gazzer/core/presentation/localization/l10n.dart';
 import 'package:gazzer/core/presentation/theme/app_theme.dart';
+import 'package:gazzer/core/presentation/views/widgets/helper_widgets/helper_widgets.dart';
 
 class BalanceWidget extends StatelessWidget {
   const BalanceWidget({super.key, this.balance});
@@ -17,21 +18,37 @@ class BalanceWidget extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: Co.purple, borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(
+        color: Co.purple,
+        borderRadius: BorderRadius.circular(24),
+      ),
       child: Row(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(L10n.tr().walletKeepItUp, style: context.style20500.copyWith(color: Co.white)),
+                Text(
+                  L10n.tr().walletKeepItUp,
+                  style: context.style20500.copyWith(color: Co.white),
+                ),
+                const VerticalSpacing(8),
+
                 Text(
                   L10n.tr().walletNewAchievements,
-                  style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
+                  style: context.style16500.copyWith(
+                    color: Co.white,
+                    fontWeight: TStyle.medium,
+                  ),
                 ),
+
+                const VerticalSpacing(8),
                 Text(
                   L10n.tr().walletBalanceLabel(balanceText, L10n.tr().egp),
-                  style: context.style14400.copyWith(color: Co.white, fontWeight: TStyle.medium),
+                  style: context.style16500.copyWith(
+                    color: Co.white,
+                    fontWeight: TStyle.medium,
+                  ),
                 ),
               ],
             ),
@@ -77,7 +94,13 @@ class _DashedBorder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _DashedBorderPainter(color: color, strokeWidth: strokeWidth, dashLength: dashLength, gapLength: gapLength, borderRadius: borderRadius),
+      painter: _DashedBorderPainter(
+        color: color,
+        strokeWidth: strokeWidth,
+        dashLength: dashLength,
+        gapLength: gapLength,
+        borderRadius: borderRadius,
+      ),
       child: Padding(padding: EdgeInsets.all(strokeWidth), child: child),
     );
   }
@@ -100,7 +123,12 @@ class _DashedBorderPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(strokeWidth / 2, strokeWidth / 2, math.max(0, size.width - strokeWidth), math.max(0, size.height - strokeWidth));
+    final rect = Rect.fromLTWH(
+      strokeWidth / 2,
+      strokeWidth / 2,
+      math.max(0, size.width - strokeWidth),
+      math.max(0, size.height - strokeWidth),
+    );
     final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
     final path = Path()..addRRect(rrect);
 
@@ -119,7 +147,10 @@ class _DashedBorderPainter extends CustomPainter {
       double distance = 0;
       while (distance < metric.length) {
         final double nextDash = math.min(dashLength, metric.length - distance);
-        dashed.addPath(metric.extractPath(distance, distance + nextDash), Offset.zero);
+        dashed.addPath(
+          metric.extractPath(distance, distance + nextDash),
+          Offset.zero,
+        );
         distance += nextDash + gapLength;
       }
     }

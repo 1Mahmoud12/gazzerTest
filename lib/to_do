@@ -3,3 +3,8 @@
 _ delet the domey clint in profile screen {   cubit.client = ClientEntity.domy();  }
 
 _ delet the domey address in _ProfileAddressesComponent {   final addresses = List.generate(4, (id) => AddressEntity.domy());  }
+
+
+_ delet    emit(WalletLoaded(data: WalletEntity.dummy())); in wallet_cubit.dart
+
+_  delet Session().client   =  ClientEntity.domy();  in wallet_screen.dart

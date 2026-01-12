@@ -871,8 +871,9 @@
 
 
       "reset_your_password": "Reset your password ",
- "confirm_address":"Confirm Address"
-
+ "confirm_address":"Confirm Address",
+  "wallet_history":"Wallet History",
+ "pleaseLoginToUseWallet" : "please login to use wallet"
 
 
 

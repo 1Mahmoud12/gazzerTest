@@ -14,7 +14,111 @@ class WalletEntity {
   final List<PaymentCardEntity> paymentCards;
   final List<TransactionEntity> recentTransactions;
   final List<VoucherAmountEntity> availableVoucherAmounts;
+
+
+
+  factory WalletEntity.dummy() {
+    return WalletEntity(
+      wallet: WalletInfoEntity(
+        balance: 1250.75,
+        lastUpdated: DateTime.now(),
+      ),
+      loyaltyPoints: WalletLoyaltyPointsEntity(
+        totalPoints: 5000,
+        availablePoints: 3200,
+        usedPoints: 1800,
+        conversionRateBerTransaction: 100,
+        conversionRate:  ConversionRateDto(
+          points: 100,
+          egp: 10,
+        ),
+        estimatedValue: 320.0,
+        expiresAt: DateTime.now().add(const Duration(days: 45)),
+        pointsNearingExpiry: 600,
+        expirationDetails: [
+          ExpirationDetailEntity(
+            expiresAt: DateTime.now().add(const Duration(days: 15)),
+            points: 300,
+          ),
+          ExpirationDetailEntity(
+            expiresAt: DateTime.now().add(const Duration(days: 45)),
+            points: 300,
+          ),
+        ],
+      ),
+      paymentCards: const [
+        PaymentCardEntity(
+          id: 1,
+          last4Digits: '4242',
+          cardBrand: 'Visa',
+          cardholderName: 'John Doe',
+          expiryMonth: 12,
+          expiryYear: 2027,
+          isDefault: true,
+        ),
+        PaymentCardEntity(
+          id: 2,
+          last4Digits: '1881',
+          cardBrand: 'Mastercard',
+          cardholderName: 'John Doe',
+          expiryMonth: 6,
+          expiryYear: 2026,
+          isDefault: false,
+        ),
+      ],
+      recentTransactions: [
+        TransactionEntity(
+          id: 101,
+          type: 'credit',
+          amount: 250.0,
+          currency: 'EGP',
+          source: 'Order #5432',
+          note: 'Cashback reward',
+          createdAt: DateTime.now().subtract(const Duration(days: 1)),
+          metadata: const {'orderId': 5432},
+        ),
+        TransactionEntity(
+          id: 102,
+          type: 'debit',
+          amount: -120.0,
+          currency: 'EGP',
+          source: 'Voucher Redemption',
+          note: 'Used points',
+          createdAt: DateTime.now().subtract(const Duration(days: 3)),
+          metadata: const {'voucherAmount': 100},
+        ),
+      ],
+      availableVoucherAmounts: const [
+        VoucherAmountEntity(
+          amount: 50,
+          pointsNeeded: 500,
+          validUntil: '2026-01-31',
+        ),
+        VoucherAmountEntity(
+          amount: 100,
+          pointsNeeded: 900,
+          validUntil: '2026-03-31',
+        ),
+        VoucherAmountEntity(
+          amount: 200,
+          pointsNeeded: 1700,
+          validUntil: '2026-06-30',
+        ),
+      ],
+    );
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 class WalletInfoEntity {
   const WalletInfoEntity({required this.balance, required this.lastUpdated});

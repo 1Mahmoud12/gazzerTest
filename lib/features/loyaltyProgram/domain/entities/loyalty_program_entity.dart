@@ -10,7 +10,117 @@ class LoyaltyProgramEntity {
   final TierProgress? tierProgress;
   final LoyaltyPoints? points;
   final List<TierBenefits> tierBenefits;
+
+
+  factory LoyaltyProgramEntity.dummy() {
+    return LoyaltyProgramEntity(
+      currentTier: const LoyaltyTier(
+        name: 'silver',
+        displayName: 'Silver',
+        icon: 'silver_badge.svg',
+        color: '#C0C0C0',
+        subtitle: 'Getting started',
+        minOrderCount: 0,
+        minProgress: 0,
+        maxProgress: 1000,
+      ),
+      tierProgress: TierProgress(
+        currentTier: 'silver',
+        totalSpent: 750,
+        orderCount: 7,
+        spentInLastDays: 300,
+        daysPeriod: 30,
+        progressPercentage: 75,
+        nextTier: const NextTier(
+          name: 'gold',
+          displayName: 'Gold',
+          spentNeeded: 250,
+          ordersNeeded: 3,
+        ),
+      ),
+      points: LoyaltyPoints(
+        availablePoints: 1200,
+        totalPoints: 2000,
+        usedPoints: 800,
+        expiresAt: DateTime.now().add(const Duration(days: 60)),
+        pointsNearingExpiry: 300,
+        earningRate: const EarningRate(
+          pointsPerAmount: 1,
+          amountUnit: 1,
+        ),
+        conversionRate: const ConversionRate(
+          points: 100,
+          egp: 10,
+        ),
+      ),
+      tierBenefits: [
+        TierBenefits(
+          tier: const LoyaltyTier(
+            name: 'silver',
+            displayName: 'Silver',
+            icon: 'silver_badge.svg',
+            color: '#C0C0C0',
+            subtitle: 'Getting started',
+            minOrderCount: 0,
+            minProgress: 0,
+            maxProgress: 1000,
+          ),
+          benefits: const [
+            LoyaltyBenefit(
+              id: 1,
+              benefitType: 'free_delivery',
+              isEnabled: true,
+              title: 'Free Delivery',
+            ),
+          ],
+        ),
+        TierBenefits(
+          tier: const LoyaltyTier(
+            name: 'gold',
+            displayName: 'Gold',
+            icon: 'gold_badge.svg',
+            color: '#FFD700',
+            subtitle: 'More rewards',
+            minOrderCount: 10,
+            minProgress: 1000,
+            maxProgress: 5000,
+          ),
+          benefits: const [
+            LoyaltyBenefit(
+              id: 1,
+              benefitType: 'free_delivery',
+              isEnabled: true,
+              title: 'Free Delivery',
+            ),
+            LoyaltyBenefit(
+              id: 2,
+              benefitType: 'discount',
+              isEnabled: true,
+              title: 'Exclusive Discounts',
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class LoyaltyTier {
   const LoyaltyTier({

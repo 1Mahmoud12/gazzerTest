@@ -16,7 +16,7 @@ class UnAuthComponent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Row(),
-        Text(msg, style: context.style16500.copyWith(color: Co.purple)),
+        Text(msg, style: context.style16500),
         const VerticalSpacing(24),
         MainBtn(
           onPressed: () {

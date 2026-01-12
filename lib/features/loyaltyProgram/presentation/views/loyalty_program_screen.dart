@@ -54,10 +54,7 @@ class _LoyaltyProgramView extends StatelessWidget {
       appBar: MainAppBar(
         iconsColor: Co.secondary,
         title: L10n.tr().loyaltyProgram,
-        titleStyle: context.style20500.copyWith(
-          color: Co.purple,
-          fontWeight: TStyle.medium,
-        ),
+      
       ),
       body: BlocBuilder<LoyaltyProgramCubit, LoyaltyProgramState>(
         builder: (context, state) {

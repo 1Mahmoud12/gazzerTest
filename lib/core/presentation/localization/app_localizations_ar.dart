@@ -2183,4 +2183,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get confirm_address => 'Confirm Address';
+
+  @override
+  String get wallet_history => 'Wallet History';
+
+  @override
+  String get pleaseLoginToUseWallet => 'please login to use wallet';
 }

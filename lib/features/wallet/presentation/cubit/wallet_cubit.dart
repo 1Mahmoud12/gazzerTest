@@ -11,36 +11,41 @@ class WalletCubit extends Cubit<WalletState> {
   WalletEntity? _cached;
 
   Future<void> load({bool forceRefresh = false}) async {
-    if (!forceRefresh) {
-      emit(const WalletLoading(isInitial: true));
-      final cached = await _repo.getCachedWallet();
-      if (cached != null) {
-        _cached = cached;
-        emit(WalletLoaded(data: cached, isCached: true));
-        if (!forceRefresh) {
-          // Proceed to refresh data in background
-        }
-      }
-    } else {
-      emit(const WalletLoading());
-    }
 
-    final result = await _repo.getWallet();
-    switch (result) {
-      case Ok<WalletEntity?>(:final value):
-        if (value != null) {
-          _cached = value;
-          emit(WalletLoaded(data: value));
-        } else {
-          emit(
-            WalletError(
-              message: 'Unable to load wallet data',
-              cachedData: _cached,
-            ),
-          );
-        }
-      case Err<WalletEntity?>(:final error):
-        emit(WalletError(message: error.message, cachedData: _cached));
-    }
+      emit(WalletLoaded(data: WalletEntity.dummy()));
+
+
+
+  //   if (!forceRefresh) {
+  //     emit(const WalletLoading(isInitial: true));
+  //     final cached = await _repo.getCachedWallet();
+  //     if (cached != null) {
+  //       _cached = cached;
+  //       emit(WalletLoaded(data: cached, isCached: true));
+  //       if (!forceRefresh) {
+  //         // Proceed to refresh data in background
+  //       }
+  //     }
+  //   } else {
+  //     emit(const WalletLoading());
+  //   }
+
+  //   final result = await _repo.getWallet();
+  //   switch (result) {
+  //     case Ok<WalletEntity?>(:final value):
+  //       if (value != null) {
+  //         _cached = value;
+  //         emit(WalletLoaded(data: value));
+  //       } else {
+  //         emit(
+  //           WalletError(
+  //             message: 'Unable to load wallet data',
+  //             cachedData: _cached,
+  //           ),
+  //         );
+  //       }
+  //     case Err<WalletEntity?>(:final error):
+  //       emit(WalletError(message: error.message, cachedData: _cached));
+  //   }
   }
 }

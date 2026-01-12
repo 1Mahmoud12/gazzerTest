@@ -4255,6 +4255,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm Address'**
   String get confirm_address;
+
+  /// No description provided for @wallet_history.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet History'**
+  String get wallet_history;
+
+  /// No description provided for @pleaseLoginToUseWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'please login to use wallet'**
+  String get pleaseLoginToUseWallet;
 }
 
 class _AppLocalizationsDelegate
